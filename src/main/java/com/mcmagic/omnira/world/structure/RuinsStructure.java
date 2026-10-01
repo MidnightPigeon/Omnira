@@ -71,11 +71,14 @@ public final class RuinsStructure extends Structure {
             low=Math.min(low,surface);high=Math.max(high,surface);
         }
         if(high-low>4 || high+RuinsPiece.height(variant)>=context.heightAccessor().getMaxBuildHeight()) return Optional.empty();
-        int y=high-(variant==2?0:1);
+        int y=generationOriginY(variant,high);
         Direction facing=Direction.Plane.HORIZONTAL.getRandomDirection(context.random());
         long seed=context.random().nextLong();
         int anchorX=x+(facing==Direction.WEST?RuinsPiece.depth(variant)-1:0);
         int anchorZ=z+(facing==Direction.NORTH?RuinsPiece.depth(variant)-1:0);
         return Optional.of(new GenerationStub(new BlockPos(x+6,y,z+6),builder->builder.addPiece(new RuinsPiece(variant,anchorX,y,anchorZ,facing,seed))));
+    }
+    public static int generationOriginY(int variant,int surfaceHeight){
+        return surfaceHeight-(variant==0?2:variant==1?1:0);
     }
 }

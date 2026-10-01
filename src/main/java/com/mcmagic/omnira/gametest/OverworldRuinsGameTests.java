@@ -19,6 +19,17 @@ import net.neoforged.neoforge.gametest.*;
 @PrefixGameTestTemplate(false)
 public final class OverworldRuinsGameTests {
     @GameTest(template="spell_arena")
+    public static void hutGenerationHeight(GameTestHelper h){
+        h.assertTrue(RuinsStructure.generationOriginY(0,64)==62,"Hut was not lowered by one block");
+        h.assertTrue(RuinsStructure.generationOriginY(1,64)==63,"Workshop height changed");
+        h.assertTrue(RuinsStructure.generationOriginY(2,64)==64,"Tower height changed");
+        for(var facing:Direction.Plane.HORIZONTAL){
+            var piece=new RuinsPiece(0,0,RuinsStructure.generationOriginY(0,64),0,facing,42);
+            h.assertTrue(piece.getBoundingBox().minY()==62,"Rotation changed hut height");
+        }
+        h.succeed();
+    }
+    @GameTest(template="spell_arena")
     public static void naturalPlacementEnabled(GameTestHelper h) throws java.io.IOException {
         try(var input=OverworldRuinsGameTests.class.getResourceAsStream("/data/omnira/worldgen/structure_set/overworld_ruins.json")) {
             var json=com.google.gson.JsonParser.parseReader(new java.io.InputStreamReader(java.util.Objects.requireNonNull(input),java.nio.charset.StandardCharsets.UTF_8)).getAsJsonObject();
