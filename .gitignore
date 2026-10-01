@@ -48,6 +48,10 @@ repo/
 /backups/
 /logs/
 /crash-reports/
+/documentation-backups/
+/screenshots/
+/saves/
+/src/art/
 /*.png
 /*.jar
 /.agents/
@@ -76,3 +80,16 @@ repo/
 __pycache__/
 *.pyc
 *.pyo
+
+### Local overrides, editor leftovers and JVM diagnostics ###
+/local.properties
+*.tmp
+*.bak
+*.orig
+*.rej
+*.swp
+*.swo
+*~
+*.jfr
+hs_err_pid*.log
+replay_pid*.log
