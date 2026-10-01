@@ -1,0 +1,24 @@
+{
+  "id": "spatial_crystal_guide",
+  "title": "Rough Spatial Crystal",
+  "item": "omnira:rough_spatial_crystal_block",
+  "text": [
+    "Spatial Caverns contain ordinary and excited rough crystal. Excited crystals are clearer, with drifting lights inside.",
+    "Both states drop ordinary Rough Spatial Crystal Blocks. Restore excitation through Advanced Condensation, or use one Infused Spiritual Crystal directly on a block."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "spatial_growth_guide",
+      "label": "Growing Spatial Crystals"
+    },
+    {
+      "target": "spatial_caverns_guide",
+      "label": "Spatial Caverns"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    }
+  ]
+}

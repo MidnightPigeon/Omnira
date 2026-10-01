@@ -1,0 +1,9 @@
+{
+  "id": "guide_book",
+  "item": "omnira:guide_book",
+  "title": "万象之引",
+  "text": [
+    "书本与灵性水晶无序合成万象之引，可查阅制作方法与使用条件。"
+  ],
+  "recipes": true
+}

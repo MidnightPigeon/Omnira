@@ -1,0 +1,31 @@
+{
+  "id": "explore_dream",
+  "item": "omnira:air_microcore",
+  "title": "探索梦境维度",
+  "text": [
+    "晨辉晶原位于高处，暮影林地位于低处，镜梦碎岛零散分布于中间。出发前准备归程手段，跨岛时留意落差与落脚处。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "recall_crystal",
+      "label": "归程水晶"
+    },
+    {
+      "target": "self_projectile",
+      "label": "自身弹射与飞行"
+    },
+    {
+      "target": "spacetime_waymark",
+      "label": "时空道标"
+    },
+    {
+      "target": "radiant_courtyard",
+      "label": "光耀庭院"
+    },
+    {
+      "target": "shadow_library",
+      "label": "暗影图书馆"
+    }
+  ]
+}

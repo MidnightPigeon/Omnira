@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:solidified_light_crystal_core_stairs",
+    "omnira:solidified_light_crystal_core_slab",
+    "omnira:night_heron_statue",
+    "omnira:golden_throne",
+    "omnira:golden_toilet",
+    "#omnira:crystal_workstations",
+    "omnira:light_crystal_core",
+    "omnira:solidified_light_crystal_core",
+    "omnira:void_crystal",
+    "omnira:permanent_void_crystal",
+    "omnira:hyperdimensional_drill"
+  ]
+}

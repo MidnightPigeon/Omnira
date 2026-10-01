@@ -1,0 +1,9 @@
+{
+  "id": "dream_crystal_shard",
+  "item": "omnira:dream_crystal_shard",
+  "title": "Dream Crystal",
+  "text": [
+    "Harvested from mature dream crystal clusters. Used to craft spacetime waymarks and recall crystals, and to attract and trade with Dream Mirrors."
+  ],
+  "recipes": true
+}

@@ -1,0 +1,19 @@
+{
+  "id": "frozen_palace_guide",
+  "title": "Solidified Palace of Terra",
+  "item": "omnira:golden_throne",
+  "text": [
+    "A solidified palace occasionally stands in the stilled highlands. Its hall retains a Golden Throne, and towers hold treasure orbs. The misty orb left by the throne always contains a Traveler Manuscript."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "golden_throne_guide",
+      "label": "Golden Throne and Golden Toilet"
+    },
+    {
+      "target": "traveler_manuscript",
+      "label": "Traveler's Manuscript"
+    }
+  ]
+}

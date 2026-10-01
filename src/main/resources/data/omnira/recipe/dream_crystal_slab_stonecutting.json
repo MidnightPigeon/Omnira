@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "omnira:dream_crystal_block"
+  },
+  "result": {
+    "id": "omnira:dream_crystal_slab",
+    "count": 2
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "time_plants_guide",
+  "title": "时光花草",
+  "item": "omnira:time_flower",
+  "text": [
+    "速逝林中自然生长着少量时光草与时光花。在任意时序尘泥上使用不稳定的时空聚合体，也可催生这些植物，聚合体会被消耗。",
+    "时光花可在高阶凝聚台凝聚为时间翘曲点。时光草用剪刀或精准采集获取；普通打碎有5%概率掉落时间之种。",
+    "采集的花草可重新放置在任意时序尘泥系列方块上，携带时也会有绿白微粒萦绕。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "time_seed_guide",
+      "label": "时间之种"
+    },
+    {
+      "target": "time_warp_point_guide",
+      "label": "时间翘曲点"
+    },
+    {
+      "target": "fleeting_woods_guide",
+      "label": "速逝林"
+    },
+    {
+      "target": "reversion_mire_guide",
+      "label": "回溯湿地"
+    },
+    {
+      "target": "recurrence_garden_guide",
+      "label": "循环花园"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    }
+  ]
+}

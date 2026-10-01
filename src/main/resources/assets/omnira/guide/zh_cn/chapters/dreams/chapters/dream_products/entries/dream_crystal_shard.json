@@ -1,0 +1,9 @@
+{
+  "id": "dream_crystal_shard",
+  "item": "omnira:dream_crystal_shard",
+  "title": "梦境水晶",
+  "text": [
+    "采集成熟梦境晶簇获得，可用于制作时空道标和归程水晶，也可吸引梦之镜并与之交换物品。"
+  ],
+  "recipes": true
+}

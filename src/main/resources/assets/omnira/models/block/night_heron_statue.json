@@ -1,0 +1,174 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "stone": "omnira:block/heron_crystal_trim",
+    "trim": "omnira:block/heron_crystal_base",
+    "button": "omnira:block/heron_button_purple",
+    "back_button": "omnira:block/heron_button_white",
+    "particle": "omnira:block/heron_crystal_base"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        1,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#stone"
+        },
+        "down": {
+          "texture": "#stone"
+        },
+        "north": {
+          "texture": "#stone"
+        },
+        "south": {
+          "texture": "#stone"
+        },
+        "east": {
+          "texture": "#stone"
+        },
+        "west": {
+          "texture": "#stone"
+        }
+      }
+    },
+    {
+      "from": [
+        1,
+        1,
+        1
+      ],
+      "to": [
+        15,
+        7,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#trim"
+        },
+        "down": {
+          "texture": "#trim"
+        },
+        "north": {
+          "texture": "#trim"
+        },
+        "south": {
+          "texture": "#trim"
+        },
+        "east": {
+          "texture": "#trim"
+        },
+        "west": {
+          "texture": "#trim"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        7,
+        0
+      ],
+      "to": [
+        16,
+        8,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#stone"
+        },
+        "down": {
+          "texture": "#stone"
+        },
+        "north": {
+          "texture": "#stone"
+        },
+        "south": {
+          "texture": "#stone"
+        },
+        "east": {
+          "texture": "#stone"
+        },
+        "west": {
+          "texture": "#stone"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        2,
+        0
+      ],
+      "to": [
+        10,
+        5,
+        1
+      ],
+      "faces": {
+        "up": {
+          "texture": "#button"
+        },
+        "down": {
+          "texture": "#button"
+        },
+        "north": {
+          "texture": "#button"
+        },
+        "south": {
+          "texture": "#button"
+        },
+        "east": {
+          "texture": "#button"
+        },
+        "west": {
+          "texture": "#button"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        2,
+        15
+      ],
+      "to": [
+        10,
+        5,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#back_button"
+        },
+        "down": {
+          "texture": "#back_button"
+        },
+        "north": {
+          "texture": "#back_button"
+        },
+        "south": {
+          "texture": "#back_button"
+        },
+        "east": {
+          "texture": "#back_button"
+        },
+        "west": {
+          "texture": "#back_button"
+        }
+      }
+    }
+  ]
+}

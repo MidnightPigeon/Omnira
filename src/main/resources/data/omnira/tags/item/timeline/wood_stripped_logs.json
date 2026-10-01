@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:stripped_shadow_log",
+    "omnira:stripped_time_log"
+  ]
+}

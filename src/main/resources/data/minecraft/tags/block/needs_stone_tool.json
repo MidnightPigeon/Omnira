@@ -1,0 +1,35 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:light_condensate",
+    "omnira:light_source_crystal",
+    "omnira:mirror_rock",
+    "omnira:dream_crystal_bedrock",
+    "omnira:dream_crystal",
+    "omnira:small_dream_bud",
+    "omnira:medium_dream_bud",
+    "omnira:large_dream_bud",
+    "omnira:light_condensate_stairs",
+    "omnira:light_condensate_slab",
+    "omnira:light_source_crystal_stairs",
+    "omnira:light_source_crystal_slab",
+    "omnira:mirror_rock_stairs",
+    "omnira:mirror_rock_slab",
+    "omnira:time_eroded_bricks",
+    "omnira:time_eroded_brick_stairs",
+    "omnira:time_eroded_brick_slab",
+    "omnira:time_eroded_brick_wall",
+    "omnira:cracked_time_eroded_bricks",
+    "omnira:cracked_time_eroded_brick_stairs",
+    "omnira:cracked_time_eroded_brick_slab",
+    "omnira:cracked_time_eroded_brick_wall",
+    "omnira:sandbound_time_eroded_bricks",
+    "omnira:sandbound_time_eroded_brick_stairs",
+    "omnira:sandbound_time_eroded_brick_slab",
+    "omnira:sandbound_time_eroded_brick_wall",
+    "omnira:broken_eventide_pillar",
+    "omnira:eventide_debris",
+    "omnira:split_time_sundial"
+    ,"omnira:infused_crystal_casing"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "shadow_trapdoor",
+  "item": "omnira:shadow_trapdoor",
+  "title": "暗影木活板门",
+  "text": [
+    "六块暗影木板排成两行，制作两扇暗影木活板门。可手动开启，也可由红石控制。"
+  ],
+  "recipes": true
+}

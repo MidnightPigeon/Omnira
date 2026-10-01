@@ -1,0 +1,27 @@
+{
+  "id": "corridor_ritual",
+  "scene": "corridor_ritual",
+  "item": "omnira:unstable_spacetime_aggregate",
+  "title": "Ritual of Time's Threshold",
+  "text": [
+    "Surround an Advanced Ritual Energy Core with eight Crystal Pedestals. Place four Spacetime Knots at the cardinal points; place two Paradox Dust and two Infused Spiritual Crystals on opposite diagonal pairs. Lure a Dream Mirror nearby, clear two blocks above the core, then use an Unstable Spacetime Aggregate on it.",
+    "The mirror fixes above the core as a blue-violet rift opens. After twelve seconds only the aggregate is consumed; pedestal offerings remain. The aggregate stops decaying during formation, but breaking the core or removing an offering ejects it and triggers a spacetime storm.",
+    "The gateway lasts three minutes and turns toward approaching players. Entering takes a moment. Ordinary vehicles can cross with passengers; large mechanical structures cannot. Afterwards, a free-roaming Dream Mirror appears again.",
+    "The one-way gateway reaches a random point in the Spacetime Mirror Corridor. Its rifts can send you to random places in the upper Time Continent or lower spatial region, but none lead back. Prepare a Spacetime Waymark or another way home. The continent appears to be formed from overlapping and twisted timelines. The space beyond the corridor seems impossible to explore."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "advanced_ritual_energy_core",
+      "label": "Advanced Ritual Energy Core"
+    },
+    {
+      "target": "unstable_spacetime_aggregate",
+      "label": "Unstable Spacetime Aggregate"
+    },
+    {
+      "target": "spacetime_waymark",
+      "label": "Spacetime Waymark"
+    }
+  ]
+}

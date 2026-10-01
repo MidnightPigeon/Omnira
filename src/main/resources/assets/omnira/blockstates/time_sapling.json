@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "stage=0": {
+      "model": "omnira:block/time_sapling"
+    },
+    "stage=1": {
+      "model": "omnira:block/time_sapling_mature"
+    }
+  }
+}

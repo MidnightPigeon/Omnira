@@ -1,0 +1,20 @@
+{
+  "id": "elemental_crystal_grid",
+  "item": "omnira:elemental_crystal_grid",
+  "title": "Elemental Crystal Grid",
+  "text": [
+    "Holds five spell crystals. In a Mana Engine it provides a 1.5x output multiplier.",
+    "Upgrading preserves the existing spells, gaps and casting position. Two new empty slots follow the original spell chain."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "elemental_crystal_grid_crafting",
+      "label": "Forging Recipe"
+    },
+    {
+      "target": "mana_engine",
+      "label": "Mana Engine"
+    }
+  ]
+}

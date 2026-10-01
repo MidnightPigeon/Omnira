@@ -1,0 +1,20 @@
+{
+  "id": "ritual_energy_core",
+  "item": "omnira:ritual_energy_core",
+  "title": "Ritual Energy Core",
+  "text": [
+    "The core of most rituals. After arranging the surrounding components, use the ritual's activating item on the core to begin.",
+    "It can be processed into an Advanced Ritual Energy Core through a specific method."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "ritual_energy_core_crafting",
+      "label": "Forging Recipe"
+    },
+    {
+      "target": "advanced_ritual_energy_core_crafting",
+      "label": "Advanced Ritual Energy Core"
+    }
+  ]
+}

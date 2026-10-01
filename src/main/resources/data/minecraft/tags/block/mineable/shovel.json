@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:temporal_silt",
+    "omnira:living_temporal_silt",
+    "omnira:sedimented_temporal_silt",
+    "omnira:sedimented_living_temporal_silt",
+    "omnira:rotted_temporal_silt",
+    "omnira:time_sand",
+    "omnira:suspicious_time_sand"
+  ]
+}

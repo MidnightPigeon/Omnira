@@ -1,0 +1,16 @@
+{
+  "id": "golden_throne_guide",
+  "title": "Golden Throne and Golden Toilet",
+  "item": "omnira:golden_toilet",
+  "text": [
+    "The Golden Throne grants 100% bonus damage, Resistance V, Regeneration V and Saturation. Voluntary dismount is locked for ten minutes; teleporting away ends the benefits. Mining it or sitting for ten minutes leaves a Golden Toilet and a misty treasure orb.",
+    "The toilet permits free dismount and grants 20% bonus damage, Regeneration II and Saturation while seated. Sneak-use it on a Cruise Orb to replace the seat and retain those seated benefits."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "frozen_palace_guide",
+      "label": "Solidified Palace of Terra"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+{ "type": "omnira:analysis", "ingredient": { "tag": "minecraft:dirt" }, "count": 64,
+  "result": { "id": "omnira:earth_microcore", "count": 1 }, "dust_min": 3, "dust_max": 5 }

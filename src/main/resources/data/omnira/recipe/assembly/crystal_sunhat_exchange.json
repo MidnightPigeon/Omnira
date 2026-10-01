@@ -1,0 +1,19 @@
+{
+  "type": "omnira:assembly",
+  "operation": "armor_exchange",
+  "slots": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "omnira:crystal_helmet"
+    }
+  ],
+  "result": {
+    "id": "omnira:crystal_sunhat",
+    "count": 1
+  }
+}

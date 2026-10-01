@@ -1,0 +1,15 @@
+{
+  "id": "time_eroded_bricks_guide",
+  "title": "时蚀石砖与遗迹残垣",
+  "item": "omnira:time_eroded_bricks",
+  "text": [
+    "终时废墟散布时蚀石砖、裂纹与覆沙变体，以及碎柱和残垣。普通石砖与裂纹石砖在终末节点会转化为对应时蚀砖。烧炼时蚀石砖可得到裂纹变体，八块裂纹砖与一份时之沙合成八块覆沙砖。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "eventide_ruins_guide",
+      "label": "终时废墟"
+    }
+  ]
+}

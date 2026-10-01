@@ -1,0 +1,11 @@
+{
+  "id": "enhanced_recall_crystal",
+  "item": "omnira:enhanced_recall_crystal",
+  "title": "Enhanced Recall Crystal",
+  "text": [
+    "Forge a recall crystal in the assembly bench's center, with three eyes of ender and three ender pearls alternating around it.",
+    "Same-dimension travel is free; cross-dimensional travel costs a base 100 mana. The three-second channel still applies.",
+    "Like the Recall Crystal, it brings a stationary mount along with its contents and passengers. A safe landing space is required; large contraptions and physically assembled structures cannot travel directly."
+  ],
+  "recipes": true
+}

@@ -1,0 +1,23 @@
+{
+  "id": "infused_grimoire",
+  "item": "omnira:infused_grimoire",
+  "title": "Infused Grimoire",
+  "text": [
+    "Advanced condensation turns the guidebook into an Infused Grimoire. Carrying it through the Cleansing Ritual may sanctify or corrupt it. See the linked entry for how to use all three forms."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "infused_grimoire_usage",
+      "label": "Using the Grimoire"
+    },
+    {
+      "target": "cleansing_ritual",
+      "label": "Cleansing Ritual"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    }
+  ]
+}

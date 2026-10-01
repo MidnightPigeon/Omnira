@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:mirror_rock"
+    }
+  },
+  "result": {
+    "id": "omnira:engraved_mirror_rock",
+    "count": 4
+  }
+}

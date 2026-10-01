@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": ["CCC", " S ", " S "],
+  "key": {"C": {"item": "omnira:spiritual_crystal"}, "S": {"item": "minecraft:stick"}},
+  "result": {"id": "omnira:crystal_pickaxe", "count": 1}
+}

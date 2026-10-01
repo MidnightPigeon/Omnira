@@ -1,0 +1,9 @@
+{
+  "id": "iron_reinforcement",
+  "item": "omnira:iron_reinforcement",
+  "title": "Iron Reinforcement",
+  "text": [
+    "A central staff reinforcement with no additional bonus."
+  ],
+  "recipes": true
+}

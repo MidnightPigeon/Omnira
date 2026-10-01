@@ -1,0 +1,11 @@
+{
+  "structures": [{"structure": "omnira:shadow_library", "weight": 1}],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 32,
+    "separation": 12,
+    "salt": 20260918,
+    "spread_type": "linear",
+    "frequency": 0.65
+  }
+}

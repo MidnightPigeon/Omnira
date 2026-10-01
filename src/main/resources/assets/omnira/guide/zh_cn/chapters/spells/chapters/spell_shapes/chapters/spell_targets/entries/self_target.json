@@ -1,0 +1,24 @@
+{
+  "id": "self_target",
+  "item": "omnira:water_microcore",
+  "title": "自身",
+  "text": [
+    "在目标槽放入水元素微核。以施法者自身为中心，配合形态形成附着屏障、随身环绕、原地爆炸或自身弹射。",
+    "选择自身并不保证安全：爆炸仍可能伤及自己；附着屏障的治疗与反击效果也有不同的作用对象。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "water_microcore",
+      "label": "水元素微核"
+    },
+    {
+      "target": "self_projectile",
+      "label": "自身弹射与飞行"
+    },
+    {
+      "target": "entity_barrier",
+      "label": "自身／生物-屏障"
+    }
+  ]
+}

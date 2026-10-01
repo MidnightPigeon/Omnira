@@ -1,0 +1,16 @@
+{
+  "id": "swiftness_rune",
+  "item": "omnira:swiftness_rune",
+  "title": "迅捷魔纹",
+  "text": [
+    "使弹射物的移动、旋转和环绕速度提高 50%，施法冷却降低 20%。直线弹射物、追踪弹射物、自身飞行、地块弹射与环绕法球均会加速。",
+    "不改变法术强度或持续时间，也不改变双发之间的 0.3 秒间隔。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "swiftness_rune_crafting",
+      "label": "锻造配方"
+    }
+  ]
+}

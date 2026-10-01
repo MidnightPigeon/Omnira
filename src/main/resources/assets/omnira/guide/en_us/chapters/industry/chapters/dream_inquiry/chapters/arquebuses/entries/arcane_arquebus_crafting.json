@@ -1,0 +1,15 @@
+{
+  "id": "arcane_arquebus_crafting",
+  "item": "omnira:arcane_arquebus",
+  "title": "Arcane Arquebus · Crafting",
+  "text": [
+    "Place an empty basic crystal grid in the assembly bench center, with a primordial spell core, wide-area rune and light microcore around it. Remove all stored crystals before forging."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "arcane_arquebus",
+      "label": "Use and Effects"
+    }
+  ]
+}

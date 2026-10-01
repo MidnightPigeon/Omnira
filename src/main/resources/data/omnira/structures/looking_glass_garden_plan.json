@@ -1,0 +1,3546 @@
+[
+  {
+    "x": 3,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 24,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 25,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 26,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 29,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 30,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 31,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 32,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 33,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 34,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 35,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 3,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 24,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 25,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 26,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 29,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 30,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 31,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 32,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 33,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 34,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 35,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 5,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 5,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 5,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 5,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 5,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 5,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 5,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 6,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 6,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 6,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 6,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 6,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 24,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 25,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 26,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 24,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 25,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 26,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 24,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 25,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 26,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 29,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 30,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 31,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 32,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 33,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 34,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 35,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 24,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 25,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 26,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 29,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 30,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 31,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 32,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 33,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 34,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 35,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 24,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 25,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 26,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 29,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 30,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 31,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 32,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 33,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 34,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 35,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 23,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 24,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 24,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 24,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 24,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 24,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 24,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 24,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 24,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 24,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 24,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 24,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 25,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 25,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 25,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 25,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 25,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 25,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 25,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 25,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 25,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 25,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 25,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 26,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 26,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 26,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 26,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 26,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 26,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 26,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 26,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 26,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 26,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 26,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 24,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 25,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 26,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 27,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 24,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 25,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 26,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 28,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 29,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 29,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 29,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 29,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 29,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 29,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 29,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 30,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 30,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 30,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 30,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 30,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 30,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 30,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 31,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 31,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 31,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 31,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 31,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 31,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 31,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 32,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 32,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 32,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 32,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 32,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 32,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 32,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 33,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 33,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 33,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 33,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 33,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 33,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 33,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 34,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 34,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 34,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 34,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 34,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 34,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 34,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 35,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 35,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 35,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 35,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 35,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 35,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 35,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 24,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 25,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 26,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 29,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 30,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 31,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 32,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 33,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 34,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 35,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 19,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 21,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 22,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 23,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 24,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 25,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 26,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 27,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 28,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 29,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 30,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 31,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 32,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 33,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 34,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 35,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 37,
+    "y": 0,
+    "z": 37,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 1,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 1,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 1,
+    "z": 8,
+    "name": "omnira:crystal_ball",
+    "properties": {
+      "facing": "south"
+    },
+    "loot": "omnira:chests/looking_glass_garden_rabbit"
+  },
+  {
+    "x": 20,
+    "y": 1,
+    "z": 15,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 17,
+    "y": 1,
+    "z": 16,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 23,
+    "y": 1,
+    "z": 16,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 24,
+    "y": 1,
+    "z": 17,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 18,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 20,
+    "name": "omnira:crystal_ball",
+    "properties": {
+      "facing": "south"
+    },
+    "loot": "omnira:chests/looking_glass_garden_rabbit"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 20,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 20,
+    "y": 1,
+    "z": 20,
+    "name": "omnira:wonderland_poker_stand",
+    "properties": {
+      "half": "lower"
+    }
+  },
+  {
+    "x": 25,
+    "y": 1,
+    "z": 20,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 32,
+    "y": 1,
+    "z": 20,
+    "name": "omnira:crystal_ball",
+    "properties": {
+      "facing": "south"
+    },
+    "loot": "omnira:chests/looking_glass_garden_rabbit"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 22,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 24,
+    "y": 1,
+    "z": 22,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 18,
+    "y": 1,
+    "z": 24,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 23,
+    "y": 1,
+    "z": 24,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 20,
+    "y": 1,
+    "z": 25,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 20,
+    "y": 1,
+    "z": 32,
+    "name": "omnira:crystal_ball",
+    "properties": {
+      "facing": "south"
+    },
+    "loot": "omnira:chests/looking_glass_garden_rabbit"
+  },
+  {
+    "x": 4,
+    "y": 1,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 1,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 2,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 2,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 20,
+    "y": 2,
+    "z": 20,
+    "name": "omnira:wonderland_poker_stand",
+    "properties": {
+      "half": "upper"
+    }
+  },
+  {
+    "x": 4,
+    "y": 2,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 2,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 3,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 3,
+    "z": 4,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 3,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 36,
+    "y": 3,
+    "z": 36,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 4,
+    "y": 4,
+    "z": 4,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 36,
+    "y": 4,
+    "z": 4,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 4,
+    "y": 4,
+    "z": 36,
+    "name": "omnira:solidified_light_crystal_core"
+  },
+  {
+    "x": 36,
+    "y": 4,
+    "z": 36,
+    "name": "omnira:solidified_light_crystal_core"
+  }
+]

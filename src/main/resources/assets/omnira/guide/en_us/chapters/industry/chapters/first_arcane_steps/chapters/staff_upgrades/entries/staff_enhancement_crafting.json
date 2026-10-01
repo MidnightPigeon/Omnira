@@ -1,0 +1,9 @@
+{
+  "id": "staff_enhancement_crafting", "item": "omnira:modular_staff", "title": "Permanent Staff Modifiers",
+  "text": [
+    "Place the staff on the middle of the advanced assembly table's three nodes. Fill its left and right nodes and six regular slots with eight identical materials: iron blocks for enhancement, clocks for delay, light microcores for holy magic, or spiritual crystals for infusion.",
+    "Each installation uses one enhancement slot and preserves parts, enchantments and runes. Wooden and blaze shafts have one slot; shadow shafts have two. Repeated modifiers are allowed within capacity and cannot be removed. A driving spell core is required."
+  ],
+  "recipes": false,
+  "links": [{"target": "staff_enhancement_usage", "label": "Modifier Effects"}, {"target": "advanced_assembly_table", "label": "Advanced Assembly Table"}]
+}

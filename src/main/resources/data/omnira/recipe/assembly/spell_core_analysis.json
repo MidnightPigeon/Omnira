@@ -1,0 +1,21 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:analysis_crystal"
+    },
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "omnira:crude_light_core"
+    }
+  ],
+  "result": {
+    "id": "omnira:primordial_spell_core",
+    "count": 1
+  }
+}

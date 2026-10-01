@@ -1,0 +1,23 @@
+{
+  "id": "doomsday_rite",
+  "title": "末日仪轨",
+  "item": "omnira:split_time_sundial",
+  "text": [
+    "终时废墟中，太极与八卦环绕着分时日晷。黑鱼的白眼藏有战利品水晶球，白鱼的黑眼则是一枚战利品液晶球。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "split_time_sundial_guide",
+      "label": "分时日晷"
+    },
+    {
+      "target": "time_warp_point_guide",
+      "label": "时间翘曲点"
+    },
+    {
+      "target": "memory_cube_guide",
+      "label": "记忆立方体"
+    }
+  ]
+}

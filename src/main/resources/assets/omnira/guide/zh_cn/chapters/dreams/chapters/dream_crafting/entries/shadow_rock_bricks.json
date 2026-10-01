@@ -1,0 +1,9 @@
+{
+  "id": "shadow_rock_bricks",
+  "item": "omnira:shadow_rock_bricks",
+  "title": "暗影岩砖",
+  "text": [
+    "四块暗影岩按2×2排列得到四块暗影岩砖，也可用暗影岩切石制作。"
+  ],
+  "recipes": true
+}

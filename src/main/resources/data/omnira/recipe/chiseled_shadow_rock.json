@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "S",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:shadow_rock_slab"
+    }
+  },
+  "result": {
+    "id": "omnira:chiseled_shadow_rock",
+    "count": 1
+  }
+}

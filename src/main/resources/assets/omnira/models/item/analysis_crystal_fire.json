@@ -1,0 +1,74 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "textures": {
+    "core": "omnira:item/analysis_crystal_fire",
+    "glow": "omnira:item/analysis_crystal_fire_glow"
+  },
+  "elements": [
+    {
+      "from": [
+        7.65,
+        7.65,
+        7.65
+      ],
+      "to": [
+        8.35,
+        8.35,
+        8.35
+      ],
+      "faces": {
+        "east": {
+          "texture": "#core"
+        },
+        "west": {
+          "texture": "#core"
+        },
+        "up": {
+          "texture": "#core"
+        },
+        "down": {
+          "texture": "#core"
+        },
+        "south": {
+          "texture": "#core"
+        },
+        "north": {
+          "texture": "#core"
+        }
+      }
+    },
+    {
+      "from": [
+        7.25,
+        7.25,
+        7.25
+      ],
+      "to": [
+        8.75,
+        8.75,
+        8.75
+      ],
+      "faces": {
+        "east": {
+          "texture": "#glow"
+        },
+        "west": {
+          "texture": "#glow"
+        },
+        "up": {
+          "texture": "#glow"
+        },
+        "down": {
+          "texture": "#glow"
+        },
+        "south": {
+          "texture": "#glow"
+        },
+        "north": {
+          "texture": "#glow"
+        }
+      }
+    }
+  ]
+}

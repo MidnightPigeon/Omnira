@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:shadow_rock_slab",
+    "omnira:shadow_rock_brick_slab",
+    "omnira:chiseled_shadow_rock_slab",
+    "omnira:mossy_shadow_rock_slab"
+  ]
+}

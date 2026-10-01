@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [{"item": "minecraft:book"}, {"item": "omnira:spiritual_crystal"}],
+  "result": {"id": "omnira:guide_book", "count": 1}
+}

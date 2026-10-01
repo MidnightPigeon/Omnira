@@ -1,0 +1,15 @@
+{
+  "id": "amplification_rune_crafting",
+  "item": "omnira:amplification_rune",
+  "title": "Amplification Rune · Crafting",
+  "text": [
+    "Use the assembly recipe below to forge this item."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "amplification_rune",
+      "label": "Use and Effects"
+    }
+  ]
+}

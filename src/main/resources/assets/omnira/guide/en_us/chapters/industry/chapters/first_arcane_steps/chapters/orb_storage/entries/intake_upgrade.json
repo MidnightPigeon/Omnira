@@ -1,0 +1,11 @@
+{
+  "id": "intake_upgrade",
+  "item": "omnira:intake_upgrade",
+  "title": "Intake Upgrade",
+  "text": [
+    "Right-click the held plate to configure directions and filters before installing it. Settings remain on the plate after removal.",
+    "Pulls one item per second from selected front, back, left or right containers. Liquid crystal balls pull fluid within their transfer limit. Multiple directions are visited in order.",
+    "Three ghost filters support allowlists and denylists. Click with a carried item to set a filter without consuming it; right-click clears it. Select fluids using filled buckets, ordinary water bottles or fluid containers. Empty buckets and bottles select no fluid. With Create installed, potion bottles, honey bottles and Create filters also work; potions match their specific contents."
+  ],
+  "recipes": true
+}

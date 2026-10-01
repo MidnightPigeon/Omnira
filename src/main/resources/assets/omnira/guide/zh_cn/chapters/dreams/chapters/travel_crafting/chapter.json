@@ -1,0 +1,11 @@
+{
+  "id": "travel_crafting",
+  "title": "道标与归程制作",
+  "icon": "omnira:recall_crystal",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/spacetime_waymark.json",
+    "entries/recall_crystal.json"
+  ],
+  "chapters": []
+}

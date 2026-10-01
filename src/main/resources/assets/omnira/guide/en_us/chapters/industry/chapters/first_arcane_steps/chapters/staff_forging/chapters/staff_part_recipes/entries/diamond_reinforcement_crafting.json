@@ -1,0 +1,15 @@
+{
+  "id": "diamond_reinforcement_crafting",
+  "item": "omnira:diamond_reinforcement",
+  "title": "Diamond Reinforcement · Crafting",
+  "text": [
+    "Use the assembly recipe below to forge this item."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "diamond_reinforcement",
+      "label": "Use and Effects"
+    }
+  ]
+}

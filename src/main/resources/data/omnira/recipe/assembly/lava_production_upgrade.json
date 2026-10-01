@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "minecraft:pointed_dripstone"
+    },
+    {
+      "item": "minecraft:pointed_dripstone"
+    },
+    {
+      "item": "minecraft:pointed_dripstone"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "omnira:grid_frame"
+    }
+  ],
+  "result": {
+    "id": "omnira:lava_production_upgrade",
+    "count": 1
+  }
+}

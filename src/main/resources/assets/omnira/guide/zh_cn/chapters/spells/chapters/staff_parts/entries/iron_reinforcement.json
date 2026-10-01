@@ -1,0 +1,9 @@
+{
+  "id": "iron_reinforcement",
+  "item": "omnira:iron_reinforcement",
+  "title": "铁质加固部件",
+  "text": [
+    "作为法杖的中央加固部件，不提供额外加成。"
+  ],
+  "recipes": true
+}

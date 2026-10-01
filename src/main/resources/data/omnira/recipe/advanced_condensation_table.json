@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["LLL", "RCR", "R R"],
+  "key": {
+    "L": {"item": "omnira:light_source_crystal"},
+    "R": {"item": "omnira:resonance_crystal"},
+    "C": {"item": "omnira:primordial_spell_core"}
+  },
+  "result": {"id": "omnira:advanced_condensation_table", "count": 1}
+}

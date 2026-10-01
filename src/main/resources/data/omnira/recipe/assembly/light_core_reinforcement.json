@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "slots": [
+    {
+      "item": "omnira:light_crystal_core"
+    },
+    {
+      "item": "omnira:light_crystal_core"
+    },
+    {
+      "item": "omnira:light_crystal_core"
+    },
+    {
+      "item": "omnira:light_crystal_core"
+    },
+    {
+      "item": "omnira:light_crystal_core"
+    },
+    {
+      "item": "omnira:light_crystal_core"
+    },
+    {
+      "item": "omnira:diamond_reinforcement"
+    }
+  ],
+  "result": {
+    "id": "omnira:light_core_reinforcement",
+    "count": 1
+  }
+}

@@ -1,0 +1,342 @@
+{
+  "textures": {
+    "crystal": "omnira:block/spiritual_crystal_clear",
+    "core": "omnira:block/light_torch_core_clear",
+    "particle": "omnira:block/spiritual_crystal_clear"
+  },
+  "elements": [
+    {
+      "from": [
+        5.5,
+        0,
+        5.5
+      ],
+      "to": [
+        10.5,
+        1,
+        10.5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#crystal",
+          "uv": [
+            5.5,
+            5.5,
+            10.5,
+            10.5
+          ]
+        },
+        "north": {
+          "texture": "#crystal",
+          "uv": [
+            5.5,
+            15,
+            10.5,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#crystal",
+          "uv": [
+            5.5,
+            15,
+            10.5,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#crystal",
+          "uv": [
+            5.5,
+            15,
+            10.5,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#crystal",
+          "uv": [
+            5.5,
+            15,
+            10.5,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7,
+        1,
+        7
+      ],
+      "to": [
+        9,
+        3,
+        9
+      ],
+      "faces": {
+        "down": {
+          "texture": "#core",
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ]
+        },
+        "up": {
+          "texture": "#core",
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ]
+        },
+        "north": {
+          "texture": "#core",
+          "uv": [
+            7,
+            14,
+            9,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#core",
+          "uv": [
+            7,
+            14,
+            9,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#core",
+          "uv": [
+            7,
+            14,
+            9,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#core",
+          "uv": [
+            7,
+            14,
+            9,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        3,
+        6
+      ],
+      "to": [
+        10,
+        7,
+        10
+      ],
+      "faces": {
+        "down": {
+          "texture": "#core",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ]
+        },
+        "up": {
+          "texture": "#core",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ]
+        },
+        "north": {
+          "texture": "#core",
+          "uv": [
+            6,
+            12,
+            10,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#core",
+          "uv": [
+            6,
+            12,
+            10,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#core",
+          "uv": [
+            6,
+            12,
+            10,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#core",
+          "uv": [
+            6,
+            12,
+            10,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7,
+        7,
+        7
+      ],
+      "to": [
+        9,
+        9,
+        9
+      ],
+      "faces": {
+        "down": {
+          "texture": "#core",
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ]
+        },
+        "up": {
+          "texture": "#core",
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ]
+        },
+        "north": {
+          "texture": "#core",
+          "uv": [
+            7,
+            14,
+            9,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#core",
+          "uv": [
+            7,
+            14,
+            9,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#core",
+          "uv": [
+            7,
+            14,
+            9,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#core",
+          "uv": [
+            7,
+            14,
+            9,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7.5,
+        9,
+        7.5
+      ],
+      "to": [
+        8.5,
+        9.600000000000001,
+        8.5
+      ],
+      "faces": {
+        "down": {
+          "texture": "#core",
+          "uv": [
+            7.5,
+            7.5,
+            8.5,
+            8.5
+          ]
+        },
+        "up": {
+          "texture": "#core",
+          "uv": [
+            7.5,
+            7.5,
+            8.5,
+            8.5
+          ]
+        },
+        "north": {
+          "texture": "#core",
+          "uv": [
+            7.5,
+            15.399999999999999,
+            8.5,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#core",
+          "uv": [
+            7.5,
+            15.399999999999999,
+            8.5,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#core",
+          "uv": [
+            7.5,
+            15.399999999999999,
+            8.5,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#core",
+          "uv": [
+            7.5,
+            15.399999999999999,
+            8.5,
+            16
+          ]
+        }
+      }
+    }
+  ],
+  "render_type": "minecraft:translucent",
+  "ambientocclusion": false
+}

@@ -1,0 +1,15 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "slots": [
+    {"item": "omnira:basic_crystal_grid"},
+    {"item": "omnira:elemental_crystal_grid"},
+    {"item": "omnira:arcane_crystal_grid"},
+    {"item": "omnira:mana_engine"},
+    {"item": "omnira:infused_stacking_upgrade"},
+    {"item": "omnira:paradox_dust"},
+    {"item": "omnira:crystal_ball"},
+    {"item": "omnira:light_dark_spell_core"},
+    {"item": "omnira:liquid_crystal_ball"}
+  ],
+  "result": {"id": "omnira:cruise_orb", "count": 1}
+}

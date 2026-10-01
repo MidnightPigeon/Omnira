@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "omnira:crude_light_core",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:light_source_crystal",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:light_crystal_torch",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:light_crystal_core",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:light_microcore",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

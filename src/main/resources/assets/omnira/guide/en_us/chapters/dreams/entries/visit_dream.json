@@ -1,0 +1,20 @@
+{
+  "id": "visit_dream",
+  "item": "omnira:ritual_energy_core",
+  "title": "Entering the Dream Realm",
+  "recipes": false,
+  "text": [
+    "Use the Ritual of Dreamseeking to open a portal into the dream realm.",
+    "Dawn Crystal Fields float high above Shadow Woodland, with rare Mirror Dream islands between them. The arrival portal returns you near the original ritual even if that entrance has disappeared."
+  ],
+  "links": [
+    {
+      "target": "dream_ritual",
+      "label": "Ritual of Dreamseeking"
+    },
+    {
+      "target": "explore_dream",
+      "label": "Exploring the Dream Realm"
+    }
+  ]
+}

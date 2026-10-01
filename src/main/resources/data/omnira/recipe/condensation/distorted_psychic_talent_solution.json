@@ -1,0 +1,11 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {
+    "item": "omnira:inactive_t_virus_solution"
+  },
+  "mana_cost": 300,
+  "result": {
+    "id": "omnira:distorted_psychic_talent_solution",
+    "count": 1
+  }
+}

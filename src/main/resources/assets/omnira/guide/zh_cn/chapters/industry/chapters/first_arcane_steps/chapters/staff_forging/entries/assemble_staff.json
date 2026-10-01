@@ -1,0 +1,16 @@
+{
+  "id": "assemble_staff",
+  "item": "omnira:modular_staff",
+  "title": "装配法杖",
+  "text": [
+    "在魔动装配台左下放入杖体、中央放入加固部件、右上放入杖端，其余四槽留空。完成锻造后获得组合后的法杖。",
+    "三类部件可自由搭配，加成相加。杖体决定强化槽，杖端决定魔纹槽；选择部件前可查阅各部件条目。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "staff_parts",
+      "label": "法杖部件"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "top": "omnira:block/engraved_mirror_rock",
+    "bottom": "omnira:block/engraved_mirror_rock",
+    "side": "omnira:block/engraved_mirror_rock"
+  }
+}

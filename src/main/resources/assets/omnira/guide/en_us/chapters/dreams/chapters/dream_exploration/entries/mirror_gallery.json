@@ -1,0 +1,10 @@
+{
+  "id": "mirror_gallery",
+  "item": "omnira:engraved_mirror_rock",
+  "title": "Ruined Mirror-Dream Gallery",
+  "text": [
+    "A rare circular ruin on the surface of the Mirror-Dream Border. A crystal path crosses the central shallow pool. One gallery remains passable while the other bears broken roofs or walls.",
+    "The pool's Crystal Ball mainly holds Dream Crystals, sometimes light or dark microcores or a Dream Spell Core. Each side gallery has a central Crystal Ball containing Paradox Dust, with chances for a Dream Spell Core, Dream Crystal Budding Rock, an Arcane Crystal Grid or a Pocket Magic Bottle."
+  ],
+  "recipes": false
+}

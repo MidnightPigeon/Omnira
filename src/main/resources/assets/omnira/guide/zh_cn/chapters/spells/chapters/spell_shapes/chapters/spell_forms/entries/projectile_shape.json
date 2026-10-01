@@ -1,0 +1,32 @@
+{
+  "id": "projectile_shape",
+  "item": "omnira:air_microcore",
+  "title": "弹射物",
+  "text": [
+    "在形态槽放入风元素微核。准星-弹射物沿视线直线发射，目标-弹射物追向选定的生物或方块；途中碰到阻挡物时触发携带的效果。",
+    "自身-弹射物改为带动施法者飞行；地面-弹射物改为向上弹起地表外观的法术方块。普通弹体不受水流推动，可以被弹射返还。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "air_microcore",
+      "label": "风元素微核"
+    },
+    {
+      "target": "self_projectile",
+      "label": "自身弹射与飞行"
+    },
+    {
+      "target": "ground_projectile",
+      "label": "地面-弹射物"
+    },
+    {
+      "target": "target_projectile",
+      "label": "目标-弹射物"
+    },
+    {
+      "target": "spell_elements",
+      "label": "法术要素"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "omnira:analysis_crystal"
+    },
+    {
+      "item": "omnira:light_microcore"
+    }
+  ],
+  "result": {
+    "id": "omnira:crude_light_core",
+    "count": 8
+  }
+}

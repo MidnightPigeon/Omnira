@@ -1,0 +1,12 @@
+{
+  "id": "light_microcore",
+  "item": "omnira:light_microcore",
+  "title": "Light Microcore",
+  "text": [
+    "Combine an analysis crystal with four crude light cores shapelessly to obtain one light microcore, costing one crystal durability.",
+    "Analyzing sixteen crude light cores at the analysis table yields one light microcore and sixteen arcane dust.",
+    "Combine a light microcore with an analysis crystal to recover eight crude light cores, costing one durability.",
+    "Use a light microcore while aiming at shadow mist, or drop it into the cloud, to convert it to dark. Each cloud converts one microcore, then dissipates within one second."
+  ],
+  "recipes": true
+}

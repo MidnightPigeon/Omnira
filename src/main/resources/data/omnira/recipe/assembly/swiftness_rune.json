@@ -1,0 +1,6 @@
+{
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "slots": [{"item":"minecraft:diamond"},{"item":"minecraft:diamond"},{"item":"minecraft:diamond"},{"item":"minecraft:diamond"},{"item":"minecraft:diamond"},{"item":"minecraft:diamond"},{"item":"minecraft:gold_block"}],
+  "result": {"id":"omnira:swiftness_rune","count":1}
+}

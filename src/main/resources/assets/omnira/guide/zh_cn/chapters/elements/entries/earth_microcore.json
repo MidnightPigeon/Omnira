@@ -1,0 +1,19 @@
+{
+  "id": "earth_microcore",
+  "item": "omnira:earth_microcore",
+  "title": "地元素微核",
+  "text": [
+    "在解析工匠桌提取的地元素微核。放入水晶加工台的目标槽时提供“地面”，放入形态槽时提供“屏障”。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "ground_target",
+      "label": "地面"
+    },
+    {
+      "target": "barrier_shape",
+      "label": "屏障"
+    }
+  ]
+}

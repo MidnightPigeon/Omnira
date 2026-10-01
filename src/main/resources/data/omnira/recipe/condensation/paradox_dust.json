@@ -1,0 +1,6 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {"item": "omnira:spacetime_knot"},
+  "mana_cost": 300,
+  "result": {"id": "omnira:paradox_dust", "count": 1}
+}

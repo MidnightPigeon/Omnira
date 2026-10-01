@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:builtin/entity",
+  "gui_light": "side",
+  "textures": {"particle": "omnira:item/spiritual_crystal_facets"},
+  "display": {
+    "gui": {"rotation": [25, 135, 0], "scale": [0.8, 0.8, 0.8]},
+    "ground": {"scale": [0.5, 0.5, 0.5]},
+    "fixed": {"rotation": [0, 90, 45], "scale": [0.65, 0.65, 0.65]},
+    "firstperson_righthand": {"rotation": [0, 45, 0], "scale": [0.6, 0.6, 0.6]},
+    "thirdperson_righthand": {"rotation": [90, 0, 0], "scale": [0.65, 0.65, 0.65]}
+  }
+}

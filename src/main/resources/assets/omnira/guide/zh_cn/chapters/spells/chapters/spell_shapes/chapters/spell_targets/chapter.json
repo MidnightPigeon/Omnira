@@ -1,0 +1,13 @@
+{
+  "id": "spell_targets",
+  "title": "目标",
+  "icon": "omnira:fire_microcore",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/ground_target.json",
+    "entries/self_target.json",
+    "entries/selected_target.json",
+    "entries/crosshair_target.json"
+  ],
+  "chapters": []
+}

@@ -1,0 +1,9 @@
+{
+  "id": "spiritual_crystal_block",
+  "item": "omnira:spiritual_crystal_block",
+  "title": "灵性水晶块",
+  "text": [
+    "四枚灵性水晶按2×2排列合成，是浅蓝色半透明建筑材料。可加工为水晶柱构件。"
+  ],
+  "recipes": true
+}

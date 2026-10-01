@@ -1,0 +1,15 @@
+{
+  "id": "marisa_crystal_ball_guide_machine_reference",
+  "title": "魔理沙的水晶球",
+  "item": "omnira:marisa_crystal_ball",
+  "text": [
+    "这件设备来自遗迹，可查阅专属产出条目的获取与操作说明。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "marisa_crystal_ball_guide",
+      "label": "获取与操作"
+    }
+  ]
+}

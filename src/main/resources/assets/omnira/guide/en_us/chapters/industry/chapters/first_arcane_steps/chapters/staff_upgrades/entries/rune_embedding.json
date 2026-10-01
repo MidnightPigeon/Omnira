@@ -1,0 +1,9 @@
+{
+  "id": "rune_embedding",
+  "item": "omnira:modular_staff",
+  "title": "Embedding Runes",
+  "text": [
+    "Place a staff in the assembly table center and a rune in an outer slot. Each rune uses one rune slot; each type can be fitted only once.",
+    "Embedding is irreversible: runes cannot be removed, replaced or recovered. Check the tip's remaining slots before forging."
+  ]
+}

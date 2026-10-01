@@ -1,0 +1,9 @@
+{
+  "id": "light_source_bricks",
+  "item": "omnira:light_source_bricks",
+  "title": "Light Source Bricks",
+  "text": [
+    "Craft four Light Source Crystal in a 2×2 square into four bricks. Retains light level 10 and 5 kpg of lift."
+  ],
+  "recipes": true
+}

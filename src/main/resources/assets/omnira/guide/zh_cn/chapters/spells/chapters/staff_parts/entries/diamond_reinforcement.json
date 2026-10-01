@@ -1,0 +1,15 @@
+{
+  "id": "diamond_reinforcement",
+  "item": "omnira:diamond_reinforcement",
+  "title": "钻石加固部件",
+  "text": [
+    "每发法术减免 5 点法力消耗。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "diamond_reinforcement_crafting",
+      "label": "锻造配方"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:time_planks"
+    }
+  },
+  "result": {
+    "id": "omnira:time_slab",
+    "count": 6
+  }
+}

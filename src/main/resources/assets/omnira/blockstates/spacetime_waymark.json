@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "omnira:block/spacetime_waymark"
+    },
+    "half=upper": {
+      "model": "omnira:block/spacetime_waymark_upper"
+    }
+  }
+}

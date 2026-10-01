@@ -1,0 +1,9 @@
+{
+  "id": "mirror_rock",
+  "item": "omnira:mirror_rock",
+  "title": "Mirror Rock",
+  "text": [
+    "Silver-surfaced rock from Mirror Dream islands. Silk Touch is required to collect the block; otherwise it shatters without a drop."
+  ],
+  "recipes": true
+}

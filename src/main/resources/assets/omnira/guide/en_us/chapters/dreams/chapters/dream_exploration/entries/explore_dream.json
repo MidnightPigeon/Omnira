@@ -1,0 +1,31 @@
+{
+  "id": "explore_dream",
+  "item": "omnira:air_microcore",
+  "title": "Exploring the Dream Realm",
+  "text": [
+    "Dawn Crystal Plains lie above the Twilight Shadow Woods, with scattered Mirror Dream islands between them. Prepare a return route and a safe landing before crossing gaps."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "recall_crystal",
+      "label": "Recall Crystal"
+    },
+    {
+      "target": "self_projectile",
+      "label": "Self Projectile Flight"
+    },
+    {
+      "target": "spacetime_waymark",
+      "label": "Spacetime Waymark"
+    },
+    {
+      "target": "radiant_courtyard",
+      "label": "Radiant Courtyard"
+    },
+    {
+      "target": "shadow_library",
+      "label": "Shadow Library"
+    }
+  ]
+}

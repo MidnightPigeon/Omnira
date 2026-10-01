@@ -1,0 +1,19 @@
+{
+  "id": "drilling_platform_guide",
+  "title": "超维钻井平台",
+  "item": "omnira:hyperdimensional_drill",
+  "text": [
+    "纪元断崖中偶尔出现钻井平台，中央安装可带走的超维钻机。平台宝藏包含一把时空考古刷与一枚液体战利品晶球。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "hyperdimensional_drill",
+      "label": "超维钻机"
+    },
+    {
+      "target": "spacetime_archaeology_brush",
+      "label": "时空考古刷"
+    }
+  ]
+}

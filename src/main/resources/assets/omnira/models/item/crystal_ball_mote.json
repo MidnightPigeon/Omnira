@@ -1,0 +1,152 @@
+{
+  "textures": {
+    "base": "omnira:block/crystal_ball_base",
+    "edge": "omnira:block/crystal_ball_edge",
+    "shell": "omnira:block/crystal_ball_shell",
+    "glint": "omnira:block/crystal_ball_glint",
+    "mote": "omnira:block/crystal_ball_mote",
+    "halo": "omnira:block/crystal_ball_halo",
+    "particle": "omnira:block/crystal_ball_base"
+  },
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "from": [
+        7.78,
+        7.78,
+        7.78
+      ],
+      "to": [
+        8.22,
+        8.22,
+        8.22
+      ],
+      "shade": false,
+      "faces": {
+        "west": {
+          "texture": "#mote",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#mote",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#mote",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#mote",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "north": {
+          "texture": "#mote",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#mote",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7.57,
+        7.57,
+        7.57
+      ],
+      "to": [
+        8.43,
+        8.43,
+        8.43
+      ],
+      "shade": false,
+      "faces": {
+        "west": {
+          "texture": "#halo",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#halo",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#halo",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#halo",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "north": {
+          "texture": "#halo",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#halo",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    }
+  ]
+}

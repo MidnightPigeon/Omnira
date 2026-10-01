@@ -1,0 +1,17 @@
+{
+  "id": "construction_matrix",
+  "item": "omnira:construction_matrix",
+  "title": "Construction Matrix",
+  "text": [
+    "Creates Void Crystals at the spell impact, normally lasting twenty seconds. Enhancement strengthens them and raises blast resistance; each Delay doubles their lifetime, while Infusion makes them permanent. Use a staff to left-click them away.",
+    "On creatures, construction locks movement and actions for 5 seconds. Delay doubles this duration, Enhancement adds crushing damage, and Infusion allows the locked creature to be mined.",
+    "Mining difficulty depends on the creature's health. Finish mining before the lock expires to kill it; the tool's Fortune is treated as Looting for drops."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "construction_matrix_crafting",
+      "label": "Analysis Recipe"
+    }
+  ]
+}

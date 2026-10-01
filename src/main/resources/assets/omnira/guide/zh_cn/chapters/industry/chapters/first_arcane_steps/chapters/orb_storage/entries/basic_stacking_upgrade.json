@@ -1,0 +1,10 @@
+{
+  "id": "basic_stacking_upgrade",
+  "item": "omnira:basic_stacking_upgrade",
+  "title": "基础堆叠升级",
+  "text": [
+    "将原本可堆叠物品的单格上限或液晶球容量提高至两倍。不可堆叠物品仍为一个。",
+    "同类升级不能重复安装；基础与注能堆叠升级属于同一类。剩余容量不足时不能拆除容量升级。"
+  ],
+  "recipes": true
+}

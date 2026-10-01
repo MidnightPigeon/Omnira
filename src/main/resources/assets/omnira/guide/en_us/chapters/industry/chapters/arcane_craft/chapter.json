@@ -1,0 +1,27 @@
+{
+  "id": "arcane_craft",
+  "title": "Arcane Fabrication",
+  "icon": "omnira:arcane_assembly_table",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/simple_condensation_table.json",
+    "entries/advanced_condensation_table.json",
+    "entries/analysis_artisan_table.json",
+    "entries/crystal_processing_table.json",
+    "entries/advanced_crystal_aggregation_ring.json",
+    "entries/arcane_assembly_table.json",
+    "entries/advanced_assembly_table.json",
+    "entries/mana_engine.json",
+    "entries/spacetime_reverser.json",
+    "entries/liquid_crystal_ball.json",
+    "entries/resonance_core.json",
+    "entries/ritual_energy_core_crafting.json",
+    "entries/advanced_ritual_energy_core_crafting.json",
+    "entries/hyperdimensional_drill_machine_reference.json",
+    "entries/split_time_sundial_guide_machine_reference.json",
+    "entries/wonderland_poker_stand_guide_machine_reference.json",
+    "entries/marisa_crystal_ball_guide_machine_reference.json",
+    "entries/crystal_ball_crafting.json"
+  ],
+  "chapters": []
+}

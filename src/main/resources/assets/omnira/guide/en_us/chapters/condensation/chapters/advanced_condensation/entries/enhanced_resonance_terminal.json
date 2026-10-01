@@ -1,0 +1,16 @@
+{
+  "id": "enhanced_resonance_terminal",
+  "item": "omnira:enhanced_resonance_terminal",
+  "title": "Enhanced Resonance Terminal",
+  "recipes": true,
+  "text": [
+    "Condense a Resonance Terminal at an Advanced Condensation Table to obtain a hexagonal terminal with six links instead of four. Existing links and ownership are retained.",
+    "Controls remain unchanged. Destroyed nodes automatically free their link positions. Shop links remain yellow and trades have no additional mana fee."
+  ],
+  "links": [
+    {
+      "target": "resonance_core",
+      "label": "Resonance Links"
+    }
+  ]
+}

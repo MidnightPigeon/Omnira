@@ -1,0 +1,14 @@
+{
+  "id": "advanced_assembly_table",
+  "item": "omnira:advanced_assembly_table",
+  "recipes": false,
+  "title": "Advanced Assembly Table",
+  "scene": "advanced_assembly_table",
+  "text": [
+    "Place an arcane assembly table at the bottom center with eight crystal casings around it. Put mana engines at the upper rear, left and right, leaving the front open. Upper front-left, front-right, rear-right and rear-left hold an advanced condensation table, analysis artisan table, crystal processing table and arcane assembly table respectively. Empty their inventories, then use one infused spiritual crystal on the bottom center. Facing does not matter.",
+    "The formed table cannot be mined, dismantled or pushed by pistons; the mana vortex cannot tear it apart. An empty Pocket Magic Bottle can capture any part and preserve contents and progress; without room to release, it stays bottled. Glue must encompass the whole 3x3x2 table before physical assembly. A physical structure can still be pulled by the vortex.",
+    "Put six unordered materials and a power core in the main table, plus one material at each of the three hovering nodes; empty-hand right-click removes a node item. These nine-input recipes do not accept ordinary assembly recipes. The power core stays, but a core used as a node ingredient is consumed.",
+    "Press the front white button and step away. Original cores take 60 seconds; dream and light-dark cores take 30. No player mana is spent. Inputs are locked while working; right-click the table afterwards for the result.",
+    "While the processing light is active, players inside the 3x3x2 platform take 2 damage each second and are ignited. Core colors do not change the hazard."
+  ]
+}

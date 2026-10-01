@@ -1,0 +1,24 @@
+{
+  "structures": [
+    {
+      "structure": "omnira:abandoned_apprentice_hut",
+      "weight": 5
+    },
+    {
+      "structure": "omnira:ruined_crystal_workshop",
+      "weight": 3
+    },
+    {
+      "structure": "omnira:abandoned_wizard_tower",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 19840721,
+    "spacing": 32,
+    "separation": 10,
+    "spread_type": "linear",
+    "frequency": 1.0
+  }
+}

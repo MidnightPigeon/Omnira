@@ -1,0 +1,36 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "slots": [
+    {
+      "item": "omnira:spacetime_knot"
+    },
+    {
+      "item": "omnira:spacetime_knot"
+    },
+    {
+      "item": "omnira:spacetime_knot"
+    },
+    {
+      "item": "omnira:spacetime_knot"
+    },
+    {
+      "item": "omnira:spacetime_knot"
+    },
+    {
+      "item": "omnira:spacetime_knot"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    }
+  ],
+  "result": {
+    "id": "omnira:unstable_spacetime_aggregate",
+    "count": 1
+  }
+}

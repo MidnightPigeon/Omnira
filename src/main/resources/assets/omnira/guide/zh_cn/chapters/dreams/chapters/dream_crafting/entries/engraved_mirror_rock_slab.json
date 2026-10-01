@@ -1,0 +1,9 @@
+{
+  "id": "engraved_mirror_rock_slab",
+  "item": "omnira:engraved_mirror_rock_slab",
+  "title": "刻纹镜面岩台阶",
+  "text": [
+    "由镜面岩加工的刻纹建筑材料，可进一步制成楼梯与台阶。"
+  ],
+  "recipes": true
+}

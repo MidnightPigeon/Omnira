@@ -1,0 +1,24 @@
+{
+  "id": "ground_target",
+  "item": "omnira:earth_microcore",
+  "title": "地面",
+  "text": [
+    "在目标槽放入地元素微核。以施法者脚下为中心，在周围选取八处地表；每处独立寻找上下12格内可用的表面，半砖与楼梯按实际表面高度选取。",
+    "不需要把准星对着地面。找不到表面的位置会跳过；全部无效时不能施放。广域魔纹向外增加一圈选点。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "earth_microcore",
+      "label": "地元素微核"
+    },
+    {
+      "target": "ground_projectile",
+      "label": "地面-弹射物"
+    },
+    {
+      "target": "ground_orbit",
+      "label": "地面-环绕"
+    }
+  ]
+}

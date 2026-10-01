@@ -1,0 +1,20 @@
+{
+  "id": "elemental_fusion_tip",
+  "item": "omnira:elemental_fusion_tip",
+  "title": "元素融合杖端",
+  "text": [
+    "每次施放 1 发，链内基础冷却 1 秒，提供 2 个魔纹槽。",
+    "灵性水晶杖端置于装配台中央，外围无序放入四种基础微核，或一颗解析之晶。解析之晶在此配方中被完整消耗。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "elemental_fusion_tip_crafting",
+      "label": "锻造配方"
+    },
+    {
+      "target": "staff_casting",
+      "label": "法术链与冷却"
+    }
+  ]
+}

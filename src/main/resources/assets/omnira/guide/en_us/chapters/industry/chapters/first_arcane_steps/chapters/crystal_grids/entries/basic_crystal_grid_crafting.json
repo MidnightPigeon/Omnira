@@ -1,0 +1,15 @@
+{
+  "id": "basic_crystal_grid_crafting",
+  "item": "omnira:basic_crystal_grid",
+  "title": "Basic Crystal Grid · Crafting",
+  "text": [
+    "Forge a grid frame in the center with three spiritual crystals in alternating outer slots. Leave the other three outer slots empty."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "basic_crystal_grid",
+      "label": "Use and Effects"
+    }
+  ]
+}

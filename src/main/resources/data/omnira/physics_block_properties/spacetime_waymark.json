@@ -1,0 +1,7 @@
+{
+  "selector": "omnira:spacetime_waymark",
+  "properties": {
+    "sable:mass": 0,
+    "sable:volume": 1
+  }
+}

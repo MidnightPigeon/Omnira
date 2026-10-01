@@ -1,0 +1,26 @@
+{
+  "id": "staff_casting",
+  "item": "omnira:modular_staff",
+  "title": "Casting with a Staff",
+  "text": [
+    "A staff reads spells from an equipped crystal grid in a repeating sequence. Each shot spends mana based on its spell crystal's authored cost; installed crystals are not consumed.",
+    "Right-click with a staff in either hand to cast; main-hand interactions take priority. Sneak-right-click a main-hand staff to open the grid. An offhand staff casts once per press, before a main-hand weapon begins its held ability. The tip sets shot count, interval and base cooldown. Hold Shift to inspect parts, enhancements and runes.",
+    "Multiple shots spend mana individually; insufficient mana, changing staffs or interrupting the cast stops the rest. Total cooldown reduction is capped at 50% and does not shorten the burst interval. Base cooldown is at least one second, or half a second after reduction.",
+    "Inside a spell chain, cooldown follows the staff tip. Completing a cycle uses a four-second base cooldown, even with one spell. Two-shot staffs begin cooldown after both shots. Staffs share the grid's casting cooldown; guns and swords cool their own spells per item."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "staff_forging",
+      "label": "Staff Forging"
+    },
+    {
+      "target": "modular_staff",
+      "label": "Staff Forging"
+    },
+    {
+      "target": "wooden_staff_shaft",
+      "label": "Staff Parts"
+    }
+  ]
+}

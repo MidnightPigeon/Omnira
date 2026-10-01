@@ -1,0 +1,11 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {
+    "item": "omnira:chronal_blindfish"
+  },
+  "mana_cost": 300,
+  "result": {
+    "id": "omnira:unstable_spacetime_aggregate",
+    "count": 1
+  }
+}

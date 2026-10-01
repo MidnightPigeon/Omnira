@@ -1,0 +1,19 @@
+{
+  "id": "staff_parts",
+  "title": "Staff Parts",
+  "icon": "omnira:wooden_staff_shaft",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/wooden_staff_shaft.json",
+    "entries/shadow_staff_shaft.json",
+    "entries/blaze_staff_shaft.json",
+    "entries/iron_reinforcement.json",
+    "entries/diamond_reinforcement.json",
+    "entries/netherite_reinforcement.json",
+    "entries/light_core_reinforcement.json",
+    "entries/spiritual_crystal_tip.json",
+    "entries/multi_arcane_tip.json",
+    "entries/elemental_fusion_tip.json"
+  ],
+  "chapters": []
+}

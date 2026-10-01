@@ -1,0 +1,15 @@
+{
+  "id": "blaze_staff_shaft",
+  "item": "omnira:blaze_staff_shaft",
+  "title": "烈焰棒杖体",
+  "text": [
+    "提供 1 个强化槽，增加 10% 法术强度。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "blaze_staff_shaft_crafting",
+      "label": "锻造配方"
+    }
+  ]
+}

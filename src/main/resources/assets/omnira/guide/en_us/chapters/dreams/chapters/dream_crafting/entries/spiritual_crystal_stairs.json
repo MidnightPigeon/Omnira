@@ -1,0 +1,9 @@
+{
+  "id": "spiritual_crystal_stairs",
+  "item": "omnira:spiritual_crystal_stairs",
+  "title": "Spiritual Crystal Stairs",
+  "text": [
+    "Craft or stonecut Spiritual Crystal Blocks; retains their translucent pale-blue appearance and light."
+  ],
+  "recipes": true
+}

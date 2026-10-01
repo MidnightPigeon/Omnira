@@ -1,0 +1,22 @@
+{
+  "id": "cleansing_ritual",
+  "title": "Rite of Cleansing",
+  "item": "omnira:infused_spiritual_crystal",
+  "scene": "cleansing_ritual",
+  "recipes": false,
+  "text": [
+    "Arrange eight Crystal Pedestals around a Ritual Energy Core as shown. Place one Infused Spiritual Crystal on each pedestal. Either the basic or advanced core works.",
+    "Use Paradox Dust on the core. Every player within the ritual area loses all potion effects, talents and curses, including the slots created for them. Health and hunger are set to 1.",
+    "Only the Paradox Dust is consumed. The eight crystals, pedestals and core remain. Carried Infused Grimoires may also be sanctified or corrupted."
+  ],
+  "links": [
+    {
+      "target": "crystal_pedestal",
+      "label": "Crystal Pedestal"
+    },
+    {
+      "target": "ritual_energy_core",
+      "label": "Ritual Energy Core"
+    }
+  ]
+}

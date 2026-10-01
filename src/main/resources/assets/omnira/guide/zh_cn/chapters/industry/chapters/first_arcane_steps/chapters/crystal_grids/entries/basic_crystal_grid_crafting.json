@@ -1,0 +1,15 @@
+{
+  "id": "basic_crystal_grid_crafting",
+  "item": "omnira:basic_crystal_grid",
+  "title": "基础水晶格栅 · 制作",
+  "text": [
+    "在魔动装配台中央放格栅框架，外围隔位放三枚灵性水晶，另外三槽留空，完成锻造得到基础格栅。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "basic_crystal_grid",
+      "label": "使用与效果"
+    }
+  ]
+}

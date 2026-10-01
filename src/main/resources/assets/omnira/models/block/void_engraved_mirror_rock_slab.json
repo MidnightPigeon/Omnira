@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "top": "omnira:block/void_engraved_mirror_rock",
+    "bottom": "omnira:block/void_engraved_mirror_rock",
+    "side": "omnira:block/void_engraved_mirror_rock"
+  }
+}

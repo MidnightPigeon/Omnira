@@ -1,0 +1,9 @@
+{
+  "id": "light_condensate",
+  "item": "omnira:light_condensate",
+  "title": "光凝晶",
+  "text": [
+    "晨辉晶原浮岛的主要组成，半透明，亮度7。航空学联动中提供2 kpg浮力。"
+  ],
+  "recipes": true
+}

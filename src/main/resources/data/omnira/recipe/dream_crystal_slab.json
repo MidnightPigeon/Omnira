@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:dream_crystal_block"
+    }
+  },
+  "result": {
+    "id": "omnira:dream_crystal_slab",
+    "count": 6
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "dissociation_thread_crafting",
+  "item": "omnira:dissociation_thread",
+  "title": "解离之线 · 解离 · 制作",
+  "text": [
+    "在解析工匠桌中加工解析之晶，每次消耗 1 点耐久，得到一份解离之线和一枚随机的地、水、火或风微核，四者概率相同。水晶留在原料槽，耐久耗尽后破碎。加工前请留空副产物槽。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "dissociation_thread",
+      "label": "使用与效果"
+    }
+  ]
+}

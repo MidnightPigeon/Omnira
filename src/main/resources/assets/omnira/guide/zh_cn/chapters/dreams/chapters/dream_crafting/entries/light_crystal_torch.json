@@ -1,0 +1,9 @@
+{
+  "id": "light_crystal_torch",
+  "item": "omnira:light_crystal_torch",
+  "title": "光晶火炬",
+  "text": [
+    "从上至下排列一块光晶核、两枚灵性水晶，一次合成四盏。亮度15，高1.6格，放置时需预留两格空间和底部支撑。"
+  ],
+  "recipes": true
+}

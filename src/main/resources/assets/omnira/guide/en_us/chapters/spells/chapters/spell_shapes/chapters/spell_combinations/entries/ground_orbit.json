@@ -1,0 +1,20 @@
+{
+  "id": "ground_orbit",
+  "item": "omnira:water_microcore",
+  "title": "Ground-Orbit",
+  "text": [
+    "Use Earth as the target and Water as the shape. Projectiles travel around the path formed by valid nearby surfaces. The positions are chosen at casting and do not keep following you.",
+    "These remain contact-triggered projectiles. Gaps in the terrain change the route; choose Self for an orbit that follows you."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "ground_target",
+      "label": "Ground"
+    },
+    {
+      "target": "orbit_shape",
+      "label": "Orbit"
+    }
+  ]
+}

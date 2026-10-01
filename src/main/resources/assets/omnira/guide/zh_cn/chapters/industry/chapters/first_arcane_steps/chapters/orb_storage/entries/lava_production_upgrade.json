@@ -1,0 +1,10 @@
+{
+  "id": "lava_production_upgrade",
+  "item": "omnira:lava_production_upgrade",
+  "title": "熔岩生产升级",
+  "text": [
+    "每秒生产 100 mB 熔岩。装在液晶球中直接填入；装在水晶球中则寻找可填充的液体容器，十秒填满一个空桶。没有可填充的容器时停止工作。",
+    "锻造所用熔岩桶会返还空桶。"
+  ],
+  "recipes": true
+}

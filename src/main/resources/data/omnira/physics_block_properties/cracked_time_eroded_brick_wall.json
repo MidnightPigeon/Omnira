@@ -1,0 +1,8 @@
+{
+  "selector": "omnira:cracked_time_eroded_brick_wall",
+  "properties": {
+    "sable:mass": 0.75,
+    "sable:volume": 0.75
+  },
+  "priority": 2000
+}

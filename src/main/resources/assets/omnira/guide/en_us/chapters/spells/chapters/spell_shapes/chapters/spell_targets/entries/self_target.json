@@ -1,0 +1,24 @@
+{
+  "id": "self_target",
+  "item": "omnira:water_microcore",
+  "title": "Self",
+  "text": [
+    "Put a Water Microcore in the target slot. Centers the spell on you, producing a personal ward, orbiting projectiles, a local burst or self flight.",
+    "Self is not automatically safe: bursts can affect you, and a ward directs healing and retaliation to different recipients."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "water_microcore",
+      "label": "Water Microcore"
+    },
+    {
+      "target": "self_projectile",
+      "label": "Self Projectile Flight"
+    },
+    {
+      "target": "entity_barrier",
+      "label": "Self or Creature-Barrier"
+    }
+  ]
+}

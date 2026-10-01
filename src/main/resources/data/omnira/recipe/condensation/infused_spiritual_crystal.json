@@ -1,0 +1,6 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {"item": "omnira:spiritual_crystal"},
+  "mana_cost": 300,
+  "result": {"id": "omnira:infused_spiritual_crystal", "count": 1}
+}

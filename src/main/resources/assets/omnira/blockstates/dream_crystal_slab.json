@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "omnira:block/dream_crystal_slab"
+    },
+    "type=top": {
+      "model": "omnira:block/dream_crystal_slab_top"
+    },
+    "type=double": {
+      "model": "omnira:block/dream_crystal_block"
+    }
+  }
+}

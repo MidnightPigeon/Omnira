@@ -1,0 +1,15 @@
+{
+  "id": "split_time_sundial_guide_machine_reference",
+  "title": "Split-Time Sundial",
+  "item": "omnira:split_time_sundial",
+  "text": [
+    "This device comes from a ruin; its special-product entry explains acquisition and operation."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "split_time_sundial_guide",
+      "label": "Acquisition and Operation"
+    }
+  ]
+}

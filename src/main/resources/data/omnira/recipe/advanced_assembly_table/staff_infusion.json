@@ -1,0 +1,9 @@
+{
+  "type": "omnira:advanced_assembly_table", "operation": "staff_enhancement",
+  "slots": [
+    {"item": "omnira:spiritual_crystal"}, {"item": "omnira:spiritual_crystal"}, {"item": "omnira:spiritual_crystal"},
+    {"item": "omnira:spiritual_crystal"}, {"item": "omnira:spiritual_crystal"}, {"item": "omnira:spiritual_crystal"},
+    {"item": "omnira:spiritual_crystal"}, {"item": "omnira:modular_staff"}, {"item": "omnira:spiritual_crystal"}
+  ],
+  "result": {"id": "omnira:modular_staff", "count": 1}
+}

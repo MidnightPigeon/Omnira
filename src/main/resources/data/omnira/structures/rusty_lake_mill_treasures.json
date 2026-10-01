@@ -1,0 +1,30 @@
+[
+  {
+    "x": 29,
+    "y": 1,
+    "z": 27,
+    "reversed": false,
+    "loot": "omnira:chests/rusty_lake_mill_cellar"
+  },
+  {
+    "x": 26,
+    "y": 14,
+    "z": 28,
+    "reversed": false,
+    "loot": "omnira:chests/rusty_lake_mill_workshop"
+  },
+  {
+    "x": 25,
+    "y": 3,
+    "z": 28,
+    "reversed": true,
+    "loot": "omnira:chests/rusty_lake_mill_memory"
+  },
+  {
+    "x": 25,
+    "y": 8,
+    "z": 23,
+    "reversed": true,
+    "loot": "omnira:chests/rusty_lake_mill_echo"
+  }
+]

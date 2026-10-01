@@ -1,0 +1,10 @@
+{
+  "id": "infused_crystal_casing",
+  "item": "omnira:infused_crystal_casing",
+  "title": "Infused Crystal Casing",
+  "text": [
+    "Use an Infused Spiritual Crystal on a Spiritual Crystal Block to form an Infused Crystal Casing. Its clear body and connecting trim match the Crystal Casing, but its rim glows pale white.",
+    "Both casings can wrap Create shafts and cogwheels. A wrench removes a standalone casing; wrenching an encased shaft toggles its axial connection, and sneak-wrenching removes the shell."
+  ],
+  "recipes": false
+}

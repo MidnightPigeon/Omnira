@@ -1,0 +1,19 @@
+{
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "slots": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "omnira:spiritual_crystal"
+    }
+  ],
+  "result": {
+    "id": "omnira:spiritual_crystal_tip",
+    "count": 1
+  }
+}

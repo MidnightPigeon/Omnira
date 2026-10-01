@@ -1,0 +1,17 @@
+{
+  "id": "crystal_processing_table",
+  "item": "omnira:crystal_processing_table",
+  "title": "Crystal Processing Table",
+  "text": [
+    "The crystal processing table writes low-tier spell crystals.",
+    "The upper-left target microcore is required; the upper-right shape modifier is optional. The left slots hold modifiers and the right slots hold elements, all optional. Add ink and a spiritual crystal in the center, then begin writing.",
+    "The base cost is 10 mana per spell component, followed by cost reductions. Ink and the substrate do not count as components."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "spell_target_shape_basics",
+      "label": "Choosing Targets and Shapes"
+    }
+  ]
+}

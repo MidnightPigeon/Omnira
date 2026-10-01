@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    " C ",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "omnira:spiritual_crystal"
+    }
+  },
+  "result": {
+    "id": "omnira:crystal_pedestal",
+    "count": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "omnira:shadow_rock"
+  },
+  "result": {
+    "id": "omnira:chiseled_shadow_rock",
+    "count": 1
+  }
+}

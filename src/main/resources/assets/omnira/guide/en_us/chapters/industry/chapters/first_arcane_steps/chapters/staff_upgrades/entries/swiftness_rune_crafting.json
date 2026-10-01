@@ -1,0 +1,15 @@
+{
+  "id": "swiftness_rune_crafting",
+  "item": "omnira:swiftness_rune",
+  "title": "Swiftness Rune · Crafting",
+  "text": [
+    "Use the assembly recipe below to forge this item."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "swiftness_rune",
+      "label": "Use and Effects"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "advanced_condensation_table",
+  "item": "omnira:advanced_condensation_table",
+  "title": "高阶凝聚台",
+  "text": [
+    "以光源晶构成桌面，共振水晶构成支腿，中央嵌入原始法术核心。",
+    "在中央放入一份原料并开始凝聚，10 秒后原位转化为产物，单次基础消耗 300 点法力。法力减免照常生效；关闭界面或更换原料会中止本次凝聚。"
+  ],
+  "recipes": true
+}

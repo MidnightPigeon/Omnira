@@ -1,0 +1,13 @@
+{
+  "id": "industry",
+  "title": "Forging and Industry",
+  "icon": "omnira:arcane_assembly_table",
+  "introduction": "introduction.json",
+  "entries": [],
+  "chapters": [
+    "chapters/arcane_craft/chapter.json",
+    "chapters/first_arcane_steps/chapter.json",
+    "chapters/dream_inquiry/chapter.json",
+    "chapters/spacetime_connections/chapter.json"
+  ]
+}

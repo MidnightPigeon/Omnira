@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "omnira:block/containment_facility_rubble"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "light_core_reinforcement",
+  "item": "omnira:light_core_reinforcement",
+  "title": "光晶核加固部件",
+  "text": [
+    "每发法术减免 5 点法力消耗，并增加 10% 法术强度。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "light_core_reinforcement_crafting",
+      "label": "锻造配方"
+    }
+  ]
+}

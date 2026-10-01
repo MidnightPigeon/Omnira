@@ -1,0 +1,116 @@
+{
+  "textures": {
+    "body": "omnira:block/drill_casing",
+    "charge": "omnira:block/drill_charge",
+    "particle": "omnira:block/drill_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        1,
+        0
+      ],
+      "to": [
+        16,
+        5,
+        15
+      ],
+      "faces": {
+        "south": {
+          "texture": "#body"
+        },
+        "west": {
+          "texture": "#body"
+        },
+        "up": {
+          "texture": "#body"
+        },
+        "down": {
+          "texture": "#body"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        5,
+        0
+      ],
+      "to": [
+        16,
+        9,
+        13
+      ],
+      "faces": {
+        "south": {
+          "texture": "#body"
+        },
+        "west": {
+          "texture": "#body"
+        },
+        "up": {
+          "texture": "#body"
+        },
+        "down": {
+          "texture": "#body"
+        }
+      }
+    },
+    {
+      "from": [
+        12,
+        9,
+        0
+      ],
+      "to": [
+        16,
+        14,
+        4
+      ],
+      "faces": {
+        "south": {
+          "texture": "#charge"
+        },
+        "west": {
+          "texture": "#charge"
+        },
+        "up": {
+          "texture": "#charge"
+        },
+        "down": {
+          "texture": "#charge"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        0,
+        7
+      ],
+      "to": [
+        9,
+        1,
+        13
+      ],
+      "faces": {
+        "north": {
+          "texture": "#body"
+        },
+        "south": {
+          "texture": "#body"
+        },
+        "east": {
+          "texture": "#body"
+        },
+        "west": {
+          "texture": "#body"
+        },
+        "up": {
+          "texture": "#body"
+        }
+      }
+    }
+  ]
+}

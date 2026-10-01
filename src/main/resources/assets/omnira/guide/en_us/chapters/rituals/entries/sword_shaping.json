@@ -1,0 +1,30 @@
+{
+  "id": "sword_shaping",
+  "item": "omnira:pure_vessel",
+  "title": "Sword Shaping Ritual",
+  "recipes": false,
+  "scene": "sword_shaping",
+  "text": [
+    "Place a pure vessel at the center of a level 5x5 area. Set four crystal pedestals two blocks north, east, south and west, at the same height.",
+    "Place one offering on each of the four pedestals in any order, then use a melee weapon on the Pure Vessel to start. Offerings are absorbed in sequence; the vessel gradually disintegrates in pale-blue or pale-purple particles and drops the new weapon after eight seconds. The original weapon is consumed; enchantments are not inherited.",
+    "The crystallized nail requires a resonance crystal, spiritual crystal, light crystal core and bone. The arcane needle requires an analysis crystal, mana engine, shadow berries and iron ingot. This ritual consumes the whole analysis crystal."
+  ],
+  "links": [
+    {
+      "target": "pure_vessel",
+      "label": "Pure Vessel"
+    },
+    {
+      "target": "crystal_pedestal",
+      "label": "Crystal Pedestal"
+    },
+    {
+      "target": "crystallized_bone_nail",
+      "label": "Crystallized Nail"
+    },
+    {
+      "target": "arcane_needle",
+      "label": "Arcane Needle"
+    }
+  ]
+}

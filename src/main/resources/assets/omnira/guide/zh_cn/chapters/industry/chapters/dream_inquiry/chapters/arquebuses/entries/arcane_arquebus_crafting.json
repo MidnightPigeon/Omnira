@@ -1,0 +1,15 @@
+{
+  "id": "arcane_arquebus_crafting",
+  "item": "omnira:arcane_arquebus",
+  "title": "魔能圣铳 · 制作",
+  "text": [
+    "将空的基础水晶格栅置于装配台中央，外围放置原始法术核心、广域魔纹与光之微核，锻造成圣铳。请先取出格栅内的法术水晶。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "arcane_arquebus",
+      "label": "使用与效果"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "priority": 2000,
+  "selector": "omnira:void_engraved_mirror_rock_slab",
+  "properties": {
+    "sable:mass": 0.0,
+    "sable:volume": 0.5
+  },
+  "overrides": {
+    "type=double": {
+      "sable:mass": 0.0,
+      "sable:volume": 1.0
+    }
+  }
+}

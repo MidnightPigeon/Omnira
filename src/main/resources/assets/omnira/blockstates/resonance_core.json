@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "mode=0": {
+      "model": "omnira:block/resonance_core_0"
+    },
+    "mode=1": {
+      "model": "omnira:block/resonance_core_1"
+    },
+    "mode=2": {
+      "model": "omnira:block/resonance_core_2"
+    },
+    "mode=3": {
+      "model": "omnira:block/resonance_core_3"
+    },
+    "mode=4": {
+      "model": "omnira:block/resonance_core_4"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "type":"omnira:sword_shaping",
+  "offerings":[{"item":"omnira:analysis_crystal"},{"item":"omnira:mana_engine"},{"item":"omnira:shadow_berries"},{"item":"minecraft:iron_ingot"}],
+  "result":{"id":"omnira:arcane_needle","count":1}
+}

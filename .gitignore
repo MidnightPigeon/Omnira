@@ -1,0 +1,78 @@
+### Gradle ###
+.gradle
+/.gradle-local/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/**/build/
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/**/out/
+
+.run/
+
+### Eclipse ###
+.apt_generated
+.classpath
+.eclipse/
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/**/bin/
+
+### VS Code ###
+.vscode/
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Minecraft Modding ###
+run/
+!**/src/**/run/
+**/src/generated/**/.cache/
+repo/
+!**/src/**/repo/
+
+### Local design notes, previews and backups (not runtime assets) ###
+/docs/
+/AGENTS.md
+/art/
+/backups/
+/logs/
+/crash-reports/
+/*.png
+/*.jar
+/.agents/
+/.codex/
+*.log
+*.class
+*.hprof
+.env
+.env.*
+!.env.example
+
+# Keep source/runtime resources, Gradle Wrapper and required build inputs versioned.
+# Only the local Gradle launcher and required test fixture are build inputs.
+/scripts/*
+!/scripts/gradle-local.ps1
+!/scripts/tests/
+/scripts/tests/*
+!/scripts/tests/spell_arena.snbt
+
+# Local collaboration preferences; do not distribute with source.
+/DEVELOPMENT_PREFERENCES.local.md
+
+# Local runtime configuration and asset-script caches.
+/config/*
+!/config/development-mods.json
+__pycache__/
+*.pyc
+*.pyo

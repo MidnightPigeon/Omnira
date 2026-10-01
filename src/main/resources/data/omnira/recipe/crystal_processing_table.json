@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SRS",
+    " S ",
+    "SBS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:spiritual_crystal"
+    },
+    "R": {
+      "item": "omnira:resonance_crystal"
+    },
+    "B": {
+      "item": "omnira:crystal_ball"
+    }
+  },
+  "result": {
+    "id": "omnira:crystal_processing_table",
+    "count": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "modifier_delay",
+  "item": "minecraft:clock",
+  "title": "Clock - Delay",
+  "text": [
+    "Writes Delay. The first converts Harm to Poison I and Healing to Regeneration I for 40 seconds. Another adds 60 seconds. Enhancement can still raise their effect levels.",
+    "For dissociation, it removes creature damage without changing block harvesting. For construction, each Delay doubles crystal lifetime and creature lock duration."
+  ],
+  "recipes": true
+}

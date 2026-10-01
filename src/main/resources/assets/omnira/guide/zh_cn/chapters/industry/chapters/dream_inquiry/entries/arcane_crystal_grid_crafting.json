@@ -1,0 +1,15 @@
+{
+  "id": "arcane_crystal_grid_crafting",
+  "item": "omnira:arcane_crystal_grid",
+  "title": "魔能水晶格栅 · 制作",
+  "text": [
+    "升级时将元素水晶格栅置于中央，右侧放光之微核，左侧放暗之微核，其余四格放梦境水晶。原法术链保留，新增空位接在末尾。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "arcane_crystal_grid",
+      "label": "使用与效果"
+    }
+  ]
+}

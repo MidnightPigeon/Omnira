@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "top": "omnira:block/time_eroded_bricks",
+    "bottom": "omnira:block/time_eroded_bricks",
+    "side": "omnira:block/time_eroded_bricks"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "modular_staff",
+  "item": "omnira:modular_staff",
+  "title": "Modular Staff",
+  "text": [
+    "Forge a shaft, reinforcement and tip into a staff. Equip a crystal grid to supply its spells."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "staff_forging",
+      "label": "Staff Forging"
+    },
+    {
+      "target": "staff_casting",
+      "label": "Casting with a Staff"
+    }
+  ]
+}

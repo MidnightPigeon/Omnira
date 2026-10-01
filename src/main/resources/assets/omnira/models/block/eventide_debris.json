@@ -1,0 +1,110 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "textures": {
+    "stone": "omnira:block/time_eroded_bricks",
+    "cracked": "omnira:block/cracked_time_eroded_bricks",
+    "sand": "omnira:block/sandbound_time_eroded_bricks",
+    "inscription": "omnira:block/eventide_pillar_inscription",
+    "dial": "omnira:block/eventide_dial_fragment",
+    "particle": "omnira:block/cracked_time_eroded_bricks"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0,
+        3
+      ],
+      "to": [
+        7,
+        2,
+        8
+      ],
+      "faces": {
+        "north": {
+          "texture": "#dial"
+        },
+        "south": {
+          "texture": "#dial"
+        },
+        "east": {
+          "texture": "#dial"
+        },
+        "west": {
+          "texture": "#dial"
+        },
+        "up": {
+          "texture": "#dial"
+        },
+        "down": {
+          "texture": "#dial"
+        }
+      }
+    },
+    {
+      "from": [
+        8,
+        0,
+        9
+      ],
+      "to": [
+        15,
+        1,
+        14
+      ],
+      "faces": {
+        "north": {
+          "texture": "#sand"
+        },
+        "south": {
+          "texture": "#sand"
+        },
+        "east": {
+          "texture": "#sand"
+        },
+        "west": {
+          "texture": "#sand"
+        },
+        "up": {
+          "texture": "#sand"
+        },
+        "down": {
+          "texture": "#sand"
+        }
+      }
+    },
+    {
+      "from": [
+        8,
+        0,
+        3
+      ],
+      "to": [
+        11,
+        3,
+        7
+      ],
+      "faces": {
+        "north": {
+          "texture": "#dial"
+        },
+        "south": {
+          "texture": "#dial"
+        },
+        "east": {
+          "texture": "#dial"
+        },
+        "west": {
+          "texture": "#dial"
+        },
+        "up": {
+          "texture": "#dial"
+        },
+        "down": {
+          "texture": "#dial"
+        }
+      }
+    }
+  ]
+}

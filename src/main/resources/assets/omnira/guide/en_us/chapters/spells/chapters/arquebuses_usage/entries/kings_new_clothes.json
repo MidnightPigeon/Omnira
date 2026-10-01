@@ -1,0 +1,19 @@
+{
+  "id": "kings_new_clothes",
+  "item": "omnira:kings_new_clothes",
+  "title": "The King's New Clothes",
+  "text": [
+    "Place the arquebus in the assembly bench's center with The King's New Clothes upgrade components around it to forge a ghostly double-barreled gun. Each gun accepts only one upgrade kit; it cannot be combined with the Ancestor Launcher. The loaded spell crystal remains installed.",
+    "Start a double shot with a 2-second base cooldown, firing two ghost projectiles 0.3 seconds apart. Each shot costs 1.5 times the base mana cost before reductions. Spell power remains +30%, selection range becomes +200% (36 blocks for Target, 48 for Crosshair), and projectile speed becomes +50%. These bonuses require the main hand.",
+    "Keep holding the gun during the double shot. Switching guns, opening the loading screen or changing dimensions cancels the second projectile. Insufficient mana also prevents the second shot.",
+    "Target spells can select entities through walls, falling back to blocks when no entity is selected. Ghost shots pass through unselected blocks, but entities along the path and the selected block stop them.",
+    "While held in the main hand, magical perception spends a fixed 50 mana every 5 seconds to reveal entity outlines within 36 blocks for 2 seconds, visible only to the holder. Insufficient mana prevents the pulse."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "kings_new_clothes_crafting",
+      "label": "Forging Recipe"
+    }
+  ]
+}

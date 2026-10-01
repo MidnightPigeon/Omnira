@@ -1,0 +1,15 @@
+{
+  "id": "spell_elements",
+  "title": "Elements",
+  "icon": "omnira:sharp_breath",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/sharp_breath.json",
+    "entries/healing_dew.json",
+    "entries/dissociation_thread.json",
+    "entries/construction_matrix.json",
+    "entries/void_crystal.json",
+    "entries/milk_suspension.json",
+    "entries/dark_breath.json"
+  ]
+}

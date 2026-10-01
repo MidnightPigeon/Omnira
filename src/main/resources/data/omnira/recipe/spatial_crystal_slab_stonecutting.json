@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "omnira:spatial_crystal_block"
+  },
+  "result": {
+    "id": "omnira:spatial_crystal_slab",
+    "count": 2
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "shadow_manuscript",
+  "item": "omnira:shadow_manuscript",
+  "title": "暗影手稿",
+  "text": [
+    "暗鬼死亡时掉落的受侵染纸张。四份手稿可在解析工匠桌提取一团暗影雾，同时获得 8–10 个奥术尘。",
+    "解析之晶与一份手稿无序合成也能得到暗影雾，消耗 1 点耐久，不产生奥术尘。"
+  ],
+  "recipes": true
+}

@@ -1,0 +1,13 @@
+{
+  "type": "omnira:spacetime_reversal",
+  "ingredient": {
+    "item": "omnira:time_warp_point"
+  },
+  "count": 2,
+  "results": [
+    {
+      "id": "omnira:time_microcore",
+      "count": 1
+    }
+  ]
+}

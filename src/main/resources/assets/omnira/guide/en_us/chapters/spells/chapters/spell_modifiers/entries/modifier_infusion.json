@@ -1,0 +1,11 @@
+{
+  "id": "modifier_infusion",
+  "item": "omnira:spiritual_crystal",
+  "title": "Spiritual Crystal - Infusion",
+  "text": [
+    "In a modifier slot, a spiritual crystal writes Infusion and counts toward component cost. This is separate from its use as the substrate.",
+    "Undelayed Harm becomes Instant Damage II, including vanilla's reversed effect on undead. Instant healing gains brief Saturation; Regeneration gains Resistance of matching level and duration. Infusion does not change Poison into another effect.",
+    "For dissociation, it increases produce and equipment limits per round, and raises Fortune for blocks. For construction, it makes void crystal permanent and allows locked creatures to be mined."
+  ],
+  "recipes": true
+}

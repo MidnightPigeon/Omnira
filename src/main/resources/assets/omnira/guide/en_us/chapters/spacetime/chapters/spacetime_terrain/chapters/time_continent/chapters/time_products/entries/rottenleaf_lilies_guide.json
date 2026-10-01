@@ -1,0 +1,19 @@
+{
+  "id": "rottenleaf_lilies_guide",
+  "title": "Rottenleaf Lilies",
+  "item": "omnira:reborn_rottenleaf_lily",
+  "text": [
+    "Both decayed and reborn lilies can be harvested and replanted. Decayed lilies become fresh only during a mire reversal and decay again afterward; other biomes never renew them. Harvesting a reborn lily fixes its state for condensation, reversal and energy use."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "reversion_mire_guide",
+      "label": "Reversion Mire"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "Spacetime Reverser"
+    }
+  ]
+}

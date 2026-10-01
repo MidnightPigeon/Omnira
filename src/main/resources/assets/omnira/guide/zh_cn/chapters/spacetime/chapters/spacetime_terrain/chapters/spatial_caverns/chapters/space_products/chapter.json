@@ -1,0 +1,11 @@
+{
+  "id": "space_products",
+  "title": "特殊产出",
+  "icon": "omnira:spatial_crystal_shard",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/spatial_crystal_guide.json",
+    "entries/spatial_growth_guide.json"
+  ],
+  "chapters": []
+}

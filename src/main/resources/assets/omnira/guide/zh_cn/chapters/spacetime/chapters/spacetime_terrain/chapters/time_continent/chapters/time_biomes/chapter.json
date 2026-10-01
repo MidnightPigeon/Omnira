@@ -1,0 +1,15 @@
+{
+  "id": "time_biomes",
+  "title": "群系介绍",
+  "icon": "omnira:temporal_silt",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/frozen_terra_guide.json",
+    "entries/fleeting_woods_guide.json",
+    "entries/reversion_mire_guide.json",
+    "entries/epochal_cliffs.json",
+    "entries/recurrence_garden_guide.json",
+    "entries/eventide_ruins_guide.json"
+  ],
+  "chapters": []
+}

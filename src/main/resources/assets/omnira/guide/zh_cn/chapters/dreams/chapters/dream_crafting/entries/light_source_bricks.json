@@ -1,0 +1,9 @@
+{
+  "id": "light_source_bricks",
+  "item": "omnira:light_source_bricks",
+  "title": "光源砖",
+  "text": [
+    "四块光源晶按2×2排列，合成四块光源砖。保留亮度10与5 kpg浮力。"
+  ],
+  "recipes": true
+}

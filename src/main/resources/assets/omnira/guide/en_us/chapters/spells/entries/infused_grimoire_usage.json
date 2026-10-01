@@ -1,0 +1,21 @@
+{
+  "id": "infused_grimoire_usage",
+  "item": "omnira:infused_grimoire",
+  "title": "Using the Infused Grimoire",
+  "text": [
+    "The grimoire is an unbreakable sword with 5 base damage and 2 attack speed. Spell power also increases its melee damage. It accepts sword enchantments except Unbreaking and Mending. The base form grants 10% spell power; both transformed forms grant 15%.",
+    "Right-click to launch a homing Knowledge Shock for 10 base damage. The base cooldown is three seconds. Each cast spends up to 30 experience points, then one health per five missing points, rounded up. This can kill you. Paying any health adds two true damage to the projectile.",
+    "The Sanctified Grimoire instead spends 150 mana, cannot cast without enough, and has a 1.5-second base cooldown. The Corrupted Grimoire spends six health per cast and heals you for 50% of its melee and projectile damage. Each book has its own cooldown; an offhand staff can cast while the main-hand book cools down."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "infused_grimoire",
+      "label": "How to Make"
+    },
+    {
+      "target": "cleansing_ritual",
+      "label": "Cleansing Ritual"
+    }
+  ]
+}

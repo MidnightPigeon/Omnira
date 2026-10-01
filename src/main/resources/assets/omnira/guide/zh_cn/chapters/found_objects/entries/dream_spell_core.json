@@ -1,0 +1,17 @@
+{
+  "id": "dream_spell_core",
+  "item": "omnira:dream_spell_core",
+  "title": "梦境法术核心",
+  "text": [
+    "光耀庭院与暗影图书馆封存室的战利品水晶球中，都有小概率藏有梦境法术核心。",
+    "佩戴后增加400点法力上限、20%法术强度、30%法力恢复和10点法力减免。也可放入魔能引擎，基础输出为1024 su与1024 FE/s，再由格栅增幅。",
+    "{dream}它似乎在与你的法力共鸣……"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "mana_engine",
+      "label": "魔能引擎"
+    }
+  ]
+}

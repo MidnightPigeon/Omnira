@@ -1,0 +1,14 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {"item": "minecraft:hay_block"},
+    {"item": "minecraft:stick"},
+    {"item": "minecraft:stick"},
+    {"item": "omnira:spiritual_crystal"},
+    {"item": "omnira:spiritual_crystal"},
+    {"item": "omnira:resonance_crystal"},
+    {"item": "omnira:analysis_crystal"}
+  ],
+  "result": {"id": "omnira:crystal_broom", "count": 1}
+}

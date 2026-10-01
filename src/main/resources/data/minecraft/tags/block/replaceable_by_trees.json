@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:shadow_sapling",
+    "omnira:shadow_leaves",
+    "omnira:time_leaves",
+    "omnira:time_sapling",
+    "omnira:time_grass",
+    "omnira:time_flower"
+  ]
+}

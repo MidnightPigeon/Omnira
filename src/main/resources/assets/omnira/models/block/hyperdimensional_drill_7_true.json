@@ -1,0 +1,8 @@
+{
+  "textures": {
+    "body": "omnira:block/drill_casing",
+    "charge": "omnira:block/drill_charge",
+    "particle": "omnira:block/drill_casing"
+  },
+  "elements": []
+}

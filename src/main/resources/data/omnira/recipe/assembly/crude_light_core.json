@@ -1,0 +1,19 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "omnira:light_source_crystal"
+    }
+  ],
+  "result": {
+    "id": "omnira:crude_light_core",
+    "count": 1
+  }
+}

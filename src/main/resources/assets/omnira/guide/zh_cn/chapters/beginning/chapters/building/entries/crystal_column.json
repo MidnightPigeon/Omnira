@@ -1,0 +1,9 @@
+{
+  "id": "crystal_column",
+  "item": "omnira:crystal_column",
+  "title": "水晶柱",
+  "text": [
+    "八棱柱身，可竖立或横放。灵性水晶块可在切石机中加工为柱身或柱端，也有对应工作台配方。"
+  ],
+  "recipes": true
+}

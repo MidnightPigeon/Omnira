@@ -1,0 +1,20 @@
+{
+  "id": "elemental_fusion_tip",
+  "item": "omnira:elemental_fusion_tip",
+  "title": "Elemental Fusion Tip",
+  "text": [
+    "Casts one shot with a 1-second within-chain base cooldown and provides two rune slots.",
+    "Forge a spiritual crystal tip with the four primary microcores, or a single analysis crystal, in any outer positions. The analysis crystal is consumed entirely."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "elemental_fusion_tip_crafting",
+      "label": "Forging Recipe"
+    },
+    {
+      "target": "staff_casting",
+      "label": "Spell Chains and Cooldown"
+    }
+  ]
+}

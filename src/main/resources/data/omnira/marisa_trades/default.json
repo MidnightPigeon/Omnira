@@ -1,0 +1,186 @@
+{
+  "common": [
+    {
+      "item": "minecraft:golden_carrot",
+      "count": 8,
+      "infused": 2
+    },
+    {
+      "item": "minecraft:experience_bottle",
+      "count": 8,
+      "infused": 3
+    },
+    {
+      "item": "minecraft:redstone",
+      "count": 24,
+      "infused": 2
+    },
+    {
+      "item": "minecraft:lapis_lazuli",
+      "count": 16,
+      "infused": 2
+    },
+    {
+      "item": "minecraft:gunpowder",
+      "count": 16,
+      "infused": 3
+    },
+    {
+      "item": "minecraft:book",
+      "count": 8,
+      "infused": 2
+    },
+    {
+      "item": "omnira:time_sapling",
+      "count": 3,
+      "infused": 3
+    },
+    {
+      "item": "omnira:resonance_crystal",
+      "count": 4,
+      "infused": 4
+    },
+    {
+      "item": "omnira:arcane_dust",
+      "count": 8,
+      "infused": 2
+    },
+    {
+      "item": "omnira:spell_ink",
+      "count": 1,
+      "infused": 3
+    },
+    {
+      "item": "omnira:grid_frame",
+      "count": 1,
+      "infused": 3
+    },
+    {
+      "item": "omnira:crude_light_core",
+      "count": 1,
+      "infused": 4
+    },
+    {
+      "item": "omnira:shadow_sapling",
+      "count": 3,
+      "infused": 2
+    },
+    {
+      "item": "omnira:light_condensate",
+      "count": 8,
+      "infused": 3
+    }
+  ],
+  "rare": [
+    {
+      "item": "omnira:analysis_crystal",
+      "count": 1,
+      "infused": 6,
+      "extra": 4
+    },
+    {
+      "item": "omnira:paradox_dust",
+      "count": 3,
+      "infused": 8,
+      "extra": 6
+    },
+    {
+      "item": "omnira:time_seed",
+      "count": 2,
+      "infused": 6,
+      "extra": 4
+    },
+    {
+      "item": "omnira:time_flower",
+      "count": 4,
+      "infused": 4,
+      "extra": 4
+    },
+    {
+      "item": "omnira:crystal_ball",
+      "count": 1,
+      "infused": 8,
+      "extra": 6
+    },
+    {
+      "item": "minecraft:diamond",
+      "count": 4,
+      "infused": 6,
+      "extra": 8
+    },
+    {
+      "item": "omnira:crystal_broom",
+      "count": 1,
+      "infused": 24,
+      "extra": 8
+    },
+    {
+      "item": "omnira:infused_grimoire",
+      "count": 1,
+      "infused": 24,
+      "extra": 12
+    },
+    {
+      "item": "omnira:primordial_spell_core",
+      "count": 1,
+      "infused": 32,
+      "extra": 16
+    },
+    {
+      "item": "omnira:light_microcore",
+      "count": 1,
+      "infused": 16,
+      "extra": 8
+    },
+    {
+      "item": "omnira:dark_microcore",
+      "count": 1,
+      "infused": 16,
+      "extra": 8
+    },
+    {
+      "item": "omnira:damaged_research_facility",
+      "count": 1,
+      "infused": 8,
+      "extra": 4
+    },
+    {
+      "item": "omnira:dream_rabbit_remains",
+      "count": 1,
+      "infused": 12,
+      "extra": 8
+    }
+  ],
+  "epic": [
+    {
+      "item": "minecraft:enchanted_golden_apple",
+      "count": 1,
+      "infused": 20,
+      "extra": 12
+    },
+    {
+      "item": "omnira:dream_spell_core",
+      "count": 1,
+      "infused": 32,
+      "extra": 16
+    },
+    {
+      "item": "omnira:time_microcore",
+      "count": 1,
+      "infused": 24,
+      "extra": 12
+    },
+    {
+      "item": "omnira:space_microcore",
+      "count": 1,
+      "infused": 24,
+      "extra": 12
+    },
+    {
+      "item": "omnira:cruise_orb",
+      "count": 1,
+      "infused": 48,
+      "extra": 24
+    }
+  ]
+}

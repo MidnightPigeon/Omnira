@@ -1,0 +1,20 @@
+{
+  "id": "visit_dream",
+  "item": "omnira:ritual_energy_core",
+  "title": "访问梦境维度",
+  "recipes": false,
+  "text": [
+    "梦境维度需要通过寻梦之仪展开传送门以进入。",
+    "梦境分为高处的晨辉晶原、低处的暮影林地，以及稀有的中层镜梦碎岛。抵达处的返回入口可带你回到原仪式附近；即使原入口已消失，仍可返回。"
+  ],
+  "links": [
+    {
+      "target": "dream_ritual",
+      "label": "寻梦之仪"
+    },
+    {
+      "target": "explore_dream",
+      "label": "探索梦境维度"
+    }
+  ]
+}

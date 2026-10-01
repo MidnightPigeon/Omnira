@@ -1,0 +1,16 @@
+{
+  "id": "enhanced_resonance_terminal",
+  "item": "omnira:enhanced_resonance_terminal",
+  "title": "强化共鸣终端",
+  "recipes": true,
+  "text": [
+    "在高阶凝聚台中凝聚共鸣终端，即可将四连接的终端强化为六连接的正六边形终端。原有绑定与所有者保留。",
+    "操作与普通终端一致。节点被摧毁后，连接自动解除并空出位置；商店连接仍为黄色，交易不额外消耗法力。"
+  ],
+  "links": [
+    {
+      "target": "resonance_core",
+      "label": "共鸣连接"
+    }
+  ]
+}

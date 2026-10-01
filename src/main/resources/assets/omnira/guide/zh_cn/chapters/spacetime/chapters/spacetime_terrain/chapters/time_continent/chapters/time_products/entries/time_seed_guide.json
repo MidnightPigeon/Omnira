@@ -1,0 +1,19 @@
+{
+  "id": "time_seed_guide",
+  "title": "时间之种",
+  "item": "omnira:time_seed",
+  "text": [
+    "无法种植。对激发态粗糙空间晶块使用，可将其转为生长空间水晶的母岩，并消耗种子。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "spatial_growth_guide",
+      "label": "空间水晶生长"
+    },
+    {
+      "target": "time_plants_guide",
+      "label": "时光花草"
+    }
+  ]
+}

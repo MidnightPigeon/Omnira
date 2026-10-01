@@ -1,0 +1,7 @@
+{
+  "selector": "omnira:arcane_assembly_table",
+  "properties": {
+    "sable:mass": 0,
+    "sable:volume": 1
+  }
+}

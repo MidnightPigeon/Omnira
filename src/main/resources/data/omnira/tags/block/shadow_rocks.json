@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:chiseled_shadow_rock",
+    "omnira:mossy_shadow_rock",
+    "omnira:shadow_rock",
+    "omnira:shadow_rock_bricks",
+    "omnira:chiseled_shadow_rock_slab",
+    "omnira:chiseled_shadow_rock_stairs",
+    "omnira:mossy_shadow_rock_slab",
+    "omnira:mossy_shadow_rock_stairs",
+    "omnira:shadow_rock_brick_slab",
+    "omnira:shadow_rock_brick_stairs",
+    "omnira:shadow_rock_slab",
+    "omnira:shadow_rock_stairs"
+  ]
+}

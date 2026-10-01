@@ -1,0 +1,10 @@
+{
+  "id": "crude_light_core",
+  "item": "omnira:crude_light_core",
+  "title": "Crude Light Core",
+  "text": [
+    "Craft four light source crystals into a crude light core, or forge one from a light source crystal at a mana assembly table. It cannot be reversed into crystals.",
+    "Forge it into a primordial spell core, or analyze it for a light microcore."
+  ],
+  "recipes": true
+}

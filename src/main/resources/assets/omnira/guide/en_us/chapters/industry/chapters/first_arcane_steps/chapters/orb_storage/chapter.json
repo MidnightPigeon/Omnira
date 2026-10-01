@@ -1,0 +1,14 @@
+{
+  "id": "orb_storage",
+  "title": "Orb Storage and Upgrades",
+  "icon": "omnira:liquid_crystal_ball",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/basic_stacking_upgrade.json",
+    "entries/infused_stacking_upgrade.json",
+    "entries/lava_production_upgrade.json",
+    "entries/intake_upgrade.json",
+    "entries/output_upgrade.json",
+    "entries/speed_upgrade.json"
+  ]
+}

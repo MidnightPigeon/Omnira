@@ -1,0 +1,511 @@
+{
+  "spells": [
+    {
+      "group": "Reading and casting",
+      "items": [
+        "guide_book",
+        "modular_staff",
+        "infused_grimoire",
+        "sanctified_grimoire",
+        "corrupted_grimoire"
+      ]
+    },
+    {
+      "group": "Lattices and cores",
+      "items": [
+        "basic_crystal_grid",
+        "elemental_crystal_grid",
+        "arcane_crystal_grid",
+        "omni_crystal_grid",
+        "primordial_spell_core",
+        "dream_spell_core",
+        "light_dark_spell_core",
+        "spacetime_spell_core",
+        "low_tier_magic_crystal",
+        "high_tier_magic_crystal"
+      ]
+    },
+    {
+      "group": "Elements",
+      "items": [
+        "earth_microcore",
+        "water_microcore",
+        "fire_microcore",
+        "air_microcore",
+        "light_microcore",
+        "dark_microcore",
+        "time_microcore",
+        "space_microcore",
+        "omni_microcore"
+      ]
+    },
+    {
+      "group": "Spell ingredients",
+      "items": [
+        "sharp_breath",
+        "healing_dew",
+        "dissociation_thread",
+        "construction_matrix",
+        "milk_suspension"
+      ]
+    },
+    {
+      "group": "Staff shafts",
+      "items": [
+        "wooden_staff_shaft",
+        "shadow_staff_shaft",
+        "blaze_staff_shaft"
+      ]
+    },
+    {
+      "group": "Staff reinforcements",
+      "items": [
+        "iron_reinforcement",
+        "diamond_reinforcement",
+        "netherite_reinforcement",
+        "light_core_reinforcement"
+      ]
+    },
+    {
+      "group": "Staff tips and runes",
+      "items": [
+        "spiritual_crystal_tip",
+        "multi_arcane_tip",
+        "elemental_fusion_tip",
+        "amplification_rune",
+        "swiftness_rune",
+        "wide_area_rune"
+      ]
+    }
+  ],
+  "equipment": [
+    {
+      "group": "Tools",
+      "items": [
+        "analysis_crystal",
+        "crystal_pickaxe",
+        "infused_crystal_pickaxe",
+        "spacetime_archaeology_brush"
+      ]
+    },
+    {
+      "group": "Weapons",
+      "items": [
+        "crystallized_bone_nail",
+        "arcane_needle",
+        "arcane_arquebus",
+        "ancestor_launcher",
+        "life_ender"
+      ]
+    },
+    {
+      "group": "Plate and dress",
+      "items": [
+        "crystal_helmet",
+        "crystal_chestplate",
+        "crystal_leggings",
+        "crystal_boots",
+        "crystal_sunhat",
+        "crystal_blouse",
+        "crystal_skirt",
+        "crystal_stocking_shoes",
+        "kings_new_clothes"
+      ]
+    },
+    {
+      "group": "Travel",
+      "items": [
+        "crystal_broom",
+        "cruise_orb",
+        "recall_crystal",
+        "enhanced_recall_crystal",
+        "dream_rabbit_remains",
+        "alice_dream_rabbit_sigil",
+        "pocket_magic_bottle"
+      ]
+    },
+    {
+      "group": "Charms and rings",
+      "items": [
+        "spacetime_anchoring_sigil",
+        "phantom_calling_card",
+        "enhanced_phantom_calling_card",
+        "d_class_credentials",
+        "c_class_credentials",
+        "b_class_credentials",
+        "a_class_credentials",
+        "scp_714",
+        "ring_of_lust",
+        "ring_of_greed"
+      ]
+    },
+    {
+      "group": "Talents",
+      "items": [
+        "psyker_talent",
+        "land_king",
+        "sea_king",
+        "sky_king"
+      ]
+    },
+    {
+      "group": "Curses",
+      "items": [
+        "khorne_blessing",
+        "tzeentch_blessing",
+        "nurgle_blessing",
+        "slaanesh_blessing",
+        "time_distortion"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "group": "Processing",
+      "items": [
+        "simple_condensation_table",
+        "advanced_condensation_table",
+        "analysis_artisan_table",
+        "crystal_processing_table",
+        "advanced_crystal_aggregation_ring",
+        "arcane_assembly_table",
+        "advanced_assembly_table",
+        "spacetime_reverser",
+        "split_time_sundial"
+      ]
+    },
+    {
+      "group": "Power and drilling",
+      "items": [
+        "mana_engine",
+        "crystal_casing",
+        "infused_crystal_casing",
+        "hyperdimensional_drill"
+      ]
+    },
+    {
+      "group": "Storage and commerce",
+      "items": [
+        "crystal_ball",
+        "liquid_crystal_ball",
+        "marisa_crystal_ball",
+        "resonance_core",
+        "resonance_terminal",
+        "enhanced_resonance_terminal"
+      ]
+    },
+    {
+      "group": "Orb upgrades",
+      "items": [
+        "basic_stacking_upgrade",
+        "infused_stacking_upgrade",
+        "spacetime_stabilization_upgrade",
+        "lava_production_upgrade",
+        "intake_upgrade",
+        "output_upgrade",
+        "speed_upgrade"
+      ]
+    },
+    {
+      "group": "Rituals and anchors",
+      "items": [
+        "crystal_pedestal",
+        "ritual_energy_core",
+        "advanced_ritual_energy_core",
+        "pure_vessel",
+        "spacetime_waymark"
+      ]
+    }
+  ],
+  "misc": [
+    {
+      "group": "Crystals and dust",
+      "items": [
+        "spiritual_crystal",
+        "infused_spiritual_crystal",
+        "resonance_crystal",
+        "dream_crystal_shard",
+        "spatial_crystal_shard",
+        "arcane_dust",
+        "paradox_dust",
+        "crude_light_core",
+        "grid_frame",
+        "spell_ink",
+        "shadow_mist"
+      ]
+    },
+    {
+      "group": "Spacetime materials",
+      "items": [
+        "spacetime_knot",
+        "time_warp_point",
+        "unstable_spacetime_aggregate",
+        "time_seed",
+        "peaceful_memory_cube",
+        "corrupted_memory_cube"
+      ]
+    },
+    {
+      "group": "Archaeology aggregates",
+      "items": [
+        "ancient_archaeology_aggregate",
+        "phantom_thieves_aggregate",
+        "umbrella_aggregate",
+        "foundation_aggregate",
+        "primordial_earth_aggregate"
+      ]
+    },
+    {
+      "group": "Relics and research",
+      "items": [
+        "shadow_manuscript",
+        "traveler_manuscript",
+        "desire_crystal",
+        "damaged_research_facility",
+        "repaired_mechanical_component",
+        "inactive_t_virus_solution",
+        "distorted_psychic_talent_solution"
+      ]
+    },
+    {
+      "group": "Fossil processing",
+      "items": [
+        "unknown_organism_fossil",
+        "tyrannosaurus_remains",
+        "tyrannosaurus_essence",
+        "mosasaurus_remains",
+        "mosasaurus_essence",
+        "pterosaur_remains",
+        "pterosaur_essence"
+      ]
+    },
+    {
+      "group": "Dormant life",
+      "items": [
+        "unknown_egg",
+        "inactive_creature_egg",
+        "creature_egg",
+        "inactive_spirit_seed",
+        "spirit_seed"
+      ]
+    }
+  ],
+  "building": [
+    {
+      "group": "Spiritual and dream crystal",
+      "items": [
+        "spiritual_crystal_block",
+        "spiritual_crystal_stairs",
+        "spiritual_crystal_slab",
+        "dream_crystal_block",
+        "dream_crystal_stairs",
+        "dream_crystal_slab",
+        "spatial_crystal_block",
+        "spatial_crystal_stairs",
+        "spatial_crystal_slab"
+      ]
+    },
+    {
+      "group": "Light crystal",
+      "items": [
+        "light_condensate",
+        "light_condensate_stairs",
+        "light_condensate_slab",
+        "light_condensate_bricks",
+        "light_condensate_brick_stairs",
+        "light_condensate_brick_slab",
+        "light_source_crystal",
+        "light_source_crystal_stairs",
+        "light_source_crystal_slab",
+        "light_source_bricks",
+        "light_source_brick_stairs",
+        "light_source_brick_slab",
+        "solidified_light_crystal_core",
+        "solidified_light_crystal_core_stairs",
+        "solidified_light_crystal_core_slab"
+      ]
+    },
+    {
+      "group": "Shadow masonry",
+      "items": [
+        "shadow_rock",
+        "shadow_rock_stairs",
+        "shadow_rock_slab",
+        "shadow_rock_bricks",
+        "shadow_rock_brick_stairs",
+        "shadow_rock_brick_slab",
+        "chiseled_shadow_rock",
+        "chiseled_shadow_rock_stairs",
+        "chiseled_shadow_rock_slab",
+        "mossy_shadow_rock",
+        "mossy_shadow_rock_stairs",
+        "mossy_shadow_rock_slab"
+      ]
+    },
+    {
+      "group": "Mirror masonry",
+      "items": [
+        "mirror_rock",
+        "mirror_rock_stairs",
+        "mirror_rock_slab",
+        "engraved_mirror_rock",
+        "engraved_mirror_rock_stairs",
+        "engraved_mirror_rock_slab",
+        "void_mirror_rock",
+        "void_mirror_rock_stairs",
+        "void_mirror_rock_slab",
+        "void_engraved_mirror_rock",
+        "void_engraved_mirror_rock_stairs",
+        "void_engraved_mirror_rock_slab"
+      ]
+    },
+    {
+      "group": "Eventide masonry",
+      "items": [
+        "time_eroded_bricks",
+        "time_eroded_brick_stairs",
+        "time_eroded_brick_slab",
+        "time_eroded_brick_wall",
+        "cracked_time_eroded_bricks",
+        "cracked_time_eroded_brick_stairs",
+        "cracked_time_eroded_brick_slab",
+        "cracked_time_eroded_brick_wall",
+        "sandbound_time_eroded_bricks",
+        "sandbound_time_eroded_brick_stairs",
+        "sandbound_time_eroded_brick_slab",
+        "sandbound_time_eroded_brick_wall",
+        "broken_eventide_pillar",
+        "eventide_debris"
+      ]
+    },
+    {
+      "group": "Shadow timber",
+      "items": [
+        "shadow_log",
+        "shadow_wood",
+        "stripped_shadow_log",
+        "stripped_shadow_wood",
+        "shadow_planks",
+        "shadow_stairs",
+        "shadow_slab",
+        "shadow_fence",
+        "shadow_fence_gate",
+        "shadow_door",
+        "shadow_trapdoor",
+        "shadow_pressure_plate",
+        "shadow_button",
+        "shadow_bookshelf"
+      ]
+    },
+    {
+      "group": "Time timber",
+      "items": [
+        "time_log",
+        "time_wood",
+        "stripped_time_log",
+        "stripped_time_wood",
+        "time_planks",
+        "time_stairs",
+        "time_slab",
+        "time_fence",
+        "time_fence_gate",
+        "time_door",
+        "time_trapdoor",
+        "time_pressure_plate",
+        "time_button"
+      ]
+    },
+    {
+      "group": "Lighting and furnishings",
+      "items": [
+        "light_crystal_torch",
+        "shadow_lantern",
+        "crystal_column_base",
+        "crystal_column",
+        "night_heron_statue",
+        "golden_throne",
+        "golden_toilet",
+        "memory_cube",
+        "wonderland_poker_stand"
+      ]
+    },
+    {
+      "group": "Special building materials",
+      "items": [
+        "void_crystal",
+        "pure_solidified_spacetime"
+      ]
+    }
+  ],
+  "nature": [
+    {
+      "group": "Terrain",
+      "items": [
+        "temporal_silt",
+        "living_temporal_silt",
+        "sedimented_temporal_silt",
+        "sedimented_living_temporal_silt",
+        "rotted_temporal_silt",
+        "time_sand",
+        "suspicious_time_sand",
+        "ancient_pottery_rubble",
+        "phantom_emblem_rubble",
+        "umbrella_laboratory_rubble",
+        "containment_facility_rubble",
+        "primordial_fossil_rock"
+      ]
+    },
+    {
+      "group": "Crystal growth",
+      "items": [
+        "light_crystal_core",
+        "dream_crystal_bedrock",
+        "small_dream_bud",
+        "medium_dream_bud",
+        "large_dream_bud",
+        "dream_crystal",
+        "rough_spatial_crystal_block",
+        "excited_rough_spatial_crystal_block",
+        "spatial_crystal_matrix",
+        "small_spatial_bud",
+        "medium_spatial_bud",
+        "large_spatial_bud",
+        "spatial_crystal_cluster"
+      ]
+    },
+    {
+      "group": "Plants",
+      "items": [
+        "shadow_sapling",
+        "shadow_leaves",
+        "shadow_berries",
+        "time_sapling",
+        "time_leaves",
+        "time_grass",
+        "time_flower",
+        "decayed_rottenleaf_lily",
+        "reborn_rottenleaf_lily"
+      ]
+    },
+    {
+      "group": "Fluids and fish",
+      "items": [
+        "decayed_timeflow_bucket",
+        "timeflow_eel",
+        "timeflow_eel_bucket",
+        "chronal_blindfish",
+        "chronal_blindfish_bucket"
+      ]
+    },
+    {
+      "group": "Spawn eggs",
+      "items": [
+        "light_spirit_spawn_egg",
+        "shadow_ghost_spawn_egg",
+        "dream_mirror_spawn_egg",
+        "timeflow_eel_spawn_egg",
+        "chronal_blindfish_spawn_egg"
+      ]
+    }
+  ]
+}

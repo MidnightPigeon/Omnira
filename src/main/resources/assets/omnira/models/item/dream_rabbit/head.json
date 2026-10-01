@@ -1,0 +1,207 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "fur": "minecraft:block/white_stained_glass",
+    "muzzle": "minecraft:block/white_stained_glass",
+    "inner": "minecraft:block/pink_stained_glass",
+    "hat": "minecraft:block/black_concrete",
+    "band": "minecraft:block/purple_concrete",
+    "eyes": "minecraft:block/black_concrete",
+    "nose": "minecraft:block/pink_concrete",
+    "particle": "minecraft:block/white_stained_glass"
+  },
+  "elements": [
+    {
+      "from": [
+        4,
+        5,
+        4
+      ],
+      "to": [
+        12,
+        12,
+        12
+      ],
+      "faces": {
+        "north": {
+          "texture": "#fur"
+        },
+        "south": {
+          "texture": "#fur"
+        },
+        "east": {
+          "texture": "#fur"
+        },
+        "west": {
+          "texture": "#fur"
+        },
+        "up": {
+          "texture": "#fur"
+        },
+        "down": {
+          "texture": "#fur"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        5,
+        2
+      ],
+      "to": [
+        11,
+        8,
+        5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#muzzle"
+        },
+        "south": {
+          "texture": "#muzzle"
+        },
+        "east": {
+          "texture": "#muzzle"
+        },
+        "west": {
+          "texture": "#muzzle"
+        },
+        "up": {
+          "texture": "#muzzle"
+        },
+        "down": {
+          "texture": "#muzzle"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        10,
+        7
+      ],
+      "to": [
+        5,
+        16,
+        10
+      ],
+      "faces": {
+        "north": {
+          "texture": "#fur"
+        },
+        "south": {
+          "texture": "#fur"
+        },
+        "east": {
+          "texture": "#fur"
+        },
+        "west": {
+          "texture": "#fur"
+        },
+        "up": {
+          "texture": "#fur"
+        },
+        "down": {
+          "texture": "#fur"
+        }
+      }
+    },
+    {
+      "from": [
+        11,
+        10,
+        7
+      ],
+      "to": [
+        13,
+        16,
+        10
+      ],
+      "faces": {
+        "north": {
+          "texture": "#fur"
+        },
+        "south": {
+          "texture": "#fur"
+        },
+        "east": {
+          "texture": "#fur"
+        },
+        "west": {
+          "texture": "#fur"
+        },
+        "up": {
+          "texture": "#fur"
+        },
+        "down": {
+          "texture": "#fur"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        11,
+        6
+      ],
+      "to": [
+        5,
+        16,
+        7
+      ],
+      "faces": {
+        "north": {
+          "texture": "#inner"
+        },
+        "south": {
+          "texture": "#inner"
+        },
+        "east": {
+          "texture": "#inner"
+        },
+        "west": {
+          "texture": "#inner"
+        },
+        "up": {
+          "texture": "#inner"
+        },
+        "down": {
+          "texture": "#inner"
+        }
+      }
+    },
+    {
+      "from": [
+        11,
+        11,
+        6
+      ],
+      "to": [
+        12,
+        16,
+        7
+      ],
+      "faces": {
+        "north": {
+          "texture": "#inner"
+        },
+        "south": {
+          "texture": "#inner"
+        },
+        "east": {
+          "texture": "#inner"
+        },
+        "west": {
+          "texture": "#inner"
+        },
+        "up": {
+          "texture": "#inner"
+        },
+        "down": {
+          "texture": "#inner"
+        }
+      }
+    }
+  ]
+}

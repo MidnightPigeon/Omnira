@@ -1,0 +1,16 @@
+{
+  "id": "grid_frame",
+  "item": "omnira:grid_frame",
+  "title": "Crystal Grid Frame",
+  "text": [
+    "The octagonal frame of a crystal grid. Craft eight spiritual crystals around an empty center, or forge six spiritual crystals in the assembly bench's outer slots with the center empty.",
+    "A frame is a crafting material, not equipment. It cannot occupy the crystal grid accessory slot or store spells."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "basic_crystal_grid",
+      "label": "Basic Crystal Grid"
+    }
+  ]
+}

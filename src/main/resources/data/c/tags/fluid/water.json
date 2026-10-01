@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:decayed_timeflow",
+    "omnira:flowing_decayed_timeflow"
+  ]
+}

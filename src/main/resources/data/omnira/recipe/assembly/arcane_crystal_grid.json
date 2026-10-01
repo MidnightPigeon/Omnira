@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "operation": "grid_upgrade",
+  "slots": [
+    {
+      "item": "omnira:dream_crystal_shard"
+    },
+    {
+      "item": "omnira:light_microcore"
+    },
+    {
+      "item": "omnira:dream_crystal_shard"
+    },
+    {
+      "item": "omnira:dream_crystal_shard"
+    },
+    {
+      "item": "omnira:dark_microcore"
+    },
+    {
+      "item": "omnira:dream_crystal_shard"
+    },
+    {
+      "item": "omnira:elemental_crystal_grid"
+    }
+  ],
+  "result": {
+    "id": "omnira:arcane_crystal_grid",
+    "count": 1
+  }
+}

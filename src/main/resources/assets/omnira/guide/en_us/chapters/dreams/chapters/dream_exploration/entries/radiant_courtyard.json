@@ -1,0 +1,16 @@
+{
+  "id": "radiant_courtyard",
+  "item": "omnira:light_crystal_torch",
+  "title": "Radiant Courtyard",
+  "text": [
+    "Look for a circular courtyard on a crystal island high in the Dawn Crystal Plains, marked by crystal columns and Light Crystal Torches. Its eight column positions may be intact, broken or fallen. Prepare safe travel and a way home.",
+    "Its single loot Crystal Ball holds crystal supplies and torches, with a chance of Light or Dark Microcores, an Arcane Crystal Grid or a Dream Spell Core."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "dream_spell_core",
+      "label": "Dream Spell Core"
+    }
+  ]
+}

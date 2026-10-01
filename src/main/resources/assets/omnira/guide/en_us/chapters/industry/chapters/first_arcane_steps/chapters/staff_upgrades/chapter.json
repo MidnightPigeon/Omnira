@@ -1,0 +1,14 @@
+{
+  "id": "staff_upgrades",
+  "title": "Enhancements and Runes",
+  "icon": "omnira:swiftness_rune",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/staff_enhancement_crafting.json",
+    "entries/rune_embedding.json",
+    "entries/swiftness_rune_crafting.json",
+    "entries/amplification_rune_crafting.json",
+    "entries/wide_area_rune_crafting.json"
+  ],
+  "chapters": []
+}

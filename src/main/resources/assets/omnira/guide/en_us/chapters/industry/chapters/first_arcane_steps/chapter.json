@@ -1,0 +1,19 @@
+{
+  "id": "first_arcane_steps",
+  "title": "First Arcane Steps",
+  "icon": "omnira:infused_crystal_pickaxe",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/crystal_casing.json",
+    "entries/infused_crystal_casing.json",
+    "entries/infused_crystal_pickaxe.json",
+    "entries/crystal_broom.json",
+    "entries/enhanced_recall_crystal.json"
+  ],
+  "chapters": [
+    "chapters/staff_forging/chapter.json",
+    "chapters/staff_upgrades/chapter.json",
+    "chapters/crystal_grids/chapter.json",
+    "chapters/orb_storage/chapter.json"
+  ]
+}

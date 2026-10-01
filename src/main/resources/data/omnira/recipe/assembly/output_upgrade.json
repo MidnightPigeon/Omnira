@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "minecraft:dispenser"
+    },
+    {
+      "item": "minecraft:dispenser"
+    },
+    {
+      "item": "minecraft:dispenser"
+    },
+    {
+      "item": "minecraft:piston"
+    },
+    {
+      "item": "minecraft:piston"
+    },
+    {
+      "item": "minecraft:piston"
+    },
+    {
+      "item": "omnira:grid_frame"
+    }
+  ],
+  "result": {
+    "id": "omnira:output_upgrade",
+    "count": 1
+  }
+}

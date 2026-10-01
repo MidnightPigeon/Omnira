@@ -1,0 +1,15 @@
+{
+  "id": "ritual_energy_core_crafting",
+  "item": "omnira:ritual_energy_core",
+  "title": "Ritual Energy Core · Crafting",
+  "text": [
+    "Forge a crystal casing with three grid frames alternating with three crystal pedestals. Starts and sustains a dream portal."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "ritual_energy_core",
+      "label": "Use and Effects"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "type": "omnira:analysis",
+  "ingredient": {
+    "item": "omnira:analysis_crystal"
+  },
+  "count": 1,
+  "input_damage": 1,
+  "result": {
+    "id": "omnira:dissociation_thread",
+    "count": 1
+  },
+  "byproduct": {
+    "choices": [
+      {
+        "id": "omnira:earth_microcore",
+        "count": 1
+      },
+      {
+        "id": "omnira:water_microcore",
+        "count": 1
+      },
+      {
+        "id": "omnira:fire_microcore",
+        "count": 1
+      },
+      {
+        "id": "omnira:air_microcore",
+        "count": 1
+      }
+    ],
+    "min": 1,
+    "max": 1
+  }
+}

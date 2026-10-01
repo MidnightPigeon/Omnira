@@ -1,0 +1,20 @@
+{
+  "id": "marisa_crystal_ball_guide",
+  "title": "Marisa's Crystal Ball",
+  "item": "omnira:marisa_crystal_ball",
+  "text": [
+    "Use Marisa's Crystal Ball to trade. Each day lists three Common, two Rare and one Epic offer, limited to three, two and one purchases per offer. All cost Infused Crystals; Rare offers also cost Dream Crystals, and Epic offers also cost Spatial Crystals.",
+    "Your daily goods drift inside the ball. Your offers and remaining purchases are shared across all of these crystal balls. Other players have their own daily lists. Silk Touch preserves the special ball; ordinary harvesting leaves an empty crystal ball. Moving one does not reset your trades."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "kirisame_shop_guide",
+      "label": "Kirisame Magic Shop"
+    },
+    {
+      "target": "marisa_crystal_ball_guide_machine_reference",
+      "label": "Marisa's Crystal Ball"
+    }
+  ]
+}

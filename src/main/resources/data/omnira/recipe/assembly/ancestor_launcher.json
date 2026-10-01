@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "operation": "alternating",
+  "slots": [
+    {
+      "item": "omnira:fire_microcore"
+    },
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "omnira:fire_microcore"
+    },
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "omnira:fire_microcore"
+    },
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "omnira:dark_microcore"
+    }
+  ],
+  "result": {
+    "id": "omnira:ancestor_launcher",
+    "count": 1
+  }
+}

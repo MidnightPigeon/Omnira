@@ -1,0 +1,17 @@
+{
+  "selector": "omnira:light_source_brick_slab",
+  "properties": {
+    "sable:floating_material": "omnira:light_source_crystal",
+    "sable:mass": 0.5,
+    "sable:volume": 0.5,
+    "sable:floating_scale": 0.5
+  },
+  "priority": 2000,
+  "overrides": {
+    "type=double": {
+      "sable:mass": 1.0,
+      "sable:volume": 1.0,
+      "sable:floating_scale": 1.0
+    }
+  }
+}

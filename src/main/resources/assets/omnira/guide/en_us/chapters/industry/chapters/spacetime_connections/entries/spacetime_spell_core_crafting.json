@@ -1,0 +1,9 @@
+{
+  "id": "spacetime_spell_core_crafting",
+  "title": "Spacetime Spell Core",
+  "item": "omnira:spacetime_spell_core",
+  "text": [
+    "Combine three Time Warp Points and three Spatial Crystals inside the Advanced Assembly Table. Place a Time Microcore, a Light/Dark Spell Core and a Space Microcore on its left, middle and right nodes to make one Spacetime Spell Core. Equip it as a spell core, power machinery with it, or use it in the Ritual of Time's Threshold to open a permanent mirror portal."
+  ],
+  "recipes": true
+}

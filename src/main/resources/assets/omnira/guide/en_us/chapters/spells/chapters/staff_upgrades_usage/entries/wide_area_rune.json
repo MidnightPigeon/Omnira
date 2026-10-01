@@ -1,0 +1,16 @@
+{
+  "id": "wide_area_rune",
+  "item": "omnira:wide_area_rune",
+  "title": "Wide Area Rune",
+  "text": [
+    "Expands spell area: Orbit gains two projectiles, for six total; orbit and explosion radii become 1.5 times larger. Ground spells gain an outer ring of affected positions.",
+    "Doubles Target and Crosshair selection ranges to 24 and 32 blocks. Obstruction rules and damage strength are unchanged."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "wide_area_rune_crafting",
+      "label": "Forging Recipe"
+    }
+  ]
+}

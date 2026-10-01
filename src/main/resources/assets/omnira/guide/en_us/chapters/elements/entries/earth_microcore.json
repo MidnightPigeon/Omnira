@@ -1,0 +1,19 @@
+{
+  "id": "earth_microcore",
+  "item": "omnira:earth_microcore",
+  "title": "Earth Microcore",
+  "text": [
+    "The Earth Microcore is obtained through analysis. In the target slot it supplies Ground; in the shape slot it supplies Barrier."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "ground_target",
+      "label": "Ground"
+    },
+    {
+      "target": "barrier_shape",
+      "label": "Barrier"
+    }
+  ]
+}

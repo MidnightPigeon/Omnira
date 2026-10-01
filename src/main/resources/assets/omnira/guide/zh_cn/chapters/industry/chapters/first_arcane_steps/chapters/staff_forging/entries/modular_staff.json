@@ -1,0 +1,19 @@
+{
+  "id": "modular_staff",
+  "item": "omnira:modular_staff",
+  "title": "法杖",
+  "text": [
+    "由杖体、加固部件和杖端在魔动装配台锻造。装备水晶格栅后，法杖便可读取其中的法术。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "staff_forging",
+      "label": "法杖锻造"
+    },
+    {
+      "target": "staff_casting",
+      "label": "法杖施法"
+    }
+  ]
+}

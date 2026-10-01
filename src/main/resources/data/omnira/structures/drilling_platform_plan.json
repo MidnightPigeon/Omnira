@@ -1,0 +1,2898 @@
+[
+  {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 0,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 1,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 3,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 4,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 5,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 6,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 7,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 9,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 10,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 11,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 12,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 13,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 15,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 16,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 0,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 1,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 2,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 3,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 4,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 6,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 8,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 9,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 10,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 12,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 13,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 14,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 15,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 1,
+    "y": 1,
+    "z": 0,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 1,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 2,
+    "y": 1,
+    "z": 0,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 2,
+    "y": 1,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 1,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 3,
+    "y": 1,
+    "z": 0,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 3,
+    "y": 1,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 4,
+    "y": 1,
+    "z": 0,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 4,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 1,
+    "z": 0,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 1,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 1,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 6,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 7,
+    "y": 1,
+    "z": 7,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "0",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 7,
+    "y": 1,
+    "z": 8,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "3",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 7,
+    "y": 1,
+    "z": 9,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "6",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 7,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 7,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "1",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 8,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "4",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 9,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "7",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 7,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "2",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 8,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "5",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 9,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "8",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 10,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 0,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 12,
+    "y": 1,
+    "z": 0,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 12,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 0,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 8,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 0,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 0,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 0,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 1,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 2,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 3,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 4,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 6,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 8,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 9,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 10,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 12,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 13,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 14,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 15,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 2,
+    "y": 2,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 2,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 3,
+    "y": 2,
+    "z": 8,
+    "name": "omnira:liquid_crystal_ball",
+    "nbt": "{id:\"omnira:liquid_crystal_ball\",FluidTreasure:1b}"
+  },
+  {
+    "x": 5,
+    "y": 2,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 2,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 7,
+    "y": 2,
+    "z": 7,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "9",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 7,
+    "y": 2,
+    "z": 8,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "12",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 7,
+    "y": 2,
+    "z": 9,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "15",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 8,
+    "y": 2,
+    "z": 7,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "10",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 8,
+    "y": 2,
+    "z": 8,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "13",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 8,
+    "y": 2,
+    "z": 9,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "16",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "z": 7,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "11",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "z": 8,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "14",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "z": 9,
+    "name": "omnira:hyperdimensional_drill",
+    "properties": {
+      "part": "17",
+      "charged": "true"
+    }
+  },
+  {
+    "x": 11,
+    "y": 2,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 2,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 13,
+    "y": 2,
+    "z": 8,
+    "name": "omnira:crystal_ball",
+    "loot": "omnira:chests/drilling_platform"
+  },
+  {
+    "x": 14,
+    "y": 2,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 2,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 3,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 3,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 3,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 3,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 3,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 3,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 14,
+    "y": 3,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 3,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 4,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 4,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 5,
+    "y": 4,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 4,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 8,
+    "y": 4,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 4,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 4,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 14,
+    "y": 4,
+    "z": 2,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 14,
+    "y": 4,
+    "z": 14,
+    "name": "minecraft:polished_deepslate"
+  },
+  {
+    "x": 2,
+    "y": 5,
+    "z": 2,
+    "name": "minecraft:lantern",
+    "properties": {
+      "hanging": "false",
+      "waterlogged": "false"
+    }
+  },
+  {
+    "x": 2,
+    "y": 5,
+    "z": 14,
+    "name": "minecraft:lantern",
+    "properties": {
+      "hanging": "false",
+      "waterlogged": "false"
+    }
+  },
+  {
+    "x": 5,
+    "y": 5,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 5,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 8,
+    "y": 5,
+    "z": 8,
+    "name": "minecraft:chain",
+    "properties": {
+      "axis": "y",
+      "waterlogged": "false"
+    }
+  },
+  {
+    "x": 11,
+    "y": 5,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 5,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 14,
+    "y": 5,
+    "z": 2,
+    "name": "minecraft:lantern",
+    "properties": {
+      "hanging": "false",
+      "waterlogged": "false"
+    }
+  },
+  {
+    "x": 14,
+    "y": 5,
+    "z": 14,
+    "name": "minecraft:lantern",
+    "properties": {
+      "hanging": "false",
+      "waterlogged": "false"
+    }
+  },
+  {
+    "x": 5,
+    "y": 6,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 6,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 8,
+    "y": 6,
+    "z": 8,
+    "name": "minecraft:chain",
+    "properties": {
+      "axis": "y",
+      "waterlogged": "false"
+    }
+  },
+  {
+    "x": 11,
+    "y": 6,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 6,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 7,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 7,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 8,
+    "y": 7,
+    "z": 8,
+    "name": "minecraft:chain",
+    "properties": {
+      "axis": "y",
+      "waterlogged": "false"
+    }
+  },
+  {
+    "x": 11,
+    "y": 7,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 7,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 8,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 8,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 8,
+    "y": 8,
+    "z": 8,
+    "name": "minecraft:chain",
+    "properties": {
+      "axis": "y",
+      "waterlogged": "false"
+    }
+  },
+  {
+    "x": 11,
+    "y": 8,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 8,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 9,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 9,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 8,
+    "y": 9,
+    "z": 8,
+    "name": "minecraft:chain",
+    "properties": {
+      "axis": "y",
+      "waterlogged": "false"
+    }
+  },
+  {
+    "x": 11,
+    "y": 9,
+    "z": 5,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 11,
+    "y": 9,
+    "z": 11,
+    "name": "minecraft:polished_deepslate_wall"
+  },
+  {
+    "x": 5,
+    "y": 10,
+    "z": 5,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 5,
+    "y": 10,
+    "z": 6,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 5,
+    "y": 10,
+    "z": 7,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 5,
+    "y": 10,
+    "z": 8,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 5,
+    "y": 10,
+    "z": 9,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 5,
+    "y": 10,
+    "z": 10,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 5,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 6,
+    "y": 10,
+    "z": 5,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 6,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 7,
+    "y": 10,
+    "z": 5,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 7,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 8,
+    "y": 10,
+    "z": 5,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 8,
+    "y": 10,
+    "z": 8,
+    "name": "minecraft:chain",
+    "properties": {
+      "axis": "y",
+      "waterlogged": "false"
+    }
+  },
+  {
+    "x": 8,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 9,
+    "y": 10,
+    "z": 5,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 9,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 10,
+    "y": 10,
+    "z": 5,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 10,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 5,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 6,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 7,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 8,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 9,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 10,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 8,
+    "y": 11,
+    "z": 8,
+    "name": "minecraft:chain",
+    "properties": {
+      "axis": "y",
+      "waterlogged": "false"
+    }
+  },
+  {
+    "x": 6,
+    "y": 12,
+    "z": 8,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 7,
+    "y": 12,
+    "z": 8,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 8,
+    "y": 12,
+    "z": 8,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 9,
+    "y": 12,
+    "z": 8,
+    "name": "minecraft:iron_block"
+  },
+  {
+    "x": 10,
+    "y": 12,
+    "z": 8,
+    "name": "minecraft:iron_block"
+  }
+]

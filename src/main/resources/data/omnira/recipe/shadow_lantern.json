@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " S ",
+    "SMS",
+    "SRS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:spiritual_crystal"
+    },
+    "M": {
+      "item": "omnira:shadow_mist"
+    },
+    "R": {
+      "item": "omnira:resonance_crystal"
+    }
+  },
+  "result": {
+    "id": "omnira:shadow_lantern",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "parent":"minecraft:block/block",
+  "textures":{"gold":"minecraft:block/gold_block","dark":"minecraft:block/polished_blackstone","water":"minecraft:block/water_still","particle":"minecraft:block/gold_block"},
+  "elements":[
+    {"from":[4,0,3],"to":[12,3,13],"faces":{"up":{"texture":"#gold"},"north":{"texture":"#gold"},"south":{"texture":"#gold"},"east":{"texture":"#gold"},"west":{"texture":"#gold"}}},
+    {"from":[2,3,1],"to":[14,6,12],"faces":{"north":{"texture":"#gold"},"south":{"texture":"#gold"},"east":{"texture":"#gold"},"west":{"texture":"#gold"}}},
+    {"from":[2,6,1],"to":[4,10,12],"faces":{"up":{"texture":"#gold"},"north":{"texture":"#gold"},"west":{"texture":"#gold"},"east":{"texture":"#gold"}}},
+    {"from":[12,6,1],"to":[14,10,12],"faces":{"up":{"texture":"#gold"},"north":{"texture":"#gold"},"east":{"texture":"#gold"},"west":{"texture":"#gold"}}},
+    {"from":[4,6,1],"to":[12,10,3],"faces":{"up":{"texture":"#gold"},"north":{"texture":"#gold"},"south":{"texture":"#gold"}}},
+    {"from":[4,6,10],"to":[12,10,12],"faces":{"up":{"texture":"#gold"},"south":{"texture":"#gold"},"north":{"texture":"#gold"}}},
+    {"from":[4,6,3],"to":[12,7,10],"faces":{"up":{"texture":"#water"}}},
+    {"from":[1,10,0],"to":[15,11,2],"faces":{"up":{"texture":"#gold"},"north":{"texture":"#gold"}}},
+    {"from":[1,10,2],"to":[4,11,12],"faces":{"up":{"texture":"#gold"},"west":{"texture":"#gold"}}},
+    {"from":[12,10,2],"to":[15,11,12],"faces":{"up":{"texture":"#gold"},"east":{"texture":"#gold"}}},
+    {"from":[4,10,11],"to":[12,11,12],"faces":{"up":{"texture":"#gold"}}},
+    {"from":[3,3,12],"to":[13,16,16],"faces":{"north":{"texture":"#gold"},"south":{"texture":"#gold"},"east":{"texture":"#gold"},"west":{"texture":"#gold"}}}
+  ]
+}

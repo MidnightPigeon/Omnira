@@ -1,0 +1,24 @@
+{
+  "id": "dream_rabbit_relics_guide",
+  "title": "梦境兔遗物",
+  "item": "omnira:alice_dream_rabbit_sigil",
+  "text": [
+    "梦境兔残迹可从镜中活花园宝藏或魔理沙的稀有交易中获得。右键后静候三秒：主世界通往梦境维度的随机镜面群系，梦境维度通往时空镜廊，时空维度则返回主世界出生点。传送消耗残迹，不消耗法力；移动、换手或受伤会中断读条，乘坐时无法启动。",
+    "在时空回溯仪中，可把残迹转为爱丽丝的梦境兔印记。印记不消耗，沿用相同路线和读条，成功传送耗尽全部法力；法力不足上限一半时使用会立即死亡。每次成功使用有一分钟冷却，同一玩家持有的所有印记共享冷却。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "kirisame_shop_guide",
+      "label": "雾雨魔法店"
+    },
+    {
+      "target": "looking_glass_garden_guide",
+      "label": "镜中活花园"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "时空回溯仪"
+    }
+  ]
+}

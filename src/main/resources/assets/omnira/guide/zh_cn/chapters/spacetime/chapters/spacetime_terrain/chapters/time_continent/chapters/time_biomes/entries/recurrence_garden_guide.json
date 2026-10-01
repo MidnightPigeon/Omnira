@@ -1,0 +1,33 @@
+{
+  "id": "recurrence_garden_guide",
+  "title": "循环花园",
+  "item": "omnira:time_flower",
+  "text": [
+    "草与花几乎等量生长在无树的花园中，地表散布着破败时流浅塘。这里每五分钟推进一次循环：时光草与时光花互换，尘泥在普通态和沉积态之间交替；接触时流的尘泥还会经历朽化阶段。",
+    "成熟作物会回到初始生长状态，尚未成熟的作物保持原状。花园范围内的水晶簇每次推进一个阶段，成熟后重新成为小芽；母岩在花园内的空面也会开始生长。",
+    "若佩戴水晶格栅，人在花园中经历循环节点时，当前法术会自动切换到下一格，包括空槽。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "looking_glass_garden_guide",
+      "label": "镜中活花园"
+    },
+    {
+      "target": "time_plants_guide",
+      "label": "时光花草"
+    },
+    {
+      "target": "temporal_silt_guide",
+      "label": "时序尘泥"
+    },
+    {
+      "target": "decayed_timeflow_guide",
+      "label": "破败时流与垂钓"
+    },
+    {
+      "target": "timeflow_eel_guide",
+      "label": "时流鳗与时间药水"
+    }
+  ]
+}

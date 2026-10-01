@@ -1,0 +1,31 @@
+{
+  "has_precipitation": false,
+  "temperature": 0.8,
+  "downfall": 0,
+  "effects": {
+    "sky_color": 8107462,
+    "fog_color": 9671856,
+    "water_color": 8166627,
+    "water_fog_color": 4537480,
+    "grass_color": 7776335,
+    "foliage_color": 6469189
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "omnira:fleeting_vegetation"
+    ],
+    []
+  ]
+}

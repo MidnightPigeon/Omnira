@@ -1,0 +1,20 @@
+{
+  "id": "looking_glass_garden_guide",
+  "title": "镜中活花园",
+  "item": "omnira:dream_rabbit_remains",
+  "text": [
+    "循环花园中偶尔能发现镜面园路围成的花园。四枚迷雾水晶球环绕中央的仙境扑克展台，宝藏中可能藏有梦境兔残迹。",
+    "园中的设备可以带走，已经开启的宝藏不会因循环重新补充。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "wonderland_poker_stand_guide",
+      "label": "仙境扑克展台"
+    },
+    {
+      "target": "dream_rabbit_relics_guide",
+      "label": "梦境兔遗物"
+    }
+  ]
+}

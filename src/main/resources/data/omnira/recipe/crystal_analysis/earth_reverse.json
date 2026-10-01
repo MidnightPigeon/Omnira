@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "omnira:analysis_crystal"
+    },
+    {
+      "item": "omnira:earth_microcore"
+    }
+  ],
+  "result": {
+    "id": "minecraft:dirt",
+    "count": 16
+  }
+}

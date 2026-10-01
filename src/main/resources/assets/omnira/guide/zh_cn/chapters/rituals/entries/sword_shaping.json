@@ -1,0 +1,30 @@
+{
+  "id": "sword_shaping",
+  "item": "omnira:pure_vessel",
+  "title": "塑剑之仪",
+  "recipes": false,
+  "scene": "sword_shaping",
+  "text": [
+    "在平整的5×5区域中央放置纯粹容器，四个水晶基座分别位于正北、正东、正南、正西，距离中央两格，且与容器同高。",
+    "四个基座各放一份材料，次序不限，然后手持近战武器右键纯粹容器启动。材料会逐次被吸收；容器在浅蓝或浅紫色粒子中逐渐崩解，八秒后掉落新武器。原武器消耗，附魔不会继承。",
+    "晶化骨钉需要共振水晶、灵性水晶、光晶核和骨头；奥能织针需要解析之晶、魔能引擎、暗影浆果和铁锭。解析之晶在此会被整个消耗。"
+  ],
+  "links": [
+    {
+      "target": "pure_vessel",
+      "label": "纯粹容器"
+    },
+    {
+      "target": "crystal_pedestal",
+      "label": "水晶基座"
+    },
+    {
+      "target": "crystallized_bone_nail",
+      "label": "晶化骨钉"
+    },
+    {
+      "target": "arcane_needle",
+      "label": "奥能织针"
+    }
+  ]
+}

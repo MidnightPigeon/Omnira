@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "IBI",
+    "III",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "omnira:infused_spiritual_crystal"
+    },
+    "B": {
+      "item": "omnira:spiritual_crystal_block"
+    }
+  },
+  "result": {
+    "id": "omnira:crystal_chestplate",
+    "count": 1
+  }
+}

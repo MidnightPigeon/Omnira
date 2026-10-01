@@ -1,0 +1,20 @@
+{
+  "id": "looking_glass_garden_guide",
+  "title": "Looking-Glass Garden",
+  "item": "omnira:dream_rabbit_remains",
+  "text": [
+    "Mirror paths occasionally form a garden within Recurrence Garden. Four sealed treasure balls surround a Wonderland Poker Stand; their rewards may include Dream Rabbit Remains.",
+    "The devices can be recovered, but the biome's cycle never replenishes opened treasures."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "wonderland_poker_stand_guide",
+      "label": "Wonderland Poker Stand"
+    },
+    {
+      "target": "dream_rabbit_relics_guide",
+      "label": "Dream Rabbit Relics"
+    }
+  ]
+}

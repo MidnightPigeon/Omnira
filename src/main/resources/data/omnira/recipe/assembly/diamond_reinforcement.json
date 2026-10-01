@@ -1,0 +1,29 @@
+{
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "slots": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    []
+  ],
+  "result": {
+    "id": "omnira:diamond_reinforcement",
+    "count": 1
+  }
+}

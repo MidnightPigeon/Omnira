@@ -1,0 +1,9 @@
+{
+  "id": "spiritual_crystal_stairs",
+  "item": "omnira:spiritual_crystal_stairs",
+  "title": "灵性水晶楼梯",
+  "text": [
+    "由灵性水晶块合成或切石获得，保留浅蓝色半透明外观与亮度。"
+  ],
+  "recipes": true
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "omnira:mossy_shadow_rock"
+  },
+  "result": {
+    "id": "omnira:mossy_shadow_rock_slab",
+    "count": 2
+  }
+}

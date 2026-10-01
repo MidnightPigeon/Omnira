@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:spacetime_anchoring_sigil",
+    "omnira:phantom_calling_card",
+    "omnira:d_class_credentials",
+    "omnira:enhanced_phantom_calling_card",
+    "omnira:c_class_credentials",
+    "omnira:b_class_credentials",
+    "omnira:a_class_credentials"
+  ]
+}

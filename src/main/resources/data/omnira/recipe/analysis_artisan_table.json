@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["SCS", " S ", "S S"],
+  "key": {
+    "S": { "item": "omnira:spiritual_crystal" },
+    "C": { "item": "minecraft:crafting_table" }
+  },
+  "result": { "id": "omnira:analysis_artisan_table", "count": 1 }
+}

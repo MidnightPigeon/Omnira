@@ -1,0 +1,14 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:translucent",
+  "textures": {"all": "minecraft:block/lime_stained_glass", "particle": "minecraft:block/lime_stained_glass"},
+  "elements": [
+    {"from":[4,4,4],"to":[12,12,12],"faces":{"north":{"texture":"#all"},"south":{"texture":"#all"},"east":{"texture":"#all"},"west":{"texture":"#all"},"up":{"texture":"#all"},"down":{"texture":"#all"}}},
+    {"from":[2,6,6],"to":[4,10,10],"faces":{"north":{"texture":"#all"},"south":{"texture":"#all"},"west":{"texture":"#all"},"up":{"texture":"#all"},"down":{"texture":"#all"}}},
+    {"from":[12,6,6],"to":[14,10,10],"faces":{"north":{"texture":"#all"},"south":{"texture":"#all"},"east":{"texture":"#all"},"up":{"texture":"#all"},"down":{"texture":"#all"}}},
+    {"from":[6,2,6],"to":[10,4,10],"faces":{"north":{"texture":"#all"},"south":{"texture":"#all"},"east":{"texture":"#all"},"west":{"texture":"#all"},"down":{"texture":"#all"}}},
+    {"from":[6,12,6],"to":[10,14,10],"faces":{"north":{"texture":"#all"},"south":{"texture":"#all"},"east":{"texture":"#all"},"west":{"texture":"#all"},"up":{"texture":"#all"}}},
+    {"from":[6,6,2],"to":[10,10,4],"faces":{"north":{"texture":"#all"},"east":{"texture":"#all"},"west":{"texture":"#all"},"up":{"texture":"#all"},"down":{"texture":"#all"}}},
+    {"from":[6,6,12],"to":[10,10,14],"faces":{"south":{"texture":"#all"},"east":{"texture":"#all"},"west":{"texture":"#all"},"up":{"texture":"#all"},"down":{"texture":"#all"}}}
+  ]
+}

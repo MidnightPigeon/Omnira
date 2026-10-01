@@ -1,0 +1,28 @@
+{
+  "id": "barrier_shape",
+  "item": "omnira:earth_microcore",
+  "title": "Barrier",
+  "text": [
+    "Put an Earth Microcore in the shape slot. Ground and positional barriers form physical obstacles and can trigger carried effects on creature contact.",
+    "On Self or a selected creature, creates a following ward that triggers after damage rather than granting immunity. On a selected block, barriers cover its exposed faces."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "earth_microcore",
+      "label": "Earth Microcore"
+    },
+    {
+      "target": "entity_barrier",
+      "label": "Self or Creature-Barrier"
+    },
+    {
+      "target": "block_barrier",
+      "label": "Block or Position-Barrier"
+    },
+    {
+      "target": "spell_elements",
+      "label": "Spell Elements"
+    }
+  ]
+}

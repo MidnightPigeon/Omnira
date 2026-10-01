@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "omnira:time_warp_point"
+    },
+    {
+      "item": "omnira:analysis_crystal"
+    },
+    {
+      "item": "omnira:time_warp_point"
+    },
+    {
+      "item": "omnira:time_warp_point"
+    }
+  ],
+  "result": {
+    "id": "omnira:time_microcore",
+    "count": 1
+  }
+}

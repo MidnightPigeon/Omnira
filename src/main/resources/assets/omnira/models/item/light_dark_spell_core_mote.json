@@ -1,0 +1,11 @@
+{
+  "parent":"omnira:item/dream_spell_core_mote",
+  "elements":[{"from":[0,0,0],"to":[1,1,1],"faces":{
+    "west":{"texture":"#light","uv":[0,15,1,16],"tintindex":1},
+    "east":{"texture":"#light","uv":[0,15,1,16],"tintindex":1},
+    "down":{"texture":"#light","uv":[0,0,1,1],"tintindex":1},
+    "up":{"texture":"#light","uv":[0,0,1,1],"tintindex":1},
+    "north":{"texture":"#light","uv":[0,15,1,16],"tintindex":1},
+    "south":{"texture":"#light","uv":[0,15,1,16],"tintindex":1}
+  }}]
+}

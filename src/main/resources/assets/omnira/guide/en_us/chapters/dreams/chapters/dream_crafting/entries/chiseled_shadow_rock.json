@@ -1,0 +1,9 @@
+{
+  "id": "chiseled_shadow_rock",
+  "item": "omnira:chiseled_shadow_rock",
+  "title": "Chiseled Shadow Rock",
+  "text": [
+    "Stack two Shadow Rock Slabs vertically to make Chiseled Shadow Rock, or use a stonecutter."
+  ],
+  "recipes": true
+}

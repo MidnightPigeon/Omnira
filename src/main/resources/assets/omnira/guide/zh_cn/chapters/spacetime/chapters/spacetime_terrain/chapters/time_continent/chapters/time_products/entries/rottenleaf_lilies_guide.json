@@ -1,0 +1,19 @@
+{
+  "id": "rottenleaf_lilies_guide",
+  "title": "朽叶睡莲",
+  "item": "omnira:reborn_rottenleaf_lily",
+  "text": [
+    "腐朽与新生睡莲均可采集和重新放置。腐朽睡莲只有放在回溯湿地，才会在逆转时新生，结束后再次腐朽；其他群系不会令其新生。趁新生时采集可固定状态，用于凝聚、回溯与供能。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "reversion_mire_guide",
+      "label": "回溯湿地"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "时空回溯仪"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "decorative_variants",
+  "item": "omnira:spiritual_crystal_stairs",
+  "title": "Decorative Stairs and Slabs",
+  "text": [
+    "Light, spiritual and dream crystals, their bricks, shadow rock variants, mirror stone and its void-touched variants, and shadow planks have stair and slab forms.",
+    "Craft six blocks into four stairs, or three blocks in a row into six slabs. Stone and crystal can also be stonecut into one stair or two slabs per block.",
+    "Different materials connect under vanilla stair rules, including upside-down corners. Light is retained. Mirror stone and its variants are weightless. Single luminous crystal slabs retain half buoyancy; double slabs restore full buoyancy."
+  ]
+}

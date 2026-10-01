@@ -1,0 +1,13 @@
+{
+  "size": 1,
+  "order": 10,
+  "icon": "omnira:slot/crystal_grid",
+  "render_toggle": true,
+  "operation": "SET",
+  "validators": [
+    "curios:tag"
+  ],
+  "use_native_gui": true,
+  "add_cosmetic": false,
+  "drop_rule": "DEFAULT"
+}

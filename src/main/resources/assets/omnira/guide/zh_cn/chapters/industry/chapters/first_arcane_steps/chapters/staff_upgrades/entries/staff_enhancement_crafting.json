@@ -1,0 +1,9 @@
+{
+  "id": "staff_enhancement_crafting", "item": "omnira:modular_staff", "title": "法杖修饰强化",
+  "text": [
+    "高阶装配台左中右节点的中间放待强化法杖，左右节点及六个普通槽各放一份同种材料，共八份。铁块、时钟、光明微核、灵性水晶分别安装强化、延迟、神圣、注魔。",
+    "每次占一个强化槽，保留原部件、附魔及魔纹。木质与烈焰杖体可安装一次，暗影杖体可安装两次；同种修饰可重复安装，无法拆卸。需要驱动核心。"
+  ],
+  "recipes": false,
+  "links": [{"target": "staff_enhancement_usage", "label": "修饰效果"}, {"target": "advanced_assembly_table", "label": "高阶装配台"}]
+}

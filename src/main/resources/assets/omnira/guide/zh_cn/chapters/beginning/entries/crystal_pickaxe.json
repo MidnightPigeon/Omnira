@@ -1,0 +1,15 @@
+{
+  "id": "crystal_pickaxe",
+  "item": "omnira:crystal_pickaxe",
+  "title": "水晶镐",
+  "text": [
+    "由灵性水晶制作的初期工具，也可继续升级为注魔水晶镐。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "infused_crystal_pickaxe",
+      "label": "注魔水晶镐"
+    }
+  ]
+}

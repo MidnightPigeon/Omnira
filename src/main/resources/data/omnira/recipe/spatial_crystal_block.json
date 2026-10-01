@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "omnira:spatial_crystal_shard"
+    }
+  },
+  "result": {
+    "id": "omnira:spatial_crystal_block",
+    "count": 1
+  }
+}

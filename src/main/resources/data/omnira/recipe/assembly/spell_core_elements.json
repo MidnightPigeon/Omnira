@@ -1,0 +1,27 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:earth_microcore"
+    },
+    {
+      "item": "omnira:water_microcore"
+    },
+    {
+      "item": "omnira:fire_microcore"
+    },
+    {
+      "item": "omnira:air_microcore"
+    },
+    [],
+    [],
+    {
+      "item": "omnira:crude_light_core"
+    }
+  ],
+  "result": {
+    "id": "omnira:primordial_spell_core",
+    "count": 1
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["DDD", "DCD", "DDD"],
+  "key": {"D": {"item": "omnira:arcane_dust"}, "C": {"item": "omnira:spiritual_crystal"}},
+  "result": {"id": "omnira:resonance_crystal", "count": 1}
+}

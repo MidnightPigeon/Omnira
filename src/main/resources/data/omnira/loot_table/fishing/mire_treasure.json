@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "omnira:time_warp_point",
+          "weight": 90
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:book",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "minecraft:enchant_randomly"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:dream_spell_core",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:time_microcore",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:time_warp_point",
+          "weight": 2
+        }
+      ]
+    }
+  ]
+}

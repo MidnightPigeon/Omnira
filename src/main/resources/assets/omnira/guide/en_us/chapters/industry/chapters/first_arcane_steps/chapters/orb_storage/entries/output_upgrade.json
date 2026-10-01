@@ -1,0 +1,11 @@
+{
+  "id": "output_upgrade",
+  "item": "omnira:output_upgrade",
+  "title": "Output Upgrade",
+  "text": [
+    "Right-click the held plate to configure directions and filters before installing it. Settings remain on the plate after removal.",
+    "Pushes one item per second into selected containers above or below, alternating when both are enabled. Fluids obey the globe transfer limit.",
+    "Uses the same filters as intake upgrades. This item rate applies only to the upgrade, not to external funnels or pipes."
+  ],
+  "recipes": true
+}

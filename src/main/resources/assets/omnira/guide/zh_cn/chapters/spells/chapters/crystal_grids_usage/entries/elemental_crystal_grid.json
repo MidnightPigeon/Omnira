@@ -1,0 +1,20 @@
+{
+  "id": "elemental_crystal_grid",
+  "item": "omnira:elemental_crystal_grid",
+  "title": "元素水晶格栅",
+  "text": [
+    "可容纳5枚法术水晶。用于魔能引擎时提供1.5倍输出。",
+    "升级后，原有法术、空位和施法顺序均保留；新增两个空槽位接在原法术链末尾。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "elemental_crystal_grid_crafting",
+      "label": "锻造配方"
+    },
+    {
+      "target": "mana_engine",
+      "label": "魔能引擎"
+    }
+  ]
+}

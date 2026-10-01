@@ -1,0 +1,21 @@
+{
+  "id": "pure_vessel",
+  "item": "omnira:pure_vessel",
+  "title": "Pure Vessel",
+  "text": [
+    "Advanced condensation turns a Crystal Ball into a Pure Vessel. Arrange the Sword Shaping offerings, then use a melee weapon on the vessel to begin.",
+    "When the ritual completes, the vessel collapses and drops the resulting weapon.",
+    "§6§oPerhaps it can also be used to work wood…"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "sword_shaping",
+      "label": "Sword Shaping Ritual"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "analysis_artisan_table",
+  "item": "omnira:analysis_artisan_table",
+  "title": "解析工匠桌",
+  "text": [
+    "解析工匠桌利用水晶的震荡从特定材料中提取元素微核与法术要素。",
+    "每次解析消耗 50 点基础法力。副产物随原料而异；需要消耗耐久的原料留在原料槽中，耐久耗尽后破碎。"
+  ],
+  "recipes": true
+}

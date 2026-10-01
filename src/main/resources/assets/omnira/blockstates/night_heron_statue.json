@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "half=upper": {
+      "model": "omnira:block/night_heron_statue_upper"
+    },
+    "facing=north,half=lower": {
+      "model": "omnira:block/night_heron_statue",
+      "y": 0
+    },
+    "facing=east,half=lower": {
+      "model": "omnira:block/night_heron_statue",
+      "y": 90
+    },
+    "facing=south,half=lower": {
+      "model": "omnira:block/night_heron_statue",
+      "y": 180
+    },
+    "facing=west,half=lower": {
+      "model": "omnira:block/night_heron_statue",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "textures": {
+    "glass": "omnira:block/forge_crystal_body",
+    "edge": "omnira:block/forge_crystal_edge",
+    "white": "omnira:item/infused_crystal_mote",
+    "tool": "omnira:block/forge_crystal_tool",
+    "particle": "omnira:block/forge_crystal_body"
+  },
+  "elements": [
+    {
+      "from": [
+        -2,
+        -2,
+        0
+      ],
+      "to": [
+        -2,
+        2,
+        1
+      ],
+      "faces": {
+        "west": {
+          "texture": "#white",
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        -2,
+        -2,
+        0
+      ],
+      "to": [
+        2,
+        -2,
+        1
+      ],
+      "faces": {
+        "down": {
+          "texture": "#white",
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        -2,
+        -2,
+        0
+      ],
+      "to": [
+        2,
+        2,
+        0
+      ],
+      "faces": {
+        "north": {
+          "texture": "#white",
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        -2,
+        -2,
+        1
+      ],
+      "to": [
+        2,
+        2,
+        1
+      ],
+      "faces": {
+        "south": {
+          "texture": "#white",
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        -2,
+        2,
+        0
+      ],
+      "to": [
+        2,
+        2,
+        1
+      ],
+      "faces": {
+        "up": {
+          "texture": "#white",
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        2,
+        -2,
+        0
+      ],
+      "to": [
+        2,
+        2,
+        1
+      ],
+      "faces": {
+        "east": {
+          "texture": "#white",
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "render_type": "minecraft:translucent"
+}

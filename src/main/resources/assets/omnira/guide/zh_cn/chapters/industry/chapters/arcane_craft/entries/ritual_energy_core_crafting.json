@@ -1,0 +1,15 @@
+{
+  "id": "ritual_energy_core_crafting",
+  "item": "omnira:ritual_energy_core",
+  "title": "仪祭能核 · 制作",
+  "text": [
+    "水晶机壳置于装配台中央，外围交替放置三个格栅框架和三个水晶基座，锻造而成。用于开启并维持梦境入口。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "ritual_energy_core",
+      "label": "使用与效果"
+    }
+  ]
+}

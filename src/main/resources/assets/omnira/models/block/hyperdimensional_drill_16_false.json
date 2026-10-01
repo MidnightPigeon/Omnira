@@ -1,0 +1,78 @@
+{
+  "textures": {
+    "body": "omnira:block/drill_casing",
+    "charge": "omnira:block/drill_empty",
+    "particle": "omnira:block/drill_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        1,
+        0
+      ],
+      "to": [
+        16,
+        5,
+        15
+      ],
+      "faces": {
+        "south": {
+          "texture": "#body"
+        },
+        "up": {
+          "texture": "#body"
+        },
+        "down": {
+          "texture": "#body"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        5,
+        0
+      ],
+      "to": [
+        16,
+        9,
+        13
+      ],
+      "faces": {
+        "south": {
+          "texture": "#body"
+        },
+        "up": {
+          "texture": "#body"
+        },
+        "down": {
+          "texture": "#body"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        9,
+        0
+      ],
+      "to": [
+        16,
+        14,
+        4
+      ],
+      "faces": {
+        "south": {
+          "texture": "#charge"
+        },
+        "up": {
+          "texture": "#charge"
+        },
+        "down": {
+          "texture": "#charge"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "omnira:spell_ink"
+    },
+    {
+      "item": "omnira:primordial_spell_core"
+    }
+  ],
+  "result": {
+    "id": "omnira:pocket_magic_bottle",
+    "count": 1
+  }
+}

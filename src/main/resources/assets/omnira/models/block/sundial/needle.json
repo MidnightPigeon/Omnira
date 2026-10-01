@@ -1,0 +1,98 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "stone": "omnira:block/time_eroded_bricks",
+    "white": "omnira:block/light_crystal_core",
+    "dial": "omnira:block/sundial_dial",
+    "glow": "omnira:block/sundial_glow",
+    "particle": "omnira:block/time_eroded_bricks"
+  },
+  "elements": [
+    {
+      "from": [
+        7.25,
+        7.75,
+        7.25
+      ],
+      "to": [
+        8.75,
+        9.5,
+        8.75
+      ],
+      "shade": true,
+      "faces": {
+        "north": {
+          "texture": "#white"
+        },
+        "south": {
+          "texture": "#white"
+        },
+        "east": {
+          "texture": "#white"
+        },
+        "west": {
+          "texture": "#white"
+        },
+        "up": {
+          "texture": "#white"
+        },
+        "down": {
+          "texture": "#white"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          8.5,
+          8
+        ],
+        "axis": "x",
+        "angle": 45,
+        "rescale": false
+      }
+    },
+    {
+      "from": [
+        7.6,
+        9.5,
+        7.6
+      ],
+      "to": [
+        8.4,
+        14.5,
+        8.4
+      ],
+      "shade": true,
+      "faces": {
+        "north": {
+          "texture": "#white"
+        },
+        "south": {
+          "texture": "#white"
+        },
+        "east": {
+          "texture": "#white"
+        },
+        "west": {
+          "texture": "#white"
+        },
+        "up": {
+          "texture": "#white"
+        },
+        "down": {
+          "texture": "#white"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          8.5,
+          8
+        ],
+        "axis": "x",
+        "angle": 45,
+        "rescale": false
+      }
+    }
+  ]
+}

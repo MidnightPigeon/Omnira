@@ -1,0 +1,32 @@
+{
+  "id": "projectile_shape",
+  "item": "omnira:air_microcore",
+  "title": "Projectile",
+  "text": [
+    "Put an Air Microcore in the shape slot. Crosshair-Projectile flies straight along your view; Target-Projectile homes toward a selected creature or block. Contact triggers the carried effects.",
+    "Self-Projectile carries the caster in flight; Ground-Projectile launches spell blocks resembling the selected surfaces upward. Ordinary projectiles are unaffected by water currents and can be reflected."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "air_microcore",
+      "label": "Air Microcore"
+    },
+    {
+      "target": "self_projectile",
+      "label": "Self Projectile Flight"
+    },
+    {
+      "target": "ground_projectile",
+      "label": "Ground-Projectile"
+    },
+    {
+      "target": "target_projectile",
+      "label": "Target-Projectile"
+    },
+    {
+      "target": "spell_elements",
+      "label": "Spell Elements"
+    }
+  ]
+}

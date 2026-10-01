@@ -1,0 +1,26 @@
+{
+  "id": "crystal_ball",
+  "item": "omnira:crystal_ball",
+  "title": "Crystal Ball",
+  "text": [
+    "Craft a chest in the center with a spiritual crystal above, below, left and right. The crystal ball provides gentle illumination.",
+    "Right-click to open twelve storage slots. Stored items roam inside as miniatures, one display per occupied slot. Removing a stack removes its display.",
+    "Avoid repeatedly jumping on the globe. Every three landings add a crack stage; the third stage shatters it, releasing all contents and one glass block, but no crystal ball. Damage gradually heals when left undisturbed.",
+    "Crystal Balls also serve as loot containers in Apprentice Huts, Crystal Workshops and Wizard Towers. Unopened loot balls contain mist; opening one reveals its loot. Crafted balls start empty."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "orb_storage",
+      "label": "Orb upgrades"
+    },
+    {
+      "target": "crystal_ball_crafting",
+      "label": "Crystal Ball Construction"
+    },
+    {
+      "target": "simple_condensation_table",
+      "label": "Simple Condensation Table"
+    }
+  ]
+}

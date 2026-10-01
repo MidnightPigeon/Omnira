@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "omnira:block/shadow_slab"
+    },
+    "type=top": {
+      "model": "omnira:block/shadow_slab_top"
+    },
+    "type=double": {
+      "model": "omnira:block/shadow_planks"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:spiritual_crystal",
+    "omnira:infused_spiritual_crystal",
+    "omnira:resonance_crystal",
+    "omnira:dream_crystal_shard",
+    "omnira:spatial_crystal_shard"
+  ]
+}

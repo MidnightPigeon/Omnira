@@ -1,0 +1,25 @@
+{
+  "id": "orbit_shape",
+  "item": "omnira:water_microcore",
+  "title": "Orbit",
+  "text": [
+    "Put a Water Microcore in the shape slot. Creates four spell projectiles around the selected center. Self and creature centers can move; block and air centers stay fixed.",
+    "Effects trigger on projectile contact with creatures or blocks. Selecting a creature only makes it the orbit center, without immediately applying effects to it. Orbiting projectiles can be reflected.",
+    "A Wide Area Rune increases the count to six and enlarges the orbit. Ground-Orbit follows the path formed by selected surface positions."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "water_microcore",
+      "label": "Water Microcore"
+    },
+    {
+      "target": "ground_orbit",
+      "label": "Ground-Orbit"
+    },
+    {
+      "target": "spell_elements",
+      "label": "Spell Elements"
+    }
+  ]
+}

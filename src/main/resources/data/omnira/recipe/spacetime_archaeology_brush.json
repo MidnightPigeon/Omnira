@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "T",
+    "L"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:spatial_crystal_shard"
+    },
+    "T": {
+      "item": "omnira:time_warp_point"
+    },
+    "L": {
+      "item": "omnira:reborn_rottenleaf_lily"
+    }
+  },
+  "result": {
+    "id": "omnira:spacetime_archaeology_brush",
+    "count": 1
+  }
+}

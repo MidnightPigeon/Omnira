@@ -1,0 +1,28 @@
+{
+  "id": "fleeting_woods_guide",
+  "title": "速逝林",
+  "item": "omnira:time_sapling",
+  "text": [
+    "这里的时间流逝更快：生长、药水、加工与冷却等计时以双倍速度推进，移动速度保持不变。时光树生长不受加速影响，树叶不会自然消失。",
+    "林地平缓，沉积态时序尘泥间生长着时光树，以及少量时光草和时光花。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "time_tree_guide",
+      "label": "时光树"
+    },
+    {
+      "target": "time_plants_guide",
+      "label": "时光花草"
+    },
+    {
+      "target": "kirisame_shop_guide",
+      "label": "雾雨魔法店"
+    },
+    {
+      "target": "temporal_silt_guide",
+      "label": "时序尘泥"
+    }
+  ]
+}

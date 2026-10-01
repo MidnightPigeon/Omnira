@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "fade=0": {
+      "model": "omnira:block/void_crystal_0"
+    },
+    "fade=1": {
+      "model": "omnira:block/void_crystal_1"
+    },
+    "fade=2": {
+      "model": "omnira:block/void_crystal_2"
+    },
+    "fade=3": {
+      "model": "omnira:block/void_crystal_3"
+    },
+    "fade=4": {
+      "model": "omnira:block/void_crystal_4"
+    },
+    "fade=5": {
+      "model": "omnira:block/void_crystal_5"
+    },
+    "fade=6": {
+      "model": "omnira:block/void_crystal_6"
+    },
+    "fade=7": {
+      "model": "omnira:block/void_crystal_7"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "traveler_manuscript",
+  "item": "omnira:traveler_manuscript",
+  "title": "Traveler's Manuscript",
+  "text": [
+    "This manuscript is hidden in the loot crystal ball left when the Golden Throne in the Frozen Imperial Palace crumbles.",
+    "Read it page by page to discover what the traveler encountered."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "frozen_terra_guide",
+      "label": "Stilled Wastes"
+    }
+  ]
+}

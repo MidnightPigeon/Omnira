@@ -1,0 +1,142 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "textures": {
+    "stone": "omnira:block/time_eroded_bricks",
+    "cracked": "omnira:block/cracked_time_eroded_bricks",
+    "sand": "omnira:block/sandbound_time_eroded_bricks",
+    "inscription": "omnira:block/eventide_pillar_inscription",
+    "dial": "omnira:block/eventide_dial_fragment",
+    "particle": "omnira:block/time_eroded_bricks"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        0,
+        3
+      ],
+      "to": [
+        13,
+        2,
+        13
+      ],
+      "faces": {
+        "north": {
+          "texture": "#stone"
+        },
+        "south": {
+          "texture": "#stone"
+        },
+        "east": {
+          "texture": "#stone"
+        },
+        "west": {
+          "texture": "#stone"
+        },
+        "up": {
+          "texture": "#stone"
+        },
+        "down": {
+          "texture": "#stone"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        2,
+        5
+      ],
+      "to": [
+        11,
+        9,
+        11
+      ],
+      "faces": {
+        "north": {
+          "texture": "#inscription"
+        },
+        "south": {
+          "texture": "#inscription"
+        },
+        "east": {
+          "texture": "#inscription"
+        },
+        "west": {
+          "texture": "#inscription"
+        },
+        "up": {
+          "texture": "#inscription"
+        },
+        "down": {
+          "texture": "#inscription"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        9,
+        5
+      ],
+      "to": [
+        8,
+        12,
+        11
+      ],
+      "faces": {
+        "north": {
+          "texture": "#cracked"
+        },
+        "south": {
+          "texture": "#cracked"
+        },
+        "east": {
+          "texture": "#cracked"
+        },
+        "west": {
+          "texture": "#cracked"
+        },
+        "up": {
+          "texture": "#cracked"
+        },
+        "down": {
+          "texture": "#cracked"
+        }
+      }
+    },
+    {
+      "from": [
+        8,
+        9,
+        5
+      ],
+      "to": [
+        11,
+        10,
+        9
+      ],
+      "faces": {
+        "north": {
+          "texture": "#sand"
+        },
+        "south": {
+          "texture": "#sand"
+        },
+        "east": {
+          "texture": "#sand"
+        },
+        "west": {
+          "texture": "#sand"
+        },
+        "up": {
+          "texture": "#sand"
+        },
+        "down": {
+          "texture": "#sand"
+        }
+      }
+    }
+  ]
+}

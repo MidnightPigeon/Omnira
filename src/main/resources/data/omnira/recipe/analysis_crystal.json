@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "omnira:earth_microcore"
+    },
+    {
+      "item": "omnira:water_microcore"
+    },
+    {
+      "item": "omnira:fire_microcore"
+    },
+    {
+      "item": "omnira:air_microcore"
+    }
+  ],
+  "result": {
+    "id": "omnira:analysis_crystal",
+    "count": 1
+  }
+}

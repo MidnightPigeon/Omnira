@@ -1,0 +1,29 @@
+{
+  "has_precipitation": false,
+  "temperature": 0.6,
+  "downfall": 0,
+  "effects": {
+    "sky_color": 5591404,
+    "fog_color": 7828874,
+    "water_color": 10534365,
+    "water_fog_color": 6785732
+  },
+  "spawners": {"monster":[{"type":"omnira:shadow_ghost","weight":30,"minCount":1,"maxCount":1}]},
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "omnira:dream_landscape"
+    ],
+    []
+  ]
+}

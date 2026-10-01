@@ -1,0 +1,21 @@
+{
+  "type": "omnira:analysis",
+  "ingredient": {
+    "item": "omnira:crystal_casing"
+  },
+  "count": 8,
+  "result": {
+    "id": "omnira:construction_matrix",
+    "count": 1
+  },
+  "byproduct": {
+    "choices": [
+      {
+        "id": "omnira:spiritual_crystal",
+        "count": 1
+      }
+    ],
+    "min": 8,
+    "max": 8
+  }
+}

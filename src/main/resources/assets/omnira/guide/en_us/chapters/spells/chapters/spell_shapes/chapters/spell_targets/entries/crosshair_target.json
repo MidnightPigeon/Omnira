@@ -1,0 +1,16 @@
+{
+  "id": "crosshair_target",
+  "item": "omnira:air_microcore",
+  "title": "Crosshair",
+  "text": [
+    "Put an Air Microcore in the target slot. Uses the block surface along your view, or an air position sixteen blocks ahead if no block is hit. It does not lock onto creatures.",
+    "With Projectile, fires straight along your view and can still hit creatures on the way. Sixteen blocks is the position-selection range, not the projectile travel limit. A Wide Area Rune doubles position-selection range."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "air_microcore",
+      "label": "Air Microcore"
+    }
+  ]
+}

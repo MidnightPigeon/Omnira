@@ -1,0 +1,19 @@
+{
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "slots": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "omnira:spacetime_waymark"
+    }
+  ],
+  "result": {
+    "id": "omnira:spacetime_knot",
+    "count": 1
+  }
+}

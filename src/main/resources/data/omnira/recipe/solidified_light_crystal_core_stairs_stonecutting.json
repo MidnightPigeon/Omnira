@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {"item": "omnira:solidified_light_crystal_core"},
+  "result": {"id": "omnira:solidified_light_crystal_core_stairs", "count": 1}
+}

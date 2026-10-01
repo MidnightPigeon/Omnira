@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " C ",
+    "CDC",
+    "SSS"
+  ],
+  "key": {
+    "C": {
+      "item": "omnira:spiritual_crystal"
+    },
+    "D": {
+      "item": "omnira:dream_crystal_shard"
+    },
+    "S": {
+      "item": "minecraft:smooth_stone"
+    }
+  },
+  "result": {
+    "id": "omnira:spacetime_waymark",
+    "count": 1
+  }
+}

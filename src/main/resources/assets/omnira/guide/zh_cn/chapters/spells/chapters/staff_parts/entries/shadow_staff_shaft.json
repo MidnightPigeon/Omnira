@@ -1,0 +1,15 @@
+{
+  "id": "shadow_staff_shaft",
+  "item": "omnira:shadow_staff_shaft",
+  "title": "暗影木杖体",
+  "text": [
+    "提供 2 个强化槽，增加 10% 法术强度。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "shadow_staff_shaft_crafting",
+      "label": "锻造配方"
+    }
+  ]
+}

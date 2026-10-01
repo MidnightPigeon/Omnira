@@ -1,0 +1,10 @@
+{
+  "id": "analysis_artisan_table",
+  "item": "omnira:analysis_artisan_table",
+  "title": "Analysis Artisan Table",
+  "text": [
+    "The analysis artisan table uses crystal vibrations to extract microcores and spell elements from selected materials.",
+    "Each analysis costs a base 50 mana. Byproducts depend on the material. Durable ingredients remain in the input slot and break when their durability is exhausted."
+  ],
+  "recipes": true
+}

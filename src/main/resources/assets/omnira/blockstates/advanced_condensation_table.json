@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "omnira:block/advanced_condensation_table",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "omnira:block/advanced_condensation_table",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "omnira:block/advanced_condensation_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "omnira:block/advanced_condensation_table",
+      "y": 270
+    }
+  }
+}

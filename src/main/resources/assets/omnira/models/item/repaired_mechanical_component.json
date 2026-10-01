@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "omnira:item/repaired_mechanical_component"
+  }
+}

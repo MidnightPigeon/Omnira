@@ -1,0 +1,17 @@
+{
+  "id": "spell_combinations",
+  "title": "Specific Combinations",
+  "icon": "omnira:water_microcore",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/self_projectile.json",
+    "entries/ground_projectile.json",
+    "entries/target_projectile.json",
+    "entries/entity_barrier.json",
+    "entries/block_barrier.json",
+    "entries/ground_orbit.json",
+    "entries/reverse_timeflow.json",
+    "entries/spatial_blade.json"
+  ],
+  "chapters": []
+}

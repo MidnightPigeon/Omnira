@@ -1,0 +1,13 @@
+{
+  "id": "dream_exploration",
+  "title": "跨岛与归程",
+  "icon": "omnira:recall_crystal",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/explore_dream.json",
+    "entries/radiant_courtyard.json",
+    "entries/shadow_library.json",
+    "entries/mirror_gallery.json"
+  ],
+  "chapters": []
+}

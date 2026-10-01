@@ -1,0 +1,55 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "omnira:time_seed",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:time_flower",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:time_sapling",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:reborn_rottenleaf_lily",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:decayed_rottenleaf_lily",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:timeflow_eel",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:chronal_blindfish",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:time_warp_point",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:time_microcore",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

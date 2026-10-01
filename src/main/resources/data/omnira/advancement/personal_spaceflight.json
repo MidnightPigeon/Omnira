@@ -1,0 +1,14 @@
+{
+  "display": {
+    "icon": {"id": "omnira:air_microcore"},
+    "title": {"translate": "advancement.omnira.personal_spaceflight.title"},
+    "description": {"translate": "advancement.omnira.personal_spaceflight.description"},
+    "background": "minecraft:textures/block/end_stone.png",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {"ascend": {"trigger": "minecraft:impossible"}},
+  "requirements": [["ascend"]]
+}

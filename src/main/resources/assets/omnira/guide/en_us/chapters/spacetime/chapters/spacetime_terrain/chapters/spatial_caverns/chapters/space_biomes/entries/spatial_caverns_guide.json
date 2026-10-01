@@ -1,0 +1,19 @@
+{
+  "id": "spatial_caverns_guide",
+  "title": "Spatial Caverns",
+  "item": "omnira:rough_spatial_crystal_block",
+  "text": [
+    "Spatial Caverns open beneath the continent. Rough Spatial Crystal forms walls and spires, with occasional excited crystals shining among them."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "spatial_crystal_guide",
+      "label": "Rough Spatial Crystal"
+    },
+    {
+      "target": "spatial_growth_guide",
+      "label": "Growing Spatial Crystals"
+    }
+  ]
+}

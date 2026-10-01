@@ -1,0 +1,9 @@
+{
+  "id": "infused_stacking_upgrade",
+  "item": "omnira:infused_stacking_upgrade",
+  "title": "Infused Stacking Upgrade",
+  "text": [
+    "Quadruples stackable item limits or fluid capacity. Cannot be installed alongside a basic stacking upgrade."
+  ],
+  "recipes": true
+}

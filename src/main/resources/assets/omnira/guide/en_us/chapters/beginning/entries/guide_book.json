@@ -1,0 +1,9 @@
+{
+  "id": "guide_book",
+  "item": "omnira:guide_book",
+  "title": "Omnira Handbook",
+  "text": [
+    "Craft a book with a Spiritual Crystal to obtain this guide to crafting and use."
+  ],
+  "recipes": true
+}

@@ -1,0 +1,24 @@
+{
+  "id": "dream_ritual",
+  "item": "minecraft:light_blue_bed",
+  "title": "Ritual of Dreamseeking",
+  "recipes": false,
+  "scene": "dream_ritual",
+  "text": [
+    "The Ritual of Dreamseeking opens a portal into the dream realm.",
+    "On a level 7x7 floor, arrange eight outer pedestals as shown, each holding a spiritual crystal. Place a ritual energy core at the center, at the same height as the outer pedestals.",
+    "Right-click the core while holding a bed of any color, at any time. One bed is consumed only when the structure is complete and there is room above it.",
+    "The portal opens one block above the ritual energy core. The core, outer pedestals, and spiritual crystals all remain to sustain the entrance.",
+    "Enter the central one-block area to reach the dream realm. Breaking the core or an outer pedestal, or removing a crystal, disables travel and makes the entrance shrink away over three seconds."
+  ],
+  "links": [
+    {
+      "target": "ritual_energy_core",
+      "label": "Ritual Energy Core"
+    },
+    {
+      "target": "crystal_pedestal",
+      "label": "Crystal Pedestal"
+    }
+  ]
+}

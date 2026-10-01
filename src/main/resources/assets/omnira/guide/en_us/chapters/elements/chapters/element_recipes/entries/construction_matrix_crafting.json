@@ -1,0 +1,15 @@
+{
+  "id": "construction_matrix_crafting",
+  "item": "omnira:construction_matrix",
+  "title": "Construction Matrix · Crafting",
+  "text": [
+    "Analyze 8 crystal casings to obtain construction matrix and 8 spiritual crystals."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "construction_matrix",
+      "label": "Use and Effects"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "dream_rabbit_relics_guide",
+  "title": "Dream Rabbit Relics",
+  "item": "omnira:alice_dream_rabbit_sigil",
+  "text": [
+    "Dream Rabbit Remains can be found in garden treasures or Marisa's rare trades. Right-click and remain still for three seconds: the Overworld leads to a random mirror biome in the Dream Realm, the Dream Realm leads to the Spacetime Mirror Corridor, and the spacetime dimension leads to the Overworld spawn. Travel consumes the remains, not mana. Moving, switching hands or taking damage cancels channeling; mounted travelers cannot begin.",
+    "The Spacetime Reverser restores the remains into Alice's Dream Rabbit Sigil. It is reusable and follows the same route and channeling rules. Successful travel drains all mana; attempting to use it below half maximum mana is lethal. All sigils held by one player share a one-minute cooldown after successful travel."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "kirisame_shop_guide",
+      "label": "Kirisame Magic Shop"
+    },
+    {
+      "target": "looking_glass_garden_guide",
+      "label": "Looking-Glass Garden"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "Spacetime Reverser"
+    }
+  ]
+}

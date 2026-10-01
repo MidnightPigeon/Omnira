@@ -1,0 +1,15 @@
+{
+  "id": "hyperdimensional_drill_machine_reference",
+  "title": "超维钻机",
+  "item": "omnira:hyperdimensional_drill",
+  "text": [
+    "这件设备来自遗迹，可查阅专属产出条目的获取与操作说明。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "hyperdimensional_drill",
+      "label": "获取与操作"
+    }
+  ]
+}

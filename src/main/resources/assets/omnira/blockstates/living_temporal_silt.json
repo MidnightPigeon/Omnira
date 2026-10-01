@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "omnira:block/living_temporal_silt",
+        "y": 0
+      },
+      {
+        "model": "omnira:block/living_temporal_silt",
+        "y": 90
+      },
+      {
+        "model": "omnira:block/living_temporal_silt",
+        "y": 180
+      },
+      {
+        "model": "omnira:block/living_temporal_silt",
+        "y": 270
+      }
+    ]
+  }
+}

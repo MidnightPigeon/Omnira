@@ -1,0 +1,15 @@
+{
+  "id": "light_core_reinforcement",
+  "item": "omnira:light_core_reinforcement",
+  "title": "Light Core Reinforcement",
+  "text": [
+    "Reduces each spell's mana cost by 5 and adds 10% spell power."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "light_core_reinforcement_crafting",
+      "label": "Forging Recipe"
+    }
+  ]
+}

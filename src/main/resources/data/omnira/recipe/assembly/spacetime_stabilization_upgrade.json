@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:spacetime_knot"
+    },
+    {
+      "item": "omnira:spacetime_knot"
+    },
+    {
+      "item": "omnira:spacetime_knot"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:elemental_crystal_grid"
+    }
+  ],
+  "result": {
+    "id": "omnira:spacetime_stabilization_upgrade",
+    "count": 1
+  }
+}

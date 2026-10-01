@@ -1,0 +1,40 @@
+{
+  "id": "time_warp_point_guide",
+  "title": "Time Warp Point",
+  "item": "omnira:time_warp_point",
+  "text": [
+    "The Analysis Artisan Table converts four Time Warp Points into one Time Microcore and exactly sixteen Arcane Dust. Shapeless crafting with an Analysis Crystal requires three Warp Points for one Time Microcore, but produces no dust. The crystal loses durability as usual. The Spacetime Reverser converts two Warp Points into one Time Microcore.",
+    "Time Warp Points rarely appear in Stilled Wastes. Entities that touch their field slow gradually and recover after leaving. A spell containing the Construction element, or a Bone Nail or Arcane Needle strike, can harvest one; charged slashes and flying needles also work. The harvested Warp Point cannot be placed directly. The remaining Temporal Mote cannot be broken, but a Pocket Bottle can carry it to a chosen location. It reforms after five minutes. A stack of 16 Warp Points collapses into an Unstable Spacetime Aggregate in a backpack or ordinary container; stabilization protects crystal storage."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "unstable_spacetime_aggregate",
+      "label": "Unstable Spacetime Aggregate"
+    },
+    {
+      "target": "frozen_terra_guide",
+      "label": "Stilled Wastes"
+    },
+    {
+      "target": "eventide_ruins_guide",
+      "label": "Eventide Ruins"
+    },
+    {
+      "target": "doomsday_rite",
+      "label": "Doomsday Rite"
+    },
+    {
+      "target": "analysis_artisan_table",
+      "label": "Analysis Artisan Table"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "Spacetime Reverser"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    }
+  ]
+}

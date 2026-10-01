@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "S  ",
+    "SS ",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:light_condensate_bricks"
+    }
+  },
+  "result": {
+    "id": "omnira:light_condensate_brick_stairs",
+    "count": 4
+  }
+}

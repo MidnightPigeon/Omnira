@@ -1,0 +1,15 @@
+{
+  "structures": [
+    {
+      "structure": "omnira:kirisame_magic_shop",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 16,
+    "separation": 4,
+    "salt": 73186425,
+    "frequency": 0.25
+  }
+}

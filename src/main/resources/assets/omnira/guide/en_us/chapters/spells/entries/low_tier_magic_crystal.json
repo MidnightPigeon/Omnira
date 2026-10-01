@@ -1,0 +1,24 @@
+{
+  "id": "low_tier_magic_crystal",
+  "item": "omnira:low_tier_magic_crystal",
+  "title": "Low-tier Magic Crystal",
+  "text": [
+    "A spell crystal stores its target, shape, elements, modifiers and authored base cost. Its keywords reflect the components used.",
+    "Right-click to cast once and consume the crystal. Alternatively, install it in an equipped crystal grid and cast repeatedly with a staff, consuming mana instead."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "spell_target_shape_basics",
+      "label": "Choosing Targets and Shapes"
+    },
+    {
+      "target": "crystal_processing_table",
+      "label": "Crystal Processing Table"
+    },
+    {
+      "target": "advanced_crystal_aggregation_ring",
+      "label": "Advanced Crystal Aggregation Ring"
+    }
+  ]
+}

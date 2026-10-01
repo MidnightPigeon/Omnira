@@ -1,0 +1,11 @@
+{
+  "structures": [{"structure": "omnira:radiant_courtyard", "weight": 1}],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 32,
+    "separation": 12,
+    "salt": 20260917,
+    "spread_type": "linear",
+    "frequency": 0.65
+  }
+}

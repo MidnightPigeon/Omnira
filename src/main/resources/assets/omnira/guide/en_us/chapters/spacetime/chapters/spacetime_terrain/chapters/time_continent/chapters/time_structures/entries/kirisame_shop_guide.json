@@ -1,0 +1,23 @@
+{
+  "id": "kirisame_shop_guide",
+  "title": "Kirisame Magic Shop",
+  "item": "omnira:marisa_crystal_ball",
+  "recipes": false,
+  "text": [
+    "A timber-and-stone magic shop occasionally appears in the Fleeting Woods. Books, mushrooms and magical apparatus fill its rooms, and the counter crystal still welcomes customers."
+  ],
+  "links": [
+    {
+      "target": "fleeting_woods_guide",
+      "label": "Fleeting Woods"
+    },
+    {
+      "target": "marisa_crystal_ball_guide",
+      "label": "Marisa's Crystal Ball"
+    },
+    {
+      "target": "dream_rabbit_relics_guide",
+      "label": "Dream Rabbit Relics"
+    }
+  ]
+}

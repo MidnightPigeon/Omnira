@@ -1,0 +1,24 @@
+{
+  "id": "decayed_timeflow_guide",
+  "title": "破败时流与垂钓",
+  "item": "omnira:decayed_timeflow_bucket",
+  "text": [
+    "浅绿色时流遍布回溯湿地浅塘，也存在于循环花园与纪元断崖含水层。接触会持续受到凋零并减速一半；时间系、梦境生物和佩戴时空锚定印记的玩家免疫。",
+    "破败时流可供垂钓，不限于湿地：常规鱼获包括时流鳗、乱时盲鱼、注灵水晶和梦境水晶；垃圾包括时间之种、时光树苗及少见的生命终结者；宝藏包括时间翘曲点，以及更少见的附魔书、梦境法术核心与时间微核。海之眷顾可提高宝藏机会。每次成功钓获会消耗三次各一点耐久，耐久附魔分别判定。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "reversion_mire_guide",
+      "label": "回溯湿地"
+    },
+    {
+      "target": "epochal_cliffs",
+      "label": "纪元断崖"
+    },
+    {
+      "target": "recurrence_garden_guide",
+      "label": "循环花园"
+    }
+  ]
+}

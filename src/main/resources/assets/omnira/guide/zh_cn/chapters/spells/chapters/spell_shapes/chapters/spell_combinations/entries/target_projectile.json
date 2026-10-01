@@ -1,0 +1,20 @@
+{
+  "id": "target_projectile",
+  "item": "omnira:fire_microcore",
+  "title": "目标-弹射物",
+  "text": [
+    "目标槽放火微核，形态槽放风微核。先选中生物或方块，再射出追踪弹体；生物移动后，弹体会继续调整方向追向它。",
+    "追踪不代表穿墙，也不保证命中原目标。沿途遇到其他生物或方块时仍会碰撞并触发效果。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "selected_target",
+      "label": "目标"
+    },
+    {
+      "target": "projectile_shape",
+      "label": "弹射物"
+    }
+  ]
+}

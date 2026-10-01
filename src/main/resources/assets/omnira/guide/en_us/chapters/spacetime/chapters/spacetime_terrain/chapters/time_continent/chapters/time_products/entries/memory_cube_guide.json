@@ -1,0 +1,28 @@
+{
+  "id": "memory_cube_guide",
+  "title": "Memory Cube",
+  "item": "omnira:memory_cube",
+  "text": [
+    "Each game day, you can extract one memory from a peaceful cube and one from a corrupted cube. Extraction does not consume the placed cube.",
+    "Opening a Peaceful Memory drains all mana and drops six random time or light materials. Opening it below half your maximum mana kills you. A Corrupted Memory inflicts ten seconds of Wither III, removes half your maximum health and drops six random space or shadow materials. Opening it below half your maximum health also kills you. Even a fatal opening consumes the memory and drops its rewards."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "rusty_lake_mill_guide",
+      "label": "Rusty Lake Mill"
+    },
+    {
+      "target": "reversion_mire_guide",
+      "label": "Reversion Mire"
+    },
+    {
+      "target": "doomsday_rite",
+      "label": "Doomsday Rite"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "Spacetime Reverser"
+    }
+  ]
+}

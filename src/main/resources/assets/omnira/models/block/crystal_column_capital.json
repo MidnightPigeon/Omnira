@@ -1,0 +1,11 @@
+{
+  "loader": "neoforge:obj",
+  "model": "omnira:models/block/crystal_column_capital.obj",
+  "automatic_culling": true,
+  "flip_v": true,
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "particle": "omnira:block/spiritual_crystal_clear"
+  },
+  "ambientocclusion": false
+}

@@ -1,0 +1,28 @@
+{
+  "id": "memory_cube_guide",
+  "title": "记忆立方体",
+  "item": "omnira:memory_cube",
+  "text": [
+    "每个游戏日，你可分别从平和与腐化状态的立方体各提取一次对应记忆。立方体本身不会被提取消耗。",
+    "开启平和记忆会耗尽法力，随机给出六件时间或光明材料；法力不足上限的一半仍可开启，但会立即死亡。开启腐化记忆会获得十秒凋零III并失去最大生命值的一半，随机给出六件空间或暗影材料；当前生命不足上限的一半也会立即死亡。致死开启仍会消耗记忆并掉出材料。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "rusty_lake_mill_guide",
+      "label": "锈湖磨坊"
+    },
+    {
+      "target": "reversion_mire_guide",
+      "label": "回溯湿地"
+    },
+    {
+      "target": "doomsday_rite",
+      "label": "末日仪轨"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "时空回溯仪"
+    }
+  ]
+}

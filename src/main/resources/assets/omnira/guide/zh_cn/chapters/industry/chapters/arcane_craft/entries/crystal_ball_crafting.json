@@ -1,0 +1,15 @@
+{
+  "id": "crystal_ball_crafting",
+  "title": "水晶球 · 制作",
+  "item": "omnira:crystal_ball",
+  "text": [
+    "在凝聚台按配方制作水晶球；成品用于物品存储与升级。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "crystal_ball",
+      "label": "使用与存储"
+    }
+  ]
+}

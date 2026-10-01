@@ -1,0 +1,5 @@
+{
+  "priority": 2000,
+  "selector": "omnira:mirror_rock",
+  "properties": {"sable:mass": 0.0}
+}

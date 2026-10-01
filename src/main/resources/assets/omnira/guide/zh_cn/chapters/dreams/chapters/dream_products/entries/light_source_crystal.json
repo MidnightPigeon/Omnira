@@ -1,0 +1,10 @@
+{
+  "id": "light_source_crystal",
+  "item": "omnira:light_source_crystal",
+  "title": "光源晶",
+  "text": [
+    "构成晨辉晶原光球外壳的淡金色半透明晶体，可用于建造和制作粗制光核。",
+    "亮度10，比光凝晶更明亮；航空学联动中提供5 kpg浮力。"
+  ],
+  "recipes": true
+}

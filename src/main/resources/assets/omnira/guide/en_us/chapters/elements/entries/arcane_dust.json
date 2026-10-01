@@ -1,0 +1,9 @@
+{
+  "id": "arcane_dust",
+  "item": "omnira:arcane_dust",
+  "title": "Arcane Dust",
+  "text": [
+    "Some materials release arcane dust during analysis: the residue of arcane vibrations."
+  ],
+  "recipes": true
+}

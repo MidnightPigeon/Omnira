@@ -1,0 +1,22 @@
+{
+  "id": "cleansing_ritual",
+  "title": "洁身之仪",
+  "item": "omnira:infused_spiritual_crystal",
+  "scene": "cleansing_ritual",
+  "recipes": false,
+  "text": [
+    "按图设置八座水晶基座和中央仪祭能核。每座基座放置一枚注灵水晶；普通或高阶能核均可使用。",
+    "手持悖论尘右键能核。仪式作用于范围内所有玩家，清除其身上的全部药水效果、天赋和诅咒，并移除由天赋与诅咒新增的槽位。生命值和饥饿值都会变为1。",
+    "只有投入的悖论尘会消耗；八枚注灵水晶、基座和能核保留。携带的注灵魔典还可能被圣化或邪化。"
+  ],
+  "links": [
+    {
+      "target": "crystal_pedestal",
+      "label": "水晶基座"
+    },
+    {
+      "target": "ritual_energy_core",
+      "label": "仪祭能核"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  L",
+    " L ",
+    "L  "
+  ],
+  "key": {
+    "L": {
+      "tag": "omnira:shadow_logs"
+    }
+  },
+  "result": {
+    "id": "omnira:shadow_staff_shaft",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "block_barrier",
+  "item": "omnira:earth_microcore",
+  "title": "Block or Position-Barrier",
+  "text": [
+    "Fire with Earth covers the exposed faces of a selected block. Crosshair creates a barrier at the selected position; Ground creates barriers at the valid surface positions.",
+    "Block-related effects also act on the selected blocks or positions. Add Construction to create Void Crystals: Barrier itself is not Construction."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "selected_target",
+      "label": "Target"
+    },
+    {
+      "target": "barrier_shape",
+      "label": "Barrier"
+    }
+  ]
+}

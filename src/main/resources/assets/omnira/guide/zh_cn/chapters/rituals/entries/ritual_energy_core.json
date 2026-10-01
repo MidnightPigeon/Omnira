@@ -1,0 +1,20 @@
+{
+  "id": "ritual_energy_core",
+  "item": "omnira:ritual_energy_core",
+  "title": "仪祭能核",
+  "text": [
+    "大部分仪式的核心。完成周边摆放后，手持仪式核心物品右键投入，即可启动对应仪式。",
+    "可以通过特定方式加工为高阶仪祭能核。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "ritual_energy_core_crafting",
+      "label": "锻造配方"
+    },
+    {
+      "target": "advanced_ritual_energy_core_crafting",
+      "label": "高阶仪祭能核"
+    }
+  ]
+}

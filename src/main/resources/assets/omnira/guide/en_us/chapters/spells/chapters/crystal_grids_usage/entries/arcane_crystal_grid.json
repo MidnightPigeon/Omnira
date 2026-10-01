@@ -1,0 +1,20 @@
+{
+  "id": "arcane_crystal_grid",
+  "item": "omnira:arcane_crystal_grid",
+  "title": "Arcane Crystal Grid",
+  "text": [
+    "Holds eight spell crystals. In a Mana Engine it provides a 2x output multiplier. Upgrading preserves the spell chain and appends empty slots.",
+    "Equipping this grid also grants 10% spell cooldown reduction. A 4-second chain cycle becomes 3.6 seconds with this bonus alone; total cooldown reduction remains capped at 50%."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "arcane_crystal_grid_crafting",
+      "label": "Forging Recipe"
+    },
+    {
+      "target": "mana_engine",
+      "label": "Mana Engine"
+    }
+  ]
+}

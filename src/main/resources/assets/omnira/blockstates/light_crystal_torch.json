@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "omnira:block/light_crystal_torch_lower"
+    },
+    "half=upper": {
+      "model": "omnira:block/light_crystal_torch_upper"
+    }
+  }
+}

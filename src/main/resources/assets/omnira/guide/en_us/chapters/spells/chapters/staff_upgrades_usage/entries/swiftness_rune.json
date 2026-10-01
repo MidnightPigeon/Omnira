@@ -1,0 +1,16 @@
+{
+  "id": "swiftness_rune",
+  "item": "omnira:swiftness_rune",
+  "title": "Swiftness Rune",
+  "text": [
+    "Increases projectile movement, rotation and orbit speed by 50%, and reduces casting cooldown by 20%. Straight and homing projectiles, self flight, ground projectiles and orbiting spells benefit.",
+    "Does not change spell power, lifetime or the 0.3-second interval between two-shot casts."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "swiftness_rune_crafting",
+      "label": "Forging Recipe"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "advanced_crystal_aggregation_ring",
+  "item": "omnira:advanced_crystal_aggregation_ring",
+  "title": "Advanced Crystal Aggregation Ring",
+  "text": [
+    "Build a vertical 3x3 frame: infused casings at the four corners, excited rough spatial crystal blocks or spatial crystal blocks above and below, living temporal silt (including sedimented) at the sides, and a crystal processing table in the center. Use one infused crystal on the center to assemble.",
+    "Both blue upper nodes define the shape: the first selects the required target, and the second selects its optional shape modifier. The three green nodes are elements and the three purple nodes are modifiers. Only the target is required. Duplicate elements do not stack.",
+    "Install a spell core centrally and place infused crystal and spell ink in the two smaller orbs. Use the floating button inside the lower ring to begin the eight-second synthesis of a High-Tier Magic Crystal. Each occupied spell node costs 20 crafting mana; casting retains the usual 10 per node. The core is retained.",
+    "Use nodes to insert or remove ingredients. Use the center to open the inventory or take the finished crystal. The ring cannot be mined, but can be transported whole in a Pocket Magic Bottle."
+  ],
+  "recipes": true
+}

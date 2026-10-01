@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "omnira:void_engraved_mirror_rock"
+  },
+  "result": {
+    "id": "omnira:void_engraved_mirror_rock_slab",
+    "count": 2
+  }
+}

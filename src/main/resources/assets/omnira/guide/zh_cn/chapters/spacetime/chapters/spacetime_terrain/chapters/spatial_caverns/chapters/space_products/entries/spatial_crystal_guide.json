@@ -1,0 +1,24 @@
+{
+  "id": "spatial_crystal_guide",
+  "title": "粗糙空间晶块",
+  "item": "omnira:rough_spatial_crystal_block",
+  "text": [
+    "空间洞穴的晶块有普通与激发两种状态。激发态更透明，内部有流动的光点。",
+    "两种状态采集后均得到普通粗糙空间晶块。高阶凝聚可恢复激发态，也可消耗一枚注灵水晶右键直接激发。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "spatial_growth_guide",
+      "label": "空间水晶生长"
+    },
+    {
+      "target": "spatial_caverns_guide",
+      "label": "空间洞穴"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:primordial_fossil_rock"
+    },
+    {
+      "item": "omnira:primordial_fossil_rock"
+    },
+    {
+      "item": "omnira:primordial_fossil_rock"
+    },
+    {
+      "item": "omnira:primordial_fossil_rock"
+    },
+    {
+      "item": "omnira:primordial_fossil_rock"
+    },
+    {
+      "item": "omnira:primordial_fossil_rock"
+    },
+    []
+  ],
+  "result": {
+    "id": "omnira:primordial_earth_aggregate",
+    "count": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "crystal_casing",
+  "item": "omnira:crystal_casing",
+  "title": "Crystal Casing",
+  "text": [
+    "A transparent building block with a Spiritual Crystal frame and glass interior. Adjacent casings connect their trim.",
+    "Right-click a Create shaft, cogwheel or large cogwheel with the casing to add a transparent shell without consuming it. Wrench the axial end faces to toggle shaft connections; sneak-wrench to remove the shell."
+  ],
+  "recipes": true
+}

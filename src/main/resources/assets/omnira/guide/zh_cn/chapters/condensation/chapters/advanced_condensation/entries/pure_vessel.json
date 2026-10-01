@@ -1,0 +1,21 @@
+{
+  "id": "pure_vessel",
+  "item": "omnira:pure_vessel",
+  "title": "纯粹容器",
+  "text": [
+    "水晶球经高阶凝聚化为纯粹容器。完成塑剑之仪的周边摆放后，手持近战武器右键投入即可启动。",
+    "仪式完成后，纯粹容器崩溃并掉落制成的武器。",
+    "§6§o也许也可以用来加工木头……"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "sword_shaping",
+      "label": "塑剑之仪"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    }
+  ]
+}

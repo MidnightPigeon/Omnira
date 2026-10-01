@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "omnira:block/mossy_shadow_rock_slab"
+    },
+    "type=top": {
+      "model": "omnira:block/mossy_shadow_rock_slab_top"
+    },
+    "type=double": {
+      "model": "omnira:block/mossy_shadow_rock"
+    }
+  }
+}

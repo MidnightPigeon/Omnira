@@ -1,0 +1,9 @@
+{
+  "id": "spacetime_knot",
+  "item": "omnira:spacetime_knot",
+  "title": "Spacetime Knot",
+  "text": [
+    "Process a spacetime waymark in the center of a mana assembly table to obtain this flowing knot. The waymark is consumed."
+  ],
+  "recipes": true
+}

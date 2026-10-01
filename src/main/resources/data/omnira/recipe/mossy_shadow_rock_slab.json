@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:mossy_shadow_rock"
+    }
+  },
+  "result": {
+    "id": "omnira:mossy_shadow_rock_slab",
+    "count": 6
+  }
+}

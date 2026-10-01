@@ -1,0 +1,16 @@
+{
+  "id": "wide_area_rune",
+  "item": "omnira:wide_area_rune",
+  "title": "广域魔纹",
+  "text": [
+    "扩大法术范围：环绕法球从四颗增至六颗，环绕与爆炸半径扩大至1.5倍；地面法术向外增加一圈作用位置。",
+    "目标与准星的选择距离翻倍，分别达到24格与32格。遮挡规则不变，不增加伤害强度。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "wide_area_rune_crafting",
+      "label": "锻造配方"
+    }
+  ]
+}

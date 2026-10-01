@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "omnira:crystal_ball"
+    }
+  ],
+  "result": {
+    "id": "omnira:liquid_crystal_ball",
+    "count": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "space_biomes",
+  "title": "Biomes",
+  "icon": "omnira:rough_spatial_crystal_block",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/spatial_caverns_guide.json"
+  ],
+  "chapters": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "ground_projectile",
+  "item": "omnira:earth_microcore",
+  "title": "Ground-Projectile",
+  "text": [
+    "Use Earth in the target slot and Air in the shape slot. Each valid surface creates a spell block that launches vertically and then falls under gravity.",
+    "The projectiles copy surface appearance without removing the original blocks or placing new ones on landing. Contact with creatures or blocks triggers the carried effects."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "ground_target",
+      "label": "Ground"
+    },
+    {
+      "target": "projectile_shape",
+      "label": "Projectile"
+    }
+  ]
+}

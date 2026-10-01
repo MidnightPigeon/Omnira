@@ -1,0 +1,15 @@
+{
+  "id": "elemental_crystal_grid_crafting",
+  "item": "omnira:elemental_crystal_grid",
+  "title": "Elemental Crystal Grid · Crafting",
+  "text": [
+    "Place a basic grid in the center and any elemental microcore on each side, left and right. Leave the other four slots empty. The two cores may be different elements."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "elemental_crystal_grid",
+      "label": "Use and Effects"
+    }
+  ]
+}

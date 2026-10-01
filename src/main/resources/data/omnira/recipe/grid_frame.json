@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["CCC", "C C", "CCC"],
+  "key": {"C": {"tag": "omnira:spiritual_crystals"}},
+  "result": {"id": "omnira:grid_frame", "count": 1}
+}

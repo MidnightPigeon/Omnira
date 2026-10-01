@@ -1,0 +1,15 @@
+{
+  "id": "staff_part_recipes",
+  "title": "Staff Part Forging",
+  "icon": "omnira:wooden_staff_shaft",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/wooden_staff_shaft_crafting.json",
+    "entries/blaze_staff_shaft_crafting.json",
+    "entries/diamond_reinforcement_crafting.json",
+    "entries/spiritual_crystal_tip_crafting.json",
+    "entries/multi_arcane_tip_crafting.json",
+    "entries/elemental_fusion_tip_crafting.json"
+  ],
+  "chapters": []
+}

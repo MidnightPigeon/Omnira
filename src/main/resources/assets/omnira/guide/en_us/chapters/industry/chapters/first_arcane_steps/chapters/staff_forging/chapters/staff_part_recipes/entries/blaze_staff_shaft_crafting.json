@@ -1,0 +1,15 @@
+{
+  "id": "blaze_staff_shaft_crafting",
+  "item": "omnira:blaze_staff_shaft",
+  "title": "Blaze Rod Staff Shaft · Crafting",
+  "text": [
+    "Use the assembly recipe below to forge this item."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "blaze_staff_shaft",
+      "label": "Use and Effects"
+    }
+  ]
+}

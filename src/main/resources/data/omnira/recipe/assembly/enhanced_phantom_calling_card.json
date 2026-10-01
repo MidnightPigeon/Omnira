@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:desire_crystal"
+    },
+    {
+      "item": "omnira:desire_crystal"
+    },
+    {
+      "item": "omnira:desire_crystal"
+    },
+    {
+      "item": "omnira:desire_crystal"
+    },
+    {
+      "item": "omnira:desire_crystal"
+    },
+    {
+      "item": "omnira:desire_crystal"
+    },
+    {
+      "item": "omnira:phantom_calling_card"
+    }
+  ],
+  "result": {
+    "id": "omnira:enhanced_phantom_calling_card",
+    "count": 1
+  }
+}

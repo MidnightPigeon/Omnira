@@ -1,0 +1,19 @@
+{
+  "id": "spiritual_crystal_tip",
+  "item": "omnira:spiritual_crystal_tip",
+  "title": "Spiritual Crystal Tip",
+  "text": [
+    "Casts one shot with a 3-second within-chain base cooldown and provides one rune slot."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "spiritual_crystal_tip_crafting",
+      "label": "Forging Recipe"
+    },
+    {
+      "target": "staff_casting",
+      "label": "Spell Chains and Cooldown"
+    }
+  ]
+}

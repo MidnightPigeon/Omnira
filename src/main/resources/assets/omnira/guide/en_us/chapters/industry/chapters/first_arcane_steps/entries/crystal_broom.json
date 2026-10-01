@@ -1,0 +1,11 @@
+{
+  "id": "crystal_broom",
+  "item": "omnira:crystal_broom",
+  "title": "Crystallized Broom",
+  "text": [
+    "Place an Analysis Crystal in the regular Arcane Assembly Table's center. The six outer slots take a hay bale, two sticks, two Spiritual Crystals and one Resonance Crystal in any order. The analysis crystal becomes part of the broom.",
+    "Place and right-click to mount. Forward/back moves, left/right steers, Space lifts and Shift dismounts at any time. Movement and lift start at 1 block per second and accelerate to 2 after holding for about a second. Releasing or reversing resets acceleration. Releasing lift lets gravity pull it down; it cannot hover or accept upgrades.",
+    "Collisions do not break it. Underwater it remains rideable but sinks steadily and cannot lift. It supplies neither air nor protection. Attack an unoccupied broom to collect it."
+  ],
+  "recipes": true
+}

@@ -1,0 +1,24 @@
+{
+  "id": "decayed_timeflow_guide",
+  "title": "Decayed Timeflow and Fishing",
+  "item": "omnira:decayed_timeflow_bucket",
+  "text": [
+    "Pale-green timeflow fills mire ponds, garden pools and cliff aquifers. It deals recurring wither damage and halves movement; temporal and dream creatures and sigil wearers are immune.",
+    "Fishing in Decayed Timeflow, not just in the mire, yields Timeflow Eels, Chronal Blindfish and infused or dream crystals as ordinary catches; time seeds, time saplings and the rare Life Ender as junk; and Time Warp Points, rarer enchanted books, Dream Spell Cores and Time Microcores as treasure. Luck of the Sea improves treasure chances. Each successful catch costs three separate points of durability, with Unbreaking checked independently for each."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "reversion_mire_guide",
+      "label": "Reversion Mire"
+    },
+    {
+      "target": "epochal_cliffs",
+      "label": "Epochal Cliffs"
+    },
+    {
+      "target": "recurrence_garden_guide",
+      "label": "Recurrence Garden"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "top": "omnira:block/spiritual_crystal_clear",
+    "bottom": "omnira:block/spiritual_crystal_clear",
+    "side": "omnira:block/spiritual_crystal_clear"
+  },
+  "render_type": "minecraft:translucent",
+  "ambientocclusion": false
+}

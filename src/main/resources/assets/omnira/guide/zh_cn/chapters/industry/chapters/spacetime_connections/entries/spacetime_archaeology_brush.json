@@ -1,0 +1,10 @@
+{
+  "id": "spacetime_archaeology_brush",
+  "title": "时空考古刷",
+  "item": "omnira:spacetime_archaeology_brush",
+  "text": [
+    "考古速度翻倍，耐久128，每五分钟恢复64点。",
+    "持续对准一个实体刷取会固定它，每秒消耗一点耐久；连续一分钟将其无掉落抹除。松手、换目标或离开距离即中断。不能刷取玩家、首领和交互装饰，目标原有的右键交互优先。"
+  ],
+  "recipes": true
+}

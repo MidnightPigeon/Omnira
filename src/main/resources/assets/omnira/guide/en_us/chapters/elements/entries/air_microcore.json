@@ -1,0 +1,19 @@
+{
+  "id": "air_microcore",
+  "item": "omnira:air_microcore",
+  "title": "Air Microcore",
+  "text": [
+    "The Air Microcore is obtained through analysis. In the target slot it supplies Crosshair; in the shape slot it supplies Projectile."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "crosshair_target",
+      "label": "Crosshair"
+    },
+    {
+      "target": "projectile_shape",
+      "label": "Projectile"
+    }
+  ]
+}

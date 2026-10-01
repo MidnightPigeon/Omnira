@@ -1,0 +1,20 @@
+{
+  "id": "dark_microcore",
+  "item": "omnira:dark_microcore",
+  "title": "暗之微核",
+  "text": [
+    "由暗影雾和六个暗影浆果在魔动装配台锻造。与光之微核及梦境水晶一起用于魔能水晶格栅的升级。",
+    "手持暗之微核右键光晶核，或让掉落的暗之微核接触光晶核，可将一枚暗之微核转为光之微核，同时将该光晶核变为光凝晶。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "dark_breath",
+      "label": "黑暗之息"
+    },
+    {
+      "target": "holy",
+      "label": "神圣"
+    }
+  ]
+}

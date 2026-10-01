@@ -1,0 +1,29 @@
+{
+  "id": "affinity_ritual",
+  "title": "Elemental Affinity Ritual",
+  "item": "omnira:light_microcore",
+  "scene": "affinity_ritual",
+  "recipes": false,
+  "text": [
+    "Use the Dream-Seeking Rite's layout with an advanced ritual energy core. Place one each of earth, water, fire, air, light and dark microcores, paradox dust and dream crystal budding rock on the eight pedestals, in any order. Use a light microcore, dark microcore or analysis crystal on the core for Light, Dark or Fourfold affinity.",
+    "Stand inside the circle for all six seconds. Acquiring affinity holds and slowly lifts you; renouncing does not immobilize you. Only the held activator is consumed, including the whole analysis crystal. Pedestal offerings remain, and interruption consumes nothing. A different affinity prevents activation; matching affinity is renounced.",
+    "Light: +20% mana regeneration and +200 capacity. Your damage can spend 20 mana to burn its target for ten seconds, including melee and spells.",
+    "Dark: +20% spell power and +10 mana cost reduction. Your damage can spend 20 mana to apply Poison II for five seconds.",
+    "Fourfold: +10% regeneration, +10% spell power, +100 capacity and +5 cost reduction. Taking damage spends 20 mana to reduce that damage by two points. All triggered abilities require sufficient mana; their fixed cost ignores reductions.",
+    "Affinities are exclusive and survive death. Repeat the matching ritual to renounce yours. You cannot gain another affinity until the penalty ends or you die.",
+    "Renouncing Light burns you for two minutes and deals one suffocation damage every half-second. Renouncing Dark applies Poison II for one minute and creates a self-harming, twenty-second mist every five seconds; death stops new mist.",
+    "Renouncing Fourfold applies Slowness III, Mining Fatigue III and Darkness for two minutes, with one base magic damage every half-second. Logging out pauses rather than removes the penalty.",
+    "Hover over the mana bar to view your affinity bonuses.",
+    "{dream}Rumor speaks of a powerful and dangerous Dream Affinity..."
+  ],
+  "links": [
+    {
+      "target": "dream_ritual",
+      "label": "Eight-pedestal layout"
+    },
+    {
+      "target": "advanced_ritual_energy_core",
+      "label": "Advanced Ritual Energy Core"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "omnira:block/time_log"
+    },
+    "axis=x": {
+      "model": "omnira:block/time_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z": {
+      "model": "omnira:block/time_log",
+      "x": 90
+    }
+  }
+}

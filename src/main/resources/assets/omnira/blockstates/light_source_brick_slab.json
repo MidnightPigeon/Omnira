@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "omnira:block/light_source_brick_slab"
+    },
+    "type=top": {
+      "model": "omnira:block/light_source_brick_slab_top"
+    },
+    "type=double": {
+      "model": "omnira:block/light_source_bricks"
+    }
+  }
+}

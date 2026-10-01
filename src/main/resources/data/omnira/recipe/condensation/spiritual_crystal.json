@@ -1,0 +1,8 @@
+{
+  "type": "omnira:condensation",
+  "mana_cost": 100,
+  "result": {
+    "id": "omnira:spiritual_crystal",
+    "count": 1
+  }
+}

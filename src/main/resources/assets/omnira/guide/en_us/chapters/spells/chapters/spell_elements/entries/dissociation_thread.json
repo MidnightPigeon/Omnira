@@ -1,0 +1,18 @@
+{
+  "id": "dissociation_thread",
+  "item": "omnira:dissociation_thread",
+  "title": "Dissociation Thread",
+  "text": [
+    "Deals minor physical damage and attempts to strip equipment or harvest creatures. It can shear sheep, collect eggs, or extract milk suspension from cows. Shorn sheep must regrow their wool.",
+    "Enhancement adds harvest rounds and damage; Infusion increases equipment and produce per round. Delay removes damage to creatures. Craft milk suspension with a bucket, or right-click a dropped suspension with a bucket, to collect milk.",
+    "Block Dissociation breaks suitable blocks and benefits from Fortune. Enhancement allows harder blocks to be affected; Infusion improves Fortune. Delay does not change block Dissociation.",
+    "With Explosion, Dissociation affects suitable blocks and creatures within the area."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "dissociation_thread_crafting",
+      "label": "Analysis Recipe"
+    }
+  ]
+}

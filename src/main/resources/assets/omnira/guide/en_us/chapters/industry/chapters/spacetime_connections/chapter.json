@@ -1,0 +1,16 @@
+{
+  "id": "spacetime_connections",
+  "title": "Spacetime Connections",
+  "icon": "omnira:spacetime_spell_core",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/spacetime_spell_core_crafting.json",
+    "entries/spacetime_knot.json",
+    "entries/cruise_orb.json",
+    "entries/unstable_spacetime_aggregate.json",
+    "entries/spacetime_stabilization_upgrade.json",
+    "entries/spacetime_archaeology_brush.json",
+    "entries/spacetime_anchoring_sigil.json"
+  ],
+  "chapters": []
+}

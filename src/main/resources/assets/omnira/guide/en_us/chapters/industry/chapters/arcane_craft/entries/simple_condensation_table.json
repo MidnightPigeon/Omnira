@@ -1,0 +1,10 @@
+{
+  "id": "simple_condensation_table",
+  "item": "omnira:simple_condensation_table",
+  "title": "Simple Condensation Table",
+  "text": [
+    "Spiritual condensation begins with wood and stone. The simple condensation table forms spiritual crystals from mana, without consuming input materials.",
+    "Start condensation at the table. The base cost is 100 mana. Collect the completed crystal from its output slot or directly from the tabletop."
+  ],
+  "recipes": true
+}

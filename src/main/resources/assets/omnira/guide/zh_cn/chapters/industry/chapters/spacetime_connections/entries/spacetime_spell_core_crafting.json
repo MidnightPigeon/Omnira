@@ -1,0 +1,9 @@
+{
+  "id": "spacetime_spell_core_crafting",
+  "title": "时空法术核心",
+  "item": "omnira:spacetime_spell_core",
+  "text": [
+    "在高阶装配台内部放入三个时间翘曲点与三个空间水晶，左、中、右节点分别放时间微核、光暗法术核心、空间微核，制成一个时空法术核心。可作为法术核心佩戴或驱动设备，也可用于叩时之仪开启永久镜门。"
+  ],
+  "recipes": true
+}

@@ -1,0 +1,15 @@
+{
+  "id": "hyperdimensional_drill_machine_reference",
+  "title": "Hyperdimensional Drilling Rig",
+  "item": "omnira:hyperdimensional_drill",
+  "text": [
+    "This device comes from a ruin; its special-product entry explains acquisition and operation."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "hyperdimensional_drill",
+      "label": "Acquisition and Operation"
+    }
+  ]
+}

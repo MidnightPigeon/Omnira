@@ -1,0 +1,52 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "charge": "omnira:block/sundial_charge",
+    "particle": "omnira:block/sundial_charge"
+  },
+  "elements": [
+    {
+      "from": [
+        10.430079258305852,
+        9.02,
+        11.919935906433745
+      ],
+      "to": [
+        11.570079258305853,
+        9.15,
+        13.059935906433745
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#charge"
+        },
+        "south": {
+          "texture": "#charge"
+        },
+        "east": {
+          "texture": "#charge"
+        },
+        "west": {
+          "texture": "#charge"
+        },
+        "up": {
+          "texture": "#charge"
+        },
+        "down": {
+          "texture": "#charge"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          8.5,
+          8
+        ],
+        "axis": "x",
+        "angle": 45,
+        "rescale": false
+      }
+    }
+  ]
+}

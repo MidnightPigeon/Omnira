@@ -1,0 +1,25 @@
+{
+  "id": "basic_crystal_grid",
+  "item": "omnira:basic_crystal_grid",
+  "title": "Basic Crystal Grid",
+  "text": [
+    "Holds three spell crystals. Equip it to supply the staff spell chain. In a Mana Engine it provides a 1.2x output multiplier.",
+    "R edits the first equipped grid, or only the first inventory grid if none is equipped. Inventory grids are editable but grant no bonuses, spell wheel or casting.",
+    "Only the first equipped grid supplies bonuses and the spell chain. Removing it promotes the next equipped grid. The spell wheel shows both shape and keywords."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "elemental_crystal_grid",
+      "label": "Upgrade to an Elemental Crystal Grid"
+    },
+    {
+      "target": "basic_crystal_grid_crafting",
+      "label": "Forging Recipe"
+    },
+    {
+      "target": "mana_engine",
+      "label": "Mana Engine"
+    }
+  ]
+}

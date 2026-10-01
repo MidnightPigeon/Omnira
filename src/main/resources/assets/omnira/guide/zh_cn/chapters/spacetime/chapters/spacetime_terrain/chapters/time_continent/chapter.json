@@ -1,0 +1,12 @@
+{
+  "id": "time_continent",
+  "title": "时间大陆",
+  "icon": "omnira:temporal_silt",
+  "introduction": "introduction.json",
+  "entries": [],
+  "chapters": [
+    "chapters/time_biomes/chapter.json",
+    "chapters/time_structures/chapter.json",
+    "chapters/time_products/chapter.json"
+  ]
+}

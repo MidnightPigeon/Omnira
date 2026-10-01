@@ -1,0 +1,9 @@
+{
+  "id": "arcane_dust",
+  "item": "omnira:arcane_dust",
+  "title": "奥术尘",
+  "text": [
+    "部分原料在解析时会析出奥术尘。它是魔能震荡的残渣。"
+  ],
+  "recipes": true
+}

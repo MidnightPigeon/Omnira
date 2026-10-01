@@ -1,0 +1,31 @@
+{
+  "has_precipitation": false,
+  "temperature": 0.8,
+  "downfall": 0,
+  "effects": {
+    "sky_color": 8107462,
+    "fog_color": 9671856,
+    "water_color": 11587738,
+    "water_fog_color": 6657091,
+    "grass_color": 8033371,
+    "foliage_color": 7968862
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "omnira:mire_vegetation"
+    ],
+    []
+  ]
+}

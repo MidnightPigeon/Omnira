@@ -1,0 +1,9 @@
+{
+  "id": "dream_crystal_block",
+  "item": "omnira:dream_crystal_block",
+  "title": "Dream Crystal Block",
+  "text": [
+    "Craft four Dream Crystals in a 2×2 square into a luminous, translucent blue-violet building block."
+  ],
+  "recipes": true
+}

@@ -1,0 +1,15 @@
+{
+  "id": "diamond_reinforcement",
+  "item": "omnira:diamond_reinforcement",
+  "title": "Diamond Reinforcement",
+  "text": [
+    "Reduces each spell's mana cost by 5."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "diamond_reinforcement_crafting",
+      "label": "Forging Recipe"
+    }
+  ]
+}

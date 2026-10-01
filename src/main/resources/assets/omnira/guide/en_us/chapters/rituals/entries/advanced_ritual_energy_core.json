@@ -1,0 +1,23 @@
+{
+  "id": "advanced_ritual_energy_core",
+  "title": "Advanced Ritual Energy Core",
+  "item": "omnira:advanced_ritual_energy_core",
+  "recipes": false,
+  "text": [
+    "Supports every ordinary ritual energy core ritual, as well as elemental affinity. Both acquiring and removing affinity require this advanced core. Rituals retain the core."
+  ],
+  "links": [
+    {
+      "target": "corridor_ritual",
+      "label": "Ritual of Time's Threshold"
+    },
+    {
+      "target": "advanced_ritual_energy_core_crafting",
+      "label": "Crafting"
+    },
+    {
+      "target": "affinity_ritual",
+      "label": "Elemental Affinity Ritual"
+    }
+  ]
+}

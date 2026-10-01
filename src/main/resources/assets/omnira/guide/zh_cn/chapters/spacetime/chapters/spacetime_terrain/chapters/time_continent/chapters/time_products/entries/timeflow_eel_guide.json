@@ -1,0 +1,24 @@
+{
+  "id": "timeflow_eel_guide",
+  "title": "时流鳗与时间药水",
+  "item": "omnira:timeflow_eel",
+  "text": [
+    "食用时流鳗可获得10秒穿越时间：存活到期便回到效果开始时的位置、生命与饱食度。用时流鳗酿造粗制药水可制得30秒时间药水；红石延长至1分30秒，每30秒回溯一次，位置均返回饮用时的起点。萤石强化为30秒的穿越时间II，到期回到原位并回满法力、生命、饱食度，修复当前穿戴与双手装备。提前清除效果不会回溯，死亡不能被撤销。",
+    "效果尚未结束时再次获得、刷新时长或提高等级，仍以第一次记录的位置和状态为准。穿越时间与时序错位各自记录、各自回归，互不覆盖。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "reversion_mire_guide",
+      "label": "回溯湿地"
+    },
+    {
+      "target": "recurrence_garden_guide",
+      "label": "循环花园"
+    },
+    {
+      "target": "decayed_timeflow_guide",
+      "label": "破败时流与垂钓"
+    }
+  ]
+}

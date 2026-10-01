@@ -1,0 +1,9 @@
+{
+  "id": "light_condensate_bricks",
+  "item": "omnira:light_condensate_bricks",
+  "title": "光凝砖",
+  "text": [
+    "四块光凝晶按2×2排列，合成四块光凝砖。保留亮度7与2 kpg浮力。"
+  ],
+  "recipes": true
+}

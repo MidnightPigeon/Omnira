@@ -1,0 +1,9 @@
+{
+  "id": "netherite_reinforcement",
+  "item": "omnira:netherite_reinforcement",
+  "title": "下界合金加固部件",
+  "text": [
+    "每发法术减免 10 点法力消耗。"
+  ],
+  "recipes": true
+}

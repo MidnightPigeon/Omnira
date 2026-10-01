@@ -1,0 +1,11 @@
+{
+  "type": "omnira:assembly",
+  "operation": "alternating",
+  "slots": [
+    {"tag": "omnira:spiritual_crystals"}, [],
+    {"tag": "omnira:spiritual_crystals"}, [],
+    {"tag": "omnira:spiritual_crystals"}, [],
+    {"item": "omnira:grid_frame"}
+  ],
+  "result": {"id": "omnira:basic_crystal_grid", "count": 1}
+}

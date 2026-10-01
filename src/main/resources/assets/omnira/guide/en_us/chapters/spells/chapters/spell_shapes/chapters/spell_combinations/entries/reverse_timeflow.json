@@ -1,0 +1,10 @@
+{
+  "id": "reverse_timeflow", "item": "omnira:time_microcore", "title": "Reverse Timeflow",
+  "text": [
+    "Place a Time Microcore in the first slot of either crystal workstation. Leave the second slot empty: its ghost marks the reserved half of this composite form.",
+    "One shell contracts toward you, with 1.5 times the normal explosion radius. Each shell applies the written effects once to contacted entities and actual blocks, never empty air or the caster. Entities and drops are gathered inward; living targets receive Wither II for 5 seconds.",
+    "Casting grants Temporal Dislocation I for 10 seconds: no entity collisions or melee hits. Enhancement raises Wither to III and Dislocation to II, adding temporary creative flight and wall phasing. When it ends, only your position returns to its original point.",
+    "Refreshing or upgrading Dislocation preserves the first origin. Time Passage likewise preserves its first snapshot; the two effects record and rewind independently."
+  ], "recipes": false,
+  "links": [{"target": "spell_target_shape_basics", "label": "Targets and Forms"}]
+}

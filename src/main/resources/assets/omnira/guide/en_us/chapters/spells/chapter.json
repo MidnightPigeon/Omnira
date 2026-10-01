@@ -1,0 +1,21 @@
+{
+  "id": "spells",
+  "title": "Writing and Casting Spells",
+  "icon": "omnira:crystal_processing_table",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/low_tier_magic_crystal.json",
+    "entries/staff_casting.json",
+    "entries/infused_grimoire_usage.json",
+    "entries/spell_ink.json"
+  ],
+  "chapters": [
+    "chapters/staff_parts/chapter.json",
+    "chapters/spell_shapes/chapter.json",
+    "chapters/spell_elements/chapter.json",
+    "chapters/spell_modifiers/chapter.json",
+    "chapters/crystal_grids_usage/chapter.json",
+    "chapters/arquebuses_usage/chapter.json",
+    "chapters/staff_upgrades_usage/chapter.json"
+  ]
+}

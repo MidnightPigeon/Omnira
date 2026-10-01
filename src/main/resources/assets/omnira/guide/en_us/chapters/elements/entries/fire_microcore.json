@@ -1,0 +1,19 @@
+{
+  "id": "fire_microcore",
+  "item": "omnira:fire_microcore",
+  "title": "Fire Microcore",
+  "text": [
+    "The Fire Microcore is obtained through analysis. In the target slot it supplies Target; in the shape slot it supplies Explosion."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "explosion_shape",
+      "label": "Explosion"
+    },
+    {
+      "target": "selected_target",
+      "label": "Target"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "crystallized_bone_nail",
+  "item": "omnira:crystallized_bone_nail",
+  "title": "Crystallized Nail",
+  "recipes": true,
+  "text": [
+    "Hold Attack for at least one second, then release a forward fan of sword energy with twice the reach and damage. Each struck entity receives one attack, and its attached spell gains an additional 50% of base spell power. Charging keeps the normal holding pose. The initial press performs a normal attack.",
+    "Ordinary hits trigger the attached spell at most once every two seconds, without restricting melee or healing. The charged fan bypasses this cooldown and pays the normal mana cost for each spell target. Solid blocks obstruct it.",
+    "Taking damage interrupts both the charged slash and healing, including damage absorbed by absorption hearts. Release the button before starting again. Spent mana is not refunded.",
+    "8 attack damage, 1.8 attack speed and 1024 durability. Accepts sword enchantments. Held in either hand, it repairs one durability every half second for a fixed 5 mana.",
+    "Hold use on the ground to heal 4 health each second, up to 12 over three seconds. Walking is allowed; jumping, flying or riding interrupts it. Each completed second costs one twelfth of the maximum mana at the start, unaffected by discounts.",
+    "Shift-use to insert a self-barrier spell crystal. Hitting a creature applies its spell effects to that creature and pays the usual mana cost, with spell power and mana discounts applied normally.",
+    "Hit a creature while airborne and looking anywhere below horizontal to bounce upward, even without being above it. Time successive strikes to remain aloft."
+  ],
+  "links": [
+    {
+      "target": "sword_shaping",
+      "label": "Sword Shaping Ritual"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "split_time_sundial_guide_machine_reference",
+  "title": "分时日晷",
+  "item": "omnira:split_time_sundial",
+  "text": [
+    "这件设备来自遗迹，可查阅专属产出条目的获取与操作说明。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "split_time_sundial_guide",
+      "label": "获取与操作"
+    }
+  ]
+}

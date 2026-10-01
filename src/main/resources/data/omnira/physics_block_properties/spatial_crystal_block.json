@@ -1,0 +1,8 @@
+{
+  "selector": "omnira:spatial_crystal_block",
+  "priority": 2000,
+  "properties": {
+    "sable:mass": 1,
+    "sable:volume": 1
+  }
+}

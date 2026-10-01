@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "tag": "omnira:shadow_logs"
+    }
+  ],
+  "result": {
+    "id": "omnira:shadow_planks",
+    "count": 4
+  }
+}

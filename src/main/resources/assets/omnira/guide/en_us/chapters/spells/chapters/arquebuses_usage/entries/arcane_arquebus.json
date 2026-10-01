@@ -1,0 +1,25 @@
+{
+  "id": "arcane_arquebus",
+  "item": "omnira:arcane_arquebus",
+  "title": "Arcane Arquebus",
+  "text": [
+    "Sneak-right-click to open its single crystal slot. Only Target-Projectile and Crosshair-Projectile spells fit. In the main hand, right-click fires only the loaded spell, never the grid sequence. The crystal is not consumed.",
+    "Without an upgrade kit, selection distance is quadrupled: 48 blocks for Target and 64 for Crosshair. Spell power gains an additive 30%, and projectile speed doubles. The base firing cooldown is 2 seconds. Base mana cost is doubled before subtracting cost reductions. Offhand holding grants no bonus.",
+    "Each arquebus accepts one upgrade kit. The Ancestor Launcher grants concealment and impact explosions; the King's New Clothes grants perception and wall-piercing ghost shots. The kits are mutually exclusive, and installing one preserves the loaded spell crystal."
+  ],
+  "links": [
+    {
+      "target": "ancestor_launcher",
+      "label": "Ancestor Launcher"
+    },
+    {
+      "target": "kings_new_clothes",
+      "label": "The King's New Clothes"
+    },
+    {
+      "target": "arcane_arquebus_crafting",
+      "label": "Forging Recipe"
+    }
+  ],
+  "recipes": false
+}

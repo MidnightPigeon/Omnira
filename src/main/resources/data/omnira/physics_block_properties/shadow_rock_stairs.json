@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "sable:mass": 0.5,
+    "sable:volume": 0.5
+  },
+  "selector": "omnira:shadow_rock_stairs",
+  "priority": 2000
+}

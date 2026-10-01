@@ -1,0 +1,15 @@
+{
+  "id": "sharp_breath_crafting",
+  "item": "omnira:sharp_breath",
+  "title": "锋锐之息 · 伤害 · 制作",
+  "text": [
+    "解析铁剑可获得锋锐之息与一根木棍。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "sharp_breath",
+      "label": "使用与效果"
+    }
+  ]
+}

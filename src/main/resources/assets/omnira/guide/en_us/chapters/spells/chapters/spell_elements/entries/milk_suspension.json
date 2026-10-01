@@ -1,0 +1,11 @@
+{
+  "id": "milk_suspension",
+  "item": "omnira:milk_suspension",
+  "title": "Milk Suspension",
+  "text": [
+    "Obtained by dissociating cows; it does not stack. Craft it with a bucket, or right-click a dropped suspension with a bucket, to obtain a milk bucket.",
+    "Right-click a compatible fluid container to inject up to 1000 mB of milk. If less room remains, fill that space and consume the whole suspension. No transfer means no consumption.",
+    "Existing milk is topped up first; empty containers are offered compatible milk."
+  ],
+  "recipes": true
+}

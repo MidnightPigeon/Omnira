@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "top": "omnira:block/light_source_bricks",
+    "bottom": "omnira:block/light_source_bricks",
+    "side": "omnira:block/light_source_bricks"
+  },
+  "render_type": "minecraft:translucent",
+  "ambientocclusion": false
+}

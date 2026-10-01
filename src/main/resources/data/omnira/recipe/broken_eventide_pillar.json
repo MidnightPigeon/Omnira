@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "S",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:time_eroded_bricks"
+    }
+  },
+  "result": {
+    "id": "omnira:broken_eventide_pillar",
+    "count": 2
+  }
+}

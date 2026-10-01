@@ -1,0 +1,31 @@
+{
+  "id": "time_products",
+  "title": "特殊产出",
+  "icon": "omnira:time_warp_point",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/temporal_silt_guide.json",
+    "entries/time_tree_guide.json",
+    "entries/time_plants_guide.json",
+    "entries/time_seed_guide.json",
+    "entries/time_warp_point_guide.json",
+    "entries/rottenleaf_lilies_guide.json",
+    "entries/decayed_timeflow_guide.json",
+    "entries/timeflow_eel_guide.json",
+    "entries/chronal_blindfish_guide.json",
+    "entries/memory_cube_guide.json",
+    "entries/epochal_aggregates_guide.json",
+    "entries/epochal_relics_guide.json",
+    "entries/damaged_research_facility_guide.json",
+    "entries/ancient_specimens_guide.json",
+    "entries/ancient_essences_guide.json",
+    "entries/golden_throne_guide.json",
+    "entries/marisa_crystal_ball_guide.json",
+    "entries/hyperdimensional_drill.json",
+    "entries/wonderland_poker_stand_guide.json",
+    "entries/dream_rabbit_relics_guide.json",
+    "entries/time_eroded_bricks_guide.json",
+    "entries/split_time_sundial_guide.json"
+  ],
+  "chapters": []
+}

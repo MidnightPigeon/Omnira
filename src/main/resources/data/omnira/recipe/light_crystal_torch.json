@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "C",
+    "S",
+    "S"
+  ],
+  "key": {
+    "C": {
+      "item": "omnira:light_crystal_core"
+    },
+    "S": {
+      "item": "omnira:spiritual_crystal"
+    }
+  },
+  "result": {
+    "id": "omnira:light_crystal_torch",
+    "count": 4
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "epochal_aggregates_guide",
+  "title": "年代聚合体与时之沙",
+  "item": "omnira:suspicious_time_sand",
+  "text": [
+    "六块同层特色方块可在普通装配台上合为聚合体，中央留空。用聚合体右键时之沙，可将其转化为对应年代的可疑时之沙。地表偶有时光草生长。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "epochal_cliffs",
+      "label": "纪元断崖"
+    },
+    {
+      "target": "arcane_assembly_table",
+      "label": "魔动装配台"
+    }
+  ]
+}

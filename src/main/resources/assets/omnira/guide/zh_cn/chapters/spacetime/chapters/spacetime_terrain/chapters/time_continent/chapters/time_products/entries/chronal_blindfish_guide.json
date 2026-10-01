@@ -1,0 +1,27 @@
+{
+  "id": "chronal_blindfish_guide",
+  "title": "乱时盲鱼",
+  "item": "omnira:chronal_blindfish",
+  "text": [
+    "地层深处有少量破败时流含水层，发亮的乱时盲鱼在其中生息，不受回溯或水流侵蚀影响。食用会失去当前一半生命；可为回溯仪补充2点能量，也可高阶凝聚为不稳定的时空聚合体。破败时流的常规鱼获也包含它。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "epochal_cliffs",
+      "label": "纪元断崖"
+    },
+    {
+      "target": "decayed_timeflow_guide",
+      "label": "破败时流与垂钓"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "时空回溯仪"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    }
+  ]
+}

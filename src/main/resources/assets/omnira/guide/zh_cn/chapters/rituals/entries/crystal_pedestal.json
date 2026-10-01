@@ -1,0 +1,10 @@
+{
+  "id": "crystal_pedestal",
+  "item": "omnira:crystal_pedestal",
+  "title": "水晶基座",
+  "text": [
+    "手持物品右键放上基座，空手右键取回。基座可陈列物品，也用于摆放仪式材料。",
+    "七个灵性水晶按“工”字形排列，可合成一个水晶基座。"
+  ],
+  "recipes": true
+}

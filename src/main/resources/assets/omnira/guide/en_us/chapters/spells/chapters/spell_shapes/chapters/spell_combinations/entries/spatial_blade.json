@@ -1,0 +1,9 @@
+{
+  "id": "spatial_blade", "item": "omnira:space_microcore", "title": "Rift Blade",
+  "text": [
+    "Place a Space Microcore in the first slot of either crystal workstation; the second slot remains empty and displays a reserved ghost.",
+    "One piercing blade travels 128 blocks toward the crosshair without gravity. Contact applies written effects to entities and spells without consuming the blade; each blade resolves each target only once.",
+    "The cut happens first: 20% of current health, or 5% for bosses. Infusion raises these to 50% and 10%, rounded upward with a minimum of 2 health. Hurt immunity is temporarily cleared to apply the written effects afterward. Players can also be hurt."
+  ], "recipes": false,
+  "links": [{"target": "spell_target_shape_basics", "label": "Targets and Forms"}]
+}

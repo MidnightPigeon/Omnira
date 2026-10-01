@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "omnira:block/analysis_artisan_table" },
+    "facing=east": { "model": "omnira:block/analysis_artisan_table", "y": 90 },
+    "facing=south": { "model": "omnira:block/analysis_artisan_table", "y": 180 },
+    "facing=west": { "model": "omnira:block/analysis_artisan_table", "y": 270 }
+  }
+}

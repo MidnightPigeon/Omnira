@@ -1,0 +1,15 @@
+{
+  "id": "shadow_staff_shaft_crafting",
+  "item": "omnira:shadow_staff_shaft",
+  "title": "Shadow Wood Staff Shaft · Crafting",
+  "text": [
+    "Use the assembly recipe below to forge this item."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "shadow_staff_shaft",
+      "label": "Use and Effects"
+    }
+  ]
+}

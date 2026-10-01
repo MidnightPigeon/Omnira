@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "omnira:block/solidified_light_crystal_core_slab"
+    },
+    "type=top": {
+      "model": "omnira:block/solidified_light_crystal_core_slab_top"
+    },
+    "type=double": {
+      "model": "omnira:block/solidified_light_crystal_core"
+    }
+  }
+}

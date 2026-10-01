@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "omnira:crystal_column_capital"
+  },
+  "result": {
+    "id": "omnira:crystal_column_base",
+    "count": 1
+  }
+}

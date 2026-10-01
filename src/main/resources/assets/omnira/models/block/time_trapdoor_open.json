@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_trapdoor_open",
+  "textures": {
+    "texture": "omnira:block/time_trapdoor"
+  },
+  "render_type": "minecraft:cutout"
+}

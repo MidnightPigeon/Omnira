@@ -1,0 +1,41 @@
+{
+  "id": "epochal_cliffs",
+  "title": "Epochal Cliffs",
+  "item": "omnira:suspicious_time_sand",
+  "text": [
+    "Five eras lie between bands of sedimented silt. Brush suspicious time sand to recover relics from each layer.",
+    "Occasional hyperdimensional drilling platforms contain a drill that may still hold a charge.",
+    "Small timeflow aquifers harbor chronal blindfish; sparse time grass grows on the surface."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "drilling_platform_guide",
+      "label": "Hyperdimensional Drilling Platform"
+    },
+    {
+      "target": "epochal_relics_guide",
+      "label": "Relics of the Eras"
+    },
+    {
+      "target": "epochal_aggregates_guide",
+      "label": "Era Aggregates and Time Sand"
+    },
+    {
+      "target": "damaged_research_facility_guide",
+      "label": "Damaged Research Facility"
+    },
+    {
+      "target": "ancient_specimens_guide",
+      "label": "Unknown Fossils and Eggs"
+    },
+    {
+      "target": "chronal_blindfish_guide",
+      "label": "Chronal Blindfish"
+    },
+    {
+      "target": "decayed_timeflow_guide",
+      "label": "Decayed Timeflow and Fishing"
+    }
+  ]
+}

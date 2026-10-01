@@ -1,0 +1,7 @@
+{
+  "selector": "omnira:sandbound_time_eroded_bricks",
+  "properties": {
+    "sable:mass": 1,
+    "sable:volume": 1
+  }
+}

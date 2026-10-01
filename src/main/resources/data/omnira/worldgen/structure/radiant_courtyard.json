@@ -1,0 +1,7 @@
+{
+  "type": "omnira:radiant_courtyard",
+  "biomes": "#omnira:has_structure/radiant_courtyard",
+  "step": "surface_structures",
+  "terrain_adaptation": "none",
+  "spawn_overrides": {}
+}

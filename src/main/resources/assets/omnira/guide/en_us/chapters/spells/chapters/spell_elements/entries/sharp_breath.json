@@ -1,0 +1,16 @@
+{
+  "id": "sharp_breath",
+  "item": "omnira:sharp_breath",
+  "title": "Sharp Breath - Harm",
+  "text": [
+    "Damage deals 6 physical damage, plus 3 per Enhancement, then scales with spell power. Infusion changes it to Instant Damage II, which heals undead instead.",
+    "Delay turns damage into Poison. Spell power raises its level rather than its duration, rounding upward while retaining the original level offset. Physical damage uses the 6, 12, 24 damage thresholds. Immunities still apply."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "sharp_breath_crafting",
+      "label": "Analysis Recipe"
+    }
+  ]
+}

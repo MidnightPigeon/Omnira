@@ -1,0 +1,29 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:ancient_pottery_rubble"
+    },
+    {
+      "item": "omnira:ancient_pottery_rubble"
+    },
+    {
+      "item": "omnira:ancient_pottery_rubble"
+    },
+    {
+      "item": "omnira:ancient_pottery_rubble"
+    },
+    {
+      "item": "omnira:ancient_pottery_rubble"
+    },
+    {
+      "item": "omnira:ancient_pottery_rubble"
+    },
+    []
+  ],
+  "result": {
+    "id": "omnira:ancient_archaeology_aggregate",
+    "count": 1
+  }
+}

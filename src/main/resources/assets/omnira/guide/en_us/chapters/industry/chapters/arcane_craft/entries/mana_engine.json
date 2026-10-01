@@ -1,0 +1,13 @@
+{
+  "id": "mana_engine",
+  "item": "omnira:mana_engine",
+  "title": "Mana Engine",
+  "text": [
+    "Place a crystal casing in the assembly bench's center. Clockwise from the upper right, place: spiritual crystal, iron block, spiritual crystal, redstone block, spiritual crystal, low-tier spell crystal. This fixed arrangement forges a mana engine; the spell crystal's keywords do not matter.",
+    "Insert a spell core into the center. Primordial cores provide a base 512 su and 512 FE/s; Dream cores provide 1024 su and 1024 FE/s. Each core defines its own mechanical and electrical base output, multiplied by the three surrounding grids. Speed remains 16 rpm.",
+    "Kinetic output is fixed at 16 rpm and requires redstone by default. Use the controls to toggle operation, redstone control and rotation direction. A wrench changes its horizontal facing. Hold W over the item to ponder its operation.",
+    "Basic, Elemental, Arcane and Omni grids provide multipliers of 1.2, 1.5, 2 and 4. The three slots multiply together; output is rounded to the nearest integer only after all multipliers. Empty slots do not reduce output, and inserted spells are unnecessary.",
+    "With Create installed, the engine supplies stress. When FE integration is available, the same port also exports electricity according to the installed core and grid multipliers. Direct assembly-table drive does not require FE integration."
+  ],
+  "recipes": true
+}

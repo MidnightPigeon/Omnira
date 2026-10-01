@@ -1,0 +1,24 @@
+{
+  "id": "ground_target",
+  "item": "omnira:earth_microcore",
+  "title": "Ground",
+  "text": [
+    "Put an Earth Microcore in the target slot. Selects eight surface positions around your feet, searching up to twelve blocks vertically at each position. Slabs and stairs use their actual surface height.",
+    "You do not need to aim at the ground. Missing surfaces are skipped; casting fails if none are available. A Wide Area Rune adds an outer ring of positions."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "earth_microcore",
+      "label": "Earth Microcore"
+    },
+    {
+      "target": "ground_projectile",
+      "label": "Ground-Projectile"
+    },
+    {
+      "target": "ground_orbit",
+      "label": "Ground-Orbit"
+    }
+  ]
+}

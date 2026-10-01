@@ -1,0 +1,6 @@
+{
+  "type": "omnira:spacetime_reversal",
+  "ingredient": {"item": "omnira:dream_rabbit_remains"},
+  "count": 1,
+  "results": [{"id": "omnira:alice_dream_rabbit_sigil", "count": 1}]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "marisa_crystal_ball_guide",
+  "title": "魔理沙的水晶球",
+  "item": "omnira:marisa_crystal_ball",
+  "text": [
+    "右键魔理沙的水晶球进行交易。每日依次抽取3条普通、2条稀有与1条史诗交易，每条分别限购3、2、1次。普通以注灵水晶交换，稀有另需梦境水晶，史诗另需空间水晶。",
+    "球内漂浮着属于你的今日商品。同一玩家在所有水晶球看到的货品与剩余次数一致；不同玩家各有自己的每日列表。精准采集能保留特殊水晶球，其他采集方式只留下普通空白水晶球；搬动水晶球不会重置交易。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "kirisame_shop_guide",
+      "label": "雾雨魔法店"
+    },
+    {
+      "target": "marisa_crystal_ball_guide_machine_reference",
+      "label": "魔理沙的水晶球"
+    }
+  ]
+}

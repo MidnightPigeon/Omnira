@@ -1,0 +1,24 @@
+{
+  "id": "dream_crafting",
+  "title": "Dream Crafting",
+  "icon": "omnira:crude_light_core",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/light_condensate_bricks.json",
+    "entries/light_source_bricks.json",
+    "entries/crude_light_core.json",
+    "entries/shadow_rock_bricks.json",
+    "entries/chiseled_shadow_rock.json",
+    "entries/dream_crystal_block.json",
+    "entries/engraved_mirror_rock.json",
+    "entries/light_crystal_torch.json",
+    "entries/shadow_bookshelf.json",
+    "entries/shadow_lantern.json",
+    "entries/shadow_trapdoor.json",
+    "entries/engraved_mirror_rock_stairs.json",
+    "entries/engraved_mirror_rock_slab.json",
+    "entries/spiritual_crystal_stairs.json",
+    "entries/decorative_variants.json"
+  ],
+  "chapters": []
+}

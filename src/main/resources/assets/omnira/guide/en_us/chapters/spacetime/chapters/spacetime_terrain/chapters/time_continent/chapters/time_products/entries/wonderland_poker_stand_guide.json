@@ -1,0 +1,21 @@
+{
+  "id": "wonderland_poker_stand_guide",
+  "title": "Wonderland Poker Stand",
+  "item": "omnira:wonderland_poker_stand",
+  "text": [
+    "The stand illuminates its surroundings and keeps its chunk loaded. It cycles through hearts, spades, diamonds and clubs, benefiting players within that chunk.",
+    "Every 30 seconds, hearts grant Instant Health II and Saturation; spades grant one minute of Haste II and Speed II; diamonds grant one minute of Resistance II. Clubs grant an extra level of Looting and Fortune. Players still in the chunk when clubs end receive a random consumable memory cube.",
+    "Suits normally change every five minutes. Fleeting Woods doubles the pace; Stilled Wastes stops it; Recurrence Garden advances it at biome nodes. During a mire reversal, the previous suit briefly returns while the normal timer continues."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "looking_glass_garden_guide",
+      "label": "Looking-Glass Garden"
+    },
+    {
+      "target": "wonderland_poker_stand_guide_machine_reference",
+      "label": "Wonderland Poker Stand"
+    }
+  ]
+}

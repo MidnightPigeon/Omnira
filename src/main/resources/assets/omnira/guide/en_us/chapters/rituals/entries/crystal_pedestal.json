@@ -1,0 +1,10 @@
+{
+  "id": "crystal_pedestal",
+  "item": "omnira:crystal_pedestal",
+  "title": "Crystal Pedestal",
+  "text": [
+    "Use with an item to display it; use with an empty hand to retrieve it. Pedestals also hold offerings for rituals.",
+    "Craft with seven spiritual crystals: full top and bottom rows with one crystal between their centers."
+  ],
+  "recipes": true
+}

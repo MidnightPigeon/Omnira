@@ -1,0 +1,15 @@
+{
+  "id": "beginning",
+  "title": "基础制作",
+  "icon": "omnira:guide_book",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/guide_book.json",
+    "entries/crystal_pickaxe.json",
+    "entries/resonance_crystal.json",
+    "entries/pocket_magic_bottle.json"
+  ],
+  "chapters": [
+    "chapters/building/chapter.json"
+  ]
+}

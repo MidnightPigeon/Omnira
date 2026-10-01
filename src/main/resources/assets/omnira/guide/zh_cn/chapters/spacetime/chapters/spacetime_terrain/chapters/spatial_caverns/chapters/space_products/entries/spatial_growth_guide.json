@@ -1,0 +1,28 @@
+{
+  "id": "spatial_growth_guide",
+  "title": "空间水晶生长",
+  "item": "omnira:spatial_crystal_matrix",
+  "text": [
+    "空间水晶母岩会在相邻表面逐步长出小型、中型、大型晶芽，最终形成空间水晶簇。成熟晶簇可采出空间水晶，精准采集可保留晶簇形态。",
+    "母岩挖掘后不掉落，精准采集也无法回收。粗糙空间晶块与其激发态均可采集，但都会掉落普通粗糙空间晶块；使用高阶凝聚台可重新激发，也可手持注灵水晶右键晶块，消耗一枚直接激发。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "time_seed_guide",
+      "label": "时间之种"
+    },
+    {
+      "target": "spatial_crystal_guide",
+      "label": "粗糙空间晶块"
+    },
+    {
+      "target": "spatial_caverns_guide",
+      "label": "空间洞穴"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    }
+  ]
+}

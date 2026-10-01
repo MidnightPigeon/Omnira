@@ -1,0 +1,46 @@
+{
+  "id": "reversion_mire_guide",
+  "title": "Reversion Mire",
+  "item": "omnira:reborn_rottenleaf_lily",
+  "text": [
+    "Shallow ponds interrupt the sedimented silt of Reversion Mire. Pale-green Decayed Timeflow occasionally turns brown; rotted silt lines the banks and pond beds. Sedimented silt touching the fluid rots after five minutes. Ordinary temporal silt must sediment first. Contact halves movement and swimming speed and deals recurring wither damage. Temporal creatures (including Timeflow Eels and Chronal Blindfish), dream creatures, and players wearing a Spacetime Anchoring Sigil are immune.",
+    "Every five minutes, the mire reverses for one minute. Entities recorded here one minute earlier return to their recorded positions, even after leaving the mire, provided they remain in the same dimension. Temporal creatures and players wearing a Spacetime Anchoring Sigil are immune to this rewind.",
+    "Mobs with juvenile forms become young temporarily, then regain their former ages. Intact generated trees rewind to their own saplings. Breaking or replacing any log or leaf revokes the entire tree's rewind. Only its surviving original rewind sapling restores the tree. Player-built wooden structures are not trees; new babies and saplings are not matured.",
+    "Decayed Rottenleaf Lilies become fresh only during a reversal in the mire, then decay again. Harvest a fresh lily to keep its reborn state permanently."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "rottenleaf_lilies_guide",
+      "label": "Rottenleaf Lilies"
+    },
+    {
+      "target": "time_tree_guide",
+      "label": "Time Tree"
+    },
+    {
+      "target": "rusty_lake_mill_guide",
+      "label": "Rusty Lake Mill"
+    },
+    {
+      "target": "temporal_silt_guide",
+      "label": "Temporal Silt"
+    },
+    {
+      "target": "decayed_timeflow_guide",
+      "label": "Decayed Timeflow and Fishing"
+    },
+    {
+      "target": "timeflow_eel_guide",
+      "label": "Timeflow Eels and Potions of Time"
+    },
+    {
+      "target": "time_plants_guide",
+      "label": "Time Flora"
+    },
+    {
+      "target": "memory_cube_guide",
+      "label": "Memory Cube"
+    }
+  ]
+}

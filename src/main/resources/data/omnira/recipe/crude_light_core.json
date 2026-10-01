@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC",
+    "CC"
+  ],
+  "key": {
+    "C": {
+      "item": "omnira:light_source_crystal"
+    }
+  },
+  "result": {
+    "id": "omnira:crude_light_core",
+    "count": 1
+  }
+}

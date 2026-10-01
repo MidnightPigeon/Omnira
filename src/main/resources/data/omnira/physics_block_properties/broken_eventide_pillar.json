@@ -1,0 +1,8 @@
+{
+  "selector": "omnira:broken_eventide_pillar",
+  "properties": {
+    "sable:mass": 0.5,
+    "sable:volume": 0.5
+  },
+  "priority": 2000
+}

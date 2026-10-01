@@ -1,0 +1,24 @@
+{
+  "id": "rusty_lake_mill_guide",
+  "title": "锈湖磨坊",
+  "item": "omnira:memory_cube",
+  "text": [
+    "回溯湿地深处偶尔能发现一座磨坊。逆转期间，原先能看见的水晶球会隐去，另两个位置则显现更珍贵的宝藏。它们是四个独立的容器；取空或拆走后不会随下一次逆转补货。",
+    "桥上的记忆立方体也随湿地逆转，在平和与腐化之间切换。采走后状态固定；想要改变它，须重新放回湿地，等待逆转。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "memory_cube_guide",
+      "label": "记忆立方体"
+    },
+    {
+      "target": "reversion_mire_guide",
+      "label": "回溯湿地"
+    },
+    {
+      "target": "damaged_research_facility_guide",
+      "label": "损坏的科研设施"
+    }
+  ]
+}

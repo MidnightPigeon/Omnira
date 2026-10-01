@@ -1,0 +1,10 @@
+{
+  "id": "light_spirit_spawn_egg",
+  "item": "omnira:light_spirit_spawn_egg",
+  "title": "光灵",
+  "text": [
+    "栖息于晨辉晶原的友善生物，能飞行并穿过方块。它会偶尔靠近附近玩家，但不会拾取物品。",
+    "死亡掉落奥术尘与光凝晶，并有 5% 几率掉落光晶核；抢夺每级增加 10 个百分点。"
+  ],
+  "recipes": false
+}

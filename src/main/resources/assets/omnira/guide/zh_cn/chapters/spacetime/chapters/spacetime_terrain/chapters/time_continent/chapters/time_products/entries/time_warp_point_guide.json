@@ -1,0 +1,40 @@
+{
+  "id": "time_warp_point_guide",
+  "title": "时间翘曲点",
+  "item": "omnira:time_warp_point",
+  "text": [
+    "解析工匠桌可将四个时间翘曲点解析为一个时间微核与固定十六个奥术尘。三个翘曲点与解析之晶无序合成，可获得一个时间微核，但不产生奥术尘。解析之晶按常规损耗耐久。时空回溯仪则以两个翘曲点换取一个时间微核。",
+    "凝时荒原偶尔出现时间翘曲点。靠近它的实体会逐渐变慢，离开后恢复。含构筑要素的法术，以及骨钉或织针的攻击，可以采下它；飞针和蓄力斩同样有效。采下的翘曲点无法直接放置。原处留下的时序微尘无法破坏，却可用方寸魔瓶带到指定位置放出，五分钟后会重新凝成翘曲点。16个翘曲点在背包非手持栏或普通容器里叠成一组，会坍缩为不稳定的时空聚合体；时空固化可保护晶球内的堆叠。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "unstable_spacetime_aggregate",
+      "label": "不稳定的时空聚合体"
+    },
+    {
+      "target": "frozen_terra_guide",
+      "label": "凝时荒原"
+    },
+    {
+      "target": "eventide_ruins_guide",
+      "label": "终时废墟"
+    },
+    {
+      "target": "doomsday_rite",
+      "label": "末日仪轨"
+    },
+    {
+      "target": "analysis_artisan_table",
+      "label": "解析工匠桌"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "时空回溯仪"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    }
+  ]
+}

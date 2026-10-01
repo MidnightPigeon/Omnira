@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "omnira:block/spacetime_spell_core"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "healing_dew_crafting",
+  "item": "omnira:healing_dew",
+  "title": "Healing Dew - Healing · Crafting",
+  "text": [
+    "Analyze 16 glistering melon slices to obtain Healing Dew and 3–5 melon seeds."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "healing_dew",
+      "label": "Use and Effects"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "light_crystal_core",
+  "item": "omnira:light_crystal_core",
+  "title": "Light Crystal Core",
+  "text": [
+    "Find Light Crystal Cores inside pale-gold spheres in the Dawn Crystal Plains. They are used in forging, rituals and lighting.",
+    "Player-placed cores slowly grow Light Condensate and Light Source Crystal into nearby empty space, leaving the six adjacent positions clear. Natural cores remain dormant.",
+    "Emits light level 15 and has zero mass with Aeronautics."
+  ],
+  "recipes": true
+}

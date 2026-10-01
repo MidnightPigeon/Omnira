@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:archaeology",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "omnira:damaged_research_facility",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:inactive_t_virus_solution",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:paradox_dust",
+          "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:time_microcore",
+          "weight": 2
+        }
+      ]
+    }
+  ]
+}

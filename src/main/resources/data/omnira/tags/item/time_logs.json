@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:time_log",
+    "omnira:time_wood",
+    "omnira:stripped_time_log",
+    "omnira:stripped_time_wood"
+  ]
+}

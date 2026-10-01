@@ -1,0 +1,23 @@
+{
+  "id": "doomsday_rite",
+  "title": "Doomsday Rite",
+  "item": "omnira:split_time_sundial",
+  "text": [
+    "In the Eventide Ruins, the taijitu and eight trigrams encircle a Split-Time Sundial. The white eye holds an item-treasure crystal ball; the black eye holds a fluid-treasure crystal ball."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "split_time_sundial_guide",
+      "label": "Split-Time Sundial"
+    },
+    {
+      "target": "time_warp_point_guide",
+      "label": "Time Warp Point"
+    },
+    {
+      "target": "memory_cube_guide",
+      "label": "Memory Cube"
+    }
+  ]
+}

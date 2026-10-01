@@ -1,0 +1,13 @@
+{
+  "id": "spell_forms",
+  "title": "形态",
+  "icon": "omnira:air_microcore",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/barrier_shape.json",
+    "entries/orbit_shape.json",
+    "entries/explosion_shape.json",
+    "entries/projectile_shape.json"
+  ],
+  "chapters": []
+}

@@ -1,0 +1,12 @@
+{
+  "id": "building",
+  "title": "水晶建筑制作",
+  "icon": "omnira:spiritual_crystal_block",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/spiritual_crystal_block.json",
+    "entries/crystal_column.json",
+    "entries/crystal_column_base.json"
+  ],
+  "chapters": []
+}

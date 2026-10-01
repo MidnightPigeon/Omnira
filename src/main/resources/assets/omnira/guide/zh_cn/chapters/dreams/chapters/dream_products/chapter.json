@@ -1,0 +1,18 @@
+{
+  "id": "dream_products",
+  "title": "梦境特产",
+  "icon": "omnira:dream_crystal_shard",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/light_condensate.json",
+    "entries/light_source_crystal.json",
+    "entries/mirror_rock.json",
+    "entries/shadow_berries.json",
+    "entries/light_crystal_core.json",
+    "entries/shadow_log.json",
+    "entries/dream_crystal_bedrock.json",
+    "entries/dream_crystal_shard.json",
+    "entries/shadow_manuscript.json"
+  ],
+  "chapters": []
+}

@@ -1,0 +1,10 @@
+{
+  "id": "spacetime_waymark",
+  "item": "omnira:spacetime_waymark",
+  "title": "Spacetime Waymark",
+  "text": [
+    "Interact with a waymark to record its position and rename it; placing or passing it is not enough. Natural waymarks receive a Lost Point name using the first available number.",
+    "Waymarks need two blocks of height and a safe landing area. Destroyed waymarks can no longer be used."
+  ],
+  "recipes": true
+}

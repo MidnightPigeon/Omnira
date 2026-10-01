@@ -1,0 +1,16 @@
+{
+  "id": "spiritual_crystal",
+  "item": "omnira:spiritual_crystal",
+  "title": "Spiritual Crystal",
+  "text": [
+    "Spiritual crystals are a fundamental condensed magical material, used to build further workstations.",
+    "They also serve as the substrate for low-tier spell crystals. Place one in the crystal processing table alongside ink and the microcores."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "simple_condensation_table",
+      "label": "Simple Condensation Table"
+    }
+  ]
+}

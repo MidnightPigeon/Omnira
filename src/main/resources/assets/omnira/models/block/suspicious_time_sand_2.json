@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "omnira:block/suspicious_time_sand_2"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "multi_arcane_tip",
+  "item": "omnira:multi_arcane_tip",
+  "title": "多重秘法杖端",
+  "text": [
+    "每次施放 2 发，发间隔 0.3 秒，链内基础冷却 3 秒，提供 2 个魔纹槽。每发分别消耗法力。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "multi_arcane_tip_crafting",
+      "label": "锻造配方"
+    },
+    {
+      "target": "staff_casting",
+      "label": "法术链与冷却"
+    }
+  ]
+}

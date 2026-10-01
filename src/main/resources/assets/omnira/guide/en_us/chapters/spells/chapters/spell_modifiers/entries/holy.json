@@ -1,0 +1,16 @@
+{
+  "id": "holy",
+  "item": "omnira:light_microcore",
+  "title": "Holy",
+  "text": [
+    "Place a Light Microcore directly in a modifier slot. Damage and healing gain a separate x1.5 multiplier; duplicate Holy modifiers do not multiply again. Sustained potion effects are unchanged.",
+    "Contacts ignite hostile creatures for 10 seconds and make neutral/allied creatures glow for 10 seconds. Angry neutral mobs count as hostile. Base Holy cloud damage is 1.5 per second; lifesteal receives another x1.5, rounded up."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "dark_microcore",
+      "label": "Microcore crafting and conversion"
+    }
+  ]
+}

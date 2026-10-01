@@ -1,0 +1,23 @@
+{
+  "id": "kirisame_shop_guide",
+  "title": "雾雨魔法店",
+  "item": "omnira:marisa_crystal_ball",
+  "recipes": false,
+  "text": [
+    "速逝林深处偶尔能发现一间木石搭建的魔法店，书籍、蘑菇与魔法器具堆满了房间。柜台上的水晶球仍在接待来客。"
+  ],
+  "links": [
+    {
+      "target": "fleeting_woods_guide",
+      "label": "速逝林"
+    },
+    {
+      "target": "marisa_crystal_ball_guide",
+      "label": "魔理沙的水晶球"
+    },
+    {
+      "target": "dream_rabbit_relics_guide",
+      "label": "梦境兔遗物"
+    }
+  ]
+}

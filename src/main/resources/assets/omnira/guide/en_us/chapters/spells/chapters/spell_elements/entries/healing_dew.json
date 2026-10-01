@@ -1,0 +1,17 @@
+{
+  "id": "healing_dew",
+  "item": "omnira:healing_dew",
+  "title": "Healing Dew - Healing",
+  "text": [
+    "Healing applies Instant Health II, restoring 8 health before spell-power bonuses and damaging undead instead. Delay changes it to Regeneration.",
+    "Spell power raises healing and Regeneration levels, not duration: 8 health corresponds to Regeneration I, and 12 to II. Delay controls duration.",
+    "Infusion adds brief Saturation to instant healing, or Resistance matching Regeneration's level and duration."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "healing_dew_crafting",
+      "label": "Analysis Recipe"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "void_crystal",
+  "item": "omnira:void_crystal",
+  "title": "虚无水晶",
+  "text": [
+    "由构筑法术形成的浅蓝色半透明方块。注魔后永久存在，可用于搭桥和建筑；仍可用法杖左键消除。"
+  ],
+  "recipes": true
+}

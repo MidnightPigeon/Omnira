@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "omnira:spiritual_crystal_block"
+  },
+  "result": {
+    "id": "omnira:spiritual_crystal_stairs",
+    "count": 1
+  }
+}

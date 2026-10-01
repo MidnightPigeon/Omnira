@@ -1,0 +1,8 @@
+{
+  "type": "omnira:overworld_ruins",
+  "variant": 1,
+  "biomes": "#omnira:has_structure/ruined_crystal_workshop",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "spawn_overrides": {}
+}

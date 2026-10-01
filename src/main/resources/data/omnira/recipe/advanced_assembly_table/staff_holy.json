@@ -1,0 +1,9 @@
+{
+  "type": "omnira:advanced_assembly_table", "operation": "staff_enhancement",
+  "slots": [
+    {"item": "omnira:light_microcore"}, {"item": "omnira:light_microcore"}, {"item": "omnira:light_microcore"},
+    {"item": "omnira:light_microcore"}, {"item": "omnira:light_microcore"}, {"item": "omnira:light_microcore"},
+    {"item": "omnira:light_microcore"}, {"item": "omnira:modular_staff"}, {"item": "omnira:light_microcore"}
+  ],
+  "result": {"id": "omnira:modular_staff", "count": 1}
+}

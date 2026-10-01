@@ -1,0 +1,8 @@
+night_heron_call.ogg
+Black-crowned night heron call recorded in October 2007 at Sangli
+Recordist: Sharad Apte (Sharadapte), October 2007
+Source: https://commons.wikimedia.org/wiki/File:Black-crowned_night_heron_call_recorded_in_October_2007_at_Sangli.wav
+License: Creative Commons Attribution-ShareAlike 4.0 International
+https://creativecommons.org/licenses/by-sa/4.0/
+Changes: complete recording converted to mono Ogg Vorbis, gain normalization and edge fades.
+This adapted audio is distributed under CC BY-SA 4.0. No endorsement implied.

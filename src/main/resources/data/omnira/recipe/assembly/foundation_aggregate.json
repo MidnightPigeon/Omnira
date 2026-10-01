@@ -1,0 +1,29 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:containment_facility_rubble"
+    },
+    {
+      "item": "omnira:containment_facility_rubble"
+    },
+    {
+      "item": "omnira:containment_facility_rubble"
+    },
+    {
+      "item": "omnira:containment_facility_rubble"
+    },
+    {
+      "item": "omnira:containment_facility_rubble"
+    },
+    {
+      "item": "omnira:containment_facility_rubble"
+    },
+    []
+  ],
+  "result": {
+    "id": "omnira:foundation_aggregate",
+    "count": 1
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "stone": "omnira:block/time_eroded_bricks",
+    "white": "omnira:block/light_crystal_core",
+    "dial": "omnira:block/sundial_dial",
+    "glow": "omnira:block/sundial_glow",
+    "particle": "omnira:block/time_eroded_bricks"
+  },
+  "elements": [
+    {
+      "from": [
+        7.7,
+        9.3,
+        4.3
+      ],
+      "to": [
+        8.3,
+        9.45,
+        7.8
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#glow"
+        },
+        "south": {
+          "texture": "#glow"
+        },
+        "east": {
+          "texture": "#glow"
+        },
+        "west": {
+          "texture": "#glow"
+        },
+        "up": {
+          "texture": "#glow"
+        },
+        "down": {
+          "texture": "#glow"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          8.5,
+          8
+        ],
+        "axis": "x",
+        "angle": 45,
+        "rescale": false
+      }
+    }
+  ]
+}

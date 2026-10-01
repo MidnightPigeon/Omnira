@@ -1,0 +1,10 @@
+{
+  "id": "light_spirit_spawn_egg",
+  "item": "omnira:light_spirit_spawn_egg",
+  "title": "Light Spirit",
+  "text": [
+    "A friendly inhabitant of the Dawn Crystal Fields that flies through blocks. It occasionally approaches nearby players but does not collect items.",
+    "Drops arcane dust and light condensate. It has a 5% chance to drop a light crystal core, increased by 10 percentage points per Looting level."
+  ],
+  "recipes": false
+}

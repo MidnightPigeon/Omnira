@@ -1,0 +1,9 @@
+{
+  "id": "crystal_column",
+  "item": "omnira:crystal_column",
+  "title": "Crystal Column",
+  "text": [
+    "An eight-sided column that can stand upright or lie horizontally. Stonecut Spiritual Crystal Blocks into shafts or ends, or use their crafting recipes."
+  ],
+  "recipes": true
+}

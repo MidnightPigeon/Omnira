@@ -1,0 +1,12 @@
+{
+  "id": "liquid_crystal_ball",
+  "item": "omnira:liquid_crystal_ball",
+  "title": "Liquid Crystal Ball",
+  "text": [
+    "Stores 24,000 mB (24 buckets) of one fluid. The central floating fluid globe changes volume with its contents; an empty globe contains drifting air motes.",
+    "The left slot exchanges buckets and fluid containers. A bucket takes two seconds. Pipes connect on any side, sharing a 500 mB/s input/output limit. Renewable source fluids, including water, are inexhaustible.",
+    "Three upgrade slots below the storage area correspond to the three recesses in the base. A heron statue can deposit 1,000 mB of milk directly; incompatible or full tanks leave the milk suspension output unchanged.",
+    "Repeated landings crack and shatter the globe, dropping a glass pane and releasing placeable fluid sources nearby."
+  ],
+  "recipes": true
+}

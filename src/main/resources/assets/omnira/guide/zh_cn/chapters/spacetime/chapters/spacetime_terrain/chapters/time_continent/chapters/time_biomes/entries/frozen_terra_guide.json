@@ -1,0 +1,28 @@
+{
+  "id": "frozen_terra_guide",
+  "title": "凝时荒原",
+  "item": "omnira:solidified_light_crystal_core",
+  "text": [
+    "这里的机器、生长与流动都陷于停滞，掉落物与弹射物也会凝住。生物的活动与自身计时不受影响；组装后的机械与航空学结构仍能行动。",
+    "高地间偶尔可见凝固的泰拉皇宫。时间翘曲点仍能减缓进入其范围的生物。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "traveler_manuscript",
+      "label": "穿越者手稿"
+    },
+    {
+      "target": "frozen_palace_guide",
+      "label": "凝固的泰拉皇宫"
+    },
+    {
+      "target": "temporal_silt_guide",
+      "label": "时序尘泥"
+    },
+    {
+      "target": "time_warp_point_guide",
+      "label": "时间翘曲点"
+    }
+  ]
+}

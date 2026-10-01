@@ -1,0 +1,15 @@
+{
+  "id": "wooden_staff_shaft",
+  "item": "omnira:wooden_staff_shaft",
+  "title": "Wooden Staff Shaft",
+  "text": [
+    "Provides one enhancement slot and no spell power bonus."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "wooden_staff_shaft_crafting",
+      "label": "Forging Recipe"
+    }
+  ]
+}

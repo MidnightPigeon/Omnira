@@ -1,0 +1,37 @@
+{
+  "id": "eventide_ruins_guide",
+  "title": "Eventide Ruins",
+  "item": "omnira:rotted_temporal_silt",
+  "text": [
+    "At each terminal node, placed source and flowing liquid blocks become Decayed Timeflow, including liquids from other mods. Stored fluids and waterlogged blocks are not converted.",
+    "Sand and gravel become Time Sand at the terminal node. Dirt blocks become ordinary, unactivated Temporal Silt, which rots at the following node.",
+    "Eventide Ruins are covered in rotted silt and time-eroded bricks, including cracked and sandbound variants, with scattered broken pillars and debris. Time ends once every five minutes on the continent's shared cycle; arrival does not start a fresh countdown.",
+    "At each node, unrotted temporal silt rots. Immature crops and crystal buds mature; already mature crops vanish in smoke and full crystal clusters become Time Sand. Other plants, saplings and reborn lilies vanish directly. Placed plants and clusters follow the same rules. Crystal matrices can grow full clusters on empty faces.",
+    "Young creatures mature at the node. Ordinary adults and creatures without juvenile forms vanish without drops, leaving a Time Warp Point. Bosses and temporal creatures are exempt.",
+    "Players lose half their maximum health as true damage at each node, bypassing armor, absorption and damage reduction. This can be lethal. Wearing a Spacetime Anchoring Sigil grants full immunity.",
+    "Stone Bricks and Cracked Stone Bricks become their time-eroded counterparts at the node. A Doomsday Rite can occasionally be found among the ruins."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "spacetime_anchoring_sigil",
+      "label": "Spacetime Anchoring Sigil"
+    },
+    {
+      "target": "doomsday_rite",
+      "label": "Doomsday Rite"
+    },
+    {
+      "target": "time_eroded_bricks_guide",
+      "label": "Time-Eroded Bricks and Ruin Fragments"
+    },
+    {
+      "target": "time_warp_point_guide",
+      "label": "Time Warp Point"
+    },
+    {
+      "target": "temporal_silt_guide",
+      "label": "Temporal Silt"
+    }
+  ]
+}

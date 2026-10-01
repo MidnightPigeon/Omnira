@@ -1,0 +1,15 @@
+{
+  "id": "construction_matrix_crafting",
+  "item": "omnira:construction_matrix",
+  "title": "构筑之方 · 构筑 · 制作",
+  "text": [
+    "解析 8 个水晶机壳，得到一份构筑之方和 8 个灵性水晶。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "construction_matrix",
+      "label": "使用与效果"
+    }
+  ]
+}

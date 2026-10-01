@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "omnira:block/cracked_time_eroded_bricks"
+  }
+}

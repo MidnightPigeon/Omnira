@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:tyrannosaurus_remains",
+    "omnira:mosasaurus_remains",
+    "omnira:pterosaur_remains"
+  ]
+}

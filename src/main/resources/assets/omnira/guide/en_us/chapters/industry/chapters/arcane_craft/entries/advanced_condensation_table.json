@@ -1,0 +1,10 @@
+{
+  "id": "advanced_condensation_table",
+  "item": "omnira:advanced_condensation_table",
+  "title": "Advanced Condensation Table",
+  "text": [
+    "A light-source crystal tabletop rests on resonance crystal legs, with a primitive spell core at its center.",
+    "Place one ingredient in the center and begin condensation. After 10 seconds, it becomes the result in the same slot for 300 base mana. Cost reductions apply. Closing the interface or changing the ingredient cancels the process."
+  ],
+  "recipes": true
+}

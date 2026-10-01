@@ -1,0 +1,13 @@
+{
+  "id": "arcane_assembly_table",
+  "item": "omnira:arcane_assembly_table",
+  "title": "Arcane Assembly Bench",
+  "text": [
+    "Arrange the ingredients in the six outer slots and central fixture, then strike to forge the result in the center.",
+    "Manual strikes cost 50 base mana, advance progress by 5% or 10%, and have a 0.5-second cooldown.",
+    "With Create installed, supply at least 16 rpm through the rear shaft. The bench uses a constant 256 su and forges automatically without mana. Higher speeds do not accelerate forging. Stopping or overstressing the network pauses work without losing progress.",
+    "Without Create, directly align the shaft with a running mana engine to forge automatically.",
+    "With Create installed, the bench also accepts pressing ingredients in its center with the outer slots empty. Pressing still advances through strikes. Collect the result from the center slot or by right-clicking the tabletop."
+  ],
+  "recipes": true
+}

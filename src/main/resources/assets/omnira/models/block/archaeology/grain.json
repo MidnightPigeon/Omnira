@@ -1,0 +1,40 @@
+{
+  "textures": {
+    "body": "omnira:block/drill_crystal",
+    "particle": "omnira:block/drill_crystal"
+  },
+  "elements": [
+    {
+      "from": [
+        -0.35,
+        -0.35,
+        -0.35
+      ],
+      "to": [
+        0.35,
+        0.35,
+        0.35
+      ],
+      "faces": {
+        "north": {
+          "texture": "#body"
+        },
+        "south": {
+          "texture": "#body"
+        },
+        "east": {
+          "texture": "#body"
+        },
+        "west": {
+          "texture": "#body"
+        },
+        "up": {
+          "texture": "#body"
+        },
+        "down": {
+          "texture": "#body"
+        }
+      }
+    }
+  ]
+}

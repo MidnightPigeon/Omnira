@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "omnira:cracked_time_eroded_bricks"
+  },
+  "result": {
+    "id": "omnira:cracked_time_eroded_brick_wall",
+    "count": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:sandbound_time_eroded_bricks"
+    }
+  },
+  "result": {
+    "id": "omnira:sandbound_time_eroded_brick_slab",
+    "count": 6
+  }
+}

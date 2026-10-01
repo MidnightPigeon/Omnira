@@ -1,0 +1,111 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "fur": "minecraft:block/white_stained_glass",
+    "muzzle": "minecraft:block/white_stained_glass",
+    "inner": "minecraft:block/pink_stained_glass",
+    "hat": "minecraft:block/black_concrete",
+    "band": "minecraft:block/purple_concrete",
+    "eyes": "minecraft:block/black_concrete",
+    "nose": "minecraft:block/pink_concrete",
+    "particle": "minecraft:block/white_stained_glass"
+  },
+  "elements": [
+    {
+      "from": [
+        5,
+        8,
+        3
+      ],
+      "to": [
+        6,
+        9,
+        4
+      ],
+      "faces": {
+        "north": {
+          "texture": "#eyes"
+        },
+        "south": {
+          "texture": "#eyes"
+        },
+        "east": {
+          "texture": "#eyes"
+        },
+        "west": {
+          "texture": "#eyes"
+        },
+        "up": {
+          "texture": "#eyes"
+        },
+        "down": {
+          "texture": "#eyes"
+        }
+      }
+    },
+    {
+      "from": [
+        10,
+        8,
+        3
+      ],
+      "to": [
+        11,
+        9,
+        4
+      ],
+      "faces": {
+        "north": {
+          "texture": "#eyes"
+        },
+        "south": {
+          "texture": "#eyes"
+        },
+        "east": {
+          "texture": "#eyes"
+        },
+        "west": {
+          "texture": "#eyes"
+        },
+        "up": {
+          "texture": "#eyes"
+        },
+        "down": {
+          "texture": "#eyes"
+        }
+      }
+    },
+    {
+      "from": [
+        7,
+        6,
+        1
+      ],
+      "to": [
+        9,
+        7,
+        2
+      ],
+      "faces": {
+        "north": {
+          "texture": "#nose"
+        },
+        "south": {
+          "texture": "#nose"
+        },
+        "east": {
+          "texture": "#nose"
+        },
+        "west": {
+          "texture": "#nose"
+        },
+        "up": {
+          "texture": "#nose"
+        },
+        "down": {
+          "texture": "#nose"
+        }
+      }
+    }
+  ]
+}

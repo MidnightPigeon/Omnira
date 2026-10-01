@@ -1,0 +1,16 @@
+{
+  "title": "Omnira Handbook",
+  "format": 2,
+  "introduction": "introduction.json",
+  "chapters": [
+    "chapters/beginning/chapter.json",
+    "chapters/condensation/chapter.json",
+    "chapters/elements/chapter.json",
+    "chapters/industry/chapter.json",
+    "chapters/spells/chapter.json",
+    "chapters/rituals/chapter.json",
+    "chapters/dreams/chapter.json",
+    "chapters/spacetime/chapter.json",
+    "chapters/found_objects/chapter.json"
+  ]
+}

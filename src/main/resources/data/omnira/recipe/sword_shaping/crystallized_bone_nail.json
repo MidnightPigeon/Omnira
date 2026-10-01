@@ -1,0 +1,5 @@
+{
+  "type":"omnira:sword_shaping",
+  "offerings":[{"item":"omnira:resonance_crystal"},{"item":"omnira:spiritual_crystal"},{"item":"omnira:light_crystal_core"},{"item":"minecraft:bone"}],
+  "result":{"id":"omnira:crystallized_bone_nail","count":1}
+}

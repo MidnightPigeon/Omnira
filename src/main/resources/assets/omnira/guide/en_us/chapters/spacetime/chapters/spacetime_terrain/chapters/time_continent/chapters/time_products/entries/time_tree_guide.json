@@ -1,0 +1,17 @@
+{
+  "id": "time_tree_guide",
+  "title": "Time Tree",
+  "item": "omnira:time_sapling",
+  "text": [
+    "Colorful bark surrounds circular growth rings, and the leaves shed tiny motes of time. The wood makes the usual wooden building pieces.",
+    "Time Saplings grow normally on temporal silt and at half speed on dirt-like blocks or end stone. They cannot grow on shadow rock.",
+    "Other saplings planted on temporal silt have an equal chance to remain dormant or grow immediately, turning the silt beneath them into dirt. Shadow Saplings grow normally on shadow rock and at half speed on dirt or end stone."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "fleeting_woods_guide",
+      "label": "Fleeting Woods"
+    }
+  ]
+}

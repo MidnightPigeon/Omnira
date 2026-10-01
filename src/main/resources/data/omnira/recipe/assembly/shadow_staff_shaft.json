@@ -1,0 +1,19 @@
+{
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "slots": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "tag": "omnira:shadow_logs"
+    }
+  ],
+  "result": {
+    "id": "omnira:shadow_staff_shaft",
+    "count": 1
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "time_plants_guide",
+  "title": "Time Flora",
+  "item": "omnira:time_flower",
+  "text": [
+    "Small patches of Time Grass and Time Flowers grow in Fleeting Woods. Using an Unstable Spacetime Aggregate on any temporal silt also sprouts these plants and consumes the aggregate.",
+    "An Advanced Condensation Table condenses a Time Flower into a Time Warp Point. Shears or Silk Touch harvest Time Grass; breaking it normally has a 5% chance to drop a Seed of Time.",
+    "Harvested flora can be placed on any Temporal Silt variant. Green and white motes also orbit the items."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "time_seed_guide",
+      "label": "Seed of Time"
+    },
+    {
+      "target": "time_warp_point_guide",
+      "label": "Time Warp Point"
+    },
+    {
+      "target": "fleeting_woods_guide",
+      "label": "Fleeting Woods"
+    },
+    {
+      "target": "reversion_mire_guide",
+      "label": "Reversion Mire"
+    },
+    {
+      "target": "recurrence_garden_guide",
+      "label": "Recurrence Garden"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    }
+  ]
+}

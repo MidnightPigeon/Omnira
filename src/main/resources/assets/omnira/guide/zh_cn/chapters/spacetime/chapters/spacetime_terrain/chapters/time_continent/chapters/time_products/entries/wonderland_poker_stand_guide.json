@@ -1,0 +1,21 @@
+{
+  "id": "wonderland_poker_stand_guide",
+  "title": "仙境扑克展台",
+  "item": "omnira:wonderland_poker_stand",
+  "text": [
+    "展台照亮周围，并使所在区块保持加载。花色依次为红桃、黑桃、方片、梅花，加成仅作用于该区块内的玩家。",
+    "红桃每30秒给予瞬间治疗II与饱和；黑桃每30秒给予一分钟急迫II与速度II；方片每30秒给予一分钟抗性提升II。梅花期间额外获得抢夺I与时运I，结束时仍在区块内可获得一枚随机的可开启记忆立方。",
+    "通常每五分钟切换花色；速逝林加倍推进，凝时荒原停止，循环花园按群系节点推进。回溯湿地逆转期间暂时退回上一花色，正常计时仍继续。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "looking_glass_garden_guide",
+      "label": "镜中活花园"
+    },
+    {
+      "target": "wonderland_poker_stand_guide_machine_reference",
+      "label": "仙境扑克展台"
+    }
+  ]
+}

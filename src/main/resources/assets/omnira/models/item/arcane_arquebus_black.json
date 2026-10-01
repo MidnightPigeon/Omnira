@@ -1,0 +1,86 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:translucent",
+  "gui_light": "side",
+  "ambientocclusion": false,
+  "textures": {
+    "pixel": "minecraft:block/white_concrete",
+    "particle": "minecraft:block/white_concrete"
+  },
+  "elements": [
+    {
+      "from": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "to": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#pixel",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 3
+        },
+        "down": {
+          "texture": "#pixel",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 3
+        },
+        "north": {
+          "texture": "#pixel",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 3
+        },
+        "south": {
+          "texture": "#pixel",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 3
+        },
+        "east": {
+          "texture": "#pixel",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 3
+        },
+        "west": {
+          "texture": "#pixel",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 3
+        }
+      }
+    }
+  ]
+}

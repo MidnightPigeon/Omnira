@@ -1,0 +1,21 @@
+{
+  "id": "resonance_core",
+  "item": "omnira:resonance_core",
+  "title": "Resonance Core",
+  "text": [
+    "Craft four Resonance Crystals in a 2x2 square. Above a compatible container, the purple core turns pale red until linked. Item links are pale green; fluid links are blue. Standard item/fluid capabilities are supported.",
+    "Above a Marisa Crystal Ball, an unlinked core remains pale red and turns yellow when linked. Select that connection in the terminal and open the shop to trade from any distance or dimension without an extra mana fee. Daily goods and purchase limits remain shared with your direct shop visits.",
+    "Destroyed nodes automatically unlink. The standard terminal supports four links; advanced condensation upgrades it to six while retaining existing links."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "resonance_ritual",
+      "label": "Ritual of Resonance"
+    },
+    {
+      "target": "enhanced_resonance_terminal",
+      "label": "Enhanced Resonance Terminal"
+    }
+  ]
+}

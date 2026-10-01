@@ -1,0 +1,7 @@
+{
+  "type": "omnira:kirisame_magic_shop",
+  "biomes": "#omnira:has_structure/kirisame_magic_shop",
+  "step": "surface_structures",
+  "terrain_adaptation": "none",
+  "spawn_overrides": {}
+}

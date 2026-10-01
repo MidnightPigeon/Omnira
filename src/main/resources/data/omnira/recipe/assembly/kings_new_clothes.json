@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "operation": "alternating",
+  "slots": [
+    {
+      "item": "omnira:dream_crystal_shard"
+    },
+    {
+      "item": "omnira:shadow_manuscript"
+    },
+    {
+      "item": "omnira:dream_crystal_shard"
+    },
+    {
+      "item": "omnira:shadow_manuscript"
+    },
+    {
+      "item": "omnira:dream_crystal_shard"
+    },
+    {
+      "item": "omnira:shadow_manuscript"
+    },
+    {
+      "item": "omnira:dark_microcore"
+    }
+  ],
+  "result": {
+    "id": "omnira:kings_new_clothes",
+    "count": 1
+  }
+}

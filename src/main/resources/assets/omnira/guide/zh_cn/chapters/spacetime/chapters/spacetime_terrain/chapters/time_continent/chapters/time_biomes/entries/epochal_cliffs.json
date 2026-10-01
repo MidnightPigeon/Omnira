@@ -1,0 +1,41 @@
+{
+  "id": "epochal_cliffs",
+  "title": "纪元断崖",
+  "item": "omnira:suspicious_time_sand",
+  "text": [
+    "断崖露出的五个年代由沉积尘泥分隔。用刷子清理可疑的时之沙，可以取出各层留下的遗物。",
+    "偶尔能见到跨越年代的超维钻井平台，中央的钻头仍可能保存能量。",
+    "地层间有少量破败时流含水层与乱时盲鱼，地表稀疏生长时光草。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "drilling_platform_guide",
+      "label": "超维钻井平台"
+    },
+    {
+      "target": "epochal_relics_guide",
+      "label": "纪元遗物"
+    },
+    {
+      "target": "epochal_aggregates_guide",
+      "label": "年代聚合体与时之沙"
+    },
+    {
+      "target": "damaged_research_facility_guide",
+      "label": "损坏的科研设施"
+    },
+    {
+      "target": "ancient_specimens_guide",
+      "label": "未知化石与生物蛋"
+    },
+    {
+      "target": "chronal_blindfish_guide",
+      "label": "乱时盲鱼"
+    },
+    {
+      "target": "decayed_timeflow_guide",
+      "label": "破败时流与垂钓"
+    }
+  ]
+}

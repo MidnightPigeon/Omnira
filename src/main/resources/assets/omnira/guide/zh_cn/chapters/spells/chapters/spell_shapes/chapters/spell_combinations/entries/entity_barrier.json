@@ -1,0 +1,24 @@
+{
+  "id": "entity_barrier",
+  "item": "omnira:earth_microcore",
+  "title": "自身／生物-屏障",
+  "text": [
+    "形态槽放地微核；目标槽放水微核可保护自身，放火微核则可选中其他生物。屏障跟随其移动，但不抵消本次受击。",
+    "承载者实际受到伤害后，治疗效果作用于承载者，其他效果尝试作用于攻击者。最多触发四次；没有合适攻击者时，反击效果可能无法生效。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "self_target",
+      "label": "自身"
+    },
+    {
+      "target": "barrier_shape",
+      "label": "屏障"
+    },
+    {
+      "target": "selected_target",
+      "label": "目标"
+    }
+  ]
+}

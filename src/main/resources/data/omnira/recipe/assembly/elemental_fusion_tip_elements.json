@@ -1,0 +1,28 @@
+{
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "slots": [
+    {
+      "item": "omnira:earth_microcore"
+    },
+    {
+      "item": "omnira:water_microcore"
+    },
+    {
+      "item": "omnira:fire_microcore"
+    },
+    {
+      "item": "omnira:air_microcore"
+    },
+    [],
+    [],
+    {
+      "item": "omnira:spiritual_crystal_tip"
+    }
+  ],
+  "result": {
+    "id": "omnira:elemental_fusion_tip",
+    "count": 1
+  },
+  "outer_shapeless": true
+}

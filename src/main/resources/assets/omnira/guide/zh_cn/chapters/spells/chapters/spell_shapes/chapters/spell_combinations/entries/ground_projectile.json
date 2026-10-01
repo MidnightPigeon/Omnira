@@ -1,0 +1,20 @@
+{
+  "id": "ground_projectile",
+  "item": "omnira:earth_microcore",
+  "title": "地面-弹射物",
+  "text": [
+    "目标槽放地微核，形态槽放风微核。周围有效地表位置各出现一个向上弹起的法术方块，随后受重力回落。",
+    "这些弹体借用地表方块的外观，不会把原方块挖走，也不会落地成为新的建筑方块。碰到生物或方块时触发携带的效果。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "ground_target",
+      "label": "地面"
+    },
+    {
+      "target": "projectile_shape",
+      "label": "弹射物"
+    }
+  ]
+}

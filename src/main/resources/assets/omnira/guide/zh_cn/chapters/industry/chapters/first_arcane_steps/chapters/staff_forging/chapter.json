@@ -1,0 +1,14 @@
+{
+  "id": "staff_forging",
+  "title": "法杖锻造",
+  "icon": "omnira:modular_staff",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/assemble_staff.json",
+    "entries/modular_staff.json",
+    "entries/staff_refinement.json"
+  ],
+  "chapters": [
+    "chapters/staff_part_recipes/chapter.json"
+  ]
+}

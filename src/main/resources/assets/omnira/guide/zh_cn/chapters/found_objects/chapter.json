@@ -1,0 +1,12 @@
+{
+  "id": "found_objects",
+  "title": "遗迹珍藏",
+  "icon": "omnira:night_heron_statue",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/night_heron_statue.json",
+    "entries/dream_spell_core.json",
+    "entries/traveler_manuscript.json"
+  ],
+  "chapters": []
+}

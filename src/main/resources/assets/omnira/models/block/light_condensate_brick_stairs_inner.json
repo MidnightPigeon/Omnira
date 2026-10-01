@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "top": "omnira:block/light_condensate_bricks",
+    "bottom": "omnira:block/light_condensate_bricks",
+    "side": "omnira:block/light_condensate_bricks"
+  },
+  "render_type": "minecraft:translucent",
+  "ambientocclusion": false
+}

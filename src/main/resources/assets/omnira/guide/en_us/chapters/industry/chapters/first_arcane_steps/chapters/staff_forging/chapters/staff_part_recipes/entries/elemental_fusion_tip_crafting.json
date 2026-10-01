@@ -1,0 +1,15 @@
+{
+  "id": "elemental_fusion_tip_crafting",
+  "item": "omnira:elemental_fusion_tip",
+  "title": "Elemental Fusion Tip · Crafting",
+  "text": [
+    "Use the assembly recipe below to forge this item."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "elemental_fusion_tip",
+      "label": "Use and Effects"
+    }
+  ]
+}

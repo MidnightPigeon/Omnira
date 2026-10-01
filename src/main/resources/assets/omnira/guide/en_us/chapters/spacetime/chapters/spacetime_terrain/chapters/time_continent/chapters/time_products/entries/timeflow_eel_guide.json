@@ -1,0 +1,24 @@
+{
+  "id": "timeflow_eel_guide",
+  "title": "Timeflow Eels and Potions of Time",
+  "item": "omnira:timeflow_eel",
+  "text": [
+    "Eating a Timeflow Eel grants 10 seconds of Time Passage: survive until it ends to return to your starting position, health and hunger. Brew an eel with Awkward Potions for 30-second Potions of Time. Redstone extends this to 1:30, triggering a return every 30 seconds; each return goes to the position recorded when you drank it. Glowstone gives 30 seconds of Time Passage II: return to the starting position with full mana, health and hunger, and fully repaired currently worn and held equipment. Clearing the effect cancels its return; it cannot undo death.",
+    "Refreshing or upgrading an active effect preserves its first recorded position and state. Time Passage and Temporal Dislocation maintain independent snapshots and return points."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "reversion_mire_guide",
+      "label": "Reversion Mire"
+    },
+    {
+      "target": "recurrence_garden_guide",
+      "label": "Recurrence Garden"
+    },
+    {
+      "target": "decayed_timeflow_guide",
+      "label": "Decayed Timeflow and Fishing"
+    }
+  ]
+}

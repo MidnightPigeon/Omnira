@@ -1,0 +1,15 @@
+{
+  "id": "ancestor_launcher_crafting",
+  "item": "omnira:ancestor_launcher",
+  "title": "Ancestor Launcher · Crafting",
+  "text": [
+    "Forge an arquebus in the center with this upgrade kit in an outer slot. Only one upgrade kit can be installed. The loaded crystal is preserved, and intertwined black and red patterns appear around the barrel."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "ancestor_launcher",
+      "label": "Use and Effects"
+    }
+  ]
+}

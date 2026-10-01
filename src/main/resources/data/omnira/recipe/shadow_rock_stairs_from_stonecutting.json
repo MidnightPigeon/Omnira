@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "omnira:shadow_rock"
+  },
+  "result": {
+    "id": "omnira:shadow_rock_stairs",
+    "count": 1
+  }
+}

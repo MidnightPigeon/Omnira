@@ -1,0 +1,12 @@
+{
+  "id": "spacetime_reverser",
+  "title": "Spacetime Reverser",
+  "item": "omnira:spacetime_reverser",
+  "text": [
+    "Ordinary Temporal Silt becomes Living Temporal Silt in five seconds for one energy, without changing quantity. Sedimented and rotted silt still rewind one stage and become activated.",
+    "The Spacetime Reverser takes five seconds and one energy per operation, storing up to 64. Spatial Crystals supply 1; Timeflow Eels and Chronal Blindfish 2; Warp Points, reborn lilies and either consumable memory 4; Time and Space Microcores 8. Two Warp Points yield one Time Microcore, while sixteen Spatial Crystals yield one Space Microcore.",
+    "Exchange memory cubes and lilies, rewind and activate silt, condense microcores, or uncover the past of unknown fossils and eggs. See recipes for quantities.",
+    "Condense remains into royal essences, or inactive T-virus solution into psychic talent solution. Each grants a talent together with Time Distortion. An existing talent prevents consumption; the Cleansing Ritual removes both talent and curse."
+  ],
+  "recipes": true
+}

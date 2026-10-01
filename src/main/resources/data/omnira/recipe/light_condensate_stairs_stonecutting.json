@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "omnira:light_condensate"
+  },
+  "result": {
+    "id": "omnira:light_condensate_stairs",
+    "count": 1
+  }
+}

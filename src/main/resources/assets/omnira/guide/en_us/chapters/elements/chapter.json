@@ -1,0 +1,19 @@
+{
+  "id": "elements",
+  "title": "Elemental Analysis",
+  "icon": "omnira:analysis_artisan_table",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/earth_microcore.json",
+    "entries/water_microcore.json",
+    "entries/fire_microcore.json",
+    "entries/air_microcore.json",
+    "entries/arcane_dust.json",
+    "entries/light_microcore.json",
+    "entries/shadow_mist.json",
+    "entries/analysis_crystal.json"
+  ],
+  "chapters": [
+    "chapters/element_recipes/chapter.json"
+  ]
+}

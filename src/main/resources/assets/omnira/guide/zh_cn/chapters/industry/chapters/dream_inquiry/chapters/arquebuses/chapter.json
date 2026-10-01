@@ -1,0 +1,12 @@
+{
+  "id": "arquebuses",
+  "title": "魔能圣铳与套组",
+  "icon": "omnira:arcane_arquebus",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/arcane_arquebus_crafting.json",
+    "entries/ancestor_launcher_crafting.json",
+    "entries/kings_new_clothes_crafting.json"
+  ],
+  "chapters": []
+}

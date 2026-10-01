@@ -1,0 +1,11 @@
+{
+  "id": "dream_crystal_bedrock",
+  "item": "omnira:dream_crystal_bedrock",
+  "title": "Dream Crystal Budding Rock",
+  "text": [
+    "Look for blue-violet budding rock on rare Mirror Dream islands. Buds on its faces gradually grow into mature clusters. The budding rock itself cannot be harvested.",
+    "Mature clusters yield dream crystals, with Fortune increasing the yield. Silk Touch collects buds or clusters at their current growth stage.",
+    "Offering one dream crystal to a Dream Mirror has a 15% chance to yield a placeable budding rock."
+  ],
+  "recipes": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "CGC",
+    "G G",
+    "CGC"
+  ],
+  "key": {
+    "C": {
+      "item": "omnira:spiritual_crystal"
+    },
+    "G": {
+      "tag": "c:glass_blocks/colorless"
+    }
+  },
+  "result": {
+    "id": "omnira:crystal_casing",
+    "count": 4
+  }
+}

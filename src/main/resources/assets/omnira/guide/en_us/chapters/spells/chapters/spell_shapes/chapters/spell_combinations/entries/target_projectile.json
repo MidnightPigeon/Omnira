@@ -1,0 +1,20 @@
+{
+  "id": "target_projectile",
+  "item": "omnira:fire_microcore",
+  "title": "Target-Projectile",
+  "text": [
+    "Use Fire in the target slot and Air in the shape slot. Select a creature or block before firing; the projectile adjusts its course as a selected creature moves.",
+    "Homing does not grant wall penetration or guarantee a hit on the original target. Other creatures and blocks can intercept the projectile."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "selected_target",
+      "label": "Target"
+    },
+    {
+      "target": "projectile_shape",
+      "label": "Projectile"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "dreams",
+  "title": "梦境访问与探索",
+  "icon": "omnira:dream_crystal_shard",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/visit_dream.json"
+  ],
+  "chapters": [
+    "chapters/dream_products/chapter.json",
+    "chapters/dream_creatures/chapter.json",
+    "chapters/dream_crafting/chapter.json",
+    "chapters/travel_crafting/chapter.json",
+    "chapters/dream_exploration/chapter.json"
+  ]
+}

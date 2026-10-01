@@ -1,0 +1,23 @@
+{
+  "id": "unstable_spacetime_aggregate",
+  "title": "Unstable Spacetime Aggregate",
+  "item": "omnira:unstable_spacetime_aggregate",
+  "recipes": true,
+  "text": [
+    "Forge six spacetime knots with paradox dust, resonance crystal and paradox dust on the left, middle and right nodes.",
+    "128 durability. Hands and inventory drain 1 per 0.5 seconds until detonation; the cursor pauses without restoring durability. Storage restores 1 per 0.5 seconds even while inspected. Returning to inventory resumes decay. A thrown aggregate detonates on impact or exhaustion.",
+    "Dropping detonates it immediately. The spherical storm ignores walls and deals 40 direct health damage to all living beings within 10 blocks, including you and allies. It deletes nonliving entities and stationary Omnira workstations without drops. Aeronautics and Create moving structures only lose blocks inside the sphere; stabilization cannot protect them.",
+    "Non-player creatures killed by the storm leave no items. A player's possessions, equipment and Curios are sealed in Spacetime Amber. Right-click your amber to reclaim items; overflow remains sealed. Recall crystals record a Death Marker until the amber disappears, even after travelling there. Each player has only one amber: a new one breaks the old one and spills its items.",
+    "Breaking the amber releases all its items. Another spacetime storm erases both the amber and its contents without drops."
+  ],
+  "links": [
+    {
+      "target": "corridor_ritual",
+      "label": "Ritual of Time's Threshold"
+    },
+    {
+      "target": "advanced_assembly_table",
+      "label": "Advanced Forge"
+    }
+  ]
+}

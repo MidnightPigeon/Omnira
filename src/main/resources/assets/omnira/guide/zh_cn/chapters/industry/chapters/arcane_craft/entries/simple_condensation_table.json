@@ -1,0 +1,10 @@
+{
+  "id": "simple_condensation_table",
+  "item": "omnira:simple_condensation_table",
+  "title": "简易凝聚台",
+  "text": [
+    "灵性凝形始于木石之间。简易凝聚台无需投入原料，可以将施作者的法力凝聚为灵性水晶。",
+    "打开凝聚台并开始凝聚，基础消耗为 100 点法力。完成后，可从输出槽取走水晶。"
+  ],
+  "recipes": true
+}

@@ -1,0 +1,15 @@
+{
+  "id": "arcane_crystal_grid_crafting",
+  "item": "omnira:arcane_crystal_grid",
+  "title": "Arcane Crystal Grid · Crafting",
+  "text": [
+    "Upgrade an elemental grid in the center, with a light microcore on the right, a dark microcore on the left and four dream crystals in the remaining slots. The spell chain is preserved; new empty slots follow it."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "arcane_crystal_grid",
+      "label": "Use and Effects"
+    }
+  ]
+}

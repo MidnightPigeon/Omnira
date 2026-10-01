@@ -1,0 +1,6 @@
+{
+  "selector": "omnira:light_condensate",
+  "properties": {
+    "sable:floating_material": "omnira:light_condensate"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "omnira:assembly",
+  "operation": "staff",
+  "slots": [
+    {"item": "omnira:spiritual_crystal_tip"}, [], [],
+    {"item": "omnira:wooden_staff_shaft"}, [], [],
+    {"item": "omnira:iron_reinforcement"}
+  ],
+  "result": {"id": "omnira:modular_staff", "count": 1}
+}

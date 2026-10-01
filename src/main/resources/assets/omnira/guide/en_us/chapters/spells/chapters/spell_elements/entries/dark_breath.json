@@ -1,0 +1,16 @@
+{
+  "id": "dark_breath",
+  "item": "omnira:dark_microcore",
+  "title": "Dark Breath",
+  "text": [
+    "Place a Dark Microcore directly in an element slot. Triggers a 1.5-block-radius cloud for 20 seconds, dealing 1 base damage per second and healing the caster for actual damage dealt. Self-damage grants no healing.",
+    "Each Delay adds 20 seconds; each Enhancement adds 1 base damage per second. Infusion seeks entities within 5 blocks, including the caster. Only area bonuses enlarge the cloud."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "dark_microcore",
+      "label": "Obtaining microcores"
+    }
+  ]
+}

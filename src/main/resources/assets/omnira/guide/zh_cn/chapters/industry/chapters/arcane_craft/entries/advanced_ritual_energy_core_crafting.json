@@ -1,0 +1,19 @@
+{
+  "id": "advanced_ritual_energy_core_crafting",
+  "item": "omnira:advanced_ritual_energy_core",
+  "title": "高阶仪祭能核·制作",
+  "recipes": true,
+  "text": [
+    "高阶装配台中央放三个仪祭能核与三根烈焰棒；从入口看，左、中、右节点分别放悖论尘、光暗法术核心、悖论尘。节点上的光暗法术核心会作为材料消耗，供能槽中的核心保留。"
+  ],
+  "links": [
+    {
+      "target": "advanced_ritual_energy_core",
+      "label": "用途"
+    },
+    {
+      "target": "advanced_assembly_table",
+      "label": "高阶装配台"
+    }
+  ]
+}

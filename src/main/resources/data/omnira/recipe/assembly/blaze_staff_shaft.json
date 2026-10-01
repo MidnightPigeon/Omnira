@@ -1,0 +1,19 @@
+{
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "slots": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "minecraft:blaze_rod"
+    }
+  ],
+  "result": {
+    "id": "omnira:blaze_staff_shaft",
+    "count": 1
+  }
+}

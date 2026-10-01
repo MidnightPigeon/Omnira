@@ -1,0 +1,9 @@
+{
+  "id": "spacetime_corridor_guide",
+  "title": "Spacetime Mirror Corridor",
+  "item": "omnira:engraved_mirror_rock",
+  "text": [
+    "The mirror corridor lies between the two layers. Mirror rock forms its long passage; wall rifts carry travelers upward or downward, but not back along the same path."
+  ],
+  "recipes": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "basic_crystal_grid",
+  "item": "omnira:basic_crystal_grid",
+  "title": "基础水晶格栅",
+  "text": [
+    "可容纳3枚法术水晶。装备后为法杖提供法术链；用于魔能引擎时提供1.2倍输出。",
+    "默认按 R 编辑佩戴的第一个格栅；没有佩戴时只编辑背包中的第一个格栅。背包中的格栅仅可编辑，不提供属性加成、左侧法术轮或施法。",
+    "佩戴多个格栅时，只有第一个提供属性加成与法术链；取下后，下一个才接替生效。法术轮同时显示形态和关键词。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "elemental_crystal_grid",
+      "label": "升级为元素水晶格栅"
+    },
+    {
+      "target": "basic_crystal_grid_crafting",
+      "label": "锻造配方"
+    },
+    {
+      "target": "mana_engine",
+      "label": "魔能引擎"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "selector": "omnira:pure_vessel",
+  "properties": {
+    "sable:mass": 0,
+    "sable:volume": 1
+  }
+}

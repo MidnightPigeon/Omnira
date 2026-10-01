@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "axis=y,reversed=false": {
+      "model": "omnira:block/crystal_column_base",
+      "x": 0,
+      "y": 0
+    },
+    "axis=y,reversed=true": {
+      "model": "omnira:block/crystal_column_base",
+      "x": 180,
+      "y": 0
+    },
+    "axis=z,reversed=false": {
+      "model": "omnira:block/crystal_column_base",
+      "x": 90,
+      "y": 180
+    },
+    "axis=z,reversed=true": {
+      "model": "omnira:block/crystal_column_base",
+      "x": 90,
+      "y": 0
+    },
+    "axis=x,reversed=false": {
+      "model": "omnira:block/crystal_column_base",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,reversed=true": {
+      "model": "omnira:block/crystal_column_base",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

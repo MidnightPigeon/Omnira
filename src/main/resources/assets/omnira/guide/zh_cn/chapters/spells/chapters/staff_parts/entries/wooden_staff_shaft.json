@@ -1,0 +1,15 @@
+{
+  "id": "wooden_staff_shaft",
+  "item": "omnira:wooden_staff_shaft",
+  "title": "木质杖体",
+  "text": [
+    "提供 1 个强化槽，不增加法术强度。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "wooden_staff_shaft_crafting",
+      "label": "锻造配方"
+    }
+  ]
+}

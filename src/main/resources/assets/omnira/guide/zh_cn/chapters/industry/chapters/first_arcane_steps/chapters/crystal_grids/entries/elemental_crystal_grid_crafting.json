@@ -1,0 +1,15 @@
+{
+  "id": "elemental_crystal_grid_crafting",
+  "item": "omnira:elemental_crystal_grid",
+  "title": "元素水晶格栅 · 制作",
+  "text": [
+    "在魔动装配台中央放基础格栅，左右两侧各放一枚任意元素微核，其余四槽留空。两枚微核可使用不同元素。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "elemental_crystal_grid",
+      "label": "使用与效果"
+    }
+  ]
+}

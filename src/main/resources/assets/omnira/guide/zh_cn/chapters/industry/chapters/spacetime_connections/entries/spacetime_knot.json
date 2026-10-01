@@ -1,0 +1,9 @@
+{
+  "id": "spacetime_knot",
+  "item": "omnira:spacetime_knot",
+  "title": "时空扭结",
+  "text": [
+    "将时空道标置于魔动装配台中央加工，可得到流转的时空扭结。此过程会消耗道标。"
+  ],
+  "recipes": true
+}

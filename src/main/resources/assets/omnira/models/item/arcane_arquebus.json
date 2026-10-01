@@ -1,0 +1,98 @@
+{
+  "parent": "minecraft:builtin/entity",
+  "textures": {
+    "glass": "omnira:item/basic_staff_facets",
+    "frame": "omnira:item/modular_staff_diamond",
+    "rim": "omnira:item/modular_staff_light_core",
+    "core": "omnira:item/primordial_core_light",
+    "black": "minecraft:block/blackstone",
+    "red": "minecraft:block/redstone_block",
+    "particle": "omnira:item/basic_staff_facets"
+  },
+  "display": {
+    "gui": {
+      "rotation": [
+        18,
+        130,
+        -30
+      ],
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.42,
+        0.42,
+        0.42
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "scale": [
+        0.55,
+        0.55,
+        0.55
+      ]
+    },
+    "firstperson_righthand": {
+      "translation": [
+        1,
+        -1,
+        -1
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ]
+    },
+    "firstperson_lefthand": {
+      "translation": [
+        1,
+        -1,
+        -1
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ]
+    },
+    "thirdperson_righthand": {
+      "translation": [
+        0,
+        1,
+        -1
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ]
+    },
+    "thirdperson_lefthand": {
+      "translation": [
+        0,
+        1,
+        -1
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ]
+    }
+  }
+}

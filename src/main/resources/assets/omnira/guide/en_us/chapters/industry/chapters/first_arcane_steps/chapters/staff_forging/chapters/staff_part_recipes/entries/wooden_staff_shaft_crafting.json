@@ -1,0 +1,15 @@
+{
+  "id": "wooden_staff_shaft_crafting",
+  "item": "omnira:wooden_staff_shaft",
+  "title": "Wooden Staff Shaft · Crafting",
+  "text": [
+    "Use the assembly recipe below to forge this item."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "wooden_staff_shaft",
+      "label": "Use and Effects"
+    }
+  ]
+}

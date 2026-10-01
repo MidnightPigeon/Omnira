@@ -1,0 +1,192 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.1.38'
+}
+
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+version = mod_version
+group = mod_group_id
+
+sourceSets.main.resources {
+    srcDir('src/generated/resources')
+    if (providers.gradleProperty('dreamTestData').isPresent()) srcDir('src/gametest/resources')
+    exclude("**/*.bbmodel")
+    exclude("src/generated/**/.cache")
+}
+
+repositories {
+    maven { url 'https://maven.theillusivec4.top/' }
+}
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+runs {
+    configureEach {
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+        systemProperty 'forge.logging.console.level', 'debug'
+        workingDirectory project.layout.projectDirectory.dir('run').dir(name)
+        modSource project.sourceSets.main
+    }
+
+    client {
+        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        if (providers.gradleProperty('clientSmoke').isPresent()) systemProperty 'omnira.clientSmoke', 'true'
+    }
+
+    server {
+        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        argument '--nogui'
+    }
+
+    gameTestServer {
+        systemProperty 'neoforge.enabledGameTestNamespaces', providers.gradleProperty('gameTestNamespaces').getOrElse(project.mod_id)
+    }
+
+    data {
+        arguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    }
+}
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+def installedCreate = file('../.minecraft/versions/WizardryCraft/mods/create-1.21.1-6.0.10.jar')
+def installedSable = file('../.minecraft/versions/WizardryCraft/mods/sable-neoforge-1.21.1-2.0.5.jar')
+def extractSableLibraries = tasks.register('extractSableLibraries', Sync) {
+    from(zipTree(installedSable)) {
+        include 'META-INF/jarjar/*.jar'
+        eachFile { details -> details.path = details.name }
+        includeEmptyDirs = false
+    }
+    into layout.buildDirectory.dir('sable-libs')
+}
+def extractCreateLibraries = tasks.register('extractCreateLibraries', Sync) {
+    from(zipTree(installedCreate)) {
+        include 'META-INF/jarjar/*.jar'
+        eachFile { details -> details.path = details.name }
+        includeEmptyDirs = false
+    }
+    into layout.buildDirectory.dir('create-libs')
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:${neo_version}"
+    compileOnly files(installedCreate)
+    compileOnly files(installedSable)
+    if (!providers.gradleProperty('withoutSable').isPresent() && !providers.gradleProperty('withoutCreate').isPresent()) {
+        localRuntime files(installedSable)
+        localRuntime files('../.minecraft/versions/WizardryCraft/mods/create-aeronautics-bundled-1.21.1-1.3.2.jar')
+    }
+    compileOnly files(fileTree('build/sable-libs') { include '*.jar' }).builtBy(extractSableLibraries)
+    if (!providers.gradleProperty('withoutCreate').isPresent()) localRuntime files(installedCreate)
+    compileOnly files('../.minecraft/versions/WizardryCraft/mods/jei-1.21.1-neoforge-19.56.0.441.jar')
+    if (!providers.gradleProperty('withoutJei').isPresent())
+        localRuntime files('../.minecraft/versions/WizardryCraft/mods/jei-1.21.1-neoforge-19.56.0.441.jar')
+    // Nested Create libraries are supplied by Create in production.
+    compileOnly files(fileTree('build/create-libs') { include '*.jar' }).builtBy(extractCreateLibraries)
+    def installedCurios = file('../.minecraft/versions/WizardryCraft/mods/curios-neoforge-9.5.1+1.21.1.jar')
+    if (installedCurios.exists()) implementation files(installedCurios)
+    else implementation 'top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1'
+    if (!providers.gradleProperty('withoutExternalMods').isPresent()) {
+        def snapshot = new groovy.json.JsonSlurper().parse(file('config/development-mods.json'))
+        snapshot.server.each { name ->
+            if (name.startsWith('kubejs-create-') && providers.gradleProperty('withoutCreate').isPresent()) return
+            def installed = file("../.minecraft/versions/WizardryCraft/mods/$name")
+            if (!installed.isFile()) throw new GradleException("External test mod missing: $name; refresh config/development-mods.json against the installed instance.")
+            localRuntime files(installed)
+        }
+    }
+}
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
+    }
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/repo"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.register('prepareSpellGameTests', Copy) {
+    from('scripts/tests/spell_arena.snbt')
+    into('run/gameTestServer/gameteststructures')
+}
+
+tasks.configureEach {
+    if (name == 'runGameTestServer') dependsOn('prepareSpellGameTests')
+}
+
+tasks.named('jar').configure {
+    from('LICENSE') { into('META-INF') }
+    exclude('com/mcmagic/omnira/gametest/**')
+    exclude('com/mcmagic/omnira/client/renderer/CruiseOrbRenderer$GeometryVerification*')
+    exclude('com/mcmagic/omnira/client/ArmorPreview*')
+    exclude('com/mcmagic/omnira/client/SpacetimeSkyPreview*')
+    exclude('data/minecraft/worldgen/world_preset/flat.json')
+}
+
+tasks.register('previewArmor', JavaExec) {
+    dependsOn tasks.named('classes')
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.mcmagic.omnira.client.ArmorPreview'
+    args file('src/main/resources/assets/omnira').absolutePath, file('build/previews/armor-poses.png').absolutePath
+    systemProperty 'java.awt.headless', 'true'
+}
+
+tasks.register('previewSpacetimeSky', JavaExec) {
+    dependsOn tasks.named('classes')
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.mcmagic.omnira.client.SpacetimeSkyPreview'
+    args file('docs/previews/spacetime-sky.png').absolutePath
+    systemProperty 'java.awt.headless', 'true'
+}
+
+tasks.register('previewCruiseOrb', JavaExec) {
+    dependsOn tasks.named('classes')
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.mcmagic.omnira.client.renderer.CruiseOrbRenderer$GeometryVerification'
+    args file('src/main/resources/assets/omnira').absolutePath, file('build/previews/cruise-orb-cracks.png').absolutePath
+    systemProperty 'java.awt.headless', 'true'
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}

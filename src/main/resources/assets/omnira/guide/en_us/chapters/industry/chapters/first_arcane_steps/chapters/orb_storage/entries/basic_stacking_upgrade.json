@@ -1,0 +1,10 @@
+{
+  "id": "basic_stacking_upgrade",
+  "item": "omnira:basic_stacking_upgrade",
+  "title": "Basic Stacking Upgrade",
+  "text": [
+    "Doubles the per-slot limit of stackable items or fluid capacity. Unstackable items remain limited to one.",
+    "Duplicate upgrade families are not accepted. Basic and infused stacking upgrades share one family; capacity upgrades cannot be removed while contents exceed the remaining capacity."
+  ],
+  "recipes": true
+}

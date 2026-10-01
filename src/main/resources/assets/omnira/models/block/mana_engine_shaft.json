@@ -1,0 +1,83 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:translucent",
+  "ambientocclusion": false,
+  "textures": {
+    "glass": "omnira:block/workstation_crystal",
+    "rim": "omnira:block/workstation_crystal_ring",
+    "heart": "omnira:item/spiritual_crystal_facets",
+    "shaft": "omnira:item/spiritual_crystal_facets",
+    "button": "omnira:block/engine_button_white",
+    "particle": "omnira:block/workstation_crystal"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        6,
+        0
+      ],
+      "to": [
+        10,
+        10,
+        4
+      ],
+      "faces": {
+        "up": {
+          "texture": "#shaft",
+          "uv": [
+            6,
+            0,
+            10,
+            4
+          ]
+        },
+        "down": {
+          "texture": "#shaft",
+          "uv": [
+            6,
+            0,
+            10,
+            4
+          ]
+        },
+        "north": {
+          "texture": "#shaft",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ]
+        },
+        "south": {
+          "texture": "#shaft",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ]
+        },
+        "east": {
+          "texture": "#shaft",
+          "uv": [
+            0,
+            6,
+            4,
+            10
+          ]
+        },
+        "west": {
+          "texture": "#shaft",
+          "uv": [
+            0,
+            6,
+            4,
+            10
+          ]
+        }
+      }
+    }
+  ]
+}

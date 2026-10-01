@@ -1,0 +1,10 @@
+{
+  "id": "light_source_crystal",
+  "item": "omnira:light_source_crystal",
+  "title": "Light Source Crystal",
+  "text": [
+    "A pale-gold translucent crystal forming the shells of light spheres in the Dawn Crystal Plains. Used for building and Crude Light Cores.",
+    "Emits light level 10, brighter than Light Condensate, and provides 5 kpg of lift with Aeronautics."
+  ],
+  "recipes": true
+}

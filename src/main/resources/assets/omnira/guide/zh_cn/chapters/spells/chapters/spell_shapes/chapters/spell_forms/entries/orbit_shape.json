@@ -1,0 +1,25 @@
+{
+  "id": "orbit_shape",
+  "item": "omnira:water_microcore",
+  "title": "环绕",
+  "text": [
+    "在形态槽放入水元素微核。生成四颗围绕选定中心运动的法术弹射物；自身或生物中心可以移动，方块或空中位置则保持固定。",
+    "法球碰到生物或方块才触发效果。选中生物只是让它成为环绕中心，不会立即对它施加效果；法球仍可被弹射返还。",
+    "广域魔纹使法球增至六颗并扩大环绕半径。地面-环绕沿地表选点组成的路径运行。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "water_microcore",
+      "label": "水元素微核"
+    },
+    {
+      "target": "ground_orbit",
+      "label": "地面-环绕"
+    },
+    {
+      "target": "spell_elements",
+      "label": "法术要素"
+    }
+  ]
+}

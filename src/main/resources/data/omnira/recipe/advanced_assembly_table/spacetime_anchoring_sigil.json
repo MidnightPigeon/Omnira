@@ -1,0 +1,10 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "slots": [
+    {"item":"omnira:spacetime_knot"}, [], [], [], [], [],
+    {"item":"omnira:time_microcore"},
+    {"item":"omnira:grid_frame"},
+    {"item":"omnira:space_microcore"}
+  ],
+  "result": {"id":"omnira:spacetime_anchoring_sigil","count":1}
+}

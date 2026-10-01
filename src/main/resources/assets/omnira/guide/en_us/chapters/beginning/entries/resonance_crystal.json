@@ -1,0 +1,9 @@
+{
+  "id": "resonance_crystal",
+  "item": "omnira:resonance_crystal",
+  "title": "Resonance Crystal",
+  "text": [
+    "Surround a Spiritual Crystal with eight Arcane Dust in a crafting table. Used in advanced workstations and Sword Shaping."
+  ],
+  "recipes": true
+}

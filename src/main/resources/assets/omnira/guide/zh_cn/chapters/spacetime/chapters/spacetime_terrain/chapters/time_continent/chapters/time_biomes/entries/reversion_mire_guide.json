@@ -1,0 +1,46 @@
+{
+  "id": "reversion_mire_guide",
+  "title": "回溯湿地",
+  "item": "omnira:reborn_rottenleaf_lily",
+  "text": [
+    "回溯湿地的沉积尘泥间散布着浅塘。浅绿色的破败时流偶尔泛起棕色，塘底与岸边覆盖朽化的时序尘泥。沉积态尘泥接触时流五分钟后会朽化，普通尘泥须先沉积。接触时流会使移动与游泳速度减半，并持续受到凋零伤害；时间系生物（包括时流鳗与乱时盲鱼）、梦境生物，以及佩戴时空锚定印记的玩家不受影响。",
+    "每五分钟，湿地经历一分钟逆转。此前一分钟身处湿地、仍在同一维度的实体会回到记录位置，即使已经离开湿地。时间系生物和佩戴时空锚定印记的玩家不受这一回溯影响。",
+    "逆转时，能变为幼体的生物暂时幼年化，结束后恢复原年龄。完整、未被改动的自然成树退回对应树苗；任意圆木或树叶被破坏、替换，整棵树便不再回溯。保留原来的回溯树苗才会恢复原树。人工搭建的木材建筑不受树木回溯影响，新幼崽与新树苗不会被催生。",
+    "腐朽的朽叶睡莲仅在回溯湿地逆转时新生，随后再次腐朽。趁新生时采集，可获得不会自行腐朽的新生睡莲。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "rottenleaf_lilies_guide",
+      "label": "朽叶睡莲"
+    },
+    {
+      "target": "time_tree_guide",
+      "label": "时光树"
+    },
+    {
+      "target": "rusty_lake_mill_guide",
+      "label": "锈湖磨坊"
+    },
+    {
+      "target": "temporal_silt_guide",
+      "label": "时序尘泥"
+    },
+    {
+      "target": "decayed_timeflow_guide",
+      "label": "破败时流与垂钓"
+    },
+    {
+      "target": "timeflow_eel_guide",
+      "label": "时流鳗与时间药水"
+    },
+    {
+      "target": "time_plants_guide",
+      "label": "时光花草"
+    },
+    {
+      "target": "memory_cube_guide",
+      "label": "记忆立方体"
+    }
+  ]
+}

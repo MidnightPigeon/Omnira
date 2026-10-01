@@ -1,0 +1,2 @@
+{ "type": "omnira:analysis", "ingredient": { "item": "minecraft:feather" }, "count": 64,
+  "result": { "id": "omnira:air_microcore", "count": 1 } }

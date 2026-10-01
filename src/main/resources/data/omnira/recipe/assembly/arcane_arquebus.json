@@ -1,0 +1,26 @@
+{
+  "type": "omnira:assembly",
+  "operation": "arquebus",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:primordial_spell_core"
+    },
+    {
+      "item": "omnira:wide_area_rune"
+    },
+    {
+      "item": "omnira:light_microcore"
+    },
+    [],
+    [],
+    [],
+    {
+      "item": "omnira:basic_crystal_grid"
+    }
+  ],
+  "result": {
+    "id": "omnira:arcane_arquebus",
+    "count": 1
+  }
+}

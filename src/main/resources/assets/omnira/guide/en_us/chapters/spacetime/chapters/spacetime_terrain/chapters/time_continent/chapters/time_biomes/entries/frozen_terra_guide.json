@@ -1,0 +1,28 @@
+{
+  "id": "frozen_terra_guide",
+  "title": "Stilled Wastes",
+  "item": "omnira:solidified_light_crystal_core",
+  "text": [
+    "Machines, growth and fluid flow stop here. Dropped items and projectiles freeze, but living creatures and their own timers continue normally. Assembled contraptions and flying structures remain mobile.",
+    "The Frozen Terra Palace sometimes appears among the highlands. Time Warp Points can still slow creatures within their reach."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "traveler_manuscript",
+      "label": "Traveler's Manuscript"
+    },
+    {
+      "target": "frozen_palace_guide",
+      "label": "Solidified Palace of Terra"
+    },
+    {
+      "target": "temporal_silt_guide",
+      "label": "Temporal Silt"
+    },
+    {
+      "target": "time_warp_point_guide",
+      "label": "Time Warp Point"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "grid_frame",
+  "item": "omnira:grid_frame",
+  "title": "格栅框架",
+  "text": [
+    "格栅的八边形外框。可在工作台用八枚灵性水晶围成一圈合成，中央留空；或在魔动装配台外围六槽各放一枚灵性水晶，中央留空，锻造得到。",
+    "框架只是制作材料，不能装备到格栅饰品槽，也不能存放法术。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "basic_crystal_grid",
+      "label": "基础水晶格栅"
+    }
+  ]
+}

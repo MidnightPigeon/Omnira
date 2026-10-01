@@ -1,0 +1,15 @@
+{
+  "id": "crystal_ball_crafting",
+  "title": "Crystal Ball Construction",
+  "item": "omnira:crystal_ball",
+  "text": [
+    "Condense a Crystal Ball according to its recipe; the finished orb stores items and accepts upgrades."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "crystal_ball",
+      "label": "Use and Storage"
+    }
+  ]
+}

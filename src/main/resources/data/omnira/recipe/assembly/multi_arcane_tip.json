@@ -1,0 +1,13 @@
+{
+  "type": "omnira:assembly",
+  "slots": [
+    {"item": "omnira:arcane_dust"},
+    {"item": "omnira:arcane_dust"},
+    {"item": "omnira:arcane_dust"},
+    {"item": "omnira:arcane_dust"},
+    {"item": "omnira:arcane_dust"},
+    {"item": "omnira:arcane_dust"},
+    {"item": "omnira:spiritual_crystal_tip"}
+  ],
+  "result": {"id": "omnira:multi_arcane_tip", "count": 1}
+}

@@ -1,0 +1,15 @@
+{
+  "id": "sharp_breath_crafting",
+  "item": "omnira:sharp_breath",
+  "title": "Sharp Breath - Harm · Crafting",
+  "text": [
+    "Analyze an iron sword to obtain Sharp Breath and a stick."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "sharp_breath",
+      "label": "Use and Effects"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {
+    "item": "omnira:time_flower"
+  },
+  "mana_cost": 300,
+  "result": {
+    "id": "omnira:time_warp_point",
+    "count": 1
+  }
+}

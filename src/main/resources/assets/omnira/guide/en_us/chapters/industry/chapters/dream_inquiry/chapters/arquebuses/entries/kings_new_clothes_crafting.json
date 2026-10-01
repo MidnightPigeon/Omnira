@@ -1,0 +1,15 @@
+{
+  "id": "kings_new_clothes_crafting",
+  "item": "omnira:kings_new_clothes",
+  "title": "The King's New Clothes · Crafting",
+  "text": [
+    "Forge an arquebus in the center with this upgrade kit outside to create a flowing blue ghost double barrel. A gun accepts only one upgrade kit: this and the Ancestor Launcher are mutually exclusive. Its loaded crystal is preserved."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "kings_new_clothes",
+      "label": "Use and Effects"
+    }
+  ]
+}

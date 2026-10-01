@@ -1,0 +1,10 @@
+{
+  "id": "night_heron_statue",
+  "item": "omnira:night_heron_statue",
+  "title": "Night Heron Crystal Statue",
+  "text": [
+    "Found in loot crystal balls in Crystal Workshops. The purple front button changes its colors; interact with the upper half or apply a redstone signal to switch walking and standing poses.",
+    "May produce Milk Suspension after a neck-stretch cycle. The white rear button toggles production. Facing the front button, place a container to the right of the base to collect it."
+  ],
+  "recipes": false
+}

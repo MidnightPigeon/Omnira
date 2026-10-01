@@ -1,0 +1,9 @@
+{
+  "id": "light_condensate_bricks",
+  "item": "omnira:light_condensate_bricks",
+  "title": "Light Condensate Bricks",
+  "text": [
+    "Craft four Light Condensate in a 2×2 square into four bricks. Retains light level 7 and 2 kpg of lift."
+  ],
+  "recipes": true
+}

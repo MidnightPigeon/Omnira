@@ -1,0 +1,15 @@
+{
+  "id": "spiritual_crystal_tip_crafting",
+  "item": "omnira:spiritual_crystal_tip",
+  "title": "Spiritual Crystal Tip · Crafting",
+  "text": [
+    "Use the assembly recipe below to forge this item."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "spiritual_crystal_tip",
+      "label": "Use and Effects"
+    }
+  ]
+}

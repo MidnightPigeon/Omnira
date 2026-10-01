@@ -1,0 +1,23 @@
+{
+  "id": "shadow_library",
+  "item": "omnira:shadow_bookshelf",
+  "title": "Shadow Library",
+  "text": [
+    "Rare Shadow Libraries lie beneath the Twilight Shadow Woods. Find a Shadow Trapdoor inside a cross-shaped shadow-stone border; its ladder leads into an ordinary stacks room.",
+    "Four to seven connected rooms include exactly one research room and one sealed archive; the rest are stacks. Shadow Lanterns light the passages, but beware the archive webs and Shadow Ghost spawner.",
+    "Stacks contain one loot Crystal Ball with books, paper and occasional enchanted books, plus an independent 20% chance of one Shadow Manuscript. Research rooms contain two, offering Resonance Crystals, enchanted books and rare damaged Analysis Crystals or Light and Dark Microcores. Analysis tables and enchanting tables are not guaranteed.",
+    "The sealed archive holds one ball with enchanted books and Shadow Manuscripts. Treasure enchantments are more common here, and a Dream Spell Core is a rare find.",
+    "A sealed archive has a 20% chance to contain a Spacetime Waymark. Right-click it to add it to your personal recall records; its name can then be changed."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "dream_spell_core",
+      "label": "Dream Spell Core"
+    },
+    {
+      "target": "spacetime_waymark",
+      "label": "Spacetime Waymark"
+    }
+  ]
+}

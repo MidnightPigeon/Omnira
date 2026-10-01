@@ -1,0 +1,20 @@
+{
+  "id": "split_time_sundial_guide",
+  "title": "Split-Time Sundial",
+  "item": "omnira:split_time_sundial",
+  "text": [
+    "The sundial cuts and replaces an item's timeline. Insert an item, click the result preview to choose an outcome, then feed it spacetime materials. It starts automatically when charged, runs for 128 seconds, and consumes one energy every four seconds (32 total). Changing the target resets progress. Only selected equal-unit materials and same-shape blocks can be exchanged.",
+    "The sundial stores up to 128 energy, shown by its illuminated rim. Allowed groups include microcores, crystal materials, ancient remains, related building materials, matching wood shapes, ingots, memory states, crystal balls, heads and casings. Memory blocks never convert into consumable memories. Items with stored contents or other extra data generally cannot be converted; the output list shows available choices."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "doomsday_rite",
+      "label": "Doomsday Rite"
+    },
+    {
+      "target": "split_time_sundial_guide_machine_reference",
+      "label": "Split-Time Sundial"
+    }
+  ]
+}

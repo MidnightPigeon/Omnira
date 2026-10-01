@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:light_source_bricks"
+    }
+  },
+  "result": {
+    "id": "omnira:light_source_brick_slab",
+    "count": 6
+  }
+}

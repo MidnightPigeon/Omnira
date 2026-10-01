@@ -1,0 +1,21 @@
+{
+  "id": "explosion_shape",
+  "item": "omnira:fire_microcore",
+  "title": "Explosion",
+  "text": [
+    "Put a Fire Microcore in the shape slot. Immediately spreads carried effects within three blocks of the selected position, without distinguishing allies, enemies or the caster.",
+    "Explosion delivers effects; it does not inherently add magic damage or destroy terrain. Elements and modifiers determine the result: ordinary Damage is physical, while Infusion changes it to Instant Damage.",
+    "Spell power strengthens carried effects but does not change this three-block radius. A Wide Area Rune increases it to 4.5 blocks. Ground targeting creates a burst at each selected surface, so watch your own position and nearby allies."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "fire_microcore",
+      "label": "Fire Microcore"
+    },
+    {
+      "target": "spell_elements",
+      "label": "Spell Elements"
+    }
+  ]
+}

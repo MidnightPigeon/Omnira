@@ -1,0 +1,19 @@
+{
+  "id": "drilling_platform_guide",
+  "title": "Hyperdimensional Drilling Platform",
+  "item": "omnira:hyperdimensional_drill",
+  "text": [
+    "Drilling platforms occasionally stand in Epochal Cliffs, with a recoverable drill at their center. Their treasures include one Spacetime Archaeology Brush and a fluid treasure orb."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "hyperdimensional_drill",
+      "label": "Hyperdimensional Drilling Rig"
+    },
+    {
+      "target": "spacetime_archaeology_brush",
+      "label": "Spacetime Archaeology Brush"
+    }
+  ]
+}

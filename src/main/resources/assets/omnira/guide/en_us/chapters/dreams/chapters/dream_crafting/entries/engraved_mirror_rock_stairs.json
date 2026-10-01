@@ -1,0 +1,9 @@
+{
+  "id": "engraved_mirror_rock_stairs",
+  "item": "omnira:engraved_mirror_rock_stairs",
+  "title": "Engraved Mirror Rock Stairs",
+  "text": [
+    "Decorative mirror stone, with stair and slab forms available through crafting and stonecutting."
+  ],
+  "recipes": true
+}

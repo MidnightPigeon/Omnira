@@ -1,0 +1,16 @@
+{
+  "id": "dream_inquiry",
+  "title": "Dream Inquiry",
+  "icon": "omnira:dark_microcore",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/spell_core.json",
+    "entries/dark_microcore.json",
+    "entries/arcane_crystal_grid_crafting.json",
+    "entries/shadow_staff_shaft_crafting.json",
+    "entries/light_core_reinforcement_crafting.json"
+  ],
+  "chapters": [
+    "chapters/arquebuses/chapter.json"
+  ]
+}

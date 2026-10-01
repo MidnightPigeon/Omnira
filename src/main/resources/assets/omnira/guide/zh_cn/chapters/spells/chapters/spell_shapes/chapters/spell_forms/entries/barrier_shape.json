@@ -1,0 +1,28 @@
+{
+  "id": "barrier_shape",
+  "item": "omnira:earth_microcore",
+  "title": "屏障",
+  "text": [
+    "在形态槽放入地元素微核。地面或位置上的屏障形成可碰撞的阻挡物，接触生物时可触发携带的法术效果。",
+    "以自身或选中的生物为目标时，改为跟随生物的受击触发屏障，并非直接免伤。选中方块时，会在它暴露的表面形成屏障。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "earth_microcore",
+      "label": "地元素微核"
+    },
+    {
+      "target": "entity_barrier",
+      "label": "自身／生物-屏障"
+    },
+    {
+      "target": "block_barrier",
+      "label": "方块／位置-屏障"
+    },
+    {
+      "target": "spell_elements",
+      "label": "法术要素"
+    }
+  ]
+}

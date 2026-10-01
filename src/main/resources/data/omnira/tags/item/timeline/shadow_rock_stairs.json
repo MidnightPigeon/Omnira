@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:shadow_rock_stairs",
+    "omnira:shadow_rock_brick_stairs",
+    "omnira:chiseled_shadow_rock_stairs",
+    "omnira:mossy_shadow_rock_stairs"
+  ]
+}

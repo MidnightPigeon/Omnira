@@ -1,0 +1,4 @@
+newmtl crystal
+Kd 1 1 1
+d 1
+map_Kd omnira:block/spiritual_crystal_clear

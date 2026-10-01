@@ -1,0 +1,15 @@
+{
+  "id": "wide_area_rune_crafting",
+  "item": "omnira:wide_area_rune",
+  "title": "Wide Area Rune · Crafting",
+  "text": [
+    "Use the assembly recipe below to forge this item."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "wide_area_rune",
+      "label": "Use and Effects"
+    }
+  ]
+}

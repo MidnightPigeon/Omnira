@@ -1,0 +1,15 @@
+{
+  "id": "crystal_pickaxe",
+  "item": "omnira:crystal_pickaxe",
+  "title": "Crystal Pickaxe",
+  "text": [
+    "An early tool made from Spiritual Crystals, which can later be upgraded into an Infused Crystal Pickaxe."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "infused_crystal_pickaxe",
+      "label": "Infused Crystal Pickaxe"
+    }
+  ]
+}

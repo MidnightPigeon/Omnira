@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "omnira:block/void_engraved_mirror_rock_slab"
+    },
+    "type=top": {
+      "model": "omnira:block/void_engraved_mirror_rock_slab_top"
+    },
+    "type=double": {
+      "model": "omnira:block/void_engraved_mirror_rock"
+    }
+  }
+}

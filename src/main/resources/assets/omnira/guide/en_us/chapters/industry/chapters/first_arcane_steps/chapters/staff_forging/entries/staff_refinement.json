@@ -1,0 +1,16 @@
+{
+  "id": "staff_refinement",
+  "item": "omnira:multi_arcane_tip",
+  "title": "Tip Refinement and Slots",
+  "text": [
+    "Forge a spiritual crystal tip in the center with one arcane dust in each outer slot to obtain a multi-arcane tip. Use it when assembling a staff to gain two-shot casting.",
+    "Wooden and blaze rod shafts have one enhancement slot; shadow wood has two. Spiritual crystal tips have one rune slot; elemental fusion and multi-arcane tips have two. Enhancement slots and rune slots are distinct."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "staff_parts",
+      "label": "Staff Parts"
+    }
+  ]
+}

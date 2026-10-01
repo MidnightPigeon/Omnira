@@ -1,0 +1,37 @@
+{
+  "id": "temporal_silt_guide",
+  "title": "时序尘泥",
+  "item": "omnira:temporal_silt",
+  "text": [
+    "时间大陆由浅绿的时序尘泥组成；活化的尘泥保留原有纹路，同时浮现更轻的弧线。两者都可作为建筑材料。",
+    "凝时荒原使尘泥保持原样。其他通常区域中，普通尘泥约五分钟后沉积，速逝林约两分半；沉积态接触破败时流后会继续朽化。循环花园与终时废墟不按自然沉积计时：前者在循环节点切换状态，后者在节点直接朽化。",
+    "工作台中央放1块沉积态活化时序尘泥，周围放8个光晶核，消耗材料得到8个固化光晶核。固化光晶核不再生长水晶，可合成楼梯、台阶，也可切石加工。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "frozen_terra_guide",
+      "label": "凝时荒原"
+    },
+    {
+      "target": "fleeting_woods_guide",
+      "label": "速逝林"
+    },
+    {
+      "target": "reversion_mire_guide",
+      "label": "回溯湿地"
+    },
+    {
+      "target": "recurrence_garden_guide",
+      "label": "循环花园"
+    },
+    {
+      "target": "eventide_ruins_guide",
+      "label": "终时废墟"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "时空回溯仪"
+    }
+  ]
+}

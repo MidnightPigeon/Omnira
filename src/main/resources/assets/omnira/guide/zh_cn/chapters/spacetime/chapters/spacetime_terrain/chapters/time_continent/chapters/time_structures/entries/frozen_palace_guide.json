@@ -1,0 +1,19 @@
+{
+  "id": "frozen_palace_guide",
+  "title": "凝固的泰拉皇宫",
+  "item": "omnira:golden_throne",
+  "text": [
+    "凝时荒原高地间偶尔可见凝固的泰拉皇宫。殿内保留黄金王座，塔楼藏有宝藏水晶球；王座崩解留下的迷雾晶球必定含有穿越者手稿。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "golden_throne_guide",
+      "label": "黄金王座与黄金马桶"
+    },
+    {
+      "target": "traveler_manuscript",
+      "label": "穿越者手稿"
+    }
+  ]
+}

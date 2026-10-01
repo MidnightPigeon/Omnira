@@ -1,0 +1,15 @@
+{
+  "id": "paradox_dust",
+  "item": "omnira:paradox_dust",
+  "title": "悖论尘",
+  "text": [
+    "时空扭结经高阶凝聚化为黑白交替闪烁的粉末。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    }
+  ]
+}

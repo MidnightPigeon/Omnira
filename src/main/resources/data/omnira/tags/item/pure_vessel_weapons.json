@@ -1,0 +1,4 @@
+{
+  "replace": false,
+  "values": ["#c:tools/melee_weapon", "#minecraft:swords", "#minecraft:axes", "minecraft:trident", "minecraft:mace"]
+}

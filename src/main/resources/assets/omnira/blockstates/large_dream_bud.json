@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "omnira:block/large_dream_bud",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "omnira:block/large_dream_bud",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "omnira:block/large_dream_bud",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "omnira:block/large_dream_bud",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "omnira:block/large_dream_bud"
+    },
+    "facing=west": {
+      "model": "omnira:block/large_dream_bud",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

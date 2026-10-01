@@ -1,0 +1,9 @@
+{
+  "id": "void_crystal",
+  "item": "omnira:void_crystal",
+  "title": "Void Crystal",
+  "text": [
+    "A pale blue translucent block formed by Construction spells. Infusion makes it permanent for bridges and buildings; a staff's left-click can still remove it."
+  ],
+  "recipes": true
+}

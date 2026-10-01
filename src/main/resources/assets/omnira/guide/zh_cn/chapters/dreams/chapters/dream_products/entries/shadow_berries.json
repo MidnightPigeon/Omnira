@@ -1,0 +1,9 @@
+{
+  "id": "shadow_berries",
+  "item": "omnira:shadow_berries",
+  "title": "暗影浆果",
+  "text": [
+    "附着在暗影树干侧面生长，等待果串成熟后再采摘。"
+  ],
+  "recipes": true
+}

@@ -1,0 +1,19 @@
+{
+  "id": "time_seed_guide",
+  "title": "Seed of Time",
+  "item": "omnira:time_seed",
+  "text": [
+    "This seed cannot be planted. Use it on an Excited Rough Spatial Crystal Block to turn the block into a spatial crystal matrix, consuming the seed."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "spatial_growth_guide",
+      "label": "Growing Spatial Crystals"
+    },
+    {
+      "target": "time_plants_guide",
+      "label": "Time Flora"
+    }
+  ]
+}

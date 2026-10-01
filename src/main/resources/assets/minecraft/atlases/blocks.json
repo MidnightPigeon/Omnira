@@ -1,0 +1,16 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "omnira:entity/crystal_broom"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "omnira:slot/crystal_grid"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "omnira:slot/spell_core"
+    }
+  ]
+}

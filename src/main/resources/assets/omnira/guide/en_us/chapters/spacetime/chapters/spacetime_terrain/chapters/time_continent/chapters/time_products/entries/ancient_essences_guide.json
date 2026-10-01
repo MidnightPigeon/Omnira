@@ -1,0 +1,17 @@
+{
+  "id": "ancient_essences_guide",
+  "title": "Ancient Essences",
+  "item": "omnira:tyrannosaurus_essence",
+  "text": [
+    "Reverse an Unknown Fossil into one of three ancient remains, then condense it into an essence. If you have no talent, eating Tyrannosaurus, Mosasaurus or Pterosaur Essence grants King of Land, Sea or Sky respectively, along with the Time Distortion curse. An existing talent prevents use.",
+    "King of Land grants 10% total damage, Resistance I and Strength II, plus regeneration while grounded. King of Sea grants 20% maximum health, 50% swimming speed, water breathing and full underwater mining speed. King of Sky grants 50% gliding speed, fall-damage immunity and night vision.",
+    "Time Distortion has a 10% chance each minute to trigger ten seconds of Time Passage; a rewind is not always welcome. Distorted Psychic Talent Solution instead grants the Psyker talent and the same curse. A Cleansing Ritual removes talents and curses together."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    }
+  ]
+}

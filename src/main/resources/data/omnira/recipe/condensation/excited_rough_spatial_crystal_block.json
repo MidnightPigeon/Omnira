@@ -1,0 +1,11 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {
+    "item": "omnira:rough_spatial_crystal_block"
+  },
+  "mana_cost": 300,
+  "result": {
+    "id": "omnira:excited_rough_spatial_crystal_block",
+    "count": 1
+  }
+}

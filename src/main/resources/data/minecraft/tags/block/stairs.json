@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:solidified_light_crystal_core_stairs",
+    "omnira:engraved_mirror_rock_stairs",
+    "omnira:spiritual_crystal_stairs",
+    "omnira:light_condensate_stairs",
+    "omnira:light_source_crystal_stairs",
+    "omnira:light_condensate_brick_stairs",
+    "omnira:light_source_brick_stairs",
+    "omnira:dream_crystal_stairs",
+    "omnira:shadow_rock_stairs",
+    "omnira:shadow_rock_brick_stairs",
+    "omnira:chiseled_shadow_rock_stairs",
+    "omnira:mossy_shadow_rock_stairs",
+    "omnira:mirror_rock_stairs",
+    "omnira:shadow_stairs",
+    "omnira:void_mirror_rock_stairs",
+    "omnira:void_engraved_mirror_rock_stairs",
+    "omnira:time_eroded_brick_stairs",
+    "omnira:cracked_time_eroded_brick_stairs",
+    "omnira:sandbound_time_eroded_brick_stairs",
+    "omnira:spatial_crystal_stairs"
+  ]
+}

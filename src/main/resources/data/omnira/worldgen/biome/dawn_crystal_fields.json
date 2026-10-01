@@ -1,0 +1,30 @@
+{
+  "has_precipitation": false,
+  "temperature": 0.6,
+  "downfall": 0,
+  "effects": {
+    "sky_color": 11060440,
+    "fog_color": 13819108,
+    "water_color": 10534365,
+    "water_fog_color": 6785732
+  },
+  "spawners": {"creature": [{"type": "omnira:light_spirit", "weight": 12, "minCount": 2, "maxCount": 4}]},
+  "creature_spawn_probability": 0.2,
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "omnira:dream_landscape"
+    ],
+    []
+  ]
+}

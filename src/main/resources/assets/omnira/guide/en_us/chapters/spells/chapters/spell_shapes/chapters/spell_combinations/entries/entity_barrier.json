@@ -1,0 +1,24 @@
+{
+  "id": "entity_barrier",
+  "item": "omnira:earth_microcore",
+  "title": "Self or Creature-Barrier",
+  "text": [
+    "Use Earth as the shape. Water targets yourself; Fire can select another creature. The ward follows its bearer but does not negate the incoming hit.",
+    "After its bearer takes damage, healing applies to the bearer and other effects attempt to affect the attacker. A ward can trigger four times; retaliation may have no recipient when there is no suitable attacker."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "self_target",
+      "label": "Self"
+    },
+    {
+      "target": "barrier_shape",
+      "label": "Barrier"
+    },
+    {
+      "target": "selected_target",
+      "label": "Target"
+    }
+  ]
+}

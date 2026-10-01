@@ -1,0 +1,19 @@
+{
+  "id": "air_microcore",
+  "item": "omnira:air_microcore",
+  "title": "风元素微核",
+  "text": [
+    "在解析工匠桌提取的风元素微核。放入水晶加工台的目标槽时提供“准星”，放入形态槽时提供“弹射物”。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "crosshair_target",
+      "label": "准星"
+    },
+    {
+      "target": "projectile_shape",
+      "label": "弹射物"
+    }
+  ]
+}

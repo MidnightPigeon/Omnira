@@ -1,0 +1,9 @@
+{
+  "id": "shadow_lantern",
+  "item": "omnira:shadow_lantern",
+  "title": "暗影灯笼",
+  "text": [
+    "灵性水晶构成灯笼框架，共振水晶承载暗影雾，散发紫色辉光，亮度为12。可以落地摆放或悬挂。"
+  ],
+  "recipes": true
+}

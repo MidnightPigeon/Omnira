@@ -1,0 +1,13 @@
+{
+  "id": "advanced_condensation",
+  "title": "高阶凝聚",
+  "icon": "omnira:advanced_condensation_table",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/paradox_dust.json",
+    "entries/infused_grimoire.json",
+    "entries/pure_vessel.json",
+    "entries/enhanced_resonance_terminal.json"
+  ],
+  "chapters": []
+}

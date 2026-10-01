@@ -1,0 +1,2 @@
+{ "type": "omnira:analysis", "ingredient": { "tag": "minecraft:fishes" }, "count": 64,
+  "result": { "id": "omnira:water_microcore", "count": 1 }, "dust_min": 3, "dust_max": 5 }

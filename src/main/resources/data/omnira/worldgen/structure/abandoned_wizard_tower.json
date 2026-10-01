@@ -1,0 +1,8 @@
+{
+  "type": "omnira:overworld_ruins",
+  "variant": 2,
+  "biomes": "#omnira:has_structure/abandoned_wizard_tower",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "spawn_overrides": {}
+}

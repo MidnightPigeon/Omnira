@@ -1,0 +1,12 @@
+{
+  "id": "spell_core",
+  "item": "omnira:primordial_spell_core",
+  "title": "Primordial Spell Core",
+  "text": [
+    "Spell cores power arcane industry. The primordial core provides a mana engine with 512 su of base capacity.",
+    "Place a crude light core in the assembly table center. Add one each of the earth, water, fire and air microcores in any outer positions, or use a single analysis crystal instead. Forging consumes the entire analysis crystal.",
+    "Equipping it in the spell core slot grants 15% spell power, 20% mana regeneration speed and 200 maximum mana.",
+    "Spell cores can be placed on solid ground and recovered by breaking them. Only the first equipped core grants bonuses; removing it promotes the next one. Multiple cores never stack their bonuses."
+  ],
+  "recipes": true
+}

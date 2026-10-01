@@ -1,0 +1,14 @@
+{
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "slots": [
+    {"item": "omnira:spiritual_crystal"},
+    {"item": "minecraft:iron_block"},
+    {"item": "omnira:spiritual_crystal"},
+    {"item": "minecraft:redstone_block"},
+    {"item": "omnira:spiritual_crystal"},
+    {"item": "omnira:low_tier_magic_crystal"},
+    {"item": "omnira:crystal_casing"}
+  ],
+  "result": {"id": "omnira:mana_engine", "count": 1}
+}

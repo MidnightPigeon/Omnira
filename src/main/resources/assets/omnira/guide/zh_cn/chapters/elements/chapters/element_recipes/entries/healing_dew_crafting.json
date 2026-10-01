@@ -1,0 +1,15 @@
+{
+  "id": "healing_dew_crafting",
+  "item": "omnira:healing_dew",
+  "title": "治愈之露 · 治疗 · 制作",
+  "text": [
+    "解析16个闪烁的西瓜片，可获得治愈之露与3至5个西瓜种子。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "healing_dew",
+      "label": "使用与效果"
+    }
+  ]
+}

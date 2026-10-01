@@ -1,0 +1,14 @@
+{
+  "display": {
+    "icon": {"id":"omnira:traveler_manuscript"},
+    "title": {"translate":"advancement.omnira.too_late_scholar.title"},
+    "description": {"translate":"advancement.omnira.too_late_scholar.description"},
+    "background":"omnira:textures/block/mirror_rock.png",
+    "frame":"challenge",
+    "show_toast":true,
+    "announce_to_chat":true,
+    "hidden":false
+  },
+  "criteria":{"read_final_page":{"trigger":"minecraft:impossible"}},
+  "requirements":[["read_final_page"]]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "shadow_bookshelf",
+  "item": "omnira:shadow_bookshelf",
+  "title": "Shadow Bookshelf",
+  "text": [
+    "Craft with Shadow Planks above and below three books. Each shelf provides twice the normal enchanting power, following the usual distance and obstruction rules without raising the enchanting level cap."
+  ],
+  "recipes": true
+}

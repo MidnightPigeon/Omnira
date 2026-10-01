@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "omnira:crystal_ball"
+    },
+    "title": {
+      "translate": "advancement.omnira.beyond_the_mist.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.beyond_the_mist.description"
+    },
+    "background": "omnira:textures/block/mirror_rock.png",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "open_loot_ball": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "open_loot_ball"
+    ]
+  ]
+}

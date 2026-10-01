@@ -1,0 +1,36 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "slots": [
+    {
+      "item": "omnira:ritual_energy_core"
+    },
+    {
+      "item": "omnira:ritual_energy_core"
+    },
+    {
+      "item": "omnira:ritual_energy_core"
+    },
+    {
+      "item": "minecraft:blaze_rod"
+    },
+    {
+      "item": "minecraft:blaze_rod"
+    },
+    {
+      "item": "minecraft:blaze_rod"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:light_dark_spell_core"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    }
+  ],
+  "result": {
+    "id": "omnira:advanced_ritual_energy_core",
+    "count": 1
+  }
+}

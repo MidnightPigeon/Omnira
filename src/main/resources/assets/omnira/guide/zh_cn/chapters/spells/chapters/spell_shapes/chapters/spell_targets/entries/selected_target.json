@@ -1,0 +1,24 @@
+{
+  "id": "selected_target",
+  "item": "omnira:fire_microcore",
+  "title": "目标",
+  "text": [
+    "在目标槽放入火元素微核。沿视线选取12格内的生物或方块，通常不能隔着方块选择生物；没有选中对象时不能施放。",
+    "选中生物时，追踪弹射物会追向它，屏障和环绕会跟随它；选中方块时则以该方块为目标。广域魔纹把选择距离提高到24格。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "fire_microcore",
+      "label": "火元素微核"
+    },
+    {
+      "target": "target_projectile",
+      "label": "目标-弹射物"
+    },
+    {
+      "target": "block_barrier",
+      "label": "方块／位置-屏障"
+    }
+  ]
+}

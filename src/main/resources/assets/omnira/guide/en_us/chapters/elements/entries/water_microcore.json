@@ -1,0 +1,19 @@
+{
+  "id": "water_microcore",
+  "item": "omnira:water_microcore",
+  "title": "Water Microcore",
+  "text": [
+    "The Water Microcore is obtained through analysis. In the target slot it supplies Self; in the shape slot it supplies Orbit."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "orbit_shape",
+      "label": "Orbit"
+    },
+    {
+      "target": "self_target",
+      "label": "Self"
+    }
+  ]
+}

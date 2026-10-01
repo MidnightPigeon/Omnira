@@ -1,0 +1,16 @@
+{
+  "id": "shadow_ghost_spawn_egg",
+  "item": "omnira:shadow_ghost_spawn_egg",
+  "title": "暗鬼",
+  "text": [
+    "暮影林地的敌对生物，可穿墙接近玩家。它会冲过目标造成伤害，短暂游荡后再次进攻，不能仅靠墙壁阻挡。",
+    "死亡掉落一份暗影手稿，可用于提炼暗影雾。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "shadow_manuscript",
+      "label": "暗影手稿"
+    }
+  ]
+}

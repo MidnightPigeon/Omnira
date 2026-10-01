@@ -1,0 +1,9 @@
+{
+  "id": "infused_stacking_upgrade",
+  "item": "omnira:infused_stacking_upgrade",
+  "title": "注能堆叠升级",
+  "text": [
+    "将可堆叠物品的单格上限或液晶球容量提高至四倍；与基础堆叠升级不能同时安装。"
+  ],
+  "recipes": true
+}

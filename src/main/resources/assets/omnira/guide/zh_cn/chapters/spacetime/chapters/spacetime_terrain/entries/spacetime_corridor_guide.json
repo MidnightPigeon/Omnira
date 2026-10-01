@@ -1,0 +1,9 @@
+{
+  "id": "spacetime_corridor_guide",
+  "title": "时空镜廊",
+  "item": "omnira:engraved_mirror_rock",
+  "text": [
+    "时空镜廊位于两层之间。镜面岩构成狭长通道，墙边的裂缝会将旅人送到上层或下层，但无法循原路返回。"
+  ],
+  "recipes": false
+}

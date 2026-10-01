@@ -1,0 +1,2 @@
+{ "type": "omnira:analysis", "ingredient": { "item": "minecraft:lava_bucket" }, "count": 1,
+  "result": { "id": "omnira:fire_microcore", "count": 1 } }

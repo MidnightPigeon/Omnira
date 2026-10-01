@@ -1,0 +1,29 @@
+{
+  "id": "ancient_specimens_guide",
+  "title": "Unknown Fossils and Eggs",
+  "item": "omnira:unknown_organism_fossil",
+  "text": [
+    "Suspicious sand in the ancient Earth layer contains unknown organism fossils and eggs. The reverser recalls a fossil as a tyrannosaur, mosasaur or pterosaur remnant with equal chances; condensation yields its essence. Unknown eggs become dormant organism eggs or spirit seeds; advanced condensation restores their vitality.",
+    "Use an active spirit seed to summon a translucent Archaeopteryx Spirit, or an active organism egg to summon a Velociraptor. This is their only source. They are immediately tamed to you and follow you. The spirit has 16 health and deals 6 base damage with a flying charge; the raptor has 20 health and deals 6 base damage with a melee bite. Both recover half their maximum health every minute.",
+    "Sneak-use your companion to switch between following and staying. Use your raptor to ride without a saddle, steer and jump; sneak to dismount. Both are time creatures, immune to Decayed Timeflow's wither and slowdown, Reversion Mire's rewind and Eventide Ruins' life-ending cycle."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "epochal_cliffs",
+      "label": "Epochal Cliffs"
+    },
+    {
+      "target": "ancient_essences_guide",
+      "label": "Ancient Essences"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "Spacetime Reverser"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    }
+  ]
+}

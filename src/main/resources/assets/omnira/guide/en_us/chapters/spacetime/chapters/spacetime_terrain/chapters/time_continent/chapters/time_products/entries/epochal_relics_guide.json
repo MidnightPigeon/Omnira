@@ -1,0 +1,17 @@
+{
+  "id": "epochal_relics_guide",
+  "title": "Relics of the Eras",
+  "item": "omnira:suspicious_time_sand",
+  "text": [
+    "Suspicious Time Sand from different strata hides relics from different ages. The Phantom Calling Card is a charm granting one extra level each of Fortune and Looting and 10% movement speed. Its enhanced form raises both bonuses to level II and speed to 15%.",
+    "D-Class Credentials reduce incoming damage by 10%. C-Class adds 10% spell power; B-Class raises damage reduction to 20% and adds ten mana cost reduction; A-Class also sustains regeneration and periodically grants saturation. The SCP-714 ring grants Absorption II but lowers movement speed by 20%.",
+    "The Ring of Lust grants 25% melee damage and 25% lifesteal; the Ring of Greed grants 20% spell power. Desire Crystals aid related upgrades; see the assembly and reversal recipes."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "epochal_cliffs",
+      "label": "Epochal Cliffs"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "fire_microcore",
+  "item": "omnira:fire_microcore",
+  "title": "火元素微核",
+  "text": [
+    "在解析工匠桌提取的火元素微核。放入水晶加工台的目标槽时提供“目标”，放入形态槽时提供“爆炸”。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "explosion_shape",
+      "label": "爆炸"
+    },
+    {
+      "target": "selected_target",
+      "label": "目标"
+    }
+  ]
+}

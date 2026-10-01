@@ -1,0 +1,15 @@
+{
+  "id": "multi_arcane_tip_crafting",
+  "item": "omnira:multi_arcane_tip",
+  "title": "Multi-Arcane Tip · Crafting",
+  "text": [
+    "Use the assembly recipe below to forge this item."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "multi_arcane_tip",
+      "label": "Use and Effects"
+    }
+  ]
+}

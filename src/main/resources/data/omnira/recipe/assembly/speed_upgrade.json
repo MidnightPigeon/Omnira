@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:swiftness_rune"
+    }
+  ],
+  "result": {
+    "id": "omnira:speed_upgrade",
+    "count": 1
+  }
+}

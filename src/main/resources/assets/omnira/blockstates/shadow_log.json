@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "omnira:block/shadow_log"
+    },
+    "axis=x": {
+      "model": "omnira:block/shadow_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z": {
+      "model": "omnira:block/shadow_log",
+      "x": 90
+    }
+  }
+}

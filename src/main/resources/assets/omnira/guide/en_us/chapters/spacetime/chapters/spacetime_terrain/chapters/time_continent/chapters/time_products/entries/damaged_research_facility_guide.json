@@ -1,0 +1,23 @@
+{
+  "id": "damaged_research_facility_guide",
+  "title": "Damaged Research Facility",
+  "item": "omnira:damaged_research_facility",
+  "text": [
+    "Damaged research apparatus cannot be placed. Craft it with a time warp point, or store it in Reversion Mire until the next reversal, to repair it."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "epochal_cliffs",
+      "label": "Epochal Cliffs"
+    },
+    {
+      "target": "rusty_lake_mill_guide",
+      "label": "Rusty Lake Mill"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "Spacetime Reverser"
+    }
+  ]
+}

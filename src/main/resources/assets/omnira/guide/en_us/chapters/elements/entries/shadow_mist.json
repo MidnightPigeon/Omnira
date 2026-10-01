@@ -1,0 +1,11 @@
+{
+  "id": "shadow_mist",
+  "item": "omnira:shadow_mist",
+  "title": "Shadow Mist",
+  "text": [
+    "Release an unrecoverable cloud against a block. It expands from one to three blocks wide over one second, then fades away over its twenty-second lifetime. Living creatures inside receive ten seconds of Darkness.",
+    "Forge mist in the assembly table center with six shadow berries to obtain a dark microcore.",
+    "A light microcore neutralizes the cloud and becomes a dark microcore. Neutralized mist no longer refreshes Darkness or converts further microcores; existing effects expire normally."
+  ],
+  "recipes": true
+}

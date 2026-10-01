@@ -1,0 +1,10 @@
+{
+  "id": "spacetime_stabilization_upgrade",
+  "item": "omnira:spacetime_stabilization_upgrade",
+  "title": "时空固化升级",
+  "text": [
+    "元素水晶格栅为中心，三个时空扭结和三个悖论尘外围无序锻造。安装后晶球拆卸保留内容与升级，并且不会被踩碎。",
+    "装有本升级的水晶球、液晶球与巡游晶球，收起后只能随身携带或放在水晶基座上，不能放入其他容器；即使内部为空也一样。"
+  ],
+  "recipes": true
+}

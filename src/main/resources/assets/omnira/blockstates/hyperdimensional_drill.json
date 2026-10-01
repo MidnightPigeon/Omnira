@@ -1,0 +1,112 @@
+{
+  "variants": {
+    "charged=true,part=0": {
+      "model": "omnira:block/hyperdimensional_drill_0_true"
+    },
+    "charged=false,part=0": {
+      "model": "omnira:block/hyperdimensional_drill_0_false"
+    },
+    "charged=true,part=1": {
+      "model": "omnira:block/hyperdimensional_drill_1_true"
+    },
+    "charged=false,part=1": {
+      "model": "omnira:block/hyperdimensional_drill_1_false"
+    },
+    "charged=true,part=2": {
+      "model": "omnira:block/hyperdimensional_drill_2_true"
+    },
+    "charged=false,part=2": {
+      "model": "omnira:block/hyperdimensional_drill_2_false"
+    },
+    "charged=true,part=3": {
+      "model": "omnira:block/hyperdimensional_drill_3_true"
+    },
+    "charged=false,part=3": {
+      "model": "omnira:block/hyperdimensional_drill_3_false"
+    },
+    "charged=true,part=4": {
+      "model": "omnira:block/hyperdimensional_drill_4_true"
+    },
+    "charged=false,part=4": {
+      "model": "omnira:block/hyperdimensional_drill_4_false"
+    },
+    "charged=true,part=5": {
+      "model": "omnira:block/hyperdimensional_drill_5_true"
+    },
+    "charged=false,part=5": {
+      "model": "omnira:block/hyperdimensional_drill_5_false"
+    },
+    "charged=true,part=6": {
+      "model": "omnira:block/hyperdimensional_drill_6_true"
+    },
+    "charged=false,part=6": {
+      "model": "omnira:block/hyperdimensional_drill_6_false"
+    },
+    "charged=true,part=7": {
+      "model": "omnira:block/hyperdimensional_drill_7_true"
+    },
+    "charged=false,part=7": {
+      "model": "omnira:block/hyperdimensional_drill_7_false"
+    },
+    "charged=true,part=8": {
+      "model": "omnira:block/hyperdimensional_drill_8_true"
+    },
+    "charged=false,part=8": {
+      "model": "omnira:block/hyperdimensional_drill_8_false"
+    },
+    "charged=true,part=9": {
+      "model": "omnira:block/hyperdimensional_drill_9_true"
+    },
+    "charged=false,part=9": {
+      "model": "omnira:block/hyperdimensional_drill_9_false"
+    },
+    "charged=true,part=10": {
+      "model": "omnira:block/hyperdimensional_drill_10_true"
+    },
+    "charged=false,part=10": {
+      "model": "omnira:block/hyperdimensional_drill_10_false"
+    },
+    "charged=true,part=11": {
+      "model": "omnira:block/hyperdimensional_drill_11_true"
+    },
+    "charged=false,part=11": {
+      "model": "omnira:block/hyperdimensional_drill_11_false"
+    },
+    "charged=true,part=12": {
+      "model": "omnira:block/hyperdimensional_drill_12_true"
+    },
+    "charged=false,part=12": {
+      "model": "omnira:block/hyperdimensional_drill_12_false"
+    },
+    "charged=true,part=13": {
+      "model": "omnira:block/hyperdimensional_drill_13_true"
+    },
+    "charged=false,part=13": {
+      "model": "omnira:block/hyperdimensional_drill_13_false"
+    },
+    "charged=true,part=14": {
+      "model": "omnira:block/hyperdimensional_drill_14_true"
+    },
+    "charged=false,part=14": {
+      "model": "omnira:block/hyperdimensional_drill_14_false"
+    },
+    "charged=true,part=15": {
+      "model": "omnira:block/hyperdimensional_drill_15_true"
+    },
+    "charged=false,part=15": {
+      "model": "omnira:block/hyperdimensional_drill_15_false"
+    },
+    "charged=true,part=16": {
+      "model": "omnira:block/hyperdimensional_drill_16_true"
+    },
+    "charged=false,part=16": {
+      "model": "omnira:block/hyperdimensional_drill_16_false"
+    },
+    "charged=true,part=17": {
+      "model": "omnira:block/hyperdimensional_drill_17_true"
+    },
+    "charged=false,part=17": {
+      "model": "omnira:block/hyperdimensional_drill_17_false"
+    }
+  }
+}

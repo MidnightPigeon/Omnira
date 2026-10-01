@@ -1,0 +1,24 @@
+{
+  "id": "selected_target",
+  "item": "omnira:fire_microcore",
+  "title": "Target",
+  "text": [
+    "Put a Fire Microcore in the target slot. Selects a creature or block along your view within twelve blocks. Blocks normally obstruct creature selection; casting requires a valid target.",
+    "Projectiles home toward a selected creature, while wards and orbits follow it. A selected block instead anchors the spell there. A Wide Area Rune extends selection to twenty-four blocks."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "fire_microcore",
+      "label": "Fire Microcore"
+    },
+    {
+      "target": "target_projectile",
+      "label": "Target-Projectile"
+    },
+    {
+      "target": "block_barrier",
+      "label": "Block or Position-Barrier"
+    }
+  ]
+}

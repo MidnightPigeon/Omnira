@@ -1,0 +1,27 @@
+{
+  "id": "chronal_blindfish_guide",
+  "title": "Chronal Blindfish",
+  "item": "omnira:chronal_blindfish",
+  "text": [
+    "Small sealed aquifers contain decayed timeflow and luminous chronal blindfish. They resist reversal and the fluid's harmful effects. Eating one removes half your current health. It provides 2 reverser energy or condenses into an unstable spacetime aggregate. It is also a regular timeflow fishing catch."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "epochal_cliffs",
+      "label": "Epochal Cliffs"
+    },
+    {
+      "target": "decayed_timeflow_guide",
+      "label": "Decayed Timeflow and Fishing"
+    },
+    {
+      "target": "spacetime_reverser",
+      "label": "Spacetime Reverser"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    }
+  ]
+}

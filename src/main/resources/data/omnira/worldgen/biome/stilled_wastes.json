@@ -1,0 +1,29 @@
+{
+  "has_precipitation": false,
+  "temperature": 0.1,
+  "downfall": 0,
+  "effects": {
+    "sky_color": 1774887,
+    "fog_color": 4471398,
+    "water_color": 8166627,
+    "water_fog_color": 4537480
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "omnira:time_warp_point"
+    ],
+    []
+  ]
+}

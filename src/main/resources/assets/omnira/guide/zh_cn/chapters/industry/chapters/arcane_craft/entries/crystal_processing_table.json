@@ -1,0 +1,17 @@
+{
+  "id": "crystal_processing_table",
+  "item": "omnira:crystal_processing_table",
+  "title": "水晶加工台",
+  "text": [
+    "水晶加工台用于编写低阶法术水晶。",
+    "上方左槽必须放入决定目标的微核，右槽可选形态修饰。左侧两槽为修饰，右侧两槽为要素，均可留空；中央放入墨水或墨囊与灵性水晶即可写入。",
+    "基础费用为参与法术的组件数量乘以 10。墨水和承载水晶不计入组件费用。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "spell_target_shape_basics",
+      "label": "目标与形态的选择"
+    }
+  ]
+}

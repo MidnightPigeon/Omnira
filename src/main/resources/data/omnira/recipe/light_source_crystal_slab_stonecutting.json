@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "omnira:light_source_crystal"
+  },
+  "result": {
+    "id": "omnira:light_source_crystal_slab",
+    "count": 2
+  }
+}

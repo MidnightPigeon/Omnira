@@ -1,0 +1,15 @@
+{
+  "id": "dissociation_thread_crafting",
+  "item": "omnira:dissociation_thread",
+  "title": "Dissociation Thread · Crafting",
+  "text": [
+    "Process an analysis crystal in the analysis artisan table to obtain dissociation thread and one equally likely earth, water, fire or air microcore. Each extraction costs 1 durability. The crystal stays in the input slot and breaks when exhausted. Leave the byproduct slot empty before processing."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "dissociation_thread",
+      "label": "Use and Effects"
+    }
+  ]
+}

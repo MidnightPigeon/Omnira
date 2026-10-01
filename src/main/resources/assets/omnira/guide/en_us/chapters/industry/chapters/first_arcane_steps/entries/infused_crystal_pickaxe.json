@@ -1,0 +1,11 @@
+{
+  "id": "infused_crystal_pickaxe",
+  "item": "omnira:infused_crystal_pickaxe",
+  "title": "Infused Crystal Pickaxe",
+  "text": [
+    "Mining ores has a 20% chance to yield an extra Spiritual Crystal.",
+    "While held in either hand, it spends 5 mana every half second to repair one durability. Cost reductions do not apply. No mana is spent at full durability or with insufficient mana.",
+    "Upgrade a crystal pickaxe at a crafting table, or place it in the assembly bench's center with one spiritual crystal, one iron ingot and one diamond in any three outer slots. Leave the others empty."
+  ],
+  "recipes": true
+}

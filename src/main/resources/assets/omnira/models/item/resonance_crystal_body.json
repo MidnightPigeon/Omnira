@@ -1,0 +1,4 @@
+{
+  "parent": "omnira:item/spiritual_crystal",
+  "textures": {"glass": "minecraft:block/amethyst_block", "particle": "minecraft:block/amethyst_block"}
+}

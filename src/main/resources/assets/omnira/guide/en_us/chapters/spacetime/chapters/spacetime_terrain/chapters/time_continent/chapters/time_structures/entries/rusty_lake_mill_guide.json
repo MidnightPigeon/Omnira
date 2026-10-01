@@ -1,0 +1,24 @@
+{
+  "id": "rusty_lake_mill_guide",
+  "title": "Rusty Lake Mill",
+  "item": "omnira:memory_cube",
+  "text": [
+    "A mill occasionally appears deep in Reversion Mire. During reversal, its visible Crystal Balls fade and two other positions reveal richer treasures. All four are independent containers: emptying or removing one does not restock it at the next reversal.",
+    "The Memory Cube on the bridge also changes between peaceful and corrupted states with the mire. Harvesting it fixes its state; return it to the mire and wait for a reversal to change it again."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "memory_cube_guide",
+      "label": "Memory Cube"
+    },
+    {
+      "target": "reversion_mire_guide",
+      "label": "Reversion Mire"
+    },
+    {
+      "target": "damaged_research_facility_guide",
+      "label": "Damaged Research Facility"
+    }
+  ]
+}

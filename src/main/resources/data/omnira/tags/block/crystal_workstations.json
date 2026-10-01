@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:advanced_condensation_table",
+    "omnira:pure_vessel",
+    "omnira:crystal_processing_table",
+    "omnira:analysis_artisan_table",
+    "omnira:arcane_assembly_table",
+    "omnira:mana_engine",
+    "omnira:crystal_casing",
+    "omnira:crystal_pedestal",
+    "omnira:ritual_energy_core",
+    "omnira:spacetime_waymark",
+    "omnira:crystal_ball",
+    {
+      "id": "omnira:crystal_encased_shaft",
+      "required": false
+    },
+    {
+      "id": "omnira:crystal_encased_cogwheel",
+      "required": false
+    },
+    {
+      "id": "omnira:crystal_encased_large_cogwheel",
+      "required": false
+    },
+    "omnira:advanced_ritual_energy_core"
+  ]
+}

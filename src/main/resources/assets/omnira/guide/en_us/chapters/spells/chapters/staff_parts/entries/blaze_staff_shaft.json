@@ -1,0 +1,15 @@
+{
+  "id": "blaze_staff_shaft",
+  "item": "omnira:blaze_staff_shaft",
+  "title": "Blaze Rod Staff Shaft",
+  "text": [
+    "Provides one enhancement slot and 10% spell power."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "blaze_staff_shaft_crafting",
+      "label": "Forging Recipe"
+    }
+  ]
+}

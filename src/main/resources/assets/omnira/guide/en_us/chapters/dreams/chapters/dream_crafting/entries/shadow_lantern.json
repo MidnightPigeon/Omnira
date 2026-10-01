@@ -1,0 +1,9 @@
+{
+  "id": "shadow_lantern",
+  "item": "omnira:shadow_lantern",
+  "title": "Shadow Lantern",
+  "text": [
+    "Spiritual Crystals form the frame, while a Resonance Crystal holds Shadow Mist in a violet glow. Emits light level 12 and can stand or hang."
+  ],
+  "recipes": true
+}

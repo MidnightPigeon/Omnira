@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC",
+    "CC"
+  ],
+  "key": {
+    "C": {
+      "item": "omnira:resonance_crystal"
+    }
+  },
+  "result": {
+    "id": "omnira:resonance_core",
+    "count": 1
+  }
+}

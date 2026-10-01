@@ -1,0 +1,7 @@
+{
+  "selector": "omnira:crystal_encased_cogwheel",
+  "properties": {
+    "sable:mass": 0,
+    "sable:volume": 1
+  }
+}

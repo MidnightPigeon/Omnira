@@ -1,0 +1,11 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {
+    "item": "omnira:inactive_creature_egg"
+  },
+  "mana_cost": 300,
+  "result": {
+    "id": "omnira:creature_egg",
+    "count": 1
+  }
+}

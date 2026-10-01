@@ -1,0 +1,10 @@
+{
+  "id": "modifier_enhancement",
+  "item": "minecraft:iron_block",
+  "title": "Iron Block - Enhancement",
+  "text": [
+    "Writes Enhancement. Each raises instant healing, infused instant damage, or a sustained potion effect by one level. Ordinary physical harm gains 3 base damage instead.",
+    "For dissociation, it adds harvest rounds and raises mining tier. For construction, it strengthens the crystal and adds crushing damage to locked creatures."
+  ],
+  "recipes": true
+}

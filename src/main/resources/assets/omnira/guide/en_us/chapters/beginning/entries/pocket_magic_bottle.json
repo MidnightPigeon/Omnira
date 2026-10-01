@@ -1,0 +1,12 @@
+{
+  "id": "pocket_magic_bottle",
+  "item": "omnira:pocket_magic_bottle",
+  "title": "Pocket Magic Bottle",
+  "text": [
+    "Craft an empty bottle from spell ink and a primordial spell core. Right-click to capture an ordinary creature; right-click again to throw the filled bottle and release it on impact. Releasing a tamed creature drops an empty magic bottle, regardless of its owner; releasing other contents consumes the bottle. Sneak-right-click instead erases the contents permanently and leaves an empty bottle.",
+    "Hostile or angered neutral creatures, bosses, players and detached creature parts cannot be captured. Riding groups must be captured from their lowest member; every member must qualify, and leads must be removed first. Armor stands, displays, vehicles, dropped items and projectiles cannot be captured alone.",
+    "An empty bottle can also capture an entire Omnira multiblock work structure by right-clicking any part, preserving contents and progress. It stays bottled if the release site lacks room. A filled bottle can be carried or placed on a Crystal Pedestal, but cannot enter other containers.",
+    "With Aeronautics installed, a complete connected physical structure can also be bottled once players disembark. Creatures and structures can cross dimensions within the same world this way."
+  ],
+  "recipes": true
+}

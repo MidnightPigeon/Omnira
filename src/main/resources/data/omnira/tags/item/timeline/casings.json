@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:crystal_casing",
+    "omnira:infused_crystal_casing",
+    {
+      "id": "#create:casing",
+      "required": false
+    }
+  ]
+}

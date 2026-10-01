@@ -1,0 +1,19 @@
+{
+  "type": "omnira:assembly",
+  "operation": "armor_exchange",
+  "slots": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "omnira:crystal_stocking_shoes"
+    }
+  ],
+  "result": {
+    "id": "omnira:crystal_boots",
+    "count": 1
+  }
+}

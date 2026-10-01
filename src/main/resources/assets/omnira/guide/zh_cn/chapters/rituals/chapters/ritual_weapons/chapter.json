@@ -1,0 +1,11 @@
+{
+  "id": "ritual_weapons",
+  "title": "仪式武器",
+  "icon": "omnira:crystallized_bone_nail",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/crystallized_bone_nail.json",
+    "entries/arcane_needle.json"
+  ],
+  "chapters": []
+}

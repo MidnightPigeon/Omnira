@@ -1,0 +1,17 @@
+{
+  "id": "recall_crystal",
+  "item": "omnira:recall_crystal",
+  "title": "Recall Crystal",
+  "text": [
+    "Right-click to choose a personally recorded waymark and channel in place for three seconds. Moving, taking damage or switching away from the crystal interrupts travel; looking around does not. Use the button beside a destination to forget it without destroying the waymark or affecting other players. Right-click the waymark again to record it once more.",
+    "Base cost is 100 mana within a dimension or 300 across dimensions, subject to cost reductions. Only successful travel spends mana, and the crystal is reusable.",
+    "Recall while riding to bring your mount with you, retaining cargo, fluids, core and upgrades. Stop before channeling; moving the mount or dismounting interrupts recall. The waymark needs enough safe space for the whole group. Large Create contraptions and physically assembled Aeronautics structures cannot travel directly."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "enhanced_recall_crystal",
+      "label": "Enhanced Recall Crystal"
+    }
+  ]
+}

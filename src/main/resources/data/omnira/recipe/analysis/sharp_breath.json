@@ -1,0 +1,21 @@
+{
+  "type": "omnira:analysis",
+  "ingredient": {
+    "item": "minecraft:iron_sword"
+  },
+  "count": 1,
+  "result": {
+    "id": "omnira:sharp_breath",
+    "count": 1
+  },
+  "byproduct": {
+    "choices": [
+      {
+        "id": "minecraft:stick",
+        "count": 1
+      }
+    ],
+    "min": 1,
+    "max": 1
+  }
+}

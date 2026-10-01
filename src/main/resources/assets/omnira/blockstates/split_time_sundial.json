@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "omnira:block/sundial/base"
+    },
+    "facing=east": {
+      "model": "omnira:block/sundial/base"
+    },
+    "facing=south": {
+      "model": "omnira:block/sundial/base"
+    },
+    "facing=west": {
+      "model": "omnira:block/sundial/base"
+    }
+  }
+}

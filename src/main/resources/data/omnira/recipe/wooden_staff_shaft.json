@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  L",
+    " L ",
+    "L  "
+  ],
+  "key": {
+    "L": {
+      "tag": "omnira:ordinary_staff_logs"
+    }
+  },
+  "result": {
+    "id": "omnira:wooden_staff_shaft",
+    "count": 1
+  }
+}

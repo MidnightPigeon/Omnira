@@ -1,0 +1,21 @@
+{
+  "type": "omnira:analysis",
+  "ingredient": {
+    "item": "minecraft:glistering_melon_slice"
+  },
+  "count": 16,
+  "result": {
+    "id": "omnira:healing_dew",
+    "count": 1
+  },
+  "byproduct": {
+    "choices": [
+      {
+        "id": "minecraft:melon_seeds",
+        "count": 1
+      }
+    ],
+    "min": 3,
+    "max": 5
+  }
+}

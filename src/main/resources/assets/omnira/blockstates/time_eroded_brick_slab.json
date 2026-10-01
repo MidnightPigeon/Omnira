@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "omnira:block/time_eroded_brick_slab"
+    },
+    "type=top": {
+      "model": "omnira:block/time_eroded_brick_slab_top"
+    },
+    "type=double": {
+      "model": "omnira:block/time_eroded_bricks"
+    }
+  }
+}

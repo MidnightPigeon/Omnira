@@ -1,0 +1,13 @@
+{
+  "type": "omnira:analysis",
+  "ingredient": {
+    "item": "omnira:shadow_manuscript"
+  },
+  "count": 4,
+  "result": {
+    "id": "omnira:shadow_mist",
+    "count": 1
+  },
+  "dust_min": 8,
+  "dust_max": 10
+}

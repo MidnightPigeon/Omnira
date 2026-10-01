@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "sable:mass": 0.5,
+    "sable:volume": 0.5
+  },
+  "selector": "omnira:dream_crystal_slab",
+  "priority": 2000,
+  "overrides": {
+    "type=double": {
+      "sable:mass": 1.0,
+      "sable:volume": 1.0
+    }
+  }
+}

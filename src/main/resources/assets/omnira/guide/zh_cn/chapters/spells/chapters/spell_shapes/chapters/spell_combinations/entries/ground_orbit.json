@@ -1,0 +1,20 @@
+{
+  "id": "ground_orbit",
+  "item": "omnira:water_microcore",
+  "title": "地面-环绕",
+  "text": [
+    "目标槽放地微核，形态槽放水微核。法球沿周围有效地表选点连接出的路线环绕，选点在施法时确定，不会一直围着移动后的施法者。",
+    "这仍然是接触触发的弹射物。地形缺口会影响路线；需要随身环绕时，改用自身目标。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "ground_target",
+      "label": "地面"
+    },
+    {
+      "target": "orbit_shape",
+      "label": "环绕"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "spatial_caverns_guide",
+  "title": "空间洞穴",
+  "item": "omnira:rough_spatial_crystal_block",
+  "text": [
+    "空间洞穴在大陆下方展开。粗糙空间晶块构成洞壁与晶锥，少量激发态晶块在其间发光；洞穴的道路仍待探索。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "spatial_crystal_guide",
+      "label": "粗糙空间晶块"
+    },
+    {
+      "target": "spatial_growth_guide",
+      "label": "空间水晶生长"
+    }
+  ]
+}

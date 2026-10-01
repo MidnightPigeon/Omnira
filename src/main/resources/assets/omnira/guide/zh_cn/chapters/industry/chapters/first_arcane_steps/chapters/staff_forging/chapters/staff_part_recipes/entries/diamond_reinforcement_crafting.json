@@ -1,0 +1,15 @@
+{
+  "id": "diamond_reinforcement_crafting",
+  "item": "omnira:diamond_reinforcement",
+  "title": "钻石加固部件 · 制作",
+  "text": [
+    "在魔动装配台中按下方配方锻造。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "diamond_reinforcement",
+      "label": "使用与效果"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "shadow_bookshelf",
+  "item": "omnira:shadow_bookshelf",
+  "title": "暗影木书架",
+  "text": [
+    "上下两排暗影木板，中间放三本书。每个提供相当于两个普通书架的附魔能力，仍遵循附魔台的距离与遮挡条件，不提高原版附魔等级上限。"
+  ],
+  "recipes": true
+}

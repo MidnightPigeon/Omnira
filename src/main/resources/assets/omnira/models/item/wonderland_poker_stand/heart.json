@@ -1,0 +1,77 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "card": "omnira:block/wonderland_card_heart",
+    "edge": "omnira:block/wonderland_poker_stand"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        2,
+        7.75
+      ],
+      "to": [
+        14,
+        14,
+        8.25
+      ],
+      "faces": {
+        "north": {
+          "texture": "#card",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#card",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#edge",
+          "uv": [
+            8,
+            0,
+            12,
+            4
+          ]
+        },
+        "west": {
+          "texture": "#edge",
+          "uv": [
+            8,
+            0,
+            12,
+            4
+          ]
+        },
+        "up": {
+          "texture": "#edge",
+          "uv": [
+            8,
+            0,
+            12,
+            4
+          ]
+        },
+        "down": {
+          "texture": "#edge",
+          "uv": [
+            8,
+            0,
+            12,
+            4
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "shadow_berries",
+  "item": "omnira:shadow_berries",
+  "title": "Shadow Berries",
+  "text": [
+    "Grows on the sides of shadow tree trunks. Wait for the hanging fruit to mature before harvesting."
+  ],
+  "recipes": true
+}

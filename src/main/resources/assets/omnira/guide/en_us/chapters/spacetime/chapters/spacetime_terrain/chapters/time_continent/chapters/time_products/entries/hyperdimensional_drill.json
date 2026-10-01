@@ -1,0 +1,20 @@
+{
+  "id": "hyperdimensional_drill",
+  "title": "Hyperdimensional Drilling Rig",
+  "item": "omnira:hyperdimensional_drill",
+  "text": [
+    "Mount the top seat, then activate the crystal panel in front. The base spins as the rig clears a 3×3 shaft layer by layer and descends, collecting no materials. It stops above unbreakable boundaries, depleted. Once started it cannot be manually stopped, but you may dismount at any time while it keeps working.",
+    "Four spatial crystals or one minute from an operating mana engine facing a side will recharge it. Mix both methods: each crystal replaces fifteen seconds. Mine it to carry the complete machine."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "drilling_platform_guide",
+      "label": "Hyperdimensional Drilling Platform"
+    },
+    {
+      "target": "hyperdimensional_drill_machine_reference",
+      "label": "Hyperdimensional Drilling Rig"
+    }
+  ]
+}

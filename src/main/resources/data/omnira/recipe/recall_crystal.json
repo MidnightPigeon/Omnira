@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "omnira:spiritual_crystal"
+    },
+    {
+      "item": "omnira:dream_crystal_shard"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    }
+  ],
+  "result": {
+    "id": "omnira:recall_crystal",
+    "count": 1
+  }
+}

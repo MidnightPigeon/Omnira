@@ -1,0 +1,15 @@
+{
+  "id": "wide_area_rune_crafting",
+  "item": "omnira:wide_area_rune",
+  "title": "广域魔纹 · 制作",
+  "text": [
+    "在魔动装配台中按下方配方锻造。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "wide_area_rune",
+      "label": "使用与效果"
+    }
+  ]
+}

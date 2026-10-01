@@ -1,0 +1,6 @@
+{
+  "selector": "omnira:light_source_crystal",
+  "properties": {
+    "sable:floating_material": "omnira:light_source_crystal"
+  }
+}

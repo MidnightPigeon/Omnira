@@ -1,0 +1,12 @@
+{
+  "id": "spell_modifiers",
+  "title": "Modifiers",
+  "icon": "minecraft:clock",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/modifier_enhancement.json",
+    "entries/modifier_delay.json",
+    "entries/modifier_infusion.json",
+    "entries/holy.json"
+  ]
+}

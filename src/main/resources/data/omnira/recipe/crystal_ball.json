@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" C ", "CBC", " C "],
+  "key": {
+    "C": {"item": "omnira:spiritual_crystal"},
+    "B": {"item": "minecraft:chest"}
+  },
+  "result": {"id": "omnira:crystal_ball", "count": 1}
+}

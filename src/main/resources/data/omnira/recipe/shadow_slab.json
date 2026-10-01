@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:shadow_planks"
+    }
+  },
+  "result": {
+    "id": "omnira:shadow_slab",
+    "count": 6
+  }
+}

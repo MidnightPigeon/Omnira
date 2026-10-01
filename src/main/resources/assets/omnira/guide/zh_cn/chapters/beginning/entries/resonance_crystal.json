@@ -1,0 +1,9 @@
+{
+  "id": "resonance_crystal",
+  "item": "omnira:resonance_crystal",
+  "title": "共振水晶",
+  "text": [
+    "在工作台中央放灵性水晶，周围八格放奥术尘，可合成共振水晶。用于进阶工作台和塑剑之仪。"
+  ],
+  "recipes": true
+}

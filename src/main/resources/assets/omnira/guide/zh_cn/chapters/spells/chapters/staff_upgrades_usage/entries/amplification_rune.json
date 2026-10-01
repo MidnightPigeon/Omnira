@@ -1,0 +1,16 @@
+{
+  "id": "amplification_rune",
+  "item": "omnira:amplification_rune",
+  "title": "增幅魔纹",
+  "text": [
+    "占用 1 个魔纹槽，提供 50% 法术强度加成。每种魔纹只能装配一个。",
+    "法术强度的百分比加成均基于基础值累加，不会相互连乘。例如部件合计提高 20%，再嵌入增幅魔纹，总强度为基础值的 170%。格栅与法术核心的强度加成也按相同规则相加。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "amplification_rune_crafting",
+      "label": "锻造配方"
+    }
+  ]
+}

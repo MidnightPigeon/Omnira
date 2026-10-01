@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:crystal_processing_table",
+    "omnira:analysis_artisan_table",
+    "omnira:simple_condensation_table",
+    "omnira:arcane_assembly_table",
+    "omnira:mana_engine",
+    "omnira:crystal_casing",
+    "omnira:infused_crystal_casing"
+  ]
+}

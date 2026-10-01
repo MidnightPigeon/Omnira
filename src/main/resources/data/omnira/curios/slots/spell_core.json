@@ -1,0 +1,13 @@
+{
+  "size": 1,
+  "order": 11,
+  "icon": "omnira:slot/spell_core",
+  "render_toggle": true,
+  "operation": "SET",
+  "validators": [
+    "curios:tag"
+  ],
+  "use_native_gui": true,
+  "add_cosmetic": false,
+  "drop_rule": "DEFAULT"
+}

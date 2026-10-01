@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "omnira:block/stripped_time_log_top",
+    "side": "omnira:block/stripped_time_log"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "omnira:advanced_assembly_table", "operation": "staff_enhancement",
+  "slots": [
+    {"item": "minecraft:clock"}, {"item": "minecraft:clock"}, {"item": "minecraft:clock"},
+    {"item": "minecraft:clock"}, {"item": "minecraft:clock"}, {"item": "minecraft:clock"},
+    {"item": "minecraft:clock"}, {"item": "omnira:modular_staff"}, {"item": "minecraft:clock"}
+  ],
+  "result": {"id": "omnira:modular_staff", "count": 1}
+}

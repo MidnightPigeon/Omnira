@@ -1,0 +1,10 @@
+{
+  "id": "crystal_column_base",
+  "item": "omnira:crystal_column_base",
+  "title": "Crystal Column End",
+  "text": [
+    "Serves as either a base or a capital. Its narrow end preferentially joins the end face of a neighboring crystal shaft, with the wide end facing outward. Otherwise its orientation follows the placement face. Supports all six directions.",
+    "Use a Create wrench to cycle through six directions. Manual orientation remains fixed until the block is placed again."
+  ],
+  "recipes": true
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "omnira:block/shadow_lantern"
+    },
+    "hanging=true,chain=false": {
+      "model": "omnira:block/shadow_lantern_hanging"
+    },
+    "hanging=true,chain=true": {
+      "model": "omnira:block/shadow_lantern_chain"
+    }
+  }
+}

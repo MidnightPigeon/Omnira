@@ -1,0 +1,15 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "slots": [
+    {"item": "omnira:infused_spiritual_crystal"},
+    {"item": "omnira:infused_spiritual_crystal"},
+    {"item": "omnira:infused_spiritual_crystal"},
+    {"item": "omnira:paradox_dust"},
+    {"item": "omnira:paradox_dust"},
+    {"item": "omnira:paradox_dust"},
+    {"item": "omnira:light_microcore"},
+    {"item": "omnira:primordial_spell_core"},
+    {"item": "omnira:dark_microcore"}
+  ],
+  "result": {"id": "omnira:light_dark_spell_core", "count": 1}
+}

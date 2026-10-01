@@ -1,0 +1,9 @@
+{
+  "id": "shadow_rock_bricks",
+  "item": "omnira:shadow_rock_bricks",
+  "title": "Shadow Rock Bricks",
+  "text": [
+    "Craft four Shadow Rock in a 2×2 square into four bricks, or cut Shadow Rock in a stonecutter."
+  ],
+  "recipes": true
+}

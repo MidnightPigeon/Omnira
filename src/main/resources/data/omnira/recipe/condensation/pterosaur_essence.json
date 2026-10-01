@@ -1,0 +1,11 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {
+    "item": "omnira:pterosaur_remains"
+  },
+  "mana_cost": 300,
+  "result": {
+    "id": "omnira:pterosaur_essence",
+    "count": 1
+  }
+}

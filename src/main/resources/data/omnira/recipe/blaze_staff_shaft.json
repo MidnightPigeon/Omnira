@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  L",
+    " L ",
+    "L  "
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "result": {
+    "id": "omnira:blaze_staff_shaft",
+    "count": 1
+  }
+}

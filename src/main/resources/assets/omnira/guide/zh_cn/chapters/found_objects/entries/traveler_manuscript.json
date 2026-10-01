@@ -1,0 +1,16 @@
+{
+  "id": "traveler_manuscript",
+  "item": "omnira:traveler_manuscript",
+  "title": "穿越者手稿",
+  "text": [
+    "凝固的泰拉皇宫中，黄金王座崩解后留下的战利品水晶球里藏有这份手稿。",
+    "右键逐页阅读，看看这位穿越者究竟遇见了什么。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "frozen_terra_guide",
+      "label": "凝时荒原"
+    }
+  ]
+}

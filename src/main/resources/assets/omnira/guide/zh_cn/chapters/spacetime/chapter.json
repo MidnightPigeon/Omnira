@@ -1,0 +1,11 @@
+{
+  "id": "spacetime",
+  "title": "时空突破与研究",
+  "icon": "omnira:time_warp_point",
+  "introduction": "introduction.json",
+  "entries": [],
+  "chapters": [
+    "chapters/spacetime_entry/chapter.json",
+    "chapters/spacetime_terrain/chapter.json"
+  ]
+}

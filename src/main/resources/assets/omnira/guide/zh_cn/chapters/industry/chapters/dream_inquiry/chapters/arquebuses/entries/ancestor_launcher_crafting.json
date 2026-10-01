@@ -1,0 +1,15 @@
+{
+  "id": "ancestor_launcher_crafting",
+  "item": "omnira:ancestor_launcher",
+  "title": "祖宗发射器 · 制作",
+  "text": [
+    "暗之微核置于装配台中央，外围交替摆放三个火之微核与三个 TNT，锻造成黑红交缠的升级套组。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "ancestor_launcher",
+      "label": "使用与效果"
+    }
+  ]
+}

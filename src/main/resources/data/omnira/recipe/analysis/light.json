@@ -1,0 +1,13 @@
+{
+  "type": "omnira:analysis",
+  "ingredient": {
+    "item": "omnira:crude_light_core"
+  },
+  "count": 16,
+  "result": {
+    "id": "omnira:light_microcore",
+    "count": 1
+  },
+  "dust_min": 16,
+  "dust_max": 16
+}

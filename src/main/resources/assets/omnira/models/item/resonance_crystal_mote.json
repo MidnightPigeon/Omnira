@@ -1,0 +1,9 @@
+{
+  "textures": {"glow": "minecraft:block/amethyst_block"},
+  "elements": [{"from": [7.5,7.5,7.5], "to": [8.5,8.5,8.5], "shade": false,
+    "faces": {
+      "up": {"texture":"#glow"}, "down": {"texture":"#glow"},
+      "north": {"texture":"#glow"}, "south": {"texture":"#glow"},
+      "east": {"texture":"#glow"}, "west": {"texture":"#glow"}
+    }}]
+}

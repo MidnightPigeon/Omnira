@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "omnira:damaged_research_facility"
+    },
+    {
+      "item": "omnira:time_warp_point"
+    }
+  ],
+  "result": {
+    "id": "omnira:repaired_mechanical_component",
+    "count": 1
+  }
+}

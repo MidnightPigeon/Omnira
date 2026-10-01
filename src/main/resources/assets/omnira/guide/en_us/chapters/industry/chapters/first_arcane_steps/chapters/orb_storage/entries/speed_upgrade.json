@@ -1,0 +1,10 @@
+{
+  "id": "speed_upgrade",
+  "item": "omnira:speed_upgrade",
+  "title": "Speed Upgrade",
+  "recipes": true,
+  "text": [
+    "Forge a swiftness rune with six resonance crystals. Automatic item intake and output run once every half-second; fluid transfer reaches 1,000 mB/s and a bucket takes one second.",
+    "Only accelerates existing transfers; it provides no automatic intake or output. Cruise orbs reject intake and output upgrades; speed boosts their fluid port and doubles movement after spell-core bonuses. Only one applies. Lava production and external item-pipe rates are unchanged."
+  ]
+}

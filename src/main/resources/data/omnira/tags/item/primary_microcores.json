@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:earth_microcore",
+    "omnira:water_microcore",
+    "omnira:fire_microcore",
+    "omnira:air_microcore"
+  ]
+}

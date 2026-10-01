@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:light_condensate"
+    }
+  },
+  "result": {
+    "id": "omnira:light_condensate_slab",
+    "count": 6
+  }
+}

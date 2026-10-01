@@ -1,0 +1,6 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {"item": "omnira:guide_book"},
+  "mana_cost": 300,
+  "result": {"id": "omnira:infused_grimoire", "count": 1}
+}

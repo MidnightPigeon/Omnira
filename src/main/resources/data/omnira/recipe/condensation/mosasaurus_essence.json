@@ -1,0 +1,11 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {
+    "item": "omnira:mosasaurus_remains"
+  },
+  "mana_cost": 300,
+  "result": {
+    "id": "omnira:mosasaurus_essence",
+    "count": 1
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "omnira:spacetime_reversal",
+  "ingredient": {
+    "item": "omnira:spatial_crystal_shard"
+  },
+  "count": 16,
+  "results": [
+    {
+      "id": "omnira:space_microcore",
+      "count": 1
+    }
+  ]
+}

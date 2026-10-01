@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "omnira:block/wonderland_poker_stand"
+    },
+    "half=upper": {
+      "model": "omnira:block/wonderland_poker_stand_empty"
+    }
+  }
+}

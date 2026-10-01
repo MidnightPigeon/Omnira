@@ -1,0 +1,15 @@
+{
+  "id": "wonderland_poker_stand_guide_machine_reference",
+  "title": "仙境扑克展台",
+  "item": "omnira:wonderland_poker_stand",
+  "text": [
+    "这件设备来自遗迹，可查阅专属产出条目的获取与操作说明。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "wonderland_poker_stand_guide",
+      "label": "获取与操作"
+    }
+  ]
+}

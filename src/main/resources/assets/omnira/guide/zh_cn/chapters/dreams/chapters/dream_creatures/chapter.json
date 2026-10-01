@@ -1,0 +1,11 @@
+{
+  "id": "dream_creatures",
+  "title": "梦位面生物",
+  "icon": "omnira:light_spirit_spawn_egg",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/light_spirit_spawn_egg.json",
+    "entries/shadow_ghost_spawn_egg.json",
+    "entries/dream_mirror_spawn_egg.json"
+  ]
+}

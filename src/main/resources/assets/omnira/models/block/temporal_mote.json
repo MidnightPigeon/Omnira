@@ -1,0 +1,1 @@
+{"ambientocclusion":false,"render_type":"minecraft:translucent","textures":{"all":"minecraft:block/lime_stained_glass","particle":"minecraft:block/lime_stained_glass"},"elements":[{"from":[6,6,6],"to":[10,10,10],"faces":{"north":{"texture":"#all"},"south":{"texture":"#all"},"east":{"texture":"#all"},"west":{"texture":"#all"},"up":{"texture":"#all"},"down":{"texture":"#all"}}}]}

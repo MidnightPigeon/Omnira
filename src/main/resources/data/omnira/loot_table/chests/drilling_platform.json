@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 6,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "omnira:infused_spiritual_crystal",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:infused_spiritual_crystal",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:paradox_dust",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:time_flower",
+          "weight": 3
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "omnira:spacetime_archaeology_brush"
+        }
+      ]
+    }
+  ]
+}

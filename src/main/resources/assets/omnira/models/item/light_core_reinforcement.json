@@ -1,0 +1,8 @@
+{
+  "parent": "omnira:item/iron_reinforcement",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "metal": "omnira:item/modular_staff_light_core",
+    "particle": "omnira:item/modular_staff_light_core"
+  }
+}

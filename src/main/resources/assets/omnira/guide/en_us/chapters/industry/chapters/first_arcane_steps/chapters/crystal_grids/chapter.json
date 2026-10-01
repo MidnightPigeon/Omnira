@@ -1,0 +1,11 @@
+{
+  "id": "crystal_grids",
+  "title": "Crystal Grids",
+  "icon": "omnira:basic_crystal_grid",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/basic_crystal_grid_crafting.json",
+    "entries/elemental_crystal_grid_crafting.json"
+  ],
+  "chapters": []
+}

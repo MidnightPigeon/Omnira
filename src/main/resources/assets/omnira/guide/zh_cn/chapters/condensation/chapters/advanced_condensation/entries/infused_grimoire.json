@@ -1,0 +1,23 @@
+{
+  "id": "infused_grimoire",
+  "item": "omnira:infused_grimoire",
+  "title": "注灵魔典",
+  "text": [
+    "指导书经高阶凝聚成为注灵魔典。携带它接受洁身之仪，有机会转为圣化或邪化版本。三种魔典的使用方式见关联条目。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "infused_grimoire_usage",
+      "label": "魔典使用"
+    },
+    {
+      "target": "cleansing_ritual",
+      "label": "洁身之仪"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    }
+  ]
+}

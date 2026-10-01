@@ -1,0 +1,15 @@
+{
+  "id": "paradox_dust",
+  "item": "omnira:paradox_dust",
+  "title": "Paradox Dust",
+  "text": [
+    "Advanced condensation reduces a spacetime knot to powder that flickers between black and white."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:shadow_log",
+    "omnira:shadow_wood",
+    "omnira:stripped_shadow_log",
+    "omnira:stripped_shadow_wood"
+  ]
+}

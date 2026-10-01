@@ -1,0 +1,10 @@
+{
+  "id": "lava_production_upgrade",
+  "item": "omnira:lava_production_upgrade",
+  "title": "Lava Production Upgrade",
+  "text": [
+    "Produces 100 mB of lava per second. Fills liquid crystal balls directly, or searches crystal-ball inventories for fillable containers. An empty bucket takes ten seconds; production stops without a suitable container.",
+    "Lava buckets used in forging return their empty buckets."
+  ],
+  "recipes": true
+}

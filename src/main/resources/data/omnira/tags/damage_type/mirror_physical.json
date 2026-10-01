@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:player_attack", "minecraft:mob_attack", "minecraft:mob_attack_no_aggro",
+    "minecraft:mob_projectile", "minecraft:arrow", "minecraft:trident", "minecraft:thrown",
+    "minecraft:explosion", "minecraft:player_explosion", "minecraft:thorns",
+    "minecraft:falling_block", "minecraft:falling_anvil", "minecraft:fly_into_wall",
+    "minecraft:sting", "minecraft:fall", "minecraft:in_wall",
+    "minecraft:cactus", "minecraft:sweet_berry_bush", "minecraft:stalagmite", "minecraft:falling_stalactite",
+    {"id":"#c:is_physical","required":false}
+  ]
+}

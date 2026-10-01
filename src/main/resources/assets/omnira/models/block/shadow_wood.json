@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "omnira:block/shadow_log",
+    "side": "omnira:block/shadow_log"
+  }
+}

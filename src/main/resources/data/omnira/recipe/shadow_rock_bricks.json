@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:shadow_rock"
+    }
+  },
+  "result": {
+    "id": "omnira:shadow_rock_bricks",
+    "count": 4
+  }
+}

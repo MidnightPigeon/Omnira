@@ -1,0 +1,20 @@
+{
+  "id": "rituals",
+  "title": "仪式建立与使用",
+  "icon": "omnira:ritual_energy_core",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/crystal_pedestal.json",
+    "entries/ritual_energy_core.json",
+    "entries/advanced_ritual_energy_core.json",
+    "entries/dream_ritual.json",
+    "entries/sword_shaping.json",
+    "entries/resonance_ritual.json",
+    "entries/affinity_ritual.json",
+    "entries/cleansing_ritual.json",
+    "entries/corridor_ritual.json"
+  ],
+  "chapters": [
+    "chapters/ritual_weapons/chapter.json"
+  ]
+}

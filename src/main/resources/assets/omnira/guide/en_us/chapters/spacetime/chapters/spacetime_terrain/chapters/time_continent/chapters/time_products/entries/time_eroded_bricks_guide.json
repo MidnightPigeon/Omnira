@@ -1,0 +1,15 @@
+{
+  "id": "time_eroded_bricks_guide",
+  "title": "Time-Eroded Bricks and Ruin Fragments",
+  "item": "omnira:time_eroded_bricks",
+  "text": [
+    "Eventide Ruins contain time-eroded, cracked and sandbound bricks, broken pillars and fragments. Ordinary and cracked stone bricks become their time-eroded equivalents at the terminal pulse. Smelt time-eroded bricks for cracked bricks; craft eight cracked bricks with one time sand for eight sandbound bricks."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "eventide_ruins_guide",
+      "label": "Eventide Ruins"
+    }
+  ]
+}

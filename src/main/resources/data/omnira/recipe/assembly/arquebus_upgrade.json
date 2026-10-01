@@ -1,0 +1,25 @@
+{
+  "type": "omnira:assembly",
+  "operation": "arquebus_upgrade",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:ancestor_launcher"
+    },
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "omnira:arcane_arquebus"
+    }
+  ],
+  "result": {
+    "id": "omnira:arcane_arquebus",
+    "count": 1,
+    "components": {
+      "omnira:ancestor_launcher": true
+    }
+  }
+}

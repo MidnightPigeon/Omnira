@@ -1,0 +1,15 @@
+{
+  "id": "kings_new_clothes_crafting",
+  "item": "omnira:kings_new_clothes",
+  "title": "国王的新装 · 制作",
+  "text": [
+    "暗之微核置于装配台中央，外围交替摆放三个梦境水晶与三个暗影手稿，锻造成国王的新装升级套组。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "kings_new_clothes",
+      "label": "使用与效果"
+    }
+  ]
+}

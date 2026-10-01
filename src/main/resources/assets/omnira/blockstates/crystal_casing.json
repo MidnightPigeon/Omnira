@@ -1,0 +1,1156 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "up": "false",
+        "west": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_0"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "false",
+        "east": "false",
+        "south": "false",
+        "north": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_0"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "west": "false",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_0"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "false",
+        "east": "false",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_0"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_0"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "false",
+        "north": "false",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_0"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "true",
+        "east": "false",
+        "north": "false",
+        "south": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_1"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "true",
+        "east": "false",
+        "south": "false",
+        "north": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_1"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "west": "false",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_1"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "true",
+        "east": "false",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_1"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "true",
+        "south": "false",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_1"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "true",
+        "north": "false",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_1"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "false",
+        "east": "true",
+        "north": "false",
+        "south": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_2"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "false",
+        "east": "true",
+        "south": "false",
+        "north": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_2"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "west": "true",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_2"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "false",
+        "east": "true",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_2"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "false",
+        "south": "true",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_2"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "false",
+        "north": "true",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_2"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "true",
+        "east": "true",
+        "north": "false",
+        "south": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_3"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "true",
+        "east": "true",
+        "south": "false",
+        "north": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_3"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "west": "true",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_3"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "true",
+        "east": "true",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_3"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "true",
+        "south": "true",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_3"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "true",
+        "north": "true",
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_3"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "false",
+        "east": "false",
+        "north": "true",
+        "south": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_4"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "false",
+        "east": "false",
+        "south": "true",
+        "north": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_4"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "west": "false",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_4"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "false",
+        "east": "false",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_4"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "false",
+        "south": "false",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_4"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "false",
+        "north": "false",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_4"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "true",
+        "east": "false",
+        "north": "true",
+        "south": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_5"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "true",
+        "east": "false",
+        "south": "true",
+        "north": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_5"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "west": "false",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_5"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "true",
+        "east": "false",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_5"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "true",
+        "south": "false",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_5"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "true",
+        "north": "false",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_5"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "false",
+        "east": "true",
+        "north": "true",
+        "south": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_6"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "false",
+        "east": "true",
+        "south": "true",
+        "north": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_6"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "west": "true",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_6"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "false",
+        "east": "true",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_6"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "false",
+        "south": "true",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_6"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "false",
+        "north": "true",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_6"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "true",
+        "east": "true",
+        "north": "true",
+        "south": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_7"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "true",
+        "east": "true",
+        "south": "true",
+        "north": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_7"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "west": "true",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_7"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "true",
+        "east": "true",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_7"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "true",
+        "south": "true",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_7"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "true",
+        "north": "true",
+        "up": "true",
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_7"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "false",
+        "east": "false",
+        "north": "false",
+        "south": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_8"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "false",
+        "east": "false",
+        "south": "false",
+        "north": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_8"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "west": "false",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_8"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "false",
+        "east": "false",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_8"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_8"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "false",
+        "north": "false",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_8"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "true",
+        "east": "false",
+        "north": "false",
+        "south": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_9"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "true",
+        "east": "false",
+        "south": "false",
+        "north": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_9"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "west": "false",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_9"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "true",
+        "east": "false",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_9"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "true",
+        "south": "false",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_9"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "true",
+        "north": "false",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_9"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "false",
+        "east": "true",
+        "north": "false",
+        "south": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_10"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "false",
+        "east": "true",
+        "south": "false",
+        "north": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_10"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "west": "true",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_10"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "false",
+        "east": "true",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_10"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "false",
+        "south": "true",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_10"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "false",
+        "north": "true",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_10"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "true",
+        "east": "true",
+        "north": "false",
+        "south": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_11"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "true",
+        "east": "true",
+        "south": "false",
+        "north": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_11"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "west": "true",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_11"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "true",
+        "east": "true",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_11"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "true",
+        "south": "true",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_11"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "true",
+        "north": "true",
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_11"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "false",
+        "east": "false",
+        "north": "true",
+        "south": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_12"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "false",
+        "east": "false",
+        "south": "true",
+        "north": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_12"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "west": "false",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_12"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "false",
+        "east": "false",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_12"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "false",
+        "south": "false",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_12"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "false",
+        "north": "false",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_12"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "true",
+        "east": "false",
+        "north": "true",
+        "south": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_13"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "true",
+        "east": "false",
+        "south": "true",
+        "north": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_13"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "west": "false",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_13"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "true",
+        "east": "false",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_13"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "true",
+        "south": "false",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_13"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "true",
+        "north": "false",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_13"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "false",
+        "east": "true",
+        "north": "true",
+        "south": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_14"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "false",
+        "east": "true",
+        "south": "true",
+        "north": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_14"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "west": "true",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_14"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "false",
+        "east": "true",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_14"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "false",
+        "south": "true",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_14"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "false",
+        "north": "true",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_14"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "west": "true",
+        "east": "true",
+        "north": "true",
+        "south": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/up_15"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "west": "true",
+        "east": "true",
+        "south": "true",
+        "north": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/down_15"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "west": "true",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/north_15"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "west": "true",
+        "east": "true",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/south_15"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "north": "true",
+        "south": "true",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/west_15"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "south": "true",
+        "north": "true",
+        "up": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/crystal_casing/east_15"
+      }
+    }
+  ]
+}

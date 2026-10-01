@@ -1,0 +1,28 @@
+{
+  "id": "fleeting_woods_guide",
+  "title": "Fleeting Woods",
+  "item": "omnira:time_sapling",
+  "text": [
+    "Time passes faster here: growth, potion effects, processing, and cooldowns advance twice as fast, while movement speed stays unchanged. Time Trees grow at their usual pace, and their leaves never decay naturally.",
+    "Time Trees and scattered Time Grass and Time Flowers cover gently rolling sedimented silt."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "time_tree_guide",
+      "label": "Time Tree"
+    },
+    {
+      "target": "time_plants_guide",
+      "label": "Time Flora"
+    },
+    {
+      "target": "kirisame_shop_guide",
+      "label": "Kirisame Magic Shop"
+    },
+    {
+      "target": "temporal_silt_guide",
+      "label": "Temporal Silt"
+    }
+  ]
+}

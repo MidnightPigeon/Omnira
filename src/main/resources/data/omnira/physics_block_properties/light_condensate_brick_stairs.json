@@ -1,0 +1,9 @@
+{
+  "selector": "omnira:light_condensate_brick_stairs",
+  "properties": {
+    "sable:floating_material": "omnira:light_condensate",
+    "sable:mass": 0.5,
+    "sable:volume": 0.5
+  },
+  "priority": 2000
+}

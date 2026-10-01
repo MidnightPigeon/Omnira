@@ -1,0 +1,8 @@
+{
+  "type": "omnira:overworld_ruins",
+  "variant": 0,
+  "biomes": "#omnira:has_structure/abandoned_apprentice_hut",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "spawn_overrides": {}
+}

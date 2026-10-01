@@ -1,0 +1,28 @@
+{
+  "id": "spatial_growth_guide",
+  "title": "Growing Spatial Crystals",
+  "item": "omnira:spatial_crystal_matrix",
+  "text": [
+    "A spatial crystal matrix grows small, medium, and large buds on adjacent faces, eventually producing a full cluster. Mature clusters yield Spatial Crystals; Silk Touch preserves the cluster.",
+    "The matrix drops nothing when mined, even with Silk Touch. Both rough crystal states drop ordinary Rough Spatial Crystal Blocks. An Advanced Condensation Table excites them again. Alternatively, right-click a block with an Infused Spiritual Crystal to excite it, consuming one crystal."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "time_seed_guide",
+      "label": "Seed of Time"
+    },
+    {
+      "target": "spatial_crystal_guide",
+      "label": "Rough Spatial Crystal Blocks"
+    },
+    {
+      "target": "spatial_caverns_guide",
+      "label": "Spatial Caverns"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    }
+  ]
+}

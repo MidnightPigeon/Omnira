@@ -1,0 +1,13 @@
+{
+  "id": "spacetime_terrain",
+  "title": "Three Strata",
+  "icon": "omnira:engraved_mirror_rock",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/spacetime_corridor_guide.json"
+  ],
+  "chapters": [
+    "chapters/time_continent/chapter.json",
+    "chapters/spatial_caverns/chapter.json"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "omnira:time_seed",
+          "weight": 65
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:time_sapling",
+          "weight": 33
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:life_ender",
+          "weight": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "spiritual_crystal",
+  "item": "omnira:spiritual_crystal",
+  "title": "灵性水晶",
+  "text": [
+    "灵性水晶是凝聚后的基础魔法材料，也是后续工作方块的制作基础。",
+    "它还可作为低阶法术水晶的承载材料。放入水晶加工台的承载槽，与墨水和微核共同完成书写。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "simple_condensation_table",
+      "label": "简易凝聚台"
+    }
+  ]
+}

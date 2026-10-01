@@ -1,0 +1,19 @@
+{
+  "id": "water_microcore",
+  "item": "omnira:water_microcore",
+  "title": "水元素微核",
+  "text": [
+    "在解析工匠桌提取的水元素微核。放入水晶加工台的目标槽时提供“自身”，放入形态槽时提供“环绕”。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "orbit_shape",
+      "label": "环绕"
+    },
+    {
+      "target": "self_target",
+      "label": "自身"
+    }
+  ]
+}

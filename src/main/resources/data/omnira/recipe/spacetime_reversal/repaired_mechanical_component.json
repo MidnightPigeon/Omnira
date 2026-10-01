@@ -1,0 +1,6 @@
+{
+  "type": "omnira:spacetime_reversal",
+  "ingredient": {"item": "omnira:damaged_research_facility"},
+  "count": 1,
+  "results": [{"id": "omnira:repaired_mechanical_component", "count": 1}]
+}

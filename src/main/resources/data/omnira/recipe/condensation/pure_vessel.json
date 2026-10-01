@@ -1,0 +1,6 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {"item": "omnira:crystal_ball"},
+  "mana_cost": 300,
+  "result": {"id": "omnira:pure_vessel", "count": 1}
+}

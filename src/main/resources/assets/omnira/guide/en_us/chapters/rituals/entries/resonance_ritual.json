@@ -1,0 +1,24 @@
+{
+  "id": "resonance_ritual",
+  "scene": "resonance_ritual",
+  "item": "omnira:resonance_terminal",
+  "title": "Ritual of Resonance",
+  "text": [
+    "Use the Ritual of Dreamseeking eight-pedestal 7x7 layout, with one Resonance Core on each pedestal. Use a Spacetime Knot on the central Ritual Energy Core. Only the knot is consumed; a terminal is ejected and the eight offerings, pedestals and ritual core remain.",
+    "The reusable terminal links up to four containers. Sneak-use a core to link or unlink; use the terminal to choose a container, even across dimensions. Only the owner may access the network.",
+    "Transfers cost 100 mana per item or per 500 mB, without discounts. Fluid fees are prepaid. Removing the container, closing the menu or switching links interrupts transfer without refund.",
+    "Above a Marisa Crystal Ball, an unlinked core remains pale red and turns yellow when linked. Select that connection in the terminal and open the shop to trade from any distance or dimension without an extra mana fee. Daily goods and purchase limits remain shared with your direct shop visits.",
+    "Destroyed nodes automatically unlink. The standard terminal supports four links; advanced condensation upgrades it to six while retaining existing links."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "resonance_core",
+      "label": "Resonance Core"
+    },
+    {
+      "target": "enhanced_resonance_terminal",
+      "label": "Enhanced Resonance Terminal"
+    }
+  ]
+}

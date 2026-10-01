@@ -1,0 +1,10 @@
+{
+  "type": "omnira:assembly",
+  "operation": "grid_upgrade",
+  "slots": [
+    [], {"tag": "omnira:microcores"}, [],
+    [], {"tag": "omnira:microcores"}, [],
+    {"item": "omnira:basic_crystal_grid"}
+  ],
+  "result": {"id": "omnira:elemental_crystal_grid", "count": 1}
+}

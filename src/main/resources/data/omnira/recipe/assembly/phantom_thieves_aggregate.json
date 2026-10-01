@@ -1,0 +1,29 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:phantom_emblem_rubble"
+    },
+    {
+      "item": "omnira:phantom_emblem_rubble"
+    },
+    {
+      "item": "omnira:phantom_emblem_rubble"
+    },
+    {
+      "item": "omnira:phantom_emblem_rubble"
+    },
+    {
+      "item": "omnira:phantom_emblem_rubble"
+    },
+    {
+      "item": "omnira:phantom_emblem_rubble"
+    },
+    []
+  ],
+  "result": {
+    "id": "omnira:phantom_thieves_aggregate",
+    "count": 1
+  }
+}

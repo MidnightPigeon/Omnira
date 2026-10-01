@@ -1,0 +1,12 @@
+{
+  "id": "arquebuses_usage",
+  "title": "魔能圣铳与套组效果",
+  "icon": "omnira:arcane_arquebus",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/arcane_arquebus.json",
+    "entries/ancestor_launcher.json",
+    "entries/kings_new_clothes.json"
+  ],
+  "chapters": []
+}

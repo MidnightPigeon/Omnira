@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:gift",
+  "pools": [{
+    "rolls": 1,
+    "entries": [
+      {"type": "minecraft:item", "name": "omnira:dream_crystal_bedrock", "weight": 30},
+      {"type": "minecraft:item", "name": "omnira:primordial_spell_core", "weight": 20},
+      {"type": "minecraft:item", "name": "omnira:arcane_crystal_grid", "weight": 10},
+      {"type": "minecraft:item", "name": "omnira:shadow_manuscript", "weight": 40},
+      {"type": "minecraft:item", "name": "omnira:light_crystal_core", "weight": 40},
+      {"type": "minecraft:item", "name": "omnira:spiritual_crystal", "weight": 40,
+       "functions": [{"function": "minecraft:set_count", "count": 16}]},
+      {"type": "minecraft:item", "name": "omnira:earth_microcore", "weight": 5},
+      {"type": "minecraft:item", "name": "omnira:water_microcore", "weight": 5},
+      {"type": "minecraft:item", "name": "omnira:fire_microcore", "weight": 5},
+      {"type": "minecraft:item", "name": "omnira:air_microcore", "weight": 5}
+    ]
+  }]
+}

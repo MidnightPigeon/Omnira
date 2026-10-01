@@ -1,0 +1,20 @@
+{
+  "id": "block_barrier",
+  "item": "omnira:earth_microcore",
+  "title": "方块／位置-屏障",
+  "text": [
+    "火微核配地微核并选中方块时，在其未被相邻方块封住的表面形成屏障。准星目标则在选定位置形成屏障，地面目标在各个有效地表选点形成屏障。",
+    "方块相关要素还会作用于选定方块或位置。要搭建虚无水晶，应另行写入构筑要素，屏障形态本身不等于构筑。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "selected_target",
+      "label": "目标"
+    },
+    {
+      "target": "barrier_shape",
+      "label": "屏障"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "fur": "minecraft:block/white_stained_glass",
+    "muzzle": "minecraft:block/white_stained_glass",
+    "inner": "minecraft:block/pink_stained_glass",
+    "hat": "minecraft:block/black_concrete",
+    "band": "minecraft:block/purple_concrete",
+    "eyes": "minecraft:block/black_concrete",
+    "nose": "minecraft:block/pink_concrete",
+    "particle": "minecraft:block/white_stained_glass"
+  },
+  "elements": [
+    {
+      "from": [
+        5,
+        12,
+        6
+      ],
+      "to": [
+        11,
+        13,
+        12
+      ],
+      "faces": {
+        "north": {
+          "texture": "#hat"
+        },
+        "south": {
+          "texture": "#hat"
+        },
+        "east": {
+          "texture": "#hat"
+        },
+        "west": {
+          "texture": "#hat"
+        },
+        "up": {
+          "texture": "#hat"
+        },
+        "down": {
+          "texture": "#hat"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        13,
+        7
+      ],
+      "to": [
+        10,
+        15,
+        11
+      ],
+      "faces": {
+        "north": {
+          "texture": "#hat"
+        },
+        "south": {
+          "texture": "#hat"
+        },
+        "east": {
+          "texture": "#hat"
+        },
+        "west": {
+          "texture": "#hat"
+        },
+        "up": {
+          "texture": "#hat"
+        },
+        "down": {
+          "texture": "#hat"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        13,
+        6
+      ],
+      "to": [
+        10,
+        14,
+        7
+      ],
+      "faces": {
+        "north": {
+          "texture": "#band"
+        },
+        "south": {
+          "texture": "#band"
+        },
+        "east": {
+          "texture": "#band"
+        },
+        "west": {
+          "texture": "#band"
+        },
+        "up": {
+          "texture": "#band"
+        },
+        "down": {
+          "texture": "#band"
+        }
+      }
+    }
+  ]
+}

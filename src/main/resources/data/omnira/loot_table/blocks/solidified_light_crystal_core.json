@@ -1,0 +1,1 @@
+{"type":"minecraft:block","pools":[{"rolls":1,"entries":[{"type":"minecraft:item","name":"omnira:solidified_light_crystal_core"}],"conditions":[{"condition":"minecraft:survives_explosion"}]}]}

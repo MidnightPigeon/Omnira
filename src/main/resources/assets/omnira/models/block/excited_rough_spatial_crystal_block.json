@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "omnira:block/excited_rough_spatial_crystal_block"
+  },
+  "render_type": "minecraft:translucent",
+  "ambientocclusion": false
+}

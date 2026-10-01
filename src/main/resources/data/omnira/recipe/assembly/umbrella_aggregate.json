@@ -1,0 +1,29 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:umbrella_laboratory_rubble"
+    },
+    {
+      "item": "omnira:umbrella_laboratory_rubble"
+    },
+    {
+      "item": "omnira:umbrella_laboratory_rubble"
+    },
+    {
+      "item": "omnira:umbrella_laboratory_rubble"
+    },
+    {
+      "item": "omnira:umbrella_laboratory_rubble"
+    },
+    {
+      "item": "omnira:umbrella_laboratory_rubble"
+    },
+    []
+  ],
+  "result": {
+    "id": "omnira:umbrella_aggregate",
+    "count": 1
+  }
+}

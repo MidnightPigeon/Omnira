@@ -1,0 +1,9 @@
+{
+  "id": "mirror_rock",
+  "item": "omnira:mirror_rock",
+  "title": "镜面岩",
+  "text": [
+    "镜梦碎岛上的银色岩石。必须使用精准采集才能取得方块，否则会破碎而不掉落。"
+  ],
+  "recipes": true
+}

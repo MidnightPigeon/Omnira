@@ -1,0 +1,19 @@
+{
+  "id": "multi_arcane_tip",
+  "item": "omnira:multi_arcane_tip",
+  "title": "Multi-Arcane Tip",
+  "text": [
+    "Casts two shots 0.3 seconds apart with a 3-second within-chain base cooldown and provides two rune slots. Each shot spends mana separately."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "multi_arcane_tip_crafting",
+      "label": "Forging Recipe"
+    },
+    {
+      "target": "staff_casting",
+      "label": "Spell Chains and Cooldown"
+    }
+  ]
+}

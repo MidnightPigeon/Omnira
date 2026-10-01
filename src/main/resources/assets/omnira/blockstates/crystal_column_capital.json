@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "omnira:block/crystal_column_capital"
+    },
+    "axis=x": {
+      "model": "omnira:block/crystal_column_capital",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z": {
+      "model": "omnira:block/crystal_column_capital",
+      "x": 90
+    }
+  }
+}

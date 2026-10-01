@@ -1,0 +1,20 @@
+{
+  "id": "arcane_crystal_grid",
+  "item": "omnira:arcane_crystal_grid",
+  "title": "魔能水晶格栅",
+  "text": [
+    "可容纳8枚法术水晶。用于魔能引擎时提供2倍输出。升级保留原法术链，新增空位接在末尾。",
+    "佩戴后额外提供10%法术冷却缩减。仅有此加成时，法术链轮末冷却由4秒降至3.6秒；总冷却缩减仍以50%为上限。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "arcane_crystal_grid_crafting",
+      "label": "锻造配方"
+    },
+    {
+      "target": "mana_engine",
+      "label": "魔能引擎"
+    }
+  ]
+}

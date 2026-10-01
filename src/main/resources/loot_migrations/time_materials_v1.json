@@ -1,0 +1,313 @@
+{
+  "omnira:chests/golden_throne": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:traveler_manuscript"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_microcore"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_microcore"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spacetime_spell_core"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.05
+          }
+        ]
+      },
+      {
+        "rolls": 8,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_seed",
+            "weight": 1
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:damaged_research_facility"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.2
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:chests/golden_throne_tower": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_microcore"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_microcore"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spacetime_spell_core"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.05
+          }
+        ]
+      },
+      {
+        "rolls": 8,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_seed",
+            "weight": 1
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.2
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:damaged_research_facility"
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:chests/doomsday_rite": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": {
+          "type": "minecraft:uniform",
+          "min": 3,
+          "max": 5
+        },
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:paradox_dust",
+            "weight": 4,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 3
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 4,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_warp_point",
+            "weight": 2,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 2
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.25
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:peaceful_memory_cube"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:corrupted_memory_cube"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_microcore"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_microcore"
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:chests/drilling_platform": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": 6,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 6
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 6
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:paradox_dust",
+            "weight": 3
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spacetime_archaeology_brush"
+          }
+        ]
+      }
+    ]
+  }
+}

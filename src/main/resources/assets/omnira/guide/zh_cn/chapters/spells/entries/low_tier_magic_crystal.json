@@ -1,0 +1,24 @@
+{
+  "id": "low_tier_magic_crystal",
+  "item": "omnira:low_tier_magic_crystal",
+  "title": "低阶魔法水晶",
+  "text": [
+    "法术水晶记录了写入时的对象、形态、要素、修饰与基础费用。其关键词由制作时投入的内容决定。",
+    "右键可以一次性施放并消耗水晶。装入已装备的水晶格栅后，也能通过法杖依序反复施放，此时消耗法力而不消耗水晶。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "spell_target_shape_basics",
+      "label": "目标与形态的选择"
+    },
+    {
+      "target": "crystal_processing_table",
+      "label": "水晶加工台"
+    },
+    {
+      "target": "advanced_crystal_aggregation_ring",
+      "label": "高阶水晶聚合环"
+    }
+  ]
+}

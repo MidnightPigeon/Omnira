@@ -1,0 +1,12 @@
+{
+  "id": "analysis_crystal",
+  "item": "omnira:analysis_crystal",
+  "title": "Analysis Crystal",
+  "text": [
+    "Crafted shapelessly from the four primary microcores, this crystal converts matter to microcores and back. It lasts for 128 conversions.",
+    "Combine it with eight dirt, fish, feathers or coals to obtain an earth, water, air or fire microcore respectively. Place one ingredient in each remaining crafting slot. Tagged ingredients may be mixed; charcoal also works.",
+    "Combine it with one primary microcore to produce 16 dirt, cod, feathers or coal respectively. These outputs are fixed. Every conversion costs one durability; the crystal breaks after its final use.",
+    "An analysis crystal converts four crude light cores into a light microcore, or a light microcore back into eight crude light cores. Forging a primordial spell core or elemental fusion tip consumes the entire analysis crystal."
+  ],
+  "recipes": true
+}

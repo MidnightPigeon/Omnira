@@ -1,0 +1,10 @@
+{
+  "id": "crude_light_core",
+  "item": "omnira:crude_light_core",
+  "title": "粗制光核",
+  "text": [
+    "四个光源晶可合成粗制光核，也可用魔动装配台加工光源晶。粗制光核不能还原为光源晶。",
+    "可继续锻造为原始法术核心，或解析出光之微核。"
+  ],
+  "recipes": true
+}

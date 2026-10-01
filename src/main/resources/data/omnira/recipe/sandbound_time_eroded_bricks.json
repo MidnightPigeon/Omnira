@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "CCC",
+    "CSC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "omnira:cracked_time_eroded_bricks"
+    },
+    "S": {
+      "item": "omnira:time_sand"
+    }
+  },
+  "result": {
+    "id": "omnira:sandbound_time_eroded_bricks",
+    "count": 8
+  }
+}

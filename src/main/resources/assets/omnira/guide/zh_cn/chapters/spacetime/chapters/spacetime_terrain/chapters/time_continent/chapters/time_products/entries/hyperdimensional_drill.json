@@ -1,0 +1,20 @@
+{
+  "id": "hyperdimensional_drill",
+  "title": "超维钻机",
+  "item": "omnira:hyperdimensional_drill",
+  "text": [
+    "右键坐上顶部座位，再右键前方水晶面板启动。底盘旋转，逐层清除下方3×3方块并缓慢下降，不保留材料。遇到不可挖掘的边界停止并耗尽能量。启动后不能手动停止，可以随时潜行离座，钻机会继续工作。",
+    "投入四枚空间水晶，或让侧面朝向它的魔能引擎运转一分钟，即可充满。两种方式可以混用：每枚水晶抵十五秒。可以挖掘带走整台钻头。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "drilling_platform_guide",
+      "label": "超维钻井平台"
+    },
+    {
+      "target": "hyperdimensional_drill_machine_reference",
+      "label": "超维钻机"
+    }
+  ]
+}

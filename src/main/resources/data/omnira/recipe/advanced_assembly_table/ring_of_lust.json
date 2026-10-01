@@ -1,0 +1,36 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "slots": [
+    {
+      "item": "omnira:desire_crystal"
+    },
+    {
+      "item": "omnira:desire_crystal"
+    },
+    {
+      "item": "omnira:desire_crystal"
+    },
+    {
+      "item": "omnira:desire_crystal"
+    },
+    {
+      "item": "omnira:desire_crystal"
+    },
+    {
+      "item": "omnira:desire_crystal"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "omnira:dream_spell_core"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    }
+  ],
+  "result": {
+    "id": "omnira:ring_of_lust",
+    "count": 1
+  }
+}

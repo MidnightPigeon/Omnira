@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "omnira:block/eventide_debris",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "omnira:block/eventide_debris",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "omnira:block/eventide_debris",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "omnira:block/eventide_debris",
+      "y": 270
+    }
+  }
+}

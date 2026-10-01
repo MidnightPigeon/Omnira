@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": ["CCC", "CSC", "CCC"],
+  "key": {
+    "C": {"item": "omnira:light_crystal_core"},
+    "S": {"item": "omnira:sedimented_living_temporal_silt"}
+  },
+  "result": {"id": "omnira:solidified_light_crystal_core", "count": 8}
+}

@@ -1,0 +1,15 @@
+{
+  "id": "shadow_staff_shaft",
+  "item": "omnira:shadow_staff_shaft",
+  "title": "Shadow Wood Staff Shaft",
+  "text": [
+    "Provides two enhancement slots and 10% spell power."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "shadow_staff_shaft_crafting",
+      "label": "Forging Recipe"
+    }
+  ]
+}

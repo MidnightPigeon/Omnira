@@ -1,0 +1,19 @@
+{
+  "id": "spiritual_crystal_tip",
+  "item": "omnira:spiritual_crystal_tip",
+  "title": "灵性水晶杖端",
+  "text": [
+    "每次施放 1 发，链内基础冷却 3 秒，提供 1 个魔纹槽。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "spiritual_crystal_tip_crafting",
+      "label": "锻造配方"
+    },
+    {
+      "target": "staff_casting",
+      "label": "法术链与冷却"
+    }
+  ]
+}

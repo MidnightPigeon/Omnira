@@ -1,0 +1,9 @@
+{
+  "id": "dream_crystal_block",
+  "item": "omnira:dream_crystal_block",
+  "title": "梦境水晶块",
+  "text": [
+    "四枚梦境水晶按2×2排列合成一块，是蓝紫色半透明的发光建筑材料。"
+  ],
+  "recipes": true
+}

@@ -1,0 +1,10 @@
+{
+  "id": "spacetime_stabilization_upgrade",
+  "item": "omnira:spacetime_stabilization_upgrade",
+  "title": "Spacetime Stabilization Upgrade",
+  "text": [
+    "Forge an Elemental Crystal Grid with three Spacetime Knots and three Paradox Dust in any outer order. Installed globes retain contents and upgrades when mined and cannot be trampled.",
+    "Item forms of Crystal Balls, Liquid Crystal Balls and Cruise Orbs with this upgrade may only be carried in your inventory or placed on a Crystal Pedestal. Other containers cannot accept them, even when their contents are empty."
+  ],
+  "recipes": true
+}

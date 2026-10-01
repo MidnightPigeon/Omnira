@@ -1,0 +1,19 @@
+{
+  "id": "advanced_ritual_energy_core_crafting",
+  "item": "omnira:advanced_ritual_energy_core",
+  "title": "Advanced Ritual Energy Core · Crafting",
+  "recipes": true,
+  "text": [
+    "Place three ritual energy cores and three blaze rods in the forge. From the entrance, the left, middle and right nodes hold paradox dust, a light-dark spell core and paradox dust. The node core is consumed; the power-slot core is retained."
+  ],
+  "links": [
+    {
+      "target": "advanced_ritual_energy_core",
+      "label": "Uses"
+    },
+    {
+      "target": "advanced_assembly_table",
+      "label": "Advanced Forge"
+    }
+  ]
+}

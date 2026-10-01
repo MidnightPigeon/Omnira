@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:time_eroded_brick_wall",
+    "omnira:cracked_time_eroded_brick_wall",
+    "omnira:sandbound_time_eroded_brick_wall"
+  ]
+}

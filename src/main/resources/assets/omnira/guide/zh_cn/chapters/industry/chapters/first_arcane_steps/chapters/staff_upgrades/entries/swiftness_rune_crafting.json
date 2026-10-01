@@ -1,0 +1,15 @@
+{
+  "id": "swiftness_rune_crafting",
+  "item": "omnira:swiftness_rune",
+  "title": "迅捷魔纹 · 制作",
+  "text": [
+    "在魔动装配台中按下方配方锻造。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "swiftness_rune",
+      "label": "使用与效果"
+    }
+  ]
+}

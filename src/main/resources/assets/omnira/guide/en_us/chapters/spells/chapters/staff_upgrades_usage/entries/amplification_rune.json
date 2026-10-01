@@ -1,0 +1,16 @@
+{
+  "id": "amplification_rune",
+  "item": "omnira:amplification_rune",
+  "title": "Amplification Rune",
+  "text": [
+    "Uses one rune slot and grants 50% spell power. Only one rune of each kind can be installed.",
+    "Percentage spell power bonuses add against the base value, rather than multiplying each other. Parts granting 20% plus Amplification give 170% of base power. Grid and spell core bonuses follow the same additive rule."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "amplification_rune_crafting",
+      "label": "Forging Recipe"
+    }
+  ]
+}

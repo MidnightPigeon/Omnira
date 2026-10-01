@@ -1,0 +1,15 @@
+{
+  "id": "time_structures",
+  "title": "结构说明",
+  "icon": "omnira:golden_throne",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/frozen_palace_guide.json",
+    "entries/kirisame_shop_guide.json",
+    "entries/rusty_lake_mill_guide.json",
+    "entries/drilling_platform_guide.json",
+    "entries/looking_glass_garden_guide.json",
+    "entries/doomsday_rite.json"
+  ],
+  "chapters": []
+}

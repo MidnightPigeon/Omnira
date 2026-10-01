@@ -1,0 +1,17 @@
+{
+  "id": "ancestor_launcher",
+  "item": "omnira:ancestor_launcher",
+  "title": "Ancestor Launcher",
+  "text": [
+    "Place the arquebus in the assembly bench's center and the upgrade components around it. Each gun accepts only one upgrade kit. Its loaded spell crystal remains installed, and black-red patterns appear along the barrel.",
+    "Spell power becomes an additive +50% of base power, and the base firing interval becomes 3 seconds. While held in the main hand, every 3 seconds it spends a fixed 10 mana to grant 5 seconds of invisibility. Insufficient mana stops renewal; putting the gun away lets the remaining invisibility expire naturally.",
+    "Projectiles burst on impact within 1.7 blocks, spreading their carried spell effects. Spell power increases damage, not this added radius. Allies and the shooter are not exempt; the direct target is not affected twice. Reflected projectiles retain the effect."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "ancestor_launcher_crafting",
+      "label": "Forging Recipe"
+    }
+  ]
+}

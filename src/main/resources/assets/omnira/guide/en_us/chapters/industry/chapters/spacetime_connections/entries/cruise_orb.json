@@ -1,0 +1,13 @@
+{
+  "id": "cruise_orb",
+  "item": "omnira:cruise_orb",
+  "title": "Cruise Orb",
+  "text": [
+    "Craft at the Advanced Forge. Mount while stationary. The blue panel button starts normal travel; red starts overload. Either button stops an active craft. Left/right steers in normal mode and strafes in overload. Space ascends and Shift descends; stop, release Shift and press again to dismount.",
+    "Press E for item and fluid storage with shared upgrades. Spell cores increase speed and remove overload's 20 mana per second cost. The vortex costs 300 mana.",
+    "The spell core slot sits above the vortex button, with a trash slot below. Trash retains the latest stack for retrieval; inserting another permanently deletes the previous contents. Filled fluid and creature buckets become empty buckets after 10 seconds without releasing their contents. Quick transfer never automatically targets trash.",
+    "The occupied cabin supplies air, shields its rider from lava, fire, suffocation and incoming attacks, and improves underwater and lava visibility. Attacks on the rider or shell count as collisions. Repeated impacts shatter it; stabilization protects the occupied craft against attacks and collisions. Attack an empty craft to collect it; only stabilization preserves its contents in the dropped item.",
+    "Cast outward from the cabin. Self—Burst instantly shatters an unstabilized orb; an external blast striking its shell counts as one collision."
+  ],
+  "recipes": true
+}

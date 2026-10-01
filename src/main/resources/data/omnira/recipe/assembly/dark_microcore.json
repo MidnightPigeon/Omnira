@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "slots": [
+    {
+      "item": "omnira:shadow_berries"
+    },
+    {
+      "item": "omnira:shadow_berries"
+    },
+    {
+      "item": "omnira:shadow_berries"
+    },
+    {
+      "item": "omnira:shadow_berries"
+    },
+    {
+      "item": "omnira:shadow_berries"
+    },
+    {
+      "item": "omnira:shadow_berries"
+    },
+    {
+      "item": "omnira:shadow_mist"
+    }
+  ],
+  "result": {
+    "id": "omnira:dark_microcore",
+    "count": 1
+  }
+}

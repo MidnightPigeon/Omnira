@@ -1,0 +1,20 @@
+{
+  "id": "self_projectile",
+  "item": "omnira:water_microcore",
+  "title": "自身弹射与飞行",
+  "text": [
+    "自身与弹射物组合可沿施法时确定的轨迹飞行，不受水流推动。基础持续20秒，每份延时增加20秒，最后3秒逐渐淡化。",
+    "注魔取消时间限制。飞行结束后获得2秒缓降，仍需提前选择安全落脚处。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "self_target",
+      "label": "自身"
+    },
+    {
+      "target": "projectile_shape",
+      "label": "弹射物"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "element_recipes",
+  "title": "Spell Element Analysis",
+  "icon": "omnira:sharp_breath",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/sharp_breath_crafting.json",
+    "entries/healing_dew_crafting.json",
+    "entries/dissociation_thread_crafting.json",
+    "entries/construction_matrix_crafting.json"
+  ],
+  "chapters": []
+}

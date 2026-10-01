@@ -1,0 +1,16 @@
+{
+  "id": "assemble_staff",
+  "item": "omnira:modular_staff",
+  "title": "Assembling a Staff",
+  "text": [
+    "Place a shaft at the assembly bench's lower left, reinforcement in the center and a tip at the upper right. Leave the other four slots empty and complete forging to obtain the assembled staff.",
+    "Combine any parts from the three categories; their bonuses add together. The shaft determines enhancement slots and the tip determines rune slots. Consult the individual part entries before choosing."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "staff_parts",
+      "label": "Staff Parts"
+    }
+  ]
+}
