@@ -3,8 +3,8 @@
   "item": "omnira:shadow_manuscript",
   "title": "Shadow Manuscript",
   "text": [
-    "An infused scrap dropped by shadow ghosts. Analyze four to obtain shadow mist and 8–10 arcane dust.",
-    "An analysis crystal can extract mist from one manuscript at the cost of one durability, without producing dust."
+    "An infused scrap dropped by shadow ghosts. Analyze nine to obtain shadow mist and 8–10 arcane dust.",
+    "An analysis crystal can extract mist from four manuscripts at the cost of one durability, without producing dust."
   ],
   "recipes": true
 }

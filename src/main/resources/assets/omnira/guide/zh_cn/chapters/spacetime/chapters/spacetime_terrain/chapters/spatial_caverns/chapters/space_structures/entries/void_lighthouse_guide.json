@@ -1,0 +1,24 @@
+{
+  "id": "void_lighthouse_guide",
+  "title": "虚空灯塔",
+  "item": "omnira:star_source",
+  "recipes": false,
+  "text": [
+    "虚无星海的晶体小岛上矗立着蓝紫色灯塔。沿内部楼梯登上灯室，可以找到悬浮的星辰之源。岛上散落少量星尘。",
+    "塔内的战利品水晶球收藏空间材料，有10%概率发现远旅的小提琴。"
+  ],
+  "links": [
+    {
+      "target": "star_source_relic",
+      "label": "星辰之源"
+    },
+    {
+      "target": "stardust_guide",
+      "label": "星尘"
+    },
+    {
+      "target": "voyager_violin",
+      "label": "远旅的小提琴"
+    }
+  ]
+}

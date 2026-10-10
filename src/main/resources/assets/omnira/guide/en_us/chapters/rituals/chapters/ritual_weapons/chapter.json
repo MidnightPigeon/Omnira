@@ -5,7 +5,15 @@
   "introduction": "introduction.json",
   "entries": [
     "entries/crystallized_bone_nail.json",
-    "entries/arcane_needle.json"
+    "entries/arcane_needle.json",
+    "entries/sharpened_crystallized_bone_nail.json",
+    "entries/channelled_crystallized_bone_nail.json",
+    "entries/threaded_paradox_bone_nail.json",
+    "entries/pure_paradox_bone_nail.json",
+    "entries/sharpened_arcane_needle.json",
+    "entries/shining_arcane_needle.json",
+    "entries/tempered_paradox_needle.json",
+    "entries/pale_paradox_needle.json"
   ],
   "chapters": []
 }

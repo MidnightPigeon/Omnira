@@ -1,0 +1,23 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": [
+    {
+      "tag": "c:gravels"
+    },
+    {
+      "tag": "minecraft:sand"
+    }
+  ],
+  "seed": {
+    "item": "minecraft:kelp"
+  },
+  "fluid": {
+    "id": "minecraft:water",
+    "amount": 500
+  },
+  "result": {
+    "id": "minecraft:kelp",
+    "count": 8
+  },
+  "stages": 4
+}

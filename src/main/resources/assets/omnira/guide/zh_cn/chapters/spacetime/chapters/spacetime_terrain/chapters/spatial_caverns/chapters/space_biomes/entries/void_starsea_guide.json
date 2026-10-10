@@ -1,0 +1,28 @@
+{
+  "id": "void_starsea_guide",
+  "title": "虚无星海",
+  "item": "omnira:void_starflow_bucket",
+  "recipes": false,
+  "text": [
+    "虚无星海是空间洞穴中的地下海洋。粗糙空间晶块铺成海床，少量激发态晶体岛露出水面；沉入海床的坠星保留了梦境光辉，大型坠星内部偶尔藏有宝藏水晶球。",
+    "星流之中生活着中立的星水母与虚空蝠鲼。注意液体与裂隙的不同危险，乘坐蝠鲼并不能代替护符对裂隙的保护。"
+  ],
+  "links": [
+    {
+      "target": "void_starflow_guide",
+      "label": "虚空星流"
+    },
+    {
+      "target": "void_crevice_guide",
+      "label": "虚空裂隙"
+    },
+    {
+      "target": "star_sea_creatures_guide",
+      "label": "星海生物"
+    },
+    {
+      "target": "void_lighthouse_guide",
+      "label": "虚空灯塔"
+    }
+  ]
+}

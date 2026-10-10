@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 
 /** Only explicitly curated, equal-unit item groups can cross timelines. */
 public final class SundialTimeline {
-    private static final String[] GROUPS={"elemental_microcores","ancient_remains","crystal_materials","crystal_blocks","temporal_silts",
+    private static final String[] GROUPS={"elemental_microcores","ancient_remains","crystal_materials","crystal_blocks","crystal_stairs","crystal_slabs","temporal_silts",
             "time_eroded_blocks","mirror_blocks","void_mirror_blocks","shadow_rock_blocks",
             "time_eroded_stairs","time_eroded_slab","time_eroded_wall",
             "mirror_stairs","mirror_slab","void_mirror_stairs","void_mirror_slab",

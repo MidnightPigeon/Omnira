@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.mcmagic.omnira.compat.sable.mixin",
+  "plugin": "com.mcmagic.omnira.compat.OptionalIntegrationMixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AbyssSableGravityMixin",
+    "ForgeSableAssemblyMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

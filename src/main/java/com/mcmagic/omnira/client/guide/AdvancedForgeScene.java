@@ -14,9 +14,12 @@ import net.minecraft.core.Direction;
 /** The construction diagram reads the same layout used by formation validation. */
 public final class AdvancedForgeScene {
     public static void render(GuiGraphics g,int x,int y,int ticks){
+        render(g,x,y,ticks,0,0,true);
+    }
+    public static void render(GuiGraphics g,int x,int y,int ticks,float yaw,float pitch,boolean construction){
         var mc=Minecraft.getInstance();g.flush();RenderSystem.enableDepthTest();var p=g.pose();var buffers=mc.renderBuffers().bufferSource();
-        p.pushPose();p.translate(x+62,y+83,180);p.scale(25,-25,25);p.mulPose(Axis.XP.rotationDegrees(25));p.mulPose(Axis.YP.rotationDegrees(-35+(float)Math.sin(ticks*.007)*20));
-        if(ticks%320<200){
+        p.pushPose();p.translate(x+62,y+83,180);p.scale(25,-25,25);p.mulPose(Axis.XP.rotationDegrees(25+pitch));p.mulPose(Axis.YP.rotationDegrees(-35+yaw+(float)Math.sin(ticks*.007)*20));
+        if(construction){
             for(int layer=0;layer<2;layer++)for(int dx=-1;dx<=1;dx++)for(int dz=-1;dz<=1;dz++){
                 var b=ForgeLayout.required(dx,layer,dz);if(b==Blocks.AIR)continue;var state=b.defaultBlockState();
                 if(state.hasProperty(BlockStateProperties.HORIZONTAL_FACING))state=state.setValue(BlockStateProperties.HORIZONTAL_FACING,layer==0?Direction.SOUTH:dx<0?Direction.WEST:dx>0?Direction.EAST:dz>0?Direction.SOUTH:Direction.NORTH);

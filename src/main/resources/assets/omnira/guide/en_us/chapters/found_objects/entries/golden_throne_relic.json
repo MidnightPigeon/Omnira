@@ -1,0 +1,15 @@
+{
+  "id": "golden_throne_relic",
+  "title": "Golden Throne and Golden Toilet",
+  "item": "omnira:golden_throne",
+  "recipes": false,
+  "text": [
+    "A special block found in Terra Palace. Follow the linked entry for its functions and interactions."
+  ],
+  "links": [
+    {
+      "target": "golden_throne_guide",
+      "label": "Functions"
+    }
+  ]
+}

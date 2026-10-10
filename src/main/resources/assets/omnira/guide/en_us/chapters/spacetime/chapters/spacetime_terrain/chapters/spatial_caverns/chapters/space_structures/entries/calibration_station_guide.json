@@ -1,0 +1,28 @@
+{
+  "id": "calibration_station_guide",
+  "title": "Calibration Station",
+  "item": "omnira:spatial_stability_anchor",
+  "recipes": false,
+  "text": [
+    "A mirror-rock and crystal observatory in the Dislocated Geodes. Its calibration corridor holds deflection clusters at different growth stages. A Spatial Stability Anchor protects the surrounding area from deflection and teleportation.",
+    "The storeroom holds two item treasure orbs and one random fluid treasure orb. Supplies include deflection and spatial crystals, occasional Space Microcores and Space Warp Points, and other laboratory materials."
+  ],
+  "links": [
+    {
+      "target": "spatial_stability_anchor",
+      "label": "Spatial Stability Anchor"
+    },
+    {
+      "target": "deflection_crystal_guide",
+      "label": "Deflection Crystals"
+    },
+    {
+      "target": "spatial_crystal_guide",
+      "label": "Spatial Crystals"
+    },
+    {
+      "target": "space_warp_point_guide",
+      "label": "Space Warp Points"
+    }
+  ]
+}

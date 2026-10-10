@@ -1,0 +1,24 @@
+{
+  "id": "unstable_paradox_source",
+  "item": "omnira:unstable_paradox_source",
+  "title": "不稳定的悖论源",
+  "text": [
+    "以悖论矿石和封装悖论流体在魔动装配台制成。不可放置，携带时逐渐损耗；投掷碰撞、耗尽或丢弃都会引发时空风暴，请谨慎处理。",
+    "存放与风暴规则沿用不稳定的时空聚合体，可通过炼金封装为稳态形式。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "arcane_assembly_table",
+      "label": "魔动装配台"
+    },
+    {
+      "target": "unstable_spacetime_aggregate",
+      "label": "不稳定的时空聚合体"
+    },
+    {
+      "target": "encapsulated_stable_paradox_source",
+      "label": "封装的稳态悖论源"
+    }
+  ]
+}

@@ -13,7 +13,6 @@
   "chapters": [
     "chapters/staff_forging/chapter.json",
     "chapters/staff_upgrades/chapter.json",
-    "chapters/crystal_grids/chapter.json",
-    "chapters/orb_storage/chapter.json"
+    "chapters/crystal_grids/chapter.json"
   ]
 }

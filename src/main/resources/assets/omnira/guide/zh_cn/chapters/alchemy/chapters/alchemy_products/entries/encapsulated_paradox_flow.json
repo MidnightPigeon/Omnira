@@ -1,0 +1,20 @@
+{
+  "id": "encapsulated_paradox_flow",
+  "item": "omnira:encapsulated_paradox_flow",
+  "title": "封装悖论流体",
+  "text": [
+    "一份悖论谜团、一只玻璃瓶和1000 mB水反应获得，无催化方块要求。此封装物品不能放置，是织针的升级材料。",
+    "用于对应仪式武器的四次升级。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "paradox_mystery",
+      "label": "悖论谜团"
+    },
+    {
+      "target": "arcane_needle",
+      "label": "武器升级"
+    }
+  ]
+}

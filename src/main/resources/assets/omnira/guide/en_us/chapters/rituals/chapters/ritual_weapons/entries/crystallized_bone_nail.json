@@ -10,12 +10,29 @@
     "8 attack damage, 1.8 attack speed and 1024 durability. Accepts sword enchantments. Held in either hand, it repairs one durability every half second for a fixed 5 mana.",
     "Hold use on the ground to heal 4 health each second, up to 12 over three seconds. Walking is allowed; jumping, flying or riding interrupts it. Each completed second costs one twelfth of the maximum mana at the start, unaffected by discounts.",
     "Shift-use to insert a self-barrier spell crystal. Hitting a creature applies its spell effects to that creature and pays the usual mana cost, with spell power and mana discounts applied normally.",
-    "Hit a creature while airborne and looking anywhere below horizontal to bounce upward, even without being above it. Time successive strikes to remain aloft."
+    "Hit a creature while airborne and looking anywhere below horizontal to bounce upward, even without being above it. Time successive strikes to remain aloft.",
+    "Upgrade four times on the Advanced Assembly Table. Each level adds 2 attack damage, 0.1 attack speed, 3 total healing and 25% of base special range. The nail gains 1 healing per segment. Level four has 16 damage, 2.2 speed, 24 total healing and double special range. Wide Area Rune range bonuses add to upgrade bonuses."
   ],
   "links": [
     {
       "target": "sword_shaping",
       "label": "Sword Shaping Ritual"
+    },
+    {
+      "target": "sharpened_crystallized_bone_nail",
+      "label": "Sharpened Crystallized Bone Nail"
+    },
+    {
+      "target": "channelled_crystallized_bone_nail",
+      "label": "Channelled Crystallized Bone Nail"
+    },
+    {
+      "target": "threaded_paradox_bone_nail",
+      "label": "Threaded Paradox Bone Nail"
+    },
+    {
+      "target": "pure_paradox_bone_nail",
+      "label": "Pure Paradox Bone Nail"
     }
   ]
 }

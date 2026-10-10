@@ -1,0 +1,15 @@
+{
+  "id": "wonderland_poker_stand_relic",
+  "title": "Wonderland Poker Stand",
+  "item": "omnira:wonderland_poker_stand",
+  "recipes": false,
+  "text": [
+    "A special block found in the garden in the Looping Garden. Follow the linked entry for its functions and interactions."
+  ],
+  "links": [
+    {
+      "target": "wonderland_poker_stand_guide",
+      "label": "Functions"
+    }
+  ]
+}

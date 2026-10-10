@@ -22,6 +22,22 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 @GameTestHolder("omnira_time_warp")
 @PrefixGameTestTemplate(false)
 public final class TimeWarpGameTests {
+    @GameTest(template="spell_arena") public static void weatheringAdvancesOnceAcrossOverlappingSources(GameTestHelper h){
+        var level=h.getLevel();var center=h.absolutePos(new BlockPos(4,4,4));
+        level.setBlockAndUpdate(center,ModBlocks.TIME_WARP_POINT.get().defaultBlockState());
+        level.setBlockAndUpdate(center.above(),ModBlocks.TEMPORAL_MOTE.get().defaultBlockState());
+        var target=center.east();level.setBlockAndUpdate(target,Blocks.STONE.defaultBlockState());
+        var outside=center.offset(6,0,0);level.setBlockAndUpdate(outside,Blocks.STONE.defaultBlockState());
+        int cx=target.getX()>>4,cz=target.getZ()>>4;
+        TemporalWeathering.pulseChunk(level,cx,cz);
+        h.assertTrue(level.getBlockState(target).is(Blocks.GRAVEL),"Overlapping sources skipped a stage");
+        h.assertTrue(level.getBlockState(outside).is(Blocks.STONE),"Weathering exceeded radius five");
+        TemporalWeathering.pulseChunk(level,cx,cz);h.assertTrue(level.getBlockState(target).is(Blocks.SAND),"Gravel did not become sand");
+        TemporalWeathering.pulseChunk(level,cx,cz);h.assertTrue(level.getBlockState(target).is(com.mcmagic.omnira.archaeology.ArchaeologyContent.SAND.get()),"Sand did not become time sand");
+        h.assertTrue(TemporalWeathering.next(Blocks.DIRT.defaultBlockState(),false).is(com.mcmagic.omnira.registry.DreamContent.TEMPORAL_SILT.get())
+                &&TemporalWeathering.next(Blocks.DIRT.defaultBlockState(),true).is(com.mcmagic.omnira.registry.DreamContent.LIVING_TEMPORAL_SILT.get()),"Soil activation mapping incorrect");
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void speedFallsByOneTenthEveryEightTicks(GameTestHelper h){
         h.assertTrue(TimeWarpEffects.speedFactor(0)==1 && TimeWarpEffects.speedFactor(7)==1,"Slowdown started early");
         for(int step=1;step<=9;step++)

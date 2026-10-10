@@ -1,0 +1,5 @@
+{
+  "type": "omnira:assembly", "operation": "fixed",
+  "slots": [[], [], [], [], [], [], {"tag": "omnira:time_logs"}],
+  "result": {"id": "omnira:time_staff_shaft", "count": 1}
+}

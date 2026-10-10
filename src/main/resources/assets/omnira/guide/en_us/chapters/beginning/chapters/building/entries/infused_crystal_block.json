@@ -1,0 +1,16 @@
+{
+  "id": "infused_crystal_block",
+  "item": "omnira:infused_crystal_block",
+  "title": "Infused Crystal Block",
+  "text": [
+    "Craft four Infused Spiritual Crystals in a 2x2 square into a translucent white block with floating white motes inside. The block can be unpacked into four crystals.",
+    "Craft or stonecut stairs and slabs, retaining the material's light, white motes and weightless properties."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "decorative_variants",
+      "label": "Decorative Stairs and Slabs"
+    }
+  ]
+}

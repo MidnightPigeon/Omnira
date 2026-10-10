@@ -1,0 +1,16 @@
+{
+  "id": "mapping_stability_compass_guide",
+  "title": "Mapping Stability Compass",
+  "item": "omnira:mapping_stability_compass",
+  "recipes": false,
+  "text": [
+    "Treasure Crystal Orbs in the Topological Labyrinth have a 20% chance to contain a Mapping Stability Compass.",
+    "Hold the compass when entering a Void Portal to reach the immediately adjacent room through its opposite exit instead of a random room. The compass is not consumed and does not protect against hazards."
+  ],
+  "links": [
+    {
+      "target": "topological_labyrinth_guide",
+      "label": "Topological Labyrinth"
+    }
+  ]
+}

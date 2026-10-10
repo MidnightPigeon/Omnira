@@ -1,0 +1,24 @@
+{
+  "id": "fold_observatory_guide",
+  "title": "Fold Observatory",
+  "item": "omnira:stable_fold_gate",
+  "recipes": false,
+  "text": [
+    "A Fold Observatory has two plazas, one on the cave floor and one near its ceiling. The lower plaza adjoins a storeroom; the upper plaza adjoins a cave-facing observation room. Their central stable gates are already linked.",
+    "Each room contains a treasure orb with spatial resources: Paradox Dust, Infused Crystals, Spatial Crystals, Fold Points and occasional Space Microcores. The upper room may also contain a Spatial Remnant."
+  ],
+  "links": [
+    {
+      "target": "fold_gate_guide",
+      "label": "Fold Gates"
+    },
+    {
+      "target": "space_warp_point_guide",
+      "label": "Fold Points and Remnants"
+    },
+    {
+      "target": "spatial_crystal_guide",
+      "label": "Spatial Crystals"
+    }
+  ]
+}

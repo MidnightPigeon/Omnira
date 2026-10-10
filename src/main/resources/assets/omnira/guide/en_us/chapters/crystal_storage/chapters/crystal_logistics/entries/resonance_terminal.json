@@ -1,0 +1,24 @@
+{
+  "id": "resonance_terminal",
+  "item": "omnira:resonance_terminal",
+  "title": "Resonance Terminal",
+  "text": [
+    "Obtained through the Resonance Ritual, a terminal binds four nodes placed above containers. Select a link to open the container's own interface. Removed nodes are unbound automatically.",
+    "A successful opening costs half your maximum mana, unaffected by reductions. Insufficient mana or a container without an interface prevents opening without charging. Transfers cost nothing extra. Create vaults and tanks have no interface but still support logistics.",
+    "A terminal cannot bind the same complete container twice. If two bound resonant orbs successfully join one network, only the earlier link remains. Splitting the network does not restore it; bind again. Separate terminals may access the same container."
+  ],
+  "links": [
+    {
+      "target": "resonance_ritual",
+      "label": "Resonance Ritual"
+    },
+    {
+      "target": "resonance_core",
+      "label": "Resonance Nodes"
+    },
+    {
+      "target": "enhanced_resonance_terminal",
+      "label": "Enhanced Terminal"
+    }
+  ]
+}

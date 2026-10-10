@@ -1,0 +1,15 @@
+{
+  "id": "marisa_crystal_ball_relic",
+  "title": "Marisa's Crystal Ball",
+  "item": "omnira:marisa_crystal_ball",
+  "recipes": false,
+  "text": [
+    "A special block found in Kirisame Magic Shop. Follow the linked entry for its functions and interactions."
+  ],
+  "links": [
+    {
+      "target": "marisa_crystal_ball_guide",
+      "label": "Functions"
+    }
+  ]
+}

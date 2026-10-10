@@ -33,7 +33,8 @@ public final class StaffItem extends Item {
         if(held.getItem()!=this || held!=player.getMainHandItem() && held!=player.getOffhandItem()) return InteractionResultHolder.fail(held);
         var context=StaffCastContext.capture(player,held);
         var stats=context.stats();
-        int baseCooldown=sequenceCooldown(CrystalGridMenu.locate(player,-2),stats.shots(),stats.cooldownTicks());
+        boolean independent=com.mcmagic.omnira.item.staff.StaffPart.of(com.mcmagic.omnira.item.staff.StaffAssembly.of(held).tip()).independentCooldown();
+        int baseCooldown=independent?stats.cooldownTicks():sequenceCooldown(CrystalGridMenu.locate(player,-2),stats.shots(),stats.cooldownTicks());
         int successes=castSequenceContents(player,context,1);
         if(successes==0) return InteractionResultHolder.fail(held);
         int cooldown=SpellCooldowns.ticks(baseCooldown,context.cooldownReduction(),1);

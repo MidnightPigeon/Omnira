@@ -119,7 +119,7 @@ public final class CorridorRitualGameTests {
         var victim=EntityType.COW.create(level);victim.setPos(Vec3.atCenterOf(core).add(2,1,0));level.addFreshEntity(victim);
         drops.getFirst().tick();h.assertTrue(victim.isRemoved(),"Ejected aggregate did not trigger storm");h.succeed();
     }
-    @GameTest(template="spell_arena",timeoutTicks=200) public static void vehicleGroupOneWayTransit(GameTestHelper h)throws Exception{
+    @GameTest(template="spell_arena",timeoutTicks=200,batch="anchor_corridor_portal") public static void vehicleGroupOneWayTransit(GameTestHelper h)throws Exception{
         var level=h.getLevel();var pos=Vec3.atBottomCenterOf(h.absolutePos(new BlockPos(5,10,5)));
         var orb=ModEntityTypes.CRUISE_ORB.get().create(level);orb.setPos(pos);level.addFreshEntity(orb);
         var profile=new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"corridor-rider");
@@ -134,6 +134,7 @@ public final class CorridorRitualGameTests {
         orb.storage.upgrades.insertItem(0,new ItemStack(ModItems.SPEED_UPGRADE.get()),false);
         orb.storage.tank.fill(new net.neoforged.neoforge.fluids.FluidStack(net.minecraft.world.level.material.Fluids.WATER,1500),net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
         var id=orb.getUUID();
+        var anchor=h.absolutePos(new BlockPos(5,4,5));level.setBlockAndUpdate(anchor,com.mcmagic.omnira.space.anchor.AnchorContent.ACTIVE.get().defaultBlockState());
         h.assertTrue(CorridorGatewayBlockEntity.transfer(level,orb),"Orb with passenger failed corridor transit");
         var world=level.getServer().getLevel(ModDimensions.SPACETIME_CORRIDOR);var arrived=world.getEntity(id);
         h.assertTrue(arrived!=null && player.getVehicle()==arrived && player.level()==world,"Passenger relation lost");
@@ -144,6 +145,6 @@ public final class CorridorRitualGameTests {
         h.assertTrue(!world.getBlockState(arrived.blockPosition()).is(ModBlocks.CORRIDOR_GATEWAY.get()),"Created forbidden return gateway");
         arrived.getPersistentData().remove("OmniraCorridorCooldown");
         h.assertTrue(!CorridorGatewayBlockEntity.transfer(world,arrived),"Gateway unexpectedly supports return travel");
-        player.stopRiding();player.discard();arrived.discard();channel.finishAndReleaseAll();h.succeed();
+        player.stopRiding();player.discard();arrived.discard();channel.finishAndReleaseAll();level.removeBlock(anchor,false);h.succeed();
     }
 }

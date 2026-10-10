@@ -3,12 +3,14 @@ package com.mcmagic.omnira.spacetime;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import java.util.WeakHashMap;
 
 @EventBusSubscriber(modid="omnira")
@@ -24,6 +26,7 @@ public final class TimeWarpEffects {
     }
     private TimeWarpEffects(){}
     public static void touch(Entity entity,long now){
+        // Block exposure is independent of biome-hazard protection, including the anchoring sigil.
         var state=ACTIVE.computeIfAbsent(entity,e->new Exposure(now));state.last=now;
     }
     public static double speedFactor(long exposureTicks){
@@ -45,7 +48,13 @@ public final class TimeWarpEffects {
         }else if(state.unwarped!=Vec3.ZERO)entity.setDeltaMovement(state.unwarped);
     }
     @SubscribeEvent public static void tick(EntityTickEvent.Post event){
-        var entity=event.getEntity();if(entity.level().isClientSide)return;
+        if(!(event.getEntity() instanceof Player))update(event.getEntity());
+    }
+    @SubscribeEvent public static void playerTick(PlayerTickEvent.Post event){
+        update(event.getEntity());
+    }
+    private static void update(Entity entity){
+        if(entity.level().isClientSide)return;
         var state=ACTIVE.get(entity);if(state==null)return;
         long now=entity.level().getGameTime();
         if(entity.isRemoved() || now-state.last>1){clear(entity,state);ACTIVE.remove(entity);return;}

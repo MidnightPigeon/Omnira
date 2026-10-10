@@ -48,6 +48,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
     public static final RecipeType<CondensationRecipe> ADVANCED_CONDENSATION=RecipeType.create("omnira","advanced_condensation",CondensationRecipe.class);
     public static final RecipeType<AssemblyRecipe> ASSEMBLY=RecipeType.create("omnira","assembly",AssemblyRecipe.class);
     public static final RecipeType<Writing> WRITING=RecipeType.create("omnira","writing",Writing.class);
+    public static final RecipeType<StarlightConversionRecipe> STARLIGHT=RecipeType.create("omnira","starlight_conversion",StarlightConversionRecipe.class);
     @Override public ResourceLocation getPluginUid() {return ResourceLocation.fromNamespaceAndPath("omnira","workstations");}
     @Override public void registerItemSubtypes(ISubtypeRegistration registration) {
         registration.registerSubtypeInterpreter(ModItems.MODULAR_STAFF.get(),new mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter<ItemStack>() {
@@ -107,6 +108,18 @@ public final class OmniraJeiPlugin implements IModPlugin {
     }
     @Override public void registerCategories(IRecipeCategoryRegistration registration) {
         var gui=registration.getJeiHelpers().getGuiHelper();
+        registration.addRecipeCategories(new ReactionCategory(gui));
+        registration.addRecipeCategories(new Category<StarlightConversionRecipe>(STARLIGHT,com.mcmagic.omnira.space.sea.StellarCraftContent.ORB_ITEM.get(),gui){
+            @Override public Component getTitle(){return Component.translatable("jei.omnira.starlight_conversion");}
+            @Override public void setRecipe(IRecipeLayoutBuilder builder,StarlightConversionRecipe recipe,IFocusGroup focuses){
+                slot(builder,RecipeIngredientRole.INPUT,42,64).addIngredients(recipe.ingredient());
+                slot(builder,RecipeIngredientRole.OUTPUT,134,64).addItemStack(recipe.result());
+            }
+            @Override public void draw(StarlightConversionRecipe recipe,IRecipeSlotsView slots,GuiGraphics g,double x,double y){
+                line(g,65,64,108,64,0xFF88B4C2);line(g,102,58,108,64,0xFF88B4C2);line(g,102,70,108,64,0xFF88B4C2);
+                label(g,Component.translatable("jei.omnira.starlight_time"),42,113);
+            }
+        });
         RitualJei.register(registration,gui);
         registration.addRecipeCategories(new Category<com.mcmagic.omnira.forging.AdvancedForgeRecipe>(ADVANCED_FORGE,ModItems.ADVANCED_FORGE.get(),gui){
             @Override public Component getTitle(){return Component.translatable("block.omnira.advanced_assembly_table");}
@@ -160,7 +173,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
             },
             new Category<CondensationRecipe>(ADVANCED_CONDENSATION,ModItems.ADVANCED_CONDENSATION_TABLE.get(),gui) {
                 @Override public void setRecipe(IRecipeLayoutBuilder b,CondensationRecipe r,IFocusGroup focus) {
-                    slot(b,RecipeIngredientRole.INPUT,52,65).addIngredients(r.ingredient());
+                    slot(b,RecipeIngredientRole.INPUT,52,65).addItemStacks(java.util.Arrays.stream(r.ingredient().getItems()).map(stack->stack.copyWithCount(r.inputCount())).toList());
                     slot(b,RecipeIngredientRole.OUTPUT,124,65).addItemStack(r.result());
                 }
                 @Override public void draw(CondensationRecipe r,IRecipeSlotsView slots,GuiGraphics g,double x,double y) {
@@ -210,6 +223,8 @@ public final class OmniraJeiPlugin implements IModPlugin {
         var level=Minecraft.getInstance().level;
         if(level==null) return;
         var recipes=level.getRecipeManager();
+        registration.addRecipes(ReactionCategory.TYPE,recipes.getAllRecipesFor(ModRecipes.REACTION_TYPE.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(STARLIGHT,recipes.getAllRecipesFor(ModRecipes.STARLIGHT_TYPE.get()).stream().map(RecipeHolder::value).toList());
         registration.addRecipes(ADVANCED_FORGE,recipes.getAllRecipesFor(ModRecipes.ADVANCED_FORGE_TYPE.get()).stream().map(RecipeHolder::value).toList());
         var rituals=new ArrayList<RitualJei.Entry>();
         rituals.add(new RitualJei.Entry(new RitualJei.Dream()));
@@ -264,6 +279,11 @@ public final class OmniraJeiPlugin implements IModPlugin {
         return result;
     }
     @Override public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        for(int index:new int[]{0,3})registration.addRecipeCatalyst(new ItemStack(com.mcmagic.omnira.workstation.CrystalWorkstations.BLOCKS.get(index).get()),mezz.jei.api.constants.RecipeTypes.SMELTING);
+        for(int index:new int[]{2,5})registration.addRecipeCatalyst(new ItemStack(com.mcmagic.omnira.workstation.CrystalWorkstations.BLOCKS.get(index).get()),mezz.jei.api.constants.RecipeTypes.ANVIL);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.PRIMITIVE_REACTION_CAULDRON.get()),ReactionCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(com.mcmagic.omnira.space.sea.StellarCraftContent.ORB_ITEM.get()),STARLIGHT);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.REACTION_POOL.get()),ReactionCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModItems.CRYSTAL_PEDESTAL.get()),RitualJei.TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModItems.RITUAL_ENERGY_CORE.get()),RitualJei.TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModItems.ADVANCED_RITUAL_ENERGY_CORE.get()),RitualJei.TYPE);
@@ -283,9 +303,29 @@ public final class OmniraJeiPlugin implements IModPlugin {
         // Analysis consumes counted stacks, so a single-item automatic transfer would be misleading.
     }
     @Override public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-        registration.addRecipeClickArea(CrystalProcessingTableScreen.class,28,7,120,16,WRITING);
-        registration.addRecipeClickArea(AnalysisArtisanTableScreen.class,28,7,120,16,ANALYSIS);
-        registration.addRecipeClickArea(SimpleCondensationTableScreen.class,28,7,120,16,CONDENSATION,ADVANCED_CONDENSATION);
-        registration.addRecipeClickArea(ArcaneAssemblyTableScreen.class,28,7,120,16,ASSEMBLY);
+        ResponsiveGuiHandler.register(registration,AggregationRingScreen.class);
+        ResponsiveGuiHandler.register(registration,AnalysisArtisanTableScreen.class);
+        ResponsiveGuiHandler.register(registration,AdvancedForgeScreen.class);
+        ResponsiveGuiHandler.register(registration,com.mcmagic.omnira.client.screen.ReactionPoolScreen.class);
+        ResponsiveGuiHandler.register(registration,ArcaneAssemblyTableScreen.class);
+        ResponsiveGuiHandler.register(registration,ArquebusScreen.class);
+        ResponsiveGuiHandler.register(registration,CruiseOrbScreen.class);
+        ResponsiveGuiHandler.register(registration,CrystalBallScreen.class);
+        ResponsiveGuiHandler.register(registration,CrystalGridScreen.class);
+        ResponsiveGuiHandler.register(registration,CrystalProcessingTableScreen.class);
+        ResponsiveGuiHandler.register(registration,ManaEngineScreen.class);
+        ResponsiveGuiHandler.register(registration,com.mcmagic.omnira.client.screen.SpacetimeEngineScreen.class);
+        ResponsiveGuiHandler.register(registration,com.mcmagic.omnira.client.screen.CatalysisScreen.class);
+        ResponsiveGuiHandler.register(registration,OrbUpgradeScreen.class);
+        ResponsiveGuiHandler.register(registration,ResonanceScreen.class);
+        ResponsiveGuiHandler.register(registration,ReversalScreen.class);
+        ResponsiveGuiHandler.register(registration,SimpleCondensationTableScreen.class);
+        ResponsiveGuiHandler.register(registration,SundialScreen.class);
+        ResponsiveGuiHandler.register(registration,CrystalUtilityScreen.class);
+        ResponsiveGuiHandler.register(registration,WaymarkScreen.class);
+        ResponsiveGuiHandler.clickArea(registration,CrystalProcessingTableScreen.class,WRITING);
+        ResponsiveGuiHandler.clickArea(registration,AnalysisArtisanTableScreen.class,ANALYSIS);
+        ResponsiveGuiHandler.clickArea(registration,SimpleCondensationTableScreen.class,CONDENSATION,ADVANCED_CONDENSATION);
+        ResponsiveGuiHandler.clickArea(registration,ArcaneAssemblyTableScreen.class,ASSEMBLY);
     }
 }

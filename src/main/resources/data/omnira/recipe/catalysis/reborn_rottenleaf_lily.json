@@ -1,0 +1,23 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": [
+    {
+      "item": "omnira:living_temporal_silt"
+    },
+    {
+      "item": "omnira:sedimented_living_temporal_silt"
+    }
+  ],
+  "seed": {
+    "item": "omnira:reborn_rottenleaf_lily"
+  },
+  "fluid": {
+    "id": "omnira:decayed_timeflow",
+    "amount": 500
+  },
+  "result": {
+    "id": "omnira:reborn_rottenleaf_lily",
+    "count": 4
+  },
+  "stages": 4
+}

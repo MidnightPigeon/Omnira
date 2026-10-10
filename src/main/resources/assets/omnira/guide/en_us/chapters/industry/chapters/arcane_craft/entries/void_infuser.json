@@ -1,0 +1,12 @@
+{
+  "id": "void_infuser",
+  "title": "Void Infuser",
+  "item": "omnira:void_infuser",
+  "recipes": true,
+  "text": [
+    "Place a Void Crystal Ball at the center of an Assembly Table, with one High-Density Void Mass and three Repaired Mechanical Components in any outer positions.",
+    "Each operation takes ten seconds and one spatial energy, with a capacity of 64. Rough Spatial Crystal Blocks, excited blocks, Spatial Crystals and Deflection Crystals provide 1, 2, 4 and 6 energy respectively.",
+    "Infuse Mirror Rock into Void-Infested Mirror Rock, Light Condensate into Shadow Rock, slime balls into ender pearls and obsidian into crying obsidian. All temporal silts become rotted, and all saplings become Shadow Saplings."
+  ],
+  "links": [{"target": "dense_void_mass_guide", "label": "High-Density Void Mass"}]
+}

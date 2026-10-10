@@ -1,0 +1,15 @@
+{
+  "id": "spacetime_aggregate_tip_crafting",
+  "item": "omnira:spacetime_aggregate_tip",
+  "title": "时空聚合体杖端 · 制作",
+  "recipes": true,
+  "text": [
+    "在高阶装配台中使用2份注灵水晶、2份不稳定的时空聚合体和2份悖论尘；左中右节点分别放时间微核、共振水晶、空间微核。"
+  ],
+  "links": [
+    {
+      "target": "spacetime_aggregate_tip",
+      "label": "使用与效果"
+    }
+  ]
+}

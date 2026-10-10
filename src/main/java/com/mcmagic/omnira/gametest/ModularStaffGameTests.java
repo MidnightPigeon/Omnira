@@ -39,6 +39,44 @@ import java.util.UUID;
 @GameTestHolder("omnira_modular_staff")
 @PrefixGameTestTemplate(false)
 public final class ModularStaffGameTests {
+    @GameTest(template="spell_arena") public static void aggregateTipUsesOwnCooldownAtCycleBoundary(GameTestHelper h){
+        var c=caster(h);var assembly=new StaffAssembly(StaffAssembly.basic().shaft(),StaffAssembly.basic().reinforcement(),
+                new ItemStack(ModItems.SPACETIME_AGGREGATE_TIP.get()),List.of());
+        var staff=assembly.create();var player=c.player();player.setItemInHand(InteractionHand.MAIN_HAND,staff);
+        var ops=h.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE);
+        var saved=StaffAssembly.CODEC.encodeStart(ops,assembly).getOrThrow();var restored=StaffAssembly.CODEC.parse(ops,saved).getOrThrow();
+        h.assertTrue(StaffPart.of(restored.tip()).independentCooldown()&&assembly.stats().cooldownTicks()==40
+                &&assembly.stats().shots()==1&&assembly.stats().power()==.2&&assembly.stats().cooldownReduction()==.1,"Aggregate tip properties lost");
+        c.grid().set(ModDataComponents.GRID_CURSOR,2);
+        h.assertTrue(((StaffItem)staff.getItem()).castHeld(player,staff).getResult().consumesAction(),"Boundary cast failed");
+        h.assertTrue(c.grid().getOrDefault(ModDataComponents.GRID_CURSOR,0)==0,"Independent cooldown disabled normal spell cycling");
+        for(int i=0;i<35;i++)player.getCooldowns().tick();
+        h.assertTrue(player.getCooldowns().isOnCooldown(staff.getItem()),"Cooldown expired before 36 ticks");
+        player.getCooldowns().tick();h.assertTrue(!player.getCooldowns().isOnCooldown(staff.getItem()),"Cycle boundary imposed 4-second cooldown");
+        var modifiers=staff.getAttributeModifiers().modifiers();
+        h.assertTrue(modifiers.stream().anyMatch(e->e.attribute().equals(ModAttributes.COOLDOWN_REDUCTION)&&e.modifier().amount()==.1),"Missing cooldown attribute");h.succeed();
+    }
+    @GameTest(template="spell_arena")
+    public static void timeAndInfusedPartsRetainProperties(GameTestHelper h) {
+        var assembly=new StaffAssembly(new ItemStack(ModItems.TIME_STAFF_SHAFT.get()),
+                new ItemStack(ModItems.IRON_REINFORCEMENT.get()),new ItemStack(ModItems.INFUSED_CRYSTAL_TIP.get()),List.of());
+        h.assertTrue(assembly.valid() && assembly.slotCapacity(StaffPart.SlotKind.ENHANCEMENT)==2
+                && assembly.slotCapacity(StaffPart.SlotKind.RUNE)==2,"New part capacities are incorrect");
+        h.assertTrue(assembly.stats().shots()==1 && assembly.stats().cooldownTicks()==60
+                && Math.abs(assembly.stats().power()-.1)<.000001,"Incorrect new staff casting properties");
+        var ops=h.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE);
+        var saved=StaffAssembly.CODEC.encodeStart(ops,assembly).getOrThrow();
+        var restored=StaffAssembly.CODEC.parse(ops,saved).getOrThrow();
+        h.assertTrue(Math.abs(StaffPart.of(restored.shaft()).regeneration()-.2)<.000001,
+                "Regeneration bonus did not survive serialization");
+        var modifiers=restored.create().getAttributeModifiers().modifiers().stream()
+                .filter(e->e.attribute().equals(ModAttributes.MANA_REGEN)).toList();
+        h.assertTrue(modifiers.size()==1 && modifiers.getFirst().slot()==EquipmentSlotGroup.MAINHAND
+                && modifiers.getFirst().modifier().operation()==AttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                && Math.abs(modifiers.getFirst().modifier().amount()-.2)<.000001,"Missing additive regeneration attribute");
+        h.assertTrue(StaffPart.of(StaffAssembly.basic().shaft()).regeneration()==0,"Existing shafts changed");
+        h.succeed();
+    }
     @GameTest(template="spell_arena")
     public static void unrelatedCastsDoNotBorrowHeldRunes(GameTestHelper h) {
         var player=caster(h).player();
@@ -308,7 +346,7 @@ public final class ModularStaffGameTests {
             }
         }
         // This is a snapshot of today's registry, never a crafting limit or variant table.
-        h.assertTrue(combinations == 36, "Current registered part combination count changed: " + combinations);
+        h.assertTrue(combinations == 80, "Current registered part combination count changed: " + combinations);
         var basic = StaffAssembly.basic();
         for (int slot : new int[]{0, 3, 6}) {
             var missing = layout(basic.shaft(), basic.reinforcement(), basic.tip());

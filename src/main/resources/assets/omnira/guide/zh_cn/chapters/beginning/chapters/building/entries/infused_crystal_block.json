@@ -1,0 +1,16 @@
+{
+  "id": "infused_crystal_block",
+  "item": "omnira:infused_crystal_block",
+  "title": "注灵水晶块",
+  "text": [
+    "四枚注灵水晶按2×2排列合成一个白色半透明水晶块，内部浮动着白色光粒。可拆回四枚注灵水晶。",
+    "可以合成或切石为楼梯与台阶，保持母材的亮度、白色光粒和零重量。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "decorative_variants",
+      "label": "装饰建材的楼梯与台阶"
+    }
+  ]
+}

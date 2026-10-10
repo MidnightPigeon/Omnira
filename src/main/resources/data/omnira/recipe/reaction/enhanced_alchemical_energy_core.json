@@ -1,0 +1,6 @@
+{
+  "type": "omnira:reaction",
+  "items": [{"ingredient": {"item": "omnira:rough_alchemical_energy_core"}}],
+  "fluid": {"id": "omnira:dilute_spacetime", "amount": 4000},
+  "results": [{"id": "omnira:enhanced_alchemical_energy_core"}]
+}

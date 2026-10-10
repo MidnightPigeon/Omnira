@@ -1,0 +1,26 @@
+{
+  "id": "spatial_stability_anchor",
+  "title": "Spatial Stability Anchor",
+  "item": "omnira:spatial_stability_anchor",
+  "recipes": false,
+  "text": [
+    "An active anchor is found in the Calibration Station. Mining it yields a Dormant Spatial Stability Anchor. Use one Space Microcore on the dormant anchor to activate it again.",
+    "The active anchor prevents deflection within a 64-block sphere. Non-portal teleportation is blocked whenever either endpoint lies inside, including Endermen, warp points, ordinary Recall Crystals and disposable Dream Rabbit Remnants.",
+    "All entities can still use portals, including dream and spacetime dimension portals, stable and unstable fold gates, and vanilla portals. Links, existing risks and other transit requirements remain unchanged. The Enhanced Recall Crystal and Alice's Dream Rabbit Sigil also allow travel both into and out of the field, with their normal costs and cooldowns.",
+    "Hostile creatures in range take 2 true damage each second, surrounded by crystal light. Nearby rough spatial crystals are gradually excited, while ordinary and sedimented temporal silt are activated. Selected blocks are surrounded by particles for one minute before conversion."
+  ],
+  "links": [
+    {
+      "target": "calibration_station_guide",
+      "label": "Calibration Station"
+    },
+    {
+      "target": "enhanced_recall_crystal",
+      "label": "Enhanced Recall Crystal"
+    },
+    {
+      "target": "dream_rabbit_relics_guide",
+      "label": "Dream Rabbit Relics"
+    }
+  ]
+}

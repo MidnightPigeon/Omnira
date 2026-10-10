@@ -43,13 +43,17 @@ public final class SundialMenu extends AbstractContainerMenu {
     }
     public int energy(){return data.get(0);}
     public int progress(){return data.get(1);}
+    public boolean select(Player player,ItemStack input,ItemStack target){
+        return machine!=null&&stillValid(player)&&player.level().mayInteract(player,machine.getBlockPos())
+                &&ItemStack.isSameItemSameComponents(storage.getItem(0),input)&&machine.select(target);
+    }
     public ItemStack selectedOutput(){
         var choices=SundialTimeline.choices(storage.getItem(0));
         return choices.isEmpty()?ItemStack.EMPTY:choices.get(Math.floorMod(data.get(2),choices.size()));
     }
     public boolean stillValid(Player player){return stillValid(access,player,SundialContent.BLOCK.get());}
     @Override public boolean clickMenuButton(Player player,int id){
-        if(machine==null)return false;
+        if(machine==null||!stillValid(player))return false;
         if(id==0){machine.cycle(1);return true;}
         return false;
     }

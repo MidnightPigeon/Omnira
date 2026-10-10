@@ -1,0 +1,12 @@
+{
+  "id": "alchemy",
+  "title": "炼金工艺与研究",
+  "icon": "omnira:rough_alchemy_cauldron",
+  "introduction": "introduction.json",
+  "entries": [],
+  "chapters": [
+    "chapters/alchemy_instruments/chapter.json",
+    "chapters/alchemy_materials/chapter.json",
+    "chapters/alchemy_products/chapter.json"
+  ]
+}

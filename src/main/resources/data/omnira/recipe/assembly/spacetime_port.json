@@ -1,0 +1,9 @@
+{
+  "type": "omnira:assembly", "outer_shapeless": true,
+  "slots": [
+    {"item": "omnira:time_warp_point"}, {"item": "omnira:time_warp_point"},
+    {"item": "omnira:space_warp_point"}, {"item": "omnira:space_warp_point"},
+    [], [], {"item": "omnira:resonance_core"}
+  ],
+  "result": {"id": "omnira:spacetime_port", "count": 2}
+}

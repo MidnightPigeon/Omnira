@@ -13,6 +13,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES =
             DeferredRegister.create(Registries.MENU, Omnira.MOD_ID);
+    public static final DeferredHolder<MenuType<?>,MenuType<com.mcmagic.omnira.alchemy.ReactionPoolMenu>> REACTION_POOL=
+            MENU_TYPES.register("large_alchemical_reaction_pool",()->IMenuTypeExtension.create(com.mcmagic.omnira.alchemy.ReactionPoolMenu::new));
     public static final DeferredHolder<MenuType<?>,MenuType<com.mcmagic.omnira.forging.AdvancedForgeMenu>> ADVANCED_FORGE=
             MENU_TYPES.register("advanced_assembly_table",()->IMenuTypeExtension.create(com.mcmagic.omnira.forging.AdvancedForgeMenu::new));
     public static final DeferredHolder<MenuType<?>,MenuType<com.mcmagic.omnira.vehicle.CruiseOrbMenu>> CRUISE_ORB=

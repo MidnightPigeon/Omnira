@@ -44,7 +44,7 @@ public final class CrystalBroomRenderer extends EntityRenderer<CrystalBroomEntit
     }
     @Override public void render(CrystalBroomEntity broom,float yaw,float partial,PoseStack pose,MultiBufferSource buffers,int light){
         pose.pushPose();pose.mulPose(Axis.YP.rotationDegrees(-net.minecraft.util.Mth.rotLerp(partial,broom.yRotO,broom.getYRot())));
-        draw(pose,VehicleGlassBuffers.wrap(buffers),light,broom.tickCount+partial);pose.popPose();
+        draw(pose,buffers,light,broom.tickCount+partial);pose.popPose();
         super.render(broom,yaw,partial,pose,buffers,light);
     }
     @Override public ResourceLocation getTextureLocation(CrystalBroomEntity broom){return TEXTURE;}

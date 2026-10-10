@@ -1,1 +1,7 @@
-{"selector":"omnira:rough_spatial_crystal_block","properties":{"sable:mass":1.0}}
+{
+  "selector": "omnira:rough_spatial_crystal_block",
+  "properties": {
+    "sable:mass": 0
+  },
+  "priority": 2000
+}

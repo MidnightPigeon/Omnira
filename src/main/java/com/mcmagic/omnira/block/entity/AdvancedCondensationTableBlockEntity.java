@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public final class AdvancedCondensationTableBlockEntity extends SimpleCondensationTableBlockEntity {
     public AdvancedCondensationTableBlockEntity(BlockPos pos,BlockState state) {super(ModBlockEntityTypes.ADVANCED_CONDENSATION_TABLE.get(),pos,state);}
-    @Override public int getMaxStackSize() {return 1;}
+    @Override public int getMaxStackSize() {return 64;}
     @Override public boolean canPlaceItem(int slot,ItemStack stack) {
         return level!=null && level.getRecipeManager().getAllRecipesFor(com.mcmagic.omnira.registry.ModRecipes.CONDENSATION_TYPE.get()).stream()
                 .anyMatch(h->h.value().advanced() && h.value().ingredient().test(stack));

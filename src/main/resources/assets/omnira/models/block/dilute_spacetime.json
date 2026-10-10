@@ -1,0 +1,6 @@
+{
+  "textures": {
+    "particle": "omnira:block/dilute_spacetime_still",
+    "flow": "omnira:block/dilute_spacetime_flow"
+  }
+}

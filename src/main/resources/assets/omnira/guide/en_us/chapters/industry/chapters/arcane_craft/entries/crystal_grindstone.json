@@ -1,0 +1,9 @@
+{
+  "id": "crystal_grindstone",
+  "item": "omnira:crystal_grindstone",
+  "title": "Crystal Grindstone",
+  "text": [
+    "Assemble a grindstone with six crystal casings. Uses the ordinary grindstone's repair, disenchanting and experience rules."
+  ],
+  "recipes": true
+}

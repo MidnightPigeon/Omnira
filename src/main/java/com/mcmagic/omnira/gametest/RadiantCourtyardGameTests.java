@@ -159,4 +159,47 @@ public final class RadiantCourtyardGameTests {
         h.assertTrue(level.getBlockState(p).isAir() && level.getBlockState(p.above()).isAir(),"Support removal leaves torch");
         h.succeed();
     }
+    @GameTest(template="spell_arena") public static void torchAllFacesPlacementSupportAndDrops(GameTestHelper h){
+        var level=h.getLevel();var p=h.absolutePos(new BlockPos(7,5,7));var block=DreamContent.LIGHT_CRYSTAL_TORCH.get();
+        var player=h.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        for(var mount:net.minecraft.core.Direction.values()){
+            var support=p.relative(mount.getOpposite());var tip=p.relative(mount);
+            level.setBlockAndUpdate(support,Blocks.STONE.defaultBlockState());
+            var stack=new ItemStack(block);
+            var hit=new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(support),mount,support,false);
+            var context=new net.minecraft.world.item.context.BlockPlaceContext(player,net.minecraft.world.InteractionHand.MAIN_HAND,stack,hit);
+            level.setBlockAndUpdate(tip,Blocks.STONE.defaultBlockState());
+            h.assertTrue(block.getStateForPlacement(context)==null,"Torch ignored blocked second cell: "+mount);
+            level.setBlockAndUpdate(tip,Blocks.AIR.defaultBlockState());
+            var state=block.getStateForPlacement(context);
+            h.assertTrue(state!=null&&state.getValue(com.mcmagic.omnira.block.LightCrystalTorchBlock.MOUNT)==mount,"Wrong placement direction: "+mount);
+            h.assertTrue(((net.minecraft.world.item.BlockItem)stack.getItem()).place(context).consumesAction(),"Torch item failed to place: "+mount);
+            h.assertTrue(stack.isEmpty()&&level.getBlockState(tip).is(block),"Torch item or tip missing: "+mount);
+            h.assertTrue(level.getBlockState(tip).canSurvive(level,tip),"Mounted tip cannot survive: "+mount);
+            var shape=level.getBlockState(tip).getShape(level,tip);
+            h.assertTrue(Math.abs((mount.getAxisDirection()==net.minecraft.core.Direction.AxisDirection.POSITIVE?shape.max(mount.getAxis()):1-shape.min(mount.getAxis()))-.6)<.001,"Tip shape has wrong direction: "+mount);
+            var area=new net.minecraft.world.phys.AABB(p).inflate(3);
+            int before=level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,area,e->e.getItem().is(block.asItem())).stream().mapToInt(e->e.getItem().getCount()).sum();
+            level.destroyBlock(tip,true);
+            h.assertTrue(level.getBlockState(p).isAir(),"Tip removal leaves anchor: "+mount);
+            int after=level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,area,e->e.getItem().is(block.asItem())).stream().mapToInt(e->e.getItem().getCount()).sum();
+            h.assertTrue(after-before==1,"Mounted torch must drop exactly once: "+mount+" drops="+(after-before));
+            level.setBlockAndUpdate(p,state);block.setPlacedBy(level,p,state,null,new ItemStack(block));
+            level.destroyBlock(support,false);
+            h.assertTrue(level.getBlockState(p).isAir()&&level.getBlockState(tip).isAir(),"Support removal leaves mounted torch: "+mount);
+            var creative=h.makeMockPlayer(net.minecraft.world.level.GameType.CREATIVE);
+            for(var broken:java.util.List.of(p,tip)){
+                level.setBlockAndUpdate(support,Blocks.STONE.defaultBlockState());
+                level.setBlockAndUpdate(p,state);block.setPlacedBy(level,p,state,null,new ItemStack(block));
+                int existing=level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,area,e->e.getItem().is(block.asItem())).stream().mapToInt(e->e.getItem().getCount()).sum();
+                block.playerWillDestroy(level,broken,level.getBlockState(broken),creative);
+                level.setBlockAndUpdate(broken,Blocks.AIR.defaultBlockState());
+                h.assertTrue(level.getBlockState(p).isAir()&&level.getBlockState(tip).isAir(),"Creative removal leaves a half: "+mount);
+                int remaining=level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,area,e->e.getItem().is(block.asItem())).stream().mapToInt(e->e.getItem().getCount()).sum();
+                h.assertTrue(remaining==existing,"Creative removal dropped torch: "+mount);
+            }
+            level.setBlockAndUpdate(support,Blocks.AIR.defaultBlockState());
+        }
+        h.succeed();
+    }
 }

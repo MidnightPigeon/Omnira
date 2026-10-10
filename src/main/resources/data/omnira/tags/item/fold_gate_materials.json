@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#omnira:timeline/mirror_blocks",
+    "#omnira:timeline/void_mirror_blocks"
+  ]
+}

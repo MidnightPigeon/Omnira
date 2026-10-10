@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "omnira:block/infused_crystal_slab"
+    },
+    "type=top": {
+      "model": "omnira:block/infused_crystal_slab_top"
+    },
+    "type=double": {
+      "model": "omnira:block/infused_crystal_block"
+    }
+  }
+}

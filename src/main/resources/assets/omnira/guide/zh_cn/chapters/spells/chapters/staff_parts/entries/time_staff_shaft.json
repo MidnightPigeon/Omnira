@@ -1,0 +1,15 @@
+{
+  "id": "time_staff_shaft",
+  "item": "omnira:time_staff_shaft",
+  "title": "时光木杖体",
+  "text": [
+    "提供2个强化槽、10%法术强度和20%法力恢复加成。法力恢复在主手持有组装后的法杖时生效。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "time_staff_shaft_crafting",
+      "label": "制作配方"
+    }
+  ]
+}

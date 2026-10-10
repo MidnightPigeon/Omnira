@@ -1,0 +1,20 @@
+{
+  "type": "omnira:reaction",
+  "items": [
+    {
+      "ingredient": {
+        "item": "omnira:deflection_crystal_block"
+      }
+    }
+  ],
+  "fluid": {
+    "id": "omnira:refined_spacetime",
+    "amount": 500
+  },
+  "results": [
+    {
+      "id": "omnira:deflection_crystal_matrix",
+      "count": 1
+    }
+  ]
+}

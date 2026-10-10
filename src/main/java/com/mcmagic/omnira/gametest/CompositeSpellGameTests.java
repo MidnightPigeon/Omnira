@@ -16,6 +16,21 @@ import java.util.*;
 @GameTestHolder("omnira_composite_spells")
 @PrefixGameTestTemplate(false)
 public final class CompositeSpellGameTests {
+    @GameTest(template="spell_arena") public static void compositeShapesHarvestBothPointsWithoutElements(GameTestHelper h){
+        for(var element:List.of(ElementType.TIME,ElementType.SPACE)){
+            var p=player(h);p.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);
+            var base=net.minecraft.core.BlockPos.containing(p.getEyePosition());
+            var a=base.south(2);var b=base.south(3);
+            h.getLevel().setBlockAndUpdate(a,ModBlocks.TIME_WARP_POINT.get().defaultBlockState());
+            h.getLevel().setBlockAndUpdate(b,ModBlocks.SPACE_WARP_POINT.get().defaultBlockState());
+            CompositeSpellMotion.cast(p,new SpellPattern(element,null),payload(""),1,new SpellCasting.Modifiers(1,1));
+            var spell=h.getLevel().getEntitiesOfClass(SpellEntity.class,p.getBoundingBox().inflate(6),e->e.ownedBy(p)).getFirst();
+            for(int i=0;i<21&&!spell.isRemoved();i++)spell.tick();
+            h.assertTrue(h.getLevel().getBlockState(a).is(ModBlocks.TEMPORAL_MOTE.get())&&h.getLevel().getBlockState(b).is(ModBlocks.SPATIAL_REMNANT.get()),"Composite shape required a construction element or missed a point: "+element);
+            spell.discard();h.getLevel().removeBlock(a,false);h.getLevel().removeBlock(b,false);
+        }
+        h.succeed();
+    }
     @GameTest(template="spell_arena")
     public static void slotsAndCrystalSerialization(GameTestHelper h){
         for(var core:List.of(ModItems.TIME_MICROCORE.get(),ModItems.SPACE_MICROCORE.get())){

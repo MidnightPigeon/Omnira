@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.*;
 
-public final class WaymarkScreen extends AbstractContainerScreen<WaymarkMenu> {
+public final class WaymarkScreen extends ResponsiveContainerScreen<WaymarkMenu> {
     private EditBox input;
     private final List<Button> rows=new ArrayList<>();
     private final List<Button> deleteButtons=new ArrayList<>();
@@ -22,7 +22,7 @@ public final class WaymarkScreen extends AbstractContainerScreen<WaymarkMenu> {
     private int page,rowCount;
     public WaymarkScreen(WaymarkMenu menu,Inventory inventory,Component title) {super(menu,inventory,title);imageWidth=256;imageHeight=220;}
     @Override protected void init() {
-        imageWidth=Math.min(256,width-16);imageHeight=menu.editing?124:Math.min(220,height-16);
+        imageWidth=256;imageHeight=menu.editing?124:220;
         super.init();rows.clear();deleteButtons.clear();
         input=addRenderableWidget(new EditBox(font,leftPos+12,topPos+32,imageWidth-24,18,Component.translatable(menu.editing?"gui.omnira.waymark.name":"gui.omnira.waymark.search")));
         input.setMaxLength(32);

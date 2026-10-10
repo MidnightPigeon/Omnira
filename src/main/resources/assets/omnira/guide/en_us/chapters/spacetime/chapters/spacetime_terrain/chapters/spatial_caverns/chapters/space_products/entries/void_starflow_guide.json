@@ -1,0 +1,16 @@
+{
+  "id": "void_starflow_guide",
+  "title": "Void Starflow",
+  "item": "omnira:void_starflow_bucket",
+  "recipes": false,
+  "text": [
+    "Immersion deals 1 true damage each second and attempts a random nearby safe teleport. A Spacetime Anchoring Sigil or riding a tamed Void Manta protects you from both fluid effects.",
+    "Carry starflow in a bucket. Liquid Crystal Balls supply unlimited external extraction, while manual container transfers still use the actual stored amount. Fishing has separate fish, junk and treasure pools affected by Luck of the Sea. Jellyfish can be caught; mantas cannot."
+  ],
+  "links": [
+    {
+      "target": "star_sea_creatures_guide",
+      "label": "Starsea Creatures"
+    }
+  ]
+}

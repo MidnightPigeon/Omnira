@@ -25,9 +25,10 @@ public final class MarisaTradeGameTests {
     public static void revisedPoolsAndCurrencies(GameTestHelper h) throws java.io.IOException {
         var expected=java.util.Map.of(
                 "common",Set.of("minecraft:golden_carrot","minecraft:experience_bottle","minecraft:redstone","minecraft:lapis_lazuli","minecraft:gunpowder","minecraft:book","omnira:time_sapling","omnira:resonance_crystal",
-                        "omnira:arcane_dust","omnira:spell_ink","omnira:grid_frame","omnira:crude_light_core","omnira:shadow_sapling","omnira:light_condensate"),
-                "rare",Set.of("omnira:analysis_crystal","omnira:paradox_dust","omnira:time_seed","omnira:time_flower","omnira:crystal_ball","minecraft:diamond","omnira:crystal_broom","omnira:infused_grimoire","omnira:primordial_spell_core","omnira:light_microcore","omnira:dark_microcore","omnira:damaged_research_facility","omnira:dream_rabbit_remains"),
-                "epic",Set.of("minecraft:enchanted_golden_apple","omnira:dream_spell_core","omnira:time_microcore","omnira:space_microcore","omnira:cruise_orb"));
+                        "omnira:arcane_dust","omnira:spell_ink","omnira:grid_frame","omnira:crude_light_core","omnira:shadow_sapling","omnira:light_crystal_core","omnira:time_grass","omnira:timeflow_eel","omnira:chronal_blindfish","omnira:time_flower","omnira:damaged_research_facility","omnira:time_sand"),
+                "rare",Set.of("omnira:analysis_crystal","omnira:paradox_dust","omnira:time_seed","omnira:crystal_ball","minecraft:diamond","omnira:crystal_broom","omnira:primordial_spell_core","omnira:light_microcore","omnira:dark_microcore","omnira:dream_rabbit_remains",
+                        "omnira:time_warp_point","omnira:liquid_crystal_ball","omnira:resonant_crystal_ball","omnira:resonant_liquid_crystal_ball","omnira:resonance_tuning_rod","omnira:ancient_archaeology_aggregate","omnira:phantom_thieves_aggregate","omnira:umbrella_aggregate","omnira:foundation_aggregate","omnira:primordial_earth_aggregate"),
+                "epic",Set.of("minecraft:enchanted_golden_apple","omnira:dream_spell_core","omnira:time_microcore","omnira:space_microcore","omnira:cruise_orb","omnira:advanced_assembly_table","omnira:advanced_crystal_aggregation_ring","omnira:spacetime_spell_core"));
         try(var reader=h.getLevel().getServer().getResourceManager().getResourceOrThrow(ResourceLocation.parse("omnira:marisa_trades/default.json")).openAsReader()){
             var json=com.google.gson.JsonParser.parseReader(reader).getAsJsonObject();
             expected.forEach((tier,items)->{
@@ -46,6 +47,33 @@ public final class MarisaTradeGameTests {
             }
         }
         h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void waymarkRequiresDreamBlock(GameTestHelper h){
+        var recipe=(net.minecraft.world.item.crafting.CraftingRecipe)h.getLevel().getRecipeManager().byKey(ResourceLocation.parse("omnira:spacetime_waymark")).orElseThrow().value();
+        var crystal=new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("omnira:spiritual_crystal")));
+        var slots=new ArrayList<>(List.of(ItemStack.EMPTY,crystal,ItemStack.EMPTY,crystal,new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("omnira:dream_crystal_block"))),crystal,new ItemStack(Items.SMOOTH_STONE),new ItemStack(Items.SMOOTH_STONE),new ItemStack(Items.SMOOTH_STONE)));
+        h.assertTrue(recipe.matches(net.minecraft.world.item.crafting.CraftingInput.of(3,3,slots),h.getLevel()),"Dream block recipe rejected");
+        slots.set(4,new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("omnira:dream_crystal_shard"))));
+        h.assertTrue(!recipe.matches(net.minecraft.world.item.crafting.CraftingInput.of(3,3,slots),h.getLevel()),"Old dream shard recipe accepted");
+        var temporal=(net.minecraft.world.item.crafting.CraftingRecipe)h.getLevel().getRecipeManager().byKey(ResourceLocation.parse("omnira:spacetime_waymark_temporal")).orElseThrow().value();
+        for(var id:List.of("living_temporal_silt","sedimented_living_temporal_silt","time_flower","reborn_rottenleaf_lily")){
+            slots.set(4,new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("omnira:"+id))));
+            h.assertTrue(temporal.matches(net.minecraft.world.item.crafting.CraftingInput.of(3,3,slots),h.getLevel()),"Temporal waymark ingredient rejected: "+id);
+        }
+        slots.set(4,new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("omnira:temporal_silt"))));
+        h.assertTrue(!temporal.matches(net.minecraft.world.item.crafting.CraftingInput.of(3,3,slots),h.getLevel()),"Inactive silt accepted");h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void lowWeightMultiblockOffers(GameTestHelper h){
+        var counts=new HashMap<String,Integer>();
+        for(int seed=0;seed<512;seed++){
+            var product=MarisaTrades.roll(h.getLevel(),seed,19).get(5).getResult();
+            counts.merge(BuiltInRegistries.ITEM.getKey(product.getItem()).toString(),1,Integer::sum);
+        }
+        int machines=0;
+        for(var id:List.of("omnira:advanced_assembly_table","omnira:advanced_crystal_aggregation_ring")){
+            int count=counts.getOrDefault(id,0);h.assertTrue(count>0,"Machine never offered: "+id);machines+=count;
+        }
+        h.assertTrue(machines<60,"Multiblock trade weight is too high");h.succeed();
     }
     private static MarisaOrbBlockEntity orb(GameTestHelper h,int x){
         var p=h.absolutePos(new BlockPos(x,3,5));h.getLevel().setBlockAndUpdate(p,KirisameContent.ORB.get().defaultBlockState());

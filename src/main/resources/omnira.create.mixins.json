@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.mcmagic.omnira.compat.create.mixin",
+  "plugin": "com.mcmagic.omnira.compat.OptionalIntegrationMixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PortFluidNetworkMixin",
+    "PortFluidPropagatorMixin",
+    "PortPipeConnectionMixin",
+    "PortPumpMixin",
+    "PortFunnelMixin",
+    "ForgeCreateAssemblyMixin",
+    "SpacetimeGlueMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

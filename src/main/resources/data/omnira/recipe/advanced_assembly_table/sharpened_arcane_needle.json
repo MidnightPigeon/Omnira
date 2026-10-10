@@ -1,0 +1,37 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "operation": "ritual_sword_upgrade",
+  "slots": [
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:arcane_needle"
+    },
+    {
+      "item": "omnira:infused_crystal_block"
+    },
+    {
+      "item": "omnira:encapsulated_paradox_flow"
+    }
+  ],
+  "result": {
+    "id": "omnira:sharpened_arcane_needle",
+    "count": 1
+  }
+}

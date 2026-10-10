@@ -1,0 +1,464 @@
+{
+  "omnira:chests/golden_throne": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:traveler_manuscript"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_microcore"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_warp_point"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spacetime_spell_core"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.05
+          }
+        ]
+      },
+      {
+        "rolls": 8,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_seed",
+            "weight": 1
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 1
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_flower",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:damaged_research_facility"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.2
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:chests/golden_throne_tower": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_microcore"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_warp_point"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spacetime_spell_core"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.05
+          }
+        ]
+      },
+      {
+        "rolls": 8,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_seed",
+            "weight": 1
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 1
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_flower",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.2
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:damaged_research_facility"
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:chests/rusty_lake_mill_echo": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 6,
+                  "max": 10
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:resonance_crystal",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 3,
+                  "max": 6
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:paradox_dust",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 4
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_seed"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:dream_spell_core"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:night_heron_statue"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:clock"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:feather"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:damaged_research_facility"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.2
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:chests/rusty_lake_mill_memory": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 6,
+                  "max": 10
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:paradox_dust",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 4
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_seed",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 2
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:dream_crystal_shard",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 3,
+                  "max": 6
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_microcore"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:night_heron_statue"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:dream_spell_core"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:corrupted_memory_cube"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:peaceful_memory_cube"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:damaged_research_facility"
+          }
+        ],
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.2
+          }
+        ]
+      }
+    ]
+  }
+}

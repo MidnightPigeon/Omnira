@@ -1,0 +1,21 @@
+{
+  "id": "orb_storage",
+  "title": "Storage",
+  "icon": "omnira:crystal_ball",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/crystal_ball.json",
+    "entries/crystal_ball_crafting.json",
+    "entries/liquid_crystal_ball.json",
+    "entries/resonant_orbs.json",
+    "entries/void_crystal_ball.json",
+    "entries/wandering_star_cluster_orb.json",
+    "entries/basic_stacking_upgrade.json",
+    "entries/infused_stacking_upgrade.json",
+    "entries/spacetime_stabilization_upgrade.json",
+    "entries/lava_production_upgrade.json",
+    "entries/intake_upgrade.json",
+    "entries/output_upgrade.json",
+    "entries/speed_upgrade.json"
+  ]
+}

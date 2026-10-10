@@ -75,8 +75,9 @@ public final class SwordFocus {
         if(payment>mana.current()+1.0E-7) {cancel(player);return;}
         if(payment>0)player.setData(ModAttachments.MANA,mana.spend(Math.min(payment,mana.current())));
         channel.paid=due;
-        if(nail && elapsed%20==0)player.heal(SEGMENT_HEAL);
-        if(!nail && elapsed==DURATION)player.heal(COMPLETE_HEAL);
+        var sword=(RitualSwordItem)stack.getItem();
+        if(nail && elapsed%20==0)player.heal(sword.segmentHeal());
+        if(!nail && elapsed==DURATION)player.heal(sword.completeHeal());
     }
     @SubscribeEvent public static void tick(PlayerTickEvent.Post event) {
         Player player=event.getEntity();

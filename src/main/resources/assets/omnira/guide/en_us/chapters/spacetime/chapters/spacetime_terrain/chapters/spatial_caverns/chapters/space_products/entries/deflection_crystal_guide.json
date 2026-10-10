@@ -1,0 +1,17 @@
+{
+  "id": "deflection_crystal_guide",
+  "title": "Deflection Crystal",
+  "item": "omnira:deflection_crystal",
+  "recipes": false,
+  "text": [
+    "Budding Deflection Crystal does not deflect entities itself. Its exposed faces grow four crystal stages in air or water. Small, medium and large buds and mature clusters affect spherical radii of 2, 3, 4 and 5 blocks respectively.",
+    "Inside a cluster field, each block of travel independently chooses left or right, smoothly distributing 5 degrees over that segment. Overlapping clusters add their angles: two yield 10 degrees, three yield 15. Turning stops when you stop moving; speed is preserved and position is never directly shifted. Clusters work in every biome and ignore the Spacetime Anchoring Sigil.",
+    "Harvest mature clusters for Deflection Crystals. Suitable tools improve the yield and Fortune applies; Silk Touch preserves the cluster. Four crystals in a 2 by 2 pattern craft a Deflection Crystal Block. In Dislocated Geodes, stepping onto it gradually turns travel by 10 degrees; the sigil prevents this. Outside that biome the block does not deflect entities. Budding blocks cannot be obtained by ordinary mining."
+  ],
+  "links": [
+    {
+      "target": "dislocated_geodes_guide",
+      "label": "Dislocated Geodes"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "type": "omnira:calibration_station",
+  "biomes": "#omnira:has_structure/calibration_station",
+  "step": "surface_structures",
+  "terrain_adaptation": "none",
+  "spawn_overrides": {}
+}

@@ -13,6 +13,7 @@ public final class TemporalCreatureTags {
     public static final TagKey<EntityType<?>> TIME=tag("time_creatures");
     public static final TagKey<EntityType<?>> DREAM=tag("dream_creatures");
 
+    /** Environmental biome hazards only; never use for time-warp blocks or spells. */
     public static boolean timeImmune(Entity entity){
         return entity.getType().is(TIME)
                 ||entity instanceof Player player&&AnchoringSigilItem.equipped(player);

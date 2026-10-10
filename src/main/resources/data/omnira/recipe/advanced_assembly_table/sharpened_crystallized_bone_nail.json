@@ -1,0 +1,37 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "operation": "ritual_sword_upgrade",
+  "slots": [
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:crystallized_bone_nail"
+    },
+    {
+      "item": "omnira:infused_crystal_block"
+    },
+    {
+      "item": "omnira:paradox_ore"
+    }
+  ],
+  "result": {
+    "id": "omnira:sharpened_crystallized_bone_nail",
+    "count": 1
+  }
+}

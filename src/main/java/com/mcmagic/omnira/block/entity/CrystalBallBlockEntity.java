@@ -13,12 +13,33 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
+    public static java.util.function.Consumer<CrystalBallBlockEntity> refreshClientTint=ball->{};
+    public java.util.UUID storageIdentity=java.util.UUID.randomUUID();
+    public final ItemStack[] frequency={ItemStack.EMPTY,ItemStack.EMPTY};
+    public int networkStatus;
+    public boolean virtualStorage;
+    public Runnable storageChanged=()->{};
+    public boolean resonant(){return com.mcmagic.omnira.storage.CrystalStorageContent.resonant(getBlockState());}
+    public CrystalBallBlockEntity storage(){
+        if(virtualStorage || !resonant() || !(level instanceof net.minecraft.server.level.ServerLevel server))return this;
+        return com.mcmagic.omnira.storage.CrystalStorageNetworks.get(server).view(this);
+    }
+    public void detachNetwork(){
+        if(!virtualStorage && resonant() && level instanceof net.minecraft.server.level.ServerLevel server)
+            com.mcmagic.omnira.storage.CrystalStorageNetworks.get(server).detach(this);
+    }
+    public void setFrequency(int slot,ItemStack sample){
+        if(slot<0||slot>1||!(level instanceof net.minecraft.server.level.ServerLevel server))return;
+        var networks=com.mcmagic.omnira.storage.CrystalStorageNetworks.get(server);
+        networks.detach(this);frequency[slot]=sample.copyWithCount(1);
+        networkStatus=0;setChanged();networks.register(this);setChanged();
+    }
     public final OrbUpgrades upgrades=new OrbUpgrades(this);
     public boolean stabilized() {return upgrades.has(com.mcmagic.omnira.item.OrbUpgradeItem.Kind.STABILIZATION);}
     public int multiplier() {return upgrades.multiplier(-1);}
     public int itemLimit(ItemStack stack,int multiplier) {return stack.getMaxStackSize()>1?stack.getMaxStackSize()*multiplier:1;}
     public boolean fitsMultiplier(int multiplier) {
-        for(var stack:items)if(stack.getCount()>itemLimit(stack,multiplier))return false;
+        for(var stack:getItems())if(stack.getCount()>itemLimit(stack,multiplier))return false;
         return true;
     }
     @Override public int getMaxStackSize() {return 64*multiplier();}
@@ -28,13 +49,18 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     @Override public ItemStack getItem(int slot) {return hasPendingLoot()?ItemStack.EMPTY:super.getItem(slot);}
     @Override public ItemStack removeItem(int slot,int amount) {return hasPendingLoot()?ItemStack.EMPTY:super.removeItem(slot,amount);}
     @Override public ItemStack removeItemNoUpdate(int slot) {return hasPendingLoot()?ItemStack.EMPTY:super.removeItemNoUpdate(slot);}
-    @Override public void setItem(int slot,ItemStack stack) {if(hasPendingLoot())return;items.set(slot,stack);setChanged();}
+    @Override public void setItem(int slot,ItemStack stack) {if(hasPendingLoot())return;getItems().set(slot,stack);setChanged();}
     private int automationTicks;
     public void serverTick() {
+        if(resonant() && level instanceof net.minecraft.server.level.ServerLevel server && server.getGameTime()%20==0)
+            com.mcmagic.omnira.storage.CrystalStorageNetworks.get(server).register(this);
         if(++automationTicks>=20){automationTicks=0;com.mcmagic.omnira.world.structure.AuthoredStructureConnections.initialize(this);com.mcmagic.omnira.mire.MillPlan.initialize(this);OrbAutomation.tick(this);}
         else if(automationTicks==10 && upgrades.speedMultiplier()>1)OrbAutomation.tick(this,false);
     }
     protected void shattered(net.minecraft.server.level.ServerLevel server) {}
+    protected boolean shatterDrops(){return true;}
+    private boolean shattering;
+    public boolean dropsOnRemoval(){return !shattering||shatterDrops();}
     public static final int SIZE=12;
     private NonNullList<ItemStack> items=NonNullList.withSize(SIZE,ItemStack.EMPTY);
     private boolean pendingLootDisplay;
@@ -61,11 +87,12 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
         if(++impacts>=9) {
             unpackLootTable(entity instanceof net.minecraft.world.entity.player.Player player?player:null);
             // onRemove drops the inventory once; setting air skips the ball's own loot table.
-            if(server.setBlockAndUpdate(worldPosition,net.minecraft.world.level.block.Blocks.AIR.defaultBlockState())) {
+            shattering=true;
+            try{if(server.setBlockAndUpdate(worldPosition,net.minecraft.world.level.block.Blocks.AIR.defaultBlockState())) {
                 shattered(server);
-                net.minecraft.world.level.block.Block.popResource(server,worldPosition,new ItemStack(this instanceof LiquidCrystalBallBlockEntity?net.minecraft.world.item.Items.GLASS_PANE:net.minecraft.world.item.Items.GLASS));
+                if(shatterDrops())net.minecraft.world.level.block.Block.popResource(server,worldPosition,new ItemStack(this instanceof LiquidCrystalBallBlockEntity?net.minecraft.world.item.Items.GLASS_PANE:net.minecraft.world.item.Items.GLASS));
                 server.levelEvent(2001,worldPosition,net.minecraft.world.level.block.Block.getId(net.minecraft.world.level.block.Blocks.GLASS.defaultBlockState()));
-            }
+            }}finally{shattering=false;}
             return;
         }
         repairAt=server.getGameTime()+REPAIR_DELAY;
@@ -82,6 +109,8 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     }
     @Override public void onLoad() {
         super.onLoad();
+        if(resonant() && level instanceof net.minecraft.server.level.ServerLevel server)
+            com.mcmagic.omnira.storage.CrystalStorageNetworks.get(server).register(this);
         if(level!=null && !level.isClientSide && impacts>0)
             level.scheduleTick(worldPosition,getBlockState().getBlock(),(int)Math.clamp(repairAt-level.getGameTime(),1,REPAIR_DELAY));
     }
@@ -90,7 +119,7 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     public CrystalBallBlockEntity(BlockPos pos,BlockState state) {super(ModBlockEntityTypes.CRYSTAL_BALL.get(),pos,state);}
     protected CrystalBallBlockEntity(net.minecraft.world.level.block.entity.BlockEntityType<?> type,BlockPos pos,BlockState state) {super(type,pos,state);}
     @Override public int getContainerSize() {return SIZE;}
-    @Override protected NonNullList<ItemStack> getItems() {return items;}
+    @Override protected NonNullList<ItemStack> getItems() {return storage().items;}
     @Override protected void setItems(NonNullList<ItemStack> items) {this.items=items;}
     @Override protected void collectImplicitComponents(net.minecraft.core.component.DataComponentMap.Builder components) {
         super.collectImplicitComponents(components);
@@ -99,9 +128,11 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
         components.set(net.minecraft.core.component.DataComponents.CONTAINER_LOOT,null);
     }
     /** Read without unpacking a structure's pending loot table. */
-    public ItemStack displayItem(int slot) {return hasPendingLoot()?ItemStack.EMPTY:items.get(slot);}
+    public ItemStack displayItem(int slot) {return hasPendingLoot()?ItemStack.EMPTY:getItems().get(slot);}
     @Override public void setChanged() {
+        if(virtualStorage){storageChanged.run();return;}
         super.setChanged();
+        if(resonant() && level instanceof net.minecraft.server.level.ServerLevel server)com.mcmagic.omnira.storage.CrystalStorageNetworks.get(server).changed(this);
         if(level!=null && !level.isClientSide)level.sendBlockUpdated(worldPosition,getBlockState(),getBlockState(),2);
     }
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
@@ -109,26 +140,32 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
         tag.putInt("Impacts",impacts);
         tag.putBoolean("PendingLoot",lootTable!=null);
         tag.put("Upgrades",upgrades.serializeNBT(registries));
-        if(lootTable==null)saveItems(tag,registries);
+        if(lootTable==null)storage().saveItems(tag,registries);
+        tag.putInt("NetworkStatus",networkStatus);saveFrequency(tag,registries);
         return tag;
     }
     @Override public net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket getUpdatePacket() {
         return net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket.create(this);
     }
-    @Override protected Component getDefaultName() {return Component.translatable("block.omnira.crystal_ball");}
+    @Override protected Component getDefaultName() {return Component.translatable(resonant()?"block.omnira.resonant_crystal_ball":"block.omnira.crystal_ball");}
     @Override protected AbstractContainerMenu createMenu(int id,Inventory inventory) {return new CrystalBallMenu(id,inventory,this);}
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries) {
         super.saveAdditional(tag,registries);
         tag.putBoolean("LootContainer",lootContainer || lootTable!=null);
         tag.putInt("Impacts",impacts);tag.putLong("RepairAt",repairAt);
-        tag.put("Upgrades",upgrades.serializeNBT(registries));
+        tag.put("Upgrades",upgrades.serializeLocal(registries));
+        saveFrequency(tag,registries);
         if(!trySaveLootTable(tag))saveItems(tag,registries);
     }
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries) {
+        int previousNetworkStatus=networkStatus;
         if(tag.contains("LootTable")){
             tag=tag.copy();tag.putString("LootTable",com.mcmagic.omnira.config.OmniraLootConfig.canonicalTableId(tag.getString("LootTable")));
         }
         super.loadAdditional(tag,registries);items=NonNullList.withSize(SIZE,ItemStack.EMPTY);
+        networkStatus=tag.getInt("NetworkStatus");
+        if(tag.hasUUID("StorageIdentity"))storageIdentity=tag.getUUID("StorageIdentity");
+        for(int i=0;i<2;i++)frequency[i]=ItemStack.parseOptional(registries,tag.getCompound("Frequency"+i));
         pendingLootDisplay=tag.getBoolean("PendingLoot");
         impacts=Math.clamp(tag.getInt("Impacts"),0,8);repairAt=tag.getLong("RepairAt");
         upgrades.deserializeNBT(registries,tag.getCompound("Upgrades"));
@@ -136,10 +173,27 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
         lootContainer=tag.getBoolean("LootContainer") || lootTable!=null;
         var counts=tag.getIntArray("OrbCounts");
         for(int i=0;i<Math.min(counts.length,SIZE);i++)if(!items.get(i).isEmpty())items.get(i).setCount(Math.max(1,counts[i]));
+        // Tint is baked into the chunk mesh, unlike the ball's animated contents.
+        if(level!=null&&level.isClientSide&&previousNetworkStatus!=networkStatus)
+            refreshClientTint.accept(this);
     }
     private void saveItems(CompoundTag tag,HolderLookup.Provider registries) {
         var compact=NonNullList.withSize(SIZE,ItemStack.EMPTY);int[] counts=new int[SIZE];
         for(int i=0;i<SIZE;i++){counts[i]=items.get(i).getCount();compact.set(i,items.get(i).copyWithCount(1));}
         ContainerHelper.saveAllItems(tag,compact,registries);tag.putIntArray("OrbCounts",counts);
+    }
+    private void saveFrequency(CompoundTag tag,HolderLookup.Provider registries){
+        tag.putUUID("StorageIdentity",storageIdentity);
+        for(int i=0;i<2;i++)if(!frequency[i].isEmpty())tag.put("Frequency"+i,frequency[i].save(registries));
+    }
+    public CompoundTag exportLocal(){return saveWithoutMetadata(level.registryAccess());}
+    public void importLocal(CompoundTag tag){
+        var id=storageIdentity;var first=frequency[0];var second=frequency[1];
+        loadAdditional(tag,level.registryAccess());storageIdentity=id;frequency[0]=first;frequency[1]=second;
+    }
+    public void clearLocal(){
+        items=NonNullList.withSize(SIZE,ItemStack.EMPTY);
+        upgrades.deserializeNBT(level.registryAccess(),new CompoundTag());
+        if(this instanceof LiquidCrystalBallBlockEntity liquid)liquid.localTank.setFluid(net.neoforged.neoforge.fluids.FluidStack.EMPTY);
     }
 }

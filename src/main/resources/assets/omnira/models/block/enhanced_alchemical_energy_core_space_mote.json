@@ -1,0 +1,86 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:translucent",
+  "ambientocclusion": false,
+  "textures": {
+    "rim": "omnira:block/workstation_crystal_ring",
+    "particle": "omnira:block/workstation_crystal",
+    "earth": "omnira:block/rough_alchemical_energy_core_earth",
+    "water": "omnira:block/rough_alchemical_energy_core_water",
+    "fire": "omnira:block/rough_alchemical_energy_core_fire",
+    "air": "omnira:block/rough_alchemical_energy_core_air",
+    "heart": "omnira:block/enhanced_alchemical_energy_core_heart",
+    "time": "omnira:block/enhanced_alchemical_energy_core_time",
+    "space": "omnira:block/enhanced_alchemical_energy_core_space"
+  },
+  "elements": [
+    {
+      "from": [
+        7.5,
+        7.5,
+        7.5
+      ],
+      "to": [
+        8.5,
+        8.5,
+        8.5
+      ],
+      "faces": {
+        "west": {
+          "texture": "#space",
+          "uv": [
+            7.5,
+            7.5,
+            8.5,
+            8.5
+          ]
+        },
+        "east": {
+          "texture": "#space",
+          "uv": [
+            7.5,
+            7.5,
+            8.5,
+            8.5
+          ]
+        },
+        "down": {
+          "texture": "#space",
+          "uv": [
+            7.5,
+            7.5,
+            8.5,
+            8.5
+          ]
+        },
+        "up": {
+          "texture": "#space",
+          "uv": [
+            7.5,
+            7.5,
+            8.5,
+            8.5
+          ]
+        },
+        "north": {
+          "texture": "#space",
+          "uv": [
+            7.5,
+            7.5,
+            8.5,
+            8.5
+          ]
+        },
+        "south": {
+          "texture": "#space",
+          "uv": [
+            7.5,
+            7.5,
+            8.5,
+            8.5
+          ]
+        }
+      }
+    }
+  ]
+}

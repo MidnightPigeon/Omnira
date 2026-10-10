@@ -1,0 +1,15 @@
+{
+  "structures": [
+    {
+      "structure": "omnira:void_lighthouse",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 16,
+    "separation": 4,
+    "salt": 9648219,
+    "frequency": 0.25
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "voyager_violin_source",
+  "title": "Voyager's Violin",
+  "item": "omnira:voyager_violin",
+  "recipes": false,
+  "text": [
+    "Each Void Lighthouse loot crystal ball has a 10% chance to contain one violin. See Relic Finds for performance instructions and effects."
+  ],
+  "links": [
+    {
+      "target": "voyager_violin",
+      "label": "Relic Finds: Voyager's Violin"
+    },
+    {
+      "target": "void_lighthouse_guide",
+      "label": "Void Lighthouse"
+    }
+  ]
+}

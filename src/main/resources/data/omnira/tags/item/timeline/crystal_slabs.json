@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:spiritual_crystal_slab",
+    "omnira:infused_crystal_slab",
+    "omnira:dream_crystal_slab",
+    "omnira:spatial_crystal_slab",
+    "omnira:solidified_light_crystal_core_slab"
+  ]
+}

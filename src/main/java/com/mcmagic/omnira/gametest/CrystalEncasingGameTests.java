@@ -19,15 +19,49 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_crystal_encasing")
 @PrefixGameTestTemplate(false)
 public final class CrystalEncasingGameTests {
+    @GameTest(template="spell_arena",timeoutTicks=240)
+    public static void crystalPipePumpFlow(GameTestHelper h){PortCreateAutomationChecks.pipes(h,true,0);}
+    @GameTest(template="spell_arena",timeoutTicks=240)
+    public static void infusedPipePumpFlow(GameTestHelper h){PortCreateAutomationChecks.pipes(h,true,1);}
     @GameTest(template="spell_arena")
     public static void crystalMassIsZero(GameTestHelper h) {
+        if(!net.neoforged.fml.ModList.get().isLoaded("sable")){h.succeed();return;}
         for(var block:java.util.List.of(ModBlocks.CRYSTAL_CASING.get(),ModBlocks.INFUSED_CRYSTAL_CASING.get(),ModBlocks.MANA_ENGINE.get(),
                 ModBlocks.CRYSTAL_PROCESSING_TABLE.get(),ModBlocks.ANALYSIS_ARTISAN_TABLE.get(),
                 ModBlocks.ARCANE_ASSEMBLY_TABLE.get(),ModBlocks.CRYSTAL_PEDESTAL.get(),ModBlocks.CRYSTAL_BALL.get(),
                 CrystalEncasing.SHAFT.get(),CrystalEncasing.COG.get(),CrystalEncasing.LARGE_COG.get(),
-                CrystalEncasing.INFUSED_SHAFT.get(),CrystalEncasing.INFUSED_COG.get(),CrystalEncasing.INFUSED_LARGE_COG.get())) {
+                CrystalEncasing.INFUSED_SHAFT.get(),CrystalEncasing.INFUSED_COG.get(),CrystalEncasing.INFUSED_LARGE_COG.get(),
+                CrystalEncasing.PIPE.get(),CrystalEncasing.INFUSED_PIPE.get())) {
             h.assertTrue(dev.ryanhcode.sable.physics.config.block_properties.PhysicsBlockPropertyHelper.getMass(
                     h.getLevel(),h.absolutePos(new BlockPos(1,2,1)),block.defaultBlockState())==0,"Expected zero mass: "+block);
+        }
+        h.succeed();
+    }
+    @GameTest(template="spell_arena")
+    public static void pipesRetainConnectionsAndUnwrap(GameTestHelper h) {
+        var player=h.makeMockPlayer(GameType.SURVIVAL);
+        var pos=h.absolutePos(new BlockPos(4,3,4));
+        var properties=com.simibubi.create.content.fluids.pipes.EncasedPipeBlock.FACING_TO_PROPERTY_MAP;
+        for(int family=0;family<2;family++)for(int mask=0;mask<64;mask++){
+            var casing=new ItemStack(family==0?ModBlocks.CRYSTAL_CASING.get():ModBlocks.INFUSED_CRYSTAL_CASING.get());
+            player.setItemInHand(InteractionHand.MAIN_HAND,casing);
+            var original=AllBlocks.FLUID_PIPE.getDefaultState();
+            for(var direction:Direction.values())original=original.setValue(properties.get(direction),(mask&(1<<direction.ordinal()))!=0);
+            h.getLevel().setBlock(pos,original,2);
+            var hit=new BlockHitResult(Vec3.atCenterOf(pos),Direction.UP,pos,false);
+            ((EncasableBlock)original.getBlock()).tryEncase(original,h.getLevel(),pos,casing,player,InteractionHand.MAIN_HAND,hit);
+            var state=h.getLevel().getBlockState(pos);
+            h.assertTrue(state.is(family==0?CrystalEncasing.PIPE.get():CrystalEncasing.INFUSED_PIPE.get()),"Pipe encasing missing");
+            h.assertTrue(casing.getCount()==1,"Encasing consumed casing");
+            for(var direction:Direction.values())h.assertTrue(state.getValue(properties.get(direction)).equals(original.getValue(properties.get(direction))),"Pipe topology changed");
+            var be=h.getLevel().getBlockEntity(pos);
+            h.assertTrue(be!=null&&be.getType().isValid(state),"Pipe entity does not support crystal casing");
+            var behaviour=com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour.get(h.getLevel(),pos,
+                    com.simibubi.create.content.fluids.FluidTransportBehaviour.TYPE);
+            h.assertTrue(behaviour!=null,"Missing native fluid transport");
+            for(var direction:Direction.values())h.assertTrue(behaviour.canHaveFlowToward(state,direction)==state.getValue(properties.get(direction)),"Closed pipe face can transfer");
+            ((IWrenchable)state.getBlock()).onWrenched(state,new UseOnContext(h.getLevel(),player,InteractionHand.MAIN_HAND,new ItemStack(Items.STICK),hit));
+            h.assertTrue(h.getLevel().getBlockState(pos).is(AllBlocks.FLUID_PIPE.get()),"Wrench did not restore native pipe");
         }
         h.succeed();
     }

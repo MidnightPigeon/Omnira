@@ -1,0 +1,23 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": [
+    {
+      "tag": "minecraft:dirt"
+    },
+    {
+      "tag": "minecraft:sand"
+    }
+  ],
+  "seed": {
+    "item": "minecraft:sugar_cane"
+  },
+  "fluid": {
+    "id": "minecraft:water",
+    "amount": 500
+  },
+  "result": {
+    "id": "minecraft:sugar_cane",
+    "count": 8
+  },
+  "stages": 4
+}

@@ -1,0 +1,16 @@
+{
+  "id": "alchemical_waste",
+  "title": "炼金废料",
+  "item": "omnira:alchemical_waste",
+  "recipes": false,
+  "text": [
+    "炼制稀薄时空时留下的焦化残渣。右键可将其沿抛物线投出，命中生物后施加5秒凋零II，撞击后消失。",
+    "也可以在合成栏中将1份炼金废料拆成9个煤炭。"
+  ],
+  "links": [
+    {
+      "target": "dilute_spacetime",
+      "label": "稀薄时空"
+    }
+  ]
+}

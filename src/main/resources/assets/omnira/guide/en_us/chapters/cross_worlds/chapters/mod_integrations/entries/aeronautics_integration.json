@@ -1,0 +1,11 @@
+{
+  "id": "aeronautics_integration",
+  "title": "Create: Aeronautics",
+  "item": "omnira:spiritual_crystal_block",
+  "recipes": false,
+  "text": [
+    "All Omnira crystal blocks, budding matrices, clusters at every growth stage and crystal building variants are weightless, including rough and excited spatial crystals. Every part of a crystal multiblock machine is also weightless, including the Large Alchemical Reaction Pool and Alchemical Catalysis Chamber. Simple Condensation Tables retain 0.5 mass, while Advanced Condensation Tables provide buoyancy.",
+    "Buoyancy of luminous materials follows their actual volume; slabs and stairs are not counted as full blocks. Weightlessness is not buoyancy: other materials, payload and propulsion still matter."
+  ],
+  "links": []
+}

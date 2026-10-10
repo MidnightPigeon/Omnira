@@ -1,0 +1,20 @@
+{
+  "id": "star_source_relic",
+  "title": "Star Source",
+  "item": "omnira:star_source",
+  "recipes": false,
+  "text": [
+    "Found only in the lantern chamber of a Void Lighthouse. It emits light level 15 and prevents hostile mob spawning inside a spherical radius of 64 blocks. Existing mobs are not removed; neutral creatures are unaffected.",
+    "Every 10 seconds it attempts to seed one patch of Star Scatter in a space with light below 5 and solid support beneath. Underwater positions must also be dark and supported. Seeding pauses when no suitable space remains and resumes as the surroundings change."
+  ],
+  "links": [
+    {
+      "target": "void_lighthouse_guide",
+      "label": "Void Lighthouse"
+    },
+    {
+      "target": "stardust_guide",
+      "label": "Stardust"
+    }
+  ]
+}

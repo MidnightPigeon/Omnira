@@ -1,0 +1,22 @@
+{
+  "id": "topological_labyrinth_guide",
+  "title": "Topological Labyrinth",
+  "item": "omnira:excited_rough_spatial_crystal_block",
+  "recipes": false,
+  "text": [
+    "Sealed upper rooms have pale-blue Long-Range Portals in their ceilings. Touch one to reach the Time Continent directly above, or a nearby landing if blocked. Neither portal type can be broken.",
+    "Two labyrinth floors lie beneath the level cave surface. A few rooms have diggable excited spatial crystal roofs; pure solidified spacetime seals the others. Light Crystal Torches mark the room corners.",
+    "Touch a Void Portal vortex to travel immediately to a nearby room through the opposite-facing exit. A new destination is chosen each time, so returning through an exit need not lead back. Liquids do not obstruct the portals.",
+    "Rooms may be empty or contain treasure orbs, relics, crystal matrices and suspicious Time Sand. Some floors are covered in Void Starflow or Decayed Timeflow."
+  ],
+  "links": [
+    {
+      "target": "mapping_stability_compass_guide",
+      "label": "Mapping Stability Compass"
+    },
+    {
+      "target": "void_starflow_guide",
+      "label": "Void Starflow"
+    }
+  ]
+}

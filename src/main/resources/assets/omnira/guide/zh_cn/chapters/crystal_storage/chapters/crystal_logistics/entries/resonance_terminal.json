@@ -1,0 +1,24 @@
+{
+  "id": "resonance_terminal",
+  "item": "omnira:resonance_terminal",
+  "title": "共鸣终端",
+  "text": [
+    "通过共鸣之仪获得，可绑定四个容器上方的共鸣节点。在终端选择连接，打开容器自身界面；节点被拆除后自动解绑。",
+    "每次成功开界面消耗最大法力的一半，不受减耗影响；法力不足或容器没有界面时无法打开，失败不扣费。存取不另收费。机械动力保险库和储罐虽无界面，仍可参与物流。",
+    "同一终端不能重复绑定同一完整容器。两枚已绑定的共振晶球成功联网时，只保留较早的绑定；断网后不会恢复，需要重新绑定。不同终端可访问同一容器。"
+  ],
+  "links": [
+    {
+      "target": "resonance_ritual",
+      "label": "共鸣之仪"
+    },
+    {
+      "target": "resonance_core",
+      "label": "共鸣节点"
+    },
+    {
+      "target": "enhanced_resonance_terminal",
+      "label": "强化终端"
+    }
+  ]
+}

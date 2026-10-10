@@ -32,6 +32,11 @@ public final class StaffEvents {
         }
         if(!(event.getItemStack().getItem() instanceof StaffItem)) return;
         var stats=StaffAssembly.of(event.getItemStack()).stats();
+        double regeneration=StaffAssembly.of(event.getItemStack()).components().stream().map(StaffPart::of)
+                .filter(Objects::nonNull).mapToDouble(StaffPart::regeneration).sum();
+        if(regeneration!=0) event.replaceModifier(ModAttributes.MANA_REGEN,new AttributeModifier(
+                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","staff_regeneration"),regeneration,
+                AttributeModifier.Operation.ADD_MULTIPLIED_BASE),EquipmentSlotGroup.MAINHAND);
         if(stats.cooldownReduction()!=0) event.replaceModifier(ModAttributes.COOLDOWN_REDUCTION,new AttributeModifier(
                 CastAttributes.STAFF_COOLDOWN,stats.cooldownReduction(),AttributeModifier.Operation.ADD_VALUE),EquipmentSlotGroup.MAINHAND);
         if(stats.power()!=0) event.replaceModifier(ModAttributes.SPELL_POWER,new AttributeModifier(

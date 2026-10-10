@@ -1,0 +1,6 @@
+{
+  "type": "omnira:reaction",
+  "items": [{"ingredient": {"item": "omnira:spiritual_crystal"}, "count": 4}],
+  "fluid": {"id": "omnira:dilute_spacetime", "amount": 1000},
+  "results": [{"id": "omnira:spacetime_waymark", "count": 1}]
+}

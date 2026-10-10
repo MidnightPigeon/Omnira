@@ -1,0 +1,78 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "grain": "omnira:block/star_source",
+    "particle": "omnira:block/star_source"
+  },
+  "elements": [
+    {
+      "from": [
+        7.6,
+        7.6,
+        7.6
+      ],
+      "to": [
+        8.4,
+        8.4,
+        8.4
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#grain",
+          "uv": [
+            2,
+            0,
+            2.8,
+            0.8
+          ]
+        },
+        "down": {
+          "texture": "#grain",
+          "uv": [
+            2,
+            0,
+            2.8,
+            0.8
+          ]
+        },
+        "north": {
+          "texture": "#grain",
+          "uv": [
+            2,
+            0,
+            2.8,
+            0.8
+          ]
+        },
+        "south": {
+          "texture": "#grain",
+          "uv": [
+            2,
+            0,
+            2.8,
+            0.8
+          ]
+        },
+        "west": {
+          "texture": "#grain",
+          "uv": [
+            2,
+            0,
+            2.8,
+            0.8
+          ]
+        },
+        "east": {
+          "texture": "#grain",
+          "uv": [
+            2,
+            0,
+            2.8,
+            0.8
+          ]
+        }
+      }
+    }
+  ]
+}

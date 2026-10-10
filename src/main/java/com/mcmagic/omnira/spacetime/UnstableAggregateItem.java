@@ -10,9 +10,12 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
 public final class UnstableAggregateItem extends Item {
-    public UnstableAggregateItem(Properties properties){super(properties.durability(128));}
+    private final boolean temporalBloom;
+    public UnstableAggregateItem(Properties properties){this(properties,true);}
+    public UnstableAggregateItem(Properties properties,boolean temporalBloom){super(properties.durability(128));this.temporalBloom=temporalBloom;}
     public static boolean isAggregate(ItemStack stack){return stack.getItem() instanceof UnstableAggregateItem;}
     @Override public InteractionResult useOn(net.minecraft.world.item.context.UseOnContext context){
+        if(!temporalBloom)return InteractionResult.PASS;
         var level=context.getLevel();var pos=context.getClickedPos();
         if(!level.getBlockState(pos).is(com.mcmagic.omnira.time.TemporalSoils.SILTS)||!level.isEmptyBlock(pos.above()))return InteractionResult.PASS;
         if(level instanceof ServerLevel server&&com.mcmagic.omnira.time.TemporalBloom.spread(server,pos)){

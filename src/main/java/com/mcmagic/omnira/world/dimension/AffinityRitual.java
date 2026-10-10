@@ -79,12 +79,13 @@ public final class AffinityRitual {
         return Vec3.atBottomCenterOf(session.pos).add(0,1.05+progress,0);
     }
     private static boolean clear(ServerPlayer player,Session session,double progress) {
+        if(com.mcmagic.omnira.space.anchor.StabilityField.blocks(player,player.serverLevel(),position(session,progress)))return false;
         return player.level().noCollision(player,player.getBoundingBox().move(position(session,progress).subtract(player.position())));
     }
     private static void hold(ServerPlayer player,Session session,double progress) {
         var p=position(session,progress);player.setDeltaMovement(Vec3.ZERO);player.fallDistance=0;
         player.setPos(p);
-        player.connection.teleport(p.x,p.y,p.z,player.getYRot(),player.getXRot());
+        player.teleportTo(player.serverLevel(),p.x,p.y,p.z,player.getYRot(),player.getXRot());
     }
     @SubscribeEvent public static void tick(PlayerTickEvent.Post event) {
         if(event.getEntity() instanceof ServerPlayer player)advance(player);

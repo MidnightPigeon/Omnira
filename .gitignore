@@ -35,6 +35,7 @@ bin/
 Thumbs.db
 
 ### Minecraft Modding ###
+.mixin.out/
 run/
 !**/src/**/run/
 **/src/generated/**/.cache/
@@ -92,4 +93,6 @@ __pycache__/
 *~
 *.jfr
 hs_err_pid*.log
+hs_err_pid*.mdmp
+hs_err_pid*.dmp
 replay_pid*.log

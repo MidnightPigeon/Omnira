@@ -1,0 +1,18 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": {
+    "item": "omnira:spatial_crystal_matrix"
+  },
+  "seed": {
+    "item": "omnira:infused_spiritual_crystal"
+  },
+  "fluid": {
+    "id": "omnira:dilute_spacetime",
+    "amount": 500
+  },
+  "result": {
+    "id": "omnira:spatial_crystal_shard",
+    "count": 4
+  },
+  "stages": 4
+}

@@ -96,18 +96,6 @@ public final class GuideRecipes {
             result.add(new Diagram(ModItems.ARCANE_ASSEMBLY_TABLE.get().getDescription(),slots,
                     List.of(mana(50),Component.translatable("jei.omnira.assembly_progress"),Component.translatable("jei.omnira.assembly_center"))));
         }
-        if(item==com.mcmagic.omnira.aggregation.AggregationContent.ITEM.get()) {
-            var slots=new ArrayList<Slot>();
-            for(int i=0;i<9;i++) {
-                Ingredient input=i==4?Ingredient.of(ModItems.CRYSTAL_PROCESSING_TABLE.get()):
-                    i==1||i==7?Ingredient.of(DreamContent.EXCITED_SPATIAL_CRYSTAL.get(),com.mcmagic.omnira.aggregation.AggregationContent.SPATIAL_BLOCK.get()):
-                    i==3||i==5?Ingredient.of(DreamContent.LIVING_TEMPORAL_SILT.get(),TimeNatureContent.LIVING_SILT.get()):Ingredient.of(ModBlocks.INFUSED_CRYSTAL_CASING.get());
-                slots.add(ingredient(24+i%3*20,55+i/3*20,input,1));
-            }
-            slots.add(slot(44,125,new ItemStack(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()),false));
-            slots.add(slot(108,75,new ItemStack(item),true));
-            result.add(new Diagram(item.getDescription(),slots,List.of(Component.translatable("jei.omnira.aggregation.vertical"),Component.translatable("jei.omnira.aggregation.activate"))));
-        }
         if(item==ModItems.LOW_TIER_MAGIC_CRYSTAL.get()) {
             var container=new SimpleContainer(9);
             container.setItem(0,new ItemStack(ModItems.AIR_MICROCORE.get()));container.setItem(1,new ItemStack(ModItems.AIR_MICROCORE.get()));
@@ -118,6 +106,12 @@ public final class GuideRecipes {
             slots.add(slot(positions[8][0],positions[8][1],CrystalProcessingTableMenu.previewCrystal(container),true));
             result.add(new Diagram(ModItems.CRYSTAL_PROCESSING_TABLE.get().getDescription(),slots,
                     List.of(Component.translatable("guide.omnira.writing_example"),mana(20),Component.translatable("guide.omnira.ink_options"))));
+        }
+        // Alternative transformations follow the original crafting and processing routes.
+        for(var holder:manager.getAllRecipesFor(ModRecipes.STARLIGHT_TYPE.get())){
+            var recipe=holder.value();if(!recipe.result().is(item))continue;
+            result.add(new Diagram(Component.translatable("jei.omnira.starlight_conversion"),List.of(
+                ingredient(24,88,recipe.ingredient(),1),slot(104,88,recipe.result(),true)),List.of(Component.translatable("jei.omnira.starlight_time"))));
         }
         return List.copyOf(result);
     }

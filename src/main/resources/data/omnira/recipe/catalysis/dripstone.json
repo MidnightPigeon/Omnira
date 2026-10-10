@@ -1,0 +1,26 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": [
+    {
+      "tag": "c:stones"
+    },
+    {
+      "tag": "minecraft:stone_ore_replaceables"
+    },
+    {
+      "tag": "minecraft:deepslate_ore_replaceables"
+    }
+  ],
+  "seed": {
+    "item": "minecraft:pointed_dripstone"
+  },
+  "fluid": {
+    "id": "minecraft:water",
+    "amount": 500
+  },
+  "result": {
+    "id": "minecraft:pointed_dripstone",
+    "count": 8
+  },
+  "stages": 4
+}

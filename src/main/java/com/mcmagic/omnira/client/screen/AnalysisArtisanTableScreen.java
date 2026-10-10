@@ -8,7 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public final class AnalysisArtisanTableScreen extends AbstractContainerScreen<AnalysisArtisanTableMenu> {
+public final class AnalysisArtisanTableScreen extends ResponsiveContainerScreen<AnalysisArtisanTableMenu> {
     private static final ResourceLocation TEXTURE = CrystalWorkstationBackground.texture("workstation_analysis");
     private Button analyze;
     public AnalysisArtisanTableScreen(AnalysisArtisanTableMenu menu, Inventory inventory, Component title) {
@@ -17,21 +17,21 @@ public final class AnalysisArtisanTableScreen extends AbstractContainerScreen<An
     }
     @Override protected void init() {
         super.init();
-        analyze = addRenderableWidget(Button.builder(Component.translatable("button.omnira.analysis_artisan_table.analyze"), button -> {
+        analyze = addRenderableWidget(new CrystalActionButton(leftPos+124,topPos+124,40,18,Component.translatable("button.omnira.analysis_artisan_table.analyze"), button -> {
             if (minecraft != null && minecraft.gameMode != null && menu.canAnalyze()) minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 0);
-        }).bounds(leftPos + 124, topPos + 124, 40, 18).build());
+        }));
         analyze.active = menu.canAnalyze() && !menu.isWorking();
     }
     @Override protected void containerTick() { super.containerTick(); analyze.active = menu.canAnalyze() && !menu.isWorking(); }
     @Override protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-        CrystalWorkstationBackground.draw(graphics,TEXTURE,leftPos,topPos);
+        CrystalWorkstationBackground.draw(graphics,TEXTURE,leftPos,topPos,"analysis",CrystalUi.time(partialTick),menu.workProgress(),menu.isWorking());
     }
     @Override protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
         CrystalWorkstationBackground.labels(graphics,font,title,playerInventoryTitle);
-        WorkstationManaStatus.render(graphics,font,minecraft == null ? null : minecraft.player,menu.manaCost());
+        WorkstationManaStatus.render(graphics,font,minecraft == null ? null : minecraft.player);
     }
-    @Override public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        super.render(graphics,mouseX,mouseY,partialTick);
+    @Override protected void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        super.renderContent(graphics,mouseX,mouseY,partialTick);
         WorkstationManaStatus.progress(graphics,leftPos+124,topPos+124,menu.workProgress());
         renderTooltip(graphics,mouseX,mouseY);
     }

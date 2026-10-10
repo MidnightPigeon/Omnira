@@ -38,7 +38,8 @@ public final class SimpleCondensationTableMenu extends AbstractContainerMenu {
         container.startOpen(owner);addDataSlot(work.progress);
         addSlot(advanced?new Slot(container,0,80,70) {
             @Override public boolean mayPlace(ItemStack stack) {return accepts(owner,stack);}
-            @Override public int getMaxStackSize() {return 1;}
+            @Override public int getMaxStackSize() {return 64;}
+            @Override public int getMaxStackSize(ItemStack stack) {return owner.level().getRecipeManager().getAllRecipesFor(ModRecipes.CONDENSATION_TYPE.get()).stream().map(h->h.value()).filter(r->r.advanced()&&r.ingredient().test(stack)).mapToInt(CondensationRecipe::inputCount).max().orElse(1);}
         }:new OutputSlot(container,0,80,70));
         for(int row=0;row<3;row++) for(int col=0;col<9;col++)
             addSlot(new Slot(inventory,9+row*9+col,8+col*18,158+row*18));
@@ -51,7 +52,7 @@ public final class SimpleCondensationTableMenu extends AbstractContainerMenu {
     }
     private boolean fits(CondensationRecipe recipe) {
         if(recipe==null) return false;
-        if(advanced) return container.getItem(0).getCount()==1 && recipe.matches(new SingleRecipeInput(container.getItem(0)),owner.level());
+        if(advanced) return recipe.matches(new SingleRecipeInput(container.getItem(0)),owner.level());
         var output=container.getItem(0);
         return (output.isEmpty() || ItemStack.isSameItemSameComponents(output,recipe.result()))
                 && output.getCount()+recipe.result().getCount()<=Math.min(container.getMaxStackSize(),recipe.result().getMaxStackSize());

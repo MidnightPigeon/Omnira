@@ -1,0 +1,32 @@
+{
+  "id": "alchemical_catalysis_chamber",
+  "title": "Alchemical Catalysis Chamber",
+  "item": "omnira:alchemical_catalysis_chamber",
+  "scene": "alchemical_catalysis_chamber",
+  "recipes": false,
+  "text": [
+    "Build the model with one Rough Alchemy Cauldron, one Rough Alchemical Energy Core and one Crystal Orb. Empty the vessels and activate the core with one Infused Crystal. The machine cannot be mined; carry it with a Pocket Magic Bottle.",
+    "Open the base to insert a suitable substrate and seed. Supply fluid through the rear blue port; capacity is 4 B. Substrate and seed are retained. Discover the combinations and their results through experimentation.",
+    "Each growth step uses 500 mB every 10 seconds. Mature contents are harvested automatically and restart. Insufficient fluid or an occupied output pauses growth.",
+    "With no fluid, naturally growing combinations follow their ordinary speed and yield; other combinations pause. Adding fluid resumes catalysis. A cycle that included natural growth still gives ordinary yield.",
+    "The base accepts Intake and Output Upgrades. Ordinary fluid access uses only the rear port. A top resonance node is an additional interface for fluid input and product extraction. Ordinary hoppers can also extract substrate and seed: configure filters carefully."
+  ],
+  "links": [
+    {
+      "target": "rough_alchemy_cauldron",
+      "label": "Rough Alchemy Cauldron"
+    },
+    {
+      "target": "rough_alchemical_energy_core",
+      "label": "Rough Alchemical Energy Core"
+    },
+    {
+      "target": "intake_upgrade",
+      "label": "Intake Upgrade"
+    },
+    {
+      "target": "output_upgrade",
+      "label": "Output Upgrade"
+    }
+  ]
+}

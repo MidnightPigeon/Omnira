@@ -1,0 +1,20 @@
+{
+  "id": "rough_alchemy_cauldron",
+  "title": "Rough Alchemy Cauldron",
+  "item": "omnira:rough_alchemy_cauldron",
+  "text": [
+    "An open crystal vessel holding 4 B of one fluid. Use buckets or fluid containers to fill and empty it. Insert items by right-clicking, up to four types with one stack each; use an empty hand to retrieve them.",
+    "Items float on fluid or rest at the bottom when dry. Breaking the vessel drops items but loses fluid. Use it on a campfire to form a Primitive Reaction Cauldron."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "rough_alchemy_cauldron_crafting",
+      "label": "Crafting the cauldron"
+    },
+    {
+      "target": "primitive_reaction_cauldron",
+      "label": "Primitive Reaction Cauldron"
+    }
+  ]
+}

@@ -11,7 +11,9 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
 import java.util.*;
 
-public final class GuideBookScreen extends Screen {
+public final class GuideBookScreen extends ResponsiveScreen {
+    @Override protected int minimumWidth(){return 320;}
+    @Override protected int minimumHeight(){return 224;}
     private static final int BUTTON_SIZE=20,LEFT_BUTTON=18,RIGHT_BUTTON=282,HEADER_BUTTON_Y=18,FOOTER_BUTTON_Y=190;
     private static final ResourceLocation BOOK=ResourceLocation.fromNamespaceAndPath("omnira","textures/gui/guide_book.png");
     private static final ResourceLocation VANILLA=ResourceLocation.withDefaultNamespace("textures/gui/container/crafting_table.png");
@@ -20,12 +22,16 @@ public final class GuideBookScreen extends Screen {
     private GuideContents.Entry entry;
     private List<List<FormattedCharSequence>> pages=List.of();
     private List<GuideRecipes.Diagram> recipes=List.of();
-    private int left,top,listPage,introPage,page,ticks;
-    private record View(GuideContents.Chapter chapter,GuideContents.Entry entry,int listPage,int introPage,int page) {}
+    private int left,top,introPage,page,ticks;
+    private float sceneYaw,scenePitch;
+    private boolean rotatingScene;
+    private boolean constructionScene=true;
+    private record View(GuideContents.Chapter chapter,GuideContents.Entry entry,int introPage,int page) {}
     private final Deque<View> history=new ArrayDeque<>();
     private ItemStack hovered=ItemStack.EMPTY;
     public GuideBookScreen() {super(Component.translatable("item.omnira.guide_book"));}
     @Override protected void init() {
+        super.init();
         left=(width-320)/2;top=(height-224)/2;buttons();
     }
     private void select(GuideContents.Entry next) {
@@ -33,17 +39,16 @@ public final class GuideBookScreen extends Screen {
         loadEntry(next);
         buttons();
     }
-    private View view() {return new View(chapter,entry,listPage,introPage,page);}
+    private View view() {return new View(chapter,entry,introPage,page);}
     private void loadEntry(GuideContents.Entry next) {
-        entry=next;page=0;
+        entry=next;page=0;sceneYaw=0;scenePitch=0;rotatingScene=false;constructionScene=true;
         pages=textPages(entry.text(),entry.links().isEmpty()?12:10);
         if(pages.isEmpty()) pages=List.of(List.of());
         recipes=entry.recipes()?GuideRecipes.find(GuideContents.icon(entry.item()).getItem()):List.of();
     }
     private void jump(GuideContents.Destination target) {
-        history.push(view());chapter=target.chapter();entry=null;listPage=0;introPage=0;page=0;
+        history.push(view());chapter=target.chapter();entry=null;introPage=0;page=0;
         if(target.entry()!=null) {
-            listPage=Math.max(0,chapter.entries().indexOf(target.entry()))/6;
             loadEntry(target.entry());
         }
         buttons();
@@ -53,9 +58,9 @@ public final class GuideBookScreen extends Screen {
         g.pose().pushPose();g.pose().translate(x,y,0);g.pose().scale(scale,scale,1);
         g.drawString(font,text,0,0,color,false);g.pose().popPose();
     }
-    private void row(String name,String item,int index,Runnable action) {
+    private void row(String name,String item,int index,int pageX,Runnable action) {
         var icon=GuideContents.icon(item);
-        var button=addRenderableWidget(new Button(left+(entry==null?174:18),top+45+index*23,132,20,Component.literal(name),b->action.run(),supplier->supplier.get()) {
+        var button=addRenderableWidget(new Button(left+pageX-1,top+45+index*23,132,20,Component.literal(name),b->action.run(),supplier->supplier.get()) {
             @Override protected void renderWidget(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
                 if(isHoveredOrFocused()) graphics.fill(getX(),getY(),getX()+width,getY()+height,0x18745232);
                 graphics.fill(getX()+23,getY()+height-1,getX()+width-3,getY()+height,0x307F6E50);
@@ -68,56 +73,72 @@ public final class GuideBookScreen extends Screen {
     private int directorySize() {return chapter==null?contents.chapters().size():chapter.entries().size()+chapter.chapters().size();}
     private void openChapter(GuideContents.Chapter target) {
         history.push(view());
-        chapter=target;entry=null;listPage=0;introPage=0;buttons();
+        chapter=target;entry=null;introPage=0;page=0;buttons();
     }
-    private int scenePages() {return entry!=null && (entry.scene().equals("dream_ritual") || entry.scene().equals("resonance_ritual") || entry.scene().equals("affinity_ritual") || entry.scene().equals("corridor_ritual") || entry.scene().equals("cleansing_ritual") || entry.scene().equals("sword_shaping") || entry.scene().equals("advanced_assembly_table"))?1:0;}
+    private int scenePages() {return entry!=null && (MachineConstructionScene.supports(entry.scene()) || entry.scene().equals("dream_ritual") || entry.scene().equals("resonance_ritual") || entry.scene().equals("affinity_ritual") || entry.scene().equals("corridor_ritual") || entry.scene().equals("cleansing_ritual") || entry.scene().equals("sword_shaping") || entry.scene().equals("advanced_assembly_table"))?1:0;}
     private void buttons() {
         clearWidgets();
         bookButton(left+RIGHT_BUTTON,top+HEADER_BUTTON_Y,"X","gui.close",this::onClose);
         if(chapter!=null || !history.isEmpty()) {
             bookButton(left+LEFT_BUTTON,top+HEADER_BUTTON_Y,"<","guide.omnira.back",this::back);
         }
-        int count=directorySize();
-        listPage=Math.clamp(listPage,0,Math.max(0,(count-1)/6));
-        for(int index=0;index<6 && listPage*6+index<count;index++) {
-            int absolute=listPage*6+index;
+        for(int side=0;side<2;side++) {
+            int leaf=GuideSpread.leaf(entry==null?introPage:page,side),pageX=side==0?19:175;
+            if(entry!=null){entryButtons(leaf,pageX);continue;}
+            int directoryLeaf=GuideSpread.directoryLeaf(leaf,introductionLeaves());
+            if(directoryLeaf<0)continue;
+            int count=directorySize();
+        for(int index=0;index<6 && directoryLeaf*6+index<count;index++) {
+            int absolute=directoryLeaf*6+index;
             if(chapter==null) {
                 var target=contents.chapters().get(absolute);
-                row(target.title(),target.icon(),index,()->openChapter(target));
+                row(target.title(),target.icon(),index,pageX,()->openChapter(target));
             } else if(absolute<chapter.entries().size()) {
                 var target=chapter.entries().get(absolute);
-                row(target.title(),target.item(),index,()->select(target));
+                row(target.title(),target.item(),index,pageX,()->select(target));
             } else {
                 var target=chapter.chapters().get(absolute-chapter.entries().size());
-                row(target.title(),target.icon(),index,()->openChapter(target));
+                row(target.title(),target.icon(),index,pageX,()->openChapter(target));
             }
         }
+        }
         int current=entry==null?introPage:page;
-        int total=entry==null?Math.max((count+5)/6,introductionPages().size()+1):pages.size()+scenePages()+recipes.size()+linkPages();
-        if(entry!=null && page<pages.size()) inlineLinks();
+        int total=totalPages();
+        turnButton(false,current>0);
+        turnButton(true,GuideSpread.hasNext(current,total));
+    }
+    private boolean introductionArt(){return !introduction().image().isBlank()||!introduction().caption().isBlank();}
+    private int introductionLeaves(){return introductionPages().size()+(introductionArt()?1:0);}
+    private int totalPages(){return entry==null?GuideSpread.directoryTotal(directorySize(),introductionLeaves()):pages.size()+scenePages()+recipes.size()+linkPages();}
+    private void entryButtons(int page,int pageX){
+        if(page>=totalPages())return;
+        if(page==pages.size()&&entry!=null&&(MachineConstructionScene.supports(entry.scene())||entry.scene().equals("advanced_assembly_table"))){
+            bookButton(left+pageX+52,top+180,"\u21c4",constructionScene?"guide.omnira.show_finished":"guide.omnira.show_construction",()->{
+                constructionScene=!constructionScene;rotatingScene=false;buttons();
+            });
+        }
+        if(page<pages.size()) inlineLinks(page,pageX);
         if(entry!=null && page==pages.size()-1) {
-            for(int i=0;i<Math.min(2,entry.links().size());i++) linkButton(entry.links().get(i),top+163+i*13,12);
+            for(int i=0;i<Math.min(2,entry.links().size());i++) linkButton(entry.links().get(i),pageX,top+163+i*13,12);
         }
         if(entry!=null && page>=pages.size()+scenePages()+recipes.size()) {
             int first=(page-pages.size()-scenePages()-recipes.size())*6;
             for(int i=first;i<Math.min(entry.links().size(),first+6);i++) {
-                linkButton(entry.links().get(i),top+49+(i-first)*21,18);
+                linkButton(entry.links().get(i),pageX,top+49+(i-first)*21,18);
             }
         }
-        turnButton(false,current>0);
-        turnButton(true,current+1<total);
     }
-    private void linkButton(GuideContents.Link link,int y,int height) {
+    private void linkButton(GuideContents.Link link,int pageX,int y,int height) {
         var target=contents.destination(link.target());
         if(target.isEmpty()) return;
-        addRenderableWidget(new Button(left+179,y,124,height,Component.literal(link.label()),b->jump(target.get()),supplier->supplier.get()) {
+        addRenderableWidget(new Button(left+pageX+4,y,124,height,Component.literal(link.label()),b->jump(target.get()),supplier->supplier.get()) {
             @Override protected void renderWidget(GuiGraphics g,int mx,int my,float pt) {
                 fit(g,link.label(),getX()+2,getY()+(getHeight()-font.lineHeight)/2,120,isHoveredOrFocused()?0xFF345D85:0xFF467889);
                 g.fill(getX()+2,getY()+height-1,getX()+122,getY()+height,0x70467889);
             }
         });
     }
-    private void inlineLinks() {
+    private void inlineLinks(int page,int pageX) {
         int y=top+47;
         for(var line:pages.get(page)) {
             var plain=new StringBuilder();
@@ -127,7 +148,7 @@ public final class GuideBookScreen extends Screen {
                 var target=contents.destination(link.target());
                 if(target.isEmpty() || link.label().isEmpty()) continue;
                 for(int start=text.indexOf(link.label());start>=0;start=text.indexOf(link.label(),start+link.label().length())) {
-                    int x=left+179+font.width(text.substring(0,start));
+                    int x=left+pageX+4+font.width(text.substring(0,start));
                     addRenderableWidget(new Button(x,y,font.width(link.label()),font.lineHeight,
                             Component.literal(link.label()),b->jump(target.get()),supplier->supplier.get()) {
                         @Override protected void renderWidget(GuiGraphics g,int mx,int my,float pt) {
@@ -144,12 +165,9 @@ public final class GuideBookScreen extends Screen {
     private void turnButton(boolean forward,boolean enabled) {
         var button=bookButton(left+(forward?RIGHT_BUTTON:LEFT_BUTTON),top+FOOTER_BUTTON_Y,forward?">":"<",
                 forward?"guide.omnira.next":"guide.omnira.previous",()->{
-                    int step=forward?1:-1;
                     if(entry==null) {
-                        introPage+=step;
-                        int count=directorySize();
-                        listPage=Math.min(introPage,Math.max(0,(count-1)/6));
-                    } else page+=step;
+                        introPage=GuideSpread.turn(introPage,forward);
+                    } else page=GuideSpread.turn(page,forward);
                     buttons();
                 });
         button.active=enabled;
@@ -178,29 +196,43 @@ public final class GuideBookScreen extends Screen {
     // This screen paints its own background; Screen.render must not blur the finished content.
     @Override public void renderBackground(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {}
 
-    @Override public void render(GuiGraphics g,int mouseX,int mouseY,float partialTick) {
+    @Override protected void renderContent(GuiGraphics g,int mouseX,int mouseY,float partialTick) {
         hovered=ItemStack.EMPTY;
         g.fill(0,0,width,height,0xAA101821);
         g.blit(BOOK,left,top,0,0,320,224,320,224);
-        fit(g,chapter==null?contents.title():chapter.title(),left+(chapter==null?21:43),top+25,chapter==null?124:105,0xFF314A58);
-        int directoryX=entry==null?175:19;
-        int count=directorySize();
+        for(int side=0;side<2;side++){
+            int leaf=GuideSpread.leaf(entry==null?introPage:page,side),pageX=side==0?19:175;
+            if(leaf>=totalPages())continue;
         if(entry==null) {
-            fit(g,Component.translatable(chapter==null?"guide.omnira.contents":"guide.omnira.chapter").getString(),left+179,top+25,98,0xFF314A58);
-            renderIntroduction(g);
-            if(chapter!=null && count==0)
-                fit(g,Component.translatable("guide.omnira.empty").getString(),left+179,top+65,124,0xFF405462);
-        } else {
-            g.renderItem(GuideContents.icon(entry.item()),left+178,top+21);
+            if(leaf<introductionLeaves()){
+                fit(g,chapter==null?contents.title():chapter.title(),left+pageX+(side==0&&chapter!=null?24:2),top+25,side==0?104:102,0xFF314A58);
+                renderIntroduction(g,leaf+(introductionArt()?0:1),pageX);
+            }else if(GuideSpread.directoryLeaf(leaf,introductionLeaves())>=0){
+                fit(g,Component.translatable(chapter==null?"guide.omnira.contents":"guide.omnira.chapter").getString(),left+pageX+(side==0?24:4),top+25,98,0xFF314A58);
+                if(directorySize()==0)fit(g,Component.translatable("guide.omnira.empty").getString(),left+pageX+4,top+65,124,0xFF405462);
+            }
+        }else renderEntryPage(g,leaf,pageX,mouseX,mouseY);
+        }
+        super.renderContent(g,mouseX,mouseY,partialTick);
+        if(!hovered.isEmpty()) {
+            var tooltip=new ArrayList<>(Screen.getTooltipFromItem(minecraft,hovered));
+            itemLink(hovered).ifPresent(target->tooltip.add(Component.translatable("guide.omnira.shift_link",target.title()).withStyle(net.minecraft.ChatFormatting.AQUA)));
+            g.renderTooltip(font,tooltip,hovered.getTooltipImage(),mouseX,mouseY);
+        }
+    }
+    private void renderEntryPage(GuiGraphics g,int page,int pageX,int mouseX,int mouseY){
+            int left=this.left+pageX-175;
+            g.renderItem(GuideContents.icon(entry.item()),left+(pageX==19?198:178),top+21);
             boolean links=page>=pages.size()+scenePages()+recipes.size();
-            fit(g,links?Component.translatable("guide.omnira.related").getString():page<pages.size()+scenePages()?entry.title():recipes.get(page-pages.size()-scenePages()).title().getString(),left+198,top+25,79,0xFF314A58);
+            fit(g,links?Component.translatable("guide.omnira.related").getString():page<pages.size()+scenePages()?entry.title():recipes.get(page-pages.size()-scenePages()).title().getString(),left+198+(pageX==19?20:0),top+25,pageX==19?75:79,0xFF314A58);
             if(page<pages.size()) {
                 int y=top+47;
                 for(var line:pages.get(page)) {g.drawString(font,line,left+179,y,0xFF353F44,false);y+=11;}
             } else if(scenePages()>0 && page==pages.size()) {
-                if(entry.scene().equals("sword_shaping"))com.mcmagic.omnira.client.guide.SwordShapingScene.render(g,left+175,top+44,ticks);
-                else if(entry.scene().equals("advanced_assembly_table"))com.mcmagic.omnira.client.guide.AdvancedForgeScene.render(g,left+175,top+44,ticks);
-                else DreamRitualScene.render(g,left+175,top+44,ticks,entry.scene().equals("resonance_ritual"),entry.scene().equals("affinity_ritual"),entry.scene().equals("corridor_ritual"),entry.scene().equals("cleansing_ritual"));
+                if(MachineConstructionScene.supports(entry.scene()))MachineConstructionScene.render(g,left+175,top+44,ticks,entry.scene(),sceneYaw,scenePitch,constructionScene);
+                else if(entry.scene().equals("sword_shaping"))SwordShapingScene.render(g,left+175,top+44,ticks,sceneYaw,scenePitch);
+                else if(entry.scene().equals("advanced_assembly_table"))AdvancedForgeScene.render(g,left+175,top+44,ticks,sceneYaw,scenePitch,constructionScene);
+                else DreamRitualScene.render(g,left+175,top+44,ticks,entry.scene().equals("resonance_ritual"),entry.scene().equals("affinity_ritual"),entry.scene().equals("corridor_ritual"),entry.scene().equals("cleansing_ritual"),sceneYaw,scenePitch);
             } else if(!links) {
                 var diagram=recipes.get(page-pages.size()-scenePages());
                 if(diagram.slots().stream().anyMatch(slot->slot.output() && slot.x()>=90)
@@ -221,38 +253,45 @@ public final class GuideBookScreen extends Screen {
                 int y=top+154;
                 for(var note:diagram.notes()) {fit(g,note.getString(),left+179,y,124,0xFF405462);y+=12;}
             }
-        }
-        super.render(g,mouseX,mouseY,partialTick);
-        if(!hovered.isEmpty()) {
-            var tooltip=new ArrayList<>(Screen.getTooltipFromItem(minecraft,hovered));
-            itemLink(hovered).ifPresent(target->tooltip.add(Component.translatable("guide.omnira.shift_link",target.title()).withStyle(net.minecraft.ChatFormatting.AQUA)));
-            g.renderTooltip(font,tooltip,hovered.getTooltipImage(),mouseX,mouseY);
-        }
     }
     private Optional<GuideContents.Destination> itemLink(ItemStack stack) {
         var id=net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem());
         return id.getNamespace().equals("omnira")?contents.itemDestination(id.toString()):Optional.empty();
     }
-    @Override public boolean mouseClicked(double mouseX,double mouseY,int button) {
-        int index=page-pages.size()-scenePages();
-        if(button==0 && hasShiftDown() && entry!=null && index>=0 && index<recipes.size()) {
+    @Override protected boolean mouseClickedContent(double mouseX,double mouseY,int button) {
+        if(button==0&&scenePages()>0)for(int side=0;side<2;side++){
+            if(GuideSpread.leaf(page,side)!=pages.size())continue;
+            int x=left+(side==0?19:175);
+            if(mouseX>=x&&mouseX<x+124&&mouseY>=top+44&&mouseY<top+178){rotatingScene=true;return true;}
+        }
+        if(button==0 && hasShiftDown() && entry!=null)for(int side=0;side<2;side++) {
+            int index=page+side-pages.size()-scenePages();
+            if(index<0||index>=recipes.size())continue;
             for(var slot:recipes.get(index).slots()) {
-                int x=left+175+slot.x()-8,y=top+slot.y()-8;
+                int x=left+(side==0?19:175)+slot.x()-8,y=top+slot.y()-8;
                 if(!slot.items().isEmpty() && mouseX>=x && mouseX<x+16 && mouseY>=y && mouseY<y+16) {
                     var target=itemLink(slot.items().get((ticks/25)%slot.items().size()));
                     if(target.isPresent()) {jump(target.get());return true;}
                 }
             }
         }
-        return super.mouseClicked(mouseX,mouseY,button);
+        return super.mouseClickedContent(mouseX,mouseY,button);
+    }
+    @Override protected boolean mouseDraggedContent(double x,double y,int button,double dx,double dy){
+        if(rotatingScene&&button==0){sceneYaw+=(float)dx*1.5F;scenePitch=Math.clamp(scenePitch+(float)dy,-65,60);return true;}
+        return super.mouseDraggedContent(x,y,button,dx,dy);
+    }
+    @Override protected boolean mouseReleasedContent(double x,double y,int button){
+        if(rotatingScene&&button==0){rotatingScene=false;return true;}
+        return super.mouseReleasedContent(x,y,button);
     }
     private void back() {
         if(!history.isEmpty()) {
             var previous=history.pop();chapter=previous.chapter();entry=null;
             if(previous.entry()!=null) loadEntry(previous.entry());
-            listPage=previous.listPage();introPage=previous.introPage();page=previous.page();
+            introPage=previous.introPage();page=previous.page();
         } else if(chapter!=null) {
-            entry=null;chapter=null;page=0;listPage=0;introPage=0;
+            entry=null;chapter=null;page=0;introPage=0;
         }
         buttons();
     }
@@ -269,12 +308,11 @@ public final class GuideBookScreen extends Screen {
                         ?com.mcmagic.omnira.mana.DreamText.colored(line.substring(com.mcmagic.omnira.mana.DreamText.MARKER.length()))
                         :Component.literal(line)).getVisualOrderText()).toList()).toList();
     }
-    private void renderIntroduction(GuiGraphics g) {
+    private void renderIntroduction(GuiGraphics g,int visibleIntro,int pageX) {
         var intro=introduction();
         var extra=introductionPages();
-        int visibleIntro=Math.clamp(introPage,0,extra.size());
         if(visibleIntro==0) {
-            int x=left+26,y=top+52;
+            int x=left+pageX+7,y=top+52;
             var image=ResourceLocation.tryParse(intro.image());
             if(image!=null && minecraft.getResourceManager().getResource(image).isPresent()) {
                 float scale=Math.min(112F/intro.imageWidth(),88F/intro.imageHeight());
@@ -296,12 +334,12 @@ public final class GuideBookScreen extends Screen {
             while(lines.size()*11*scale>42 && scale>.5F) {
                 scale-=.05F;lines=GuideTextLayout.wrap(intro.caption(),(int)(124/scale),font::width);
             }
-            g.pose().pushPose();g.pose().translate(left+82,top+150,0);g.pose().scale(scale,scale,1);
+            g.pose().pushPose();g.pose().translate(left+pageX+63,top+150,0);g.pose().scale(scale,scale,1);
             for(int i=0;i<lines.size();i++) g.drawString(font,lines.get(i),-font.width(lines.get(i))/2,i*11,0xFF405462,false);
             g.pose().popPose();
         } else {
             int y=top+47;
-            for(var line:extra.get(visibleIntro-1)) {g.drawString(font,line,left+21,y,0xFF353F44,false);y+=11;}
+            for(var line:extra.get(visibleIntro-1)) {g.drawString(font,line,left+pageX+4,y,0xFF353F44,false);y+=11;}
         }
     }
     @Override public boolean keyPressed(int key,int scanCode,int modifiers) {

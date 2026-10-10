@@ -91,6 +91,7 @@ public final class CompositeSpellMotion {
                     shape.toAabbs().stream().anyMatch(box->shellTouches(box.move(pos),center,inner,outer));
             if(contact){
                 blocks.add(pos.immutable());
+                if(com.mcmagic.omnira.spacetime.TimeWarpPointBlock.harvest(level,pos.immutable(),owner))continue;
                 Direction face=Direction.getNearest(center.x-pos.getX()-.5,center.y-pos.getY()-.5,center.z-pos.getZ()-.5);
                 spell.applyBlockEffects(new BlockHitResult(Vec3.atCenterOf(pos),face,pos.immutable(),false));
             }
@@ -126,6 +127,16 @@ public final class CompositeSpellMotion {
             }else if(living==null)spell.applyEffects(entity);
             if(entity instanceof SpellEntity other){
                 other.hurt(new net.minecraft.world.damagesource.DamageSource(level.damageSources().magic().typeHolder(),spell,owner),1);
+            }
+        }
+        var sweep=new AABB(from,to).inflate(width+height);
+        final Vec3 bladeRight=right;
+        for(var pos:BlockPos.betweenClosed(BlockPos.containing(sweep.minX,sweep.minY,sweep.minZ),BlockPos.containing(sweep.maxX,sweep.maxY,sweep.maxZ))){
+            if(blocks.contains(pos)||!level.hasChunkAt(pos))continue;
+            var state=level.getBlockState(pos);
+            if(!state.is(com.mcmagic.omnira.registry.ModBlocks.TIME_WARP_POINT.get())&&!state.is(com.mcmagic.omnira.registry.ModBlocks.SPACE_WARP_POINT.get()))continue;
+            if(state.getShape(level,pos).toAabbs().stream().anyMatch(box->bladeTouches(box.move(pos),from,to,bladeRight,up,width,height))){
+                blocks.add(pos.immutable());com.mcmagic.omnira.spacetime.TimeWarpPointBlock.harvest(level,pos.immutable(),owner);
             }
         }
         spell.setPos(to);traveled+=distance;

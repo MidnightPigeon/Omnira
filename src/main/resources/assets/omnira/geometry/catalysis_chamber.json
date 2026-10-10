@@ -1,0 +1,170 @@
+{
+  "parts": [
+    {
+      "name": "foot",
+      "material": "frame",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        1,
+        0.125,
+        1
+      ],
+      "color": "E2D0E9ED",
+      "faces": 63
+    },
+    {
+      "name": "base",
+      "material": "glass",
+      "from": [
+        0.0625,
+        0.125,
+        0.0625
+      ],
+      "to": [
+        0.9375,
+        0.875,
+        0.9375
+      ],
+      "color": "FFB7DEDD",
+      "faces": 15
+    },
+    {
+      "name": "ledge",
+      "material": "frame",
+      "from": [
+        0,
+        0.875,
+        0
+      ],
+      "to": [
+        1,
+        1,
+        1
+      ],
+      "color": "DFD1EAEE",
+      "faces": 63
+    },
+    {
+      "name": "cover",
+      "material": "glass",
+      "from": [
+        0.09375,
+        1,
+        0.09375
+      ],
+      "to": [
+        0.90625,
+        2.6,
+        0.90625
+      ],
+      "color": "86D3EEF0",
+      "faces": 31
+    },
+    {
+      "name": "rear_pipe",
+      "material": "frame",
+      "from": [
+        0.3125,
+        0.3125,
+        0.9375
+      ],
+      "to": [
+        0.6875,
+        0.6875,
+        1
+      ],
+      "color": "E4B1D8E8",
+      "faces": 62
+    },
+    {
+      "name": "rear_inlet",
+      "material": "glow",
+      "from": [
+        0.375,
+        0.375,
+        1.001
+      ],
+      "to": [
+        0.625,
+        0.625,
+        1.005
+      ],
+      "color": "E67CC7F4",
+      "faces": 63
+    },
+    {
+      "name": "upgrade_frame_0",
+      "material": "frame",
+      "from": [
+        0.12,
+        0.35,
+        0.047
+      ],
+      "to": [
+        0.32,
+        0.55,
+        0.061
+      ],
+      "color": "D9BEDCE4",
+      "faces": 63
+    },
+    {
+      "name": "upgrade_recess_0",
+      "material": "glass",
+      "from": [
+        0.14500000000000002,
+        0.375,
+        0.04
+      ],
+      "to": [
+        0.295,
+        0.525,
+        0.046
+      ],
+      "color": "C8759CA8",
+      "faces": 63
+    },
+    {
+      "name": "upgrade_frame_1",
+      "material": "frame",
+      "from": [
+        0.68,
+        0.35,
+        0.047
+      ],
+      "to": [
+        0.88,
+        0.55,
+        0.061
+      ],
+      "color": "D9BEDCE4",
+      "faces": 63
+    },
+    {
+      "name": "upgrade_recess_1",
+      "material": "glass",
+      "from": [
+        0.7050000000000001,
+        0.375,
+        0.04
+      ],
+      "to": [
+        0.855,
+        0.525,
+        0.046
+      ],
+      "color": "C8759CA8",
+      "faces": 63
+    }
+  ],
+  "liquid": {
+    "radius": 0.328125,
+    "bottom": 1.075,
+    "min_width": 0.03125,
+    "max_width": 0.125
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "omnira:assembly",
+  "slots": [
+    {
+      "item": "omnira:crystal_casing"
+    },
+    {
+      "item": "omnira:crystal_casing"
+    },
+    {
+      "item": "omnira:crystal_casing"
+    },
+    {
+      "item": "omnira:crystal_casing"
+    },
+    {
+      "item": "omnira:crystal_casing"
+    },
+    {
+      "item": "omnira:crystal_casing"
+    },
+    {
+      "item": "minecraft:grindstone"
+    }
+  ],
+  "result": {
+    "id": "omnira:crystal_grindstone",
+    "count": 1
+  }
+}

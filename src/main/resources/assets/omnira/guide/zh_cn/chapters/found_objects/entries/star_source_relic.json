@@ -1,0 +1,20 @@
+{
+  "id": "star_source_relic",
+  "title": "星辰之源",
+  "item": "omnira:star_source",
+  "recipes": false,
+  "text": [
+    "仅能在虚空灯塔的顶部灯室中发现。自身亮度15，阻止半径64格球形范围内的敌对生物刷新，但不会清除已经存在的生物，也不会阻止中立生物出现。",
+    "每10秒尝试在范围内亮度低于5、下方有坚实支撑的空位放置一处星屑。水下也可以，但必须同样足够暗且下方有支撑；没有合适位置时停止播撒，环境改变后会继续寻找。"
+  ],
+  "links": [
+    {
+      "target": "void_lighthouse_guide",
+      "label": "虚空灯塔"
+    },
+    {
+      "target": "stardust_guide",
+      "label": "星尘"
+    }
+  ]
+}

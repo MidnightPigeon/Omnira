@@ -1,0 +1,8 @@
+{
+  "type": "omnira:reaction",
+  "items": [{"ingredient": {"item": "omnira:rough_alchemical_energy_core"}}],
+  "fluid": {"id": "omnira:void_starflow", "amount": 10000},
+  "additional_fluids": [{"id": "omnira:decayed_timeflow", "amount": 10000}],
+  "results": [{"id": "omnira:alchemical_waste"}],
+  "fluid_result": {"id": "omnira:dilute_spacetime", "amount": 1000}
+}

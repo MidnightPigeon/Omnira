@@ -15,10 +15,6 @@
     {
       "target": "reversion_mire_guide",
       "label": "回溯湿地"
-    },
-    {
-      "target": "damaged_research_facility_guide",
-      "label": "损坏的科研设施"
     }
   ]
 }

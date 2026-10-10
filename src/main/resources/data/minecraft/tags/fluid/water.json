@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     "omnira:decayed_timeflow",
-    "omnira:flowing_decayed_timeflow"
+    "omnira:flowing_decayed_timeflow",
+    "omnira:void_starflow",
+    "omnira:flowing_void_starflow",
+    "omnira:dilute_spacetime",
+    "omnira:flowing_dilute_spacetime"
   ]
 }

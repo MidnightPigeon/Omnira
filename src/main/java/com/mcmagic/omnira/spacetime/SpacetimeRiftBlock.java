@@ -31,7 +31,7 @@ public final class SpacetimeRiftBlock extends Block {
             boolean time=level.random.nextBoolean();
             int x=level.random.nextInt(CorridorLayout.RIFT_RANGE*2+1)-CorridorLayout.RIFT_RANGE;
             int z=level.random.nextInt(CorridorLayout.RIFT_RANGE*2+1)-CorridorLayout.RIFT_RANGE;
-            int y=time?CorridorLayout.TIME_ENTRANCE.getY():CorridorLayout.SPACE_ENTRANCE.getY();
+            int y=time?CorridorLayout.TIME_ENTRANCE.getY():com.mcmagic.omnira.space.FoldedTerrain.floor(x,z)+1;
             var target=new BlockPos(x,y,z);
             if(!level.getWorldBorder().isWithinBounds(target))continue;
             level.getChunkAt(target);
@@ -48,6 +48,6 @@ public final class SpacetimeRiftBlock extends Block {
         }
         if(landing==null)return;
         for(var member:root.getSelfAndPassengers().toList())member.getPersistentData().putLong("OmniraRiftCooldown",level.getGameTime()+40);
-        root.changeDimension(new net.minecraft.world.level.portal.DimensionTransition(level,landing,Vec3.ZERO,root.getYRot(),root.getXRot(),e->e.fallDistance=0));
+        com.mcmagic.omnira.space.anchor.StabilityField.portalTravel(root,new net.minecraft.world.level.portal.DimensionTransition(level,landing,Vec3.ZERO,root.getYRot(),root.getXRot(),e->e.fallDistance=0));
     }
 }

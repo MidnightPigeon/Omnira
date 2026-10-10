@@ -1,0 +1,25 @@
+{
+  "id": "enhanced_alchemical_energy_core",
+  "title": "Enhanced Alchemical Energy Core",
+  "item": "omnira:enhanced_alchemical_energy_core",
+  "recipes": true,
+  "text": [
+    "React one Rough Alchemical Energy Core with 4 B of Dilute Spacetime in either reaction vessel to produce one Enhanced Alchemical Energy Core. No catalyst block is required. At base speed, the core is consumed at the start and 400 mB of fluid every ten seconds, finishing after 100 seconds.",
+    "A blue-green nucleus floats and rotates among orbiting crystal motes. This placeable component does not process materials on its own.",
+    "With this core as the bottom catalyst, 1 B of Refined Spacetime produces one Time Microcore AND one Space Microcore together after 100 seconds, consuming 100 mB every ten seconds. Both vessels support the recipe. The catalyst is retained, and both products must have storage space."
+  ],
+  "links": [
+    {
+      "target": "rough_alchemical_energy_core",
+      "label": "Rough Alchemical Energy Core"
+    },
+    {
+      "target": "dilute_spacetime",
+      "label": "Dilute Spacetime"
+    },
+    {
+      "target": "refined_spacetime",
+      "label": "Refined Spacetime"
+    }
+  ]
+}

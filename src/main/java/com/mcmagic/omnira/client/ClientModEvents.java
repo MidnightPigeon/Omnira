@@ -34,7 +34,9 @@ public final class ClientModEvents {
             net.minecraft.client.renderer.item.ItemProperties.register(com.mcmagic.omnira.registry.ModItems.MEMORY_CUBE.get(),
                     ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"peaceful"),(stack,level,entity,seed)->
                             com.mcmagic.omnira.item.MemoryCubeBlockItem.peaceful(stack)?1F:0F);
-            net.minecraft.client.renderer.item.ItemProperties.register(com.mcmagic.omnira.registry.ModItems.ARCANE_NEEDLE.get(),
+            for(var item:java.util.stream.Stream.concat(java.util.stream.Stream.of(com.mcmagic.omnira.registry.ModItems.ARCANE_NEEDLE.get()),
+                    com.mcmagic.omnira.registry.ModItems.NEEDLE_UPGRADES.stream().map(java.util.function.Supplier::get)).toList())
+                net.minecraft.client.renderer.item.ItemProperties.register(item,
                     ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"needle_out"),(stack,level,entity,seed)->
                             entity instanceof net.minecraft.world.entity.player.Player player && player.getMainHandItem()==stack
                                     && com.mcmagic.omnira.item.FlyingNeedle.isOut(player)?1F:0F);
@@ -57,6 +59,14 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void additionalModels(net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional event) {
+        for(String part:new String[]{"mystery","flow","grain","source","frame","genesis_grain"})event.register(com.mcmagic.omnira.client.renderer.ParadoxMaterialRenderer.model(part));
+        for(String id:com.mcmagic.omnira.item.RitualSwordUpgrades.NAIL_IDS)
+            event.register(com.mcmagic.omnira.client.renderer.RitualSwordUpgradeRenderer.model(id,"body"));
+        for(String id:com.mcmagic.omnira.item.RitualSwordUpgrades.NEEDLE_IDS)
+            for(String part:new String[]{"body","ring","blade"})event.register(com.mcmagic.omnira.client.renderer.RitualSwordUpgradeRenderer.model(id,part));
+        event.register(com.mcmagic.omnira.client.renderer.VoidAnvilRenderer.MODEL);
+        event.register(com.mcmagic.omnira.music.ViolinRender.model(false));
+        event.register(com.mcmagic.omnira.music.ViolinRender.model(true));
         event.register(com.mcmagic.omnira.client.renderer.MemoryCubeRenderer.model(false));
         event.register(com.mcmagic.omnira.client.renderer.MemoryCubeRenderer.model(true));
         for(String part:com.mcmagic.omnira.client.renderer.AdvancedForgeRenderer.PARTS)event.register(com.mcmagic.omnira.client.renderer.AdvancedForgeRenderer.model(part));
@@ -89,7 +99,7 @@ public final class ClientModEvents {
         event.register(CrystalProcessingTableRenderer.hammerModel());
         for(String part:new String[]{"core","ripple"})event.register(com.mcmagic.omnira.client.renderer.AdvancedCondensationVisuals.model(part));
         for(String part:new String[]{"body","halo","grain"})event.register(com.mcmagic.omnira.client.renderer.UnstableAggregateRenderer.model(part));
-        for(String part:new String[]{"body","grain"})event.register(com.mcmagic.omnira.client.renderer.TimeWarpPointItemRenderer.model(part));
+        for(String part:new String[]{"body","grain","spatial_body"})event.register(com.mcmagic.omnira.client.renderer.TimeWarpPointItemRenderer.model(part));
         for(String part:new String[]{"head","hat","eyes","grain"})event.register(com.mcmagic.omnira.client.renderer.DreamRabbitRenderer.model(part));
         event.register(com.mcmagic.omnira.client.renderer.TimePlantItemRenderer.model(false));
         event.register(com.mcmagic.omnira.client.renderer.TimePlantItemRenderer.model(true));
@@ -138,6 +148,11 @@ public final class ClientModEvents {
         event.register((stack,tint)->switch(tint) {case 1->0xFF8EAFC5;case 2->0xFFD5F8FF;default->0xFFA6DDF7;},com.mcmagic.omnira.registry.ModItems.CRYSTALLIZED_NAIL.get());
         event.register((stack,tint)->switch(tint) {case 1->0xFF9482B8;case 2->0xFFE7DEF5;default->0xFFC7B5E5;},com.mcmagic.omnira.registry.ModItems.ARCANE_NEEDLE.get());
         event.register((stack,tint)->{
+            if(tint==3){int shade=(int)(24+220*(.5+.5*Math.sin(net.minecraft.Util.getMillis()/180.0)));return 0xFF000000|shade<<16|shade<<8|shade;}
+            return 0xFFFFFFFF;
+        },java.util.stream.Stream.concat(com.mcmagic.omnira.registry.ModItems.NAIL_UPGRADES.stream(),
+                com.mcmagic.omnira.registry.ModItems.NEEDLE_UPGRADES.stream()).map(java.util.function.Supplier::get).toArray(net.minecraft.world.item.Item[]::new));
+        event.register((stack,tint)->{
             double phase=net.minecraft.Util.getMillis()/180.0+tint*1.7;
             int shade=(int)(22+233*(.5+.5*Math.sin(phase)));
             return 0xFF000000 | shade<<16 | shade<<8 | shade;
@@ -157,6 +172,14 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void itemRenderers(net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent event) {
+        var upgraded=java.util.stream.Stream.concat(com.mcmagic.omnira.registry.ModItems.NAIL_UPGRADES.stream(),
+                com.mcmagic.omnira.registry.ModItems.NEEDLE_UPGRADES.stream()).map(java.util.function.Supplier::get).toArray(net.minecraft.world.item.Item[]::new);
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
+            private com.mcmagic.omnira.client.renderer.RitualSwordUpgradeRenderer renderer;
+            public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
+                if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.RitualSwordUpgradeRenderer();return renderer;
+            }
+        },upgraded);
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
             private com.mcmagic.omnira.client.renderer.WonderlandPokerStandRenderer.ItemRenderer renderer;
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
@@ -178,7 +201,7 @@ public final class ClientModEvents {
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
             private final com.mcmagic.omnira.client.renderer.TimeWarpPointItemRenderer renderer=new com.mcmagic.omnira.client.renderer.TimeWarpPointItemRenderer();
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){return renderer;}
-        },com.mcmagic.omnira.registry.ModItems.TIME_WARP_POINT.get());
+        },com.mcmagic.omnira.registry.ModItems.TIME_WARP_POINT.get(),com.mcmagic.omnira.registry.ModItems.TEMPORAL_MOTE.get(),com.mcmagic.omnira.registry.ModItems.SPACE_WARP_POINT.get(),com.mcmagic.omnira.registry.ModItems.SPATIAL_REMNANT.get());
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
             private final com.mcmagic.omnira.client.renderer.DreamRabbitRenderer renderer=new com.mcmagic.omnira.client.renderer.DreamRabbitRenderer();
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){return renderer;}
@@ -241,7 +264,26 @@ public final class ClientModEvents {
                 if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.CrystalBallRenderer.ItemRenderer();
                 return renderer;
             }
-        },com.mcmagic.omnira.registry.ModItems.CRYSTAL_BALL.get(),com.mcmagic.omnira.registry.ModItems.LIQUID_CRYSTAL_BALL.get());
+        },com.mcmagic.omnira.registry.ModItems.CRYSTAL_BALL.get(),com.mcmagic.omnira.registry.ModItems.LIQUID_CRYSTAL_BALL.get(),com.mcmagic.omnira.storage.CrystalStorageContent.ITEM.get(),com.mcmagic.omnira.storage.CrystalStorageContent.FLUID.get(),com.mcmagic.omnira.storage.CrystalStorageContent.VOID_ITEM.get(),com.mcmagic.omnira.space.sea.StellarCraftContent.ORB_ITEM.get());
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
+            private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
+            @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
+                if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.DeflectionFieldRenderer();return renderer;
+            }
+        },com.mcmagic.omnira.space.sea.StellarCraftContent.SHIELD.get());
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
+            private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
+            @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
+                if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.ParadoxMaterialRenderer();return renderer;
+            }
+        },com.mcmagic.omnira.paradox.ParadoxContent.MYSTERY.get(),com.mcmagic.omnira.paradox.ParadoxContent.BOTTLED_FLOW.get());
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
+            private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
+            public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
+                if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.ParadoxSourceRenderer();return renderer;
+            }
+        },com.mcmagic.omnira.paradox.ParadoxContent.UNSTABLE_SOURCE.get(),com.mcmagic.omnira.paradox.ParadoxContent.STABLE_SOURCE.get(),
+                com.mcmagic.omnira.paradox.ParadoxContent.STABLE_AGGREGATE.get(),com.mcmagic.omnira.paradox.ParadoxContent.GENESIS.get());
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
             private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
@@ -249,6 +291,20 @@ public final class ClientModEvents {
                 return renderer;
             }
         },com.mcmagic.omnira.registry.ModItems.ANALYSIS_CRYSTAL.get());
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
+            private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
+            @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if(renderer==null) renderer=new com.mcmagic.omnira.client.renderer.InfusedStaffTipRenderer();
+                return renderer;
+            }
+        },com.mcmagic.omnira.registry.ModItems.INFUSED_CRYSTAL_TIP.get());
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
+            private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
+            public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.InfusedStaffTipRenderer(true);
+                return renderer;
+            }
+        },com.mcmagic.omnira.registry.ModItems.SPACETIME_AGGREGATE_TIP.get());
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
             private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
@@ -327,6 +383,7 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(com.mcmagic.omnira.paradox.ParadoxContent.ANVIL.get(),com.mcmagic.omnira.client.renderer.VoidAnvilRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.WONDERLAND_POKER_STAND.get(),com.mcmagic.omnira.client.renderer.WonderlandPokerStandRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.MEMORY_CUBE.get(),com.mcmagic.omnira.client.renderer.MemoryCubeRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.GOLDEN_THRONE_SEAT.get(),net.minecraft.client.renderer.entity.NoopRenderer::new);
@@ -354,6 +411,7 @@ public final class ClientModEvents {
         event.registerBlockEntityRenderer(ModBlockEntityTypes.RITUAL_ENERGY_CORE.get(),com.mcmagic.omnira.client.renderer.RitualEnergyCoreRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.CRYSTAL_PEDESTAL.get(),com.mcmagic.omnira.client.renderer.CrystalPedestalRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.DREAM_PORTAL.get(),com.mcmagic.omnira.client.renderer.DreamPortalRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntityTypes.FOLD_GATE.get(),com.mcmagic.omnira.client.renderer.FoldGateRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.CORRIDOR_GATEWAY.get(),com.mcmagic.omnira.client.renderer.CorridorGatewayRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.MANA_ENGINE.get(),com.mcmagic.omnira.client.renderer.ManaEngineRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.ARCANE_ASSEMBLY_TABLE.get(),com.mcmagic.omnira.client.renderer.AssemblyRenderer::new);

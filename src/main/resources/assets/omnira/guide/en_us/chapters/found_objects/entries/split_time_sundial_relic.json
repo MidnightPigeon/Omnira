@@ -1,0 +1,15 @@
+{
+  "id": "split_time_sundial_relic",
+  "title": "Split-Time Sundial",
+  "item": "omnira:split_time_sundial",
+  "recipes": false,
+  "text": [
+    "A special block found in Doomsday Rite. Follow the linked entry for its functions and interactions."
+  ],
+  "links": [
+    {
+      "target": "split_time_sundial_guide",
+      "label": "Functions"
+    }
+  ]
+}

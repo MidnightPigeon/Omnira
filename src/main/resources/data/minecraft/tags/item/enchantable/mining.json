@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "omnira:spacetime_archaeology_brush"
+    "omnira:spacetime_archaeology_brush",
+    "omnira:resonance_tuning_rod"
   ]
 }

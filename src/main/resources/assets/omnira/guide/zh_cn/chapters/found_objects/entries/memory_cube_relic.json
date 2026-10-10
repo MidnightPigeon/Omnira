@@ -1,0 +1,15 @@
+{
+  "id": "memory_cube_relic",
+  "title": "记忆立方体",
+  "item": "omnira:memory_cube",
+  "recipes": false,
+  "text": [
+    "来自锈湖磨坊的特殊方块。详细功能与交互方式见下方关联条目。"
+  ],
+  "links": [
+    {
+      "target": "memory_cube_guide",
+      "label": "功能说明"
+    }
+  ]
+}

@@ -3,10 +3,13 @@
   "title": "Time Warp Point",
   "item": "omnira:time_warp_point",
   "text": [
+    "Reverse Time Flow and Spatial Blade also harvest Time Warp Points and Spatial Fold Points on contact. This depends only on the spell form, with no Construction or other element required.",
+    "Placed Time Warp Points and Temporal Motes reshape terrain within a five-block sphere at each five-minute time node. Stone becomes gravel, gravel becomes sand, and sand becomes Time Sand, advancing only one stage per node. Dirt becomes Temporal Silt, with equal chances of ordinary and living silt. Overlapping areas do not accelerate this process.",
     "The Analysis Artisan Table converts four Time Warp Points into one Time Microcore and exactly sixteen Arcane Dust. Shapeless crafting with an Analysis Crystal requires three Warp Points for one Time Microcore, but produces no dust. The crystal loses durability as usual. The Spacetime Reverser converts two Warp Points into one Time Microcore.",
-    "Time Warp Points rarely appear in Stilled Wastes. Entities that touch their field slow gradually and recover after leaving. A spell containing the Construction element, or a Bone Nail or Arcane Needle strike, can harvest one; charged slashes and flying needles also work. The harvested Warp Point cannot be placed directly. The remaining Temporal Mote cannot be broken, but a Pocket Bottle can carry it to a chosen location. It reforms after five minutes. A stack of 16 Warp Points collapses into an Unstable Spacetime Aggregate in a backpack or ordinary container; stabilization protects crystal storage."
+    "Time Warp Points rarely appear in Stilled Wastes. Entities that touch their field slow gradually and recover after leaving. A spell containing the Construction element, or a Bone Nail or Arcane Needle strike, can harvest one; charged slashes and flying needles also work. The harvested Warp Point cannot be placed directly. The remaining Temporal Mote cannot be broken, but a Pocket Bottle can carry it to a chosen location. It reforms after five minutes. A stack of 16 Warp Points collapses into an Unstable Spacetime Aggregate in a backpack or ordinary container; stabilization protects crystal storage.",
+    "Advanced condensation converts one Time Flower or Reborn Rottenleaf Lily into one Warp Point, or eight Warp Points into one placeable Temporal Mote. This is the only crafting method for the mote item. Each recipe costs 300 mana. A placed mote reforms into a Warp Point after five minutes. The Spacetime Reverser restores one Unstable Spacetime Aggregate into eight Warp Points for one energy, taking five seconds."
   ],
-  "recipes": false,
+  "recipes": true,
   "links": [
     {
       "target": "unstable_spacetime_aggregate",

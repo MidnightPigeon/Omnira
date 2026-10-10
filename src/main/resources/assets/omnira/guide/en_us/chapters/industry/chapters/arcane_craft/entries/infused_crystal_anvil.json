@@ -1,0 +1,10 @@
+{
+  "id": "infused_crystal_anvil",
+  "item": "omnira:infused_crystal_anvil",
+  "title": "Infused Crystal Anvil",
+  "text": [
+    "Upgrade a crystal anvil using the same advanced assembly layout. It has unlimited durability and still allows immediate forging by paying experience.",
+    "Either end of the through-shaft can drive automatic forging, replacing each experience level with 20 seconds. Requires at least 16 rpm with a fixed 256 SU load, or 256 FE/second. More power does not speed it up. Power loss pauses progress; changed inputs or names restart it. Electric drive leaves the shaft still."
+  ],
+  "recipes": true
+}

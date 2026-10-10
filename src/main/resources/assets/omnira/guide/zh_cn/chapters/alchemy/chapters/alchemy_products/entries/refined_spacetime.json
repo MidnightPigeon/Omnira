@@ -1,0 +1,25 @@
+{
+  "id": "refined_spacetime",
+  "title": "精炼时空",
+  "item": "omnira:refined_spacetime_bucket",
+  "recipes": false,
+  "text": [
+    "在大型炼金反应池的底部催化区域放置时空法术核心，投入10 B稀薄时空、1个时间翘曲点与1个空间折跃点，即可反应出1 B精炼时空。催化核心不消耗。",
+    "基础耗时100秒。两个点在开始时消耗，每10秒消耗1 B稀薄时空并产生100 mB精炼时空。这一液体转化需要大型反应池，原始反应釜无法进行。",
+    "精炼时空有更浓、更强烈的流光，但不会形成无限源，在液晶球中也不能无限抽取。用强化炼金能核催化1 B精炼时空，可同时获得时间微核与空间微核各一枚。"
+  ],
+  "links": [
+    {
+      "target": "large_alchemical_reaction_pool",
+      "label": "大型炼金反应池"
+    },
+    {
+      "target": "dilute_spacetime",
+      "label": "稀薄时空"
+    },
+    {
+      "target": "enhanced_alchemical_energy_core",
+      "label": "强化炼金能核"
+    }
+  ]
+}

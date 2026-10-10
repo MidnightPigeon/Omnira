@@ -135,7 +135,7 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
         if(landing==null){root.getPersistentData().putLong("OmniraCorridorCooldown",source.getGameTime()+40);return false;}
         for(var member:members)member.getPersistentData().putLong("OmniraCorridorCooldown",destination.getGameTime()+60);
         if(root instanceof com.mcmagic.omnira.vehicle.CruiseOrbEntity orb)orb.stop();
-        return root.changeDimension(new DimensionTransition(destination,landing,Vec3.ZERO,root.getYRot(),root.getXRot(),e->{
+        return com.mcmagic.omnira.space.anchor.StabilityField.portalTravel(root,new DimensionTransition(destination,landing,Vec3.ZERO,root.getYRot(),root.getXRot(),e->{
             e.fallDistance=0;e.placePortalTicket(e.blockPosition());TransitionParticles.arrive(e);
         }))!=null;
     }

@@ -66,9 +66,39 @@
       "infused": 2
     },
     {
-      "item": "omnira:light_condensate",
+      "item": "omnira:light_crystal_core",
+      "count": 2,
+      "infused": 16
+    },
+    {
+      "item": "omnira:time_grass",
       "count": 8,
       "infused": 3
+    },
+    {
+      "item": "omnira:timeflow_eel",
+      "count": 2,
+      "infused": 4
+    },
+    {
+      "item": "omnira:chronal_blindfish",
+      "count": 2,
+      "infused": 4
+    },
+    {
+      "item": "omnira:time_flower",
+      "infused": 4,
+      "count": 4
+    },
+    {
+      "item": "omnira:damaged_research_facility",
+      "infused": 8,
+      "count": 1
+    },
+    {
+      "item": "omnira:time_sand",
+      "infused": 3,
+      "count": 16
     }
   ],
   "rare": [
@@ -80,20 +110,14 @@
     },
     {
       "item": "omnira:paradox_dust",
-      "count": 3,
-      "infused": 8,
-      "extra": 6
+      "count": 4,
+      "infused": 4,
+      "extra": 3
     },
     {
       "item": "omnira:time_seed",
       "count": 2,
       "infused": 6,
-      "extra": 4
-    },
-    {
-      "item": "omnira:time_flower",
-      "count": 4,
-      "infused": 4,
       "extra": 4
     },
     {
@@ -115,12 +139,6 @@
       "extra": 8
     },
     {
-      "item": "omnira:infused_grimoire",
-      "count": 1,
-      "infused": 24,
-      "extra": 12
-    },
-    {
       "item": "omnira:primordial_spell_core",
       "count": 1,
       "infused": 32,
@@ -139,16 +157,70 @@
       "extra": 8
     },
     {
-      "item": "omnira:damaged_research_facility",
-      "count": 1,
-      "infused": 8,
-      "extra": 4
-    },
-    {
       "item": "omnira:dream_rabbit_remains",
       "count": 1,
       "infused": 12,
       "extra": 8
+    },
+    {
+      "extra": 6,
+      "item": "omnira:time_warp_point",
+      "count": 2,
+      "infused": 12
+    },
+    {
+      "extra": 8,
+      "item": "omnira:liquid_crystal_ball",
+      "count": 1,
+      "infused": 12
+    },
+    {
+      "extra": 12,
+      "item": "omnira:resonant_crystal_ball",
+      "count": 1,
+      "infused": 20
+    },
+    {
+      "extra": 12,
+      "item": "omnira:resonant_liquid_crystal_ball",
+      "count": 1,
+      "infused": 24
+    },
+    {
+      "extra": 8,
+      "item": "omnira:resonance_tuning_rod",
+      "count": 1,
+      "infused": 16
+    },
+    {
+      "item": "omnira:ancient_archaeology_aggregate",
+      "infused": 12,
+      "extra": 6,
+      "count": 1
+    },
+    {
+      "item": "omnira:phantom_thieves_aggregate",
+      "infused": 12,
+      "extra": 6,
+      "count": 1
+    },
+    {
+      "item": "omnira:umbrella_aggregate",
+      "infused": 12,
+      "extra": 6,
+      "count": 1
+    },
+    {
+      "item": "omnira:foundation_aggregate",
+      "infused": 12,
+      "extra": 6,
+      "count": 1
+    },
+    {
+      "item": "omnira:primordial_earth_aggregate",
+      "infused": 12,
+      "extra": 6,
+      "count": 1
     }
   ],
   "epic": [
@@ -180,6 +252,27 @@
       "item": "omnira:cruise_orb",
       "count": 1,
       "infused": 48,
+      "extra": 24
+    },
+    {
+      "extra": 32,
+      "item": "omnira:advanced_assembly_table",
+      "count": 1,
+      "weight": 1,
+      "infused": 64
+    },
+    {
+      "extra": 32,
+      "item": "omnira:advanced_crystal_aggregation_ring",
+      "count": 1,
+      "weight": 1,
+      "infused": 64
+    },
+    {
+      "item": "omnira:spacetime_spell_core",
+      "infused": 48,
+      "count": 1,
+      "weight": 10,
       "extra": 24
     }
   ]

@@ -1,0 +1,16 @@
+{
+  "id": "rough_alchemical_energy_core",
+  "title": "Rough Alchemical Energy Core",
+  "item": "omnira:rough_alchemical_energy_core",
+  "text": [
+    "Above a Spiritual Crystal Block, a Primitive Reaction Cauldron combines 4000 mB of lava with one Earth, Water, Fire and Air Microcore to produce one Rough Alchemical Energy Core. The basic reaction lasts 100 seconds and consumes 400 mB every ten seconds. The catalyst block is not consumed.",
+    "A Large Alchemical Reaction Pool supports the same recipe; any block in its catalyst floor may be a Spiritual Crystal Block. The core is a placeable alchemical component, not a processing machine by itself."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "enhanced_alchemical_energy_core",
+      "label": "Enhanced Alchemical Energy Core"
+    }
+  ]
+}

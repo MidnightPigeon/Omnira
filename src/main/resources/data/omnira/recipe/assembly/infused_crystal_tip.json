@@ -1,0 +1,5 @@
+{
+  "type": "omnira:assembly", "operation": "fixed",
+  "slots": [[], [], [], [], [], [], {"item": "omnira:infused_spiritual_crystal"}],
+  "result": {"id": "omnira:infused_crystal_tip", "count": 1}
+}

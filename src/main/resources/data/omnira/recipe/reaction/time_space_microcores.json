@@ -1,0 +1,6 @@
+{
+  "type": "omnira:reaction",
+  "fluid": {"id": "omnira:refined_spacetime", "amount": 1000},
+  "support": {"item": "omnira:enhanced_alchemical_energy_core"},
+  "guaranteed_results": [{"id": "omnira:time_microcore"}, {"id": "omnira:space_microcore"}]
+}

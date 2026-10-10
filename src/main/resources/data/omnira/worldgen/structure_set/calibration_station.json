@@ -1,0 +1,4 @@
+{
+  "structures": [{"structure": "omnira:calibration_station", "weight": 1}],
+  "placement": {"type": "minecraft:random_spread", "spacing": 16, "separation": 4, "salt": 9648257, "frequency": 0.25}
+}

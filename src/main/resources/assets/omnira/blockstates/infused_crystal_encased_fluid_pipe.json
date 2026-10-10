@@ -1,0 +1,173 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "create:block/fluid_pipe/core_x"
+      }
+    },
+    {
+      "apply": {
+        "model": "create:block/fluid_pipe/core_y"
+      }
+    },
+    {
+      "apply": {
+        "model": "create:block/fluid_pipe/core_z"
+      }
+    },
+    {
+      "when": {
+        "south": "false"
+      },
+      "apply": {
+        "model": "omnira:block/infused_crystal_encased_fluid_pipe_closed"
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "omnira:block/infused_crystal_encased_fluid_pipe_open"
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "create:block/fluid_pipe/connection/south"
+      }
+    },
+    {
+      "when": {
+        "north": "false"
+      },
+      "apply": {
+        "model": "omnira:block/infused_crystal_encased_fluid_pipe_closed",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "omnira:block/infused_crystal_encased_fluid_pipe_open",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "create:block/fluid_pipe/connection/north"
+      }
+    },
+    {
+      "when": {
+        "west": "false"
+      },
+      "apply": {
+        "model": "omnira:block/infused_crystal_encased_fluid_pipe_closed",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "omnira:block/infused_crystal_encased_fluid_pipe_open",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "create:block/fluid_pipe/connection/west"
+      }
+    },
+    {
+      "when": {
+        "east": "false"
+      },
+      "apply": {
+        "model": "omnira:block/infused_crystal_encased_fluid_pipe_closed",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "omnira:block/infused_crystal_encased_fluid_pipe_open",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "create:block/fluid_pipe/connection/east"
+      }
+    },
+    {
+      "when": {
+        "up": "false"
+      },
+      "apply": {
+        "model": "omnira:block/infused_crystal_encased_fluid_pipe_closed",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": {
+        "model": "omnira:block/infused_crystal_encased_fluid_pipe_open",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": {
+        "model": "create:block/fluid_pipe/connection/up"
+      }
+    },
+    {
+      "when": {
+        "down": "false"
+      },
+      "apply": {
+        "model": "omnira:block/infused_crystal_encased_fluid_pipe_closed",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": {
+        "model": "omnira:block/infused_crystal_encased_fluid_pipe_open",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": {
+        "model": "create:block/fluid_pipe/connection/down"
+      }
+    }
+  ]
+}

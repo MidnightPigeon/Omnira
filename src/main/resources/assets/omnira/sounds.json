@@ -1,4 +1,12 @@
 {
+  "violin_allemanda": {
+    "subtitle": "subtitles.omnira.violin",
+    "sounds": [{"name": "omnira:violin/bach_allemanda", "stream": true, "attenuation_distance": 24}]
+  },
+  "violin_adagio": {
+    "subtitle": "subtitles.omnira.violin",
+    "sounds": [{"name": "omnira:violin/bach_adagio", "stream": true, "attenuation_distance": 24}]
+  },
   "night_heron_call": {
     "sounds": ["omnira:night_heron_call"]
   }

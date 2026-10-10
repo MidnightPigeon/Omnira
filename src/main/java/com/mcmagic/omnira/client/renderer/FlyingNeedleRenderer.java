@@ -19,8 +19,14 @@ public final class FlyingNeedleRenderer extends EntityRenderer<FlyingNeedle> {
         var velocity=needle.getDeltaMovement();
         pose.pushPose();pose.mulPose(Axis.YP.rotation((float)Math.atan2(velocity.x,velocity.z)));
         pose.mulPose(Axis.XP.rotation((float)(Math.PI/2-Math.atan2(velocity.y,velocity.horizontalDistance()))));pose.scale(.55F,.55F,.55F);
-        items.render(new ItemStack(ModItems.ARCANE_NEEDLE.get()),ItemDisplayContext.NONE,false,pose,buffers,light,OverlayTexture.NO_OVERLAY,
-                net.minecraft.client.Minecraft.getInstance().getModelManager().getModel(MODEL));pose.popPose();
+        var stack=needle.getItem();
+        if(stack.getItem() instanceof com.mcmagic.omnira.item.RitualSwordItem sword && sword.upgradeLevel>0){
+            pose.translate(-.5,-.5,-.5);
+            RitualSwordUpgradeRenderer.draw(stack,"blade",pose,buffers,light,OverlayTexture.NO_OVERLAY);
+            RitualSwordUpgradeRenderer.particles(stack,pose,buffers,OverlayTexture.NO_OVERLAY,false);
+        }else items.render(stack,ItemDisplayContext.NONE,false,pose,buffers,light,OverlayTexture.NO_OVERLAY,
+                net.minecraft.client.Minecraft.getInstance().getModelManager().getModel(MODEL));
+        pose.popPose();
     }
     @Override public ResourceLocation getTextureLocation(FlyingNeedle entity){return TextureAtlas.LOCATION_BLOCKS;}
 }

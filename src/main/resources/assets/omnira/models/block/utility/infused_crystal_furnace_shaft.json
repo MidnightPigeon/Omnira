@@ -1,0 +1,77 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "surface": "omnira:block/infused_crystal_casing_0",
+    "particle": "omnira:block/infused_crystal_casing_0"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        6,
+        12
+      ],
+      "to": [
+        10,
+        10,
+        16
+      ],
+      "faces": {
+        "west": {
+          "texture": "#surface",
+          "uv": [
+            12,
+            6,
+            16,
+            10
+          ]
+        },
+        "east": {
+          "texture": "#surface",
+          "uv": [
+            12,
+            6,
+            16,
+            10
+          ]
+        },
+        "down": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            12,
+            10,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            12,
+            10,
+            16
+          ]
+        },
+        "north": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ]
+        },
+        "south": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ]
+        }
+      }
+    }
+  ]
+}

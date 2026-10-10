@@ -14,7 +14,7 @@ import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
-public class CrystalProcessingTableScreen extends AbstractContainerScreen<CrystalProcessingTableMenu> {
+public class CrystalProcessingTableScreen extends ResponsiveContainerScreen<CrystalProcessingTableMenu> {
     private static final ResourceLocation GUI_TEXTURE = ResourceLocation.fromNamespaceAndPath(
             Omnira.MOD_ID,
             "textures/gui/container/workstation_processing.png"
@@ -38,16 +38,14 @@ public class CrystalProcessingTableScreen extends AbstractContainerScreen<Crysta
     @Override
     protected void init() {
         super.init();
-        this.writeButton = addRenderableWidget(Button.builder(
+        this.writeButton = addRenderableWidget(new CrystalActionButton(leftPos+WRITE_BUTTON_X,topPos+WRITE_BUTTON_Y,WRITE_BUTTON_WIDTH,WRITE_BUTTON_HEIGHT,
                         Component.translatable("button.omnira.crystal_processing_table.write"),
                         button -> {
                             if (this.minecraft != null && this.minecraft.player != null && this.minecraft.gameMode != null
                                     && this.menu.canProcessCrystal()) {
                                 this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, CrystalProcessingTableMenu.WRITE_BUTTON);
                             }
-                        })
-                .bounds(this.leftPos + WRITE_BUTTON_X, this.topPos + WRITE_BUTTON_Y, WRITE_BUTTON_WIDTH, WRITE_BUTTON_HEIGHT)
-                .build());
+                        }));
     }
 
     @Override
@@ -60,7 +58,7 @@ public class CrystalProcessingTableScreen extends AbstractContainerScreen<Crysta
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
-        CrystalWorkstationBackground.draw(guiGraphics,GUI_TEXTURE,leftPos,topPos);
+        CrystalWorkstationBackground.draw(guiGraphics,GUI_TEXTURE,leftPos,topPos,"processing",CrystalUi.time(partialTick),menu.workProgress(),menu.isWorking());
     }
 
     static void renderVanillaFrame(GuiGraphics graphics, int leftPos, int topPos, int imageWidth, int imageHeight) {
@@ -74,8 +72,8 @@ public class CrystalProcessingTableScreen extends AbstractContainerScreen<Crysta
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+    protected void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.renderContent(guiGraphics, mouseX, mouseY, partialTick);
         CompositeSlotGhost.render(guiGraphics,menu.getSlot(0),menu.getSlot(1),leftPos,topPos);
         WorkstationManaStatus.progress(guiGraphics,leftPos+WRITE_BUTTON_X,topPos+WRITE_BUTTON_Y,menu.workProgress());
         this.renderTooltip(guiGraphics, mouseX, mouseY);
@@ -100,6 +98,6 @@ public class CrystalProcessingTableScreen extends AbstractContainerScreen<Crysta
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         CrystalWorkstationBackground.labels(guiGraphics,font,title,playerInventoryTitle);
-        WorkstationManaStatus.render(guiGraphics,font,minecraft == null ? null : minecraft.player,menu.manaCost());
+        WorkstationManaStatus.render(guiGraphics,font,minecraft == null ? null : minecraft.player);
     }
 }

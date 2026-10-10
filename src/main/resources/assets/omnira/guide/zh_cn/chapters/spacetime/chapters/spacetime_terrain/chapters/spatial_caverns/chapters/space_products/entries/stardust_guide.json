@@ -1,0 +1,15 @@
+{
+  "id": "stardust_guide",
+  "title": "星屑与星尘",
+  "item": "omnira:stardust",
+  "recipes": false,
+  "text": [
+    "星辰之源会在地面或水底铺下稀疏的发光星屑，亮度12。轻击即可摧毁并掉落粉末状、仍然发光的星尘。采集后的星尘无法重新放置；灯塔小岛上的星屑同样可以采集。"
+  ],
+  "links": [
+    {
+      "target": "star_source_relic",
+      "label": "星辰之源"
+    }
+  ]
+}

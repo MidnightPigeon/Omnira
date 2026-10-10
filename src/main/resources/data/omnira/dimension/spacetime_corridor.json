@@ -11,7 +11,11 @@
       "mire_biome": "omnira:reversion_mire",
       "cliffs_biome": "omnira:epochal_cliffs",
       "garden_biome": "omnira:recurrence_garden",
-      "ruins_biome": "omnira:eventide_ruins"
+      "ruins_biome": "omnira:eventide_ruins",
+      "folded_biome": "omnira:folded_caverns",
+      "starsea_biome": "omnira:void_starsea",
+      "geodes_biome": "omnira:dislocated_geodes",
+      "abyss_biome": "omnira:inverted_abyss"
     }
   }
 }

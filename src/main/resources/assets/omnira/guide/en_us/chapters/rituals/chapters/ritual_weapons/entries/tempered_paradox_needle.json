@@ -1,0 +1,21 @@
+{
+  "id": "tempered_paradox_needle",
+  "item": "omnira:tempered_paradox_needle",
+  "title": "Tempered Paradox Needle",
+  "recipes": true,
+  "text": [
+    "On the Advanced Assembly Table, put the previous-stage weapon at the left node, Dilute Spacetime Bucket at the middle and Encapsulated Paradox Flow at the right. The six surface ingredients are Paradox Dust. Damage, enchantments, custom names and loaded crystals are retained.",
+    "Upgrade 3: 14 damage, 2.1 attack speed, 21 total healing and 175% base special range. Paradox motes increase with level.",
+    "§d§oAt least upgrading needs no smithing template)§r"
+  ],
+  "links": [
+    {
+      "target": "arcane_needle",
+      "label": "Weapon Use"
+    },
+    {
+      "target": "advanced_assembly_table",
+      "label": "Advanced Assembly Table"
+    }
+  ]
+}

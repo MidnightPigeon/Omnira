@@ -18,7 +18,7 @@ public final class CrystalPedestalRenderer implements BlockEntityRenderer<Crysta
         pose.pushPose();pose.translate(.5,DISPLAY_HEIGHT+Math.sin(time*.035)*.01,.5);
         pose.mulPose(Axis.YP.rotationDegrees((float)(time*.6%360)));
         pose.scale(DISPLAY_SCALE,DISPLAY_SCALE,DISPLAY_SCALE);
-        items.renderStatic(pedestal.getItem(0),ItemDisplayContext.FIXED,light,overlay,pose,buffers,pedestal.getLevel(),0);
+        items.renderStatic(pedestal.getItem(0),ItemDisplayContext.FIXED,light,overlay,pose,CrystalGlassLayer.contents(buffers),pedestal.getLevel(),0);
         pose.popPose();
     }
 }

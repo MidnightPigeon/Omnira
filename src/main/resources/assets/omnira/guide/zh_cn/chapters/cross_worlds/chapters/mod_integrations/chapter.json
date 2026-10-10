@@ -1,0 +1,11 @@
+{
+  "id": "mod_integrations",
+  "title": "联动模组列表",
+  "icon": "omnira:mana_engine",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/create_integration.json",
+    "entries/aeronautics_integration.json"
+  ],
+  "chapters": []
+}

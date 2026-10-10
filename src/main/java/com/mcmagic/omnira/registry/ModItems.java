@@ -12,6 +12,22 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Omnira.MOD_ID);
+    public static final DeferredItem<Item> VOYAGER_VIOLIN=ITEMS.register("voyager_violin",()->
+            new com.mcmagic.omnira.music.VoyagerViolinItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
+    public static final DeferredItem<BlockItem> CRYSTAL_SIGN=ITEMS.register("crystal_sign",()->new com.mcmagic.omnira.sign.CrystalSigns.PlacementItem(
+            new Item.Properties().stacksTo(16),ModBlocks.CRYSTAL_SIGN.get(),ModBlocks.CRYSTAL_WALL_SIGN.get(),null));
+    public static final DeferredItem<BlockItem> WISDOM_SIGN=ITEMS.register("marvelous_wisdom_sign",()->new com.mcmagic.omnira.sign.CrystalSigns.PlacementItem(
+            new Item.Properties().stacksTo(16),ModBlocks.WISDOM_SIGN.get(),ModBlocks.WISDOM_WALL_SIGN.get(),ModBlocks.WISDOM_HANGING_SIGN.get()));
+    public static final DeferredItem<BlockItem> ROUGH_ALCHEMICAL_ENERGY_CORE=ITEMS.registerSimpleBlockItem(ModBlocks.ROUGH_ALCHEMICAL_ENERGY_CORE);
+    public static final DeferredItem<BlockItem> ROUGH_ALCHEMY_CAULDRON=ITEMS.register("rough_alchemy_cauldron",()->new com.mcmagic.omnira.alchemy.AlchemyCauldronItem(new Item.Properties()));
+    public static final DeferredItem<BlockItem> REACTION_POOL=ITEMS.register("large_alchemical_reaction_pool",()->new com.mcmagic.omnira.alchemy.ReactionPoolBlock.PlacementItem(new Item.Properties()));
+    public static final DeferredItem<BlockItem> PRIMITIVE_REACTION_CAULDRON=ITEMS.registerSimpleBlockItem(ModBlocks.PRIMITIVE_REACTION_CAULDRON);
+    public static final DeferredItem<BlockItem> TEMPORAL_MOTE=ITEMS.registerSimpleBlockItem(ModBlocks.TEMPORAL_MOTE);
+    public static final DeferredItem<BlockItem> SPATIAL_REMNANT=ITEMS.registerSimpleBlockItem(ModBlocks.SPATIAL_REMNANT);
+    public static final DeferredItem<BlockItem> FOLD_GATE_FRAME=ITEMS.registerSimpleBlockItem(ModBlocks.FOLD_GATE_FRAME);
+    public static final DeferredItem<BlockItem> STABLE_FOLD_GATE=ITEMS.registerSimpleBlockItem(ModBlocks.STABLE_FOLD_GATE);
+    public static final DeferredItem<BlockItem> UNSTABLE_FOLD_GATE=ITEMS.registerSimpleBlockItem(ModBlocks.UNSTABLE_FOLD_GATE);
+    public static final DeferredItem<Item> SPACE_WARP_POINT=ITEMS.registerSimpleItem("space_warp_point",new Item.Properties().stacksTo(16));
     public static final DeferredItem<BlockItem> WONDERLAND_POKER_STAND=ITEMS.registerSimpleBlockItem(ModBlocks.WONDERLAND_POKER_STAND);
     public static final DeferredItem<Item> DREAM_RABBIT_REMAINS=ITEMS.register("dream_rabbit_remains",()->new com.mcmagic.omnira.dream.DreamRabbitItem(new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON),false));
     public static final DeferredItem<Item> ALICE_DREAM_RABBIT_SIGIL=ITEMS.register("alice_dream_rabbit_sigil",()->new com.mcmagic.omnira.dream.DreamRabbitItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE),true));
@@ -26,6 +42,7 @@ public final class ModItems {
     public static final DeferredItem<Item> UNSTABLE_SPACETIME_AGGREGATE=ITEMS.registerItem("unstable_spacetime_aggregate",com.mcmagic.omnira.spacetime.UnstableAggregateItem::new,new Item.Properties().rarity(Rarity.RARE));
     public static final DeferredItem<BlockItem> ADVANCED_FORGE=ITEMS.register("advanced_assembly_table",()->new com.mcmagic.omnira.forging.AdvancedForgeItem(new Item.Properties()));
     public static final DeferredItem<BlockItem> RESONANCE_CORE=ITEMS.registerSimpleBlockItem(ModBlocks.RESONANCE_CORE);
+    public static final DeferredItem<BlockItem> SPACETIME_PORT=ITEMS.registerSimpleBlockItem(ModBlocks.SPACETIME_PORT);
     public static final DeferredItem<Item> RESONANCE_TERMINAL=ITEMS.registerItem("resonance_terminal",com.mcmagic.omnira.item.ResonanceTerminalItem::new);
     public static final DeferredItem<Item> ENHANCED_RESONANCE_TERMINAL=ITEMS.registerItem("enhanced_resonance_terminal",p->new com.mcmagic.omnira.item.ResonanceTerminalItem(p,6));
     public static final DeferredItem<Item> CRUISE_ORB=ITEMS.registerItem("cruise_orb",com.mcmagic.omnira.vehicle.CruiseOrbItem::new,new Item.Properties().rarity(Rarity.UNCOMMON));
@@ -45,9 +62,11 @@ public final class ModItems {
     public static final DeferredItem<Item> LIFE_ENDER=ITEMS.registerItem("life_ender",com.mcmagic.omnira.item.LifeEnderItem::new);
     public static final DeferredItem<Item> CRYSTALLIZED_NAIL=ITEMS.register("crystallized_bone_nail",()->new com.mcmagic.omnira.item.RitualSwordItem(new Item.Properties(),com.mcmagic.omnira.item.RitualSwordItem.Kind.NAIL));
     public static final DeferredItem<Item> ARCANE_NEEDLE=ITEMS.register("arcane_needle",()->new com.mcmagic.omnira.item.RitualSwordItem(new Item.Properties(),com.mcmagic.omnira.item.RitualSwordItem.Kind.NEEDLE));
+    public static final java.util.List<DeferredItem<Item>> NAIL_UPGRADES=com.mcmagic.omnira.item.RitualSwordUpgrades.register(ITEMS,com.mcmagic.omnira.item.RitualSwordItem.Kind.NAIL);
+    public static final java.util.List<DeferredItem<Item>> NEEDLE_UPGRADES=com.mcmagic.omnira.item.RitualSwordUpgrades.register(ITEMS,com.mcmagic.omnira.item.RitualSwordItem.Kind.NEEDLE);
     public static final DeferredItem<BlockItem> ADVANCED_CONDENSATION_TABLE=ITEMS.registerSimpleBlockItem(ModBlocks.ADVANCED_CONDENSATION_TABLE);
     public static final DeferredItem<BlockItem> PURE_VESSEL=ITEMS.registerSimpleBlockItem(ModBlocks.PURE_VESSEL);
-    public static final DeferredItem<Item> PARADOX_DUST=ITEMS.registerSimpleItem("paradox_dust");
+    public static final DeferredItem<Item> PARADOX_DUST=ITEMS.register("paradox_dust",()->new com.mcmagic.omnira.paradox.ParadoxDustItem(new Item.Properties()));
     public static final DeferredItem<Item> ARCANE_ARQUEBUS=ITEMS.registerItem("arcane_arquebus",com.mcmagic.omnira.item.ArcaneArquebusItem::new,new Item.Properties().rarity(Rarity.RARE));
     public static final DeferredItem<Item> ANCESTOR_LAUNCHER=ITEMS.registerSimpleItem("ancestor_launcher",new Item.Properties().rarity(Rarity.RARE));
     public static final DeferredItem<Item> KINGS_NEW_CLOTHES=ITEMS.registerSimpleItem("kings_new_clothes",new Item.Properties().rarity(Rarity.RARE));
@@ -90,7 +109,7 @@ public final class ModItems {
     public static final DeferredItem<Item> INFUSED_SPIRITUAL_CRYSTAL=ITEMS.registerSimpleItem("infused_spiritual_crystal",new Item.Properties().rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> RESONANCE_CRYSTAL=ITEMS.registerSimpleItem("resonance_crystal",new Item.Properties());
     public static final DeferredItem<Item> ARCANE_DUST =
-            ITEMS.registerSimpleItem("arcane_dust", new Item.Properties());
+            ITEMS.registerItem("arcane_dust",com.mcmagic.omnira.item.ArcaneDustItem::new,new Item.Properties());
 
     public static final DeferredItem<BlockItem> CRYSTAL_PROCESSING_TABLE =
             ITEMS.registerSimpleBlockItem(ModBlocks.CRYSTAL_PROCESSING_TABLE);
@@ -151,12 +170,19 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> ARCANE_ASSEMBLY_TABLE=ITEMS.registerSimpleBlockItem(ModBlocks.ARCANE_ASSEMBLY_TABLE);
     public static final DeferredItem<Item> WOODEN_STAFF_SHAFT=staffPart("wooden_staff_shaft",com.mcmagic.omnira.item.staff.StaffPart.Role.SHAFT,0,0,0,0);
     public static final DeferredItem<Item> SHADOW_STAFF_SHAFT=staffPart("shadow_staff_shaft",com.mcmagic.omnira.item.staff.StaffPart.Role.SHAFT,.1,0,0,0,2);
+    public static final DeferredItem<Item> TIME_STAFF_SHAFT=ITEMS.registerItem("time_staff_shaft",p->new com.mcmagic.omnira.item.staff.StaffPartItem(p,
+            com.mcmagic.omnira.item.staff.StaffPart.component("time_staff_shaft",com.mcmagic.omnira.item.staff.StaffPart.Role.SHAFT,.1,0,0,0).withSlots(2,0).withRegeneration(.2)),new Item.Properties());
     public static final DeferredItem<Item> BLAZE_STAFF_SHAFT=staffPart("blaze_staff_shaft",com.mcmagic.omnira.item.staff.StaffPart.Role.SHAFT,.1,0,0,0);
     public static final DeferredItem<Item> IRON_REINFORCEMENT=staffPart("iron_reinforcement",com.mcmagic.omnira.item.staff.StaffPart.Role.REINFORCEMENT,0,0,0,0);
     public static final DeferredItem<Item> DIAMOND_REINFORCEMENT=staffPart("diamond_reinforcement",com.mcmagic.omnira.item.staff.StaffPart.Role.REINFORCEMENT,0,5,0,0);
     public static final DeferredItem<Item> NETHERITE_REINFORCEMENT=staffPart("netherite_reinforcement",com.mcmagic.omnira.item.staff.StaffPart.Role.REINFORCEMENT,0,10,0,0);
     public static final DeferredItem<Item> LIGHT_CORE_REINFORCEMENT=staffPart("light_core_reinforcement",com.mcmagic.omnira.item.staff.StaffPart.Role.REINFORCEMENT,.1,5,0,0);
     public static final DeferredItem<Item> SPIRITUAL_CRYSTAL_TIP=staffPart("spiritual_crystal_tip",com.mcmagic.omnira.item.staff.StaffPart.Role.TIP,0,0,1,60);
+    public static final DeferredItem<Item> INFUSED_CRYSTAL_TIP=staffPart("infused_crystal_tip",com.mcmagic.omnira.item.staff.StaffPart.Role.TIP,0,0,1,60,2);
+    public static final DeferredItem<Item> SPACETIME_AGGREGATE_TIP=ITEMS.registerItem("spacetime_aggregate_tip",p->new com.mcmagic.omnira.item.staff.StaffPartItem(p,
+            new com.mcmagic.omnira.item.staff.StaffPart(com.mcmagic.omnira.item.staff.StaffPart.Role.TIP,.2,0,1,40,
+                    net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","item/staff_parts/spacetime_aggregate_tip"),1,0,1,
+                    com.mcmagic.omnira.item.staff.StaffPart.SlotKind.ENHANCEMENT,0,.1,0,0,true)),new Item.Properties());
     public static final DeferredItem<Item> MULTI_ARCANE_TIP=staffPart("multi_arcane_tip",com.mcmagic.omnira.item.staff.StaffPart.Role.TIP,0,0,2,60,2);
     public static final DeferredItem<Item> ELEMENTAL_FUSION_TIP=staffPart("elemental_fusion_tip",com.mcmagic.omnira.item.staff.StaffPart.Role.TIP,0,0,1,20,2);
     public static final DeferredItem<Item> SWIFTNESS_RUNE=ITEMS.registerItem("swiftness_rune",p ->

@@ -31,20 +31,21 @@ public final class EventideRuins {
     public static final ResourceKey<Biome> BIOME=ResourceKey.create(Registries.BIOME,ResourceLocation.parse("omnira:eventide_ruins"));
     private static final String ENTITY_CYCLE="OmniraEventideCycle";
     private static final net.minecraft.tags.TagKey<Block> COMMON_DIRTS=net.minecraft.tags.TagKey.create(Registries.BLOCK,ResourceLocation.parse("c:dirts"));
-    private static final net.minecraft.tags.TagKey<Block> COMMON_SANDS=net.minecraft.tags.TagKey.create(Registries.BLOCK,ResourceLocation.parse("c:sands"));
 
     public static void pulseChunk(ServerLevel level,int cx,int cz){
         pulseChunk(level,cx,cz,level.getGameTime()/PERIOD);
     }
 
     public static void pulseChunk(ServerLevel level,int cx,int cz,long cycle){
+        var chunk=level.getChunkSource().getChunk(cx,cz,net.minecraft.world.level.chunk.status.ChunkStatus.FULL,false);
+        if(chunk==null)return;
+        if(java.util.Arrays.stream(chunk.getSections()).noneMatch(section->section.getBiomes().maybeHas(biome->biome.is(BIOME))))return;
         var matrices=new ArrayList<BlockPos>();
         var pos=new BlockPos.MutableBlockPos();
         for(int x=cx<<4;x<(cx<<4)+16;x++)for(int z=cz<<4;z<(cz<<4)+16;z++){
-            pos.set(x,224,z);
-            if(!level.getBiome(pos).is(BIOME))continue;
-            for(int y=com.mcmagic.omnira.spacetime.CorridorLayout.TIME_BASE+1;y<level.getMaxBuildHeight();y++){
-                pos.setY(y);var state=level.getBlockState(pos);
+            for(int y=level.getMinBuildHeight();y<level.getMaxBuildHeight();y++){
+                pos.set(x,y,z);var state=level.getBlockState(pos);
+                if(state.isAir()||!level.getBiome(pos).is(BIOME))continue;
                 if(state.getBlock() instanceof LiquidBlock&&!com.mcmagic.omnira.mire.MireContent.fluid(state.getFluidState())){
                     level.setBlockAndUpdate(pos,com.mcmagic.omnira.mire.MireContent.LIQUID.get().defaultBlockState());
                 }else if(state.is(Blocks.STONE_BRICKS)){
@@ -53,9 +54,8 @@ public final class EventideRuins {
                     level.setBlockAndUpdate(pos,EventideMasonry.CRACKED.get().defaultBlockState());
                 }else if(state.is(com.mcmagic.omnira.time.TemporalSoils.SILTS)&&!state.is(com.mcmagic.omnira.mire.MireContent.SILT.get())){
                     level.setBlockAndUpdate(pos,com.mcmagic.omnira.mire.MireContent.SILT.get().defaultBlockState());
-                }else if(!state.is(TemporalSoils.SILTS)&&(state.is(BlockTags.SAND)||state.is(COMMON_SANDS)
-                        ||state.is(net.neoforged.neoforge.common.Tags.Blocks.GRAVELS))){
-                    if(!state.is(ArchaeologyContent.SAND.get()))level.setBlockAndUpdate(pos,ArchaeologyContent.SAND.get().defaultBlockState());
+                }else if(!state.hasBlockEntity()&&com.mcmagic.omnira.spacetime.TemporalWeathering.mineralNext(state)!=state){
+                    level.setBlockAndUpdate(pos,com.mcmagic.omnira.spacetime.TemporalWeathering.mineralNext(state));
                 }else if(!state.is(TemporalSoils.SILTS)&&(state.is(BlockTags.DIRT)||state.is(COMMON_DIRTS))){
                     // One transition per node: the new silt rots only on the next pass.
                     level.setBlockAndUpdate(pos,DreamContent.TEMPORAL_SILT.get().defaultBlockState());
@@ -74,14 +74,13 @@ public final class EventideRuins {
         }
         for(var root:matrices)for(var face:Direction.values())grow(level,root,face);
         for(var living:level.getEntitiesOfClass(LivingEntity.class,new AABB(cx<<4,
-                com.mcmagic.omnira.spacetime.CorridorLayout.TIME_BASE+1,cz<<4,
+                level.getMinBuildHeight(),cz<<4,
                 (cx+1)<<4,level.getMaxBuildHeight(),(cz+1)<<4)))
             if(!(living instanceof Player))pulseEntity(level,living,cycle,cx,cz);
     }
 
     public static void pulsePlayer(ServerLevel level,Player player,long cycle){
-        if(player.getY()>com.mcmagic.omnira.spacetime.CorridorLayout.TIME_BASE)
-            pulseEntity(level,player,cycle,player.getBlockX()>>4,player.getBlockZ()>>4);
+        pulseEntity(level,player,cycle,player.getBlockX()>>4,player.getBlockZ()>>4);
     }
 
     private static void pulseEntity(ServerLevel level,LivingEntity living,long cycle,int cx,int cz){
@@ -129,6 +128,7 @@ public final class EventideRuins {
 
     private static BlockState advance(BlockState state){
         for(var stages:new Block[][]{
+                com.mcmagic.omnira.space.geodes.DeflectionContent.stages(),
                 {DreamContent.SMALL_DREAM_BUD.get(),DreamContent.MEDIUM_DREAM_BUD.get(),DreamContent.LARGE_DREAM_BUD.get(),DreamContent.DREAM_CRYSTAL.get()},
                 {TimeNatureContent.SMALL_SPATIAL_BUD.get(),TimeNatureContent.MEDIUM_SPATIAL_BUD.get(),TimeNatureContent.LARGE_SPATIAL_BUD.get(),TimeNatureContent.SPATIAL_CLUSTER.get()},
                 {Blocks.SMALL_AMETHYST_BUD,Blocks.MEDIUM_AMETHYST_BUD,Blocks.LARGE_AMETHYST_BUD,Blocks.AMETHYST_CLUSTER}}){
@@ -147,18 +147,24 @@ public final class EventideRuins {
 
     private static boolean matrix(BlockState state){
         return state.is(DreamContent.DREAM_CRYSTAL_BEDROCK.get())
-                ||state.is(TimeNatureContent.SPATIAL_MATRIX.get())||state.is(Blocks.BUDDING_AMETHYST);
+                ||state.is(TimeNatureContent.SPATIAL_MATRIX.get())||state.is(Blocks.BUDDING_AMETHYST)
+                ||state.is(com.mcmagic.omnira.space.geodes.DeflectionContent.MATRIX.get());
     }
 
     private static boolean mature(BlockState state){
         return state.is(DreamContent.DREAM_CRYSTAL.get())
-                ||state.is(TimeNatureContent.SPATIAL_CLUSTER.get())||state.is(Blocks.AMETHYST_CLUSTER);
+                ||state.is(TimeNatureContent.SPATIAL_CLUSTER.get())||state.is(Blocks.AMETHYST_CLUSTER)
+                ||state.is(com.mcmagic.omnira.space.geodes.DeflectionContent.CLUSTER.get());
     }
 
     private static void grow(ServerLevel level,BlockPos root,Direction face){
         var at=root.relative(face);
         if(level.isOutsideBuildHeight(at)||!level.hasChunkAt(at)||!level.getBiome(at).is(BIOME))return;
         var matrix=level.getBlockState(root);var old=level.getBlockState(at);
+        if(matrix.is(com.mcmagic.omnira.space.geodes.DeflectionContent.MATRIX.get())){
+            for(int i=0;i<4;i++)com.mcmagic.omnira.space.geodes.DeflectionMatrixBlock.grow(level,root,face);
+            return;
+        }
         Block target=matrix.is(DreamContent.DREAM_CRYSTAL_BEDROCK.get())?DreamContent.DREAM_CRYSTAL.get()
                 :matrix.is(TimeNatureContent.SPATIAL_MATRIX.get())?TimeNatureContent.SPATIAL_CLUSTER.get():Blocks.AMETHYST_CLUSTER;
         if(old.is(target))return;

@@ -24,7 +24,7 @@ public final class ArcaneAssemblyTableMenu extends AbstractContainerMenu {
     }
     public ArcaneAssemblyTableMenu(int id,Inventory player,ArcaneAssemblyTableBlockEntity table) {
         this(id,player,table,ContainerLevelAccess.create(table.getLevel(),table.getBlockPos()),table,new ContainerData() {
-            @Override public int get(int i) {return i==0?table.progress():i==1?(table.finished()?1:0):i==2?table.cooldown():table.mechanicalPowered()?1:0;}
+            @Override public int get(int i) {return i==0?table.progress():i==1?(table.finished()?1:0):i==2?table.cooldown():table.powered()?1:0;}
             @Override public void set(int i,int value) {}
             @Override public int getCount() {return 4;}
         });
@@ -46,10 +46,10 @@ public final class ArcaneAssemblyTableMenu extends AbstractContainerMenu {
     public int progress() {return data.get(0);}
     public int cooldown() {return data.get(2);}
     public boolean finished() {return data.get(1)!=0;}
-    public boolean mechanicalPowered() {return data.get(3)!=0;}
-    public double manaCost() {return mechanicalPowered()?0:ManaCosts.cost(owner,ArcaneAssemblyTableBlockEntity.BASE_COST);}
+    public boolean powered() {return data.get(3)!=0;}
+    public double manaCost() {return powered()?0:ManaCosts.cost(owner,ArcaneAssemblyTableBlockEntity.BASE_COST);}
     public boolean canStrike() {
-        return !mechanicalPowered() && cooldown()==0 && !finished() && ManaCosts.canSpend(owner,ArcaneAssemblyTableBlockEntity.BASE_COST)
+        return !powered() && cooldown()==0 && !finished() && ManaCosts.canSpend(owner,ArcaneAssemblyTableBlockEntity.BASE_COST)
                 && com.mcmagic.omnira.recipe.AssemblyWork.find(owner.level(),inventory)!=null;
     }
     @Override public boolean stillValid(Player player) {

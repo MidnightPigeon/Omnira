@@ -54,6 +54,7 @@
       "items": [
         "wooden_staff_shaft",
         "shadow_staff_shaft",
+        "time_staff_shaft",
         "blaze_staff_shaft"
       ]
     },
@@ -70,29 +71,39 @@
       "group": "Staff tips and runes",
       "items": [
         "spiritual_crystal_tip",
+        "infused_crystal_tip",
+        "spacetime_aggregate_tip",
         "multi_arcane_tip",
         "elemental_fusion_tip",
         "amplification_rune",
         "swiftness_rune",
         "wide_area_rune"
       ]
-    }
-  ],
-  "equipment": [
+    },
     {
       "group": "Tools",
       "items": [
         "analysis_crystal",
         "crystal_pickaxe",
         "infused_crystal_pickaxe",
-        "spacetime_archaeology_brush"
+        "spacetime_archaeology_brush",
+        "voyager_violin"
       ]
     },
     {
       "group": "Weapons",
       "items": [
         "crystallized_bone_nail",
+        "sharpened_crystallized_bone_nail",
+        "channelled_crystallized_bone_nail",
+        "threaded_paradox_bone_nail",
+        "pure_paradox_bone_nail",
         "arcane_needle",
+        "sharpened_arcane_needle",
+        "shining_arcane_needle",
+        "tempered_paradox_needle",
+        "pale_paradox_needle",
+        "deflection_field",
         "arcane_arquebus",
         "ancestor_launcher",
         "life_ender"
@@ -116,12 +127,7 @@
       "group": "Travel",
       "items": [
         "crystal_broom",
-        "cruise_orb",
-        "recall_crystal",
-        "enhanced_recall_crystal",
-        "dream_rabbit_remains",
-        "alice_dream_rabbit_sigil",
-        "pocket_magic_bottle"
+        "cruise_orb"
       ]
     },
     {
@@ -169,33 +175,73 @@
         "crystal_processing_table",
         "advanced_crystal_aggregation_ring",
         "arcane_assembly_table",
-        "advanced_assembly_table",
+        "crystal_furnace",
+        "crystal_grindstone",
+        "crystal_anvil",
+        "infused_crystal_furnace",
+        "infused_crystal_grindstone",
+        "infused_crystal_anvil",
+        "advanced_assembly_table"
+      ]
+    },
+    {
+      "group": "Exploration devices",
+      "items": [
         "spacetime_reverser",
+        "void_infuser",
         "split_time_sundial"
+      ]
+    },
+    {
+      "group": "Alchemy vessels",
+      "items": [
+        "rough_alchemy_cauldron",
+        "primitive_reaction_cauldron",
+        "large_alchemical_reaction_pool",
+        "alchemical_catalysis_chamber"
       ]
     },
     {
       "group": "Power and drilling",
       "items": [
         "mana_engine",
+        "spacetime_engine",
         "crystal_casing",
         "infused_crystal_casing",
         "hyperdimensional_drill"
       ]
     },
     {
-      "group": "Storage and commerce",
+      "group": "Commerce",
       "items": [
-        "crystal_ball",
-        "liquid_crystal_ball",
-        "marisa_crystal_ball",
-        "resonance_core",
-        "resonance_terminal",
-        "enhanced_resonance_terminal"
+        "marisa_crystal_ball"
       ]
     },
     {
-      "group": "Orb upgrades",
+      "group": "Ritual apparatus",
+      "items": [
+        "crystal_pedestal",
+        "ritual_energy_core",
+        "advanced_ritual_energy_core",
+        "pure_vessel"
+      ]
+    }
+  ],
+  "storage": [
+    {
+      "group": "Item and fluid storage",
+      "items": [
+        "crystal_ball",
+        "liquid_crystal_ball",
+        "resonant_crystal_ball",
+        "resonant_liquid_crystal_ball",
+        "void_crystal_ball",
+        "wandering_star_cluster_orb",
+        "pocket_magic_bottle"
+      ]
+    },
+    {
+      "group": "Storage upgrades",
       "items": [
         "basic_stacking_upgrade",
         "infused_stacking_upgrade",
@@ -207,102 +253,51 @@
       ]
     },
     {
-      "group": "Rituals and anchors",
+      "group": "Logistics",
       "items": [
-        "crystal_pedestal",
-        "ritual_energy_core",
-        "advanced_ritual_energy_core",
-        "pure_vessel",
-        "spacetime_waymark"
-      ]
-    }
-  ],
-  "misc": [
-    {
-      "group": "Crystals and dust",
-      "items": [
-        "spiritual_crystal",
-        "infused_spiritual_crystal",
-        "resonance_crystal",
-        "dream_crystal_shard",
-        "spatial_crystal_shard",
-        "arcane_dust",
-        "paradox_dust",
-        "crude_light_core",
-        "grid_frame",
-        "spell_ink",
-        "shadow_mist"
+        "resonance_core",
+        "spacetime_port",
+        "resonance_terminal",
+        "enhanced_resonance_terminal",
+        "resonance_tuning_rod"
       ]
     },
     {
-      "group": "Spacetime materials",
+      "group": "Player transport",
       "items": [
-        "spacetime_knot",
-        "time_warp_point",
-        "unstable_spacetime_aggregate",
-        "time_seed",
-        "peaceful_memory_cube",
-        "corrupted_memory_cube"
-      ]
-    },
-    {
-      "group": "Archaeology aggregates",
-      "items": [
-        "ancient_archaeology_aggregate",
-        "phantom_thieves_aggregate",
-        "umbrella_aggregate",
-        "foundation_aggregate",
-        "primordial_earth_aggregate"
-      ]
-    },
-    {
-      "group": "Relics and research",
-      "items": [
-        "shadow_manuscript",
-        "traveler_manuscript",
-        "desire_crystal",
-        "damaged_research_facility",
-        "repaired_mechanical_component",
-        "inactive_t_virus_solution",
-        "distorted_psychic_talent_solution"
-      ]
-    },
-    {
-      "group": "Fossil processing",
-      "items": [
-        "unknown_organism_fossil",
-        "tyrannosaurus_remains",
-        "tyrannosaurus_essence",
-        "mosasaurus_remains",
-        "mosasaurus_essence",
-        "pterosaur_remains",
-        "pterosaur_essence"
-      ]
-    },
-    {
-      "group": "Dormant life",
-      "items": [
-        "unknown_egg",
-        "inactive_creature_egg",
-        "creature_egg",
-        "inactive_spirit_seed",
-        "spirit_seed"
+        "spacetime_waymark",
+        "recall_crystal",
+        "enhanced_recall_crystal",
+        "dream_rabbit_remains",
+        "alice_dream_rabbit_sigil",
+        "fold_gate_frame",
+        "stable_fold_gate",
+        "unstable_fold_gate",
+        "void_portal",
+        "long_range_portal",
+        "mapping_stability_compass"
       ]
     }
   ],
   "building": [
     {
-      "group": "Spiritual and dream crystal",
+      "group": "Crystal building families",
       "items": [
         "spiritual_crystal_block",
         "spiritual_crystal_stairs",
         "spiritual_crystal_slab",
+        "infused_crystal_block",
+        "infused_crystal_stairs",
+        "infused_crystal_slab",
         "dream_crystal_block",
         "dream_crystal_stairs",
         "dream_crystal_slab",
         "spatial_crystal_block",
         "spatial_crystal_stairs",
-        "spatial_crystal_slab"
+        "spatial_crystal_slab",
+        "deflection_crystal_block",
+        "phase_crystal_block",
+        "phase_crystal_cluster"
       ]
     },
     {
@@ -420,6 +415,9 @@
       "items": [
         "light_crystal_torch",
         "shadow_lantern",
+        "star_source",
+        "crystal_sign",
+        "marvelous_wisdom_sign",
         "crystal_column_base",
         "crystal_column",
         "night_heron_statue",
@@ -430,6 +428,15 @@
       ]
     },
     {
+      "group": "Spatial anomalies",
+      "items": [
+        "spatial_stability_anchor",
+        "dormant_spatial_stability_anchor",
+        "void_crevice",
+        "dense_void_mass"
+      ]
+    },
+    {
       "group": "Special building materials",
       "items": [
         "void_crystal",
@@ -437,7 +444,102 @@
       ]
     }
   ],
-  "nature": [
+  "misc": [
+    {
+      "group": "Crystals and dust",
+      "items": [
+        "spiritual_crystal",
+        "infused_spiritual_crystal",
+        "resonance_crystal",
+        "dream_crystal_shard",
+        "spatial_crystal_shard",
+        "deflection_crystal",
+        "arcane_dust",
+        "paradox_dust",
+        "stardust",
+        "crude_light_core",
+        "grid_frame",
+        "spell_ink",
+        "shadow_mist"
+      ]
+    },
+    {
+      "group": "Spacetime materials",
+      "items": [
+        "spacetime_knot",
+        "time_warp_point",
+        "temporal_mote",
+        "space_warp_point",
+        "spatial_remnant",
+        "unstable_spacetime_aggregate",
+        "paradox_mystery",
+        "paradox_ore",
+        "encapsulated_paradox_flow",
+        "unstable_paradox_source",
+        "encapsulated_stable_paradox_source",
+        "encapsulated_stable_spacetime_aggregate",
+        "genesis_particles"
+      ]
+    },
+    {
+      "group": "Memory rewards",
+      "items": [
+        "peaceful_memory_cube",
+        "corrupted_memory_cube"
+      ]
+    },
+    {
+      "group": "Alchemy materials",
+      "items": [
+        "rough_alchemical_energy_core",
+        "enhanced_alchemical_energy_core",
+        "alchemical_waste"
+      ]
+    },
+    {
+      "group": "Archaeology aggregates",
+      "items": [
+        "ancient_archaeology_aggregate",
+        "phantom_thieves_aggregate",
+        "umbrella_aggregate",
+        "foundation_aggregate",
+        "primordial_earth_aggregate"
+      ]
+    },
+    {
+      "group": "Relics and research",
+      "items": [
+        "shadow_manuscript",
+        "traveler_manuscript",
+        "desire_crystal",
+        "damaged_research_facility",
+        "repaired_mechanical_component",
+        "inactive_t_virus_solution",
+        "distorted_psychic_talent_solution"
+      ]
+    },
+    {
+      "group": "Fossil processing",
+      "items": [
+        "unknown_organism_fossil",
+        "tyrannosaurus_remains",
+        "tyrannosaurus_essence",
+        "mosasaurus_remains",
+        "mosasaurus_essence",
+        "pterosaur_remains",
+        "pterosaur_essence"
+      ]
+    },
+    {
+      "group": "Dormant life",
+      "items": [
+        "unknown_egg",
+        "inactive_creature_egg",
+        "creature_egg",
+        "inactive_spirit_seed",
+        "spirit_seed"
+      ]
+    },
     {
       "group": "Terrain",
       "items": [
@@ -470,7 +572,12 @@
         "small_spatial_bud",
         "medium_spatial_bud",
         "large_spatial_bud",
-        "spatial_crystal_cluster"
+        "spatial_crystal_cluster",
+        "deflection_crystal_matrix",
+        "small_deflection_bud",
+        "medium_deflection_bud",
+        "large_deflection_bud",
+        "deflection_crystal_cluster"
       ]
     },
     {
@@ -479,6 +586,7 @@
         "shadow_sapling",
         "shadow_leaves",
         "shadow_berries",
+        "time_seed",
         "time_sapling",
         "time_leaves",
         "time_grass",
@@ -488,13 +596,23 @@
       ]
     },
     {
-      "group": "Fluids and fish",
+      "group": "Fluids",
       "items": [
         "decayed_timeflow_bucket",
+        "void_starflow_bucket",
+        "dilute_spacetime_bucket",
+        "refined_spacetime_bucket"
+      ]
+    },
+    {
+      "group": "Aquatic creatures",
+      "items": [
         "timeflow_eel",
         "timeflow_eel_bucket",
         "chronal_blindfish",
-        "chronal_blindfish_bucket"
+        "chronal_blindfish_bucket",
+        "star_jellyfish",
+        "star_jellyfish_bucket"
       ]
     },
     {
@@ -504,7 +622,9 @@
         "shadow_ghost_spawn_egg",
         "dream_mirror_spawn_egg",
         "timeflow_eel_spawn_egg",
-        "chronal_blindfish_spawn_egg"
+        "chronal_blindfish_spawn_egg",
+        "star_jellyfish_spawn_egg",
+        "void_manta_spawn_egg"
       ]
     }
   ]

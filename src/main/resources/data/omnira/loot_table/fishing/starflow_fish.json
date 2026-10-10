@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "omnira:star_jellyfish",
+          "weight": 120
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:infused_spiritual_crystal",
+          "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:dream_crystal_shard",
+          "weight": 8
+        }
+      ]
+    }
+  ]
+}

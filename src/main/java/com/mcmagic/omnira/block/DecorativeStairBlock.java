@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 /** Keep vanilla mixed-material corners; reconcile after batch/template placement finishes. */
-public final class DecorativeStairBlock extends StairBlock {
+public class DecorativeStairBlock extends StairBlock {
     public DecorativeStairBlock(BlockState base,Properties properties){super(base,properties);}
     @Override protected void onPlace(BlockState state,Level level,BlockPos pos,BlockState old,boolean moving) {
         super.onPlace(state,level,pos,old,moving);

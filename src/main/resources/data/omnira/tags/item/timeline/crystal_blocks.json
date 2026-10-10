@@ -2,7 +2,10 @@
   "replace": false,
   "values": [
     "omnira:spiritual_crystal_block",
+    "omnira:infused_crystal_block",
     "omnira:dream_crystal_block",
+    "omnira:spatial_crystal_block",
+    "omnira:deflection_crystal_block",
     "omnira:rough_spatial_crystal_block",
     "omnira:excited_rough_spatial_crystal_block",
     "omnira:solidified_light_crystal_core"

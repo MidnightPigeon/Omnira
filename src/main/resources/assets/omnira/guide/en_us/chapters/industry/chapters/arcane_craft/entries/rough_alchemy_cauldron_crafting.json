@@ -1,0 +1,15 @@
+{
+  "id": "rough_alchemy_cauldron_crafting",
+  "title": "Making a Rough Alchemy Cauldron",
+  "item": "omnira:rough_alchemy_cauldron",
+  "recipes": true,
+  "text": [
+    "Craft a cauldron surrounded by eight Spiritual Crystals. See Alchemical Instruments for its use."
+  ],
+  "links": [
+    {
+      "target": "rough_alchemy_cauldron",
+      "label": "Rough Alchemy Cauldron"
+    }
+  ]
+}

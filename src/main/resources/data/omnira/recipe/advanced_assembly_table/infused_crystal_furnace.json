@@ -1,0 +1,36 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "slots": [
+    {
+      "item": "omnira:infused_crystal_casing"
+    },
+    {
+      "item": "omnira:infused_crystal_casing"
+    },
+    {
+      "item": "omnira:infused_crystal_casing"
+    },
+    {
+      "item": "omnira:infused_crystal_casing"
+    },
+    {
+      "item": "omnira:infused_crystal_casing"
+    },
+    {
+      "item": "omnira:infused_crystal_casing"
+    },
+    {
+      "item": "omnira:mana_engine"
+    },
+    {
+      "item": "omnira:crystal_furnace"
+    },
+    {
+      "item": "omnira:primordial_spell_core"
+    }
+  ],
+  "result": {
+    "id": "omnira:infused_crystal_furnace",
+    "count": 1
+  }
+}

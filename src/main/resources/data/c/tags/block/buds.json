@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:small_deflection_bud",
+    "omnira:medium_deflection_bud",
+    "omnira:large_deflection_bud"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "spacetime_port",
+  "item": "omnira:spacetime_port",
+  "title": "Spacetime Port",
+  "recipes": true,
+  "text": [
+    "Assemble a pair of ports from a Resonance Core, two Time Warp Points and two Space Warp Points. Attach them to block faces and link two within 32 blocks in the same dimension using the Tuning Rod. Use either linked port to disconnect.",
+    "The attached faces act as neighbours, even with different orientations. Ports neither move contents automatically nor add a rate limit. Containers, upgrades, pipes and machines determine item, fluid and energy transfers.",
+    "Engines can drive remote machines through ports. Create connections require exposed shaft faces at both ends; plain casings do not work. Horizontal and vertical shafts can connect, as can hopper outlets and pumped pipe networks.",
+    "White and black spheres float and rotate above linked ports. Holding the Tuning Rod reveals their line. After selecting one end, use air or another block to cancel selection."
+  ],
+  "links": [
+    {
+      "target": "resonance_tuning_rod",
+      "label": "Tuning Rod"
+    },
+    {
+      "target": "output_upgrade",
+      "label": "Ejection Upgrade"
+    }
+  ]
+}

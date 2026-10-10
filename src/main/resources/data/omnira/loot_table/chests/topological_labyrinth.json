@@ -1,0 +1,1 @@
+{"type":"minecraft:chest","pools":[{"rolls":1,"entries":[{"type":"minecraft:loot_table","value":"omnira:chests/calibration_materials"},{"type":"minecraft:loot_table","value":"omnira:chests/calibration_supplies"}]},{"rolls":1,"conditions":[{"condition":"minecraft:random_chance","chance":0.2}],"entries":[{"type":"minecraft:item","name":"omnira:mapping_stability_compass"}]}]}

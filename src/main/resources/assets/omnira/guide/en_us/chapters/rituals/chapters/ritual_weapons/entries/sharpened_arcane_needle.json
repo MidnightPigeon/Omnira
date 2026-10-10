@@ -1,0 +1,21 @@
+{
+  "id": "sharpened_arcane_needle",
+  "item": "omnira:sharpened_arcane_needle",
+  "title": "Sharpened Arcane Needle",
+  "recipes": true,
+  "text": [
+    "On the Advanced Assembly Table, put the previous-stage weapon at the left node, Infused Crystal Block at the middle and Encapsulated Paradox Flow at the right. The six surface ingredients are Paradox Dust. Damage, enchantments, custom names and loaded crystals are retained.",
+    "Upgrade 1: 10 damage, 1.9 attack speed, 15 total healing and 125% base special range. Paradox motes increase with level.",
+    "§d§oAt least upgrading needs no smithing template)§r"
+  ],
+  "links": [
+    {
+      "target": "arcane_needle",
+      "label": "Weapon Use"
+    },
+    {
+      "target": "advanced_assembly_table",
+      "label": "Advanced Assembly Table"
+    }
+  ]
+}

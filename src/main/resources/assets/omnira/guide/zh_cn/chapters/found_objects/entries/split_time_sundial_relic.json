@@ -1,0 +1,15 @@
+{
+  "id": "split_time_sundial_relic",
+  "title": "分时日晷",
+  "item": "omnira:split_time_sundial",
+  "recipes": false,
+  "text": [
+    "来自末日仪轨的特殊方块。详细功能与交互方式见下方关联条目。"
+  ],
+  "links": [
+    {
+      "target": "split_time_sundial_guide",
+      "label": "功能说明"
+    }
+  ]
+}

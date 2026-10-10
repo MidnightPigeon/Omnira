@@ -1,6 +1,8 @@
 {
   "selector": "omnira:light_condensate_bricks",
   "properties": {
-    "sable:floating_material": "omnira:light_condensate"
-  }
+    "sable:floating_material": "omnira:light_condensate",
+    "sable:mass": 0
+  },
+  "priority": 2000
 }

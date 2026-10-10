@@ -26,18 +26,22 @@ abstract class MireFishingMixin {
     @WrapOperation(method="catchingFish",at=@At(value="INVOKE",target="Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private boolean omnira$timeflowSurface(BlockState state,Block block,Operation<Boolean> original){
         var hook=(FishingHook)(Object)this;
+        if(block==Blocks.WATER&&com.mcmagic.omnira.space.sea.VoidSeaContent.fluid(hook.level().getFluidState(hook.blockPosition())))return state.is(Blocks.WATER)||com.mcmagic.omnira.space.sea.VoidSeaContent.fluid(state.getFluidState());
         return block==Blocks.WATER&&MireContent.fluid(hook.level().getFluidState(hook.blockPosition()))
                 ?MireFishingEffects.surface(state):original.call(state,block);
     }
     @WrapOperation(method="catchingFish",at=@At(value="INVOKE",target="Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I"))
     private int omnira$timeflowParticles(ServerLevel level,ParticleOptions type,double x,double y,double z,int count,double dx,double dy,double dz,double speed,Operation<Integer> original){
         var hook=(FishingHook)(Object)this;
+        if(com.mcmagic.omnira.space.sea.VoidSeaContent.fluid(level.getFluidState(hook.blockPosition())))return com.mcmagic.omnira.space.sea.StarflowFishing.emit(level,type,x,y,z,count,dx,dy,dz,speed);
         if(!MireContent.fluid(level.getFluidState(hook.blockPosition())))return original.call(level,type,x,y,z,count,dx,dy,dz,speed);
         return MireFishingEffects.emit(level,type,x,y,z,count,dx,dy,dz,speed);
     }
     @Inject(method="catchingFish",at=@At("HEAD"))
     private void omnira$waitingRipple(BlockPos pos,CallbackInfo ci){
         var hook=(FishingHook)(Object)this;
+        if(timeUntilLured>0&&timeUntilHooked<=0&&nibble<=0&&hook.tickCount%16==0&&com.mcmagic.omnira.space.sea.VoidSeaContent.fluid(hook.level().getFluidState(pos)))
+            com.mcmagic.omnira.space.sea.StarflowFishing.emit((ServerLevel)hook.level(),ParticleTypes.SPLASH,hook.getX()+Math.cos(hook.tickCount*.17)*.5,hook.getY()+.5,hook.getZ()+Math.sin(hook.tickCount*.17)*.5,1,0,0,0,0);
         if(timeUntilLured<=0||timeUntilHooked>0||nibble>0||hook.tickCount%16!=0||!MireContent.fluid(hook.level().getFluidState(pos)))return;
         double angle=hook.tickCount*.17, radius=.45+.15*Math.sin(hook.tickCount*.07);
         MireFishingEffects.emit((ServerLevel)hook.level(),ParticleTypes.SPLASH,hook.getX()+Math.cos(angle)*radius,hook.getY()+.5,hook.getZ()+Math.sin(angle)*radius,1,0,0,0,0);
@@ -45,6 +49,7 @@ abstract class MireFishingMixin {
     @ModifyArg(method="retrieve",at=@At(value="INVOKE",target="Lnet/minecraft/server/ReloadableServerRegistries$Holder;getLootTable(Lnet/minecraft/resources/ResourceKey;)Lnet/minecraft/world/level/storage/loot/LootTable;"),index=0)
     private ResourceKey<LootTable> omnira$mireFishing(ResourceKey<LootTable> original){
         var hook=(FishingHook)(Object)this;
+        if(com.mcmagic.omnira.space.sea.VoidSeaContent.fluid(hook.level().getFluidState(hook.blockPosition())))return ResourceKey.create(Registries.LOOT_TABLE,ResourceLocation.parse("omnira:fishing/void_starflow"));
         return MireContent.fluid(hook.level().getFluidState(hook.blockPosition()))
                 ?ResourceKey.create(Registries.LOOT_TABLE,ResourceLocation.parse("omnira:fishing/reversion_mire")):original;
     }

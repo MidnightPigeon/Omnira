@@ -7,7 +7,6 @@ import com.mcmagic.omnira.mire.MireContent;
 import com.mcmagic.omnira.registry.DreamContent;
 import com.mcmagic.omnira.registry.ModDataComponents;
 import com.mcmagic.omnira.registry.TimeNatureContent;
-import com.mcmagic.omnira.world.dimension.ModDimensions;
 import java.util.ArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -42,14 +41,14 @@ public final class RecurrenceGarden {
     }
 
     static void pulseChunk(ServerLevel level,int cx,int cz,ArrayList<BlockPos> matrices){
+        var chunk=level.getChunkSource().getChunk(cx,cz,net.minecraft.world.level.chunk.status.ChunkStatus.FULL,false);
+        if(chunk==null||java.util.Arrays.stream(chunk.getSections()).noneMatch(section->section.getBiomes().maybeHas(biome->biome.is(BIOME))))return;
         var pos=new BlockPos.MutableBlockPos();
         for(int x=cx<<4;x<(cx<<4)+16;x++)for(int z=cz<<4;z<(cz<<4)+16;z++){
-            pos.set(x,level.dimension().equals(ModDimensions.SPACETIME_CORRIDOR)?224:-60,z);
-            if(!level.getBiome(pos).is(BIOME))continue;
-            int floor=level.dimension().equals(ModDimensions.SPACETIME_CORRIDOR)?171:level.getMinBuildHeight();
-            for(int y=floor;y<level.getMaxBuildHeight();y++){
-                pos.setY(y);
+            for(int y=level.getMinBuildHeight();y<level.getMaxBuildHeight();y++){
+                pos.set(x,y,z);
                 var state=level.getBlockState(pos);
+                if(state.isAir()||!level.getBiome(pos).is(BIOME))continue;
                 if(state.is(com.mcmagic.omnira.registry.ModBlocks.WONDERLAND_POKER_STAND.get())
                         &&state.getValue(WonderlandPokerStandBlock.HALF)==net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER
                         &&level.getBlockEntity(pos) instanceof WonderlandPokerStandBlockEntity stand)stand.advanceGarden();
@@ -65,7 +64,8 @@ public final class RecurrenceGarden {
     }
 
     private static boolean isMatrix(BlockState state){
-        return state.is(DreamContent.DREAM_CRYSTAL_BEDROCK.get())||state.is(TimeNatureContent.SPATIAL_MATRIX.get())||state.is(Blocks.BUDDING_AMETHYST);
+        return state.is(DreamContent.DREAM_CRYSTAL_BEDROCK.get())||state.is(TimeNatureContent.SPATIAL_MATRIX.get())||state.is(Blocks.BUDDING_AMETHYST)
+                ||state.is(com.mcmagic.omnira.space.geodes.DeflectionContent.MATRIX.get());
     }
 
     private static void growEmptyFaces(ServerLevel level,BlockPos pos){
@@ -78,6 +78,7 @@ public final class RecurrenceGarden {
             if(!old.isAir()&&!old.getFluidState().is(Fluids.WATER))continue;
             if(matrix.is(DreamContent.DREAM_CRYSTAL_BEDROCK.get()))com.mcmagic.omnira.block.DreamCrystalMatrixBlock.grow(level,pos,face);
             else if(matrix.is(TimeNatureContent.SPATIAL_MATRIX.get()))SpatialMatrixBlock.grow(level,pos,face);
+            else if(matrix.is(com.mcmagic.omnira.space.geodes.DeflectionContent.MATRIX.get()))com.mcmagic.omnira.space.geodes.DeflectionMatrixBlock.grow(level,pos,face);
             else level.setBlockAndUpdate(at,Blocks.SMALL_AMETHYST_BUD.defaultBlockState()
                     .setValue(AmethystClusterBlock.FACING,face)
                     .setValue(AmethystClusterBlock.WATERLOGGED,old.getFluidState().is(Fluids.WATER)));
@@ -102,7 +103,7 @@ public final class RecurrenceGarden {
             Block[] dream={DreamContent.SMALL_DREAM_BUD.get(),DreamContent.MEDIUM_DREAM_BUD.get(),DreamContent.LARGE_DREAM_BUD.get(),DreamContent.DREAM_CRYSTAL.get()};
             Block[] spatial={TimeNatureContent.SMALL_SPATIAL_BUD.get(),TimeNatureContent.MEDIUM_SPATIAL_BUD.get(),TimeNatureContent.LARGE_SPATIAL_BUD.get(),TimeNatureContent.SPATIAL_CLUSTER.get()};
             Block[] vanilla={Blocks.SMALL_AMETHYST_BUD,Blocks.MEDIUM_AMETHYST_BUD,Blocks.LARGE_AMETHYST_BUD,Blocks.AMETHYST_CLUSTER};
-            for(var stages:new Block[][]{dream,spatial,vanilla})for(int i=0;i<stages.length;i++)if(state.is(stages[i]))
+            for(var stages:new Block[][]{dream,spatial,vanilla,com.mcmagic.omnira.space.geodes.DeflectionContent.stages()})for(int i=0;i<stages.length;i++)if(state.is(stages[i]))
                 return stages[(i+1)%stages.length].defaultBlockState()
                         .setValue(AmethystClusterBlock.FACING,state.getValue(AmethystClusterBlock.FACING))
                         .setValue(AmethystClusterBlock.WATERLOGGED,state.getValue(AmethystClusterBlock.WATERLOGGED));

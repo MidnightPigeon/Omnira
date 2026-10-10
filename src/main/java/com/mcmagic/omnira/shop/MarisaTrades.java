@@ -16,19 +16,29 @@ public final class MarisaTrades {
         Tier(String id,int count,int limit,String extra){this.id=id;this.count=count;this.limit=limit;this.extra=extra;}
     }
     private MarisaTrades(){}
+    private record WeightedOffer(MerchantOffer offer,int weight){}
     public static MerchantOffers roll(ServerLevel level,long seed,long day){
         var offers=new MerchantOffers();
         try(var reader=level.getServer().getResourceManager().getResourceOrThrow(TABLE).openAsReader()){
             var json=JsonParser.parseReader(reader).getAsJsonObject();var random=new Random(seed^day*0x9E3779B97F4A7C15L);
             for(var tier:Tier.values()){
-                List<MerchantOffer> pool=new ArrayList<>();Set<String> products=new HashSet<>();
+                List<WeightedOffer> pool=new ArrayList<>();Set<String> products=new HashSet<>();
                 for(var entry:json.getAsJsonArray(tier.id)){
                     var row=entry.getAsJsonObject();
                     if(!products.add(row.get("item").getAsString()))throw new IllegalArgumentException("Duplicate product in "+tier.id);
-                    pool.add(offer(row,tier));
+                    int weight=row.has("weight")?row.get("weight").getAsInt():10;
+                    if(weight<=0)throw new IllegalArgumentException("Trade weight must be positive");
+                    pool.add(new WeightedOffer(offer(row,tier),weight));
                 }
                 if(pool.size()<tier.count)throw new IllegalArgumentException("Too few products in "+tier.id);
-                Collections.shuffle(pool,random);offers.addAll(pool.subList(0,tier.count));
+                for(int draw=0;draw<tier.count;draw++){
+                    int total=0;for(var product:pool)total=Math.addExact(total,product.weight());
+                    int choice=random.nextInt(total);
+                    for(int index=0;index<pool.size();index++){
+                        choice-=pool.get(index).weight();
+                        if(choice<0){offers.add(pool.remove(index).offer());break;}
+                    }
+                }
             }
         }catch(java.io.IOException ex){throw new IllegalStateException("Missing Marisa trade table",ex);}
         return offers;

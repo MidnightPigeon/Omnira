@@ -18,10 +18,18 @@ import java.util.List;
 public final class RitualSwordItem extends SwordItem {
     public enum Kind { NAIL, NEEDLE }
     public final Kind kind;
+    public final int upgradeLevel;
     public RitualSwordItem(Properties properties,Kind kind) {
-        super(CrystalPickaxeItem.CrystalTier.INFUSED,properties.attributes(SwordItem.createAttributes(CrystalPickaxeItem.CrystalTier.INFUSED,3,-2.2F)));
-        this.kind=kind;
+        this(properties,kind,0);
     }
+    public RitualSwordItem(Properties properties,Kind kind,int upgradeLevel) {
+        super(CrystalPickaxeItem.CrystalTier.INFUSED,properties.attributes(SwordItem.createAttributes(CrystalPickaxeItem.CrystalTier.INFUSED,3+2*upgradeLevel,-2.2F+.1F*upgradeLevel)));
+        if(upgradeLevel<0 || upgradeLevel>4)throw new IllegalArgumentException("Invalid ritual sword level");
+        this.kind=kind;this.upgradeLevel=upgradeLevel;
+    }
+    public float segmentHeal(){return SwordFocus.SEGMENT_HEAL+upgradeLevel;}
+    public float completeHeal(){return SwordFocus.COMPLETE_HEAL+3*upgradeLevel;}
+    public double specialRangeMultiplier(){return 1+.25*upgradeLevel;}
     public static boolean accepts(ItemStack crystal) {
         if(!CrystalGridMenu.isCrystal(crystal))return false;
         var pattern=crystal.get(ModDataComponents.SPELL_PATTERN);
@@ -106,6 +114,7 @@ public final class RitualSwordItem extends SwordItem {
                 .withStyle(style->style.withColor(kind==Kind.NAIL?0xFFFFFF:0xFFAAAA).withItalic(true)));
         lines.add(Component.translatable("tooltip.omnira.ritual_sword."+(kind==Kind.NAIL?"nail":"needle")+".charge").withStyle(ChatFormatting.GRAY));
         lines.add(Component.translatable("tooltip.omnira.ritual_sword.load").withStyle(ChatFormatting.DARK_GRAY));
+        if(upgradeLevel>0)lines.add(Component.translatable("tooltip.omnira.ritual_sword_upgrade",upgradeLevel,4).withStyle(ChatFormatting.GRAY));
         if(!crystal(stack).isEmpty())lines.add(crystal(stack).getHoverName().copy().withStyle(ChatFormatting.GRAY));
     }
 }

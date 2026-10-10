@@ -7,12 +7,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 /** Six interior material positions and a core; the start button remains in the world. */
-public final class AdvancedForgeScreen extends AbstractContainerScreen<AdvancedForgeMenu> {
+public final class AdvancedForgeScreen extends ResponsiveContainerScreen<AdvancedForgeMenu> {
     private static final ResourceLocation BACKGROUND=CrystalWorkstationBackground.texture("workstation_forge");
     public AdvancedForgeScreen(AdvancedForgeMenu m,Inventory i,Component t){super(m,i,t);imageWidth=176;imageHeight=240;inventoryLabelY=146;}
     protected void renderBg(GuiGraphics g,float partial,int mouseX,int mouseY){
-        CrystalWorkstationBackground.draw(g,BACKGROUND,leftPos,topPos);
+        CrystalWorkstationBackground.draw(g,BACKGROUND,leftPos,topPos,"forge",CrystalUi.time(partial),0,menu.working());
     }
     protected void renderLabels(GuiGraphics g,int x,int y){CrystalWorkstationBackground.labels(g,font,title,playerInventoryTitle);}
-    public void render(GuiGraphics g,int x,int y,float partial){super.render(g,x,y,partial);renderTooltip(g,x,y);}
+    protected void renderContent(GuiGraphics g,int x,int y,float partial){super.renderContent(g,x,y,partial);renderTooltip(g,x,y);}
 }

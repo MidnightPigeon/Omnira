@@ -37,6 +37,7 @@ public final class DreamRabbitTravel {
     private DreamRabbitTravel(){}
     private static void message(ServerPlayer player,String key){player.displayClientMessage(Component.translatable("message.omnira.rabbit."+key),true);}
     public static boolean start(ServerPlayer player,InteractionHand hand,DreamRabbitItem item){
+        if(!item.sigil()&&com.mcmagic.omnira.space.anchor.StabilityField.contains(player)){message(player,"blocked");return false;}
         if(!player.isAlive()||player.isSpectator()||player.isSleeping()||player.isPassenger()||CHANNELS.containsKey(player.getUUID()))return false;
         if(item.sigil()){
             if(player.getCooldowns().isOnCooldown(ModItems.ALICE_DREAM_RABBIT_SIGIL.get())){message(player,"cooldown");return false;}
@@ -69,13 +70,13 @@ public final class DreamRabbitTravel {
         ServerLevel destination=player.server.getLevel(to);
         if(destination==null){message(player,"blocked");return;}
         Vec3 landing=findLanding(destination,player,to);
-        if(landing==null || !player.canChangeDimensions(channel.source(),destination)
+        if(landing==null || !channel.sigil()&&com.mcmagic.omnira.space.anchor.StabilityField.blocks(player,destination,landing) || !player.canChangeDimensions(channel.source(),destination)
                 || !net.neoforged.neoforge.common.CommonHooks.onTravelToDimension(player,to)){
             message(player,"blocked");return;
         }
         var mana=player.getData(ModAttachments.MANA).withMaximum(player.getAttributeValue(ModAttributes.MAX_MANA));
         if(channel.sigil() && mana.current()<mana.maximum()/2){player.setHealth(0);player.die(player.damageSources().genericKill());return;}
-        if(!player.teleportTo(destination,landing.x,landing.y,landing.z,Set.of(),player.getYRot(),player.getXRot())
+        if(!com.mcmagic.omnira.space.anchor.StabilityField.toolTravel(player,channel.sigil(),()->player.teleportTo(destination,landing.x,landing.y,landing.z,Set.of(),player.getYRot(),player.getXRot()))
                 ||player.serverLevel()!=destination){message(player,"blocked");return;}
         player.setDeltaMovement(Vec3.ZERO);player.fallDistance=0;
         if(channel.sigil()){

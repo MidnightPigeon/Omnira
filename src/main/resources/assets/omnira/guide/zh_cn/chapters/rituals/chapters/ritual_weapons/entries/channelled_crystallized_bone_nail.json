@@ -1,0 +1,21 @@
+{
+  "id": "channelled_crystallized_bone_nail",
+  "item": "omnira:channelled_crystallized_bone_nail",
+  "title": "沟槽晶化骨钉",
+  "recipes": true,
+  "text": [
+    "在高阶装配台升级：左节点放前一阶段武器，中节点放梦境水晶块，右节点放悖论矿石；台面放六个悖论尘。升级保留耐久损耗、附魔、自定义名称和装入的法术水晶。",
+    "第2次升级：攻击力12，攻速2.0，完整引导回血18点，特殊范围为基础的150%。悖论颗粒随等级增加。",
+    "§b§o至少升级不需要锻造模板）§r"
+  ],
+  "links": [
+    {
+      "target": "crystallized_bone_nail",
+      "label": "武器使用"
+    },
+    {
+      "target": "advanced_assembly_table",
+      "label": "高阶装配台"
+    }
+  ]
+}

@@ -39,7 +39,7 @@ public final class CrystalGridRenderer extends BlockEntityWithoutLevelRenderer {
             pose.translate((Math.round(7.5+4.5*Math.sin(angle))+.5)/16,
                     (Math.round(7.5+4.5*Math.cos(angle))+.5)/16,.5);
             pose.scale(.13F,.13F,.13F);
-            mc.getItemRenderer().renderStatic(contents.get(i),ItemDisplayContext.FIXED,LightTexture.FULL_BRIGHT,overlay,pose,buffers,mc.level,0);
+            mc.getItemRenderer().renderStatic(contents.get(i),ItemDisplayContext.FIXED,LightTexture.FULL_BRIGHT,overlay,pose,CrystalGlassLayer.contents(buffers),mc.level,0);
             pose.popPose();
         }
         pose.popPose();

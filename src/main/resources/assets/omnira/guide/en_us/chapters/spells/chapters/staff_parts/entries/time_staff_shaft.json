@@ -1,0 +1,15 @@
+{
+  "id": "time_staff_shaft",
+  "item": "omnira:time_staff_shaft",
+  "title": "Time Wood Staff Shaft",
+  "text": [
+    "Provides 2 enhancement slots, +10% spell power and +20% mana regeneration while the assembled staff is held in the main hand."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "time_staff_shaft_crafting",
+      "label": "Crafting"
+    }
+  ]
+}

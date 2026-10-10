@@ -22,6 +22,29 @@ import java.util.UUID;
 @GameTestHolder("omnira_anchoring")
 @PrefixGameTestTemplate(false)
 public final class AnchoringSigilGameTests {
+    @GameTest(template="spell_arena") public static void sigilDoesNotPreventWarpBlockSlowdown(GameTestHelper h){
+        var p=player(h);equip(p);
+        h.assertTrue(com.mcmagic.omnira.time.TemporalCreatureTags.timeImmune(p),"Biome protection missing");
+        h.assertTrue(!p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,100))
+                &&!p.addEffect(new MobEffectInstance(MobEffects.WITHER,100)),"Vanilla effect immunity missing");
+        long now=h.getLevel().getGameTime();
+        TimeWarpEffects.touch(p,now-72);TimeWarpEffects.touch(p,now);
+        TimeWarpEffects.playerTick(new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(p));
+        var attrs=java.util.List.of(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED,
+                net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED,
+                net.minecraft.world.entity.ai.attributes.Attributes.BLOCK_BREAK_SPEED);
+        var ids=java.util.List.of("time_warp_speed","time_warp_attack","time_warp_mining");
+        for(int i=0;i<attrs.size();i++){
+            var modifier=p.getAttribute(attrs.get(i)).getModifier(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira",ids.get(i)));
+            h.assertTrue(modifier!=null&&Math.abs(modifier.amount()+.9)<.0001,"Sigil prevented block slowdown: "+ids.get(i));
+        }
+        h.runAfterDelay(3,()->{
+            TimeWarpEffects.playerTick(new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(p));
+            for(int i=0;i<attrs.size();i++)h.assertTrue(p.getAttribute(attrs.get(i)).getModifier(
+                    net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira",ids.get(i)))==null,"Block slowdown persisted after leaving");
+            h.succeed();
+        });
+    }
     @GameTest(template="spell_arena") public static void wornSigilPreventsMireRewind(GameTestHelper h){
         var p=player(h);
         var level=h.getLevel();

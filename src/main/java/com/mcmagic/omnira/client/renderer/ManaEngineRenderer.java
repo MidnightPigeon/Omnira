@@ -24,7 +24,7 @@ public final class ManaEngineRenderer implements BlockEntityRenderer<BlockEntity
     }
     private static void item(ItemStack stack,PoseStack pose,MultiBufferSource buffers,int light,int overlay,BlockEntity entity) {
         pose.pushPose();pose.mulPose(Axis.XP.rotationDegrees(90));pose.scale(.22F,.22F,.22F);
-        Minecraft.getInstance().getItemRenderer().renderStatic(stack,ItemDisplayContext.FIXED,light,overlay,pose,buffers,entity.getLevel(),0);
+        Minecraft.getInstance().getItemRenderer().renderStatic(stack,ItemDisplayContext.FIXED,light,overlay,pose,CrystalGlassLayer.contents(buffers),entity.getLevel(),0);
         pose.popPose();
     }
     @Override public void render(BlockEntity entity,float partialTick,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {

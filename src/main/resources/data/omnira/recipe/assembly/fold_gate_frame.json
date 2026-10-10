@@ -1,0 +1,30 @@
+{
+  "type": "omnira:assembly",
+  "slots": [
+    {
+      "tag": "omnira:fold_gate_materials"
+    },
+    {
+      "tag": "omnira:fold_gate_materials"
+    },
+    {
+      "tag": "omnira:fold_gate_materials"
+    },
+    {
+      "tag": "omnira:fold_gate_materials"
+    },
+    {
+      "tag": "omnira:fold_gate_materials"
+    },
+    {
+      "tag": "omnira:fold_gate_materials"
+    },
+    {
+      "item": "omnira:space_microcore"
+    }
+  ],
+  "result": {
+    "id": "omnira:fold_gate_frame",
+    "count": 1
+  }
+}

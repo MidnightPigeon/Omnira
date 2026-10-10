@@ -1,0 +1,26 @@
+{
+  "id": "primitive_reaction_cauldron",
+  "title": "Primitive Reaction Cauldron",
+  "item": "omnira:primitive_reaction_cauldron",
+  "recipes": false,
+  "text": [
+    "Use a Rough Alchemy Cauldron on a campfire. Insert reagents by right-clicking with items or fluid containers; retrieve items with an empty hand. Breaking it returns an empty cauldron and leaves the campfire.",
+    "Reactions start automatically when conditions match. Only one runs at a time; matching catalyst recipes take priority. The supporting catalyst is retained.",
+    "The base duration is 100 seconds. Items are consumed at startup; fluids are settled every 10 seconds. Full outputs wait for space; a missing catalyst pauses work.",
+    "Insufficient reagent at a fluid installment fails the reaction. If more than half was consumed, failure also causes a 10-block-radius blast dealing 15 magic damage and strong knockback, without breaking terrain."
+  ],
+  "links": [
+    {
+      "target": "rough_alchemy_cauldron",
+      "label": "Rough Alchemy Cauldron"
+    },
+    {
+      "target": "alchemical_products",
+      "label": "Fluid Transmutation"
+    },
+    {
+      "target": "rough_alchemical_energy_core",
+      "label": "Rough Alchemical Energy Core"
+    }
+  ]
+}

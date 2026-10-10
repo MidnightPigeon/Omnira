@@ -15,10 +15,6 @@
     {
       "target": "reversion_mire_guide",
       "label": "Reversion Mire"
-    },
-    {
-      "target": "damaged_research_facility_guide",
-      "label": "Damaged Research Facility"
     }
   ]
 }

@@ -1,0 +1,6 @@
+{
+  "type": "omnira:reaction",
+  "items": [{"ingredient": {"item": "omnira:spiritual_crystal"}}],
+  "support": {"item": "omnira:resonance_core"},
+  "results": [{"id": "omnira:resonance_crystal", "count": 1}]
+}

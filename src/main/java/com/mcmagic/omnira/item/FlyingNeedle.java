@@ -27,12 +27,20 @@ public final class FlyingNeedle extends ThrowableItemProjectile {
     @Override public boolean isPushedByFluid() {return false;}
     public void launch(ServerPlayer owner,ItemStack weapon) {
         setOwner(owner);this.weapon=weapon;weaponSlot=owner.getInventory().selected;
-        flightRange=10*SwordActions.reachMultiplier(owner);
+        flightRange=10*SwordActions.specialReachMultiplier(owner);
+        setItem(weapon.copyWithCount(1));
         origin=owner.getEyePosition();setPos(origin);setDeltaMovement(owner.getLookAngle());
     }
     @Override protected void onHit(HitResult hit) {
         if(level().isClientSide || returning || pullTarget!=null || !(getOwner() instanceof ServerPlayer p))return;
-        if(hit instanceof EntityHitResult entity)SwordActions.strike(p,entity.getEntity(),false);
+        if(hit instanceof EntityHitResult entity){
+            var target=entity.getEntity();boolean liveDonkey=target.getType()==EntityType.DONKEY&&target.isAlive();
+            SwordActions.strike(p,target,false);
+            if(liveDonkey&&!target.isAlive()){
+                var advancement=p.server.getAdvancements().get(net.minecraft.resources.ResourceLocation.parse("omnira:needle_sick_donkey"));
+                if(advancement!=null)p.getAdvancements().award(advancement,"flying_needle_kill");
+            }
+        }
         Vec3 direction=getDeltaMovement().normalize();
         pullTarget=findLanding(p,hit.getLocation(),direction);
         if(pullTarget==null)returning=true;

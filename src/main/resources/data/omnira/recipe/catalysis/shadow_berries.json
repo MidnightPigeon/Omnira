@@ -1,0 +1,23 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": [
+    {
+      "tag": "omnira:shadow_logs"
+    },
+    {
+      "item": "omnira:shadow_planks"
+    }
+  ],
+  "seed": {
+    "item": "omnira:shadow_berries"
+  },
+  "fluid": {
+    "id": "minecraft:water",
+    "amount": 500
+  },
+  "result": {
+    "id": "omnira:shadow_berries",
+    "count": 8
+  },
+  "stages": 3
+}

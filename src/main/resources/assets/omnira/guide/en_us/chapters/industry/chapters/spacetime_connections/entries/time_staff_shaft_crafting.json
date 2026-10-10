@@ -1,0 +1,15 @@
+{
+  "id": "time_staff_shaft_crafting",
+  "item": "omnira:time_staff_shaft",
+  "title": "Time Wood Staff Shaft · Crafting",
+  "text": [
+    "Uses the Shadow Wood Staff Shaft recipes with time logs instead; crafting and assembly are both supported."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "time_staff_shaft",
+      "label": "Function"
+    }
+  ]
+}

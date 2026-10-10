@@ -1,0 +1,7 @@
+{
+  "parent": "omnira:item/dream_crystal_shard",
+  "textures": {
+    "crystal": "omnira:block/deflection_crystal",
+    "particle": "omnira:block/deflection_crystal"
+  }
+}

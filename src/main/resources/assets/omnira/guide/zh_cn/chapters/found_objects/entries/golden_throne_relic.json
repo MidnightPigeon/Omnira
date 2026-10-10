@@ -1,0 +1,15 @@
+{
+  "id": "golden_throne_relic",
+  "title": "黄金王座与黄金马桶",
+  "item": "omnira:golden_throne",
+  "recipes": false,
+  "text": [
+    "来自泰拉皇宫的特殊方块。详细功能与交互方式见下方关联条目。"
+  ],
+  "links": [
+    {
+      "target": "golden_throne_guide",
+      "label": "功能说明"
+    }
+  ]
+}

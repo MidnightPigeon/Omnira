@@ -1,0 +1,25 @@
+{
+  "id": "enhanced_alchemical_energy_core",
+  "title": "强化炼金能核",
+  "item": "omnira:enhanced_alchemical_energy_core",
+  "recipes": true,
+  "text": [
+    "将1个粗糙炼金能核与4 B稀薄时空投入原始反应釜或大型炼金反应池，无需底部催化方块，基础100秒后获得1个强化炼金能核。原能核在开始时消耗，每10秒消耗400 mB液体。",
+    "蓝绿色的反应核心悬浮旋转，晶粒围绕其运转。它是可放置的炼金组件，本身不加工。",
+    "以强化炼金能核为底部催化方块，1 B精炼时空可在100秒内同时产出1枚时间微核和1枚空间微核；每10秒消耗100 mB。两种反应器均支持，催化能核不消耗，两种产物均需留有存放空间。"
+  ],
+  "links": [
+    {
+      "target": "rough_alchemical_energy_core",
+      "label": "粗糙炼金能核"
+    },
+    {
+      "target": "dilute_spacetime",
+      "label": "稀薄时空"
+    },
+    {
+      "target": "refined_spacetime",
+      "label": "精炼时空"
+    }
+  ]
+}

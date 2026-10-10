@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 /** Three continuous strata with random one-way rifts in the middle corridor. */
 public final class CorridorLayout {
     public static final int FLOOR=128,SEPARATOR_BOTTOM=112,SEPARATOR_TOP=144;
-    public static final int TIME_BASE=170,SPACE_CEILING=103,SPACE_ROOF=96;
+    public static final int TIME_BASE=170,SPACE_BASE=23,SPACE_CEILING=103,SPACE_ROOF=96;
     public static final int RIFT_RANGE=2048;
     public static final BlockPos TIME_ENTRANCE=new BlockPos(160,225,0),SPACE_ENTRANCE=new BlockPos(-160,41,0);
     private CorridorLayout(){}
@@ -35,6 +35,7 @@ public final class CorridorLayout {
                 .setValue(SpacetimeRiftBlock.FACING,direction).setValue(SpacetimeRiftBlock.HALF,y==base?DoubleBlockHalf.LOWER:DoubleBlockHalf.UPPER);
     }
     public static BlockState block(int x,int y,int z){
+        if(y==SPACE_BASE)return ModBlocks.PURE_SOLIDIFIED_SPACETIME.get().defaultBlockState();
         if(Math.abs(x)<=2 && y>=FLOOR && y<=FLOOR+4){
             if(y==FLOOR)return corridorRock(x,y,z,false);
             int bottom=riftBottom(z);
@@ -44,6 +45,7 @@ public final class CorridorLayout {
         }
         if(y>=SEPARATOR_BOTTOM && y<=SEPARATOR_TOP)return ModBlocks.PURE_SOLIDIFIED_SPACETIME.get().defaultBlockState();
         if(y==TIME_BASE||y==SPACE_CEILING)return ModBlocks.PURE_SOLIDIFIED_SPACETIME.get().defaultBlockState();
+        if(y>SPACE_BASE&&y<SPACE_CEILING&&com.mcmagic.omnira.space.abyss.AbyssTerrain.biome(x,z))return com.mcmagic.omnira.space.abyss.AbyssTerrain.block(x,y,z);
         if(y>TIME_BASE&&StrataBiomeSource.epochalCliffs(x,z))return com.mcmagic.omnira.archaeology.EpochalTerrain.block(x,y,z);
         if(y>=TIME_BASE&&y<=230&&StrataBiomeSource.reversionMire(x,z)){
             var mire=com.mcmagic.omnira.mire.MireTerrain.column(x,z);
@@ -70,8 +72,16 @@ public final class CorridorLayout {
             return (StrataBiomeSource.fleetingWoods(x,z)?(living?TimeNatureContent.LIVING_SILT:TimeNatureContent.SILT)
                     :(living?DreamContent.LIVING_TEMPORAL_SILT:DreamContent.TEMPORAL_SILT)).get().defaultBlockState();
         }
-        if(y>=24 && y<=40 || y>=SPACE_ROOF && y<=SPACE_CEILING)return DreamContent.SPATIAL_CRYSTAL.get().defaultBlockState();
-        if(y>=41 && y<SPACE_ROOF){
+        if(y>=24&&y<SPACE_CEILING){
+            if(com.mcmagic.omnira.space.phase.PhaseTerrain.biome(x,z))return com.mcmagic.omnira.space.phase.PhaseTerrain.block(x,y,z);
+            if(com.mcmagic.omnira.space.labyrinth.LabyrinthTerrain.biome(x,z))return com.mcmagic.omnira.space.labyrinth.LabyrinthTerrain.block(x,y,z);
+            if(com.mcmagic.omnira.space.geodes.DislocatedTerrain.biome(x,z))return com.mcmagic.omnira.space.geodes.DislocatedTerrain.block(x,y,z);
+            if(com.mcmagic.omnira.space.sea.VoidSeaTerrain.biome(x,z))return com.mcmagic.omnira.space.sea.VoidSeaTerrain.block(x,y,z);
+            var decoration=com.mcmagic.omnira.space.FoldedTerrain.decoration(x,y,z);if(decoration!=null)return decoration;
+        }
+        int floor=com.mcmagic.omnira.space.FoldedTerrain.floor(x,z),roof=com.mcmagic.omnira.space.FoldedTerrain.roof(x,z);
+        if(y>=24 && y<=floor || y>=roof && y<=SPACE_CEILING)return DreamContent.SPATIAL_CRYSTAL.get().defaultBlockState();
+        if(y>floor && y<roof){
             int cone=cone(x,y,z);
             if(cone!=0)return (Math.floorMod(hash(x,y,z),9)==0 && exposed(x,y,z)
                     ?DreamContent.EXCITED_SPATIAL_CRYSTAL:DreamContent.SPATIAL_CRYSTAL).get().defaultBlockState();
@@ -101,8 +111,10 @@ public final class CorridorLayout {
             int height=7+Math.floorMod(seed>>>20,9);
             int radius=2+Math.floorMod(seed>>>8,3);
             int dx=x-centerX,dz=z-centerZ;
-            for(int anchor:new int[]{40,SPACE_ROOF}){
-                int distance=Math.abs(y-anchor);
+            for(boolean upper:new boolean[]{false,true}){
+                int anchor=upper?com.mcmagic.omnira.space.FoldedTerrain.roof(centerX,centerZ):com.mcmagic.omnira.space.FoldedTerrain.floor(centerX,centerZ);
+                int distance=upper?anchor-y:y-anchor;
+                if(distance<0)continue;
                 if(distance>height)continue;
                 int width=Math.max(1,radius*(height-distance)/height);
                 if(dx*dx+dz*dz<=width*width)return 1;

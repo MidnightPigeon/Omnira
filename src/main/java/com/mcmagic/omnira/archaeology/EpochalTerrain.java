@@ -30,6 +30,7 @@ public final class EpochalTerrain {
     }
     public static int hash(int x,int y,int z){int h=x*73428767^y*9123671^z*1274126177;h=(h^(h>>>16))*0x7feb352d;return h^(h>>>15);}
     public static BlockState block(int x,int y,int z){
+        var portal=com.mcmagic.omnira.space.labyrinth.LongRangeTerrain.block(x,y,z);if(portal!=null)return portal;
         var c=column(x,z);if(y>c.surface)return Blocks.AIR.defaultBlockState();
         int era=era(y,c),h=Math.floorMod(hash(x,y,z),100);
         if(era<0)return (h<25?TimeNatureContent.LIVING_SILT:TimeNatureContent.SILT).get().defaultBlockState();

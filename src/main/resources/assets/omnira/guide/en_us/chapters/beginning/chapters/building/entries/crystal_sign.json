@@ -1,0 +1,10 @@
+{
+  "id": "crystal_sign",
+  "item": "omnira:crystal_sign",
+  "title": "Crystal Sign",
+  "recipes": true,
+  "text": [
+    "Place six spiritual crystals across the top two crafting rows and a stick in the bottom center to make three crystal signs.",
+    "Place on the ground or a wall. It emits light level 12 and supports editing, dye, glow ink and wax on its front text. Forge a crystal sign in the assembly table center with six infused crystals around it to make a Marvelous Wisdom Sign, which displays randomly drawn statements on both sides."
+  ]
+}

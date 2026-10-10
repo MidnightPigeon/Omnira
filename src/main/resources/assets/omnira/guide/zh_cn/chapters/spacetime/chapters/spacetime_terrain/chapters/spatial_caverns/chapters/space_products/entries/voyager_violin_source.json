@@ -1,0 +1,19 @@
+{
+  "id": "voyager_violin_source",
+  "title": "远旅的小提琴",
+  "item": "omnira:voyager_violin",
+  "recipes": false,
+  "text": [
+    "虚空灯塔的每枚战利品水晶球有10%概率藏有一把远旅的小提琴。演奏方式及具体效果见遗迹珍藏。"
+  ],
+  "links": [
+    {
+      "target": "voyager_violin",
+      "label": "遗迹珍藏：远旅的小提琴"
+    },
+    {
+      "target": "void_lighthouse_guide",
+      "label": "虚空灯塔"
+    }
+  ]
+}

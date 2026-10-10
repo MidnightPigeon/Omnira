@@ -1,0 +1,10 @@
+{
+  "id": "infused_crystal_grindstone",
+  "item": "omnira:infused_crystal_grindstone",
+  "title": "Infused Crystal Grindstone",
+  "text": [
+    "Upgrade a crystal grindstone using the same advanced assembly layout. Damaged equipment inside repairs one durability every five seconds.",
+    "Choose which enchantments to keep or remove in the right-hand list; all are kept initially. Taking the result costs 100 mana per removed enchantment, or 500 per curse. Disenchanting gives no experience."
+  ],
+  "recipes": true
+}

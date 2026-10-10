@@ -5,7 +5,9 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
-public final class TravelerManuscriptScreen extends Screen {
+public final class TravelerManuscriptScreen extends ResponsiveScreen {
+    @Override protected int minimumWidth(){return PANEL_WIDTH;}
+    @Override protected int minimumHeight(){return PANEL_HEIGHT;}
     private static final int PAGES=4, PANEL_WIDTH=188, PANEL_HEIGHT=218;
     private int page;
     private Button previous,next;
@@ -13,6 +15,7 @@ public final class TravelerManuscriptScreen extends Screen {
     public TravelerManuscriptScreen() {super(Component.translatable("item.omnira.traveler_manuscript"));}
 
     @Override protected void init() {
+        super.init();
         int left=(width-PANEL_WIDTH)/2,top=(height-PANEL_HEIGHT)/2;
         previous=pageButton(left+22,top+186,"<",-1);
         next=pageButton(left+144,top+186,">",1);
@@ -48,7 +51,7 @@ public final class TravelerManuscriptScreen extends Screen {
 
     @Override public void renderBackground(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {}
 
-    @Override public void render(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
+    @Override protected void renderContent(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
         graphics.fill(0,0,width,height,0xAA101821);
         int x=(width-PANEL_WIDTH)/2,y=(height-PANEL_HEIGHT)/2;
         graphics.fill(x+8,y,x+180,y+218,0xFF608CA2);
@@ -65,6 +68,6 @@ public final class TravelerManuscriptScreen extends Screen {
             lineY+=11;
         }
         graphics.drawCenteredString(font,(page+1)+" / "+PAGES,x+94,y+191,0xFF4A7789);
-        super.render(graphics,mouseX,mouseY,partialTick);
+        super.renderContent(graphics,mouseX,mouseY,partialTick);
     }
 }

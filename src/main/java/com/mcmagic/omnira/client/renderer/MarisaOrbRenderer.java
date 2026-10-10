@@ -18,7 +18,7 @@ public final class MarisaOrbRenderer implements BlockEntityRenderer<MarisaOrbBlo
     private static void globe(PoseStack pose,MultiBufferSource buffers,double time,int light,int overlay){
         var mc=Minecraft.getInstance();
         var goods=com.mcmagic.omnira.client.MarisaGoodsView.goods();
-        MultiBufferSource contents=type->buffers.getBuffer(type==Sheets.translucentItemSheet()?CrystalGlassLayer.ATLAS:type);
+        MultiBufferSource contents=CrystalGlassLayer.contents(buffers);
         for(int i=0;i<goods.size();i++){
             var item=goods.get(i);var at=com.mcmagic.omnira.shop.MarisaDisplayMotion.position(i,time);
             pose.pushPose();pose.translate(at.x,at.y,at.z);
@@ -41,7 +41,11 @@ public final class MarisaOrbRenderer implements BlockEntityRenderer<MarisaOrbBlo
         draw("shell",pose,buffers,light,overlay);
     }
     @Override public void render(MarisaOrbBlockEntity orb,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
+        pose.pushPose();pose.translate(.5,.5,.5);
+        pose.mulPose(com.mcmagic.omnira.block.OrbMount.rotation(orb.getBlockState().getValue(com.mcmagic.omnira.block.CrystalBallBlock.MOUNT)));
+        pose.translate(-.5,-.5,-.5);draw("base",pose,buffers,light,overlay);
         globe(pose,buffers,orb.getLevel()==null?0:orb.getLevel().getGameTime()+partial,light,overlay);
+        pose.popPose();
     }
     public static final class ItemRenderer extends BlockEntityWithoutLevelRenderer {
         public ItemRenderer(){super(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels());}

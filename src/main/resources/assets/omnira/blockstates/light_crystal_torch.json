@@ -1,10 +1,16 @@
 {
   "variants": {
-    "half=lower": {
-      "model": "omnira:block/light_crystal_torch_lower"
-    },
-    "half=upper": {
-      "model": "omnira:block/light_crystal_torch_upper"
-    }
+    "facing=up,half=lower": {"model":"omnira:block/light_crystal_torch_lower"},
+    "facing=up,half=upper": {"model":"omnira:block/light_crystal_torch_upper"},
+    "facing=down,half=lower": {"model":"omnira:block/light_crystal_torch_lower","x":180},
+    "facing=down,half=upper": {"model":"omnira:block/light_crystal_torch_upper","x":180},
+    "facing=north,half=lower": {"model":"omnira:block/light_crystal_torch_lower","x":90},
+    "facing=north,half=upper": {"model":"omnira:block/light_crystal_torch_upper","x":90},
+    "facing=south,half=lower": {"model":"omnira:block/light_crystal_torch_lower","x":270},
+    "facing=south,half=upper": {"model":"omnira:block/light_crystal_torch_upper","x":270},
+    "facing=east,half=lower": {"model":"omnira:block/light_crystal_torch_lower","x":90,"y":90},
+    "facing=east,half=upper": {"model":"omnira:block/light_crystal_torch_upper","x":90,"y":90},
+    "facing=west,half=lower": {"model":"omnira:block/light_crystal_torch_lower","x":90,"y":270},
+    "facing=west,half=upper": {"model":"omnira:block/light_crystal_torch_upper","x":90,"y":270}
   }
 }

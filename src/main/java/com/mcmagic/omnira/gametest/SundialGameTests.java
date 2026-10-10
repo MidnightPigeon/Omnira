@@ -19,6 +19,45 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @GameTestHolder("omnira_sundial")
 @PrefixGameTestTemplate(false)
 public final class SundialGameTests {
+    @GameTest(template="spell_arena") public static void choiceGrid(GameTestHelper h){
+        for(int count=0;count<=512;count++){
+            int side=com.mcmagic.omnira.time.SundialLayout.choiceSide(count);
+            h.assertTrue(side%2==1&&side*side>=count+1,"Grid must be odd with a reserved center");
+            h.assertTrue(side==1||(side-2)*(side-2)<count+1,"Grid is larger than necessary");
+            float radius=side*10*com.mcmagic.omnira.time.SundialLayout.choiceScale(count)+2;
+            h.assertTrue(137-radius>=0&&137+radius<=200&&66-radius>=0&&66+radius<151,"Popup overlaps inventory or exceeds panel");
+            for(int index=0;index<count;index++){
+                int cell=com.mcmagic.omnira.time.SundialLayout.choiceCell(index,side);
+                h.assertTrue(cell!=side*side/2&&com.mcmagic.omnira.time.SundialLayout.choiceIndex(cell,side)==index,"Grid mapping lost a choice");
+            }
+        }
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void directSelection(GameTestHelper h){
+        var pos=h.absolutePos(new BlockPos(4,1,4));
+        h.getLevel().setBlockAndUpdate(pos,SundialContent.BLOCK.get().defaultBlockState());
+        var machine=(SundialBlockEntity)h.getLevel().getBlockEntity(pos);
+        var input=new ItemStack(ModItems.SPIRITUAL_CRYSTAL.get());
+        machine.setItem(0,input.copy());
+        machine.setItem(2,new ItemStack(ModItems.TIME_MICROCORE.get(),5));
+        for(int i=0;i<30;i++)machine.tick();
+        int progress=machine.progress(),energy=machine.energy();
+        var player=h.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        player.setPos(pos.getX()+.5,pos.getY()+.5,pos.getZ()+.5);
+        player.containerMenu=new com.mcmagic.omnira.time.SundialMenu(17,player.getInventory(),machine);
+        var current=machine.selectedOutput();
+        h.assertTrue(com.mcmagic.omnira.time.SundialSelectionPayload.apply(player,new com.mcmagic.omnira.time.SundialSelectionPayload(17,input,current)),"Current target rejected");
+        h.assertTrue(machine.progress()==progress,"Selecting current target restarted conversion");
+        var next=SundialTimeline.choices(input).stream().filter(s->!ItemStack.isSameItemSameComponents(s,current)).findFirst().orElseThrow();
+        h.assertTrue(com.mcmagic.omnira.time.SundialSelectionPayload.apply(player,new com.mcmagic.omnira.time.SundialSelectionPayload(17,input,next)),"Direct choice failed");
+        h.assertTrue(machine.progress()==1&&machine.energy()==energy&&ItemStack.isSameItemSameComponents(machine.selectedOutput(),next),"Target switch did not restart correctly");
+        h.assertTrue(!machine.select(new ItemStack(Items.DIAMOND)),"Unlisted target accepted");
+        h.assertTrue(!com.mcmagic.omnira.time.SundialSelectionPayload.apply(player,new com.mcmagic.omnira.time.SundialSelectionPayload(18,input,current)),"Wrong menu accepted");
+        h.assertTrue(!com.mcmagic.omnira.time.SundialSelectionPayload.apply(player,new com.mcmagic.omnira.time.SundialSelectionPayload(17,new ItemStack(Items.IRON_INGOT),current)),"Stale input accepted");
+        player.setPos(player.position().add(100,0,0));
+        h.assertTrue(!com.mcmagic.omnira.time.SundialSelectionPayload.apply(player,new com.mcmagic.omnira.time.SundialSelectionPayload(17,input,current)),"Distant selection accepted");
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void layout(GameTestHelper h) {
         int balls=0,dial=0;
         for(var cell:DoomsdayRitePlan.cells()) {

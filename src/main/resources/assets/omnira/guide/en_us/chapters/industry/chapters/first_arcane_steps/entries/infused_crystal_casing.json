@@ -4,7 +4,7 @@
   "title": "Infused Crystal Casing",
   "text": [
     "Use an Infused Spiritual Crystal on a Spiritual Crystal Block to form an Infused Crystal Casing. Its clear body and connecting trim match the Crystal Casing, but its rim glows pale white.",
-    "Both casings can wrap Create shafts and cogwheels. A wrench removes a standalone casing; wrenching an encased shaft toggles its axial connection, and sneak-wrenching removes the shell."
+    "Both casings can wrap Create shafts, both cogwheel sizes and fluid pipes. A wrench removes a standalone casing; wrenching an encased shaft toggles its axial connection, and sneak-wrenching removes its shell. Encased pipes retain their connections and pump-driven flow; ordinary wrenching removes the pipe shell."
   ],
   "recipes": false
 }

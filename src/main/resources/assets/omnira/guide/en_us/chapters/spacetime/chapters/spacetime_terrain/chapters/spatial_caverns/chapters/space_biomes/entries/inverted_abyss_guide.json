@@ -1,0 +1,20 @@
+{
+  "id": "inverted_abyss_guide",
+  "title": "Inverted Abyss",
+  "item": "omnira:excited_rough_spatial_crystal_block",
+  "recipes": false,
+  "text": [
+    "Gravity points down in the lower cave and up in the upper cave. A five-block weightless band separates them; forward movement there follows your gaze. The spacetime amulet does not alter gravity.",
+    "Excited spatial crystals cover both surfaces, where vast fissures reach the pure solidified spacetime layers. Floating groups of six rough crystals surrounding one excited crystal mark the weightless band. Skyreach towers connect the two ends."
+  ],
+  "links": [
+    {
+      "target": "skyreach_tower_guide",
+      "label": "Skyreach Tower"
+    },
+    {
+      "target": "dense_void_mass_guide",
+      "label": "High-Density Void Mass"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "paradox_ore",
+  "item": "omnira:paradox_ore",
+  "title": "Paradox Ore",
+  "text": [
+    "Assemble a paradox mystery with six spiritual crystals. This non-placeable material is intended for Nail upgrades.",
+    "Used for all four upgrades of its corresponding ritual weapon."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "paradox_mystery",
+      "label": "Paradox Mystery"
+    },
+    {
+      "target": "crystallized_bone_nail",
+      "label": "Weapon Upgrades"
+    }
+  ]
+}

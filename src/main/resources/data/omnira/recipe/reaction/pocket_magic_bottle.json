@@ -1,0 +1,10 @@
+{
+  "type": "omnira:reaction",
+  "items": [
+    {"ingredient": {"item": "minecraft:glass_bottle"}},
+    {"ingredient": {"item": "omnira:infused_spiritual_crystal"}}
+  ],
+  "fluid": {"id": "omnira:dilute_spacetime", "amount": 1000},
+  "support": {"item": "omnira:infused_crystal_block"},
+  "results": [{"id": "omnira:pocket_magic_bottle", "count": 1}]
+}

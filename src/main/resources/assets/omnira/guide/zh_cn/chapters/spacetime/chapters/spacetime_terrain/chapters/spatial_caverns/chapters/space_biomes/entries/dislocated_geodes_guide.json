@@ -1,0 +1,16 @@
+{
+  "id": "dislocated_geodes_guide",
+  "title": "错位晶洞",
+  "item": "omnira:deflection_crystal_block",
+  "recipes": false,
+  "text": [
+    "起伏的洞底和洞顶与相邻洞穴自然衔接。上下相向的晶锥之间，浅蓝到浅粉的偏折水晶大量替代了粗糙空间晶块；晶锥尖端生长着偏折水晶母岩及其晶簇。",
+    "在错位晶洞内踩上偏折水晶块，会让行进方向逐渐向随机一侧偏转10°。佩戴时空锚定印记可免疫此踩踏效果，搬到其他群系的晶块不会造成偏折。晶簇则在任何地方都随行进距离弯曲你的路线，且无法用护符免疫。"
+  ],
+  "links": [
+    {
+      "target": "deflection_crystal_guide",
+      "label": "偏折水晶与晶簇"
+    }
+  ]
+}

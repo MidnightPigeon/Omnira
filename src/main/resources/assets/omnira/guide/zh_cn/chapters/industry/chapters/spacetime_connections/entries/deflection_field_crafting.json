@@ -1,0 +1,19 @@
+{
+  "id": "deflection_field_crafting",
+  "item": "omnira:deflection_field",
+  "title": "偏折力场制作",
+  "recipes": true,
+  "text": [
+    "在高阶装配台上使用3份星尘和3枚偏折水晶，中央节点放星辰之源，左右节点各放一个空间折跃点。"
+  ],
+  "links": [
+    {
+      "target": "deflection_field",
+      "label": "偏折力场使用"
+    },
+    {
+      "target": "star_source_relic",
+      "label": "星辰之源"
+    }
+  ]
+}

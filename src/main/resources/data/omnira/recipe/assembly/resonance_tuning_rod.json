@@ -1,0 +1,30 @@
+{
+  "type": "omnira:assembly",
+  "slots": [
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:resonance_crystal"
+    }
+  ],
+  "result": {
+    "id": "omnira:resonance_tuning_rod",
+    "count": 1
+  }
+}

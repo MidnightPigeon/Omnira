@@ -7,7 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public final class ArquebusScreen extends AbstractContainerScreen<ArquebusMenu> {
+public final class ArquebusScreen extends ResponsiveContainerScreen<ArquebusMenu> {
     private static final ResourceLocation VANILLA=ResourceLocation.withDefaultNamespace("textures/gui/container/crafting_table.png");
     public ArquebusScreen(ArquebusMenu menu,Inventory inventory,Component title) {super(menu,inventory,title);}
     @Override protected void renderBg(GuiGraphics g,float partial,int mouseX,int mouseY) {
@@ -18,5 +18,5 @@ public final class ArquebusScreen extends AbstractContainerScreen<ArquebusMenu> 
         g.fill(leftPos+72,topPos+27,leftPos+104,topPos+59,0xFFCEE3EA);
         g.blit(VANILLA,leftPos+79,topPos+34,7,83,18,18,256,256);
     }
-    @Override public void render(GuiGraphics g,int x,int y,float partial) {super.render(g,x,y,partial);renderTooltip(g,x,y);}
+    @Override protected void renderContent(GuiGraphics g,int x,int y,float partial) {super.renderContent(g,x,y,partial);renderTooltip(g,x,y);}
 }

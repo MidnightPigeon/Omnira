@@ -25,6 +25,8 @@ public final class DreamContent {
                     .isRedstoneConductor((s,l,p)->false).isViewBlocking((s,l,p)->false).isSuffocating((s,l,p)->false)));
     public static final DeferredBlock<Block> SPIRITUAL_CRYSTAL_STAIRS=block("spiritual_crystal_stairs",()->new DecorativeStairBlock(SPIRITUAL_CRYSTAL_BLOCK.get().defaultBlockState(),BlockBehaviour.Properties.ofFullCopy(SPIRITUAL_CRYSTAL_BLOCK.get())));
     public static final DeferredBlock<Block> DREAM_CRYSTAL_BLOCK=block("dream_crystal_block",()->glass(10));
+    public static final DeferredBlock<Block> INFUSED_CRYSTAL_BLOCK=block("infused_crystal_block",()->new com.mcmagic.omnira.block.InfusedCrystalBlock(
+            BlockBehaviour.Properties.ofFullCopy(SPIRITUAL_CRYSTAL_BLOCK.get())));
     public static final DeferredBlock<Block> CRYSTAL_COLUMN=block("crystal_column",()->new com.mcmagic.omnira.block.CrystalColumnBlock(stone().noOcclusion().sound(SoundType.AMETHYST).lightLevel(s->10),0));
     public static final DeferredBlock<Block> CRYSTAL_COLUMN_BASE=block("crystal_column_base",()->new com.mcmagic.omnira.block.CrystalColumnBlock(stone().noOcclusion().sound(SoundType.AMETHYST).lightLevel(s->10),1));
     public static final DeferredBlock<Block> CRYSTAL_COLUMN_CAPITAL=block("crystal_column_capital",()->new com.mcmagic.omnira.block.CrystalColumnBlock(stone().noOcclusion().sound(SoundType.AMETHYST).lightLevel(s->10),2));

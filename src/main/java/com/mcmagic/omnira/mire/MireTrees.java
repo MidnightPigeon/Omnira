@@ -83,6 +83,8 @@ public final class MireTrees extends SavedData {
             if(tree.until>0){
                 if(now>=tree.until){if(restore(level,tree))restored.add(tree.root);remove.add(tree.root);}
             }else if(now>=MireCycle.PERIOD&&now%MireCycle.PERIOD==0&&level.getBiome(tree.root).is(MireCycle.BIOME)){
+                // Rewind a whole tree only when its complete recorded shape belongs to the mire.
+                if(tree.footprint.stream().anyMatch(p->!level.getBiome(p).is(MireCycle.BIOME)))continue;
                 if(!level.getBlockState(tree.root).is(tree.trunk.getBlock())){remove.add(tree.root);continue;}
                 var snapshot=new LinkedHashMap<BlockPos,BlockState>();
                 for(var pos:tree.footprint){var state=level.getBlockState(pos);if(material(state))snapshot.put(pos,state);}

@@ -11,7 +11,7 @@ import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.blending.Blender;
 
 public final class CorridorGenerator extends ChunkGenerator {
-    private static final int[][] STRATA={{24,CorridorLayout.SPACE_CEILING},{CorridorLayout.SEPARATOR_BOTTOM,CorridorLayout.SEPARATOR_TOP},{CorridorLayout.TIME_BASE,230}};
+    private static final int[][] STRATA={{CorridorLayout.SPACE_BASE,CorridorLayout.SPACE_CEILING},{CorridorLayout.SEPARATOR_BOTTOM,CorridorLayout.SEPARATOR_TOP},{CorridorLayout.TIME_BASE,230}};
     public static final MapCodec<CorridorGenerator> CODEC=RecordCodecBuilder.mapCodec(i->i.group(BiomeSource.CODEC.fieldOf("biome_source").forGetter(CorridorGenerator::getBiomeSource)).apply(i,CorridorGenerator::new));
     public CorridorGenerator(BiomeSource source){super(source);}
     @Override protected MapCodec<? extends ChunkGenerator> codec(){return CODEC;}
@@ -22,7 +22,21 @@ public final class CorridorGenerator extends ChunkGenerator {
             for(var band:STRATA)for(int y=band[0];y<=band[1];y++){
                 var state=CorridorLayout.block(x,y,z);if(state.isAir())continue;
                 pos.set(x,y,z);chunk.setBlockState(pos,state,false);
-                if(state.is(com.mcmagic.omnira.archaeology.ArchaeologyContent.SUSPICIOUS.get())){
+                if(state.getBlock() instanceof com.mcmagic.omnira.space.labyrinth.VoidPortalBlock){
+                    chunk.setBlockEntity(new com.mcmagic.omnira.space.labyrinth.VoidPortalEntity(pos.immutable(),state));
+                }
+                else if(y<40&&com.mcmagic.omnira.space.labyrinth.LabyrinthTerrain.biome(x,z)&&state.getBlock() instanceof net.minecraft.world.level.block.EntityBlock entityBlock){
+                    var be=entityBlock.newBlockEntity(pos.immutable(),state);
+                    if(be!=null){com.mcmagic.omnira.space.labyrinth.LabyrinthDecoration.configure(be,pos.immutable());chunk.setBlockEntity(be);}
+                }
+                else if(state.is(com.mcmagic.omnira.registry.ModBlocks.CRYSTAL_BALL.get())){
+                    var ball=new com.mcmagic.omnira.block.entity.CrystalBallBlockEntity(pos.immutable(),state);
+                    ball.setLootTable(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.LOOT_TABLE,net.minecraft.resources.ResourceLocation.parse("omnira:chests/radiant_courtyard")),com.mcmagic.omnira.space.sea.VoidSeaTerrain.hash(x,y,z));
+                    chunk.setBlockEntity(ball);
+                }
+                if(state.is(com.mcmagic.omnira.registry.ModBlocks.SPACE_WARP_POINT.get()))
+                    chunk.setBlockEntity(new com.mcmagic.omnira.space.SpaceWarpBlockEntity(pos.immutable(),state));
+                if(state.is(com.mcmagic.omnira.archaeology.ArchaeologyContent.SUSPICIOUS.get())&&!(y<40&&com.mcmagic.omnira.space.labyrinth.LabyrinthTerrain.biome(x,z))){
                     var be=new net.minecraft.world.level.block.entity.BrushableBlockEntity(pos.immutable(),state);
                     be.setLootTable(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.LOOT_TABLE,
                             net.minecraft.resources.ResourceLocation.parse("omnira:archaeology/epoch_"+state.getValue(com.mcmagic.omnira.archaeology.TimeSandBlock.ERA))),

@@ -35,11 +35,13 @@ public final class DreamTransitGameTests {
         if(net.neoforged.fml.ModList.get().isLoaded("create"))h.assertTrue(checked>0,"No Create structures checked");
         h.succeed();
     }
-    @GameTest(template="spell_arena",timeoutTicks=400)
+    @GameTest(template="spell_arena",timeoutTicks=400,batch="anchor_dream_portal")
     public static void vehiclePassengerAndCargoRoundTrip(GameTestHelper h)throws Exception{
         var level=h.getLevel();var pos=h.absolutePos(new BlockPos(6,3,6));
         level.setBlockAndUpdate(pos,ModBlocks.DREAM_PORTAL.get().defaultBlockState());
         var portal=(DreamPortalBlockEntity)level.getBlockEntity(pos);portal.initialize(true);
+        var anchorState=com.mcmagic.omnira.space.anchor.AnchorContent.ACTIVE.get().defaultBlockState();
+        level.setBlockAndUpdate(pos.above(4),anchorState);
         var orb=ModEntityTypes.CRUISE_ORB.get().create(level);
         orb.setPos(pos.getX()+.5,pos.getY(),pos.getZ()+.5);level.addFreshEntity(orb);
         orb.setCore(new ItemStack(ModItems.DREAM_SPELL_CORE.get()));
@@ -63,6 +65,7 @@ public final class DreamTransitGameTests {
             var returnPos=arrived.blockPosition();
             dream.setBlockAndUpdate(returnPos,ModBlocks.DREAM_PORTAL.get().defaultBlockState());
             ((DreamPortalBlockEntity)dream.getBlockEntity(returnPos)).initialize(true);
+            dream.setBlockAndUpdate(returnPos.above(4),anchorState);
             arrived.getPersistentData().putLong("OmniraDreamCooldown",0);
             arrived.setPos(returnPos.getX()+.5,returnPos.getY(),returnPos.getZ()+.5);
             arrived.placePortalTicket(returnPos);
@@ -73,7 +76,8 @@ public final class DreamTransitGameTests {
                         +", dream="+dream.getEntity(id)+", riderLevel="+player.level().dimension().location()+", vehicle="+player.getVehicle()
                         +", origin="+arrived.getPersistentData()+", returnPortal="+dream.getBlockEntity(returnPos));
                 h.assertTrue(returned.storage.items.getStackInSlot(0).getCount()==17 && returned.storage.tank.getFluidAmount()==1500,"Round trip changed storage");
-                player.stopRiding();player.discard();returned.discard();channel.finishAndReleaseAll();dream.removeBlock(returnPos,false);h.succeed();
+                player.stopRiding();player.discard();returned.discard();channel.finishAndReleaseAll();dream.removeBlock(returnPos,false);
+                level.removeBlock(pos.above(4),false);dream.removeBlock(returnPos.above(4),false);h.succeed();
             });
         });
     }

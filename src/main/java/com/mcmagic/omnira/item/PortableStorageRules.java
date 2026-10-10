@@ -13,7 +13,9 @@ public final class PortableStorageRules {
     public static boolean stabilized(ItemStack stack){
         if(stack.isEmpty())return false;
         boolean vehicle=stack.is(ModItems.CRUISE_ORB.get());
-        if(!vehicle && !stack.is(ModItems.CRYSTAL_BALL.get()) && !stack.is(ModItems.LIQUID_CRYSTAL_BALL.get()))return false;
+        if(!vehicle && !stack.is(ModItems.CRYSTAL_BALL.get()) && !stack.is(ModItems.LIQUID_CRYSTAL_BALL.get())
+            && !stack.is(com.mcmagic.omnira.storage.CrystalStorageContent.ITEM.get()) && !stack.is(com.mcmagic.omnira.storage.CrystalStorageContent.FLUID.get())
+            && !stack.is(com.mcmagic.omnira.space.sea.StellarCraftContent.ORB_ITEM.get()))return false;
         var data=stack.get(vehicle?DataComponents.CUSTOM_DATA:DataComponents.BLOCK_ENTITY_DATA);
         if(data==null)return false;
         // Read only the upgrade list; copying a filled container's entire NBT on every slot check is costly.

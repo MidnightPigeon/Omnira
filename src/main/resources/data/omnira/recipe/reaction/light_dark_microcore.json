@@ -1,0 +1,6 @@
+{
+  "type": "omnira:reaction",
+  "fluid": {"id": "omnira:void_starflow", "amount": 4000},
+  "support": [{"item": "omnira:living_temporal_silt"}, {"item": "omnira:sedimented_living_temporal_silt"}],
+  "results": [{"id": "omnira:light_microcore"}, {"id": "omnira:dark_microcore"}]
+}

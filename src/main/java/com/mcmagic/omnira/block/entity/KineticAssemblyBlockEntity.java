@@ -34,8 +34,7 @@ public final class KineticAssemblyBlockEntity extends KineticBlockEntity impleme
             lastRpm=rpm;
             if(hasNetwork()) getOrCreateNetwork().updateStressFor(this,calculateStressApplied());
         }
-        work.setMechanicalPowered(Math.abs(getSpeed())>=16 && !isOverStressed());
-        if(work.mechanicalPowered()) work.automaticStrike();
+        work.tickPower(Math.abs(getSpeed())>=16 && !isOverStressed());
     }
     @Override protected void write(CompoundTag tag,HolderLookup.Provider registries,boolean clientPacket) {
         super.write(tag,registries,clientPacket);

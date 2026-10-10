@@ -1,0 +1,7 @@
+{
+  "selector": "omnira:unstable_fold_gate",
+  "properties": {
+    "sable:mass": 0,
+    "sable:volume": 1
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "skyreach_tower_guide",
+  "title": "通天塔",
+  "item": "omnira:dense_void_mass",
+  "recipes": false,
+  "text": [
+    "上下相对的环形柱廊贯穿倒悬深渊，螺旋阶梯通向中央无重力带。两端各有入口与战利品平台，每侧保存两枚战利品水晶球与一枚战利品液晶球。",
+    "通道中央悬浮着高密度虚空团块，穿过这里时留意它的引力。"
+  ],
+  "links": [
+    {
+      "target": "inverted_abyss_guide",
+      "label": "倒悬深渊"
+    },
+    {
+      "target": "dense_void_mass_guide",
+      "label": "高密度虚空团块"
+    },
+    {
+      "target": "spatial_crystal_guide",
+      "label": "空间水晶"
+    }
+  ]
+}

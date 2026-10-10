@@ -18,18 +18,28 @@ import net.neoforged.neoforge.registries.*;
 
 /** Explicit functional groups keep progression and material families together. */
 public final class ModCreativeModeTabs {
-    public enum Category { SPELLS, EQUIPMENT, RESEARCH, MISC, BUILDING, NATURE }
+    public enum Category { SPELLS, RESEARCH, STORAGE, BUILDING, MISC }
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS=DeferredRegister.create(Registries.CREATIVE_MODE_TAB,Omnira.MOD_ID);
-    // Existing registry IDs are retained; only titles, order and contents change.
-    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> MAGIC_MOD_TAB=tab("omnira",Category.SPELLS,CreativeModeTabs.COMBAT,()->StaffAssembly.basic().create());
-    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> EQUIPMENT_TAB=tab("equipment",Category.EQUIPMENT,MAGIC_MOD_TAB.getKey(),()->ModItems.CRYSTAL_PICKAXE.get().getDefaultInstance());
-    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> RESEARCH_TAB=tab("research",Category.RESEARCH,EQUIPMENT_TAB.getKey(),()->ModItems.ANALYSIS_ARTISAN_TABLE.get().getDefaultInstance());
-    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> MISC_TAB=tab("misc",Category.MISC,RESEARCH_TAB.getKey(),()->ModItems.RESONANCE_CRYSTAL.get().getDefaultInstance());
-    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> BUILDING_TAB=tab("building",Category.BUILDING,MISC_TAB.getKey(),()->DreamContent.CRYSTAL_COLUMN.get().asItem().getDefaultInstance());
-    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> NATURE_TAB=tab("nature",Category.NATURE,BUILDING_TAB.getKey(),()->DreamContent.SHADOW_LEAVES.get().asItem().getDefaultInstance());
+    // Retain the five surviving tab IDs; merged categories are catalog groups.
+    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> MAGIC_MOD_TAB=tab("omnira",Category.SPELLS,CreativeModeTabs.SPAWN_EGGS,()->StaffAssembly.basic().create());
+    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> RESEARCH_TAB=tab("research",Category.RESEARCH,MAGIC_MOD_TAB.getKey(),()->ModItems.ANALYSIS_ARTISAN_TABLE.get().getDefaultInstance());
+    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> STORAGE_TAB=tab("storage",Category.STORAGE,RESEARCH_TAB.getKey(),()->ModItems.CRYSTAL_BALL.get().getDefaultInstance());
+    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> BUILDING_TAB=tab("building",Category.BUILDING,STORAGE_TAB.getKey(),()->DreamContent.CRYSTAL_COLUMN.get().asItem().getDefaultInstance());
+    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> MISC_TAB=tab("misc",Category.MISC,BUILDING_TAB.getKey(),()->ModItems.RESONANCE_CRYSTAL.get().getDefaultInstance());
     private static DeferredHolder<CreativeModeTab,CreativeModeTab> tab(String id,Category category,ResourceKey<CreativeModeTab> before,java.util.function.Supplier<ItemStack> icon){
         return CREATIVE_MODE_TABS.register(id,()->CreativeModeTab.builder().title(Component.translatable("itemGroup.omnira."+category.name().toLowerCase(Locale.ROOT)))
                 .withTabsBefore(before).icon(icon).displayItems((parameters,output)->contents(category).forEach(output::accept)).build());
+    }
+    public static List<CreativeModeTab> groupTabs(List<CreativeModeTab> sorted){
+        var own=List.of(MAGIC_MOD_TAB.get(),RESEARCH_TAB.get(),STORAGE_TAB.get(),BUILDING_TAB.get(),MISC_TAB.get());
+        var result=new ArrayList<CreativeModeTab>();
+        boolean inserted=false;
+        for(var tab:sorted){
+            if(own.contains(tab)){
+                if(!inserted){own.stream().filter(sorted::contains).forEach(result::add);inserted=true;}
+            }else result.add(tab);
+        }
+        return List.copyOf(result);
     }
     private static final JsonObject CATALOG=readCatalog();
     private static JsonObject readCatalog(){

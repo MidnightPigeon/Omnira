@@ -1,0 +1,12468 @@
+[
+  {
+    "x": 6,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 17,
+    "z": 9,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 17,
+    "z": 10,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "true",
+      "west": "false"
+    }
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 16,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 17,
+    "z": 11,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "true",
+      "west": "false"
+    }
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 16,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 17,
+    "z": 12,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "true",
+      "west": "false"
+    }
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 16,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 17,
+    "z": 13,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "true",
+      "west": "false"
+    }
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 17,
+    "z": 14,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "true",
+      "west": "false"
+    }
+  },
+  {
+    "x": 6,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 6,
+    "y": 17,
+    "z": 15,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "true",
+      "west": "false"
+    }
+  },
+  {
+    "x": 7,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 7,
+    "y": 16,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 17,
+    "z": 8,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 21,
+    "z": 9,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 1,
+    "z": 10,
+    "name": "omnira:stardust",
+    "properties": {
+      "fluid_level": "0",
+      "water": "0"
+    }
+  },
+  {
+    "x": 7,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 21,
+    "z": 10,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 16,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 21,
+    "z": 11,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 16,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 21,
+    "z": 12,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 16,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 21,
+    "z": 13,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 21,
+    "z": 14,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 21,
+    "z": 15,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 7,
+    "y": 16,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 7,
+    "y": 17,
+    "z": 16,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 7,
+    "y": 1,
+    "z": 17,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 8,
+    "y": 16,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 17,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 16,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 21,
+    "z": 8,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 2,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 3,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 4,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 5,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 6,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 7,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 8,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 9,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 10,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 11,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 12,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 13,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 14,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 15,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 17,
+    "z": 9,
+    "name": "omnira:stardust",
+    "properties": {
+      "fluid_level": "0",
+      "water": "0"
+    }
+  },
+  {
+    "x": 8,
+    "y": 18,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 19,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 20,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 21,
+    "z": 9,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 2,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 3,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 4,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 5,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 6,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 7,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 8,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 9,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 10,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 11,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 12,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 13,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 14,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 15,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 17,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 18,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 19,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 20,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 21,
+    "z": 10,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 2,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 3,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 4,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 5,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 6,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 7,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 8,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 9,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 10,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 11,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 12,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 13,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 14,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 15,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 16,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 17,
+    "z": 11,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 8,
+    "y": 18,
+    "z": 11,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 8,
+    "y": 19,
+    "z": 11,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 8,
+    "y": 20,
+    "z": 11,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 8,
+    "y": 21,
+    "z": 11,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 2,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 3,
+    "z": 12,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 8,
+    "y": 4,
+    "z": 12,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 8,
+    "y": 5,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 6,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 7,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 8,
+    "z": 12,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 8,
+    "y": 9,
+    "z": 12,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 8,
+    "y": 10,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 11,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 12,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 13,
+    "z": 12,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 8,
+    "y": 14,
+    "z": 12,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 8,
+    "y": 15,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 16,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 17,
+    "z": 12,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 8,
+    "y": 18,
+    "z": 12,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 8,
+    "y": 19,
+    "z": 12,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 8,
+    "y": 20,
+    "z": 12,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 8,
+    "y": 21,
+    "z": 12,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 2,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 3,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 4,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 5,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 6,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 7,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 8,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 9,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 10,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 11,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 12,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 13,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 14,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 15,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 16,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 17,
+    "z": 13,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 8,
+    "y": 18,
+    "z": 13,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 8,
+    "y": 19,
+    "z": 13,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 8,
+    "y": 20,
+    "z": 13,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 8,
+    "y": 21,
+    "z": 13,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 2,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 3,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 4,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 5,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 6,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 7,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 8,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 9,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 10,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 11,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 12,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 13,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 14,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 15,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 17,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 18,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 19,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 20,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 21,
+    "z": 14,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 15,
+    "name": "omnira:stardust",
+    "properties": {
+      "fluid_level": "0",
+      "water": "0"
+    }
+  },
+  {
+    "x": 8,
+    "y": 2,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 3,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 4,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 5,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 6,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 7,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 8,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 9,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 10,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 11,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 12,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 13,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 14,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 15,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 17,
+    "z": 15,
+    "name": "omnira:stardust",
+    "properties": {
+      "fluid_level": "0",
+      "water": "0"
+    }
+  },
+  {
+    "x": 8,
+    "y": 18,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 19,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 20,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 8,
+    "y": 21,
+    "z": 15,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 16,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 21,
+    "z": 16,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "z": 17,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 8,
+    "y": 16,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 8,
+    "y": 17,
+    "z": 17,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 17,
+    "z": 6,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 21,
+    "z": 7,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 3,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 4,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 5,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 6,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 7,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 8,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 9,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 10,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 11,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 12,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 13,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 14,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 15,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 17,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 18,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 19,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 20,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 21,
+    "z": 8,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 3,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 4,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 5,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 6,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 7,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 8,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 9,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 10,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 11,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 12,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 13,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 14,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 15,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 17,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 18,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 19,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 20,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 21,
+    "z": 9,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 3,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 4,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 5,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 6,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 7,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 8,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 9,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 10,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 11,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 12,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 13,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 14,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 15,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 17,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 18,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 19,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 20,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 21,
+    "z": 10,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 3,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 4,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 5,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 6,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 7,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 8,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 9,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 11,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 12,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 13,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 14,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 15,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 17,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 18,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 19,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 20,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 21,
+    "z": 11,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 3,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 4,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 5,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 6,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 7,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 8,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 9,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 10,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 11,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 12,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 13,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 14,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 15,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 17,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 18,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 19,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 20,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 21,
+    "z": 12,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 3,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 4,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 5,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 6,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 7,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 8,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 9,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 10,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 11,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 12,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 13,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 14,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 15,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 17,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 18,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 19,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 20,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 21,
+    "z": 13,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 3,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 4,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 5,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 6,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 7,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 8,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 9,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 10,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 11,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 12,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 13,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 14,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 15,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 17,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 18,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 19,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 20,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 21,
+    "z": 14,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 3,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 4,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 5,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 6,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 7,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 8,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 9,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 10,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 11,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 12,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 13,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 14,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 15,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 17,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 18,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 19,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 20,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 21,
+    "z": 15,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 3,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 4,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 5,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 6,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 7,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 8,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 9,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 10,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 11,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 12,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 13,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 14,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 15,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 17,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 18,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 19,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 20,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 9,
+    "y": 21,
+    "z": 16,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 9,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "z": 17,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 21,
+    "z": 17,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 9,
+    "y": 16,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 9,
+    "y": 17,
+    "z": 18,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 17,
+    "z": 6,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 21,
+    "z": 7,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 1,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 2,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 3,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 4,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 5,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 6,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 7,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 8,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 9,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 10,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 11,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 12,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 13,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 14,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 15,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 17,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 18,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 19,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 20,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 21,
+    "z": 8,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 1,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 2,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 3,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 4,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 5,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 6,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 7,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 8,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 9,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 10,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 11,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 12,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 13,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 14,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 15,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 17,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 18,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 19,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 20,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 21,
+    "z": 9,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 1,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 2,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 3,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 4,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 5,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 6,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 7,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 8,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 9,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 10,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 11,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 12,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "south"
+    }
+  },
+  {
+    "x": 10,
+    "y": 13,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 14,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 15,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 17,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 18,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 19,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 20,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 21,
+    "z": 10,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 1,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 2,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 3,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 4,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 5,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 6,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 7,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 8,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 9,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 11,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 12,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 13,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "south"
+    }
+  },
+  {
+    "x": 10,
+    "y": 14,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 15,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 17,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 18,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 19,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 20,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 21,
+    "z": 11,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 1,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 2,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 3,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 4,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 5,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 6,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 7,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 8,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 9,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 10,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 11,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 12,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 13,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 14,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "south"
+    }
+  },
+  {
+    "x": 10,
+    "y": 15,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 17,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 18,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 19,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 20,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 21,
+    "z": 12,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 1,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 2,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 3,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 4,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 5,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 6,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 7,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 8,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 9,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 10,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 11,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 12,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 13,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 14,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 15,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "south"
+    }
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 17,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 18,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 19,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 20,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 21,
+    "z": 13,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "east"
+    }
+  },
+  {
+    "x": 10,
+    "y": 1,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 2,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 3,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 4,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 5,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 6,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 7,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 8,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 9,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 10,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 11,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 12,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 13,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 14,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 15,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "east"
+    }
+  },
+  {
+    "x": 10,
+    "y": 17,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 18,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 19,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 20,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 21,
+    "z": 14,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 1,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 2,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 3,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 4,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 5,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 6,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 7,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 8,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 9,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 10,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 11,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 12,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 13,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 14,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 15,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 17,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 18,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 19,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 20,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 10,
+    "y": 21,
+    "z": 15,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 1,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 2,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 3,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 4,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 5,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 6,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 7,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 8,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 9,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 10,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 11,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 12,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 13,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 14,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 15,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 17,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 18,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 19,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 20,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 21,
+    "z": 16,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 1,
+    "z": 17,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "true",
+      "west": "true"
+    }
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 21,
+    "z": 17,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 10,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 16,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 10,
+    "y": 17,
+    "z": 18,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 17,
+    "z": 6,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 21,
+    "z": 7,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 2,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 3,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 4,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 5,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 6,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 7,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 8,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 9,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 11,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 12,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 13,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 14,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 15,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 17,
+    "z": 8,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 11,
+    "y": 18,
+    "z": 8,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 11,
+    "y": 19,
+    "z": 8,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 11,
+    "y": 20,
+    "z": 8,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 11,
+    "y": 21,
+    "z": 8,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 2,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 3,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 4,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 5,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 6,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 7,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 8,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 9,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 11,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 12,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 13,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 14,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 15,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 17,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 18,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 19,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 20,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 21,
+    "z": 9,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 2,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 3,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 4,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 5,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 6,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 7,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 8,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 9,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 11,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "west"
+    }
+  },
+  {
+    "x": 11,
+    "y": 12,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 13,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 14,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 15,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 17,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 18,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 19,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 20,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 21,
+    "z": 10,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 11,
+    "name": "omnira:crystal_ball",
+    "properties": {
+      "facing": "north"
+    },
+    "loot": "omnira:chests/void_lighthouse"
+  },
+  {
+    "x": 11,
+    "y": 2,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 3,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 4,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 5,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 6,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 7,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 8,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 9,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 11,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 12,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 13,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 14,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 15,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 17,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 18,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 19,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 20,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 21,
+    "z": 11,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 2,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 3,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 4,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 5,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 6,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 7,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 8,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 9,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 11,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 12,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 13,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 14,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 15,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 17,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 18,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 19,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 20,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 21,
+    "z": 12,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 2,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 3,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 4,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 5,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 6,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 7,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 8,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 9,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 11,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 12,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 13,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 14,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 15,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 17,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 18,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 19,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 20,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 21,
+    "z": 13,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "east"
+    }
+  },
+  {
+    "x": 11,
+    "y": 2,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 3,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 4,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 5,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 6,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 7,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 8,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 9,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 11,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 12,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 13,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 14,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 15,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 17,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 18,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 19,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 20,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 21,
+    "z": 14,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 2,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 3,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 4,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 5,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 6,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 7,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 8,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 9,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 11,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 12,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 13,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 14,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 15,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 17,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 18,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 19,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 20,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 11,
+    "y": 21,
+    "z": 15,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 1,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 2,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 3,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 4,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 5,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 6,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 7,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 8,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 9,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 10,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 11,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 12,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 13,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 14,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 15,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 17,
+    "z": 16,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 11,
+    "y": 18,
+    "z": 16,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 11,
+    "y": 19,
+    "z": 16,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 11,
+    "y": 20,
+    "z": 16,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 11,
+    "y": 21,
+    "z": 16,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 21,
+    "z": 17,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 16,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 17,
+    "z": 18,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 11,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 17,
+    "z": 6,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 21,
+    "z": 7,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 1,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 2,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 3,
+    "z": 8,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 12,
+    "y": 4,
+    "z": 8,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 12,
+    "y": 5,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 6,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 7,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 8,
+    "z": 8,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 12,
+    "y": 9,
+    "z": 8,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 12,
+    "y": 10,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 11,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 12,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 13,
+    "z": 8,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 12,
+    "y": 14,
+    "z": 8,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 12,
+    "y": 15,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 17,
+    "z": 8,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 12,
+    "y": 18,
+    "z": 8,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 12,
+    "y": 19,
+    "z": 8,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 12,
+    "y": 20,
+    "z": 8,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 12,
+    "y": 21,
+    "z": 8,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 1,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 2,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 3,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 4,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 5,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 6,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 7,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 8,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 9,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 10,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 11,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 12,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 13,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 14,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 15,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 17,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 18,
+    "z": 9,
+    "name": "omnira:marvelous_wisdom_wall_sign",
+    "properties": {
+      "waterlogged": "false",
+      "facing": "south"
+    },
+    "nbt": "{back_text:{color:\"black\",has_glowing_text:1b,messages:[\u0027\"\"\u0027,\u0027\"来不及了\"\u0027,\u0027\"就用这个晋升古代学者吧\"\u0027,\u0027\"\"\u0027]},front_text:{color:\"black\",has_glowing_text:1b,messages:[\u0027\"\"\u0027,\u0027\"来不及了\"\u0027,\u0027\"就用这个晋升古代学者吧\"\u0027,\u0027\"\"\u0027]},id:\"omnira:crystal_sign\",is_waxed:0b}"
+  },
+  {
+    "x": 12,
+    "y": 19,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 20,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 21,
+    "z": 9,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 1,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 2,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 3,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 4,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 5,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 6,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 7,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 8,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 9,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 10,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "west"
+    }
+  },
+  {
+    "x": 12,
+    "y": 11,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 12,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 13,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 14,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 15,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 17,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 18,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 19,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 20,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 21,
+    "z": 10,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 1,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 2,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 3,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 4,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 5,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 6,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 7,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 8,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 9,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 11,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 12,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 13,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 14,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 15,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 17,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 18,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 19,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 20,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 21,
+    "z": 11,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 1,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 2,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 3,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 4,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 5,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 6,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 7,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 8,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 9,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 10,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 11,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 12,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 13,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 14,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 15,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 17,
+    "z": 12,
+    "name": "omnira:crystal_ball",
+    "properties": {
+      "facing": "south"
+    },
+    "loot": "omnira:chests/void_lighthouse"
+  },
+  {
+    "x": 12,
+    "y": 18,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 19,
+    "z": 12,
+    "name": "omnira:star_source",
+    "properties": {
+      "fluid_level": "0",
+      "water": "0"
+    }
+  },
+  {
+    "x": 12,
+    "y": 20,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 21,
+    "z": 12,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 1,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 2,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 3,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 4,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 5,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 6,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 7,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 8,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 9,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 10,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 11,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 12,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 13,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 14,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 15,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 17,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 18,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 19,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 20,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 21,
+    "z": 13,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 1,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 2,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "east"
+    }
+  },
+  {
+    "x": 12,
+    "y": 3,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 4,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 5,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 6,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 7,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 8,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 9,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 10,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 11,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 12,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 13,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 14,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 15,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 17,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 18,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 19,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 20,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 21,
+    "z": 14,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 1,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 2,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 3,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 4,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 5,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 6,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 7,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 8,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 9,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 10,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 11,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 12,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 13,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 14,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 15,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 17,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 18,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 19,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 20,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 21,
+    "z": 15,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 2,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 3,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 4,
+    "z": 16,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 12,
+    "y": 5,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 6,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 7,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 8,
+    "z": 16,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 12,
+    "y": 9,
+    "z": 16,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 12,
+    "y": 10,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 11,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 12,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 13,
+    "z": 16,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 12,
+    "y": 14,
+    "z": 16,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 12,
+    "y": 15,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 17,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 18,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 12,
+    "y": 19,
+    "z": 16,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 12,
+    "y": 20,
+    "z": 16,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 12,
+    "y": 21,
+    "z": 16,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 21,
+    "z": 17,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 16,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 17,
+    "z": 18,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 12,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 17,
+    "z": 6,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 21,
+    "z": 7,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 2,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 3,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 4,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 5,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 6,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 7,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 8,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 9,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 10,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 11,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 12,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 13,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 14,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 15,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 17,
+    "z": 8,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 13,
+    "y": 18,
+    "z": 8,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 13,
+    "y": 19,
+    "z": 8,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 13,
+    "y": 20,
+    "z": 8,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 13,
+    "y": 21,
+    "z": 8,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 2,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 3,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 4,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 5,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 6,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 7,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 8,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 9,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 10,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 11,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 12,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 13,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 14,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 15,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 17,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 18,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 19,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 20,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 21,
+    "z": 9,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 2,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 3,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 4,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 5,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 6,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 7,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 8,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 9,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "west"
+    }
+  },
+  {
+    "x": 13,
+    "y": 10,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 11,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 12,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 13,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 14,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 15,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 17,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 18,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 19,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 20,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 21,
+    "z": 10,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 11,
+    "name": "omnira:stardust",
+    "properties": {
+      "fluid_level": "0",
+      "water": "0"
+    }
+  },
+  {
+    "x": 13,
+    "y": 2,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 3,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 4,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 5,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 6,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 7,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 8,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 9,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 11,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 12,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 13,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 14,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 15,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 17,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 18,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 19,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 20,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 21,
+    "z": 11,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 2,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 3,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 4,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 5,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 6,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 7,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 8,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 9,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 10,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 11,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 12,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 13,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 14,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 15,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 17,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 18,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 19,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 20,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 21,
+    "z": 12,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 2,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 3,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 4,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 5,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 6,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 7,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 8,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 9,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 10,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 11,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 12,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 13,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 14,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 15,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 17,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 18,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 19,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 20,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 21,
+    "z": 13,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 2,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 3,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "east"
+    }
+  },
+  {
+    "x": 13,
+    "y": 4,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 5,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 6,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 7,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 8,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 9,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 10,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 11,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 12,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 13,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 14,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 15,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 17,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 18,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 19,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 20,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 21,
+    "z": 14,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 2,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 3,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 4,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 5,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 6,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 7,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 8,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 9,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 10,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 11,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 12,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 13,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 14,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 15,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 17,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 18,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 19,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 20,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 13,
+    "y": 21,
+    "z": 15,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 1,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 2,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 3,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 4,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 5,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 6,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 7,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 8,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 9,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 10,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 11,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 12,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 13,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 14,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 15,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 17,
+    "z": 16,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 13,
+    "y": 18,
+    "z": 16,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 13,
+    "y": 19,
+    "z": 16,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 13,
+    "y": 20,
+    "z": 16,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 13,
+    "y": 21,
+    "z": 16,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 21,
+    "z": 17,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 16,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 17,
+    "z": 18,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 19,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 20,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 21,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 13,
+    "y": 0,
+    "z": 22,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 17,
+    "z": 6,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 21,
+    "z": 7,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 2,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 3,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 4,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 5,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 6,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 7,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 8,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 9,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 10,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 11,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 12,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 13,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 14,
+    "z": 8,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 15,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 17,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 18,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 19,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 20,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 21,
+    "z": 8,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 2,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 3,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 4,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 5,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 6,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 7,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 8,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 9,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 10,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 11,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 12,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 13,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 14,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 15,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 17,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 18,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 19,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 20,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 21,
+    "z": 9,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 2,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 3,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 4,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 5,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 6,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 7,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 8,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "west"
+    }
+  },
+  {
+    "x": 14,
+    "y": 9,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 10,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 11,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 12,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 13,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 14,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 15,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 17,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 18,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 19,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 20,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 21,
+    "z": 10,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 2,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 3,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 4,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 5,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 6,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 7,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "north"
+    }
+  },
+  {
+    "x": 14,
+    "y": 8,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 9,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 11,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 12,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 13,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 14,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 15,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 17,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 18,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 19,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 20,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 21,
+    "z": 11,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 2,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 3,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 4,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 5,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 6,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "north"
+    }
+  },
+  {
+    "x": 14,
+    "y": 7,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 8,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 9,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 10,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 11,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 12,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 13,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 14,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 15,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 17,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 18,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 19,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 20,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 21,
+    "z": 12,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 2,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 3,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 4,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 5,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "north"
+    }
+  },
+  {
+    "x": 14,
+    "y": 6,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 7,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 8,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 9,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 10,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 11,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 12,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 13,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 14,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 15,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 17,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 18,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 19,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 20,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 21,
+    "z": 13,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 2,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 3,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 4,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock_stairs",
+    "properties": {
+      "waterlogged": "false",
+      "half": "bottom",
+      "shape": "straight",
+      "facing": "north"
+    }
+  },
+  {
+    "x": 14,
+    "y": 5,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 6,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 7,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 8,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 9,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 10,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 11,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 12,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 13,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 14,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 15,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 17,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 18,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 19,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 20,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 21,
+    "z": 14,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 2,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 3,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 4,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 5,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 6,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 7,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 8,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 9,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 10,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 11,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 12,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 13,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 14,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 15,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 17,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 18,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 19,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 20,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 14,
+    "y": 21,
+    "z": 15,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 2,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 3,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 4,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 5,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 6,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 7,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 8,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 9,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 10,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 11,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 12,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 13,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 14,
+    "z": 16,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 15,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 17,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 18,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 19,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 20,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 21,
+    "z": 16,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 1,
+    "z": 17,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "true",
+      "west": "false"
+    }
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 21,
+    "z": 17,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 14,
+    "y": 0,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 16,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 14,
+    "y": 17,
+    "z": 18,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 6,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 17,
+    "z": 6,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 21,
+    "z": 7,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 2,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 3,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 4,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 5,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 6,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 7,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 8,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 9,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 10,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 11,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 12,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 13,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 14,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 15,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 17,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 18,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 19,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 20,
+    "z": 8,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 21,
+    "z": 8,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 2,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 3,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 4,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 5,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 6,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 7,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 8,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 9,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 10,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 11,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 12,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 13,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 14,
+    "z": 9,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 15,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 17,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 18,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 19,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 20,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 21,
+    "z": 9,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 2,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 3,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 4,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 5,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 6,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 7,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 8,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 9,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 10,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 11,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 12,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 13,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 14,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 15,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 17,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 18,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 19,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 20,
+    "z": 10,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 21,
+    "z": 10,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 2,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 3,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 4,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 5,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 6,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 7,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 8,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 9,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 10,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 11,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 12,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 13,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 14,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 15,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 17,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 18,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 19,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 20,
+    "z": 11,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 21,
+    "z": 11,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 2,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 3,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 4,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 5,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 6,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 7,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 8,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 9,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 10,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 11,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 12,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 13,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 14,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 15,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 17,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 18,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 19,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 20,
+    "z": 12,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 21,
+    "z": 12,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 2,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 3,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 4,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 5,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 6,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 7,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 8,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 9,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 10,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 11,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 12,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 13,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 14,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 15,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 17,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 18,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 19,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 20,
+    "z": 13,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 21,
+    "z": 13,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 2,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 3,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 4,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 5,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 6,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 7,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 8,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 9,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 10,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 11,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 12,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 13,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 14,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 15,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 17,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 18,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 19,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 20,
+    "z": 14,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 21,
+    "z": 14,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 2,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 3,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 4,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 5,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 6,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 7,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 8,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 9,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 10,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 11,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 12,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 13,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 14,
+    "z": 15,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 15,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 17,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 18,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 19,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 20,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 21,
+    "z": 15,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 2,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 3,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 4,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 5,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 6,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 7,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 8,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 9,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 10,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 11,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 12,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 13,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 14,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 15,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 17,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 18,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 19,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 20,
+    "z": 16,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 15,
+    "y": 21,
+    "z": 16,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 15,
+    "y": 0,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 1,
+    "z": 17,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 21,
+    "z": 17,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 15,
+    "y": 16,
+    "z": 18,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 15,
+    "y": 17,
+    "z": 18,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 16,
+    "y": 16,
+    "z": 7,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 17,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 16,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 21,
+    "z": 8,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 2,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 3,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 4,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 5,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 6,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 7,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 8,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 9,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 10,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 11,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 12,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 13,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 14,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 15,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 17,
+    "z": 9,
+    "name": "omnira:stardust",
+    "properties": {
+      "fluid_level": "0",
+      "water": "0"
+    }
+  },
+  {
+    "x": 16,
+    "y": 18,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 19,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 20,
+    "z": 9,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 21,
+    "z": 9,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 2,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 3,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 4,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 5,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 6,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 7,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 8,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 9,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 10,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 11,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 12,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 13,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 14,
+    "z": 10,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 15,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 17,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 18,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 19,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 20,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 21,
+    "z": 10,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 2,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 3,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 4,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 5,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 6,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 7,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 8,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 9,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 10,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 11,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 12,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 13,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 14,
+    "z": 11,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 15,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 16,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 17,
+    "z": 11,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 16,
+    "y": 18,
+    "z": 11,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 16,
+    "y": 19,
+    "z": 11,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 16,
+    "y": 20,
+    "z": 11,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 16,
+    "y": 21,
+    "z": 11,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 2,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 3,
+    "z": 12,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 16,
+    "y": 4,
+    "z": 12,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 16,
+    "y": 5,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 6,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 7,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 8,
+    "z": 12,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 16,
+    "y": 9,
+    "z": 12,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 16,
+    "y": 10,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 11,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 12,
+    "z": 12,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 13,
+    "z": 12,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 16,
+    "y": 14,
+    "z": 12,
+    "name": "omnira:dream_crystal_block"
+  },
+  {
+    "x": 16,
+    "y": 15,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 16,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 17,
+    "z": 12,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 16,
+    "y": 18,
+    "z": 12,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 16,
+    "y": 19,
+    "z": 12,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 16,
+    "y": 20,
+    "z": 12,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 16,
+    "y": 21,
+    "z": 12,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 2,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 3,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 4,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 5,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 6,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 7,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 8,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 9,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 10,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 11,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 12,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 13,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 14,
+    "z": 13,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 15,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 16,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 17,
+    "z": 13,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 16,
+    "y": 18,
+    "z": 13,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 16,
+    "y": 19,
+    "z": 13,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 16,
+    "y": 20,
+    "z": 13,
+    "name": "minecraft:light_blue_stained_glass"
+  },
+  {
+    "x": 16,
+    "y": 21,
+    "z": 13,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 2,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 3,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 4,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 5,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 6,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 7,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 8,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 9,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 10,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 11,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 12,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 13,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 14,
+    "z": 14,
+    "name": "omnira:mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 15,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 17,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 18,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 19,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 20,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 21,
+    "z": 14,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 15,
+    "name": "omnira:stardust",
+    "properties": {
+      "fluid_level": "0",
+      "water": "0"
+    }
+  },
+  {
+    "x": 16,
+    "y": 2,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 3,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 4,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 5,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 6,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 7,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 8,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 9,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 10,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 11,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 12,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 13,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 14,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 15,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 17,
+    "z": 15,
+    "name": "omnira:stardust",
+    "properties": {
+      "fluid_level": "0",
+      "water": "0"
+    }
+  },
+  {
+    "x": 16,
+    "y": 18,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 19,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 20,
+    "z": 15,
+    "name": "minecraft:air"
+  },
+  {
+    "x": 16,
+    "y": 21,
+    "z": 15,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 16,
+    "y": 0,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 16,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 21,
+    "z": 16,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 16,
+    "y": 1,
+    "z": 17,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "true",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 16,
+    "y": 16,
+    "z": 17,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 16,
+    "y": 17,
+    "z": 17,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 17,
+    "y": 1,
+    "z": 7,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 17,
+    "y": 16,
+    "z": 8,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 17,
+    "z": 8,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 21,
+    "z": 9,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 1,
+    "z": 10,
+    "name": "omnira:stardust",
+    "properties": {
+      "fluid_level": "0",
+      "water": "0"
+    }
+  },
+  {
+    "x": 17,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 21,
+    "z": 10,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 16,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 21,
+    "z": 11,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 16,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 21,
+    "z": 12,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 16,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 21,
+    "z": 13,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 21,
+    "z": 14,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 17,
+    "y": 0,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 21,
+    "z": 15,
+    "name": "omnira:shadow_rock_brick_slab",
+    "properties": {
+      "waterlogged": "false",
+      "type": "bottom"
+    }
+  },
+  {
+    "x": 17,
+    "y": 16,
+    "z": 16,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 17,
+    "y": 17,
+    "z": 16,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 17,
+    "y": 1,
+    "z": 17,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "false",
+      "west": "true"
+    }
+  },
+  {
+    "x": 18,
+    "y": 16,
+    "z": 9,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 17,
+    "z": 9,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "false",
+      "west": "false"
+    }
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 16,
+    "z": 10,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 17,
+    "z": 10,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "true",
+      "west": "false"
+    }
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 16,
+    "z": 11,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 17,
+    "z": 11,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "true",
+      "west": "false"
+    }
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 16,
+    "z": 12,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 17,
+    "z": 12,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "true",
+      "west": "false"
+    }
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 16,
+    "z": 13,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 17,
+    "z": 13,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "true",
+      "west": "false"
+    }
+  },
+  {
+    "x": 18,
+    "y": 0,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 16,
+    "z": 14,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 17,
+    "z": 14,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "true",
+      "north": "true",
+      "west": "false"
+    }
+  },
+  {
+    "x": 18,
+    "y": 16,
+    "z": 15,
+    "name": "omnira:engraved_mirror_rock"
+  },
+  {
+    "x": 18,
+    "y": 17,
+    "z": 15,
+    "name": "minecraft:iron_bars",
+    "properties": {
+      "east": "false",
+      "waterlogged": "false",
+      "south": "false",
+      "north": "true",
+      "west": "false"
+    }
+  }
+]

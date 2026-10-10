@@ -24,7 +24,7 @@ public final class LightSpiritRenderer extends EntityRenderer<LightSpirit> {
         if (spirit.deathTime > 0) {
             float fade=Math.max(0,1-(spirit.deathTime+partial)/20F);pose.scale(fade,fade,fade);
         }
-        var mesh = buffers.getBuffer(RenderType.entityTranslucent(TEXTURE));
+        var mesh = buffers.getBuffer(CrystalGlassLayer.LIGHT_SPIRIT);
         int overlay = OverlayTexture.pack(0, spirit.hurtTime > 0 || spirit.deathTime > 0);
         int glow = LightTexture.pack(Math.max(10, LightTexture.block(light)), LightTexture.sky(light));
         core.render(pose,mesh,glow,overlay,0xFFF3D677);

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["CCC", "CKC", "CCC"],
+  "key": {"C": {"item": "omnira:spiritual_crystal"}, "K": {"item": "minecraft:cauldron"}},
+  "result": {"id": "omnira:rough_alchemy_cauldron", "count": 1}
+}

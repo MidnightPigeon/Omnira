@@ -46,7 +46,9 @@ public final class OrbAutomation {
     }
     public static Direction[] directions(CrystalBallBlockEntity ball,boolean input) {
         Direction front=ball.getBlockState().getValue(com.mcmagic.omnira.block.CrystalBallBlock.FACING);
-        return input?new Direction[]{front,front.getOpposite(),front.getCounterClockWise(),front.getClockWise()}:new Direction[]{Direction.DOWN,Direction.UP};
+        // Append directions so existing upgrade masks retain their meaning.
+        return input?new Direction[]{front,front.getOpposite(),front.getCounterClockWise(),front.getClockWise(),Direction.DOWN,Direction.UP}
+                :new Direction[]{Direction.DOWN,Direction.UP,front,front.getOpposite(),front.getCounterClockWise(),front.getClockWise()};
     }
     private static void transfer(CrystalBallBlockEntity ball,int slot,boolean input) {
         var tag=OrbUpgrades.settings(ball.upgrades.getStackInSlot(slot));var directions=directions(ball,input);

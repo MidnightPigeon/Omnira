@@ -1,0 +1,15 @@
+{
+  "id": "infused_crystal_tip",
+  "item": "omnira:infused_crystal_tip",
+  "title": "注灵水晶杖端",
+  "text": [
+    "提供2个符文槽，单次施放，基础冷却3秒。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "infused_crystal_tip_crafting",
+      "label": "制作配方"
+    }
+  ]
+}

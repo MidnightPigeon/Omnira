@@ -50,9 +50,22 @@ public final class ResonanceTerminalItem extends Item {
             core.terminal=null;core.setChanged();core.refresh();message(player,"unbound");return InteractionResult.CONSUME;
         }
         if(core.terminal!=null || core.kind()==0){message(player,"unavailable");return InteractionResult.CONSUME;}
+        var containerKey=com.mcmagic.omnira.storage.StorageContainerIdentity.terminalKey(core);
+        for(int i=0;i<capacity(stack);i++){
+            var link=tag.getCompound("Link"+i);String linked=link.getString("Container");
+            if(link.getString("Dimension").equals(context.getLevel().dimension().location().toString())&&link.hasUUID("Identity")){
+                var linkedPos=net.minecraft.core.BlockPos.of(link.getLong("Pos"));
+                if(context.getLevel().hasChunkAt(linkedPos)&&context.getLevel().getBlockEntity(linkedPos) instanceof ResonanceCoreBlockEntity other){
+                    linked=com.mcmagic.omnira.storage.StorageContainerIdentity.terminalKey(other);
+                    if(com.mcmagic.omnira.storage.StorageContainerIdentity.sameStorage(core,other)){message(player,"container_bound");return InteractionResult.FAIL;}
+                }
+            }
+            if(containerKey!=null&&containerKey.equals(linked)){message(player,"container_bound");return InteractionResult.FAIL;}
+        }
         for(int i=0;i<capacity(stack);i++)if(!tag.contains("Link"+i)) {
             var link=new CompoundTag();link.putUUID("Identity",core.identity);link.putString("Dimension",context.getLevel().dimension().location().toString());
             link.putLong("Pos",core.getBlockPos().asLong());link.putInt("Kind",core.kind());
+            if(containerKey!=null)link.putString("Container",containerKey);
             tag.put("Link"+i,link);save(stack,tag);core.terminal=id;core.setChanged();core.refresh();
             message(player,"bound");return InteractionResult.CONSUME;
         }

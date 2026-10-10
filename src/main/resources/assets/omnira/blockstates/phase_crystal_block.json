@@ -1,0 +1,55 @@
+{
+  "variants": {
+    "phase=0": {
+      "model": "omnira:block/phase_crystal_block"
+    },
+    "phase=1": {
+      "model": "omnira:block/phase_crystal_transition_1_block"
+    },
+    "phase=2": {
+      "model": "omnira:block/phase_crystal_transition_2_block"
+    },
+    "phase=3": {
+      "model": "omnira:block/phase_crystal_transition_3_block"
+    },
+    "phase=4": {
+      "model": "omnira:block/phase_crystal_transition_4_block"
+    },
+    "phase=5": {
+      "model": "omnira:block/phase_crystal_transition_5_block"
+    },
+    "phase=6": {
+      "model": "omnira:block/phase_crystal_transition_6_block"
+    },
+    "phase=7": {
+      "model": "omnira:block/phase_crystal_transition_7_block"
+    },
+    "phase=8": {
+      "model": "omnira:block/phase_crystal_transition_8_block"
+    },
+    "phase=9": {
+      "model": "omnira:block/phase_crystal_transition_9_block"
+    },
+    "phase=10": {
+      "model": "omnira:block/phase_crystal_transition_10_block"
+    },
+    "phase=11": {
+      "model": "omnira:block/phase_crystal_transition_11_block"
+    },
+    "phase=12": {
+      "model": "omnira:block/phase_crystal_transition_12_block"
+    },
+    "phase=13": {
+      "model": "omnira:block/phase_crystal_transition_13_block"
+    },
+    "phase=14": {
+      "model": "omnira:block/phase_crystal_transition_14_block"
+    },
+    "phase=15": {
+      "model": "omnira:block/phase_crystal_transition_15_block"
+    },
+    "phase=16": {
+      "model": "omnira:block/phase_crystal_inverted_block"
+    }
+  }
+}

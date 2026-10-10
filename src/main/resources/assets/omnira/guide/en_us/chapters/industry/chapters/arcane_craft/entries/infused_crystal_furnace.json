@@ -1,0 +1,11 @@
+{
+  "id": "infused_crystal_furnace",
+  "item": "omnira:infused_crystal_furnace",
+  "title": "Infused Crystal Furnace",
+  "text": [
+    "Upgrade a crystal furnace in the advanced assembly table: engine on the left, primordial spell core on the right, six infused crystal casings around it.",
+    "Retains double vanilla smelting speed. Its rear shaft accepts engine drive, at least 16 rpm with a fixed 256 SU load, or 256 FE/second to run without fuel. More power does not increase speed. Electric drive leaves the shaft still and glowing.",
+    "It also accepts fuel; one infused crystal smelts 16 ordinary items. The diamond stays lit under power and drains in steps while burning fuel. Connecting power discards the remaining burn time; disconnecting does not restore it."
+  ],
+  "recipes": true
+}

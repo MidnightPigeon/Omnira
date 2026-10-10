@@ -12,17 +12,18 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 
 public final class CrystalBallMenu extends AbstractContainerMenu {
     public final CrystalBallBlockEntity ball;
-    public final int storageSlots,upgradeStart,playerStart;
+    public final int storageSlots,upgradeStart,playerStart,frequencyStart;
     public CrystalBallMenu(int id,Inventory inventory,RegistryFriendlyByteBuf data) {
         this(id,inventory,(CrystalBallBlockEntity)inventory.player.level().getBlockEntity(data.readBlockPos()));
     }
     public CrystalBallMenu(int id,Inventory inventory,CrystalBallBlockEntity ball) {
         super(ModMenuTypes.CRYSTAL_BALL.get(),id);this.ball=ball;ball.startOpen(inventory.player);
-        storageSlots=liquid()?1:12;upgradeStart=storageSlots;playerStart=upgradeStart+3;
-        if(liquid())addSlot(new Slot(ball,0,-26,55) {
+        storageSlots=liquid()||singleOrb()?1:12;upgradeStart=storageSlots;frequencyStart=upgradeStart+(singleOrb()?1:3);playerStart=frequencyStart+(ball.resonant()?2:0);
+        if(singleOrb())addSlot(new Slot(ball,0,80,55){@Override public int getMaxStackSize(ItemStack stack){return ball.getMaxStackSize(stack);}});
+        else if(liquid())addSlot(new Slot(ball,0,-26,55) {
             @Override public int getMaxStackSize(){return 1;}
             @Override public int getMaxStackSize(ItemStack stack){return 1;}
-            @Override public boolean mayPlace(ItemStack stack){return stack.getCapability(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM)!=null;}
+            @Override public boolean mayPlace(ItemStack stack){return ball.canPlaceItem(0,stack);}
         });
         else {
             int slot=0;
@@ -33,17 +34,33 @@ public final class CrystalBallMenu extends AbstractContainerMenu {
                 });
             }
         }
-        for(int i=0;i<3;i++) {
-            final int slot=i;
-            addSlot(new SlotItemHandler(ball.upgrades,i,53+i*27,119) {
+        for(int i=0;i<(singleOrb()?1:3);i++) {
+            final int slot=singleOrb()?1:i;
+            addSlot(new SlotItemHandler(ball.upgrades,slot,singleOrb()?80:53+i*27,119) {
                 @Override public boolean mayPickup(Player player){return ball.upgrades.mayRemove(slot);}
+            });
+        }
+        if(ball.resonant())for(int i=0;i<2;i++){
+            final int frequency=i;
+            addSlot(new Slot(new SimpleContainer(2){
+                @Override public ItemStack getItem(int index){return ball.frequency[index];}
+                @Override public void setItem(int index,ItemStack stack){ball.frequency[index]=stack.copyWithCount(1);}
+            },i,184,43+i*27){
+                @Override public boolean mayPickup(Player player){return false;}
+                @Override public boolean mayPlace(ItemStack stack){return false;}
             });
         }
         for(int row=0;row<3;row++)for(int col=0;col<9;col++)addSlot(new Slot(inventory,9+row*9+col,8+col*18,160+row*18));
         for(int col=0;col<9;col++)addSlot(new Slot(inventory,col,8+col*18,218));
     }
     public boolean liquid(){return ball instanceof LiquidCrystalBallBlockEntity;}
+    public boolean voidOrb(){return ball instanceof VoidCrystalBallBlockEntity;}
+    public boolean starOrb(){return ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity;}
+    public boolean singleOrb(){return voidOrb()||starOrb();}
     @Override public void clicked(int index,int button,ClickType type,Player player) {
+        if(ball.resonant()&&index>=frequencyStart&&index<frequencyStart+2){
+            if(!player.level().isClientSide)ball.setFrequency(index-frequencyStart,getCarried());return;
+        }
         if(index>=0 && index<storageSlots && type==ClickType.PICKUP) {
             var slot=slots.get(index);var stored=slot.getItem();var carried=getCarried();
             if(carried.isEmpty()) {
@@ -82,7 +99,7 @@ public final class CrystalBallMenu extends AbstractContainerMenu {
             }
             if(!moved)return ItemStack.EMPTY;
         } else if(stack.getItem() instanceof OrbUpgradeItem) {
-            if(!moveItemStackTo(stack,upgradeStart,playerStart,false))return ItemStack.EMPTY;
+            if(!moveItemStackTo(stack,upgradeStart,playerStart,false)&&(!singleOrb()||!moveItemStackTo(stack,0,1,false)))return ItemStack.EMPTY;
         } else if(liquid()) {
             if(!moveItemStackTo(stack,0,1,false))return ItemStack.EMPTY;
         } else {

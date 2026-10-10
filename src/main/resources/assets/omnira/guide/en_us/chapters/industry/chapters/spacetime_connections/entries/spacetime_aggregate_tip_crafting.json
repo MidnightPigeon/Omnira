@@ -1,0 +1,15 @@
+{
+  "id": "spacetime_aggregate_tip_crafting",
+  "item": "omnira:spacetime_aggregate_tip",
+  "title": "Spacetime Aggregate Tip · Crafting",
+  "recipes": true,
+  "text": [
+    "Use the advanced assembly table: 2 infused crystals, 2 unstable spacetime aggregates and 2 paradox dust, with time microcore, resonance crystal and space microcore in the left, center and right nodes."
+  ],
+  "links": [
+    {
+      "target": "spacetime_aggregate_tip",
+      "label": "Function"
+    }
+  ]
+}

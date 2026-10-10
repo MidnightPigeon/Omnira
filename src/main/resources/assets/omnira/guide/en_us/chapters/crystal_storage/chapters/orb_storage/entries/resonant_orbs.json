@@ -1,0 +1,23 @@
+{
+  "id": "resonant_orbs",
+  "item": "omnira:resonant_crystal_ball",
+  "title": "Resonant Orbs",
+  "recipes": true,
+  "text": [
+    "Combine an item or liquid crystal ball with six resonance crystals in the assembly table. Existing contents and upgrades are preserved. Unconnected bases are purple.",
+    "The two slots on the right hold frequency markers. Click or drag any item to mark without consuming it; click with an empty cursor to clear. Order and item components matter, and at least one marker is required. Matching orbs of the same kind share one storage capacity. Item networks glow green and fluid networks blue.",
+    "Without stabilization, matching frequencies in different dimensions are independent. One stabilization upgrade in the network enables cross-dimensional sharing. All members show the same upgrades, which can be removed from any member; capacity is not multiplied by orb count.",
+    "Contents and upgrades are checked before joining. Only a failed newcomer turns red and clears both frequency markers; the existing network remains unaffected and contents are preserved. Its red warning persists without a frequency, even after reloading, and never retries automatically. Clear or replace a frequency marker to reset it to purple and attempt the new channel. Without a matching partner it stays purple.",
+    "Changing frequency, removing members or splitting dimensions keeps exactly one copy of contents and upgrades with a surviving original channel member. Chunk unload does not erase shared storage."
+  ],
+  "links": [
+    {
+      "target": "spacetime_stabilization_upgrade",
+      "label": "Stabilization"
+    },
+    {
+      "target": "output_upgrade",
+      "label": "Output filtering"
+    }
+  ]
+}

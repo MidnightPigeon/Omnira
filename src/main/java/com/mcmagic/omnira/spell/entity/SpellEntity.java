@@ -101,6 +101,13 @@ public class SpellEntity extends Entity {
     public boolean reflectFrom(DreamMirror mirror) {
         return reflectFrom(mirror,true);
     }
+    public boolean deflectable(){return kind()==Kind.PROJECTILE||kind()==Kind.FLYING_BLOCK||kind()==Kind.ORB;}
+    public boolean deflectFrom(LivingEntity holder,Vec3 velocity){
+        if(!(level() instanceof ServerLevel)||!deflectable()||velocity.lengthSqr()<1e-8)return false;
+        ownerId=holder.getUUID();followedId=null;homePoint=null;homeBlock=null;ghostTargetBlock=null;orbitPath=List.of();
+        if(kind()==Kind.ORB)entityData.set(KIND,Kind.PROJECTILE.ordinal());
+        lastMirror=holder.getUUID();reflectionGrace=8;setDeltaMovement(velocity);hasImpulse=true;hurtMarked=true;return true;
+    }
     public boolean reflectFrom(DreamMirror mirror,boolean returnDamage) {
         if(!(level() instanceof ServerLevel) || kind()!=Kind.PROJECTILE && kind()!=Kind.SELF_FLIGHT && kind()!=Kind.FLYING_BLOCK && kind()!=Kind.ORB) return false;
         if(reflectionGrace>0 && mirror.getUUID().equals(lastMirror)) return false;
@@ -163,7 +170,7 @@ public class SpellEntity extends Entity {
 
     public static SpellEntity spawn(ServerLevel level, Entity owner, Kind kind, Vec3 position) {
         SpellEntity spell = new SpellEntity(ModEntityTypes.SPELL.get(), level);
-        spell.ownerId = owner.getUUID();
+        spell.ownerId = owner==null?null:owner.getUUID();
         spell.entityData.set(KIND, kind.ordinal());
         spell.entityData.set(BORN, level.getGameTime());
         spell.entityData.set(CHARGES, kind == Kind.WARD ? 4 : 1);

@@ -1,0 +1,9 @@
+{
+  "id": "crystal_furnace",
+  "item": "omnira:crystal_furnace",
+  "title": "Crystal Furnace",
+  "text": [
+    "Assemble a furnace with six crystal casings. Smelts ordinary furnace recipes using fuel, twice as fast as a vanilla furnace. One infused crystal smelts 16 ordinary items."
+  ],
+  "recipes": true
+}

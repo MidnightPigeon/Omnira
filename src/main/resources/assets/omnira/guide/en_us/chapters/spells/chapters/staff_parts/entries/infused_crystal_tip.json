@@ -1,0 +1,15 @@
+{
+  "id": "infused_crystal_tip",
+  "item": "omnira:infused_crystal_tip",
+  "title": "Infused Crystal Tip",
+  "text": [
+    "Provides 2 rune slots, one cast per cycle and a 3-second base cooldown."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "infused_crystal_tip_crafting",
+      "label": "Crafting"
+    }
+  ]
+}

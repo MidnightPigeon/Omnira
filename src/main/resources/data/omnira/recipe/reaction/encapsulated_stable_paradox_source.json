@@ -1,0 +1,25 @@
+{
+  "type": "omnira:reaction",
+  "items": [
+    {
+      "ingredient": {
+        "item": "omnira:unstable_paradox_source"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "omnira:grid_frame"
+      }
+    }
+  ],
+  "fluid": {
+    "id": "omnira:dilute_spacetime",
+    "amount": 10000
+  },
+  "results": [
+    {
+      "id": "omnira:encapsulated_stable_paradox_source",
+      "count": 1
+    }
+  ]
+}

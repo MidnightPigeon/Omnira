@@ -8,5 +8,10 @@
     "先扣除当前生命20%的切割真实伤害，BOSS为5%；注魔修饰改为50%与10%，均向上取整且最低2点。随后临时清除无敌帧执行法术载荷。玩家也会受伤，使用时注意同行者。"
   ],
   "recipes": false,
-  "links": [{"target": "spell_target_shape_basics", "label": "目标与形态的选择"}]
+  "links": [
+    {
+      "target": "spell_target_shape_basics",
+      "label": "目标与形态的选择"
+    }
+  ]
 }

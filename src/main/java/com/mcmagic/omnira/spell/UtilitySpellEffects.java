@@ -76,6 +76,10 @@ public final class UtilitySpellEffects {
         if(effect.operation().equals("dissociation")) {
             if(!allowed(player,hit)) return;
             var state=level.getBlockState(hit);
+            if(state.is(ModBlocks.SPACE_WARP_POINT.get())) {
+                com.mcmagic.omnira.spacetime.TimeWarpPointBlock.harvest(level,hit,player);
+                return;
+            }
             if(state.isAir() || state.getDestroySpeed(level,hit)<0) return;
             var tool=batch.tool(effect,level);
             if(state.requiresCorrectToolForDrops() && !tool.isCorrectToolForDrops(state)) return;

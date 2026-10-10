@@ -1,0 +1,19 @@
+{
+  "id": "deflection_field_crafting",
+  "item": "omnira:deflection_field",
+  "title": "Crafting the Deflection Field",
+  "recipes": true,
+  "text": [
+    "Use 3 Stardust and 3 Deflection Crystals at the Advanced Assembly Table, with a Star Source in the central node and a Space Warp Point in each side node."
+  ],
+  "links": [
+    {
+      "target": "deflection_field",
+      "label": "Using the Deflection Field"
+    },
+    {
+      "target": "star_source_relic",
+      "label": "Star Source"
+    }
+  ]
+}

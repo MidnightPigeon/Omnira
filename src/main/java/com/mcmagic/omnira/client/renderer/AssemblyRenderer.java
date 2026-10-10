@@ -22,7 +22,10 @@ public final class AssemblyRenderer implements BlockEntityRenderer<BlockEntity> 
     @Override public void render(BlockEntity entity,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {
         if(!(entity instanceof AssemblyAccess access)) return;
         contents.render(access.assembly(),partial,pose,buffers,light,overlay);
-        float angle=entity instanceof ArcaneAssemblyTableBlockEntity?0:CreateEnginePhase.degrees(entity);
+        var table=access.assembly();
+        float angle=table.electricalPowered()?0:entity instanceof ArcaneAssemblyTableBlockEntity?
+                (table.mechanicalPowered()?(float)((entity.getLevel().getGameTime()+partial)*4.8%360):0):CreateEnginePhase.degrees(entity);
+        if(table.electricalPowered())light=LightTexture.FULL_BRIGHT;
         renderShaft(entity,pose,buffers,light,overlay,angle);
     }
     public void renderPreview(BlockEntity entity,PoseStack pose,MultiBufferSource buffers,int light,int overlay,

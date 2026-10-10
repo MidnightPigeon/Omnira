@@ -1,0 +1,24 @@
+{
+  "id": "fold_observatory_guide",
+  "title": "折径观测站",
+  "item": "omnira:stable_fold_gate",
+  "recipes": false,
+  "text": [
+    "折叠洞窟中的观测站分为洞底与近顶部两座折跃广场。下方广场侧边是储藏室，上方广场侧边是朝向洞穴的观测室。两座广场中央的稳定折跃门已经配对。",
+    "两间房各有一枚宝藏水晶球，主要保存悖论尘、注灵水晶、空间水晶、空间折跃点，少量空间微核。观测室还有机会找到空轨残迹。"
+  ],
+  "links": [
+    {
+      "target": "fold_gate_guide",
+      "label": "折跃门"
+    },
+    {
+      "target": "space_warp_point_guide",
+      "label": "空间折跃点与空轨残迹"
+    },
+    {
+      "target": "spatial_crystal_guide",
+      "label": "空间水晶"
+    }
+  ]
+}

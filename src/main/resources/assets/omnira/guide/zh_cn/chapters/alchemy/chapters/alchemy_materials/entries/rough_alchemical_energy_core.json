@@ -1,0 +1,16 @@
+{
+  "id": "rough_alchemical_energy_core",
+  "title": "粗糙炼金能核",
+  "item": "omnira:rough_alchemical_energy_core",
+  "text": [
+    "在灵性水晶块上方的原始反应釜中，加入4000 mB熔岩和地、水、火、风微核各一枚，可以反应出一个粗糙炼金能核。基础耗时100秒，每10秒消耗400 mB熔岩，下方的灵性水晶块不消耗。",
+    "大型炼金反应池也支持此配方，催化区域任意一格为灵性水晶块即可。能核是可放置的炼金组件，本身不进行加工。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "enhanced_alchemical_energy_core",
+      "label": "强化炼金能核"
+    }
+  ]
+}

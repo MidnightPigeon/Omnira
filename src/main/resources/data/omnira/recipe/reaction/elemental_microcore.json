@@ -1,0 +1,11 @@
+{
+  "type": "omnira:reaction",
+  "fluid": {"id": "omnira:decayed_timeflow", "amount": 1000},
+  "support": {"item": "omnira:spatial_crystal_block"},
+  "results": [
+    {"id": "omnira:earth_microcore"},
+    {"id": "omnira:water_microcore"},
+    {"id": "omnira:fire_microcore"},
+    {"id": "omnira:air_microcore"}
+  ]
+}

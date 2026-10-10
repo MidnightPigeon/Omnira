@@ -1,0 +1,15 @@
+{
+  "id": "paradox_mystery",
+  "item": "omnira:paradox_mystery",
+  "title": "Paradox Mystery",
+  "text": [
+    "Nine paradox dust form a moving powder cluster. This non-placeable item can be assembled into ore or reacted into encapsulated flow."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "paradox_dust",
+      "label": "Paradox Dust"
+    }
+  ]
+}

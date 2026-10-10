@@ -1,0 +1,20 @@
+{
+  "id": "paradox_ore",
+  "item": "omnira:paradox_ore",
+  "title": "悖论矿石",
+  "text": [
+    "在装配台中，以悖论谜团为中心，配合六份灵性水晶获得。此物品不能放置，是骨钉的升级材料。",
+    "用于对应仪式武器的四次升级。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "paradox_mystery",
+      "label": "悖论谜团"
+    },
+    {
+      "target": "crystallized_bone_nail",
+      "label": "武器升级"
+    }
+  ]
+}

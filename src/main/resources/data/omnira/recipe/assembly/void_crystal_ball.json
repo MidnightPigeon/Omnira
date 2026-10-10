@@ -1,0 +1,25 @@
+{
+  "type": "omnira:assembly",
+  "slots": [
+    {
+      "item": "omnira:crystal_ball"
+    },
+    {
+      "item": "omnira:liquid_crystal_ball"
+    },
+    {
+      "item": "omnira:dark_microcore"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    },
+    [],
+    [],
+    []
+  ],
+  "operation": "void_orb",
+  "result": {
+    "id": "omnira:void_crystal_ball",
+    "count": 1
+  }
+}

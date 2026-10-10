@@ -46,14 +46,14 @@ public final class SpacetimeCoreRecipeGameTests {
             var dust=recipe.secondaryOutput().roll(h.getLevel().random);
             h.assertTrue(dust.is(item("arcane_dust",1).getItem())&&dust.getCount()==16,"Dust must be exactly sixteen");
         }
-        var crystal=item("analysis_crystal",1);crystal.setDamageValue(12);
+        var crystal=item("analysis_crystal",1);crystal.setDamageValue(2);
         var crafting=CraftingInput.of(2,2,java.util.List.of(item("time_warp_point",1),crystal,item("time_warp_point",1),item("time_warp_point",1)));
         var conversion=(CraftingRecipe)recipe(h,"crystal_analysis/time");
         h.assertTrue(conversion.matches(crafting,h.getLevel()),"Three-point crystal recipe rejected");
         var core=conversion.assemble(crafting,h.getLevel().registryAccess());
         h.assertTrue(core.is(item("time_microcore",1).getItem())&&core.getCount()==1,"Crystal must produce one core");
         var remainder=conversion.getRemainingItems(crafting);
-        h.assertTrue(remainder.get(0).isEmpty()&&remainder.get(2).isEmpty()&&remainder.get(3).isEmpty()&&remainder.get(1).getDamageValue()==13,"Unexpected dust or catalyst wear");
+        h.assertTrue(remainder.get(0).isEmpty()&&remainder.get(2).isEmpty()&&remainder.get(3).isEmpty()&&remainder.get(1).getDamageValue()==3,"Unexpected dust or catalyst wear");
         h.assertTrue(!conversion.matches(CraftingInput.of(3,1,java.util.List.of(crystal,item("time_warp_point",1),item("time_warp_point",1))),h.getLevel()),"Two points accepted");
         h.succeed();
     }

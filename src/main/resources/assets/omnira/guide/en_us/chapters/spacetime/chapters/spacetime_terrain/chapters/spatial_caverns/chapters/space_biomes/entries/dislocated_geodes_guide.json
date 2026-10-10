@@ -1,0 +1,16 @@
+{
+  "id": "dislocated_geodes_guide",
+  "title": "Dislocated Geodes",
+  "item": "omnira:deflection_crystal_block",
+  "recipes": false,
+  "text": [
+    "Rolling cave floors and ceilings meet the surrounding caverns. Pale-blue-to-pink Deflection Crystal replaces much of the rough spatial crystal. Budding crystals and clusters form at the exposed tips of opposing crystal cones.",
+    "Stepping onto a Deflection Crystal Block in this biome gradually bends your travel left or right by 10 degrees. A Spacetime Anchoring Sigil prevents this floor effect, and blocks outside the biome are harmless. Clusters curve your path wherever they are placed, and the sigil does not protect against them."
+  ],
+  "links": [
+    {
+      "target": "deflection_crystal_guide",
+      "label": "Deflection Crystals and Clusters"
+    }
+  ]
+}

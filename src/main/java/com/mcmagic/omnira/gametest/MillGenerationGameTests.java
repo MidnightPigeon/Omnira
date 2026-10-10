@@ -22,7 +22,8 @@ public final class MillGenerationGameTests {
         l.setBlockAndUpdate(naturalSite,Blocks.GOLD_BLOCK.defaultBlockState());
         // Exercise independent chunk clips, including reload-equivalent placement ordering.
         for(int x=b.minX()>>4;x<=b.maxX()>>4;x++)for(int z=b.minZ()>>4;z<=b.maxZ()>>4;z++){
-            l.getChunk(x,z);var clip=new BoundingBox(x*16,l.getMinBuildHeight(),z*16,x*16+15,l.getMaxBuildHeight()-1,z*16+15);
+            var biome=l.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.BIOME).getHolderOrThrow(MireCycle.BIOME);
+            l.getChunk(x,z).fillBiomesFromNoise((a,y,c,s)->biome,l.getChunkSource().randomState().sampler());var clip=new BoundingBox(x*16,l.getMinBuildHeight(),z*16,x*16+15,l.getMaxBuildHeight()-1,z*16+15);
             piece.postProcess(l,l.structureManager(),l.getChunkSource().getGenerator(),net.minecraft.util.RandomSource.create(7),clip,new ChunkPos(x,z),origin);
         }
         h.assertTrue(MillPlan.CELLS.size()==2190,"Natural sample cells leaked into the structure");

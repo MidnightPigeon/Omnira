@@ -32,6 +32,7 @@ public final class GridAssemblyGameTests {
             h.assertTrue(SpellCooldowns.ticks(player,80,1)==(expected==0?80:72),"Equipped bonus not applied to 4-second loop");
             var wrong=new top.theillusivec4.curios.api.SlotContext("spell_core",player,0,false,true);
             h.assertTrue(item.getAttributeModifiers(wrong,id("wrong"),stack).isEmpty(),"Unequipped/wrong-slot bonus leaked");
+            for(var modifier:mods)attr.removeModifier(modifier.id());
         }
         player.getAttribute(ModAttributes.COOLDOWN_REDUCTION).setBaseValue(1);
         h.assertTrue(SpellCooldowns.ticks(player,80,1)==40,"50 percent cap bypassed");h.succeed();

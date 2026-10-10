@@ -1,0 +1,19 @@
+{
+  "id": "voyager_violin",
+  "title": "Voyager's Violin",
+  "item": "omnira:voyager_violin",
+  "recipes": false,
+  "text": [
+    "Each Void Lighthouse loot crystal ball has a 10% chance to contain one violin.",
+    "Keep your main hand empty and hold the violin in your offhand. Right-click to perform, with the bow in your main hand and violin in your offhand; right-click again to stop. Putting it away, filling your main hand or changing dimensions also stops the performance.",
+    "A random classical violin recording plays while the performer and living creatures within a 10-block sphere receive Regeneration II and Resistance II. Effects fade shortly after leaving the aura or stopping.",
+    "All items carried by the performer recover 5 durability per second, including inventory, armor and curios. This costs no mana and does not repair other creatures' equipment.",
+    "The author is both a violinist and a fan of Voyager from Reverse: 1999, so this violin was added as an Easter egg."
+  ],
+  "links": [
+    {
+      "target": "void_lighthouse_guide",
+      "label": "Void Lighthouse"
+    }
+  ]
+}

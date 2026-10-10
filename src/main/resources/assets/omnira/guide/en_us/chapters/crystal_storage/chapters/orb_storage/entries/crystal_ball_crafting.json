@@ -1,0 +1,15 @@
+{
+  "id": "crystal_ball_crafting",
+  "title": "Crystal Ball Construction",
+  "item": "omnira:crystal_ball",
+  "text": [
+    "Craft a Crystal Orb from a chest and four Spiritual Crystals at a crafting table. See Item Storage for use and upgrades."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "crystal_ball",
+      "label": "Use and Storage"
+    }
+  ]
+}

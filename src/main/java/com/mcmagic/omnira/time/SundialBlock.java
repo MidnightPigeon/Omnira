@@ -22,7 +22,7 @@ public final class SundialBlock extends CrystalProcessingTableBlock {
     public SundialBlock(Properties properties){super(properties);}
     @Override protected MapCodec<? extends CrystalProcessingTableBlock> codec(){return CODEC;}
     @Override public BlockEntity newBlockEntity(BlockPos pos,BlockState state){return new SundialBlockEntity(pos,state);}
-    @Override protected RenderShape getRenderShape(BlockState state){return RenderShape.INVISIBLE;}
+    @Override protected RenderShape getRenderShape(BlockState state){return RenderShape.ENTITYBLOCK_ANIMATED;}
     @Override protected VoxelShape getShape(BlockState state,BlockGetter level,BlockPos pos,CollisionContext context){return Block.box(2,0,2,14,14,14);}
     @Override protected InteractionResult useWithoutItem(BlockState state,Level level,BlockPos pos,Player player,BlockHitResult hit){
         return player.isShiftKeyDown()?InteractionResult.PASS:super.useWithoutItem(state,level,pos,player,hit);

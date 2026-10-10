@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "omnira:infused_spiritual_crystal"
+    }
+  },
+  "result": {
+    "id": "omnira:infused_crystal_block",
+    "count": 1
+  }
+}

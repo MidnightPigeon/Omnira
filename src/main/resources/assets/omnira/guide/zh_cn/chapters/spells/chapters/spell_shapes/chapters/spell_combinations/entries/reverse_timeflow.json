@@ -9,5 +9,10 @@
     "刷新或提升时序错位等级不覆盖首次起点；穿越时间也遵循首次起点规则，两种效果分别记录、分别回归。"
   ],
   "recipes": false,
-  "links": [{"target": "spell_target_shape_basics", "label": "目标与形态的选择"}]
+  "links": [
+    {
+      "target": "spell_target_shape_basics",
+      "label": "目标与形态的选择"
+    }
+  ]
 }

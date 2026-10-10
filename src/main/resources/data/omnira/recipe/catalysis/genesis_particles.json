@@ -1,0 +1,18 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": {
+    "item": "omnira:encapsulated_stable_spacetime_aggregate"
+  },
+  "seed": {
+    "item": "omnira:genesis_particles"
+  },
+  "fluid": {
+    "id": "omnira:refined_spacetime",
+    "amount": 500
+  },
+  "result": {
+    "id": "omnira:genesis_particles",
+    "count": 1
+  },
+  "stages": 4
+}

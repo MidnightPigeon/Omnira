@@ -1,0 +1,37 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "operation": "ritual_sword_upgrade",
+  "slots": [
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:paradox_dust"
+    },
+    {
+      "item": "omnira:tempered_paradox_needle"
+    },
+    {
+      "item": "omnira:omni_microcore"
+    },
+    {
+      "item": "omnira:encapsulated_paradox_flow"
+    }
+  ],
+  "result": {
+    "id": "omnira:pale_paradox_needle",
+    "count": 1
+  }
+}

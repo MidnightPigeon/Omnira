@@ -3,7 +3,7 @@
   "item": "omnira:light_crystal_torch",
   "title": "Light Crystal Torch",
   "text": [
-    "Place a Light Crystal Core above two Spiritual Crystals in a vertical recipe to make four torches. Emits light level 15; its 1.6-block height requires two free cells and support below."
+    "Place a Light Crystal Core above two Spiritual Crystals in a vertical recipe to make four torches. Emits light level 15 and spans 1.6 blocks. Stand it on a floor, mount it on a wall or suspend it from a ceiling, with two free cells extending from the clicked supporting face."
   ],
   "recipes": true
 }

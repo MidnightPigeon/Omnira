@@ -1,0 +1,30 @@
+{
+  "type": "omnira:assembly",
+  "slots": [
+    {
+      "item": "omnira:infused_spiritual_crystal"
+    },
+    {
+      "item": "omnira:infused_spiritual_crystal"
+    },
+    {
+      "item": "omnira:infused_spiritual_crystal"
+    },
+    {
+      "item": "omnira:infused_spiritual_crystal"
+    },
+    {
+      "item": "omnira:infused_spiritual_crystal"
+    },
+    {
+      "item": "omnira:infused_spiritual_crystal"
+    },
+    {
+      "item": "omnira:crystal_sign"
+    }
+  ],
+  "result": {
+    "id": "omnira:marvelous_wisdom_sign",
+    "count": 1
+  }
+}

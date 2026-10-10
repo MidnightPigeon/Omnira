@@ -63,7 +63,7 @@ public final class DreamMirror extends PathfinderMob {
     @Override public boolean hurt(DamageSource source,float amount) {
         if(level().isClientSide || amount<=0 || source.is(DamageTypes.THORNS) || isInvulnerableTo(source)) return false;
         updateCopies();
-        if(source.is(PHYSICAL)) {
+        if(source.is(PHYSICAL) && !(source.getDirectEntity() instanceof SpellEntity blade && blade.kind()==SpellEntity.Kind.SPATIAL_BLADE)) {
             if(source.getDirectEntity() instanceof Projectile projectile) {
                 com.mcmagic.omnira.event.MirrorProjectileEvents.bounce(projectile,this,projectile.position(),source,amount);
                 return false;

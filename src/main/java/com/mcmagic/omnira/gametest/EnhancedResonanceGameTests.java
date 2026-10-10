@@ -96,7 +96,7 @@ public final class EnhancedResonanceGameTests {
             h.assertTrue(ResonanceTerminalItem.data(output).equals(original)&&p.getData(ModAttachments.MANA).current()==200,"Upgrade lost identity/links or charged wrong mana");
             table.setItem(0,ItemStack.EMPTY);p.getInventory().setItem(0,output);
             var terminalMenu=new ResonanceMenu(2,p.getInventory(),0);
-            h.assertTrue(terminalMenu.clickMenuButton(p,0)&&terminalMenu.kind()==2,"Preserved link cannot access original node");
+            h.assertTrue(terminalMenu.clickMenuButton(p,0)&&terminalMenu.kind()==6,"Preserved link cannot access original node");
             terminalMenu.removed(p);menu.removed(p);h.succeed();
         });
     }

@@ -1,0 +1,15 @@
+{
+  "id": "encapsulated_stable_spacetime_aggregate",
+  "item": "omnira:encapsulated_stable_spacetime_aggregate",
+  "title": "Encapsulated Stable Spacetime Aggregate",
+  "text": [
+    "A reaction encapsulates an Unstable Spacetime Aggregate. Its stable form does not decay and can serve as a catalysis substrate."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "alchemical_catalysis_chamber",
+      "label": "Alchemical Catalysis Chamber"
+    }
+  ]
+}

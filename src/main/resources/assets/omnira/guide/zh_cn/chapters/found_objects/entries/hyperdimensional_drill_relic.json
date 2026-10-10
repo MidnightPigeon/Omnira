@@ -1,0 +1,15 @@
+{
+  "id": "hyperdimensional_drill_relic",
+  "title": "超维钻机",
+  "item": "omnira:hyperdimensional_drill",
+  "recipes": false,
+  "text": [
+    "来自超维钻井平台的特殊方块。详细功能与交互方式见下方关联条目。"
+  ],
+  "links": [
+    {
+      "target": "hyperdimensional_drill",
+      "label": "功能说明"
+    }
+  ]
+}

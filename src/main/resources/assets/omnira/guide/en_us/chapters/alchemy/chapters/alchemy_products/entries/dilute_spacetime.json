@@ -1,0 +1,33 @@
+{
+  "id": "dilute_spacetime",
+  "title": "Dilute Spacetime",
+  "item": "omnira:dilute_spacetime_bucket",
+  "recipes": false,
+  "text": [
+    "Combine one Rough Alchemical Energy Core, 10 B of Void Starflow and 10 B of Decayed Timeflow in the Large Alchemical Reaction Pool. No catalyst block is required. The products are 1 B of Dilute Spacetime and one Alchemical Waste.",
+    "At base speed, the reaction takes 100 seconds. The core is consumed at the start. Every ten seconds consumes 1 B of each reagent and produces 100 mB of Dilute Spacetime. Waste is delivered on completion. Higher efficiency shortens the intervals proportionally.",
+    "Dilute Spacetime is a gently luminous, water-like fluid that can form infinite sources. Liquid Crystal Balls supply it indefinitely to external extraction, while manual container transfers still use the actual stored amount."
+  ],
+  "links": [
+    {
+      "target": "refined_spacetime",
+      "label": "Further Refinement"
+    },
+    {
+      "target": "enhanced_alchemical_energy_core",
+      "label": "Enhanced Alchemical Energy Core"
+    },
+    {
+      "target": "large_alchemical_reaction_pool",
+      "label": "Large Alchemical Reaction Pool"
+    },
+    {
+      "target": "rough_alchemical_energy_core",
+      "label": "Rough Alchemical Energy Core"
+    },
+    {
+      "target": "alchemical_waste",
+      "label": "Alchemical Waste"
+    }
+  ]
+}

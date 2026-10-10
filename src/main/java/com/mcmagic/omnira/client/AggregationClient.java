@@ -32,7 +32,7 @@ public final class AggregationClient {
         if(stack.isEmpty())return;
         pose.pushPose();pose.translate(x,y,z);pose.scale(scale,scale,scale);
         if(stack.is(com.mcmagic.omnira.registry.ModItems.SPELL_INK.get()))pose.translate(0,-1.0/16,0);
-        Minecraft.getInstance().getItemRenderer().renderStatic(stack,ItemDisplayContext.NONE,light,overlay,pose,buffers,Minecraft.getInstance().level,0);pose.popPose();
+        Minecraft.getInstance().getItemRenderer().renderStatic(stack,ItemDisplayContext.NONE,light,overlay,pose,CrystalGlassLayer.contents(buffers),Minecraft.getInstance().level,0);pose.popPose();
     }
     private static void mote(double x,double y,double z,int color,float size,float alpha,PoseStack pose,MultiBufferSource buffers,int overlay){
         pose.pushPose();pose.translate(x,y,z);pose.scale(size,size,size);

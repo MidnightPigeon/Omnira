@@ -8,6 +8,8 @@ public final class ModRegistryAliases {
     private ModRegistryAliases() {}
 
     public static void install() {
+        alias(ModBlocks.BLOCKS, "void_fissure", "void_crevice");
+        alias(ModItems.ITEMS, "void_fissure", "void_crevice");
         alias(ModBlocks.BLOCKS, "advanced_forge", "advanced_assembly_table");
         alias(ModItems.ITEMS, "advanced_forge", "advanced_assembly_table");
         alias(ModBlockEntityTypes.BLOCK_ENTITY_TYPES, "advanced_forge", "advanced_assembly_table");
@@ -16,6 +18,12 @@ public final class ModRegistryAliases {
         alias(ModBlocks.BLOCKS, "test_spell_core", "primordial_spell_core");
         alias(ModItems.ITEMS, "test_spell_core", "primordial_spell_core");
         alias(ModItems.ITEMS, "crystallized_nail", "crystallized_bone_nail");
+        alias(ModItems.ITEMS, "sharpened_bone_nail", "sharpened_crystallized_bone_nail");
+        alias(ModItems.ITEMS, "channelled_bone_nail", "channelled_crystallized_bone_nail");
+        alias(ModItems.ITEMS, "coiled_bone_nail", "threaded_paradox_bone_nail");
+        alias(ModItems.ITEMS, "pure_bone_nail", "pure_paradox_bone_nail");
+        alias(ModItems.ITEMS, "hivesteel_arcane_needle", "tempered_paradox_needle");
+        alias(ModItems.ITEMS, "pale_steel_arcane_needle", "pale_paradox_needle");
 
         alias(ModBlocks.BLOCKS, "spatial_crystal", "rough_spatial_crystal_block");
         alias(ModItems.ITEMS, "spatial_crystal", "rough_spatial_crystal_block");

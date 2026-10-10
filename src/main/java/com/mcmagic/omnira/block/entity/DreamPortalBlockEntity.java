@@ -134,7 +134,7 @@ public final class DreamPortalBlockEntity extends BlockEntity {
                 memberData.putLong("OmniraDreamOrigin",worldPosition.asLong());
             }
         }
-        player.changeDimension(new DimensionTransition(destination,landing,Vec3.ZERO,player.getYRot(),player.getXRot(),entity->{
+        com.mcmagic.omnira.space.anchor.StabilityField.portalTravel(player,new DimensionTransition(destination,landing,Vec3.ZERO,player.getYRot(),player.getXRot(),entity->{
             entity.fallDistance=0;
             entity.placePortalTicket(entity.blockPosition());
             TransitionParticles.arrive(entity);

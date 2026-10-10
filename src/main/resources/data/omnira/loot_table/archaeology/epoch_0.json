@@ -57,12 +57,17 @@
         {
           "type": "minecraft:item",
           "name": "omnira:paradox_dust",
-          "weight": 222
+          "weight": 74
         },
         {
           "type": "minecraft:item",
           "name": "omnira:time_microcore",
           "weight": 37
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:infused_spiritual_crystal",
+          "weight": 148
         }
       ]
     }

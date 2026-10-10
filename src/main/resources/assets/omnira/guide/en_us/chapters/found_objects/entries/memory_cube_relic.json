@@ -1,0 +1,15 @@
+{
+  "id": "memory_cube_relic",
+  "title": "Memory Cube",
+  "item": "omnira:memory_cube",
+  "recipes": false,
+  "text": [
+    "A special block found in Rusty Lake Mill. Follow the linked entry for its functions and interactions."
+  ],
+  "links": [
+    {
+      "target": "memory_cube_guide",
+      "label": "Functions"
+    }
+  ]
+}

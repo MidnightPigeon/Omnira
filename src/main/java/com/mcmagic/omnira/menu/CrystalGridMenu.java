@@ -93,7 +93,7 @@ public final class CrystalGridMenu extends AbstractContainerMenu {
     public ItemStack icon() {return locate(owner,source);}
     public int nextSlot() { return owner.level().isClientSide?clientCursor:next(bound,capacity); }
     public static int slotX(int count,int i) {return 80+(int)Math.round(Math.sin(i*Math.PI*2/count)*52);}
-    public static int slotY(int count,int i) {return 72-(int)Math.round(Math.cos(i*Math.PI*2/count)*58);}
+    public static int slotY(int count,int i) {return 72-(int)Math.round(Math.cos(i*Math.PI*2/count)*44);}
     @Override public boolean stillValid(Player player) {
         return player==owner && player.isAlive() && (player.level().isClientSide || locate(player,source)==bound);
     }

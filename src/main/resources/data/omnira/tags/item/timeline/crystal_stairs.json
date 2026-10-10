@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:spiritual_crystal_stairs",
+    "omnira:infused_crystal_stairs",
+    "omnira:dream_crystal_stairs",
+    "omnira:spatial_crystal_stairs",
+    "omnira:solidified_light_crystal_core_stairs"
+  ]
+}

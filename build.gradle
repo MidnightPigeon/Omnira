@@ -48,6 +48,7 @@ runs {
 
     gameTestServer {
         systemProperty 'neoforge.enabledGameTestNamespaces', providers.gradleProperty('gameTestNamespaces').getOrElse(project.mod_id)
+        if (providers.gradleProperty('testEnergyProvider').isPresent()) systemProperty 'omnira.testEnergyProvider', 'true'
     }
 
     data {
@@ -60,7 +61,8 @@ configurations {
 }
 
 def installedCreate = file('../.minecraft/versions/WizardryCraft/mods/create-1.21.1-6.0.10.jar')
-def installedSable = file('../.minecraft/versions/WizardryCraft/mods/sable-neoforge-1.21.1-2.0.5.jar')
+def installedSable = file('../.minecraft/versions/WizardryCraft/mods/sable-neoforge-1.21.1-2.0.6.jar')
+def installedJei = file('../.minecraft/versions/WizardryCraft/mods/jei-1.21.1-neoforge-19.57.0.451.jar')
 def extractSableLibraries = tasks.register('extractSableLibraries', Sync) {
     from(zipTree(installedSable)) {
         include 'META-INF/jarjar/*.jar'
@@ -88,9 +90,9 @@ dependencies {
     }
     compileOnly files(fileTree('build/sable-libs') { include '*.jar' }).builtBy(extractSableLibraries)
     if (!providers.gradleProperty('withoutCreate').isPresent()) localRuntime files(installedCreate)
-    compileOnly files('../.minecraft/versions/WizardryCraft/mods/jei-1.21.1-neoforge-19.56.0.441.jar')
+    compileOnly files(installedJei)
     if (!providers.gradleProperty('withoutJei').isPresent())
-        localRuntime files('../.minecraft/versions/WizardryCraft/mods/jei-1.21.1-neoforge-19.56.0.441.jar')
+        localRuntime files(installedJei)
     // Nested Create libraries are supplied by Create in production.
     compileOnly files(fileTree('build/create-libs') { include '*.jar' }).builtBy(extractCreateLibraries)
     def installedCurios = file('../.minecraft/versions/WizardryCraft/mods/curios-neoforge-9.5.1+1.21.1.jar')

@@ -1,0 +1,11 @@
+{
+  "id": "crystal_storage",
+  "title": "水晶存储与物流",
+  "icon": "omnira:crystal_ball",
+  "introduction": "introduction.json",
+  "entries": [],
+  "chapters": [
+    "chapters/orb_storage/chapter.json",
+    "chapters/crystal_logistics/chapter.json"
+  ]
+}

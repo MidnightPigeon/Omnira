@@ -1,0 +1,7 @@
+{
+  "type": "omnira:reaction",
+  "items": [{"ingredient": {"item": "omnira:time_warp_point"}}, {"ingredient": {"item": "omnira:space_warp_point"}}],
+  "fluid": {"id": "omnira:dilute_spacetime", "amount": 10000},
+  "support": {"item": "omnira:spacetime_spell_core"},
+  "fluid_result": {"id": "omnira:refined_spacetime", "amount": 1000}
+}

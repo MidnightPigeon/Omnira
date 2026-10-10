@@ -1,0 +1,9 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "slots": [
+    {"item": "omnira:stardust"}, {"item": "omnira:stardust"}, {"item": "omnira:stardust"},
+    {"item": "omnira:deflection_crystal"}, {"item": "omnira:deflection_crystal"}, {"item": "omnira:deflection_crystal"},
+    {"item": "omnira:space_warp_point"}, {"item": "omnira:star_source"}, {"item": "omnira:space_warp_point"}
+  ],
+  "result": {"id": "omnira:deflection_field", "count": 1}
+}

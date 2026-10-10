@@ -18,6 +18,7 @@ public final class DecorationVariants {
         add("light_source_bricks","light_source_brick",DreamContent.LIGHT_SOURCE_BRICKS,null,null);
         add("solidified_light_crystal_core","solidified_light_crystal_core",DreamContent.SOLIDIFIED_LIGHT_CRYSTAL_CORE,null,null);
         add("spiritual_crystal_block","spiritual_crystal",DreamContent.SPIRITUAL_CRYSTAL_BLOCK,DreamContent.SPIRITUAL_CRYSTAL_STAIRS,null);
+        add("infused_crystal_block","infused_crystal",DreamContent.INFUSED_CRYSTAL_BLOCK,null,null);
         add("dream_crystal_block","dream_crystal",DreamContent.DREAM_CRYSTAL_BLOCK,null,null);
         add("shadow_rock","shadow_rock",DreamContent.SHADOW_ROCK,DreamContent.SHADOW_ROCK_STAIRS,DreamContent.SHADOW_ROCK_SLAB);
         add("shadow_rock_bricks","shadow_rock_brick",DreamContent.SHADOW_ROCK_BRICKS,null,null);
@@ -31,11 +32,15 @@ public final class DecorationVariants {
     }
     private static void add(String baseId,String stem,DeferredBlock<Block> base,DeferredBlock<Block> stairs,DeferredBlock<Block> slab) {
         if(stairs==null) {
-            stairs=ModBlocks.BLOCKS.register(stem+"_stairs",()->new DecorativeStairBlock(base.get().defaultBlockState(),BlockBehaviour.Properties.ofFullCopy(base.get())));
+            stairs=ModBlocks.BLOCKS.register(stem+"_stairs",()->baseId.equals("infused_crystal_block")
+                    ?new com.mcmagic.omnira.block.InfusedCrystalBlock.Stairs(base.get().defaultBlockState(),BlockBehaviour.Properties.ofFullCopy(base.get()))
+                    :new DecorativeStairBlock(base.get().defaultBlockState(),BlockBehaviour.Properties.ofFullCopy(base.get())));
             DreamContent.ITEMS.add(ModItems.ITEMS.registerSimpleBlockItem(stairs));
         }
         if(slab==null) {
-            slab=ModBlocks.BLOCKS.register(stem+"_slab",()->new SlabBlock(BlockBehaviour.Properties.ofFullCopy(base.get())));
+            slab=ModBlocks.BLOCKS.register(stem+"_slab",()->baseId.equals("infused_crystal_block")
+                    ?new com.mcmagic.omnira.block.InfusedCrystalBlock.Slab(BlockBehaviour.Properties.ofFullCopy(base.get()))
+                    :new SlabBlock(BlockBehaviour.Properties.ofFullCopy(base.get())));
             DreamContent.ITEMS.add(ModItems.ITEMS.registerSimpleBlockItem(slab));
         }
         FAMILIES.add(new Family(baseId,stem,base,stairs,slab));

@@ -4,8 +4,7 @@
   "icon": "omnira:simple_condensation_table",
   "introduction": "introduction.json",
   "entries": [
-    "entries/spiritual_crystal.json",
-    "entries/crystal_ball.json"
+    "entries/spiritual_crystal.json"
   ],
   "chapters": [
     "chapters/advanced_condensation/chapter.json"

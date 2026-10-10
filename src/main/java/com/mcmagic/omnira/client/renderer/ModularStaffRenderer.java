@@ -54,6 +54,12 @@ public final class ModularStaffRenderer extends BlockEntityWithoutLevelRenderer 
                 pose.scale(.28F, .28F, .28F);
                 pose.translate(-.5, -.5, -.5);
             }
+            if(partStack.is(com.mcmagic.omnira.registry.ModItems.INFUSED_CRYSTAL_TIP.get())||partStack.is(com.mcmagic.omnira.registry.ModItems.SPACETIME_AGGREGATE_TIP.get())) {
+                mc.getItemRenderer().renderModelLists(model,partStack,light,overlay,pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
+                if(partStack.is(com.mcmagic.omnira.registry.ModItems.INFUSED_CRYSTAL_TIP.get()))InfusedStaffTipRenderer.motes(pose,buffers,overlay,18.0/16,time);
+                pose.popPose();
+                continue;
+            }
             // Match the ordinary non-block item pipeline, including translucent model layers.
             for (var pass : model.getRenderPasses(partStack, true)) {
                 for (var renderType : pass.getRenderTypes(partStack, true)) {

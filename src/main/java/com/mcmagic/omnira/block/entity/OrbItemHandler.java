@@ -6,13 +6,14 @@ import net.neoforged.neoforge.items.IItemHandler;
 public final class OrbItemHandler implements IItemHandler {
     private final CrystalBallBlockEntity owner;
     public OrbItemHandler(CrystalBallBlockEntity owner) {this.owner=owner;}
-    public int getSlots(){return owner instanceof LiquidCrystalBallBlockEntity?0:12;}
+    public int getSlots(){return owner instanceof LiquidCrystalBallBlockEntity?0:owner.getContainerSize();}
     public ItemStack getStackInSlot(int slot){return owner.getItem(slot);}
     public int getSlotLimit(int slot){return owner.getMaxStackSize();}
-    public boolean isItemValid(int slot,ItemStack stack){return slot>=0 && slot<getSlots() && !com.mcmagic.omnira.item.bottle.PocketBottleItem.restricted(stack);}
+    public boolean isItemValid(int slot,ItemStack stack){return slot>=0 && slot<getSlots() && (owner instanceof VoidCrystalBallBlockEntity || !com.mcmagic.omnira.item.bottle.PocketBottleItem.restricted(stack));}
     public ItemStack insertItem(int slot,ItemStack stack,boolean simulate) {
         if(owner.hasPendingLoot())return stack;
         if(stack.isEmpty() || !isItemValid(slot,stack))return stack;
+        if(owner instanceof VoidCrystalBallBlockEntity)return ItemStack.EMPTY;
         var existing=owner.getItem(slot);
         if(!existing.isEmpty() && !ItemStack.isSameItemSameComponents(existing,stack))return stack;
         int amount=Math.min(stack.getCount(),owner.getMaxStackSize(stack)-existing.getCount());

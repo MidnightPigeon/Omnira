@@ -11,7 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public final class ArcaneAssemblyTableScreen extends AbstractContainerScreen<ArcaneAssemblyTableMenu> {
+public final class ArcaneAssemblyTableScreen extends ResponsiveContainerScreen<ArcaneAssemblyTableMenu> {
     private static final ResourceLocation BACKGROUND=CrystalWorkstationBackground.texture("workstation_assembly");
     private static final ResourceLocation HAMMER=ResourceLocation.fromNamespaceAndPath("omnira","textures/gui/assembly_hammer.png");
     private Button hammer;
@@ -53,18 +53,19 @@ public final class ArcaneAssemblyTableScreen extends AbstractContainerScreen<Arc
         hammer.active=cooldown==0 && menu.canStrike();
     }
     @Override protected void renderBg(GuiGraphics graphics,float partialTick,int mouseX,int mouseY) {
-        CrystalWorkstationBackground.draw(graphics,BACKGROUND,leftPos,topPos);
+        CrystalWorkstationBackground.draw(graphics,BACKGROUND,leftPos,topPos,"assembly",CrystalUi.time(partialTick),menu.progress()/100F,menu.cooldown()>0);
     }
     @Override protected void renderLabels(GuiGraphics graphics,int mouseX,int mouseY) {
         CrystalWorkstationBackground.labels(graphics,font,title,playerInventoryTitle);
-        WorkstationManaStatus.render(graphics,font,minecraft.player,menu.manaCost());
-        graphics.fill(61,132,130,138,0xFF555A63);
-        graphics.fill(62,133,62+(int)(67*menu.progress()/100F),137,0xFFDCF1F3);
+        WorkstationManaStatus.render(graphics,font,minecraft.player);
+        graphics.fill(61,132,130,138,MachinePanelArt.RIM);
+        graphics.fill(62,133,129,137,MachinePanelArt.DARK);
+        graphics.fill(62,133,62+(int)(67*menu.progress()/100F),137,MachinePanelArt.MINT);
         String text=menu.progress()+"%";
         graphics.pose().pushPose();graphics.pose().translate(96,125,0);graphics.pose().scale(.75F,.75F,1);
-        graphics.drawString(font,text,-font.width(text)/2,0,0xFF404040,false);graphics.pose().popPose();
+        graphics.drawString(font,text,-font.width(text)/2,0,0xFFDCEEEA,false);graphics.pose().popPose();
     }
-    @Override public void render(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
-        super.render(graphics,mouseX,mouseY,partialTick);renderTooltip(graphics,mouseX,mouseY);
+    @Override protected void renderContent(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
+        super.renderContent(graphics,mouseX,mouseY,partialTick);renderTooltip(graphics,mouseX,mouseY);
     }
 }

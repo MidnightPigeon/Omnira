@@ -3,6 +3,11 @@
   "title": "Structures",
   "icon": "omnira:rough_spatial_crystal_block",
   "introduction": "introduction.json",
-  "entries": [],
+  "entries": [
+    "entries/fold_observatory_guide.json",
+    "entries/void_lighthouse_guide.json",
+    "entries/calibration_station_guide.json",
+    "entries/skyreach_tower_guide.json"
+  ],
   "chapters": []
 }

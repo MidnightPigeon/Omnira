@@ -1,0 +1,16 @@
+{
+  "id": "void_crevice_guide",
+  "title": "Void Crevice",
+  "item": "omnira:void_crevice",
+  "recipes": false,
+  "text": [
+    "Entering a fissure removes half your current health and half the remaining durability of equipped armor and held items, rounded up. Remaining inside does not repeat the hit; leaving and entering again does.",
+    "After contact, a fissure attempts to relocate within nearby starflow or up to two blocks above its surface. A Spacetime Anchoring Sigil prevents the losses, not relocation. Mantas are immune, but their riders need their own sigil."
+  ],
+  "links": [
+    {
+      "target": "void_starflow_guide",
+      "label": "Void Starflow"
+    }
+  ]
+}

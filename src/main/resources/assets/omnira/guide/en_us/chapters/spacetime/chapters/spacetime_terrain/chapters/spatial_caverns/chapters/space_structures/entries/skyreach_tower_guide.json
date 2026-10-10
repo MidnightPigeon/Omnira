@@ -1,0 +1,24 @@
+{
+  "id": "skyreach_tower_guide",
+  "title": "Skyreach Tower",
+  "item": "omnira:dense_void_mass",
+  "recipes": false,
+  "text": [
+    "Opposing circular colonnades span the abyss, with spiral stairs leading to the weightless crossing. Each end has an entrance and treasure gallery holding two item treasure orbs and one fluid treasure orb.",
+    "A high-density void mass floats in the central passage. Mind its attraction when crossing."
+  ],
+  "links": [
+    {
+      "target": "inverted_abyss_guide",
+      "label": "Inverted Abyss"
+    },
+    {
+      "target": "dense_void_mass_guide",
+      "label": "High-Density Void Mass"
+    },
+    {
+      "target": "spatial_crystal_guide",
+      "label": "Spatial Crystals"
+    }
+  ]
+}

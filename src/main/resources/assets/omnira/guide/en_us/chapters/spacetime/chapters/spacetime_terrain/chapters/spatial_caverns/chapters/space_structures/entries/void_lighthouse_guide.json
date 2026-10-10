@@ -1,0 +1,24 @@
+{
+  "id": "void_lighthouse_guide",
+  "title": "Void Lighthouse",
+  "item": "omnira:star_source",
+  "recipes": false,
+  "text": [
+    "A blue-violet lighthouse stands on a crystal island in the Void Starsea. Its interior staircase leads to a suspended Star Source in the lantern chamber; a few motes of Stardust light the island.",
+    "A loot crystal ball inside holds spatial materials, with a 10% chance to find Voyager's Violin."
+  ],
+  "links": [
+    {
+      "target": "star_source_relic",
+      "label": "Star Source"
+    },
+    {
+      "target": "stardust_guide",
+      "label": "Stardust"
+    },
+    {
+      "target": "voyager_violin",
+      "label": "Voyager's Violin"
+    }
+  ]
+}

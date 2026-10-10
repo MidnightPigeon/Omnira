@@ -1,0 +1,33 @@
+{
+  "id": "dilute_spacetime",
+  "title": "稀薄时空",
+  "item": "omnira:dilute_spacetime_bucket",
+  "recipes": false,
+  "text": [
+    "在大型炼金反应池中投入1个粗糙炼金能核、10 B虚空星流和10 B破败时流，无需底部催化方块，即可炼成1 B稀薄时空，并获得1个炼金废料。",
+    "基础反应耗时100秒。能核在开始时消耗；每10秒各消耗1 B原液，并生成100 mB稀薄时空，完成时才获得废料。提高池体效率会同比缩短结算间隔。",
+    "稀薄时空是发出微光的类水液体，可以像水一样形成无限源。存入液晶球后，外部抽取不减少存量；手动用液体容器存取仍按实际液量结算。"
+  ],
+  "links": [
+    {
+      "target": "refined_spacetime",
+      "label": "进一步精炼"
+    },
+    {
+      "target": "enhanced_alchemical_energy_core",
+      "label": "强化炼金能核"
+    },
+    {
+      "target": "large_alchemical_reaction_pool",
+      "label": "大型炼金反应池"
+    },
+    {
+      "target": "rough_alchemical_energy_core",
+      "label": "粗糙炼金能核"
+    },
+    {
+      "target": "alchemical_waste",
+      "label": "炼金废料"
+    }
+  ]
+}

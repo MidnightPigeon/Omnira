@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "omnira:block/infused_crystal_block"
+    }
+  }
+}

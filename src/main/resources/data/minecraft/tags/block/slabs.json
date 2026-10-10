@@ -20,6 +20,7 @@
     "omnira:time_eroded_brick_slab",
     "omnira:cracked_time_eroded_brick_slab",
     "omnira:sandbound_time_eroded_brick_slab",
-    "omnira:spatial_crystal_slab"
+    "omnira:spatial_crystal_slab",
+    "omnira:infused_crystal_slab"
   ]
 }

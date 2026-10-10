@@ -4,6 +4,7 @@
   "icon": "omnira:crystal_processing_table",
   "introduction": "introduction.json",
   "entries": [
+    "entries/deflection_field.json",
     "entries/low_tier_magic_crystal.json",
     "entries/staff_casting.json",
     "entries/infused_grimoire_usage.json",

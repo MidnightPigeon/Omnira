@@ -1,0 +1,15 @@
+{
+  "id": "marisa_crystal_ball_relic",
+  "title": "魔理沙的水晶球",
+  "item": "omnira:marisa_crystal_ball",
+  "recipes": false,
+  "text": [
+    "来自雾雨魔法店的特殊方块。详细功能与交互方式见下方关联条目。"
+  ],
+  "links": [
+    {
+      "target": "marisa_crystal_ball_guide",
+      "label": "功能说明"
+    }
+  ]
+}

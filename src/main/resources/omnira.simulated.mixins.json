@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.mcmagic.omnira.compat.simulated.mixin",
+  "plugin": "com.mcmagic.omnira.compat.OptionalIntegrationMixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ForgeSimAssemblyMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

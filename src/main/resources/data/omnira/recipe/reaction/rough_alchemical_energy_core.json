@@ -1,0 +1,12 @@
+{
+  "type": "omnira:reaction",
+  "items": [
+    {"ingredient": {"item": "omnira:earth_microcore"}},
+    {"ingredient": {"item": "omnira:water_microcore"}},
+    {"ingredient": {"item": "omnira:fire_microcore"}},
+    {"ingredient": {"item": "omnira:air_microcore"}}
+  ],
+  "fluid": {"id": "minecraft:lava", "amount": 4000},
+  "support": {"item": "omnira:spiritual_crystal_block"},
+  "results": [{"id": "omnira:rough_alchemical_energy_core", "count": 1}]
+}

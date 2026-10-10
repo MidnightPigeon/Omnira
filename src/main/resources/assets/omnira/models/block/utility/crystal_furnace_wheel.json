@@ -1,0 +1,8 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "surface": "omnira:block/spiritual_crystal_clear",
+    "particle": "omnira:block/spiritual_crystal_clear"
+  },
+  "elements": []
+}

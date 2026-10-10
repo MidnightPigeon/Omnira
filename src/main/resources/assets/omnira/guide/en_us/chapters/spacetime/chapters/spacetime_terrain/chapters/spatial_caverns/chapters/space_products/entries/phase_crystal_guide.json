@@ -1,0 +1,26 @@
+{
+  "id": "phase_crystal_guide",
+  "title": "Phase Crystals",
+  "item": "omnira:phase_crystal_cluster",
+  "recipes": false,
+  "text": [
+    "Phase Crystal Clusters can be placed on a variety of floors. Each Arcane Dust attempt consumes one dust with a 25% chance to grow a large formation; other crystal matrices keep their normal growth rules. Growth destroys ordinary blocks in its occupied cells and deals ten true damage to each impaled entity. An indestructible block immediately overhead blocks the attempt; indestructible blocks elsewhere remain. Four Phase Crystal Blocks craft one cluster.",
+    "When inverted blocks become solid again, trapped entities also take ten true damage, once per restoration even when overlapping several blocks.",
+    "Normal blocks are translucent deep blue and emit light level 12. A group of more than nine face-connected blocks has a 20% chance every ten seconds to invert together: pale blue, more transparent, passable and light level 15. The same chance restores solid form. Both changes take four seconds, switching collision at completion. Pale purple motes appear inside blocks and around small clusters; inverted blocks have deeper purple motes. Separate blocks, small groups and the cluster itself do not invert.",
+    "In an Alchemical Catalysis Chamber, use excited rough spatial crystal as substrate, a Phase Crystal Cluster as seed and Dilute Spacetime. Four growth stages produce sixteen Phase Crystal Blocks."
+  ],
+  "links": [
+    {
+      "target": "phase_crystal_grove_guide",
+      "label": "Phase Crystal Grove"
+    },
+    {
+      "target": "arcane_dust",
+      "label": "Arcane Dust"
+    },
+    {
+      "target": "alchemical_catalysis_chamber",
+      "label": "Alchemical Catalysis Chamber"
+    }
+  ]
+}

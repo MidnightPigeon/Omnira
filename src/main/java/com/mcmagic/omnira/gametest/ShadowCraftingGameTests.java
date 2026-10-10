@@ -70,10 +70,10 @@ public final class ShadowCraftingGameTests {
     @GameTest(template="spell_arena")
     public static void shadowAnalysisAndGrid(GameTestHelper h) {
         var analysis=(AnalysisRecipe)recipe(h,"analysis/shadow_mist");
-        h.assertTrue(analysis.matches(new SingleRecipeInput(new ItemStack(ModItems.SHADOW_MANUSCRIPT.get(),4)),h.getLevel()) && analysis.dustMin()==8 && analysis.dustMax()==10,"Manuscript analysis incorrect");
-        h.assertTrue(!analysis.matches(new SingleRecipeInput(new ItemStack(ModItems.SHADOW_MANUSCRIPT.get(),3)),h.getLevel()),"Too few manuscripts accepted");
+        h.assertTrue(analysis.matches(new SingleRecipeInput(new ItemStack(ModItems.SHADOW_MANUSCRIPT.get(),9)),h.getLevel()) && analysis.dustMin()==8 && analysis.dustMax()==10,"Manuscript analysis incorrect");
+        h.assertTrue(!analysis.matches(new SingleRecipeInput(new ItemStack(ModItems.SHADOW_MANUSCRIPT.get(),8)),h.getLevel()),"Too few manuscripts accepted");
         var fast=(CraftingRecipe)recipe(h,"crystal_analysis/shadow_mist");
-        var input=CraftingInput.of(2,1,java.util.List.of(new ItemStack(ModItems.ANALYSIS_CRYSTAL.get()),new ItemStack(ModItems.SHADOW_MANUSCRIPT.get())));
+        var input=CraftingInput.of(3,2,java.util.List.of(new ItemStack(ModItems.ANALYSIS_CRYSTAL.get()),new ItemStack(ModItems.SHADOW_MANUSCRIPT.get()),new ItemStack(ModItems.SHADOW_MANUSCRIPT.get()),new ItemStack(ModItems.SHADOW_MANUSCRIPT.get()),new ItemStack(ModItems.SHADOW_MANUSCRIPT.get()),ItemStack.EMPTY));
         h.assertTrue(fast.matches(input,h.getLevel()) && fast.assemble(input,h.getLevel().registryAccess()).is(ModItems.SHADOW_MIST.get()),"Fast mist recipe mismatch");
         h.assertTrue(fast.getRemainingItems(input).get(0).getDamageValue()==1,"Analysis crystal durability not consumed");
         var grid=new ItemStack(ModItems.ELEMENTAL_CRYSTAL_GRID.get());

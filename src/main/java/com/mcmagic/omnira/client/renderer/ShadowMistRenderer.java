@@ -14,7 +14,7 @@ public final class ShadowMistRenderer extends EntityRenderer<ShadowMist> {
     @Override public void render(ShadowMist entity,float yaw,float partial,PoseStack pose,MultiBufferSource buffers,int light) {
         float d=entity.diameter(partial),alpha=entity.opacity(partial);
         pose.pushPose();pose.translate(0,d*.325,0);pose.scale(d*16/14,d*.65F*16/14,d*16/14);
-        cloud.render(pose,buffers.getBuffer(RenderType.entityTranslucent(TEXTURE)),light,OverlayTexture.NO_OVERLAY,
+        cloud.render(pose,buffers.getBuffer(CrystalGlassLayer.SHADOW_MIST),light,OverlayTexture.NO_OVERLAY,
                 ((int)(alpha*150)<<24)|0xFFFFFF);
         pose.popPose();super.render(entity,yaw,partial,pose,buffers,light);
     }

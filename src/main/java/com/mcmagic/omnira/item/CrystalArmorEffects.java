@@ -77,6 +77,7 @@ public final class CrystalArmorEffects {
 
     @SubscribeEvent public static void reduce(LivingDamageEvent.Pre event){
         if(event.getEntity() instanceof Player player)
-            event.setNewDamage(event.getNewDamage()*(float)(1-equipped(player).reduction));
+            event.setNewDamage(event.getNewDamage()*(float)Math.max(0,1-equipped(player).reduction
+                    -(com.mcmagic.omnira.space.sea.DeflectionFieldEvents.raised(player)?.25:0)));
     }
 }

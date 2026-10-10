@@ -1,0 +1,10 @@
+{
+  "id": "mod_integration_risks",
+  "title": "联动风险模组列表",
+  "icon": "omnira:unstable_spacetime_aggregate",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/enigmatic_legacy_risk.json"
+  ],
+  "chapters": []
+}

@@ -1,0 +1,11 @@
+{
+  "type": "omnira:reaction",
+  "fluid": {"id": "minecraft:water", "amount": 4000},
+  "support": {"item": "omnira:dream_crystal_block"},
+  "results": [
+    {"id": "omnira:spiritual_crystal"},
+    {"id": "omnira:dream_crystal_shard"},
+    {"id": "minecraft:glass"},
+    {"id": "omnira:water_microcore"}
+  ]
+}

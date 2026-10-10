@@ -1,0 +1,23 @@
+{
+  "text": [
+    "共鸣节点传输物品和液体；时空道标与归程水晶用于定点归程，折跃门连接远方的目的地。"
+  ],
+  "links": [
+    {
+      "target": "spacetime_waymark",
+      "label": "时空道标"
+    },
+    {
+      "target": "recall_crystal",
+      "label": "归程水晶"
+    },
+    {
+      "target": "enhanced_recall_crystal",
+      "label": "进阶归程水晶"
+    },
+    {
+      "target": "fold_gate_guide",
+      "label": "折跃门"
+    }
+  ]
+}

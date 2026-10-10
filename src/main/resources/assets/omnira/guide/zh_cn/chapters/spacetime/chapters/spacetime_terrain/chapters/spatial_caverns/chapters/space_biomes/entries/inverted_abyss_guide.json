@@ -1,0 +1,20 @@
+{
+  "id": "inverted_abyss_guide",
+  "title": "倒悬深渊",
+  "item": "omnira:excited_rough_spatial_crystal_block",
+  "recipes": false,
+  "text": [
+    "洞穴下半部重力向下，上半部重力向上；两者之间有五格厚的无重力带。在无重力带中，前进会沿视线方向推进。时空护符不会改变这里的重力。",
+    "发光的空间晶块铺满两端地表，巨大的裂谷一直延伸到纯粹固化时空层。无重力带内悬浮着晶块团：六块粗糙空间晶块围绕一块激发态晶块，标示这片区域。通天塔连接上下两端。"
+  ],
+  "links": [
+    {
+      "target": "skyreach_tower_guide",
+      "label": "通天塔"
+    },
+    {
+      "target": "dense_void_mass_guide",
+      "label": "高密度虚空团块"
+    }
+  ]
+}

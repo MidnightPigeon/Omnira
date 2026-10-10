@@ -50,9 +50,7 @@ public final class HyperDrillBlockEntity extends BlockEntity {
         for(var d:Direction.Plane.HORIZONTAL){
             var p=worldPosition.relative(d,2);
             if(!level.hasChunkAt(p)||com.mcmagic.omnira.time.StilledTime.stopped(level,p))continue;
-            var s=level.getBlockState(p);
-            if(level.getBlockEntity(p) instanceof ManaEngineAccess engine&&s.hasProperty(BlockStateProperties.HORIZONTAL_FACING)
-                    &&s.getValue(BlockStateProperties.HORIZONTAL_FACING)==d.getOpposite()&&engine.engineState().running()){addCharge(1);return;}
+            if(com.mcmagic.omnira.space.SpacetimePortState.engineAt(level,p,d.getOpposite())!=null){addCharge(1);return;}
         }
     }
     public static int lowerLimit(Level level,int y){

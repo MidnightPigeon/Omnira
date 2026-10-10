@@ -10,7 +10,8 @@
     "Taking damage interrupts both needle charging and healing, including damage absorbed by absorption hearts. Release the button before starting again.",
     "8 attack damage, 1.8 attack speed and 1024 durability. Accepts sword enchantments. Mana repair, self-barrier crystal loading and downward bounces work as with the crystallized nail.",
     "Hold use for three uninterrupted seconds to heal 12 health. Movement is locked, and you hover when airborne. On a moving structure, the anchor follows that structure. Cannot be used while riding.",
-    "The channel gradually spends one quarter of the maximum mana at its start, unaffected by discounts. Interrupting it gives no healing and does not refund mana."
+    "The channel gradually spends one quarter of the maximum mana at its start, unaffected by discounts. Interrupting it gives no healing and does not refund mana.",
+    "Upgrade four times on the Advanced Assembly Table. Each level adds 2 attack damage, 0.1 attack speed, 3 total healing and 25% of base special range. The nail gains 1 healing per segment. Level four has 16 damage, 2.2 speed, 24 total healing and double special range. Wide Area Rune range bonuses add to upgrade bonuses."
   ],
   "links": [
     {
@@ -20,6 +21,22 @@
     {
       "target": "crystallized_bone_nail",
       "label": "Crystallized Nail"
+    },
+    {
+      "target": "sharpened_arcane_needle",
+      "label": "Sharpened Arcane Needle"
+    },
+    {
+      "target": "shining_arcane_needle",
+      "label": "Shining Arcane Needle"
+    },
+    {
+      "target": "tempered_paradox_needle",
+      "label": "Tempered Paradox Needle"
+    },
+    {
+      "target": "pale_paradox_needle",
+      "label": "Pale Paradox Needle"
     }
   ]
 }

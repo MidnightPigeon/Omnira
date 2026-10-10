@@ -1,0 +1,10 @@
+{
+  "id": "crystal_anvil",
+  "item": "omnira:crystal_anvil",
+  "title": "Crystal Anvil",
+  "text": [
+    "Assemble an anvil with six crystal casings. Keeps vanilla repair, enchantment combining and renaming. Each operation uses one of its 16 durability points. At zero it pauses instead of breaking.",
+    "Draws up to 10 mana per second in total from players within five blocks. Every 200 mana restores one durability. Breaking and replacing it does not reset durability."
+  ],
+  "recipes": true
+}

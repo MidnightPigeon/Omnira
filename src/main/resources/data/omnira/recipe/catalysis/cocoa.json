@@ -1,0 +1,23 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": [
+    {
+      "tag": "minecraft:jungle_logs"
+    },
+    {
+      "item": "minecraft:jungle_planks"
+    }
+  ],
+  "seed": {
+    "item": "minecraft:cocoa_beans"
+  },
+  "fluid": {
+    "id": "minecraft:water",
+    "amount": 500
+  },
+  "result": {
+    "id": "minecraft:cocoa_beans",
+    "count": 8
+  },
+  "stages": 3
+}

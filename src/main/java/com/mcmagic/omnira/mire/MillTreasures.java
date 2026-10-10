@@ -51,11 +51,10 @@ public final class MillTreasures extends SavedData {
     public void pulse(ServerLevel level,long now){
         for(var slots:mills.values()){
             if(slots.stream().anyMatch(s->!level.hasChunkAt(s.pos)))continue;
-            boolean reversed=MireCycle.reversing(now);
             // A removed or replaced visible ball is gone permanently, not a new spawn opportunity.
             for(var s:slots)if(!s.retired&&s.visible&&!owns(level,s)){s.retired=true;s.visible=false;s.snapshot=new CompoundTag();setDirty();}
-            for(var s:slots)if(!s.retired&&s.visible&&s.reversed!=reversed)hide(level,s);
-            for(var s:slots)if(!s.retired&&!s.visible&&s.reversed==reversed&&level.isEmptyBlock(s.pos)
+            for(var s:slots)if(!s.retired&&s.visible&&s.reversed!=(MireCycle.reversing(now)&&level.getBiome(s.pos).is(MireCycle.BIOME)))hide(level,s);
+            for(var s:slots)if(!s.retired&&!s.visible&&s.reversed==(MireCycle.reversing(now)&&level.getBiome(s.pos).is(MireCycle.BIOME))&&level.isEmptyBlock(s.pos)
                     &&level.getEntities((net.minecraft.world.entity.Entity)null,new AABB(s.pos),e->e.isAlive()&&!e.isSpectator()).isEmpty())show(level,s);
         }
     }

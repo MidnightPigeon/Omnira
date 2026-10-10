@@ -11,9 +11,10 @@ final class CrystalWorkstationBackground {
     private static final ResourceLocation SCROLL=texture("crystal_workstation_scroll");
     private static final ResourceLocation VANILLA=ResourceLocation.withDefaultNamespace("textures/gui/container/crafting_table.png");
     static ResourceLocation texture(String name){return ResourceLocation.fromNamespaceAndPath("omnira","textures/gui/container/"+name+".png");}
-    static void draw(GuiGraphics graphics,ResourceLocation texture,int x,int y){
+    static void draw(GuiGraphics graphics,ResourceLocation texture,int x,int y,String kind,float time,float progress,boolean active){
         RenderSystem.enableBlend();
-        graphics.blit(texture,x,y,0,0,176,240,176,240);
+        graphics.blit(texture,x,y+142,0,142,176,98,176,240);
+        MachinePanelArt.workstation(CrystalUi.pixels(graphics,x,y),kind,time,progress,active);
         graphics.blit(VANILLA,x+7,y+157,7,83,162,76,256,256);
         CrystalProcessingTableScreen.renderVanillaFrame(graphics,x,y+142,176,98);
     }

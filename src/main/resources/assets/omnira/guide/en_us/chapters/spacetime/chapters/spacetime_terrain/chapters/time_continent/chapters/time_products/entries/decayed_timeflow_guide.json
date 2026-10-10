@@ -3,6 +3,7 @@
   "title": "Decayed Timeflow and Fishing",
   "item": "omnira:decayed_timeflow_bucket",
   "text": [
+    "Like water, two adjacent Decayed Timeflow sources can replenish a source above solid support or another source of the same fluid. External extraction from a Liquid Crystal Ball is infinite within its transfer rate, while UI container exchanges use the actual stored volume.",
     "Pale-green timeflow fills mire ponds, garden pools and cliff aquifers. It deals recurring wither damage and halves movement; temporal and dream creatures and sigil wearers are immune.",
     "Fishing in Decayed Timeflow, not just in the mire, yields Timeflow Eels, Chronal Blindfish and infused or dream crystals as ordinary catches; time seeds, time saplings and the rare Life Ender as junk; and Time Warp Points, rarer enchanted books, Dream Spell Cores and Time Microcores as treasure. Luck of the Sea improves treasure chances. Each successful catch costs three separate points of durability, with Unbreaking checked independently for each."
   ],

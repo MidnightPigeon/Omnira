@@ -1,0 +1,8 @@
+{
+  "selector": "omnira:large_deflection_bud",
+  "priority": 2000,
+  "properties": {
+    "sable:mass": 0,
+    "sable:volume": 1
+  }
+}

@@ -31,16 +31,18 @@ public final class TimeWarpPointItemRenderer extends BlockEntityWithoutLevelRend
         double time=mc.level==null?net.minecraft.Util.getMillis()/50.0
                 :mc.level.getGameTime()+mc.getTimer().getGameTimeDeltaPartialTick(false);
         pose.pushPose();pose.translate(.5,.5,.5);pose.scale(1.25F,1.25F,1.25F);pose.translate(-.5,-.5,-.5);
+        boolean spatial=stack.is(com.mcmagic.omnira.registry.ModItems.SPACE_WARP_POINT.get())||stack.is(com.mcmagic.omnira.registry.ModItems.SPATIAL_REMNANT.get());
+        boolean mote=stack.is(com.mcmagic.omnira.registry.ModItems.TEMPORAL_MOTE.get())||stack.is(com.mcmagic.omnira.registry.ModItems.SPATIAL_REMNANT.get());
         pose.pushPose();pose.translate(.5,.5,.5);pose.mulPose(Axis.YP.rotationDegrees((float)(time*.8)));
-        pose.translate(-.5,-.5,-.5);draw("body",pose,buffers,overlay,0xFFFFFF);pose.popPose();
+        pose.translate(-.5,-.5,-.5);if(!mote)draw(spatial?"spatial_body":"body",pose,buffers,overlay,0xFFFFFF);pose.popPose();
         for(int i=0;i<10;i++){
             double phase=(time/30+i*.137)%1;
             double y=1-2*(i+.5)/10,angle=i*2.3999632297+time*.045;
-            double radius=.29+.16*phase,horizontal=Math.sqrt(1-y*y);
+            double radius=mote?.08+.08*phase:.29+.16*phase,horizontal=Math.sqrt(1-y*y);
             pose.pushPose();pose.translate(.5+Math.cos(angle)*horizontal*radius,.5+y*radius,
                     .5+Math.sin(angle)*horizontal*radius);
             float scale=(float)(.65+.4*Math.sin(Math.PI*phase));pose.scale(scale,scale,scale);
-            draw("grain",pose,buffers,overlay,i%4==0?0xE8F8ED:i%3==0?0x9BDFC0:0x65C785);
+            draw("grain",pose,buffers,overlay,spatial?(i%4==0?0xE5EEFF:i%3==0?0x25283F:0x799EEE):(i%4==0?0xE8F8ED:i%3==0?0x9BDFC0:0x65C785));
             pose.popPose();
         }
         pose.popPose();

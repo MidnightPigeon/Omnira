@@ -41,12 +41,18 @@
         {
           "type": "minecraft:item",
           "name": "omnira:paradox_dust",
-          "weight": 2
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ]
         },
         {
           "type": "minecraft:item",
           "name": "omnira:time_seed",
-          "weight": 1
+          "weight": 2
         }
       ]
     },

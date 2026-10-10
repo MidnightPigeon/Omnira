@@ -1,0 +1,16 @@
+{
+  "id": "spacetime_aggregate_tip",
+  "item": "omnira:spacetime_aggregate_tip",
+  "title": "时空聚合体杖端",
+  "recipes": false,
+  "text": [
+    "提供1个符文槽，单次施放，基础冷却2秒；法术强度+20%，冷却减免+10%，按同类属性加算。",
+    "无视水晶格栅的循环冷却，抵达链尾也按法杖自身冷却计算；默认实际冷却1.8秒。仍按正常次序推进格栅内的法术，不改变水晶与法力消耗。"
+  ],
+  "links": [
+    {
+      "target": "spacetime_aggregate_tip_crafting",
+      "label": "制作配方"
+    }
+  ]
+}

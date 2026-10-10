@@ -1,0 +1,15 @@
+{
+  "id": "paradox_mystery",
+  "item": "omnira:paradox_mystery",
+  "title": "悖论谜团",
+  "text": [
+    "九份悖论尘合为一团动态悖论粉尘。它是不可放置的物品，可继续装配成矿石或反应成封装流体。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "paradox_dust",
+      "label": "悖论尘"
+    }
+  ]
+}

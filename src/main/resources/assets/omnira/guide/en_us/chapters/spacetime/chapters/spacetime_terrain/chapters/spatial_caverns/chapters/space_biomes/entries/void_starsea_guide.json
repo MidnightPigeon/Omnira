@@ -1,0 +1,28 @@
+{
+  "id": "void_starsea_guide",
+  "title": "Void Starsea",
+  "item": "omnira:void_starflow_bucket",
+  "recipes": false,
+  "text": [
+    "An underground ocean fills this region of the spatial caverns. Rough spatial crystal forms the seabed; sparse islands are made from excited crystal. Fallen luminous stars are partly buried below, and some large cores contain a treasure orb.",
+    "Neutral Star Jellyfish and Void Mantas inhabit the sea. Riding a manta protects against starflow, but not against fissures."
+  ],
+  "links": [
+    {
+      "target": "void_starflow_guide",
+      "label": "Void Starflow"
+    },
+    {
+      "target": "void_crevice_guide",
+      "label": "Void Crevice"
+    },
+    {
+      "target": "star_sea_creatures_guide",
+      "label": "Starsea Creatures"
+    },
+    {
+      "target": "void_lighthouse_guide",
+      "label": "Void Lighthouse"
+    }
+  ]
+}

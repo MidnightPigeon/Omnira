@@ -47,15 +47,16 @@ public final class StaffEnhancementGameTests {
     public static void timeLootMigrationPreservesIndependentPools(GameTestHelper h)throws Exception {
         var config=com.mcmagic.omnira.config.OmniraLootConfig.defaults();
         var tables=config.getAsJsonObject("treasureTables");
-        for(var entry:tables.entrySet()) {
-            if(entry.getKey().startsWith("omnira:memory/"))continue;
-            h.assertTrue(!entry.getValue().toString().contains("\"omnira:space_microcore\"")
-                    && !entry.getValue().toString().contains("\"omnira:spatial_crystal_shard\""),"Space ingredient remains in time treasure");
-        }
         h.assertTrue(tables.get("omnira:memory/space").toString().contains("space_microcore"),"Independent memory pool lost its microcore");
         try(var stream=StaffEnhancementGameTests.class.getResourceAsStream("/loot_migrations/time_only_v1.json")) {
             var previous=com.google.gson.JsonParser.parseReader(new java.io.InputStreamReader(java.util.Objects.requireNonNull(stream),
                     java.nio.charset.StandardCharsets.UTF_8)).getAsJsonObject();
+            // Validate only tables owned by this migration, not future independent space loot.
+            for(var key:previous.keySet()) {
+                var current=tables.get(key);
+                h.assertTrue(current!=null&&!current.toString().contains("\"omnira:space_microcore\"")
+                        &&!current.toString().contains("\"omnira:spatial_crystal_shard\""),"Space ingredient remains in time treasure: "+key);
+            }
             var custom=previous.deepCopy();var id="omnira:chests/golden_throne";
             custom.getAsJsonObject(id).addProperty("random_sequence","omnira:custom");
             var saved=custom.get(id).deepCopy();

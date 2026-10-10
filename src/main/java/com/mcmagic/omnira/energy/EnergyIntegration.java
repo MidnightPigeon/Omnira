@@ -21,6 +21,12 @@ public final class EnergyIntegration {
     }
     @SubscribeEvent public static void register(RegisterCapabilitiesEvent event) {
         registrations=event;
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,ModBlockEntityTypes.ARCANE_ASSEMBLY_TABLE.get(),
+                com.mcmagic.omnira.block.entity.ArcaneAssemblyTableBlockEntity::energyPort);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,com.mcmagic.omnira.engine.SpacetimeEngineContent.CONTROLLER.get(),
+                com.mcmagic.omnira.engine.SpacetimeEngineBlock::energyPort);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,com.mcmagic.omnira.engine.SpacetimeEngineContent.OUTPUT.get(),
+                com.mcmagic.omnira.engine.SpacetimeEngineBlock::energyPort);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,ModBlockEntityTypes.MANA_ENGINE.get(),
                 (entity,side)->entity instanceof ManaEngineAccess engine?engine.engineState().energyPort(side):null);
     }

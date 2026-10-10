@@ -1,0 +1,16 @@
+{
+  "id": "phase_crystal_grove_guide",
+  "title": "相位晶林",
+  "item": "omnira:phase_crystal_cluster",
+  "recipes": false,
+  "text": [
+    "激发态粗糙空间晶块铺成明亮的林地，深蓝色晶簇与芦荟状的大型晶簇稀疏分布其间。它们不是树木，也不会自然成长。",
+    "超过九块的相连相位晶块会整簇反相，变得浅蓝、更加透明，并允许实体穿过；稍后也可能恢复实体状态。探索时留意晶簇的颜色与通行变化。"
+  ],
+  "links": [
+    {
+      "target": "phase_crystal_guide",
+      "label": "相位晶簇与晶块"
+    }
+  ]
+}

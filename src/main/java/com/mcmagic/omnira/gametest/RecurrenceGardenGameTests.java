@@ -48,6 +48,14 @@ public final class RecurrenceGardenGameTests {
         var outside=registry.getHolderOrThrow(net.minecraft.resources.ResourceKey.create(Registries.BIOME,net.minecraft.resources.ResourceLocation.parse("minecraft:plains")));
         level.getChunkAt(inside).fillBiomesFromNoise((x,y,z,sampler)->garden,level.getChunkSource().randomState().sampler());
         level.getChunkAt(inside.east()).fillBiomesFromNoise((x,y,z,sampler)->outside,level.getChunkSource().randomState().sampler());
+        // BiomeManager blends quart cells; find the actual block boundary, not the chunk edge.
+        boolean found=false;
+        search:for(int dx=-4;dx<=4;dx++)for(int dz=-4;dz<=4;dz++){
+            var p=inside.offset(dx,0,dz);
+            if(level.getBiome(p).is(RecurrenceGarden.BIOME)&&level.getBiome(p.south()).is(RecurrenceGarden.BIOME)
+                    &&!level.getBiome(p.east()).is(RecurrenceGarden.BIOME)&&!level.getBiome(p.south().east()).is(RecurrenceGarden.BIOME)){inside=p;found=true;break search;}
+        }
+        h.assertTrue(found,"No actual biome boundary in fixture");
         level.setBlockAndUpdate(inside,DreamContent.DREAM_CRYSTAL_BEDROCK.get().defaultBlockState());
         level.setBlockAndUpdate(inside.east(),Blocks.AIR.defaultBlockState());
         level.setBlockAndUpdate(inside.south(),DreamContent.DREAM_CRYSTAL_BEDROCK.get().defaultBlockState());

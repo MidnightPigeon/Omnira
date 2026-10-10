@@ -19,7 +19,7 @@ public final class LightCoreGameTests {
     @GameTest(template="spell_arena")
     public static void recipesAndAttributes(GameTestHelper h) {
         var core=new ItemStack(ModItems.CRUDE_LIGHT_CORE.get());
-        var crystal=new ItemStack(ModItems.ANALYSIS_CRYSTAL.get());crystal.setDamageValue(127);
+        var crystal=new ItemStack(ModItems.ANALYSIS_CRYSTAL.get());crystal.setDamageValue(7);
         var forward=(CraftingRecipe)recipe(h,"crystal_analysis/light");
         var input=CraftingInput.of(3,2,java.util.List.of(core,core,crystal,core,core,ItemStack.EMPTY));
         h.assertTrue(forward.matches(input,h.getLevel()),"Four-core analysis failed");
@@ -37,7 +37,8 @@ public final class LightCoreGameTests {
                 && analysis.dustMin()==16 && analysis.dustMax()==16,"Analysis amounts wrong");
         var source=net.minecraft.core.registries.BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("omnira","light_source_crystal"));
         var crafting=(CraftingRecipe)recipe(h,"crude_light_core");
-        h.assertTrue(crafting.matches(CraftingInput.of(2,2,java.util.Collections.nCopies(4,new ItemStack(source))),h.getLevel()),"2x2 recipe failed");
+        h.assertTrue(crafting.matches(CraftingInput.of(3,3,java.util.Collections.nCopies(9,new ItemStack(source))),h.getLevel()),"3x3 recipe failed");
+        h.assertTrue(!crafting.matches(CraftingInput.of(2,2,java.util.Collections.nCopies(4,new ItemStack(source))),h.getLevel()),"Old conflicting recipe accepted");
         var container=new SimpleContainer(7);container.setItem(6,new ItemStack(source));
         h.assertTrue(((AssemblyRecipe)recipe(h,"assembly/crude_light_core")).matches(new AssemblyRecipe.Input(container),h.getLevel()),"Single crystal forging failed");
         var elements=(AssemblyRecipe)recipe(h,"assembly/spell_core_elements");

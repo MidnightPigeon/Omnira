@@ -10,7 +10,17 @@ import com.mcmagic.omnira.registry.ModDataComponents;
 /** Per-stack definitions also allow future components supplied by other items or data packs. */
 public record StaffPart(Role role, double power, double reduction, int shots, int cooldownTicks,
                         ResourceLocation model, int maxCopies, int enhancementSlots, int runeSlots, SlotKind upgradeSlot,
-                        double speed, double cooldownReduction, double range) {
+                        double speed, double cooldownReduction, double range, double regeneration, boolean independentCooldown) {
+    public StaffPart(Role role, double power, double reduction, int shots, int cooldownTicks,
+                     ResourceLocation model, int maxCopies, int enhancementSlots, int runeSlots, SlotKind upgradeSlot,
+                     double speed, double cooldownReduction, double range, double regeneration) {
+        this(role,power,reduction,shots,cooldownTicks,model,maxCopies,enhancementSlots,runeSlots,upgradeSlot,speed,cooldownReduction,range,regeneration,false);
+    }
+    public StaffPart(Role role, double power, double reduction, int shots, int cooldownTicks,
+                     ResourceLocation model, int maxCopies, int enhancementSlots, int runeSlots, SlotKind upgradeSlot,
+                     double speed, double cooldownReduction, double range) {
+        this(role,power,reduction,shots,cooldownTicks,model,maxCopies,enhancementSlots,runeSlots,upgradeSlot,speed,cooldownReduction,range,0);
+    }
     public StaffPart(Role role, double power, double reduction, int shots, int cooldownTicks,
                      ResourceLocation model, int maxCopies, int enhancementSlots, int runeSlots, SlotKind upgradeSlot,
                      double speed, double cooldownReduction) {
@@ -55,12 +65,17 @@ public record StaffPart(Role role, double power, double reduction, int shots, in
             SlotKind.CODEC.optionalFieldOf("upgrade_slot",SlotKind.ENHANCEMENT).forGetter(StaffPart::upgradeSlot),
             Codec.doubleRange(0,10).optionalFieldOf("speed",0D).forGetter(StaffPart::speed),
             Codec.doubleRange(0,1).optionalFieldOf("cooldown_reduction",0D).forGetter(StaffPart::cooldownReduction),
-            Codec.doubleRange(0,2).optionalFieldOf("range",0D).forGetter(StaffPart::range)
+            Codec.doubleRange(0,2).optionalFieldOf("range",0D).forGetter(StaffPart::range),
+            Codec.doubleRange(0,10).optionalFieldOf("regeneration",0D).forGetter(StaffPart::regeneration),
+            Codec.BOOL.optionalFieldOf("independent_cooldown",false).forGetter(StaffPart::independentCooldown)
     ).apply(i,StaffPart::new));
 
     public static StaffPart of(ItemStack stack) {return stack.get(ModDataComponents.STAFF_PART);}
     public StaffPart withSlots(int enhancements,int runes) {
-        return new StaffPart(role,power,reduction,shots,cooldownTicks,model,maxCopies,enhancements,runes,upgradeSlot,speed,cooldownReduction,range);
+        return new StaffPart(role,power,reduction,shots,cooldownTicks,model,maxCopies,enhancements,runes,upgradeSlot,speed,cooldownReduction,range,regeneration,independentCooldown);
+    }
+    public StaffPart withRegeneration(double value) {
+        return new StaffPart(role,power,reduction,shots,cooldownTicks,model,maxCopies,enhancementSlots,runeSlots,upgradeSlot,speed,cooldownReduction,range,value,independentCooldown);
     }
     public static boolean is(ItemStack stack, Role role) {
         var part=of(stack);return !stack.isEmpty() && part!=null && part.role==role;

@@ -1,0 +1,16 @@
+{
+  "id": "deflection_field",
+  "item": "omnira:deflection_field",
+  "title": "Deflection Field",
+  "recipes": false,
+  "text": [
+    "Starlight flickers across a translucent pink hexagonal shield. Holding it grants a 25% chance to evade attacks. Incoming projectiles are randomly deflected while lowered, or reflected back along their incoming path while raised. Raising it also grants 25% damage reduction. Spatial Blades are not ordinary projectiles and cannot be reflected.",
+    "Durability: 256. Each deflection or reflection costs 1 durability; holding the shield raised costs an additional 1 per second. Unbreaking applies to both costs. While held, it repairs itself using mana, like infused tools: 5 mana restores 1 durability."
+  ],
+  "links": [
+    {
+      "target": "deflection_field_crafting",
+      "label": "Crafting the Deflection Field"
+    }
+  ]
+}

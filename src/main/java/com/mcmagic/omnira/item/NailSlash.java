@@ -40,7 +40,7 @@ public final class NailSlash {
         return result;
     }
     public static void release(ServerPlayer player) {
-        double reach=player.entityInteractionRange()*2;
+        double reach=reach(player);
         var weapon=player.getMainHandItem();
         net.neoforged.neoforge.network.PacketDistributor.sendToPlayersNear(player.serverLevel(),null,
                 player.getX(),player.getY(),player.getZ(),64,
@@ -57,6 +57,9 @@ public final class NailSlash {
             if(!player.isAlive() || player.getMainHandItem()!=weapon)break;
             SwordActions.strike(player,target,true);
         }
+    }
+    public static double reach(ServerPlayer player){
+        return player.entityInteractionRange()*2/SwordActions.reachMultiplier(player)*SwordActions.specialReachMultiplier(player);
     }
     private NailSlash() {}
 }

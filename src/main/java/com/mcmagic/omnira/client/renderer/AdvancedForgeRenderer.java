@@ -12,6 +12,7 @@ import net.minecraft.world.item.*;
 
 public final class AdvancedForgeRenderer implements BlockEntityRenderer<AdvancedForgeBlockEntity> {
     public static final String[] PARTS={"base","node","button","wand","tongs","needle","hammer","rune","table","panel","mist"};
+    private static final int[] TOOL_COLORS={0xB9DCF4,0xA8DED2,0xD8C5EF,0xE9D6AE};
     public AdvancedForgeRenderer(BlockEntityRendererProvider.Context context){}
     public static ModelResourceLocation model(String part){return ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("omnira","block/advanced_assembly_table_"+part));}
     private static void draw(String part,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
@@ -19,7 +20,7 @@ public final class AdvancedForgeRenderer implements BlockEntityRenderer<Advanced
     }
     private static void item(ItemStack stack,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         if(stack.isEmpty())return;pose.pushPose();pose.scale(.25F,.25F,.25F);
-        Minecraft.getInstance().getItemRenderer().renderStatic(stack,ItemDisplayContext.FIXED,light,overlay,pose,buffers,Minecraft.getInstance().level,0);pose.popPose();
+        Minecraft.getInstance().getItemRenderer().renderStatic(stack,ItemDisplayContext.FIXED,light,overlay,pose,CrystalGlassLayer.contents(buffers),Minecraft.getInstance().level,0);pose.popPose();
     }
     private static float smooth(float t){t=Math.clamp(t,0,1);return t*t*(3-2*t);}
     public static int color(ItemStack core,double time){
@@ -35,7 +36,8 @@ public final class AdvancedForgeRenderer implements BlockEntityRenderer<Advanced
         boolean powered=core.getItem() instanceof SpellCoreItem;
         int coreColor=color(core,time);
         MultiBufferSource glow=type->new Tint(buffers.getBuffer(CrystalGlassLayer.ATLAS),coreColor);
-        pose.pushPose();pose.translate(-.5,0,-.5);draw("base",pose,buffers,light,overlay);pose.popPose();
+        MultiBufferSource baseTint=type->new Tint(buffers.getBuffer(CrystalGlassLayer.ATLAS),0xC1D7E4);
+        pose.pushPose();pose.translate(-.5,0,-.5);draw("base",pose,baseTint,light,overlay);pose.popPose();
         pose.pushPose();
         if(powered)pose.mulPose(Axis.YP.rotationDegrees((float)(time*.15%360)));
         draw("table",pose,buffers,light,overlay);pose.popPose();
@@ -65,7 +67,8 @@ public final class AdvancedForgeRenderer implements BlockEntityRenderer<Advanced
             // Enclosed tools disappear inside the dense cloud, independent of translucent draw order.
             float visibility=1-smooth((motion-.35F)/.35F);
             if(visibility<=0)continue;
-            MultiBufferSource toolBuffers=type->new Tint(buffers.getBuffer(CrystalGlassLayer.ATLAS),0xFFFFFF,(int)(255*visibility));
+            int toolColor=TOOL_COLORS[i];
+            MultiBufferSource toolBuffers=type->new Tint(buffers.getBuffer(CrystalGlassLayer.ATLAS),toolColor,(int)(255*visibility));
             double bob=powered?Math.sin(time*.055+i*Math.PI/2)*.045*(1-motion):0;
             int[] at=ForgeLayout.TOOLS[i];pose.pushPose();pose.translate(at[0]*(1-.85*motion),1.4+.2*motion+bob,at[1]*(1-.85*motion));
             pose.mulPose(Axis.ZP.rotationDegrees((i%2==0?1:-1)*20));draw(PARTS[3+i],pose,toolBuffers,light,overlay);

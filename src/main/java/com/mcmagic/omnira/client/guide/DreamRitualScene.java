@@ -28,6 +28,9 @@ public final class DreamRitualScene {
         render(graphics,x,y,ticks,resonance,affinity,corridor,false);
     }
     public static void render(GuiGraphics graphics,int x,int y,int ticks,boolean resonance,boolean affinity,boolean corridor,boolean cleansing) {
+        render(graphics,x,y,ticks,resonance,affinity,corridor,cleansing,0,0);
+    }
+    public static void render(GuiGraphics graphics,int x,int y,int ticks,boolean resonance,boolean affinity,boolean corridor,boolean cleansing,float yaw,float pitch) {
         var mc=Minecraft.getInstance();
         boolean active=!resonance && !affinity && !corridor && !cleansing && ticks%200>=100;
         graphics.flush();
@@ -35,7 +38,7 @@ public final class DreamRitualScene {
         var pose=graphics.pose();
         var buffers=mc.renderBuffers().bufferSource();
         pose.pushPose();pose.translate(x+62,y+73,160);
-        pose.scale(11,-11,11);pose.mulPose(Axis.XP.rotationDegrees(28));pose.mulPose(Axis.YP.rotationDegrees(-35));
+        pose.scale(11,-11,11);pose.mulPose(Axis.XP.rotationDegrees(28+pitch));pose.mulPose(Axis.YP.rotationDegrees(-35+yaw));
         pose.translate(-.5,0,-.5);
         for(int dx=-3;dx<=3;dx++) for(int dz=-3;dz<=3;dz++) {
             pose.pushPose();pose.translate(dx,-1,dz);

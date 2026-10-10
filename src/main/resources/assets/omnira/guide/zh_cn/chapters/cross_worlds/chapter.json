@@ -1,0 +1,12 @@
+{
+  "id": "cross_worlds",
+  "title": "世界之外的碰撞",
+  "icon": "omnira:spacetime_port",
+  "introduction": "introduction.json",
+  "entries": [],
+  "chapters": [
+    "chapters/mod_integrations/chapter.json",
+    "chapters/mod_integration_risks/chapter.json",
+    "chapters/worldline_entanglement/chapter.json"
+  ]
+}

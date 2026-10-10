@@ -1,0 +1,15 @@
+{
+  "id": "wonderland_poker_stand_relic",
+  "title": "仙境扑克展台",
+  "item": "omnira:wonderland_poker_stand",
+  "recipes": false,
+  "text": [
+    "来自循环花园的花园结构的特殊方块。详细功能与交互方式见下方关联条目。"
+  ],
+  "links": [
+    {
+      "target": "wonderland_poker_stand_guide",
+      "label": "功能说明"
+    }
+  ]
+}

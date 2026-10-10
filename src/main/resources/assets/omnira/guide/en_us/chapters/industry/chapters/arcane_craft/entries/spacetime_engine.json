@@ -1,0 +1,14 @@
+{
+  "id": "spacetime_engine",
+  "item": "omnira:spacetime_engine",
+  "title": "Spacetime Engine",
+  "scene": "spacetime_engine",
+  "recipes": false,
+  "text": [
+    "Build the model with four Infused Crystal Casings, four Mana Engines, one Enhanced Alchemical Energy Core and one Spacetime Spell Core. Empty the engines and activate the spell core with one Infused Crystal. It cannot be mined; carry it with a Pocket Magic Bottle.",
+    "The engine needs no fuel. Without Create, the screen contains grids and rotation directions only. Each face drives like one ordinary Mana Engine, including through Spacetime Ports.",
+    "With Create, configure capacity, speed and direction separately for each face: base limits are 2048 SU and 128 rpm. Front, right, rear and left use blue, gold, purple and green, matching the screen.",
+    "Three grid multipliers multiply: Basic x1.2, Elemental x1.5, Arcane x2, Omni x4. They increase stress and electrical limits, not speed. Grids float horizontally on the rotating array.",
+    "With an electricity mod, shaft faces also output FE. Without Create, each face supplies 512 FE/second times its grid multiplier. With Create, configured capacity converts at 1 SU to 1 FE/second; stopped faces produce no electricity."
+  ]
+}

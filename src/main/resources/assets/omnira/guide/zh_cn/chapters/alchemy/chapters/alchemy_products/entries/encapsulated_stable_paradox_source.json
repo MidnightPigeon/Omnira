@@ -1,0 +1,15 @@
+{
+  "id": "encapsulated_stable_paradox_source",
+  "item": "omnira:encapsulated_stable_paradox_source",
+  "title": "封装的稳态悖论源",
+  "text": [
+    "通过反应封装不稳定的悖论源，得到不再自行损耗的稳态材料。可作为炼金催化室的基底，其用途有待探索。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "alchemical_catalysis_chamber",
+      "label": "炼金催化室"
+    }
+  ]
+}

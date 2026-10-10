@@ -1,0 +1,16 @@
+{
+  "id": "phase_crystal_grove_guide",
+  "title": "Phase Crystal Grove",
+  "item": "omnira:phase_crystal_cluster",
+  "recipes": false,
+  "text": [
+    "A bright floor of excited rough spatial crystal supports scattered deep-blue clusters and larger aloe-shaped crystal formations. They are not trees and do not grow naturally.",
+    "Connected formations of more than nine Phase Crystal Blocks can invert together, becoming pale blue, more transparent and passable. They can later return to solid form. Watch their color as you pass."
+  ],
+  "links": [
+    {
+      "target": "phase_crystal_guide",
+      "label": "Phase Crystals"
+    }
+  ]
+}

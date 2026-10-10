@@ -1,0 +1,16 @@
+{
+  "id": "folded_caverns_guide",
+  "title": "Folded Caverns",
+  "item": "omnira:space_warp_point",
+  "recipes": false,
+  "text": [
+    "Crystal spires grow from the rolling floor and ceiling. Spatial Fold Points occur near the floor and upper crystal shelves, shortening journeys across the cavern.",
+    "Remain within a point's five-block sphere for three seconds to attempt a jump to another point within 128 horizontal blocks. You may reach an upper shelf. Arrivals remain outside the target sphere; unsafe destinations are skipped."
+  ],
+  "links": [
+    {
+      "target": "space_warp_point_guide",
+      "label": "Fold Points and Spatial Remnants"
+    }
+  ]
+}

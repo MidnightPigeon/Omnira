@@ -4,7 +4,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public final class AnalysisCrystalItem extends Item {
-    public AnalysisCrystalItem() { super(new Properties().durability(128)); }
+    public AnalysisCrystalItem() { super(new Properties().durability(8)); }
 
     @Override
     public boolean hasCraftingRemainingItem(ItemStack stack) { return true; }

@@ -34,7 +34,7 @@ public final class HyperDrillBlock extends BaseEntityBlock implements com.mcmagi
     public BlockPos bottleOrigin(BlockPos p,BlockState s){return origin(p,s);}
     public Set<BlockPos> bottleParts(Level l,BlockPos p,BlockState s){return parts(l,origin(p,s));}
     @Override public BlockEntity newBlockEntity(BlockPos p,BlockState s){return s.getValue(PART)==4?new HyperDrillBlockEntity(p,s):null;}
-    @Override protected RenderShape getRenderShape(BlockState s){return RenderShape.INVISIBLE;}
+    @Override protected RenderShape getRenderShape(BlockState s){return RenderShape.ENTITYBLOCK_ANIMATED;}
     @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level l,BlockState s,BlockEntityType<T> t){return l.isClientSide?null:createTickerHelper(t,ArchaeologyContent.DRILL_ENTITY.get(),(world,pos,state,drill)->drill.tick());}
     @Override protected ItemInteractionResult useItemOn(ItemStack stack,BlockState s,Level l,BlockPos p,Player player,InteractionHand hand,BlockHitResult hit){
         if(player.isShiftKeyDown())return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

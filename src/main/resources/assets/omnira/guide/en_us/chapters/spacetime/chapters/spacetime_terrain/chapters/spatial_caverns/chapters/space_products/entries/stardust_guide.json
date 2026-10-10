@@ -1,0 +1,15 @@
+{
+  "id": "stardust_guide",
+  "title": "Star Scatter and Stardust",
+  "item": "omnira:stardust",
+  "recipes": false,
+  "text": [
+    "A Star Source scatters luminous grains across the ground or an underwater floor, emitting light level 12. A single hit breaks them into glowing, powdery Stardust. Collected Stardust cannot be placed again; the scatter on lighthouse islands can also be harvested."
+  ],
+  "links": [
+    {
+      "target": "star_source_relic",
+      "label": "Star Source"
+    }
+  ]
+}

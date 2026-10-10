@@ -16,6 +16,11 @@ import java.util.Set;
 @GameTestHolder("omnira_memory_loot")
 @PrefixGameTestTemplate(false)
 public final class MemoryLootConfigGameTests {
+    @GameTest(template="spell_arena") public static void facilitiesOnlyInCliffLoot(GameTestHelper h){
+        var tables=OmniraLootConfig.defaults().getAsJsonObject("treasureTables");
+        for(var entry:tables.entrySet())h.assertTrue(entry.getValue().toString().contains("omnira:damaged_research_facility")==entry.getKey().equals("omnira:archaeology/epoch_2"),"Unexpected facility loot source: "+entry.getKey());
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void basicResourceRewards(GameTestHelper h)throws Exception{
         var defaults=OmniraLootConfig.defaults().getAsJsonObject("treasureTables");
         for(var entry:defaults.entrySet()){
@@ -84,11 +89,11 @@ public final class MemoryLootConfigGameTests {
                     h.assertTrue(!Set.of("minecraft:black_concrete","minecraft:white_concrete","omnira:dream_crystal","omnira:memory_cube").contains(id),"Obsolete or placeable reward: "+id);
                     if(id.equals("omnira:dream_crystal_shard"))shards+=stack.getCount();
                     if(id.equals("omnira:peaceful_memory_cube")||id.equals("omnira:corrupted_memory_cube"))memories+=stack.getCount();
-                    if(name.equals("golden_throne_tower")&&id.equals("omnira:damaged_research_facility"))facilities++;
+                    if(id.equals("omnira:damaged_research_facility"))facilities++;
                 }
                 h.assertTrue(memories<=1,"More than one memory cube in a mill ball");cubes+=memories;
             }
         }
-        h.assertTrue(facilities>0&&cubes>0&&shards>0,"Expected revised rewards missing");h.succeed();
+        h.assertTrue(facilities==0&&cubes>0&&shards>0,"Unexpected facility or missing revised rewards");h.succeed();
     }
 }

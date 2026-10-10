@@ -11,6 +11,8 @@ import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 @EventBusSubscriber(modid="omnira",value=Dist.CLIENT)
 public final class TimeflowFishingVisuals {
     @SubscribeEvent public static void register(RegisterParticleProvidersEvent event){
+        event.registerSpriteSet(ModParticles.STARFLOW_RIPPLE.get(),s->(t,l,x,y,z,dx,dy,dz)->{var p=new Ripple(l,x,y,z,dx,dz,s);p.setColor(.65F,.79F,1F);return p;});
+        event.registerSpriteSet(ModParticles.STARFLOW_BUBBLE.get(),s->(t,l,x,y,z,dx,dy,dz)->{var p=new Bubble(l,x,y,z,dx,dy,dz,s);p.setColor(.8F,.7F,1F);return p;});
         event.registerSpriteSet(ModParticles.TIMEFLOW_RIPPLE.get(),s->(t,l,x,y,z,dx,dy,dz)->new Ripple(l,x,y,z,dx,dz,s));
         event.registerSpriteSet(ModParticles.TIMEFLOW_BUBBLE.get(),s->(t,l,x,y,z,dx,dy,dz)->new Bubble(l,x,y,z,dx,dy,dz,s));
     }

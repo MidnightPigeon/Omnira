@@ -4,9 +4,18 @@
   "icon": "omnira:night_heron_statue",
   "introduction": "introduction.json",
   "entries": [
+    "entries/voyager_violin.json",
     "entries/night_heron_statue.json",
     "entries/dream_spell_core.json",
-    "entries/traveler_manuscript.json"
+    "entries/traveler_manuscript.json",
+    "entries/star_source_relic.json",
+    "entries/spatial_stability_anchor.json",
+    "entries/split_time_sundial_relic.json",
+    "entries/wonderland_poker_stand_relic.json",
+    "entries/memory_cube_relic.json",
+    "entries/golden_throne_relic.json",
+    "entries/hyperdimensional_drill_relic.json",
+    "entries/marisa_crystal_ball_relic.json"
   ],
   "chapters": []
 }

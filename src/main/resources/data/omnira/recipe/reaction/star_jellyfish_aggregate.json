@@ -1,0 +1,5 @@
+{
+  "type": "omnira:reaction",
+  "items": [{"ingredient": {"item": "omnira:star_jellyfish"}}],
+  "results": [{"id": "omnira:unstable_spacetime_aggregate", "count": 1}]
+}

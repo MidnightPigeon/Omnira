@@ -120,7 +120,7 @@ public final class OrbStorageGameTests {
         player.getInventory().setItem(40,new ItemStack(ModItems.OUTPUT_UPGRADE.get()));
         var offhand=new com.mcmagic.omnira.menu.OrbUpgradeMenu(2,player.getInventory(),40,false);
         offhand.clicked(3,40,net.minecraft.world.inventory.ClickType.SWAP,player);
-        h.assertTrue(player.getOffhandItem().is(ModItems.OUTPUT_UPGRADE.get()) && !offhand.clickMenuButton(player,3),"Offhand lock or output direction validation failed");
+        h.assertTrue(player.getOffhandItem().is(ModItems.OUTPUT_UPGRADE.get()) && !offhand.clickMenuButton(player,7),"Offhand lock or output direction validation failed");
         h.succeed();
     }
     @GameTest(template="spell_arena") public static void recipesAreShapelessAndReturnOnlyLavaBuckets(GameTestHelper h) {
@@ -212,7 +212,8 @@ public final class OrbStorageGameTests {
         h.assertTrue(ball.upgrades.extractItem(0,1,false).isEmpty(),"Overfull fluid upgrade removable");
         h.assertTrue(ball.tank.drain(1000,FluidAction.EXECUTE).getAmount()==1000 && ball.tank.getFluidAmount()==95000,"Lava incorrectly infinite");
         ball.tank.setFluid(new FluidStack(Fluids.WATER,1000));
-        h.assertTrue(ball.infinite() && ball.tank.drain(1000,FluidAction.EXECUTE).getAmount()==1000 && ball.tank.getFluidAmount()==1000,"Renewable source depleted");
+        h.assertTrue(ball.infinite() && ball.tank.drain(1000,FluidAction.EXECUTE).getAmount()==1000 && ball.tank.isEmpty(),"Internal extraction did not debit renewable fluid");
+        ball.tank.setFluid(new FluidStack(Fluids.WATER,1000));
         var copy=new LiquidCrystalBallBlockEntity(ball.getBlockPos(),ball.getBlockState());copy.setLevel(h.getLevel());
         copy.loadWithComponents(ball.saveWithFullMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());
         h.assertTrue(copy.tank.getCapacity()==96000 && copy.tank.getFluidAmount()==1000,"Fluid persistence lost");h.succeed();
@@ -222,6 +223,39 @@ public final class OrbStorageGameTests {
         h.runAfterDelay(38,()->h.assertTrue(ball.getItem(0).is(Items.LAVA_BUCKET) && ball.tank.isEmpty(),"Bucket completed early"));
         h.runAfterDelay(43,()->h.assertTrue(ball.getItem(0).is(Items.BUCKET) && ball.tank.getFluidAmount()==1000,"Bucket not committed after two seconds"));
         h.runAfterDelay(65,()->{h.assertTrue(ball.getItem(0).is(Items.BUCKET) && ball.tank.getFluidAmount()==1000,"Completed bucket reversed automatically");h.succeed();});
+    }
+    @GameTest(template="spell_arena",timeoutTicks=80) public static void renewableBucketUsesRealVolume(GameTestHelper h){
+        var ball=(LiquidCrystalBallBlockEntity)place(h,true);
+        ball.tank.setFluid(new FluidStack(Fluids.WATER,1000));ball.setItem(0,new ItemStack(Items.BUCKET));
+        h.runAfterDelay(43,()->{
+            h.assertTrue(ball.getItem(0).is(Items.WATER_BUCKET)&&ball.tank.isEmpty(),"UI bucket created infinite water");h.succeed();
+        });
+    }
+    @GameTest(template="spell_arena") public static void portableFluidCapabilityRequiresStabilization(GameTestHelper h){
+        var capability=net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM;
+        h.assertTrue(new ItemStack(ModItems.LIQUID_CRYSTAL_BALL.get()).getCapability(capability)==null,"Unstabilized orb exposes portable fluid storage");
+        for(String id:new String[]{"fluid_tank","creative_fluid_tank"}){
+            var item=net.minecraft.core.registries.BuiltInRegistries.ITEM.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("create",id));
+            h.assertTrue(new ItemStack(item).getCapability(capability)==null,"Create tank unexpectedly exposes item fluid storage");
+        }
+        var ball=(LiquidCrystalBallBlockEntity)place(h,true);
+        ball.upgrades.insertItem(0,new ItemStack(ModItems.SPACETIME_STABILIZATION_UPGRADE.get()),false);
+        ball.upgrades.insertItem(1,new ItemStack(ModItems.INFUSED_STACKING_UPGRADE.get()),false);
+        var portable=new ItemStack(ModItems.LIQUID_CRYSTAL_BALL.get());
+        portable.set(DataComponents.BLOCK_ENTITY_DATA,net.minecraft.world.item.component.CustomData.of(ball.saveWithFullMetadata(h.getLevel().registryAccess())));
+        var handler=portable.getCapability(capability);
+        h.assertTrue(handler!=null&&handler.getTankCapacity(0)==96000,"Stabilized portable orb has no expanded tank");
+        h.assertTrue(handler.fill(new FluidStack(Fluids.WATER,2000),FluidAction.SIMULATE)==2000&&handler.getFluidInTank(0).isEmpty(),"Portable simulation mutated contents");
+        handler.fill(new FluidStack(Fluids.WATER,2000),FluidAction.EXECUTE);
+        var second=portable.getCapability(capability);
+        h.assertTrue(handler.drain(1000,FluidAction.EXECUTE).getAmount()==1000&&handler.getFluidInTank(0).getAmount()==1000,"Portable water extraction was infinite");
+        h.assertTrue(second.getFluidInTank(0).getAmount()==1000,"Older capability duplicated stale fluid volume");
+        var copy=new LiquidCrystalBallBlockEntity(ball.getBlockPos(),ball.getBlockState());
+        copy.loadWithComponents(portable.get(DataComponents.BLOCK_ENTITY_DATA).copyTag(),h.getLevel().registryAccess());
+        h.assertTrue(copy.stabilized()&&copy.tank.getFluidAmount()==1000&&copy.multiplier()==4,"Portable fluid update lost upgrades or volume");
+        var player=h.makeMockPlayer(GameType.SURVIVAL);var menu=new CrystalBallMenu(1,player.getInventory(),ball);
+        h.assertTrue(!menu.slots.getFirst().mayPlace(new ItemStack(ModItems.LIQUID_CRYSTAL_BALL.get()))&&menu.slots.getFirst().mayPlace(portable),"Port does not follow item fluid capability");
+        h.succeed();
     }
     @GameTest(template="spell_arena",timeoutTicks=80) public static void sharedPipeRateAndSimulation(GameTestHelper h) {
         var ball=(LiquidCrystalBallBlockEntity)place(h,true);
@@ -259,6 +293,30 @@ public final class OrbStorageGameTests {
         h.getLevel().setBlockAndUpdate(pos,ModBlocks.NIGHT_HERON_STATUE.get().defaultBlockState().setValue(com.mcmagic.omnira.block.NightHeronStatueBlock.FACING,Direction.NORTH));
         ((NightHeronStatueBlockEntity)h.getLevel().getBlockEntity(pos)).ejectMilk();
         h.assertTrue(ball.tank.getFluidAmount()==1000 && ball.tank.getFluid().getFluid()==net.neoforged.neoforge.common.NeoForgeMod.MILK.get(),"Heron milk was not injected");h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void sixDirectionIntakeAndOutput(GameTestHelper h) {
+        var ball=place(h,false);var p=ball.getBlockPos();
+        for(var direction:Direction.values())h.getLevel().setBlockAndUpdate(p.relative(direction),Blocks.BARREL.defaultBlockState());
+        ball.upgrades.insertItem(0,new ItemStack(ModItems.OUTPUT_UPGRADE.get()),false);
+        var tag=OrbUpgrades.settings(ball.upgrades.getStackInSlot(0));tag.putInt("Directions",63);ball.upgrades.update(0,tag);
+        ball.setItem(0,new ItemStack(Items.DIAMOND,6));
+        for(int i=0;i<6;i++)OrbAutomation.tick(ball);
+        for(var direction:Direction.values())h.assertTrue(((net.minecraft.world.Container)h.getLevel().getBlockEntity(p.relative(direction))).countItem(Items.DIAMOND)==1,"Output skipped "+direction);
+        h.assertTrue(ball.getItem(0).isEmpty(),"Output did not visit all six sides");
+        ball.upgrades.extractItem(0,1,false);ball.upgrades.insertItem(0,new ItemStack(ModItems.INTAKE_UPGRADE.get()),false);
+        tag=OrbUpgrades.settings(ball.upgrades.getStackInSlot(0));tag.putInt("Directions",63);ball.upgrades.update(0,tag);
+        for(int i=0;i<6;i++)OrbAutomation.tick(ball);
+        h.assertTrue(ball.countItem(Items.DIAMOND)==6,"Intake did not visit all six sides");
+        for(var direction:Direction.values())h.assertTrue(((net.minecraft.world.Container)h.getLevel().getBlockEntity(p.relative(direction))).isEmpty(),"Intake skipped "+direction);
+        var player=h.makeMockPlayer(GameType.SURVIVAL);
+        for(boolean input:new boolean[]{true,false}){
+            var plate=new ItemStack(input?ModItems.INTAKE_UPGRADE.get():ModItems.OUTPUT_UPGRADE.get());player.getInventory().setItem(0,plate);
+            var menu=new com.mcmagic.omnira.menu.OrbUpgradeMenu(1,player.getInventory(),0,input);
+            for(int id=2;id<=6;id++)h.assertTrue(menu.clickMenuButton(player,id),"Direction button rejected");
+            h.assertTrue(OrbUpgrades.settings(plate).getInt("Directions")==63,"Menu cannot select all six sides");
+            h.assertTrue(!menu.clickMenuButton(player,7),"Invalid direction accepted");
+        }
+        h.succeed();
     }
     @GameTest(template="spell_arena") public static void directionalFiltersAndRoundRobin(GameTestHelper h) {
         var ball=place(h,false);var p=ball.getBlockPos();

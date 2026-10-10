@@ -1,0 +1,5 @@
+{
+  "parent":"minecraft:block/block",
+  "textures":{"particle":"omnira:block/reaction_pool_glass","glass":"omnira:block/reaction_pool_glass","frame":"omnira:block/reaction_pool_frame","mechanism":"omnira:block/reaction_pool_mechanism","screen":"omnira:block/reaction_pool_screen","glow":"omnira:block/reaction_pool_glow"},
+  "elements":[{"from":[7,7,7],"to":[9,9,9],"faces":{"north":{"texture":"#glass"},"south":{"texture":"#frame"},"east":{"texture":"#mechanism"},"west":{"texture":"#screen"},"up":{"texture":"#glow"},"down":{"texture":"#glass"}}}]
+}

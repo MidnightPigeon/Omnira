@@ -8,7 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public final class ManaEngineScreen extends AbstractContainerScreen<ManaEngineMenu> {
+public final class ManaEngineScreen extends ResponsiveContainerScreen<ManaEngineMenu> {
     private static final ResourceLocation BACKGROUND=CrystalWorkstationBackground.texture("workstation_engine");
     private static final ResourceLocation ICONS=ResourceLocation.fromNamespaceAndPath("omnira","textures/gui/engine_controls.png");
     private final Button[] controls=new Button[3];
@@ -23,7 +23,7 @@ public final class ManaEngineScreen extends AbstractContainerScreen<ManaEngineMe
                 if(minecraft!=null && minecraft.gameMode!=null) minecraft.gameMode.handleInventoryButtonClick(menu.containerId,index);
             },supplier->supplier.get()) {
                 @Override protected void renderWidget(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
-                    super.renderWidget(graphics,mouseX,mouseY,partialTick);
+                    MachinePanelArt.button(CrystalUi.pixels(graphics,getX(),getY()),20,20,active,isHoveredOrFocused());
                     int icon=index==2?(menu.setting(2)?2:3):index;
                     com.mojang.blaze3d.systems.RenderSystem.enableBlend();
                     graphics.blit(ICONS,getX()+2,getY()+2,icon*16,0,16,16,64,16);
@@ -44,7 +44,7 @@ public final class ManaEngineScreen extends AbstractContainerScreen<ManaEngineMe
     }
     @Override protected void containerTick() {super.containerTick();updateTooltips();}
     @Override protected void renderBg(GuiGraphics graphics,float partialTick,int mouseX,int mouseY) {
-        CrystalWorkstationBackground.draw(graphics,BACKGROUND,leftPos,topPos);
+        CrystalWorkstationBackground.draw(graphics,BACKGROUND,leftPos,topPos,"engine",CrystalUi.time(partialTick),0,menu.running());
     }
     @Override protected void renderLabels(GuiGraphics graphics,int mouseX,int mouseY) {
         CrystalWorkstationBackground.labels(graphics,font,title,playerInventoryTitle);
@@ -58,7 +58,7 @@ public final class ManaEngineScreen extends AbstractContainerScreen<ManaEngineMe
         if(menu.electrical() && menu.kinetic()) graphics.drawString(font,electric+" FE/s",0,12,0xFFD6E8E9,false);
         graphics.pose().popPose();
     }
-    @Override public void render(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
-        super.render(graphics,mouseX,mouseY,partialTick);renderTooltip(graphics,mouseX,mouseY);
+    @Override protected void renderContent(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
+        super.renderContent(graphics,mouseX,mouseY,partialTick);renderTooltip(graphics,mouseX,mouseY);
     }
 }

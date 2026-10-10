@@ -12,9 +12,17 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 public final class OrbUpgrades extends ItemStackHandler {
     private final CrystalBallBlockEntity owner;
     public OrbUpgrades(CrystalBallBlockEntity owner) {super(3);this.owner=owner;}
+    private OrbUpgrades target(){return owner.storage().upgrades;}
+    @Override public ItemStack getStackInSlot(int slot){var target=target();return target==this?super.getStackInSlot(slot):target.getStackInSlot(slot);}
+    @Override public void setStackInSlot(int slot,ItemStack stack){var target=target();if(target==this)super.setStackInSlot(slot,stack);else {target.setStackInSlot(slot,stack);owner.setChanged();}}
+    @Override public ItemStack insertItem(int slot,ItemStack stack,boolean simulate){var target=target();return target==this?super.insertItem(slot,stack,simulate):target.insertItem(slot,stack,simulate);}
+    @Override public CompoundTag serializeNBT(HolderLookup.Provider registries){var target=target();return target==this?super.serializeNBT(registries):target.serializeNBT(registries);}
+    public CompoundTag serializeLocal(HolderLookup.Provider registries){return super.serializeNBT(registries);}
     @Override public int getSlotLimit(int slot) {return 1;}
     @Override public boolean isItemValid(int slot,ItemStack stack) {
         var candidate=kind(stack);if(candidate==null)return false;
+        if(owner instanceof VoidCrystalBallBlockEntity)return slot==1&&candidate==OrbUpgradeItem.Kind.INTAKE;
+        if(owner instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity)return slot==1&&candidate==OrbUpgradeItem.Kind.STABILIZATION;
         for(int i=0;i<3;i++)if(i!=slot) {
             var other=kind(getStackInSlot(i));
             if(candidate.sameFamily(other))return false;
@@ -35,6 +43,7 @@ public final class OrbUpgrades extends ItemStackHandler {
     }
     public boolean mayRemove(int slot) {return owner.fitsMultiplier(multiplier(slot));}
     @Override public ItemStack extractItem(int slot,int count,boolean simulate) {
+        var target=target();if(target!=this)return target.extractItem(slot,count,simulate);
         return mayRemove(slot)?super.extractItem(slot,count,simulate):ItemStack.EMPTY;
     }
     public static CompoundTag settings(ItemStack stack) {return stack.getOrDefault(DataComponents.CUSTOM_DATA,CustomData.EMPTY).copyTag();}

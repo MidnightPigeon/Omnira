@@ -1,0 +1,26 @@
+{
+  "id": "primitive_reaction_cauldron",
+  "title": "原始反应釜",
+  "item": "omnira:primitive_reaction_cauldron",
+  "recipes": false,
+  "text": [
+    "对营火使用粗糙炼金釜搭建，无需界面。用物品或液体容器右键投入原料，空手右键取出物品。拆除后掉落空釜，留下营火。",
+    "条件满足后自动反应，一次只执行一个配方；原料重叠时优先使用满足底部催化条件的配方。底部催化方块不消耗。",
+    "基础耗时100秒：启动时消耗物品，每10秒结算一次液体。产物空间不足时等待腾空；缺少催化方块时暂停。",
+    "扣液时原液不足会失败。已经耗液超过一半时，失败还会产生半径10格、15点魔法伤害的爆炸与强烈击退，不破坏地形。"
+  ],
+  "links": [
+    {
+      "target": "rough_alchemy_cauldron",
+      "label": "粗糙炼金釜"
+    },
+    {
+      "target": "alchemical_products",
+      "label": "液体炼成"
+    },
+    {
+      "target": "rough_alchemical_energy_core",
+      "label": "粗糙炼金能核"
+    }
+  ]
+}

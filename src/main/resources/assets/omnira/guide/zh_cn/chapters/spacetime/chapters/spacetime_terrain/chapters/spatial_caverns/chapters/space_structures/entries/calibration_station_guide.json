@@ -1,0 +1,28 @@
+{
+  "id": "calibration_station_guide",
+  "title": "偏光校准所",
+  "item": "omnira:spatial_stability_anchor",
+  "recipes": false,
+  "text": [
+    "错位晶洞中的观测厅以镜面岩与水晶构成，校准长廊保存着不同生长阶段的偏折晶簇。空间稳定锚维持着周围的稳定，保护这里免受偏折与传送的干扰。",
+    "储藏间保存两枚物品战利品水晶球与一枚随机液体战利品球，可以找到偏折水晶、空间水晶、少量空间微核与空间折跃点，以及实验耗材。"
+  ],
+  "links": [
+    {
+      "target": "spatial_stability_anchor",
+      "label": "空间稳定锚"
+    },
+    {
+      "target": "deflection_crystal_guide",
+      "label": "偏折水晶与晶簇"
+    },
+    {
+      "target": "spatial_crystal_guide",
+      "label": "空间水晶"
+    },
+    {
+      "target": "space_warp_point_guide",
+      "label": "空间折跃点"
+    }
+  ]
+}

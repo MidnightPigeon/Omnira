@@ -1,0 +1,18 @@
+{
+  "id": "void_crystal_ball",
+  "item": "omnira:void_crystal_ball",
+  "title": "Void Crystal Orb",
+  "recipes": true,
+  "text": [
+    "Forge a crystal orb, liquid crystal orb, darkness microcore and eye of ender in any arrangement on the assembly table.",
+    "The central trash slot and item/fluid ports immediately destroy all input. There is no temporary storage or undo. Resonance nodes and pipes can insert, but nothing can be extracted. A terminal-bound node turns black and is named Void; unbound nodes remain red.",
+    "The base has one central upgrade socket, accepting only intake upgrades. Intake follows the configured directions and filters; direct input and resonance transfer bypass that filter.",
+    "Shattering a Void Crystal Orb by stepping on it is risky."
+  ],
+  "links": [
+    {
+      "target": "intake_upgrade",
+      "label": "Intake upgrade"
+    }
+  ]
+}

@@ -15,6 +15,13 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModRecipes {
     private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, Omnira.MOD_ID);
     private static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, Omnira.MOD_ID);
+    public static final DeferredHolder<RecipeType<?>,RecipeType<com.mcmagic.omnira.alchemy.ReactionRecipe>> REACTION_TYPE=
+            TYPES.register("reaction",()->new RecipeType<>() {});
+    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.alchemy.ReactionRecipe>> REACTION_SERIALIZER=
+            SERIALIZERS.register("reaction",()->new RecipeSerializer<>() {
+                public MapCodec<com.mcmagic.omnira.alchemy.ReactionRecipe> codec(){return com.mcmagic.omnira.alchemy.ReactionRecipe.CODEC;}
+                public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.alchemy.ReactionRecipe> streamCodec(){return com.mcmagic.omnira.alchemy.ReactionRecipe.STREAM_CODEC;}
+            });
     public static final DeferredHolder<RecipeType<?>,RecipeType<com.mcmagic.omnira.forging.AdvancedForgeRecipe>> ADVANCED_FORGE_TYPE=
             TYPES.register("advanced_assembly_table",()->new RecipeType<>() {});
     public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.forging.AdvancedForgeRecipe>> ADVANCED_FORGE_SERIALIZER=
@@ -44,6 +51,23 @@ public final class ModRecipes {
                 @Override public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.recipe.AssemblyRecipe> streamCodec() {return com.mcmagic.omnira.recipe.AssemblyRecipe.STREAM_CODEC;}
             });
     private ModRecipes() {}
+    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.recipe.SafeShapedRecipe>> SAFE_SHAPED_SERIALIZER=
+            SERIALIZERS.register("safe_shaped",()->new RecipeSerializer<>() {
+                public MapCodec<com.mcmagic.omnira.recipe.SafeShapedRecipe> codec(){return com.mcmagic.omnira.recipe.SafeShapedRecipe.CODEC;}
+                public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.recipe.SafeShapedRecipe> streamCodec(){return com.mcmagic.omnira.recipe.SafeShapedRecipe.STREAM;}
+            });
+    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.recipe.StarClusterOrbCraftRecipe>> STELLAR_ORB_CRAFT_SERIALIZER=
+            SERIALIZERS.register("star_cluster_orb_crafting",()->new RecipeSerializer<>() {
+                public MapCodec<com.mcmagic.omnira.recipe.StarClusterOrbCraftRecipe> codec(){return com.mcmagic.omnira.recipe.StarClusterOrbCraftRecipe.CODEC;}
+                public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.recipe.StarClusterOrbCraftRecipe> streamCodec(){return com.mcmagic.omnira.recipe.StarClusterOrbCraftRecipe.STREAM;}
+            });
+    public static final DeferredHolder<RecipeType<?>,RecipeType<com.mcmagic.omnira.recipe.StarlightConversionRecipe>> STARLIGHT_TYPE=
+            TYPES.register("starlight_conversion",()->new RecipeType<>() {});
+    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.recipe.StarlightConversionRecipe>> STARLIGHT_SERIALIZER=
+            SERIALIZERS.register("starlight_conversion",()->new RecipeSerializer<>() {
+                public MapCodec<com.mcmagic.omnira.recipe.StarlightConversionRecipe> codec(){return com.mcmagic.omnira.recipe.StarlightConversionRecipe.CODEC;}
+                public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.recipe.StarlightConversionRecipe> streamCodec(){return com.mcmagic.omnira.recipe.StarlightConversionRecipe.STREAM;}
+            });
     public static final DeferredHolder<RecipeType<?>,RecipeType<com.mcmagic.omnira.recipe.VesselConversionRecipe>> VESSEL_CONVERSION_TYPE=
             TYPES.register("vessel_conversion",()->new RecipeType<>() {});
     public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.recipe.VesselConversionRecipe>> VESSEL_CONVERSION_SERIALIZER=

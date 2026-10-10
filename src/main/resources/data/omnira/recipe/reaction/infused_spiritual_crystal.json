@@ -1,0 +1,6 @@
+{
+  "type": "omnira:reaction",
+  "items": [{"ingredient": {"item": "omnira:spiritual_crystal"}}],
+  "support": {"item": "omnira:infused_crystal_block"},
+  "results": [{"id": "omnira:infused_spiritual_crystal", "count": 1}]
+}

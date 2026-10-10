@@ -32,15 +32,26 @@ public final class ReversalContent {
     public static final DeferredItem<BlockItem> MACHINE_ITEM=ModItems.ITEMS.registerSimpleBlockItem(MACHINE);
     public static final java.util.function.Supplier<BlockEntityType<ReversalBlockEntity>> ENTITY=ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register("spacetime_reverser",()->BlockEntityType.Builder.of(ReversalBlockEntity::new,MACHINE.get()).build(null));
     public static final java.util.function.Supplier<net.minecraft.world.inventory.MenuType<ReversalMenu>> MENU=ModMenuTypes.MENU_TYPES.register("spacetime_reverser",()->net.neoforged.neoforge.common.extensions.IMenuTypeExtension.create(ReversalMenu::new));
+    public static final DeferredBlock<ReversalBlock> INFUSER=ModBlocks.BLOCKS.register("void_infuser",()->new ReversalBlock(BlockBehaviour.Properties.of().strength(3,12).noOcclusion().sound(net.minecraft.world.level.block.SoundType.GLASS)));
+    public static final DeferredItem<BlockItem> INFUSER_ITEM=ModItems.ITEMS.registerSimpleBlockItem(INFUSER);
+    public static final java.util.function.Supplier<BlockEntityType<ReversalBlockEntity>> INFUSER_ENTITY=ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register("void_infuser",()->BlockEntityType.Builder.of(ReversalBlockEntity::new,INFUSER.get()).build(null));
+    public static final java.util.function.Supplier<net.minecraft.world.inventory.MenuType<ReversalMenu>> INFUSER_MENU=ModMenuTypes.MENU_TYPES.register("void_infuser",()->net.neoforged.neoforge.common.extensions.IMenuTypeExtension.create(ReversalMenu::new));
     private static final DeferredRegister<RecipeType<?>> TYPES=DeferredRegister.create(Registries.RECIPE_TYPE,"omnira");
     private static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS=DeferredRegister.create(Registries.RECIPE_SERIALIZER,"omnira");
     public static final java.util.function.Supplier<RecipeType<ReversalRecipe>> TYPE=TYPES.register("spacetime_reversal",()->new RecipeType<>(){public String toString(){return "omnira:spacetime_reversal";}});
+    public static final java.util.function.Supplier<RecipeType<ReversalRecipe>> INFUSION_TYPE=TYPES.register("void_infusion",()->new RecipeType<>(){public String toString(){return "omnira:void_infusion";}});
+    public static final java.util.function.Supplier<RecipeSerializer<ReversalRecipe>> INFUSION_SERIALIZER=SERIALIZERS.register("void_infusion",()->new RecipeSerializer<>(){
+        public com.mojang.serialization.MapCodec<ReversalRecipe> codec(){return ReversalRecipe.CODEC.xmap(ReversalRecipe::asInfusion,r->r);}
+        public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf,ReversalRecipe> streamCodec(){return ReversalRecipe.STREAM.map(ReversalRecipe::asInfusion,r->r);}
+    });
     public static final java.util.function.Supplier<RecipeSerializer<ReversalRecipe>> SERIALIZER=SERIALIZERS.register("spacetime_reversal",()->new RecipeSerializer<>(){
         public com.mojang.serialization.MapCodec<ReversalRecipe> codec(){return ReversalRecipe.CODEC;}
         public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf,ReversalRecipe> streamCodec(){return ReversalRecipe.STREAM;}
     });
     private static DeferredItem<Item> talent(String name,FateCurioItem.Kind kind){return ModItems.ITEMS.register(name,()->new FateCurioItem(new Item.Properties().rarity(Rarity.RARE),kind));}
     private static DeferredItem<Item> essence(String name,java.util.function.Supplier<Item> talent,boolean drink){return ModItems.ITEMS.register(name,()->new TalentEssenceItem(new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON),talent,drink));}
-    public static void register(IEventBus bus){TYPES.register(bus);SERIALIZERS.register(bus);bus.addListener((net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent e)->e.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,ENTITY.get(),(be,side)->new net.neoforged.neoforge.items.wrapper.SidedInvWrapper(be,side==null?net.minecraft.core.Direction.UP:side)));}
+    public static void register(IEventBus bus){TYPES.register(bus);SERIALIZERS.register(bus);bus.addListener((net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent e)->{
+        for(var type:java.util.List.of(ENTITY.get(),INFUSER_ENTITY.get()))e.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,type,(be,side)->new net.neoforged.neoforge.items.wrapper.SidedInvWrapper(be,side==null?net.minecraft.core.Direction.UP:side));
+    });}
     private ReversalContent(){}
 }

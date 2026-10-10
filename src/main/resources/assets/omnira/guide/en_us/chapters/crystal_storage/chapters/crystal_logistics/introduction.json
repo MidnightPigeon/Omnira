@@ -1,0 +1,23 @@
+{
+  "text": [
+    "Resonance nodes transfer items and fluids. Waymarks and recall crystals provide return travel, while fold gates connect distant destinations."
+  ],
+  "links": [
+    {
+      "target": "spacetime_waymark",
+      "label": "Spacetime Waymark"
+    },
+    {
+      "target": "recall_crystal",
+      "label": "Recall Crystal"
+    },
+    {
+      "target": "enhanced_recall_crystal",
+      "label": "Enhanced Recall Crystal"
+    },
+    {
+      "target": "fold_gate_guide",
+      "label": "Fold Gates"
+    }
+  ]
+}

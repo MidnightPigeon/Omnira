@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "omnira:infused_crystal_block"
+    }
+  ],
+  "result": {
+    "id": "omnira:infused_spiritual_crystal",
+    "count": 4
+  }
+}

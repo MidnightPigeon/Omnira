@@ -1,0 +1,145 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "surface": "omnira:block/infused_crystal_block",
+    "particle": "omnira:block/infused_crystal_block"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        5,
+        6
+      ],
+      "to": [
+        10,
+        6,
+        10
+      ],
+      "faces": {
+        "west": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            10,
+            10,
+            11
+          ]
+        },
+        "east": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            10,
+            10,
+            11
+          ]
+        },
+        "down": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ]
+        },
+        "up": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ]
+        },
+        "north": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            10,
+            10,
+            11
+          ]
+        },
+        "south": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            10,
+            10,
+            11
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        8,
+        6
+      ],
+      "to": [
+        10,
+        9,
+        10
+      ],
+      "faces": {
+        "west": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            7,
+            10,
+            8
+          ]
+        },
+        "east": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            7,
+            10,
+            8
+          ]
+        },
+        "down": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ]
+        },
+        "up": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ]
+        },
+        "north": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            7,
+            10,
+            8
+          ]
+        },
+        "south": {
+          "texture": "#surface",
+          "uv": [
+            6,
+            7,
+            10,
+            8
+          ]
+        }
+      }
+    }
+  ]
+}

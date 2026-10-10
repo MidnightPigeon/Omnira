@@ -21,7 +21,7 @@ public final class ShadowGhostRenderer extends EntityRenderer<ShadowGhost> {
         pose.pushPose();pose.translate(0,.75+Math.sin((entity.tickCount+partial)*.09)*.025,0);
         pose.mulPose(Axis.YP.rotationDegrees(180-yaw));
         if(entity.deathTime>0) {float s=Math.max(0,1-(entity.deathTime+partial)/20F);pose.scale(s,s,s);}
-        var mesh=buffers.getBuffer(RenderType.entityTranslucent(TEXTURE));
+        var mesh=buffers.getBuffer(CrystalGlassLayer.SHADOW_GHOST);
         int overlay=OverlayTexture.pack(0,entity.hurtTime>0 || entity.deathTime>0);
         core.render(pose,mesh,light,overlay,0xCC9982BE);
         shell.render(pose,mesh,light,overlay,0x99FFFFFF);

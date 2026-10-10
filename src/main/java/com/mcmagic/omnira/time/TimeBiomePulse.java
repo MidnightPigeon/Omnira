@@ -1,6 +1,5 @@
 package com.mcmagic.omnira.time;
 
-import com.mcmagic.omnira.world.dimension.ModDimensions;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,8 +22,6 @@ public final class TimeBiomePulse {
 
     @SubscribeEvent public static void tick(LevelTickEvent.Post event){
         if(!(event.getLevel() instanceof ServerLevel level))return;
-        boolean spacetime=level.dimension().equals(ModDimensions.SPACETIME_CORRIDOR);
-        if(!spacetime&&!level.dimension().equals(Level.OVERWORLD))return;
         long now=level.getGameTime();
         if(now>0&&now%PERIOD==0)enqueue(level);
         var batches=PENDING.get(level);
@@ -32,8 +29,9 @@ public final class TimeBiomePulse {
         var batch=batches.peekFirst();
         long key=batch.chunks().removeFirst();int cx=ChunkPos.getX(key),cz=ChunkPos.getZ(key);
         if(level.getChunkSource().getChunk(cx,cz,ChunkStatus.FULL,false)!=null){
+            com.mcmagic.omnira.spacetime.TemporalWeathering.pulseChunk(level,cx,cz);
             RecurrenceGarden.pulseChunk(level,cx,cz,batch.gardenMatrices());
-            if(spacetime)EventideRuins.pulseChunk(level,cx,cz,batch.cycle());
+            EventideRuins.pulseChunk(level,cx,cz,batch.cycle());
         }
         if(batch.chunks().isEmpty()){
             RecurrenceGarden.finish(level,batch.gardenMatrices());
@@ -44,11 +42,13 @@ public final class TimeBiomePulse {
 
     private static void enqueue(ServerLevel level){
         var chunks=new ArrayDeque<Long>();var seen=new HashSet<Long>();
+        for(long key:level.getForcedChunks()){
+            if(seen.add(key)&&level.getChunkSource().getChunk(ChunkPos.getX(key),ChunkPos.getZ(key),ChunkStatus.FULL,false)!=null)chunks.addLast(key);
+        }
         int radius=level.getServer().getPlayerList().getViewDistance();
         for(var player:level.players()){
             // Players are sampled at the node, not later as queued chunks are processed.
-            if(level.dimension().equals(ModDimensions.SPACETIME_CORRIDOR))
-                EventideRuins.pulsePlayer(level,player,level.getGameTime()/PERIOD);
+            EventideRuins.pulsePlayer(level,player,level.getGameTime()/PERIOD);
             if(level.getBiome(player.blockPosition()).is(RecurrenceGarden.BIOME))RecurrenceGarden.advanceGrid(player);
             int cx=player.getBlockX()>>4,cz=player.getBlockZ()>>4;
             for(int dx=-radius;dx<=radius;dx++)for(int dz=-radius;dz<=radius;dz++){

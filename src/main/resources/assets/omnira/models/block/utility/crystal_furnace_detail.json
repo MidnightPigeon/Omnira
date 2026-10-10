@@ -1,0 +1,12 @@
+{
+  "ambientocclusion": false,
+  "textures": {"surface":"omnira:block/crystal_casing_0","particle":"omnira:block/crystal_casing_0"},
+  "elements": [
+    {"from":[4,5,1],"to":[5,11,2],"faces":{"north":{"texture":"#surface"},"south":{"texture":"#surface"},"east":{"texture":"#surface"},"west":{"texture":"#surface"},"up":{"texture":"#surface"},"down":{"texture":"#surface"}}},
+    {"from":[11,5,1],"to":[12,11,2],"faces":{"north":{"texture":"#surface"},"south":{"texture":"#surface"},"east":{"texture":"#surface"},"west":{"texture":"#surface"},"up":{"texture":"#surface"},"down":{"texture":"#surface"}}},
+    {"from":[5,10,1],"to":[11,11,2],"faces":{"north":{"texture":"#surface"},"south":{"texture":"#surface"},"up":{"texture":"#surface"},"down":{"texture":"#surface"}}},
+    {"from":[10,7,0],"to":[12,8,1],"faces":{"north":{"texture":"#surface"},"south":{"texture":"#surface"},"east":{"texture":"#surface"},"west":{"texture":"#surface"},"up":{"texture":"#surface"},"down":{"texture":"#surface"}}},
+    {"from":[4,5,4],"to":[5,6,12],"faces":{"north":{"texture":"#surface"},"south":{"texture":"#surface"},"east":{"texture":"#surface"},"west":{"texture":"#surface"},"up":{"texture":"#surface"}}},
+    {"from":[11,5,4],"to":[12,6,12],"faces":{"north":{"texture":"#surface"},"south":{"texture":"#surface"},"east":{"texture":"#surface"},"west":{"texture":"#surface"},"up":{"texture":"#surface"}}}
+  ]
+}

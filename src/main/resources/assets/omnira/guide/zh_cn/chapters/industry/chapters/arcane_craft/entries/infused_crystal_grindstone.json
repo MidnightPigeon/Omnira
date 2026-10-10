@@ -1,0 +1,10 @@
+{
+  "id": "infused_crystal_grindstone",
+  "item": "omnira:infused_crystal_grindstone",
+  "title": "灵晶砂轮",
+  "text": [
+    "按同系高阶装配方式升级水晶砂轮。内部受损装备每5秒自主恢复1点耐久。",
+    "右侧列表选择保留或去除附魔，初始全部保留。取出祛魔结果时，每条普通附魔消耗100法力，每条诅咒消耗500法力；不再获得祛魔经验。"
+  ],
+  "recipes": true
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "decorations",
+  "pattern": ["CCC", "CCC", " S "],
+  "key": {
+    "C": {"item": "omnira:spiritual_crystal"},
+    "S": {"item": "minecraft:stick"}
+  },
+  "result": {"id": "omnira:crystal_sign", "count": 3}
+}

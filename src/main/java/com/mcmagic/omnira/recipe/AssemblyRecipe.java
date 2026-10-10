@@ -13,12 +13,14 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public record AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean outerShapeless,String operation) implements Recipe<AssemblyRecipe.Input> {
+    private static final java.util.Set<String> PRESERVING_OPERATIONS=java.util.Set.of("resonant_orb","grid_upgrade","staff_upgrade","arquebus_upgrade");
     public AssemblyRecipe(List<Ingredient> slots,ItemStack result) {this(slots,result,false,"fixed");}
     public AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean outerShapeless) {this(slots,result,outerShapeless,"fixed");}
     public AssemblyRecipe {
         slots=List.copyOf(slots);
-        if(!List.of("fixed","alternating","grid_upgrade","staff","staff_upgrade","arquebus","arquebus_upgrade","armor_exchange").contains(operation)) throw new IllegalArgumentException("Unknown assembly operation: "+operation);
-        if(slots.size()!=7 || slots.stream().allMatch(Ingredient::isEmpty) || result.getCount()!=1)
+        if(!List.of("fixed","alternating","grid_upgrade","staff","staff_upgrade","arquebus","arquebus_upgrade","armor_exchange","resonant_orb","void_orb").contains(operation)) throw new IllegalArgumentException("Unknown assembly operation: "+operation);
+        boolean pairedPorts=result.is(com.mcmagic.omnira.registry.ModItems.SPACETIME_PORT.get()) && result.getCount()==2;
+        if(slots.size()!=7 || slots.stream().allMatch(Ingredient::isEmpty) || result.getCount()!=1 && !pairedPorts)
             throw new IllegalArgumentException("Assembly requires seven positions, at least one component and one result");
     }
     public record Input(Container container) implements RecipeInput {
@@ -44,12 +46,16 @@ public record AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean out
         }
     };
     @Override public boolean matches(Input input,Level level) {
+        for(int i=0;i<input.size();i++) {
+            boolean preserves=i==6 && PRESERVING_OPERATIONS.contains(operation);
+            if(!preserves && !RecipeInputSafety.empty(input.getItem(i)))return false;
+        }
+        if(result.is(com.mcmagic.omnira.space.sea.StellarCraftContent.ORB_ITEM.get())&&!StarClusterOrbCraftRecipe.emptyOrb(input.getItem(6)))return false;
+        if(operation.equals("void_orb"))return matchSlots(input,0,0,7);
         if(operation.equals("armor_exchange") && com.mcmagic.omnira.registry.ArmorContent.exchange(input.getItem(6),result).isEmpty())return false;
         if(result.is(com.mcmagic.omnira.registry.ModItems.LIQUID_CRYSTAL_BALL.get()) && input.getItem(6).has(net.minecraft.core.component.DataComponents.BLOCK_ENTITY_DATA))return false;
         if(result.is(com.mcmagic.omnira.registry.ModItems.SPACETIME_STABILIZATION_UPGRADE.get()) && input.getItem(6).getOrDefault(net.minecraft.core.component.DataComponents.CONTAINER,
                 net.minecraft.world.item.component.ItemContainerContents.EMPTY).stream().anyMatch(s->!s.isEmpty()))return false;
-        if(operation.equals("arquebus") && input.getItem(6).getOrDefault(net.minecraft.core.component.DataComponents.CONTAINER,
-                net.minecraft.world.item.component.ItemContainerContents.EMPTY).stream().anyMatch(s->!s.isEmpty())) return false;
         if(operation.equals("arquebus_upgrade") && (!(input.getItem(6).getItem() instanceof com.mcmagic.omnira.item.ArcaneArquebusItem)
                 || com.mcmagic.omnira.item.ArcaneArquebusItem.upgraded(input.getItem(6)))) return false;
         if(operation.equals("alternating")) return matches(slots.get(6),input.getItem(6))
@@ -70,11 +76,24 @@ public record AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean out
         return false;
     }
     private boolean matchOuter(Input input,int slot,int used) {
-        if(slot==6) return true;
-        for(int i=0;i<6;i++) if((used&(1<<i))==0 && matches(slots.get(i),input.getItem(slot)) && matchOuter(input,slot+1,used|(1<<i))) return true;
+        return matchSlots(input,slot,used,6);
+    }
+    private boolean matchSlots(Input input,int slot,int used,int limit) {
+        if(slot==limit) return true;
+        for(int i=0;i<limit;i++) if((used&(1<<i))==0 && matches(slots.get(i),input.getItem(slot)) && matchSlots(input,slot+1,used|(1<<i),limit)) return true;
         return false;
     }
     @Override public ItemStack assemble(Input input,HolderLookup.Provider registries) {
+        if(result.is(com.mcmagic.omnira.registry.ModItems.INFUSED_CRYSTAL_PICKAXE.get())
+                &&input.getItem(6).is(com.mcmagic.omnira.registry.ModItems.CRYSTAL_PICKAXE.get()))
+            return RecipeInputSafety.upgradePickaxe(input.getItem(6),result);
+        if(operation.equals("resonant_orb")){
+            var orb=result.copy();var source=input.getItem(6);
+            source.getComponentsPatch().entrySet().forEach(entry->{
+                if(entry.getValue().isPresent())copyComponent(orb,entry.getKey(),entry.getValue().get());
+            });
+            return orb;
+        }
         if(operation.equals("armor_exchange"))return com.mcmagic.omnira.registry.ArmorContent.exchange(input.getItem(6),result);
         if(operation.equals("arquebus_upgrade")) {
             var gun=input.getItem(6).copyWithCount(1);
@@ -89,6 +108,7 @@ public record AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean out
         return operation.startsWith("staff")?StaffAssemblyRecipes.assemble(input,operation):result.copy();
     }
     public List<Ingredient> displaySlots() {return operation.equals("staff")?StaffAssemblyRecipes.displaySlots():slots;}
+    @SuppressWarnings({"unchecked","rawtypes"}) private static void copyComponent(ItemStack stack,net.minecraft.core.component.DataComponentType type,Object value){stack.set(type,value);}
     @Override public ItemStack getResultItem(HolderLookup.Provider registries) {return result.copy();}
     @Override public boolean canCraftInDimensions(int w,int h) {return true;}
     @Override public boolean isSpecial() {return true;}

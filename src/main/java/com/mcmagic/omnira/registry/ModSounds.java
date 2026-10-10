@@ -10,4 +10,8 @@ public final class ModSounds {
     public static final java.util.function.Supplier<SoundEvent> NIGHT_HERON_CALL=TYPES.register("night_heron_call",
             ()->SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("omnira","night_heron_call")));
     private ModSounds() {}
+    public static final java.util.function.Supplier<SoundEvent> VIOLIN_ALLEMANDA=TYPES.register("violin_allemanda",
+            ()->SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("omnira","violin_allemanda")));
+    public static final java.util.function.Supplier<SoundEvent> VIOLIN_ADAGIO=TYPES.register("violin_adagio",
+            ()->SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("omnira","violin_adagio")));
 }

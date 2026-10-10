@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [{"item": "omnira:alchemical_waste"}],
+  "result": {"id": "minecraft:coal", "count": 9}
+}

@@ -1,0 +1,21 @@
+{
+  "id": "sharpened_crystallized_bone_nail",
+  "item": "omnira:sharpened_crystallized_bone_nail",
+  "title": "Sharpened Crystallized Bone Nail",
+  "recipes": true,
+  "text": [
+    "On the Advanced Assembly Table, put the previous-stage weapon at the left node, Infused Crystal Block at the middle and Paradox Ore at the right. The six surface ingredients are Paradox Dust. Damage, enchantments, custom names and loaded crystals are retained.",
+    "Upgrade 1: 10 damage, 1.9 attack speed, 15 total healing and 125% base special range. Paradox motes increase with level.",
+    "§b§oAt least upgrading needs no smithing template)§r"
+  ],
+  "links": [
+    {
+      "target": "crystallized_bone_nail",
+      "label": "Weapon Use"
+    },
+    {
+      "target": "advanced_assembly_table",
+      "label": "Advanced Assembly Table"
+    }
+  ]
+}

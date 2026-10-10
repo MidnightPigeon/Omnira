@@ -4,7 +4,13 @@
   "icon": "omnira:rough_spatial_crystal_block",
   "introduction": "introduction.json",
   "entries": [
-    "entries/spatial_caverns_guide.json"
+    "entries/phase_crystal_grove_guide.json",
+    "entries/dislocated_geodes_guide.json",
+    "entries/folded_caverns_guide.json",
+    "entries/spatial_caverns_guide.json",
+    "entries/void_starsea_guide.json",
+    "entries/inverted_abyss_guide.json",
+    "entries/topological_labyrinth_guide.json"
   ],
   "chapters": []
 }

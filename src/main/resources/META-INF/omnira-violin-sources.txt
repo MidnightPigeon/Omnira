@@ -1,0 +1,19 @@
+Voyager's Violin recordings
+
+Both recordings are designated CC0 1.0 Universal by their source pages.
+License: https://creativecommons.org/publicdomain/zero/1.0/
+The CC0 designation applies to the recordings, not merely Bach's compositions.
+Performer/recording author: unknown, as credited by Wikimedia Commons.
+Retrieved: 2026-10-06. Audio converted to mono for positional playback.
+
+bach_allemanda.ogg
+J. S. Bach, Partita No. 2 in D minor, BWV 1004, I. Allemanda
+Recorded 18 April 2013, MAT Listening Room, QMUL, London.
+https://commons.wikimedia.org/wiki/File:Bach_Partita_2_-_Allemanda_-_18-04-2013.ogg
+Original SHA1: 4a555ba92d833022a473aee3c8ff7bd77f6b68af
+
+bach_adagio.ogg
+J. S. Bach, Violin Sonata No. 1 in G minor, BWV 1001, I. Adagio
+Recorded 22 September 2014, William Goodenough House, London.
+https://commons.wikimedia.org/wiki/File:J._S._Bach_%E2%80%93_Violin_Sonata_No.1_in_G_minor,_BWV_1001,_I._Adagio.ogg
+Original SHA1: da651f5155df5a33df06e7362c32edb1953f4dc9

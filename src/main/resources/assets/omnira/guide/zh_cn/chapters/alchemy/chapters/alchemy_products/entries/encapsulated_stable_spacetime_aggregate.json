@@ -1,0 +1,15 @@
+{
+  "id": "encapsulated_stable_spacetime_aggregate",
+  "item": "omnira:encapsulated_stable_spacetime_aggregate",
+  "title": "封装的稳态时空聚合体",
+  "text": [
+    "通过反应封装不稳定的时空聚合体。稳态封装不再自行损耗，可作为炼金催化室的基底。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "alchemical_catalysis_chamber",
+      "label": "炼金催化室"
+    }
+  ]
+}

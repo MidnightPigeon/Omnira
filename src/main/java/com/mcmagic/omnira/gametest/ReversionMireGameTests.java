@@ -21,7 +21,7 @@ import net.neoforged.neoforge.gametest.*;
 public final class ReversionMireGameTests {
     private static void biome(GameTestHelper h,BlockPos pos,ResourceLocation id){
         var l=h.getLevel();var value=l.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ResourceKey.create(Registries.BIOME,id));
-        l.getChunkAt(pos).fillBiomesFromNoise((x,y,z,s)->value,l.getChunkSource().randomState().sampler());
+        for(int cx=(pos.getX()>>4)-1;cx<=(pos.getX()>>4)+1;cx++)for(int cz=(pos.getZ()>>4)-1;cz<=(pos.getZ()>>4)+1;cz++)l.getChunk(cx,cz).fillBiomesFromNoise((x,y,z,s)->value,l.getChunkSource().randomState().sampler());
     }
     @GameTest(template="spell_arena",templateNamespace="omnira_landscape")
     public static void terrainAndContent(GameTestHelper h){

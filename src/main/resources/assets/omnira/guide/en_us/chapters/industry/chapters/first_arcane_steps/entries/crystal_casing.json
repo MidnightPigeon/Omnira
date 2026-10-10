@@ -4,7 +4,7 @@
   "title": "Crystal Casing",
   "text": [
     "A transparent building block with a Spiritual Crystal frame and glass interior. Adjacent casings connect their trim.",
-    "Right-click a Create shaft, cogwheel or large cogwheel with the casing to add a transparent shell without consuming it. Wrench the axial end faces to toggle shaft connections; sneak-wrench to remove the shell."
+    "Right-click a Create shaft, either cogwheel size or fluid pipe with the casing to add a transparent shell without consuming it. Wrench the axial end faces to toggle shaft connections; sneak-wrench to remove kinetic shells. Encased pipes preserve their connections and pump-driven flow; ordinary wrenching removes their shell."
   ],
   "recipes": true
 }

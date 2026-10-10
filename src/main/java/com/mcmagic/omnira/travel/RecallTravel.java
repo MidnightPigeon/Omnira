@@ -40,6 +40,7 @@ public final class RecallTravel {
         }
     }
     public static boolean start(ServerPlayer player,InteractionHand hand,UUID target) {
+        if(!player.getItemInHand(hand).is(ModItems.ENHANCED_RECALL_CRYSTAL.get())&&com.mcmagic.omnira.space.anchor.StabilityField.contains(player))return false;
         if(!player.isAlive() || player.isSpectator() || !DreamTransitRules.allowed(player.getRootVehicle()) || player.isSleeping()
                 || !(player.getItemInHand(hand).getItem() instanceof RecallCrystalItem crystal)) return false;
         var directory=WaymarkDirectory.get(player.serverLevel());
@@ -80,6 +81,7 @@ public final class RecallTravel {
         Vec3 landing=findLanding(destination,player,entry.pos());
         if(landing==null) {message(player,"blocked");return;}
         var root=channel.root();
+        if(!channel.stack().is(ModItems.ENHANCED_RECALL_CRYSTAL.get())&&com.mcmagic.omnira.space.anchor.StabilityField.blocks(root,destination,landing)){message(player,"blocked");return;}
         if(!DreamTransitRules.allowed(root)){message(player,"blocked");return;}
         if(destination!=channel.source())for(var member:root.getSelfAndPassengers().toList())
             if(!member.canChangeDimensions(channel.source(),destination)
@@ -94,12 +96,12 @@ public final class RecallTravel {
         boolean success=false;
         try {
             if(root==player){
-                success=player.teleportTo(destination,landing.x,landing.y,landing.z,Set.of(),player.getYRot(),player.getXRot());
+                success=com.mcmagic.omnira.space.anchor.StabilityField.toolTravel(root,channel.stack().is(ModItems.ENHANCED_RECALL_CRYSTAL.get()),()->player.teleportTo(destination,landing.x,landing.y,landing.z,Set.of(),player.getYRot(),player.getXRot()));
                 success=success && player.serverLevel()==destination && player.position().distanceToSqr(landing)<.01;
             }else{
-                var arrived=root.changeDimension(new DimensionTransition(destination,landing,Vec3.ZERO,root.getYRot(),root.getXRot(),entity->{
+                var arrived=com.mcmagic.omnira.space.anchor.StabilityField.toolTravel(root,channel.stack().is(ModItems.ENHANCED_RECALL_CRYSTAL.get()),()->root.changeDimension(new DimensionTransition(destination,landing,Vec3.ZERO,root.getYRot(),root.getXRot(),entity->{
                     entity.setDeltaMovement(Vec3.ZERO);entity.fallDistance=0;entity.placePortalTicket(entity.blockPosition());
-                }));
+                })));
                 success=arrived!=null && player.getRootVehicle()==arrived && player.serverLevel()==destination
                         && arrived.position().distanceToSqr(landing)<.01;
             }

@@ -1,0 +1,21 @@
+{
+  "type": "omnira:assembly",
+  "slots": [
+    {
+      "item": "omnira:encapsulated_paradox_flow"
+    },
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "omnira:paradox_ore"
+    }
+  ],
+  "outer_shapeless": true,
+  "result": {
+    "id": "omnira:unstable_paradox_source",
+    "count": 1
+  }
+}

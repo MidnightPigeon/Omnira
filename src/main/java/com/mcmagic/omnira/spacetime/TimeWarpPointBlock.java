@@ -39,10 +39,11 @@ public final class TimeWarpPointBlock extends BaseEntityBlock {
         if(level instanceof ServerLevel server && player.getMainHandItem().getItem() instanceof RitualSwordItem)harvest(server,pos,player);
     }
     public static boolean harvest(ServerLevel level,BlockPos pos,Player player){
-        if(!level.getBlockState(pos).is(ModBlocks.TIME_WARP_POINT.get()) || !player.mayBuild()
+        boolean spatial=level.getBlockState(pos).is(ModBlocks.SPACE_WARP_POINT.get());
+        if(!spatial&&!level.getBlockState(pos).is(ModBlocks.TIME_WARP_POINT.get()) || !player.mayBuild()
                 || !level.mayInteract(player,pos))return false;
-        if(!level.setBlock(pos,ModBlocks.TEMPORAL_MOTE.get().defaultBlockState(),Block.UPDATE_ALL))return false;
-        Block.popResource(level,pos,ModItems.TIME_WARP_POINT.get().getDefaultInstance());
+        if(!level.setBlock(pos,(spatial?ModBlocks.SPATIAL_REMNANT:ModBlocks.TEMPORAL_MOTE).get().defaultBlockState(),Block.UPDATE_ALL))return false;
+        Block.popResource(level,pos,(spatial?ModItems.SPACE_WARP_POINT:ModItems.TIME_WARP_POINT).get().getDefaultInstance());
         return true;
     }
     public static boolean harvestNearby(ServerLevel level,BlockPos center,Player player){

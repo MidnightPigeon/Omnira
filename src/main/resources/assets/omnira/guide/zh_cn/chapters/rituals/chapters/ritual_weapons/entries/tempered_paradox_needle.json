@@ -1,0 +1,21 @@
+{
+  "id": "tempered_paradox_needle",
+  "item": "omnira:tempered_paradox_needle",
+  "title": "钢化悖论织针",
+  "recipes": true,
+  "text": [
+    "在高阶装配台升级：左节点放前一阶段武器，中节点放桶装稀薄时空，右节点放封装悖论流体；台面放六个悖论尘。升级保留耐久损耗、附魔、自定义名称和装入的法术水晶。",
+    "第3次升级：攻击力14，攻速2.1，完整引导回血21点，特殊范围为基础的175%。悖论颗粒随等级增加。",
+    "§d§o至少升级不需要锻造模板）§r"
+  ],
+  "links": [
+    {
+      "target": "arcane_needle",
+      "label": "武器使用"
+    },
+    {
+      "target": "advanced_assembly_table",
+      "label": "高阶装配台"
+    }
+  ]
+}

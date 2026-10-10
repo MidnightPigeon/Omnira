@@ -13,9 +13,12 @@ import net.minecraft.world.level.block.Blocks;
 
 public final class SwordShapingScene {
     public static void render(GuiGraphics g,int x,int y,int ticks) {
+        render(g,x,y,ticks,0,0);
+    }
+    public static void render(GuiGraphics g,int x,int y,int ticks,float yaw,float pitch) {
         var mc=Minecraft.getInstance();var pose=g.pose();var buffers=mc.renderBuffers().bufferSource();
         g.flush();RenderSystem.enableDepthTest();pose.pushPose();pose.translate(x+62,y+76,160);
-        pose.scale(15,-15,15);pose.mulPose(Axis.XP.rotationDegrees(28));pose.mulPose(Axis.YP.rotationDegrees(-35));pose.translate(-.5,0,-.5);
+        pose.scale(15,-15,15);pose.mulPose(Axis.XP.rotationDegrees(28+pitch));pose.mulPose(Axis.YP.rotationDegrees(-35+yaw));pose.translate(-.5,0,-.5);
         for(int dx=-2;dx<=2;dx++)for(int dz=-2;dz<=2;dz++) {
             pose.pushPose();pose.translate(dx,-1,dz);mc.getBlockRenderer().renderSingleBlock(Blocks.SMOOTH_STONE.defaultBlockState(),pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);pose.popPose();
         }

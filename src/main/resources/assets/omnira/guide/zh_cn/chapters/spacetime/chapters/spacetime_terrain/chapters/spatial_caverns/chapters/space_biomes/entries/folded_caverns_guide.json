@@ -1,0 +1,16 @@
+{
+  "id": "folded_caverns_guide",
+  "title": "折叠洞窟",
+  "item": "omnira:space_warp_point",
+  "recipes": false,
+  "text": [
+    "起伏的晶体地面与洞顶之间生长着上下相向的晶锥。空间折跃点散布于洞底及顶部晶台，距离在这里并不意味着通行所需的路程。",
+    "在折跃点五格球形范围内连续停留三秒，会尝试前往水平128格内的其他折跃点。可能抵达洞顶，落点位于目标作用范围外；没有安全落点时不会传送。"
+  ],
+  "links": [
+    {
+      "target": "space_warp_point_guide",
+      "label": "空间折跃点与空轨残迹"
+    }
+  ]
+}

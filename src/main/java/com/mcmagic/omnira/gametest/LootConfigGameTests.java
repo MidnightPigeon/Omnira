@@ -20,6 +20,29 @@ import java.util.Set;
 @GameTestHolder("omnira_loot_config")
 @PrefixGameTestTemplate(false)
 public final class LootConfigGameTests {
+    @GameTest(template="spell_arena") public static void independentFluidListsAndTags(GameTestHelper h){
+        var waterTag=Set.of("#minecraft:water");
+        var both=new OmniraLootConfig.FluidRules(true,true,waterTag,Set.of("minecraft:water"));
+        h.assertTrue(!both.allows(Fluids.WATER)&&!both.allows(Fluids.LAVA),"Blacklist must override a whitelist tag");
+        var dilute=com.mcmagic.omnira.alchemy.AlchemyMaterials.DILUTE.source.get();
+        h.assertTrue(both.allows(dilute),"Water tag did not include registered dilute spacetime");
+        var tagDenied=new OmniraLootConfig.FluidRules(true,true,Set.of("minecraft:water"),waterTag);
+        h.assertTrue(!tagDenied.allows(Fluids.WATER),"Blacklist tag did not override explicit whitelist ID");
+        h.assertTrue(new OmniraLootConfig.FluidRules(true,false,waterTag,waterTag).allows(Fluids.WATER),"Disabled blacklist still filters");
+        var disabled=new OmniraLootConfig.FluidRules(false,false,Set.of(),waterTag);
+        h.assertTrue(disabled.allows(Fluids.LAVA)&&disabled.allows(Fluids.WATER)&&!disabled.allows(Fluids.FLOWING_WATER)&&!disabled.allows(Fluids.EMPTY),"Disabled lists changed source-only restriction");
+        var defaults=OmniraLootConfig.defaults();var rules=OmniraLootConfig.rules(defaults);
+        h.assertTrue(rules.whitelistEnabled()&&rules.blacklistEnabled()&&rules.allows(dilute)
+                &&!rules.allows(com.mcmagic.omnira.alchemy.AlchemyMaterials.REFINED.source.get()),"New defaults mishandled spacetime fluids");
+        var f=defaults.getAsJsonObject("fluidTreasure");f.remove("alchemyRevision");f.remove("whitelistEnabled");f.remove("blacklistEnabled");f.addProperty("mode","BLACKLIST");
+        h.assertTrue(OmniraLootConfig.migrateFluidSwitches(defaults)&&!OmniraLootConfig.rules(defaults).whitelistEnabled()&&OmniraLootConfig.rules(defaults).blacklistEnabled(),"Old blacklist mode migration changed semantics");
+        f.add("whitelist",new JsonArray());
+        h.assertTrue(OmniraLootConfig.migrateAlchemyFluids(defaults)&&f.getAsJsonArray("whitelist").contains(new JsonPrimitive("omnira:void_starflow"))
+                &&f.getAsJsonArray("whitelist").contains(new JsonPrimitive("omnira:dilute_spacetime")),"New fluids not migrated");
+        f.add("whitelist",new JsonArray());h.assertTrue(!OmniraLootConfig.migrateAlchemyFluids(defaults)&&f.getAsJsonArray("whitelist").isEmpty(),"Later user edits overwritten");
+        f.getAsJsonArray("whitelist").add("#invalid");boolean rejected=false;try{OmniraLootConfig.rules(defaults);}catch(IllegalArgumentException expected){rejected=true;}
+        h.assertTrue(rejected,"Malformed tag accepted");h.succeed();
+    }
     @GameTest(template="spell_arena") public static void potionTreasureComponents(GameTestHelper h){
         var fluid=net.minecraft.core.registries.BuiltInRegistries.FLUID.get(ResourceLocation.parse("create:potion"));
         for(int i=0;i<32;i++){
@@ -35,21 +58,22 @@ public final class LootConfigGameTests {
     }
     @GameTest(template="spell_arena")
     public static void configurationAndTreasure(GameTestHelper h)throws Exception{
-        var white=new OmniraLootConfig.FluidRules(OmniraLootConfig.Mode.WHITELIST,Set.of("minecraft:water","missing:fluid","minecraft:flowing_lava"),Set.of("minecraft:water"));
+        var white=new OmniraLootConfig.FluidRules(true,false,Set.of("minecraft:water","missing:fluid","minecraft:flowing_lava"),Set.of("minecraft:water"));
         h.assertTrue(white.allows(Fluids.WATER)&&!white.allows(Fluids.LAVA)&&!white.allows(Fluids.FLOWING_LAVA)&&!white.allows(Fluids.EMPTY),"Whitelist source filtering");
-        var black=new OmniraLootConfig.FluidRules(OmniraLootConfig.Mode.BLACKLIST,Set.of(),Set.of("minecraft:lava"));
+        var black=new OmniraLootConfig.FluidRules(false,true,Set.of(),Set.of("minecraft:lava"));
         h.assertTrue(black.allows(Fluids.WATER)&&!black.allows(Fluids.LAVA)&&!black.allows(Fluids.FLOWING_WATER),"Blacklist filtering");
         var path=OmniraLootConfig.path();var original=Files.readString(path);
         var level=h.getLevel();var key=ResourceLocation.parse("omnira:chests/kirisame_attic");
         var root=JsonParser.parseString(original).getAsJsonObject();
-        h.assertTrue(OmniraLootConfig.rules(root).mode()==OmniraLootConfig.Mode.WHITELIST,"Default mode");
+        h.assertTrue(OmniraLootConfig.rules(root).whitelistEnabled(),"Default whitelist switch");
         var candidates=LiquidCrystalBallBlockEntity.treasureFluids();
         var candidateIds=candidates.stream().map(f->net.minecraft.core.registries.BuiltInRegistries.FLUID.getKey(f).toString()).toList();
         var registered=Set.copyOf(OmniraLootConfig.sourceFluidIds());
-        var expected=OmniraLootConfig.rules(root).whitelist().stream().filter(registered::contains).collect(java.util.stream.Collectors.toSet());
+        var expected=net.minecraft.core.registries.BuiltInRegistries.FLUID.stream().filter(OmniraLootConfig.rules(root)::allows)
+                .map(f->net.minecraft.core.registries.BuiltInRegistries.FLUID.getKey(f).toString()).collect(java.util.stream.Collectors.toSet());
         h.assertTrue(!candidateIds.isEmpty()&&candidateIds.size()==Set.copyOf(candidateIds).size()
                 &&Set.copyOf(candidateIds).equals(expected),"Actual treasure candidates differ from available whitelist sources: "+candidateIds);
-        h.assertTrue(candidateIds.stream().filter("aeronautics:levitite_blend"::equals).count()==1,"Levitite Blend has duplicate candidates");
+        h.assertTrue(candidateIds.stream().filter("aeronautics:levitite_blend"::equals).count()==(expected.contains("aeronautics:levitite_blend")?1:0),"Levitite Blend candidate count differs from installed whitelist");
         com.mcmagic.omnira.Omnira.LOGGER.info("Verified loot fluid IDs: {}",OmniraLootConfig.sourceFluidIds());
         try{
             root.getAsJsonObject("fluidTreasure").add("whitelist",new JsonArray());
@@ -68,7 +92,8 @@ public final class LootConfigGameTests {
             Files.writeString(path,root.toString());OmniraLootConfig.lootTable(new LootTableLoadEvent(level.registryAccess(),key,LootTable.EMPTY));
             ball.unpackLootTable(player);
             h.assertTrue(!ball.hasPendingLoot()&&ball.tank.getFluid().getFluid()==Fluids.LAVA&&ball.tank.getFluidAmount()==ball.tank.getCapacity(),"Configured liquid not used");
-            root.getAsJsonObject("fluidTreasure").addProperty("mode","BLACKLIST");
+            root.getAsJsonObject("fluidTreasure").addProperty("whitelistEnabled",false);
+            root.getAsJsonObject("fluidTreasure").addProperty("blacklistEnabled",true);
             root.getAsJsonObject("fluidTreasure").getAsJsonArray("blacklist").add("minecraft:lava");
             Files.writeString(path,root.toString());OmniraLootConfig.lootTable(new LootTableLoadEvent(level.registryAccess(),key,LootTable.EMPTY));
             h.assertTrue(!LiquidCrystalBallBlockEntity.treasureFluids().contains(Fluids.LAVA)&&LiquidCrystalBallBlockEntity.treasureFluids().contains(Fluids.WATER),"Mode switch failed");

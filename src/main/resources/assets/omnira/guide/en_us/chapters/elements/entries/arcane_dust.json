@@ -3,7 +3,8 @@
   "item": "omnira:arcane_dust",
   "title": "Arcane Dust",
   "text": [
-    "Some materials release arcane dust during analysis: the residue of arcane vibrations."
+    "Some materials release arcane dust during analysis: the residue of arcane vibrations.",
+    "Use Arcane Dust on an amethyst, dream, spatial or deflection crystal matrix to advance every eligible cluster by one stage. Empty or water-source faces sprout small buds. Even a single growable face triggers growth and consumes 1 dust. Nothing is consumed only when all six faces are blocked or mature. Mature clusters, other crystal families and obstructed faces are unaffected."
   ],
   "recipes": true
 }

@@ -1,0 +1,21 @@
+{
+  "id": "pure_paradox_bone_nail",
+  "item": "omnira:pure_paradox_bone_nail",
+  "title": "纯粹悖论骨钉",
+  "recipes": true,
+  "text": [
+    "在高阶装配台升级：左节点放前一阶段武器，中节点放万象微核，右节点放悖论矿石；台面放六个悖论尘。升级保留耐久损耗、附魔、自定义名称和装入的法术水晶。",
+    "第4次升级：攻击力16，攻速2.2，完整引导回血24点，特殊范围为基础的200%。悖论颗粒随等级增加。",
+    "§b§o至少升级不需要锻造模板）§r"
+  ],
+  "links": [
+    {
+      "target": "crystallized_bone_nail",
+      "label": "武器使用"
+    },
+    {
+      "target": "advanced_assembly_table",
+      "label": "高阶装配台"
+    }
+  ]
+}

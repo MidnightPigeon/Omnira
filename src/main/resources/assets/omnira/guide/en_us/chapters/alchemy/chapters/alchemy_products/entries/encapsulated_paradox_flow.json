@@ -1,0 +1,20 @@
+{
+  "id": "encapsulated_paradox_flow",
+  "item": "omnira:encapsulated_paradox_flow",
+  "title": "Encapsulated Paradox Flow",
+  "text": [
+    "React one paradox mystery and a glass bottle with 1000 mB water, without a required catalyst block. This non-placeable sealed material is intended for Needle upgrades.",
+    "Used for all four upgrades of its corresponding ritual weapon."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "paradox_mystery",
+      "label": "Paradox Mystery"
+    },
+    {
+      "target": "arcane_needle",
+      "label": "Weapon Upgrades"
+    }
+  ]
+}

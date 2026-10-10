@@ -3,13 +3,19 @@
   "item": "omnira:paradox_dust",
   "title": "Paradox Dust",
   "text": [
-    "Advanced condensation reduces a spacetime knot to powder that flickers between black and white."
+    "Advanced condensation turns spacetime knots into alternating black-and-white powder. Right-click consumes one dust and rolls one of five equally likely paradoxes.",
+    "Blink exactly 20 blocks along your view, without finding a safe destination; restore health and hunger; summon a random dream creature; summon a void anvil that waits three seconds overhead before falling; or receive one random earth, water, fire or air microcore.",
+    "The anvil uses ordinary falling-anvil damage and vanishes on landing, leaving no block or item. Stability fields can still prevent the blink."
   ],
   "recipes": true,
   "links": [
     {
       "target": "advanced_condensation_table",
       "label": "Advanced Condensation Table"
+    },
+    {
+      "target": "paradox_mystery",
+      "label": "Paradox Mystery"
     }
   ]
 }

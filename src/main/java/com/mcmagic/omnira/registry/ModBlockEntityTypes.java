@@ -12,6 +12,26 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModBlockEntityTypes {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Omnira.MOD_ID);
+    public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<net.minecraft.world.level.block.entity.BlockEntity>> SPACETIME_PORT=
+            BLOCK_ENTITY_TYPES.register("spacetime_port",()->BlockEntityType.Builder.of((net.minecraft.core.BlockPos pos,net.minecraft.world.level.block.state.BlockState state)->
+                    ((com.mcmagic.omnira.space.SpacetimePortBlock)ModBlocks.SPACETIME_PORT.get()).newBlockEntity(pos,state),ModBlocks.SPACETIME_PORT.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.block.InfusedCrystalBlock.Motes>> INFUSED_CRYSTAL_MOTES=
+            BLOCK_ENTITY_TYPES.register("infused_crystal_motes",()->BlockEntityType.Builder.of(
+                    com.mcmagic.omnira.block.InfusedCrystalBlock.Motes::new,com.mcmagic.omnira.block.InfusedCrystalBlock.blocks()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.sign.CrystalSignEntity>> CRYSTAL_SIGN=
+            BLOCK_ENTITY_TYPES.register("crystal_sign",()->BlockEntityType.Builder.of(com.mcmagic.omnira.sign.CrystalSignEntity::new,
+                    ModBlocks.CRYSTAL_SIGN.get(),ModBlocks.CRYSTAL_WALL_SIGN.get(),ModBlocks.WISDOM_SIGN.get(),
+                    ModBlocks.WISDOM_WALL_SIGN.get(),ModBlocks.WISDOM_HANGING_SIGN.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<net.minecraft.world.level.block.entity.BlockEntity>> REACTION_POOL=
+            BLOCK_ENTITY_TYPES.register("large_alchemical_reaction_pool",()->BlockEntityType.Builder.of((net.minecraft.core.BlockPos pos,net.minecraft.world.level.block.state.BlockState state)->
+                    ((com.mcmagic.omnira.alchemy.ReactionPoolBlock)ModBlocks.REACTION_POOL.get()).newBlockEntity(pos,state),ModBlocks.REACTION_POOL.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.alchemy.RoughAlchemyCauldronBlockEntity>> ROUGH_ALCHEMY_CAULDRON=
+            BLOCK_ENTITY_TYPES.register("rough_alchemy_cauldron",()->BlockEntityType.Builder.of(
+                    com.mcmagic.omnira.alchemy.RoughAlchemyCauldronBlockEntity::new,
+                    ModBlocks.ROUGH_ALCHEMY_CAULDRON.get(),ModBlocks.PRIMITIVE_REACTION_CAULDRON.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.space.FoldGateBlockEntity>> FOLD_GATE=
+            BLOCK_ENTITY_TYPES.register("fold_gate",()->BlockEntityType.Builder.of(com.mcmagic.omnira.space.FoldGateBlockEntity::new,
+                    ModBlocks.FOLD_GATE_FRAME.get(),ModBlocks.STABLE_FOLD_GATE.get(),ModBlocks.UNSTABLE_FOLD_GATE.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.time.WonderlandPokerStandBlockEntity>> WONDERLAND_POKER_STAND=
             BLOCK_ENTITY_TYPES.register("wonderland_poker_stand",()->BlockEntityType.Builder.of(com.mcmagic.omnira.time.WonderlandPokerStandBlockEntity::new,
                     ModBlocks.WONDERLAND_POKER_STAND.get()).build(null));
@@ -26,6 +46,10 @@ public final class ModBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.spacetime.TimeWarpPointBlockEntity>> TIME_WARP_POINT=
             BLOCK_ENTITY_TYPES.register("time_warp_point",()->BlockEntityType.Builder.of(
                     com.mcmagic.omnira.spacetime.TimeWarpPointBlockEntity::new,ModBlocks.TIME_WARP_POINT.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.space.SpaceWarpBlockEntity>> SPACE_WARP_POINT=
+            BLOCK_ENTITY_TYPES.register("space_warp_point",()->BlockEntityType.Builder.of(com.mcmagic.omnira.space.SpaceWarpBlockEntity::new,ModBlocks.SPACE_WARP_POINT.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.space.SpatialRemnantBlockEntity>> SPATIAL_REMNANT=
+            BLOCK_ENTITY_TYPES.register("spatial_remnant",()->BlockEntityType.Builder.of(com.mcmagic.omnira.space.SpatialRemnantBlockEntity::new,ModBlocks.SPATIAL_REMNANT.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.spacetime.CorridorGatewayBlockEntity>> CORRIDOR_GATEWAY=
             BLOCK_ENTITY_TYPES.register("corridor_gateway",()->BlockEntityType.Builder.of(com.mcmagic.omnira.spacetime.CorridorGatewayBlockEntity::new,ModBlocks.CORRIDOR_GATEWAY.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.forging.AdvancedForgeBlockEntity>> ADVANCED_FORGE=
@@ -33,7 +57,7 @@ public final class ModBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.block.entity.ResonanceCoreBlockEntity>> RESONANCE_CORE=
             BLOCK_ENTITY_TYPES.register("resonance_core",()->BlockEntityType.Builder.of(com.mcmagic.omnira.block.entity.ResonanceCoreBlockEntity::new,ModBlocks.RESONANCE_CORE.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.block.entity.LiquidCrystalBallBlockEntity>> LIQUID_CRYSTAL_BALL=
-            BLOCK_ENTITY_TYPES.register("liquid_crystal_ball",()->BlockEntityType.Builder.of(com.mcmagic.omnira.block.entity.LiquidCrystalBallBlockEntity::new,ModBlocks.LIQUID_CRYSTAL_BALL.get()).build(null));
+            BLOCK_ENTITY_TYPES.register("liquid_crystal_ball",()->BlockEntityType.Builder.of(com.mcmagic.omnira.block.entity.LiquidCrystalBallBlockEntity::new,ModBlocks.LIQUID_CRYSTAL_BALL.get(),com.mcmagic.omnira.storage.CrystalStorageContent.FLUID_ORB.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.block.entity.SpellCoreBlockEntity>> SPELL_CORE=
             BLOCK_ENTITY_TYPES.register("spell_core",()->BlockEntityType.Builder.of(com.mcmagic.omnira.block.entity.SpellCoreBlockEntity::new,
                     ModBlocks.TEST_SPELL_CORE.get(),ModBlocks.DREAM_SPELL_CORE.get(),ModBlocks.LIGHT_DARK_SPELL_CORE.get(),ModBlocks.SPACETIME_SPELL_CORE.get()).build(null));
@@ -44,7 +68,7 @@ public final class ModBlockEntityTypes {
                     com.mcmagic.omnira.block.entity.PureVesselBlockEntity::new,ModBlocks.PURE_VESSEL.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.block.entity.CrystalBallBlockEntity>> CRYSTAL_BALL=
             BLOCK_ENTITY_TYPES.register("crystal_ball",()->BlockEntityType.Builder.of(
-                    com.mcmagic.omnira.block.entity.CrystalBallBlockEntity::new,ModBlocks.CRYSTAL_BALL.get()).build(null));
+                    (pos,state)->state.is(com.mcmagic.omnira.space.sea.StellarCraftContent.ORB.get())?new com.mcmagic.omnira.space.sea.StarClusterOrbEntity(pos,state):state.is(com.mcmagic.omnira.storage.CrystalStorageContent.VOID_ORB.get())?new com.mcmagic.omnira.block.entity.VoidCrystalBallBlockEntity(pos,state):new com.mcmagic.omnira.block.entity.CrystalBallBlockEntity(pos,state),ModBlocks.CRYSTAL_BALL.get(),com.mcmagic.omnira.storage.CrystalStorageContent.ITEM_ORB.get(),com.mcmagic.omnira.storage.CrystalStorageContent.VOID_ORB.get(),com.mcmagic.omnira.space.sea.StellarCraftContent.ORB.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.block.entity.AdvancedCondensationTableBlockEntity>> ADVANCED_CONDENSATION_TABLE=
             BLOCK_ENTITY_TYPES.register("advanced_condensation_table",()->BlockEntityType.Builder.of(
                     com.mcmagic.omnira.block.entity.AdvancedCondensationTableBlockEntity::new,ModBlocks.ADVANCED_CONDENSATION_TABLE.get()).build(null));
@@ -98,7 +122,19 @@ public final class ModBlockEntityTypes {
         eventBus.addListener(ModBlockEntityTypes::registerCapabilities);
     }
     private static void registerCapabilities(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,SPACETIME_PORT.get(),(e,s)->((com.mcmagic.omnira.space.SpacetimePortHost)e).port().itemPort(s));
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,SPACETIME_PORT.get(),(e,s)->((com.mcmagic.omnira.space.SpacetimePortHost)e).port().fluidPort(s));
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK,SPACETIME_PORT.get(),(e,s)->((com.mcmagic.omnira.space.SpacetimePortHost)e).port().energyPort(s));
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,REACTION_POOL.get(),com.mcmagic.omnira.alchemy.ReactionPoolBlock::itemPort);
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,REACTION_POOL.get(),com.mcmagic.omnira.alchemy.ReactionPoolBlock::fluidPort);
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK,REACTION_POOL.get(),com.mcmagic.omnira.alchemy.ReactionPoolBlock::energyPort);
+        event.registerItem(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM,
+                (stack,context)->com.mcmagic.omnira.item.PortableStorageRules.stabilized(stack)?new com.mcmagic.omnira.item.PortableLiquidOrbFluidHandler(stack):null,
+                ModItems.LIQUID_CRYSTAL_BALL.get(),com.mcmagic.omnira.storage.CrystalStorageContent.FLUID.get());
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,ROUGH_ALCHEMY_CAULDRON.get(),(vessel,side)->vessel.tank);
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,ROUGH_ALCHEMY_CAULDRON.get(),(vessel,side)->vessel.items);
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,LIQUID_CRYSTAL_BALL.get(),(ball,side)->ball.fluidHandler);
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,CRYSTAL_BALL.get(),(ball,side)->ball.itemHandler);
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,CRYSTAL_BALL.get(),(ball,side)->ball instanceof com.mcmagic.omnira.block.entity.VoidCrystalBallBlockEntity sink?sink.fluidHandler:null);
     }
 }

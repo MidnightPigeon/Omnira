@@ -1,0 +1,15 @@
+{
+  "id": "crystal_ball_crafting",
+  "title": "水晶球 · 制作",
+  "item": "omnira:crystal_ball",
+  "text": [
+    "用箱子与四枚灵性水晶在工作台合成水晶球。使用与升级见物品存储。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "crystal_ball",
+      "label": "使用与存储"
+    }
+  ]
+}

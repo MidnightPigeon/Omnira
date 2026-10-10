@@ -6,6 +6,7 @@ import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.*;
+import com.simibubi.create.content.fluids.pipes.EncasedPipeBlock;
 import net.minecraft.core.*;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
@@ -19,6 +20,10 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 /** Loaded only with Create. Native kinetic entities retain networking, rendering and wrench behavior. */
 public final class CrystalEncasing {
+    public static final DeferredBlock<EncasedPipeBlock> PIPE=ModBlocks.BLOCKS.register("crystal_encased_fluid_pipe",
+            ()->new EncasedPipeBlock(properties(),ModBlocks.CRYSTAL_CASING::get));
+    public static final DeferredBlock<EncasedPipeBlock> INFUSED_PIPE=ModBlocks.BLOCKS.register("infused_crystal_encased_fluid_pipe",
+            ()->new EncasedPipeBlock(properties(),ModBlocks.INFUSED_CRYSTAL_CASING::get));
     public static final DeferredBlock<EncasedShaftBlock> SHAFT=ModBlocks.BLOCKS.register("crystal_encased_shaft",
             ()->new CrystalShaft(properties(),ModBlocks.CRYSTAL_CASING::get));
     public static final DeferredBlock<EncasedCogwheelBlock> COG=ModBlocks.BLOCKS.register("crystal_encased_cogwheel",
@@ -38,11 +43,14 @@ public final class CrystalEncasing {
     }
     public static void register(IEventBus bus) {
         bus.addListener((BlockEntityTypeAddBlocksEvent event)->{
+            event.modify(AllBlockEntityTypes.ENCASED_FLUID_PIPE.get(),PIPE.get(),INFUSED_PIPE.get());
             event.modify(AllBlockEntityTypes.ENCASED_SHAFT.get(),SHAFT.get(),INFUSED_SHAFT.get());
             event.modify(AllBlockEntityTypes.ENCASED_COGWHEEL.get(),COG.get(),INFUSED_COG.get());
             event.modify(AllBlockEntityTypes.ENCASED_LARGE_COGWHEEL.get(),LARGE_COG.get(),INFUSED_LARGE_COG.get());
         });
         bus.addListener((FMLCommonSetupEvent event)->event.enqueueWork(()->{
+            EncasingRegistry.addVariant(AllBlocks.FLUID_PIPE.get(),PIPE.get());
+            EncasingRegistry.addVariant(AllBlocks.FLUID_PIPE.get(),INFUSED_PIPE.get());
             EncasingRegistry.addVariant(AllBlocks.SHAFT.get(),SHAFT.get());
             EncasingRegistry.addVariant(AllBlocks.COGWHEEL.get(),COG.get());
             EncasingRegistry.addVariant(AllBlocks.LARGE_COGWHEEL.get(),LARGE_COG.get());

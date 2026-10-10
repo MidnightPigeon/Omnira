@@ -1,0 +1,15 @@
+{
+  "id": "encapsulated_stable_paradox_source",
+  "item": "omnira:encapsulated_stable_paradox_source",
+  "title": "Encapsulated Stable Paradox Source",
+  "text": [
+    "A reaction stabilizes an Unstable Paradox Source, preventing durability decay. It can serve as a catalysis substrate; discover its uses through experimentation."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "alchemical_catalysis_chamber",
+      "label": "Alchemical Catalysis Chamber"
+    }
+  ]
+}

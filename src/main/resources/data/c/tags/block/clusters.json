@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:deflection_crystal_cluster",
+    "omnira:phase_crystal_cluster"
+  ]
+}

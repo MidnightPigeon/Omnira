@@ -1,0 +1,6 @@
+{"variants": {
+  "facing=north": {"model": "omnira:block/wandering_star_cluster_orb"},
+  "facing=east": {"model": "omnira:block/wandering_star_cluster_orb", "y": 90},
+  "facing=south": {"model": "omnira:block/wandering_star_cluster_orb", "y": 180},
+  "facing=west": {"model": "omnira:block/wandering_star_cluster_orb", "y": 270}
+}}

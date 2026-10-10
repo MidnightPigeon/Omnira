@@ -1,0 +1,10 @@
+{
+  "id": "enigmatic_legacy_risk",
+  "title": "神秘遗物",
+  "item": "omnira:star_jellyfish",
+  "recipes": false,
+  "text": [
+    "本模组部分中立生物具有高强度的反击能力，包括真实伤害和范围攻击。与神秘遗物的“七咒之戒”共用时存在较大风险，原本可和平接近的生物可能成为威胁，请谨慎搭配。"
+  ],
+  "links": []
+}

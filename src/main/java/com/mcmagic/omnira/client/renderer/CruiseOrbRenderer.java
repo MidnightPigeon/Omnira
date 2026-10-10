@@ -72,7 +72,7 @@ public final class CruiseOrbRenderer extends EntityRenderer<CruiseOrbEntity> {
                                  MultiBufferSource buffers, int light) {
         pose.pushPose();
         pose.mulPose(Axis.YP.rotationDegrees(-net.minecraft.util.Mth.rotLerp(partial,entity.yRotO,entity.getYRot())));
-        renderOrb(entity, pose, VehicleGlassBuffers.wrap(buffers), entity.level().getGameTime() + partial, partial, light,
+        renderOrb(entity, pose, buffers, entity.level().getGameTime() + partial, partial, light,
                 OverlayTexture.NO_OVERLAY);
         pose.popPose();
         super.render(entity, yaw, partial, pose, buffers, light);
@@ -81,8 +81,7 @@ public final class CruiseOrbRenderer extends EntityRenderer<CruiseOrbEntity> {
     private static void renderOrb(CruiseOrbEntity entity, PoseStack pose, MultiBufferSource buffers,
                                   double time, float partial, int light, int overlay) {
         // Match CrystalBallRenderer's fixed sorted batch, including custom spell-core items.
-        MultiBufferSource contents = type -> buffers.getBuffer(type == Sheets.translucentItemSheet()
-                ? CrystalGlassLayer.ATLAS : type);
+        MultiBufferSource contents = CrystalGlassLayer.contents(buffers);
         FLOOR.drawFloor(pose,buffers,time,entity!=null && entity.started(),entity!=null && entity.overloaded(),light,overlay);
         if (entity != null && entity.storage.hasGoldenToilet()) {
             GOLDEN_SEAT.drawOpaque(pose, buffers, GOLD, light, overlay);

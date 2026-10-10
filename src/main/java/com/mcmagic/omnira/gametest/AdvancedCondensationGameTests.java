@@ -18,6 +18,15 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_advanced_condensation")
 @PrefixGameTestTemplate(false)
 public final class AdvancedCondensationGameTests {
+    @GameTest(template="spell_arena",timeoutTicks=240)
+    public static void rebornLilyProducesOnePoint(GameTestHelper h){
+        var table=table(h);var p=player(h);var menu=new SimpleCondensationTableMenu(1,p.getInventory(),table);
+        table.setItem(0,new ItemStack(com.mcmagic.omnira.mire.MireContent.REBORN_ITEM.get()));
+        h.assertTrue(menu.clickMenuButton(p,0),"Lily condensation failed to start");
+        h.runAfterDelay(200,()->{
+            menu.broadcastChanges();h.assertTrue(table.getItem(0).is(ModItems.TIME_WARP_POINT.get())&&table.getItem(0).getCount()==1&&p.getData(ModAttachments.MANA).current()==200,"Lily output or mana incorrect");h.succeed();
+        });
+    }
     @GameTest(template="spell_arena")
     public static void crystalMaterialsAndSaplingGrowth(GameTestHelper h) {
         var recipe=h.getLevel().getRecipeManager().byKey(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","advanced_condensation_table")).orElseThrow().value();
@@ -37,6 +46,23 @@ public final class AdvancedCondensationGameTests {
         h.assertTrue(mature.getValue(net.minecraft.world.level.block.SaplingBlock.STAGE)==1 && mature.getShape(level,pos).bounds().maxY>early.maxY,"Sapling growth stage/outline not updated");
         sapling.advanceTree(level,pos,mature,net.minecraft.util.RandomSource.create(12));
         h.assertTrue(level.getBlockState(pos).is(DreamContent.SHADOW_LOG.get()),"3D sapling no longer grows a tree");h.succeed();
+    }
+    @GameTest(template="spell_arena",timeoutTicks=240)
+    public static void temporalMoteConsumesEightAndPlaces(GameTestHelper h){
+        var table=table(h);var p=player(h);var menu=new SimpleCondensationTableMenu(1,p.getInventory(),table);
+        p.getInventory().setItem(9,new ItemStack(ModItems.TIME_WARP_POINT.get(),10));menu.quickMoveStack(p,1);
+        h.assertTrue(table.getItem(0).getCount()==8&&p.getInventory().getItem(9).getCount()==2,"Eight-item input limit incorrect");
+        table.setItem(0,new ItemStack(ModItems.TIME_WARP_POINT.get(),7));h.assertTrue(!menu.canCondense(),"Seven points accepted");
+        table.setItem(0,new ItemStack(ModItems.TIME_WARP_POINT.get(),8));h.assertTrue(menu.clickMenuButton(p,0),"Eight-point condensation failed");
+        h.runAfterDelay(200,()->{
+            menu.broadcastChanges();h.assertTrue(table.getItem(0).is(ModItems.TEMPORAL_MOTE.get())&&table.getItem(0).getCount()==1,"Wrong mote result");
+            h.assertTrue(p.getData(ModAttachments.MANA).current()==200,"Wrong condensation mana debit");
+            var ground=table.getBlockPos().east(2);h.getLevel().setBlockAndUpdate(ground,net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+            p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,table.removeItem(0,1));
+            var hit=new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(ground),Direction.UP,ground,false);
+            var result=ModItems.TEMPORAL_MOTE.get().useOn(new net.minecraft.world.item.context.UseOnContext(p,net.minecraft.world.InteractionHand.MAIN_HAND,hit));
+            h.assertTrue(result.consumesAction()&&h.getLevel().getBlockState(ground.above()).is(ModBlocks.TEMPORAL_MOTE.get()),"Mote item failed placement");h.succeed();
+        });
     }
     private static AdvancedCondensationTableBlockEntity table(GameTestHelper h) {
         var p=h.absolutePos(new BlockPos(5,2,5));h.getLevel().setBlockAndUpdate(p,ModBlocks.ADVANCED_CONDENSATION_TABLE.get().defaultBlockState());

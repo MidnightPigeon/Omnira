@@ -4,6 +4,12 @@
   "icon": "omnira:arcane_assembly_table",
   "introduction": "introduction.json",
   "entries": [
+    "entries/crystal_furnace.json",
+    "entries/crystal_grindstone.json",
+    "entries/crystal_anvil.json",
+    "entries/infused_crystal_furnace.json",
+    "entries/infused_crystal_grindstone.json",
+    "entries/infused_crystal_anvil.json",
     "entries/simple_condensation_table.json",
     "entries/advanced_condensation_table.json",
     "entries/analysis_artisan_table.json",
@@ -12,16 +18,16 @@
     "entries/arcane_assembly_table.json",
     "entries/advanced_assembly_table.json",
     "entries/mana_engine.json",
+    "entries/spacetime_engine.json",
     "entries/spacetime_reverser.json",
-    "entries/liquid_crystal_ball.json",
-    "entries/resonance_core.json",
+    "entries/void_infuser.json",
     "entries/ritual_energy_core_crafting.json",
     "entries/advanced_ritual_energy_core_crafting.json",
     "entries/hyperdimensional_drill_machine_reference.json",
     "entries/split_time_sundial_guide_machine_reference.json",
     "entries/wonderland_poker_stand_guide_machine_reference.json",
     "entries/marisa_crystal_ball_guide_machine_reference.json",
-    "entries/crystal_ball_crafting.json"
+    "entries/rough_alchemy_cauldron_crafting.json"
   ],
   "chapters": []
 }

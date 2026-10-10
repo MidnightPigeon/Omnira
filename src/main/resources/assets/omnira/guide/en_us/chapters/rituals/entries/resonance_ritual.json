@@ -4,10 +4,10 @@
   "item": "omnira:resonance_terminal",
   "title": "Ritual of Resonance",
   "text": [
-    "Use the Ritual of Dreamseeking eight-pedestal 7x7 layout, with one Resonance Core on each pedestal. Use a Spacetime Knot on the central Ritual Energy Core. Only the knot is consumed; a terminal is ejected and the eight offerings, pedestals and ritual core remain.",
+    "Requires eight Crystal Pedestals, eight Resonance Cores and one Ritual Energy Core. Use a Spacetime Knot on the core. Only the knot is consumed; a terminal is ejected and all offerings, pedestals and the core remain.",
     "The reusable terminal links up to four containers. Sneak-use a core to link or unlink; use the terminal to choose a container, even across dimensions. Only the owner may access the network.",
-    "Transfers cost 100 mana per item or per 500 mB, without discounts. Fluid fees are prepaid. Removing the container, closing the menu or switching links interrupts transfer without refund.",
-    "Above a Marisa Crystal Ball, an unlinked core remains pale red and turns yellow when linked. Select that connection in the terminal and open the shop to trade from any distance or dimension without an extra mana fee. Daily goods and purchase limits remain shared with your direct shop visits.",
+    "Each successful terminal opening costs half your maximum mana, unaffected by cost reductions. Insufficient mana prevents opening; failed attempts and subsequent transfers cost nothing. Containers without an interface cannot be opened. Unbinding the node, removing the container or moving the terminal ends remote access.",
+    "Above a Marisa Crystal Ball, an unlinked core remains pale red and turns yellow when linked. Select that connection in the terminal and open the shop to trade from any distance or dimension. Opening the shop costs half your maximum mana; trades have no additional fee. Daily goods and purchase limits remain shared with your direct shop visits.",
     "Destroyed nodes automatically unlink. The standard terminal supports four links; advanced condensation upgrades it to six while retaining existing links."
   ],
   "recipes": false,

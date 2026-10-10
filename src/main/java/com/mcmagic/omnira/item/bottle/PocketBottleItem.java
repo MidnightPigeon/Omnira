@@ -55,15 +55,18 @@ public final class PocketBottleItem extends Item {
     @Override public InteractionResult useOn(UseOnContext context) {
         var player=context.getPlayer();var stack=context.getItemInHand();
         if(player==null) return InteractionResult.PASS;
-        if(!filled(stack) && context.getLevel().getBlockState(context.getClickedPos()).is(ModBlocks.TEMPORAL_MOTE.get())){
+        boolean spatial=context.getLevel().getBlockState(context.getClickedPos()).is(ModBlocks.SPATIAL_REMNANT.get());
+        if(!filled(stack) && (spatial||context.getLevel().getBlockState(context.getClickedPos()).is(ModBlocks.TEMPORAL_MOTE.get()))){
             if(!(context.getLevel() instanceof ServerLevel server))return InteractionResult.SUCCESS;
             var pos=context.getClickedPos();
             if(!player.mayBuild() || !server.mayInteract(player,pos))return InteractionResult.FAIL;
-            var data=new CompoundTag();data.putString("Kind","temporal_mote");
+            var data=new CompoundTag();data.putString("Kind",spatial?"spatial_remnant":"temporal_mote");
+            if(spatial&&server.getBlockEntity(pos) instanceof com.mcmagic.omnira.space.SpatialRemnantBlockEntity remnant)
+                data.putDouble("MovementDistance",remnant.distance());
             var id=BottleStorage.get(server).put(data);
             if(!server.removeBlock(pos,false)){BottleStorage.get(server).remove(id);return InteractionResult.FAIL;}
             stack.set(ModDataComponents.BOTTLE_CAPTURE,id);
-            stack.set(DataComponents.CUSTOM_NAME,Component.translatable("item.omnira.pocket_magic_bottle.mote"));
+            stack.set(DataComponents.CUSTOM_NAME,Component.translatable(spatial?"item.omnira.pocket_magic_bottle.spatial_remnant":"item.omnira.pocket_magic_bottle.mote"));
             return InteractionResult.SUCCESS;
         }
         if(filled(stack) || player.isShiftKeyDown()) return use(context.getLevel(),player,context.getHand()).getResult();
@@ -127,12 +130,14 @@ public final class PocketBottleItem extends Item {
         boolean released;
         boolean returnEmpty=false;
         Vec3 returnPoint=impact;
-        if(data.getString("Kind").equals("temporal_mote")) {
+        if(data.getString("Kind").equals("temporal_mote")||data.getString("Kind").equals("spatial_remnant")) {
             var pos=BlockPos.containing(impact);
             if(!level.getBlockState(pos).canBeReplaced())pos=pos.above();
             released=level.hasChunkAt(pos) && level.getWorldBorder().isWithinBounds(pos)
                     && level.getBlockState(pos).canBeReplaced()
-                    && level.setBlock(pos,ModBlocks.TEMPORAL_MOTE.get().defaultBlockState(),3);
+                    && level.setBlock(pos,(data.getString("Kind").equals("spatial_remnant")?ModBlocks.SPATIAL_REMNANT:ModBlocks.TEMPORAL_MOTE).get().defaultBlockState(),3);
+            if(released&&level.getBlockEntity(pos) instanceof com.mcmagic.omnira.space.SpatialRemnantBlockEntity remnant)
+                remnant.restoreDistance(data.getDouble("MovementDistance"));
         } else if(data.getString("Kind").equals("multiblock")) {
             var thrown=projectile==null?null:level.getEntity(projectile);
             Player actor=thrown instanceof ThrownPocketBottle bottle && bottle.getOwner() instanceof Player owner?owner:

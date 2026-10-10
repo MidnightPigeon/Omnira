@@ -1,4 +1,25 @@
 {
+  "omnira:chests/topological_labyrinth": {
+    "type": "minecraft:chest",
+    "pools": [
+      {"rolls": 1, "entries": [
+        {"type": "minecraft:loot_table", "value": "omnira:chests/calibration_materials"},
+        {"type": "minecraft:loot_table", "value": "omnira:chests/calibration_supplies"}
+      ]},
+      {"rolls": 1, "conditions": [{"condition": "minecraft:random_chance", "chance": 0.2}],
+       "entries": [{"type": "minecraft:item", "name": "omnira:mapping_stability_compass"}]}
+    ]
+  },
+  "omnira:archaeology/topological_labyrinth": {
+    "type": "minecraft:archaeology",
+    "pools": [{"rolls": 1, "entries": [
+      {"type": "minecraft:loot_table", "value": "omnira:archaeology/epoch_0"},
+      {"type": "minecraft:loot_table", "value": "omnira:archaeology/epoch_1"},
+      {"type": "minecraft:loot_table", "value": "omnira:archaeology/epoch_2"},
+      {"type": "minecraft:loot_table", "value": "omnira:archaeology/epoch_3"},
+      {"type": "minecraft:loot_table", "value": "omnira:archaeology/epoch_4"}
+    ]}]
+  },
   "omnira:chests/apprentice_hut": {
     "type": "minecraft:chest",
     "pools": [
@@ -328,15 +349,11 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
-            "weight": 4,
+            "weight": 2,
             "functions": [
               {
                 "function": "minecraft:set_count",
-                "count": {
-                  "type": "minecraft:uniform",
-                  "min": 1,
-                  "max": 3
-                }
+                "count": 1
               }
             ]
           },
@@ -373,7 +390,7 @@
           {
             "type": "minecraft:item",
             "name": "omnira:time_flower",
-            "weight": 4
+            "weight": 6
           }
         ]
       },
@@ -447,12 +464,18 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
-            "weight": 3
+            "weight": 1,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": 1
+              }
+            ]
           },
           {
             "type": "minecraft:item",
             "name": "omnira:time_flower",
-            "weight": 3
+            "weight": 5
           }
         ]
       },
@@ -543,21 +566,6 @@
             "weight": 1
           }
         ]
-      },
-      {
-        "rolls": 1,
-        "entries": [
-          {
-            "type": "minecraft:item",
-            "name": "omnira:damaged_research_facility"
-          }
-        ],
-        "conditions": [
-          {
-            "condition": "minecraft:random_chance",
-            "chance": 0.2
-          }
-        ]
       }
     ]
   },
@@ -628,21 +636,6 @@
             "weight": 1
           }
         ]
-      },
-      {
-        "rolls": 1,
-        "conditions": [
-          {
-            "condition": "minecraft:random_chance",
-            "chance": 0.2
-          }
-        ],
-        "entries": [
-          {
-            "type": "minecraft:item",
-            "name": "omnira:damaged_research_facility"
-          }
-        ]
       }
     ]
   },
@@ -674,15 +667,11 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
-            "weight": 2,
+            "weight": 1,
             "functions": [
               {
                 "function": "minecraft:set_count",
-                "count": {
-                  "type": "minecraft:uniform",
-                  "min": 1,
-                  "max": 3
-                }
+                "count": 1
               }
             ]
           },
@@ -715,6 +704,11 @@
                 }
               }
             ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:time_seed",
+            "weight": 1
           }
         ]
       },
@@ -910,7 +904,7 @@
           {
             "type": "minecraft:item",
             "name": "omnira:time_flower",
-            "weight": 4,
+            "weight": 5,
             "functions": [
               {
                 "function": "minecraft:set_count",
@@ -955,15 +949,11 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
-            "weight": 2,
+            "weight": 1,
             "functions": [
               {
                 "function": "minecraft:set_count",
-                "count": {
-                  "type": "minecraft:uniform",
-                  "min": 1,
-                  "max": 2
-                }
+                "count": 1
               }
             ]
           },
@@ -1035,6 +1025,18 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": 1
+              }
+            ],
+            "weight": 1
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 3,
             "functions": [
               {
                 "function": "minecraft:set_count",
@@ -1335,12 +1337,18 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
-            "weight": 2
+            "weight": 1,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": 1
+              }
+            ]
           },
           {
             "type": "minecraft:item",
             "name": "omnira:time_seed",
-            "weight": 1
+            "weight": 2
           }
         ]
       },
@@ -1421,6 +1429,18 @@
             "functions": [
               {
                 "function": "minecraft:set_count",
+                "count": 1
+              }
+            ],
+            "weight": 1
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 3,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
                 "count": {
                   "type": "minecraft:uniform",
                   "min": 2,
@@ -1482,21 +1502,6 @@
             "name": "minecraft:feather"
           }
         ]
-      },
-      {
-        "rolls": 1,
-        "entries": [
-          {
-            "type": "minecraft:item",
-            "name": "omnira:damaged_research_facility"
-          }
-        ],
-        "conditions": [
-          {
-            "condition": "minecraft:random_chance",
-            "chance": 0.2
-          }
-        ]
       }
     ]
   },
@@ -1528,6 +1533,18 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": 1
+              }
+            ],
+            "weight": 1
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 3,
             "functions": [
               {
                 "function": "minecraft:set_count",
@@ -1636,21 +1653,6 @@
             "name": "omnira:peaceful_memory_cube"
           }
         ]
-      },
-      {
-        "rolls": 1,
-        "entries": [
-          {
-            "type": "minecraft:item",
-            "name": "omnira:damaged_research_facility"
-          }
-        ],
-        "conditions": [
-          {
-            "condition": "minecraft:random_chance",
-            "chance": 0.2
-          }
-        ]
       }
     ]
   },
@@ -1712,12 +1714,18 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
-            "weight": 2
+            "weight": 1,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": 1
+              }
+            ]
           },
           {
             "type": "minecraft:item",
             "name": "omnira:time_seed",
-            "weight": 1
+            "weight": 2
           }
         ]
       },
@@ -2500,12 +2508,17 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
-            "weight": 222
+            "weight": 74
           },
           {
             "type": "minecraft:item",
             "name": "omnira:time_microcore",
             "weight": 37
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 148
           }
         ]
       }
@@ -2530,12 +2543,17 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
-            "weight": 12
+            "weight": 4
           },
           {
             "type": "minecraft:item",
             "name": "omnira:time_microcore",
             "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 8
           }
         ]
       }
@@ -2560,12 +2578,17 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
-            "weight": 12
+            "weight": 4
           },
           {
             "type": "minecraft:item",
             "name": "omnira:time_microcore",
             "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 8
           }
         ]
       }
@@ -2590,12 +2613,17 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
-            "weight": 12
+            "weight": 4
           },
           {
             "type": "minecraft:item",
             "name": "omnira:time_microcore",
             "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 8
           }
         ]
       }
@@ -2620,12 +2648,17 @@
           {
             "type": "minecraft:item",
             "name": "omnira:paradox_dust",
-            "weight": 12
+            "weight": 4
           },
           {
             "type": "minecraft:item",
             "name": "omnira:time_microcore",
             "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 8
           }
         ]
       }
@@ -2766,6 +2799,564 @@
             "type": "minecraft:item",
             "name": "omnira:time_microcore",
             "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:chests/fold_observatory_lower": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": {
+          "type": "minecraft:uniform",
+          "min": 3,
+          "max": 5
+        },
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 5,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 4,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 4
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 5,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_warp_point",
+            "weight": 2,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 2
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_microcore",
+            "weight": 1,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 1
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:chests/fold_observatory_upper": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": {
+          "type": "minecraft:uniform",
+          "min": 3,
+          "max": 5
+        },
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 5,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 4,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 4
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 5,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_warp_point",
+            "weight": 2,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 2
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_microcore",
+            "weight": 1,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_remnant"
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:fishing/starflow_fish": {
+    "type": "minecraft:fishing",
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:star_jellyfish",
+            "weight": 120
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 12
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:dream_crystal_shard",
+            "weight": 8
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:fishing/starflow_junk": {
+    "type": "minecraft:fishing",
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:paradox_dust",
+            "weight": 15
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 83
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:life_ender",
+            "weight": 2
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:fishing/starflow_treasure": {
+    "type": "minecraft:fishing",
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_warp_point",
+            "weight": 92
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:book",
+            "weight": 8,
+            "functions": [
+              {
+                "function": "minecraft:enchant_randomly"
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:dream_spell_core",
+            "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_microcore",
+            "weight": 2
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:fishing/void_starflow": {
+    "type": "minecraft:fishing",
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:loot_table",
+            "value": "omnira:fishing/starflow_fish",
+            "weight": 85,
+            "quality": -1
+          },
+          {
+            "type": "minecraft:loot_table",
+            "value": "omnira:fishing/starflow_junk",
+            "weight": 10,
+            "quality": -2
+          },
+          {
+            "type": "minecraft:loot_table",
+            "value": "omnira:fishing/starflow_treasure",
+            "weight": 5,
+            "quality": 2
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:chests/void_lighthouse": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": {
+          "type": "minecraft:uniform",
+          "min": 3,
+          "max": 5
+        },
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:resonance_crystal",
+            "weight": 5,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 4
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 5,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 4,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 4
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 3
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_warp_point",
+            "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_microcore",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:voyager_violin"
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:chests/calibration_materials": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": {
+          "type": "minecraft:uniform",
+          "min": 4,
+          "max": 6
+        },
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:deflection_crystal",
+            "weight": 8,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 4,
+                  "max": 10
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 6,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 3,
+                  "max": 7
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 5,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 3,
+                  "max": 6
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_microcore",
+            "weight": 1,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 1
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:chests/calibration_supplies": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": {
+          "type": "minecraft:uniform",
+          "min": 4,
+          "max": 6
+        },
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spiritual_crystal",
+            "weight": 6,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 4,
+                  "max": 8
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 4,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 4
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:resonance_crystal",
+            "weight": 4,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 4
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:deflection_crystal",
+            "weight": 5,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 3,
+                  "max": 6
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_warp_point",
+            "weight": 1,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 1
+                }
+              }
+            ]
           }
         ]
       }

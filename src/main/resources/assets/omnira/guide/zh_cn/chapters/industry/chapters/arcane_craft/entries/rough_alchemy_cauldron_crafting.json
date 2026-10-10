@@ -1,0 +1,15 @@
+{
+  "id": "rough_alchemy_cauldron_crafting",
+  "title": "粗糙炼金釜制作",
+  "item": "omnira:rough_alchemy_cauldron",
+  "recipes": true,
+  "text": [
+    "用八枚灵性水晶环绕炼药锅合成。使用方式见炼金器械。"
+  ],
+  "links": [
+    {
+      "target": "rough_alchemy_cauldron",
+      "label": "粗糙炼金釜"
+    }
+  ]
+}

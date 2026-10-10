@@ -1,0 +1,8 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "surface": "omnira:block/infused_crystal_block",
+    "particle": "omnira:block/infused_crystal_block"
+  },
+  "elements": []
+}

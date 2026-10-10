@@ -1,0 +1,11 @@
+{
+  "id": "create_integration",
+  "title": "Create",
+  "item": "omnira:mana_engine",
+  "recipes": false,
+  "text": [
+    "Mana Engines provide rotation and stress capacity to Create networks. Connect to the shaft output face and inspect speed, capacity and fuel status on the engine panel.",
+    "Machines occupy part of a network's stress capacity rather than consuming stress as fuel. Large Alchemical Reaction Pool occupancy and efficiency scale with shaft RPM; Assembly Tables, Infused Crystal Furnaces and Infused Crystal Anvils retain fixed occupancy and processing speed. Crystal and Infused Crystal Casings support kinetic encasing and wrench-controlled shaft interfaces; Spacetime Ports connect real shaft interfaces even across different orientations."
+  ],
+  "links": []
+}

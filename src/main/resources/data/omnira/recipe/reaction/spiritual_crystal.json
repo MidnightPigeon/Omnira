@@ -1,0 +1,5 @@
+{
+  "type": "omnira:reaction",
+  "support": {"item": "omnira:primordial_spell_core"},
+  "results": [{"id": "omnira:spiritual_crystal", "count": 1}]
+}

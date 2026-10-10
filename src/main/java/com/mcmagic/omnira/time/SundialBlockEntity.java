@@ -32,9 +32,18 @@ public final class SundialBlockEntity extends CrystalProcessingTableBlockEntity 
     public void cycle(int step){
         var choices=SundialTimeline.choices(getItem(0));
         if(choices.size()<2||Math.floorMod(step,choices.size())==0)return;
-        selection=Math.floorMod(selection+step,choices.size());
+        select(choices.get(Math.floorMod(selection+step,choices.size())));
+    }
+    public boolean select(ItemStack chosen){
+        var choices=SundialTimeline.choices(getItem(0));
+        int index=-1;
+        for(int i=0;i<choices.size();i++)if(ItemStack.isSameItemSameComponents(choices.get(i),chosen)){index=i;break;}
+        if(index<0)return false;
+        if(index==Math.floorMod(selection,choices.size()))return true;
+        selection=index;
         progress=0;started=ItemStack.EMPTY;target=ItemStack.EMPTY;
         start();setChanged();
+        return true;
     }
     public boolean start(){
         if(progress>0||energy<COST||getItem(0).isEmpty())return false;

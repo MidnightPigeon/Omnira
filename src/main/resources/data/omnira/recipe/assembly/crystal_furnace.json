@@ -1,0 +1,30 @@
+{
+  "type": "omnira:assembly",
+  "slots": [
+    {
+      "item": "omnira:crystal_casing"
+    },
+    {
+      "item": "omnira:crystal_casing"
+    },
+    {
+      "item": "omnira:crystal_casing"
+    },
+    {
+      "item": "omnira:crystal_casing"
+    },
+    {
+      "item": "omnira:crystal_casing"
+    },
+    {
+      "item": "omnira:crystal_casing"
+    },
+    {
+      "item": "minecraft:furnace"
+    }
+  ],
+  "result": {
+    "id": "omnira:crystal_furnace",
+    "count": 1
+  }
+}

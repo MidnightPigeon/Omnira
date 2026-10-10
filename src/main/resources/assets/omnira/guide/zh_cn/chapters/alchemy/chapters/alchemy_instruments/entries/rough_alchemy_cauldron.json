@@ -1,0 +1,20 @@
+{
+  "id": "rough_alchemy_cauldron",
+  "title": "粗糙炼金釜",
+  "item": "omnira:rough_alchemy_cauldron",
+  "text": [
+    "敞口水晶釜可盛装4 B单一液体，用桶或液体容器存取。手持物品右键放入，最多四种、每种一组；空手右键取出。",
+    "有液体时物品浮于液面，无液体时停在釜底。拆除会散落物品，液体消失。对营火使用釜，可搭成原始反应釜。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "rough_alchemy_cauldron_crafting",
+      "label": "制作粗糙炼金釜"
+    },
+    {
+      "target": "primitive_reaction_cauldron",
+      "label": "原始反应釜"
+    }
+  ]
+}

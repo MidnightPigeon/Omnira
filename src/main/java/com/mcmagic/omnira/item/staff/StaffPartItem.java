@@ -14,11 +14,13 @@ public final class StaffPartItem extends Item {
         if(part.role()==StaffPart.Role.TIP) lines.add(Component.translatable("tooltip.omnira.staff.rune_capacity",part.runeSlots()).withStyle(ChatFormatting.GRAY));
         if(part.role()==StaffPart.Role.UPGRADE) lines.add(Component.translatable("tooltip.omnira.staff.slot_type."+part.upgradeSlot().getSerializedName()).withStyle(ChatFormatting.GRAY));
         if(part.power()!=0) lines.add(Component.translatable("tooltip.omnira.staff.power",Math.round(part.power()*100)).withStyle(ChatFormatting.AQUA));
+        if(part.regeneration()!=0) lines.add(Component.translatable("tooltip.omnira.staff.regeneration",Math.round(part.regeneration()*100)).withStyle(ChatFormatting.AQUA));
         if(part.reduction()!=0) lines.add(Component.translatable("tooltip.omnira.staff.reduction",format(part.reduction())).withStyle(ChatFormatting.AQUA));
         if(part.speed()!=0) lines.add(Component.translatable("tooltip.omnira.staff.speed",Math.round(part.speed()*100)).withStyle(ChatFormatting.AQUA));
         if(part.range()!=0) lines.add(Component.translatable("tooltip.omnira.staff.range").withStyle(ChatFormatting.AQUA));
         if(part.cooldownReduction()!=0) lines.add(Component.translatable("tooltip.omnira.staff.cooldown_reduction",Math.round(part.cooldownReduction()*100)).withStyle(ChatFormatting.AQUA));
         if(part.role()==StaffPart.Role.TIP) {
+            if(part.independentCooldown()) lines.add(Component.translatable("tooltip.omnira.staff.independent_cooldown").withStyle(ChatFormatting.AQUA));
             lines.add(Component.translatable("tooltip.omnira.staff.cycle",part.shots(),format(part.cooldownTicks()/20D)).withStyle(ChatFormatting.GRAY));
             if(part.shots()>1) lines.add(Component.translatable("tooltip.omnira.staff.interval","0.3").withStyle(ChatFormatting.GRAY));
         }

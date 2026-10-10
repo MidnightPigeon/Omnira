@@ -21,8 +21,19 @@ public final class MillTreasureGameTests {
             new MillTreasures.Site(p.south(3).east(2),true,"omnira:chests/rusty_lake_mill_echo"));}
     private static CrystalBallBlockEntity ball(GameTestHelper h,BlockPos p){return (CrystalBallBlockEntity)h.getLevel().getBlockEntity(p);}
     private static MillTreasures setup(GameTestHelper h,BlockPos p){
+        var biome=h.getLevel().registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.BIOME).getHolderOrThrow(com.mcmagic.omnira.mire.MireCycle.BIOME);
+        for(int cx=(p.getX()>>4)-1;cx<=(p.getX()>>4)+1;cx++)for(int cz=(p.getZ()>>4)-1;cz<=(p.getZ()>>4)+1;cz++)h.getLevel().getChunk(cx,cz).fillBiomesFromNoise((x,y,z,s)->biome,h.getLevel().getChunkSource().randomState().sampler());
         var level=h.getLevel();for(var s:sites(p))level.setBlockAndUpdate(s.pos(),s.reversed()?Blocks.AIR.defaultBlockState():ModBlocks.CRYSTAL_BALL.get().defaultBlockState());
         var data=new MillTreasures();h.assertTrue(data.register(level,p,sites(p)),"Registration failed");h.assertTrue(!data.register(level,p,sites(p)),"Duplicate registration reset treasures");return data;
+    }
+    @GameTest(template="spell_arena")
+    public static void outsideMireDoesNotSwitch(GameTestHelper h){
+        var l=h.getLevel();var p=h.absolutePos(new BlockPos(5,4,5));var data=setup(h,p);
+        var plain=l.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.BIOME).getHolderOrThrow(net.minecraft.world.level.biome.Biomes.PLAINS);
+        for(int cx=(p.getX()>>4)-1;cx<=(p.getX()>>4)+1;cx++)for(int cz=(p.getZ()>>4)-1;cz<=(p.getZ()>>4)+1;cz++)l.getChunk(cx,cz).fillBiomesFromNoise((x,y,z,s)->plain,l.getChunkSource().randomState().sampler());
+        data.pulse(l,6000);
+        h.assertTrue(ball(h,p)!=null&&ball(h,p.east(2))!=null,"Ordinary treasure outside mire disappeared");
+        h.assertTrue(l.isEmptyBlock(p.south(3))&&l.isEmptyBlock(p.south(3).east(2)),"Reversed treasure appeared outside mire");h.succeed();
     }
     @GameTest(template="spell_arena")
     public static void phasePersistenceAndFiniteLoot(GameTestHelper h){

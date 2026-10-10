@@ -1,0 +1,9 @@
+{
+  "id": "crystal_furnace",
+  "item": "omnira:crystal_furnace",
+  "title": "水晶熔炉",
+  "text": [
+    "用熔炉与六个水晶机壳装配而成。使用燃料加工普通熔炼配方，速度为原版熔炉的两倍。一枚注灵水晶可烧制16件普通产物。"
+  ],
+  "recipes": true
+}

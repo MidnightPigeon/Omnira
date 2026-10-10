@@ -1,5 +1,17 @@
 {
   "sources": [
+    {"type":"minecraft:single","resource":"omnira:entity/night_heron_feathers"},
+    {"type":"minecraft:single","resource":"omnira:models/armor/crystal_armor_layer_1"},
+    {"type":"minecraft:single","resource":"omnira:models/armor/crystal_armor_layer_2"},
+    {"type":"minecraft:single","resource":"omnira:entity/archaeopteryx_spirit"},
+    {"type":"minecraft:single","resource":"omnira:entity/star_jellyfish"},
+    {"type":"minecraft:single","resource":"omnira:entity/light_spirit"},
+    {"type":"minecraft:single","resource":"omnira:entity/shadow_ghost"},
+    {"type":"minecraft:single","resource":"omnira:entity/shadow_mist"},
+    {
+      "type": "minecraft:single",
+      "resource": "omnira:entity/solid_white"
+    },
     {
       "type": "minecraft:single",
       "resource": "omnira:entity/crystal_broom"

@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "omnira:safe_shaped",
   "category": "equipment",
   "pattern": ["CIC", "DPD", "CIC"],
   "key": {

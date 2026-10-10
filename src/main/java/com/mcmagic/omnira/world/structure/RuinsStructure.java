@@ -25,6 +25,22 @@ public final class RuinsStructure extends Structure {
     public static final java.util.function.Supplier<StructurePieceType> COURTYARD_PIECE=
             PIECES.register("radiant_courtyard",()->RadiantCourtyardPiece::new);
     private final int variant;
+    public static final java.util.function.Supplier<StructureType<com.mcmagic.omnira.space.abyss.SkyreachStructure>> SKYREACH_TYPE=
+            TYPES.register("skyreach_tower",()->()->com.mcmagic.omnira.space.abyss.SkyreachStructure.CODEC);
+    public static final java.util.function.Supplier<StructurePieceType> SKYREACH_PIECE=
+            PIECES.register("skyreach_tower",()->com.mcmagic.omnira.space.abyss.SkyreachPiece::new);
+    public static final java.util.function.Supplier<StructureType<com.mcmagic.omnira.space.geodes.CalibrationStructure>> CALIBRATION_TYPE=
+            TYPES.register("calibration_station",()->()->com.mcmagic.omnira.space.geodes.CalibrationStructure.CODEC);
+    public static final java.util.function.Supplier<StructurePieceType> CALIBRATION_PIECE=
+            PIECES.register("calibration_station",()->com.mcmagic.omnira.space.geodes.CalibrationPiece::new);
+    public static final java.util.function.Supplier<StructureType<com.mcmagic.omnira.space.FoldObservatoryStructure>> FOLD_OBSERVATORY_TYPE=
+            TYPES.register("fold_observatory",()->()->com.mcmagic.omnira.space.FoldObservatoryStructure.CODEC);
+    public static final java.util.function.Supplier<StructurePieceType> FOLD_OBSERVATORY_PIECE=
+            PIECES.register("fold_observatory",()->com.mcmagic.omnira.space.FoldObservatoryPiece::new);
+    public static final java.util.function.Supplier<StructureType<com.mcmagic.omnira.space.sea.VoidLighthouseStructure>> LIGHTHOUSE_TYPE=
+            TYPES.register("void_lighthouse",()->()->com.mcmagic.omnira.space.sea.VoidLighthouseStructure.CODEC);
+    public static final java.util.function.Supplier<StructurePieceType> LIGHTHOUSE_PIECE=
+            PIECES.register("void_lighthouse",()->com.mcmagic.omnira.space.sea.VoidLighthousePiece::new);
     public static final java.util.function.Supplier<StructureType<com.mcmagic.omnira.archaeology.DrillingPlatformStructure>> DRILL_PLATFORM_TYPE=
             TYPES.register("hyperdimensional_drilling_platform",()->()->com.mcmagic.omnira.archaeology.DrillingPlatformStructure.CODEC);
     public static final java.util.function.Supplier<StructurePieceType> DRILL_PLATFORM_PIECE=

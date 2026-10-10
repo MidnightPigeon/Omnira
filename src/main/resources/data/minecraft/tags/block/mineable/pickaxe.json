@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "omnira:rough_alchemical_energy_core",
+    "omnira:enhanced_alchemical_energy_core",
     "omnira:memory_cube",
     "omnira:solidified_light_crystal_core_stairs",
     "omnira:solidified_light_crystal_core_slab",
@@ -89,6 +91,8 @@
     "omnira:primordial_fossil_rock",
     "omnira:hyperdimensional_drill",
     "omnira:spacetime_reverser",
+    "omnira:void_infuser",
+    "omnira:dense_void_mass",
     "omnira:time_eroded_bricks",
     "omnira:time_eroded_brick_stairs",
     "omnira:time_eroded_brick_slab",
@@ -107,6 +111,19 @@
     "omnira:infused_crystal_casing",
     "omnira:spatial_crystal_block",
     "omnira:spatial_crystal_stairs",
-    "omnira:spatial_crystal_slab"
+    "omnira:spatial_crystal_slab",
+    "omnira:infused_crystal_block",
+    "omnira:infused_crystal_stairs",
+    "omnira:infused_crystal_slab",
+    "omnira:deflection_crystal_block",
+    "omnira:deflection_crystal_matrix",
+    "omnira:small_deflection_bud",
+    "omnira:medium_deflection_bud",
+    "omnira:large_deflection_bud",
+    "omnira:deflection_crystal_cluster",
+    "omnira:spatial_stability_anchor",
+    "omnira:dormant_spatial_stability_anchor",
+    "omnira:phase_crystal_block",
+    "omnira:phase_crystal_cluster"
   ]
 }

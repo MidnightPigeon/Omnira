@@ -30,8 +30,8 @@ public final class OrbUpgradeMenu extends AbstractContainerMenu {
             @Override public boolean mayPickup(Player player){return false;}
             @Override public boolean mayPlace(ItemStack stack){return false;}
         });
-        for(int row=0;row<3;row++)for(int col=0;col<9;col++)inventorySlot(inventory,9+row*9+col,8+18*col,113+18*row);
-        for(int col=0;col<9;col++)inventorySlot(inventory,col,8+18*col,171);
+        for(int row=0;row<3;row++)for(int col=0;col<9;col++)inventorySlot(inventory,9+row*9+col,8+18*col,133+18*row);
+        for(int col=0;col<9;col++)inventorySlot(inventory,col,8+18*col,191);
         addDataSlot(whitelist);addDataSlot(directions);
         broadcastChanges();
     }
@@ -61,7 +61,7 @@ public final class OrbUpgradeMenu extends AbstractContainerMenu {
         if(player.level().isClientSide || !stillValid(player))return false;
         var tag=OrbUpgrades.settings(bound);
         if(id==0)tag.putBoolean("Whitelist",!tag.getBoolean("Whitelist"));
-        else if(id>=1 && id<=(intake?4:2))
+        else if(id>=1 && id<=6)
             tag.putInt("Directions",directions.get()^(1<<(id-1)));
         else return false;
         bound.set(DataComponents.CUSTOM_DATA,CustomData.of(tag));

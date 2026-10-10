@@ -16,9 +16,10 @@ import java.util.List;
 @PrefixGameTestTemplate(false)
 public final class MireTreeTrackingGameTests {
     private static BlockPos setup(GameTestHelper h){
-        var level=h.getLevel();var p=h.absolutePos(new BlockPos(5,3,5));
+        var level=h.getLevel();var p=h.absolutePos(new BlockPos(4101,3,4101));
         var biome=level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(MireCycle.BIOME);
-        level.getChunkAt(p).fillBiomesFromNoise((x,y,z,s)->biome,level.getChunkSource().randomState().sampler());
+        for(int cx=(p.getX()>>4)-1;cx<=(p.getX()>>4)+1;cx++)for(int cz=(p.getZ()>>4)-1;cz<=(p.getZ()>>4)+1;cz++)
+            level.getChunk(cx,cz).fillBiomesFromNoise((x,y,z,s)->biome,level.getChunkSource().randomState().sampler());
         return p;
     }
     private static boolean tracked(GameTestHelper h,BlockPos p){
@@ -62,14 +63,15 @@ public final class MireTreeTrackingGameTests {
         h.runAfterDelay(2,()->{
             h.assertTrue(tracked(h,p),"Vanilla feature not registered");
             var data=MireTrees.get(l);data.pulse(l,6000);
-            h.assertTrue(l.getBlockState(p).is(Blocks.OAK_SAPLING),"Wrong vanilla sapling");
+            h.assertTrue(l.getBlockState(p).is(Blocks.OAK_SAPLING),"Wrong vanilla sapling: "+l.getBlockState(p)+" records="+data.save(new CompoundTag(),l.registryAccess()));
             ((SaplingBlock)Blocks.OAK_SAPLING).advanceTree(l,p,l.getBlockState(p),l.random);
             h.assertTrue(l.getBlockState(p).is(Blocks.OAK_SAPLING),"Rewound sapling grew early");
             data.pulse(l,7200);h.assertTrue(l.getBlockState(p).is(Blocks.OAK_LOG),"Oak not restored");
             l.setBlockAndUpdate(p,Blocks.AIR.defaultBlockState());
             var shadowRoot=p.offset(10,0,0);
             var biome=l.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(MireCycle.BIOME);
-            l.getChunkAt(shadowRoot).fillBiomesFromNoise((x,y,z,s)->biome,l.getChunkSource().randomState().sampler());
+            for(int cx=(shadowRoot.getX()>>4)-1;cx<=(shadowRoot.getX()>>4)+1;cx++)for(int cz=(shadowRoot.getZ()>>4)-1;cz<=(shadowRoot.getZ()>>4)+1;cz++)
+                l.getChunk(cx,cz).fillBiomesFromNoise((x,y,z,s)->biome,l.getChunkSource().randomState().sampler());
             l.setBlockAndUpdate(shadowRoot.below(),Blocks.GRASS_BLOCK.defaultBlockState());
             var shadow=features.getHolderOrThrow(ResourceKey.create(Registries.CONFIGURED_FEATURE,ResourceLocation.parse("omnira:shadow_tree"))).value();
             h.assertTrue(shadow.place(l,l.getChunkSource().getGenerator(),l.random,shadowRoot),"Shadow feature failed");

@@ -4,8 +4,19 @@
   "icon": "omnira:spatial_crystal_shard",
   "introduction": "introduction.json",
   "entries": [
+    "entries/phase_crystal_guide.json",
+    "entries/deflection_crystal_guide.json",
+    "entries/space_warp_point_guide.json",
     "entries/spatial_crystal_guide.json",
-    "entries/spatial_growth_guide.json"
+    "entries/spatial_growth_guide.json",
+    "entries/fold_gate_guide.json",
+    "entries/void_starflow_guide.json",
+    "entries/void_crevice_guide.json",
+    "entries/star_sea_creatures_guide.json",
+    "entries/stardust_guide.json",
+    "entries/voyager_violin_source.json",
+    "entries/dense_void_mass_guide.json",
+    "entries/mapping_stability_compass_guide.json"
   ],
   "chapters": []
 }

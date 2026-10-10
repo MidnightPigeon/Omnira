@@ -1,0 +1,24 @@
+{
+  "id": "star_sea_creatures_guide",
+  "title": "Starsea Creatures",
+  "item": "omnira:star_jellyfish",
+  "recipes": false,
+  "text": [
+    "Star Jellyfish have 6 health and retaliate by pursuing their attacker, charging and bursting for 8 true damage within 5 blocks without harming themselves. Void Mantas have 40 health and retaliate in melee for 10 true damage. Neither proactively attacks players.",
+    "Both fly and swim. They prefer reachable waterlike pools within 16 blocks with at least a continuous 3x3x2 volume, and avoid Decayed Timeflow. Without suitable water, they wander roughly 2 to 6 blocks above the ground. Jellyfish swim vertically and horizontally; mantas remain level.",
+    "Holding a Spatial Crystal in either hand attracts nearby mantas without interrupting riding, staying or retaliation. Each crystal has a one-in-three chance to tame a manta. Its owner can ride without a saddle; sneak-use toggles following or staying. Riding grants water breathing and starflow protection. Look up or down while moving to change altitude, jump to rise, and sneak to dismount.",
+    "Both are space creatures, protected against spatial biome hazards and starflow, but not against time hazards. They evade physical attacks, including melee attacks and arrows, but cannot evade spell projectiles.",
+    "A Star Jellyfish drops one Star Jellyfish item on death. A Void Manta drops one Unstable Spacetime Aggregate.",
+    "Star Jellyfish can be eaten, restoring 4 hunger and attempting a random teleport like chorus fruit. One also reacts into one Unstable Spacetime Aggregate in either reaction vessel without liquid or a catalyst, taking 100 seconds."
+  ],
+  "links": [
+    {
+      "target": "void_starflow_guide",
+      "label": "Void Starflow"
+    },
+    {
+      "target": "void_crevice_guide",
+      "label": "Void Crevice"
+    }
+  ]
+}

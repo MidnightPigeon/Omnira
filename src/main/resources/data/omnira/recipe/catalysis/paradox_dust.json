@@ -1,0 +1,18 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": {
+    "item": "omnira:encapsulated_stable_paradox_source"
+  },
+  "seed": {
+    "item": "omnira:paradox_dust"
+  },
+  "fluid": {
+    "id": "omnira:dilute_spacetime",
+    "amount": 500
+  },
+  "result": {
+    "id": "omnira:paradox_dust",
+    "count": 4
+  },
+  "stages": 4
+}

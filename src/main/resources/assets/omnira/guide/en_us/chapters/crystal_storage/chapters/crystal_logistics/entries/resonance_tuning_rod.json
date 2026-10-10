@@ -1,0 +1,20 @@
+{
+  "id": "resonance_tuning_rod",
+  "item": "omnira:resonance_tuning_rod",
+  "title": "Resonance Tuning Rod",
+  "recipes": true,
+  "text": [
+    "Assemble a Resonance Crystal with six Paradox Dust. Select two container nodes within 32 blocks. White particle rings send to black rings, preserving the nodes' original colors and terminal bindings.",
+    "After selecting the first end, use air or another block to cancel. Use either linked node to disconnect the whole transfer link. Holding the rod reveals lines; no mana is required.",
+    "Transfers move one item or 500 mB per second, selecting accepted contents in slot order. Intake and Output Upgrade filters do not affect tuning links; those upgrades independently move contents between adjacent containers.",
+    "Both ends must use separate storage. A complete large container supports one tuning output; other nodes may receive or bind terminals. If linked resonant orbs successfully join one network, the link is removed and will not return after splitting.",
+    "A durability-free weapon with 4 attack damage and 2 attack speed, supporting sword and axe combat enchantments. Use mature crops to harvest; crops normally destroyed by harvesting restart growth. Coffee, shadow berries, sweet berries and cave berries support Fortune.",
+    "Pumpkin and melon harvests break the fruit without resetting stems. Without Silk Touch, melons drop slices unaffected by Fortune; Silk Touch yields the whole melon."
+  ],
+  "links": [
+    {
+      "target": "resonance_core",
+      "label": "Resonance Nodes"
+    }
+  ]
+}

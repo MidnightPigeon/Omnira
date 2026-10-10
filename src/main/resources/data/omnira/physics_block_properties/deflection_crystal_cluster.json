@@ -1,0 +1,8 @@
+{
+  "selector": "omnira:deflection_crystal_cluster",
+  "priority": 2000,
+  "properties": {
+    "sable:mass": 0,
+    "sable:volume": 1
+  }
+}

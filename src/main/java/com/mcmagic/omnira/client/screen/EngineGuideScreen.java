@@ -22,7 +22,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 /** A client-only model stage. It never places blocks or runs a kinetic network. */
-public final class EngineGuideScreen extends Screen {
+public final class EngineGuideScreen extends ResponsiveScreen {
+    @Override protected int minimumWidth(){return 320;}
+    @Override protected int minimumHeight(){return 270;}
     private final Screen parent;
     private int stage,ticks;
     private boolean electrical,paused;
@@ -74,7 +76,7 @@ public final class EngineGuideScreen extends Screen {
     // This screen paints its own background; Screen.render must not blur the finished content.
     @Override public void renderBackground(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {}
 
-    @Override public void render(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
+    @Override protected void renderContent(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
         graphics.fill(0,0,width,height,0xF01C2228);
         graphics.drawCenteredString(font,title,width/2,12,0xFFF2F3EF);
         int sceneBottom=height-112;
@@ -117,7 +119,7 @@ public final class EngineGuideScreen extends Screen {
         pose.pushPose();pose.translate((width-column)/2F,y,0);pose.scale(textScale,textScale,1);
         for(int i=0;i<lines.size();i++) graphics.drawString(font,lines.get(i),0,i*10,0xFFE0E1DC,false);
         pose.popPose();
-        super.render(graphics,mouseX,mouseY,partialTick);
+        super.renderContent(graphics,mouseX,mouseY,partialTick);
     }
     @Override public boolean isPauseScreen() {return false;}
     @Override public void onClose() {minecraft.setScreen(parent);}

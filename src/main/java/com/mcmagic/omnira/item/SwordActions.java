@@ -31,6 +31,9 @@ public final class SwordActions {
         return player.getMainHandItem().getItem() instanceof RitualSwordItem && player.getOffhandItem().getItem() instanceof StaffItem
                 ?com.mcmagic.omnira.item.staff.StaffAssembly.of(player.getOffhandItem()).stats().rangeMultiplier():1;
     }
+    public static double specialReachMultiplier(net.minecraft.world.entity.player.Player player){
+        return reachMultiplier(player)+(player.getMainHandItem().getItem() instanceof RitualSwordItem sword?.25*sword.upgradeLevel:0);
+    }
     public static float damage(net.minecraft.world.entity.player.Player p,float base) {return POWER_STRIKE.get()==p?base*2:base;}
     public static boolean eligible(ServerPlayer p) {return p.isAlive() && !p.isSpectator() && !p.isUsingItem() && !LifeEnderItem.held(p)
             && !weaponUnavailable(p) && p.containerMenu==p.inventoryMenu && p.getMainHandItem().getItem() instanceof RitualSwordItem;}

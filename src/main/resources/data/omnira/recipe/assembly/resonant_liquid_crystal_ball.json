@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "slots": [
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:resonance_crystal"
+    },
+    {
+      "item": "omnira:liquid_crystal_ball"
+    }
+  ],
+  "result": {
+    "id": "omnira:resonant_liquid_crystal_ball",
+    "count": 1
+  },
+  "operation": "resonant_orb"
+}

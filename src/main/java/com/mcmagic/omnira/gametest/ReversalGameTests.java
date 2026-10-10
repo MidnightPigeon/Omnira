@@ -12,6 +12,13 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @GameTestHolder("omnira_reversal")
 @PrefixGameTestTemplate(false)
 public final class ReversalGameTests {
+    @GameTest(template="spell_arena") public static void aggregateReturnsEightPoints(GameTestHelper h){
+        var pos=h.absolutePos(new BlockPos(3,3,3));h.getLevel().setBlockAndUpdate(pos,ReversalContent.MACHINE.get().defaultBlockState());
+        var be=(ReversalBlockEntity)h.getLevel().getBlockEntity(pos);
+        be.setItem(0,new ItemStack(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get()));be.setItem(2,new ItemStack(ModItems.TIME_WARP_POINT.get()));
+        for(int i=0;i<100;i++)be.tick();
+        h.assertTrue(be.getItem(0).isEmpty()&&be.getItem(1).is(ModItems.TIME_WARP_POINT.get())&&be.getItem(1).getCount()==8&&be.energy()==3,"Aggregate reversal result or energy incorrect");h.succeed();
+    }
     @GameTest(template="spell_arena") public static void repairFacility(GameTestHelper h){
         var pos=h.absolutePos(new BlockPos(3,3,3));h.getLevel().setBlockAndUpdate(pos,ReversalContent.MACHINE.get().defaultBlockState());
         var be=(ReversalBlockEntity)h.getLevel().getBlockEntity(pos);

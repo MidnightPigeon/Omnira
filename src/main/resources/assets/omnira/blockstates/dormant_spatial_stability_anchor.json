@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "omnira:block/dormant_spatial_stability_anchor"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "infused_crystal_tip_crafting",
+  "item": "omnira:infused_crystal_tip",
+  "title": "Infused Crystal Tip · Crafting",
+  "text": [
+    "Uses the Spiritual Crystal Tip assembly recipe with an infused crystal instead."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "infused_crystal_tip",
+      "label": "Function"
+    }
+  ]
+}

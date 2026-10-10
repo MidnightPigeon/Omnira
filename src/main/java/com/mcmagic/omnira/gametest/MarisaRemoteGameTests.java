@@ -45,6 +45,7 @@ public final class MarisaRemoteGameTests {
         return new Setup(p,(MarisaOrbBlockEntity)h.getLevel().getBlockEntity(pos),core,terminal);
     }
     private static MerchantMenu open(GameTestHelper h,Setup s){
+        s.player.setData(ModAttachments.MANA,new com.mcmagic.omnira.mana.ManaState(500,1000));
         var menu=new ResonanceMenu(1,s.player.getInventory(),0);s.player.containerMenu=menu;
         h.assertTrue(menu.clickMenuButton(s.player,0)&&menu.kind()==4&&menu.status(0)==4,"Shop node cannot be selected");
         h.assertTrue(menu.clickMenuButton(s.player,ResonanceMenu.OPEN_SHOP)&&s.player.containerMenu instanceof MerchantMenu,"Shop menu did not open");

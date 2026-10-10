@@ -83,7 +83,7 @@ public final class CrystalProcessingTableRenderer implements BlockEntityRenderer
             float scale=table.getContainerSize()==7 && stack.getItem() instanceof com.mcmagic.omnira.item.StaffItem?.15F:ITEM_SCALE;
             pose.scale(scale,scale,scale);
             itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, displayLight, overlay,
-                    pose, buffers, table.getLevel(), (int) table.getBlockPos().asLong() + slot);
+                    pose, CrystalGlassLayer.contents(buffers), table.getLevel(), (int) table.getBlockPos().asLong() + slot);
             pose.popPose();
         }
         pose.popPose();

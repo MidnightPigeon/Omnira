@@ -283,13 +283,35 @@ public final class SpellCasting {
             HolyMagic.cloud(level,caster,payload,power,modifiers.range(),caster.position());
             effect.applyEffects(caster);
         } else if(hit instanceof EntityHitResult entityHit) {
-            HolyMagic.cloud(level,caster,payload,power,modifiers.range(),entityHit.getLocation());
-            effect.applyEffects(entityHit.getEntity());
+            if(target==SpellTargetKeyword.AIM && entityHit.getEntity() instanceof com.mcmagic.omnira.entity.DreamMirror mirror)
+                reflectDirectRay(caster,mirror,entityHit.getLocation(),payload,power,modifiers,entityRange);
+            else {
+                HolyMagic.cloud(level,caster,payload,power,modifiers.range(),entityHit.getLocation());
+                effect.applyEffects(entityHit.getEntity());
+            }
         } else if(hit instanceof BlockHitResult block) applyDirectBlock(caster,payload,power,modifiers.range(),block.getBlockPos(),
                 block.getDirection(),block.getBlockPos().relative(block.getDirection()));
         effect.discard();
         level.playSound(null,caster.blockPosition(),SoundEvents.AMETHYST_BLOCK_CHIME,SoundSource.PLAYERS,.6F,1.1F);
         return true;
+    }
+
+    public static void reflectDirectRay(Player caster,com.mcmagic.omnira.entity.DreamMirror mirror,Vec3 contact,
+                                        SpellPayload payload,double power,Modifiers modifiers,double range){
+        var level=(ServerLevel)caster.level();
+        Vec3 direction=caster.getLookAngle();
+        var ray=spawn(level,caster,power,payload,SpellEntity.Kind.PROJECTILE,contact,modifiers);
+        ray.setDeltaMovement(direction);
+        if(ray.reflectFrom(mirror)) {
+            Vec3 start=contact.subtract(direction.scale(.01));
+            Vec3 end=start.add(ray.getDeltaMovement().normalize().scale(range));
+            var wall=level.clip(new ClipContext(start,end,ClipContext.Block.COLLIDER,ClipContext.Fluid.NONE,ray));
+            var hit=ProjectileUtil.getEntityHitResult(level,ray,start,wall.getLocation(),new AABB(start,end).inflate(1),
+                    e->e!=mirror && validTarget(e),.1F);
+            if(hit!=null)ray.applyEffects(hit.getEntity());
+            else if(wall.getType()==HitResult.Type.BLOCK)ray.applyBlockEffects(wall);
+        }
+        ray.discard();
     }
 
     private static void applyDirectBlock(Player caster,SpellPayload payload,double power,double range,

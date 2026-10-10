@@ -3,17 +3,13 @@
   "title": "损坏的科研设施",
   "item": "omnira:damaged_research_facility",
   "text": [
-    "损坏的科研设施不能放置。与时间翘曲点合成可修复；存入回溯湿地的储藏设备，也会在下一次逆转开始时修复。"
+    "区域战利品仅来自纪元断崖的保护伞公司考古层。损坏的科研设施不能放置。与时间翘曲点合成可修复；存入回溯湿地的储藏设备，也会在下一次逆转开始时修复。"
   ],
   "recipes": false,
   "links": [
     {
       "target": "epochal_cliffs",
       "label": "纪元断崖"
-    },
-    {
-      "target": "rusty_lake_mill_guide",
-      "label": "锈湖磨坊"
     },
     {
       "target": "spacetime_reverser",
