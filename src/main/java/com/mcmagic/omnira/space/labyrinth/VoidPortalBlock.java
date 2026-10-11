@@ -13,12 +13,13 @@ public final class VoidPortalBlock extends BaseEntityBlock implements LiquidBloc
     public VoidPortalBlock(Properties properties){super(properties);registerDefaultState(stateDefinition.any().setValue(FACING,Direction.NORTH).setValue(FLUID,0));}
     @Override protected com.mojang.serialization.MapCodec<? extends BaseEntityBlock> codec(){return simpleCodec(VoidPortalBlock::new);}
     @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block,BlockState> b){b.add(FACING,FLUID);}
-    @Override protected RenderShape getRenderShape(BlockState s){return RenderShape.ENTITYBLOCK_ANIMATED;}
+    @Override protected RenderShape getRenderShape(BlockState s){return RenderShape.MODEL;}
     @Override public net.minecraft.world.level.block.entity.BlockEntity newBlockEntity(BlockPos p,BlockState s){return new VoidPortalEntity(p,s);}
     @Override public boolean onDestroyedByPlayer(BlockState s,Level level,BlockPos p,net.minecraft.world.entity.player.Player player,boolean harvest,net.minecraft.world.level.material.FluidState fluid){return false;}
     @Override public boolean canEntityDestroy(BlockState s,BlockGetter level,BlockPos p,net.minecraft.world.entity.Entity entity){return false;}
     // Keep the wall/floor sealed; the vortex projects into the room and triggers before collision.
     @Override protected VoxelShape getCollisionShape(BlockState s,BlockGetter level,BlockPos p,CollisionContext c){return Shapes.block();}
+    @Override protected VoxelShape getOcclusionShape(BlockState s,BlockGetter level,BlockPos p){return Shapes.block();}
     public static net.minecraft.world.phys.AABB bounds(BlockState s,BlockPos p){
         var d=s.getValue(FACING).getOpposite();var center=net.minecraft.world.phys.Vec3.atCenterOf(p).add(net.minecraft.world.phys.Vec3.atLowerCornerOf(d.getNormal()).scale(.55));
         return new net.minecraft.world.phys.AABB(center,center).inflate(d.getAxis()==Direction.Axis.X?.15:.62,d.getAxis()==Direction.Axis.Y?.15:.62,d.getAxis()==Direction.Axis.Z?.15:.62);
@@ -33,6 +34,9 @@ public final class VoidPortalBlock extends BaseEntityBlock implements LiquidBloc
     }
     @Override public BlockState getStateForPlacement(net.minecraft.world.item.context.BlockPlaceContext c){return defaultBlockState().setValue(FACING,c.getClickedFace().getOpposite()).setValue(FLUID,liquid(c.getLevel().getFluidState(c.getClickedPos()).getType()));}
     @Override public void animateTick(BlockState s,Level level,BlockPos p,net.minecraft.util.RandomSource random){
+        if(random.nextInt(16)!=0)return;
+        var viewer=level.getNearestPlayer(p.getX()+.5,p.getY()+.5,p.getZ()+.5,8,false);
+        if(viewer==null)return;
         var d=s.getValue(FACING).getOpposite();var center=net.minecraft.world.phys.Vec3.atCenterOf(p).add(net.minecraft.world.phys.Vec3.atLowerCornerOf(d.getNormal()).scale(.55));
         var color=s.is(LabyrinthContent.LONG_RANGE_PORTAL.get())?new org.joml.Vector3f(.48F,.8F,1):new org.joml.Vector3f(.64F,.36F,.85F);
         level.addParticle(new net.minecraft.core.particles.DustParticleOptions(color,.7F),center.x+(random.nextDouble()-.5)*.6,center.y+(random.nextDouble()-.5)*.6,center.z+(random.nextDouble()-.5)*.6,0,0,0);

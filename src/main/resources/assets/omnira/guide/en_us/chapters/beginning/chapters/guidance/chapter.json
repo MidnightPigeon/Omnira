@@ -1,0 +1,10 @@
+{
+  "id": "guidance",
+  "title": "Guidance Orb",
+  "icon": "omnira:guidance_orb",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/guidance_orb.json"
+  ],
+  "chapters": []
+}

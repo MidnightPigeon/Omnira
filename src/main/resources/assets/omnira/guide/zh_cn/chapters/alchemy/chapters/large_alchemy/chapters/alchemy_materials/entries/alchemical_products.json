@@ -1,0 +1,40 @@
+{
+  "id": "alchemical_products",
+  "title": "液体炼成",
+  "item": "omnira:water_microcore",
+  "recipes": false,
+  "text": [
+    "液体也能成为炼成原料。根据底部催化方块，水、破败时流和虚空星流可用于获得水晶或元素微核；产物仍可通过原有途径获取。",
+    "查阅反应配方尝试不同组合。多液体反应需使用大型炼金反应池。"
+  ],
+  "links": [
+    {
+      "target": "refined_spacetime",
+      "label": "精炼时空与双微核炼成"
+    },
+    {
+      "target": "dilute_spacetime",
+      "label": "稀薄时空"
+    },
+    {
+      "target": "alchemical_waste",
+      "label": "炼金废料"
+    },
+    {
+      "target": "primitive_reaction_cauldron",
+      "label": "原始反应釜"
+    },
+    {
+      "target": "large_alchemical_reaction_pool",
+      "label": "大型炼金反应池"
+    },
+    {
+      "target": "rough_alchemical_energy_core",
+      "label": "粗糙炼金能核"
+    },
+    {
+      "target": "spell_core",
+      "label": "原始法术核心"
+    }
+  ]
+}

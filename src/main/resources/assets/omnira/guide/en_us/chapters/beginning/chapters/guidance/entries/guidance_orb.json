@@ -1,0 +1,11 @@
+{
+  "id": "guidance_orb",
+  "item": "omnira:guidance_orb",
+  "title": "Guidance Orb",
+  "recipes": true,
+  "text": [
+    "Your most, most faithful guide along the path of exploration. Probably?",
+    "Craft it with four glass blocks around the guidebook. Place and use it to reveal guidance. Offer the indicated item to advance without consuming it. Mining and replacing preserves its stage.",
+    "At the early and advanced stages, use once to reveal four paths, then use the corresponding face to open its book page. The top reveals the next goal. Use an empty hand or another item to dismiss a persistent projection."
+  ]
+}

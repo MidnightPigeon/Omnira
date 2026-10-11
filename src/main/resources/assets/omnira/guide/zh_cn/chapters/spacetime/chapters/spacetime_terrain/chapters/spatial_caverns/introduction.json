@@ -3,5 +3,17 @@
   "image_width": 112,
   "image_height": 88,
   "caption": "",
-  "text": []
+  "text": [
+    "空间洞穴在时间大陆下方展开。粗糙空间晶块构成洞壁与晶锥，激发态晶块照亮其间；折叠洞窟、晶林与虚无星海各自呈现不同的空间规律。"
+  ],
+  "links": [
+    {
+      "target": "spatial_crystal_guide",
+      "label": "粗糙空间晶块"
+    },
+    {
+      "target": "spatial_growth_guide",
+      "label": "空间水晶生长"
+    }
+  ]
 }

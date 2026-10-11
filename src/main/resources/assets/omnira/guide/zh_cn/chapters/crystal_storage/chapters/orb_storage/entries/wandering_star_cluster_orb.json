@@ -18,6 +18,10 @@
     {
       "target": "stardust_guide",
       "label": "星尘"
+    },
+    {
+      "target": "orb_upgrade_plugins",
+      "label": "升级插件"
     }
   ]
 }

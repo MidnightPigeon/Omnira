@@ -14,6 +14,10 @@
     {
       "target": "folded_caverns_guide",
       "label": "Folded Caverns"
+    },
+    {
+      "target": "spacetime_port",
+      "label": "Spacetime Port"
     }
   ]
 }

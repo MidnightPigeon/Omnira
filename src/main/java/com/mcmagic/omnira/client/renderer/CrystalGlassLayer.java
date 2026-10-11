@@ -62,6 +62,7 @@ public abstract class CrystalGlassLayer extends RenderType {
     }
     @SubscribeEvent public static void finishWorldGlass(RenderLevelStageEvent event){
         if(event.getStage()!=RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES)return;
+        CrystalInteriorMotes.flush();
         var buffers=Minecraft.getInstance().renderBuffers().bufferSource();
         // World glass is intercepted into WorldGlassBuffers; mist and local fallbacks stay here.
         buffers.endLastBatch();

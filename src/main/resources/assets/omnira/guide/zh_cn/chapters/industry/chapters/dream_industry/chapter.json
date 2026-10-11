@@ -1,0 +1,17 @@
+{
+  "id": "dream_industry",
+  "title": "梦境",
+  "icon": "omnira:advanced_condensation_table",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/advanced_assembly_table.json",
+    "entries/staff_enhancement_crafting.json",
+    "entries/infused_crystal_furnace.json",
+    "entries/infused_crystal_grindstone.json",
+    "entries/infused_crystal_anvil.json"
+  ],
+  "chapters": [
+    "chapters/dream_inquiry/chapter.json",
+    "chapters/advanced_condensation/chapter.json"
+  ]
+}

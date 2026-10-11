@@ -1,0 +1,32 @@
+{
+  "id": "resonance_crystal",
+  "item": "omnira:resonance_crystal",
+  "title": "Resonance Crystal",
+  "text": [
+    "Resonance Crystals are a foundation of logistics equipment. Craft one from a Spiritual Crystal and eight Arcane Dust; other devices and rituals also use them.",
+    "Alternatively, react 1 Spiritual Crystal into 1 Resonance Crystal over a Resonance Core. No fluid is needed; the base reaction time is 100 seconds and the catalyst is preserved."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "resonance_core",
+      "label": "Resonance Core"
+    },
+    {
+      "target": "resonant_orbs",
+      "label": "Resonant Orbs"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    },
+    {
+      "target": "crystal_processing_table",
+      "label": "Crystal Processing Table"
+    },
+    {
+      "target": "shadow_lantern",
+      "label": "Shadow Lantern"
+    }
+  ]
+}

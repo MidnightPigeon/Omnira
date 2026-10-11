@@ -7,7 +7,8 @@
     "entries/fold_observatory_guide.json",
     "entries/void_lighthouse_guide.json",
     "entries/calibration_station_guide.json",
-    "entries/skyreach_tower_guide.json"
+    "entries/skyreach_tower_guide.json",
+    "entries/phase_greenhouse_guide.json"
   ],
   "chapters": []
 }

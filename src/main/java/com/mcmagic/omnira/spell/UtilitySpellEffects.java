@@ -31,6 +31,7 @@ public final class UtilitySpellEffects {
         for(int round=0;round<rounds && target.isAlive();round++) {
             int remaining=yield;
             for(EquipmentSlot slot:EquipmentSlot.values()) {
+                if(target instanceof com.mcmagic.omnira.entity.DreamMirror mirror && mirror.virtualEquipment(slot)) continue;
                 var equipment=target.getItemBySlot(slot);
                 if(!equipment.isEmpty() && remaining-->0) {
                     target.setItemSlot(slot,ItemStack.EMPTY);

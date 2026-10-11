@@ -58,6 +58,7 @@ public final class FoldGateTransit {
             for(var member:root.getSelfAndPassengers().toList())if(member instanceof ServerPlayer p&&!p.isCreative()&&!p.isSpectator()){
                 float damage=unstableDamage(p.getMaxHealth(),source.random.nextDouble());
                 p.setHealth(Math.max(0,p.getHealth()-damage));
+                com.mcmagic.omnira.space.phase.PhaseConcealment.afterDamage(p);
                 if(p.getHealth()<=0){p.die(source.damageSources().genericKill());return false;}
             }
         }

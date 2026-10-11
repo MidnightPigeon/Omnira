@@ -11,7 +11,9 @@ import com.mojang.math.Axis;
 import com.mcmagic.omnira.config.OmniraConfig;
 
 public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBallBlockEntity> {
-    public static final String[] PARTS={"base","shell","mote","cracks_1","cracks_2","void_base","star_base"};
+    private static final net.minecraft.util.RandomSource BASE_RANDOM=net.minecraft.util.RandomSource.create(42);
+    private static final net.minecraft.core.Direction[] BASE_FACES={net.minecraft.core.Direction.DOWN,net.minecraft.core.Direction.UP,net.minecraft.core.Direction.NORTH,net.minecraft.core.Direction.SOUTH,net.minecraft.core.Direction.WEST,net.minecraft.core.Direction.EAST,null};
+    public static final String[] PARTS={"base","shell","mote","cracks_1","cracks_2","void_base","star_base","guidance_base"};
     public CrystalBallRenderer(BlockEntityRendererProvider.Context context) {}
     public static ModelResourceLocation model(String part) {return CrystalGridRenderer.part("crystal_ball",part);}
     private static void draw(String part,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {
@@ -23,9 +25,8 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
         var mc=Minecraft.getInstance();
         var model=ball.resonant()?com.mcmagic.omnira.client.StorageVisuals.base():model(ball instanceof com.mcmagic.omnira.block.entity.VoidCrystalBallBlockEntity?"void_base":ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity?"star_base":"base");
         int tint=ball.resonant()?com.mcmagic.omnira.client.StorageVisuals.color(ball.networkStatus):ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity?0x284E91:0xFFFFFF;
-        var baked=mc.getModelManager().getModel(model);var random=net.minecraft.util.RandomSource.create(42);var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
-        var faces=new java.util.ArrayList<net.minecraft.core.Direction>(java.util.List.of(net.minecraft.core.Direction.values()));faces.add(null);
-        for(var face:faces){random.setSeed(42);for(var quad:baked.getQuads(null,face,random)){
+        var baked=mc.getModelManager().getModel(model);var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
+        for(var face:BASE_FACES){BASE_RANDOM.setSeed(42);for(var quad:baked.getQuads(null,face,BASE_RANDOM)){
             int color=quad.isTinted()?tint:0xFFFFFF;
             out.putBulkData(pose.last(),quad,(color>>16&255)/255F,(color>>8&255)/255F,(color&255)/255F,1,light,overlay);
         }}
@@ -68,19 +69,17 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
     }
     private static void fog(PoseStack pose,MultiBufferSource buffers,double time) {
         var mesh=buffers.getBuffer(CrystalGlassLayer.COLOR);
-        var matrix=pose.last().pose();
         for(int i=0;i<9;i++) {
             double phase=time*.012+i*2.4;
             float x=.5F+(float)Math.sin(phase)*.08F;
             float y=.5F+(float)Math.sin(phase*.83+i)*.07F;
             float z=.5F+(float)Math.cos(phase*1.13)*.08F;
             float r=.075F+.012F*(float)Math.sin(phase*.7+i);
-            float[][] v={{x-r,y-r,z-r},{x+r,y-r,z-r},{x+r,y+r,z-r},{x-r,y+r,z-r},
-                    {x-r,y-r,z+r},{x+r,y-r,z+r},{x+r,y+r,z+r},{x-r,y+r,z+r}};
-            int[][] faces={{0,3,2,1},{4,5,6,7},{0,4,7,3},{1,2,6,5},{3,7,6,2},{0,1,5,4}};
-            for(var face:faces)for(int n:face)mesh.addVertex(matrix,v[n][0],v[n][1],v[n][2])
-                    .setColor(.67F,.73F,.86F,.18F);
+            StellarVisuals.cube(pose,mesh,x,y,z,r,0xABBADB,.18F);
         }
+    }
+    @Override public boolean shouldRender(CrystalBallBlockEntity ball,net.minecraft.world.phys.Vec3 camera){
+        return BlockEntityRenderer.super.shouldRender(ball,camera)&&com.mcmagic.omnira.client.LabyrinthDisplayVisibility.visible(ball,camera,new net.minecraft.world.phys.AABB(ball.getBlockPos()).inflate(.3));
     }
     public static void vortex(PoseStack pose,MultiBufferSource buffers,double time){
         vortex(pose,buffers,time,false);
@@ -92,9 +91,10 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
             float x=.5F+(float)(Math.cos(angle)*radius),z=.5F+(float)(Math.sin(angle)*radius);
             float y=.5F+(float)Math.sin(angle*2)*.025F,r=.018F+i*.0004F;
             float shade=.12F+i*.018F;
-            float[][] v={{x-r,y-r,z-r},{x+r,y-r,z-r},{x+r,y+r,z-r},{x-r,y+r,z-r},{x-r,y-r,z+r},{x+r,y-r,z+r},{x+r,y+r,z+r},{x-r,y+r,z+r}};
-            int[][] faces={{0,3,2,1},{4,5,6,7},{0,4,7,3},{1,2,6,5},{3,7,6,2},{0,1,5,4}};
-            for(var face:faces)for(int n:face)mesh.addVertex(matrix,v[n][0],v[n][1],v[n][2]).setColor(paleBlue?.36F+shade*.6F:shade*.8F,paleBlue?.62F+shade*.5F:shade*.55F,paleBlue?.8F+shade*.3F:shade+ .12F,.94F);
+            int red=(int)((paleBlue?.36F+shade*.6F:shade*.8F)*255);
+            int green=(int)((paleBlue?.62F+shade*.5F:shade*.55F)*255);
+            int blue=(int)((paleBlue?.8F+shade*.3F:shade+.12F)*255);
+            StellarVisuals.cube(pose,mesh,x,y,z,r,red<<16|green<<8|blue,.94F);
         }
     }
     @Override public void render(CrystalBallBlockEntity ball,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {

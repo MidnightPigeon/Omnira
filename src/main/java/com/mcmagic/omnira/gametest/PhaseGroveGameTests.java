@@ -15,6 +15,18 @@ import net.neoforged.neoforge.gametest.*;
 
 @GameTestHolder("omnira_phase") @PrefixGameTestTemplate(false)
 public final class PhaseGroveGameTests {
+    @GameTest(template="spell_arena") public static void physicalMotesStayBounded(GameTestHelper h){
+        h.assertTrue(PhaseMoteLayout.CACHE_LIMIT==512&&PhaseMoteLayout.VISIBLE_LIMIT==128&&PhaseMoteLayout.RANGE==32,"Decoration has no fixed budget");
+        for(int tick=0;tick<400;tick++)for(int i=0;i<3;i++){
+            var inside=PhaseMoteLayout.sample(false,0,tick,i);float r=PhaseMoteLayout.RADIUS;
+            h.assertTrue(inside.x()-r>0&&inside.x()+r<1&&inside.y()-r>0&&inside.y()+r<1&&inside.z()-r>0&&inside.z()+r<1,"Mote escapes crystal interior");
+            var orbit=PhaseMoteLayout.sample(true,0,tick,i);
+            double dx=orbit.x()-.5,dz=orbit.z()-.5;
+            h.assertTrue(Math.abs(dx*dx+dz*dz-.49*.49)<.00001,"Cluster orbit changes size");
+        }
+        h.assertTrue(PhaseMoteLayout.sample(false,0,0,0).color()==0xCFA6FF&&PhaseMoteLayout.sample(false,1,0,0).color()==0x6E29C2,"Purple phase palette changed");
+        h.succeed();
+    }
     private static final class Roll extends net.minecraft.world.level.levelgen.LegacyRandomSource {
         final int result;int calls;Roll(int result){super(1);this.result=result;}
         @Override public int nextInt(int bound){if(bound!=5)throw new AssertionError("Not a 20% trial");calls++;return result;}

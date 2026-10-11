@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public final class StabilityAnchorEntity extends BlockEntity {
-    private static final DustParticleOptions GLOW=new DustParticleOptions(new org.joml.Vector3f(.55F,.9F,1),.7F);
     private final SpatialActivation activation=new SpatialActivation(this,64);
     private long lastTick=Long.MIN_VALUE;
     public StabilityAnchorEntity(BlockPos p,BlockState s){super(AnchorContent.ENTITY.get(),p,s);}
@@ -24,10 +23,7 @@ public final class StabilityAnchorEntity extends BlockEntity {
         return null;
     }
     public static void orbit(ServerLevel level,Vec3 center,double radius,long time){
-        double angle=time*.12;for(int i=0;i<3;i++){
-            double a=angle+i*Math.PI*2/3;
-            level.sendParticles(GLOW,center.x+Math.cos(a)*radius,center.y+Math.sin(a*2)*radius*.4,center.z+Math.sin(a)*radius,1,0,0,0,0);
-        }
+        StabilityVisualPayload.queue(level,center,radius);
     }
     public boolean begin(BlockPos pos){
         return activation.begin(pos);

@@ -1,0 +1,15 @@
+{
+  "id": "travel_recall",
+  "item": "omnira:recall_crystal",
+  "title": "Recall Crystal",
+  "text": [
+    "Select a recorded waymark and channel while stationary to return."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "recall_crystal",
+      "label": "Details and Acquisition"
+    }
+  ]
+}

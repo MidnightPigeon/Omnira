@@ -5,7 +5,8 @@
   "recipes": false,
   "text": [
     "Treasure Crystal Orbs in the Topological Labyrinth have a 20% chance to contain a Mapping Stability Compass.",
-    "Hold the compass when entering a Void Portal to reach the immediately adjacent room through its opposite exit instead of a random room. The compass is not consumed and does not protect against hazards."
+    "Hold the compass when entering a Void Portal to reach the immediately adjacent room through its opposite exit instead of a random room. The compass is not consumed and does not protect against hazards.",
+    "Sneak-use to bind your currently configured respawn point. Hold use for 3 seconds to return across dimensions, spending all remaining mana. Releasing use cancels without a cost. An unbound or invalid point returns you to world spawn."
   ],
   "links": [
     {

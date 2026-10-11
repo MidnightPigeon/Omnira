@@ -5,9 +5,8 @@
   "introduction": "introduction.json",
   "entries": [],
   "chapters": [
-    "chapters/arcane_craft/chapter.json",
-    "chapters/first_arcane_steps/chapter.json",
-    "chapters/dream_inquiry/chapter.json",
-    "chapters/spacetime_connections/chapter.json"
+    "chapters/initial_industry/chapter.json",
+    "chapters/dream_industry/chapter.json",
+    "chapters/advanced_industry/chapter.json"
   ]
 }

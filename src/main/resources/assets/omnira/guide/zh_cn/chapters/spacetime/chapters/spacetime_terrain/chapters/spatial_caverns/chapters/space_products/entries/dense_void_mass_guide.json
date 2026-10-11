@@ -7,7 +7,10 @@
     "通天塔中央的悬浮团块可用镐采集并再次放置。处于倒悬深渊无重力带时，它会强烈吸引五格球形范围内的实体；其他位置仅有微弱吸引，不改变重力方向。它也是虚空侵染仪的制作材料。"
   ],
   "links": [
-    {"target": "void_infuser", "label": "虚空侵染仪"},
+    {
+      "target": "void_infuser",
+      "label": "虚空侵染仪"
+    },
     {
       "target": "skyreach_tower_guide",
       "label": "通天塔"

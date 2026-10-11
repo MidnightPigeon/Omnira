@@ -1,0 +1,23 @@
+{
+  "id": "dream_microcore_conversion",
+  "item": "omnira:earth_microcore",
+  "title": "地风元素转换",
+  "recipes": false,
+  "text": [
+    "1枚水元素微核、1枚火元素微核与1份悖论尘反应，固定得到地元素微核和风元素微核各1枚。不需要底部催化方块。"
+  ],
+  "links": [
+    {
+      "target": "primitive_reaction_cauldron",
+      "label": "原始反应釜"
+    },
+    {
+      "target": "paradox_dust",
+      "label": "悖论尘"
+    },
+    {
+      "target": "microcore_conversion",
+      "label": "火元素转换"
+    }
+  ]
+}

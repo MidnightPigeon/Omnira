@@ -32,7 +32,7 @@ public final class StarJellyfish extends StarSeaCreature implements Bucketable {
         if(!(level() instanceof ServerLevel server))return;
         for(LivingEntity target:server.getEntitiesOfClass(LivingEntity.class,getBoundingBox().inflate(5),e->e!=this&&e.isAlive())){
             var b=target.getBoundingBox();double d=position().distanceToSqr(Math.clamp(getX(),b.minX,b.maxX),Math.clamp(getY(),b.minY,b.maxY),Math.clamp(getZ(),b.minZ,b.maxZ));
-            if(d<=25)VoidSeaEffects.trueDamage(target,8,damageSources().mobAttack(this));
+            if(d<=25)VoidSeaEffects.trueDamage(target,8,damageSources().explosion(this,this));
         }
         for(int ring=0;ring<3;ring++)for(int i=0;i<32;i++){
             double angle=i*Math.PI/16,radius=2+ring*1.5;

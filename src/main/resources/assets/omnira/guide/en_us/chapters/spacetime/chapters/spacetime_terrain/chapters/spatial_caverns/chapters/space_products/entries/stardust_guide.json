@@ -10,6 +10,10 @@
     {
       "target": "star_source_relic",
       "label": "Star Source"
+    },
+    {
+      "target": "wandering_star_cluster_orb",
+      "label": "Wandering Star Cluster Orb"
     }
   ]
 }

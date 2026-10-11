@@ -38,6 +38,8 @@ public final class MirrorScene {
         final TextureTarget target=new TextureTarget(128,224,true,Minecraft.ON_OSX);
         final ResourceLocation location;
         long updated;
+        BlockPos origin;
+        List<BlockPos> terrain;
         View(UUID id) {location=ResourceLocation.fromNamespaceAndPath("omnira","dynamic/mirror_"+id);}
         @Override public int getId() {return target.getColorTextureId();}
         @Override public void load(ResourceManager resources) {}
@@ -75,7 +77,8 @@ public final class MirrorScene {
                 RenderSystem.viewport(viewport[0],viewport[1],viewport[2],viewport[3]);
             }
         }
-        if(now-view.updated>=100 && now-lastPass>=45) {
+        long interval=eye.distanceToSqr(center)>16*16?300:eye.distanceToSqr(center)>8*8?180:100;
+        if(now-view.updated>=interval && now-lastPass>=45) {
             if(source instanceof MultiBufferSource.BufferSource buffers) buffers.endBatch();
             render(view,mirror,eye,center,n,distance,partial);
             view.updated=now;lastPass=now;
@@ -86,6 +89,32 @@ public final class MirrorScene {
         var textures=Minecraft.getInstance().getTextureManager();
         for(var view:VIEWS.values()) textures.release(view.location);
         VIEWS.clear();world=null;
+    }
+    public static void changed(BlockPos pos){
+        for(var view:VIEWS.values())if(view.origin!=null&&Math.abs(view.origin.getX()-pos.getX())<=17
+                &&Math.abs(view.origin.getY()-pos.getY())<=17&&Math.abs(view.origin.getZ()-pos.getZ())<=17)view.terrain=null;
+    }
+    private static void chunks(net.neoforged.neoforge.event.level.ChunkEvent event){
+        if(event.getLevel().isClientSide())for(var view:VIEWS.values())view.terrain=null;
+    }
+    @net.neoforged.bus.api.SubscribeEvent public static void loaded(net.neoforged.neoforge.event.level.ChunkEvent.Load event){chunks(event);}
+    @net.neoforged.bus.api.SubscribeEvent public static void unloaded(net.neoforged.neoforge.event.level.ChunkEvent.Unload event){chunks(event);}
+    @net.neoforged.fml.common.EventBusSubscriber(modid="omnira",value=net.neoforged.api.distmarker.Dist.CLIENT,
+            bus=net.neoforged.fml.common.EventBusSubscriber.Bus.MOD)
+    public static final class ModelChanges {
+        @net.neoforged.bus.api.SubscribeEvent public static void baked(net.neoforged.neoforge.client.event.ModelEvent.BakingCompleted event){
+            RenderSystem.recordRenderCall(()->{for(var view:VIEWS.values())view.terrain=null;});
+        }
+    }
+    private static List<BlockPos> terrain(View view,BlockPos origin){
+        if(view.terrain!=null&&origin.equals(view.origin))return view.terrain;
+        view.origin=origin.immutable();var level=Minecraft.getInstance().level;var blocks=new ArrayList<BlockPos>();
+        for(var p:BlockPos.betweenClosed(origin.offset(-16,-16,-16),origin.offset(16,16,16))){
+            if(!level.hasChunkAt(p))continue;var state=level.getBlockState(p);
+            if(state.getRenderShape()!=RenderShape.MODEL)continue;
+            for(var face:Direction.values())if(!level.getBlockState(p.relative(face)).isSolidRender(level,p.relative(face))){blocks.add(p.immutable());break;}
+        }
+        view.terrain=List.copyOf(blocks);return view.terrain;
     }
     private static void render(View view,DreamMirror mirror,Vec3 eye,Vec3 center,Vec3 n,double distance,float partial) {
         var mc=Minecraft.getInstance();
@@ -124,13 +153,11 @@ public final class MirrorScene {
             var origin=mirror.blockPosition();
             int rendered=0;
             var random = net.minecraft.util.RandomSource.create();
-            for(var mutable:BlockPos.betweenClosed(origin.offset(-16,-16,-16),origin.offset(16,16,16))) {
+            for(var mutable:terrain(view,origin)) {
                 if(Vec3.atCenterOf(mutable).subtract(center).dot(n)<-.8 || !mc.level.hasChunkAt(mutable)) continue;
                 var state=mc.level.getBlockState(mutable);
                 if(state.getRenderShape()!=RenderShape.MODEL) continue;
-                boolean exposed=false;
-                for(var direction:Direction.values()) if(!mc.level.getBlockState(mutable.relative(direction)).isSolidRender(mc.level,mutable.relative(direction))) {exposed=true;break;}
-                if(!exposed || rendered++>=4500) continue;
+                if(rendered++>=4500) break;
                 pose.pushPose();pose.translate(mutable.getX(),mutable.getY(),mutable.getZ());
                 // World tessellation samples exposed-face light and biome tint. Item rendering
                 // lights the entire block from its opaque interior, turning terrain black.

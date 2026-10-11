@@ -20,19 +20,68 @@ public final class LabyrinthGameTests {
         }
         throw new IllegalStateException("No complete maze region found");
     }
+    @GameTest(template="spell_arena") public static void portalBackingIsSolidAndRendered(GameTestHelper h){
+        for(var block:new net.minecraft.world.level.block.Block[]{LabyrinthContent.PORTAL.get(),LabyrinthContent.LONG_RANGE_PORTAL.get()})for(var direction:Direction.values()){
+            var state=block.defaultBlockState().setValue(VoidPortalBlock.FACING,direction);
+            h.assertTrue(state.getRenderShape()==net.minecraft.world.level.block.RenderShape.MODEL,"Portal backing is invisible");
+            h.assertTrue(state.canOcclude()&&state.getOcclusionShape(h.getLevel(),BlockPos.ZERO)==net.minecraft.world.phys.shapes.Shapes.block(),"Portal backing does not seal the wall");
+        }
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void roomDisplaySightPreservesTransparentAndPartialViews(GameTestHelper h){
+        var level=h.getLevel();var saved=new java.util.HashMap<BlockPos,net.minecraft.world.level.block.state.BlockState>();
+        var camera=net.minecraft.world.phys.Vec3.atCenterOf(h.absolutePos(new BlockPos(5,3,2)));
+        var target=new net.minecraft.world.phys.AABB(h.absolutePos(new BlockPos(5,3,6))).inflate(.2);
+        try{
+            for(var material:new net.minecraft.world.level.block.Block[]{ModBlocks.PURE_SOLIDIFIED_SPACETIME.get(),Blocks.GLASS,Blocks.WATER,DreamContent.DREAM_CRYSTAL.get()}){
+                for(int x=2;x<=8;x++)for(int y=1;y<=6;y++){
+                    var p=h.absolutePos(new BlockPos(x,y,4));saved.putIfAbsent(p,level.getBlockState(p));level.setBlock(p,material.defaultBlockState(),2);
+                }
+                h.assertTrue(LabyrinthSight.visible(level,camera,target)==(material!=ModBlocks.PURE_SOLIDIFIED_SPACETIME.get()),"Opaque maze wall or transparent display sight is wrong");
+            }
+            for(int x=2;x<=8;x++)for(int y=1;y<=6;y++)level.setBlock(h.absolutePos(new BlockPos(x,y,4)),ModBlocks.PURE_SOLIDIFIED_SPACETIME.get().defaultBlockState(),2);
+            level.setBlock(h.absolutePos(new BlockPos(5,3,4)),Blocks.AIR.defaultBlockState(),2);
+            h.assertTrue(LabyrinthSight.visible(level,camera,target),"Open sight was incorrectly culled");
+            level.setBlock(h.absolutePos(new BlockPos(5,3,4)),ModBlocks.PURE_SOLIDIFIED_SPACETIME.get().defaultBlockState(),2);
+            var wide=new net.minecraft.world.phys.AABB(h.absolutePos(new BlockPos(4,3,6))).expandTowards(3,0,0);
+            level.setBlock(h.absolutePos(new BlockPos(6,3,4)),Blocks.AIR.defaultBlockState(),2);
+            h.assertTrue(!LabyrinthSight.clear(level,camera,wide.getCenter())&&LabyrinthSight.visible(level,camera,wide),"Partly visible rim was incorrectly culled");
+            h.assertTrue(LabyrinthSight.visible(level,target.getCenter(),target),"Camera inside display was culled");
+        }finally{saved.forEach((p,s)->level.setBlock(p,s,2));}
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void paletteContactWorksAcrossSectionsWithoutLoadingChunks(GameTestHelper h){
+        var level=h.getLevel();var saved=new java.util.HashMap<BlockPos,net.minecraft.world.level.block.state.BlockState>();
+        var origin=h.absolutePos(new BlockPos(5,3,5));
+        try{
+            for(var direction:Direction.values()){
+                var p=new BlockPos((origin.getX()&~15)+15,Math.floorDiv(origin.getY(),16)*16+15,(origin.getZ()&~15)+15);
+                var state=LabyrinthContent.PORTAL.get().defaultBlockState().setValue(VoidPortalBlock.FACING,direction);
+                saved.putIfAbsent(p,level.getBlockState(p));level.setBlock(p,state,2);
+                var center=VoidPortalBlock.bounds(state,p).getCenter();
+                var contact=LabyrinthTransit.contact(level,new net.minecraft.world.phys.AABB(center,center).inflate(.05));
+                h.assertTrue(contact!=null&&contact.pos().equals(p)&&contact.outward()==direction,"Section-edge contact lost a portal");
+            }
+            int cx=1_800_000,cz=1_800_000;
+            h.assertTrue(level.getChunkSource().getChunkNow(cx,cz)==null,"Unexpected distant test chunk");
+            var far=new net.minecraft.world.phys.AABB(cx*16+4,30,cz*16+4,cx*16+5,31,cz*16+5);
+            h.assertTrue(LabyrinthTransit.contact(level,far)==null&&level.getChunkSource().getChunkNow(cx,cz)==null,"Contact scan loaded a distant chunk");
+        }finally{saved.forEach((p,s)->level.setBlock(p,s,2));}
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void roomDimensionsRoofsAndUniformThemes(GameTestHelper h){
         int[] kinds=new int[14];int roofs=0;
         for(int x=-40;x<=40;x++)for(int z=-40;z<=40;z++){
-            var room=new LabyrinthTerrain.Room(x,2,z);kinds[Math.floorMod(LabyrinthTerrain.hash(room),14)]++;
+            var room=new LabyrinthTerrain.Room(x,2,z);kinds[LabyrinthTerrain.theme(room)]++;
             if(LabyrinthTerrain.entryRoof(room))roofs++;
         }
         h.assertTrue(roofs>1100&&roofs<1500,"Roof access is not approximately one fifth");
-        for(int count:kinds)h.assertTrue(count>350&&count<600,"Room themes not equally distributed");
+        for(int i=0;i<kinds.length;i++)h.assertTrue(i==6?kinds[i]>270&&kinds[i]<390:kinds[i]>370&&kinds[i]<590,"Room theme weights differ from five percent heron and evenly split remainder");
         var room=site();var plan=LabyrinthTerrain.plan(room);var o=room.origin();
-        h.assertTrue(plan.doors().size()==6,"Middle complete room lacks six directions");
+        h.assertTrue(plan.doors().size()==5&&!plan.doors().containsKey(Direction.DOWN),"Lower room has an invalid exit through the base");
         for(int x=1;x<=5;x++)for(int z=1;z<=5;z++){
             h.assertTrue(plan.blocks().get(o.offset(x,0,z)).is(ModBlocks.PURE_SOLIDIFIED_SPACETIME.get())||x==3&&z==3,"Room floor missing");
-            for(int y=1;y<=5;y++)h.assertTrue(plan.blocks().containsKey(o.offset(x,y,z)),"Missing interior cell");
+            for(int y=1;y<=4;y++)h.assertTrue(plan.blocks().containsKey(o.offset(x,y,z)),"Missing interior cell");
         }
         for(int x:new int[]{1,5})for(int z:new int[]{1,5}){
             var p=o.offset(x,1,z);h.assertTrue(plan.blocks().get(p).is(DreamContent.LIGHT_CRYSTAL_TORCH.get())&&plan.blocks().get(p.above()).is(DreamContent.LIGHT_CRYSTAL_TORCH.get()),"Corner torch incomplete");
@@ -44,12 +93,42 @@ public final class LabyrinthGameTests {
         var room=site();
         for(var direction:Direction.values()){
             var stable=LabyrinthTransit.candidates(room,direction,true);
-            h.assertTrue(stable.size()==1&&stable.getFirst().equals(room.adjacent(direction)),"Compass does not reach adjacent room");
+            h.assertTrue(direction==Direction.DOWN?stable.isEmpty():stable.size()==1&&stable.getFirst().equals(room.adjacent(direction)),"Compass does not reach a valid adjacent room");
             var random=LabyrinthTransit.candidates(room,direction,false);
             h.assertTrue(random.size()>10,"Random mapping has too few destinations");
             for(var target:random)h.assertTrue(!target.equals(room)&&Math.abs(target.x()-room.x())<=2&&Math.abs(target.y()-room.y())<=2&&Math.abs(target.z()-room.z())<=2&&LabyrinthTerrain.plan(target).doors().containsKey(direction.getOpposite()),"Invalid destination");
         }
         h.assertTrue(LabyrinthTransit.candidates(new LabyrinthTerrain.Room(room.x(),2,room.z()),Direction.UP,true).isEmpty(),"Compass escapes through surface");h.succeed();
+    }
+    @GameTest(template="spell_arena",timeoutTicks=200) public static void equalHeightClearCrossAndInactiveHeronDisplays(GameTestHelper h){
+        var base=site();boolean foundHeron=false,foundCruise=false;int themes=0,total=0;
+        for(int x=-100;x<=100;x++)for(int z=-100;z<=100;z++){
+            var r=new LabyrinthTerrain.Room(x,1,z);
+            total++;if(LabyrinthTerrain.theme(r)==6)themes++;
+        }
+        h.assertTrue(themes>total*.045&&themes<total*.055,"Heron room chance not approximately five percent");
+        for(int dx=-6;dx<=6;dx++)for(int dz=-6;dz<=6;dz++)for(int layer=1;layer<=2;layer++){
+            var r=new LabyrinthTerrain.Room(base.x()+dx,layer,base.z()+dz);if(!LabyrinthTerrain.exists(r))continue;
+            var plan=LabyrinthTerrain.plan(r);var o=r.origin();
+            h.assertTrue(r.ceiling()-r.floor()-1==4,"Room clear height is not four");
+            h.assertTrue(LabyrinthTerrain.room(o.offset(3,1,3)).equals(r),"Vertical room lookup mismatched");
+            for(var cell:plan.blocks().entrySet()){
+                var p=cell.getKey();var s=cell.getValue();
+                h.assertTrue(!s.is(ModBlocks.NIGHT_HERON_STATUE.get()),"Maze generated an active milk-producing statue");
+                int x=p.getX()-o.getX(),z=p.getZ()-o.getZ();
+                if(p.getY()>r.floor()&&p.getY()<r.ceiling()&&x>=1&&x<=5&&z>=1&&z<=5&&(x==3||z==3))
+                    h.assertTrue(s.isAir()||s.getBlock() instanceof net.minecraft.world.level.block.LiquidBlock,"Room content obstructs the portal cross");
+                if(s.is(ModBlocks.CRYSTAL_PEDESTAL.get())){
+                    var pedestal=new com.mcmagic.omnira.block.entity.CrystalPedestalBlockEntity(p,s);LabyrinthDecoration.configure(pedestal,p);
+                    var expected=plan.kind()==6?ModBlocks.NIGHT_HERON_STATUE.get().asItem():ModItems.CRUISE_ORB.get();
+                    h.assertTrue(pedestal.getItem(0).is(expected),"Wrong pedestal exhibit");
+                    if(plan.kind()==6)foundHeron=true;else foundCruise=true;
+                }
+            }
+        }
+        h.assertTrue(foundHeron&&foundCruise,"Display themes were not covered");
+        for(int y=24;y<27;y++)h.assertTrue(LabyrinthTerrain.block(base.origin().getX()+3,y,base.origin().getZ()+3).is(ModBlocks.PURE_SOLIDIFIED_SPACETIME.get()),"Truncated basement was not sealed");
+        h.succeed();
     }
     @GameTest(template="spell_arena") public static void legacyBiomeSourceLoadsLabyrinth(GameTestHelper h)throws Exception{
         try(var in=LabyrinthGameTests.class.getResourceAsStream("/data/omnira/dimension/spacetime_corridor.json")){

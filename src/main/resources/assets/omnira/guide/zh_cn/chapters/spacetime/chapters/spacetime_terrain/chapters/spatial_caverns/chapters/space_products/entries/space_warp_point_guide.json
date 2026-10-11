@@ -14,6 +14,10 @@
     {
       "target": "folded_caverns_guide",
       "label": "折叠洞窟"
+    },
+    {
+      "target": "spacetime_port",
+      "label": "时空端口"
     }
   ]
 }

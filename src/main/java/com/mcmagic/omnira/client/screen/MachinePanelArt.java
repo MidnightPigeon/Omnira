@@ -69,8 +69,8 @@ public final class MachinePanelArt {
         table(p,kind.equals("forge"));
         switch(kind){
             case "analysis" -> {
-                ring(p,88,60,21,21,GOLD);
-                line(p,88,68,88,82,RIM);line(p,64,82,112,82,RIM);
+                ring(p,88,56,15,15,GOLD);
+                line(p,88,71,88,82,RIM);line(p,64,82,112,82,RIM);
                 if(active){flow(p,88,82,64,98,time,MINT);flow(p,88,82,112,98,time,LILAC);}
                 else{line(p,64,82,64,96,RIM);line(p,112,82,112,96,RIM);}
                 slot(p,88,56,GOLD);slot(p,64,104,MINT);slot(p,112,104,LILAC);

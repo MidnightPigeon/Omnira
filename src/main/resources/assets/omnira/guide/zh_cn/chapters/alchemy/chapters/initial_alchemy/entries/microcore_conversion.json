@@ -1,0 +1,19 @@
+{
+  "id": "microcore_conversion",
+  "item": "omnira:fire_microcore",
+  "title": "火元素转换",
+  "recipes": false,
+  "text": [
+    "500 mB熔岩与1枚水元素微核反应，得到1枚火元素微核。不需要底部催化方块。"
+  ],
+  "links": [
+    {
+      "target": "primitive_reaction_cauldron",
+      "label": "原始反应釜"
+    },
+    {
+      "target": "dream_microcore_conversion",
+      "label": "地风元素转换"
+    }
+  ]
+}

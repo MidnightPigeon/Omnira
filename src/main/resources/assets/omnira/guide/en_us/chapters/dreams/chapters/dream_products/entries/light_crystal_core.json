@@ -7,5 +7,15 @@
     "Player-placed cores slowly grow Light Condensate and Light Source Crystal into nearby empty space, leaving the six adjacent positions clear. Natural cores remain dormant.",
     "Emits light level 15 and has zero mass with Aeronautics."
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "light_crystal_torch",
+      "label": "Light Crystal Torch"
+    },
+    {
+      "target": "frozen_terra_guide",
+      "label": "Stilled Wastes"
+    }
+  ]
 }

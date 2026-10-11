@@ -1,0 +1,20 @@
+{
+  "id": "initial_spells",
+  "title": "Early",
+  "icon": "omnira:low_tier_magic_crystal",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/low_tier_magic_crystal.json",
+    "entries/staff_casting.json",
+    "entries/spell_ink.json"
+  ],
+  "chapters": [
+    "chapters/elements/chapter.json",
+    "chapters/spell_shapes/chapter.json",
+    "chapters/spell_elements/chapter.json",
+    "chapters/spell_modifiers/chapter.json",
+    "chapters/staff_parts/chapter.json",
+    "chapters/crystal_grids_usage/chapter.json",
+    "chapters/staff_upgrades_usage/chapter.json"
+  ]
+}

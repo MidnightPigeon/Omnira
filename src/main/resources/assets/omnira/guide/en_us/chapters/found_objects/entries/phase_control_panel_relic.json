@@ -1,0 +1,23 @@
+{
+  "id": "phase_control_panel_relic",
+  "title": "Phase Control Panel",
+  "item": "omnira:phase_control_panel",
+  "recipes": false,
+  "text": [
+    "Found in the configuration room of Phase Greenhouse Ruins, attached to a Phase Crystal Block's side. Right-click to hold the connected crystals solid or inverted, preventing random changes. Switching retains the four-second transition. Removing the panel restores the crystals' own phase rules."
+  ],
+  "links": [
+    {
+      "target": "phase_greenhouse_guide",
+      "label": "Phase Greenhouse Ruins"
+    },
+    {
+      "target": "phase_crystal_guide",
+      "label": "Phase Crystals"
+    },
+    {
+      "target": "phase_concealment_charm",
+      "label": "Phase Concealment Charm"
+    }
+  ]
+}

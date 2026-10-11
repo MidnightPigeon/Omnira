@@ -1,0 +1,15 @@
+{
+  "id": "advanced_industry",
+  "title": "时空",
+  "icon": "omnira:advanced_assembly_table",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/advanced_crystal_aggregation_ring.json",
+    "entries/spacetime_engine.json",
+    "entries/spacetime_reverser.json",
+    "entries/void_infuser.json"
+  ],
+  "chapters": [
+    "chapters/spacetime_connections/chapter.json"
+  ]
+}

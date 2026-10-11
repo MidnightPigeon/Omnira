@@ -8,5 +8,5 @@ public final class GuideSpread {
     public static boolean hasNext(int first,int total){return first+2<total;}
     public static int directoryStart(int introductionLeaves){return introductionLeaves;}
     public static int directoryLeaf(int leaf,int introductionLeaves){return leaf-directoryStart(introductionLeaves);}
-    public static int directoryTotal(int entries,int introductionLeaves){return directoryStart(introductionLeaves)+Math.max(1,(entries+5)/6);}
+    public static int directoryTotal(int entries,int introductionLeaves){return directoryStart(introductionLeaves)+(entries+5)/6;}
 }

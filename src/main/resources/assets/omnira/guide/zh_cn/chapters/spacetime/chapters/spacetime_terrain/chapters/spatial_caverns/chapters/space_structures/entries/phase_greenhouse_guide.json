@@ -1,0 +1,24 @@
+{
+  "id": "phase_greenhouse_guide",
+  "title": "相位温室遗址",
+  "item": "omnira:phase_control_panel",
+  "recipes": false,
+  "text": [
+    "相位晶林中的两座半球形晶室由配置走廊连接，墙壁与穹顶均由相位晶块构成。正门对面的相位控制晶板维持着建筑状态，右键可以切换连接晶块的常态与反相。",
+    "培养温室保存着两台炼金催化室和一枚战利品液晶球；储藏间保存两枚战利品水晶球。"
+  ],
+  "links": [
+    {
+      "target": "phase_crystal_grove_guide",
+      "label": "相位晶林"
+    },
+    {
+      "target": "phase_control_panel_relic",
+      "label": "相位控制晶板"
+    },
+    {
+      "target": "alchemical_catalysis_chamber",
+      "label": "炼金催化室"
+    }
+  ]
+}

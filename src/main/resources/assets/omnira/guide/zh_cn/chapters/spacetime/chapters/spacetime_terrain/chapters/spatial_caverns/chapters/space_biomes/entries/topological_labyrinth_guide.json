@@ -1,7 +1,7 @@
 {
   "id": "topological_labyrinth_guide",
   "title": "拓扑迷宫",
-  "item": "omnira:excited_rough_spatial_crystal_block",
+  "item": "omnira:void_portal",
   "recipes": false,
   "text": [
     "封闭的顶层房间天花板上有浅蓝色的超距传送门，触碰即可前往时间大陆。它优先保持横向位置，受阻时会在附近寻找落点。超距与虚空传送门均无法破坏。",

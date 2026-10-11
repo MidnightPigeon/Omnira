@@ -1,0 +1,19 @@
+{
+  "id": "dream_spells",
+  "title": "梦境",
+  "icon": "omnira:dream_crystal",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/infused_grimoire_usage.json",
+    "entries/light_microcore.json",
+    "entries/shadow_mist.json",
+    "entries/shadow_staff_shaft.json",
+    "entries/light_core_reinforcement.json",
+    "entries/arcane_crystal_grid.json",
+    "entries/holy.json",
+    "entries/staff_enhancement_usage.json"
+  ],
+  "chapters": [
+    "chapters/arquebuses_usage/chapter.json"
+  ]
+}

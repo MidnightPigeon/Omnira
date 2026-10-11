@@ -30,9 +30,27 @@ public final class GuideBookScreen extends ResponsiveScreen {
     private final Deque<View> history=new ArrayDeque<>();
     private ItemStack hovered=ItemStack.EMPTY;
     public GuideBookScreen() {super(Component.translatable("item.omnira.guide_book"));}
+    private String initialDestination;
+    private int initialPage;
+    private boolean restored;
+    private java.util.function.Consumer<com.mcmagic.omnira.guidance.GuideBookmark> remember;
+    private com.mcmagic.omnira.guidance.GuideBookmark lastBookmark;
+    public GuideBookScreen(String destination) {this();initialDestination=destination;}
+    public GuideBookScreen(String destination,int page,java.util.function.Consumer<com.mcmagic.omnira.guidance.GuideBookmark> remember){
+        this(destination);this.initialPage=page;this.remember=remember;
+    }
     @Override protected void init() {
         super.init();
         left=(width-320)/2;top=(height-224)/2;buttons();
+        if(!restored){
+            if(initialDestination!=null){
+                String target=initialDestination;initialDestination=null;var found=contents.destination(target);
+                if(found.isPresent())jump(found.get());else if(!target.isEmpty())initialPage=0;
+            }
+            int saved=Math.min(initialPage,Math.max(0,totalPages()-1))&~1;
+            if(entry==null)introPage=saved;else page=saved;
+            restored=true;buttons();
+        }
     }
     private void select(GuideContents.Entry next) {
         if(entry==null) history.push(view());
@@ -106,7 +124,14 @@ public final class GuideBookScreen extends ResponsiveScreen {
         int total=totalPages();
         turnButton(false,current>0);
         turnButton(true,GuideSpread.hasNext(current,total));
+        rememberPage();
     }
+    private void rememberPage(){
+        if(!restored||remember==null)return;
+        var position=new com.mcmagic.omnira.guidance.GuideBookmark(entry!=null?entry.id():chapter!=null?chapter.id():"",entry!=null?page:introPage);
+        if(!position.equals(lastBookmark)){lastBookmark=position;remember.accept(position);}
+    }
+    @Override public void removed(){rememberPage();super.removed();}
     private boolean introductionArt(){return !introduction().image().isBlank()||!introduction().caption().isBlank();}
     private int introductionLeaves(){return introductionPages().size()+(introductionArt()?1:0);}
     private int totalPages(){return entry==null?GuideSpread.directoryTotal(directorySize(),introductionLeaves()):pages.size()+scenePages()+recipes.size()+linkPages();}

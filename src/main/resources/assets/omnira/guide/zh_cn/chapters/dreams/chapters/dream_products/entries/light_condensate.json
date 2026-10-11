@@ -5,5 +5,11 @@
   "text": [
     "晨辉晶原浮岛的主要组成，半透明，亮度7。航空学联动中提供2 kpg浮力。"
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "light_condensate_bricks",
+      "label": "光凝砖"
+    }
+  ]
 }

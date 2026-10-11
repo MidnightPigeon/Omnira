@@ -1,0 +1,19 @@
+{
+  "id": "travel_enhanced_recall",
+  "item": "omnira:enhanced_recall_crystal",
+  "title": "Enhanced Recall Crystal",
+  "text": [
+    "An enhanced crystal reduces recall costs while retaining the stationary channel."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "enhanced_recall_crystal",
+      "label": "Details and Acquisition"
+    },
+    {
+      "target": "recall_crystal",
+      "label": "Dream Recall"
+    }
+  ]
+}

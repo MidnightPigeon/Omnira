@@ -14,6 +14,18 @@
     {
       "target": "spacetime_reverser",
       "label": "时空回溯仪"
+    },
+    {
+      "target": "spacetime_waymark",
+      "label": "时空道标"
+    },
+    {
+      "target": "time_warp_point_guide",
+      "label": "时间翘曲点"
+    },
+    {
+      "target": "travel_waymark",
+      "label": "时空道标"
     }
   ]
 }

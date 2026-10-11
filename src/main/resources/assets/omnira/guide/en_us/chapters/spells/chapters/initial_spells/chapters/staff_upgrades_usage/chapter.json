@@ -1,0 +1,12 @@
+{
+  "id": "staff_upgrades_usage",
+  "title": "Rune Effects",
+  "icon": "omnira:swiftness_rune",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/swiftness_rune.json",
+    "entries/amplification_rune.json",
+    "entries/wide_area_rune.json"
+  ],
+  "chapters": []
+}

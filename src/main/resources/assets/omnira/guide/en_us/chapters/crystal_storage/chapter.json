@@ -6,6 +6,7 @@
   "entries": [],
   "chapters": [
     "chapters/orb_storage/chapter.json",
-    "chapters/crystal_logistics/chapter.json"
+    "chapters/crystal_logistics/chapter.json",
+    "chapters/entity_transport/chapter.json"
   ]
 }

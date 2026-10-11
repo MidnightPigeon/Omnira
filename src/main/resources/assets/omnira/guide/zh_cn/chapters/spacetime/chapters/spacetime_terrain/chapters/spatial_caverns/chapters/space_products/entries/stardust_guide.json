@@ -10,6 +10,10 @@
     {
       "target": "star_source_relic",
       "label": "星辰之源"
+    },
+    {
+      "target": "wandering_star_cluster_orb",
+      "label": "游离星团晶球"
     }
   ]
 }

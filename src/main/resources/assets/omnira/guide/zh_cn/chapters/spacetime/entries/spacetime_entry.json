@@ -1,0 +1,19 @@
+{
+  "id": "spacetime_entry",
+  "item": "omnira:advanced_ritual_energy_core",
+  "title": "击穿时空",
+  "recipes": false,
+  "text": [
+    "捕捉梦之镜并启动叩时之仪，可以开启通往时空镜廊的单向镜门。进入前准备好归途；镜廊中的裂缝会将来者送向时间大陆或空间洞穴。"
+  ],
+  "links": [
+    {
+      "target": "corridor_ritual",
+      "label": "叩时之仪"
+    },
+    {
+      "target": "pocket_magic_bottle",
+      "label": "方寸魔瓶"
+    }
+  ]
+}

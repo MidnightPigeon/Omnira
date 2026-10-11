@@ -38,7 +38,8 @@ public final class DeflectionFieldEvents {
         if(data.hasUUID("DeflectionHolder")&&data.getUUID("DeflectionHolder").equals(holder.getUUID())
                 &&server.getGameTime()-data.getLong("DeflectionTick")<8)return false;
         Vec3 outgoing=raised(holder)?velocity.scale(-1):velocity.yRot((holder.getRandom().nextBoolean()?1:-1)
-                *(float)Math.toRadians(35+holder.getRandom().nextInt(46))).xRot((float)Math.toRadians(holder.getRandom().nextInt(31)-15));
+                *(float)Math.toRadians(35+holder.getRandom().nextInt(46))).xRot((float)Math.toRadians(holder.getRandom().nextInt(31)-15))
+                .normalize().scale(velocity.length());
         if(shot instanceof SpellEntity spell){if(!spell.deflectFrom(holder,outgoing))return false;}
         else if(shot instanceof Projectile projectile){
             if(projectile instanceof ShulkerBullet){

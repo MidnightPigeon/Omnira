@@ -18,6 +18,10 @@
     {
       "target": "stardust_guide",
       "label": "Stardust"
+    },
+    {
+      "target": "orb_upgrade_plugins",
+      "label": "Upgrade Plugins"
     }
   ]
 }

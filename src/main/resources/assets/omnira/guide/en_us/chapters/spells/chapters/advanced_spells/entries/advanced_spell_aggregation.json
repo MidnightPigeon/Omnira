@@ -1,0 +1,15 @@
+{
+  "id": "advanced_spell_aggregation",
+  "item": "omnira:advanced_crystal_aggregation_ring",
+  "title": "Multiblock Spell Aggregation",
+  "text": [
+    "The Advanced Crystal Aggregation Ring processes High-tier Magic Crystals with more effects and modifiers. See its machine entry for construction and operation."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "advanced_crystal_aggregation_ring",
+      "label": "Advanced Crystal Aggregation Ring"
+    }
+  ]
+}

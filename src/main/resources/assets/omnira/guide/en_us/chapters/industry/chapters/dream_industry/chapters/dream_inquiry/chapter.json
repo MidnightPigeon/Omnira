@@ -1,0 +1,23 @@
+{
+  "id": "dream_inquiry",
+  "title": "Dream Inquiry",
+  "icon": "omnira:dark_microcore",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/spell_core.json",
+    "entries/dark_microcore.json",
+    "entries/arcane_crystal_grid_crafting.json",
+    "entries/shadow_staff_shaft_crafting.json",
+    "entries/light_core_reinforcement_crafting.json",
+    "entries/advanced_ritual_energy_core_crafting.json",
+    "entries/spacetime_knot.json",
+    "entries/cruise_orb.json",
+    "entries/unstable_spacetime_aggregate.json",
+    "entries/paradox_mystery.json",
+    "entries/paradox_ore.json",
+    "entries/unstable_paradox_source.json"
+  ],
+  "chapters": [
+    "chapters/arquebuses/chapter.json"
+  ]
+}

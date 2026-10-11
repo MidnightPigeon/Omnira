@@ -1,0 +1,24 @@
+{
+  "id": "phase_greenhouse_guide",
+  "title": "Phase Greenhouse Ruins",
+  "item": "omnira:phase_control_panel",
+  "recipes": false,
+  "text": [
+    "Two hemispherical crystal rooms in the Phase Crystal Grove are joined by a configuration corridor. Their walls and domes are Phase Crystal Blocks. The panel opposite the main entrance holds the building's phase; right-click to switch connected crystals between solid and inverted states.",
+    "The cultivation greenhouse contains two Alchemical Catalysis Chambers and one liquid treasure orb. The storeroom holds two item treasure orbs."
+  ],
+  "links": [
+    {
+      "target": "phase_crystal_grove_guide",
+      "label": "Phase Crystal Grove"
+    },
+    {
+      "target": "phase_control_panel_relic",
+      "label": "Phase Control Panel"
+    },
+    {
+      "target": "alchemical_catalysis_chamber",
+      "label": "Alchemical Catalysis Chamber"
+    }
+  ]
+}

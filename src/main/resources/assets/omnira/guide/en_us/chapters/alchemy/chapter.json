@@ -5,8 +5,8 @@
   "introduction": "introduction.json",
   "entries": [],
   "chapters": [
-    "chapters/alchemy_instruments/chapter.json",
-    "chapters/alchemy_materials/chapter.json",
-    "chapters/alchemy_products/chapter.json"
+    "chapters/initial_alchemy/chapter.json",
+    "chapters/dream_alchemy/chapter.json",
+    "chapters/large_alchemy/chapter.json"
   ]
 }

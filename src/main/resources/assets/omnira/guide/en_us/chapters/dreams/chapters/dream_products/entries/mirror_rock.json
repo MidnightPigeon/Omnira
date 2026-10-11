@@ -5,5 +5,15 @@
   "text": [
     "Silver-surfaced rock from Mirror Dream islands. Silk Touch is required to collect the block; otherwise it shatters without a drop."
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "engraved_mirror_rock",
+      "label": "Engraved Mirror Rock"
+    },
+    {
+      "target": "travel_fold_gate",
+      "label": "Fold Gate"
+    }
+  ]
 }

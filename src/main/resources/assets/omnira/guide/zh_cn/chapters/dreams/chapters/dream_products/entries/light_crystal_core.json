@@ -7,5 +7,15 @@
     "玩家放置后的核心会缓慢在周围空处生长光凝晶与光源晶，紧邻的六个位置留空。天然核心不会自行扩张。",
     "核心亮度15；航空学联动中重量为零。"
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "light_crystal_torch",
+      "label": "光晶火炬"
+    },
+    {
+      "target": "frozen_terra_guide",
+      "label": "凝时荒原"
+    }
+  ]
 }

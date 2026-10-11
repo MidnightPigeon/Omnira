@@ -9,6 +9,10 @@
   ],
   "links": [
     {
+      "target": "phase_greenhouse_guide",
+      "label": "相位温室遗址"
+    },
+    {
       "target": "phase_crystal_guide",
       "label": "相位晶簇与晶块"
     }

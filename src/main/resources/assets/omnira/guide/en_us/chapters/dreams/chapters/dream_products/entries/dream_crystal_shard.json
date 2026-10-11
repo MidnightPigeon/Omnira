@@ -5,5 +5,11 @@
   "text": [
     "Harvested from mature dream crystal clusters. Used to craft spacetime waymarks and recall crystals, and to attract and trade with Dream Mirrors."
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "dream_crystal_block",
+      "label": "Dream Crystal Block"
+    }
+  ]
 }

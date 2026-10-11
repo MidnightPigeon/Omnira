@@ -6,5 +6,15 @@
     "构成晨辉晶原光球外壳的淡金色半透明晶体，可用于建造和制作粗制光核。",
     "亮度10，比光凝晶更明亮；航空学联动中提供5 kpg浮力。"
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    },
+    {
+      "target": "light_source_bricks",
+      "label": "光源砖"
+    }
+  ]
 }

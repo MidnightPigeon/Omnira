@@ -32,6 +32,14 @@
     {
       "target": "advanced_condensation_table",
       "label": "高阶凝聚台"
+    },
+    {
+      "target": "spacetime_waymark",
+      "label": "时空道标"
+    },
+    {
+      "target": "travel_waymark",
+      "label": "时空道标"
     }
   ]
 }

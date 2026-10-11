@@ -12,6 +12,10 @@
     {
       "target": "enhanced_recall_crystal",
       "label": "Enhanced Recall Crystal"
+    },
+    {
+      "target": "travel_recall",
+      "label": "Entity Transport"
     }
   ]
 }

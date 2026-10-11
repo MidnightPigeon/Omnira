@@ -1,0 +1,23 @@
+{
+  "id": "dream_microcore_conversion",
+  "item": "omnira:earth_microcore",
+  "title": "Earth and Air Microcore Conversion",
+  "recipes": false,
+  "text": [
+    "React one Water Microcore, one Fire Microcore and one Paradox Dust to obtain one Earth Microcore and one Air Microcore together. No catalyst block is required."
+  ],
+  "links": [
+    {
+      "target": "primitive_reaction_cauldron",
+      "label": "Primitive Reaction Cauldron"
+    },
+    {
+      "target": "paradox_dust",
+      "label": "Paradox Dust"
+    },
+    {
+      "target": "microcore_conversion",
+      "label": "Fire Microcore Conversion"
+    }
+  ]
+}

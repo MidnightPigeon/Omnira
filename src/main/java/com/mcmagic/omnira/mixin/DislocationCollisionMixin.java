@@ -10,10 +10,11 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 public abstract class DislocationCollisionMixin {
     @Inject(method="push(Lnet/minecraft/world/entity/Entity;)V",at=@At("HEAD"),cancellable=true)
     private void omnira$noBodyPush(Entity other,CallbackInfo callback){
-        if(TemporalDislocation.phased((Entity)(Object)this)||TemporalDislocation.phased(other))callback.cancel();
+        if(phased((Entity)(Object)this)||phased(other))callback.cancel();
     }
     @Inject(method="canCollideWith",at=@At("HEAD"),cancellable=true)
     private void omnira$noBodyCollision(Entity other,CallbackInfoReturnable<Boolean> result){
-        if(TemporalDislocation.phased((Entity)(Object)this)||TemporalDislocation.phased(other))result.setReturnValue(false);
+        if(phased((Entity)(Object)this)||phased(other))result.setReturnValue(false);
     }
+    private static boolean phased(Entity entity){return TemporalDislocation.phased(entity)||com.mcmagic.omnira.space.phase.PhaseConcealment.active(entity);}
 }

@@ -1,0 +1,74 @@
+{
+  "id": "spiritual_crystal",
+  "item": "omnira:spiritual_crystal",
+  "title": "灵性水晶",
+  "text": [
+    "灵性水晶是凝聚后的基础魔法材料，也是后续工作方块的制作基础。",
+    "原始法术核心催化下，反应釜或反应池无需投入任何物品与液体，即可持续生产灵性水晶，基础每100秒产1枚，核心不消耗。",
+    "它还可作为低阶法术水晶的承载材料。放入水晶加工台的承载槽，与墨水和微核共同完成书写。",
+    "在注灵水晶块催化下，1枚灵性水晶可反应为1枚注灵水晶；在共鸣晶核催化下，可反应为1枚共振水晶。两种反应均无需液体，基础时长100秒，催化方块不消耗。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "simple_condensation_table",
+      "label": "简易凝聚台"
+    },
+    {
+      "target": "analysis_artisan_table",
+      "label": "解析工匠桌"
+    },
+    {
+      "target": "arcane_assembly_table",
+      "label": "魔动装配台"
+    },
+    {
+      "target": "crystal_ball",
+      "label": "水晶球"
+    },
+    {
+      "target": "crystal_casing",
+      "label": "水晶机壳"
+    },
+    {
+      "target": "crystal_pedestal",
+      "label": "水晶基座"
+    },
+    {
+      "target": "crystal_processing_table",
+      "label": "水晶加工台"
+    },
+    {
+      "target": "crystal_sign",
+      "label": "水晶告示牌"
+    },
+    {
+      "target": "light_crystal_torch",
+      "label": "光晶火炬"
+    },
+    {
+      "target": "rough_alchemy_cauldron",
+      "label": "粗糙炼金釜"
+    },
+    {
+      "target": "shadow_lantern",
+      "label": "暗影灯笼"
+    },
+    {
+      "target": "spacetime_waymark",
+      "label": "时空道标"
+    },
+    {
+      "target": "spiritual_crystal_block",
+      "label": "灵性水晶块"
+    },
+    {
+      "target": "mana_engine",
+      "label": "魔能引擎"
+    },
+    {
+      "target": "travel_waymark",
+      "label": "时空道标"
+    }
+  ]
+}

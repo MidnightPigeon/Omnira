@@ -13,12 +13,16 @@
       "label": "空间水晶生长"
     },
     {
-      "target": "spatial_caverns_guide",
+      "target": "spatial_caverns",
       "label": "空间洞穴"
     },
     {
       "target": "advanced_condensation_table",
       "label": "高阶凝聚台"
+    },
+    {
+      "target": "inverted_abyss_guide",
+      "label": "倒悬深渊"
     }
   ]
 }

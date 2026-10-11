@@ -13,7 +13,8 @@ public final class LabyrinthDecoration {
         else if(be instanceof net.minecraft.world.level.block.entity.BrushableBlockEntity sand)
             sand.setLootTable(ResourceKey.create(net.minecraft.core.registries.Registries.LOOT_TABLE,ResourceLocation.parse("omnira:archaeology/topological_labyrinth")),net.minecraft.world.level.levelgen.RandomSupport.mixStafford13(pos.asLong()));
         else if(be instanceof com.mcmagic.omnira.block.entity.CrystalPedestalBlockEntity pedestal)
-            pedestal.setItem(0,new net.minecraft.world.item.ItemStack(com.mcmagic.omnira.registry.ModItems.CRUISE_ORB.get()));
+            pedestal.setItem(0,new net.minecraft.world.item.ItemStack(LabyrinthTerrain.plan(LabyrinthTerrain.room(pos)).kind()==6
+                    ?com.mcmagic.omnira.registry.ModBlocks.NIGHT_HERON_STATUE.get():com.mcmagic.omnira.registry.ModItems.CRUISE_ORB.get()));
     }
     private LabyrinthDecoration(){}
 }

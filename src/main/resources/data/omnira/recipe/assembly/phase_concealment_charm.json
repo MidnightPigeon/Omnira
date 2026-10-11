@@ -1,0 +1,21 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:phase_control_panel"
+    },
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "omnira:spacetime_anchoring_sigil"
+    }
+  ],
+  "result": {
+    "id": "omnira:phase_concealment_charm",
+    "count": 1
+  }
+}

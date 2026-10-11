@@ -10,6 +10,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class DislocationPushableMixin {
     @Inject(method="isPushable",at=@At("HEAD"),cancellable=true)
     private void omnira$noSolidBody(CallbackInfoReturnable<Boolean> result){
-        if(TemporalDislocation.phased((LivingEntity)(Object)this))result.setReturnValue(false);
+        if(TemporalDislocation.phased((LivingEntity)(Object)this)||com.mcmagic.omnira.space.phase.PhaseConcealment.active((LivingEntity)(Object)this))result.setReturnValue(false);
     }
 }

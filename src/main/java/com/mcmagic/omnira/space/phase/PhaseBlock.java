@@ -13,9 +13,11 @@ import net.minecraft.world.phys.shapes.*;
 public final class PhaseBlock extends TransparentBlock {
     public static final BooleanProperty INVERTED=BooleanProperty.create("inverted");
     public static final BooleanProperty TRANSITIONING=BooleanProperty.create("transitioning");
+    public static final BooleanProperty TARGET=BooleanProperty.create("target_inverted");
     public static final IntegerProperty PHASE=IntegerProperty.create("phase",0,16);
-    public PhaseBlock(Properties p){super(p);registerDefaultState(stateDefinition.any().setValue(INVERTED,false).setValue(TRANSITIONING,false).setValue(PHASE,0));}
-    @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block,BlockState> builder){builder.add(INVERTED,TRANSITIONING,PHASE);}
+    public PhaseBlock(Properties p){super(p);registerDefaultState(stateDefinition.any().setValue(INVERTED,false).setValue(TRANSITIONING,false).setValue(TARGET,false).setValue(PHASE,0));}
+    @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block,BlockState> builder){builder.add(INVERTED,TRANSITIONING,TARGET,PHASE);}
+    @Override public boolean skipRendering(BlockState state,BlockState adjacent,Direction side){return adjacent.is(this)||super.skipRendering(state,adjacent,side);}
     @Override public void animateTick(BlockState state,Level level,BlockPos pos,RandomSource random){
         PhaseParticles.inside(level,pos,random,state.getValue(PHASE)/16F);
     }
@@ -23,7 +25,11 @@ public final class PhaseBlock extends TransparentBlock {
         return state.getValue(INVERTED)?Shapes.empty():Shapes.block();
     }
     @Override public void onPlace(BlockState state,Level level,BlockPos pos,BlockState old,boolean moving){
-        if(!level.isClientSide)PhaseNetworks.schedule(level,pos);
+        if(!level.isClientSide){if(!old.is(this))PhaseNetworks.invalidate(level);PhaseNetworks.schedule(level,pos);}
+    }
+    @Override public void onRemove(BlockState state,Level level,BlockPos pos,BlockState next,boolean moving){
+        if(!next.is(this)&&!level.isClientSide){PhaseNetworks.invalidate(level);for(var face:Direction.values())PhaseNetworks.schedule(level,pos.relative(face));}
+        super.onRemove(state,level,pos,next,moving);
     }
     @Override public void tick(BlockState state,ServerLevel level,BlockPos pos,RandomSource random){PhaseNetworks.tick(level,pos);}
 }

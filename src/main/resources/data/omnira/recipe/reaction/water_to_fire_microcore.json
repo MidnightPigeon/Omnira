@@ -1,0 +1,20 @@
+{
+  "type": "omnira:reaction",
+  "items": [
+    {
+      "ingredient": {
+        "item": "omnira:water_microcore"
+      }
+    }
+  ],
+  "fluid": {
+    "id": "minecraft:lava",
+    "amount": 500
+  },
+  "guaranteed_results": [
+    {
+      "id": "omnira:fire_microcore",
+      "count": 1
+    }
+  ]
+}

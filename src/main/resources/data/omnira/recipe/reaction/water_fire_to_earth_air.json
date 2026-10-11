@@ -1,0 +1,30 @@
+{
+  "type": "omnira:reaction",
+  "items": [
+    {
+      "ingredient": {
+        "item": "omnira:water_microcore"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "omnira:fire_microcore"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "omnira:paradox_dust"
+      }
+    }
+  ],
+  "guaranteed_results": [
+    {
+      "id": "omnira:earth_microcore",
+      "count": 1
+    },
+    {
+      "id": "omnira:air_microcore",
+      "count": 1
+    }
+  ]
+}

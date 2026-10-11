@@ -20,6 +20,7 @@ public final class WorldGlassBuffers {
     private static ByteBufferBuilder memory;
     private static MultiBufferSource.BufferSource deferred;
     private static boolean collecting,pending;
+    public static boolean collecting(){return collecting&&!MirrorScene.rendering();}
 
     // Only the main world source is redirected; GUI, hand, previews and mirrors stay local.
     public static VertexConsumer redirect(MultiBufferSource.BufferSource source,RenderType type){
@@ -36,6 +37,7 @@ public final class WorldGlassBuffers {
 
     @SubscribeEvent public static void stage(RenderLevelStageEvent event){
         if(event.getStage()==RenderLevelStageEvent.Stage.AFTER_SKY){
+            CrystalInteriorMotes.beginFrame();
             // Never replay camera-relative vertices left by an aborted frame.
             if(pending)reset();
             collecting=true;
@@ -48,6 +50,7 @@ public final class WorldGlassBuffers {
         }
     }
     public static void reset(){
+        CrystalInteriorMotes.reset();
         collecting=false;pending=false;deferred=null;
         if(memory!=null){memory.close();memory=null;}
     }

@@ -1,0 +1,19 @@
+{
+  "id": "phase_concealment_charm",
+  "title": "Phase Concealment Charm",
+  "item": "omnira:phase_concealment_charm",
+  "recipes": true,
+  "text": [
+    "Wear in a charm slot. After taking damage, become translucent for 5 seconds and pass through entities, but not walls. Single-target attacks cannot hit you; explosions, area spells and splash damage potions still can. This charm does not retain the Spacetime Anchoring Sigil abilities."
+  ],
+  "links": [
+    {
+      "target": "phase_control_panel_relic",
+      "label": "Phase Control Panel"
+    },
+    {
+      "target": "arcane_assembly_table",
+      "label": "Assembly Table"
+    }
+  ]
+}

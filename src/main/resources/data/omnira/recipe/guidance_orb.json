@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "GBG",
+    " G "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "B": {
+      "item": "omnira:guide_book"
+    }
+  },
+  "result": {
+    "id": "omnira:guidance_orb",
+    "count": 1
+  }
+}

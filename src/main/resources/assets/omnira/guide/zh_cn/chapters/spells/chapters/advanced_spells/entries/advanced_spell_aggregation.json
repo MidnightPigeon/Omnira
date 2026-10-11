@@ -1,0 +1,15 @@
+{
+  "id": "advanced_spell_aggregation",
+  "item": "omnira:advanced_crystal_aggregation_ring",
+  "title": "多方块法术聚合",
+  "text": [
+    "高阶水晶聚合环可以加工高阶魔法水晶，组合更多要素与修饰。搭建和操作见高阶水晶聚合环。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "advanced_crystal_aggregation_ring",
+      "label": "高阶水晶聚合环"
+    }
+  ]
+}

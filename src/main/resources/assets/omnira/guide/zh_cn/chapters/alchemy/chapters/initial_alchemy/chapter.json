@@ -1,0 +1,12 @@
+{
+  "id": "initial_alchemy",
+  "title": "初级",
+  "icon": "omnira:rough_alchemy_cauldron",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/rough_alchemy_cauldron.json",
+    "entries/primitive_reaction_cauldron.json",
+    "entries/microcore_conversion.json"
+  ],
+  "chapters": []
+}

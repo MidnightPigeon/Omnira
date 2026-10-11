@@ -1,0 +1,15 @@
+{
+  "id": "travel_fold_gate",
+  "item": "omnira:fold_gate_frame",
+  "title": "Fold Gate",
+  "text": [
+    "Stable gates pair for two-way travel; unstable gates eject travellers one-way."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "fold_gate_guide",
+      "label": "Details and Acquisition"
+    }
+  ]
+}

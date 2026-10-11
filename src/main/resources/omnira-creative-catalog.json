@@ -4,6 +4,7 @@
       "group": "Reading and casting",
       "items": [
         "guide_book",
+        "guidance_orb",
         "modular_staff",
         "infused_grimoire",
         "sanctified_grimoire",
@@ -45,8 +46,7 @@
         "sharp_breath",
         "healing_dew",
         "dissociation_thread",
-        "construction_matrix",
-        "milk_suspension"
+        "construction_matrix"
       ]
     },
     {
@@ -134,6 +134,7 @@
       "group": "Charms and rings",
       "items": [
         "spacetime_anchoring_sigil",
+        "phase_concealment_charm",
         "phantom_calling_card",
         "enhanced_phantom_calling_card",
         "d_class_credentials",
@@ -297,7 +298,8 @@
         "spatial_crystal_slab",
         "deflection_crystal_block",
         "phase_crystal_block",
-        "phase_crystal_cluster"
+        "phase_crystal_cluster",
+        "phase_control_panel"
       ]
     },
     {
@@ -460,7 +462,8 @@
         "crude_light_core",
         "grid_frame",
         "spell_ink",
-        "shadow_mist"
+        "shadow_mist",
+        "milk_suspension"
       ]
     },
     {

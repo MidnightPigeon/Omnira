@@ -1,0 +1,15 @@
+{
+  "id": "travel_recall",
+  "item": "omnira:recall_crystal",
+  "title": "归程水晶",
+  "text": [
+    "选择已记录的道标，保持原地引导后归程。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "recall_crystal",
+      "label": "获取与使用"
+    }
+  ]
+}

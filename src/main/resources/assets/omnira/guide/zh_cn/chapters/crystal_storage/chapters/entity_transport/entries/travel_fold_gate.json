@@ -1,0 +1,15 @@
+{
+  "id": "travel_fold_gate",
+  "item": "omnira:fold_gate_frame",
+  "title": "折跃门",
+  "text": [
+    "稳定门可成对连接并双向通行；不稳定门用于单向弹射。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "fold_gate_guide",
+      "label": "获取与使用"
+    }
+  ]
+}

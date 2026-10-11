@@ -268,6 +268,7 @@ public final class SpellCasting {
         }
         power=com.mcmagic.omnira.fate.FateEffects.spellPower(caster,power);
         SpellEntity effect=SpellEntity.spawn(level,caster,SpellEntity.Kind.BURST,caster.position());
+        effect.directSingleTarget(target==SpellTargetKeyword.AIM||target==SpellTargetKeyword.TARGET);
         effect.configure(power,payload);
         effect.rangeMultiplier(modifiers.range());
         effect.suppressCloud();

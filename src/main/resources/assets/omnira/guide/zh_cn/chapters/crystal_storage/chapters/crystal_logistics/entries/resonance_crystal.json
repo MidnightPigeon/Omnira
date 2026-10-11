@@ -1,0 +1,32 @@
+{
+  "id": "resonance_crystal",
+  "item": "omnira:resonance_crystal",
+  "title": "共振水晶",
+  "text": [
+    "共振水晶是物流器械的基础材料。以灵性水晶和八份奥术尘合成，也用于部分器械与仪式。",
+    "也可在共鸣晶核催化下，将1枚灵性水晶反应为1枚共振水晶，无需液体，基础时长100秒，催化方块不消耗。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "resonance_core",
+      "label": "共鸣晶核"
+    },
+    {
+      "target": "resonant_orbs",
+      "label": "共振晶球"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    },
+    {
+      "target": "crystal_processing_table",
+      "label": "水晶加工台"
+    },
+    {
+      "target": "shadow_lantern",
+      "label": "暗影灯笼"
+    }
+  ]
+}

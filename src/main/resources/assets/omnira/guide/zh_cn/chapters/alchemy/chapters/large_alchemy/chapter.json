@@ -1,0 +1,14 @@
+{
+  "id": "large_alchemy",
+  "title": "时空",
+  "icon": "omnira:large_alchemical_reaction_pool",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/large_alchemical_reaction_pool.json",
+    "entries/alchemical_catalysis_chamber.json"
+  ],
+  "chapters": [
+    "chapters/alchemy_materials/chapter.json",
+    "chapters/alchemy_products/chapter.json"
+  ]
+}

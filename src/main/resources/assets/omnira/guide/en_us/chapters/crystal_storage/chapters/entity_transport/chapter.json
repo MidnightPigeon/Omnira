@@ -1,0 +1,13 @@
+{
+  "id": "entity_transport",
+  "title": "Entity Transport",
+  "icon": "omnira:recall_crystal",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/travel_waymark.json",
+    "entries/travel_recall.json",
+    "entries/travel_enhanced_recall.json",
+    "entries/travel_fold_gate.json"
+  ],
+  "chapters": []
+}

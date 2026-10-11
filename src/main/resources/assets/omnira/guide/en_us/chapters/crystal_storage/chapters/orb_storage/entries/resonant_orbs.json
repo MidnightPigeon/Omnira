@@ -18,6 +18,10 @@
     {
       "target": "output_upgrade",
       "label": "Output filtering"
+    },
+    {
+      "target": "orb_upgrade_plugins",
+      "label": "Upgrade Plugins"
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "id": "simple_storage",
+  "title": "Simple Storage",
+  "icon": "omnira:crystal_ball",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/crystal_ball.json",
+    "entries/crystal_ball_crafting.json",
+    "entries/liquid_crystal_ball.json"
+  ],
+  "chapters": []
+}

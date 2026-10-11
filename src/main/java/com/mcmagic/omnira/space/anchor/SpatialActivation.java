@@ -13,7 +13,11 @@ public final class SpatialActivation {
     private final BlockEntity owner;
     private final int radius,side,volume;
     private final Map<BlockPos,Progress> progress=new LinkedHashMap<>();
-    private record Progress(BlockState original,int ticks){}
+    private static final class Progress {
+        final BlockState original;int ticks;
+        Progress(BlockState state,int ticks){this.original=state;this.ticks=ticks;}
+        BlockState original(){return original;}int ticks(){return ticks;}
+    }
     private int cursor;
     public SpatialActivation(BlockEntity owner,int radius){this.owner=owner;this.radius=radius;side=radius*2+1;volume=side*side*side;}
     public boolean begin(BlockPos pos){
@@ -30,11 +34,12 @@ public final class SpatialActivation {
         while(it.hasNext()){
             var entry=it.next();var pos=entry.getKey();if(!level.hasChunkAt(pos))continue;
             var old=entry.getValue();if(!level.getBlockState(pos).equals(old.original())){it.remove();owner.setChanged();continue;}
-            int ticks=old.ticks()+1;
+            int ticks=++old.ticks;
             if(ticks>=1200){level.setBlockAndUpdate(pos,StabilityAnchorEntity.result(old.original()));it.remove();owner.setChanged();}
-            else{entry.setValue(new Progress(old.original(),ticks));if(now%10==0)StabilityAnchorEntity.orbit(level,Vec3.atCenterOf(pos),.65,now+pos.asLong()%97);}
+            else if(now%10==0)StabilityAnchorEntity.orbit(level,Vec3.atCenterOf(pos),.65,now+pos.asLong()%97);
         }
-        for(int n=0;n<2048&&progress.size()<128;n++){
+        int budget=ActivationScanBudget.take(level,owner.getBlockPos());
+        for(int n=0;n<budget&&progress.size()<128;n++){
             int index=cursor++;if(cursor==volume)cursor=0;
             begin(owner.getBlockPos().offset(offset(index%side),offset(index/(side*side)),offset(index/side%side)));
         }

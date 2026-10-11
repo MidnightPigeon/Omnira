@@ -13,12 +13,16 @@
       "label": "Growing Spatial Crystals"
     },
     {
-      "target": "spatial_caverns_guide",
+      "target": "spatial_caverns",
       "label": "Spatial Caverns"
     },
     {
       "target": "advanced_condensation_table",
       "label": "Advanced Condensation Table"
+    },
+    {
+      "target": "inverted_abyss_guide",
+      "label": "Inverted Abyss"
     }
   ]
 }

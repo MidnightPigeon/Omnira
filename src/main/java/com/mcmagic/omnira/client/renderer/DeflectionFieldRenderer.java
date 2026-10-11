@@ -15,7 +15,11 @@ public final class DeflectionFieldRenderer extends BlockEntityWithoutLevelRender
     }
     @Override public void renderByItem(ItemStack stack,ItemDisplayContext context,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         var mc=Minecraft.getInstance();double time=mc.level==null?0:mc.level.getGameTime()+mc.getTimer().getGameTimeDeltaPartialTick(false);
-        pose.pushPose();pose.translate(-.0625,-.25,.5);
+        pose.pushPose();
+        boolean held=context==ItemDisplayContext.FIRST_PERSON_LEFT_HAND||context==ItemDisplayContext.FIRST_PERSON_RIGHT_HAND
+                ||context==ItemDisplayContext.THIRD_PERSON_LEFT_HAND||context==ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
+        // Held geometry uses vanilla shield's grip origin; display models stay centered.
+        if(held)pose.translate(-.5625,-.75,.09375);else pose.translate(-.0625,-.25,.5);
         var mesh=buffers.getBuffer(CrystalGlassLayer.COLOR);var matrix=pose.last().pose();
         for(int y=0;y<24;y++)for(int x=0;x<18;x++){
             if(!occupied(x,y))continue;

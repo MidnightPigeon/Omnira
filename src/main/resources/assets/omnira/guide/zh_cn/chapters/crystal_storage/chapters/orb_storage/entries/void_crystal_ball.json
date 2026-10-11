@@ -13,6 +13,10 @@
     {
       "target": "intake_upgrade",
       "label": "汲取升级"
+    },
+    {
+      "target": "orb_upgrade_plugins",
+      "label": "升级插件"
     }
   ]
 }

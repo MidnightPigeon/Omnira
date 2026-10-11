@@ -9,6 +9,10 @@
   ],
   "links": [
     {
+      "target": "phase_greenhouse_guide",
+      "label": "Phase Greenhouse Ruins"
+    },
+    {
       "target": "phase_crystal_guide",
       "label": "Phase Crystals"
     }

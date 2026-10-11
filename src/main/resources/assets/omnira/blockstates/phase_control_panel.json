@@ -1,0 +1,36 @@
+{
+  "variants": {
+    "facing=north,inverted=false": {
+      "model": "omnira:block/phase_control_panel",
+      "y": 0
+    },
+    "facing=north,inverted=true": {
+      "model": "omnira:block/phase_control_panel_inverted",
+      "y": 0
+    },
+    "facing=east,inverted=false": {
+      "model": "omnira:block/phase_control_panel",
+      "y": 90
+    },
+    "facing=east,inverted=true": {
+      "model": "omnira:block/phase_control_panel_inverted",
+      "y": 90
+    },
+    "facing=south,inverted=false": {
+      "model": "omnira:block/phase_control_panel",
+      "y": 180
+    },
+    "facing=south,inverted=true": {
+      "model": "omnira:block/phase_control_panel_inverted",
+      "y": 180
+    },
+    "facing=west,inverted=false": {
+      "model": "omnira:block/phase_control_panel",
+      "y": 270
+    },
+    "facing=west,inverted=true": {
+      "model": "omnira:block/phase_control_panel_inverted",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "microcore_conversion",
+  "item": "omnira:fire_microcore",
+  "title": "Fire Microcore Conversion",
+  "recipes": false,
+  "text": [
+    "React 500 mB of lava with one Water Microcore to obtain one Fire Microcore. No catalyst block is required."
+  ],
+  "links": [
+    {
+      "target": "primitive_reaction_cauldron",
+      "label": "Primitive Reaction Cauldron"
+    },
+    {
+      "target": "dream_microcore_conversion",
+      "label": "Earth and Air Microcore Conversion"
+    }
+  ]
+}

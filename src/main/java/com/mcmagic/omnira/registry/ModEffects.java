@@ -4,6 +4,7 @@ import net.minecraft.world.effect.*;
 import net.neoforged.neoforge.registries.*;
 public final class ModEffects {
     public static final DeferredRegister<MobEffect> EFFECTS=DeferredRegister.create(Registries.MOB_EFFECT,"omnira");
+    public static final DeferredHolder<MobEffect,MobEffect> PHASE_CONCEALMENT=EFFECTS.register("phase_concealment",com.mcmagic.omnira.space.phase.PhaseConcealment::new);
     public static final DeferredHolder<MobEffect,MobEffect> TIME_PASSAGE=EFFECTS.register("time_passage",com.mcmagic.omnira.mire.TimePassage::new);
     public static final DeferredHolder<MobEffect,MobEffect> TEMPORAL_DISLOCATION=EFFECTS.register("temporal_dislocation",com.mcmagic.omnira.time.TemporalDislocation::new);
     public static final DeferredHolder<MobEffect,MobEffect> CONSTRUCTION_LOCK=EFFECTS.register("construction_lock",()->new LockEffect());

@@ -17,6 +17,16 @@ public final class StabilityField extends SavedData {
     public static final int RADIUS=64;
     private final Set<BlockPos> anchors=new HashSet<>();
     private final Set<BlockPos> stellarOrbs=new HashSet<>();
+    private final Map<Long,Set<BlockPos>> anchorIndex=new HashMap<>(),orbIndex=new HashMap<>();
+    private boolean indexDirty=true;
+    @Override public void setDirty(){indexDirty=true;super.setDirty();}
+    private static long cell(BlockPos p){return BlockPos.asLong(p.getX()>>6,p.getY()>>6,p.getZ()>>6);}
+    private void index(){
+        if(!indexDirty)return;anchorIndex.clear();orbIndex.clear();
+        for(var p:anchors)anchorIndex.computeIfAbsent(cell(p),k->new HashSet<>()).add(p);
+        for(var p:stellarOrbs)orbIndex.computeIfAbsent(cell(p),k->new HashSet<>()).add(p);
+        indexDirty=false;
+    }
     private static final ThreadLocal<Set<UUID>> TOOL_TRAVEL=ThreadLocal.withInitial(Set::of);
     public static <T> T toolTravel(Entity root,boolean enhanced,java.util.function.Supplier<T> action){
         if(!enhanced)return action.get();
@@ -42,17 +52,20 @@ public final class StabilityField extends SavedData {
         return strength(level,point)>0;
     }
     public static int strength(ServerLevel level,Vec3 point){
-        var data=get(level);var it=data.anchors.iterator();
-        while(it.hasNext()){
-            var pos=it.next();
-            if(level.hasChunkAt(pos)&&!level.getBlockState(pos).is(AnchorContent.ACTIVE.get())){it.remove();data.setDirty();continue;}
-            if(Vec3.atCenterOf(pos).distanceToSqr(point)<=RADIUS*RADIUS)return 2;
-        }
-        it=data.stellarOrbs.iterator();
-        while(it.hasNext()){
-            var pos=it.next();
-            if(level.hasChunkAt(pos)&&(!(level.getBlockEntity(pos) instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity orb)||!orb.stabilized())){it.remove();data.setDirty();continue;}
-            if(Vec3.atCenterOf(pos).distanceToSqr(point)<=32*32)return 1;
+        var data=get(level);data.index();var center=BlockPos.containing(point);
+        for(int strength=2;strength>=1;strength--){
+            var map=strength==2?data.anchorIndex:data.orbIndex;int radius=strength==2?64:32;
+            for(int dx=-1;dx<=1;dx++)for(int dy=-1;dy<=1;dy++)for(int dz=-1;dz<=1;dz++){
+                var bucket=map.get(BlockPos.asLong((center.getX()>>6)+dx,(center.getY()>>6)+dy,(center.getZ()>>6)+dz));
+                if(bucket==null)continue;
+                for(var pos:bucket){
+                    if(level.hasChunkAt(pos)&&(strength==2?!level.getBlockState(pos).is(AnchorContent.ACTIVE.get()):
+                            !(level.getBlockEntity(pos) instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity orb)||!orb.stabilized())){
+                        (strength==2?data.anchors:data.stellarOrbs).remove(pos);data.setDirty();continue;
+                    }
+                    if(Vec3.atCenterOf(pos).distanceToSqr(point)<=radius*radius)return strength;
+                }
+            }
         }
         return 0;
     }

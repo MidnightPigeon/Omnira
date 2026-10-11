@@ -38,6 +38,10 @@
     {
       "target": "advanced_condensation_table",
       "label": "高阶凝聚台"
+    },
+    {
+      "target": "spacetime_port",
+      "label": "时空端口"
     }
   ]
 }

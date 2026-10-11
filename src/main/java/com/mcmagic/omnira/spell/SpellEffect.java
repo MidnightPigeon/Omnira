@@ -62,6 +62,8 @@ public record SpellEffect(boolean healing,int amplifier,int duration,boolean inf
     public void apply(Entity source,Entity owner,Entity hit,double power,boolean holy) {
         LivingEntity target=SpellCasting.livingTarget(hit);
         if(target==null || !target.isAlive()) return;
+        if(!healing&&com.mcmagic.omnira.space.phase.PhaseConcealment.active(target)
+                &&com.mcmagic.omnira.space.phase.PhaseConcealment.singleTarget(source))return;
         if(darkness())return;
         if(holy && (duration==0 || utility()))power*=1.5;
         if(utility()) {UtilitySpellEffects.applyLiving(this,source,owner,target,power);return;}

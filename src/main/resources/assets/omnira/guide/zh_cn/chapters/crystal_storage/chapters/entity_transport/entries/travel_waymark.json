@@ -1,0 +1,15 @@
+{
+  "id": "travel_waymark",
+  "item": "omnira:spacetime_waymark",
+  "title": "时空道标",
+  "text": [
+    "放置并右键记录位置，供归程水晶选择。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "spacetime_waymark",
+      "label": "获取与使用"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
   "item": "omnira:fold_gate_frame",
   "recipes": true,
   "text": [
-    "Assemble six Engraved Mirror Rocks around a Spatial Crystal in an Assembly Table to make a two-block frame. Use one Spatial Fold Point to open a stable gate, or one Unstable Spacetime Aggregate to open an unstable gate.",
+    "Assemble six mirror-rock materials around a Space Microcore to make the frame. It occupies two vertical blocks. Use a Space Warp Point to unfold a stable gate, or an Unstable Spacetime Aggregate to unfold an unstable gate.",
     "Select two stable gates with a Resonance Tuning Rod. White and black particles mark pairing order, not travel direction: travel works both ways, across any distance and across dimensions. Use the rod on either linked gate to unlink. Breaking either half also unlinks the pair.",
     "Stand in the portal for one second to travel. A stable gate requires a safe landing outside its partner. Ordinary vehicles and passengers travel together; assembled Create and aeronautical structures cannot pass.",
     "An unstable gate launches players one way to a random dimension, including the current one. It maps coordinates using the destination scale, then seeks safe ground 128 to 512 horizontal blocks away. Once a landing is found, it deals true damage equal to 20% to 50% of maximum health, which can be lethal. No return gate is created.",
@@ -18,6 +18,10 @@
     {
       "target": "space_warp_point_guide",
       "label": "Spatial Fold Points"
+    },
+    {
+      "target": "travel_fold_gate",
+      "label": "Entity Transport"
     }
   ]
 }

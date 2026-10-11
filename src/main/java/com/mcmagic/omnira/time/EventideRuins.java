@@ -97,6 +97,7 @@ public final class EventideRuins {
             // The time node removes health directly, independent of armor and damage modifiers.
             float remaining=player.getHealth()-player.getMaxHealth()*.5F;
             player.setHealth(Math.max(0,remaining));
+            com.mcmagic.omnira.space.phase.PhaseConcealment.afterDamage(player);
             if(remaining<=0)player.die(new net.minecraft.world.damagesource.DamageSource(
                     level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(
                             ResourceKey.create(Registries.DAMAGE_TYPE,ResourceLocation.parse("omnira:time_ending")))));

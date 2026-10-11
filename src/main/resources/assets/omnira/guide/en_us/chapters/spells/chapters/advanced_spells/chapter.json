@@ -1,0 +1,15 @@
+{
+  "id": "advanced_spells",
+  "title": "Spacetime",
+  "icon": "omnira:high_tier_magic_crystal",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/advanced_spell_aggregation.json",
+    "entries/reverse_timeflow.json",
+    "entries/spatial_blade.json",
+    "entries/time_staff_shaft.json",
+    "entries/infused_crystal_tip.json",
+    "entries/spacetime_aggregate_tip.json"
+  ],
+  "chapters": []
+}

@@ -33,6 +33,10 @@ public final class RuinsStructure extends Structure {
             TYPES.register("calibration_station",()->()->com.mcmagic.omnira.space.geodes.CalibrationStructure.CODEC);
     public static final java.util.function.Supplier<StructurePieceType> CALIBRATION_PIECE=
             PIECES.register("calibration_station",()->com.mcmagic.omnira.space.geodes.CalibrationPiece::new);
+    public static final java.util.function.Supplier<StructureType<com.mcmagic.omnira.space.phase.PhaseGreenhouseStructure>> PHASE_GREENHOUSE_TYPE=
+            TYPES.register("phase_greenhouse",()->()->com.mcmagic.omnira.space.phase.PhaseGreenhouseStructure.CODEC);
+    public static final java.util.function.Supplier<StructurePieceType> PHASE_GREENHOUSE_PIECE=
+            PIECES.register("phase_greenhouse",()->com.mcmagic.omnira.space.phase.PhaseGreenhousePiece::new);
     public static final java.util.function.Supplier<StructureType<com.mcmagic.omnira.space.FoldObservatoryStructure>> FOLD_OBSERVATORY_TYPE=
             TYPES.register("fold_observatory",()->()->com.mcmagic.omnira.space.FoldObservatoryStructure.CODEC);
     public static final java.util.function.Supplier<StructurePieceType> FOLD_OBSERVATORY_PIECE=

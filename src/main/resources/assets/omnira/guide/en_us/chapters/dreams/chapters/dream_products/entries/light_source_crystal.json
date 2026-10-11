@@ -6,5 +6,15 @@
     "A pale-gold translucent crystal forming the shells of light spheres in the Dawn Crystal Plains. Used for building and Crude Light Cores.",
     "Emits light level 10, brighter than Light Condensate, and provides 5 kpg of lift with Aeronautics."
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    },
+    {
+      "target": "light_source_bricks",
+      "label": "Light Source Bricks"
+    }
+  ]
 }

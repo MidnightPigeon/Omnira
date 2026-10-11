@@ -1,0 +1,23 @@
+{
+  "id": "phase_control_panel_relic",
+  "title": "相位控制晶板",
+  "item": "omnira:phase_control_panel",
+  "recipes": false,
+  "text": [
+    "可在相位温室遗址的配置室找到，附着在相位晶块侧面。右键切换所连接晶块的常态或反相，并固定该状态，不再随机变化；切换仍有4秒的过渡。拆下晶板后，晶块恢复自身的反相规则。"
+  ],
+  "links": [
+    {
+      "target": "phase_greenhouse_guide",
+      "label": "相位温室遗址"
+    },
+    {
+      "target": "phase_crystal_guide",
+      "label": "相位晶块与晶簇"
+    },
+    {
+      "target": "phase_concealment_charm",
+      "label": "相位隐匿护符"
+    }
+  ]
+}

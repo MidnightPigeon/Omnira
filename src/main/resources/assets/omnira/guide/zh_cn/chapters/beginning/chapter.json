@@ -1,15 +1,12 @@
 {
   "id": "beginning",
-  "title": "基础制作",
+  "title": "基础制作与入门",
   "icon": "omnira:guide_book",
   "introduction": "introduction.json",
-  "entries": [
-    "entries/guide_book.json",
-    "entries/crystal_pickaxe.json",
-    "entries/resonance_crystal.json",
-    "entries/pocket_magic_bottle.json"
-  ],
+  "entries": [],
   "chapters": [
+    "chapters/guidance/chapter.json",
+    "chapters/initial_crafting/chapter.json",
     "chapters/building/chapter.json"
   ]
 }

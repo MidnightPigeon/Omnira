@@ -30,8 +30,8 @@ public final class StorageVisuals {
         event.register((state,level,pos,tint)->color(level!=null&&level.getBlockEntity(pos) instanceof CrystalBallBlockEntity ball?ball.networkStatus:0),CrystalStorageContent.ITEM_ORB.get(),CrystalStorageContent.FLUID_ORB.get());
     }
     @SubscribeEvent public static void itemColors(net.neoforged.neoforge.client.event.RegisterColorHandlersEvent.Item event){
-        event.register((stack,tint)->0x284E91,com.mcmagic.omnira.space.sea.StellarCraftContent.ORB_ITEM.get());
-        event.register((stack,tint)->color(0),CrystalStorageContent.ITEM.get(),CrystalStorageContent.FLUID.get());
+        event.register((stack,tint)->0xFF284E91,com.mcmagic.omnira.space.sea.StellarCraftContent.ORB_ITEM.get());
+        event.register((stack,tint)->0xFF000000|color(0),CrystalStorageContent.ITEM.get(),CrystalStorageContent.FLUID.get());
     }
     @SubscribeEvent public static void extensions(net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent event){
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){

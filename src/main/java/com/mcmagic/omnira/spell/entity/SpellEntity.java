@@ -63,6 +63,9 @@ public class SpellEntity extends Entity {
     private boolean knowledgeLeech;
     private SpellPayload payload=SpellPayload.EMPTY;
     private boolean explosiveImpact;
+    private boolean directSingleTarget;
+    public void directSingleTarget(boolean value){directSingleTarget=value;}
+    public boolean directSingleTarget(){return directSingleTarget;}
     private boolean darkTriggered;
     public boolean holy(){return com.mcmagic.omnira.spell.HolyMagic.enabled(payload);}
     public void triggerCloud(Vec3 point) {

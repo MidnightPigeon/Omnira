@@ -17,7 +17,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.ai.navigation.*;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.InteractionHand;
@@ -116,15 +115,28 @@ public final class DreamMirror extends PathfinderMob {
         setYRot((float)Math.toDegrees(Math.atan2(-delta.x,delta.z)));
         setYBodyRot(getYRot());setYHeadRot(getYRot());
     }
-    @Override protected float getDamageAfterMagicAbsorb(DamageSource source,float amount) {
-        float result=super.getDamageAfterMagicAbsorb(source,amount);
-        if(getTarget() instanceof Player player && faces(player) && !source.is(net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS)
-                && !source.is(net.minecraft.tags.DamageTypeTags.BYPASSES_EFFECTS) && level() instanceof ServerLevel server) {
-            result=CombatRules.getDamageAfterMagicAbsorb(result,EnchantmentHelper.getDamageProtection(server,player,source));
-            damageContainers.peek().setReduction(net.neoforged.neoforge.common.damagesource.DamageContainer.Reduction.ENCHANTMENTS,
-                    damageContainers.peek().getNewDamage()-result);
-        }
-        return result;
+    public boolean virtualEquipment(EquipmentSlot slot) {
+        return slot.getType()==EquipmentSlot.Type.HUMANOID_ARMOR;
+    }
+    private void copyArmor(EquipmentSlot slot,ItemStack source) {
+        var old=getItemBySlot(slot);
+        setDropChance(slot,0);
+        if(ItemStack.matches(old,source)) return;
+        old.forEachModifier(slot,(type,modifier)->{
+            var attribute=getAttribute(type);
+            if(attribute!=null) attribute.removeModifier(modifier.id());
+        });
+        var copy=source.copy();
+        setItemSlot(slot,copy);
+        setDropChance(slot,0);
+        // Apply immediately too: damage can arrive before vanilla's next equipment update.
+        copy.forEachModifier(slot,(type,modifier)->{
+            var attribute=getAttribute(type);
+            if(attribute!=null) {
+                attribute.removeModifier(modifier.id());
+                attribute.addTransientModifier(modifier);
+            }
+        });
     }
     private void copyAttribute(net.minecraft.core.Holder<Attribute> type,double value) {
         var attribute=getAttribute(type);attribute.removeModifier(COPIED);
@@ -133,6 +145,8 @@ public final class DreamMirror extends PathfinderMob {
     }
     public void updateCopies() {
         var player=getTarget() instanceof Player p && faces(p)?p:null;
+        for(var slot:EquipmentSlot.values()) if(virtualEquipment(slot))
+            copyArmor(slot,player==null?ItemStack.EMPTY:player.getItemBySlot(slot));
         copyAttribute(Attributes.ARMOR,player==null?0:player.getAttributeValue(Attributes.ARMOR));
         copyAttribute(Attributes.ARMOR_TOUGHNESS,player==null?0:player.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
         copyAttribute(ModAttributes.SPELL_POWER,player==null?1:player.getAttributeValue(ModAttributes.SPELL_POWER));
@@ -195,13 +209,21 @@ public final class DreamMirror extends PathfinderMob {
     @Override public boolean isPushable() {return false;}
     @Override public void push(Entity entity) {}
     @Override public boolean canPickUpLoot() {return false;}
+    @Override protected void dropCustomDeathLoot(ServerLevel level,DamageSource source,boolean recentlyHit) {
+        for(var slot:EquipmentSlot.values()) if(virtualEquipment(slot)) setDropChance(slot,0);
+        super.dropCustomDeathLoot(level,source,recentlyHit);
+    }
     @Override protected void checkFallDamage(double y,boolean grounded,net.minecraft.world.level.block.state.BlockState state,BlockPos pos) {}
     @Override public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);if(angryAt!=null) tag.putUUID("MirrorTarget",angryAt);
+        tag.remove("ArmorItems");tag.remove("ArmorDropChances");
         tag.putInt("MirrorShot",shotTicks);tag.putInt("MirrorCopy",copyTicks);
     }
     @Override public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);angryAt=tag.hasUUID("MirrorTarget")?tag.getUUID("MirrorTarget"):null;
+        for(var slot:EquipmentSlot.values()) if(virtualEquipment(slot)) {
+            copyArmor(slot,ItemStack.EMPTY);setDropChance(slot,0);
+        }
         shotTicks=tag.contains("MirrorShot")?Math.clamp(tag.getInt("MirrorShot"),1,100):100;
         copyTicks=tag.contains("MirrorCopy")?Math.clamp(tag.getInt("MirrorCopy"),1,600):600;
     }

@@ -1,0 +1,19 @@
+{
+  "id": "phase_concealment_charm",
+  "title": "相位隐匿护符",
+  "item": "omnira:phase_concealment_charm",
+  "recipes": true,
+  "text": [
+    "佩戴于护符槽。受伤后进入5秒的反相状态，身体半透明，可以穿过实体但不能穿墙，期间无法被单体攻击命中。爆炸、范围法术与喷溅伤害药水仍会波及。此护符不保留时空锚定印记的能力。"
+  ],
+  "links": [
+    {
+      "target": "phase_control_panel_relic",
+      "label": "相位控制晶板"
+    },
+    {
+      "target": "arcane_assembly_table",
+      "label": "装配台"
+    }
+  ]
+}

@@ -46,6 +46,7 @@ public final class Omnira {
         com.mcmagic.omnira.engine.SpacetimeEngineContent.init();
         com.mcmagic.omnira.space.sea.StarlightContent.init();
         com.mcmagic.omnira.space.sea.StellarCraftContent.init();
+        com.mcmagic.omnira.guidance.GuidanceContent.init();
         com.mcmagic.omnira.paradox.ParadoxContent.init();
         com.mcmagic.omnira.space.geodes.DeflectionContent.init();
         com.mcmagic.omnira.space.abyss.AbyssContent.init();

@@ -161,16 +161,45 @@ public final class DreamMirrorGameTests {
         player.discard();h.succeed();
     }
     @GameTest(template="spell_arena")
-    public static void protectionWithoutEquipment(GameTestHelper h) {
+    public static void virtualArmorProtection(GameTestHelper h) {
         var mirror=mirror(h);var player=player(h,mirror);
         var armor=new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.DIAMOND_CHESTPLATE);
         armor.enchant(h.getLevel().registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT)
                 .getHolderOrThrow(net.minecraft.world.item.enchantment.Enchantments.PROTECTION),4);
         player.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST,armor);
         mirror.provoke(player);mirror.updateCopies();
-        mirror.hurt(h.getLevel().damageSources().indirectMagic(player,player),10);
-        h.assertTrue(Math.abs(mirror.getHealth()-21.6F)<.02,"Protection did not reduce magic: "+mirror.getHealth());
-        h.assertTrue(mirror.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.CHEST).isEmpty(),"Armor became extractable");
+        h.assertTrue(net.minecraft.world.item.ItemStack.matches(mirror.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.CHEST),armor),
+                "Missing virtual armor before damage; target="+mirror.getTarget()+" facing="+mirror.faces(player));
+        h.assertTrue(net.minecraft.world.item.enchantment.EnchantmentHelper.getDamageProtection(h.getLevel(),mirror,
+                h.getLevel().damageSources().indirectMagic(player,player))==4,
+                "Protection data unavailable; player="+net.minecraft.world.item.enchantment.EnchantmentHelper.getDamageProtection(h.getLevel(),player,
+                        h.getLevel().damageSources().indirectMagic(player,player)));
+        var source=h.getLevel().damageSources().indirectMagic(player,player);
+        var control=net.minecraft.world.entity.EntityType.ZOMBIE.create(h.getLevel());
+        control.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST,armor.copy());
+        control.hurt(source,10);
+        mirror.hurt(source,10);
+        h.assertTrue(Math.abs((30-mirror.getHealth())-(20-control.getHealth()))<.02,
+                "Protection differs from ordinary equipment: mirror="+mirror.getHealth()+" control="+control.getHealth()
+                        +" bypassEffects="+source.is(net.minecraft.tags.DamageTypeTags.BYPASSES_EFFECTS)
+                        +" bypassEnchantments="+source.is(net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS));
+        var slot=net.minecraft.world.entity.EquipmentSlot.CHEST;
+        h.assertTrue(net.minecraft.world.item.ItemStack.matches(mirror.getItemBySlot(slot),armor)
+                && mirror.getItemBySlot(slot)!=armor,"Armor was not independently copied");
+        var saved=new net.minecraft.nbt.CompoundTag();mirror.addAdditionalSaveData(saved);
+        h.assertTrue(!saved.contains("ArmorItems"),"Virtual armor survived storage/capture");
+        var before=h.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,mirror.getBoundingBox().inflate(5)).size();
+        com.mcmagic.omnira.spell.UtilitySpellEffects.applyLiving(
+                com.mcmagic.omnira.spell.SpellEffect.utility("dissociation",0,0,0),player,player,mirror,1,false);
+        h.assertTrue(net.minecraft.world.item.ItemStack.matches(mirror.getItemBySlot(slot),armor)
+                && h.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,mirror.getBoundingBox().inflate(5)).size()==before,
+                "Dissociation extracted virtual armor");
+        mirror.setTarget(null);mirror.updateCopies();
+        h.assertTrue(mirror.getItemBySlot(slot).isEmpty() && mirror.getArmorValue()==0,"Virtual armor persisted without target");
+        mirror.provoke(player);mirror.updateCopies();
+        mirror.hurt(h.getLevel().damageSources().genericKill(),1000);
+        h.assertTrue(h.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,mirror.getBoundingBox().inflate(5),
+                item->item.getItem().is(net.minecraft.world.item.Items.DIAMOND_CHESTPLATE)).isEmpty(),"Death dropped virtual armor");
         player.discard();h.succeed();
     }
     @GameTest(template="spell_arena")

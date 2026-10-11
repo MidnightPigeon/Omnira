@@ -14,6 +14,14 @@ public abstract class StarSeaCreature extends TamableAnimal {
     private Vec3 destination;
     private int wanderTicks,attackTicks;
     private boolean attracted;
+    private BlockPos waterOrigin,cachedWater;
+    private int waterCursor;
+    private long waterRetry;
+    private long waterWorkTick=Long.MIN_VALUE;
+    private static final int[] WATER_OFFSETS=java.util.stream.IntStream.range(0,33*33*33)
+            .filter(n->{int x=n%33-16,y=n/1089-16,z=n/33%33-16;return x*x+y*y+z*z<=256;})
+            .boxed().sorted(java.util.Comparator.comparingInt(n->{int x=n%33-16,y=n/1089-16,z=n/33%33-16;return x*x+y*y+z*z;}))
+            .mapToInt(Integer::intValue).toArray();
     protected StarSeaCreature(EntityType<? extends TamableAnimal> type,Level level){super(type,level);setNoGravity(true);}
     @Override protected void registerGoals(){targetSelector.addGoal(1,new HurtByTargetGoal(this));}
     @Override public boolean canDrownInFluidType(net.neoforged.neoforge.fluids.FluidType type){return false;}
@@ -36,6 +44,7 @@ public abstract class StarSeaCreature extends TamableAnimal {
         else if(isOrderedToSit()){setDeltaMovement(getDeltaMovement().scale(.6));return;}
         else if(lure!=null)destination=lure;
         else if(isTame()&&getOwner()!=null&&distanceToSqr(getOwner())>36)destination=getOwner().position().add(0,1,0);
+        else if(!preferredFluid(level().getFluidState(blockPosition()))&&nearbyWater()!=null)destination=Vec3.atCenterOf(cachedWater);
         else if(--wanderTicks<=0||destination==null||position().distanceToSqr(destination)<1||horizontalCollision||verticalCollision){
             wanderTicks=40+random.nextInt(60);destination=chooseDestination();
         }
@@ -88,15 +97,28 @@ public abstract class StarSeaCreature extends TamableAnimal {
         return best;
     }
     private Vec3 nearbyWater(){
-        Vec3 best=null;double distance=257;BlockPos.MutableBlockPos p=new BlockPos.MutableBlockPos();
-        for(int x=-16;x<=16;x++)for(int z=-16;z<=16;z++)for(int y=-16;y<=16;y++){
-            double d=x*x+y*y+z*z;if(d>256||d>=distance)continue;
-            p.set(getBlockX()+x,getBlockY()+y,getBlockZ()+z);if(!level().hasChunkAt(p))continue;
+        long now=level().getGameTime();
+        if(cachedWater!=null){
+            if(cachedWater.distSqr(blockPosition())<=256&&level().hasChunkAt(cachedWater)&&attractingWater(cachedWater)){
+                Vec3 point=Vec3.atCenterOf(cachedWater);if(safePath(point.subtract(position())))return point;
+            }
+            cachedWater=null;waterRetry=0;
+        }
+        if(waterOrigin==null||waterOrigin.distSqr(blockPosition())>16){waterOrigin=blockPosition();waterCursor=0;waterRetry=now+Math.floorMod(getId(),5);}
+        if(now<waterRetry)return null;
+        if(waterWorkTick==now)return null;waterWorkTick=now;
+        BlockPos.MutableBlockPos p=new BlockPos.MutableBlockPos();
+        for(int checked=0;checked<512&&waterCursor<WATER_OFFSETS.length;checked++){
+            int n=WATER_OFFSETS[waterCursor++];
+            p.set(waterOrigin.getX()+n%33-16,waterOrigin.getY()+n/1089-16,waterOrigin.getZ()+n/33%33-16);
+            if(p.distSqr(blockPosition())>256||!level().hasChunkAt(p))continue;
             if(!attractingWater(p))continue;
             Vec3 point=Vec3.atCenterOf(p),delta=point.subtract(position());
-            if(safePath(delta)){best=point;distance=d;}
+            if(safePath(delta)){cachedWater=p.immutable();waterCursor=0;waterRetry=now+100;return point;}
         }
-        return best;
+        if(waterCursor>=WATER_OFFSETS.length){waterCursor=0;waterRetry=now+100+Math.floorMod(getId(),20);}
+        else waterRetry=now+1;
+        return null;
     }
     public boolean preferredFluid(net.minecraft.world.level.material.FluidState state){return !state.isEmpty()&&!com.mcmagic.omnira.mire.MireContent.fluid(state)&&state.getFluidType().canSwim(this);}
     public boolean attractingWater(BlockPos center){

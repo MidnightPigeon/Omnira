@@ -1,0 +1,19 @@
+{
+  "id": "spacetime_entry",
+  "item": "omnira:advanced_ritual_energy_core",
+  "title": "Breaking into Spacetime",
+  "recipes": false,
+  "text": [
+    "Capture a Dream Mirror and perform the Time-knocking Ritual to open a one-way gate into the Spacetime Corridor. Prepare a way home; its rifts lead to the Time Continent or Spatial Caverns."
+  ],
+  "links": [
+    {
+      "target": "corridor_ritual",
+      "label": "Time-knocking Ritual"
+    },
+    {
+      "target": "pocket_magic_bottle",
+      "label": "Pocket Magic Bottle"
+    }
+  ]
+}

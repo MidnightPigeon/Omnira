@@ -4,6 +4,7 @@
   "icon": "omnira:resonance_core",
   "introduction": "introduction.json",
   "entries": [
+    "entries/resonance_crystal.json",
     "entries/resonance_core.json",
     "entries/resonance_terminal.json",
     "entries/enhanced_resonance_terminal.json",

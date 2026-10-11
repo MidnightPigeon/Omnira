@@ -32,6 +32,7 @@ public final class ModItems {
     public static final DeferredItem<Item> DREAM_RABBIT_REMAINS=ITEMS.register("dream_rabbit_remains",()->new com.mcmagic.omnira.dream.DreamRabbitItem(new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON),false));
     public static final DeferredItem<Item> ALICE_DREAM_RABBIT_SIGIL=ITEMS.register("alice_dream_rabbit_sigil",()->new com.mcmagic.omnira.dream.DreamRabbitItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE),true));
     public static final DeferredItem<Item> SPACETIME_ANCHORING_SIGIL=ITEMS.registerItem("spacetime_anchoring_sigil",com.mcmagic.omnira.spacetime.AnchoringSigilItem::new);
+    public static final DeferredItem<Item> PHASE_CONCEALMENT_CHARM=ITEMS.registerItem("phase_concealment_charm",com.mcmagic.omnira.space.phase.PhaseConcealmentItem::new);
     public static final DeferredItem<BlockItem> MEMORY_CUBE=ITEMS.register("memory_cube",()->new com.mcmagic.omnira.item.MemoryCubeBlockItem(ModBlocks.MEMORY_CUBE.get(),new Item.Properties()));
     public static final DeferredItem<Item> PEACEFUL_MEMORY=ITEMS.register("peaceful_memory_cube",()->new com.mcmagic.omnira.item.MemoryCubeItem(new Item.Properties(),true));
     public static final DeferredItem<Item> CORRUPTED_MEMORY=ITEMS.register("corrupted_memory_cube",()->new com.mcmagic.omnira.item.MemoryCubeItem(new Item.Properties(),false));

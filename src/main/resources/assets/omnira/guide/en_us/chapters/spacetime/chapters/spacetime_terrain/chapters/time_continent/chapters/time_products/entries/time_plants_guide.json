@@ -32,6 +32,14 @@
     {
       "target": "advanced_condensation_table",
       "label": "Advanced Condensation Table"
+    },
+    {
+      "target": "spacetime_waymark",
+      "label": "Spacetime Waymark"
+    },
+    {
+      "target": "travel_waymark",
+      "label": "Spacetime Waymark"
     }
   ]
 }

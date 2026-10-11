@@ -31,6 +31,8 @@ public final class ClientModEvents {
     @SubscribeEvent
     public static void setupCurios(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
         event.enqueueWork(()->{
+            net.minecraft.client.renderer.item.ItemProperties.register(com.mcmagic.omnira.space.sea.StellarCraftContent.SHIELD.get(),
+                    ResourceLocation.withDefaultNamespace("blocking"),(stack,level,entity,seed)->entity!=null&&entity.isUsingItem()&&entity.getUseItem()==stack?1F:0F);
             net.minecraft.client.renderer.item.ItemProperties.register(com.mcmagic.omnira.registry.ModItems.MEMORY_CUBE.get(),
                     ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"peaceful"),(stack,level,entity,seed)->
                             com.mcmagic.omnira.item.MemoryCubeBlockItem.peaceful(stack)?1F:0F);
@@ -274,6 +276,18 @@ public final class ClientModEvents {
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
             private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
+                if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.MappingCompassRenderer();return renderer;
+            }
+        },com.mcmagic.omnira.space.labyrinth.LabyrinthContent.COMPASS.get());
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
+            private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
+            @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
+                if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.GuidanceOrbRenderer.ItemRenderer();return renderer;
+            }
+        },com.mcmagic.omnira.guidance.GuidanceContent.ITEM.get());
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
+            private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
+            @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
                 if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.ParadoxMaterialRenderer();return renderer;
             }
         },com.mcmagic.omnira.paradox.ParadoxContent.MYSTERY.get(),com.mcmagic.omnira.paradox.ParadoxContent.BOTTLED_FLOW.get());
@@ -383,6 +397,7 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(com.mcmagic.omnira.guidance.GuidanceContent.ENTITY.get(),com.mcmagic.omnira.client.renderer.GuidanceOrbRenderer::new);
         event.registerEntityRenderer(com.mcmagic.omnira.paradox.ParadoxContent.ANVIL.get(),com.mcmagic.omnira.client.renderer.VoidAnvilRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.WONDERLAND_POKER_STAND.get(),com.mcmagic.omnira.client.renderer.WonderlandPokerStandRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.MEMORY_CUBE.get(),com.mcmagic.omnira.client.renderer.MemoryCubeRenderer::new);

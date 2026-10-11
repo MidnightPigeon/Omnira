@@ -1,0 +1,12 @@
+{
+  "id": "dream_alchemy",
+  "title": "Dream",
+  "icon": "omnira:rough_alchemical_energy_core",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/rough_alchemical_energy_core.json",
+    "entries/dream_microcore_conversion.json",
+    "entries/encapsulated_paradox_flow.json"
+  ],
+  "chapters": []
+}

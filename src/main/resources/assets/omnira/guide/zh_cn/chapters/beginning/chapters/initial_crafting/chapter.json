@@ -1,0 +1,14 @@
+{
+  "id": "initial_crafting",
+  "title": "起步制作",
+  "icon": "omnira:simple_condensation_table",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/simple_condensation_table.json",
+    "entries/spiritual_crystal.json",
+    "entries/guide_book.json",
+    "entries/crystal_pickaxe.json",
+    "entries/pocket_magic_bottle.json"
+  ],
+  "chapters": []
+}

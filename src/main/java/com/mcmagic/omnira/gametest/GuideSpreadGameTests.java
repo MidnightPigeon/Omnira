@@ -9,17 +9,16 @@ import net.neoforged.neoforge.gametest.*;
 public final class GuideSpreadGameTests {
     @GameTest(template="spell_arena") public static void constructionScenesAndUnspoiledRisk(GameTestHelper h) throws Exception {
         for(var language:java.util.List.of("zh_cn","en_us")){
-            String base="/assets/omnira/guide/"+language+"/chapters/";
+            var book=GuidanceGameTests.guide(language);
             for(var id:java.util.List.of("advanced_assembly_table","advanced_crystal_aggregation_ring","large_alchemical_reaction_pool")){
-                String directory=id.equals("large_alchemical_reaction_pool")?"alchemy/chapters/instruments/entries/":"industry/chapters/arcane_craft/entries/";
-                try(var stream=GuideSpreadGameTests.class.getResourceAsStream(base+directory+id+".json")){
-                    h.assertTrue(stream!=null,"Missing construction guide: "+id);
-                    var entry=com.google.gson.JsonParser.parseReader(new java.io.InputStreamReader(stream,java.nio.charset.StandardCharsets.UTF_8)).getAsJsonObject();
+                {
+                    var entry=GuidanceGameTests.find(book,id);
+                    h.assertTrue(entry!=null,"Missing construction guide: "+id);
                     h.assertTrue(entry.has("scene")&&!entry.get("scene").getAsString().isEmpty(),"Missing 3D construction scene: "+id);
                 }
             }
-            try(var stream=GuideSpreadGameTests.class.getResourceAsStream(base+"storage/chapters/items/entries/void_crystal_ball.json")){
-                var text=new String(stream.readAllBytes(),java.nio.charset.StandardCharsets.UTF_8);
+            {
+                var text=GuidanceGameTests.find(book,"void_crystal_ball").toString();
                 h.assertTrue(text.contains(language.equals("zh_cn")?"风险":"risky"),"Missing shattering risk warning");
                 h.assertTrue(!text.contains("时空聚合体")&&!text.contains("Spacetime Aggregate")&&!text.contains("spacetime storm"),"Guide spoiled shattering outcome");
             }
@@ -43,6 +42,7 @@ public final class GuideSpreadGameTests {
         h.assertTrue(GuideSpread.turn(0,false)==0,"Backtracking below zero");h.succeed();
     }
     @GameTest(template="spell_arena") public static void directorySpreads(GameTestHelper h){
+        h.assertTrue(GuideSpread.directoryTotal(0,1)==1,"Empty directory created a phantom right page");
         h.assertTrue(GuideSpread.directoryLeaf(0,0)==0&&GuideSpread.directoryLeaf(1,0)==1,"Empty introductions reserved a sidebar");
         h.assertTrue(GuideSpread.directoryStart(1)==1&&GuideSpread.directoryStart(3)==3,"Introduction inserted a blank leaf");
         h.assertTrue(GuideSpread.directoryLeaf(1,1)==0,"Opening spread lost its right-hand directory");

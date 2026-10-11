@@ -1,0 +1,15 @@
+{
+  "id": "travel_waymark",
+  "item": "omnira:spacetime_waymark",
+  "title": "Spacetime Waymark",
+  "text": [
+    "Place and use a waymark to record a recall destination."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "spacetime_waymark",
+      "label": "Details and Acquisition"
+    }
+  ]
+}

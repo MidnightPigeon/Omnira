@@ -16,8 +16,10 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 public final class VoidSeaEffects {
     public static boolean trueDamage(LivingEntity target,float damage,DamageSource source){
         if(!target.isAlive()||target.isSpectator()||target instanceof Player p&&p.isCreative())return false;
+        if(damage<=0||com.mcmagic.omnira.space.phase.PhaseConcealment.blocks(target,source))return false;
         if(source.getEntity() instanceof LivingEntity attacker)target.setLastHurtByMob(attacker);
         target.setHealth(Math.max(0,target.getHealth()-damage));
+        com.mcmagic.omnira.space.phase.PhaseConcealment.afterDamage(target);
         if(target.level() instanceof ServerLevel server)server.broadcastDamageEvent(target,source);
         if(target.getHealth()<=0)target.die(source);
         return true;

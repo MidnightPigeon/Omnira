@@ -19,9 +19,9 @@ public final class DreamPlayerVisuals {
     private static final java.util.Map<ResourceLocation,Batch> SKINS=new java.util.HashMap<>();
     private static boolean world;
     private DreamPlayerVisuals() {}
-    public static boolean active(LivingEntity entity){return entity instanceof Player && entity.getData(ModAttachments.DREAM_AFFINITY);}
+    public static boolean active(LivingEntity entity){return entity instanceof Player && (entity.getData(ModAttachments.DREAM_AFFINITY)||com.mcmagic.omnira.space.phase.PhaseConcealment.active(entity));}
     public static int color(int original,LivingEntity player){
-        float opacity=.55F+.45F*Math.clamp(player.getData(ModAttachments.DREAM_SOLIDIFY),0,1);
+        float opacity=com.mcmagic.omnira.space.phase.PhaseConcealment.active(player)?.38F:.55F+.45F*Math.clamp(player.getData(ModAttachments.DREAM_SOLIDIFY),0,1);
         return (original&0xFFFFFF)|((int)((original>>>24)*opacity)<<24);
     }
     public static VertexConsumer buffer(MultiBufferSource original,ResourceLocation skin) {

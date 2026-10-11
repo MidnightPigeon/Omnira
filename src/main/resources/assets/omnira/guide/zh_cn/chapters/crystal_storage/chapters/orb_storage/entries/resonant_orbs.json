@@ -18,6 +18,10 @@
     {
       "target": "output_upgrade",
       "label": "弹出与过滤"
+    },
+    {
+      "target": "orb_upgrade_plugins",
+      "label": "升级插件"
     }
   ]
 }

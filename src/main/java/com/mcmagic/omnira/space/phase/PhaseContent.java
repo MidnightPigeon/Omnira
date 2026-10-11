@@ -17,6 +17,9 @@ public final class PhaseContent {
     public static final DeferredBlock<PhaseClusterBlock> CLUSTER=ModBlocks.BLOCKS.register("phase_crystal_cluster",()->new PhaseClusterBlock(
             BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_CLUSTER).mapColor(net.minecraft.world.level.material.MapColor.COLOR_BLUE).noOcclusion().lightLevel(s->12)));
     public static final DeferredItem<BlockItem> CLUSTER_ITEM=ModItems.ITEMS.registerSimpleBlockItem(CLUSTER);
+    public static final DeferredBlock<PhaseControlBlock> CONTROL=ModBlocks.BLOCKS.register("phase_control_panel",()->new PhaseControlBlock(
+            BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).noOcclusion().strength(2).lightLevel(s->12)));
+    public static final DeferredItem<BlockItem> CONTROL_ITEM=ModItems.ITEMS.registerSimpleBlockItem(CONTROL);
     public static void init(){}
     private PhaseContent(){}
 }

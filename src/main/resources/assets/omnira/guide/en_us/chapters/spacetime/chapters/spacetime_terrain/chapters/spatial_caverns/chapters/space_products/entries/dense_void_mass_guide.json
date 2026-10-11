@@ -7,7 +7,10 @@
     "Mine the floating mass in a Skyreach Tower with a pickaxe and place it again. In the Inverted Abyss's weightless band it strongly attracts entities within a five-block sphere. Elsewhere it exerts only a weak pull, without changing gravity direction. It is also a component of the Void Infuser."
   ],
   "links": [
-    {"target": "void_infuser", "label": "Void Infuser"},
+    {
+      "target": "void_infuser",
+      "label": "Void Infuser"
+    },
     {
       "target": "skyreach_tower_guide",
       "label": "Skyreach Tower"

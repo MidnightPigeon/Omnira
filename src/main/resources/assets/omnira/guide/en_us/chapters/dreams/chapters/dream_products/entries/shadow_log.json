@@ -6,5 +6,11 @@
     "Shadow Woodland trees provide planks, slabs, stairs, fences, doors and other wooden components. Use an axe to strip the wood.",
     "Plant saplings singly or in a 2x2 group for a large tree. Harvest leaves with shears or Silk Touch. Shadow berries grow on the sides of trunks."
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "shadow_berries",
+      "label": "Shadow Berries"
+    }
+  ]
 }

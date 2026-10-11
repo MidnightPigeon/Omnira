@@ -1,0 +1,7 @@
+{
+  "type": "omnira:phase_greenhouse",
+  "biomes": "#omnira:has_structure/phase_greenhouse",
+  "step": "surface_structures",
+  "terrain_adaptation": "none",
+  "spawn_overrides": {}
+}

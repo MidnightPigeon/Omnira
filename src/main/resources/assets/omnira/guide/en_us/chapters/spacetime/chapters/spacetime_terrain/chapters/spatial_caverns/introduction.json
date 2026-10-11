@@ -3,5 +3,17 @@
   "image_width": 112,
   "image_height": 88,
   "caption": "",
-  "text": []
+  "text": [
+    "Spatial Caverns unfold beneath the time continent. Rough spatial crystals form the cave walls and spires; excited crystals illuminate paths between folded caves, crystal groves and the void sea."
+  ],
+  "links": [
+    {
+      "target": "spatial_crystal_guide",
+      "label": "Rough Spatial Crystal"
+    },
+    {
+      "target": "spatial_growth_guide",
+      "label": "Growing Spatial Crystals"
+    }
+  ]
 }

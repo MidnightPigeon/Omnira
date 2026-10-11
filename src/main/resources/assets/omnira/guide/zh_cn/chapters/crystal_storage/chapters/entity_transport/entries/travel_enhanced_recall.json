@@ -1,0 +1,19 @@
+{
+  "id": "travel_enhanced_recall",
+  "item": "omnira:enhanced_recall_crystal",
+  "title": "强化归程水晶",
+  "text": [
+    "强化归程水晶减少归程消耗，仍需要原地引导。"
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "enhanced_recall_crystal",
+      "label": "获取与使用"
+    },
+    {
+      "target": "recall_crystal",
+      "label": "梦境归程"
+    }
+  ]
+}

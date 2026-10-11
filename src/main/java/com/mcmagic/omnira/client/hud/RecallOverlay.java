@@ -11,7 +11,8 @@ public final class RecallOverlay {
     public static void render(GuiGraphics g,DeltaTracker tracker) {
         var mc=Minecraft.getInstance();if(mc.player==null || mc.options.hideGui) return;
         int rabbit=mc.player.getData(ModAttachments.RABBIT_TICKS);
-        int remaining=rabbit>0?rabbit:mc.player.getData(ModAttachments.RECALL_TICKS);if(remaining<=0) return;
+        boolean compass=mc.player.isUsingItem()&&mc.player.getUseItem().getItem() instanceof com.mcmagic.omnira.space.labyrinth.MappingCompassItem;
+        int remaining=compass?mc.player.getUseItemRemainingTicks():rabbit>0?rabbit:mc.player.getData(ModAttachments.RECALL_TICKS);if(remaining<=0) return;
         int x=g.guiWidth()/2-60,y=g.guiHeight()-83;
         g.fill(x,y,x+120,y+7,0xFF343139);g.fill(x+1,y+1,x+119,y+6,0xFFCED7DC);
         g.fill(x+2,y+2,x+118,y+5,0xFF434951);

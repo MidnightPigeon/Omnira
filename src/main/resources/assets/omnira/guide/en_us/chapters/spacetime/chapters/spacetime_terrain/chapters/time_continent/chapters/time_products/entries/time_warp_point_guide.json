@@ -38,6 +38,10 @@
     {
       "target": "advanced_condensation_table",
       "label": "Advanced Condensation Table"
+    },
+    {
+      "target": "spacetime_port",
+      "label": "Spacetime Port"
     }
   ]
 }

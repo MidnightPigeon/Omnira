@@ -12,7 +12,7 @@ public final class RitualSwordUpgrades {
     public static List<DeferredItem<Item>> register(DeferredRegister.Items registry,RitualSwordItem.Kind kind){
         var ids=kind==RitualSwordItem.Kind.NAIL?NAIL_IDS:NEEDLE_IDS;
         return java.util.stream.IntStream.range(0,4).mapToObj(i->registry.<Item>register(ids.get(i),
-                ()->new RitualSwordItem(new Item.Properties(),kind,i+1))).toList();
+                ()->new RitualSwordItem(new Item.Properties().rarity(switch(i){case 1->Rarity.UNCOMMON;case 2->Rarity.RARE;case 3->Rarity.EPIC;default->Rarity.COMMON;}),kind,i+1))).toList();
     }
     public static Item item(RitualSwordItem.Kind kind,int level){
         if(level==0)return kind==RitualSwordItem.Kind.NAIL?ModItems.CRYSTALLIZED_NAIL.get():ModItems.ARCANE_NEEDLE.get();

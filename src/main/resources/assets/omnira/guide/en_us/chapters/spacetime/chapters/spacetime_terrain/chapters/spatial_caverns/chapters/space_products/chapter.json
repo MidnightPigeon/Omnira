@@ -16,7 +16,8 @@
     "entries/stardust_guide.json",
     "entries/voyager_violin_source.json",
     "entries/dense_void_mass_guide.json",
-    "entries/mapping_stability_compass_guide.json"
+    "entries/mapping_stability_compass_guide.json",
+    "entries/deflection_field.json"
   ],
   "chapters": []
 }
