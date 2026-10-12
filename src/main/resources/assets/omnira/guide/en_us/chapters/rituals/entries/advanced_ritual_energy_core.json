@@ -7,6 +7,7 @@
     "Supports every ordinary ritual energy core ritual, as well as elemental affinity. Both acquiring and removing affinity require this advanced core. Rituals retain the core."
   ],
   "links": [
+    {"target": "genesis_ritual", "label": "Ritual of World Confluence"},
     {
       "target": "corridor_ritual",
       "label": "Ritual of Time's Threshold"

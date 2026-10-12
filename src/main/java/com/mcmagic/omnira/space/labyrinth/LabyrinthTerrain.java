@@ -32,9 +32,10 @@ public final class LabyrinthTerrain {
     public static int hash(Room room){int h=room.x*73428767^room.y*9123671^room.z*1274126177;h=(h^(h>>>16))*0x7feb352d;return h^(h>>>15);}
     public static boolean entryRoof(Room room){return Math.floorMod(hash(room)>>>4,5)==0;}
     public static int theme(Room room){
-        int roll=Math.floorMod(hash(room),260);
-        if(roll<13)return 6;
-        int other=(roll-13)/19;
+        int roll=Math.floorMod(hash(room),600);
+        if(roll<90)return 0;
+        if(roll<108)return 6;
+        int other=1+(roll-108)/41;
         return other<6?other:other+1;
     }
     private static boolean inside(int x,int z){return biome(x,z)&&biome(x-1,z)&&biome(x+1,z)&&biome(x,z-1)&&biome(x,z+1);}

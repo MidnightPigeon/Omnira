@@ -28,6 +28,7 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> STABLE_FOLD_GATE=ITEMS.registerSimpleBlockItem(ModBlocks.STABLE_FOLD_GATE);
     public static final DeferredItem<BlockItem> UNSTABLE_FOLD_GATE=ITEMS.registerSimpleBlockItem(ModBlocks.UNSTABLE_FOLD_GATE);
     public static final DeferredItem<Item> SPACE_WARP_POINT=ITEMS.registerSimpleItem("space_warp_point",new Item.Properties().stacksTo(16));
+    public static final DeferredItem<Item> PURE_MIRROR=ITEMS.registerSimpleItem("pure_mirror");
     public static final DeferredItem<BlockItem> WONDERLAND_POKER_STAND=ITEMS.registerSimpleBlockItem(ModBlocks.WONDERLAND_POKER_STAND);
     public static final DeferredItem<Item> DREAM_RABBIT_REMAINS=ITEMS.register("dream_rabbit_remains",()->new com.mcmagic.omnira.dream.DreamRabbitItem(new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON),false));
     public static final DeferredItem<Item> ALICE_DREAM_RABBIT_SIGIL=ITEMS.register("alice_dream_rabbit_sigil",()->new com.mcmagic.omnira.dream.DreamRabbitItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE),true));
@@ -56,6 +57,7 @@ public final class ModItems {
     public static final DeferredItem<Item> INTAKE_UPGRADE=upgrade("intake_upgrade",com.mcmagic.omnira.item.OrbUpgradeItem.Kind.INTAKE);
     public static final DeferredItem<Item> OUTPUT_UPGRADE=upgrade("output_upgrade",com.mcmagic.omnira.item.OrbUpgradeItem.Kind.OUTPUT);
     public static final DeferredItem<Item> SPEED_UPGRADE=upgrade("speed_upgrade",com.mcmagic.omnira.item.OrbUpgradeItem.Kind.SPEED);
+    public static final DeferredItem<Item> RECIPE_CONTROL_UPGRADE=upgrade("recipe_control_upgrade",com.mcmagic.omnira.item.OrbUpgradeItem.Kind.RECIPE_CONTROL);
     private static DeferredItem<Item> upgrade(String name,com.mcmagic.omnira.item.OrbUpgradeItem.Kind kind) {
         return ITEMS.register(name,()->new com.mcmagic.omnira.item.OrbUpgradeItem(new Item.Properties(),kind));
     }

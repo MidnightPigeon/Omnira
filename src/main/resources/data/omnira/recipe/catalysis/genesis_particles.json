@@ -8,7 +8,7 @@
   },
   "fluid": {
     "id": "omnira:refined_spacetime",
-    "amount": 500
+    "amount": 100
   },
   "result": {
     "id": "omnira:genesis_particles",

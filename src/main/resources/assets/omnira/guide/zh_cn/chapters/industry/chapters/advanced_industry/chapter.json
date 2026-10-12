@@ -7,7 +7,9 @@
     "entries/advanced_crystal_aggregation_ring.json",
     "entries/spacetime_engine.json",
     "entries/spacetime_reverser.json",
-    "entries/void_infuser.json"
+    "entries/void_infuser.json",
+    "entries/temporal_energy.json",
+    "entries/spatial_energy.json"
   ],
   "chapters": [
     "chapters/spacetime_connections/chapter.json"

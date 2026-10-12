@@ -12,6 +12,7 @@ public final class TuningOutputs extends SavedData {
     private record Claim(BlockPos node,UUID identity,BlockPos peer,UUID peerIdentity){}
     private final LinkedHashMap<String,Claim> claims=new LinkedHashMap<>();
     private final Map<UUID,UUID> removedLinks=new HashMap<>();
+    private long refreshedAt=Long.MIN_VALUE;
     public boolean consumeRemovedLink(UUID node,UUID peer){
         if(peer!=null&&peer.equals(removedLinks.get(node))){removedLinks.remove(node);setDirty();return true;}
         return false;
@@ -34,6 +35,7 @@ public final class TuningOutputs extends SavedData {
         return level.getDataStorage().computeIfAbsent(new Factory<>(TuningOutputs::new,TuningOutputs::load,null),"omnira_tuning_outputs");
     }
     private void refresh(ServerLevel level){
+        refreshedAt=level.getGameTime();
         var updated=new LinkedHashMap<String,Claim>();
         for(var entry:claims.entrySet()){
             var claim=entry.getValue();String key=entry.getKey();
@@ -48,14 +50,23 @@ public final class TuningOutputs extends SavedData {
         if(!claims.equals(updated)){claims.clear();claims.putAll(updated);setDirty();}
     }
     public boolean available(ResonanceCoreBlockEntity node){
-        var level=(ServerLevel)node.getLevel();refresh(level);
+        return available(node,true);
+    }
+    private boolean available(ResonanceCoreBlockEntity node,boolean refreshNow){
+        var level=(ServerLevel)node.getLevel();
+        if(refreshNow||refreshedAt!=level.getGameTime())refresh(level);
         String key=StorageContainerIdentity.key(node);if(key==null)return false;
         for(var existing:claims.values())if(!existing.identity().equals(node.identity)&&level.hasChunkAt(existing.node())
                 &&level.getBlockEntity(existing.node()) instanceof ResonanceCoreBlockEntity other&&StorageContainerIdentity.same(node,other))return false;
         var claim=claims.get(key);return claim==null||claim.identity().equals(node.identity);
     }
     public boolean claim(ResonanceCoreBlockEntity node){
-        if(!available(node))return false;
+        return claim(node,true);
+    }
+    /** Tick renewals share the ledger rebuild; interactive claims always refresh immediately. */
+    public boolean renew(ResonanceCoreBlockEntity node){return claim(node,false);}
+    private boolean claim(ResonanceCoreBlockEntity node,boolean refreshNow){
+        if(!available(node,refreshNow))return false;
         var key=StorageContainerIdentity.key(node);var claim=new Claim(node.getBlockPos(),node.identity,node.peer,node.peerIdentity);
         if(!claim.equals(claims.put(key,claim)))setDirty();return true;
     }

@@ -223,6 +223,29 @@ public final class CrystalUtilityGameTests {
         var result=work.take(player,1);
         h.assertTrue(result.getEnchantmentLevel(sharp)==2&&result.getEnchantmentLevel(curse)==0&&player.getData(ModAttachments.MANA).current()==500,"Selective removal did not preserve other enchantment");h.succeed();
     }
+    @GameTest(template="spell_arena") public static void dualEquipmentRepairDisablesSelection(GameTestHelper h){
+        var work=machine(h,4);var player=h.makeMockPlayer(GameType.SURVIVAL);
+        player.setPos(net.minecraft.world.phys.Vec3.atCenterOf(work.getBlockPos()));
+        var registry=h.getLevel().registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT);
+        var sharp=registry.getOrThrow(net.minecraft.world.item.enchantment.Enchantments.SHARPNESS);
+        var smite=registry.getOrThrow(net.minecraft.world.item.enchantment.Enchantments.SMITE);
+        var curse=registry.getOrThrow(net.minecraft.world.item.enchantment.Enchantments.VANISHING_CURSE);
+        var first=new ItemStack(Items.IRON_SWORD);first.setDamageValue(180);first.enchant(sharp,2);first.enchant(curse,1);
+        var second=new ItemStack(Items.IRON_SWORD);second.setDamageValue(190);second.enchant(smite,3);
+        work.setItem(0,first);work.setItem(1,second);
+        var menu=new CrystalWorkstationMenu(1,player.getInventory(),work);
+        h.assertTrue(!menu.configure(player,sharp.getRegisteredName(),false),"Dual-input selection accepted");
+        h.assertTrue(!WorkstationRecipes.singleInput(first,second),"Dual-input panel remained available");
+        for(int i=0;i<100;i++)work.tickDirect();
+        h.assertTrue(work.getItem(0).getDamageValue()==179&&work.getItem(1).getDamageValue()==189,"Passive repair must apply to both inputs");
+        var result=work.recipe();
+        h.assertTrue(!result.stack().isEmpty()&&result.stack().getDamageValue()<179
+                &&net.minecraft.world.item.enchantment.EnchantmentHelper.getEnchantmentsForCrafting(result.stack()).isEmpty()
+                &&result.mana()==0,"Dual repair retained enchantments or charged selective-removal mana");
+        h.assertTrue(!work.take(player,1).isEmpty()&&work.getItem(0).isEmpty()&&work.getItem(1).isEmpty(),"Dual repair did not consume both items");
+        work.setItem(0,first.copy());work.setItem(1,new ItemStack(Items.DIAMOND_SWORD));
+        h.assertTrue(work.preview().isEmpty(),"Different equipment types combined");h.succeed();
+    }
     @GameTest(template="spell_arena") public static void faceContractsAndPersistence(GameTestHelper h){
         for(int index:new int[]{3,5}){
             var work=machine(h,index);var block=(CrystalWorkstationBlock)work.getBlockState().getBlock();

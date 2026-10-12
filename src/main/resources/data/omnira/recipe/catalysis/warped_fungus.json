@@ -1,0 +1,19 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": {
+    "item": "minecraft:warped_nylium"
+  },
+  "seed": {
+    "item": "minecraft:warped_fungus"
+  },
+  "fluid": {
+    "id": "minecraft:lava",
+    "amount": 100
+  },
+  "result": {
+    "id": "minecraft:warped_stem",
+    "count": 1
+  },
+  "stages": 4,
+  "yield": "fungus"
+}

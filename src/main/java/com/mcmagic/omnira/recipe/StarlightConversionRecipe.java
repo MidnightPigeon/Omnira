@@ -19,7 +19,7 @@ public record StarlightConversionRecipe(Ingredient ingredient,ItemStack result) 
         Ingredient.CONTENTS_STREAM_CODEC,StarlightConversionRecipe::ingredient,ItemStack.STREAM_CODEC,StarlightConversionRecipe::result,StarlightConversionRecipe::new);
     public boolean matches(SingleRecipeInput input,Level level){return ingredient.test(input.item())&&!input.item().is(result.getItem());}
     public ItemStack assemble(SingleRecipeInput input,HolderLookup.Provider registries){return result.copyWithCount(input.item().getCount());}
-    public ItemStack getResultItem(HolderLookup.Provider registries){return result;}
+    public ItemStack getResultItem(HolderLookup.Provider registries){return result.copy();}
     public boolean canCraftInDimensions(int width,int height){return width*height>=1;}
     public RecipeType<?> getType(){return ModRecipes.STARLIGHT_TYPE.get();}
     public RecipeSerializer<?> getSerializer(){return ModRecipes.STARLIGHT_SERIALIZER.get();}

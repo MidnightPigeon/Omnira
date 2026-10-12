@@ -23,6 +23,11 @@ public final class RitualEnergyCoreBlock extends BaseEntityBlock {
     }
     @Override protected MapCodec<? extends BaseEntityBlock> codec() {return CODEC;}
     @Override public BlockEntity newBlockEntity(BlockPos pos,BlockState state) {return new RitualEnergyCoreBlockEntity(pos,state);}
+    @Override public <T extends BlockEntity> net.minecraft.world.level.block.entity.BlockEntityTicker<T> getTicker(
+            Level level,BlockState state,net.minecraft.world.level.block.entity.BlockEntityType<T> type){
+        return createTickerHelper(type,com.mcmagic.omnira.registry.ModBlockEntityTypes.RITUAL_ENERGY_CORE.get(),
+                (world,pos,block,core)->{if(world.isClientSide)core.tickVisual();else core.tickGenesis();});
+    }
     @Override protected RenderShape getRenderShape(BlockState state) {return RenderShape.MODEL;}
     @Override protected VoxelShape getShape(BlockState state,BlockGetter level,BlockPos pos,CollisionContext context) {
         return Shapes.or(box(2,0,2,14,3,14),box(4,3,4,12,16,12));
@@ -30,6 +35,12 @@ public final class RitualEnergyCoreBlock extends BaseEntityBlock {
     @Override protected ItemInteractionResult useItemOn(ItemStack stack,BlockState state,Level level,BlockPos pos,
                                                        Player player,InteractionHand hand,BlockHitResult hit) {
         if(player.isShiftKeyDown())return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if(state.is(com.mcmagic.omnira.registry.ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get())
+                && net.neoforged.neoforge.fluids.FluidUtil.getFluidHandler(stack).isPresent()){
+            if(!level.isClientSide && level.getBlockEntity(pos) instanceof RitualEnergyCoreBlockEntity core)
+                net.neoforged.neoforge.fluids.FluidUtil.interactWithFluidHandler(player,hand,core.genesisOffering);
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
         if(stack.is(com.mcmagic.omnira.registry.ModItems.UNSTABLE_SPACETIME_AGGREGATE.get())
                 || stack.is(com.mcmagic.omnira.registry.ModItems.SPACETIME_SPELL_CORE.get())) {
             if(level instanceof net.minecraft.server.level.ServerLevel server)

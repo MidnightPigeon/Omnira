@@ -12,6 +12,34 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
 
 public final class CatalysisGrowthVisuals {
+    public static boolean fungal(CatalysisGrowth.Plan plan){
+        var plant=plan.plant();
+        return plant.is(Blocks.CRIMSON_FUNGUS)||plant.is(Blocks.WARPED_FUNGUS)||plant.is(Blocks.RED_MUSHROOM)||plant.is(Blocks.BROWN_MUSHROOM);
+    }
+    public static void fungus(CatalysisGrowth.Plan plan,float stage,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
+        if(stage<2){block(plan.plant(),.5,1.22,.5,.34F,.34F,.34F,pose,buffers,light,overlay);return;}
+        boolean crimson=plan.plant().is(Blocks.CRIMSON_FUNGUS),warped=plan.plant().is(Blocks.WARPED_FUNGUS);
+        boolean nether=crimson||warped,red=plan.plant().is(Blocks.RED_MUSHROOM);
+        var stem=(crimson?Blocks.CRIMSON_STEM:warped?Blocks.WARPED_STEM:Blocks.MUSHROOM_STEM).defaultBlockState();
+        var hat=(crimson?Blocks.NETHER_WART_BLOCK:warped?Blocks.WARPED_WART_BLOCK:red?Blocks.RED_MUSHROOM_BLOCK:Blocks.BROWN_MUSHROOM_BLOCK).defaultBlockState();
+        if(!nether){
+            for(var face:java.util.List.of(net.minecraft.world.level.block.state.properties.BlockStateProperties.UP,net.minecraft.world.level.block.state.properties.BlockStateProperties.DOWN,
+                    net.minecraft.world.level.block.state.properties.BlockStateProperties.NORTH,net.minecraft.world.level.block.state.properties.BlockStateProperties.SOUTH,
+                    net.minecraft.world.level.block.state.properties.BlockStateProperties.EAST,net.minecraft.world.level.block.state.properties.BlockStateProperties.WEST)){
+                hat=hat.setValue(face,true);stem=stem.setValue(face,face!=net.minecraft.world.level.block.state.properties.BlockStateProperties.UP&&face!=net.minecraft.world.level.block.state.properties.BlockStateProperties.DOWN);
+            }
+        }
+        float fraction=Math.clamp((stage-1)/Math.max(1,plan.stages()-1),0,1),cell=(.42F+.42F*fraction)/5;
+        // Uniform miniature blocks preserve native bark and cap texture proportions.
+        for(int y=0;y<7;y++)for(int x=-2;x<=2;x++)for(int z=-2;z<=2;z++){
+            boolean trunk=x==0&&z==0&&y<6;
+            boolean cap=nether?y>=4&&y<=6&&(y==6?Math.abs(x)<=1&&Math.abs(z)<=1:Math.abs(x)+Math.abs(z)<4)
+                    :red?y>=4&&y<=6&&(y==6?Math.abs(x)<=1&&Math.abs(z)<=1:Math.max(Math.abs(x),Math.abs(z))==2&&Math.abs(x)+Math.abs(z)<4)
+                    :y==6&&Math.abs(x)+Math.abs(z)<4;
+            if(!trunk&&!cap)continue;
+            block(cap?hat:stem,.5+x*cell,1.22+y*cell,.5+z*cell,cell,cell,cell,pose,buffers,light,overlay);
+        }
+    }
     public static boolean sealed(ItemStack stack){return stack.is(ParadoxContent.STABLE_SOURCE.get())||stack.is(ParadoxContent.STABLE_AGGREGATE.get());}
     public static void sealedGrowth(CatalysisBlockEntity be,double time,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         pose.pushPose();pose.translate(.5,1.38,.5);pose.scale(.65F,.65F,.65F);

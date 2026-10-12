@@ -13,11 +13,8 @@ import net.neoforged.neoforge.registries.*;
 public final class CatalysisContent {
     private static final DeferredRegister<net.minecraft.world.item.crafting.RecipeType<?>> TYPES=DeferredRegister.create(net.minecraft.core.registries.Registries.RECIPE_TYPE,"omnira");
     private static final DeferredRegister<net.minecraft.world.item.crafting.RecipeSerializer<?>> SERIALIZERS=DeferredRegister.create(net.minecraft.core.registries.Registries.RECIPE_SERIALIZER,"omnira");
-    public static final DeferredHolder<net.minecraft.world.item.crafting.RecipeType<?>,net.minecraft.world.item.crafting.RecipeType<CatalysisRecipe>> TYPE=TYPES.register("catalysis",()->new net.minecraft.world.item.crafting.RecipeType<>(){});
-    public static final DeferredHolder<net.minecraft.world.item.crafting.RecipeSerializer<?>,net.minecraft.world.item.crafting.RecipeSerializer<CatalysisRecipe>> SERIALIZER=SERIALIZERS.register("catalysis",()->new net.minecraft.world.item.crafting.RecipeSerializer<>(){
-        public com.mojang.serialization.MapCodec<CatalysisRecipe> codec(){return CatalysisRecipe.CODEC;}
-        public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf,CatalysisRecipe> streamCodec(){return CatalysisRecipe.STREAM;}
-    });
+    public static final DeferredHolder<net.minecraft.world.item.crafting.RecipeType<?>,net.minecraft.world.item.crafting.RecipeType<CatalysisRecipe>> TYPE=TYPES.register("catalysis",()->RecipeRegistration.type(net.minecraft.resources.ResourceLocation.parse("omnira:catalysis")));
+    public static final DeferredHolder<net.minecraft.world.item.crafting.RecipeSerializer<?>,net.minecraft.world.item.crafting.RecipeSerializer<CatalysisRecipe>> SERIALIZER=SERIALIZERS.register("catalysis",()->RecipeRegistration.serializer(CatalysisRecipe.CODEC,CatalysisRecipe.STREAM));
     public static final DeferredBlock<CatalysisBlock> BLOCK=ModBlocks.BLOCKS.register("alchemical_catalysis_chamber",()->new CatalysisBlock(
             BlockBehaviour.Properties.of().strength(-1,3600000).noOcclusion().randomTicks().lightLevel(s->8)));
     public static final DeferredItem<CatalysisBlock.PlacementItem> ITEM=ModItems.ITEMS.register("alchemical_catalysis_chamber",()->new CatalysisBlock.PlacementItem(new Item.Properties()));

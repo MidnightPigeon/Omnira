@@ -2,8 +2,9 @@
   "id": "space_warp_point_guide",
   "title": "Fold Points and Spatial Remnants",
   "item": "omnira:space_warp_point",
-  "recipes": false,
+  "recipes": true,
   "text": [
+    "Craft nine Excited Rough Spatial Crystal Blocks into one Spatial Fold Point at a crafting table.",
     "Harvest a point with a Dissociation spell or a ritual sword's melee, charged slash or flying needle. It leaves an unbreakable Spatial Remnant. The harvested point item cannot be placed directly.",
     "Move remnants with a Pocket Magic Bottle, or condense eight fold points into one placeable remnant at an Advanced Condensation Table for 300 mana.",
     "Spatial disturbance drives regeneration: moving entities accumulate disturbances that allow a fold point to form again. A Spatial Remnant pools movement from all entities within its five-block spherical range, including players, creatures and dropped items. After a combined 100 blocks of movement, it regenerates into a Spatial Fold Point in place. Standing still contributes nothing; earned distance survives leaving the area, reloading and transport by bottle.",

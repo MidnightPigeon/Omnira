@@ -21,12 +21,14 @@ import net.neoforged.neoforge.items.*;
 import java.util.*;
 
 public final class CatalysisBlockEntity extends BlockEntity implements MenuProvider {
-    public static final int CAPACITY=4000,STEP_TICKS=200,STEP_FLUID=500;
+    public static final int CAPACITY=4000,STEP_TICKS=200,STEP_FLUID=100,CYCLE_STEPS=4;
     private boolean internal;
     private int stage=1,elapsed,stemStage=1;
+    private int catalysisSteps;
     private long visualUpdatedAt;
     private boolean stemReady;
     private boolean naturalMode,naturalCycle;
+    private boolean recipeAllowed=true;
     private int stageCount=4;
     private ItemStack boundSoil=ItemStack.EMPTY,boundSeed=ItemStack.EMPTY;
     private FluidStack boundFluid=FluidStack.EMPTY;
@@ -36,9 +38,9 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
         @Override public boolean isItemValid(int slot,ItemStack stack){return slot==0?CatalysisGrowth.acceptsSubstrate(level,stack):slot==1;}
         @Override protected void onContentsChanged(int slot){if(!internal&&slot<2)reset();setChanged();}
     };
-    public final ItemStackHandler upgrades=new ItemStackHandler(2){
+    public final ItemStackHandler upgrades=new ItemStackHandler(3){
         @Override public int getSlotLimit(int slot){return 1;}
-        @Override public boolean isItemValid(int slot,ItemStack stack){return OrbUpgrades.kind(stack)==(slot==0?Kind.INTAKE:Kind.OUTPUT);}
+        @Override public boolean isItemValid(int slot,ItemStack stack){return OrbUpgrades.kind(stack)==(slot==0?Kind.INTAKE:slot==1?Kind.OUTPUT:Kind.RECIPE_CONTROL);}
         @Override protected void onContentsChanged(int slot){setChanged();}
     };
     public final FluidTank tank=new FluidTank(CAPACITY){@Override protected void onContentsChanged(){setChanged();}};
@@ -63,12 +65,16 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
     public int stage(){return stage;}
     public boolean catalyzing(){
         return complete()&&tank.getFluidAmount()>=STEP_FLUID&&overflow.isEmpty()
-                &&items.getStackInSlot(2).isEmpty()&&plan()!=null;
+                &&items.getStackInSlot(2).isEmpty()&&plan()!=null&&recipeAllowed;
+    }
+    public boolean naturallyGrowing(){
+        return complete()&&tank.isEmpty()&&overflow.isEmpty()&&items.getStackInSlot(2).isEmpty()
+                &&recipeAllowed&&naturalMode;
     }
     public float visualStage(double time){
-        if(naturalMode||tank.getFluidAmount()<STEP_FLUID||!items.getStackInSlot(2).isEmpty()||plan()==null)return stage;
+        if(!recipeAllowed||naturalMode||tank.getFluidAmount()<STEP_FLUID||!items.getStackInSlot(2).isEmpty()||plan()==null)return stage;
         double extrapolated=level!=null&&level.isClientSide?Math.clamp(time-visualUpdatedAt,0,20):0;
-        return stage+(float)Math.clamp((elapsed+extrapolated)/STEP_TICKS,0,1);
+        return 1+(stageCount-1)*Math.min(catalysisSteps+(float)Math.clamp((elapsed+extrapolated)/STEP_TICKS,0,1),CYCLE_STEPS-1)/(CYCLE_STEPS-1);
     }
     public int stemStage(){return stemStage;}
     public boolean stemReady(){return stemReady;}
@@ -83,7 +89,7 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
         for(int i=0;i<3;i++){var s=level.getBlockState(worldPosition.above(i));if(!s.is(CatalysisContent.BLOCK.get())||s.getValue(CatalysisBlock.PART)!=i
                 ||s.getValue(CatalysisBlock.FACING)!=getBlockState().getValue(CatalysisBlock.FACING))return false;}return true;
     }
-    private void reset(){stage=1;stemStage=1;stemReady=false;elapsed=0;naturalCycle=false;stageCount=4;harvest.clear();boundSeed=ItemStack.EMPTY;boundSoil=ItemStack.EMPTY;boundFluid=FluidStack.EMPTY;}
+    private void reset(){stage=1;stemStage=1;stemReady=false;elapsed=0;catalysisSteps=0;naturalCycle=false;stageCount=4;harvest.clear();boundSeed=ItemStack.EMPTY;boundSoil=ItemStack.EMPTY;boundFluid=FluidStack.EMPTY;}
     private CatalysisGrowth.Plan preparePlan(){
         if(!ItemStack.isSameItemSameComponents(boundSoil,items.getStackInSlot(0))||!ItemStack.isSameItemSameComponents(boundSeed,items.getStackInSlot(1))
                 ||!tank.isEmpty()&&!boundFluid.isEmpty()&&!FluidStack.isSameFluidSameComponents(boundFluid,tank.getFluid())){
@@ -92,14 +98,24 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
         if(!tank.isEmpty())boundFluid=tank.getFluid().copyWithAmount(1);
         var plan=plan();if(plan==null)return null;
         if(naturalMode!=tank.isEmpty()||stageCount!=plan.stages()){
-            stage=1+(stage-1)*(plan.stages()-1)/Math.max(1,stageCount-1);elapsed=0;
+            if(!naturalMode&&!tank.isEmpty())stage=1+catalysisSteps*(plan.stages()-1)/(CYCLE_STEPS-1);
+            else {
+                stage=1+Math.round((stage-1)*(float)(plan.stages()-1)/Math.max(1,stageCount-1));
+                catalysisSteps=Math.clamp(Math.round((stage-1)*(float)(CYCLE_STEPS-1)/Math.max(1,plan.stages()-1)),0,CYCLE_STEPS-1);
+            }
+            elapsed=0;
             stageCount=plan.stages();naturalMode=tank.isEmpty();setChanged();
         }
         return plan;
     }
+    private boolean allowed(CatalysisGrowth.Plan plan){
+        boolean allow=!com.mcmagic.omnira.recipe.RecipeControl.installed(upgrades)||
+                com.mcmagic.omnira.recipe.RecipeControl.allows(level,upgrades,CatalysisProducts.possible((ServerLevel)level,plan,items.getStackInSlot(1)),FluidStack.EMPTY);
+        if(recipeAllowed!=allow){recipeAllowed=allow;setChanged();}return allow;
+    }
     public void naturalTick(net.minecraft.util.RandomSource random){
         if(!(level instanceof ServerLevel server)||!complete()||!tank.isEmpty()||!overflow.isEmpty()||!items.getStackInSlot(2).isEmpty())return;
-        var plan=preparePlan();var rule=naturalRule();if(plan==null||rule==null)return;
+        var plan=preparePlan();var rule=naturalRule();if(plan==null||rule==null||!allowed(plan))return;
         if(rule.kind()==CatalysisNaturalGrowth.Kind.VINE&&stage>=26)return;
         if(!rule.advance(server,worldPosition.above(),items.getStackInSlot(0),random))return;
         naturalCycle=true;
@@ -107,8 +123,8 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
         boolean mature=rule.kind()==CatalysisNaturalGrowth.Kind.VINE?random.nextFloat()<.11F:stage+1>=plan.stages();
         if(mature){
             var result=rule.harvest(server,worldPosition.above(),boundSoil,boundSeed);if(result.isEmpty())return;
-            overflow.addAll(result);stage=1;naturalCycle=false;flushHarvest();
-        }else stage++;
+            overflow.addAll(result);stage=1;catalysisSteps=0;naturalCycle=false;flushHarvest();
+        }else {stage++;catalysisSteps=Math.clamp((stage-1)*(CYCLE_STEPS-1)/Math.max(1,plan.stages()-1),0,CYCLE_STEPS-1);}
         setChanged();
     }
     public void tick(){
@@ -117,22 +133,21 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
         if(!overflow.isEmpty()){
             flushHarvest();return;
         }
-        var plan=preparePlan();if(plan==null||tank.isEmpty())return;
+        var plan=preparePlan();if(plan==null||!allowed(plan)||tank.isEmpty())return;
         if(tank.getFluidAmount()<STEP_FLUID||!items.getStackInSlot(2).isEmpty())return;
         if(++elapsed<STEP_TICKS){if(elapsed%20==0)setChanged();return;}
         elapsed=STEP_TICKS;
-        if(plan.yield()==CatalysisGrowth.Yield.FRUIT&&!stemReady){
-            tank.drain(STEP_FLUID,IFluidHandler.FluidAction.EXECUTE);elapsed=0;stemStage++;
-            stemReady=stemStage>=8;setChanged();return;
-        }
-        boolean mature=stage+1>=plan.stages();
+        boolean mature=catalysisSteps+1>=CYCLE_STEPS;
         if(mature&&harvest.isEmpty()){
             var natural=naturalCycle?naturalRule():null;
             harvest.addAll(natural!=null?natural.harvest(server,worldPosition.above(),boundSoil,boundSeed):plan.harvest(server,worldPosition.above(),boundSoil,boundSeed));setChanged();
             if(harvest.isEmpty()){elapsed=0;return;}
         }
         tank.drain(STEP_FLUID,IFluidHandler.FluidAction.EXECUTE);elapsed=0;
-        if(mature){overflow.addAll(harvest);harvest.clear();stage=1;naturalCycle=false;flushHarvest();}else stage++;
+        catalysisSteps++;
+        if(plan.yield()==CatalysisGrowth.Yield.FRUIT&&!stemReady){stemStage=1+Math.min(catalysisSteps,3)*7/3;stemReady=mature;}
+        if(mature){overflow.addAll(harvest);harvest.clear();stage=1;catalysisSteps=0;naturalCycle=false;flushHarvest();}
+        else stage=1+catalysisSteps*(plan.stages()-1)/(CYCLE_STEPS-1);
         server.sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD,worldPosition.getX()+.5,worldPosition.getY()+1.5,worldPosition.getZ()+.5,6,.25,.45,.25,.01);
         setChanged();
     }
@@ -151,7 +166,7 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
     }
     public void dropContents(){
         if(level==null)return;for(int i=0;i<3;i++)Block.popResource(level,worldPosition,items.getStackInSlot(i));
-        for(int i=0;i<2;i++)Block.popResource(level,worldPosition,upgrades.getStackInSlot(i));overflow.forEach(s->Block.popResource(level,worldPosition,s));
+        for(int i=0;i<upgrades.getSlots();i++)Block.popResource(level,worldPosition,upgrades.getStackInSlot(i));overflow.forEach(s->Block.popResource(level,worldPosition,s));
     }
     @Override public Component getDisplayName(){return CatalysisContent.BLOCK.get().getName();}
     @Override public AbstractContainerMenu createMenu(int id,Inventory inv,Player player){return new CatalysisMenu(id,inv,this);}
@@ -159,6 +174,8 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider provider){
         super.saveAdditional(tag,provider);tag.put("Items",items.serializeNBT(provider));tag.put("Upgrades",upgrades.serializeNBT(provider));tag.put("Fluid",tank.writeToNBT(provider,new CompoundTag()));
         tag.putInt("Stage",stage);tag.putInt("Elapsed",elapsed);
+        tag.putInt("CatalysisSteps",catalysisSteps);
+        tag.putBoolean("RecipeAllowed",recipeAllowed);
         tag.putInt("StemStage",stemStage);tag.putBoolean("StemReady",stemReady);
         tag.putBoolean("NaturalMode",naturalMode);tag.putBoolean("NaturalCycle",naturalCycle);tag.putInt("StageCount",stageCount);
         if(!boundSeed.isEmpty())tag.put("Seed",boundSeed.save(provider));if(!boundSoil.isEmpty())tag.put("Soil",boundSoil.save(provider));
@@ -169,11 +186,16 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider provider){
         super.loadAdditional(tag,provider);internal=true;
         visualUpdatedAt=level==null?0:level.getGameTime();
-        try{items.deserializeNBT(provider,tag.getCompound("Items"));upgrades.deserializeNBT(provider,tag.getCompound("Upgrades"));tank.readFromNBT(provider,tag.getCompound("Fluid"));}
+        var upgradeData=tag.getCompound("Upgrades").copy();upgradeData.putInt("Size",3);
+        try{items.deserializeNBT(provider,tag.getCompound("Items"));upgrades.deserializeNBT(provider,upgradeData);tank.readFromNBT(provider,tag.getCompound("Fluid"));}
         finally{internal=false;}
         stage=Math.clamp(tag.getInt("Stage"),1,64);elapsed=Math.clamp(tag.getInt("Elapsed"),0,STEP_TICKS);
+        recipeAllowed=!tag.contains("RecipeAllowed")||tag.getBoolean("RecipeAllowed");
         stemStage=Math.clamp(tag.getInt("StemStage"),1,8);stemReady=tag.getBoolean("StemReady");
         naturalMode=tag.getBoolean("NaturalMode");naturalCycle=tag.getBoolean("NaturalCycle");stageCount=tag.contains("StageCount")?Math.clamp(tag.getInt("StageCount"),2,64):stageCountFromSaved();
+        catalysisSteps=tag.contains("CatalysisSteps")?Math.clamp(tag.getInt("CatalysisSteps"),0,CYCLE_STEPS-1)
+                :Math.clamp((stage-1)*(CYCLE_STEPS-1)/Math.max(1,stageCount-1),0,CYCLE_STEPS-1);
+        if(!naturalMode)stage=1+catalysisSteps*(stageCount-1)/(CYCLE_STEPS-1);
         boundSeed=ItemStack.parseOptional(provider,tag.getCompound("Seed"));boundSoil=ItemStack.parseOptional(provider,tag.getCompound("Soil"));boundFluid=FluidStack.parseOptional(provider,tag.getCompound("BoundFluid"));
         harvest.clear();for(var t:tag.getList("Harvest",10)){var s=ItemStack.parseOptional(provider,(CompoundTag)t);if(!s.isEmpty())harvest.add(s);}
         overflow.clear();for(var t:tag.getList("Overflow",10)){var s=ItemStack.parseOptional(provider,(CompoundTag)t);if(!s.isEmpty())overflow.add(s);}

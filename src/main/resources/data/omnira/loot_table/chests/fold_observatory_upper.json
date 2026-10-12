@@ -40,16 +40,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "omnira:spatial_crystal_shard",
+          "name": "omnira:pure_mirror",
           "weight": 5,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 2,
-                "max": 5
-              }
+              "count": 1
             }
           ]
         },
@@ -82,6 +78,11 @@
               }
             }
           ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:stable_fold_gate",
+          "weight": 1
         }
       ]
     },

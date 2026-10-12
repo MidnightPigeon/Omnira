@@ -39,7 +39,11 @@ public final class TimeNatureGameTests {
         h.assertTrue(!SpatialMatrixBlock.grow(level,pos,Direction.UP),"Mature cluster grew again");
         h.assertTrue(Block.getDrops(level.getBlockState(pos),level,pos,null).isEmpty(),"Matrix has drops");
         var drops=Block.getDrops(DreamContent.EXCITED_SPATIAL_CRYSTAL.get().defaultBlockState(),level,pos,null);
-        h.assertTrue(drops.size()==1&&drops.getFirst().is(DreamContent.SPATIAL_CRYSTAL.get().asItem()),"Excited block did not become rough crystal");h.succeed();
+        h.assertTrue(drops.size()==1&&drops.getFirst().is(DreamContent.SPATIAL_CRYSTAL.get().asItem()),"Excited block did not become rough crystal");
+        var tool=new ItemStack(Items.DIAMOND_PICKAXE);
+        tool.enchant(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(net.minecraft.world.item.enchantment.Enchantments.SILK_TOUCH),1);
+        var silk=Block.getDrops(DreamContent.EXCITED_SPATIAL_CRYSTAL.get().defaultBlockState(),level,pos,null,null,tool);
+        h.assertTrue(silk.size()==1&&silk.getFirst().is(DreamContent.EXCITED_SPATIAL_CRYSTAL.get().asItem()),"Silk Touch did not preserve excitation");h.succeed();
     }
     @GameTest(template="spell_arena")
     public static void dormantSaplingAndPersistentLeaves(GameTestHelper h){

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["CCC", "CCC", "CCC"],
+  "key": {
+    "C": { "item": "omnira:excited_rough_spatial_crystal_block" }
+  },
+  "result": { "id": "omnira:space_warp_point", "count": 1 }
+}

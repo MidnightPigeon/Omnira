@@ -71,6 +71,7 @@ public final class CrystalWorkstationMenu extends AbstractContainerMenu {
         if(rename){if(machine.kind()!=CrystalWorkstations.Kind.ANVIL||value.length()>50)return false;machine.rename=value;}
         else{
             if(machine.kind()!=CrystalWorkstations.Kind.GRINDSTONE||!machine.infused())return false;
+            if(!WorkstationRecipes.singleInput(machine.getItem(0),machine.getItem(1)))return false;
             machine.recipe();
             if(WorkstationRecipes.enchantments(machine).keySet().stream().noneMatch(e->e.getRegisteredName().equals(value)))return false;
             if(!machine.removedEnchantments.add(value))machine.removedEnchantments.remove(value);

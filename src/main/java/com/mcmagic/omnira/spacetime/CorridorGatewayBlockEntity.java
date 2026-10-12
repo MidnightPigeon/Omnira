@@ -110,13 +110,14 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
     public static boolean transfer(ServerLevel source,Entity root){
         if(root.isPassenger() || !DreamTransitRules.allowed(root)
                 || root.getPersistentData().getLong("OmniraCorridorCooldown")>source.getGameTime())return false;
-        var destination=source.getServer().getLevel(ModDimensions.SPACETIME_CORRIDOR);
-        if(destination==null || source==destination)return false;
+        boolean returning=source.dimension()==ModDimensions.SPACETIME_CORRIDOR;
+        var destination=returning?source.getServer().overworld():source.getServer().getLevel(ModDimensions.SPACETIME_CORRIDOR);
+        if(destination==null)return false;
         var members=root.getSelfAndPassengers().toList();
         for(var member:members)if(!member.canChangeDimensions(source,destination)
                 || !net.neoforged.neoforge.common.CommonHooks.onTravelToDimension(member,destination.dimension()))return false;
-        Vec3 landing=null;
-        for(int attempt=0;attempt<12;attempt++){
+        Vec3 landing=returning?overworldReturn(source,root):null;
+        for(int attempt=0;!returning && attempt<12;attempt++){
             int z=destination.random.nextInt(16385)-8192;
             var point=new Vec3(.5,CorridorLayout.FLOOR+1,z+.5);
             var pos=BlockPos.containing(point);
@@ -138,6 +139,36 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
         return com.mcmagic.omnira.space.anchor.StabilityField.portalTravel(root,new DimensionTransition(destination,landing,Vec3.ZERO,root.getYRot(),root.getXRot(),e->{
             e.fallDistance=0;e.placePortalTicket(e.blockPosition());TransitionParticles.arrive(e);
         }))!=null;
+    }
+    public static Vec3 overworldReturn(ServerLevel source,Entity root){
+        var world=source.getServer().overworld();
+        var player=root.getSelfAndPassengers().filter(e->e instanceof net.minecraft.server.level.ServerPlayer)
+                .map(e->(net.minecraft.server.level.ServerPlayer)e).findFirst().orElse(null);
+        if(player!=null && player.getRespawnDimension()==net.minecraft.world.level.Level.OVERWORLD && player.getRespawnPosition()!=null){
+            var pos=player.getRespawnPosition();world.getChunkAt(pos);
+            var resolved=com.mcmagic.omnira.mixin.CompassRespawnAccessor.omnira$respawn(world,pos,player.getRespawnAngle(),player.isRespawnForced(),true);
+            if(resolved.isPresent()){
+                var target=resolved.get().position();
+                if(groupFits(world,root,target))return target;
+                var nearby=com.mcmagic.omnira.block.entity.DreamPortalBlockEntity.findLanding(world,BlockPos.containing(target),root);
+                if(nearby!=null)return nearby;
+            }
+        }
+        var spawn=world.getSharedSpawnPos();world.getChunkAt(spawn);
+        int y=world.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,spawn.getX(),spawn.getZ());
+        var target=Vec3.atBottomCenterOf(new BlockPos(spawn.getX(),y,spawn.getZ()));
+        return groupFits(world,root,target)?target:com.mcmagic.omnira.block.entity.DreamPortalBlockEntity.findLanding(world,BlockPos.containing(target),root);
+    }
+    private static boolean groupFits(ServerLevel world,Entity root,Vec3 target){
+        for(var member:root.getSelfAndPassengers().toList()){
+            var box=member.getBoundingBox().move(target.subtract(root.position()));
+            if(box.minY<world.getMinBuildHeight() || box.maxY>=world.getMaxBuildHeight() || !world.getWorldBorder().isWithinBounds(box))return false;
+            for(int x=net.minecraft.util.Mth.floor(box.minX)>>4;x<=net.minecraft.util.Mth.floor(box.maxX)>>4;x++)
+                for(int z=net.minecraft.util.Mth.floor(box.minZ)>>4;z<=net.minecraft.util.Mth.floor(box.maxZ)>>4;z++)world.getChunk(x,z);
+            if(!world.noCollision(box))return false;
+        }
+        var pos=BlockPos.containing(target);
+        return world.getBlockState(pos.below()).isFaceSturdy(world,pos.below(),Direction.UP);
     }
     public void release(){
         if(!(level instanceof ServerLevel server) || released || started<0)return;

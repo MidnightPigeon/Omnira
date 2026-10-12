@@ -31,8 +31,11 @@ public final class DreamRitualScene {
         render(graphics,x,y,ticks,resonance,affinity,corridor,cleansing,0,0);
     }
     public static void render(GuiGraphics graphics,int x,int y,int ticks,boolean resonance,boolean affinity,boolean corridor,boolean cleansing,float yaw,float pitch) {
+        render(graphics,x,y,ticks,resonance,affinity,corridor,cleansing,false,yaw,pitch);
+    }
+    public static void render(GuiGraphics graphics,int x,int y,int ticks,boolean resonance,boolean affinity,boolean corridor,boolean cleansing,boolean genesis,float yaw,float pitch) {
         var mc=Minecraft.getInstance();
-        boolean active=!resonance && !affinity && !corridor && !cleansing && ticks%200>=100;
+        boolean active=!genesis && !resonance && !affinity && !corridor && !cleansing && ticks%200>=100;
         graphics.flush();
         RenderSystem.enableDepthTest();
         var pose=graphics.pose();
@@ -52,12 +55,13 @@ public final class DreamRitualScene {
             pose.translate(.5,com.mcmagic.omnira.client.renderer.CrystalPedestalRenderer.DISPLAY_HEIGHT,.5);
             float scale=com.mcmagic.omnira.client.renderer.CrystalPedestalRenderer.DISPLAY_SCALE;
             pose.scale(scale,scale,scale);
-            mc.getItemRenderer().renderStatic(new ItemStack(corridor?com.mcmagic.omnira.spacetime.CorridorRitual.offering(offeringIndex++):affinity?com.mcmagic.omnira.world.dimension.AffinityRitual.ingredients().get(offeringIndex++):resonance?com.mcmagic.omnira.registry.ModItems.RESONANCE_CORE.get():cleansing?com.mcmagic.omnira.registry.ModItems.INFUSED_SPIRITUAL_CRYSTAL.get():com.mcmagic.omnira.registry.ModItems.SPIRITUAL_CRYSTAL.get()),ItemDisplayContext.FIXED,
+            mc.getItemRenderer().renderStatic(new ItemStack(genesis?com.mcmagic.omnira.world.dimension.GenesisRitual.ingredients().get(offeringIndex++):corridor?com.mcmagic.omnira.spacetime.CorridorRitual.offering(offeringIndex++):affinity?com.mcmagic.omnira.world.dimension.AffinityRitual.ingredients().get(offeringIndex++):resonance?com.mcmagic.omnira.registry.ModItems.RESONANCE_CORE.get():cleansing?com.mcmagic.omnira.registry.ModItems.INFUSED_SPIRITUAL_CRYSTAL.get():com.mcmagic.omnira.registry.ModItems.SPIRITUAL_CRYSTAL.get()),ItemDisplayContext.FIXED,
                     LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY,pose,buffers,mc.level,0);
             pose.popPose();
         }
-        mc.getBlockRenderer().renderSingleBlock((affinity || corridor?ModBlocks.ADVANCED_RITUAL_ENERGY_CORE:ModBlocks.RITUAL_ENERGY_CORE).get().defaultBlockState(),pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
-        com.mcmagic.omnira.client.renderer.RitualEnergyCoreRenderer.cube(pose,buffers,ticks,OverlayTexture.NO_OVERLAY,affinity || corridor);
+        mc.getBlockRenderer().renderSingleBlock((genesis || affinity || corridor?ModBlocks.ADVANCED_RITUAL_ENERGY_CORE:ModBlocks.RITUAL_ENERGY_CORE).get().defaultBlockState(),pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+        com.mcmagic.omnira.client.renderer.RitualEnergyCoreRenderer.cube(pose,buffers,ticks,OverlayTexture.NO_OVERLAY,genesis || affinity || corridor);
+        if(genesis)com.mcmagic.omnira.client.renderer.GenesisOfferingRenderer.render(pose,buffers,Math.min(10000,(ticks%240)*50),Math.max(0,ticks%240-200),OverlayTexture.NO_OVERLAY);
         if(corridor){
             if(mirrorFrame==null)mirrorFrame=com.mcmagic.omnira.client.renderer.DreamMirrorRenderer.createFrame();
             pose.pushPose();pose.translate(.5,1,.5);
@@ -75,6 +79,7 @@ public final class DreamRitualScene {
             graphics.renderItem(new ItemStack(com.mcmagic.omnira.registry.ModItems.SPACETIME_KNOT.get()),x+54,y+108);
         }
         if(cleansing)graphics.renderItem(new ItemStack(com.mcmagic.omnira.registry.ModItems.PARADOX_DUST.get()),x+54,y+108);
+        if(genesis)graphics.renderItem(new ItemStack(com.mcmagic.omnira.alchemy.AlchemyMaterials.REFINED.bucket.get()),x+54,y+108);
         if(affinity)graphics.renderItem(com.mcmagic.omnira.mana.Affinity.byId(1+(ticks/60)%3).offering(),x+54,y+108);
         if(corridor)graphics.renderItem(new ItemStack(com.mcmagic.omnira.registry.ModItems.UNSTABLE_SPACETIME_AGGREGATE.get()),x+54,y+108);
         var label=net.minecraft.network.chat.Component.translatable(active?"guide.omnira.dream.active":"guide.omnira.dream.layout");

@@ -5,7 +5,7 @@
   "recipes": true,
   "text": [
     "Stars shimmer over a deep-blue base. Numerous dust motes wander inside the light-level-15 globe. Its stored item remains suspended at the center, including items that cannot be processed.",
-    "One item slot and one central upgrade slot remain. Only Spacetime Stabilization is accepted. Starlight Conversion starts automatically and transforms the entire stack one-for-one after 10 seconds. Changing the input resets the timer.",
+    "One item slot and separate Spacetime Stabilization and Recipe Control upgrade slots remain. Permitted Starlight Conversion starts automatically and transforms the entire stack one-for-one after 10 seconds. Changing the input resets the timer.",
     "Fish become Star Jellyfish; Arcane Dust and Paradox Dust become Stardust; a Night Heron Statue becomes Voyager's Violin; Rough Spatial Crystal becomes excited; water buckets become Void Starflow buckets.",
     "With Spacetime Stabilization installed, a 32-block spherical field prevents spatial deflection and ordinary teleportation. Hostile creatures take 1 true damage each second. Rough Spatial Crystal and eligible temporal silts are surrounded by light motes and activated after one minute. Portals and enhanced Recall Crystals and rabbit marks remain usable.",
     "Craft an empty Crystal Orb with 8 Stardust, or assemble it with 6 Stardust. Remove its contents and upgrades before crafting."

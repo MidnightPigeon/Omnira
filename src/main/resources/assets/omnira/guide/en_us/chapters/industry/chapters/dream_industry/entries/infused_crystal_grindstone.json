@@ -4,7 +4,8 @@
   "title": "Infused Crystal Grindstone",
   "text": [
     "Upgrade a crystal grindstone using the same advanced assembly layout. Damaged equipment inside repairs one durability every five seconds.",
-    "Choose which enchantments to keep or remove in the right-hand list; all are kept initially. Taking the result costs 100 mana per removed enchantment, or 500 per curse. Disenchanting gives no experience."
+    "With one input, choose which enchantments to keep or remove; all are kept initially. Taking the result costs 100 mana per removed enchantment, or 500 per curse, with no experience gained.",
+    "Two inputs disable enchantment selection. Matching equipment can only combine into an unenchanted repaired item. Both stored inputs still receive passive repairs."
   ],
   "recipes": true
 }

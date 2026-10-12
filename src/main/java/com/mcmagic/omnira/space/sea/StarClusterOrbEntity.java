@@ -37,6 +37,7 @@ public final class StarClusterOrbEntity extends CrystalBallBlockEntity {
             if(progress!=0){progress=0;processing=ItemStack.EMPTY;setChanged();}return;
         }
         if(!ItemStack.matches(processing,input)){processing=input.copy();progress=0;}
+        if(!com.mcmagic.omnira.recipe.RecipeControl.allows(level,upgrades,java.util.List.of(output),net.neoforged.neoforge.fluids.FluidStack.EMPTY))return;
         if(++progress>=DURATION){progress=0;processing=ItemStack.EMPTY;setItem(0,output);
             server.sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD,worldPosition.getX()+.5,worldPosition.getY()+.625,worldPosition.getZ()+.5,16,.2,.2,.2,.02);
         }else if(progress%10==0)setChanged();

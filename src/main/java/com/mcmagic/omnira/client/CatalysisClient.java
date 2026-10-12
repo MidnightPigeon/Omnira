@@ -47,6 +47,7 @@ public final class CatalysisClient {
             double x=.22+side*.56;
             if(be!=null)item(be.upgrades.getStackInSlot(side),x,.45,.02,.15F,0,pose,buffers,light,overlay);
         }
+        if(be!=null)item(be.upgrades.getStackInSlot(2),.5,.225,.02,.15F,0,pose,buffers,light,overlay);
         var plan=be==null?null:be.plan();boolean working=be!=null&&be.catalyzing();
         baseCore(time,working,pose,buffers,light,overlay,glow);
         if(be!=null){
@@ -70,27 +71,39 @@ public final class CatalysisClient {
                 pose.pushPose();pose.translate(.28125,1.04,.28125);pose.scale(.4375F,.18F,.4375F);
                 mc.getBlockRenderer().renderSingleBlock(block.getBlock().defaultBlockState(),pose,CrystalGlassLayer.contents(buffers),light,overlay);pose.popPose();
             }
+            if(soil.is(com.mcmagic.omnira.registry.ModItems.PURE_MIRROR.get())){
+                pose.pushPose();pose.translate(.5,1.08,.5);pose.mulPose(Axis.XP.rotationDegrees(90));
+                item(soil,0,0,0,.7F,0,pose,buffers,light,overlay);pose.popPose();
+            }
             if(CatalysisGrowthVisuals.sealed(soil)){
                 CatalysisGrowthVisuals.sealedGrowth(be,time,pose,buffers,light,overlay);
+            }else if(plan!=null&&CatalysisGrowthVisuals.fungal(plan)){
+                CatalysisGrowthVisuals.fungus(plan,be.visualStage(time),pose,buffers,light,overlay);
             }else if(plan!=null&&plan.yield()==CatalysisGrowth.Yield.TREE){
                 CatalysisGrowthVisuals.tree(plan,be.visualStage(time),pose,buffers,light,overlay);
             }else if(plan!=null&&!plan.plant().isAir()){
                 boolean fruit=plan.yield()==CatalysisGrowth.Yield.FRUIT;
-                float growth=(be.visualStage(time)-1F)/Math.max(1,plan.stages()-1),scale=fruit?.38F:.28F+.33F*growth;
-                var visual=fruit?plan.plant().setValue(net.minecraft.world.level.block.StemBlock.AGE,be.stemStage()-1):plan.visual(be.stage());
-                pose.pushPose();pose.translate((fruit?.35:.5)-scale/2,1.22,.5-scale/2);pose.scale(scale,scale,scale);
-                mc.getBlockRenderer().renderSingleBlock(visual,pose,CrystalGlassLayer.contents(buffers),light,overlay);pose.popPose();
-                if(fruit&&be.stemReady()){
-                    float size=.12F+.20F*growth;pose.pushPose();pose.translate(.60-size/2,1.22,.5-size/2);pose.scale(size,size,size);
-                    mc.getBlockRenderer().renderSingleBlock((plan.plant().is(net.minecraft.world.level.block.Blocks.MELON_STEM)?net.minecraft.world.level.block.Blocks.MELON:net.minecraft.world.level.block.Blocks.PUMPKIN).defaultBlockState(),pose,CrystalGlassLayer.contents(buffers),light,overlay);pose.popPose();
+                boolean fruitVisible=fruit&&(be.stemReady()||be.stage()>=4);
+                float growth=(be.visualStage(time)-1F)/Math.max(1,plan.stages()-1);
+                float scale=fruit?(fruitVisible?be.stemReady()?.12F+.20F*growth:.12F:.38F):.28F+.33F*growth;
+                var visual=fruit?fruitVisible?(plan.plant().is(net.minecraft.world.level.block.Blocks.MELON_STEM)?net.minecraft.world.level.block.Blocks.MELON:net.minecraft.world.level.block.Blocks.PUMPKIN).defaultBlockState()
+                        :plan.plant().setValue(net.minecraft.world.level.block.StemBlock.AGE,be.stemStage()-1):plan.visual(be.stage());
+                pose.pushPose();pose.translate(.5-scale/2,1.22,.5-scale/2);pose.scale(scale,scale,scale);
+                mc.getBlockRenderer().renderSingleBlock(visual,pose,CrystalGlassLayer.contents(buffers),light,overlay);
+                if(visual.is(net.minecraft.world.level.block.Blocks.PITCHER_CROP)&&visual.getValue(net.minecraft.world.level.block.PitcherCropBlock.AGE)>=3){
+                    pose.translate(0,1,0);
+                    mc.getBlockRenderer().renderSingleBlock(visual.setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.DOUBLE_BLOCK_HALF,
+                            net.minecraft.world.level.block.state.properties.DoubleBlockHalf.UPPER),pose,CrystalGlassLayer.contents(buffers),light,overlay);
                 }
+                pose.popPose();
             }else item(be.items.getStackInSlot(1),.5,1.43,.5,.35F,time*.35,pose,buffers,light,overlay);
             item(be.items.getStackInSlot(2),.5,2.25+Math.sin(time*.05)*.025,.5,.28F,time*.5,pose,buffers,light,overlay);
         }
-        if(working)for(int i=0;i<10;i++){
-            double phase=(time*.006+i*.1)%1,angle=time*.018+i*2.4;
+        boolean natural=be!=null&&plan!=null&&be.naturallyGrowing();
+        if(working||natural)for(int i=0;i<10;i++){
+            double phase=(time*(natural?.002:.006)+i*.1)%1,angle=time*(natural?.006:.018)+i*2.4;
             double x=.5+Math.cos(angle)*.32,z=.5+Math.sin(angle)*.32,y=1.15+phase*1.3;
-            box(pose,buffers,glow,x-.012,y-.012,z-.012,x+.012,y+.012,z+.012,i%2==0?0xD9DBFFFF:0xC2AEF0CE,LightTexture.FULL_BRIGHT,overlay);
+            box(pose,buffers,glow,x-.012,y-.012,z-.012,x+.012,y+.012,z+.012,natural?0xC29CE8A0:i%2==0?0xD9DBFFFF:0xC2AEF0CE,LightTexture.FULL_BRIGHT,overlay);
         }
     }
     private static void baseCore(double time,boolean working,PoseStack pose,MultiBufferSource buffers,int light,int overlay,TextureAtlasSprite glow){

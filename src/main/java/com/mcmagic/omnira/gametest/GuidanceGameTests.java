@@ -87,7 +87,7 @@ public final class GuidanceGameTests {
         var orb=orb(h,3,Direction.NORTH);orb.interact(ItemStack.EMPTY,Direction.NORTH);
         h.assertTrue(orb.target(Direction.NORTH).equals("spacetime_terrain")&&orb.target(Direction.EAST).equals("advanced_industry")
                 &&orb.target(Direction.SOUTH).equals("large_alchemy")&&orb.target(Direction.WEST).equals("advanced_spells"),"Advanced routes wrong");
-        orb.interact(ItemStack.EMPTY,Direction.UP);h.assertTrue(orb.projections()[0].equals("genesis_particles"),"Genesis projection absent");
+        h.assertTrue(orb.interact(ItemStack.EMPTY,Direction.UP).equals("genesis_ritual") && orb.projections()[0].equals("genesis_particles"),"Genesis route or projection absent");
         var drops=Block.getDrops(orb.getBlockState(),h.getLevel(),orb.getBlockPos(),orb);
         h.assertTrue(drops.size()==1&&drops.getFirst().is(GuidanceContent.ITEM.get()),"Orb drop missing");
         var state=drops.getFirst().get(DataComponents.BLOCK_STATE);

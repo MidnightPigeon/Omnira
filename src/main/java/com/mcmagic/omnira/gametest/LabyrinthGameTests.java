@@ -76,7 +76,10 @@ public final class LabyrinthGameTests {
             if(LabyrinthTerrain.entryRoof(room))roofs++;
         }
         h.assertTrue(roofs>1100&&roofs<1500,"Roof access is not approximately one fifth");
-        for(int i=0;i<kinds.length;i++)h.assertTrue(i==6?kinds[i]>270&&kinds[i]<390:kinds[i]>370&&kinds[i]<590,"Room theme weights differ from five percent heron and evenly split remainder");
+        for(int i=0;i<kinds.length;i++){
+            double expected=i==0?.15:i==6?.03:.82/12;
+            h.assertTrue(Math.abs(kinds[i]/6561.0-expected)<.015,"Room theme weights differ from fifteen percent empty, three percent heron and evenly split remainder: "+i);
+        }
         var room=site();var plan=LabyrinthTerrain.plan(room);var o=room.origin();
         h.assertTrue(plan.doors().size()==5&&!plan.doors().containsKey(Direction.DOWN),"Lower room has an invalid exit through the base");
         for(int x=1;x<=5;x++)for(int z=1;z<=5;z++){
@@ -106,7 +109,7 @@ public final class LabyrinthGameTests {
             var r=new LabyrinthTerrain.Room(x,1,z);
             total++;if(LabyrinthTerrain.theme(r)==6)themes++;
         }
-        h.assertTrue(themes>total*.045&&themes<total*.055,"Heron room chance not approximately five percent");
+        h.assertTrue(themes>total*.025&&themes<total*.035,"Heron room chance not approximately three percent");
         for(int dx=-6;dx<=6;dx++)for(int dz=-6;dz<=6;dz++)for(int layer=1;layer<=2;layer++){
             var r=new LabyrinthTerrain.Room(base.x()+dx,layer,base.z()+dz);if(!LabyrinthTerrain.exists(r))continue;
             var plan=LabyrinthTerrain.plan(r);var o=r.origin();

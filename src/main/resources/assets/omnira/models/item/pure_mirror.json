@@ -1,0 +1,22 @@
+{
+  "parent": "minecraft:block/block",
+  "gui_light": "front",
+  "textures": {"mirror": "omnira:block/mirror_rock", "particle": "omnira:block/mirror_rock"},
+  "elements": [
+    {"from": [3, 3, 7], "to": [13, 13, 9], "faces": {
+      "north": {"texture": "#mirror", "uv": [3, 3, 13, 13]},
+      "south": {"texture": "#mirror", "uv": [3, 3, 13, 13]},
+      "up": {"texture": "#mirror", "uv": [3, 7, 13, 9]},
+      "down": {"texture": "#mirror", "uv": [3, 7, 13, 9]},
+      "east": {"texture": "#mirror", "uv": [7, 3, 9, 13]},
+      "west": {"texture": "#mirror", "uv": [7, 3, 9, 13]}
+    }}
+  ],
+  "display": {
+    "gui": {"rotation": [15, -25, 0], "translation": [0, 0, 0], "scale": [1, 1, 1]},
+    "ground": {"rotation": [0, 0, 0], "translation": [0, 2, 0], "scale": [0.5, 0.5, 0.5]},
+    "fixed": {"rotation": [0, 0, 0], "translation": [0, 0, 0], "scale": [0.75, 0.75, 0.75]},
+    "thirdperson_righthand": {"rotation": [0, 0, 0], "translation": [0, 2, 0], "scale": [0.5, 0.5, 0.5]},
+    "firstperson_righthand": {"rotation": [0, -25, 0], "translation": [0, 1, 0], "scale": [0.7, 0.7, 0.7]}
+  }
+}

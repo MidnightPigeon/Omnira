@@ -1,0 +1,18 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": {
+    "item": "minecraft:mycelium"
+  },
+  "seed": {
+    "item": "minecraft:red_mushroom"
+  },
+  "fluid": {
+    "id": "minecraft:water",
+    "amount": 100
+  },
+  "result": {
+    "id": "minecraft:red_mushroom",
+    "count": 16
+  },
+  "stages": 4
+}

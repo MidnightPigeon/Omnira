@@ -10,4 +10,15 @@ public final class CrystalPedestalBlockEntity extends CrystalProcessingTableBloc
     @Override public int getContainerSize() {return 1;}
     @Override public int getMaxStackSize() {return 1;}
     @Override public boolean canPlaceItem(int slot,ItemStack stack) {return slot==0;}
+    @Override public void setChanged(){
+        super.setChanged();
+        validateRituals();
+    }
+    public void validateRituals(){
+        if(level==null || level.isClientSide)return;
+        for(var offset:com.mcmagic.omnira.world.dimension.DreamRitual.ANCHORS){
+            var core=worldPosition.offset(-offset[0],0,-offset[1]);
+            if(level.hasChunkAt(core) && level.getBlockEntity(core) instanceof RitualEnergyCoreBlockEntity ritual)ritual.validateGenesis();
+        }
+    }
 }

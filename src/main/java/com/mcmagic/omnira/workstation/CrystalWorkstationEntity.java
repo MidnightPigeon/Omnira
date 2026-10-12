@@ -47,7 +47,7 @@ public final class CrystalWorkstationEntity extends CrystalProcessingTableBlockE
         public int receiveEnergy(int amount,boolean simulate){
             if(level==null||level.isClientSide)return 0;
             int n=inputLimit.receive(level.getGameTime(),amount,5120-energy,simulate);
-            if(!simulate&&n>0){energy+=n;setChanged();}return n;
+            if(!simulate&&n>0){energy+=n;level.blockEntityChanged(worldPosition);}return n;
         }
         public int extractEnergy(int amount,boolean simulate){return 0;}
         public int getEnergyStored(){return energy;}
@@ -152,6 +152,7 @@ public final class CrystalWorkstationEntity extends CrystalProcessingTableBlockE
     private void smelt(){
         if(powered()){burn=0;burnTotal=0;}
         else if(burn>0)burn--;
+        if(getItem(0).isEmpty()){progress=0;return;}
         var found=level.getRecipeManager().getRecipeFor(RecipeType.SMELTING,new SingleRecipeInput(getItem(0)),level);
         if(found.isEmpty()){progress=0;return;}
         var recipe=found.get().value();var result=recipe.assemble(new SingleRecipeInput(getItem(0)),level.registryAccess());

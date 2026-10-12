@@ -27,7 +27,8 @@ public final class SpacetimeEngineKinetics {
         @Override public float getGeneratedSpeed(){var be=controller();return be==null?0:be.generatedSpeed(side());}
         @Override public float calculateAddedStressCapacity(){
             var be=controller();float speed=getGeneratedSpeed();if(be==null||speed==0)return lastCapacityProvided=0;
-            float divisor=Math.max(Math.abs(speed),Math.abs(getTheoreticalSpeed()));
+            // Create multiplies source capacity by generated RPM, not driven RPM.
+            float divisor=Math.abs(speed);
             float coefficient=be.capacity(side())/divisor;
             if((double)coefficient*divisor>be.capacity(side()))coefficient=Math.nextDown(coefficient);
             return lastCapacityProvided=coefficient;
@@ -35,9 +36,13 @@ public final class SpacetimeEngineKinetics {
         @Override public float calculateStressApplied(){return lastStressApplied=0;}
         @Override public void tick(){
             super.tick();if(level==null||level.isClientSide)return;
-            float speed=getGeneratedSpeed(),capacity=calculateAddedStressCapacity();
+            float speed=getGeneratedSpeed();
             if(speed!=previousSpeed){previousSpeed=speed;updateGeneratedRotation();}
-            if(capacity!=previousCapacity){previousCapacity=capacity;if(hasNetwork())notifyStressCapacityChange(capacity);setChanged();sendData();}
+            float capacity=calculateAddedStressCapacity();
+            if(capacity!=previousCapacity||hasNetwork()&&!java.util.Objects.equals(getOrCreateNetwork().sources.get(this),capacity)){
+                previousCapacity=capacity;if(hasNetwork())notifyStressCapacityChange(capacity);setChanged();sendData();
+            }
+            if(hasNetwork()&&level.getGameTime()%20==0)OmniraKineticAccounting.repairClosedNetwork(getOrCreateNetwork());
         }
     }
     private SpacetimeEngineKinetics(){}

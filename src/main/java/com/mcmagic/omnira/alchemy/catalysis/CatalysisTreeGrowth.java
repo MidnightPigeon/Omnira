@@ -3,23 +3,31 @@ package com.mcmagic.omnira.alchemy.catalysis;
 import com.mcmagic.omnira.mixin.*;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.features.TreeFeatures;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import java.lang.reflect.*;
 import java.util.*;
 
 /** A bounded, write-isolated feature view. Never grows a temporary tree in the player's world. */
 public final class CatalysisTreeGrowth {
     public static List<ItemStack> harvest(ServerLevel level,BlockState sapling,BlockState soil){
-        var grower=sapling.getBlock() instanceof SaplingBlock s?((CatalysisSaplingAccessor)s).omnira$grower():
-                sapling.is(Blocks.AZALEA)||sapling.is(Blocks.FLOWERING_AZALEA)?net.minecraft.world.level.block.grower.TreeGrower.AZALEA:null;
-        if(grower==null)return List.of();
-        var access=(CatalysisTreeGrowerAccessor)(Object)grower;
-        var key=access.omnira$tree(level.random,false);if(key==null)key=access.omnira$megaTree(level.random);if(key==null)return List.of();
+        ResourceKey<ConfiguredFeature<?,?>> key;
+        if(sapling.is(Blocks.CRIMSON_FUNGUS))key=TreeFeatures.CRIMSON_FUNGUS_PLANTED;
+        else if(sapling.is(Blocks.WARPED_FUNGUS))key=TreeFeatures.WARPED_FUNGUS_PLANTED;
+        else {
+            var grower=sapling.getBlock() instanceof SaplingBlock s?((CatalysisSaplingAccessor)s).omnira$grower():
+                    sapling.is(Blocks.AZALEA)||sapling.is(Blocks.FLOWERING_AZALEA)?net.minecraft.world.level.block.grower.TreeGrower.AZALEA:null;
+            if(grower==null)return List.of();
+            var access=(CatalysisTreeGrowerAccessor)(Object)grower;
+            key=access.omnira$tree(level.random,false);if(key==null)key=access.omnira$megaTree(level.random);if(key==null)return List.of();
+        }
         var feature=level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).get(key);if(feature==null)return List.of();
         var origin=new BlockPos(0,64,0);var blocks=new HashMap<BlockPos,BlockState>();
         java.util.function.Function<BlockPos,BlockState> state=p->blocks.getOrDefault(p,p.getY()<64?soil:Blocks.AIR.defaultBlockState());
@@ -55,7 +63,7 @@ public final class CatalysisTreeGrowth {
         });
         try{
             if(!feature.place(view,level.getChunkSource().getGenerator(),level.random,origin))return List.of();
-        }catch(UnsupportedOperationException e){
+        }catch(RuntimeException e){
             if(WARNED.add(key.location().toString()))com.mcmagic.omnira.Omnira.LOGGER.warn("Catalysis tree {} cannot be simulated: {}",key.location(),e.getMessage());
             return List.of();
         }

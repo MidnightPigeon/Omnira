@@ -17,6 +17,11 @@ public final class CrystalPedestalBlock extends CrystalProcessingTableBlock {
     public CrystalPedestalBlock(Properties properties) {super(properties);}
     @Override protected MapCodec<? extends CrystalProcessingTableBlock> codec() {return CODEC;}
     @Override public BlockEntity newBlockEntity(BlockPos pos,BlockState state) {return new CrystalPedestalBlockEntity(pos,state);}
+    @Override protected void onRemove(BlockState state,Level level,BlockPos pos,BlockState next,boolean moving){
+        if(!state.is(next.getBlock()) && level.getBlockEntity(pos) instanceof CrystalPedestalBlockEntity pedestal)
+            pedestal.validateRituals();
+        super.onRemove(state,level,pos,next,moving);
+    }
     @Override protected VoxelShape getShape(BlockState state,BlockGetter level,BlockPos pos,CollisionContext context) {
         return Shapes.or(box(3,0,3,13,1,13),box(4,1,4,12,2,12),
                 box(5,2,5,11,8,11),box(4,8,4,12,9,12),

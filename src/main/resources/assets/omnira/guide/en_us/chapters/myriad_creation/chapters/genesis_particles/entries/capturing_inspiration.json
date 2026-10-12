@@ -1,0 +1,15 @@
+{
+  "id": "capturing_inspiration",
+  "title": "Capturing Inspiration",
+  "item": "omnira:genesis_particles",
+  "recipes": false,
+  "text": [
+    "Gather the eight microcores of earth, water, fire, air, light, darkness, time and space, then complete the Ritual of World Confluence with Refined Spacetime to condense one Genesis Particle."
+  ],
+  "links": [
+    {
+      "target": "genesis_ritual",
+      "label": "Ritual of World Confluence"
+    }
+  ]
+}

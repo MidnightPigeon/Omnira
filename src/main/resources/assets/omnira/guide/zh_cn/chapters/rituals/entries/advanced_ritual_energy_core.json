@@ -7,6 +7,7 @@
     "兼容普通仪祭能核的全部仪式，也可用于元素亲和仪式。亲和仪式的获取与解除均须使用高阶能核；普通能核无法启动。仪式不消耗能核。"
   ],
   "links": [
+    {"target": "genesis_ritual", "label": "汇世之仪"},
     {
       "target": "corridor_ritual",
       "label": "叩时之仪"

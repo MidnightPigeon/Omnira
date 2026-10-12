@@ -20,6 +20,7 @@ import net.minecraft.world.level.portal.DimensionTransition;
 public final class DreamPortalBlockEntity extends BlockEntity {
     public static final int COLLAPSE_TICKS=60;
     private boolean exit;
+    private BlockPos paired;
     private long collapseAt=-1;
     public static final int OPEN_TICKS=40;
     private long openedAt=-1;
@@ -27,6 +28,22 @@ public final class DreamPortalBlockEntity extends BlockEntity {
     public static final int TRANSIT_TICKS=24;
     public DreamPortalBlockEntity(BlockPos pos,BlockState state) {super(ModBlockEntityTypes.DREAM_PORTAL.get(),pos,state);}
     public void initialize(boolean exit) {this.exit=exit;collapseAt=-1;openedAt=level==null?-1:level.getGameTime();sync();}
+    public static BlockPos mappedReturn(ServerLevel source,BlockPos origin){
+        var world=source.getServer().overworld();
+        for(int r=0;r<=6;r++)for(int dx=-r;dx<=r;dx++)for(int dz=-r;dz<=r;dz++){
+            if(Math.max(Math.abs(dx),Math.abs(dz))!=r)continue;
+            int x=origin.getX()+dx,z=origin.getZ()+dz;
+            var column=new BlockPos(x,world.getMinBuildHeight(),z);
+            if(!world.getWorldBorder().isWithinBounds(column))continue;
+            world.getChunkAt(column);
+            int y=world.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,x,z);
+            var pos=new BlockPos(x,y,z);
+            if(!world.isOutsideBuildHeight(pos.above()) && world.getBlockState(pos.below()).isFaceSturdy(world,pos.below(),Direction.UP)
+                    && world.isEmptyBlock(pos) && world.isEmptyBlock(pos.above()))return pos;
+        }
+        return null;
+    }
+    public void pairWith(BlockPos target){paired=target.immutable();sync();}
     public float scale(float partial) {
         if(level==null) return 1;
         float opening=openedAt<0?1:Math.clamp((level.getGameTime()+partial-openedAt)/OPEN_TICKS,0,1);
@@ -41,6 +58,11 @@ public final class DreamPortalBlockEntity extends BlockEntity {
         if(level==null) return;
         long time=level.getGameTime();
         if(!level.isClientSide) {
+            if(exit && paired!=null && collapseAt<0 && time%10==0){
+                var other=((ServerLevel)level).getServer().getLevel(ModDimensions.DREAM_REALM);
+                if(other!=null && other.hasChunkAt(paired) && (!(other.getBlockEntity(paired) instanceof DreamPortalBlockEntity portal)
+                        || !worldPosition.equals(portal.paired) || !DreamRitual.anchorsIntact(other,paired))){collapseAt=time;sync();}
+            }
             if(!exit && collapseAt<0 && time%10==0 && !DreamRitual.anchorsIntact(level,worldPosition)) {
                 collapseAt=time;sync();
             }
@@ -91,17 +113,25 @@ public final class DreamPortalBlockEntity extends BlockEntity {
             }
         }
     }
-    private void transfer(Entity player) {
+    private Entity transfer(Entity player) {
         if(!(level instanceof ServerLevel source) || collapseAt>=0 || (openedAt>=0 && level.getGameTime()-openedAt<OPEN_TICKS) || player.isSpectator()
-                || player.isPassenger() || !player.isAlive() || !DreamTransitRules.allowed(player)) return;
-        if(!exit && !DreamRitual.anchorsIntact(source,worldPosition)) return;
+                || player.isPassenger() || !player.isAlive() || !DreamTransitRules.allowed(player)) return null;
+        if(!exit && !DreamRitual.anchorsIntact(source,worldPosition)) return null;
         var data=player.getPersistentData();
         long now=source.getGameTime();
-        if(data.getLong("OmniraDreamCooldown")>now) return;
+        if(data.getLong("OmniraDreamCooldown")>now) return null;
         data.putLong("OmniraDreamCooldown",now+60);
         ServerLevel destination;
         Vec3 landing;
-        if(source.dimension()!=ModDimensions.DREAM_REALM) {
+        if(paired!=null){
+            destination=source.dimension()==ModDimensions.DREAM_REALM?source.getServer().overworld():source.getServer().getLevel(ModDimensions.DREAM_REALM);
+            landing=null;
+            if(destination!=null){
+                destination.getChunkAt(paired);
+                if(destination.getBlockEntity(paired) instanceof DreamPortalBlockEntity portal && worldPosition.equals(portal.paired)
+                        && portal.collapseAt<0)landing=findLanding(destination,paired,player);
+            }
+        }else if(source.dimension()!=ModDimensions.DREAM_REALM) {
             destination=source.getServer().getLevel(ModDimensions.DREAM_REALM);
             landing=destination==null?null:prepareHub(destination,player);
         } else {
@@ -121,11 +151,11 @@ public final class DreamPortalBlockEntity extends BlockEntity {
         if(destination==null || landing==null) {
             for(var member:player.getSelfAndPassengers().toList())if(member instanceof ServerPlayer passenger)
                 passenger.displayClientMessage(Component.translatable("message.omnira.dream.arrival_blocked"),true);
-            return;
+            return null;
         }
         var group=player.getSelfAndPassengers().toList();
         for(var member:group)if(!member.canChangeDimensions(source,destination)
-                || !net.neoforged.neoforge.common.CommonHooks.onTravelToDimension(member,destination.dimension()))return;
+                || !net.neoforged.neoforge.common.CommonHooks.onTravelToDimension(member,destination.dimension()))return null;
         for(var member:group){
             var memberData=member.getPersistentData();
             memberData.putLong("OmniraDreamCooldown",destination.getGameTime()+100);
@@ -134,7 +164,7 @@ public final class DreamPortalBlockEntity extends BlockEntity {
                 memberData.putLong("OmniraDreamOrigin",worldPosition.asLong());
             }
         }
-        com.mcmagic.omnira.space.anchor.StabilityField.portalTravel(player,new DimensionTransition(destination,landing,Vec3.ZERO,player.getYRot(),player.getXRot(),entity->{
+        return com.mcmagic.omnira.space.anchor.StabilityField.portalTravel(player,new DimensionTransition(destination,landing,Vec3.ZERO,player.getYRot(),player.getXRot(),entity->{
             entity.fallDistance=0;
             entity.placePortalTicket(entity.blockPosition());
             TransitionParticles.arrive(entity);
@@ -158,12 +188,13 @@ public final class DreamPortalBlockEntity extends BlockEntity {
         }
         return findLanding(destination,hub,player);
     }
-    private static Vec3 findLanding(ServerLevel world,BlockPos origin,Entity player) {
+    public static Vec3 findLanding(ServerLevel world,BlockPos origin,Entity player) {
         for(int r=1;r<=6;r++) for(int dx=-r;dx<=r;dx++) for(int dz=-r;dz<=r;dz++) {
             if(Math.max(Math.abs(dx),Math.abs(dz))!=r) continue;
             for(int dy=3;dy>=-4;dy--) {
                 BlockPos feet=origin.offset(dx,dy,dz);
                 if(!world.getWorldBorder().isWithinBounds(feet) || world.isOutsideBuildHeight(feet.above())) continue;
+                world.getChunkAt(feet);
                 if(!world.getBlockState(feet.below()).isFaceSturdy(world,feet.below(),Direction.UP)
                         || !world.getBlockState(feet).isAir() || !world.getBlockState(feet.above()).isAir()) continue;
                 Vec3 point=Vec3.atBottomCenterOf(feet);
@@ -181,9 +212,11 @@ public final class DreamPortalBlockEntity extends BlockEntity {
     }
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries) {
         super.saveAdditional(tag,registries);tag.putBoolean("DreamExit",exit);tag.putLong("CollapseAt",collapseAt);tag.putLong("OpenedAt",openedAt);
+        if(paired!=null)tag.putLong("Paired",paired.asLong());
     }
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries) {
         super.loadAdditional(tag,registries);exit=tag.getBoolean("DreamExit");collapseAt=tag.contains("CollapseAt")?tag.getLong("CollapseAt"):-1;openedAt=tag.contains("OpenedAt")?tag.getLong("OpenedAt"):-1;
+        paired=tag.contains("Paired")?BlockPos.of(tag.getLong("Paired")):null;
     }
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag tag=new CompoundTag();saveAdditional(tag,registries);return tag;

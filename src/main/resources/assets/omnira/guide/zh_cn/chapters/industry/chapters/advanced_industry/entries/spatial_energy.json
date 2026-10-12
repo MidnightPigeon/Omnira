@@ -1,0 +1,9 @@
+{
+  "id": "spatial_energy",
+  "title": "空间能量材料",
+  "item": "omnira:void_infuser",
+  "recipes": false,
+  "text": [
+    "将鼠标移到材料上查看每件提供的能量。"
+  ]
+}

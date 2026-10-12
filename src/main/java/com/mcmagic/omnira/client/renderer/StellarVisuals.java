@@ -22,6 +22,11 @@ public final class StellarVisuals {
         for(var face:FACES)for(int n:face)mesh.addVertex(matrix,x+CORNERS[n][0]*radius,y+CORNERS[n][1]*radius,z+CORNERS[n][2]*radius)
             .setColor((color>>16&255)/255F,(color>>8&255)/255F,(color&255)/255F,alpha);
     }
+    public static void cube(PoseStack pose,com.mojang.blaze3d.vertex.VertexConsumer mesh,float x,float y,float z,float radius,int color){
+        var matrix=pose.last().pose();
+        for(var face:FACES)for(int n:face)mesh.addVertex(matrix,x+CORNERS[n][0]*radius,y+CORNERS[n][1]*radius,z+CORNERS[n][2]*radius)
+            .setColor(color);
+    }
     public static void cluster(PoseStack pose,MultiBufferSource buffers,double time){
         cluster(pose,buffers,time,false);
     }

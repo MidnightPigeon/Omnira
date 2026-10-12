@@ -131,6 +131,8 @@ public final class ModBlockEntityTypes {
         event.registerItem(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM,
                 (stack,context)->com.mcmagic.omnira.item.PortableStorageRules.stabilized(stack)?new com.mcmagic.omnira.item.PortableLiquidOrbFluidHandler(stack):null,
                 ModItems.LIQUID_CRYSTAL_BALL.get(),com.mcmagic.omnira.storage.CrystalStorageContent.FLUID.get());
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,RITUAL_ENERGY_CORE.get(),
+                (core,side)->core.getBlockState().is(ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get())?core.genesisOffering:null);
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,ROUGH_ALCHEMY_CAULDRON.get(),(vessel,side)->vessel.tank);
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,ROUGH_ALCHEMY_CAULDRON.get(),(vessel,side)->vessel.items);
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,LIQUID_CRYSTAL_BALL.get(),(ball,side)->ball.fluidHandler);

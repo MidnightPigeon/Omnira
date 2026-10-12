@@ -9,6 +9,7 @@
     "镜面岩可转为虚空侵染的镜面岩，光凝晶转为暗影岩，粘液球转为末影珍珠，黑曜石转为哭泣的黑曜石。各类时序尘泥会朽化，各类树苗会变为暗影树苗。"
   ],
   "links": [
+    {"target": "spatial_energy", "label": "空间能量材料"},
     {
       "target": "dense_void_mass_guide",
       "label": "高密度虚空团块"

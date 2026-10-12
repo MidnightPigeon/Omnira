@@ -1,0 +1,19 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": {
+    "item": "minecraft:crimson_nylium"
+  },
+  "seed": {
+    "item": "minecraft:crimson_fungus"
+  },
+  "fluid": {
+    "id": "minecraft:lava",
+    "amount": 100
+  },
+  "result": {
+    "id": "minecraft:crimson_stem",
+    "count": 1
+  },
+  "stages": 4,
+  "yield": "fungus"
+}

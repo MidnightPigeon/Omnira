@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "omnira:spacetime_stabilization_upgrade"},
+    {"item": "omnira:intake_upgrade"},
+    {"item": "omnira:output_upgrade"}
+  ],
+  "result": {"id": "omnira:recipe_control_upgrade", "count": 1}
+}

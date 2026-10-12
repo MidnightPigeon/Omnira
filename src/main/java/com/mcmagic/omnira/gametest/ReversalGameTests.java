@@ -12,6 +12,21 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @GameTestHolder("omnira_reversal")
 @PrefixGameTestTemplate(false)
 public final class ReversalGameTests {
+    @GameTest(template="spell_arena") public static void fuelCatalogueAndProgressResume(GameTestHelper h){
+        for(boolean spatial:new boolean[]{false,true})for(var fuel:ReversalFuels.all(spatial)){
+            h.assertTrue(!fuel.stack().isEmpty(),"Fuel catalogue contains missing item: "+fuel.item());
+            h.assertTrue((spatial?ReversalBlockEntity.spaceFuel(fuel.stack()):ReversalBlockEntity.fuel(fuel.stack()))==fuel.energy(),"Display fuel differs from machine");
+        }
+        var pos=h.absolutePos(new BlockPos(3,3,3));h.getLevel().setBlockAndUpdate(pos,ReversalContent.MACHINE.get().defaultBlockState());
+        var be=(ReversalBlockEntity)h.getLevel().getBlockEntity(pos);
+        be.setItem(0,new ItemStack(ModItems.TIME_WARP_POINT.get(),2));be.setItem(2,new ItemStack(ModItems.TIME_MICROCORE.get()));
+        for(int i=0;i<37;i++)be.tick();
+        var copy=new ReversalBlockEntity(pos,be.getBlockState());copy.setLevel(h.getLevel());
+        copy.loadWithComponents(be.saveWithFullMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());
+        h.assertTrue(copy.progress()==37,"Throttled render sync lost actual saved progress");
+        for(int i=0;i<63;i++)copy.tick();
+        h.assertTrue(copy.getItem(1).is(ModItems.TIME_MICROCORE.get())&&copy.energy()==7,"Resumed instrument changed output or energy");h.succeed();
+    }
     @GameTest(template="spell_arena") public static void aggregateReturnsEightPoints(GameTestHelper h){
         var pos=h.absolutePos(new BlockPos(3,3,3));h.getLevel().setBlockAndUpdate(pos,ReversalContent.MACHINE.get().defaultBlockState());
         var be=(ReversalBlockEntity)h.getLevel().getBlockEntity(pos);

@@ -55,15 +55,7 @@ public final class CreateReactionPool {
         }
     }
     private static void rebalance(KineticNetwork net){
-        // Old saves may retain a ghost reservation. Only discard it when the topology
-        // proves there can be no unloaded consumers, never for an open shaft network.
-        if(net.getSize()==net.members.size()||closedRemoteDrive(net)){
-            double loadedStress=0,loadedCapacity=0;
-            for(var member:net.members.keySet())loadedStress+=net.getActualStressOf(member);
-            for(var source:net.sources.keySet())loadedCapacity+=net.getActualCapacityOf(source);
-            if(net.getSize()!=net.members.size()||Math.abs(net.calculateStress()-loadedStress)>.001
-                    ||Math.abs(net.calculateCapacity()-loadedCapacity)>.001)net.initFromTE(0,0,0);
-        }
+        com.mcmagic.omnira.compat.create.OmniraKineticAccounting.repairClosedNetwork(net);
         // Demand follows shaft RPM, not spare generator capacity. Create owns overload detection.
         var ports=new ArrayList<Port>();
         for(var member:net.members.keySet())if(member instanceof Port port){
@@ -77,21 +69,6 @@ public final class CreateReactionPool {
     private static boolean eligible(Port port){
         var pool=ReactionPoolBlock.controller(port.getLevel(),port.getBlockPos());
         return pool!=null&&pool.complete()&&Math.abs(port.getTheoreticalSpeed())>0;
-    }
-    private static boolean closedRemoteDrive(KineticNetwork net){
-        if(net.members.size()!=4||net.sources.size()!=1)return false;
-        for(var member:net.members.keySet())if(member instanceof Port poolPort){
-            var level=poolPort.getLevel();var state=poolPort.getBlockState();
-            var side=ReactionPoolBlock.outward(state.getValue(ReactionPoolBlock.FACING),state.getValue(ReactionPoolBlock.PART));
-            var local=com.mcmagic.omnira.space.SpacetimePortState.at(level,poolPort.getBlockPos().relative(side));
-            var remote=local==null?null:local.other();
-            if(remote==null||!local.attached().equals(poolPort.getBlockPos())||!CreateSpacetimePort.shaft(local)||!CreateSpacetimePort.shaft(remote))return false;
-            var engine=level.getBlockEntity(remote.attached());
-            return engine instanceof com.mcmagic.omnira.block.entity.ManaEngineBlockEntity
-                    &&net.sources.containsKey(engine)&&net.members.containsKey(local.host)&&net.members.containsKey(remote.host)
-                    &&net.members.containsKey(engine);
-        }
-        return false;
     }
     private CreateReactionPool(){}
 }

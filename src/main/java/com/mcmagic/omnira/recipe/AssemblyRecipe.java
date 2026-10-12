@@ -18,6 +18,7 @@ public record AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean out
     public AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean outerShapeless) {this(slots,result,outerShapeless,"fixed");}
     public AssemblyRecipe {
         slots=List.copyOf(slots);
+        result=result.copy();
         if(!List.of("fixed","alternating","grid_upgrade","staff","staff_upgrade","arquebus","arquebus_upgrade","armor_exchange","resonant_orb","void_orb").contains(operation)) throw new IllegalArgumentException("Unknown assembly operation: "+operation);
         boolean pairedPorts=result.is(com.mcmagic.omnira.registry.ModItems.SPACETIME_PORT.get()) && result.getCount()==2;
         if(slots.size()!=7 || slots.stream().allMatch(Ingredient::isEmpty) || result.getCount()!=1 && !pairedPorts)

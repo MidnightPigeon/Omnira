@@ -37,7 +37,8 @@ public final class CrystalUtilityClient {
             draw(id+"_wheel",p,b,light,overlay,true);p.popPose();
         }
         if(index==3||index==5){
-            float angle=work==null?0:work.electrical?0:time*work.rpm*.3F;
+            float speed=work==null?0:work.host instanceof WorkstationAccess access?access.shaftSpeed():work.rpm;
+            float angle=time*speed*.3F;
             p.pushPose();p.translate(.5,.5,.5);p.mulPose(Axis.ZP.rotationDegrees(angle));p.translate(-.5,-.5,-.5);
             draw(id+"_shaft",p,b,work!=null&&work.electrical?LightTexture.FULL_BRIGHT:light,overlay,false);p.popPose();
         }

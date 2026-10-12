@@ -55,12 +55,14 @@ public final class CrystalUtilityScreen extends ResponsiveContainerScreen<Crysta
         return work==null||!work.removedEnchantments.contains(e.getRegisteredName());
     }
     private boolean overList(double x,double y){return menu.index==4&&x>=leftPos+LIST_X&&x<leftPos+LIST_X+LIST_WIDTH&&y>=topPos+LIST_Y&&y<topPos+LIST_Y+ROWS*ROW_HEIGHT;}
+    private boolean selectionAvailable(){return WorkstationRecipes.singleInput(menu.getSlot(0).getItem(),menu.getSlot(1).getItem());}
     @Override protected boolean hasClickedOutside(double x,double y,int guiLeft,int guiTop,int button){
         if(menu.index==4&&x>=guiLeft+176&&x<guiLeft+298&&y>=guiTop&&y<guiTop+80)return false;
         return super.hasClickedOutside(x,y,guiLeft,guiTop,button);
     }
     @Override protected boolean mouseClickedContent(double x,double y,int button){
         if(button==0&&overList(x,y)){
+            if(!selectionAvailable())return true;
             var entries=enchantments();int i=scroll+(int)(y-topPos-LIST_Y)/ROW_HEIGHT;
             if(i<entries.size())PacketDistributor.sendToServer(new WorkstationConfigPayload(menu.containerId,entries.get(i).getRegisteredName(),false));
             return true;
@@ -72,7 +74,7 @@ public final class CrystalUtilityScreen extends ResponsiveContainerScreen<Crysta
         return super.keyPressed(key,scan,modifiers);
     }
     @Override public boolean mouseScrolled(double x,double y,double dx,double dy){
-        if(overList(x/uiScale(),y/uiScale())){scroll=Math.clamp(scroll-(int)Math.signum(dy),0,Math.max(0,enchantments().size()-ROWS));return true;}
+        if(overList(x/uiScale(),y/uiScale())){if(selectionAvailable())scroll=Math.clamp(scroll-(int)Math.signum(dy),0,Math.max(0,enchantments().size()-ROWS));return true;}
         return super.mouseScrolled(x,y,dx,dy);
     }
     private void magicFuel(GuiGraphics g,int amount){
@@ -103,6 +105,10 @@ public final class CrystalUtilityScreen extends ResponsiveContainerScreen<Crysta
         if(menu.index==4){
             int x=leftPos+176;g.fill(x,topPos,x+122,topPos+80,0xFF373737);g.fill(x+1,topPos+1,x+121,topPos+79,0xFFFFFFFF);g.fill(x+3,topPos+3,x+119,topPos+77,0xFFC6C6C6);
             CrystalUi.title(g,font,Component.translatable("gui.omnira.workstation.enchantments"),x+61,topPos+6,110,0xFF404040);
+            if(menu.getSlot(0).hasItem()&&menu.getSlot(1).hasItem()){
+                CrystalUi.title(g,font,Component.translatable("gui.omnira.workstation.unavailable"),x+61,topPos+40,110,0xFF606060);
+                return;
+            }
             var list=enchantments();scroll=Math.min(scroll,Math.max(0,list.size()-ROWS));
             for(int row=0;row<ROWS&&row+scroll<list.size();row++){
                 var e=list.get(row+scroll);int y=topPos+LIST_Y+row*ROW_HEIGHT;boolean keep=selected(e);
@@ -127,7 +133,7 @@ public final class CrystalUtilityScreen extends ResponsiveContainerScreen<Crysta
             g.renderTooltip(font,Component.translatable(menu.index==2?"gui.omnira.workstation.durability":"gui.omnira.workstation.forging",menu.index==2?menu.value(0):menu.value(1)/20,menu.value(2)/20),mx,my);
         if(menu.index%3==2&&isHovering(menu.getSlot(2).x,menu.getSlot(2).y,16,16,mx,my)&&menu.value(5)>0)
             g.renderTooltip(font,Component.translatable("container.repair.cost",menu.value(5)),mx,my);
-        if(overList(mx,my)){
+        if(selectionAvailable()&&overList(mx,my)){
             var list=enchantments();int i=scroll+(my-topPos-LIST_Y)/ROW_HEIGHT;
             if(i<list.size())g.renderTooltip(font,list.get(i).value().description().copy().append(Component.translatable(selected(list.get(i))?"gui.omnira.workstation.keep":"gui.omnira.workstation.remove")),mx,my);
         }

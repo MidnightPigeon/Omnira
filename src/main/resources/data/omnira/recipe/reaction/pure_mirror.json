@@ -1,0 +1,6 @@
+{
+  "type": "omnira:reaction",
+  "items": [{"ingredient": {"item": "omnira:mirror_rock"}}],
+  "fluid": {"id": "omnira:void_starflow", "amount": 1000},
+  "results": [{"id": "omnira:pure_mirror", "count": 1}]
+}

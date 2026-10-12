@@ -1,0 +1,8 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": {"item": "omnira:pure_mirror"},
+  "seed": {"item": "omnira:mirror_rock"},
+  "fluid": {"id": "minecraft:water", "amount": 100},
+  "result": {"id": "omnira:mirror_rock", "count": 16},
+  "stages": 4
+}

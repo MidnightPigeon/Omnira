@@ -13,7 +13,7 @@
   },
   "fluid": {
     "id": "omnira:decayed_timeflow",
-    "amount": 500
+    "amount": 100
   },
   "result": {
     "id": "omnira:reborn_rottenleaf_lily",

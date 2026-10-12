@@ -9,5 +9,6 @@
     "Exchange memory cubes and lilies, rewind and activate silt, condense microcores, or uncover the past of unknown fossils and eggs. See recipes for quantities.",
     "Condense remains into royal essences, or inactive T-virus solution into psychic talent solution. Each grants a talent together with Time Distortion. An existing talent prevents consumption; the Cleansing Ritual removes both talent and curse."
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [{"target": "temporal_energy", "label": "Temporal Energy Materials"}]
 }

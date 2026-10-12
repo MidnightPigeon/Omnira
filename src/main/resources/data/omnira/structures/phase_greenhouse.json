@@ -17314,7 +17314,7 @@
     "y": 1,
     "z": 13,
     "name": "omnira:crystal_pedestal",
-    "nbt": "{id:\"omnira:crystal_pedestal\",Items:[{Slot:0b,id:\"omnira:deflection_crystal\",count:1}]}"
+    "nbt": "{id:\"omnira:crystal_pedestal\",Items:[{Slot:0b,id:\"omnira:phase_crystal_block\",count:1}]}"
   },
   {
     "x": 33,

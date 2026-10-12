@@ -121,8 +121,8 @@ public final class MachinePanelArt {
         // Keep the two working modules separate, with a stepped vessel around the fluid controls.
         polygon(p,RIM,15,23,145,23,150,28,150,100,142,109,20,109,12,100,12,28);
         polygon(p,0xFF3E606D,17,25,143,25,148,29,148,99,140,107,22,107,14,99,14,29);
-        frame(p,160,20,68,68,0xFF476773);frame(p,160,97,68,32,0xFF476773);
-        p.fill(154,27,155,124,0xFF92B4C0);
+        frame(p,160,20,68,68,0xFF476773);frame(p,150,97,88,32,0xFF476773);
+        p.fill(154,27,155,90,0xFF92B4C0);
     }
     public static void grid(Pixels p,int count,int selected,float time){
         int color=count==3?LIGHT:count==5?MINT:count==8?LILAC:GOLD;

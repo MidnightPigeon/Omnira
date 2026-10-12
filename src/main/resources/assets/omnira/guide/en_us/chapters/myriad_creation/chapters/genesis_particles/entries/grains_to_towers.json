@@ -1,0 +1,16 @@
+{
+  "id": "grains_to_towers",
+  "title": "Grains into Towers",
+  "item": "omnira:genesis_particles",
+  "recipes": false,
+  "text": [
+    "An existing Genesis Particle can serve as a seed alongside an Encapsulated Stable Spacetime Aggregate in an Alchemical Catalysis Chamber. Cultivate it with Refined Spacetime; the substrate and seed remain, and each completed growth cycle yields one Genesis Particle.",
+    "It does not grow naturally. Continued liquid catalysis is needed for these faint echoes to accumulate."
+  ],
+  "links": [
+    {
+      "target": "alchemical_catalysis_chamber",
+      "label": "Alchemical Catalysis Chamber"
+    }
+  ]
+}

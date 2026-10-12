@@ -181,6 +181,7 @@ public final class CruiseOrbStorage {
     }
     private void lava(int slot) {
         var lava=new FluidStack(Fluids.LAVA,100);
+        if(!com.mcmagic.omnira.recipe.RecipeControl.allows(owner.level(),upgrades,java.util.List.of(),lava))return;
         if(tank.fill(lava,FluidAction.SIMULATE)>0){tank.fill(lava,FluidAction.EXECUTE);return;}
         var tag=OrbUpgrades.settings(upgrades.getStackInSlot(slot));
         for(int i=0;i<SIZE;i++) {

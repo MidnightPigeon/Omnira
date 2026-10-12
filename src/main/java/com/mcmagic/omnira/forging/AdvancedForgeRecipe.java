@@ -17,6 +17,7 @@ public record AdvancedForgeRecipe(List<Ingredient> slots,ItemStack result,String
     public AdvancedForgeRecipe(List<Ingredient> slots,ItemStack result){this(slots,result,"fixed");}
     public AdvancedForgeRecipe {
         slots=List.copyOf(slots);
+        result=result.copy();
         if(!operation.equals("fixed") && !operation.equals("staff_enhancement") && !operation.equals("ritual_sword_upgrade"))throw new IllegalArgumentException("Unknown advanced assembly operation: "+operation);
         if(slots.size()!=9 || slots.stream().allMatch(Ingredient::isEmpty))throw new IllegalArgumentException("Expected nine material positions");
     }

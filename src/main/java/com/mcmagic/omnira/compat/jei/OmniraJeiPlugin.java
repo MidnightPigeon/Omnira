@@ -212,9 +212,13 @@ public final class OmniraJeiPlugin implements IModPlugin {
                 }
                 @Override public void draw(Writing r,IRecipeSlotsView slots,GuiGraphics g,double x,double y) {
                     ring(g,new int[][]{points[0],points[1],points[5],points[4],points[3],points[2]});
+                    for(int i=2;i<6;i++)WritingSymbols.draw(g,points[i][0]-8,compactY(points[i][1])-8,i>=4,i);
                     if(com.mcmagic.omnira.spell.SpellPattern.composite(r.inputs().getFirst()))
                         com.mcmagic.omnira.client.screen.CompositeSlotGhost.render(g,r.inputs().getFirst(),points[1][0]-8,compactY(points[1][1])-8);
                     mana(g,SpellPayload.of(r.output()).baseCost(),"jei.omnira.writing_time");
+                }
+                @Override public void getTooltip(mezz.jei.api.gui.builder.ITooltipBuilder tooltip,Writing r,IRecipeSlotsView slots,double x,double y){
+                    for(int i=2;i<6;i++)if(Math.abs(x-points[i][0])<9&&Math.abs(y-compactY(points[i][1]))<9){tooltip.addAll(WritingSymbols.tooltip(i>=4));return;}
                 }
             }
         );
@@ -228,6 +232,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
         registration.addRecipes(ADVANCED_FORGE,recipes.getAllRecipesFor(ModRecipes.ADVANCED_FORGE_TYPE.get()).stream().map(RecipeHolder::value).toList());
         var rituals=new ArrayList<RitualJei.Entry>();
         rituals.add(new RitualJei.Entry(new RitualJei.Dream()));
+        rituals.add(new RitualJei.Entry(new RitualJei.Genesis()));
         rituals.add(new RitualJei.Entry(new RitualJei.Corridor()));
         rituals.add(new RitualJei.Entry(new RitualJei.Resonance()));
         rituals.add(new RitualJei.Entry(new RitualJei.Cleansing()));
@@ -247,35 +252,17 @@ public final class OmniraJeiPlugin implements IModPlugin {
         registration.addRecipes(ASSEMBLY,assemblyRecipes);
         registration.addRecipes(WRITING,writingRecipes());
     }
-    private static List<List<ItemStack>> pairs(List<Item> items,boolean ordered) {
-        var result=new ArrayList<List<ItemStack>>();
-        result.add(List.of(ItemStack.EMPTY,ItemStack.EMPTY));
-        for(int i=0;i<items.size();i++) {
-            result.add(List.of(new ItemStack(items.get(i)),ItemStack.EMPTY));
-            for(int j=ordered?0:i;j<items.size();j++) result.add(List.of(new ItemStack(items.get(i)),new ItemStack(items.get(j))));
-        }
-        return result;
-    }
     private static List<Writing> writingRecipes() {
         var result=new ArrayList<Writing>();
         var cores=List.of(ModItems.EARTH_MICROCORE.get(),ModItems.WATER_MICROCORE.get(),ModItems.FIRE_MICROCORE.get(),ModItems.AIR_MICROCORE.get());
-        var elements=pairs(List.of(ModItems.SHARP_BREATH.get(),ModItems.HEALING_DEW.get(),ModItems.DISSOCIATION_THREAD.get(),ModItems.CONSTRUCTION_MATRIX.get(),ModItems.DARK_MICROCORE.get()),true);
-        var modifiers=pairs(List.of(Items.CLOCK,Items.IRON_BLOCK,ModItems.SPIRITUAL_CRYSTAL.get(),ModItems.LIGHT_MICROCORE.get()),false);
-        for(var target:cores) for(var shape:cores) for(var element:elements) for(var modifier:modifiers) {
-            var inputs=List.of(new ItemStack(target),new ItemStack(shape),modifier.get(0),modifier.get(1),element.get(0),element.get(1),
+        for(int kind=0;kind<3;kind++) {
+            var inputs=List.of(new ItemStack(kind==2?ModItems.TIME_MICROCORE.get():cores.getFirst()),kind==0?new ItemStack(cores.get(1)):ItemStack.EMPTY,
+                    ItemStack.EMPTY,ItemStack.EMPTY,ItemStack.EMPTY,ItemStack.EMPTY,
                     new ItemStack(ModItems.SPELL_INK.get()),new ItemStack(ModItems.SPIRITUAL_CRYSTAL.get()));
             var container=new SimpleContainer(9);
             for(int i=0;i<8;i++) container.setItem(i,inputs.get(i).copy());
             result.add(new Writing(inputs,CrystalProcessingTableMenu.previewCrystal(container)));
         }
-        for(var target:List.of(ModItems.TIME_MICROCORE.get(),ModItems.SPACE_MICROCORE.get()))
-            for(var element:elements) for(var modifier:modifiers) {
-                var inputs=List.of(new ItemStack(target),ItemStack.EMPTY,modifier.get(0),modifier.get(1),element.get(0),element.get(1),
-                        new ItemStack(ModItems.SPELL_INK.get()),new ItemStack(ModItems.SPIRITUAL_CRYSTAL.get()));
-                var container=new SimpleContainer(9);
-                for(int i=0;i<8;i++)container.setItem(i,inputs.get(i).copy());
-                result.add(new Writing(inputs,CrystalProcessingTableMenu.previewCrystal(container)));
-            }
         return result;
     }
     @Override public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
@@ -298,7 +285,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
     }
     @Override public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
         if(net.neoforged.fml.ModList.get().isLoaded("create")) CreatePressingJei.transfer(registration);
-        registration.addRecipeTransferHandler(CrystalProcessingTableMenu.class,ModMenuTypes.CRYSTAL_PROCESSING_TABLE.get(),WRITING,0,8,9,36);
+        // Writing pages are schematics, not complete transferable recipes.
         registration.addRecipeTransferHandler(ArcaneAssemblyTableMenu.class,ModMenuTypes.ARCANE_ASSEMBLY_TABLE.get(),ASSEMBLY,0,7,7,36);
         // Analysis consumes counted stacks, so a single-item automatic transfer would be misleading.
     }

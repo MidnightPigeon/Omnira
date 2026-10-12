@@ -71,6 +71,7 @@ repo/
 !/scripts/tests/
 /scripts/tests/*
 !/scripts/tests/spell_arena.snbt
+!/scripts/tests/omnira_recipe_smoke.js
 
 # Local collaboration preferences; do not distribute with source.
 /DEVELOPMENT_PREFERENCES.local.md

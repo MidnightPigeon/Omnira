@@ -24,7 +24,11 @@ public final class CrystalStorageNetworks extends SavedData {
     private final Map<UUID,CompoundTag> pending=new HashMap<>();
     private net.minecraft.server.MinecraftServer server;
     private boolean reconciling,notifying;
-    private int lastReconcileTick=Integer.MIN_VALUE;
+    private boolean topologyDirty=true;
+    private record Location(String dimension,BlockPos pos){}
+    private final Map<Location,Endpoint> locations=new HashMap<>();
+    private final Map<CrystalBallBlockEntity,Boolean> stabilization=new IdentityHashMap<>();
+    private final Map<CrystalBallBlockEntity,List<Endpoint>> views=new IdentityHashMap<>();
     public static CrystalStorageNetworks get(ServerLevel level){
         var data=level.getServer().overworld().getDataStorage().computeIfAbsent(
             new Factory<>(CrystalStorageNetworks::new,CrystalStorageNetworks::load,null),"omnira_crystal_storage");
@@ -39,23 +43,37 @@ public final class CrystalStorageNetworks extends SavedData {
     private CrystalBallBlockEntity fresh(boolean liquid,ServerLevel level){
         var state=(liquid?ModBlocks.LIQUID_CRYSTAL_BALL:ModBlocks.CRYSTAL_BALL).get().defaultBlockState();
         CrystalBallBlockEntity ball=liquid?new LiquidCrystalBallBlockEntity(BlockPos.ZERO,state):new CrystalBallBlockEntity(BlockPos.ZERO,state);
-        ball.virtualStorage=true;ball.setLevel(level);ball.storageChanged=()->{setDirty();if(!reconciling)notifyViews();};
+        ball.virtualStorage=true;ball.setLevel(level);ball.storageChanged=()->{
+            boolean current=ball.stabilized();
+            var previous=stabilization.put(ball,current);
+            if(previous!=null&&previous!=current)topologyDirty=true;
+            setDirty();if(!reconciling)notifyViews(ball);
+        };
         return ball;
     }
     private CrystalBallBlockEntity store(Endpoint e){
-        return stores.computeIfAbsent(e.store,id->{
-            var value=fresh(e.liquid,level(e)==null?server.overworld():level(e));
-            var tag=pending.remove(id);if(tag!=null)value.importLocal(tag);return value;
+        var value=stores.computeIfAbsent(e.store,id->{
+            var payload=fresh(e.liquid,level(e)==null?server.overworld():level(e));
+            var tag=pending.remove(id);if(tag!=null)payload.importLocal(tag);return payload;
         });
+        if(!reconciling){
+            if(!stabilization.containsKey(value))stabilization.put(value,value.stabilized());
+            // A loaded save may be queried before its first endpoint tick.
+            if(!views.containsKey(value)){
+                var members=new ArrayList<Endpoint>();
+                for(var endpoint:endpoints.values())if(endpoint.store.equals(e.store))members.add(endpoint);
+                views.put(value,members);
+            }
+        }
+        return value;
     }
     public CrystalBallBlockEntity view(CrystalBallBlockEntity ball){
         var e=endpoints.get(ball.storageIdentity);return e==null?ball:store(e);
     }
     public String terminalStorageKey(ServerLevel level,BlockPos pos){
         String dimension=level.dimension().location().toString();
-        for(var endpoint:endpoints.values())if(endpoint.dimension.equals(dimension)&&endpoint.pos.equals(pos))
-            return "omnira:shared_"+(endpoint.liquid?"fluid":"items")+"@"+endpoint.store;
-        return null;
+        var endpoint=locations.get(new Location(dimension,pos));
+        return endpoint==null?null:"omnira:shared_"+(endpoint.liquid?"fluid":"items")+"@"+endpoint.store;
     }
     public void register(CrystalBallBlockEntity ball){
         if(ball.virtualStorage||ball.hasPendingLoot())return;
@@ -71,15 +89,18 @@ public final class CrystalStorageNetworks extends SavedData {
             e.dimension=ball.getLevel().dimension().location().toString();e.liquid=ball instanceof LiquidCrystalBallBlockEntity;
             e.frequency=new ItemStack[]{ball.frequency[0].copy(),ball.frequency[1].copy()};
             var payload=fresh(e.liquid,(ServerLevel)ball.getLevel());payload.importLocal(ball.exportLocal());
-            stores.put(e.store,payload);ball.clearLocal();endpoints.put(e.id,e);setDirty();
+            stores.put(e.store,payload);ball.clearLocal();endpoints.put(e.id,e);
+            locations.put(new Location(e.dimension,e.pos),e);setDirty();
         }
-        if(added||lastReconcileTick!=server.getTickCount())reconcile();ball.networkStatus=e.status;
+        if(added||topologyDirty)reconcile();ball.networkStatus=e.status;
     }
     public void changed(CrystalBallBlockEntity ball){
-        if(endpoints.containsKey(ball.storageIdentity)){setDirty();if(!notifying)notifyViews();}
+        var endpoint=endpoints.get(ball.storageIdentity);
+        if(endpoint!=null&&!notifying)store(endpoint).storageChanged.run();
     }
     public void detach(CrystalBallBlockEntity ball){
         var e=endpoints.remove(ball.storageIdentity);if(e==null)return;
+        locations.remove(new Location(e.dimension,e.pos),e);
         if(endpoints.values().stream().noneMatch(other->other.store.equals(e.store))){
             ball.importLocal(store(e).exportLocal());stores.remove(e.store);pending.remove(e.store);
         }
@@ -91,7 +112,6 @@ public final class CrystalStorageNetworks extends SavedData {
     }
     public void reconcile(){
         if(reconciling)return;reconciling=true;
-        lastReconcileTick=server.getTickCount();
         try{
             var frequencyGroups=new ArrayList<List<Endpoint>>();
             for(var e:endpoints.values()){
@@ -147,6 +167,11 @@ public final class CrystalStorageNetworks extends SavedData {
                 for(var e:group)if(!e.rejected)e.status=members>1?(e.liquid?2:1):0;
             }
             for(var level:server.getAllLevels())TuningOutputs.get(level).disconnectShared(level);
+            stabilization.clear();
+            for(var storage:stores.values())stabilization.put(storage,storage.stabilized());
+            views.clear();
+            for(var endpoint:endpoints.values())views.computeIfAbsent(store(endpoint),key->new ArrayList<>()).add(endpoint);
+            topologyDirty=false;
             setDirty();notifyViews();
         }finally{reconciling=false;}
     }
@@ -181,8 +206,13 @@ public final class CrystalStorageNetworks extends SavedData {
         return result;
     }
     private void notifyViews(){
+        notifyViews(null);
+    }
+    private void notifyViews(CrystalBallBlockEntity storage){
         if(server==null||notifying)return;notifying=true;
-        try{for(var e:endpoints.values()){var ball=loaded(e);if(ball!=null){ball.networkStatus=e.status;ball.getLevel().sendBlockUpdated(e.pos,ball.getBlockState(),ball.getBlockState(),2);}}}
+        try{for(var e:storage==null?endpoints.values():views.getOrDefault(storage,List.of())){
+            var ball=loaded(e);if(ball!=null){ball.networkStatus=e.status;ball.getLevel().sendBlockUpdated(e.pos,ball.getBlockState(),ball.getBlockState(),2);}
+        }}
         finally{notifying=false;}
     }
     public static CrystalStorageNetworks load(CompoundTag tag,HolderLookup.Provider registries){
@@ -194,6 +224,7 @@ public final class CrystalStorageNetworks extends SavedData {
             e.rejected=t.getBoolean("Rejected");e.status=e.rejected?3:0;
             e.frequency=new ItemStack[]{ItemStack.parseOptional(registries,t.getCompound("F0")),ItemStack.parseOptional(registries,t.getCompound("F1"))};
             data.endpoints.put(e.id,e);
+            data.locations.put(new Location(e.dimension,e.pos),e);
         }
         return data;
     }

@@ -1,0 +1,9 @@
+{
+  "id": "spatial_energy",
+  "title": "Spatial Energy Materials",
+  "item": "omnira:void_infuser",
+  "recipes": false,
+  "text": [
+    "Hover a material to see its energy per item."
+  ]
+}

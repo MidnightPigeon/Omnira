@@ -10,7 +10,6 @@ import net.minecraft.world.level.block.state.BlockState;
 /** Optional kinetic host; the same assembly inventory and recipe logic serve both modes. */
 public final class KineticAssemblyBlockEntity extends KineticBlockEntity implements AssemblyAccess {
     private final ArcaneAssemblyTableBlockEntity work;
-    private float lastRpm=Float.NaN;
     public KineticAssemblyBlockEntity(BlockPos pos,BlockState state) {
         super(ModBlockEntityTypes.ARCANE_ASSEMBLY_TABLE.get(),pos,state);
         work=new ArcaneAssemblyTableBlockEntity(pos,state);
@@ -22,18 +21,13 @@ public final class KineticAssemblyBlockEntity extends KineticBlockEntity impleme
         work.setLevel(level);
     }
     @Override public float calculateStressApplied() {
-        float rpm=Math.abs(getTheoreticalSpeed());
-        return lastStressApplied=rpm>=16?256F/rpm:0;
+        return lastStressApplied=com.mcmagic.omnira.compat.create.OmniraKineticAccounting.fixedImpact(this,256);
     }
     @Override public void tick() {
         super.tick();
         work.setBlockState(getBlockState());
         if(level==null || level.isClientSide) return;
-        float rpm=Math.abs(getTheoreticalSpeed());
-        if(rpm!=lastRpm) {
-            lastRpm=rpm;
-            if(hasNetwork()) getOrCreateNetwork().updateStressFor(this,calculateStressApplied());
-        }
+        com.mcmagic.omnira.compat.create.OmniraKineticAccounting.refreshImpact(this,calculateStressApplied());
         work.tickPower(Math.abs(getSpeed())>=16 && !isOverStressed());
     }
     @Override protected void write(CompoundTag tag,HolderLookup.Provider registries,boolean clientPacket) {

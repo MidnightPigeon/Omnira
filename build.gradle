@@ -153,6 +153,23 @@ tasks.configureEach {
     if (name == 'runGameTestServer') dependsOn('prepareSpellGameTests')
 }
 
+if (providers.gradleProperty('kubejsRecipeTest').isPresent()) {
+    if (providers.gradleProperty('withoutExternalMods').isPresent())
+        throw new GradleException('kubejsRecipeTest requires the installed KubeJS test runtime.')
+    def fixture = layout.projectDirectory.file('run/gameTestServer/kubejs/server_scripts/omnira_recipe_smoke.js')
+    tasks.register('prepareKubeRecipeTest', Copy) {
+        from('scripts/tests/omnira_recipe_smoke.js')
+        into(fixture.asFile.parentFile)
+    }
+    tasks.register('cleanKubeRecipeTest', Delete) { delete(fixture) }
+    tasks.configureEach {
+        if (name == 'runGameTestServer') {
+            dependsOn('prepareKubeRecipeTest')
+            finalizedBy('cleanKubeRecipeTest')
+        }
+    }
+}
+
 tasks.named('jar').configure {
     from('LICENSE') { into('META-INF') }
     exclude('com/mcmagic/omnira/gametest/**')

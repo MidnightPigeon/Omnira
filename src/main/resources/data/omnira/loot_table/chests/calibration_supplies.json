@@ -55,9 +55,21 @@
         },
         {
           "type": "minecraft:item",
-          "name": "omnira:deflection_crystal",
+          "name": "omnira:excited_rough_spatial_crystal_block",
           "weight": 5,
           "functions": [
+            {
+              "function": "minecraft:set_item",
+              "item": "omnira:deflection_crystal",
+              "conditions": [
+                {
+                  "condition": "minecraft:location_check",
+                  "predicate": {
+                    "biomes": "omnira:dislocated_geodes"
+                  }
+                }
+              ]
+            },
             {
               "function": "minecraft:set_count",
               "count": {

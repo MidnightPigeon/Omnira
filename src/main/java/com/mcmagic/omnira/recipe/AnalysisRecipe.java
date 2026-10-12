@@ -60,6 +60,7 @@ public record AnalysisRecipe(Ingredient ingredient, int count, ItemStack result,
         return dustMax>0?new Byproduct(java.util.List.of(new ItemStack(com.mcmagic.omnira.registry.ModItems.ARCANE_DUST.get())),dustMin,dustMax):byproduct;
     }
     public AnalysisRecipe {
+        result=result.copy();
         if (count < 1 || count > 64 || dustMin < 0 || dustMax < dustMin || dustMax > 64)
             throw new IllegalArgumentException("Invalid analysis recipe counts");
         if(dustMax>0 && byproduct.max()>0) throw new IllegalArgumentException("Analysis has only one byproduct slot");

@@ -1,0 +1,11 @@
+{
+  "id": "genesis_particles",
+  "title": "创世余韵",
+  "icon": "omnira:genesis_particles",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/capturing_inspiration.json",
+    "entries/grains_to_towers.json"
+  ],
+  "chapters": []
+}

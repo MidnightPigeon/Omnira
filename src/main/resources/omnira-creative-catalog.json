@@ -250,7 +250,8 @@
         "lava_production_upgrade",
         "intake_upgrade",
         "output_upgrade",
-        "speed_upgrade"
+        "speed_upgrade",
+        "recipe_control_upgrade"
       ]
     },
     {
@@ -496,7 +497,8 @@
       "items": [
         "rough_alchemical_energy_core",
         "enhanced_alchemical_energy_core",
-        "alchemical_waste"
+        "alchemical_waste",
+        "pure_mirror"
       ]
     },
     {

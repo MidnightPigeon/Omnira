@@ -43,8 +43,7 @@ public final class EngineCoreGameTests {
             h.assertTrue(e.ratedCapacity()==base && e.ratedEnergy()==base && e.running(),"Wrong core base output");
             for(int slot=1;slot<4;slot++)e.inventory.setItem(slot,new ItemStack(ModItems.OMNI_CRYSTAL_GRID.get()));
             h.assertTrue(e.ratedCapacity()==base*64 && e.ratedEnergy()==base*64,"Lattice multipliers use wrong core base");
-            if(e.host instanceof ManaEngineBlockEntity kinetic)
-                h.assertTrue(kinetic.calculateAddedStressCapacity()*16==base*64,"Actual Create stress differs from rating");
+            if(net.neoforged.fml.ModList.get().isLoaded("create"))EngineCoreCreateChecks.ratedCapacity(h,e,base*64);
             for(int slot=1;slot<4;slot++)e.inventory.setItem(slot,new ItemStack(ModItems.BASIC_CRYSTAL_GRID.get()));
             h.assertTrue(e.ratedCapacity()==Math.round(base*1.2*1.2*1.2),"Basic lattices must boost output, rounding only once");
             e.inventory.setItem(2,new ItemStack(ModItems.ELEMENTAL_CRYSTAL_GRID.get()));

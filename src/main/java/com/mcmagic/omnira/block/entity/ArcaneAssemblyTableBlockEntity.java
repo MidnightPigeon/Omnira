@@ -27,7 +27,7 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
         public int receiveEnergy(int amount,boolean simulate) {
             if(level==null||level.isClientSide)return 0;
             int accepted=inputLimit.receive(level.getGameTime(),amount,5120-energy,simulate);
-            if(!simulate&&accepted>0){energy+=accepted;setChanged();}
+            if(!simulate&&accepted>0){energy+=accepted;level.blockEntityChanged(worldPosition);}
             return accepted;
         }
         public int extractEnergy(int amount,boolean simulate){return 0;}
@@ -49,7 +49,7 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
         boolean modeChanged=mechanicalPowered!=mechanical||electricalPowered!=electric;
         mechanicalPowered=mechanical;electricalPowered=electric;
         if(modeChanged)setChanged();
-        else if(electric)super.setChanged();
+        else if(electric)level.blockEntityChanged(worldPosition);
         if(electric)com.mcmagic.omnira.energy.ShaftCurrent.spark(level,worldPosition,
                 getBlockState().getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING).getOpposite());
         if(powered())automaticStrike();
@@ -68,7 +68,7 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
     public void writeWork(CompoundTag tag,HolderLookup.Provider registries) {saveAdditional(tag,registries);}
     public void readWork(CompoundTag tag,HolderLookup.Provider registries) {loadAdditional(tag,registries);}
     public boolean automaticStrike() {
-        if(level==null || level.isClientSide || !powered() || cooldown()>0) return false;
+        if(level==null || level.isClientSide || !powered() || cooldown()>0 || isEmpty()) return false;
         var recipe=work();
         return recipe!=null && completeStrike(recipe);
     }

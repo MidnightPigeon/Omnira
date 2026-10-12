@@ -62,7 +62,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
         entry=next;page=0;sceneYaw=0;scenePitch=0;rotatingScene=false;constructionScene=true;
         pages=textPages(entry.text(),entry.links().isEmpty()?12:10);
         if(pages.isEmpty()) pages=List.of(List.of());
-        recipes=entry.recipes()?GuideRecipes.find(GuideContents.icon(entry.item()).getItem()):List.of();
+        recipes=GuideEnergy.supports(entry.id())?GuideEnergy.pages(entry.id()):entry.recipes()?GuideRecipes.find(GuideContents.icon(entry.item()).getItem()):List.of();
     }
     private void jump(GuideContents.Destination target) {
         history.push(view());chapter=target.chapter();entry=null;introPage=0;page=0;
@@ -93,7 +93,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
         history.push(view());
         chapter=target;entry=null;introPage=0;page=0;buttons();
     }
-    private int scenePages() {return entry!=null && (MachineConstructionScene.supports(entry.scene()) || entry.scene().equals("dream_ritual") || entry.scene().equals("resonance_ritual") || entry.scene().equals("affinity_ritual") || entry.scene().equals("corridor_ritual") || entry.scene().equals("cleansing_ritual") || entry.scene().equals("sword_shaping") || entry.scene().equals("advanced_assembly_table"))?1:0;}
+    private int scenePages() {return entry!=null && (MachineConstructionScene.supports(entry.scene()) || entry.scene().equals("genesis_ritual") || entry.scene().equals("dream_ritual") || entry.scene().equals("resonance_ritual") || entry.scene().equals("affinity_ritual") || entry.scene().equals("corridor_ritual") || entry.scene().equals("cleansing_ritual") || entry.scene().equals("sword_shaping") || entry.scene().equals("advanced_assembly_table"))?1:0;}
     private void buttons() {
         clearWidgets();
         bookButton(left+RIGHT_BUTTON,top+HEADER_BUTTON_Y,"X","gui.close",this::onClose);
@@ -241,6 +241,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
         super.renderContent(g,mouseX,mouseY,partialTick);
         if(!hovered.isEmpty()) {
             var tooltip=new ArrayList<>(Screen.getTooltipFromItem(minecraft,hovered));
+            if(entry!=null&&GuideEnergy.supports(entry.id()))tooltip.add(GuideEnergy.tooltip(entry.id(),hovered));
             itemLink(hovered).ifPresent(target->tooltip.add(Component.translatable("guide.omnira.shift_link",target.title()).withStyle(net.minecraft.ChatFormatting.AQUA)));
             g.renderTooltip(font,tooltip,hovered.getTooltipImage(),mouseX,mouseY);
         }
@@ -257,7 +258,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
                 if(MachineConstructionScene.supports(entry.scene()))MachineConstructionScene.render(g,left+175,top+44,ticks,entry.scene(),sceneYaw,scenePitch,constructionScene);
                 else if(entry.scene().equals("sword_shaping"))SwordShapingScene.render(g,left+175,top+44,ticks,sceneYaw,scenePitch);
                 else if(entry.scene().equals("advanced_assembly_table"))AdvancedForgeScene.render(g,left+175,top+44,ticks,sceneYaw,scenePitch,constructionScene);
-                else DreamRitualScene.render(g,left+175,top+44,ticks,entry.scene().equals("resonance_ritual"),entry.scene().equals("affinity_ritual"),entry.scene().equals("corridor_ritual"),entry.scene().equals("cleansing_ritual"),sceneYaw,scenePitch);
+                else DreamRitualScene.render(g,left+175,top+44,ticks,entry.scene().equals("resonance_ritual"),entry.scene().equals("affinity_ritual"),entry.scene().equals("corridor_ritual"),entry.scene().equals("cleansing_ritual"),entry.scene().equals("genesis_ritual"),sceneYaw,scenePitch);
             } else if(!links) {
                 var diagram=recipes.get(page-pages.size()-scenePages());
                 if(diagram.slots().stream().anyMatch(slot->slot.output() && slot.x()>=90)

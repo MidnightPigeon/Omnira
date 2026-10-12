@@ -18,7 +18,7 @@ public final class CrystalBallMenu extends AbstractContainerMenu {
     }
     public CrystalBallMenu(int id,Inventory inventory,CrystalBallBlockEntity ball) {
         super(ModMenuTypes.CRYSTAL_BALL.get(),id);this.ball=ball;ball.startOpen(inventory.player);
-        storageSlots=liquid()||singleOrb()?1:12;upgradeStart=storageSlots;frequencyStart=upgradeStart+(singleOrb()?1:3);playerStart=frequencyStart+(ball.resonant()?2:0);
+        storageSlots=liquid()||singleOrb()?1:12;upgradeStart=storageSlots;frequencyStart=upgradeStart+(starOrb()?2:singleOrb()?1:3);playerStart=frequencyStart+(ball.resonant()?2:0);
         if(singleOrb())addSlot(new Slot(ball,0,80,55){@Override public int getMaxStackSize(ItemStack stack){return ball.getMaxStackSize(stack);}});
         else if(liquid())addSlot(new Slot(ball,0,-26,55) {
             @Override public int getMaxStackSize(){return 1;}
@@ -34,9 +34,9 @@ public final class CrystalBallMenu extends AbstractContainerMenu {
                 });
             }
         }
-        for(int i=0;i<(singleOrb()?1:3);i++) {
-            final int slot=singleOrb()?1:i;
-            addSlot(new SlotItemHandler(ball.upgrades,slot,singleOrb()?80:53+i*27,119) {
+        for(int i=0;i<(starOrb()?2:singleOrb()?1:3);i++) {
+            final int slot=starOrb()?i:singleOrb()?1:i;
+            addSlot(new SlotItemHandler(ball.upgrades,slot,starOrb()?66+i*28:singleOrb()?80:53+i*27,119) {
                 @Override public boolean mayPickup(Player player){return ball.upgrades.mayRemove(slot);}
             });
         }

@@ -32,13 +32,19 @@ public final class LootConfigGameTests {
         var disabled=new OmniraLootConfig.FluidRules(false,false,Set.of(),waterTag);
         h.assertTrue(disabled.allows(Fluids.LAVA)&&disabled.allows(Fluids.WATER)&&!disabled.allows(Fluids.FLOWING_WATER)&&!disabled.allows(Fluids.EMPTY),"Disabled lists changed source-only restriction");
         var defaults=OmniraLootConfig.defaults();var rules=OmniraLootConfig.rules(defaults);
-        h.assertTrue(rules.whitelistEnabled()&&rules.blacklistEnabled()&&rules.allows(dilute)
+        h.assertTrue(rules.whitelistEnabled()&&rules.blacklistEnabled()&&!rules.allows(dilute)
                 &&!rules.allows(com.mcmagic.omnira.alchemy.AlchemyMaterials.REFINED.source.get()),"New defaults mishandled spacetime fluids");
         var f=defaults.getAsJsonObject("fluidTreasure");f.remove("alchemyRevision");f.remove("whitelistEnabled");f.remove("blacklistEnabled");f.addProperty("mode","BLACKLIST");
         h.assertTrue(OmniraLootConfig.migrateFluidSwitches(defaults)&&!OmniraLootConfig.rules(defaults).whitelistEnabled()&&OmniraLootConfig.rules(defaults).blacklistEnabled(),"Old blacklist mode migration changed semantics");
         f.add("whitelist",new JsonArray());
-        h.assertTrue(OmniraLootConfig.migrateAlchemyFluids(defaults)&&f.getAsJsonArray("whitelist").contains(new JsonPrimitive("omnira:void_starflow"))
-                &&f.getAsJsonArray("whitelist").contains(new JsonPrimitive("omnira:dilute_spacetime")),"New fluids not migrated");
+        h.assertTrue(OmniraLootConfig.migrateAlchemyFluids(defaults)&&f.getAsJsonArray("whitelist").isEmpty(),"Migration must not add fluids");
+        f.remove("fixedWhitelistRevision");f.getAsJsonArray("whitelist").add("omnira:dilute_spacetime");
+        f.getAsJsonArray("whitelist").add("custom:fluid");
+        h.assertTrue(OmniraLootConfig.migrateFixedFluidWhitelist(defaults)
+                &&!f.getAsJsonArray("whitelist").contains(new JsonPrimitive("omnira:dilute_spacetime"))
+                &&f.getAsJsonArray("whitelist").contains(new JsonPrimitive("custom:fluid")),"Fixed whitelist migration changed custom entries");
+        f.getAsJsonArray("whitelist").add("omnira:dilute_spacetime");
+        h.assertTrue(!OmniraLootConfig.migrateFixedFluidWhitelist(defaults)&&OmniraLootConfig.rules(defaults).allows(dilute),"Later manual fluid edits overwritten");
         f.add("whitelist",new JsonArray());h.assertTrue(!OmniraLootConfig.migrateAlchemyFluids(defaults)&&f.getAsJsonArray("whitelist").isEmpty(),"Later user edits overwritten");
         f.getAsJsonArray("whitelist").add("#invalid");boolean rejected=false;try{OmniraLootConfig.rules(defaults);}catch(IllegalArgumentException expected){rejected=true;}
         h.assertTrue(rejected,"Malformed tag accepted");h.succeed();

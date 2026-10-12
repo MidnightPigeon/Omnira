@@ -15,6 +15,7 @@ import java.util.List;
 public record SwordShapingRecipe(List<Ingredient> offerings,ItemStack result) implements Recipe<SwordShapingRecipe.Input> {
     public SwordShapingRecipe {
         offerings=List.copyOf(offerings);
+        result=result.copy();
         if(offerings.size()!=4 || offerings.stream().anyMatch(Ingredient::isEmpty) || result.getCount()!=1)
             throw new IllegalArgumentException("Sword shaping requires four offerings and one result");
     }

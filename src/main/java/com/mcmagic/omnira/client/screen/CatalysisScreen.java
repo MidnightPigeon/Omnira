@@ -31,7 +31,7 @@ public final class CatalysisScreen extends ResponsiveContainerScreen<CatalysisMe
         for(var slot:menu.slots){int color=slot.index==0?0xFFCAD5B3:slot.index==1?0xFFAEDCCA:slot.index==2?0xFFD9DFEE:0xFFC2DBDF;
             g.fill(x+slot.x-1,y+slot.y-1,x+slot.x+17,y+slot.y+17,color);g.fill(x+slot.x,y+slot.y,x+slot.x+16,y+slot.y+16,0xFF3D5968);}
         int ink=menu.chamber.plan()!=null?0xFFCEF2DF:0xFF88A6AF;
-        for(int side:new int[]{-1,1})for(int i=0;i<3;i++)g.fill(x+87+side*(7+i*2),y+126+i,x+89+side*(7+i*2),y+128+i,ink);
+        for(int xx:new int[]{70,102})g.fill(x+xx,y+128,x+xx+3,y+131,ink);
     }
     @Override protected void renderLabels(GuiGraphics g,int x,int y){CrystalUi.title(g,font,title,88,5,166,0xFFE2F0F1);g.drawString(font,playerInventoryTitle,8,154,0xFFE2F0F1,false);}
     @Override protected void renderContent(GuiGraphics g,int x,int y,float partial){
@@ -39,7 +39,7 @@ public final class CatalysisScreen extends ResponsiveContainerScreen<CatalysisMe
         int rx=x-leftPos,ry=y-topPos;
         if(rx>=49&&rx<127&&ry>=83&&ry<103){var f=menu.chamber.tank.getFluid();var text=new java.util.ArrayList<Component>();
             if(!f.isEmpty())text.add(f.getHoverName());text.add(Component.literal(f.getAmount()+" / 4000 mB"));g.renderComponentTooltip(font,text,x,y);}
-        for(int i=0;i<5;i++){var slot=menu.slots.get(i);if(!slot.hasItem()&&rx>=slot.x&&rx<slot.x+16&&ry>=slot.y&&ry<slot.y+16)
-            g.renderTooltip(font,Component.translatable("gui.omnira.catalysis."+new String[]{"substrate","seed","product","intake","output"}[i]),x,y);}
+        for(int i=0;i<6;i++){var slot=menu.slots.get(i);if(!slot.hasItem()&&rx>=slot.x&&rx<slot.x+16&&ry>=slot.y&&ry<slot.y+16)
+            g.renderTooltip(font,Component.translatable("gui.omnira.catalysis."+new String[]{"substrate","seed","product","intake","output","recipe_control"}[i]),x,y);}
     }
 }

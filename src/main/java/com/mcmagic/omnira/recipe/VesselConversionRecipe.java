@@ -11,6 +11,7 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 public record VesselConversionRecipe(Ingredient ingredient,ItemStack result) implements Recipe<SingleRecipeInput> {
+    public VesselConversionRecipe { result=result.copy(); }
     public static final MapCodec<VesselConversionRecipe> CODEC=RecordCodecBuilder.mapCodec(i->i.group(
             Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(VesselConversionRecipe::ingredient),
             ItemStack.STRICT_CODEC.fieldOf("result").forGetter(VesselConversionRecipe::result)).apply(i,VesselConversionRecipe::new));
@@ -18,7 +19,7 @@ public record VesselConversionRecipe(Ingredient ingredient,ItemStack result) imp
             Ingredient.CONTENTS_STREAM_CODEC,VesselConversionRecipe::ingredient,ItemStack.STREAM_CODEC,VesselConversionRecipe::result,VesselConversionRecipe::new);
     @Override public boolean matches(SingleRecipeInput input,Level level) {return ingredient.test(input.item());}
     @Override public ItemStack assemble(SingleRecipeInput input,HolderLookup.Provider registries) {return result.copy();}
-    @Override public ItemStack getResultItem(HolderLookup.Provider registries) {return result;}
+    @Override public ItemStack getResultItem(HolderLookup.Provider registries) {return result.copy();}
     @Override public boolean canCraftInDimensions(int width,int height) {return width*height>=1;}
     @Override public RecipeType<?> getType() {return ModRecipes.VESSEL_CONVERSION_TYPE.get();}
     @Override public RecipeSerializer<?> getSerializer() {return ModRecipes.VESSEL_CONVERSION_SERIALIZER.get();}

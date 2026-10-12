@@ -13,6 +13,7 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 public record CondensationRecipe(int manaCost,ItemStack result,Ingredient ingredient,int inputCount) implements Recipe<SingleRecipeInput> {
+    public CondensationRecipe { result=result.copy(); }
     public CondensationRecipe(int manaCost,ItemStack result,Ingredient ingredient){this(manaCost,result,ingredient,1);}
     public CondensationRecipe(int manaCost,ItemStack result) {this(manaCost,result,Ingredient.EMPTY);}
     public boolean advanced() {return !ingredient.isEmpty();}

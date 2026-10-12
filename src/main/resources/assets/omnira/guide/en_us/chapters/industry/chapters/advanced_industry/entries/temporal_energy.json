@@ -1,0 +1,9 @@
+{
+  "id": "temporal_energy",
+  "title": "Temporal Energy Materials",
+  "item": "omnira:spacetime_reverser",
+  "recipes": false,
+  "text": [
+    "Hover a material to see its energy per item."
+  ]
+}

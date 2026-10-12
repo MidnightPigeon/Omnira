@@ -19,8 +19,8 @@ public final class OrbUpgradeScreen extends ResponsiveContainerScreen<OrbUpgrade
     private void send(int id){minecraft.gameMode.handleInventoryButtonClick(menu.containerId,id);}
     @Override protected void init() {
         super.init();
-        mode=addRenderableWidget(panelButton(leftPos+44,topPos+54,88,0,menu::whitelist));
-        for(int i=0;i<directions.length;i++) {
+        mode=addRenderableWidget(panelButton(leftPos+44,topPos+(menu.recipeControl?90:54),88,0,menu::whitelist));
+        for(int i=0;!menu.recipeControl&&i<directions.length;i++) {
             final int index=i;
             directions[i]=addRenderableWidget(panelButton(leftPos+10+(i%3)*52,topPos+76+(i/3)*20,51,index+1,()->(menu.directions()&(1<<index))!=0));
         }
@@ -40,8 +40,8 @@ public final class OrbUpgradeScreen extends ResponsiveContainerScreen<OrbUpgrade
     @Override protected void renderBg(GuiGraphics g,float partial,int mouseX,int mouseY) {
         g.fill(leftPos+4,topPos+2,leftPos+172,topPos+117,0xFFAABFCB);
         g.fill(leftPos+6,topPos+4,leftPos+170,topPos+115,0xFF384650);
-        for(int i=0;i<3;i++) {
-            int x=leftPos+62+i*18,y=topPos+30;
+        for(int i=0;i<(menu.recipeControl?9:3);i++) {
+            int x=leftPos+62+i%3*18,y=topPos+30+(menu.recipeControl?i/3*18:0);
             g.fill(x-1,y-1,x+17,y+17,0xFFB1CED8);
             g.fill(x,y,x+16,y+16,0xFF688091);
         }
@@ -55,7 +55,7 @@ public final class OrbUpgradeScreen extends ResponsiveContainerScreen<OrbUpgrade
     @Override protected void renderContent(GuiGraphics g,int mouseX,int mouseY,float partial) {
         mode.setMessage(Component.translatable("gui.omnira.orb."+(menu.whitelist()?"whitelist":"blacklist")));
         String[] names=menu.intake?new String[]{"front","back","left","right","down","up"}:new String[]{"down","up","front","back","left","right"};
-        for(int i=0;i<directions.length;i++)directions[i].setMessage(Component.literal((menu.directions()&(1<<i))!=0?"+ ":"- ").append(Component.translatable("gui.omnira.orb."+names[i])));
+        for(int i=0;!menu.recipeControl&&i<directions.length;i++)directions[i].setMessage(Component.literal((menu.directions()&(1<<i))!=0?"+ ":"- ").append(Component.translatable("gui.omnira.orb."+names[i])));
         super.renderContent(g,mouseX,mouseY,partial);renderTooltip(g,mouseX,mouseY);
     }
 }

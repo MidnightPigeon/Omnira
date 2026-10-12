@@ -1,11 +1,18 @@
 package com.mcmagic.omnira.registry;
 
 import com.mcmagic.omnira.Omnira;
+import com.mcmagic.omnira.alchemy.ReactionRecipe;
+import com.mcmagic.omnira.forging.AdvancedForgeRecipe;
 import com.mcmagic.omnira.recipe.AnalysisRecipe;
-import com.mojang.serialization.MapCodec;
+import com.mcmagic.omnira.recipe.CondensationRecipe;
+import com.mcmagic.omnira.recipe.AssemblyRecipe;
+import com.mcmagic.omnira.recipe.StarlightConversionRecipe;
+import com.mcmagic.omnira.recipe.VesselConversionRecipe;
+import com.mcmagic.omnira.recipe.SwordShapingRecipe;
+import com.mcmagic.omnira.recipe.SafeShapedRecipe;
+import com.mcmagic.omnira.recipe.StarClusterOrbCraftRecipe;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.bus.api.IEventBus;
@@ -15,79 +22,63 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModRecipes {
     private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, Omnira.MOD_ID);
     private static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, Omnira.MOD_ID);
-    public static final DeferredHolder<RecipeType<?>,RecipeType<com.mcmagic.omnira.alchemy.ReactionRecipe>> REACTION_TYPE=
-            TYPES.register("reaction",()->new RecipeType<>() {});
-    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.alchemy.ReactionRecipe>> REACTION_SERIALIZER=
-            SERIALIZERS.register("reaction",()->new RecipeSerializer<>() {
-                public MapCodec<com.mcmagic.omnira.alchemy.ReactionRecipe> codec(){return com.mcmagic.omnira.alchemy.ReactionRecipe.CODEC;}
-                public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.alchemy.ReactionRecipe> streamCodec(){return com.mcmagic.omnira.alchemy.ReactionRecipe.STREAM_CODEC;}
-            });
-    public static final DeferredHolder<RecipeType<?>,RecipeType<com.mcmagic.omnira.forging.AdvancedForgeRecipe>> ADVANCED_FORGE_TYPE=
-            TYPES.register("advanced_assembly_table",()->new RecipeType<>() {});
-    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.forging.AdvancedForgeRecipe>> ADVANCED_FORGE_SERIALIZER=
-            SERIALIZERS.register("advanced_assembly_table",()->new RecipeSerializer<>() {
-                public MapCodec<com.mcmagic.omnira.forging.AdvancedForgeRecipe> codec(){return com.mcmagic.omnira.forging.AdvancedForgeRecipe.CODEC;}
-                public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.forging.AdvancedForgeRecipe> streamCodec(){return com.mcmagic.omnira.forging.AdvancedForgeRecipe.STREAM_CODEC;}
-            });
-    public static final DeferredHolder<RecipeType<?>, RecipeType<AnalysisRecipe>> ANALYSIS_TYPE = TYPES.register("analysis", () -> new RecipeType<>() {
-        @Override public String toString() { return "omnira:analysis"; }
-    });
-    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AnalysisRecipe>> ANALYSIS_SERIALIZER = SERIALIZERS.register("analysis", () -> new RecipeSerializer<>() {
-        @Override public MapCodec<AnalysisRecipe> codec() { return AnalysisRecipe.CODEC; }
-        @Override public StreamCodec<RegistryFriendlyByteBuf, AnalysisRecipe> streamCodec() { return AnalysisRecipe.STREAM_CODEC; }
-    });
-    public static final DeferredHolder<RecipeType<?>,RecipeType<com.mcmagic.omnira.recipe.CondensationRecipe>> CONDENSATION_TYPE=
-            TYPES.register("condensation",()->new RecipeType<>() {@Override public String toString() {return "omnira:condensation";}});
-    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.recipe.CondensationRecipe>> CONDENSATION_SERIALIZER=
-            SERIALIZERS.register("condensation",()->new RecipeSerializer<>() {
-                @Override public MapCodec<com.mcmagic.omnira.recipe.CondensationRecipe> codec() {return com.mcmagic.omnira.recipe.CondensationRecipe.CODEC;}
-                @Override public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.recipe.CondensationRecipe> streamCodec() {return com.mcmagic.omnira.recipe.CondensationRecipe.STREAM_CODEC;}
-            });
-    public static final DeferredHolder<RecipeType<?>,RecipeType<com.mcmagic.omnira.recipe.AssemblyRecipe>> ASSEMBLY_TYPE=
-            TYPES.register("assembly",()->new RecipeType<>() {@Override public String toString() {return "omnira:assembly";}});
-    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.recipe.AssemblyRecipe>> ASSEMBLY_SERIALIZER=
-            SERIALIZERS.register("assembly",()->new RecipeSerializer<>() {
-                @Override public MapCodec<com.mcmagic.omnira.recipe.AssemblyRecipe> codec() {return com.mcmagic.omnira.recipe.AssemblyRecipe.CODEC;}
-                @Override public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.recipe.AssemblyRecipe> streamCodec() {return com.mcmagic.omnira.recipe.AssemblyRecipe.STREAM_CODEC;}
-            });
-    private ModRecipes() {}
-    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.recipe.SafeShapedRecipe>> SAFE_SHAPED_SERIALIZER=
-            SERIALIZERS.register("safe_shaped",()->new RecipeSerializer<>() {
-                public MapCodec<com.mcmagic.omnira.recipe.SafeShapedRecipe> codec(){return com.mcmagic.omnira.recipe.SafeShapedRecipe.CODEC;}
-                public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.recipe.SafeShapedRecipe> streamCodec(){return com.mcmagic.omnira.recipe.SafeShapedRecipe.STREAM;}
-            });
-    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.recipe.StarClusterOrbCraftRecipe>> STELLAR_ORB_CRAFT_SERIALIZER=
-            SERIALIZERS.register("star_cluster_orb_crafting",()->new RecipeSerializer<>() {
-                public MapCodec<com.mcmagic.omnira.recipe.StarClusterOrbCraftRecipe> codec(){return com.mcmagic.omnira.recipe.StarClusterOrbCraftRecipe.CODEC;}
-                public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.recipe.StarClusterOrbCraftRecipe> streamCodec(){return com.mcmagic.omnira.recipe.StarClusterOrbCraftRecipe.STREAM;}
-            });
-    public static final DeferredHolder<RecipeType<?>,RecipeType<com.mcmagic.omnira.recipe.StarlightConversionRecipe>> STARLIGHT_TYPE=
-            TYPES.register("starlight_conversion",()->new RecipeType<>() {});
-    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.recipe.StarlightConversionRecipe>> STARLIGHT_SERIALIZER=
-            SERIALIZERS.register("starlight_conversion",()->new RecipeSerializer<>() {
-                public MapCodec<com.mcmagic.omnira.recipe.StarlightConversionRecipe> codec(){return com.mcmagic.omnira.recipe.StarlightConversionRecipe.CODEC;}
-                public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.recipe.StarlightConversionRecipe> streamCodec(){return com.mcmagic.omnira.recipe.StarlightConversionRecipe.STREAM;}
-            });
-    public static final DeferredHolder<RecipeType<?>,RecipeType<com.mcmagic.omnira.recipe.VesselConversionRecipe>> VESSEL_CONVERSION_TYPE=
-            TYPES.register("vessel_conversion",()->new RecipeType<>() {});
-    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.recipe.VesselConversionRecipe>> VESSEL_CONVERSION_SERIALIZER=
-            SERIALIZERS.register("vessel_conversion",()->new RecipeSerializer<>() {
-                @Override public MapCodec<com.mcmagic.omnira.recipe.VesselConversionRecipe> codec(){return com.mcmagic.omnira.recipe.VesselConversionRecipe.CODEC;}
-                @Override public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.recipe.VesselConversionRecipe> streamCodec(){return com.mcmagic.omnira.recipe.VesselConversionRecipe.STREAM;}
-            });
-    public static final DeferredHolder<RecipeType<?>,RecipeType<com.mcmagic.omnira.recipe.SwordShapingRecipe>> SWORD_SHAPING_TYPE=
-            TYPES.register("sword_shaping",()->new RecipeType<>() {@Override public String toString(){return "omnira:sword_shaping";}});
-    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<com.mcmagic.omnira.recipe.SwordShapingRecipe>> SWORD_SHAPING_SERIALIZER=
-            SERIALIZERS.register("sword_shaping",()->new RecipeSerializer<>() {
-                @Override public MapCodec<com.mcmagic.omnira.recipe.SwordShapingRecipe> codec(){return com.mcmagic.omnira.recipe.SwordShapingRecipe.CODEC;}
-                @Override public StreamCodec<RegistryFriendlyByteBuf,com.mcmagic.omnira.recipe.SwordShapingRecipe> streamCodec(){return com.mcmagic.omnira.recipe.SwordShapingRecipe.STREAM_CODEC;}
-            });
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<ReactionRecipe>> REACTION_TYPE =
+            TYPES.register("reaction", () -> RecipeRegistration.type(ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "reaction")));
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<ReactionRecipe>> REACTION_SERIALIZER =
+            SERIALIZERS.register("reaction", () -> RecipeRegistration.serializer(ReactionRecipe.CODEC, ReactionRecipe.STREAM_CODEC));
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AdvancedForgeRecipe>> ADVANCED_FORGE_TYPE =
+            TYPES.register("advanced_assembly_table", () -> RecipeRegistration.type(ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "advanced_assembly_table")));
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AdvancedForgeRecipe>> ADVANCED_FORGE_SERIALIZER =
+            SERIALIZERS.register("advanced_assembly_table", () -> RecipeRegistration.serializer(AdvancedForgeRecipe.CODEC, AdvancedForgeRecipe.STREAM_CODEC));
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AnalysisRecipe>> ANALYSIS_TYPE =
+            TYPES.register("analysis", () -> RecipeRegistration.type(ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "analysis")));
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AnalysisRecipe>> ANALYSIS_SERIALIZER =
+            SERIALIZERS.register("analysis", () -> RecipeRegistration.serializer(AnalysisRecipe.CODEC, AnalysisRecipe.STREAM_CODEC));
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<CondensationRecipe>> CONDENSATION_TYPE =
+            TYPES.register("condensation", () -> RecipeRegistration.type(ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "condensation")));
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<CondensationRecipe>> CONDENSATION_SERIALIZER =
+            SERIALIZERS.register("condensation", () -> RecipeRegistration.serializer(CondensationRecipe.CODEC, CondensationRecipe.STREAM_CODEC));
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AssemblyRecipe>> ASSEMBLY_TYPE =
+            TYPES.register("assembly", () -> RecipeRegistration.type(ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "assembly")));
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AssemblyRecipe>> ASSEMBLY_SERIALIZER =
+            SERIALIZERS.register("assembly", () -> RecipeRegistration.serializer(AssemblyRecipe.CODEC, AssemblyRecipe.STREAM_CODEC));
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<StarlightConversionRecipe>> STARLIGHT_TYPE =
+            TYPES.register("starlight_conversion", () -> RecipeRegistration.type(ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "starlight_conversion")));
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<StarlightConversionRecipe>> STARLIGHT_SERIALIZER =
+            SERIALIZERS.register("starlight_conversion", () -> RecipeRegistration.serializer(StarlightConversionRecipe.CODEC, StarlightConversionRecipe.STREAM));
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<VesselConversionRecipe>> VESSEL_CONVERSION_TYPE =
+            TYPES.register("vessel_conversion", () -> RecipeRegistration.type(ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "vessel_conversion")));
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<VesselConversionRecipe>> VESSEL_CONVERSION_SERIALIZER =
+            SERIALIZERS.register("vessel_conversion", () -> RecipeRegistration.serializer(VesselConversionRecipe.CODEC, VesselConversionRecipe.STREAM));
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<SwordShapingRecipe>> SWORD_SHAPING_TYPE =
+            TYPES.register("sword_shaping", () -> RecipeRegistration.type(ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "sword_shaping")));
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<SwordShapingRecipe>> SWORD_SHAPING_SERIALIZER =
+            SERIALIZERS.register("sword_shaping", () -> RecipeRegistration.serializer(SwordShapingRecipe.CODEC, SwordShapingRecipe.STREAM_CODEC));
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<SafeShapedRecipe>> SAFE_SHAPED_SERIALIZER =
+            SERIALIZERS.register("safe_shaped", () -> RecipeRegistration.serializer(SafeShapedRecipe.CODEC, SafeShapedRecipe.STREAM));
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<StarClusterOrbCraftRecipe>> STELLAR_ORB_CRAFT_SERIALIZER =
+            SERIALIZERS.register("star_cluster_orb_crafting", () -> RecipeRegistration.serializer(StarClusterOrbCraftRecipe.CODEC, StarClusterOrbCraftRecipe.STREAM));
+
     public static void aliasAdvancedAssemblyTable() {
-        var oldId=net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"advanced_forge");
-        var newId=net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"advanced_assembly_table");
-        TYPES.addAlias(oldId,newId);
-        SERIALIZERS.addAlias(oldId,newId);
+        var oldId = ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "advanced_forge");
+        var newId = ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "advanced_assembly_table");
+        TYPES.addAlias(oldId, newId);
+        SERIALIZERS.addAlias(oldId, newId);
     }
 
-    public static void register(IEventBus bus) { TYPES.register(bus); SERIALIZERS.register(bus); }
+    public static void register(IEventBus bus) {
+        TYPES.register(bus);
+        SERIALIZERS.register(bus);
+    }
+
+    private ModRecipes() {}
 }

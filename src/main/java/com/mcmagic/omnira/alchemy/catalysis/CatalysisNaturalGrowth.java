@@ -58,7 +58,10 @@ public final class CatalysisNaturalGrowth {
             return supported?rule(3,plant.setValue(CocoaBlock.AGE,2),Kind.COCOA,CatalysisGrowth.Yield.CROP):null;
         }
         if(plant.is(Blocks.SWEET_BERRY_BUSH))return rule(4,plant.setValue(SweetBerryBushBlock.AGE,3),Kind.BERRY,CatalysisGrowth.Yield.CROP);
-        if(plant.getBlock() instanceof CropBlock||plant.is(Blocks.PITCHER_CROP))return new Rule(plan,Kind.CROP);
+        if(plant.getBlock() instanceof CropBlock||plant.is(Blocks.PITCHER_CROP)){
+            var age=CatalysisGrowth.age(plant);int stages=java.util.Collections.max(age.getPossibleValues())+1;
+            return rule(stages,plan.plant(),Kind.CROP,CatalysisGrowth.Yield.CROP);
+        }
         // Water-dependent plants, bonemeal-only growth and material synthesis are not invented here.
         return null;
     }

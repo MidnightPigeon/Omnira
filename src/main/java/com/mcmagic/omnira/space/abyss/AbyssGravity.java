@@ -37,6 +37,9 @@ public final class AbyssGravity {
     }
     public static boolean inverted(Entity entity){return !entity.isSpectator()&&GravityTransition.inverted(entity);}
     public static double eyeOffset(Entity entity){return GravityTransition.eyeOffset(entity,0);}
+    public static double footParticleY(Entity entity,double inset){
+        return inverted(entity)?entity.getBoundingBox().maxY-inset:entity.getY()+inset;
+    }
     public static Vec3 input(Entity entity,Vec3 input,float speed){
         double length=input.length();if(length<1e-7)return Vec3.ZERO;
         var scaled=input.scale(speed/Math.max(1,length));

@@ -19,19 +19,31 @@ import java.util.*;
 public final class CatalysisGrowth {
     private static final java.util.concurrent.ConcurrentMap<Item,ItemStack> ORES=new java.util.concurrent.ConcurrentHashMap<>();
     @net.neoforged.bus.api.SubscribeEvent public static void tagsUpdated(net.neoforged.neoforge.event.TagsUpdatedEvent event){ORES.clear();}
-    public enum Yield { FIXED,CROP,TREE,FRUIT }
+    public enum Yield implements net.minecraft.util.StringRepresentable {
+        FIXED,CROP,TREE,FRUIT,FUNGUS;
+        public static final com.mojang.serialization.Codec<Yield> CODEC=net.minecraft.util.StringRepresentable.fromEnum(Yield::values);
+        public String getSerializedName(){return name().toLowerCase(java.util.Locale.ROOT);}
+    }
     public record Plan(int stages,BlockState plant,ItemStack product,Yield yield) {
         public List<ItemStack> harvest(ServerLevel level,BlockPos pos,ItemStack substrate,ItemStack seed){
             if(yield==Yield.FIXED)return List.of(product.copy());
             if(yield==Yield.TREE)return CatalysisTreeGrowth.harvest(level,plant,Block.byItem(substrate.getItem()).defaultBlockState());
+            if(yield==Yield.FUNGUS)return products(CatalysisTreeGrowth.harvest(level,plant,Block.byItem(substrate.getItem()).defaultBlockState()),seed,2);
             var mature=yield==Yield.FRUIT?(plant.is(Blocks.MELON_STEM)?Blocks.MELON:Blocks.PUMPKIN).defaultBlockState():plant;
+            if(yield==Yield.CROP&&plant.getBlock() instanceof CropBlock crop)mature=crop.getStateForAge(crop.getMaxAge());
             return doubledProducts(Block.getDrops(mature,level,pos,null,null,ItemStack.EMPTY),seed);
         }
         public BlockState visual(int stage){
             for(var family:crystalFamilies())if(plant.is(family[4]))return stages==5&&stage==1?Blocks.AIR.defaultBlockState():family[Math.clamp(stages==5?stage-1:stage,1,4)].defaultBlockState();
             var age=age(plant);if(age==null)return plant;
             int min=Collections.min(age.getPossibleValues()),max=Collections.max(age.getPossibleValues());
-            return plant.setValue(age,min+Math.clamp(stage-1,0,stages-1)*(max-min)/(stages-1));
+            if(stages==4){
+                int index=Math.clamp(stage-1,0,3);
+                if(plant.is(Blocks.PITCHER_CROP))return plant.setValue(age,index);
+                if(plant.is(Blocks.TORCHFLOWER_CROP))return plant.setValue(age,index/2);
+                if(plant.getBlock() instanceof CocoaBlock)return plant.setValue(age,index<2?0:index-1);
+            }
+            return plant.setValue(age,min+Math.round(Math.clamp(stage-1,0,stages-1)*(float)(max-min)/(stages-1)));
         }
     }
     static Block[][] crystalFamilies(){return com.mcmagic.omnira.block.CrystalFamilies.all();}
@@ -60,7 +72,7 @@ public final class CatalysisGrowth {
         for(var holder:level.getRecipeManager().getAllRecipesFor(CatalysisContent.TYPE.get()))if(holder.value().matches(input,level)){
             var recipe=holder.value();
             for(var family:crystalFamilies())if(soil.is(family[0])&&seed.is(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()))plant=family[4].defaultBlockState();
-            return new Plan(recipe.stages(),plant,recipe.result(),Yield.FIXED);
+            return new Plan(4,plant,recipe.result(),recipe.yield());
         }
         if(!(substrate.getItem() instanceof BlockItem))return null;
         boolean dirt=soil.is(BlockTags.DIRT)||soil.is(Blocks.FARMLAND);
@@ -84,7 +96,7 @@ public final class CatalysisGrowth {
         var age=age(plant);if(age==null||!(plant.getBlock() instanceof CropBlock||tagged(plant,"minecraft:crops")||tagged(plant,"c:crops")))return null;
         int min=Collections.min(age.getPossibleValues()),max=Collections.max(age.getPossibleValues());
         if(max<=min||!supports(level,soil,plant))return null;
-        return new Plan(max-min+1,plant.setValue(age,max),ItemStack.EMPTY,Yield.CROP);
+        return new Plan(4,plant.setValue(age,max),ItemStack.EMPTY,Yield.CROP);
     }
     private static boolean supports(Level level,BlockState soil,BlockState plant){
         // Evaluate survival in a read-only local view with farmland as the cultivated dirt surface.

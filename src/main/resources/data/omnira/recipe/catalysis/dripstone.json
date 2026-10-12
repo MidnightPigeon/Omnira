@@ -16,7 +16,7 @@
   },
   "fluid": {
     "id": "minecraft:water",
-    "amount": 500
+    "amount": 100
   },
   "result": {
     "id": "minecraft:pointed_dripstone",

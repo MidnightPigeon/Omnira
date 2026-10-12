@@ -11,6 +11,8 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 /** Upgrade state travels with the plate; slots are deliberately not exposed to pipes. */
 public final class OrbUpgrades extends ItemStackHandler {
     private final CrystalBallBlockEntity owner;
+    private record FilterState(CustomData data,boolean whitelist,ItemStack[] samples){}
+    private final FilterState[] filters=new FilterState[3];
     public OrbUpgrades(CrystalBallBlockEntity owner) {super(3);this.owner=owner;}
     private OrbUpgrades target(){return owner.storage().upgrades;}
     @Override public ItemStack getStackInSlot(int slot){var target=target();return target==this?super.getStackInSlot(slot):target.getStackInSlot(slot);}
@@ -22,7 +24,7 @@ public final class OrbUpgrades extends ItemStackHandler {
     @Override public boolean isItemValid(int slot,ItemStack stack) {
         var candidate=kind(stack);if(candidate==null)return false;
         if(owner instanceof VoidCrystalBallBlockEntity)return slot==1&&candidate==OrbUpgradeItem.Kind.INTAKE;
-        if(owner instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity)return slot==1&&candidate==OrbUpgradeItem.Kind.STABILIZATION;
+        if(owner instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity)return slot==1&&candidate==OrbUpgradeItem.Kind.STABILIZATION||slot==0&&candidate==OrbUpgradeItem.Kind.RECIPE_CONTROL;
         for(int i=0;i<3;i++)if(i!=slot) {
             var other=kind(getStackInSlot(i));
             if(candidate.sameFamily(other))return false;
@@ -67,13 +69,16 @@ public final class OrbUpgrades extends ItemStackHandler {
         plate.set(DataComponents.CUSTOM_DATA,CustomData.of(tag));
     }
     public boolean matches(int slot,ItemStack item,net.neoforged.neoforge.fluids.FluidStack fluid) {
-        var data=settings(getStackInSlot(slot));
         var level=owner.getLevel();
         if(level==null)return false;
-        for(int i=0;i<3;i++) {
-            var sample=ItemStack.parseOptional(level.registryAccess(),data.getCompound("Filter"+i));
-            if(OrbFilterMatcher.matches(level,sample,item,fluid))return data.getBoolean("Whitelist");
+        var data=getStackInSlot(slot).getOrDefault(DataComponents.CUSTOM_DATA,CustomData.EMPTY);
+        var cached=filters[slot];
+        if(cached==null||!cached.data().equals(data)){
+            var tag=data.copyTag();var samples=new ItemStack[3];
+            for(int i=0;i<3;i++)samples[i]=ItemStack.parseOptional(level.registryAccess(),tag.getCompound("Filter"+i));
+            cached=new FilterState(data,tag.getBoolean("Whitelist"),samples);filters[slot]=cached;
         }
-        return !data.getBoolean("Whitelist");
+        for(var sample:cached.samples())if(OrbFilterMatcher.matches(level,sample,item,fluid))return cached.whitelist();
+        return !cached.whitelist();
     }
 }

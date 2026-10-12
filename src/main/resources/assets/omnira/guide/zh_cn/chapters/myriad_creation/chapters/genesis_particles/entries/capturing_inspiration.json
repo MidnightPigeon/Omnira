@@ -1,0 +1,15 @@
+{
+  "id": "capturing_inspiration",
+  "title": "捕捉灵感",
+  "item": "omnira:genesis_particles",
+  "recipes": false,
+  "text": [
+    "汇集地、水、火、风、光、暗、时间与空间八种微核，以精炼时空完成汇世之仪，便能凝聚一份创世微粒。"
+  ],
+  "links": [
+    {
+      "target": "genesis_ritual",
+      "label": "汇世之仪"
+    }
+  ]
+}

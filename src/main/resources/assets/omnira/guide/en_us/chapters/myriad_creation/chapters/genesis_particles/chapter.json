@@ -1,0 +1,11 @@
+{
+  "id": "genesis_particles",
+  "title": "Echoes of Creation",
+  "icon": "omnira:genesis_particles",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/capturing_inspiration.json",
+    "entries/grains_to_towers.json"
+  ],
+  "chapters": []
+}

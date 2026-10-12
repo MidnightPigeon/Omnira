@@ -13,11 +13,11 @@
   },
   "fluid": {
     "id": "minecraft:water",
-    "amount": 500
+    "amount": 100
   },
   "result": {
     "id": "omnira:shadow_berries",
     "count": 8
   },
-  "stages": 3
+  "stages": 4
 }

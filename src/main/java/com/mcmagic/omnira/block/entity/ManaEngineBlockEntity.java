@@ -21,6 +21,8 @@ public final class ManaEngineBlockEntity extends GeneratingKineticBlockEntity im
         super.tick();
         if(level==null) return;
         if(!level.isClientSide && engine.pollChanges()) {updateGeneratedRotation();setChanged();}
+        if(!level.isClientSide&&hasNetwork()&&level.getGameTime()%20==0)
+            com.mcmagic.omnira.compat.create.OmniraKineticAccounting.repairClosedNetwork(getOrCreateNetwork());
         engine.tickEnergy();engine.animate();
     }
     @Override protected void write(CompoundTag tag,HolderLookup.Provider registries,boolean clientPacket) {

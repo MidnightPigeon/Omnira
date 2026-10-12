@@ -26,7 +26,7 @@ public final class NodeTransport {
         TuningOutputs.get(level).claim(source);return true;
     }
     public static void tick(ResonanceCoreBlockEntity source){
-        if(source.output&&source.peer!=null&&source.getLevel() instanceof net.minecraft.server.level.ServerLevel server&&!TuningOutputs.get(server).claim(source)){unpair(source);return;}
+        if(source.output&&source.peer!=null&&source.getLevel() instanceof net.minecraft.server.level.ServerLevel server&&!TuningOutputs.get(server).renew(source)){unpair(source);return;}
         if(!source.output||source.peer==null||!source.getLevel().hasChunkAt(source.peer))return;
         if(!(source.getLevel().getBlockEntity(source.peer) instanceof ResonanceCoreBlockEntity target)
             ||!source.peerIdentity.equals(target.identity)||!source.identity.equals(target.peerIdentity)

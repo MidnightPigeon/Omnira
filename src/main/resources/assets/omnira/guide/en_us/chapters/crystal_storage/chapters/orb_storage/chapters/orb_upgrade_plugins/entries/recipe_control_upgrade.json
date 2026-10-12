@@ -1,0 +1,11 @@
+{
+  "id": "recipe_control_upgrade",
+  "item": "omnira:recipe_control_upgrade",
+  "title": "Recipe Control Upgrade",
+  "recipes": true,
+  "text": [
+    "Right-click the held plate to configure nine ghost product samples. Clicking consumes nothing; an empty cursor clears a sample, and another item replaces it. Use filled fluid containers to filter fluid products.",
+    "A whitelist permits the entire recipe when any possible product matches. A blacklist rejects the entire recipe when any possible product matches. An empty whitelist stops production; an empty blacklist allows all recipes.",
+    "Controls reaction pools, catalysis chambers, starlight conversion and orb lava production. Disabled work pauses and resumes when permitted. Storage and transfers are unaffected."
+  ]
+}

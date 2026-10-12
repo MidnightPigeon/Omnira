@@ -4,5 +4,5 @@
   "icon": "omnira:genesis_particles",
   "introduction": "introduction.json",
   "entries": [],
-  "chapters": []
+  "chapters": ["chapters/genesis_particles/chapter.json"]
 }

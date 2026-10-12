@@ -17,7 +17,7 @@ public final class CatalysisCatalogue {
     private static List<CatalysisRecipe> cached;
 
     public static List<CatalysisRecipe> build(ServerLevel level) {
-        var water=new FluidStack(Fluids.WATER,500);
+        var water=new FluidStack(Fluids.WATER,100);
         var soils=BuiltInRegistries.BLOCK.stream()
                 .filter(b->b.defaultBlockState().is(BlockTags.DIRT)||b==Blocks.FARMLAND)
                 .map(ItemStack::new).filter(s->!s.isEmpty()).toList();

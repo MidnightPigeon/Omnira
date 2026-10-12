@@ -9,6 +9,8 @@ Omnira 是面向 Minecraft 1.21.1 / NeoForge 的魔法与探索模组，仍在�
 - **异界探索**：探索梦境与时空维度，发现具有独特机制的群系、遗迹和宝藏。
 - **水晶物流**：使用水晶球体系储存和运输物品。
 
+联动与整合包作者请参阅[联动开发说明](INTEGRATION.md)，包含配方格式、KubeJS示例、自动化接口与兼容边界。
+
 ### 许可
 
 本项目的代码与自有美术资源均采用 [MIT 许可证](LICENSE)。第三方依赖及第三方素材仍遵循各自许可，本许可证不授予其相关权利。
@@ -21,6 +23,8 @@ Omnira is a magic and exploration mod for Minecraft 1.21.1 / NeoForge. This proj
 - **Magical crafting**: process and transform resources through crystal workstations, condensation, assembly and temporal reversal.
 - **Otherworld exploration**: discover dream and spacetime dimensions, distinctive biome mechanics, ruins and treasures.
 - **Crystals logistics**: store and transport items with crystal orbs.
+
+For add-on and modpack authors, see the [integration reference](INTEGRATION.md) for recipe formats, KubeJS examples, capabilities and compatibility boundaries.
 
 ### License
 

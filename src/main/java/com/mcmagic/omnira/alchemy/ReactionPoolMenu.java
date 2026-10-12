@@ -26,7 +26,7 @@ public final class ReactionPoolMenu extends AbstractContainerMenu {
             @Override public boolean mayPlace(ItemStack stack){return pool.canSetItem(slot,stack.copyWithCount(1));}
             @Override public void set(ItemStack stack){if(pool.canSetItem(slot,stack))super.set(stack);}
         });}
-        for(int i=0;i<3;i++){final int slot=i;addSlot(new SlotItemHandler(pool.upgrades,i,166+i*20,105){
+        for(int i=0;i<4;i++){final int slot=i;addSlot(new SlotItemHandler(pool.upgrades,i,156+i*20,105){
             @Override public boolean mayPickup(Player player){return pool.fitsMultiplier(pool.multiplier(slot));}
             @Override public boolean mayPlace(ItemStack stack){return mayPickup(inv.player)&&super.mayPlace(stack);}
         });}
@@ -66,8 +66,8 @@ public final class ReactionPoolMenu extends AbstractContainerMenu {
         var slot=slots.get(index);if(!slot.hasItem()||!slot.mayPickup(player))return ItemStack.EMPTY;
         var stack=slot.getItem();var copy=stack.copy();
         boolean moved;
-        if(index<12)moved=moveItemStackTo(stack,12,slots.size(),true);
-        else if(com.mcmagic.omnira.block.entity.OrbUpgrades.kind(stack)!=null)moved=moveItemStackTo(stack,9,12,false);
+        if(index<13)moved=moveItemStackTo(stack,13,slots.size(),true);
+        else if(com.mcmagic.omnira.block.entity.OrbUpgrades.kind(stack)!=null)moved=moveItemStackTo(stack,9,13,false);
         else {int before=stack.getCount();for(int i=0;i<9&&!stack.isEmpty();i++)stack.setCount(pool.items.insertItem(i,stack,false).getCount());moved=stack.getCount()!=before;}
         if(!moved)return ItemStack.EMPTY;if(stack.isEmpty())slot.setByPlayer(ItemStack.EMPTY);else slot.setChanged();slot.onTake(player,stack);return copy;
     }

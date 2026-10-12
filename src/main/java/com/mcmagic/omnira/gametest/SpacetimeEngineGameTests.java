@@ -101,6 +101,14 @@ public final class SpacetimeEngineGameTests {
         var e=engine(h);
         if(net.neoforged.fml.ModList.get().isLoaded("create"))SpacetimeEngineCreateChecks.remote(h,e);else h.succeed();
     }
+    @GameTest(template="spell_arena",timeoutTicks=180) public static void remoteIdleAnvilKeepsFixedOccupancy(GameTestHelper h){
+        var e=engine(h);
+        if(net.neoforged.fml.ModList.get().isLoaded("create"))SpacetimeEngineCreateChecks.idleAnvil(h,e);else h.succeed();
+    }
+    @GameTest(template="spell_arena",timeoutTicks=100) public static void fixedMachinesRotateAndReserveWhileIdle(GameTestHelper h){
+        var e=engine(h);
+        if(net.neoforged.fml.ModList.get().isLoaded("create"))SpacetimeEngineCreateChecks.fixedMachines(h,e);else h.succeed();
+    }
     @GameTest(template="spell_arena") public static void fallbackPortsDrivePoolAndAssembly(GameTestHelper h){
         if(SpacetimeEngineController.hasKinetics()){h.succeed();return;}
         var e=engine(h);var l=h.getLevel();var root=e.getBlockPos().below();

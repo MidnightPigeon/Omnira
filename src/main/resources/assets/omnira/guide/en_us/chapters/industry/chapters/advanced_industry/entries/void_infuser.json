@@ -9,6 +9,7 @@
     "Infuse Mirror Rock into Void-Infested Mirror Rock, Light Condensate into Shadow Rock, slime balls into ender pearls and obsidian into crying obsidian. All temporal silts become rotted, and all saplings become Shadow Saplings."
   ],
   "links": [
+    {"target": "spatial_energy", "label": "Spatial Energy Materials"},
     {
       "target": "dense_void_mass_guide",
       "label": "High-Density Void Mass"

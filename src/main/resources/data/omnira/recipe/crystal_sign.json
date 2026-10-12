@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "decorations",
+  "category": "misc",
   "pattern": ["CCC", "CCC", " S "],
   "key": {
     "C": {"item": "omnira:spiritual_crystal"},

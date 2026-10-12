@@ -1,0 +1,8 @@
+{
+  "id": "pure_mirror", "title": "纯粹镜面", "item": "omnira:pure_mirror", "recipes": true,
+  "text": [
+    "1块镜面岩与1B虚空星流反应可炼成1片纯粹镜面，不需要底部催化方块。空间遗迹战利品与虚空星流钓鱼也有机会获得。",
+    "可在合成栏拆分成9块镜面岩，也可用作炼金催化室的基底培育镜面岩。"
+  ],
+  "links": [{"target": "alchemical_catalysis_chamber", "label": "炼金催化室"}]
+}

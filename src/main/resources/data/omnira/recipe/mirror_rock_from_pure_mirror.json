@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [{"item": "omnira:pure_mirror"}],
+  "result": {"id": "omnira:mirror_rock", "count": 9}
+}

@@ -35,6 +35,12 @@ abstract class AbyssEntityMixin {
     private double omnira$fall(double dy){var e=(Entity)(Object)this;return AbyssGravity.direction(e)==0?0:AbyssGravity.inverted(e)?-dy:dy;}
     @Inject(method="getOnPos(F)Lnet/minecraft/core/BlockPos;",at=@At("HEAD"),cancellable=true)
     private void omnira$support(float offset,CallbackInfoReturnable<BlockPos> ci){var e=(Entity)(Object)this;if(AbyssGravity.inverted(e))ci.setReturnValue(BlockPos.containing(e.getX(),e.getBoundingBox().maxY+offset,e.getZ()));}
+    @ModifyArgs(method="spawnSprintParticle",at=@At(value="INVOKE",target="Lnet/minecraft/world/level/Level;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"))
+    private void omnira$runningParticles(org.spongepowered.asm.mixin.injection.invoke.arg.Args args){
+        var entity=(Entity)(Object)this;if(!AbyssGravity.inverted(entity))return;
+        args.set(2,AbyssGravity.footParticleY(entity,.1));
+        args.set(5,-(double)args.get(5));
+    }
     @Inject(method="getEyeY",at=@At("RETURN"),cancellable=true)
     private void omnira$eyes(CallbackInfoReturnable<Double> ci){ci.setReturnValue(ci.getReturnValue()+AbyssGravity.eyeOffset((Entity)(Object)this));}
     @Inject(method="getEyePosition(F)Lnet/minecraft/world/phys/Vec3;",at=@At("RETURN"),cancellable=true)

@@ -23,6 +23,7 @@ public final class OrbAutomation {
         }
     }
     private static void lava(CrystalBallBlockEntity ball,int slot) {
+        if(!com.mcmagic.omnira.recipe.RecipeControl.allows(ball.getLevel(),ball.upgrades,java.util.List.of(),new FluidStack(Fluids.LAVA,100)))return;
         if(ball instanceof LiquidCrystalBallBlockEntity liquid) {liquid.tank.fill(new FluidStack(Fluids.LAVA,100),FluidAction.EXECUTE);return;}
         var tag=OrbUpgrades.settings(ball.upgrades.getStackInSlot(slot));
         for(int i=0;i<12;i++) {

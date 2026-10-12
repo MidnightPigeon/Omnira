@@ -28,7 +28,9 @@ public final class RitualEnergyCoreRenderer implements BlockEntityRenderer<Ritua
         pose.popPose();
     }
     @Override public void render(RitualEnergyCoreBlockEntity core,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {
+        if(core.genesisFluid()>0)GenesisOfferingRenderer.render(pose,buffers,core.visualFluid(partial),core.visualAbsorption(partial),overlay);
         cube(pose,buffers,core.getLevel()==null?0:core.getLevel().getGameTime()+partial,overlay,
                 core.getBlockState().is(com.mcmagic.omnira.registry.ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get()));
     }
+    @Override public net.minecraft.world.phys.AABB getRenderBoundingBox(RitualEnergyCoreBlockEntity core){return new net.minecraft.world.phys.AABB(core.getBlockPos()).inflate(3);}
 }

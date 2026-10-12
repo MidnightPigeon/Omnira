@@ -1,0 +1,16 @@
+{
+  "id": "grains_to_towers",
+  "title": "聚沙成塔",
+  "item": "omnira:genesis_particles",
+  "recipes": false,
+  "text": [
+    "已有的创世微粒可以作为种子，与封装的稳态时空聚合体一同放入炼金催化室，以精炼时空继续培养。基底与种子保留，每轮成熟产出一份创世微粒。",
+    "它不会自行生长，只有持续的液体催化才能使这些微小的余韵积聚。"
+  ],
+  "links": [
+    {
+      "target": "alchemical_catalysis_chamber",
+      "label": "炼金催化室"
+    }
+  ]
+}

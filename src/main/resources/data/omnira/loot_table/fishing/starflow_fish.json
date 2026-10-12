@@ -18,6 +18,16 @@
           "type": "minecraft:item",
           "name": "omnira:dream_crystal_shard",
           "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:spatial_crystal_shard",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "omnira:resonance_crystal",
+          "weight": 4
         }
       ]
     }

@@ -1,0 +1,9 @@
+{
+  "id": "temporal_energy",
+  "title": "时间能量材料",
+  "item": "omnira:spacetime_reverser",
+  "recipes": false,
+  "text": [
+    "将鼠标移到材料上查看每件提供的能量。"
+  ]
+}

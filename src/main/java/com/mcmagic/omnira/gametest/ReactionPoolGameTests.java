@@ -17,6 +17,20 @@ import java.util.List;
 @GameTestHolder("omnira_alchemy")
 @PrefixGameTestTemplate(false)
 public final class ReactionPoolGameTests {
+    @GameTest(template="spell_arena") public static void cachedRecipeIdentitySurvivesReload(GameTestHelper h){
+        var pool=pool(h);var recipe=recipe(Items.DIRT,Items.STONE,2000);
+        pool.items.setStackInSlot(0,new ItemStack(Items.DIRT,3));
+        h.assertTrue(pool.start(recipe),"Initial cached recipe rejected");
+        var ops=h.getLevel().registryAccess().createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE);
+        var tag=ReactionRecipe.CODEC.codec().encodeStart(ops,recipe).getOrThrow();
+        for(int i=0;i<100;i++)h.assertTrue(!pool.start(recipe),"Identical live recipe started twice");
+        var equivalent=ReactionRecipe.CODEC.codec().parse(ops,tag).getOrThrow();
+        h.assertTrue(!pool.start(equivalent),"Equivalent reloaded recipe duplicated active job");
+        var copy=new ReactionPoolBlockEntity(pool.getBlockPos(),pool.getBlockState());copy.setLevel(h.getLevel());
+        copy.loadWithComponents(pool.saveWithFullMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());
+        h.assertTrue(!copy.start(equivalent),"Saved job lost equivalent recipe identity");
+        copy.advance(2000);h.assertTrue(copy.start(equivalent),"Completed recipe did not restart");h.succeed();
+    }
     @GameTest(template="spell_arena") public static void waymarkReaction(GameTestHelper h){
         var pool=pool(h);var level=h.getLevel();
         var recipe=level.getRecipeManager().getAllRecipesFor(ModRecipes.REACTION_TYPE.get()).stream()

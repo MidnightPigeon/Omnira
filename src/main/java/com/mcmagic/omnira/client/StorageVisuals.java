@@ -46,8 +46,7 @@ public final class StorageVisuals {
         for(var v:vertices)mesh.addVertex(pose.last().pose(),v[0],v[1],v[2]).setColor(color);
     }
     private static void cube(com.mojang.blaze3d.vertex.VertexConsumer mesh,PoseStack pose,float x,float y,float z,float r,int color){
-        float[][] p={{x-r,y-r,z-r},{x+r,y-r,z-r},{x+r,y+r,z-r},{x-r,y+r,z-r},{x-r,y-r,z+r},{x+r,y-r,z+r},{x+r,y+r,z+r},{x-r,y+r,z+r}};
-        for(var f:new int[][]{{0,3,2,1},{4,5,6,7},{0,4,7,3},{1,2,6,5},{3,7,6,2},{0,1,5,4}})quad(mesh,pose,new float[][]{p[f[0]],p[f[1]],p[f[2]],p[f[3]]},color);
+        com.mcmagic.omnira.client.renderer.StellarVisuals.cube(pose,mesh,x,y,z,r,color);
     }
     public static final class RodRenderer extends BlockEntityWithoutLevelRenderer {
         public RodRenderer(){super(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels());}
@@ -79,7 +78,13 @@ public final class StorageVisuals {
         }
     }
     private static final class NodeRenderer implements BlockEntityRenderer<ResonanceCoreBlockEntity> {
-        @Override public net.minecraft.world.phys.AABB getRenderBoundingBox(ResonanceCoreBlockEntity node){return node.peer==null?new net.minecraft.world.phys.AABB(node.getBlockPos()):new net.minecraft.world.phys.AABB(node.getBlockPos()).minmax(new net.minecraft.world.phys.AABB(node.peer)).inflate(.1);}
+        @Override public net.minecraft.world.phys.AABB getRenderBoundingBox(ResonanceCoreBlockEntity node){
+            var bounds=new net.minecraft.world.phys.AABB(node.getBlockPos()).inflate(.1);
+            var player=Minecraft.getInstance().player;
+            return node.peer!=null&&node.output&&player!=null
+                &&(player.getMainHandItem().is(CrystalStorageContent.ROD.get())||player.getOffhandItem().is(CrystalStorageContent.ROD.get()))
+                ?bounds.minmax(new net.minecraft.world.phys.AABB(node.peer).inflate(.1)):bounds;
+        }
         public int getViewDistance(){return 96;}
         @Override public void render(ResonanceCoreBlockEntity node,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
             var player=Minecraft.getInstance().player;
@@ -98,8 +103,8 @@ public final class StorageVisuals {
             var side=vector.cross(new Vector3f(0,1,0),new Vector3f());
             if(side.lengthSquared()<.001F)side.set(1,0,0);side.normalize().mul(.012F);
             var mesh=buffers.getBuffer(CrystalGlassLayer.COLOR);
-            for(int i=0;i<32;i++){
-                float a=i/32F,b=(i+1)/32F;int color=i<16?0xEFFFFFFF:0xEF211927;
+            for(int i=0;i<2;i++){
+                float a=i/2F,b=(i+1)/2F;int color=i==0?0xEFFFFFFF:0xEF211927;
                 float x=.5F+delta.getX()*a,y=.45F+delta.getY()*a,z=.5F+delta.getZ()*a;
                 float xx=.5F+delta.getX()*b,yy=.45F+delta.getY()*b,zz=.5F+delta.getZ()*b;
                 quad(mesh,pose,new float[][]{{x-side.x,y,z-side.z},{xx-side.x,yy,zz-side.z},{xx+side.x,yy,zz+side.z},{x+side.x,y,z+side.z}},color);

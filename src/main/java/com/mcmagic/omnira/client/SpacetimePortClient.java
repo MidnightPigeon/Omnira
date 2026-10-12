@@ -36,7 +36,13 @@ public final class SpacetimePortClient {
         for(var v:new Vec3[]{a,b,c,d})out.addVertex(pose.last().pose(),(float)v.x,(float)v.y,(float)v.z).setColor(color);
     }
     private static final class Renderer implements BlockEntityRenderer<BlockEntity> {
-        @Override public AABB getRenderBoundingBox(BlockEntity e){var p=((SpacetimePortHost)e).port();return p.peer==null?new AABB(e.getBlockPos()):new AABB(e.getBlockPos()).minmax(new AABB(p.peer));}
+        @Override public AABB getRenderBoundingBox(BlockEntity e){
+            var p=((SpacetimePortHost)e).port();var bounds=new AABB(e.getBlockPos());
+            var player=Minecraft.getInstance().player;
+            return p.peer!=null&&p.white&&player!=null
+                &&(player.getMainHandItem().is(com.mcmagic.omnira.storage.CrystalStorageContent.ROD.get())||player.getOffhandItem().is(com.mcmagic.omnira.storage.CrystalStorageContent.ROD.get()))
+                ?bounds.minmax(new AABB(p.peer)):bounds;
+        }
         @Override public int getViewDistance(){return 64;}
         @Override public void render(BlockEntity e,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
             var p=((SpacetimePortHost)e).port();
@@ -57,8 +63,8 @@ public final class SpacetimePortClient {
             var end=(other==null?Vec3.atCenterOf(p.peer):marker(other)).subtract(Vec3.atLowerCornerOf(e.getBlockPos()));
             var delta=end.subtract(start);var side=delta.cross(new Vec3(0,1,0));if(side.lengthSqr()<.001)side=new Vec3(1,0,0);side=side.normalize().scale(.008);
             var vertical=new Vec3(0,.008,0);var out=buffers.getBuffer(CrystalGlassLayer.COLOR);
-            for(int i=0;i<32;i++){
-                var a=start.add(delta.scale(i/32.0));var b=start.add(delta.scale((i+1)/32.0));int color=i<16?0xEBFFFFFF:0xEB181D29;
+            for(int i=0;i<2;i++){
+                var a=start.add(delta.scale(i/2.0));var b=start.add(delta.scale((i+1)/2.0));int color=i==0?0xEBFFFFFF:0xEB181D29;
                 quad(out,pose,a.subtract(side),b.subtract(side),b.add(side),a.add(side),color);
                 quad(out,pose,a.subtract(vertical),b.subtract(vertical),b.add(vertical),a.add(vertical),color);
             }

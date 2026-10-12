@@ -119,7 +119,7 @@ public final class CorridorRitualGameTests {
         var victim=EntityType.COW.create(level);victim.setPos(Vec3.atCenterOf(core).add(2,1,0));level.addFreshEntity(victim);
         drops.getFirst().tick();h.assertTrue(victim.isRemoved(),"Ejected aggregate did not trigger storm");h.succeed();
     }
-    @GameTest(template="spell_arena",timeoutTicks=200,batch="anchor_corridor_portal") public static void vehicleGroupOneWayTransit(GameTestHelper h)throws Exception{
+    @GameTest(template="spell_arena",timeoutTicks=200,batch="anchor_corridor_portal") public static void vehicleGroupEntryAndReturn(GameTestHelper h)throws Exception{
         var level=h.getLevel();var pos=Vec3.atBottomCenterOf(h.absolutePos(new BlockPos(5,10,5)));
         var orb=ModEntityTypes.CRUISE_ORB.get().create(level);orb.setPos(pos);level.addFreshEntity(orb);
         var profile=new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"corridor-rider");
@@ -144,7 +144,8 @@ public final class CorridorRitualGameTests {
         h.assertTrue(Math.abs(arrived.getX()-.5)<.01 && arrived.getY()==129,"Not in corridor interior");
         h.assertTrue(!world.getBlockState(arrived.blockPosition()).is(ModBlocks.CORRIDOR_GATEWAY.get()),"Created forbidden return gateway");
         arrived.getPersistentData().remove("OmniraCorridorCooldown");
-        h.assertTrue(!CorridorGatewayBlockEntity.transfer(world,arrived),"Gateway unexpectedly supports return travel");
-        player.stopRiding();player.discard();arrived.discard();channel.finishAndReleaseAll();level.removeBlock(anchor,false);h.succeed();
+        h.assertTrue(CorridorGatewayBlockEntity.transfer(world,arrived),"Gateway in spacetime failed overworld return");
+        h.assertTrue(player.level()==level.getServer().overworld() && player.getVehicle()!=null,"Return lost passenger or destination");
+        var returned=player.getVehicle();player.stopRiding();player.discard();returned.discard();channel.finishAndReleaseAll();level.removeBlock(anchor,false);h.succeed();
     }
 }

@@ -12,7 +12,8 @@
     "entries/resonance_ritual.json",
     "entries/affinity_ritual.json",
     "entries/cleansing_ritual.json",
-    "entries/corridor_ritual.json"
+    "entries/corridor_ritual.json",
+    "entries/genesis_ritual.json"
   ],
   "chapters": [
     "chapters/ritual_weapons/chapter.json"

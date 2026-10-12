@@ -1,0 +1,8 @@
+{
+  "id": "pure_mirror", "title": "Pure Mirror", "item": "omnira:pure_mirror", "recipes": true,
+  "text": [
+    "React one Mirror Rock with 1B of Void Starflow to make one Pure Mirror, without a catalyst block beneath the vessel. Spatial ruins and Void Starflow fishing can also yield it.",
+    "Craft one into nine Mirror Rocks, or use it as a substrate to cultivate Mirror Rock in the Alchemical Catalysis Chamber."
+  ],
+  "links": [{"target": "alchemical_catalysis_chamber", "label": "Alchemical Catalysis Chamber"}]
+}

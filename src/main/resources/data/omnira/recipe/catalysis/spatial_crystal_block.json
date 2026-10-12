@@ -8,7 +8,7 @@
   },
   "fluid": {
     "id": "omnira:dilute_spacetime",
-    "amount": 500
+    "amount": 100
   },
   "result": {
     "id": "omnira:spatial_crystal_shard",

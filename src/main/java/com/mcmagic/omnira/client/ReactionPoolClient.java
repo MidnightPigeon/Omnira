@@ -23,6 +23,7 @@ import java.util.*;
 
 @EventBusSubscriber(modid="omnira",value=Dist.CLIENT)
 public final class ReactionPoolClient {
+    private static final int[][] WORKING_GLYPH={{0,0},{0,1},{0,2},{-1,1},{1,-1}};
     private record Mesh(float[][] vertices,int[][] faces,String material,int color,String motion,float[] pivot){}
     private static final List<Mesh> MESHES=new ArrayList<>();
     private static final List<float[][]> LIQUID_SHELL=new ArrayList<>();
@@ -64,11 +65,11 @@ public final class ReactionPoolClient {
         if(pool==null)return new Motion();var m=MOTIONS.computeIfAbsent(pool,k->new Motion());
         double elapsed=m.initialized?Math.clamp(time-m.last,0,5):0,speed=pool.powered()?Math.min(8,pool.efficiency()):0;
         m.phase+=elapsed*speed;
-        if(pool.electricalPowered()){m.left=0;m.right=0;}
-        else if(net.neoforged.fml.ModList.get().isLoaded("create")){
+        if(net.neoforged.fml.ModList.get().isLoaded("create")){
             m.left=CreateReactionPoolClient.shaftAngle(pool,3);
             m.right=CreateReactionPoolClient.shaftAngle(pool,5);
-        }else{m.left=(m.left+elapsed*speed*2.4)%360;m.right=m.left;}
+        }else if(pool.electricalPowered()){m.left=0;m.right=0;}
+        else{m.left=(m.left+elapsed*speed*2.4)%360;m.right=m.left;}
         m.initialized=true;m.last=time;return m;
     }
     public static void renderPreview(double time,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
@@ -110,7 +111,7 @@ public final class ReactionPoolClient {
             for(int i=0;i<4;i++){
                 double a=phase*.018+i*Math.PI/2;
                 pose.pushPose();pose.translate(.5+Math.cos(a)*.47,.43,.5+Math.sin(a)*.47);pose.mulPose(Axis.YP.rotationDegrees((float)(90-Math.toDegrees(a))));
-                for(int[] xy:new int[][]{{0,0},{0,1},{0,2},{-1,1},{1,-1}})cube(out,pose,xy[0]*.02F,xy[1]*.02F,0,.008F,0xC4DEF7FF);pose.popPose();
+                for(int[] xy:WORKING_GLYPH)cube(out,pose,xy[0]*.02F,xy[1]*.02F,0,.008F,0xC4DEF7FF);pose.popPose();
             }
             if(pool.reacting())for(int i=0;i<24;i++){
                 double cycle=(time*.014+i/24.0)%1,a=time*.035+i*Math.PI/6,r=.4+cycle*.5;
@@ -130,14 +131,14 @@ public final class ReactionPoolClient {
         pose.pushPose();pose.translate(at.get(0).getAsDouble()/16,at.get(1).getAsDouble()/16,at.get(2).getAsDouble()/16);
         pose.mulPose(Axis.XP.rotationDegrees(data.get("tilt").getAsFloat()));float z=data.get("front").getAsFloat()/16;
         var out=buffers.getBuffer(CrystalGlassLayer.COLOR);int ink=working?0xE5E9FFFF:0xBA89BED4;
-        for(int side:new int[]{-1,1})for(int i=0;i<3;i++)cube(out,pose,side*(.22F+i*.024F),.05F,z,.011F,ink);
+        for(int i=0;i<3;i++)cube(out,pose,-(.22F+i*.024F),.05F,z,.011F,ink);
         float pulse=working?(float)(.5+.5*Math.sin(phase*.07)):0;
         MultiBufferSource sorted=CrystalGlassLayer.contents(buffers);
-        for(int i=0;i<3;i++){
-            var stack=pool==null?ItemStack.EMPTY:pool.upgrades.getStackInSlot(i);float x=(i-1)*.20F,y=-.165F;
+        for(int i=0;i<4;i++){
+            var stack=pool==null?ItemStack.EMPTY:pool.upgrades.getStackInSlot(i);float x=.21F+i%2*.13F,y=.047F+(i/2==0?.072F:-.072F);
             int color=0x887A9AAE;var kind=com.mcmagic.omnira.block.entity.OrbUpgrades.kind(stack);if(kind!=null)color=0xE0000000|kind.displayColor;
-            for(int side=-1;side<=1;side+=2){cube(out,pose,x+side*.068F,y,z,.009F,color);cube(out,pose,x,y+side*.06F,z,.009F,color);}
-            if(!stack.isEmpty())item(stack,x,y,z-.02,0,.12F,pool,pose,sorted,LightTexture.FULL_BRIGHT,overlay,30+i);
+            for(int side=-1;side<=1;side+=2){cube(out,pose,x+side*.052F,y,z,.008F,color);cube(out,pose,x,y+side*.05F,z,.008F,color);}
+            if(!stack.isEmpty())item(stack,x,y,z-.014,0,.095F,pool,pose,sorted,LightTexture.FULL_BRIGHT,overlay,30+i);
         }
         if(pool!=null)panelLiquid(pool,pose,buffers,light,overlay);
         if(working)cube(out,pose,(float)(Math.sin(phase*.04)*.10),.16F,z,.01F,(Math.round(120+100*pulse)<<24)|0xDDF9FF);
@@ -145,7 +146,7 @@ public final class ReactionPoolClient {
     }
     private static void panelLiquid(ReactionPoolBlockEntity pool,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         var atlas=Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS);
-        double base=.75/16-2.05/16,centerY=.75/16,centerZ=-2.0/16,unit=.5/16,radius=2.05/16;
+        double base=.75/16-1.95/16,centerY=.75/16,centerZ=-.1/16,unit=1.95/4.1/16,radius=1.95/16;
         for(var fluid:pool.fluids.snapshot().reversed()){
             double top=base+2*radius*fluid.getAmount()/pool.capacity();
             var ext=IClientFluidTypeExtensions.of(fluid.getFluid());int color=ext.getTintColor(fluid);if((color>>>24)==0)color|=0xFF000000;
@@ -180,13 +181,18 @@ public final class ReactionPoolClient {
     private static void liquidCap(PoseStack pose,MultiBufferSource buffers,TextureAtlasSprite sprite,double height,boolean top,int color,int light,int overlay){
         int layer=Math.clamp((int)Math.floor((height-ReactionPoolGeometry.VESSEL_FLOOR)*16+(top?-.00001:.00001)),0,LIQUID_PROFILES.size()-1);
         for(var row:LIQUID_PROFILES.get(layer)){
-            var v=points(row[0],height,row[1],row[2],height,row[3]);var f=FACES[top?4:5];
-            quad(pose,buffers,sprite,v[f[0]],v[f[1]],v[f[2]],v[f[3]],color,light,overlay,16);
+            // Anchor every strip and layer to one X/Z atlas grid; winding must not rotate the animation.
+            var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);var f=FACES[top?4:5];
+            for(int tx=(int)Math.floor(row[0]);tx<Math.ceil(row[2]);tx++)for(int tz=(int)Math.floor(row[1]);tz<Math.ceil(row[3]);tz++){
+                var v=points(Math.max(row[0],tx),height,Math.max(row[1],tz),Math.min(row[2],tx+1),height,Math.min(row[3],tz+1));
+                for(int index:f){var p=v[index];out.addVertex(pose.last(),p[0],p[1],p[2]).setColor(color)
+                        .setUv(sprite.getU(p[0]-tx),sprite.getV(p[2]-tz)).setOverlay(overlay).setLight(light).setNormal(pose.last(),0,top?1:-1,0);}
+            }
         }
     }
     private static final int[][] FACES={{0,3,2,1},{4,5,6,7},{0,4,7,3},{1,2,6,5},{3,7,6,2},{0,1,5,4}};
     private static float[][] points(double x,double y,double z,double xx,double yy,double zz){return new float[][]{{(float)x,(float)y,(float)z},{(float)xx,(float)y,(float)z},{(float)xx,(float)yy,(float)z},{(float)x,(float)yy,(float)z},{(float)x,(float)y,(float)zz},{(float)xx,(float)y,(float)zz},{(float)xx,(float)yy,(float)zz},{(float)x,(float)yy,(float)zz}};}
-    private static void cube(VertexConsumer out,PoseStack pose,float x,float y,float z,float r,int color){var v=points(x-r,y-r,z-r,x+r,y+r,z+r);for(var face:FACES)for(int n:face)out.addVertex(pose.last().pose(),v[n][0],v[n][1],v[n][2]).setColor(color);}
+    private static void cube(VertexConsumer out,PoseStack pose,float x,float y,float z,float r,int color){com.mcmagic.omnira.client.renderer.StellarVisuals.cube(pose,out,x,y,z,r,color);}
     private static void box(PoseStack pose,MultiBufferSource buffers,TextureAtlasSprite sprite,double x,double y,double z,double xx,double yy,double zz,int color,int light,int overlay){var v=points(x,y,z,xx,yy,zz);for(var f:FACES)quad(pose,buffers,sprite,v[f[0]],v[f[1]],v[f[2]],v[f[3]],color,light,overlay,16);}
     private static void quad(PoseStack pose,MultiBufferSource buffers,TextureAtlasSprite sprite,float[] a,float[] b,float[] c,float[] d,int color,int light,int overlay,int pixels){
         var normal=new org.joml.Vector3f(b[0]-a[0],b[1]-a[1],b[2]-a[2]).cross(new org.joml.Vector3f(d[0]-a[0],d[1]-a[1],d[2]-a[2])).normalize();

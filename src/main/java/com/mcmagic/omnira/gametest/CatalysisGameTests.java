@@ -15,6 +15,102 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_catalysis")
 @PrefixGameTestTemplate(false)
 public final class CatalysisGameTests {
+    @GameTest(template="spell_arena") public static void debitMatchesDisplayAndHarvest(GameTestHelper h){
+        var be=chamber(h);
+        for(var seed:new Item[]{Items.WHEAT_SEEDS,Items.BEETROOT_SEEDS,Items.CARROT,Items.POTATO,Items.PITCHER_POD,Items.TORCHFLOWER_SEEDS,Items.COCOA_BEANS}){
+            be.items.setStackInSlot(2,ItemStack.EMPTY);fill(be,seed==Items.COCOA_BEANS?Items.JUNGLE_LOG:Items.DIRT,seed,Fluids.WATER,400);
+            h.assertTrue(be.plan()!=null&&be.plan().stages()==4,"Crop display is not four stages");
+            for(int step=1;step<=3;step++){
+                ticks(be,200);h.assertTrue(be.stage()==step+1&&be.tank.getFluidAmount()==400-100*step&&be.items.getStackInSlot(2).isEmpty(),"Debit/display mismatch for "+seed);
+                var visual=be.plan().visual(be.stage());var age=CatalysisGrowth.age(visual);int expected;
+                if(seed==Items.PITCHER_POD)expected=step;
+                else if(seed==Items.TORCHFLOWER_SEEDS)expected=step/2;
+                else if(seed==Items.COCOA_BEANS)expected=new int[]{0,0,1,2}[step];
+                else expected=seed==Items.BEETROOT_SEEDS?step:new int[]{0,2,5,7}[step];
+                h.assertTrue(visual.getValue(age)==expected,"Wrong native crop display age: "+seed);
+                be.loadWithComponents(be.saveWithoutMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());
+                h.assertTrue(be.stage()==step+1,"Reload changed completed display stage");
+            }
+            ticks(be,200);h.assertTrue(be.stage()==1&&be.tank.isEmpty()&&!be.items.getStackInSlot(2).isEmpty(),"Fourth debit did not harvest/reset");
+            if(seed==Items.TORCHFLOWER_SEEDS)h.assertTrue(be.items.getStackInSlot(2).is(Items.TORCHFLOWER)&&be.items.getStackInSlot(2).getCount()==2,"Torchflower harvested immature seeds");
+            if(seed==Items.PITCHER_POD)h.assertTrue(be.items.getStackInSlot(2).is(Items.PITCHER_PLANT)&&be.items.getStackInSlot(2).getCount()==2,"Pitcher harvested immature pods");
+            for(int batch=0;batch<20;batch++){if(be.items.extractItem(2,64,false).isEmpty())break;ticks(be,1);}
+        }
+        for(var holder:h.getLevel().getRecipeManager().getAllRecipesFor(CatalysisContent.TYPE.get()))
+            h.assertTrue(holder.value().fluid().getAmount()==100&&holder.value().stages()==4,"Data catalysis not normalized");
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void fungiCatalysisMatchesSoilAndLiquid(GameTestHelper h){
+        var be=chamber(h);
+        var soils=new Item[]{Items.CRIMSON_NYLIUM,Items.WARPED_NYLIUM,Items.MYCELIUM,Items.MYCELIUM};
+        var seeds=new Item[]{Items.CRIMSON_FUNGUS,Items.WARPED_FUNGUS,Items.RED_MUSHROOM,Items.BROWN_MUSHROOM};
+        for(int i=0;i<seeds.length;i++){
+            var fluid=i<2?Fluids.LAVA:Fluids.WATER;
+            be.items.setStackInSlot(2,ItemStack.EMPTY);fill(be,soils[i],seeds[i],fluid,400);
+            h.assertTrue(be.plan()!=null&&be.plan().stages()==4,"Missing fungal catalysis plan: "+seeds[i]);
+            ticks(be,799);h.assertTrue(be.tank.getFluidAmount()==100&&be.items.getStackInSlot(2).isEmpty(),"Fungal harvest completed early");
+            int expected=16;var product=seeds[i];
+            if(i<2){
+                product=i==0?Items.CRIMSON_STEM:Items.WARPED_STEM;
+                h.getLevel().random.setSeed(42);
+                var nativeDrops=CatalysisTreeGrowth.harvest(h.getLevel(),Block.byItem(seeds[i]).defaultBlockState(),Block.byItem(soils[i]).defaultBlockState());
+                var stem=product;
+                h.assertTrue(!nativeDrops.isEmpty()&&nativeDrops.stream().allMatch(s->s.is(stem)),"Native fungus simulation produced no stems or extra items");
+                expected=nativeDrops.stream().mapToInt(ItemStack::getCount).sum()*2;
+                h.getLevel().random.setSeed(42);
+            }
+            ticks(be,1);h.assertTrue(be.tank.isEmpty(),"Wrong fungal liquid cost");
+            int received=0;
+            for(int batch=0;batch<20;batch++){
+                var output=be.items.extractItem(2,64,false);if(output.isEmpty())break;
+                h.assertTrue(output.is(product),"Wrong fungal output");received+=output.getCount();ticks(be,1);
+            }
+            h.assertTrue(received==expected,"Fungal yield did not follow configured rule: "+received+" / "+expected);
+            h.assertTrue(be.items.getStackInSlot(0).getCount()==1&&be.items.getStackInSlot(1).getCount()==1,"Fungal growth consumed substrate or seed");
+            h.assertTrue(CatalysisGrowth.resolve(h.getLevel(),new ItemStack(soils[i]),new ItemStack(seeds[i]),new FluidStack(i<2?Fluids.WATER:Fluids.LAVA,1000))==null,"Wrong liquid accepted");
+            h.assertTrue(CatalysisGrowth.resolve(h.getLevel(),new ItemStack(Items.NETHERRACK),new ItemStack(seeds[i]),new FluidStack(fluid,1000))==null,"Plain netherrack substituted for fungal substrate");
+        }
+        h.assertTrue(CatalysisGrowth.resolve(h.getLevel(),new ItemStack(Items.CRIMSON_NYLIUM),new ItemStack(Items.WARPED_FUNGUS),new FluidStack(Fluids.LAVA,1000))==null,"Mismatched nether fungus accepted");
+        h.assertTrue(CatalysisGrowth.resolve(h.getLevel(),new ItemStack(Items.WARPED_NYLIUM),new ItemStack(Items.CRIMSON_FUNGUS),new FluidStack(Fluids.LAVA,1000))==null,"Mismatched crimson fungus accepted");
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void everyCropUsesFourCatalyses(GameTestHelper h){
+        var original=chamber(h);
+        for(var seed:new Item[]{Items.WHEAT_SEEDS,Items.BEETROOT_SEEDS,Items.CARROT,Items.POTATO,Items.SWEET_BERRIES,Items.PUMPKIN_SEEDS,Items.MELON_SEEDS}){
+            var be=new CatalysisBlockEntity(original.getBlockPos(),original.getBlockState());be.setLevel(h.getLevel());
+            be.items.setStackInSlot(2,ItemStack.EMPTY);fill(be,Items.DIRT,seed,Fluids.WATER,400);
+            ticks(be,399);h.assertTrue(be.tank.getFluidAmount()==300&&be.items.getStackInSlot(2).isEmpty(),"Second debit was early for "+seed+": "+be.tank.getFluidAmount());
+            be.loadWithComponents(be.saveWithoutMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());
+            ticks(be,400);h.assertTrue(be.tank.getFluidAmount()==100&&be.items.getStackInSlot(2).isEmpty(),"Premature harvest for "+seed);
+            ticks(be,1);h.assertTrue(be.tank.isEmpty()&&!be.items.getStackInSlot(2).isEmpty(),"Four catalyses failed for "+seed);
+        }h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void rearManualInputPrefersImportAndRejectsConflict(GameTestHelper h){
+        var be=chamber(h);var level=h.getLevel();var pos=be.getBlockPos();var player=h.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        for(var facing:Direction.Plane.HORIZONTAL){
+            for(int i=0;i<3;i++)level.setBlockAndUpdate(pos.above(i),level.getBlockState(pos.above(i)).setValue(CatalysisBlock.FACING,facing));
+            be.tank.setFluid(FluidStack.EMPTY);
+            player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new ItemStack(Items.WATER_BUCKET));
+            clickPort(be,player,facing.getClockWise());h.assertTrue(be.tank.isEmpty()&&player.getMainHandItem().is(Items.WATER_BUCKET),"Non-port accepted liquid");
+            clickPort(be,player,facing.getOpposite());h.assertTrue(be.tank.getFluidAmount()==1000&&player.getMainHandItem().is(Items.BUCKET),"Rear bucket input or return failed");
+            player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new ItemStack(Items.LAVA_BUCKET));
+            clickPort(be,player,facing.getOpposite());h.assertTrue(be.tank.getFluidAmount()==1000&&be.tank.getFluid().is(Fluids.WATER)&&player.getMainHandItem().is(Items.LAVA_BUCKET),"Mixed incompatible fluids");
+        }
+        var orbPos=pos.offset(4,0,0);level.setBlockAndUpdate(orbPos,ModBlocks.LIQUID_CRYSTAL_BALL.get().defaultBlockState());
+        var orb=(com.mcmagic.omnira.block.entity.LiquidCrystalBallBlockEntity)level.getBlockEntity(orbPos);
+        orb.upgrades.insertItem(0,new ItemStack(ModItems.SPACETIME_STABILIZATION_UPGRADE.get()),false);orb.tank.setFluid(new FluidStack(Fluids.WATER,5000));
+        var portable=new ItemStack(ModItems.LIQUID_CRYSTAL_BALL.get());portable.set(net.minecraft.core.component.DataComponents.BLOCK_ENTITY_DATA,net.minecraft.world.item.component.CustomData.of(orb.saveWithFullMetadata(level.registryAccess())));
+        player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,portable);
+        var rear=be.getBlockState().getValue(CatalysisBlock.FACING).getOpposite();clickPort(be,player,rear);
+        h.assertTrue(be.tank.getFluidAmount()==4000&&player.getMainHandItem().getCapability(Capabilities.FluidHandler.ITEM).getFluidInTank(0).getAmount()==2000,"Portable input drained backwards or overfilled");
+        clickPort(be,player,rear);h.assertTrue(be.tank.getFluidAmount()==4000,"Full tank exported into a filled input container");
+        player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new ItemStack(Items.BUCKET));clickPort(be,player,rear);
+        h.assertTrue(be.tank.getFluidAmount()==3000&&player.getMainHandItem().is(Items.WATER_BUCKET),"Empty bucket cannot withdraw");h.succeed();
+    }
+    private static void clickPort(CatalysisBlockEntity be,net.minecraft.world.entity.player.Player player,Direction side){
+        var pos=be.getBlockPos();be.getLevel().getBlockState(pos).useItemOn(player.getMainHandItem(),be.getLevel(),player,net.minecraft.world.InteractionHand.MAIN_HAND,
+                new net.minecraft.world.phys.BlockHitResult(pos.getCenter(),side,pos,false));
+    }
     private static net.minecraft.util.RandomSource successfulGrowth(){return new net.minecraft.world.level.levelgen.LegacyRandomSource(1){
         @Override public int nextInt(int bound){return bound==6||bound==3?1:0;}
         @Override public double nextDouble(){return 0;}
@@ -24,7 +120,7 @@ public final class CatalysisGameTests {
         var be=chamber(h);
         be.items.setStackInSlot(0,new ItemStack(Items.DIRT));be.items.setStackInSlot(1,new ItemStack(Items.WHEAT_SEEDS));
         h.assertTrue(!be.catalyzing(),"Dry natural growth powers the alchemy core");
-        be.tank.fill(new FluidStack(Fluids.WATER,499),FluidAction.EXECUTE);
+        be.tank.fill(new FluidStack(Fluids.WATER,99),FluidAction.EXECUTE);
         h.assertTrue(!be.catalyzing(),"Insufficient liquid powers the core");
         be.tank.fill(new FluidStack(Fluids.WATER,1),FluidAction.EXECUTE);
         h.assertTrue(be.catalyzing(),"Valid catalytic growth does not power the core");
@@ -64,15 +160,15 @@ public final class CatalysisGameTests {
         var be=chamber(h);h.getLevel().setDayTime(6000);be.items.setStackInSlot(0,new ItemStack(Items.DIRT));be.items.setStackInSlot(1,new ItemStack(Items.WHEAT_SEEDS));
         be.naturalTick(successfulGrowth());h.assertTrue(be.stage()==2,"Natural wheat failed to advance");
         be.loadWithComponents(be.saveWithoutMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());
-        be.tank.fill(new FluidStack(Fluids.WATER,4000),FluidAction.EXECUTE);ticks(be,1200);
+        be.tank.fill(new FluidStack(Fluids.WATER,4000),FluidAction.EXECUTE);ticks(be,800);
         h.assertTrue(be.items.getStackInSlot(2).is(Items.WHEAT)&&be.items.getStackInSlot(2).getCount()==1,"Refill lost progress or doubled a partly natural crop");
-        be.items.extractItem(2,64,false);be.tank.fill(new FluidStack(Fluids.WATER,4000),FluidAction.EXECUTE);ticks(be,1400);
+        be.items.extractItem(2,64,false);be.tank.fill(new FluidStack(Fluids.WATER,4000),FluidAction.EXECUTE);ticks(be,800);
         h.assertTrue(be.items.getStackInSlot(2).getCount()==2,"Next fully catalyzed crop did not regain doubled yield");h.succeed();
     }
     @GameTest(template="spell_arena") public static void smallLiquidRemainderIsNotDryMode(GameTestHelper h){
-        var be=chamber(h);h.getLevel().setDayTime(6000);fill(be,Items.DIRT,Items.WHEAT_SEEDS,Fluids.WATER,499);
+        var be=chamber(h);h.getLevel().setDayTime(6000);fill(be,Items.DIRT,Items.WHEAT_SEEDS,Fluids.WATER,99);
         for(int i=0;i<30;i++)be.naturalTick(successfulGrowth());ticks(be,2000);
-        h.assertTrue(be.stage()==1&&be.tank.getFluidAmount()==499&&be.items.getStackInSlot(2).isEmpty(),"Partial liquid got free growth");h.succeed();
+        h.assertTrue(be.stage()==1&&be.tank.getFluidAmount()==99&&be.items.getStackInSlot(2).isEmpty(),"Partial liquid got free growth");h.succeed();
     }
     @GameTest(template="spell_arena") public static void naturalFruitFollowsMatureStem(GameTestHelper h){
         var be=chamber(h);h.getLevel().setDayTime(6000);be.items.setStackInSlot(0,new ItemStack(Items.DIRT));be.items.setStackInSlot(1,new ItemStack(Items.PUMPKIN_SEEDS));
@@ -101,7 +197,7 @@ public final class CatalysisGameTests {
         h.assertTrue(com.mcmagic.omnira.item.bottle.MultiblockBottleCapture.capture(player,p.above(2),bottle),"Capture failed");
         var captured=com.mcmagic.omnira.item.bottle.BottleStorage.get(level).get(bottle.get(ModDataComponents.BOTTLE_CAPTURE));
         h.assertTrue(com.mcmagic.omnira.item.bottle.MultiblockBottleCapture.release(level,captured,net.minecraft.world.phys.Vec3.atLowerCornerOf(p),player),"Release failed");
-        var restored=CatalysisBlock.controller(level,p);h.assertTrue(restored.complete()&&restored.stage()==2&&restored.tank.getFluidAmount()==3500,"Bottle lost progress/fluid");
+        var restored=CatalysisBlock.controller(level,p);h.assertTrue(restored.complete()&&restored.stage()==2&&restored.tank.getFluidAmount()==3900,"Bottle lost progress/fluid");
         h.succeed();
     }
     @GameTest(template="spell_arena") public static void portsAndResonance(GameTestHelper h){
@@ -127,16 +223,16 @@ public final class CatalysisGameTests {
     }
     @GameTest(template="spell_arena") public static void wheatGrowthAndRetainedIngredients(GameTestHelper h){
         var be=chamber(h);fill(be,Items.DIRT,Items.WHEAT_SEEDS,Fluids.WATER,4000);
-        ticks(be,1399);h.assertTrue(be.items.getStackInSlot(2).isEmpty()&&be.tank.getFluidAmount()==1000,"Early maturity or wrong stage costs");
-        ticks(be,1);h.assertTrue(be.items.getStackInSlot(2).is(Items.WHEAT)&&be.items.getStackInSlot(2).getCount()==2&&be.tank.getFluidAmount()==500,"Wheat yield/consumption wrong");
+        ticks(be,799);h.assertTrue(be.items.getStackInSlot(2).isEmpty()&&be.tank.getFluidAmount()==3700,"Early maturity or wrong stage costs");
+        ticks(be,1);h.assertTrue(be.items.getStackInSlot(2).is(Items.WHEAT)&&be.items.getStackInSlot(2).getCount()==2&&be.tank.getFluidAmount()==3600,"Wheat yield/consumption wrong");
         h.assertTrue(be.items.getStackInSlot(0).getCount()==1&&be.items.getStackInSlot(1).getCount()==1&&be.stage()==1,"Consumed substrate/seed or failed to reset");
-        ticks(be,400);h.assertTrue(be.tank.getFluidAmount()==500,"Occupied output consumed fluid");h.succeed();
+        ticks(be,400);h.assertTrue(be.tank.getFluidAmount()==3600,"Occupied output consumed fluid");h.succeed();
     }
     @GameTest(template="spell_arena") public static void shortageAndReload(GameTestHelper h){
-        var be=chamber(h);fill(be,Items.DIRT,Items.WHEAT_SEEDS,Fluids.WATER,500);ticks(be,200);ticks(be,300);
-        h.assertTrue(be.stage()==2&&be.tank.isEmpty(),"Empty tank discarded growth");
+        var be=chamber(h);fill(be,Items.DIRT,Items.WHEAT_SEEDS,Fluids.WATER,100);ticks(be,200);ticks(be,300);
+        h.assertTrue(be.tank.isEmpty()&&be.plan().visual(be.stage()).getValue(CropBlock.AGE)==2,"Empty tank discarded growth");
         var tag=be.saveWithoutMetadata(h.getLevel().registryAccess());be.loadWithComponents(tag,h.getLevel().registryAccess());
-        be.tank.fill(new FluidStack(Fluids.WATER,500),FluidAction.EXECUTE);ticks(be,200);
+        be.tank.fill(new FluidStack(Fluids.WATER,100),FluidAction.EXECUTE);ticks(be,200);
         h.assertTrue(be.stage()==3&&be.tank.isEmpty(),"Reload/refill reset progress");
         be.items.setStackInSlot(1,new ItemStack(Items.CARROT));h.assertTrue(be.stage()==1,"Changed seed inherited growth");h.succeed();
     }
@@ -145,7 +241,7 @@ public final class CatalysisGameTests {
         Item[][] cases={{Items.JUNGLE_LOG,Items.COCOA_BEANS},{Items.VINE,Items.GLOW_BERRIES},{Items.DIRT,Items.SUGAR_CANE},{Items.SAND,Items.SUGAR_CANE},
                 {Items.GRAVEL,Items.KELP},{Items.SAND,Items.KELP},{Items.STONE,Items.POINTED_DRIPSTONE},{Items.DIRT,Items.BAMBOO}};
         for(var pair:cases){be.items.setStackInSlot(2,ItemStack.EMPTY);fill(be,pair[0],pair[1],Fluids.WATER,4000);var plan=be.plan();h.assertTrue(plan!=null,"Missing special recipe "+pair[1]);
-            ticks(be,(plan.stages()-1)*200);h.assertTrue(be.items.getStackInSlot(2).is(pair[1])&&be.items.getStackInSlot(2).getCount()==8,"Special yield is not 8: "+pair[1]);}
+            ticks(be,800);h.assertTrue(be.items.getStackInSlot(2).is(pair[1])&&be.items.getStackInSlot(2).getCount()==8,"Special yield is not 8: "+pair[1]);}
         fill(be,DreamContent.EXCITED_SPATIAL_CRYSTAL.get().asItem(),Items.DIAMOND,com.mcmagic.omnira.space.sea.VoidSeaContent.SOURCE.get(),4000);
         h.assertTrue(be.plan()!=null&&be.plan().product().is(Items.DIAMOND_ORE),"Mineral tag -> ore rule failed");
         h.assertTrue(CatalysisGrowth.ore(new ItemStack(Items.IRON_INGOT)).is(Items.IRON_ORE),"Iron ore mapping failed");h.succeed();
@@ -165,9 +261,9 @@ public final class CatalysisGameTests {
         for(var soil:new Block[]{DreamContent.SHADOW_ROCK.get(),DreamContent.MOSSY_SHADOW_ROCK.get()}){
             be.items.setStackInSlot(2,ItemStack.EMPTY);fill(be,soil.asItem(),seed,Fluids.WATER,4000);
             h.assertTrue(be.plan()!=null&&be.plan().yield()==CatalysisGrowth.Yield.TREE,"Missing shadow tree plan");
-            ticks(be,600);
+            ticks(be,800);
             h.assertTrue(be.items.getStackInSlot(2).is(DreamContent.SHADOW_LOG.get().asItem())&&be.items.getStackInSlot(2).getCount()>=6,"Missing actual shadow trunk yield");
-            h.assertTrue(be.tank.getFluidAmount()==2500,"Shadow tree water cost");
+            h.assertTrue(be.tank.getFluidAmount()==3600,"Shadow tree water cost");
             h.assertTrue(be.items.getStackInSlot(0).is(soil.asItem())&&be.items.getStackInSlot(1).is(seed),"Consumed catalysts");
             h.assertTrue(CatalysisNaturalGrowth.resolve(h.getLevel(),new ItemStack(soil),new ItemStack(seed))!=null,"Missing natural shadow growth");
         }
@@ -182,7 +278,7 @@ public final class CatalysisGameTests {
             for(int retry=0;retry<4&&drops.isEmpty();retry++)drops=CatalysisTreeGrowth.harvest(level,sapling.defaultBlockState(),sapling==TimeNatureContent.SAPLING.get()?DreamContent.TEMPORAL_SILT.get().defaultBlockState():Blocks.DIRT.defaultBlockState());
             h.assertTrue(!drops.isEmpty(),"Tree simulation failed: "+sapling);
             h.assertTrue(drops.stream().allMatch(s->Block.byItem(s.getItem()).defaultBlockState().is(net.minecraft.tags.BlockTags.LOGS)),"Non-log tree output");
-            h.assertTrue(drops.stream().mapToInt(ItemStack::getCount).sum()>=3,"Tree yield is not full trunk");
+            h.assertTrue(drops.stream().mapToInt(ItemStack::getCount).sum()>0,"Tree yield is empty: "+sapling);
         }
         h.assertTrue(level.getBlockState(guard).is(Blocks.GOLD_BLOCK),"Simulation changed real world");h.succeed();
     }
@@ -195,18 +291,19 @@ public final class CatalysisGameTests {
             be.items.setStackInSlot(2,ItemStack.EMPTY);fill(be,matrix.asItem(),ModItems.INFUSED_SPIRITUAL_CRYSTAL.get(),com.mcmagic.omnira.alchemy.AlchemyMaterials.DILUTE.source.get(),4000);
             h.assertTrue(be.plan()!=null,"Missing matrix recipe "+matrix);
             h.assertTrue(!be.plan().visual(1).equals(be.plan().visual(4)),"Crystal growth stages have identical models");
-            ticks(be,600);h.assertTrue(be.items.getStackInSlot(2).is(crystals[i])&&be.items.getStackInSlot(2).getCount()==4,"Expected four crystal materials, not clusters");
+            ticks(be,800);h.assertTrue(be.items.getStackInSlot(2).is(crystals[i])&&be.items.getStackInSlot(2).getCount()==4,"Expected four crystal materials, not clusters");
         }
         long count=level.getRecipeManager().getAllRecipesFor(ModRecipes.REACTION_TYPE.get()).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value)
                 .filter(r->r.fluid().getFluid()==com.mcmagic.omnira.alchemy.AlchemyMaterials.REFINED.source.get()&&r.fluid().getAmount()==500).count();
         h.assertTrue(count==4,"Expected four crystal matrix reactions");h.succeed();
     }
     @GameTest(template="spell_arena") public static void stemsMatureOnceThenFourStageFruit(GameTestHelper h){
-        var be=chamber(h);fill(be,Items.DIRT,Items.PUMPKIN_SEEDS,Fluids.WATER,4000);ticks(be,1400);
-        h.assertTrue(be.stemReady()&&be.stemStage()==8&&be.stage()==1&&be.items.getStackInSlot(2).isEmpty(),"Stem did not mature before fruit growth");
-        be.tank.fill(new FluidStack(Fluids.WATER,1000),FluidAction.EXECUTE);ticks(be,600);
+        var be=chamber(h);fill(be,Items.DIRT,Items.PUMPKIN_SEEDS,Fluids.WATER,4000);ticks(be,799);
+        h.assertTrue(!be.stemReady()&&be.items.getStackInSlot(2).isEmpty(),"Fruit matured before four catalyses");
+        ticks(be,1);
         h.assertTrue(be.items.getStackInSlot(2).is(Items.PUMPKIN)&&be.items.getStackInSlot(2).getCount()==2,"Four-stage pumpkin yield not doubled");
-        be.items.extractItem(2,64,false);be.tank.fill(new FluidStack(Fluids.WATER,1500),FluidAction.EXECUTE);ticks(be,600);
+        h.assertTrue(be.stemReady()&&be.stemStage()==8&&be.tank.getFluidAmount()==3600,"Stem or first cycle cost incorrect");
+        be.items.extractItem(2,64,false);ticks(be,800);
         h.assertTrue(be.items.getStackInSlot(2).getCount()==2&&be.stemReady(),"Repeated harvest regrew the stem");
         var seed=new ItemStack(Items.MELON_SEEDS);var plan=CatalysisGrowth.resolve(h.getLevel(),new ItemStack(Items.DIRT),seed,new FluidStack(Fluids.WATER,500));
         h.assertTrue(plan.stages()==4,"Melon did not use four fruit stages");

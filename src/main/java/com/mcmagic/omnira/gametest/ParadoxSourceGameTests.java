@@ -68,16 +68,16 @@ public final class ParadoxSourceGameTests {
     }
     @GameTest(template="spell_arena") public static void dustGrowsFourAndRetainsInputs(GameTestHelper h){
         var be=chamber(h);insert(be,false);be.tank.fill(new FluidStack(AlchemyMaterials.DILUTE.source.get(),4000),FluidAction.EXECUTE);
-        ticks(be,599);h.assertTrue(be.items.getStackInSlot(2).isEmpty()&&be.stage()==3,"Dust harvested before fourth stage");
+        ticks(be,799);h.assertTrue(be.items.getStackInSlot(2).isEmpty()&&be.stage()==4,"Dust harvested before fourth catalysis");
         ticks(be,1);h.assertTrue(be.items.getStackInSlot(2).is(ModItems.PARADOX_DUST.get())&&be.items.getStackInSlot(2).getCount()==4,"Dust yield is not four");
-        h.assertTrue(be.items.getStackInSlot(0).getCount()==1&&be.items.getStackInSlot(1).getCount()==1&&be.stage()==1&&be.tank.getFluidAmount()==2500,"Inputs, reset or consumption incorrect");
-        ticks(be,500);h.assertTrue(be.tank.getFluidAmount()==2500,"Occupied output consumed fluid");h.succeed();
+        h.assertTrue(be.items.getStackInSlot(0).getCount()==1&&be.items.getStackInSlot(1).getCount()==1&&be.stage()==1&&be.tank.getFluidAmount()==3600,"Inputs, reset or consumption incorrect");
+        ticks(be,500);h.assertTrue(be.tank.getFluidAmount()==3600,"Occupied output consumed fluid");h.succeed();
     }
     @GameTest(template="spell_arena") public static void genesisNeedsRefinedFluidAndYieldsOne(GameTestHelper h){
         var be=chamber(h);insert(be,true);be.tank.setFluid(new FluidStack(AlchemyMaterials.DILUTE.source.get(),4000));
         ticks(be,800);h.assertTrue(be.plan()==null&&be.items.getStackInSlot(2).isEmpty()&&be.tank.getFluidAmount()==4000,"Genesis grew using dilute spacetime");
-        be.tank.setFluid(new FluidStack(AlchemyMaterials.REFINED.source.get(),4000));ticks(be,600);
-        h.assertTrue(be.items.getStackInSlot(2).is(ParadoxContent.GENESIS.get())&&be.items.getStackInSlot(2).getCount()==1&&be.tank.getFluidAmount()==2500,"Genesis yield or fluid cost incorrect");
+        be.tank.setFluid(new FluidStack(AlchemyMaterials.REFINED.source.get(),4000));ticks(be,800);
+        h.assertTrue(be.items.getStackInSlot(2).is(ParadoxContent.GENESIS.get())&&be.items.getStackInSlot(2).getCount()==1&&be.tank.getFluidAmount()==3600,"Genesis yield or fluid cost incorrect");
         h.assertTrue(be.items.getStackInSlot(0).is(ParadoxContent.STABLE_AGGREGATE.get())&&be.items.getStackInSlot(1).is(ParadoxContent.GENESIS.get()),"Consumed genesis inputs");h.succeed();
     }
     @GameTest(template="spell_arena") public static void bothSourcesPauseWithoutFluidAcrossReload(GameTestHelper h){
@@ -85,12 +85,12 @@ public final class ParadoxSourceGameTests {
         for(boolean genesis:new boolean[]{false,true}){
             be.items.setStackInSlot(0,ItemStack.EMPTY);be.items.setStackInSlot(2,ItemStack.EMPTY);insert(be,genesis);
             var liquid=genesis?AlchemyMaterials.REFINED.source.get():AlchemyMaterials.DILUTE.source.get();
-            be.tank.setFluid(new FluidStack(liquid,500));ticks(be,200);
+            be.tank.setFluid(new FluidStack(liquid,100));ticks(be,200);
             h.assertTrue(be.stage()==2&&be.tank.isEmpty()&&be.naturalRule()==null,"Source invented natural growth");
             for(int i=0;i<200;i++)be.naturalTick(net.minecraft.util.RandomSource.create(i));ticks(be,2000);
             be.loadWithComponents(be.saveWithoutMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());
             h.assertTrue(be.stage()==2&&be.items.getStackInSlot(2).isEmpty(),"Dry mode or reload changed progress");
-            be.tank.fill(new FluidStack(liquid,1000),FluidAction.EXECUTE);ticks(be,400);
+            be.tank.fill(new FluidStack(liquid,300),FluidAction.EXECUTE);ticks(be,600);
             h.assertTrue(be.items.getStackInSlot(2).getCount()==(genesis?1:4)&&be.stage()==1,"Refill did not resume paused cycle");
         }h.succeed();
     }

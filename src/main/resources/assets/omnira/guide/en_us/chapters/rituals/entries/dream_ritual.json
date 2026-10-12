@@ -5,7 +5,7 @@
   "recipes": false,
   "scene": "dream_ritual",
   "text": [
-    "The Ritual of Dreamseeking opens a portal into the dream realm.",
+    "The Ritual of Dreamseeking opens a portal into the dream realm. Within the dream realm, it creates a paired portal at the mapped Overworld location for travel both ways. Beds in both custom dimensions can mark a respawn point.",
     "Requires eight Crystal Pedestals, eight Spiritual Crystals and one Ritual Energy Core.",
     "Right-click the core while holding a bed of any color, at any time. One bed is consumed only when the structure is complete and there is room above it.",
     "The portal opens one block above the ritual energy core. The core, outer pedestals, and spiritual crystals all remain to sustain the entrance.",

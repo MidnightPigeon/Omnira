@@ -57,7 +57,13 @@ public final class CatalysisBlock extends BaseEntityBlock implements com.mcmagic
         }
         if(state.getValue(PART)==0&&hit.getDirection()==state.getValue(FACING).getOpposite()
                 &&net.neoforged.neoforge.fluids.FluidUtil.getFluidHandler(stack).isPresent()){
-            if(!level.isClientSide)net.neoforged.neoforge.fluids.FluidUtil.interactWithFluidHandler(player,hand,be.tank);
+            if(!level.isClientSide){
+                var inventory=new net.neoforged.neoforge.items.wrapper.InvWrapper(player.getInventory());
+                var result=net.neoforged.neoforge.fluids.FluidUtil.tryEmptyContainerAndStow(stack,be.tank,inventory,Integer.MAX_VALUE,player,true);
+                if(result.isSuccess())player.setItemInHand(hand,result.getResult());
+                else if(net.neoforged.neoforge.fluids.FluidUtil.getFluidContained(stack).isEmpty())
+                    net.neoforged.neoforge.fluids.FluidUtil.interactWithFluidHandler(player,hand,be.tank);
+            }
             return ItemInteractionResult.SUCCESS;
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

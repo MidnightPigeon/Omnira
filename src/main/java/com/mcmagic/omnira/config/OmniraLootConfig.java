@@ -79,15 +79,20 @@ public final class OmniraLootConfig {
         return BuiltInRegistries.FLUID.stream().filter(f->f!=Fluids.EMPTY&&f.defaultFluidState().isSource())
                 .map(f->BuiltInRegistries.FLUID.getKey(f).toString()).sorted().toList();
     }
-    /** One-time default expansion; later pack-author edits remain authoritative. */
+    /** One-time restrictions; never populate a pack author's whitelist. */
     public static boolean migrateAlchemyFluids(JsonObject root){
         var fluid=root.getAsJsonObject("fluidTreasure");
         if(fluid.has("alchemyRevision")&&fluid.get("alchemyRevision").getAsInt()>=1)return false;
         var whitelist=fluid.getAsJsonArray("whitelist");var blacklist=fluid.getAsJsonArray("blacklist");
         while(whitelist.remove(new JsonPrimitive("omnira:refined_spacetime"))){}
-        for(var id:List.of("omnira:void_starflow","omnira:dilute_spacetime"))if(!whitelist.contains(new JsonPrimitive(id)))whitelist.add(id);
         if(!blacklist.contains(new JsonPrimitive("omnira:refined_spacetime")))blacklist.add("omnira:refined_spacetime");
         fluid.addProperty("alchemyRevision",1);return true;
+    }
+    public static boolean migrateFixedFluidWhitelist(JsonObject root){
+        var fluid=root.getAsJsonObject("fluidTreasure");
+        if(fluid.has("fixedWhitelistRevision")&&fluid.get("fixedWhitelistRevision").getAsInt()>=1)return false;
+        while(fluid.getAsJsonArray("whitelist").remove(new JsonPrimitive("omnira:dilute_spacetime"))){}
+        fluid.addProperty("fixedWhitelistRevision",1);return true;
     }
     public static boolean migrateFluidSwitches(JsonObject root){
         var fluid=root.getAsJsonObject("fluidTreasure");boolean changed=false;
@@ -112,6 +117,15 @@ public final class OmniraLootConfig {
     }
     public static boolean migrateDefaultParadoxScarcity(JsonObject tables){
         return migrateDefaults(tables,"paradox_scarcity_v1");
+    }
+    public static boolean migrateDefaultDeflectionBiome(JsonObject tables){
+        return migrateDefaults(tables,"deflection_biome_v1");
+    }
+    public static boolean migrateDefaultSpatialFishing(JsonObject tables){
+        return migrateDefaults(tables,"spatial_fishing_v1");
+    }
+    public static boolean migrateDefaultSpatialDiversity(JsonObject tables){
+        return migrateDefaults(tables,"spatial_diversity_v1");
     }
     private static boolean migrateDefaults(JsonObject tables,String revision){
         try(var stream=Objects.requireNonNull(OmniraLootConfig.class.getResourceAsStream("/loot_migrations/"+revision+".json"));
@@ -160,8 +174,11 @@ public final class OmniraLootConfig {
             root.addProperty("instructions","Edit this file, then restart or /reload. Treasure tables use vanilla loot-table JSON. Already opened treasure is unchanged. Empty eligible fluid lists leave treasure unopened.");
             var fluid=new JsonObject();fluid.addProperty("whitelistEnabled",true);fluid.addProperty("blacklistEnabled",true);
             fluid.addProperty("instructions","Enable each list independently. Entries accept fluid IDs or #namespace:fluid_tag. Enabled blacklist overrides whitelist. Disabling both allows all source fluids.");
-            fluid.add("whitelist",GSON.toJsonTree(sourceFluidIds()));fluid.add("blacklist",new JsonArray());
-            root.add("fluidTreasure",fluid);migrateAlchemyFluids(root);root.add("treasureTables",JsonParser.parseReader(reader));return root;
+            fluid.add("whitelist",GSON.toJsonTree(List.of("aeronautics:levitite_blend","create:chocolate","create:honey","create:potion","create:tea",
+                    "minecraft:lava","minecraft:milk","minecraft:water","omnira:decayed_timeflow","omnira:void_starflow")));
+            fluid.add("blacklist",new JsonArray());
+            root.add("fluidTreasure",fluid);migrateAlchemyFluids(root);migrateFixedFluidWhitelist(root);
+            root.add("treasureTables",JsonParser.parseReader(reader));return root;
         }catch(IOException ex){throw new IllegalStateException("Cannot read Omnira loot defaults",ex);}
     }
     private static Set<String> ids(JsonArray array){
@@ -209,6 +226,7 @@ public final class OmniraLootConfig {
             var tables=root.getAsJsonObject("treasureTables");boolean added=migrateTableIds(tables);
             added=migrateFluidSwitches(root)||added;
             added=migrateAlchemyFluids(root)||added;
+            added=migrateFixedFluidWhitelist(root)||added;
             added=migrateDefaultTimeflowTreasure(tables)||added;
             added=migrateDefaultToolTreasures(tables)||added;
             added=migrateDefaultMemoryTreasures(tables)||added;
@@ -217,6 +235,9 @@ public final class OmniraLootConfig {
             added=migrateDefaultTimeOnly(tables)||added;
             added=migrateDefaults(tables,"facility_cliffs_only_v1")||added;
             added=migrateDefaultParadoxScarcity(tables)||added;
+            added=migrateDefaultDeflectionBiome(tables)||added;
+            added=migrateDefaultSpatialFishing(tables)||added;
+            added=migrateDefaultSpatialDiversity(tables)||added;
             current=decode(root,registries);
             for(var entry:defaults().getAsJsonObject("treasureTables").entrySet())if(!tables.has(entry.getKey())){tables.add(entry.getKey(),entry.getValue());added=true;}
             if(added){Files.writeString(path,GSON.toJson(root)+"\n",StandardCharsets.UTF_8);loadedStamp=Files.getLastModifiedTime(path)+":"+Files.size(path);}

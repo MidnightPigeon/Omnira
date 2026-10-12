@@ -18,6 +18,7 @@ public final class CatalysisMenu extends AbstractContainerMenu {
         addSlot(new SlotItemHandler(chamber.items,0,62,57));addSlot(new SlotItemHandler(chamber.items,1,98,57));
         addSlot(new SlotItemHandler(chamber.items,2,80,25){@Override public boolean mayPlace(ItemStack stack){return false;}});
         addSlot(new SlotItemHandler(chamber.upgrades,0,44,123));addSlot(new SlotItemHandler(chamber.upgrades,1,116,123));
+        addSlot(new SlotItemHandler(chamber.upgrades,2,80,123));
         for(int row=0;row<3;row++)for(int col=0;col<9;col++)addSlot(new Slot(inv,9+row*9+col,8+col*18,166+row*18));
         for(int col=0;col<9;col++)addSlot(new Slot(inv,col,8+col*18,224));
     }
@@ -25,8 +26,8 @@ public final class CatalysisMenu extends AbstractContainerMenu {
     @Override public ItemStack quickMoveStack(Player player,int index){
         if(index<0||index>=slots.size())return ItemStack.EMPTY;var slot=slots.get(index);if(!slot.hasItem())return ItemStack.EMPTY;
         var stack=slot.getItem();var copy=stack.copy();boolean moved;
-        if(index<5)moved=moveItemStackTo(stack,5,slots.size(),true);
-        else if(com.mcmagic.omnira.block.entity.OrbUpgrades.kind(stack)!=null)moved=moveItemStackTo(stack,3,5,false);
+        if(index<6)moved=moveItemStackTo(stack,6,slots.size(),true);
+        else if(com.mcmagic.omnira.block.entity.OrbUpgrades.kind(stack)!=null)moved=moveItemStackTo(stack,3,6,false);
         else moved=moveItemStackTo(stack,0,2,false);
         if(!moved)return ItemStack.EMPTY;if(stack.isEmpty())slot.setByPlayer(ItemStack.EMPTY);else slot.setChanged();slot.onTake(player,stack);return copy;
     }

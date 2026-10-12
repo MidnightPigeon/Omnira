@@ -10,9 +10,21 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "omnira:deflection_crystal",
+          "name": "omnira:excited_rough_spatial_crystal_block",
           "weight": 8,
           "functions": [
+            {
+              "function": "minecraft:set_item",
+              "item": "omnira:deflection_crystal",
+              "conditions": [
+                {
+                  "condition": "minecraft:location_check",
+                  "predicate": {
+                    "biomes": "omnira:dislocated_geodes"
+                  }
+                }
+              ]
+            },
             {
               "function": "minecraft:set_count",
               "count": {
@@ -40,16 +52,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "omnira:spatial_crystal_shard",
+          "name": "omnira:pure_mirror",
           "weight": 5,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 3,
-                "max": 6
-              }
+              "count": 1
             }
           ]
         },

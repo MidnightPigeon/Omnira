@@ -8,6 +8,7 @@
     "entries/infused_stacking_upgrade.json",
     "entries/intake_upgrade.json",
     "entries/output_upgrade.json",
+    "entries/recipe_control_upgrade.json",
     "entries/speed_upgrade.json",
     "entries/spacetime_stabilization_upgrade.json",
     "entries/lava_production_upgrade.json"

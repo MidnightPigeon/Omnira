@@ -16,9 +16,15 @@ import java.util.Set;
 @GameTestHolder("omnira_memory_loot")
 @PrefixGameTestTemplate(false)
 public final class MemoryLootConfigGameTests {
-    @GameTest(template="spell_arena") public static void facilitiesOnlyInCliffLoot(GameTestHelper h){
+    @GameTest(template="spell_arena") public static void facilitiesOnlyInCliffLoot(GameTestHelper h)throws Exception{
         var tables=OmniraLootConfig.defaults().getAsJsonObject("treasureTables");
         for(var entry:tables.entrySet())h.assertTrue(entry.getValue().toString().contains("omnira:damaged_research_facility")==entry.getKey().equals("omnira:archaeology/epoch_2"),"Unexpected facility loot source: "+entry.getKey());
+        for(String name:new String[]{"golden_throne","golden_throne_tower"}){
+            try(var input=MemoryLootConfigGameTests.class.getResourceAsStream("/data/omnira/loot_table/chests/"+name+".json")){
+                var nativeTable=JsonParser.parseReader(new java.io.InputStreamReader(java.util.Objects.requireNonNull(input),java.nio.charset.StandardCharsets.UTF_8));
+                h.assertTrue(nativeTable.equals(tables.get("omnira:chests/"+name)),"Native throne loot differs from configured defaults: "+name);
+            }
+        }
         h.succeed();
     }
     @GameTest(template="spell_arena") public static void basicResourceRewards(GameTestHelper h)throws Exception{
@@ -28,7 +34,9 @@ public final class MemoryLootConfigGameTests {
             for(String id:new String[]{"temporal_silt","living_temporal_silt","sedimented_temporal_silt",
                     "sedimented_living_temporal_silt","rotted_temporal_silt","rough_spatial_crystal_block",
                     "excited_rough_spatial_crystal_block","time_sand","shadow_rock"})
-                h.assertTrue(!json.contains("\"omnira:"+id+"\""),"Terrain reward in "+entry.getKey()+": "+id);
+                h.assertTrue(!json.contains("\"omnira:"+id+"\"")||id.equals("excited_rough_spatial_crystal_block")
+                        &&Set.of("omnira:chests/calibration_materials","omnira:chests/calibration_supplies").contains(entry.getKey()),
+                        "Terrain reward in "+entry.getKey()+": "+id);
         }
         try(var in=MemoryLootConfigGameTests.class.getResourceAsStream("/loot_migrations/basic_resources_v1.json")){
             var old=JsonParser.parseReader(new java.io.InputStreamReader(java.util.Objects.requireNonNull(in),java.nio.charset.StandardCharsets.UTF_8)).getAsJsonObject();

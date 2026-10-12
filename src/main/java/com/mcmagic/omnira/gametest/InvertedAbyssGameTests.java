@@ -14,6 +14,22 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_abyss")
 @PrefixGameTestTemplate(false)
 public final class InvertedAbyssGameTests {
+    @GameTest(template="spell_arena") public static void sprintParticlesFollowPhysicalFeet(GameTestHelper h){
+        var p=h.absolutePos(new BlockPos(10,5,10));int middle=paint(h,p);
+        var normal=h.spawn(EntityType.PIG,new BlockPos(10,5,10));normal.setNoAi(true);
+        normal.setPos(p.getX()+.5,middle-12,p.getZ()+.5);
+        h.assertTrue(Math.abs(AbyssGravity.footParticleY(normal,.1)-(normal.getY()+.1))<1e-6,"Ordinary sprint particle origin changed");
+        var inverted=h.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        inverted.setPos(p.getX()+.5,middle+12,p.getZ()+.5);
+        h.assertTrue(AbyssGravity.inverted(inverted),"Player is not inverted");
+        h.assertTrue(Math.abs(AbyssGravity.footParticleY(inverted,.1)-(inverted.getBoundingBox().maxY-.1))<1e-6,"Inverted sprint particles remain near the head");
+        inverted.setPose(net.minecraft.world.entity.Pose.CROUCHING);inverted.refreshDimensions();
+        h.assertTrue(Math.abs(AbyssGravity.footParticleY(inverted,.1)-(inverted.getBoundingBox().maxY-.1))<1e-6,"Crouching height ignored");
+        var spectator=h.makeMockPlayer(net.minecraft.world.level.GameType.SPECTATOR);
+        spectator.setPos(p.getX()+.5,middle+12,p.getZ()+.5);
+        h.assertTrue(Math.abs(AbyssGravity.footParticleY(spectator,.1)-(spectator.getY()+.1))<1e-6,"Spectator particle origin changed");
+        normal.discard();h.succeed();
+    }
     public static int paint(GameTestHelper h,BlockPos p){
         var level=h.getLevel();int middle=((p.getY()+40)>>2)<<2;
         var registry=level.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.BIOME);

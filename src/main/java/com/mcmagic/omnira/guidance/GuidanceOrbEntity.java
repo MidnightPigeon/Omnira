@@ -41,7 +41,7 @@ public final class GuidanceOrbEntity extends BlockEntity {
         if(view==IDLE){view=BUTTONS;sync();return "";}
         if(face==Direction.UP){
             view=HINT;sync();
-            return stage()==1?"visit_dream":"";
+            return stage()==1?"visit_dream":stage()==3?"genesis_ritual":"";
         }
         return target(face);
     }

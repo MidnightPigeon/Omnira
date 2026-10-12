@@ -1,0 +1,16 @@
+{
+  "id": "genesis_ritual",
+  "title": "汇世之仪",
+  "item": "omnira:genesis_particles",
+  "scene": "genesis_ritual",
+  "recipes": false,
+  "text": [
+    "需要一个高阶仪祭能核、八座水晶基座，以及地、水、火、风、光、暗、时间、空间微核各一枚，无序摆放。",
+    "供物齐全后，向能核灌注10B精炼时空。可以分次使用桶、盛有液体的可携带容器，或直接连接管道。桶会返还；液体沿顺时针逐渐围成一环。",
+    "液体环完整后被能核吸收，消耗八枚微核，产出一份创世微粒。若中途取走供物或破坏仪式，液体环消失，已投入的精炼时空不返还，其余微核保留。能核不储存液体，也不接受其他液体。"
+  ],
+  "links": [
+    {"target": "advanced_ritual_energy_core", "label": "高阶仪祭能核"},
+    {"target": "genesis_particles", "label": "创世余韵"}
+  ]
+}

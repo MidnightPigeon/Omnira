@@ -159,8 +159,24 @@
       ],
       "color": "C8759CA8",
       "faces": 63
-    }
-  ],
+      },
+      {
+        "name": "upgrade_frame_2",
+        "material": "frame",
+        "from": [0.4, 0.125, 0.047],
+        "to": [0.6, 0.325, 0.061],
+        "color": "D9BEDCE4",
+        "faces": 63
+      },
+      {
+        "name": "upgrade_recess_2",
+        "material": "glass",
+        "from": [0.425, 0.15, 0.04],
+        "to": [0.575, 0.3, 0.046],
+        "color": "C8759CA8",
+        "faces": 63
+      }
+    ],
   "liquid": {
     "radius": 0.328125,
     "bottom": 1.075,

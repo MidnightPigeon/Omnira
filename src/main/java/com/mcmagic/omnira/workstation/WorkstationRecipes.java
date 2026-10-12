@@ -21,7 +21,7 @@ public final class WorkstationRecipes {
         var menu=new GrindstoneMenu(0,player.getInventory(),ContainerLevelAccess.create(work.getLevel(),work.getBlockPos()));
         menu.getSlot(0).set(work.getItem(0).copy());menu.getSlot(1).set(work.getItem(1).copy());
         var result=menu.getSlot(2).getItem().copy();int mana=0;
-        if(work.infused()){
+        if(work.infused()&&singleInput(work.getItem(0),work.getItem(1))){
             var source=work.getItem(0).isEmpty()?work.getItem(1):work.getItem(0);
             if(result.isEmpty()&&(work.getItem(0).isEmpty()||work.getItem(1).isEmpty()))result=source.copy();
             if(!result.isEmpty()){
@@ -39,7 +39,11 @@ public final class WorkstationRecipes {
                 if(mana==0&&(work.getItem(0).isEmpty()||work.getItem(1).isEmpty()))result=ItemStack.EMPTY;
             }
         }
+        else if(work.infused()&&!result.isEmpty())EnchantmentHelper.setEnchantments(result,ItemEnchantments.EMPTY);
         return new Result(result,0,0,mana,menu);
+    }
+    public static boolean singleInput(ItemStack first,ItemStack second){
+        return first.isEmpty()!=second.isEmpty();
     }
     public static Map<Holder<Enchantment>,Integer> enchantments(CrystalWorkstationEntity work){
         var result=new TreeMap<Holder<Enchantment>,Integer>(Comparator.comparing(Holder::getRegisteredName));

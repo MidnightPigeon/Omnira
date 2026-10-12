@@ -47,9 +47,23 @@ public final class DreamRitual {
             player.displayClientMessage(Component.translatable("message.omnira.dream."+failure),true);
             return InteractionResult.CONSUME;
         }
+        BlockPos mapped=null;
+        if(level.dimension()==ModDimensions.DREAM_REALM){
+            mapped=DreamPortalBlockEntity.mappedReturn(level,center);
+            if(mapped==null){player.displayClientMessage(Component.translatable("message.omnira.dream.arrival_blocked"),true);return InteractionResult.CONSUME;}
+        }
         if(!level.setBlockAndUpdate(center,ModBlocks.DREAM_PORTAL.get().defaultBlockState())) return InteractionResult.CONSUME;
-        bed.consume(1,player);
         if(level.getBlockEntity(center) instanceof DreamPortalBlockEntity portal) portal.initialize(false);
+        if(mapped!=null){
+            var overworld=level.getServer().overworld();
+            if(!overworld.setBlockAndUpdate(mapped,ModBlocks.DREAM_PORTAL.get().defaultBlockState())
+                    || !(overworld.getBlockEntity(mapped) instanceof DreamPortalBlockEntity counterpart)){
+                level.removeBlock(center,false);return InteractionResult.CONSUME;
+            }
+            counterpart.initialize(true);counterpart.pairWith(center);
+            ((DreamPortalBlockEntity)level.getBlockEntity(center)).pairWith(mapped);
+        }
+        bed.consume(1,player);
         level.playSound(null,center,net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_CHIME,net.minecraft.sounds.SoundSource.BLOCKS,1,.6F);
         return InteractionResult.CONSUME;
     }
