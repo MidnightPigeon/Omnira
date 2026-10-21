@@ -10,7 +10,7 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 /** Keep the normal shaped recipe, but never silently discard an upgraded/filled source orb. */
-public record StarClusterOrbCraftRecipe(ShapedRecipe shaped) implements CraftingRecipe {
+public record StarClusterOrbCraftRecipe(ShapedRecipe shaped) implements WrappedShapedRecipe {
     private static final ShapedRecipe.Serializer SHAPED=new ShapedRecipe.Serializer();
     public static final MapCodec<StarClusterOrbCraftRecipe> CODEC=SHAPED.codec().xmap(StarClusterOrbCraftRecipe::new,StarClusterOrbCraftRecipe::shaped);
     public static final StreamCodec<RegistryFriendlyByteBuf,StarClusterOrbCraftRecipe> STREAM=SHAPED.streamCodec().map(StarClusterOrbCraftRecipe::new,StarClusterOrbCraftRecipe::shaped);

@@ -11,6 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 /** Physical harm by default; infusion opts instantaneous harm into potion semantics. */
 public record SpellEffect(boolean healing,int amplifier,int duration,boolean infused,String operation,int enhancement,int delay,int infusion) {
+    public SpellEffect {if(operation.equals("reload")){amplifier=0;duration=0;delay=0;}}
     public static final Codec<SpellEffect> CODEC=RecordCodecBuilder.create(i->i.group(
             Codec.BOOL.fieldOf("healing").forGetter(SpellEffect::healing),
             Codec.intRange(0,255).fieldOf("amplifier").forGetter(SpellEffect::amplifier),
@@ -25,7 +26,7 @@ public record SpellEffect(boolean healing,int amplifier,int duration,boolean inf
     public static SpellEffect utility(String operation,int enhancement,int delay,int infusion) {
         return new SpellEffect(false,0,0,infusion>0,operation,enhancement,delay,infusion);
     }
-    public boolean utility() {return operation.equals("dissociation") || operation.equals("construction");}
+    public boolean utility() {return operation.equals("dissociation") || operation.equals("construction") || operation.equals("reload");}
     public boolean darkness() {return operation.equals("dark_breath");}
     public SpellEffect(boolean healing,int amplifier,int duration) {this(healing,amplifier,duration,false);}
     public static SpellEffect compose(boolean healing,int clocks,int ironBlocks) {
@@ -36,6 +37,7 @@ public record SpellEffect(boolean healing,int amplifier,int duration,boolean inf
     }
     public float physicalDamage(double power) {
         if(darkness())return 0;
+        if(operation.equals("reload"))return 0;
         if(utility()) return operation.equals("dissociation") && delay==0?(float)(2*(1+enhancement)*power):0;
         return duration==0 && !healing && !infused?(float)((6+3*Math.max(0,amplifier-1))*power):0;
     }

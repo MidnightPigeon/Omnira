@@ -1,0 +1,17 @@
+{
+  "id": "marvelous_wisdom_sign",
+  "item": "omnira:marvelous_wisdom_sign",
+  "title": "神奇的智慧之牌",
+  "recipes": true,
+  "text": [
+    "由水晶告示牌经普通装配升级而成，可插地、贴墙或悬挂。双面显示同一句话，亮度15，白色星光环绕牌面。",
+    "每块牌独立抽取语句，右键换一句；一轮内不重复，抽完后重新开始。语句与抽取进度会保存。",
+    "文字固定为黑色荧光字，不能手动编辑或染色。"
+  ],
+  "links": [
+    {
+      "target": "crystal_sign",
+      "label": "水晶告示牌"
+    }
+  ]
+}

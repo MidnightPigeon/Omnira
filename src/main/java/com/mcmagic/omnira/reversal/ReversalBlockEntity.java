@@ -16,6 +16,7 @@ public final class ReversalBlockEntity extends com.mcmagic.omnira.block.entity.C
     public int fuelValue(ItemStack stack){return infusion()?spaceFuel(stack):fuel(stack);}
     public static int spaceFuel(ItemStack stack){return ReversalFuels.value(stack,true);}
     public int energy(){return energy;} public int progress(){return progress;}
+    public void worldRotation(){energy=CAPACITY;if(progress>0){progress=duration()-1;tick();}energy=CAPACITY;setChanged();}
     @Override public int getContainerSize(){return 3;}
     @Override protected net.minecraft.network.chat.Component getDefaultName(){return getBlockState().getBlock().getName();}
     @Override protected net.minecraft.world.inventory.AbstractContainerMenu createMenu(int id,net.minecraft.world.entity.player.Inventory inv){return new ReversalMenu(id,inv,this);}
@@ -41,6 +42,7 @@ public final class ReversalBlockEntity extends com.mcmagic.omnira.block.entity.C
             var choices=recipe.outputs(input);var result=choices.get(level.random.nextInt(choices.size())).copy();
             input.shrink(recipe.count());if(getItem(1).isEmpty())setItem(1,result);else getItem(1).grow(result.getCount());
             energy--;progress=0;started=input.copy();
+            if(!infusion())com.mcmagic.omnira.progression.BranchProgress.machine(this,"yesterday_again");
         }
         // Save actual progress every tick; send the world render snapshot only twice a second.
         level.blockEntityChanged(worldPosition);

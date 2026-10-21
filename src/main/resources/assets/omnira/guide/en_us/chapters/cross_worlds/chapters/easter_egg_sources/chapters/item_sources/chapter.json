@@ -1,0 +1,8 @@
+{
+  "id": "item_sources",
+  "title": "Item List",
+  "icon": "omnira:marisa_crystal_ball",
+  "introduction": "introduction.json",
+  "entries": [],
+  "chapters": []
+}

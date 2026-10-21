@@ -15,6 +15,48 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_catalysis")
 @PrefixGameTestTemplate(false)
 public final class CatalysisGameTests {
+    @GameTest(template="spell_arena") public static void arcaneDustKeepsInputsAndRequiresWater(GameTestHelper h){
+        var original=chamber(h);var be=new CatalysisBlockEntity(original.getBlockPos(),original.getBlockState());be.setLevel(h.getLevel());
+        fill(be,ModItems.TEST_SPELL_CORE.get(),ModItems.ARCANE_DUST.get(),Fluids.WATER,400);ticks(be,799);
+        h.assertTrue(be.items.getStackInSlot(2).isEmpty()&&be.tank.getFluidAmount()==100,"Dust matured before four paid steps");
+        ticks(be,1);h.assertTrue(be.items.getStackInSlot(2).is(ModItems.ARCANE_DUST.get())&&be.items.getStackInSlot(2).getCount()==8&&be.tank.isEmpty(),"Dust yield or liquid consumption incorrect");
+        h.assertTrue(be.items.getStackInSlot(0).getCount()==1&&be.items.getStackInSlot(1).getCount()==1,"Dust cultivation consumed reusable inputs");
+        be.items.extractItem(2,64,false);for(int i=0;i<40;i++)be.naturalTick(successfulGrowth());ticks(be,2000);
+        h.assertTrue(be.items.getStackInSlot(2).isEmpty()&&be.stage()==1,"Dry dust entered natural growth");h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void probabilityCloudCultivatesThreeMicrocores(GameTestHelper h){
+        var original=chamber(h);var cloud=com.mcmagic.omnira.myriad.MiniatureWorldContent.PROBABILITY_CLOUD.get();
+        var owner=BranchAdvancementGameTests.player(h);
+        com.mcmagic.omnira.progression.BranchProgress.operate(owner,original);
+        var fluid=net.minecraft.core.registries.BuiltInRegistries.FLUID.get(net.minecraft.resources.ResourceLocation.parse("omnira:dilute_spacetime"));
+        for(var seed:new Item[]{ModItems.TIME_MICROCORE.get(),ModItems.SPACE_MICROCORE.get(),ModItems.OMNI_MICROCORE.get()}){
+            var be=new CatalysisBlockEntity(original.getBlockPos(),original.getBlockState());be.setLevel(h.getLevel());
+            fill(be,cloud,seed,fluid,400);ticks(be,800);
+            h.assertTrue(be.items.getStackInSlot(2).is(seed)&&be.items.getStackInSlot(2).getCount()==4&&be.tank.isEmpty(),"Incorrect cloud output or fluid debit");
+            h.assertTrue(be.items.getStackInSlot(0).getCount()==1&&be.items.getStackInSlot(1).getCount()==1,"Cloud or seed was consumed");
+            h.assertTrue(CatalysisGrowth.resolve(h.getLevel(),new ItemStack(cloud),new ItemStack(seed),FluidStack.EMPTY)==null,"Cloud entered natural growth without fluid");
+        }
+        h.assertTrue(cloud.getDefaultInstance().getRarity()==Rarity.EPIC,"Probability cloud must have a purple name");
+        for(var id:new String[]{"perpetual_growth","from_nothing"})
+            h.assertTrue(BranchAdvancementGameTests.recorded(owner,id),"Completed catalysis did not record "+id);
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void sameInputsPreserveProgressDuringRefillAndExtraction(GameTestHelper h){
+        var be=chamber(h);fill(be,Items.DIRT,Items.WHEAT_SEEDS,Fluids.WATER,400);ticks(be,250);
+        h.assertTrue(be.stage()==2&&be.tank.getFluidAmount()==300,"Setup did not advance first stage");
+        for(int i=0;i<5;i++){
+            be.items.insertItem(0,new ItemStack(Items.DIRT),false);be.items.insertItem(1,new ItemStack(Items.WHEAT_SEEDS),false);ticks(be,20);
+        }
+        h.assertTrue(be.stage()==2&&be.tank.getFluidAmount()==300,"Same-item refill reset or overcharged growth");
+        be.items.extractItem(0,1,false);be.items.extractItem(1,1,false);
+        be.loadWithComponents(be.saveWithoutMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());ticks(be,50);
+        h.assertTrue(be.stage()==3&&be.tank.getFluidAmount()==200,"Count reduction or reload reset elapsed time");
+        var changed=be.items.getStackInSlot(1).copy();changed.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal("changed seed"));
+        be.items.setStackInSlot(1,changed);
+        h.assertTrue(be.stage()==1&&be.tank.getFluidAmount()==200,"Component replacement did not reset without refunding fluid");
+        ticks(be,200);be.items.setStackInSlot(0,new ItemStack(Items.GRASS_BLOCK));
+        h.assertTrue(be.stage()==1,"Different substrate did not reset");h.succeed();
+    }
     @GameTest(template="spell_arena") public static void debitMatchesDisplayAndHarvest(GameTestHelper h){
         var be=chamber(h);
         for(var seed:new Item[]{Items.WHEAT_SEEDS,Items.BEETROOT_SEEDS,Items.CARROT,Items.POTATO,Items.PITCHER_POD,Items.TORCHFLOWER_SEEDS,Items.COCOA_BEANS}){
@@ -320,26 +362,40 @@ public final class CatalysisGameTests {
         level.setBlockAndUpdate(p.north(),Blocks.CHEST.defaultBlockState());level.setBlockAndUpdate(p.above().south(),Blocks.CHEST.defaultBlockState());
         var source=(net.minecraft.world.level.block.entity.ChestBlockEntity)level.getBlockEntity(p.north());source.setItem(0,new ItemStack(Items.DIRT,2));
         var target=(net.minecraft.world.level.block.entity.ChestBlockEntity)level.getBlockEntity(p.above().south());
-        be.upgrades.setStackInSlot(0,new ItemStack(ModItems.INTAKE_UPGRADE.get()));
         var plate=new ItemStack(ModItems.OUTPUT_UPGRADE.get());com.mcmagic.omnira.block.entity.OrbUpgrades.setFilter(plate,0,new ItemStack(Items.WHEAT),level.registryAccess());
         var tag=com.mcmagic.omnira.block.entity.OrbUpgrades.settings(plate);tag.putBoolean("Whitelist",true);tag.putInt("Directions",1<<3);
-        plate.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA,net.minecraft.world.item.component.CustomData.of(tag));be.upgrades.setStackInSlot(1,plate);
-        be.items.setStackInSlot(2,new ItemStack(Items.WHEAT,2));CatalysisAutomation.tick(be);
-        h.assertTrue(be.items.getStackInSlot(0).is(Items.DIRT)&&source.getItem(0).getCount()==1,"Intake did not scan first layer");
-        h.assertTrue(target.getItem(0).is(Items.WHEAT)&&target.getItem(0).getCount()==1&&be.items.getStackInSlot(0).getCount()==1,"Output layer/filter failed");h.succeed();
+        plate.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA,net.minecraft.world.item.component.CustomData.of(tag));
+        ItemStack[] plates={new ItemStack(ModItems.INTAKE_UPGRADE.get()),plate,new ItemStack(ModItems.RECIPE_CONTROL_UPGRADE.get())};
+        for(int[] order:new int[][]{{0,1,2},{0,2,1},{1,0,2},{1,2,0},{2,0,1},{2,1,0}}){
+            for(int slot=0;slot<3;slot++){
+                h.assertTrue(be.upgrades.isItemValid(slot,plates[order[slot]]),"Compatible upgrade restricted by position");
+                h.assertTrue(!be.upgrades.isItemValid(slot,new ItemStack(Items.DIRT))&&!be.upgrades.isItemValid(slot,new ItemStack(ModItems.SPACETIME_STABILIZATION_UPGRADE.get())),"Incompatible upgrade accepted");
+                be.upgrades.setStackInSlot(slot,ItemStack.EMPTY);
+                h.assertTrue(be.upgrades.insertItem(slot,plates[order[slot]].copy(),false).isEmpty(),"Upgrade insertion failed");
+            }
+            be.loadWithComponents(be.saveWithoutMetadata(level.registryAccess()),level.registryAccess());
+            h.assertTrue(com.mcmagic.omnira.recipe.RecipeControl.installed(be.upgrades),"Recipe control lost after reorder/reload");
+            source.setItem(0,new ItemStack(Items.DIRT,2));target.clearContent();
+            be.items.setStackInSlot(0,ItemStack.EMPTY);be.items.setStackInSlot(2,new ItemStack(Items.WHEAT,2));CatalysisAutomation.tick(be);
+            h.assertTrue(be.items.getStackInSlot(0).is(Items.DIRT)&&source.getItem(0).getCount()==1,"Intake did not scan first layer");
+            h.assertTrue(target.getItem(0).is(Items.WHEAT)&&target.getItem(0).getCount()==1&&be.items.getStackInSlot(0).getCount()==1,"Output layer/filter failed after reorder");
+        }h.succeed();
     }
     @GameTest(template="spell_arena") public static void intakeFluidOnlyAtRear(GameTestHelper h){
         var be=chamber(h);var level=h.getLevel();var p=be.getBlockPos();var plate=new ItemStack(ModItems.INTAKE_UPGRADE.get());
         var tag=new net.minecraft.nbt.CompoundTag();tag.putInt("Directions",63);plate.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA,net.minecraft.world.item.component.CustomData.of(tag));
-        be.upgrades.setStackInSlot(0,plate);
+        be.upgrades.setStackInSlot(2,plate);
         level.setBlockAndUpdate(p.east(),ModBlocks.LIQUID_CRYSTAL_BALL.get().defaultBlockState());
         var wrong=(com.mcmagic.omnira.block.entity.LiquidCrystalBallBlockEntity)level.getBlockEntity(p.east());wrong.tank.setFluid(new FluidStack(Fluids.WATER,1000));
         CatalysisAutomation.tick(be);h.assertTrue(be.tank.isEmpty(),"Intake stole liquid from a non-port side");
         level.setBlockAndUpdate(p.south(),ModBlocks.LIQUID_CRYSTAL_BALL.get().defaultBlockState());
         var right=(com.mcmagic.omnira.block.entity.LiquidCrystalBallBlockEntity)level.getBlockEntity(p.south());right.tank.setFluid(new FluidStack(Fluids.WATER,1000));
-        be.upgrades.setStackInSlot(0,ItemStack.EMPTY);
+        be.upgrades.setStackInSlot(2,ItemStack.EMPTY);
         h.runAfterDelay(21,()->{
-            be.upgrades.setStackInSlot(0,plate);CatalysisAutomation.tick(be);
+            com.mcmagic.omnira.block.entity.OrbUpgrades.setFilter(plate,0,new ItemStack(Items.WATER_BUCKET),level.registryAccess());
+            var settings=com.mcmagic.omnira.block.entity.OrbUpgrades.settings(plate);settings.putBoolean("Whitelist",true);
+            plate.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA,net.minecraft.world.item.component.CustomData.of(settings));
+            be.upgrades.setStackInSlot(2,plate);CatalysisAutomation.tick(be);
             h.assertTrue(be.tank.getFluidAmount()==500,"Intake did not use rear port");h.succeed();
         });
     }

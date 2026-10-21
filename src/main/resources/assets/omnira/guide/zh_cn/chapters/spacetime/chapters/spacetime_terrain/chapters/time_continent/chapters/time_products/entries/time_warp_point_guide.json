@@ -43,5 +43,167 @@
       "target": "spacetime_port",
       "label": "时空端口"
     }
+  ],
+  "figures": [
+    {
+      "id": "time_regrowth",
+      "title": "翘曲点再生",
+      "icons": [
+        {
+          "item": "omnira:time_warp_point",
+          "x": 5,
+          "y": 22,
+          "count": 1
+        },
+        {
+          "item": "omnira:temporal_mote",
+          "x": 102,
+          "y": 22,
+          "count": 1
+        },
+        {
+          "item": "omnira:pocket_magic_bottle",
+          "x": 50,
+          "y": 110,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 29,
+          "y1": 30,
+          "x2": 94,
+          "y2": 30,
+          "color": "#7FA584",
+          "arrow": true
+        },
+        {
+          "x1": 101,
+          "y1": 62,
+          "x2": 20,
+          "y2": 62,
+          "color": "#7FA584",
+          "arrow": true
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "采集后留下微尘",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "五分钟后重新凝成",
+          "x": 0,
+          "y": 78,
+          "width": 124,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "可用魔瓶搬运微尘",
+          "x": 0,
+          "y": 97,
+          "width": 124,
+          "height": 11,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "stone_aging",
+      "title": "土地演变",
+      "icons": [
+        {
+          "item": "minecraft:stone",
+          "x": 0,
+          "y": 2,
+          "count": 1
+        },
+        {
+          "item": "minecraft:gravel",
+          "x": 0,
+          "y": 31,
+          "count": 1
+        },
+        {
+          "item": "minecraft:sand",
+          "x": 0,
+          "y": 60,
+          "count": 1
+        },
+        {
+          "item": "omnira:time_sand",
+          "x": 0,
+          "y": 89,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 8,
+          "y1": 21,
+          "x2": 8,
+          "y2": 28,
+          "color": "#7FA584",
+          "arrow": true
+        },
+        {
+          "x1": 8,
+          "y1": 50,
+          "x2": 8,
+          "y2": 57,
+          "color": "#7FA584",
+          "arrow": true
+        },
+        {
+          "x1": 8,
+          "y1": 79,
+          "x2": 8,
+          "y2": 86,
+          "color": "#7FA584",
+          "arrow": true
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "石头",
+          "x": 25,
+          "y": 5,
+          "width": 99,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "砂砾",
+          "x": 25,
+          "y": 34,
+          "width": 99,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "沙子",
+          "x": 25,
+          "y": 63,
+          "width": 99,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "时之沙",
+          "x": 25,
+          "y": 92,
+          "width": 99,
+          "height": 22,
+          "color": "#405462"
+        }
+      ]
+    }
   ]
 }

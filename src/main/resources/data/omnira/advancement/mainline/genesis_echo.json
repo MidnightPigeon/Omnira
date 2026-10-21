@@ -1,0 +1,43 @@
+{
+  "parent": "omnira:mainline/eightfold_gathering",
+  "display": {
+    "icon": {
+      "id": "omnira:genesis_particles"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.genesis_echo.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.genesis_echo.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "obtained": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:genesis_particles"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "obtained"
+    ]
+  ]
+}

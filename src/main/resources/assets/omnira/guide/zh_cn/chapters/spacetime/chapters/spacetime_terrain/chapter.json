@@ -9,5 +9,10 @@
   "chapters": [
     "chapters/time_continent/chapter.json",
     "chapters/spatial_caverns/chapter.json"
+  ],
+  "directory_order": [
+    "spacetime_corridor_guide",
+    "time_continent",
+    "spatial_caverns"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "id": "spells",
   "title": "法术编写与施放",
-  "icon": "omnira:crystal_processing_table",
+  "icon": "omnira:modular_staff",
   "introduction": "introduction.json",
   "entries": [],
   "chapters": [

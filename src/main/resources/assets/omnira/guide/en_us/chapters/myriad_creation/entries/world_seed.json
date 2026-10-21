@@ -1,0 +1,7 @@
+{
+  "id": "world_seed",
+  "title": "World Seeds",
+  "item": "omnira:dormant_world_seed",
+  "text": ["Surround a Spacetime Spell Core with eight Genesis Particles to craft a Dormant World Seed. Activate it through advanced condensation.", "Its miniature oceans and continents are dark and still while dormant. Once active, their colors brighten and small motes drift outward."],
+  "links": [{"target": "capturing_inspiration", "label": "Obtaining Genesis Particles"}, {"target": "advanced_condensation_table", "label": "Advanced Condensation Table"}, {"target": "world_forming_ritual", "label": "Ritual of World Formation"}, {"target": "world_deflection", "label": "World Deflection"}, {"target": "reload_element", "label": "Spell Element: Reload"}]
+}

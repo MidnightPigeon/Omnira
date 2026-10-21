@@ -1,0 +1,28 @@
+{
+  "base": {
+    "Name": "omnira:sedimented_temporal_silt"
+  },
+  "surface": {
+    "Name": "omnira:sedimented_living_temporal_silt"
+  },
+  "decorations": [
+    {
+      "kind": "tree",
+      "block": {
+        "Name": "omnira:time_log"
+      },
+      "crown": {
+        "Name": "omnira:time_leaves"
+      }
+    },
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "omnira:time_grass"
+      },
+      "crown": {
+        "Name": "omnira:time_flower"
+      }
+    }
+  ]
+}

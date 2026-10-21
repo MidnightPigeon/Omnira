@@ -17,8 +17,16 @@ import java.util.List;
 @GameTestHolder("omnira_alchemy")
 @PrefixGameTestTemplate(false)
 public final class ReactionPoolGameTests {
+    @GameTest(template="spell_arena",timeoutTicks=260) public static void independentRpmInputsSumAndCapMechanicalEfficiency(GameTestHelper h){
+        if(net.neoforged.fml.ModList.get().isLoaded("create"))ReactionPoolCompatibilityChecks.independentRpm(h);else h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void nestedCreateWhitelistTypesSurviveSampleStorage(GameTestHelper h){
+        if(net.neoforged.fml.ModList.get().isLoaded("create"))ReactionPoolCompatibilityChecks.typedCreateFilters(h);else h.succeed();
+    }
     @GameTest(template="spell_arena") public static void cachedRecipeIdentitySurvivesReload(GameTestHelper h){
         var pool=pool(h);var recipe=recipe(Items.DIRT,Items.STONE,2000);
+        var owner=BranchAdvancementGameTests.player(h);
+        com.mcmagic.omnira.progression.BranchProgress.operate(owner,pool);
         pool.items.setStackInSlot(0,new ItemStack(Items.DIRT,3));
         h.assertTrue(pool.start(recipe),"Initial cached recipe rejected");
         var ops=h.getLevel().registryAccess().createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE);
@@ -29,7 +37,8 @@ public final class ReactionPoolGameTests {
         var copy=new ReactionPoolBlockEntity(pool.getBlockPos(),pool.getBlockState());copy.setLevel(h.getLevel());
         copy.loadWithComponents(pool.saveWithFullMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());
         h.assertTrue(!copy.start(equivalent),"Saved job lost equivalent recipe identity");
-        copy.advance(2000);h.assertTrue(copy.start(equivalent),"Completed recipe did not restart");h.succeed();
+        copy.advance(2000);h.assertTrue(copy.start(equivalent),"Completed recipe did not restart");
+        h.assertTrue(BranchAdvancementGameTests.recorded(owner,"rivers_alchemy"),"Completed reaction pool did not record branch");h.succeed();
     }
     @GameTest(template="spell_arena") public static void waymarkReaction(GameTestHelper h){
         var pool=pool(h);var level=h.getLevel();
@@ -214,9 +223,9 @@ public final class ReactionPoolGameTests {
         h.assertTrue(pool.reactionCount()==2,"Liquid recipes not concurrent");pool.advance(200);
         h.assertTrue(pool.fluids.total()==4500&&pool.manualFluid.drain(40000,SIMULATE).getAmount()==3600,"Batch consumption or top-first container extraction incorrect");
         level.setBlockAndUpdate(pool.getBlockPos().offset(-1,-1,-1),Blocks.AIR.defaultBlockState());pool.advance(1800);
-        h.assertTrue(pool.reactionCount()==1&&pool.fluids.amount(new FluidStack(Fluids.WATER,1))==3600,"Missing catalyst paused unrelated reaction");
+        h.assertTrue(!pool.reacting()&&pool.fluids.amount(new FluidStack(Fluids.WATER,1))==3600,"Catalyst failure retained its job or stopped unrelated work");
         level.setBlockAndUpdate(pool.getBlockPos().offset(-1,-1,-1),DreamContent.DREAM_CRYSTAL_BLOCK.get().defaultBlockState());pool.advance(1800);
-        h.assertTrue(!pool.reacting()&&pool.fluids.total()==0,"Paused recipe did not resume");h.succeed();
+        h.assertTrue(!pool.reacting()&&pool.fluids.total()==3600,"Restoring catalyst resumed cancelled work");h.succeed();
     }
     @GameTest(template="spell_arena") public static void progressiveFluidOutputAndReservation(GameTestHelper h){
         var pool=pool(h);pool.manualFluid.fill(new FluidStack(Fluids.WATER,1000),EXECUTE);
@@ -238,12 +247,12 @@ public final class ReactionPoolGameTests {
         h.assertTrue(pool.fluidInput.fill(new FluidStack(Fluids.LAVA,1000),SIMULATE)==0,"External liquid bypassed intake whitelist");
         h.assertTrue(pool.fluidInput.fill(new FluidStack(Fluids.WATER,1000),EXECUTE)==1000,"Whitelisted liquid denied");
         h.assertTrue(pool.itemInput.insertItem(0,new ItemStack(Items.WATER_BUCKET),false).isEmpty(),"Bucket sample did not whitelist bucket item");
-        h.assertTrue(!pool.itemInput.insertItem(1,new ItemStack(Items.DIAMOND),false).isEmpty(),"External item bypassed intake filter");
+        h.assertTrue(pool.itemInput.insertItem(1,new ItemStack(Items.DIAMOND),false).isEmpty(),"Fluid-only whitelist restricted item input");
         h.assertTrue(pool.manualFluid.fill(new FluidStack(Fluids.LAVA,1000),EXECUTE)==1000&&pool.items.insertItem(1,new ItemStack(Items.DIAMOND,3),false).isEmpty(),"Direct player insertion was filtered");
         pool.energyInput.receiveEnergy(512,false);
         h.runAfterDelay(1,()->pool.energyInput.receiveEnergy(512,false));
         h.runAfterDelay(2,()->{
-        ReactionPoolBlockEntity.tick(h.getLevel(),pool.getBlockPos(),pool.getBlockState(),pool);
+        // Input is spent continuously, independently of reaction or export activity.
         h.assertTrue(pool.powered()&&pool.electricalPowered(),"Electric supply did not start machine in electrical mode");
         h.assertTrue(pool.manualFluid.drain(250,SIMULATE).getFluid()==Fluids.WATER&&pool.fluidOutput.drain(250,SIMULATE).getFluid()==Fluids.LAVA,"Player and automatic layer priorities not opposite");
         pool.itemOutput.extractItem(1,1,true);
@@ -251,12 +260,53 @@ public final class ReactionPoolGameTests {
         var output=new ItemStack(ModItems.OUTPUT_UPGRADE.get());OrbUpgrades.setFilter(output,0,new ItemStack(Items.WATER_BUCKET),h.getLevel().registryAccess());pool.upgrades.insertItem(1,output,false);
         h.assertTrue(pool.fluidOutput.drain(new FluidStack(Fluids.WATER,1000),EXECUTE).isEmpty(),"Output bucket blacklist did not filter fluid");
         h.assertTrue(pool.itemOutput.extractItem(0,1,false).isEmpty(),"Output bucket blacklist did not filter bucket");
-        h.assertTrue(pool.itemOutput.extractItem(1,64,false).getCount()==1&&pool.itemOutput.extractItem(1,64,false).isEmpty(),"Item output exceeds 1 per second");
-        h.assertTrue(pool.fluidOutput.drain(new FluidStack(Fluids.LAVA,1000),EXECUTE).getAmount()==500&&pool.fluidOutput.drain(new FluidStack(Fluids.LAVA,1000),EXECUTE).isEmpty(),"Liquid output exceeds 500 per second");
+        h.assertTrue(pool.itemOutput.extractItem(1,64,false).getCount()==4&&pool.itemOutput.extractItem(1,64,false).isEmpty(),"Item output exceeds 4 per second");
+        h.assertTrue(pool.fluidOutput.drain(new FluidStack(Fluids.LAVA,1000),EXECUTE).getAmount()==1000&&pool.fluidOutput.drain(new FluidStack(Fluids.LAVA,1000),EXECUTE).isEmpty(),"Stored liquid extraction is incorrectly throttled");
         h.assertTrue(pool.outputItem().is(Items.DIAMOND)&&pool.outputFluid().getFluid()==Fluids.LAVA&&pool.outputItemTick()==h.getLevel().getGameTime()&&pool.outputFluidTick()==h.getLevel().getGameTime(),"Actual output did not synchronize correct pipe contents");
         var copy=new ReactionPoolBlockEntity(pool.getBlockPos(),pool.getBlockState());copy.setLevel(h.getLevel());copy.loadWithComponents(pool.saveWithFullMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());
         h.assertTrue(copy.outputItem().is(Items.DIAMOND)&&copy.outputFluid().getFluid()==Fluids.LAVA&&copy.electricalPowered(),"Output animation packet lost contents or power mode");
         h.succeed();});
+    }
+    private static void typedFilters(ReactionPoolBlockEntity pool,GameTestHelper h,boolean white,Item... samples){
+        for(int i=0;i<2;i++){
+            var plate=new ItemStack(i==0?ModItems.INTAKE_UPGRADE.get():ModItems.OUTPUT_UPGRADE.get());
+            var tag=OrbUpgrades.settings(plate);tag.putBoolean("Whitelist",white);
+            plate.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA,net.minecraft.world.item.component.CustomData.of(tag));
+            for(int j=0;j<samples.length;j++)OrbUpgrades.setFilter(plate,j,new ItemStack(samples[j]),h.getLevel().registryAccess());
+            pool.upgrades.setStackInSlot(i,plate);
+        }
+    }
+    @GameTest(template="spell_arena") public static void typedWhitelistsAndBlacklistsKeepInputOutputIndependent(GameTestHelper h){
+        var pool=pool(h);
+        pool.items.setStackInSlot(0,new ItemStack(Items.STONE,8));pool.items.setStackInSlot(1,new ItemStack(Items.DIAMOND,8));
+        pool.manualFluid.fill(new FluidStack(Fluids.WATER,1000),EXECUTE);pool.manualFluid.fill(new FluidStack(Fluids.LAVA,1000),EXECUTE);
+        pool.energyInput.receiveEnergy(512,false);h.runAfterDelay(1,()->pool.energyInput.receiveEnergy(512,false));
+        h.runAfterDelay(2,()->{
+            h.assertTrue(pool.powered(),"Filter test output is not powered");
+            for(int mode=0;mode<3;mode++){
+                Item[] samples=mode==0?new Item[]{Items.STONE}:mode==1?new Item[]{Items.WATER_BUCKET}:new Item[]{Items.STONE,Items.WATER_BUCKET};
+                typedFilters(pool,h,true,samples);
+                h.assertTrue(pool.itemInput.isItemValid(0,new ItemStack(Items.STONE))&&pool.itemInput.isItemValid(1,new ItemStack(Items.DIAMOND))==(mode==1),"Typed whitelist item input mismatch: "+mode);
+                h.assertTrue(pool.fluidInput.fill(new FluidStack(Fluids.WATER,20),SIMULATE)==20&&(pool.fluidInput.fill(new FluidStack(Fluids.LAVA,20),SIMULATE)>0)==(mode==0),"Typed whitelist fluid input mismatch: "+mode);
+                h.assertTrue(!pool.itemOutput.extractItem(0,1,true).isEmpty()&&pool.itemOutput.extractItem(1,1,true).isEmpty()==(mode!=1),"Typed whitelist item output mismatch: "+mode);
+                h.assertTrue(!pool.fluidOutput.drain(new FluidStack(Fluids.WATER,20),SIMULATE).isEmpty()&&pool.fluidOutput.drain(new FluidStack(Fluids.LAVA,20),SIMULATE).isEmpty()==(mode!=0),"Typed whitelist fluid output mismatch: "+mode);
+                h.assertTrue(pool.nodeItems.extractItem(1,1,true).isEmpty()==(mode!=1)&&pool.nodeFluids.drain(new FluidStack(Fluids.LAVA,20),SIMULATE).isEmpty()==(mode!=0),"Node output bypassed typed whitelist: "+mode);
+                h.assertTrue(pool.nodeFluids.drain(20,SIMULATE).getFluid()==Fluids.WATER,"Node generic drain did not select an allowed liquid");
+                typedFilters(pool,h,false,samples);
+                h.assertTrue(pool.itemInput.isItemValid(1,new ItemStack(Items.DIAMOND))&&pool.itemOutput.extractItem(0,1,true).isEmpty()==(mode!=1),"Blacklist item matching changed: "+mode);
+                h.assertTrue((pool.fluidInput.fill(new FluidStack(Fluids.WATER,20),SIMULATE)==0)==(mode!=0)&&!pool.fluidOutput.drain(new FluidStack(Fluids.LAVA,20),SIMULATE).isEmpty(),"Blacklist fluid matching changed: "+mode);
+                h.assertTrue(pool.nodeItems.extractItem(0,1,true).isEmpty()==(mode!=1)&&pool.nodeFluids.drain(20,SIMULATE).getFluid()==(mode==0?Fluids.WATER:Fluids.LAVA),"Node blacklist did not skip excluded content: "+mode);
+            }
+            typedFilters(pool,h,true);
+            h.assertTrue(!pool.itemInput.isItemValid(0,new ItemStack(Items.STONE))&&pool.fluidInput.fill(new FluidStack(Fluids.WATER,20),SIMULATE)==0,"Empty whitelist changed");
+            typedFilters(pool,h,false);
+            h.assertTrue(pool.itemInput.isItemValid(0,new ItemStack(Items.STONE))&&pool.fluidInput.fill(new FluidStack(Fluids.WATER,20),SIMULATE)==20,"Empty blacklist changed");
+            typedFilters(pool,h,true,Items.STONE);
+            pool.upgrades.setStackInSlot(0,ItemStack.EMPTY);
+            h.assertTrue(pool.itemInput.isItemValid(1,new ItemStack(Items.DIAMOND))&&pool.itemOutput.extractItem(1,1,true).isEmpty(),"Output upgrade filtered input");
+            h.assertTrue(pool.items.getStackInSlot(0).getCount()==8&&pool.items.getStackInSlot(1).getCount()==8&&pool.fluids.total()==2000,"Filter simulation mutated inventory");
+            h.succeed();
+        });
     }
     @GameTest(template="spell_arena") public static void octagonalCollisionAndFixedInterfaces(GameTestHelper h){
         for(var facing:Direction.Plane.HORIZONTAL){
@@ -291,10 +341,11 @@ public final class ReactionPoolGameTests {
         var pool=pool(h);int[] received={0};
         for(int i=1;i<=40;i++)h.runAfterDelay(i,()->{
             int amount=pool.energyInput.receiveEnergy(Integer.MAX_VALUE,false);received[0]+=amount;
-            h.assertTrue(amount<=410&&pool.energyInput.receiveEnergy(Integer.MAX_VALUE,false)==0,"Pool input burst exceeded limit");
-            h.assertTrue(pool.electricalEfficiency()<=16&&pool.efficiency()<=16,"Electrical acceleration exceeded 16x");
+            h.assertTrue(amount<=410&&pool.energyInput.receiveEnergy(Integer.MAX_VALUE,false)==0,"Pool input burst exceeded shared rate limit");
+            h.assertTrue(pool.electricalEfficiency()<=8&&pool.efficiency()<=8&&pool.energyInput.getEnergyStored()==0,"Electrical rate exceeded cap or became stored fuel");
         });
-        h.runAfterDelay(41,()->{h.assertTrue(received[0]==16384,"Two-second FE intake is not exact");h.succeed();});
+        h.runAfterDelay(41,()->{h.assertTrue(received[0]==16384&&pool.efficiency()==8,"Two-second idle FE draw or eightfold efficiency is not exact");});
+        h.runAfterDelay(42,()->{ReactionPoolBlockEntity.tick(h.getLevel(),pool.getBlockPos(),pool.getBlockState(),pool);h.assertTrue(!pool.powered(),"Pool ran after continuous FE stopped");h.succeed();});
     }
     @GameTest(template="spell_arena",timeoutTicks=120) public static void kineticPowerAndHigherSourceSelection(GameTestHelper h){
         var pool=pool(h);

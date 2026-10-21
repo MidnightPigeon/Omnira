@@ -90,7 +90,7 @@ public record ReactionRecipe(List<InputItem> items, FluidStack fluid, Ingredient
     private boolean assign(Input input,int[] slots,int n,int used) {
         if(n==items.size())return true;
         var required=items.get(n);
-        for(int slot=0;slot<input.size();slot++)if((used&(1<<slot))==0&&required.ingredient.test(input.getItem(slot))
+        for(int slot=0;slot<input.size();slot++)if((used&(1<<slot))==0&&com.mcmagic.omnira.recipe.RecipeInputSafety.empty(input.getItem(slot))&&required.ingredient.test(input.getItem(slot))
                 &&input.getItem(slot).getCount()>=required.count){
             slots[n]=slot;if(assign(input,slots,n+1,used|(1<<slot)))return true;
         }

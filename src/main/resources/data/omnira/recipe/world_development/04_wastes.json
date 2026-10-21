@@ -1,0 +1,1 @@
+{"type":"omnira:world_development","from":"NETHER_EMPTY","to":"NETHER","materials":[{"ingredient":{"item":"minecraft:netherrack"},"count":64},{"ingredient":{"item":"omnira:infused_spiritual_crystal"},"count":16},{"ingredient":{"item":"minecraft:porkchop"},"count":1}],"duration":100}

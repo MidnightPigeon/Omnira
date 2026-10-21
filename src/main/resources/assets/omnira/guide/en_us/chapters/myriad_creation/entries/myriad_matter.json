@@ -1,0 +1,22 @@
+{
+  "id": "myriad_matter",
+  "title": "Rewriting Matter",
+  "item": "omnira:pure_mirror",
+  "text": [
+    "Select Matter. Put source A on the left and target B on the right; Unfold consumes one of each. Leave the right slot empty to replace matches with air, consuming only A. All matching blocks or drops in the sphere are changed without charging for every replacement.",
+    "Ordinary blocks match by type and use B's default state without copying states, inventories or machine data. Incomplete blocks are valid. Complete multiblock machine items appear as drops, not isolated machine parts. Connections and physics proceed normally afterwards.",
+    "Ordinary items match as drops. Item-to-item replacement preserves total count and splits at the target's stack limit; item-to-block replacement places one block per occupied position."
+  ],
+  "scene": "codex_matter",
+  "recipes": false,
+  "links": [
+    {
+      "target": "myriad_codex",
+      "label": "Myriad Codex"
+    },
+    {
+      "target": "myriad_heart",
+      "label": "Heart of Myriad"
+    }
+  ]
+}

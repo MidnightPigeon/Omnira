@@ -1,0 +1,128 @@
+{
+  "id": "arcane_pulse_wires",
+  "title": "奥术连线",
+  "item": "omnira:arcane_dust",
+  "recipes": false,
+  "text": [
+    "用奥术尘右键铺设悬空连线，每格消耗1份。母岩和相位晶簇会优先触发催生，潜行右键可跳过催生直接放线。横向、竖向均可直线连接，最长16格，邻近接口会自动接合。",
+    "源输出直接连接的第一格免损耗，之后每格扣除该最短导魔链传递原值的5%；两格合计10%，不逐格复乘。分叉按各支路传递值计算，合流汇总，不影响无关支路。",
+    "机器只显示实际使用量。连线显示本格衰减，晶球显示到达该节点的链路衰减；损耗由供给端承担。"
+  ],
+  "links": [
+    {
+      "target": "magic_pulse",
+      "label": "魔力脉冲"
+    },
+    {
+      "target": "arcane_dust",
+      "label": "奥术尘"
+    },
+    {
+      "target": "pulse_accumulator_orbs",
+      "label": "蓄能晶球"
+    }
+  ],
+  "figures": [
+    {
+      "id": "wire_loss",
+      "title": "线性损耗",
+      "icons": [
+        {
+          "item": "omnira:spacetime_engine",
+          "x": 0,
+          "y": 38,
+          "count": 1
+        },
+        {
+          "item": "omnira:pulse_accumulator_orb",
+          "x": 108,
+          "y": 38,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 19,
+          "y1": 46,
+          "x2": 103,
+          "y2": 46,
+          "color": "#9A6EAF",
+          "arrow": true
+        }
+      ],
+      "areas": [
+        {
+          "x": 32,
+          "y": 44,
+          "width": 5,
+          "height": 5,
+          "color": "#B889D0"
+        },
+        {
+          "x": 57,
+          "y": 44,
+          "width": 5,
+          "height": 5,
+          "color": "#B889D0"
+        },
+        {
+          "x": 82,
+          "y": 44,
+          "width": 5,
+          "height": 5,
+          "color": "#B889D0"
+        }
+      ],
+      "labels": [
+        {
+          "text": "1000 MPU",
+          "x": 0,
+          "y": 8,
+          "width": 70,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "900 MPU",
+          "x": 70,
+          "y": 8,
+          "width": 54,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "0%",
+          "x": 24,
+          "y": 62,
+          "width": 26,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "5%",
+          "x": 52,
+          "y": 62,
+          "width": 26,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "5%",
+          "x": 79,
+          "y": 62,
+          "width": 26,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "第一格免损耗。\n其余每格扣原值的5%。",
+          "x": 0,
+          "y": 86,
+          "width": 124,
+          "height": 44,
+          "color": "#405462"
+        }
+      ]
+    }
+  ]
+}

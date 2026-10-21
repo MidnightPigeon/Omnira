@@ -1,0 +1,16 @@
+{
+  "base": {
+    "Name": "omnira:void_mirror_rock"
+  },
+  "surface": {
+    "Name": "omnira:void_starflow"
+  },
+  "decorations": [
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "omnira:void_mirror_rock"
+      }
+    }
+  ]
+}

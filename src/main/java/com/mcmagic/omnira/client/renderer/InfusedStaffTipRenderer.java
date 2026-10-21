@@ -17,13 +17,14 @@ public final class InfusedStaffTipRenderer extends BlockEntityWithoutLevelRender
     }
     public static void motes(PoseStack pose,MultiBufferSource buffers,int overlay,double y,double time) {
         var mc=Minecraft.getInstance();
-        var model=mc.getModelManager().getModel(CrystalGridRenderer.part("infused_spiritual_crystal","mote"));
+        var motes=ParticleModelQuads.collect(mc.getModelManager().getModel(CrystalGridRenderer.part("infused_spiritual_crystal","mote")));
+        var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
         for(int i=0;i<4;i++) {
             double angle=time*.04+i*Math.PI/2;
             pose.pushPose();
             pose.translate(7.5/16+Math.cos(angle)*.23,y+Math.sin(angle*1.7)*.25,7.5/16+Math.sin(angle)*.23);
             pose.scale(.65F,.65F,.65F);
-            mc.getItemRenderer().renderModelLists(model,ItemStack.EMPTY,LightTexture.FULL_BRIGHT,overlay,pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
+            mc.getItemRenderer().renderQuadList(pose,out,motes,ItemStack.EMPTY,LightTexture.FULL_BRIGHT,overlay);
             pose.popPose();
         }
     }

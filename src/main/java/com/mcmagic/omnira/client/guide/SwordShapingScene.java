@@ -22,12 +22,16 @@ public final class SwordShapingScene {
         for(int dx=-2;dx<=2;dx++)for(int dz=-2;dz<=2;dz++) {
             pose.pushPose();pose.translate(dx,-1,dz);mc.getBlockRenderer().renderSingleBlock(Blocks.SMOOTH_STONE.defaultBlockState(),pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);pose.popPose();
         }
-        var offerings=new Item[]{ModItems.RESONANCE_CRYSTAL.get(),ModItems.SPIRITUAL_CRYSTAL.get(),DreamContent.LIGHT_CRYSTAL_CORE.get().asItem(),Items.BONE};
+        var recipe=mc.level==null?java.util.Optional.<com.mcmagic.omnira.recipe.SwordShapingRecipe>empty():GuideRecipes.swordExample(mc.level);
         for(int i=0;i<4;i++) {
             var p=SwordShapingRitual.ANCHORS[i];pose.pushPose();pose.translate(p[0],0,p[1]);
             mc.getBlockRenderer().renderSingleBlock(ModBlocks.CRYSTAL_PEDESTAL.get().defaultBlockState(),pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
             pose.translate(.5,1.1,.5);pose.scale(.6F,.6F,.6F);
-            mc.getItemRenderer().renderStatic(new ItemStack(offerings[i]),ItemDisplayContext.FIXED,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY,pose,buffers,mc.level,0);pose.popPose();
+            if(recipe.isPresent()){
+                var choices=recipe.get().offerings().get(i).getItems();
+                mc.getItemRenderer().renderStatic(choices[Math.floorMod(ticks/25,choices.length)].copyWithCount(1),ItemDisplayContext.FIXED,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY,pose,buffers,mc.level,0);
+            }
+            pose.popPose();
         }
         mc.getBlockRenderer().renderSingleBlock(ModBlocks.PURE_VESSEL.get().defaultBlockState(),pose,buffers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
         buffers.endBatch();pose.popPose();RenderSystem.disableDepthTest();

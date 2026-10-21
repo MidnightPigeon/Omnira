@@ -75,9 +75,8 @@ public final class CrystalArmorEffects {
     public static double meleeBonus(Player player){return (equipped(player)==SetBonus.PLATE?.2:0)
             +(player.getData(ModAttachments.DREAM_AFFINITY)?.3:0)+player.getAttributeValue(ModAttributes.MELEE_DAMAGE);}
 
-    @SubscribeEvent public static void reduce(LivingDamageEvent.Pre event){
-        if(event.getEntity() instanceof Player player)
-            event.setNewDamage(event.getNewDamage()*(float)Math.max(0,1-equipped(player).reduction
-                    -(com.mcmagic.omnira.space.sea.DeflectionFieldEvents.raised(player)?.25:0)));
+    public static void reduce(LivingDamageEvent.Pre event){
+        if(!com.mcmagic.omnira.combat.OmniraDamage.isTrue(event.getSource()))
+            event.setNewDamage(event.getNewDamage()*(float)com.mcmagic.omnira.combat.CombatRules.incoming(event.getEntity()));
     }
 }

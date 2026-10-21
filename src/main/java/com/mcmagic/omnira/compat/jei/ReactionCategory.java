@@ -34,7 +34,7 @@ public final class ReactionCategory implements IRecipeCategory<ReactionRecipe> {
         for(int i=0;i<recipe.fluidInputs().size();i++){
             var fluid=recipe.fluidInputs().get(i);
             builder.addSlot(RecipeIngredientRole.INPUT,pool?80+i%2*22:47,pool?18+i/2*22:33).setStandardSlotBackground()
-                    .addFluidStack(fluid.getFluid(),fluid.getAmount()).setFluidRenderer(Math.max(4000,fluid.getAmount()),false,16,16)
+                    .addFluidStack(fluid.getFluid(),fluid.getAmount()).setFluidRenderer(fluid.getAmount(),false,16,16)
                     .addRichTooltipCallback((view,tooltip)->{if(pool)tooltip.add(Component.translatable("jei.omnira.reaction.pool_only"));});
         }
         if(!recipe.support().isEmpty())builder.addSlot(RecipeIngredientRole.CATALYST,47,91).setStandardSlotBackground().addIngredients(recipe.support())
@@ -47,7 +47,7 @@ public final class ReactionCategory implements IRecipeCategory<ReactionRecipe> {
         if(!recipe.results().isEmpty())builder.addSlot(RecipeIngredientRole.OUTPUT,outputX(count,slot),outputY(count,slot++)).setStandardSlotBackground().addItemStacks(recipe.results())
                 .addRichTooltipCallback((view,tooltip)->tooltip.add(Component.translatable("jei.omnira.reaction.chance",100.0/recipe.results().size())));
         if(!recipe.fluidResult().isEmpty())builder.addSlot(RecipeIngredientRole.OUTPUT,outputX(count,slot),outputY(count,slot)).setStandardSlotBackground()
-                .addFluidStack(recipe.fluidResult().getFluid(),recipe.fluidResult().getAmount()).setFluidRenderer(Math.max(4000,recipe.fluidResult().getAmount()),false,16,16);
+                .addFluidStack(recipe.fluidResult().getFluid(),recipe.fluidResult().getAmount()).setFluidRenderer(recipe.fluidResult().getAmount(),false,16,16);
     }
     public void draw(ReactionRecipe recipe,IRecipeSlotsView slots,GuiGraphics g,double mouseX,double mouseY){
         boolean pool=recipe.requiresPool();

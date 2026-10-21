@@ -6,7 +6,13 @@
     "sky_color": 8949446,
     "fog_color": 12305624,
     "water_color": 10534365,
-    "water_fog_color": 6785732
+    "water_fog_color": 6785732,
+    "music": {
+      "sound": "omnira:music.mirror_dream",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": true
+    }
   },
   "spawners": {"creature":[{"type":"omnira:dream_mirror","weight":12,"minCount":1,"maxCount":1}]},
   "spawn_costs": {},

@@ -4,7 +4,8 @@
   "title": "Speed Upgrade",
   "recipes": true,
   "text": [
-    "Forge a swiftness rune with six resonance crystals. Automatic item intake and output run once every half-second; fluid transfer reaches 1,000 mB/s and a bucket takes one second.",
-    "Only accelerates existing transfers; it provides no automatic intake or output. Cruise orbs reject intake and output upgrades; speed boosts their fluid port and doubles movement after spell-core bonuses. Only one applies. Lava production and external item-pipe rates are unchanged."
+    "Forge a swiftness rune with six resonance crystals. Right-click while holding to open two real core slots. Base multiplier: 2; each primordial core adds 1, dream or light-dark adds 2, and spacetime adds 3. Bonuses add, up to 8x. Cores are recoverable and appear below the arrows.",
+    "Install at most one per device. Multiplies the base 4 items/s and 2000 mB/s transfer limits and speeds up bucket exchange. External extraction, Intake/Output and resonance have independent limits. Resonance uses the sender's rate; Intake uses its host's rate. Ordinary receiving is unthrottled.",
+    "Adds no automatic transfer and does not speed up processing or lava generation. Cruise orbs still reject Intake/Output Upgrades. Their movement bonus remains 2x, regardless of the cores inside this upgrade."
   ]
 }

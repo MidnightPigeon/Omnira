@@ -56,4 +56,18 @@ public final class StaffAssemblyRecipes {
         }
         return List.copyOf(result);
     }
+    public static List<AssemblyRecipe> upgradePreviews(AssemblyRecipe recipe) {
+        var result=new ArrayList<AssemblyRecipe>();
+        for(var upgrade:parts(StaffPart.Role.UPGRADE)) {
+            if(!recipe.slots().getFirst().test(upgrade))continue;
+            var input=new net.minecraft.world.SimpleContainer(7);
+            input.setItem(0,upgrade.copy());input.setItem(6,new ItemStack(com.mcmagic.omnira.registry.ModItems.MODULAR_STAFF.get()));
+            var output=assemble(new AssemblyRecipe.Input(input),"staff_upgrade");
+            if(output.isEmpty())continue;
+            var slots=new ArrayList<Ingredient>(Collections.nCopies(7,Ingredient.EMPTY));
+            slots.set(0,Ingredient.of(upgrade));slots.set(6,Ingredient.of(input.getItem(6)));
+            result.add(new AssemblyRecipe(slots,output,true));
+        }
+        return List.copyOf(result);
+    }
 }

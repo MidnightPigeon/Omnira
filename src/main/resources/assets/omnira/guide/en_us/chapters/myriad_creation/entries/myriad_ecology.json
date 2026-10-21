@@ -1,0 +1,24 @@
+{
+  "id": "myriad_ecology",
+  "title": "Building Ecology",
+  "item": "omnira:crystal_ball",
+  "text": [
+    "Select Ecology and insert one microcore. Choose uniformly from its matching biomes, clear the sphere, lay flat ground or liquid around the lower third, add suitable decorations, then place the central treasure orb. A single-layer Spiritual Crystal boundary encloses the result. The real biome is unchanged.",
+    "Earth: temperate vanilla Overworld biomes, Deep Dark, Lush Caves and Dripstone Caves. Water: oceans and cold biomes. Fire: hot biomes and Nether biomes except Soul Sand Valley. Air: End biomes and Mirror-Dream Border.",
+    "Light: the light layer and Void Starsea. Dark: the dark layer and Reversion Mire. Time and Space: their remaining biomes. Omni: registered biomes, including other mods. All microcores exclude Spacetime Corridor.",
+    "Landscapes are built from biome blocks, liquids and suitable decorations rather than copied buildings or inventories. Treasure uses the related biome/dimension loot table. Pure Solidified Spacetime is replaced with Excited Rough Spatial Crystal in these landscapes.",
+    "All original blocks inside the ecology sphere are erased, including unbreakable blocks, machines, containers and even the source codex, without refunds. The following cutaway exposes the interior; the real shell is closed."
+  ],
+  "scene": "codex_ecology",
+  "recipes": false,
+  "links": [
+    {
+      "target": "myriad_codex",
+      "label": "Myriad Codex"
+    },
+    {
+      "target": "myriad_heart",
+      "label": "Heart of Myriad"
+    }
+  ]
+}

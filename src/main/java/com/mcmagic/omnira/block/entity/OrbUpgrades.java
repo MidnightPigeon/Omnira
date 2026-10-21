@@ -23,8 +23,12 @@ public final class OrbUpgrades extends ItemStackHandler {
     @Override public int getSlotLimit(int slot) {return 1;}
     @Override public boolean isItemValid(int slot,ItemStack stack) {
         var candidate=kind(stack);if(candidate==null)return false;
-        if(owner instanceof VoidCrystalBallBlockEntity)return slot==1&&candidate==OrbUpgradeItem.Kind.INTAKE;
-        if(owner instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity)return slot==1&&candidate==OrbUpgradeItem.Kind.STABILIZATION||slot==0&&candidate==OrbUpgradeItem.Kind.RECIPE_CONTROL;
+        var host=owner instanceof VoidCrystalBallBlockEntity?com.mcmagic.omnira.item.UpgradeCompatibility.Host.VOID_ORB:
+                owner instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity?com.mcmagic.omnira.item.UpgradeCompatibility.Host.STAR_ORB:
+                        com.mcmagic.omnira.item.UpgradeCompatibility.Host.CRYSTAL_BALL;
+        if(!host.accepts(candidate))return false;
+        if(owner instanceof VoidCrystalBallBlockEntity)return slot==1&&candidate==OrbUpgradeItem.Kind.INTAKE||slot==0&&candidate==OrbUpgradeItem.Kind.SPEED;
+        if(owner instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity)return slot==1&&candidate==OrbUpgradeItem.Kind.STABILIZATION||slot==0&&candidate==OrbUpgradeItem.Kind.RECIPE_CONTROL||slot==2&&candidate==OrbUpgradeItem.Kind.SPEED;
         for(int i=0;i<3;i++)if(i!=slot) {
             var other=kind(getStackInSlot(i));
             if(candidate.sameFamily(other))return false;
@@ -34,7 +38,7 @@ public final class OrbUpgrades extends ItemStackHandler {
     @Override protected void onContentsChanged(int slot) {owner.setChanged();}
     public static OrbUpgradeItem.Kind kind(ItemStack stack) {return stack.getItem() instanceof OrbUpgradeItem upgrade?upgrade.kind:null;}
     public boolean has(OrbUpgradeItem.Kind kind) {for(int i=0;i<3;i++)if(kind(getStackInSlot(i))==kind)return true;return false;}
-    public int speedMultiplier() {return has(OrbUpgradeItem.Kind.SPEED)?2:1;}
+    public int speedMultiplier() {return com.mcmagic.omnira.storage.LogisticsRates.multiplier(this);}
     public int multiplier(int except) {
         int value=1;
         for(int i=0;i<3;i++)if(i!=except) {

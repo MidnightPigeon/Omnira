@@ -13,7 +13,12 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 
-public final class SimpleCondensationTableMenu extends AbstractContainerMenu {
+public final class SimpleCondensationTableMenu extends AbstractContainerMenu implements WorldRotationWork {
+    private boolean worldCompleting;
+    @Override public void worldRotation(net.minecraft.server.level.ServerLevel level,net.minecraft.core.BlockPos pos){
+        if(!work.active()||!access.evaluate((at,p)->at==level&&p.equals(pos),false))return;
+        worldCompleting=true;try{work.complete(owner,container,stillValid(owner)&&canCondense(),this::finish);}finally{worldCompleting=false;}
+    }
     private final Container container;
     private final ContainerLevelAccess access;
     private final Player owner;
@@ -59,7 +64,7 @@ public final class SimpleCondensationTableMenu extends AbstractContainerMenu {
     }
     public boolean canCondense() {
         var recipe=recipe();
-        return fits(recipe) && ManaCosts.canSpend(owner,recipe.manaCost());
+        return fits(recipe) && (worldCompleting||ManaCosts.canSpend(owner,recipe.manaCost()));
     }
     public double manaCost() {var recipe=recipe();return ManaCosts.cost(owner,recipe==null?(advanced?300:0):recipe.manaCost());}
     public boolean isWorking() {return work.active();}
@@ -76,7 +81,7 @@ public final class SimpleCondensationTableMenu extends AbstractContainerMenu {
     }
     private void finish() {
         var recipe=recipe();
-        if(!(owner instanceof ServerPlayer server) || !stillValid(owner) || !fits(recipe) || !ManaEvents.trySpend(server,recipe.manaCost())) return;
+        if(!(owner instanceof ServerPlayer server) || !stillValid(owner) || !fits(recipe) || !worldCompleting&&!ManaEvents.trySpend(server,recipe.manaCost())) return;
         if(advanced || container.getItem(0).isEmpty()) container.setItem(0,recipe.assemble(new SingleRecipeInput(container.getItem(0)),owner.registryAccess()));
         else container.getItem(0).grow(recipe.result().getCount());
         container.setChanged();

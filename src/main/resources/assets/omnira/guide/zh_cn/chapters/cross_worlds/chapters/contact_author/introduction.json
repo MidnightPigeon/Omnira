@@ -1,0 +1,10 @@
+{
+  "text": [
+    "问题反馈请前往项目GitHub的Issues。提交前先检索已有问题，并附上模组与加载器版本、复现步骤及相关日志。",
+    "作者主页收录其他项目与联系方式。"
+  ],
+  "external_links": [
+    { "label": "项目GitHub · 问题反馈", "url": "https://github.com/MidnightPigeon/Omnira" },
+    { "label": "作者主页 · 项目与联系", "url": "https://midnightpigeon.github.io/" }
+  ]
+}

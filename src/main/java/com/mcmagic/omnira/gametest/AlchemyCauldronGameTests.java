@@ -17,6 +17,8 @@ public final class AlchemyCauldronGameTests {
         var level=h.getLevel();var pos=h.absolutePos(new BlockPos(5,2,5));
         level.setBlockAndUpdate(pos,ModBlocks.PRIMITIVE_REACTION_CAULDRON.get().defaultBlockState());
         var v=(com.mcmagic.omnira.alchemy.RoughAlchemyCauldronBlockEntity)level.getBlockEntity(pos);
+        var owner=BranchAdvancementGameTests.player(h);
+        com.mcmagic.omnira.progression.BranchProgress.operate(owner,v);
         var recipe=level.getRecipeManager().getAllRecipesFor(ModRecipes.REACTION_TYPE.get()).stream()
                 .filter(r->r.id().equals(ResourceLocation.parse("omnira:reaction/rough_alchemical_energy_core"))).findFirst().orElseThrow().value();
         h.assertTrue(recipe.items().size()==4&&recipe.duration()==2000&&recipe.results().size()==1,"Incorrect core reaction definition");
@@ -41,7 +43,8 @@ public final class AlchemyCauldronGameTests {
         for(int i=0;i<1800;i++)com.mcmagic.omnira.alchemy.RoughAlchemyCauldronBlockEntity.tick(level,pos,v.getBlockState(),v);
         h.assertTrue(!v.working()&&v.tank.isEmpty()&&v.items.getStackInSlot(0).is(ModItems.ROUGH_ALCHEMICAL_ENERGY_CORE.get())
                 &&v.items.getStackInSlot(0).getCount()==1,"Core output or total lava consumption incorrect");
-        h.assertTrue(level.getBlockState(pos.below()).is(support),"Core reaction consumed the catalyst");h.succeed();
+        h.assertTrue(level.getBlockState(pos.below()).is(support),"Core reaction consumed the catalyst");
+        h.assertTrue(BranchAdvancementGameTests.recorded(owner,"first_reaction"),"Completed cauldron reaction did not record branch");h.succeed();
     }
     @GameTest(template="spell_arena") public static void dreamWaterReaction(GameTestHelper h){
         var level=h.getLevel();var pos=h.absolutePos(new BlockPos(5,2,5));
@@ -81,9 +84,10 @@ public final class AlchemyCauldronGameTests {
         h.assertTrue(recipe.duration()==2000&&recipe.results().size()==4&&vessel.start(recipe),"Missing equal four-way reaction");
         level.setBlockAndUpdate(pos.below(),net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
         com.mcmagic.omnira.alchemy.RoughAlchemyCauldronBlockEntity.tick(level,pos,vessel.getBlockState(),vessel);
-        h.assertTrue(vessel.progress()==0&&vessel.tank.getFluidAmount()==2000,"Missing support did not pause reaction");
+        h.assertTrue(!vessel.working()&&vessel.progress()==0&&vessel.tank.getFluidAmount()==2000,"Missing support did not cancel reaction");
         level.setBlockAndUpdate(pos.below(),com.mcmagic.omnira.aggregation.AggregationContent.SPATIAL_BLOCK.get().defaultBlockState());
         h.assertTrue(vessel.tank.drain(1000,execute).getAmount()==1000,"Player reagent extraction failed");
+        h.assertTrue(vessel.start(recipe),"Fresh reaction did not restart with restored catalyst");
         for(int i=0;i<199;i++)com.mcmagic.omnira.alchemy.RoughAlchemyCauldronBlockEntity.tick(level,pos,vessel.getBlockState(),vessel);
         h.assertTrue(vessel.tank.getFluidAmount()==1000,"Fluid consumed before ten-second boundary");
         com.mcmagic.omnira.alchemy.RoughAlchemyCauldronBlockEntity.tick(level,pos,vessel.getBlockState(),vessel);
@@ -117,8 +121,11 @@ public final class AlchemyCauldronGameTests {
                 net.neoforged.neoforge.fluids.FluidStack.EMPTY,Ingredient.EMPTY,java.util.List.of(new ItemStack(Items.EMERALD)),net.neoforged.neoforge.fluids.FluidStack.EMPTY,20);
         h.assertTrue(v.start(recipe)&&v.items.getStackInSlot(0).isEmpty(),"Item-only reaction did not consume inputs at start");
         v.insert(new ItemStack(Items.STONE));v.insert(new ItemStack(Items.DIRT));v.insert(new ItemStack(Items.SAND));
-        h.assertTrue(!v.insert(new ItemStack(Items.GRAVEL)).isEmpty(),"Insertion used reserved output space");
+        h.assertTrue(v.insert(new ItemStack(Items.GRAVEL)).isEmpty(),"Active reaction locked the fourth material slot");
         for(int i=0;i<20;i++)com.mcmagic.omnira.alchemy.RoughAlchemyCauldronBlockEntity.tick(level,pos,v.getBlockState(),v);
+        h.assertTrue(v.working()&&v.progress()==20,"Full material slots did not hold the completed reaction");
+        v.items.extractItem(3,64,false);
+        com.mcmagic.omnira.alchemy.RoughAlchemyCauldronBlockEntity.tick(level,pos,v.getBlockState(),v);
         h.assertTrue(java.util.stream.IntStream.range(0,4).anyMatch(i->v.items.getStackInSlot(i).is(Items.EMERALD)),"Item-only reaction output missing");
         for(int i=0;i<4;i++)v.items.setStackInSlot(i,ItemStack.EMPTY);
         v.items.setStackInSlot(0,new ItemStack(Items.DIAMOND,2));

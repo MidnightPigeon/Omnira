@@ -1,6 +1,7 @@
 {
   "id": "self_projectile",
   "item": "omnira:water_microcore",
+  "icon": "omnira:crystal_broom",
   "title": "自身弹射与飞行",
   "text": [
     "自身与弹射物组合可沿施法时确定的轨迹飞行，不受水流推动。基础持续20秒，每份延时增加20秒，最后3秒逐渐淡化。",

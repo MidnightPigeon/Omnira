@@ -35,7 +35,7 @@ public class SpacetimeEngineBlock extends BaseEntityBlock implements com.mcmagic
                 ?com.mcmagic.omnira.compat.create.SpacetimeEngineKinetics.entity(p,s):new SpacetimeEngineController(p,s);
     }
     @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level l,BlockState s,BlockEntityType<T> type){
-        if(s.getValue(PART)==9)return (level,pos,state,be)->{if(be instanceof SpacetimeEngineController engine)engine.energy.tick();};
+        if(s.getValue(PART)==9)return (level,pos,state,be)->{if(be instanceof SpacetimeEngineController engine)engine.tickOutput();};
         return side(s.getValue(PART))>=0&&net.neoforged.fml.ModList.get().isLoaded("create")
                 ?(level,pos,state,be)->com.mcmagic.omnira.compat.create.SpacetimeEngineKinetics.tick(be):null;
     }
@@ -71,7 +71,7 @@ public class SpacetimeEngineBlock extends BaseEntityBlock implements com.mcmagic
         var result=new java.util.LinkedHashSet<BlockPos>();var root=origin(p,s);
         for(int i=0;i<10;i++)result.add(root.offset(offset(i)));return result;
     }
-    public static final class PlacementItem extends BlockItem {
+    public static final class PlacementItem extends BlockItem implements com.mcmagic.omnira.item.MultiblockPlacementItem {
         public PlacementItem(Properties p){super(SpacetimeEngineContent.BLOCK.get(),p);}
         @Override public InteractionResult place(BlockPlaceContext c){
             var player=c.getPlayer();if(player==null||!player.isCreative()||!c.canPlace())return InteractionResult.FAIL;

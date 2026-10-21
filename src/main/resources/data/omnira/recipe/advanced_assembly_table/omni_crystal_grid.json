@@ -1,0 +1,16 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "operation": "grid_upgrade",
+  "slots": [
+    {"item": "omnira:genesis_particles"},
+    {"item": "omnira:genesis_particles"},
+    {"item": "omnira:genesis_particles"},
+    {"item": "omnira:grid_frame"},
+    {"item": "omnira:grid_frame"},
+    {"item": "omnira:grid_frame"},
+    {"item": "omnira:omni_microcore"},
+    {"item": "omnira:arcane_crystal_grid"},
+    {"item": "omnira:omni_microcore"}
+  ],
+  "result": {"id": "omnira:omni_crystal_grid", "count": 1}
+}

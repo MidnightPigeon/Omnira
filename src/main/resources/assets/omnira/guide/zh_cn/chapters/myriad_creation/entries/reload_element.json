@@ -1,0 +1,23 @@
+{
+  "id": "reload_element",
+  "title": "重载",
+  "item": "omnira:active_world_seed",
+  "icon": "omnira:construction_matrix",
+  "recipes": false,
+  "text": [
+    "将激活的世界之种作为法术要素，重载法术触及的完整方块或生物。",
+    "方块随机变为另一种完整方块，空气与不完整方块不受影响；生物在善良、中立、敌对或首领的同类之中随机转变，装饰实体不受影响。",
+    "初始只抽取原版内容，且不能转变敌对生物或首领。强化开放这两类目标，注魔将候选扩展到所有模组。重载不受延时或法术强度影响。",
+    "也许会重载出神秘的BOSS生物"
+  ],
+  "links": [
+    {
+      "target": "world_seed",
+      "label": "世界之种"
+    },
+    {
+      "target": "advanced_spell_aggregation",
+      "label": "高阶法术加工"
+    }
+  ]
+}

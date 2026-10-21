@@ -20,15 +20,15 @@ public final class OrbStorageGameTests {
     @GameTest(template="spell_arena",timeoutTicks=60) public static void speedUpgradeSharesFluidBudget(GameTestHelper h) {
         var ball=(LiquidCrystalBallBlockEntity)place(h,true);
         ball.upgrades.insertItem(0,new ItemStack(ModItems.SPEED_UPGRADE.get()),false);
-        ball.tank.fill(new FluidStack(Fluids.LAVA,3000),FluidAction.EXECUTE);
+        ball.tank.fill(new FluidStack(Fluids.LAVA,10000),FluidAction.EXECUTE);
         h.runAfterDelay(22,()->{
-            h.assertTrue(ball.fluidHandler.drain(2000,FluidAction.SIMULATE).getAmount()==1000,"Accelerated pipe budget is not 1000 mB");
-            h.assertTrue(ball.fluidHandler.drain(2000,FluidAction.EXECUTE).getAmount()==1000,"Pipe debit differs from simulation");
+            h.assertTrue(ball.fluidHandler.drain(8000,FluidAction.SIMULATE).getAmount()==4000,"Accelerated pipe budget is not 4000 mB");
+            h.assertTrue(ball.fluidHandler.drain(8000,FluidAction.EXECUTE).getAmount()==4000,"Pipe debit differs from simulation");
             h.assertTrue(ball.fluidHandler.drain(1,FluidAction.EXECUTE).isEmpty(),"Repeated calls bypass fluid limit");
         });
         h.runAfterDelay(44,()->{
             ball.upgrades.extractItem(0,1,false);
-            h.assertTrue(ball.fluidHandler.drain(2000,FluidAction.EXECUTE).getAmount()==500,"Removing speed upgrade does not restore pipe limit");h.succeed();
+            h.assertTrue(ball.fluidHandler.drain(8000,FluidAction.EXECUTE).getAmount()==2000,"Removing speed upgrade does not restore pipe limit");h.succeed();
         });
     }
     @GameTest(template="spell_arena") public static void speedDoesNotGrantAutomationOrBoostProduction(GameTestHelper h) {
@@ -36,7 +36,7 @@ public final class OrbStorageGameTests {
         ball.upgrades.insertItem(0,new ItemStack(ModItems.SPEED_UPGRADE.get()),false);
         for(int i=0;i<20;i++)ball.serverTick();h.assertTrue(ball.tank.isEmpty(),"Speed upgrade produces contents");
         ball.upgrades.insertItem(1,new ItemStack(ModItems.LAVA_PRODUCTION_UPGRADE.get()),false);
-        for(int i=0;i<20;i++)ball.serverTick();h.assertTrue(ball.tank.getFluidAmount()==100,"Speed upgrade boosts production");h.succeed();
+        for(int i=0;i<20;i++)ball.serverTick();h.assertTrue(ball.tank.getFluidAmount()==200,"Speed upgrade boosts production");h.succeed();
     }
     @GameTest(template="spell_arena",timeoutTicks=60) public static void speedUpgradeBucketAndRecipe(GameTestHelper h) {
         var container=new net.minecraft.world.SimpleContainer(7);
@@ -48,9 +48,9 @@ public final class OrbStorageGameTests {
         ball.upgrades.insertItem(0,new ItemStack(ModItems.SPEED_UPGRADE.get()),false);
         h.assertTrue(!ball.upgrades.isItemValid(1,new ItemStack(ModItems.SPEED_UPGRADE.get())),"Duplicate speed upgrade accepted");
         ball.setItem(0,new ItemStack(Items.LAVA_BUCKET));
-        h.runAfterDelay(18,()->h.assertTrue(ball.tank.isEmpty(),"Bucket completed early"));
-        h.runAfterDelay(22,()->{
-            h.assertTrue(ball.getItem(0).is(Items.BUCKET) && ball.tank.getFluidAmount()==1000,"Accelerated bucket did not finish in one second");h.succeed();
+        h.runAfterDelay(3,()->h.assertTrue(ball.tank.isEmpty(),"Bucket completed early"));
+        h.runAfterDelay(7,()->{
+            h.assertTrue(ball.getItem(0).is(Items.BUCKET) && ball.tank.getFluidAmount()==1000,"Accelerated bucket did not finish in five ticks");h.succeed();
         });
     }
     @GameTest(template="spell_arena") public static void speedUpgradeItemCadence(GameTestHelper h) {
@@ -59,13 +59,13 @@ public final class OrbStorageGameTests {
         ball.upgrades.insertItem(1,new ItemStack(ModItems.OUTPUT_UPGRADE.get()),false);
         var pos=ball.getBlockPos().below();h.getLevel().setBlockAndUpdate(pos,Blocks.BARREL.defaultBlockState());
         var output=(net.minecraft.world.Container)h.getLevel().getBlockEntity(pos);
-        ball.setItem(0,new ItemStack(Items.STONE,8));
-        for(int i=0;i<9;i++)ball.serverTick();h.assertTrue(output.isEmpty(),"Accelerated output ran too early");
-        ball.serverTick();h.assertTrue(output.countItem(Items.STONE)==1,"Missing half-second transfer");
-        for(int i=0;i<10;i++)ball.serverTick();h.assertTrue(output.countItem(Items.STONE)==2,"Missing second transfer");
+        ball.setItem(0,new ItemStack(Items.STONE,32));
+        for(int i=0;i<4;i++)ball.serverTick();h.assertTrue(output.isEmpty(),"Accelerated output ran too early");
+        ball.serverTick();h.assertTrue(output.countItem(Items.STONE)==2,"Missing quarter-second accelerated transfer");
+        for(int i=0;i<15;i++)ball.serverTick();h.assertTrue(output.countItem(Items.STONE)==8,"Wrong accelerated one-second output");
         ball.upgrades.extractItem(0,1,false);
-        for(int i=0;i<10;i++)ball.serverTick();h.assertTrue(output.countItem(Items.STONE)==2,"Removed speed upgrade still active");
-        for(int i=0;i<10;i++)ball.serverTick();h.assertTrue(output.countItem(Items.STONE)==3,"Base output cadence changed");h.succeed();
+        for(int i=0;i<10;i++)ball.serverTick();h.assertTrue(output.countItem(Items.STONE)==10,"Removed speed upgrade still active");
+        for(int i=0;i<10;i++)ball.serverTick();h.assertTrue(output.countItem(Items.STONE)==12,"Base output cadence changed");h.succeed();
     }
     @GameTest(template="spell_arena") public static void bucketAndBottleFluidFilters(GameTestHelper h) {
         var ball=place(h,true);
@@ -149,10 +149,10 @@ public final class OrbStorageGameTests {
         h.getLevel().setBlockAndUpdate(pos,(liquid?ModBlocks.LIQUID_CRYSTAL_BALL:ModBlocks.CRYSTAL_BALL).get().defaultBlockState());
         return (CrystalBallBlockEntity)h.getLevel().getBlockEntity(pos);
     }
-    @GameTest(template="spell_arena") public static void externalItemRequestsAreNotUpgradeRateLimited(GameTestHelper h) {
+    @GameTest(template="spell_arena") public static void externalItemRequestsRespectOutputLimit(GameTestHelper h) {
         var ball=place(h,false);ball.upgrades.insertItem(0,new ItemStack(ModItems.INFUSED_STACKING_UPGRADE.get()),false);ball.setItem(0,new ItemStack(Items.STONE,256));
-        h.assertTrue(ball.itemHandler.extractItem(0,128,true).getCount()==128 && ball.getItem(0).getCount()==256,"External extraction simulation limited or mutated");
-        h.assertTrue(ball.itemHandler.extractItem(0,128,false).getCount()==128 && ball.getItem(0).getCount()==128,"External pipe request rate was overridden");h.succeed();
+        h.assertTrue(ball.itemHandler.extractItem(0,128,true).getCount()==4 && ball.getItem(0).getCount()==256,"External extraction simulation cap or mutation incorrect");
+        h.assertTrue(ball.itemHandler.extractItem(0,128,false).getCount()==4 && ball.getItem(0).getCount()==252&&ball.itemHandler.extractItem(0,1,false).isEmpty(),"External pipe bypassed shared side output limit");h.succeed();
     }
     @GameTest(template="spell_arena") public static void almostFullInventoryAndHotbarRespectNormalLimits(GameTestHelper h) {
         var ball=place(h,false);ball.upgrades.insertItem(0,new ItemStack(ModItems.INFUSED_STACKING_UPGRADE.get()),false);
@@ -218,10 +218,10 @@ public final class OrbStorageGameTests {
         copy.loadWithComponents(ball.saveWithFullMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());
         h.assertTrue(copy.tank.getCapacity()==96000 && copy.tank.getFluidAmount()==1000,"Fluid persistence lost");h.succeed();
     }
-    @GameTest(template="spell_arena",timeoutTicks=80) public static void bucketTakesTwoSecondsAndStops(GameTestHelper h) {
+    @GameTest(template="spell_arena",timeoutTicks=80) public static void bucketTakesHalfSecondAndStops(GameTestHelper h) {
         var ball=(LiquidCrystalBallBlockEntity)place(h,true);ball.setItem(0,new ItemStack(Items.LAVA_BUCKET));
-        h.runAfterDelay(38,()->h.assertTrue(ball.getItem(0).is(Items.LAVA_BUCKET) && ball.tank.isEmpty(),"Bucket completed early"));
-        h.runAfterDelay(43,()->h.assertTrue(ball.getItem(0).is(Items.BUCKET) && ball.tank.getFluidAmount()==1000,"Bucket not committed after two seconds"));
+        h.runAfterDelay(8,()->h.assertTrue(ball.getItem(0).is(Items.LAVA_BUCKET) && ball.tank.isEmpty(),"Bucket completed early"));
+        h.runAfterDelay(12,()->h.assertTrue(ball.getItem(0).is(Items.BUCKET) && ball.tank.getFluidAmount()==1000,"Bucket not committed after half-second"));
         h.runAfterDelay(65,()->{h.assertTrue(ball.getItem(0).is(Items.BUCKET) && ball.tank.getFluidAmount()==1000,"Completed bucket reversed automatically");h.succeed();});
     }
     @GameTest(template="spell_arena",timeoutTicks=80) public static void renewableBucketUsesRealVolume(GameTestHelper h){
@@ -260,20 +260,21 @@ public final class OrbStorageGameTests {
     @GameTest(template="spell_arena",timeoutTicks=80) public static void sharedPipeRateAndSimulation(GameTestHelper h) {
         var ball=(LiquidCrystalBallBlockEntity)place(h,true);
         h.runAfterDelay(22,()->{
-            var handler=ball.fluidHandler;var lava=new FluidStack(Fluids.LAVA,1000);
-            h.assertTrue(handler.fill(lava,FluidAction.SIMULATE)==500 && ball.tank.isEmpty(),"Simulation altered tank or limit");
-            h.assertTrue(handler.fill(lava,FluidAction.EXECUTE)==500,"Wrong aggregate allowance");
+            var handler=ball.fluidHandler;var lava=new FluidStack(Fluids.LAVA,6000);
+            h.assertTrue(handler.fill(lava,FluidAction.SIMULATE)==6000 && ball.tank.isEmpty(),"Receiving is rate limited or simulation mutated contents");
+            h.assertTrue(handler.fill(lava,FluidAction.EXECUTE)==6000,"Ordinary input was throttled");
+            h.assertTrue(handler.drain(6000,FluidAction.EXECUTE).getAmount()==2000,"Wrong external output allowance");
             for(var direction:Direction.values()) {
                 var side=h.getLevel().getCapability(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,ball.getBlockPos(),direction);
-                h.assertTrue(side!=null && side.fill(lava,FluidAction.EXECUTE)==0 && side.drain(500,FluidAction.EXECUTE).isEmpty(),"Side bypassed shared limit");
+                h.assertTrue(side!=null && side.drain(500,FluidAction.EXECUTE).isEmpty(),"Side bypassed external output limit");
             }
         });
-        h.runAfterDelay(43,()->{h.assertTrue(ball.fluidHandler.drain(1000,FluidAction.EXECUTE).getAmount()==500,"Rate failed to refill");h.succeed();});
+        h.runAfterDelay(43,()->{h.assertTrue(ball.fluidHandler.drain(6000,FluidAction.EXECUTE).getAmount()==2000,"Rate failed to refill");h.succeed();});
     }
-    @GameTest(template="spell_arena",timeoutTicks=230) public static void lavaFillsBucketAfterTenSeconds(GameTestHelper h) {
+    @GameTest(template="spell_arena",timeoutTicks=130) public static void lavaFillsBucketAfterFiveSeconds(GameTestHelper h) {
         var ball=place(h,false);ball.upgrades.insertItem(0,new ItemStack(ModItems.LAVA_PRODUCTION_UPGRADE.get()),false);ball.setItem(0,new ItemStack(Items.BUCKET,2));
-        h.runAfterDelay(185,()->h.assertTrue(ball.getItem(1).isEmpty(),"Lava bucket completed early"));
-        h.runAfterDelay(205,()->{h.assertTrue(ball.getItem(0).getCount()==1 && ball.getItem(1).is(Items.LAVA_BUCKET),"Lava production lost bucket or failed");h.succeed();});
+        h.runAfterDelay(85,()->h.assertTrue(ball.getItem(1).isEmpty(),"Lava bucket completed early"));
+        h.runAfterDelay(105,()->{h.assertTrue(ball.getItem(0).getCount()==1 && ball.getItem(1).is(Items.LAVA_BUCKET),"Lava production lost bucket or failed");h.succeed();});
     }
     @GameTest(template="spell_arena") public static void stabilizedDropRestoresAndResistsTrampling(GameTestHelper h) {
         var ball=place(h,false);var p=ball.getBlockPos();

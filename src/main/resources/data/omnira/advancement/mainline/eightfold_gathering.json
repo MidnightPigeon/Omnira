@@ -1,0 +1,148 @@
+{
+  "parent": "omnira:mainline/spacetime_gate",
+  "display": {
+    "icon": {
+      "id": "omnira:time_microcore"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.eightfold_gathering.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.eightfold_gathering.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "earth_microcore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:earth_microcore"
+            ]
+          }
+        ]
+      }
+    },
+    "water_microcore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:water_microcore"
+            ]
+          }
+        ]
+      }
+    },
+    "fire_microcore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:fire_microcore"
+            ]
+          }
+        ]
+      }
+    },
+    "air_microcore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:air_microcore"
+            ]
+          }
+        ]
+      }
+    },
+    "light_microcore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:light_microcore"
+            ]
+          }
+        ]
+      }
+    },
+    "dark_microcore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:dark_microcore"
+            ]
+          }
+        ]
+      }
+    },
+    "time_microcore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:time_microcore"
+            ]
+          }
+        ]
+      }
+    },
+    "space_microcore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:space_microcore"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "earth_microcore"
+    ],
+    [
+      "water_microcore"
+    ],
+    [
+      "fire_microcore"
+    ],
+    [
+      "air_microcore"
+    ],
+    [
+      "light_microcore"
+    ],
+    [
+      "dark_microcore"
+    ],
+    [
+      "time_microcore"
+    ],
+    [
+      "space_microcore"
+    ]
+  ]
+}

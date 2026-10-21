@@ -1,0 +1,15 @@
+{
+  "id": "ages_dial",
+  "title": "Dial of Ages",
+  "item": "omnira:ages_dial",
+  "recipes": false,
+  "text": [
+    "Add 1B Decayed Timeflow to form a dial recording the world's passage through time."
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "Ritual of World Formation"
+    }
+  ]
+}

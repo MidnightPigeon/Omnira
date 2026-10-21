@@ -8,7 +8,9 @@ import net.minecraft.world.item.component.ItemContainerContents;
 public final class GridAssemblyRecipes {
     private GridAssemblyRecipes() {}
     public static ItemStack upgrade(AssemblyRecipe.Input input,ItemStack result) {
-        var source=input.getItem(6);
+        return upgrade(input.getItem(6),result);
+    }
+    public static ItemStack upgrade(ItemStack source,ItemStack result) {
         if(source.getCount()!=1 || !(source.getItem() instanceof CrystalGridItem from)
                 || !(result.getItem() instanceof CrystalGridItem to) || to.capacity<=from.capacity) return ItemStack.EMPTY;
         var contents=source.getOrDefault(DataComponents.CONTAINER,ItemContainerContents.EMPTY);

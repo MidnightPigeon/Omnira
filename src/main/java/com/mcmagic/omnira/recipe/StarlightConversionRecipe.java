@@ -17,7 +17,7 @@ public record StarlightConversionRecipe(Ingredient ingredient,ItemStack result) 
         ItemStack.STRICT_CODEC.fieldOf("result").forGetter(StarlightConversionRecipe::result)).apply(i,StarlightConversionRecipe::new));
     public static final StreamCodec<RegistryFriendlyByteBuf,StarlightConversionRecipe> STREAM=StreamCodec.composite(
         Ingredient.CONTENTS_STREAM_CODEC,StarlightConversionRecipe::ingredient,ItemStack.STREAM_CODEC,StarlightConversionRecipe::result,StarlightConversionRecipe::new);
-    public boolean matches(SingleRecipeInput input,Level level){return ingredient.test(input.item())&&!input.item().is(result.getItem());}
+    public boolean matches(SingleRecipeInput input,Level level){return RecipeInputSafety.empty(input.item())&&ingredient.test(input.item())&&!input.item().is(result.getItem());}
     public ItemStack assemble(SingleRecipeInput input,HolderLookup.Provider registries){return result.copyWithCount(input.item().getCount());}
     public ItemStack getResultItem(HolderLookup.Provider registries){return result.copy();}
     public boolean canCraftInDimensions(int width,int height){return width*height>=1;}

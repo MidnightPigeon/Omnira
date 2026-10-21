@@ -13,5 +13,14 @@
   ],
   "chapters": [
     "chapters/element_recipes/chapter.json"
+  ],
+  "directory_order": [
+    "earth_microcore",
+    "water_microcore",
+    "fire_microcore",
+    "air_microcore",
+    "analysis_crystal",
+    "arcane_dust",
+    "element_recipes"
   ]
 }

@@ -14,6 +14,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 /** Read-only sample interpretation, independent of upgrade slot state and transfer direction. */
 public final class OrbFilterMatcher {
+    public static final int ITEMS=1,FLUIDS=2,BOTH=ITEMS|FLUIDS;
     private OrbFilterMatcher() {}
     static boolean preserveComponents(ItemStack sample) {
         return sample.has(DataComponents.POTION_CONTENTS)
@@ -28,6 +29,23 @@ public final class OrbFilterMatcher {
         if(handler!=null)for(int tank=0;tank<handler.getTanks();tank++)
             if(FluidStack.isSameFluidSameComponents(fluid,handler.getFluidInTank(tank)))return true;
         return FluidStack.isSameFluidSameComponents(fluid,bottledFluid(sample));
+    }
+    public static int domains(Level level,ItemStack sample){
+        if(sample.isEmpty())return 0;
+        if(createFilter(sample))return OrbCreateFilters.domains(level,sample);
+        var handler=sample.getCapability(Capabilities.FluidHandler.ITEM);
+        if(handler!=null)for(int tank=0;tank<handler.getTanks();tank++)if(!handler.getFluidInTank(tank).isEmpty())return FLUIDS;
+        return bottledFluid(sample).isEmpty()?ITEMS:FLUIDS;
+    }
+    /** Typed whitelist for mixed-content machines; blacklist matching is deliberately unchanged. */
+    public static boolean allowsTyped(Level level,ItemStack[] samples,boolean whitelist,ItemStack item,FluidStack fluid){
+        int domain=fluid==null?ITEMS:FLUIDS,configured=0;boolean matched=false;
+        for(var sample:samples){
+            int scope=whitelist?domains(level,sample):BOTH;configured|=scope;
+            if((scope&domain)!=0&&matches(level,sample,item,fluid))matched=true;
+        }
+        if(!whitelist)return !matched;
+        return (configured!=0&&(configured&domain)==0)||matched;
     }
     private static boolean createFilter(ItemStack sample) {
         return ModList.get().isLoaded("create") && OrbCreateFilters.isFilter(sample);

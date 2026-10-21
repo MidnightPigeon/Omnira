@@ -1,0 +1,15 @@
+{
+  "id": "geothermal_ember",
+  "title": "地心火种",
+  "item": "omnira:geothermal_ember",
+  "recipes": false,
+  "text": [
+    "追加1B熔岩，凝结出驱动地热活动的火种。火之微核、火药与注灵水晶也可无序合成烈焰弹。"
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "拟界之仪"
+    }
+  ]
+}

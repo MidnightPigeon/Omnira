@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-public record SafeShapedRecipe(ShapedRecipe shaped) implements CraftingRecipe {
+public record SafeShapedRecipe(ShapedRecipe shaped) implements WrappedShapedRecipe {
     private static final ShapedRecipe.Serializer SHAPED=new ShapedRecipe.Serializer();
     public static final MapCodec<SafeShapedRecipe> CODEC=SHAPED.codec().xmap(SafeShapedRecipe::new,SafeShapedRecipe::shaped);
     public static final StreamCodec<RegistryFriendlyByteBuf,SafeShapedRecipe> STREAM=SHAPED.streamCodec().map(SafeShapedRecipe::new,SafeShapedRecipe::shaped);

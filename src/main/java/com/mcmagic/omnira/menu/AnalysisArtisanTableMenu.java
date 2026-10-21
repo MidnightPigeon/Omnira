@@ -16,7 +16,12 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 
-public final class AnalysisArtisanTableMenu extends AbstractContainerMenu {
+public final class AnalysisArtisanTableMenu extends AbstractContainerMenu implements WorldRotationWork {
+    private boolean worldCompleting;
+    @Override public void worldRotation(net.minecraft.server.level.ServerLevel level,net.minecraft.core.BlockPos pos){
+        if(!work.active()||!access.evaluate((at,p)->at==level&&p.equals(pos),false))return;
+        worldCompleting=true;try{work.complete(owner,container,stillValid(owner)&&canAnalyze(),()->finishAnalysis(owner,0));}finally{worldCompleting=false;}
+    }
     private final Container container;
     private final ContainerLevelAccess access;
     private final Player owner;
@@ -61,7 +66,7 @@ public final class AnalysisArtisanTableMenu extends AbstractContainerMenu {
     public double manaCost() {return com.mcmagic.omnira.mana.ManaCosts.cost(owner,AnalysisRecipe.MANA_COST);}
     public boolean canAnalyze() {
         AnalysisRecipe recipe = recipe();
-        return recipe != null && fits(recipe) && com.mcmagic.omnira.mana.ManaCosts.canSpend(owner,AnalysisRecipe.MANA_COST);
+        return recipe != null && fits(recipe) && (worldCompleting||com.mcmagic.omnira.mana.ManaCosts.canSpend(owner,AnalysisRecipe.MANA_COST));
     }
     @Override public boolean clickMenuButton(Player player, int id) {
         if (id != 0 || player != owner || player.level().isClientSide || !stillValid(player) || !canAnalyze()) return false;
@@ -78,10 +83,10 @@ public final class AnalysisArtisanTableMenu extends AbstractContainerMenu {
         AnalysisRecipe recipe = recipe();
         if (recipe == null || !fits(recipe)) return false;
         ItemStack input = container.getItem(0);
-        ItemStack remainder = recipe.inputDamage()>0?ItemStack.EMPTY:input.getCraftingRemainingItem();
+        ItemStack remainder = recipe.remainder(input);
         // Keep remainders in the emptied input slot. Never discard buckets or debit mana before capacity checks.
         if (!remainder.isEmpty() && (input.getCount() != recipe.count() || recipe.count() != 1)) return false;
-        if (!ManaEvents.trySpend(serverPlayer, AnalysisRecipe.MANA_COST)) return false;
+        if (!worldCompleting&&!ManaEvents.trySpend(serverPlayer, AnalysisRecipe.MANA_COST)) return false;
         if(recipe.inputDamage()>0) {
             // Damage the existing tool in the input slot; it is never an output or a remainder.
             input.setDamageValue(input.getDamageValue()+recipe.inputDamage());
@@ -91,6 +96,7 @@ public final class AnalysisArtisanTableMenu extends AbstractContainerMenu {
             if (!remainder.isEmpty()) container.setItem(0, remainder);
         }
         addOutput(1, recipe.result().copy());
+        com.mcmagic.omnira.progression.BranchProgress.record(player,"analysis");
         var byproduct=recipe.secondaryOutput().roll(player.getRandom());
         if(!byproduct.isEmpty()) addOutput(2,byproduct);
         container.setChanged();

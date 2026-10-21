@@ -70,7 +70,7 @@ public final class AlchemyRefinementGameTests {
     @GameTest(template="spell_arena") public static void guaranteedPairPrimitiveReload(GameTestHelper h){
         var r=recipe(h,"time_space_microcores");var v=cauldron(h);v.tank.setFluid(r.fluid().copy());
         h.assertTrue(r.results().isEmpty()&&r.guaranteedResults().size()==2&&!v.start(r),"Pair must be fixed and require catalyst");
-        h.getLevel().setBlockAndUpdate(v.getBlockPos().below(),AlchemyMaterials.ENHANCED_CORE.get().defaultBlockState());
+        h.getLevel().setBlockAndUpdate(v.getBlockPos().below(),ModBlocks.ROUGH_ALCHEMICAL_ENERGY_CORE.get().defaultBlockState());
         h.assertTrue(v.start(r),"Primitive pair did not start");tick(h,v,200);
         h.assertTrue(v.tank.getFluidAmount()==900&&count(v.items,ModItems.TIME_MICROCORE.get())==0,"Pair delivered early");
         var copy=new RoughAlchemyCauldronBlockEntity(v.getBlockPos(),v.getBlockState());copy.setLevel(h.getLevel());
@@ -79,7 +79,7 @@ public final class AlchemyRefinementGameTests {
     }
     @GameTest(template="spell_arena") public static void guaranteedPairPoolReload(GameTestHelper h){
         var r=recipe(h,"time_space_microcores");var p=pool(h);p.manualFluid.fill(r.fluid(),EXECUTE);
-        h.getLevel().setBlockAndUpdate(p.getBlockPos().below(),AlchemyMaterials.ENHANCED_CORE.get().defaultBlockState());
+        h.getLevel().setBlockAndUpdate(p.getBlockPos().below(),ModBlocks.ROUGH_ALCHEMICAL_ENERGY_CORE.get().defaultBlockState());
         h.assertTrue(p.start(r),"Pool pair did not start");p.advance(400);
         var copy=new ReactionPoolBlockEntity(p.getBlockPos(),p.getBlockState());copy.setLevel(h.getLevel());
         copy.loadWithComponents(p.getUpdateTag(h.getLevel().registryAccess()),h.getLevel().registryAccess());copy.advance(1600);
@@ -87,23 +87,24 @@ public final class AlchemyRefinementGameTests {
     }
     @GameTest(template="spell_arena") public static void pairNeedsTwoSlotsAndReservesBoth(GameTestHelper h){
         var r=recipe(h,"time_space_microcores");var v=cauldron(h);v.tank.setFluid(r.fluid().copy());
-        h.getLevel().setBlockAndUpdate(v.getBlockPos().below(),AlchemyMaterials.ENHANCED_CORE.get().defaultBlockState());
+        h.getLevel().setBlockAndUpdate(v.getBlockPos().below(),ModBlocks.ROUGH_ALCHEMICAL_ENERGY_CORE.get().defaultBlockState());
         v.items.setStackInSlot(0,new ItemStack(Items.STONE));v.items.setStackInSlot(1,new ItemStack(Items.DIRT));v.items.setStackInSlot(2,new ItemStack(Items.STICK));
         h.assertTrue(!v.start(r),"Two outputs reused one free slot");v.items.setStackInSlot(2,ItemStack.EMPTY);
         h.assertTrue(v.start(r),"Two free slots rejected");
-        h.assertTrue(!v.items.insertItem(2,new ItemStack(Items.DIAMOND),false).isEmpty(),"Manual insert stole reserved pair slot");
-        tick(h,v,2000);pair(h,v.items);h.succeed();
+        h.assertTrue(v.items.insertItem(2,new ItemStack(Items.DIAMOND),false).isEmpty(),"Active pair reaction locked a material slot");
+        tick(h,v,2000);h.assertTrue(v.working()&&v.progress()==2000,"Pair did not wait for both output slots");
+        v.items.extractItem(2,64,false);tick(h,v,1);pair(h,v.items);h.succeed();
     }
     @GameTest(template="spell_arena") public static void fullPairMemberBlocksBothVessels(GameTestHelper h){
         var r=recipe(h,"time_space_microcores");var p=pool(h);p.manualFluid.fill(r.fluid(),EXECUTE);
-        h.getLevel().setBlockAndUpdate(p.getBlockPos().below(),AlchemyMaterials.ENHANCED_CORE.get().defaultBlockState());
+        h.getLevel().setBlockAndUpdate(p.getBlockPos().below(),ModBlocks.ROUGH_ALCHEMICAL_ENERGY_CORE.get().defaultBlockState());
         for(var item:java.util.List.of(ModItems.TIME_MICROCORE.get(),ModItems.SPACE_MICROCORE.get())){
             p.items.setStackInSlot(0,new ItemStack(item,item.getDefaultMaxStackSize()));
             h.assertTrue(!p.start(r),"Full paired output allowed pool startup");
         }
         h.getLevel().setBlockAndUpdate(p.getBlockPos(),Blocks.AIR.defaultBlockState());
         var v=cauldron(h);v.tank.setFluid(r.fluid().copy());
-        h.getLevel().setBlockAndUpdate(v.getBlockPos().below(),AlchemyMaterials.ENHANCED_CORE.get().defaultBlockState());
+        h.getLevel().setBlockAndUpdate(v.getBlockPos().below(),ModBlocks.ROUGH_ALCHEMICAL_ENERGY_CORE.get().defaultBlockState());
         for(var item:java.util.List.of(ModItems.TIME_MICROCORE.get(),ModItems.SPACE_MICROCORE.get())){
             v.items.setStackInSlot(0,new ItemStack(item,item.getDefaultMaxStackSize()));
             h.assertTrue(!v.start(r),"Full paired output allowed primitive startup");
@@ -111,7 +112,7 @@ public final class AlchemyRefinementGameTests {
     }
     @GameTest(template="spell_arena") public static void failedPairDeliversNeitherProduct(GameTestHelper h){
         var r=recipe(h,"time_space_microcores");var p=pool(h);p.manualFluid.fill(r.fluid(),EXECUTE);
-        h.getLevel().setBlockAndUpdate(p.getBlockPos().below(),AlchemyMaterials.ENHANCED_CORE.get().defaultBlockState());
+        h.getLevel().setBlockAndUpdate(p.getBlockPos().below(),ModBlocks.ROUGH_ALCHEMICAL_ENERGY_CORE.get().defaultBlockState());
         h.assertTrue(p.start(r),"Pair did not start");p.advance(1000);p.manualFluid.drain(r.fluid(),EXECUTE);p.advance(200);
         h.assertTrue(!p.reacting()&&count(p.items,ModItems.TIME_MICROCORE.get())==0&&count(p.items,ModItems.SPACE_MICROCORE.get())==0,"Failed reaction delivered fixed outputs");
         var ops=h.getLevel().registryAccess().createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE);

@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "id": "omnira:traveler_manuscript"
+    },
+    "title": {
+      "translate": "advancement.omnira.easter_eggs.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.easter_eggs.description"
+    },
+    "background": "omnira:textures/block/mirror_rock.png",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "discovered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "discovered"
+    ]
+  ]
+}

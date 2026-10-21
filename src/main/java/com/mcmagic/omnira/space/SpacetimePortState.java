@@ -55,6 +55,7 @@ public final class SpacetimePortState {
     private void clear(){peer=null;peerIdentity=null;white=false;selectedUntil=0;}
     public void sync(){
         host.setChanged();var l=host.getLevel();if(l==null)return;
+        com.mcmagic.omnira.pulse.PulseNetworks.changed(l,host.getBlockPos());
         l.invalidateCapabilities(host.getBlockPos());l.invalidateCapabilities(attached());
         l.sendBlockUpdated(host.getBlockPos(),host.getBlockState(),host.getBlockState(),3);
         l.updateNeighborsAt(host.getBlockPos(),host.getBlockState().getBlock());
@@ -65,6 +66,7 @@ public final class SpacetimePortState {
         if(peer!=null&&l.hasChunkAt(peer)&&other()==null){unlink();return;}
     }
     public void write(CompoundTag tag){
+        tag.putLong("PortAnchor",host.getBlockPos().asLong());
         tag.putUUID("PortIdentity",identity);tag.putBoolean("PortWhite",white);tag.putLong("PortSelected",selectedUntil);
         if(peer!=null&&peerIdentity!=null){tag.putLong("PortPeer",peer.asLong());tag.putUUID("PortPeerIdentity",peerIdentity);}
     }
@@ -72,14 +74,16 @@ public final class SpacetimePortState {
         if(tag.hasUUID("PortIdentity"))identity=tag.getUUID("PortIdentity");
         white=tag.getBoolean("PortWhite");selectedUntil=tag.getLong("PortSelected");
         peer=tag.contains("PortPeer")?BlockPos.of(tag.getLong("PortPeer")):null;
+        if(peer!=null&&tag.contains("PortAnchor"))
+            peer=peer.offset(host.getBlockPos().subtract(BlockPos.of(tag.getLong("PortAnchor"))));
         peerIdentity=tag.hasUUID("PortPeerIdentity")?tag.getUUID("PortPeerIdentity"):null;
     }
     private final IItemHandler items=new IItemHandler(){
         private IItemHandler target(){return remote(Capabilities.ItemHandler.BLOCK);}
         public int getSlots(){var t=target();return t==null?0:t.getSlots();}
         public ItemStack getStackInSlot(int s){var t=target();return t==null||s<0||s>=t.getSlots()?ItemStack.EMPTY:t.getStackInSlot(s);}
-        public ItemStack insertItem(int s,ItemStack stack,boolean simulate){var t=target();return t==null||s<0||s>=t.getSlots()?stack:t.insertItem(s,stack,simulate);}
-        public ItemStack extractItem(int s,int n,boolean simulate){var t=target();return t==null||s<0||s>=t.getSlots()?ItemStack.EMPTY:t.extractItem(s,n,simulate);}
+        public ItemStack insertItem(int s,ItemStack stack,boolean simulate){var t=target();var result=t==null||s<0||s>=t.getSlots()?stack:t.insertItem(s,stack,simulate);if(!simulate)transferred(stack.getCount()-result.getCount());return result;}
+        public ItemStack extractItem(int s,int n,boolean simulate){var t=target();var result=t==null||s<0||s>=t.getSlots()?ItemStack.EMPTY:t.extractItem(s,n,simulate);if(!simulate)transferred(result.getCount());return result;}
         public int getSlotLimit(int s){var t=target();return t==null||s<0||s>=t.getSlots()?0:t.getSlotLimit(s);}
         public boolean isItemValid(int s,ItemStack stack){var t=target();return t!=null&&s>=0&&s<t.getSlots()&&t.isItemValid(s,stack);}
     };
@@ -89,20 +93,24 @@ public final class SpacetimePortState {
         public FluidStack getFluidInTank(int i){var t=target();return t==null||i<0||i>=t.getTanks()?FluidStack.EMPTY:t.getFluidInTank(i);}
         public int getTankCapacity(int i){var t=target();return t==null||i<0||i>=t.getTanks()?0:t.getTankCapacity(i);}
         public boolean isFluidValid(int i,FluidStack f){var t=target();return t!=null&&i>=0&&i<t.getTanks()&&t.isFluidValid(i,f);}
-        public int fill(FluidStack f,FluidAction a){var t=target();return t==null?0:t.fill(f,a);}
-        public FluidStack drain(FluidStack f,FluidAction a){var t=target();return t==null?FluidStack.EMPTY:t.drain(f,a);}
-        public FluidStack drain(int n,FluidAction a){var t=target();return t==null?FluidStack.EMPTY:t.drain(n,a);}
+        public int fill(FluidStack f,FluidAction a){var t=target();int result=t==null?0:t.fill(f,a);if(a.execute())transferred(result);return result;}
+        public FluidStack drain(FluidStack f,FluidAction a){var t=target();var result=t==null?FluidStack.EMPTY:t.drain(f,a);if(a.execute())transferred(result.getAmount());return result;}
+        public FluidStack drain(int n,FluidAction a){var t=target();var result=t==null?FluidStack.EMPTY:t.drain(n,a);if(a.execute())transferred(result.getAmount());return result;}
     };
     private final IEnergyStorage energy=new IEnergyStorage(){
         private IEnergyStorage target(){return remote(Capabilities.EnergyStorage.BLOCK);}
-        public int receiveEnergy(int n,boolean sim){var t=target();return t!=null?t.receiveEnergy(n,sim):0;}
-        public int extractEnergy(int n,boolean sim){var t=target();return t!=null?t.extractEnergy(n,sim):0;}
+        public int receiveEnergy(int n,boolean sim){var t=target();int result=t!=null?t.receiveEnergy(n,sim):0;if(!sim)transferred(result);return result;}
+        public int extractEnergy(int n,boolean sim){var t=target();int result=t!=null?t.extractEnergy(n,sim):0;if(!sim)transferred(result);return result;}
         public int getEnergyStored(){var t=target();return t==null?0:t.getEnergyStored();}
         public int getMaxEnergyStored(){var t=target();return t==null?0:t.getMaxEnergyStored();}
         public boolean canExtract(){var t=target();return t!=null&&t.canExtract();}
         public boolean canReceive(){var t=target();return t!=null&&t.canReceive();}
     };
     public IItemHandler itemPort(Direction side){return accessible(side)?items:null;}
+    private void transferred(int amount){
+        com.mcmagic.omnira.progression.BranchProgress.port(host,amount);var other=other();
+        if(other!=null)com.mcmagic.omnira.progression.BranchProgress.port(other.host,amount);
+    }
     public IFluidHandler fluidPort(Direction side){return accessible(side)?fluids:null;}
     public IEnergyStorage energyPort(Direction side){return accessible(side)?energy:null;}
     public static com.mcmagic.omnira.block.entity.ManaEngineAccess engineAt(Level l,BlockPos p,Direction towardsMachine){
@@ -116,9 +124,9 @@ public final class SpacetimePortState {
                 &&state.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING)==output
                 &&engine.engineState().running()?engine:null;
     }
-    /** Direct-drive fallback when Create is absent; one unit is 512 SU at a usable speed. */
+    /** Legacy drive query; native machines use PulseNetworks for reservations. One unit is 512 MPU. */
     public static double driveAt(Level l,BlockPos p,Direction towardsMachine){
-        if(engineAt(l,p,towardsMachine)!=null)return 1;
+        var engine=engineAt(l,p,towardsMachine);if(engine!=null)return engine.engineState().ratedCapacity()/512.0;
         if(!l.hasChunkAt(p))return 0;
         var port=at(l,p);BlockPos source=p;Direction output=towardsMachine;
         if(port!=null){var peer=port.other();if(peer==null||port.face().getOpposite()!=towardsMachine)return 0;source=peer.attached();output=peer.face();}
@@ -128,6 +136,6 @@ public final class SpacetimePortState {
         int side=com.mcmagic.omnira.engine.SpacetimeEngineBlock.side(state.getValue(com.mcmagic.omnira.engine.SpacetimeEngineBlock.PART));
         var be=com.mcmagic.omnira.engine.SpacetimeEngineBlock.controller(l,source);
         return side>=0&&output==com.mcmagic.omnira.engine.SpacetimeEngineBlock.OUTPUTS[side]&&be!=null&&Math.abs(be.generatedSpeed(side))>=16
-                ?(com.mcmagic.omnira.engine.SpacetimeEngineController.hasKinetics()?be.capacity(side)/512.:1):0;
+                ?be.capacity(side)/512.:0;
     }
 }

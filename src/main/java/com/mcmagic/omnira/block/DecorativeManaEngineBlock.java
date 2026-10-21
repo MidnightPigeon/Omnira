@@ -31,7 +31,9 @@ public final class DecorativeManaEngineBlock extends BaseEntityBlock {
     }
     @Override protected RenderShape getRenderShape(BlockState state) {return RenderShape.MODEL;}
     @Override protected InteractionResult useWithoutItem(BlockState state,Level level,BlockPos pos,Player player,BlockHitResult hit) {
-        if(player instanceof ServerPlayer server && level.getBlockEntity(pos) instanceof ManaEngineAccess engine) server.openMenu(engine,pos);
+        if(player instanceof ServerPlayer server && level.getBlockEntity(pos) instanceof ManaEngineAccess engine){
+            if(engine.engineState().controlHit(hit))engine.engineState().control(0);else server.openMenu(engine,pos);
+        }
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
     @Override protected void onRemove(BlockState state,Level level,BlockPos pos,BlockState next,boolean moving) {

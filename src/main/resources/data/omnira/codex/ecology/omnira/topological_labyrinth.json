@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "omnira:pure_solidified_spacetime"
+  },
+  "surface": {
+    "Name": "omnira:pure_solidified_spacetime"
+  },
+  "decorations": [
+    {
+      "kind": "spire",
+      "block": {
+        "Name": "omnira:pure_solidified_spacetime"
+      },
+      "crown": {
+        "Name": "omnira:excited_rough_spatial_crystal_block"
+      }
+    }
+  ]
+}

@@ -10,9 +10,11 @@ import net.minecraft.world.item.*;
 
 /** The inventory, hand and dropped item share the placed plant's mesh and mote orbit. */
 public final class TimePlantItemRenderer extends BlockEntityWithoutLevelRenderer {
+    private static final ModelResourceLocation FLOWER=ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("omnira","block/time_flower")),
+            GRASS=ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("omnira","block/time_grass"));
     public TimePlantItemRenderer(){super(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels());}
     public static ModelResourceLocation model(boolean flower){
-        return ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("omnira",flower?"block/time_flower":"block/time_grass"));
+        return flower?FLOWER:GRASS;
     }
     @Override public void renderByItem(ItemStack stack,ItemDisplayContext context,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         var mc=Minecraft.getInstance();boolean flower=stack.is(TimeNatureContent.FLOWER.get().asItem());

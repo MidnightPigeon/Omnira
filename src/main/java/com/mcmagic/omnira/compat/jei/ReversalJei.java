@@ -21,16 +21,21 @@ public final class ReversalJei implements IModPlugin {
             if(r.results().getFirst().is(com.mcmagic.omnira.registry.ModItems.MEMORY_CUBE.get())){
                 for(int i=0;i<2;i++){
                     var input=com.mcmagic.omnira.item.MemoryCubeBlockItem.withState(new ItemStack(com.mcmagic.omnira.registry.ModItems.MEMORY_CUBE.get()),i==0);
-                    b.addSlot(RecipeIngredientRole.INPUT,14,2+23*i).setStandardSlotBackground().addItemStack(input);
-                    b.addSlot(RecipeIngredientRole.OUTPUT,100,2+23*i).setStandardSlotBackground().addItemStack(r.outputs(input).getFirst());
+                    b.addSlot(RecipeIngredientRole.INPUT,14,1+21*i).setStandardSlotBackground().addItemStack(input);
+                    b.addSlot(RecipeIngredientRole.OUTPUT,100,1+21*i).setStandardSlotBackground().addItemStack(r.outputs(input).getFirst());
                 }
                 return;
             }
             b.addSlot(RecipeIngredientRole.INPUT,14,13).setStandardSlotBackground().addItemStacks(java.util.Arrays.stream(r.ingredient().getItems()).map(s->s.copyWithCount(r.count())).toList());
-            for(int i=0;i<r.results().size();i++)b.addSlot(RecipeIngredientRole.OUTPUT,76+26*i,13).setStandardSlotBackground().addItemStack(r.results().get(i));
+            b.addSlot(RecipeIngredientRole.OUTPUT,100,13).setStandardSlotBackground().addItemStacks(r.results())
+                    .addRichTooltipCallback((v,t)->{if(r.results().size()>1)t.add(Component.translatable("jei.omnira.reaction.chance",100.0/r.results().size()));});
         }
         public void draw(ReversalRecipe r,mezz.jei.api.gui.ingredient.IRecipeSlotsView slots,net.minecraft.client.gui.GuiGraphics g,double x,double y){
-            var font=net.minecraft.client.Minecraft.getInstance().font;g.drawString(font,"->",45,18,0x445B65,false);g.drawString(font,Component.translatable(infusion?"jei.omnira.infusion_cost":"jei.omnira.reversal_cost"),6,40,0x445B65,false);
+            var font=net.minecraft.client.Minecraft.getInstance().font;
+            boolean memory=r.results().getFirst().is(com.mcmagic.omnira.registry.ModItems.MEMORY_CUBE.get());
+            if(memory){gui.getRecipeArrow().draw(g,53,2);gui.getRecipeArrow().draw(g,53,23);}
+            else gui.getRecipeArrow().draw(g,53,14);
+            g.drawString(font,Component.translatable(infusion?"jei.omnira.infusion_cost":"jei.omnira.reversal_cost"),6,memory?43:40,0x445B65,false);
             if(r.results().size()>1)g.drawString(font,Component.translatable("jei.omnira.reversal_random"),6,52,0x445B65,false);
         }
     });}

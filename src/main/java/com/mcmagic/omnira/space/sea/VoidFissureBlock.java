@@ -65,7 +65,7 @@ public final class VoidFissureBlock extends Block {
                 else stack.setDamageValue(stack.getDamageValue()+damage);
             }
             VoidSeaEffects.trueDamage(living,(float)Math.ceil(living.getHealth()/2),living.damageSources().genericKill());
-        }else e.hurt(e.damageSources().genericKill(),(float)Math.ceil(1));
+        }else e.hurt(com.mcmagic.omnira.combat.OmniraDamage.source(e,"true_damage"),1);
     }
     public static boolean destination(ServerLevel level,BlockPos p){
         if(!level.hasChunkAt(p)||!level.getWorldBorder().isWithinBounds(p)||!level.getBiome(p).is(VoidSeaContent.BIOME))return false;

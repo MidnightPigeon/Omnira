@@ -24,13 +24,13 @@ final class SpacetimeEngineCreateChecks {
             for(int side=0;side<3;side++)e.configure(side,256,37,false);
         });
         h.runAfterDelay(55,()->{
-            checkFixedMachines(h,machines,37);
+            checkFixedMachines(h,machines,16);
             for(int side=0;side<2;side++)h.assertTrue(((com.mcmagic.omnira.compat.create.KineticCrystalWorkstationEntity)machines.get(side)).workstation().progress>0,"Working machine failed to process");
-            e.configure(0,256,0,false);
+            e.configure(0,0,16,false);
         });
         h.runAfterDelay(80,()->{
             h.assertTrue(machines.get(0).getSpeed()==0,"Stopped source still rotates consumer");
-            h.assertTrue(Math.abs(machines.get(1).getSpeed())==37&&Math.abs(machines.get(2).getSpeed())==37,"Stopping one output stopped other sources");
+            h.assertTrue(Math.abs(machines.get(1).getSpeed())==16&&Math.abs(machines.get(2).getSpeed())==16,"Stopping one output stopped other sources");
             h.succeed();
         });
     }
@@ -102,9 +102,9 @@ final class SpacetimeEngineCreateChecks {
     }
     private static void checkIdleAnvil(GameTestHelper h,com.mcmagic.omnira.compat.create.KineticCrystalWorkstationEntity machine,float rpm){
         var net=machine.getOrCreateNetwork();
-        h.assertTrue(!machine.isOverStressed()&&Math.abs(machine.getSpeed())==rpm,"Idle anvil overloaded: speed="+machine.getTheoreticalSpeed()+", stress="+net.calculateStress()+", capacity="+net.calculateCapacity());
+        h.assertTrue(!machine.isOverStressed()&&Math.abs(machine.getSpeed())==16,"Idle anvil overloaded: speed="+machine.getTheoreticalSpeed()+", stress="+net.calculateStress()+", capacity="+net.calculateCapacity());
         h.assertTrue(Math.abs(net.getActualStressOf(machine)-256)<.001,"Idle anvil lost fixed occupancy");
-        h.assertTrue(Math.abs(machine.workstation().rpm)==rpm,"Idle shaft animation stopped");
+        h.assertTrue(machine.workstation().rpm==0&&machine.workstation().pulsePowered,"Native pulse input rotated the visible shaft");
     }
     static void remote(GameTestHelper h,SpacetimeEngineController e){
         var l=h.getLevel();var from=e.getBlockPos().below().east();var target=h.absolutePos(new net.minecraft.core.BlockPos(10,5,10));
@@ -114,7 +114,7 @@ final class SpacetimeEngineCreateChecks {
         h.assertTrue(com.mcmagic.omnira.space.SpacetimePortState.pair(a,b),"Remote pair failed");
         h.runAfterDelay(25,()->{
             var shaft=(KineticBlockEntity)l.getBlockEntity(target);
-            h.assertTrue(Math.abs(shaft.getSpeed())==64,"Perpendicular remote output failed");
+            h.assertTrue(Math.abs(shaft.getSpeed())==16,"Perpendicular remote output failed");
             h.assertTrue(Math.abs(shaft.getOrCreateNetwork().calculateCapacity()-2048)<.01,"Remote capacity changed");
             b.unlink();h.runAfterDelay(20,()->{h.assertTrue(shaft.getSpeed()==0,"Unlinked shaft still rotating");h.succeed();});
         });

@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "omnira:mirror_rock"
+  },
+  "surface": {
+    "Name": "omnira:mirror_rock"
+  },
+  "decorations": [
+    {
+      "kind": "spire",
+      "block": {
+        "Name": "omnira:dream_crystal_bedrock"
+      },
+      "crown": {
+        "Name": "omnira:dream_crystal"
+      }
+    }
+  ]
+}

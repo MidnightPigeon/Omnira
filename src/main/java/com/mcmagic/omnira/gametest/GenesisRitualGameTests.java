@@ -30,6 +30,28 @@ public final class GenesisRitualGameTests {
         return (RitualEnergyCoreBlockEntity)level.getBlockEntity(pos);
     }
     private static FluidStack fluid(int amount){return new FluidStack(AlchemyMaterials.REFINED.source.get(),amount);}
+    @GameTest(template="spell_arena") public static void outputUpgradeAndSpacetimePortsOfferExactMillibuckets(GameTestHelper h){
+        var core=setup(h);var level=h.getLevel();var pos=core.getBlockPos().offset(3,0,2);
+        level.setBlockAndUpdate(pos,ModBlocks.LIQUID_CRYSTAL_BALL.get().defaultBlockState()
+                .setValue(com.mcmagic.omnira.block.CrystalBallBlock.FACING,Direction.NORTH));
+        var orb=(LiquidCrystalBallBlockEntity)level.getBlockEntity(pos);orb.tank.setFluid(fluid(12345));
+        var upgrade=new ItemStack(ModItems.OUTPUT_UPGRADE.get());var settings=new net.minecraft.nbt.CompoundTag();settings.putInt("Directions",1<<5);
+        upgrade.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA,net.minecraft.world.item.component.CustomData.of(settings));orb.upgrades.setStackInSlot(0,upgrade);
+        var a=pos.east();var b=core.getBlockPos().west();
+        level.setBlockAndUpdate(a,ModBlocks.SPACETIME_PORT.get().defaultBlockState().setValue(com.mcmagic.omnira.space.SpacetimePortBlock.FACING,Direction.EAST));
+        level.setBlockAndUpdate(b,ModBlocks.SPACETIME_PORT.get().defaultBlockState().setValue(com.mcmagic.omnira.space.SpacetimePortBlock.FACING,Direction.WEST));
+        h.assertTrue(com.mcmagic.omnira.space.SpacetimePortState.pair(com.mcmagic.omnira.space.SpacetimePortState.at(level,a),com.mcmagic.omnira.space.SpacetimePortState.at(level,b)),"Native fluid endpoints did not pair");
+        var offering=GenesisRitual.offering();
+        h.assertTrue(offering.getAmount()==core.genesisOffering.getTankCapacity(0)&&core.genesisOffering.isFluidValid(0,offering),"Displayed fluid requirement differs from actual offering");
+        core.genesisOffering.fill(fluid(offering.getAmount()-750),FluidAction.EXECUTE);
+        OrbAutomation.tick(orb);
+        h.runAfterDelay(40,()->{
+            OrbAutomation.tick(orb);OrbAutomation.tick(orb);
+            h.assertTrue(core.genesisFluid()==offering.getAmount()&&orb.tank.getFluidAmount()==12345-750,
+                    "Native output/port route ignored exact mB or over-drained source: "+core.genesisFluid()+"/"+orb.tank.getFluidAmount());
+            h.succeed();
+        });
+    }
     private static CrystalPedestalBlockEntity first(GameTestHelper h,RitualEnergyCoreBlockEntity core){
         return (CrystalPedestalBlockEntity)h.getLevel().getBlockEntity(core.getBlockPos().offset(0,0,-3));
     }

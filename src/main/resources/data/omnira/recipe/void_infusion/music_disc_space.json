@@ -1,0 +1,6 @@
+{
+  "type": "omnira:void_infusion",
+  "ingredient": {"tag": "c:music_discs"},
+  "count": 1,
+  "results": [{"id": "omnira:music_disc_space", "count": 1}]
+}

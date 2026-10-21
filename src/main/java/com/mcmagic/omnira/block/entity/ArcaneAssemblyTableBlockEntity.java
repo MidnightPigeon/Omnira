@@ -18,41 +18,39 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
     private net.minecraft.world.level.block.entity.BlockEntity host;
     private boolean mechanicalPowered;
     private boolean electricalPowered;
+    private boolean pulsePowered,pulseConnected;
+    private double pulseFactor=1,pulseCharge;
+    private double mechanicalFactor=1;
+    public boolean pulsePowered(){return pulsePowered;}
+    public boolean pulseInsufficient(){return pulseConnected&&!pulsePowered;}
     private int energy,energyRemainder;
     public static final int FE_PER_SECOND=256;
-    private final com.mcmagic.omnira.energy.EnergyInputLimit inputLimit=new com.mcmagic.omnira.energy.EnergyInputLimit(FE_PER_SECOND);
     public boolean electricalPowered() {return electricalPowered;}
-    public boolean powered() {return mechanicalPowered||electricalPowered;}
-    public final net.neoforged.neoforge.energy.IEnergyStorage energyInput=new net.neoforged.neoforge.energy.IEnergyStorage() {
-        public int receiveEnergy(int amount,boolean simulate) {
-            if(level==null||level.isClientSide)return 0;
-            int accepted=inputLimit.receive(level.getGameTime(),amount,5120-energy,simulate);
-            if(!simulate&&accepted>0){energy+=accepted;level.blockEntityChanged(worldPosition);}
-            return accepted;
-        }
-        public int extractEnergy(int amount,boolean simulate){return 0;}
-        public int getEnergyStored(){return energy;}
-        public int getMaxEnergyStored(){return 5120;}
-        public boolean canReceive(){return true;}
-        public boolean canExtract(){return false;}
-    };
+    public boolean powered() {return pulsePowered||mechanicalPowered||electricalPowered;}
+    public final com.mcmagic.omnira.energy.ContinuousEnergyInput energyInput=new com.mcmagic.omnira.energy.ContinuousEnergyInput(
+            FE_PER_SECOND,2048,()->level==null?0:level.getGameTime(),
+            ()->level!=null&&!level.isClientSide&&!mechanicalPowered&&!com.mcmagic.omnira.pulse.PulseNetworks.power(level,worldPosition).connected());
     public static net.neoforged.neoforge.energy.IEnergyStorage energyPort(net.minecraft.world.level.block.entity.BlockEntity entity,Direction side) {
         if(!(entity instanceof AssemblyAccess access))return null;
         var back=entity.getBlockState().getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING).getOpposite();
         return side==back?access.assembly().energyInput:null;
     }
     public void tickPower(boolean mechanical) {
+        tickPower(mechanical,16);
+    }
+    public void tickPower(boolean mechanical,float rpm) {
         if(level==null||level.isClientSide)return;
-        int cost=(FE_PER_SECOND+energyRemainder)/20;
-        boolean electric=!mechanical&&energy>=cost;
-        if(electric){energy-=cost;energyRemainder=(FE_PER_SECOND+energyRemainder)%20;}
-        boolean modeChanged=mechanicalPowered!=mechanical||electricalPowered!=electric;
+        var pulse=com.mcmagic.omnira.pulse.PulseNetworks.power(level,worldPosition);
+        boolean previousPulse=pulsePowered,previousConnection=pulseConnected;
+        pulseConnected=pulse.connected();pulsePowered=pulse.connected()&&pulse.running();pulseFactor=pulse.factor(256);
+        if(pulseConnected)mechanical=false;
+        mechanicalFactor=mechanical?Math.min(8,Math.abs(rpm)/16.0):0;
+        boolean electric=!pulseConnected&&!mechanical&&energyInput.factor()>=1;
+        boolean modeChanged=mechanicalPowered!=mechanical||electricalPowered!=electric||previousPulse!=pulsePowered||previousConnection!=pulseConnected;
         mechanicalPowered=mechanical;electricalPowered=electric;
         if(modeChanged)setChanged();
-        else if(electric)level.blockEntityChanged(worldPosition);
-        if(electric)com.mcmagic.omnira.energy.ShaftCurrent.spark(level,worldPosition,
-                getBlockState().getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING).getOpposite());
-        if(powered())automaticStrike();
+        if(powered()){pulseCharge=Math.min(STRIKE_COOLDOWN,pulseCharge+(pulsePowered?pulseFactor:mechanical?mechanicalFactor:energyInput.factor()));if(pulseCharge>=STRIKE_COOLDOWN&&automaticStrike())pulseCharge-=STRIKE_COOLDOWN;}
+        else pulseCharge=0;
     }
     @Override public ArcaneAssemblyTableBlockEntity assembly() {return this;}
     public void setHost(net.minecraft.world.level.block.entity.BlockEntity host) {this.host=host;}
@@ -68,7 +66,7 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
     public void writeWork(CompoundTag tag,HolderLookup.Provider registries) {saveAdditional(tag,registries);}
     public void readWork(CompoundTag tag,HolderLookup.Provider registries) {loadAdditional(tag,registries);}
     public boolean automaticStrike() {
-        if(level==null || level.isClientSide || !powered() || cooldown()>0 || isEmpty()) return false;
+        if(level==null || level.isClientSide || !powered() || !pulsePowered&&!electricalPowered&&mechanicalFactor<=1&&cooldown()>0 || isEmpty()) return false;
         var recipe=work();
         return recipe!=null && completeStrike(recipe);
     }
@@ -90,6 +88,10 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
     }
     public long lastStrike() {return lastStrike;}
     public int progress() {return progress;}
+    public void worldRotation(){
+        energy=5120;var recipe=work();
+        if(progress>0&&!finished&&recipe!=null){activeRecipe=recipe.id();progress=100;completeStrike(recipe);}setChanged();
+    }
     public boolean finished() {return finished;}
     public RecipeHolder<AssemblyRecipe> recipe() {
         return level==null || finished?null:level.getRecipeManager()
@@ -104,7 +106,7 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
     }
     public void tickDirectDrive() {
         if(level==null || level.isClientSide) return;
-        tickPower(directEngine(level,worldPosition,getBlockState()));
+        tickPower(false);
     }
     private void invalidateWork() {progress=0;activeRecipe="";}
     @Override public void setItem(int slot,ItemStack stack) {
@@ -149,6 +151,7 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
                 output++;
             }
             finished=output>0;
+            if(finished)com.mcmagic.omnira.progression.BranchProgress.processed(this);
             if(!finished) invalidateWork();
         }
         setChanged();
@@ -170,10 +173,12 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
     @Override protected AbstractContainerMenu createMenu(int id,Inventory inventory) {
         return new com.mcmagic.omnira.menu.ArcaneAssemblyTableMenu(id,inventory,this);
     }
-    private void saveWork(CompoundTag tag) {tag.putBoolean("AssemblyPowered",mechanicalPowered);tag.putBoolean("AssemblyElectrical",electricalPowered);tag.putInt("AssemblyEnergy",energy);tag.putInt("AssemblyEnergyRemainder",energyRemainder);tag.putLong("AssemblyLastStrike",lastStrike);tag.putInt("AssemblyProgress",progress);tag.putBoolean("AssemblyFinished",finished);tag.putString("AssemblyRecipe",activeRecipe);}
+    private void saveWork(CompoundTag tag) {tag.putBoolean("PulsePowered",pulsePowered);tag.putBoolean("PulseConnected",pulseConnected);tag.putDouble("PulseCharge",pulseCharge);tag.putBoolean("AssemblyPowered",mechanicalPowered);tag.putBoolean("AssemblyElectrical",electricalPowered);tag.putInt("AssemblyEnergy",energy);tag.putInt("AssemblyEnergyRemainder",energyRemainder);tag.putLong("AssemblyLastStrike",lastStrike);tag.putInt("AssemblyProgress",progress);tag.putBoolean("AssemblyFinished",finished);tag.putString("AssemblyRecipe",activeRecipe);}
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries) {super.saveAdditional(tag,registries);saveWork(tag);}
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries) {var tag=super.getUpdateTag(registries);saveWork(tag);return tag;}
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries) {
+        energyInput.reset();
+        pulsePowered=tag.getBoolean("PulsePowered");pulseConnected=tag.getBoolean("PulseConnected");pulseCharge=Math.clamp(tag.getDouble("PulseCharge"),0,STRIKE_COOLDOWN);
         super.loadAdditional(tag,registries);mechanicalPowered=tag.getBoolean("AssemblyPowered");electricalPowered=tag.getBoolean("AssemblyElectrical");energy=Math.clamp(tag.getInt("AssemblyEnergy"),0,5120);energyRemainder=Math.clamp(tag.getInt("AssemblyEnergyRemainder"),0,19);lastStrike=tag.contains("AssemblyLastStrike")?tag.getLong("AssemblyLastStrike"):-20;progress=Math.clamp(tag.getInt("AssemblyProgress"),0,100);
         finished=tag.getBoolean("AssemblyFinished") && getItems().stream().anyMatch(s->!s.isEmpty());activeRecipe=tag.getString("AssemblyRecipe");
     }

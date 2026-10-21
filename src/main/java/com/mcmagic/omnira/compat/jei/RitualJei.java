@@ -21,8 +21,10 @@ final class RitualJei {
     static final RecipeType<Entry> TYPE=RecipeType.create("omnira","ritual",Entry.class);
     record Dream() {}
     record Genesis() {}
+    record WorldForming() {}
+    static final RecipeType<WorldForming> WORLD_FORMING=RecipeType.create("omnira","world_forming_ritual",WorldForming.class);
     static final RecipeType<Genesis> GENESIS=RecipeType.create("omnira","genesis_ritual",Genesis.class);
-    record Corridor() {}
+    record Corridor(boolean permanent) {}
     static final RecipeType<Corridor> CORRIDOR=RecipeType.create("omnira","corridor_ritual",Corridor.class);
     record Resonance() {}
     record Cleansing() {}
@@ -70,12 +72,12 @@ final class RitualJei {
                 for(var a:com.mcmagic.omnira.world.dimension.DreamRitual.ANCHORS)
                     slot(b,RecipeIngredientRole.CATALYST,60+a[0]*16,60+a[1]*16,"jei.omnira.ritual.offering").addItemStack(new ItemStack(com.mcmagic.omnira.spacetime.CorridorRitual.offering(index++)));
                 slot(b,RecipeIngredientRole.CATALYST,60,60,"jei.omnira.ritual.advanced_core").addItemStack(new ItemStack(ModItems.ADVANCED_RITUAL_ENERGY_CORE.get()));
-                slot(b,RecipeIngredientRole.INPUT,162,28,"jei.omnira.ritual.hand").addItemStack(new ItemStack(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get()));
+                slot(b,RecipeIngredientRole.INPUT,162,28,"jei.omnira.ritual.hand").addItemStack(new ItemStack(com.mcmagic.omnira.spacetime.CorridorRitual.activator(r.permanent())));
                 slot(b,RecipeIngredientRole.CATALYST,150,98,"jei.omnira.ritual.pedestals").addItemStack(new ItemStack(ModItems.CRYSTAL_PEDESTAL.get(),8));
                 slot(b,RecipeIngredientRole.OUTPUT,193,76,"jei.omnira.ritual.portal_result").addItemStack(new ItemStack(ModItems.CORRIDOR_GATEWAY.get()));
             }
             public void draw(Corridor r,IRecipeSlotsView slots,GuiGraphics g,double x,double y) {
-                grid(g,7,16,60);arrow(g,132,76,177);note(g,"jei.omnira.ritual.corridor_steps");
+                grid(g,7,16,60);arrow(g,132,76,177);note(g,r.permanent()?"jei.omnira.ritual.corridor_permanent_steps":"jei.omnira.ritual.corridor_steps");
             }
         },new Page<Affinity>(AFFINITY,ModItems.ADVANCED_RITUAL_ENERGY_CORE.get(),"jei.omnira.ritual.affinity_title",gui) {
             public void setRecipe(IRecipeLayoutBuilder b,Affinity r,IFocusGroup focus) {
@@ -114,7 +116,7 @@ final class RitualJei {
         },new Page<Resonance>(RESONANCE,ModItems.RESONANCE_TERMINAL.get(),"jei.omnira.ritual.resonance_title",gui) {
             public void setRecipe(IRecipeLayoutBuilder b,Resonance r,IFocusGroup focus) {
                 for(var a:com.mcmagic.omnira.world.dimension.DreamRitual.ANCHORS)
-                    slot(b,RecipeIngredientRole.CATALYST,60+a[0]*16,60+a[1]*16,"jei.omnira.ritual.offering").addItemStack(new ItemStack(ModItems.RESONANCE_CORE.get()));
+                    slot(b,RecipeIngredientRole.INPUT,60+a[0]*16,60+a[1]*16,"jei.omnira.ritual.offering").addItemStack(new ItemStack(ModItems.RESONANCE_CORE.get()));
                 slot(b,RecipeIngredientRole.CATALYST,60,60,"jei.omnira.ritual.either_core").addIngredients(Ingredient.of(ModItems.RITUAL_ENERGY_CORE.get(),ModItems.ADVANCED_RITUAL_ENERGY_CORE.get()));
                 slot(b,RecipeIngredientRole.INPUT,162,28,"jei.omnira.ritual.hand").addItemStack(new ItemStack(ModItems.SPACETIME_KNOT.get()));
                 slot(b,RecipeIngredientRole.CATALYST,150,98,"jei.omnira.ritual.pedestals").addItemStack(new ItemStack(ModItems.CRYSTAL_PEDESTAL.get(),8));
@@ -124,7 +126,7 @@ final class RitualJei {
         },new Page<Cleansing>(CLEANSING,ModItems.INFUSED_SPIRITUAL_CRYSTAL.get(),"jei.omnira.ritual.cleansing_title",gui) {
             public void setRecipe(IRecipeLayoutBuilder b,Cleansing r,IFocusGroup focus) {
                 for(var a:com.mcmagic.omnira.world.dimension.DreamRitual.ANCHORS)
-                    slot(b,RecipeIngredientRole.CATALYST,60+a[0]*16,60+a[1]*16,"jei.omnira.ritual.offering")
+                    slot(b,RecipeIngredientRole.INPUT,60+a[0]*16,60+a[1]*16,"jei.omnira.ritual.offering")
                             .addItemStack(new ItemStack(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()));
                 slot(b,RecipeIngredientRole.CATALYST,60,60,"jei.omnira.ritual.either_core")
                         .addIngredients(Ingredient.of(ModItems.RITUAL_ENERGY_CORE.get(),ModItems.ADVANCED_RITUAL_ENERGY_CORE.get()));
@@ -153,11 +155,24 @@ final class RitualJei {
                     slot(b,RecipeIngredientRole.INPUT,60+a[0]*16,60+a[1]*16,"jei.omnira.ritual.offering")
                             .addItemStack(new ItemStack(com.mcmagic.omnira.world.dimension.GenesisRitual.ingredients().get(index++)));
                 slot(b,RecipeIngredientRole.CATALYST,60,60,"jei.omnira.ritual.advanced_core").addItemStack(new ItemStack(ModItems.ADVANCED_RITUAL_ENERGY_CORE.get()));
-                slot(b,RecipeIngredientRole.INPUT,162,28,"jei.omnira.ritual.hand").addFluidStack(com.mcmagic.omnira.alchemy.AlchemyMaterials.REFINED.source.get(),10000);
+                var fluid=com.mcmagic.omnira.world.dimension.GenesisRitual.offering();
+                slot(b,RecipeIngredientRole.INPUT,162,28,"jei.omnira.ritual.hand").addFluidStack(fluid.getFluid(),fluid.getAmount()).setFluidRenderer(fluid.getAmount(),false,16,16);
                 slot(b,RecipeIngredientRole.CATALYST,150,98,"jei.omnira.ritual.pedestals").addItemStack(new ItemStack(ModItems.CRYSTAL_PEDESTAL.get(),8));
                 slot(b,RecipeIngredientRole.OUTPUT,193,76,"jei.omnira.ritual.drop").addItemStack(new ItemStack(com.mcmagic.omnira.paradox.ParadoxContent.GENESIS.get()));
             }
             public void draw(Genesis r,IRecipeSlotsView slots,GuiGraphics g,double x,double y){grid(g,7,16,60);arrow(g,132,76,177);note(g,"jei.omnira.ritual.genesis_steps");}
+        },new Page<WorldForming>(WORLD_FORMING,com.mcmagic.omnira.myriad.MiniatureWorldContent.ITEM.get(),"jei.omnira.ritual.world_forming_title",gui){
+            public void setRecipe(IRecipeLayoutBuilder b,WorldForming r,IFocusGroup focus){
+                int index=0;
+                for(var a:com.mcmagic.omnira.world.dimension.DreamRitual.ANCHORS)
+                    slot(b,RecipeIngredientRole.INPUT,60+a[0]*16,60+a[1]*16,"jei.omnira.ritual.offering")
+                            .addItemStack(new ItemStack(com.mcmagic.omnira.myriad.WorldComponent.values()[index++].item.get()));
+                slot(b,RecipeIngredientRole.CATALYST,60,60,"jei.omnira.ritual.advanced_core").addItemStack(new ItemStack(ModItems.ADVANCED_RITUAL_ENERGY_CORE.get()));
+                slot(b,RecipeIngredientRole.INPUT,162,28,"jei.omnira.ritual.hand").addItemStack(new ItemStack(com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get()));
+                slot(b,RecipeIngredientRole.CATALYST,150,98,"jei.omnira.ritual.pedestals").addItemStack(new ItemStack(ModItems.CRYSTAL_PEDESTAL.get(),8));
+                slot(b,RecipeIngredientRole.OUTPUT,193,76,"jei.omnira.ritual.drop").addItemStack(new ItemStack(com.mcmagic.omnira.myriad.MiniatureWorldContent.ITEM.get()));
+            }
+            public void draw(WorldForming r,IRecipeSlotsView slots,GuiGraphics g,double x,double y){grid(g,7,16,60);arrow(g,132,76,177);note(g,"jei.omnira.ritual.world_forming_steps");}
         });
         registration.addRecipeCategories(new IRecipeCategory<Entry>() {
             private final IDrawable icon=gui.createDrawableItemStack(new ItemStack(ModItems.RITUAL_ENERGY_CORE.get()));
@@ -177,6 +192,7 @@ final class RitualJei {
                 g.drawCenteredString(Minecraft.getInstance().font,page.getTitle(),110,202,0xFF514333);
             }
             private IRecipeCategory<?> page(Object ritual) {
+                if(ritual instanceof WorldForming)return pages.get(8);
                 if(ritual instanceof Genesis)return pages.get(7);
                 if(ritual instanceof Corridor)return pages.get(0);
                 if(ritual instanceof Affinity)return pages.get(1);

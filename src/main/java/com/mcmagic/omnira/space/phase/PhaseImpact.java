@@ -17,7 +17,7 @@ public final class PhaseImpact {
     public static void impale(List<Entity> occupants){
         for(var entity:occupants){
             if(entity instanceof LivingEntity living)com.mcmagic.omnira.space.sea.VoidSeaEffects.trueDamage(living,10,living.damageSources().genericKill());
-            else entity.hurt(entity.damageSources().genericKill(),10);
+            else entity.hurt(com.mcmagic.omnira.combat.OmniraDamage.source(entity,"true_damage"),10);
         }
     }
     private PhaseImpact(){}

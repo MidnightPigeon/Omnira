@@ -11,9 +11,17 @@ import net.minecraft.core.Direction;
 
 /** Optional Create accounting; never discard a reservation for an unverified topology. */
 public final class OmniraKineticAccounting {
+    public static float scaledImpact(KineticBlockEntity machine,float base){
+        return CrystalShaftInput.sufficient(machine.getTheoreticalSpeed())?base/CrystalShaftInput.MIN_RPM:0;
+    }
+    public static float refreshDynamicImpact(KineticBlockEntity machine,float coefficient,float previousRpm){
+        refreshImpact(machine,coefficient);float rpm=machine.getTheoreticalSpeed();
+        if(machine.hasNetwork()&&Float.compare(previousRpm,rpm)!=0)machine.getOrCreateNetwork().updateNetwork();
+        return rpm;
+    }
     public static float fixedImpact(KineticBlockEntity machine,float total){
         float rpm=Math.abs(machine.getTheoreticalSpeed());
-        if(rpm==0)return 0;
+        if(!CrystalShaftInput.sufficient(rpm))return 0;
         float coefficient=total/rpm;
         return (double)coefficient*rpm>total?Math.nextDown(coefficient):coefficient;
     }
@@ -35,6 +43,7 @@ public final class OmniraKineticAccounting {
                 &&Math.abs(net.calculateCapacity()-capacity)<.001)return;
         if(closedLoadedNetwork(net)){
             net.initFromTE(0,0,0);
+            net.updateNetwork();
             // Create's aggregate updater does not sync a size-only change.
             net.sync();
         }
@@ -47,7 +56,7 @@ public final class OmniraKineticAccounting {
             // Unknown gearboxes, belts and third-party connections may reach unloaded consumers.
             if(!(member instanceof KineticAssemblyBlockEntity||member instanceof KineticCrystalWorkstationEntity
                     ||member instanceof ManaEngineBlockEntity||member instanceof SpacetimeEngineKinetics.Output
-                    ||member instanceof CreateReactionPool.Port||member instanceof CreateSpacetimePort.PortEntity))return false;
+                    ||member instanceof CreateReactionPool.Port||member instanceof CreateSpacetimePort.PortEntity||member instanceof CodexKinetics.Host))return false;
             var level=member.getLevel();var pos=member.getBlockPos();var state=member.getBlockState();
             if(level==null||!java.util.Objects.equals(member.network,net.id)||!level.hasChunkAt(pos)
                     ||level.getBlockEntity(pos)!=member||!(state.getBlock() instanceof IRotate rotate))return false;

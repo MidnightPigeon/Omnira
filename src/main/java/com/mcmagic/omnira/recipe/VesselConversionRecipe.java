@@ -17,7 +17,7 @@ public record VesselConversionRecipe(Ingredient ingredient,ItemStack result) imp
             ItemStack.STRICT_CODEC.fieldOf("result").forGetter(VesselConversionRecipe::result)).apply(i,VesselConversionRecipe::new));
     public static final StreamCodec<RegistryFriendlyByteBuf,VesselConversionRecipe> STREAM=StreamCodec.composite(
             Ingredient.CONTENTS_STREAM_CODEC,VesselConversionRecipe::ingredient,ItemStack.STREAM_CODEC,VesselConversionRecipe::result,VesselConversionRecipe::new);
-    @Override public boolean matches(SingleRecipeInput input,Level level) {return ingredient.test(input.item());}
+    @Override public boolean matches(SingleRecipeInput input,Level level) {return RecipeInputSafety.empty(input.item())&&ingredient.test(input.item());}
     @Override public ItemStack assemble(SingleRecipeInput input,HolderLookup.Provider registries) {return result.copy();}
     @Override public ItemStack getResultItem(HolderLookup.Provider registries) {return result.copy();}
     @Override public boolean canCraftInDimensions(int width,int height) {return width*height>=1;}

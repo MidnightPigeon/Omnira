@@ -25,6 +25,13 @@ public final class PhaseGrowth {
     public static Set<BlockPos> form(){return FORM;}
     public static InteractionResult grow(UseOnContext context){return grow(context,context.getLevel().random);}
     public static InteractionResult grow(UseOnContext context,net.minecraft.util.RandomSource random){
+        return grow(context,random,false);
+    }
+    public static void mature(net.minecraft.server.level.ServerPlayer player,BlockPos pos){
+        grow(new UseOnContext(player,net.minecraft.world.InteractionHand.MAIN_HAND,
+                new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(pos),Direction.UP,pos,false)),player.getRandom(),true);
+    }
+    private static InteractionResult grow(UseOnContext context,net.minecraft.util.RandomSource random,boolean forced){
         var level=context.getLevel();var pos=context.getClickedPos();var player=context.getPlayer();var stack=context.getItemInHand();
         if(player==null||!level.getBlockState(pos).is(PhaseContent.CLUSTER.get()))return InteractionResult.PASS;
         var replacements=new LinkedHashSet<BlockPos>();
@@ -40,8 +47,8 @@ public final class PhaseGrowth {
             replacements.add(at);
         }
         if(!level.isClientSide){
-            var server=(ServerLevel)level;stack.consume(1,player);
-            if(random.nextInt(4)!=0){server.sendParticles(ParticleTypes.END_ROD,pos.getX()+.5,pos.getY()+.5,pos.getZ()+.5,3,.2,.2,.2,.01);return InteractionResult.SUCCESS;}
+            var server=(ServerLevel)level;if(!forced)stack.consume(1,player);
+            if(!forced&&random.nextInt(4)!=0){server.sendParticles(ParticleTypes.END_ROD,pos.getX()+.5,pos.getY()+.5,pos.getZ()+.5,3,.2,.2,.2,.01);return InteractionResult.SUCCESS;}
             var occupants=PhaseImpact.occupants(server,replacements);
             for(var at:replacements){
                 if(!at.equals(pos)&&!level.getBlockState(at).isAir())level.destroyBlock(at,false,player);

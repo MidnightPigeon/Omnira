@@ -1,0 +1,10 @@
+{
+  "text": [
+    "Report problems in the project's GitHub Issues. Search existing reports first, then include mod and loader versions, reproduction steps and relevant logs.",
+    "The author's website lists other projects and contact details."
+  ],
+  "external_links": [
+    { "label": "Project GitHub / Issues", "url": "https://github.com/MidnightPigeon/Omnira" },
+    { "label": "Author's Website", "url": "https://midnightpigeon.github.io/" }
+  ]
+}

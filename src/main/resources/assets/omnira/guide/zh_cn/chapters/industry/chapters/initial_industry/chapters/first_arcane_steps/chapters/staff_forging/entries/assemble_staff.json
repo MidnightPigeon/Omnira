@@ -1,6 +1,7 @@
 {
   "id": "assemble_staff",
   "item": "omnira:modular_staff",
+  "icon": "omnira:arcane_assembly_table",
   "title": "装配法杖",
   "text": [
     "在魔动装配台左下放入杖体、中央放入加固部件、右上放入杖端，其余四槽留空。完成锻造后获得组合后的法杖。",

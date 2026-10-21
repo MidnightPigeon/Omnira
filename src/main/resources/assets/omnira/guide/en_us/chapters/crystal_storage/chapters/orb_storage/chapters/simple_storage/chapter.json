@@ -1,7 +1,7 @@
 {
   "id": "simple_storage",
   "title": "Simple Storage",
-  "icon": "omnira:crystal_ball",
+  "icon": "omnira:crystal_casing",
   "introduction": "introduction.json",
   "entries": [
     "entries/crystal_ball.json",

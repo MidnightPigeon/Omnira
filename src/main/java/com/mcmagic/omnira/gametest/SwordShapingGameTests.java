@@ -174,6 +174,27 @@ public final class SwordShapingGameTests {
         h.assertTrue(drops.stream().noneMatch(e->e.getItem().is(ModItems.ANALYSIS_CRYSTAL.get()) || e.getItem().is(Items.IRON_SWORD) || e.getItem().is(ModItems.PURE_VESSEL.get())),"Consumed input returned");
         h.assertTrue(h.getLevel().getEntitiesOfClass(com.mcmagic.omnira.entity.ShadowMist.class,area).isEmpty(),"Colored collapse should not spawn dark mist");h.succeed();
     }
+    @GameTest(template="spell_arena") public static void bothRecipesConsumeAllOfferingsAndKeepPedestals(GameTestHelper h) {
+        for(boolean needle:new boolean[]{false,true}) {
+            var v=ritual(h,needle);var pos=v.getBlockPos();var inputs=new java.util.ArrayList<ItemStack>();
+            for(var a:SwordShapingRitual.ANCHORS)inputs.add(((CrystalPedestalBlockEntity)h.getLevel().getBlockEntity(pos.offset(a[0],0,a[1]))).getItem(0).copy());
+            h.assertTrue(v.ritual.start(player(h,Items.AIR)),"Recipe did not start");
+            for(int i=0;i<SwordShapingRitual.DURATION;i++)v.ritual.tick();
+            h.assertTrue(h.getLevel().isEmptyBlock(pos),"Pure vessel was not consumed");
+            for(var a:SwordShapingRitual.ANCHORS) {
+                var at=pos.offset(a[0],0,a[1]);
+                h.assertTrue(h.getLevel().getBlockState(at).is(ModBlocks.CRYSTAL_PEDESTAL.get())
+                        && ((CrystalPedestalBlockEntity)h.getLevel().getBlockEntity(at)).getItem(0).isEmpty(),"Offering retained or pedestal consumed");
+            }
+            var drops=h.getLevel().getEntitiesOfClass(ItemEntity.class,new AABB(pos).inflate(3));
+            var output=needle?ModItems.ARCANE_NEEDLE.get():ModItems.CRYSTALLIZED_NAIL.get();
+            h.assertTrue(drops.stream().filter(e->e.getItem().is(output)).mapToInt(e->e.getItem().getCount()).sum()==1,"Incorrect ritual output");
+            h.assertTrue(drops.stream().noneMatch(e->e.getItem().is(Items.IRON_SWORD) || e.getItem().is(ModItems.PURE_VESSEL.get())
+                    || inputs.stream().anyMatch(input->e.getItem().is(input.getItem()))),"Consumed material refunded on completion");
+            drops.forEach(net.minecraft.world.entity.Entity::discard);
+        }
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void ritualPersistsAndRefundsOnBreak(GameTestHelper h) {
         var v=ritual(h,false);var p=player(h,Items.AIR);h.assertTrue(v.ritual.start(p),"Nail recipe missing");
         for(int i=0;i<45;i++)v.ritual.tick();var registries=h.getLevel().registryAccess();

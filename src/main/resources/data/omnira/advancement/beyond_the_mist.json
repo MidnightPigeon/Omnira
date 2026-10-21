@@ -1,4 +1,5 @@
 {
+  "parent": "omnira:easter_eggs/root",
   "display": {
     "icon": {
       "id": "omnira:crystal_ball"

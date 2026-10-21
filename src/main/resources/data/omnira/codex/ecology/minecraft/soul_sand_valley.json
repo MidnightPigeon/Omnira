@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "minecraft:soul_soil"
+  },
+  "surface": {
+    "Name": "minecraft:soul_sand"
+  },
+  "decorations": [
+    {
+      "kind": "spire",
+      "block": {
+        "Name": "minecraft:basalt"
+      },
+      "crown": {
+        "Name": "minecraft:bone_block"
+      }
+    }
+  ]
+}

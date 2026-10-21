@@ -1,0 +1,7 @@
+{
+  "type": "omnira:reaction",
+  "items": [{"ingredient": {"item": "omnira:genesis_particles"}}, {"ingredient": {"item": "minecraft:wind_charge"}}],
+  "fluid": {"id": "omnira:refined_spacetime", "amount": 1000},
+  "support": {"item": "omnira:enhanced_alchemical_energy_core"},
+  "results": [{"id": "omnira:flowing_sky_canopy"}]
+}

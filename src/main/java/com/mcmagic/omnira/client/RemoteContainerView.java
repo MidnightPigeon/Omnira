@@ -33,7 +33,11 @@ public final class RemoteContainerView {
     public static void logout(net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent.LoggingOut event){clear();}
     @net.neoforged.bus.api.SubscribeEvent
     public static void closed(net.neoforged.neoforge.client.event.ScreenEvent.Closing event){
-        if(event.getScreen() instanceof net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<?> screen&&screen.getMenu().containerId==menuId)clear();
+        if(event.getScreen() instanceof net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<?> screen&&screen.getMenu().containerId==menuId){
+            // A temporary guide/ponder screen does not close the server's still-active menu.
+            var player=Minecraft.getInstance().player;
+            if(player==null||player.containerMenu!=screen.getMenu())clear();
+        }
     }
     private RemoteContainerView(){}
 }

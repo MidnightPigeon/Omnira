@@ -11,11 +11,12 @@ public abstract class ResponsiveScreen extends Screen {
     protected abstract int minimumWidth();
     protected abstract int minimumHeight();
     @Override protected void init(){
-        uiScale=UiViewport.fit(width,height,minimumWidth(),minimumHeight());
-        width=Math.round(width/uiScale);height=Math.round(height/uiScale);
+        var window=minecraft.getWindow();var viewport=UiViewport.layout(window.getGuiScaledWidth(),window.getGuiScaledHeight(),minimumWidth(),minimumHeight());
+        uiScale=viewport.scale();width=viewport.width();height=viewport.height();
         super.init();
     }
     @Override public final void render(GuiGraphics g,int x,int y,float partial){
+        g=new ViewportGraphics(g,width,height);
         widgetTooltip.begin();
         g.pose().pushPose();g.pose().scale(uiScale,uiScale,1);
         try{renderContent(g,(int)(x/uiScale),(int)(y/uiScale),partial);widgetTooltip.render(g,font,(int)(x/uiScale),(int)(y/uiScale));}finally{g.pose().popPose();}

@@ -79,7 +79,7 @@ public final class ConstructionPrison {
         killingTool.enchant(player.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.LOOTING),fortune);
         player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,killingTool);
         try {
-            target.hurt(SpellDamageSource.of(target,net.minecraft.world.damagesource.DamageTypes.GENERIC_KILL,player,player,"mined"),Float.MAX_VALUE);
+            com.mcmagic.omnira.combat.OmniraDamage.execute(target,SpellDamageSource.of(target,net.minecraft.world.damagesource.DamageTypes.GENERIC_KILL,player,player,"mined"));
         } finally {
             player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,held);
             ConstructionLock.release(target);

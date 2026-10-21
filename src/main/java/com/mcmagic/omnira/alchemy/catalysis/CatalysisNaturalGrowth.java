@@ -60,7 +60,8 @@ public final class CatalysisNaturalGrowth {
         if(plant.is(Blocks.SWEET_BERRY_BUSH))return rule(4,plant.setValue(SweetBerryBushBlock.AGE,3),Kind.BERRY,CatalysisGrowth.Yield.CROP);
         if(plant.getBlock() instanceof CropBlock||plant.is(Blocks.PITCHER_CROP)){
             var age=CatalysisGrowth.age(plant);int stages=java.util.Collections.max(age.getPossibleValues())+1;
-            return rule(stages,plan.plant(),Kind.CROP,CatalysisGrowth.Yield.CROP);
+            // Custom catalysis recipes may visualize an immature plant; natural loot still uses its real mature state.
+            return rule(stages,plant.setValue(age,stages-1),Kind.CROP,CatalysisGrowth.Yield.CROP);
         }
         // Water-dependent plants, bonemeal-only growth and material synthesis are not invented here.
         return null;

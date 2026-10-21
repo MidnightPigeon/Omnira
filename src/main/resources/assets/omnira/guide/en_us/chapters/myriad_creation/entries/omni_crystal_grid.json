@@ -1,0 +1,16 @@
+{
+  "id": "omni_crystal_grid",
+  "title": "Omni Crystal Grid",
+  "item": "omnira:omni_crystal_grid",
+  "recipes": true,
+  "text": [
+    "Place an Arcane Crystal Grid in the middle node of the Advanced Assembly Table, with an Omni Microcore on each side. Add 3 Genesis Particles and 3 Grid Frames in any order on the tabletop. The upgrade preserves the spell chain and appends empty slots.",
+    "Holds 12 spell crystals. Provides a 4x engine output multiplier and an additional 10% spell cooldown reduction when equipped."
+  ],
+  "links": [
+    {"target": "miniature_world_framework", "label": "Omni Microcores"},
+    {"target": "grains_to_towers", "label": "Cultivating Genesis Particles"},
+    {"target": "advanced_assembly_table", "label": "Advanced Assembly Table"},
+    {"target": "arcane_crystal_grid", "label": "Arcane Crystal Grid"}
+  ]
+}

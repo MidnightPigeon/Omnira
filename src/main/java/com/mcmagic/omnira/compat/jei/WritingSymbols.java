@@ -13,7 +13,7 @@ final class WritingSymbols {
         double phase=time%3/3;
         float scale=(float)Math.sin(Math.PI*phase);
         if(scale<.15F)return;
-        var choices=element?List.of(ModItems.SHARP_BREATH.get(),ModItems.HEALING_DEW.get(),ModItems.DISSOCIATION_THREAD.get(),ModItems.CONSTRUCTION_MATRIX.get(),ModItems.DARK_MICROCORE.get())
+        var choices=element?List.of(ModItems.SHARP_BREATH.get(),ModItems.HEALING_DEW.get(),ModItems.DISSOCIATION_THREAD.get(),ModItems.CONSTRUCTION_MATRIX.get(),ModItems.DARK_MICROCORE.get(),com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get())
                 :List.of(Items.CLOCK,Items.IRON_BLOCK,ModItems.SPIRITUAL_CRYSTAL.get(),ModItems.LIGHT_MICROCORE.get());
         var stack=new ItemStack(choices.get((int)(time/3)%choices.size()));
         g.pose().pushPose();g.pose().translate(x+8,y+8,0);g.pose().scale(scale,scale,1);g.renderFakeItem(stack,-8,-8);g.pose().popPose();

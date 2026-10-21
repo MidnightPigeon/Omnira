@@ -14,7 +14,7 @@ public final class ManaBar {
         g.fill(left,y+1,right,y+12,0xFF343139);
         g.fill(left+1,y+2,right-1,y+11,0xFFB7B3BD);
         g.fill(left+2,y+3,right-2,y+10,0xFF24222A);
-        int fill=Mth.clamp((int)Math.round((right-left-4)*mana.current()/mana.maximum()),0,right-left-4);
+        int fill=(int)Math.round((right-left-4)*Mth.clamp(mana.current()/mana.maximum(),0,1));
         if(fill>0) {
             g.fill(left+2,y+3,left+2+fill,y+10,color);
             g.fill(left+2,y+9,left+2+fill,y+10,0xFF939098);
@@ -60,6 +60,7 @@ public final class ManaBar {
                 default -> {}
             }
         }
+        if(mana.current()>mana.maximum())g.fill(left+2,y+1,right-2,y+2,mana.pulseOverloaded()?0xFFF28282:0xFFF1C76B);
         String label=(int)mana.current()+"/"+(int)mana.maximum();
         float scale=Math.min(.75F,(width-14F)/Math.max(1,font.width(label)));
         g.pose().pushPose();

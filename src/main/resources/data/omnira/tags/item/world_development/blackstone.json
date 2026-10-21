@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:blackstone",
+    "minecraft:polished_blackstone",
+    "minecraft:polished_blackstone_bricks",
+    "minecraft:chiseled_polished_blackstone",
+    "minecraft:cracked_polished_blackstone_bricks",
+    "minecraft:gilded_blackstone",
+    "minecraft:blackstone_stairs",
+    "minecraft:polished_blackstone_stairs",
+    "minecraft:polished_blackstone_brick_stairs"
+  ]
+}

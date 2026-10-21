@@ -49,6 +49,7 @@ public final class CruiseOrbMenu extends AbstractContainerMenu {
     }
     @Override public void clicked(int index,int button,ClickType type,Player player){
         if(!stillValid(player))return;
+        if(com.mcmagic.omnira.menu.UpgradeMenuFeedback.rejectClick(this,index,button,type,player,UPGRADES,CORE))return;
         if(index==TRASH){
             var slot=slots.get(TRASH);
             if(type==ClickType.PICKUP && !getCarried().isEmpty() && (button==0 || button==1)){
@@ -64,26 +65,7 @@ public final class CruiseOrbMenu extends AbstractContainerMenu {
                 }
             }
         }
-        if(index>=0 && index<12 && type==ClickType.PICKUP){
-            var slot=slots.get(index);var stored=slot.getItem();var carried=getCarried();
-            if(carried.isEmpty()){
-                int take=Math.min(stored.getCount(),stored.getMaxStackSize());if(button==1)take=(take+1)/2;setCarried(slot.remove(take));
-            } else if(slot.mayPlace(carried) && (stored.isEmpty() || ItemStack.isSameItemSameComponents(stored,carried))){
-                int amount=Math.min(slot.getMaxStackSize(carried)-stored.getCount(),button==1?1:carried.getCount());
-                if(amount>0){slot.set(carried.copyWithCount(stored.getCount()+amount));carried.shrink(amount);}
-            } else if(button==0 && slot.mayPlace(carried) && stored.getCount()<=stored.getMaxStackSize() && carried.getCount()<=slot.getMaxStackSize(carried)){
-                slot.set(carried);setCarried(stored);
-            }
-            slot.setChanged();return;
-        }
-        if(index>=0 && index<12 && type==ClickType.SWAP && slots.get(index).getItem().getCount()>slots.get(index).getItem().getMaxStackSize()){
-            if((button>=0 && button<9 || button==40) && player.getInventory().getItem(button).isEmpty()){
-                var slot=slots.get(index);player.getInventory().setItem(button,slot.remove(slot.getItem().getMaxStackSize()));slot.setChanged();
-            }return;
-        }
-        if(index>=0 && index<12 && type==ClickType.THROW && getCarried().isEmpty()){
-            var slot=slots.get(index);player.drop(slot.remove(button==0?1:Math.min(slot.getItem().getCount(),slot.getItem().getMaxStackSize())),true);slot.setChanged();return;
-        }
+        if(com.mcmagic.omnira.menu.LargeStackMenuClicks.handle(this,index,button,type,player,0,12))return;
         super.clicked(index,button,type,player);
     }
     @Override public boolean canDragTo(Slot slot){return slot!=slots.get(TRASH) && super.canDragTo(slot);}
@@ -95,13 +77,15 @@ public final class CruiseOrbMenu extends AbstractContainerMenu {
             while(!stack.isEmpty()){
                 int before=stack.getCount();if(!moveItemStackTo(stack,PLAYER,slots.size(),true) || before==stack.getCount())break;
             }
-        } else if(stack.getItem() instanceof OrbUpgradeItem){moveItemStackTo(stack,UPGRADES,CORE,false);}
+        } else if(stack.getItem() instanceof OrbUpgradeItem){
+            if(!moveItemStackTo(stack,UPGRADES,CORE,false))com.mcmagic.omnira.menu.UpgradeMenuFeedback.incompatible(this,stack,player,UPGRADES,CORE);
+        }
         else if(stack.getItem() instanceof com.mcmagic.omnira.item.SpellCoreItem){moveItemStackTo(stack,CORE,CORE+1,false);}
         else {
             if(orb.storage.port.isItemValid(0,stack) && !slots.get(PORT).hasItem())moveItemStackTo(stack,PORT,UPGRADES,false);
-            else stack.setCount(orb.storage.insert(stack,false).getCount());
+            else stack.setCount(orb.storage.insert(stack.copy(),false).getCount());
         }
         if(stack.getCount()==original.getCount())return ItemStack.EMPTY;
-        if(stack.isEmpty())slot.setByPlayer(ItemStack.EMPTY);else slot.setChanged();slot.onTake(player,stack);return original;
+        if(stack.isEmpty())slot.setByPlayer(ItemStack.EMPTY);else slot.set(stack);slot.onTake(player,stack);return original;
     }
 }

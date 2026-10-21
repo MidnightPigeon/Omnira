@@ -122,19 +122,21 @@ public final class ModBlockEntityTypes {
         eventBus.addListener(ModBlockEntityTypes::registerCapabilities);
     }
     private static void registerCapabilities(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK,com.mcmagic.omnira.pulse.PulseContent.ENTITY.get(),
+                (host,side)->com.mcmagic.omnira.pulse.PulseOrbEntity.from(host).conversion.face(side));
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,SPACETIME_PORT.get(),(e,s)->((com.mcmagic.omnira.space.SpacetimePortHost)e).port().itemPort(s));
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,SPACETIME_PORT.get(),(e,s)->((com.mcmagic.omnira.space.SpacetimePortHost)e).port().fluidPort(s));
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK,SPACETIME_PORT.get(),(e,s)->((com.mcmagic.omnira.space.SpacetimePortHost)e).port().energyPort(s));
-        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,REACTION_POOL.get(),com.mcmagic.omnira.alchemy.ReactionPoolBlock::itemPort);
-        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,REACTION_POOL.get(),com.mcmagic.omnira.alchemy.ReactionPoolBlock::fluidPort);
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,REACTION_POOL.get(),(be,side)->com.mcmagic.omnira.progression.BranchAutomation.items(com.mcmagic.omnira.alchemy.ReactionPoolBlock.controller(be.getLevel(),be.getBlockPos()),com.mcmagic.omnira.alchemy.ReactionPoolBlock.itemPort(be,side)));
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,REACTION_POOL.get(),(be,side)->com.mcmagic.omnira.progression.BranchAutomation.fluids(com.mcmagic.omnira.alchemy.ReactionPoolBlock.controller(be.getLevel(),be.getBlockPos()),com.mcmagic.omnira.alchemy.ReactionPoolBlock.fluidPort(be,side)));
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK,REACTION_POOL.get(),com.mcmagic.omnira.alchemy.ReactionPoolBlock::energyPort);
         event.registerItem(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM,
                 (stack,context)->com.mcmagic.omnira.item.PortableStorageRules.stabilized(stack)?new com.mcmagic.omnira.item.PortableLiquidOrbFluidHandler(stack):null,
                 ModItems.LIQUID_CRYSTAL_BALL.get(),com.mcmagic.omnira.storage.CrystalStorageContent.FLUID.get());
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,RITUAL_ENERGY_CORE.get(),
                 (core,side)->core.getBlockState().is(ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get())?core.genesisOffering:null);
-        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,ROUGH_ALCHEMY_CAULDRON.get(),(vessel,side)->vessel.tank);
-        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,ROUGH_ALCHEMY_CAULDRON.get(),(vessel,side)->vessel.items);
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,ROUGH_ALCHEMY_CAULDRON.get(),(vessel,side)->com.mcmagic.omnira.progression.BranchAutomation.fluids(vessel,vessel.tank));
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,ROUGH_ALCHEMY_CAULDRON.get(),(vessel,side)->com.mcmagic.omnira.progression.BranchAutomation.items(vessel,vessel.items));
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,LIQUID_CRYSTAL_BALL.get(),(ball,side)->ball.fluidHandler);
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,CRYSTAL_BALL.get(),(ball,side)->ball.itemHandler);
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,CRYSTAL_BALL.get(),(ball,side)->ball instanceof com.mcmagic.omnira.block.entity.VoidCrystalBallBlockEntity sink?sink.fluidHandler:null);

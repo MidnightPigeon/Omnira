@@ -1,0 +1,15 @@
+{
+  "id": "boundary_crystal_membrane",
+  "title": "Boundary Crystal Membrane",
+  "item": "omnira:boundary_crystal_membrane",
+  "recipes": false,
+  "text": [
+    "Add 1B of Void Starflow in a Large Alchemical Reaction Pool to form a transparent membrane defining a world's boundaries."
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "Ritual of World Formation"
+    }
+  ]
+}

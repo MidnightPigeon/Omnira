@@ -251,6 +251,20 @@ public final class DreamMirrorGameTests {
     public static void tradePool(GameTestHelper h) {
         var mirror=mirror(h);
         var table=h.getLevel().getServer().reloadableRegistries().getLootTable(DreamMirror.TRADE_LOOT);
+        var encoded=net.minecraft.world.level.storage.loot.LootTable.DIRECT_CODEC.encodeStart(
+                h.getLevel().registryAccess().createSerializationContext(com.mojang.serialization.JsonOps.INSTANCE),table).getOrThrow().getAsJsonObject();
+        var pools=encoded.getAsJsonArray("pools");h.assertTrue(pools.size()==1,"Mirror trades must select one reward pool");
+        var expected=java.util.Map.ofEntries(
+                java.util.Map.entry("dream_crystal_bedrock",20),java.util.Map.entry("primordial_spell_core",10),
+                java.util.Map.entry("music_disc_mi_meng_ye",20),java.util.Map.entry("arcane_crystal_grid",10),
+                java.util.Map.entry("shadow_manuscript",40),java.util.Map.entry("light_crystal_core",40),java.util.Map.entry("spiritual_crystal",40),
+                java.util.Map.entry("earth_microcore",5),java.util.Map.entry("water_microcore",5),java.util.Map.entry("fire_microcore",5),java.util.Map.entry("air_microcore",5));
+        int totalWeight=0;var seen=new java.util.HashSet<String>();
+        for(var entry:pools.get(0).getAsJsonObject().getAsJsonArray("entries")){
+            var object=entry.getAsJsonObject();var name=object.get("name").getAsString().substring("omnira:".length());int weight=object.get("weight").getAsInt();
+            h.assertTrue(seen.add(name)&&java.util.Objects.equals(expected.get(name),weight),"Wrong exact trade weight: "+name);totalWeight+=weight;
+        }
+        h.assertTrue(totalWeight==200&&seen.size()==expected.size(),"Trade probability total or reward set changed");
         var params=new net.minecraft.world.level.storage.loot.LootParams.Builder(h.getLevel())
                 .withParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.ORIGIN,mirror.position())
                 .withParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY,mirror)
@@ -263,11 +277,12 @@ public final class DreamMirrorGameTests {
             h.assertTrue(stack.getCount()==(stack.is(ModItems.SPIRITUAL_CRYSTAL.get())?16:1),"Wrong reward count");
             counts.merge(stack.getItem(),1,Integer::sum);
         }
-        h.assertTrue(counts.size()==10,"Missing or unexpected reward type");
+        h.assertTrue(counts.size()==11,"Missing or unexpected reward type");
         int mothers=counts.getOrDefault(DreamContent.DREAM_CRYSTAL_BEDROCK.get().asItem(),0);
         int cores=counts.getOrDefault(ModItems.TEST_SPELL_CORE.get(),0);
         int grids=counts.getOrDefault(ModItems.ARCANE_CRYSTAL_GRID.get(),0);
-        h.assertTrue(mothers>450 && mothers<750 && cores>270 && cores<530 && grids>100 && grids<300,"Reward probabilities outside expected ranges");
+        int discs=counts.getOrDefault(ModItems.MUSIC_DISC_MI_MENG_YE.get(),0);
+        h.assertTrue(mothers>300&&mothers<500&&cores>100&&cores<300&&grids>100&&grids<300&&discs>300&&discs<500,"Reward probabilities outside expected ranges");
         h.succeed();
     }
     @GameTest(template="spell_arena")

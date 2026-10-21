@@ -10,6 +10,10 @@ import net.minecraft.world.item.ItemStack;
 
 public final class PortableStorageRules {
     private PortableStorageRules(){}
+    public static boolean packedFrame(ItemStack stack){
+        return stack.getItem() instanceof com.mcmagic.omnira.myriad.MiniatureWorldBlock.PlacementItem
+                &&stack.has(DataComponents.BLOCK_ENTITY_DATA);
+    }
     public static boolean stabilized(ItemStack stack){
         if(stack.isEmpty())return false;
         boolean vehicle=stack.is(ModItems.CRUISE_ORB.get());

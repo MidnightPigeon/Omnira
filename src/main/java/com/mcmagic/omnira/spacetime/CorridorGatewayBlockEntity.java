@@ -32,7 +32,7 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
     public CorridorGatewayBlockEntity(BlockPos pos,BlockState state){super(ModBlockEntityTypes.CORRIDOR_GATEWAY.get(),pos,state);}
     public void initialize(Player player,InteractionHand hand,DreamMirror mirror){
         mirrorId=mirror.getUUID();aggregate=player.getItemInHand(hand).split(1);
-        permanent=aggregate.is(ModItems.SPACETIME_SPELL_CORE.get());
+        permanent=aggregate.is(CorridorRitual.activator(true));
         mirror.saveWithoutId(mirrorData);
         var delta=player.position().subtract(Vec3.atCenterOf(worldPosition));
         yaw=(float)Math.toDegrees(Math.atan2(-delta.x,delta.z));
@@ -47,15 +47,15 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
     public void tick(){
         if(!(level instanceof ServerLevel server) || started<0 || released)return;
         long now=level.getGameTime();
+        for(var a:DreamRitual.ANCHORS)if(!server.hasChunkAt(worldPosition.offset(a[0],-1,a[1])))return;
+        var pedestals=CorridorRitual.pedestals(server,worldPosition.below());
+        if(!server.getBlockState(worldPosition.below()).is(ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get()) || pedestals.size()!=8){
+            server.removeBlock(worldPosition,false);return;
+        }
         if(opened>=0){
             if(!permanent && now-opened>=CorridorRitual.OPEN_TICKS){server.removeBlock(worldPosition,false);return;}
             transferTouching(server);
         }else{
-            for(var a:DreamRitual.ANCHORS)if(!server.hasChunkAt(worldPosition.offset(a[0],-1,a[1])))return;
-            var pedestals=CorridorRitual.pedestals(server,worldPosition.below());
-            if(!server.getBlockState(worldPosition.below()).is(ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get()) || pedestals.size()!=8){
-                server.removeBlock(worldPosition,false);return;
-            }
             if(now-started>=CorridorRitual.FORM_TICKS){
                 aggregate=ItemStack.EMPTY;opened=now;sync();
                 server.playSound(null,worldPosition,net.minecraft.sounds.SoundEvents.PORTAL_TRIGGER,net.minecraft.sounds.SoundSource.BLOCKS,.5F,1.4F);

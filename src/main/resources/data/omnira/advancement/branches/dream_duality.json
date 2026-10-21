@@ -1,0 +1,40 @@
+{
+  "parent": "omnira:mainline/beyond_dreams",
+  "display": {
+    "icon": {
+      "id": "omnira:dream_crystal"
+    },
+    "title": {
+      "translate": "advancement.omnira.branches.dream_duality.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.branches.dream_duality.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "light": {
+      "trigger": "minecraft:impossible"
+    },
+    "dark": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "light"
+    ],
+    [
+      "dark"
+    ]
+  ]
+}

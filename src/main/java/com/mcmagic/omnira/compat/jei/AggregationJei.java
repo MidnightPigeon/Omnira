@@ -28,7 +28,8 @@ public final class AggregationJei implements IModPlugin {
                             i==1||i==7?List.of(new ItemStack(DreamContent.EXCITED_SPATIAL_CRYSTAL.get()),new ItemStack(AggregationContent.SPATIAL_BLOCK.get())):
                             i==3||i==5?List.of(new ItemStack(DreamContent.LIVING_TEMPORAL_SILT.get()),new ItemStack(TimeNatureContent.LIVING_SILT.get())):
                             List.of(new ItemStack(ModBlocks.INFUSED_CRYSTAL_CASING.get()));
-                    builder.addSlot(RecipeIngredientRole.INPUT,8+i%3*19,5+i/3*19).setStandardSlotBackground().addItemStacks(choices);
+                    builder.addSlot(RecipeIngredientRole.INPUT,8+i%3*19,5+i/3*19).setStandardSlotBackground().addItemStacks(choices)
+                            .addRichTooltipCallback((view,tip)->tip.add(net.minecraft.network.chat.Component.translatable("jei.omnira.construction.free_facing")));
                 }
                 builder.addSlot(RecipeIngredientRole.INPUT,77,24).setStandardSlotBackground().addItemStack(new ItemStack(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()));
                 builder.addSlot(RecipeIngredientRole.OUTPUT,132,24).setStandardSlotBackground().addItemStack(new ItemStack(AggregationContent.ITEM.get()));

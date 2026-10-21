@@ -1,0 +1,15 @@
+{
+  "id": "boundary_crystal_membrane",
+  "title": "界域晶膜",
+  "item": "omnira:boundary_crystal_membrane",
+  "recipes": false,
+  "text": [
+    "追加1B虚空星流，在大型反应池中凝结出划定世界边界的透明晶膜。"
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "拟界之仪"
+    }
+  ]
+}

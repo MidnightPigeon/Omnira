@@ -35,7 +35,7 @@ public final class AdvancedForgeBlockEntity extends CrystalProcessingTableBlockE
     public boolean hot(){return working() && elapsed>=duration/5 && elapsed<duration*9/10;}
     public int buttonTicks(){return buttonTicks;}
     public ItemStack output(){return output;}
-    public boolean canPlaceItem(int slot,ItemStack item){return !working() && (slot!=9 || item.getItem() instanceof SpellCoreItem);}
+    public boolean canPlaceItem(int slot,ItemStack item){return !working() && com.mcmagic.omnira.item.PortableStorageRules.mayPlace(this,item) && (slot!=9 || item.getItem() instanceof SpellCoreItem);}
     public static int duration(ItemStack core){return core.getItem() instanceof SpellCoreItem source?Math.max(1,(int)Math.round(1200D*512/Math.max(1,source.engineOutput(core).stress()))):0;}
     public boolean start(Player player){
         if(stormDamaged || level==null || level.isClientSide || !stillValid(player) || player.isSpectator() || working() || !output.isEmpty())return false;
@@ -78,12 +78,13 @@ public final class AdvancedForgeBlockEntity extends CrystalProcessingTableBlockE
             reserved=NonNullList.withSize(9,ItemStack.EMPTY);
         }else if(elapsed%20==0)setChanged();
     }
+    public void worldRotation(){if(working()&&!stormDamaged){elapsed=Math.max(0,duration-1);tick();}}
     public void node(Player player,InteractionHand hand,int slot){
-        if(working() || !stillValid(player))return;
+        if(slot<0 || slot>=getContainerSize() || working() || !stillValid(player))return;
         var held=player.getItemInHand(hand);
         if(held.isEmpty()){
             var item=removeItem(slot,1);if(!player.getInventory().add(item))player.drop(item,false);
-        }else if(getItem(slot).isEmpty()){setItem(slot,held.copyWithCount(1));if(!player.getAbilities().instabuild)held.shrink(1);}
+        }else if(canPlaceItem(slot,held) && getItem(slot).isEmpty()){setItem(slot,held.copyWithCount(1));if(!player.getAbilities().instabuild)held.shrink(1);}
     }
     public boolean collect(Player player){
         if(working() || output.isEmpty())return false;

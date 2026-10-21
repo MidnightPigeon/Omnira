@@ -4,12 +4,13 @@
   "icon": "omnira:arcane_assembly_table",
   "introduction": "introduction.json",
   "entries": [
+    "entries/analysis_artisan_table.json",
+    "entries/crystal_casing.json",
+    "entries/arcane_assembly_table.json",
+    "entries/crystal_processing_table.json",
     "entries/crystal_furnace.json",
     "entries/crystal_grindstone.json",
     "entries/crystal_anvil.json",
-    "entries/analysis_artisan_table.json",
-    "entries/crystal_processing_table.json",
-    "entries/arcane_assembly_table.json",
     "entries/mana_engine.json",
     "entries/ritual_energy_core_crafting.json",
     "entries/rough_alchemy_cauldron_crafting.json"

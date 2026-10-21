@@ -43,7 +43,10 @@ public final class Omnira {
         com.mcmagic.omnira.space.sea.VoidSeaContent.register(modEventBus);
         com.mcmagic.omnira.alchemy.AlchemyMaterials.register(modEventBus);
         com.mcmagic.omnira.alchemy.catalysis.CatalysisContent.register(modEventBus);
+        com.mcmagic.omnira.myriad.MiniatureWorldContent.register(modEventBus);
+        com.mcmagic.omnira.codex.MyriadCodexContent.init();
         com.mcmagic.omnira.engine.SpacetimeEngineContent.init();
+        com.mcmagic.omnira.pulse.PulseContent.init();
         com.mcmagic.omnira.space.sea.StarlightContent.init();
         com.mcmagic.omnira.space.sea.StellarCraftContent.init();
         com.mcmagic.omnira.guidance.GuidanceContent.init();

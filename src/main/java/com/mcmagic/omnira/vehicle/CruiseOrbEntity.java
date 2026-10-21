@@ -62,7 +62,7 @@ public final class CruiseOrbEntity extends Entity {
         super.onSyncedDataUpdated(key);
         if(key==STORAGE && level().isClientSide && storage!=null)storage.load(entityData.get(STORAGE));
     }
-    public double speed(){return (core().getItem() instanceof SpellCoreItem?core().is(ModItems.TEST_SPELL_CORE.get())?2:3:1)*storage.speedMultiplier();}
+    public double speed(){return (core().getItem() instanceof SpellCoreItem?core().is(ModItems.TEST_SPELL_CORE.get())?2:3:1)*Math.min(2,storage.speedMultiplier());}
     public float turnSpeed(){return 3;}
     public static Vec3 pressedAxes(int keys){return new Vec3(((keys&8)!=0?1:0)-((keys&4)!=0?1:0),
             ((keys&16)!=0?1:0)-((keys&32)!=0?1:0),((keys&1)!=0?1:0)-((keys&2)!=0?1:0));}

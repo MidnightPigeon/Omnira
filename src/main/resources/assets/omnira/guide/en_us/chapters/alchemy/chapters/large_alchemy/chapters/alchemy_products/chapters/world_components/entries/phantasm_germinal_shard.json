@@ -1,0 +1,15 @@
+{
+  "id": "phantasm_germinal_shard",
+  "title": "Phantasm Germinal Shard",
+  "item": "omnira:phantasm_germinal_shard",
+  "recipes": false,
+  "text": [
+    "Add one Dream Crystal to form a shard of unrealized landscapes and possibilities."
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "Ritual of World Formation"
+    }
+  ]
+}

@@ -15,14 +15,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 @EventBusSubscriber(modid="omnira")
 public final class VoidSeaEffects {
     public static boolean trueDamage(LivingEntity target,float damage,DamageSource source){
-        if(!target.isAlive()||target.isSpectator()||target instanceof Player p&&p.isCreative())return false;
-        if(damage<=0||com.mcmagic.omnira.space.phase.PhaseConcealment.blocks(target,source))return false;
-        if(source.getEntity() instanceof LivingEntity attacker)target.setLastHurtByMob(attacker);
-        target.setHealth(Math.max(0,target.getHealth()-damage));
-        com.mcmagic.omnira.space.phase.PhaseConcealment.afterDamage(target);
-        if(target.level() instanceof ServerLevel server)server.broadcastDamageEvent(target,source);
-        if(target.getHealth()<=0)target.die(source);
-        return true;
+        return com.mcmagic.omnira.combat.OmniraDamage.trueDamage(target,damage,source);
     }
     @SubscribeEvent public static void tick(EntityTickEvent.Post event){
         Entity e=event.getEntity();
@@ -31,7 +24,7 @@ public final class VoidSeaEffects {
         if(data.contains("OmniraStarflowHit")&&now-data.getLong("OmniraStarflowHit")<20)return;
         data.putLong("OmniraStarflowHit",now);
         if(e instanceof LivingEntity living)trueDamage(living,1,living.damageSources().genericKill());
-        else e.hurt(e.damageSources().genericKill(),1);
+        else e.hurt(com.mcmagic.omnira.combat.OmniraDamage.source(e,"true_damage"),1);
         if(!e.isAlive())return;
         Entity root=e.getRootVehicle();
         if(root.getPersistentData().getLong("OmniraStarflowTeleportUntil")>now||!DreamTransitRules.allowed(root))return;

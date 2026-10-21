@@ -47,15 +47,15 @@ public final class AffinityEffects {
         return true;
     }
     @SubscribeEvent public static void hit(LivingDamageEvent.Post event) {
-        if(event.getNewDamage()<=0 || !(event.getSource().getEntity() instanceof ServerPlayer player)
+        if(event.getNewDamage()<=0 || event.getSource().getEntity()==event.getEntity() || !(event.getSource().getEntity() instanceof ServerPlayer player)
                 || !player.isAlive())return;
         var affinity=player.getData(ModAttachments.AFFINITY).active();
         if((affinity!=Affinity.LIGHT && affinity!=Affinity.DARK) || !spend(player))return;
         if(affinity==Affinity.LIGHT)event.getEntity().igniteForSeconds(10);
         else event.getEntity().addEffect(new MobEffectInstance(MobEffects.POISON,100,1));
     }
-    @SubscribeEvent(priority=EventPriority.LOWEST) public static void defend(LivingDamageEvent.Pre event) {
-        if(event.getNewDamage()>0 && event.getEntity() instanceof ServerPlayer player
+    public static void defend(LivingDamageEvent.Pre event) {
+        if(!com.mcmagic.omnira.combat.OmniraDamage.isTrue(event.getSource()) && event.getNewDamage()>0 && event.getEntity() instanceof ServerPlayer player
                 && player.getData(ModAttachments.AFFINITY).active()==Affinity.ELEMENTAL && spend(player))
             event.setNewDamage(Math.max(0,event.getNewDamage()-2));
     }

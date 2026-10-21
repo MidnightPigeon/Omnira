@@ -16,16 +16,18 @@ public final class GuideBookRenderer extends BlockEntityWithoutLevelRenderer {
     public static ModelResourceLocation grimoire(String kind) {
         return CrystalGridRenderer.part(kind+"_grimoire","closed");
     }
+    public static ModelResourceLocation founder(){return CrystalGridRenderer.part("founder_approval","closed");}
     @Override public void renderByItem(ItemStack stack,ItemDisplayContext context,PoseStack pose,
                                       MultiBufferSource buffers,int light,int overlay) {
         var mc=Minecraft.getInstance();
         boolean hand=context.firstPerson() || context==ItemDisplayContext.THIRD_PERSON_LEFT_HAND
                 || context==ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
         boolean open=hand && mc.screen instanceof com.mcmagic.omnira.client.screen.GuideBookScreen;
-        var variant=stack.getItem() instanceof com.mcmagic.omnira.item.InfusedGrimoireItem book
+        boolean founder=stack.getItem() instanceof com.mcmagic.omnira.weaver.FounderApprovalItem;
+        var variant=founder?founder():stack.getItem() instanceof com.mcmagic.omnira.item.InfusedGrimoireItem book
                 ?grimoire(book.kind().name().toLowerCase(java.util.Locale.ROOT)):model(open?"open":"closed");
         mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(variant),
-                stack,light,overlay,pose,buffers.getBuffer(Sheets.translucentItemSheet()));
+                stack,light,overlay,pose,buffers.getBuffer(founder?Sheets.cutoutBlockSheet():Sheets.translucentItemSheet()));
         if(stack.getItem() instanceof com.mcmagic.omnira.item.InfusedGrimoireItem book) {
             double time=mc.level==null?0:mc.level.getGameTime()+mc.getTimer().getGameTimeDeltaPartialTick(false);
             grimoireMotes(book.kind(),pose,buffers,time);

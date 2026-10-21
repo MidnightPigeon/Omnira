@@ -57,7 +57,10 @@ public final class AdvancedForgeCompatibilityChecks {
             h.assertTrue(moved!=null && moved.getItem(0).is(Items.DIAMOND) && moved.getItem(9).is(ModItems.DREAM_SPELL_CORE.get()),"Physical assembly lost inventory");
             h.assertTrue(ForgeLayout.formedParts(h.getLevel(),moved.getBlockPos(),moved.getBlockState()).size()==18,"Physical assembly lost parts");
             honey.discard();
+            var retained=new SableTestBody(ship);
             h.runAfterDelay(4,()->{
+                try(retained){
+                h.assertTrue(!ship.isRemoved(),"Retained forge unloaded before physics check");
                 var pushed=new HashSet<UUID>();var vortexCenter=ship.boundingBox().toMojang().getCenter().add(-2,0,0);
                 var physics=dev.ryanhcode.sable.api.sublevel.SubLevelContainer.getContainer(h.getLevel()).physicsSystem().getPipeline();
                 double before=physics.getLinearVelocity(ship,new org.joml.Vector3d()).x;
@@ -67,7 +70,8 @@ public final class AdvancedForgeCompatibilityChecks {
                 h.assertTrue(after>before,"Vortex impulse did not reach physics body: "+before+" -> "+after);
                 com.mcmagic.omnira.compat.SableVortex.apply(h.getLevel(),vortexCenter,false,4,pushed);
                 h.assertTrue(physics.getLinearVelocity(ship,new org.joml.Vector3d()).x<after,"Contraction did not pull physics body");
-                h.assertTrue(moved.getItem(0).is(Items.DIAMOND),"Vortex dismantled physical work structure");h.succeed();
+                h.assertTrue(moved.getItem(0).is(Items.DIAMOND),"Vortex dismantled physical work structure");
+                }h.succeed();
             });return;
         }
     }

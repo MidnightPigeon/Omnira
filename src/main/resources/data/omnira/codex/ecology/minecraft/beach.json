@@ -1,0 +1,16 @@
+{
+  "base": {
+    "Name": "minecraft:sandstone"
+  },
+  "surface": {
+    "Name": "minecraft:sand"
+  },
+  "decorations": [
+    {
+      "kind": "column",
+      "block": {
+        "Name": "minecraft:cactus"
+      }
+    }
+  ]
+}

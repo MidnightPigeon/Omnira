@@ -10,5 +10,11 @@
   ],
   "chapters": [
     "chapters/staff_part_recipes/chapter.json"
+  ],
+  "directory_order": [
+    "staff_part_recipes",
+    "assemble_staff",
+    "modular_staff",
+    "staff_refinement"
   ]
 }

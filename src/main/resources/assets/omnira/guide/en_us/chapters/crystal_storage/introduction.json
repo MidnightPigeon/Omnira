@@ -1,1 +1,7 @@
-{}
+{
+  "image": "omnira:textures/gui/guide/chapters/crystal_storage.png",
+  "image_width": 1417,
+  "image_height": 1110,
+  "caption": "Store items and fluids, distribute magical pulses, and transport entities between distant places.",
+  "text": []
+}

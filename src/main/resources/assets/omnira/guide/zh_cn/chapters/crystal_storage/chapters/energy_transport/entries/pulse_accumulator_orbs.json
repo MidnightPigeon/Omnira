@@ -1,0 +1,113 @@
+{
+  "id": "pulse_accumulator_orbs",
+  "title": "蓄能晶球",
+  "item": "omnira:pulse_accumulator_orb",
+  "icon": "omnira:resonance_core",
+  "recipes": false,
+  "text": [
+    "两种晶球使用白色底座，支持六向放置，是整合、分发势能的节点，而非电池。基础吞吐8192 MPU，单槽支持堆叠、注能堆叠升级。",
+    "底座只进不出，可输入脉冲、应力或电力；其余五面只接受脉冲，可输出三种能源。电力按实际FE/s换算，应力输入至少16 rpm、输出固定16 rpm，轴线须垂直于接口面，空转不占用。各种输出共享势能总额，金色包含外部调用；时空端口可延伸相邻面。晶球不会给附近玩家充魔。",
+    "共振蓄能晶球以两件物品设定频率，同维度同频视为一个节点，共享势能与唯一升级槽，可从任一球取出升级。合并时保留高等级容量升级，多余升级退回。时空固化使同频组跨维度共享，上限仍为8192 MPU。",
+    "浅蓝表示本节点尚可使用的配额，金色表示经过节点的工作势能；横条上限表示吞吐容量。空载时均分分支配额，工作时可调配闲置余量。串联节点可能经过同一股工作势能，不能把它们的金色读数相加当作全网消耗。"
+  ],
+  "links": [
+    {
+      "target": "magic_pulse",
+      "label": "魔力脉冲"
+    },
+    {
+      "target": "pulse_accumulator_orb_crafting",
+      "label": "脉冲蓄能晶球制作"
+    },
+    {
+      "target": "resonant_accumulator_orb_crafting",
+      "label": "共振蓄能晶球制作"
+    }
+  ],
+  "figures": [
+    {
+      "id": "node_meter",
+      "title": "势能读数",
+      "icons": [
+        {
+          "item": "omnira:pulse_accumulator_orb",
+          "x": 0,
+          "y": 0,
+          "count": 1
+        }
+      ],
+      "strokes": [],
+      "areas": [
+        {
+          "x": 0,
+          "y": 26,
+          "width": 124,
+          "height": 12,
+          "color": "#B5AB92"
+        },
+        {
+          "x": 1,
+          "y": 27,
+          "width": 61,
+          "height": 10,
+          "color": "#C79943"
+        },
+        {
+          "x": 62,
+          "y": 27,
+          "width": 31,
+          "height": 10,
+          "color": "#71BBD3"
+        },
+        {
+          "x": 1,
+          "y": 54,
+          "width": 5,
+          "height": 5,
+          "color": "#C79943"
+        },
+        {
+          "x": 1,
+          "y": 79,
+          "width": 5,
+          "height": 5,
+          "color": "#71BBD3"
+        }
+      ],
+      "labels": [
+        {
+          "text": "容量8192 MPU",
+          "x": 22,
+          "y": 2,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "占用4096",
+          "x": 12,
+          "y": 52,
+          "width": 112,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "可用2048",
+          "x": 12,
+          "y": 77,
+          "width": 112,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "余下部分是未获得的容量。",
+          "x": 0,
+          "y": 104,
+          "width": 124,
+          "height": 28,
+          "color": "#405462"
+        }
+      ]
+    }
+  ]
+}

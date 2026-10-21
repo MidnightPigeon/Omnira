@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {"item": "omnira:dream_crystal_bedrock"}
+  ],
+  "result": {"id": "omnira:music_disc_mi_meng_ye", "count": 1}
+}

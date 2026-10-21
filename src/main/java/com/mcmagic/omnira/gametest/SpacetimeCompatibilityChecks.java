@@ -53,13 +53,15 @@ public final class SpacetimeCompatibilityChecks {
         var gathered=dev.ryanhcode.sable.api.SubLevelAssemblyHelper.gatherConnectedBlocks(anchor,level,100,(a,b,c,d,e)->blocks.contains(c));
         var ship=dev.ryanhcode.sable.api.SubLevelAssemblyHelper.assembleBlocks(level,anchor,gathered.blocks(),gathered.boundingBox());
         h.assertTrue(ship!=null,"Sable fixture failed to assemble");
+        var retained=new SableTestBody(ship);
         h.runAfterDelay(4,()->{
+            try(retained){
             var first=ship.getPlot().getCenterBlock();
             var center=ship.logicalPose().transformPosition(Vec3.atCenterOf(first));
             SpacetimeStorm.trigger(level,center);
             h.assertTrue(!ship.isRemoved(),"Storm erased whole Sable ship");
             h.assertTrue(level.getBlockState(first).isAir() && level.getBlockState(first.offset(24,0,0)).is(Blocks.STONE),"Sable sphere did not preserve outside blocks");
-            dev.ryanhcode.sable.api.sublevel.SubLevelContainer.getContainer(level).removeSubLevel(ship,dev.ryanhcode.sable.sublevel.storage.SubLevelRemovalReason.REMOVED);
+            }
             h.succeed();
         });
     }

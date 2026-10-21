@@ -1,4 +1,5 @@
 {
+  "parent": "omnira:easter_eggs/root",
   "display": {
     "icon": {"id": "omnira:air_microcore"},
     "title": {"translate": "advancement.omnira.personal_spaceflight.title"},

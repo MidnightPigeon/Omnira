@@ -1,4 +1,5 @@
 {
+  "parent": "omnira:easter_eggs/root",
   "display": {
     "icon": {"id": "omnira:arcane_needle"},
     "title": {"translate": "advancement.omnira.needle_sick_donkey.title"},

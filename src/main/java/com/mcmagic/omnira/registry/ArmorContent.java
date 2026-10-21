@@ -27,7 +27,7 @@ public final class ArmorContent {
     private static Map<ArmorItem.Type,DeferredItem<ArmorItem>> equipment(boolean dress){
         var result=new EnumMap<ArmorItem.Type,DeferredItem<ArmorItem>>(ArmorItem.Type.class);
         var types=new ArmorItem.Type[]{ArmorItem.Type.HELMET,ArmorItem.Type.CHESTPLATE,ArmorItem.Type.LEGGINGS,ArmorItem.Type.BOOTS};
-        String[] names=dress?new String[]{"crystal_sunhat","crystal_blouse","crystal_skirt","crystal_stocking_shoes"}
+        String[] names=dress?new String[]{"crystal_sunhat","crystal_top","crystal_skirt","crystal_stocking_shoes"}
                 :new String[]{"crystal_helmet","crystal_chestplate","crystal_leggings","crystal_boots"};
         for(int i=0;i<types.length;i++){
             var type=types[i];

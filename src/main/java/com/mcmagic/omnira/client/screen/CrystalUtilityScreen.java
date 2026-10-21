@@ -70,7 +70,7 @@ public final class CrystalUtilityScreen extends ResponsiveContainerScreen<Crysta
         return super.mouseClickedContent(x,y,button);
     }
     @Override public boolean keyPressed(int key,int scan,int modifiers){
-        if(name!=null&&name.isFocused()&&key!=org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE)return name.keyPressed(key,scan,modifiers)||name.canConsumeInput();
+        if(name!=null&&name.isFocused()&&key!=org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE&&key!=org.lwjgl.glfw.GLFW.GLFW_KEY_TAB)return name.keyPressed(key,scan,modifiers)||name.canConsumeInput();
         return super.keyPressed(key,scan,modifiers);
     }
     @Override public boolean mouseScrolled(double x,double y,double dx,double dy){

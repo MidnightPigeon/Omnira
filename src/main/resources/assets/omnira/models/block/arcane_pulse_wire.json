@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "omnira:block/crystal_ball_shell"
+  }
+}

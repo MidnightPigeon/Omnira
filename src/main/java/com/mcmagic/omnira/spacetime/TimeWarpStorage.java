@@ -7,15 +7,16 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
-/** A complete stack collapses into one aggregate in unprotected storage. */
+/** Either warp point's complete stack collapses into one aggregate in unprotected storage. */
 public final class TimeWarpStorage {
     private TimeWarpStorage(){}
+    private static boolean warpPoint(ItemStack stack){return stack.is(ModItems.TIME_WARP_POINT.get())||stack.is(ModItems.SPACE_WARP_POINT.get());}
     public static boolean container(Container storage,boolean immune){
         if(immune || storage instanceof net.minecraft.world.inventory.ResultContainer)return false;
         boolean active=false;
         for(int slot=0;slot<storage.getContainerSize();slot++){
             var stack=storage.getItem(slot);
-            if(!stack.is(ModItems.TIME_WARP_POINT.get()) || storage instanceof Inventory && (slot<9 || slot>=36))continue;
+            if(!warpPoint(stack) || storage instanceof Inventory && (slot<9 || slot>=36))continue;
             active=true;
             if(stack.getCount()==16)storage.setItem(slot,new ItemStack(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get()));
         }
@@ -26,7 +27,7 @@ public final class TimeWarpStorage {
         boolean active=false;
         for(int slot=0;slot<storage.getSlots();slot++){
             var stack=storage.getStackInSlot(slot);
-            if(!stack.is(ModItems.TIME_WARP_POINT.get()))continue;
+            if(!warpPoint(stack))continue;
             active=true;
             if(stack.getCount()==16)mutable.setStackInSlot(slot,new ItemStack(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get()));
         }

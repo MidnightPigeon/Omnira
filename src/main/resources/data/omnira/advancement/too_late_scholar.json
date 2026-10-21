@@ -1,4 +1,5 @@
 {
+  "parent": "omnira:easter_eggs/root",
   "display": {
     "icon": {"id":"omnira:traveler_manuscript"},
     "title": {"translate":"advancement.omnira.too_late_scholar.title"},

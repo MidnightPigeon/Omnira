@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "omnira:time_sand"
+  },
+  "surface": {
+    "Name": "omnira:time_sand"
+  },
+  "decorations": [
+    {
+      "kind": "spire",
+      "block": {
+        "Name": "omnira:primordial_fossil_rock"
+      },
+      "crown": {
+        "Name": "omnira:ancient_pottery_rubble"
+      }
+    }
+  ]
+}

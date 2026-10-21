@@ -18,7 +18,7 @@ public final class CrystalPedestalBlockEntity extends CrystalProcessingTableBloc
         if(level==null || level.isClientSide)return;
         for(var offset:com.mcmagic.omnira.world.dimension.DreamRitual.ANCHORS){
             var core=worldPosition.offset(-offset[0],0,-offset[1]);
-            if(level.hasChunkAt(core) && level.getBlockEntity(core) instanceof RitualEnergyCoreBlockEntity ritual)ritual.validateGenesis();
+            if(level.hasChunkAt(core) && level.getBlockEntity(core) instanceof RitualEnergyCoreBlockEntity ritual){ritual.validateGenesis();ritual.worldForming.validate();}
         }
     }
 }

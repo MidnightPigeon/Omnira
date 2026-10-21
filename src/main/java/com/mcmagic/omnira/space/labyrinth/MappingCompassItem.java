@@ -51,10 +51,14 @@ public final class MappingCompassItem extends Item {
     }
     public static boolean returnHome(ServerPlayer player,ItemStack stack){
         var target=destination(player,stack);
-        if(com.mcmagic.omnira.space.anchor.StabilityField.blocks(player,target.newLevel(),target.pos()))return false;
         var source=player.serverLevel();var origin=player.position();
-        if(!player.teleportTo(target.newLevel(),target.pos().x,target.pos().y,target.pos().z,Set.of(),target.yRot(),target.xRot()))return false;
+        if(!com.mcmagic.omnira.space.anchor.StabilityField.toolTravel(player,true,()->
+                player.teleportTo(target.newLevel(),target.pos().x,target.pos().y,target.pos().z,Set.of(),target.yRot(),target.xRot())))return false;
         player.setData(ModAttachments.MANA,player.getData(ModAttachments.MANA).withCurrent(0));
+        var binding=stack.getOrDefault(DataComponents.CUSTOM_DATA,CustomData.EMPTY).copyTag().getCompound(BINDING);
+        if(binding.contains("Pos")&&target.newLevel().dimension().location().toString().equals(binding.getString("Dimension"))
+                &&net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(target.newLevel().getBlockState(net.minecraft.core.BlockPos.of(binding.getLong("Pos"))).getBlock()).toString().equals(binding.getString("Block")))
+            com.mcmagic.omnira.progression.BranchProgress.record(player,"bound_return");
         player.setDeltaMovement(Vec3.ZERO);player.fallDistance=0;
         source.sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD,origin.x,origin.y+1,origin.z,12,.3,.5,.3,.02);
         target.newLevel().playSound(null,player.blockPosition(),net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT,net.minecraft.sounds.SoundSource.PLAYERS,.7F,1.3F);
@@ -80,7 +84,7 @@ public final class MappingCompassItem extends Item {
         return use(context.getLevel(),player,context.getHand()).getResult();
     }
     @Override public ItemStack finishUsingItem(ItemStack stack,Level level,LivingEntity user){
-        if(user instanceof ServerPlayer player&&!returnHome(player,stack))player.displayClientMessage(Component.translatable("message.omnira.recall.blocked"),true);
+        if(user instanceof ServerPlayer player&&!returnHome(player,stack))player.displayClientMessage(Component.translatable("message.omnira.compass.return_failed"),true);
         return stack;
     }
     @Override public void appendHoverText(ItemStack stack,Item.TooltipContext context,List<Component> lines,TooltipFlag flag){

@@ -15,11 +15,13 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.*;
 
 public final class GuidanceOrbBlock extends BaseEntityBlock {
-    public static final IntegerProperty STAGE=IntegerProperty.create("stage",0,4);
+    public static final IntegerProperty STAGE=IntegerProperty.create("stage",0,5);
     public static final DirectionProperty FACING=BlockStateProperties.HORIZONTAL_FACING;
-    public GuidanceOrbBlock(){
-        super(Properties.of().mapColor(net.minecraft.world.level.material.MapColor.COLOR_LIGHT_BLUE).strength(1.5F).noOcclusion());
-        registerDefaultState(stateDefinition.any().setValue(STAGE,0).setValue(FACING,Direction.NORTH));
+    public GuidanceOrbBlock(){this(false);}
+    public GuidanceOrbBlock(boolean complete){
+        super(Properties.of().mapColor(net.minecraft.world.level.material.MapColor.COLOR_LIGHT_BLUE).strength(1.5F).noOcclusion()
+                .lightLevel(s->s.getValue(STAGE)==5?15:0));
+        registerDefaultState(stateDefinition.any().setValue(STAGE,complete?5:0).setValue(FACING,Direction.NORTH));
     }
     @Override protected MapCodec<? extends BaseEntityBlock> codec(){return MapCodec.unit(this);}
     @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block,BlockState> b){b.add(STAGE,FACING);}
@@ -42,7 +44,11 @@ public final class GuidanceOrbBlock extends BaseEntityBlock {
     }
     private void interact(Level l,BlockPos p,Player player,ItemStack stack,Direction face){
         if(!l.isClientSide&&!player.isSpectator()&&l.getBlockEntity(p) instanceof GuidanceOrbEntity orb){
+            if(orb.stage()==5){UniversalUnderstanding.use(player);return;}
+            int previous=orb.stage();
             String target=orb.interact(stack,face);
+            if(previous==4&&l.getBlockState(p).is(GuidanceContent.UNDERSTANDING.get()))
+                com.mcmagic.omnira.progression.BranchProgress.record(player,"convergent_paths");
             if(!target.isEmpty()&&player instanceof net.minecraft.server.level.ServerPlayer server)
                 net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(server,new OpenGuidancePayload(target));
         }

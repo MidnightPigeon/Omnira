@@ -1,0 +1,15 @@
+{
+  "id": "ages_dial",
+  "title": "岁月刻轮",
+  "item": "omnira:ages_dial",
+  "recipes": false,
+  "text": [
+    "追加1B破败时流，凝结出记录世界演化的刻轮。"
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "拟界之仪"
+    }
+  ]
+}

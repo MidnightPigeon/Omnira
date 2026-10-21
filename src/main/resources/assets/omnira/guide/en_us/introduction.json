@@ -1,9 +1,7 @@
 {
-  "image": "",
-  "image_width": 112,
-  "image_height": 88,
+  "image": "omnira:textures/gui/guide/chapters/book_opening.png",
+  "image_width": 1586,
+  "image_height": 992,
   "caption": "The power of Omnira dwells eternally within all things.",
-  "text": [
-    "Begin with Spiritual Crystals and early arcane crafts, visit dreams, then reach spacetime and develop advanced industry and alchemy. The Guidance Orb points to the next step at every stage."
-  ]
+  "text": []
 }

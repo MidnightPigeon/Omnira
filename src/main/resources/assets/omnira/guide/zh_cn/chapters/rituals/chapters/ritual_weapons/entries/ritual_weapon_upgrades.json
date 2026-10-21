@@ -1,0 +1,171 @@
+{
+  "id": "ritual_weapon_upgrades",
+  "item": "omnira:paradox_ore",
+  "title": "武器升级",
+  "recipes": false,
+  "text": [
+    "骨钉与织针都可在高阶装配台升级四次，每级攻击力+2、攻速+0.1、三秒完整治疗+3，特殊能力范围增加基础值的25%。骨钉每段治疗增加1点；广域魔纹与升级的范围加成加算。",
+    "台面固定六份悖论尘，左节点放前一阶段武器，右节点分别放悖论矿石或封装悖论流体。中节点依次使用注灵水晶块、梦境水晶块、桶装稀薄时空、万象微核。",
+    "升级保留耐久损耗、附魔、自定义名称和装入的法术水晶，悖论颗粒随等级增多。"
+  ],
+  "links": [
+    {
+      "target": "crystallized_bone_nail",
+      "label": "晶化骨钉"
+    },
+    {
+      "target": "arcane_needle",
+      "label": "奥能织针"
+    }
+  ],
+  "figures": [
+    {
+      "id": "nail_levels",
+      "title": "骨钉升级",
+      "icons": [
+        {
+          "item": "omnira:sharpened_crystallized_bone_nail",
+          "x": 0,
+          "y": 26,
+          "count": 1
+        },
+        {
+          "item": "omnira:channelled_crystallized_bone_nail",
+          "x": 0,
+          "y": 52,
+          "count": 1
+        },
+        {
+          "item": "omnira:threaded_paradox_bone_nail",
+          "x": 0,
+          "y": 78,
+          "count": 1
+        },
+        {
+          "item": "omnira:pure_paradox_bone_nail",
+          "x": 0,
+          "y": 104,
+          "count": 1
+        }
+      ],
+      "areas": [],
+      "strokes": [],
+      "labels": [
+        {
+          "text": "伤害/攻速；回血/范围",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "10 / 1.9\n15 / 125%",
+          "x": 22,
+          "y": 26,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "12 / 2.0\n18 / 150%",
+          "x": 22,
+          "y": 52,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "14 / 2.1\n21 / 175%",
+          "x": 22,
+          "y": 78,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "16 / 2.2\n24 / 200%",
+          "x": 22,
+          "y": 104,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "needle_levels",
+      "title": "织针升级",
+      "icons": [
+        {
+          "item": "omnira:sharpened_arcane_needle",
+          "x": 0,
+          "y": 26,
+          "count": 1
+        },
+        {
+          "item": "omnira:shining_arcane_needle",
+          "x": 0,
+          "y": 52,
+          "count": 1
+        },
+        {
+          "item": "omnira:tempered_paradox_needle",
+          "x": 0,
+          "y": 78,
+          "count": 1
+        },
+        {
+          "item": "omnira:pale_paradox_needle",
+          "x": 0,
+          "y": 104,
+          "count": 1
+        }
+      ],
+      "areas": [],
+      "strokes": [],
+      "labels": [
+        {
+          "text": "伤害/攻速；回血/范围",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "10 / 1.9\n15 / 125%",
+          "x": 22,
+          "y": 26,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "12 / 2.0\n18 / 150%",
+          "x": 22,
+          "y": 52,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "14 / 2.1\n21 / 175%",
+          "x": 22,
+          "y": 78,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "16 / 2.2\n24 / 200%",
+          "x": 22,
+          "y": 104,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        }
+      ]
+    }
+  ]
+}

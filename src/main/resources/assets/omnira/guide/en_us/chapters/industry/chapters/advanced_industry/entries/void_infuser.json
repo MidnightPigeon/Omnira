@@ -6,7 +6,8 @@
   "text": [
     "Place a Void Crystal Ball at the center of an Assembly Table, with one High-Density Void Mass and three Repaired Mechanical Components in any outer positions.",
     "Each operation takes ten seconds and one spatial energy, with a capacity of 64. Rough Spatial Crystal Blocks, excited blocks, Spatial Crystals and Deflection Crystals provide 1, 2, 4 and 6 energy respectively.",
-    "Infuse Mirror Rock into Void-Infested Mirror Rock, Light Condensate into Shadow Rock, slime balls into ender pearls and obsidian into crying obsidian. All temporal silts become rotted, and all saplings become Shadow Saplings."
+    "Infuse Mirror Rock into Void-Infested Mirror Rock, Light Condensate into Shadow Rock, slime balls into ender pearls and obsidian into crying obsidian. All temporal silts become rotted, and all saplings become Shadow Saplings.",
+    "Any music disc can be converted into one Space Music Disc. The blank disc has no recorded music and cannot play in a jukebox."
   ],
   "links": [
     {"target": "spatial_energy", "label": "Spatial Energy Materials"},

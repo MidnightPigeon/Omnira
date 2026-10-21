@@ -37,12 +37,15 @@ public final class ParadoxSourceRenderer extends BlockEntityWithoutLevelRenderer
     }
     public static void grains(boolean genesis,boolean orbit,double time,PoseStack pose,MultiBufferSource buffers,int overlay,float amount){
         int count=genesis?5:8;
+        var mc=Minecraft.getInstance();var grains=ParticleModelQuads.collect(mc.getModelManager().getModel(ParadoxMaterialRenderer.model(genesis?"genesis_grain":"grain")));
+        var out=CrystalGlassLayer.contents(buffers).getBuffer(Sheets.cutoutBlockSheet());
         for(int i=0;i<count;i++){
             double phase=(time/36+i*.137)%1,angle=time*.027+i*2.39996;
             double radius=(genesis?.22:.30)+(orbit?Math.sin(angle*1.3)*.025:phase*.22);
             pose.pushPose();pose.translate(Math.cos(angle)*radius,Math.sin(angle*1.7)*radius*.6,Math.sin(angle)*radius);
             float scale=amount*(orbit?1:(float)Math.sin(phase*Math.PI));pose.scale(scale,scale,scale);
-            draw(ParadoxMaterialRenderer.model(genesis?"genesis_grain":"grain"),pose,buffers,LightTexture.FULL_BRIGHT,overlay,true);pose.popPose();
+            pose.pushPose();pose.translate(-.5,-.5,-.5);
+            mc.getItemRenderer().renderQuadList(pose,out,grains,ItemStack.EMPTY,LightTexture.FULL_BRIGHT,overlay);pose.popPose();pose.popPose();
         }
     }
     private static void draw(net.minecraft.client.resources.model.ModelResourceLocation model,PoseStack pose,MultiBufferSource buffers,int light,int overlay,boolean opaque){

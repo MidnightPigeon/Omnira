@@ -1,0 +1,15 @@
+{
+  "id": "energy_transport",
+  "title": "能量传输",
+  "icon": "omnira:mana_engine",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/magic_pulse.json",
+    "entries/player_pulse_channeling.json",
+    "entries/pulse_accumulator_orbs.json",
+    "entries/arcane_pulse_wires.json",
+    "entries/pulse_accumulator_orb_crafting.json",
+    "entries/resonant_accumulator_orb_crafting.json"
+  ],
+  "chapters": []
+}

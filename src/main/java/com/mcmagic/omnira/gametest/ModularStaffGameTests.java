@@ -39,6 +39,22 @@ import java.util.UUID;
 @GameTestHolder("omnira_modular_staff")
 @PrefixGameTestTemplate(false)
 public final class ModularStaffGameTests {
+    @GameTest(template="spell_arena") public static void worldRotationIgnoresBurstAndCooldownReduction(GameTestHelper h){
+        var c=caster(h);var crystals=NonNullList.withSize(3,ItemStack.EMPTY);
+        crystals.set(0,new ItemStack(ModItems.WORLD_ROTATION_CRYSTAL.get()));
+        c.grid().set(DataComponents.CONTAINER,ItemContainerContents.fromItems(crystals));
+        c.player().getAttribute(ModAttributes.COOLDOWN_REDUCTION).setBaseValue(.9);
+        use(h,c,true);com.mcmagic.omnira.spell.world.WorldRotation.cancel(c.player().getUUID());
+        state(h,c,0,1);
+        for(int i=0;i<1199;i++)tick(c);
+        h.assertTrue(c.player().getCooldowns().isOnCooldown(c.staff().getItem()),"Fixed cooldown was reduced");
+        tick(c);h.assertTrue(!c.player().getCooldowns().isOnCooldown(c.staff().getItem()),"Burst extended fixed cooldown");h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void wrapCooldownUsesLargerValue(GameTestHelper h){
+        var c=caster(h);c.grid().set(ModDataComponents.GRID_CURSOR,2);
+        h.assertTrue(StaffItem.sequenceCooldown(c.grid(),1,40)==80,"Wrap cooldown omitted");
+        h.assertTrue(StaffItem.sequenceCooldown(c.grid(),1,1600)==1600,"Wrap cooldown replaced longer spell cooldown");h.succeed();
+    }
     @GameTest(template="spell_arena") public static void aggregateTipUsesOwnCooldownAtCycleBoundary(GameTestHelper h){
         var c=caster(h);var assembly=new StaffAssembly(StaffAssembly.basic().shaft(),StaffAssembly.basic().reinforcement(),
                 new ItemStack(ModItems.SPACETIME_AGGREGATE_TIP.get()),List.of());

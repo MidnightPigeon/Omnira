@@ -1,9 +1,7 @@
 {
-  "image": "",
-  "image_width": 112,
-  "image_height": 88,
-  "caption": "",
-  "text": [
-    "The Spacetime Mirror Corridor connects the Time Continent and the Spatial Caverns. This chapter covers entry, the two layers, and known resources."
-  ]
+  "image": "omnira:textures/gui/guide/chapters/spacetime.png",
+  "image_width": 1423,
+  "image_height": 1105,
+  "caption": "The Time Continent, Spacetime Corridor and Spatial Caverns form the three layers of this realm.",
+  "text": []
 }

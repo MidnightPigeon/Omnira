@@ -35,11 +35,12 @@ public final class StaffItem extends Item {
         var stats=context.stats();
         boolean independent=com.mcmagic.omnira.item.staff.StaffPart.of(com.mcmagic.omnira.item.staff.StaffAssembly.of(held).tip()).independentCooldown();
         int baseCooldown=independent?stats.cooldownTicks():sequenceCooldown(CrystalGridMenu.locate(player,-2),stats.shots(),stats.cooldownTicks());
+        int spellCooldown=nextSpellCooldown(player);
         int successes=castSequenceContents(player,context,1);
         if(successes==0) return InteractionResultHolder.fail(held);
-        int cooldown=SpellCooldowns.ticks(baseCooldown,context.cooldownReduction(),1);
-        player.getCooldowns().addCooldown(this,cooldown+(stats.shots()-1)*com.mcmagic.omnira.item.staff.StaffEvents.SHOT_INTERVAL);
-        com.mcmagic.omnira.item.staff.StaffEvents.queue(player,held,stats.shots()-1,cooldown);
+        int cooldown=Math.max(spellCooldown,SpellCooldowns.ticks(baseCooldown,context.cooldownReduction(),1));
+        player.getCooldowns().addCooldown(this,cooldown+(spellCooldown>0?0:(stats.shots()-1)*com.mcmagic.omnira.item.staff.StaffEvents.SHOT_INTERVAL));
+        com.mcmagic.omnira.item.staff.StaffEvents.queue(player,held,spellCooldown>0?0:stats.shots()-1,cooldown);
         return InteractionResultHolder.success(held);
     }
     public static int sequenceCooldown(ItemStack grid,int shots,int staffCooldown) {
@@ -50,9 +51,15 @@ public final class StaffItem extends Item {
             if(slot<0) return staffCooldown;
             preview.set(ModDataComponents.GRID_CURSOR,(slot+1)%item.capacity);
             int next=CrystalGridMenu.next(preview,item.capacity);
-            if(next<=slot) return CHAIN_COOLDOWN_TICKS;
+            if(next<=slot) return Math.max(staffCooldown,CHAIN_COOLDOWN_TICKS);
         }
         return staffCooldown;
+    }
+    public static int nextSpellCooldown(ServerPlayer player){
+        var grid=CrystalGridMenu.locate(player,-2);if(!(grid.getItem() instanceof CrystalGridItem item))return 0;
+        int slot=CrystalGridMenu.next(grid,item.capacity);if(slot<0)return 0;
+        var list=NonNullList.withSize(item.capacity,ItemStack.EMPTY);grid.getOrDefault(DataComponents.CONTAINER,ItemContainerContents.EMPTY).copyInto(list);
+        var pattern=list.get(slot).get(ModDataComponents.SPELL_PATTERN);return pattern!=null&&pattern.worldRotation()?1200:0;
     }
     public static int castSequence(ServerPlayer player,ItemStack staff,int count) {
         if(!(staff.getItem() instanceof StaffItem)) return 0;
@@ -70,6 +77,12 @@ public final class StaffItem extends Item {
             int slot=CrystalGridMenu.next(grid,item.capacity);
             if(slot<0) {player.displayClientMessage(Component.translatable("message.omnira.grid.empty"),true);break;}
             ItemStack crystal=list.get(slot);
+            var pattern=crystal.get(ModDataComponents.SPELL_PATTERN);
+            if(pattern!=null&&pattern.worldRotation()){
+                if(!com.mcmagic.omnira.spell.world.WorldRotation.cast(player))break;
+                grid.set(ModDataComponents.GRID_CURSOR,(slot+1)%item.capacity);
+                com.mcmagic.omnira.progression.BranchProgress.spell(player,grid,slot,CrystalGridMenu.next(grid,item.capacity));successes++;break;
+            }
             SpellPayload payload=com.mcmagic.omnira.item.staff.StaffEnhancements.apply(SpellPayload.of(crystal),context.enhancements());
             double cost=ManaCosts.cost(payload.baseCost(),1,context.reduction());
             if(!player.getData(ModAttachments.MANA).canSpend(cost)) {
@@ -81,6 +94,7 @@ public final class StaffItem extends Item {
             }
             player.setData(ModAttachments.MANA,player.getData(ModAttachments.MANA).spend(cost));
             grid.set(ModDataComponents.GRID_CURSOR,(slot+1)%item.capacity);
+            com.mcmagic.omnira.progression.BranchProgress.spell(player,grid,slot,CrystalGridMenu.next(grid,item.capacity));
             successes++;
         }
         return successes;

@@ -120,9 +120,9 @@ public class ReactionPoolBlock extends BaseEntityBlock implements com.mcmagic.om
     public static net.neoforged.neoforge.energy.IEnergyStorage energyPort(BlockEntity entity,Direction side){
         int part=entity.getBlockState().getValue(PART);if(part!=3&&part!=5)return null;
         if(side!=outward(entity.getBlockState().getValue(FACING),part))return null;
-        var pool=controller(entity.getLevel(),entity.getBlockPos());return pool!=null&&pool.complete()?pool.energyInput:null;
+        var pool=controller(entity.getLevel(),entity.getBlockPos());return pool!=null&&pool.complete()?pool.energyPort(side):null;
     }
-    public static final class PlacementItem extends BlockItem {
+    public static final class PlacementItem extends BlockItem implements com.mcmagic.omnira.item.MultiblockPlacementItem {
         public PlacementItem(Properties properties){super(ModBlocks.REACTION_POOL.get(),properties);}
         @Override public InteractionResult place(BlockPlaceContext context){
             var player=context.getPlayer();var level=context.getLevel();if(player==null||!player.isCreative()||!context.canPlace())return InteractionResult.FAIL;

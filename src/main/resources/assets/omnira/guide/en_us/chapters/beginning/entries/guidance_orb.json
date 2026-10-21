@@ -1,0 +1,19 @@
+{
+  "id": "guidance_orb",
+  "item": "omnira:guidance_orb",
+  "title": "Guidance Orb",
+  "recipes": true,
+  "text": [
+    "Your most, most faithful guide along the path of exploration. Probably?",
+    "Craft with four glass blocks around a guidebook. Advancement is a world interaction: first reveal the orb's requirement, then right-click with the indicated item without consuming it. Every later stage requires selecting the top entry first. Outside the requirement view, any held item operates navigation only. Mining and replacing preserves the stage.",
+    "Right-click to reveal the side entries, then click a face to open its guide page. The top entry shows your next goal; interact to dismiss a persistent hint.",
+    "After Genesis Particles unlock the final stage, its four faces lead to World Formation, Myriad Aggregation, the World Generation Probability Cloud and the Omni Grid. Unravel All above opens the codex recipe, with a codex projection and hint.",
+    "Open the final requirement from the top entry before offering a codex to obtain Universal Understanding. See its related entry for mana restoration and dismantling."
+  ],
+  "links": [
+    {
+      "target": "universal_understanding",
+      "label": "Universal Understanding"
+    }
+  ]
+}

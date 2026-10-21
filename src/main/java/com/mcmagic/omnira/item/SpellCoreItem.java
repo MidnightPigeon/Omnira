@@ -11,6 +11,9 @@ import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 public final class SpellCoreItem extends net.minecraft.world.item.BlockItem implements ICurioItem,com.mcmagic.omnira.energy.EngineCore {
+    public static java.util.List<ItemStack> examples(){
+        return net.minecraft.core.registries.BuiltInRegistries.ITEM.stream().filter(item->item instanceof SpellCoreItem).map(ItemStack::new).toList();
+    }
     public enum Kind {
         TEST("primordial_spell_core",com.mcmagic.omnira.registry.ModBlocks.TEST_SPELL_CORE,200,.15,.2,0,512),
         DREAM("dream_spell_core",com.mcmagic.omnira.registry.ModBlocks.DREAM_SPELL_CORE,400,.2,.3,10,1024),

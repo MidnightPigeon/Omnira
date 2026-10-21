@@ -2,6 +2,7 @@
   "id": "alchemical_products",
   "title": "Fluid Transmutation",
   "item": "omnira:water_microcore",
+  "icon": "omnira:dilute_spacetime_bucket",
   "recipes": false,
   "text": [
     "Fluids can be reagents. Depending on the supporting catalyst, water, Decayed Timeflow and Void Starflow can produce crystals or elemental microcores, alongside their original acquisition paths.",

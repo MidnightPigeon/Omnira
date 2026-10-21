@@ -1,0 +1,37 @@
+{
+  "parent": "omnira:mainline/ritual_ascension",
+  "display": {
+    "icon": {
+      "id": "omnira:spacetime_spell_core"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.spacetime_gate.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.spacetime_gate.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "entered": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "omnira:spacetime_corridor"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "entered"
+    ]
+  ]
+}

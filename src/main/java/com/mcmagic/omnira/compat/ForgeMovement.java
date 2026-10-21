@@ -38,9 +38,22 @@ public final class ForgeMovement {
         for(var pos:selected){
             var state=level.getBlockState(pos);
             if(state.is(ModBlocks.PURE_SOLIDIFIED_SPACETIME.get()))return false;
-            if(!state.is(ModBlocks.ADVANCED_FORGE.get()) || !checked.add(ForgeLayout.master(pos,state)))continue;
-            var parts=parts(level,pos,state);
-            if(parts.isEmpty() || !selected.containsAll(parts) || !fullyGlued(level,pos,state))return false;
+            if(state.getBlock() instanceof com.mcmagic.omnira.item.bottle.BottleMultiblock machine){
+                if(!checked.add(machine.bottleOrigin(pos,state)))continue;
+                var parts=machine.bottleParts(level,pos,state);
+                if(parts.isEmpty() || !selected.containsAll(parts))return false;
+                if(state.is(ModBlocks.ADVANCED_FORGE.get())&&!fullyGlued(level,pos,state))return false;
+            }else if(state.getBlock() instanceof com.mcmagic.omnira.myriad.MiniatureWorldBlock){
+                var base=com.mcmagic.omnira.myriad.MiniatureWorldBlock.origin(pos,state);
+                if(!checked.add(base))continue;
+                int side=com.mcmagic.omnira.myriad.MiniatureWorldBlock.size(state);
+                for(int i=0;i<side*side*side;i++){
+                    var at=base.offset(com.mcmagic.omnira.myriad.MiniatureWorldBlock.offset(i,side));
+                    var part=level.getBlockState(at);
+                    if(!selected.contains(at)||!part.is(state.getBlock())||part.getValue(com.mcmagic.omnira.myriad.MiniatureWorldBlock.PART)!=i
+                            ||part.getValue(com.mcmagic.omnira.myriad.MiniatureWorldBlock.COMPACT)!=state.getValue(com.mcmagic.omnira.myriad.MiniatureWorldBlock.COMPACT))return false;
+                }
+            }
         }
         return true;
     }

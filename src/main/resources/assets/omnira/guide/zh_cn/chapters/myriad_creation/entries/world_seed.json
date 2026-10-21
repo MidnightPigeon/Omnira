@@ -1,0 +1,7 @@
+{
+  "id": "world_seed",
+  "title": "世界之种",
+  "item": "omnira:dormant_world_seed",
+  "text": ["八份创世微粒环绕时空法术核心，合成休眠的世界之种。将其投入高阶凝聚台，即可激活。", "休眠时，微缩的海洋与陆地黯淡而静止；激活后，色彩变得鲜明，细小颗粒不断向外散逸。"],
+  "links": [{"target": "capturing_inspiration", "label": "创世微粒的来源"}, {"target": "advanced_condensation_table", "label": "高阶凝聚台"}, {"target": "world_forming_ritual", "label": "拟界之仪"}, {"target": "world_deflection", "label": "偏转世界"}, {"target": "reload_element", "label": "法术要素：重载"}]
+}

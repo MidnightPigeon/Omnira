@@ -20,11 +20,13 @@ public final class WorkstationCapabilities {
                 int n=Math.min(stack.getCount(),Math.min(stack.getMaxStackSize(),getSlotLimit(slot))-old.getCount());
                 if(n<=0)return stack;
                 if(!simulate){if(old.isEmpty())work.setItem(slot,stack.copyWithCount(n));else{old.grow(n);work.setChanged();}}
+                if(!simulate)com.mcmagic.omnira.progression.BranchProgress.automated(host,n);
                 return stack.copyWithCount(stack.getCount()-n);
             }
             public ItemStack extractItem(int slot,int amount,boolean simulate){
                 if(slot!=2||amount<=0)return ItemStack.EMPTY;
-                return simulate?work.getItem(slot).copyWithCount(Math.min(amount,work.getItem(slot).getCount())):work.removeItem(slot,amount);
+                var result=simulate?work.getItem(slot).copyWithCount(Math.min(amount,work.getItem(slot).getCount())):work.removeItem(slot,amount);
+                if(!simulate)com.mcmagic.omnira.progression.BranchProgress.automated(host,result.getCount());return result;
             }
         });
     }

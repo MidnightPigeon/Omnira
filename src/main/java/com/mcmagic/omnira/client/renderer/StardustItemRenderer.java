@@ -16,12 +16,13 @@ public final class StardustItemRenderer extends BlockEntityWithoutLevelRenderer 
         mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(MODEL),stack,LightTexture.FULL_BRIGHT,overlay,
                 pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
         double time=mc.level==null?net.minecraft.Util.getMillis()/50.0:mc.level.getGameTime()+mc.getTimer().getGameTimeDeltaPartialTick(false);
+        var motes=StaticModelQuads.collect(mc.getModelManager().getModel(MOTE));
+        var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
         for(int i=0;i<5;i++){
             double phase=time*.035+i*Math.PI*2/5;
             pose.pushPose();pose.translate(Math.cos(phase)*.26,.13+Math.sin(phase*1.7+i)*.07,Math.sin(phase)*.22);
             pose.translate(.5,.5,.5);pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees((float)(phase*50)));pose.translate(-.5,-.5,-.5);
-            mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(MOTE),stack,LightTexture.FULL_BRIGHT,overlay,
-                    pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));pose.popPose();
+            mc.getItemRenderer().renderQuadList(pose,out,motes,stack,LightTexture.FULL_BRIGHT,overlay);pose.popPose();
         }
     }
 }

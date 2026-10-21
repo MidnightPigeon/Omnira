@@ -12,7 +12,10 @@
     "chapters/dreams/chapter.json",
     "chapters/spacetime/chapter.json",
     "chapters/found_objects/chapter.json",
-    "chapters/cross_worlds/chapter.json",
-    "chapters/myriad_creation/chapter.json"
-  ]
+    "chapters/myriad_creation/chapter.json",
+    "chapters/cross_worlds/chapter.json"
+  ],
+  "aliases": {
+    "guidance": "guidance_orb"
+  }
 }

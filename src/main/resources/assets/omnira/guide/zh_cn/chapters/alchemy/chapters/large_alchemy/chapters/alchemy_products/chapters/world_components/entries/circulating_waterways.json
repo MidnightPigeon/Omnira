@@ -1,0 +1,15 @@
+{
+  "id": "circulating_waterways",
+  "title": "循环水脉",
+  "item": "omnira:circulating_waterways",
+  "recipes": false,
+  "text": [
+    "追加1B水，凝结出连接海洋、河流与降水的循环水脉。"
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "拟界之仪"
+    }
+  ]
+}

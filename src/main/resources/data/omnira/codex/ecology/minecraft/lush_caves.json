@@ -1,0 +1,28 @@
+{
+  "base": {
+    "Name": "minecraft:clay"
+  },
+  "surface": {
+    "Name": "minecraft:moss_block"
+  },
+  "decorations": [
+    {
+      "kind": "tree",
+      "block": {
+        "Name": "minecraft:oak_log"
+      },
+      "crown": {
+        "Name": "minecraft:azalea_leaves"
+      }
+    },
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "minecraft:azalea"
+      },
+      "crown": {
+        "Name": "minecraft:flowering_azalea"
+      }
+    }
+  ]
+}

@@ -29,9 +29,9 @@ public final class CruiseOrbGameTests {
         orb.setCore(new ItemStack(ModItems.TEST_SPELL_CORE.get()));h.assertTrue(orb.speed()==4,"Original core speed not doubled");
         orb.setCore(new ItemStack(ModItems.DREAM_SPELL_CORE.get()));h.assertTrue(orb.speed()==6,"Dream core speed not doubled");
         orb.storage.port.setStackInSlot(0,new ItemStack(Items.LAVA_BUCKET));
-        for(int i=0;i<19;i++)orb.storage.tick();
-        h.assertTrue(orb.storage.tank.isEmpty(),"Vehicle bucket transferred before one second");
-        orb.storage.tick();h.assertTrue(orb.storage.tank.getFluidAmount()==1000 && orb.storage.port.getStackInSlot(0).is(Items.BUCKET),"Vehicle bucket did not transfer in one second");
+        for(int i=0;i<4;i++)orb.storage.tick();
+        h.assertTrue(orb.storage.tank.isEmpty(),"Vehicle bucket transferred before five ticks");
+        orb.storage.tick();h.assertTrue(orb.storage.tank.getFluidAmount()==1000 && orb.storage.port.getStackInSlot(0).is(Items.BUCKET),"Vehicle accelerated bucket did not transfer in five ticks");
         orb.storage.upgrades.extractItem(0,1,false);h.assertTrue(orb.speed()==3,"Removed upgrade still boosts speed");
         orb.discard();h.succeed();
     }
@@ -223,13 +223,13 @@ public final class CruiseOrbGameTests {
     }
     @GameTest(template="spell_arena") public static void manualLiquidPort(GameTestHelper h){
         var orb=orb(h);var bank=orb.storage;bank.port.setStackInSlot(0,new ItemStack(Items.LAVA_BUCKET));
-        for(int i=0;i<39;i++)bank.tick();h.assertTrue(bank.tank.isEmpty(),"Bucket empties faster than 2 seconds");
+        for(int i=0;i<9;i++)bank.tick();h.assertTrue(bank.tank.isEmpty(),"Bucket empties faster than half-second");
         bank.tick();h.assertTrue(bank.tank.getFluidAmount()==1000 && bank.port.getStackInSlot(0).is(Items.BUCKET),"Bucket transfer failed");
         for(int i=0;i<50;i++)bank.tick();h.assertTrue(bank.tank.getFluidAmount()==1000,"Completed bucket reverses automatically");
-        bank.port.setStackInSlot(0,new ItemStack(Items.BUCKET));for(int i=0;i<20;i++)bank.tick();
+        bank.port.setStackInSlot(0,new ItemStack(Items.BUCKET));for(int i=0;i<4;i++)bank.tick();
         bank.port.setStackInSlot(0,ItemStack.EMPTY);bank.port.setStackInSlot(0,new ItemStack(Items.BUCKET));
-        for(int i=0;i<20;i++)bank.tick();h.assertTrue(bank.port.getStackInSlot(0).is(Items.BUCKET),"Port removal retained transfer credit");
-        for(int i=0;i<20;i++)bank.tick();h.assertTrue(bank.port.getStackInSlot(0).is(Items.LAVA_BUCKET) && bank.tank.isEmpty(),"Bucket extraction failed");
+        for(int i=0;i<9;i++)bank.tick();h.assertTrue(bank.port.getStackInSlot(0).is(Items.BUCKET),"Port removal retained transfer credit");
+        bank.tick();h.assertTrue(bank.port.getStackInSlot(0).is(Items.LAVA_BUCKET) && bank.tank.isEmpty(),"Bucket extraction failed");
         bank.tank.fill(new FluidStack(Fluids.WATER,1000),FluidAction.EXECUTE);bank.tank.drain(1000,FluidAction.EXECUTE);
         h.assertTrue(bank.tank.getFluidAmount()==1000,"Renewable water not infinite");orb.discard();h.succeed();
     }

@@ -16,4 +16,9 @@ abstract class BottleSlotMixin {
     private void omnira$rejectBottle(ItemStack stack,CallbackInfoReturnable<Boolean> cir) {
         if(!com.mcmagic.omnira.item.PortableStorageRules.mayPlace(container,stack)) cir.setReturnValue(false);
     }
+    // Empty-slot clicks use safeInsert, whose virtual mayPlace call can bypass the base Slot hook.
+    @Inject(method="safeInsert(Lnet/minecraft/world/item/ItemStack;I)Lnet/minecraft/world/item/ItemStack;",at=@At("HEAD"),cancellable=true)
+    private void omnira$rejectPortableInsertion(ItemStack stack,int increment,CallbackInfoReturnable<ItemStack> cir) {
+        if(!com.mcmagic.omnira.item.PortableStorageRules.mayPlace(container,stack)) cir.setReturnValue(stack);
+    }
 }

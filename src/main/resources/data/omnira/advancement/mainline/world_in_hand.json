@@ -1,0 +1,43 @@
+{
+  "parent": "omnira:mainline/deconstruction",
+  "display": {
+    "icon": {
+      "id": "omnira:miniature_world_framework"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.world_in_hand.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.world_in_hand.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "obtained": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:miniature_world_framework"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "obtained"
+    ]
+  ]
+}

@@ -21,5 +21,60 @@
       "target": "resonance_tuning_rod",
       "label": "定向物流"
     }
+  ],
+  "figures": [
+    {
+      "id": "resonance_remote",
+      "title": "远程访问",
+      "icons": [
+        {
+          "item": "omnira:crystal_ball",
+          "x": 8,
+          "y": 58,
+          "count": 1
+        },
+        {
+          "item": "omnira:resonance_core",
+          "x": 8,
+          "y": 36,
+          "count": 1
+        },
+        {
+          "item": "omnira:resonance_terminal",
+          "x": 100,
+          "y": 36,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 31,
+          "y1": 44,
+          "x2": 94,
+          "y2": 44,
+          "color": "#719B69",
+          "arrow": false
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "节点放在容器上方",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "绑定后由终端打开容器。",
+          "x": 0,
+          "y": 91,
+          "width": 124,
+          "height": 33,
+          "color": "#405462"
+        }
+      ]
+    }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "id": "spell_combinations",
   "title": "Specific Combinations",
-  "icon": "omnira:water_microcore",
+  "icon": "omnira:elemental_crystal_grid",
   "introduction": "introduction.json",
   "entries": [
     "entries/self_projectile.json",

@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "minecraft:stone"
+  },
+  "surface": {
+    "Name": "minecraft:dripstone_block"
+  },
+  "decorations": [
+    {
+      "kind": "spire",
+      "block": {
+        "Name": "minecraft:dripstone_block"
+      },
+      "crown": {
+        "Name": "minecraft:pointed_dripstone"
+      }
+    }
+  ]
+}

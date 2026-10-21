@@ -20,7 +20,7 @@ final class SpacetimePortCompatibilityChecks {
     static void verify(GameTestHelper h){
         var l=h.getLevel();var a=h.absolutePos(new BlockPos(2,3,2));var b=h.absolutePos(new BlockPos(8,3,8));
         l.setBlockAndUpdate(a,ModBlocks.MANA_ENGINE.get().defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING,Direction.EAST));
-        var engine=((ManaEngineAccess)l.getBlockEntity(a)).engineState();engine.redstoneControl=false;engine.inventory.setItem(0,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
+        var engine=((ManaEngineAccess)l.getBlockEntity(a)).engineState();engine.inventory.setItem(0,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
         var shaft=net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.parse("create:shaft"));
         l.setBlockAndUpdate(b,shaft.defaultBlockState().setValue(BlockStateProperties.AXIS,Direction.Axis.Y));
         var white=port(h,a,Direction.EAST);var black=port(h,b,Direction.DOWN);

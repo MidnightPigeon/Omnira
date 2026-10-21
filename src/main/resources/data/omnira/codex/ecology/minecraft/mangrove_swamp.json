@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "minecraft:mud"
+  },
+  "surface": {
+    "Name": "minecraft:mud"
+  },
+  "decorations": [
+    {
+      "kind": "tree",
+      "block": {
+        "Name": "minecraft:mangrove_log"
+      },
+      "crown": {
+        "Name": "minecraft:mangrove_leaves"
+      }
+    }
+  ]
+}

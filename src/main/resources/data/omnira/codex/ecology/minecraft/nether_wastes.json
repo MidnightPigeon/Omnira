@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "minecraft:netherrack"
+  },
+  "surface": {
+    "Name": "minecraft:netherrack"
+  },
+  "decorations": [
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "minecraft:red_mushroom"
+      },
+      "crown": {
+        "Name": "minecraft:brown_mushroom"
+      }
+    }
+  ]
+}

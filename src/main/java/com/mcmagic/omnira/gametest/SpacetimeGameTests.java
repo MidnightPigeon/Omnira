@@ -146,7 +146,7 @@ public final class SpacetimeGameTests {
         input.setItem(6,new ItemStack(ModItems.PARADOX_DUST.get()));input.setItem(7,new ItemStack(ModItems.RESONANCE_CRYSTAL.get()));input.setItem(8,new ItemStack(ModItems.PARADOX_DUST.get()));
         h.assertTrue(recipe.matches(new com.mcmagic.omnira.forging.AdvancedForgeRecipe.Input(input),level),"Left-middle-right recipe mismatch");h.succeed();
     }
-    @GameTest(template="spell_arena",timeoutTicks=120) public static void corridorAndUniqueIslandEntrances(GameTestHelper h){
+    @GameTest(template="spell_arena",timeoutTicks=120) public static void corridorAndContinentalTransit(GameTestHelper h){
         var world=h.getLevel().getServer().getLevel(com.mcmagic.omnira.world.dimension.ModDimensions.SPACETIME_CORRIDOR);
         h.assertTrue(world!=null,"Corridor dimension missing");
         for(int z:new int[]{-10000,-1,0,10000}){
@@ -159,30 +159,21 @@ public final class SpacetimeGameTests {
             var entrance=CorridorLayout.entrance(time);world.getChunkAt(entrance);
             h.assertTrue(!CorridorLayout.block(entrance.getX(),entrance.getY(),entrance.getZ()).is(ModBlocks.SPACETIME_RIFT.get())
                     && !CorridorLayout.block(entrance.getX(),entrance.getY()+1,entrance.getZ()).is(ModBlocks.SPACETIME_RIFT.get()),"New continents still generate return rifts");
-            h.assertTrue(!CorridorLayout.block(entrance.getX()+1000,entrance.getY()-1,0).isAir(),"Continent must extend beyond the old island");
             h.assertTrue(!CorridorLayout.block(entrance.getX()+1000,entrance.getY(),0).is(ModBlocks.SPACETIME_RIFT.get()),"Continent must not duplicate its entrance");
             var origin=new BlockPos(2,129,time?24:72);
             var rift=ModBlocks.SPACETIME_RIFT.get().defaultBlockState().setValue(SpacetimeRiftBlock.TIME,time);
             var pig=EntityType.PIG.create(world);pig.setPos(Vec3.atBottomCenterOf(origin));world.addFreshEntity(pig);
             rift.entityInside(world,origin,pig);
             h.assertTrue(!pig.isRemoved() && Math.abs(pig.getX())<=CorridorLayout.RIFT_RANGE+1 && Math.abs(pig.getZ())<=CorridorLayout.RIFT_RANGE+1
-                    && (Math.abs(pig.getY()-CorridorLayout.TIME_ENTRANCE.getY())<1 || Math.abs(pig.getY()-CorridorLayout.SPACE_ENTRANCE.getY())<1),"Rift did not reach a random continent landing");
+                    && (pig.getY()>CorridorLayout.TIME_BASE || pig.getY()>CorridorLayout.SPACE_BASE&&pig.getY()<CorridorLayout.SPACE_CEILING)
+                    && world.noCollision(pig,pig.getBoundingBox()),"Rift did not reach a safe landing in a continent stratum");
             pig.getPersistentData().putLong("OmniraRiftCooldown",0);
             rift.entityInside(world,entrance,pig);
             h.assertTrue(pig.getY()!=129 && !pig.getPersistentData().contains("OmniraRiftOrigin"),"Old return rift still works");pig.discard();
         }
-        h.assertTrue(CorridorLayout.block(0,224,0).is(DreamContent.TEMPORAL_SILT.get())
-                || CorridorLayout.block(0,224,0).is(DreamContent.LIVING_TEMPORAL_SILT.get()),"Time surface is not silt");
-        h.assertTrue(CorridorLayout.block(0,40,0).is(DreamContent.SPATIAL_CRYSTAL.get())
-                && CorridorLayout.block(0,80,0).is(DreamContent.SPATIAL_CRYSTAL.get()),"Space cave lacks floor or ceiling");
-        int floorCones=0,ceilingCones=0,glowing=0;
-        for(int x=0;x<64;x++)for(int z=0;z<64;z++){
-            if(!CorridorLayout.block(x,48,z).isAir())floorCones++;
-            if(!CorridorLayout.block(x,72,z).isAir())ceilingCones++;
-            if(CorridorLayout.block(x,48,z).is(DreamContent.EXCITED_SPATIAL_CRYSTAL.get())
-                    || CorridorLayout.block(x,72,z).is(DreamContent.EXCITED_SPATIAL_CRYSTAL.get()))glowing++;
-        }
-        h.assertTrue(floorCones>0 && ceilingCones>0 && glowing>0,"Cave cones or glowing surface are missing");
+        for(int x:new int[]{-10000,0,840,1160,10000})
+            for(int y:new int[]{CorridorLayout.SPACE_BASE,CorridorLayout.SPACE_CEILING,CorridorLayout.TIME_BASE})
+                h.assertTrue(CorridorLayout.block(x,y,0).is(ModBlocks.PURE_SOLIDIFIED_SPACETIME.get()),"Missing stratum boundary at "+x+","+y+",0");
         h.assertTrue(DreamContent.EXCITED_SPATIAL_CRYSTAL.get().defaultBlockState().getLightEmission()==15,"Excited crystal light is not 15");
         h.assertTrue(DreamContent.SPATIAL_CRYSTAL.get().defaultBlockState().getLightEmission()==5,"Spatial crystal light is not 5");
         h.assertTrue(CorridorLayout.block(0,133,0).is(ModBlocks.PURE_SOLIDIFIED_SPACETIME.get()),"Corridor ceiling needs an opaque backing");

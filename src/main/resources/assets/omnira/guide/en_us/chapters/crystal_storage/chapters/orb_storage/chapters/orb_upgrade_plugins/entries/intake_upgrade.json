@@ -4,7 +4,7 @@
   "title": "Intake Upgrade",
   "text": [
     "Right-click the held plate to configure directions and filters before installing it. Settings remain on the plate after removal.",
-    "Freely enable any of the six directions: front, back, left, right, up and down. Pulls one item per second from selected adjacent containers. Liquid crystal balls pull fluid within their transfer limit. Multiple directions are visited in order.",
+    "Enable any of six sides. Active intake uses its host's limit: base 4 items or 2000 mB per second, increased by Speed Upgrades. Selected sides are visited in order. Unlike ordinary receiving, intake is rate-limited, but does not spend the source's external extraction allowance.",
     "Three ghost filters support allowlists and denylists. Click with a carried item to set a filter without consuming it; right-click clears it. Select fluids using filled buckets, ordinary water bottles or fluid containers. Empty buckets and bottles select no fluid. With Create installed, potion bottles, honey bottles and Create filters also work; potions match their specific contents."
   ],
   "recipes": true

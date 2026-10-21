@@ -1,6 +1,7 @@
 {
   "id": "entity_barrier",
   "item": "omnira:earth_microcore",
+  "icon": "omnira:deflection_field",
   "title": "Self or Creature-Barrier",
   "text": [
     "Use Earth as the shape. Water targets yourself; Fire can select another creature. The ward follows its bearer but does not negate the incoming hit.",

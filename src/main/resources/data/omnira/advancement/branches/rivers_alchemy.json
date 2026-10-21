@@ -1,0 +1,34 @@
+{
+  "parent": "omnira:mainline/further_beyond",
+  "display": {
+    "icon": {
+      "id": "omnira:large_alchemical_reaction_pool"
+    },
+    "title": {
+      "translate": "advancement.omnira.branches.rivers_alchemy.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.branches.rivers_alchemy.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "performed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "performed"
+    ]
+  ]
+}

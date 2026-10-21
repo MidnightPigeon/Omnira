@@ -1,0 +1,15 @@
+{
+  "id": "geothermal_ember",
+  "title": "Geothermal Ember",
+  "item": "omnira:geothermal_ember",
+  "recipes": false,
+  "text": [
+    "Add 1B Lava to form an ember of geothermal activity. A Fire Microcore, Gunpowder and an Infused Spiritual Crystal also craft a Fire Charge shapelessly."
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "Ritual of World Formation"
+    }
+  ]
+}

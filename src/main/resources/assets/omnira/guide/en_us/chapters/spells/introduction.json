@@ -1,7 +1,7 @@
 {
-  "image": "",
-  "image_width": 112,
-  "image_height": 88,
-  "caption": "",
+  "image": "omnira:textures/gui/guide/chapters/spells.png",
+  "image_width": 1417,
+  "image_height": 1110,
+  "caption": "Choose a form with microcores, then compose its effects with elements and modifiers.",
   "text": []
 }

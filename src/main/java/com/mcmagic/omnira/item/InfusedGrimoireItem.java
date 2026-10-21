@@ -48,12 +48,18 @@ public final class InfusedGrimoireItem extends Item {
     private final Kind kind;
     public InfusedGrimoireItem(Properties properties,Kind kind) {
         super(properties.stacksTo(1).component(DataComponents.TOOL,SwordItem.createToolProperties())
-                .attributes(ItemAttributeModifiers.builder()
+                .attributes(attributes(kind)));
+        this.kind=kind;
+    }
+    private static ItemAttributeModifiers attributes(Kind kind){
+        var builder=ItemAttributeModifiers.builder()
                         .add(Attributes.ATTACK_DAMAGE,new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID,4,AttributeModifier.Operation.ADD_VALUE),EquipmentSlotGroup.MAINHAND)
                         .add(Attributes.ATTACK_SPEED,new AttributeModifier(Item.BASE_ATTACK_SPEED_ID,-2,AttributeModifier.Operation.ADD_VALUE),EquipmentSlotGroup.MAINHAND)
                         .add(ModAttributes.SPELL_POWER,new AttributeModifier(ResourceLocation.fromNamespaceAndPath("omnira","grimoire_power"),kind==Kind.INFUSED?.1:.15,
-                                AttributeModifier.Operation.ADD_MULTIPLIED_BASE),EquipmentSlotGroup.MAINHAND).build()));
-        this.kind=kind;
+                                AttributeModifier.Operation.ADD_MULTIPLIED_BASE),EquipmentSlotGroup.MAINHAND);
+        if(kind==Kind.CORRUPTED)builder.add(ModAttributes.LIFESTEAL,new AttributeModifier(
+                com.mcmagic.omnira.combat.HeldCombatAttributes.GRIMOIRE_LEECH,.5,AttributeModifier.Operation.ADD_VALUE),EquipmentSlotGroup.MAINHAND);
+        return builder.build();
     }
     public Kind kind(){return kind;}
     @Override public float getAttackDamageBonus(Entity target,float base,DamageSource source) {
@@ -81,11 +87,7 @@ public final class InfusedGrimoireItem extends Item {
         if(kind==Kind.SANCTIFIED)player.setData(ModAttachments.MANA,mana.spend(manaCost));
         if(kind==Kind.INFUSED)player.giveExperiencePoints(-Math.min(30,player.totalExperience));
         if(healthCost>0) {
-            player.setHealth(player.getHealth()-healthCost);
-            if(!player.isAlive()) {
-                player.die(SpellDamageSource.of(player,DamageTypes.GENERIC_KILL,null,null,"knowledge_extraction"));
-                return InteractionResultHolder.success(stack);
-            }
+            if(!com.mcmagic.omnira.combat.OmniraDamage.payHealth(player,healthCost,"knowledge_extraction"))return InteractionResultHolder.success(stack);
         }
         var projectile=SpellEntity.spawn(server,player,SpellEntity.Kind.PROJECTILE,player.getEyePosition());
         projectile.configure(com.mcmagic.omnira.fate.FateEffects.spellPower(player,CastAttributes.power(player,0)),10);

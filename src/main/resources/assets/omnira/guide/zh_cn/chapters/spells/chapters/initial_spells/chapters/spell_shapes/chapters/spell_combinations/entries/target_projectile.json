@@ -1,6 +1,7 @@
 {
   "id": "target_projectile",
   "item": "omnira:fire_microcore",
+  "icon": "minecraft:fire_charge",
   "title": "目标-弹射物",
   "text": [
     "目标槽放火微核，形态槽放风微核。先选中生物或方块，再射出追踪弹体；生物移动后，弹体会继续调整方向追向它。",

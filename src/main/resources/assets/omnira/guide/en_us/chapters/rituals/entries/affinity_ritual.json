@@ -5,11 +5,11 @@
   "scene": "affinity_ritual",
   "recipes": false,
   "text": [
-    "Requires one Advanced Ritual Energy Core, eight Crystal Pedestals, one each of earth, water, fire, air, light and dark microcores, one Paradox Dust and one Dream Crystal Budding Rock. Offering order is unrestricted. Use a light microcore, dark microcore or analysis crystal on the core for Light, Dark or Fourfold affinity.",
-    "Stand inside the circle for all six seconds. Acquiring affinity holds and slowly lifts you; renouncing does not immobilize you. Only the held activator is consumed, including the whole analysis crystal. Pedestal offerings remain, and interruption consumes nothing. A different affinity prevents activation; matching affinity is renounced.",
-    "Light: +20% mana regeneration and +200 capacity. Your damage can spend 20 mana to burn its target for ten seconds, including melee and spells.",
-    "Dark: +20% spell power and +10 mana cost reduction. Your damage can spend 20 mana to apply Poison II for five seconds.",
-    "Fourfold: +10% regeneration, +10% spell power, +100 capacity and +5 cost reduction. Taking damage spends 20 mana to reduce that damage by two points. All triggered abilities require sufficient mana; their fixed cost ignores reductions.",
+    "Use an Advanced Ritual Energy Core and eight pedestals. Offer earth, water, fire, air, light and dark microcores, Paradox Dust and Dream Crystal Budding Rock in any order. Activate with a light microcore, dark microcore or analysis crystal for Light, Dark or Fourfold affinity.",
+    "Stay inside for six seconds. Acquisition lifts you; renunciation allows movement. Completion consumes one activator, including the whole analysis crystal; interruption consumes nothing. Offerings are not consumed and may be removed after activation without affecting affinity.",
+    "Light: your damage spends 20 mana to burn its target for ten seconds, including melee and spells.",
+    "Dark: your damage spends 20 mana to apply Poison II for five seconds.",
+    "Fourfold: taking damage spends 20 mana to reduce that damage by two points. All three abilities require sufficient mana and ignore cost reductions.",
     "Affinities are exclusive and survive death. Repeat the matching ritual to renounce yours. You cannot gain another affinity until the penalty ends or you die.",
     "Renouncing Light burns you for two minutes and deals one suffocation damage every half-second. Renouncing Dark applies Poison II for one minute and creates a self-harming, twenty-second mist every five seconds; death stops new mist.",
     "Renouncing Fourfold applies Slowness III, Mining Fatigue III and Darkness for two minutes, with one base magic damage every half-second. Logging out pauses rather than removes the penalty.",
@@ -24,6 +24,143 @@
     {
       "target": "advanced_ritual_energy_core",
       "label": "Advanced Ritual Energy Core"
+    }
+  ],
+  "figures": [
+    {
+      "id": "affinity_choice",
+      "title": "Affinity Activators",
+      "icons": [
+        {
+          "item": "omnira:light_microcore",
+          "x": 0,
+          "y": 5,
+          "count": 1
+        },
+        {
+          "item": "omnira:dark_microcore",
+          "x": 0,
+          "y": 39,
+          "count": 1
+        },
+        {
+          "item": "omnira:analysis_crystal",
+          "x": 0,
+          "y": 73,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 24,
+          "y1": 13,
+          "x2": 44,
+          "y2": 13,
+          "color": "#597E8A",
+          "arrow": true
+        },
+        {
+          "x1": 24,
+          "y1": 47,
+          "x2": 44,
+          "y2": 47,
+          "color": "#597E8A",
+          "arrow": true
+        },
+        {
+          "x1": 24,
+          "y1": 81,
+          "x2": 44,
+          "y2": 81,
+          "color": "#597E8A",
+          "arrow": true
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "Light",
+          "x": 52,
+          "y": 7,
+          "width": 72,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Dark",
+          "x": 52,
+          "y": 41,
+          "width": 72,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Fourfold",
+          "x": 52,
+          "y": 75,
+          "width": 72,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Activator consumed; offerings remain.",
+          "x": 0,
+          "y": 110,
+          "width": 124,
+          "height": 22,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "affinity_bonuses",
+      "title": "Affinity Bonuses",
+      "icons": [],
+      "areas": [],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 42,
+          "x2": 123,
+          "y2": 42,
+          "color": "#9FAF9F",
+          "arrow": false
+        },
+        {
+          "x1": 0,
+          "y1": 86,
+          "x2": 123,
+          "y2": 86,
+          "color": "#9FAF9F",
+          "arrow": false
+        }
+      ],
+      "labels": [
+        {
+          "text": "Light\nRegen +20%, mana +200",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 40,
+          "color": "#705921"
+        },
+        {
+          "text": "Dark\nPower +20%, cost reduction +10",
+          "x": 0,
+          "y": 44,
+          "width": 124,
+          "height": 40,
+          "color": "#634478"
+        },
+        {
+          "text": "Fourfold\nRegen/power +10%\nMana +100, cost reduction +5",
+          "x": 0,
+          "y": 88,
+          "width": 124,
+          "height": 44,
+          "color": "#305E5B"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,34 @@
+{
+  "parent": "omnira:mainline/myriad_codex",
+  "display": {
+    "icon": {
+      "id": "omnira:earth_microcore"
+    },
+    "title": {
+      "translate": "advancement.omnira.branches.pocket_ecology.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.branches.pocket_ecology.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "performed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "performed"
+    ]
+  ]
+}

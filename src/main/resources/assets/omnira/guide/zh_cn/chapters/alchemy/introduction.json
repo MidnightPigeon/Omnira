@@ -1,5 +1,7 @@
 {
-  "text": [
-    "以液体、材料与催化方块进行炼成，从基础反应到并行生产。"
-  ]
+  "image": "omnira:textures/gui/guide/chapters/alchemy.png",
+  "image_width": 1420,
+  "image_height": 1108,
+  "caption": "液体、材料与催化相遇，从一口炼金釜走向持续生产。",
+  "text": []
 }

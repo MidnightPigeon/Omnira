@@ -62,13 +62,8 @@ public class CrystalProcessingTableScreen extends ResponsiveContainerScreen<Crys
     }
 
     static void renderVanillaFrame(GuiGraphics graphics, int leftPos, int topPos, int imageWidth, int imageHeight) {
-        // Sample the actual vanilla container border without stretching its bevel.
-        graphics.blit(CRAFTING_TABLE_TEXTURE, leftPos, topPos, 0, 0, 176, 4, 256, 256);
-        graphics.blit(CRAFTING_TABLE_TEXTURE, leftPos, topPos + imageHeight - 4, 0, 162, 176, 4, 256, 256);
-        graphics.blit(CRAFTING_TABLE_TEXTURE, leftPos, topPos + 4, 4, imageHeight - 8,
-                0.0F, 50.0F, 4, 1, 256, 256);
-        graphics.blit(CRAFTING_TABLE_TEXTURE, leftPos + imageWidth - 4, topPos + 4, 4, imageHeight - 8,
-                172.0F, 50.0F, 4, 1, 256, 256);
+        VanillaFrameLayout.draw(imageWidth,imageHeight,(x,y,w,h,u,v,sw,sh)->
+                graphics.blit(CRAFTING_TABLE_TEXTURE,leftPos+x,topPos+y,w,h,(float)u,(float)v,sw,sh,256,256));
     }
 
     @Override

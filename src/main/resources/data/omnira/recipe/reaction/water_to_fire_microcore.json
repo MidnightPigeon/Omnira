@@ -5,12 +5,13 @@
       "ingredient": {
         "item": "omnira:water_microcore"
       }
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:blaze_powder"
+      }
     }
   ],
-  "fluid": {
-    "id": "minecraft:lava",
-    "amount": 500
-  },
   "guaranteed_results": [
     {
       "id": "omnira:fire_microcore",

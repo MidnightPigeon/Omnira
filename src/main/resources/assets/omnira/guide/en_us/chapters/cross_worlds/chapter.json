@@ -7,6 +7,8 @@
   "chapters": [
     "chapters/mod_integrations/chapter.json",
     "chapters/mod_integration_risks/chapter.json",
-    "chapters/worldline_entanglement/chapter.json"
+    "chapters/worldline_entanglement/chapter.json",
+    "chapters/easter_egg_sources/chapter.json",
+    "chapters/contact_author/chapter.json"
   ]
 }

@@ -94,13 +94,8 @@ public final class EventideRuins {
         if(data.contains(ENTITY_CYCLE)&&data.getLong(ENTITY_CYCLE)==cycle)return;
         data.putLong(ENTITY_CYCLE,cycle);
         if(living instanceof Player player){
-            // The time node removes health directly, independent of armor and damage modifiers.
-            float remaining=player.getHealth()-player.getMaxHealth()*.5F;
-            player.setHealth(Math.max(0,remaining));
-            com.mcmagic.omnira.space.phase.PhaseConcealment.afterDamage(player);
-            if(remaining<=0)player.die(new net.minecraft.world.damagesource.DamageSource(
-                    level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(
-                            ResourceKey.create(Registries.DAMAGE_TYPE,ResourceLocation.parse("omnira:time_ending")))));
+            com.mcmagic.omnira.combat.OmniraDamage.trueDamage(player,player.getMaxHealth()*.5F,
+                    com.mcmagic.omnira.combat.OmniraDamage.source(player,"time_ending"));
             return;
         }
         if(living instanceof Mob mob&&mob.isBaby()){

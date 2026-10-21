@@ -92,10 +92,9 @@ public final class StorageVisuals {
             if(node.peer!=null||selected){
                 var mesh=buffers.getBuffer(CrystalGlassLayer.COLOR);double time=node.getLevel().getGameTime()+partial;
                 int color=selected||node.output?0xF5FFFFFF:0xF5201729;
+                var points=ResonanceNodeMotion.ring(time);
                 for(int i=0;i<14;i++){
-                    double angle=time*.045+i*Math.PI*2/14;
-                    cube(mesh,pose,.5F+(float)Math.cos(angle)*.37F,.44F+(float)Math.sin(angle*2+time*.025)*.045F,
-                        .5F+(float)Math.sin(angle)*.37F,.025F,color);
+                    cube(mesh,pose,points[i*3],points[i*3+1],points[i*3+2],.025F,color);
                 }
             }
             if(player==null||node.peer==null||!node.output||!(player.getMainHandItem().is(CrystalStorageContent.ROD.get())||player.getOffhandItem().is(CrystalStorageContent.ROD.get())))return;

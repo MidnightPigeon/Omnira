@@ -21,6 +21,7 @@ public final class EngineEnergyBuffer {
     }
     public int stored() {return stored;}
     public int capacity() {return capacity;}
+    public void fill(int capacity){this.capacity=Math.max(0,capacity);stored=this.capacity;}
     public int remainder() {return remainder;}
     public void restore(int stored,int remainder) {
         this.stored=Math.max(0,stored);this.remainder=Math.clamp(remainder,0,19);

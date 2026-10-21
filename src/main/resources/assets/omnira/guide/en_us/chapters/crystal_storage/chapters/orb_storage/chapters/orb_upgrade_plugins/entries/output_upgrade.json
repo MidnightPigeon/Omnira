@@ -4,8 +4,8 @@
   "title": "Output Upgrade",
   "text": [
     "Right-click the held plate to configure directions and filters before installing it. Settings remain on the plate after removal.",
-    "Freely enable any of the six directions: front, back, left, right, up and down. Pushes one item per second into selected adjacent containers, visiting enabled directions in order. Fluids obey the globe transfer limit.",
-    "Uses the same filters as intake upgrades. This item rate applies only to the upgrade, not to external funnels or pipes."
+    "Enable any of six sides to push into adjacent containers at a base 4 items or 2000 mB per second, increased by Speed Upgrades. Enabled directions are visited in order.",
+    "Uses the same filters as Intake Upgrades. Output, external extraction and resonance use independent rate allowances."
   ],
   "recipes": true
 }

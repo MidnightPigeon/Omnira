@@ -8,12 +8,14 @@ import net.minecraft.world.level.block.state.BlockState;
 /** Other rituals retain their own lifetime; genesis owns only an irreversible offering counter. */
 public final class RitualEnergyCoreBlockEntity extends BlockEntity {
     public RitualEnergyCoreBlockEntity(BlockPos pos,BlockState state) {super(ModBlockEntityTypes.RITUAL_ENERGY_CORE.get(),pos,state);}
+    public final com.mcmagic.omnira.myriad.WorldFormingRitual worldForming = new com.mcmagic.omnira.myriad.WorldFormingRitual(this);
     private int genesisFluid,absorption;
     private float visualFluid,previousVisualFluid;
     private float visualAbsorption,previousVisualAbsorption;
     public float visualFluid(float partial){return previousVisualFluid+(visualFluid-previousVisualFluid)*partial;}
     public float visualAbsorption(float partial){return previousVisualAbsorption+(visualAbsorption-previousVisualAbsorption)*partial;}
     public void tickVisual(){
+        worldForming.tickVisual();
         previousVisualFluid=visualFluid;visualFluid+=Math.clamp(genesisFluid-visualFluid,-1000F,500F);
         previousVisualAbsorption=visualAbsorption;visualAbsorption+=Math.clamp(absorption()-visualAbsorption,-40F,1F);
     }
@@ -70,9 +72,11 @@ public final class RitualEnergyCoreBlockEntity extends BlockEntity {
     private void sync(){setChanged();if(level!=null)level.sendBlockUpdated(worldPosition,getBlockState(),getBlockState(),2);}
     @Override protected void saveAdditional(net.minecraft.nbt.CompoundTag tag,net.minecraft.core.HolderLookup.Provider lookup){
         super.saveAdditional(tag,lookup);tag.putInt("GenesisOffering",genesisFluid);tag.putInt("GenesisAbsorption",absorption);
+        worldForming.save(tag,lookup);
     }
     @Override protected void loadAdditional(net.minecraft.nbt.CompoundTag tag,net.minecraft.core.HolderLookup.Provider lookup){
         super.loadAdditional(tag,lookup);genesisFluid=Math.clamp(tag.getInt("GenesisOffering"),0,10000);
+        worldForming.load(tag,lookup);
         absorption=genesisFluid==10000?Math.clamp(tag.getInt("GenesisAbsorption"),0,59):0;
         if(genesisFluid==0){visualFluid=previousVisualFluid=0;visualAbsorption=previousVisualAbsorption=0;}
     }

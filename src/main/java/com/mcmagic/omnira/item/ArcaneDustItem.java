@@ -15,10 +15,11 @@ public final class ArcaneDustItem extends Item {
     @Override public InteractionResult useOn(UseOnContext context){
         var level=context.getLevel();var pos=context.getClickedPos();var player=context.getPlayer();var stack=context.getItemInHand();
         if(stack.isEmpty()||player==null||player.isSpectator()||!level.mayInteract(player,pos))return InteractionResult.PASS;
+        if(player.isShiftKeyDown())return com.mcmagic.omnira.pulse.PulseWireBlock.place(context);
         if(level.getBlockState(pos).is(com.mcmagic.omnira.space.phase.PhaseContent.CLUSTER.get()))return com.mcmagic.omnira.space.phase.PhaseGrowth.grow(context);
         Block[] family=null;
         for(var candidate:CrystalFamilies.all())if(level.getBlockState(pos).is(candidate[0])){family=candidate;break;}
-        if(family==null)return InteractionResult.PASS;
+        if(family==null)return com.mcmagic.omnira.pulse.PulseWireBlock.place(context);
         boolean changed=false;
         for(var face:Direction.values()){
             var at=pos.relative(face);

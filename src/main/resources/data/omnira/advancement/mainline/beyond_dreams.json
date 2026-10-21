@@ -1,0 +1,37 @@
+{
+  "parent": "omnira:mainline/first_creation",
+  "display": {
+    "icon": {
+      "id": "omnira:dream_crystal"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.beyond_dreams.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.beyond_dreams.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "entered": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "omnira:dream_realm"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "entered"
+    ]
+  ]
+}

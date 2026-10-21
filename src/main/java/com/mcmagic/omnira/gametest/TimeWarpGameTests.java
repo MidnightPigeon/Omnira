@@ -46,22 +46,40 @@ public final class TimeWarpGameTests {
         h.succeed();
     }
     @GameTest(template="spell_arena") public static void fullStackCollapsesOnlyInUnprotectedStorage(GameTestHelper h){
+        for(var point:java.util.List.of(ModItems.TIME_WARP_POINT.get(),ModItems.SPACE_WARP_POINT.get()))fullStackStorageChecks(h,point);
+        h.succeed();
+    }
+    private static void fullStackStorageChecks(GameTestHelper h,net.minecraft.world.item.Item point){
         var chest=new SimpleContainer(9);
-        chest.setItem(4,new ItemStack(ModItems.TIME_WARP_POINT.get(),16));
-        h.assertTrue(TimeWarpStorage.container(chest,true)==false && chest.getItem(4).is(ModItems.TIME_WARP_POINT.get()),"Stabilized storage changed");
+        chest.setItem(4,new ItemStack(point,16));
+        h.assertTrue(TimeWarpStorage.container(chest,true)==false && chest.getItem(4).is(point),"Stabilized storage changed");
         h.assertTrue(TimeWarpStorage.container(chest,false) && chest.getItem(4).is(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get()),"Container stack did not collapse");
         var player=h.makeMockPlayer(GameType.SURVIVAL);
-        player.getInventory().setItem(0,new ItemStack(ModItems.TIME_WARP_POINT.get(),16));
-        player.getInventory().setItem(9,new ItemStack(ModItems.TIME_WARP_POINT.get(),16));
+        player.getInventory().setItem(0,new ItemStack(point,16));
+        player.getInventory().setItem(9,new ItemStack(point,16));
+        player.getInventory().setItem(40,new ItemStack(point,16));
         TimeWarpStorage.container(player.getInventory(),false);
-        h.assertTrue(player.getInventory().getItem(0).is(ModItems.TIME_WARP_POINT.get()),"Held hotbar stack changed");
+        h.assertTrue(player.getInventory().getItem(0).is(point)&&player.getInventory().getItem(40).is(point),"Hotbar or offhand stack changed");
         h.assertTrue(player.getInventory().getItem(9).is(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get()),"Backpack stack did not collapse");
-        var handler=new ItemStackHandler(3);handler.setStackInSlot(1,new ItemStack(ModItems.TIME_WARP_POINT.get(),16));
+        var handler=new ItemStackHandler(3);handler.setStackInSlot(1,new ItemStack(point,16));
         TimeWarpStorage.handler(handler,true);
-        h.assertTrue(handler.getStackInSlot(1).is(ModItems.TIME_WARP_POINT.get()),"Protected handler changed");
+        h.assertTrue(handler.getStackInSlot(1).is(point),"Protected handler changed");
         TimeWarpStorage.handler(handler,false);
         h.assertTrue(handler.getStackInSlot(1).is(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get()),"Item handler did not collapse");
-        h.succeed();
+        h.assertTrue(handler.getStackInSlot(1).getCount()==1&&!TimeWarpStorage.handler(handler,false),"Collapse duplicated its output");
+    }
+    @GameTest(template="spell_arena") public static void partialAndSeparatePointStacksDoNotMerge(GameTestHelper h){
+        var chest=new SimpleContainer(3);chest.setItem(0,new ItemStack(ModItems.TIME_WARP_POINT.get(),8));
+        chest.setItem(1,new ItemStack(ModItems.SPACE_WARP_POINT.get(),8));chest.setItem(2,new ItemStack(ModItems.SPACE_WARP_POINT.get(),15));
+        h.assertTrue(AggregateStorage.container(chest,10)&&chest.getItem(0).getCount()==8&&chest.getItem(1).getCount()==8
+                &&chest.getItem(2).getCount()==15&&!chest.getItem(2).is(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get()),"Separate or partial stacks collapsed");
+        var result=new net.minecraft.world.inventory.ResultContainer();result.setItem(0,new ItemStack(ModItems.SPACE_WARP_POINT.get(),16));
+        h.assertTrue(!TimeWarpStorage.container(result,false)&&result.getItem(0).is(ModItems.SPACE_WARP_POINT.get()),"Recipe preview collapsed");
+        chest.setItem(2,new ItemStack(ModItems.SPACE_WARP_POINT.get(),16));AggregateStorage.container(chest,20);
+        h.assertTrue(chest.getItem(2).is(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get())&&chest.getItem(2).getCount()==1,"Shared storage entry missed spatial collapse");
+        var handler=new ItemStackHandler(1);handler.setStackInSlot(0,new ItemStack(ModItems.SPACE_WARP_POINT.get(),16));
+        AggregateStorage.handler(handler,30,true);h.assertTrue(handler.getStackInSlot(0).is(ModItems.SPACE_WARP_POINT.get()),"Shared protected handler collapsed");
+        AggregateStorage.handler(handler,40);h.assertTrue(handler.getStackInSlot(0).is(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get()),"Shared handler missed spatial collapse");h.succeed();
     }
     @GameTest(template="spell_arena") public static void harvestLeavesUnbreakableRegrowingMote(GameTestHelper h){
         var level=h.getLevel();var pos=h.absolutePos(new BlockPos(5,3,5));var player=h.makeMockPlayer(GameType.SURVIVAL);

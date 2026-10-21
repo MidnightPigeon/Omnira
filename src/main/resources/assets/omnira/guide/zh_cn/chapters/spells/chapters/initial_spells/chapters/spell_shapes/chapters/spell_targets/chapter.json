@@ -1,7 +1,7 @@
 {
   "id": "spell_targets",
   "title": "目标",
-  "icon": "omnira:fire_microcore",
+  "icon": "minecraft:target",
   "introduction": "introduction.json",
   "entries": [
     "entries/ground_target.json",

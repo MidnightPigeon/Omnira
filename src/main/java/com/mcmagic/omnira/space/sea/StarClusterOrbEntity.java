@@ -20,6 +20,7 @@ public final class StarClusterOrbEntity extends CrystalBallBlockEntity {
     public StarClusterOrbEntity(BlockPos pos,BlockState state){super(pos,state);}
     @Override public int getContainerSize(){return 1;}
     public int progress(){return progress;}
+    public void worldRotation(){if(progress>0){progress=DURATION-1;serverTick();}}
     public ItemStack result(ItemStack input){return com.mcmagic.omnira.recipe.StarlightConversionRecipe.output(level,input);}
     @Override public int getMaxStackSize(ItemStack stack){
         var output=result(stack);return output.isEmpty()?stack.getMaxStackSize():Math.min(stack.getMaxStackSize(),output.getMaxStackSize());

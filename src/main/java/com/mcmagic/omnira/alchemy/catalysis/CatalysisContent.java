@@ -27,12 +27,12 @@ public final class CatalysisContent {
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK,ENTITY.get(),(be,side)->{
             var root=CatalysisBlock.controller(be.getLevel(),be.getBlockPos());
             if(root==null||!root.complete())return null;
-            return be.getBlockState().getValue(CatalysisBlock.PART)==2?root.extractOnly:root.items;
+            return com.mcmagic.omnira.progression.BranchAutomation.items(root,be.getBlockState().getValue(CatalysisBlock.PART)==2?root.extractOnly:root.automationItems);
         });
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK,ENTITY.get(),(be,side)->{
             var root=CatalysisBlock.controller(be.getLevel(),be.getBlockPos());
             return root!=null&&root.complete()&&be.getBlockState().getValue(CatalysisBlock.PART)==0
-                    &&side==be.getBlockState().getValue(CatalysisBlock.FACING).getOpposite()?root.tank:null;
+                    &&side==be.getBlockState().getValue(CatalysisBlock.FACING).getOpposite()?com.mcmagic.omnira.progression.BranchAutomation.fluids(root,root.tank):null;
         });
     }
     private CatalysisContent(){}

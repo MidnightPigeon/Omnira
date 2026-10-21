@@ -97,6 +97,11 @@ public final class DimensionRitualReturnGameTests {
         var clock=(net.minecraft.world.level.storage.ServerLevelData)world.getServer().overworld().getLevelData();clock.setGameTime(now);
         try{
         for(boolean permanent:java.util.List.of(false,true)){
+            world.setBlockAndUpdate(pos.below(),ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get().defaultBlockState());int offering=0;
+            for(var anchor:DreamRitual.ANCHORS){
+                var at=pos.below().offset(anchor[0],0,anchor[1]);world.setBlockAndUpdate(at,ModBlocks.CRYSTAL_PEDESTAL.get().defaultBlockState());
+                ((CrystalPedestalBlockEntity)world.getBlockEntity(at)).setItem(0,new ItemStack(CorridorRitual.offering(offering++)));
+            }
             world.setBlockAndUpdate(pos,ModBlocks.CORRIDOR_GATEWAY.get().defaultBlockState());
             var gate=(CorridorGatewayBlockEntity)world.getBlockEntity(pos);var tag=gate.saveWithFullMetadata(world.registryAccess());
             tag.putLong("Started",now-240);tag.putLong("Opened",now);tag.putBoolean("Permanent",permanent);gate.loadWithComponents(tag,world.registryAccess());gate.tick();
@@ -104,7 +109,8 @@ public final class DimensionRitualReturnGameTests {
             tag.putLong("Opened",now-CorridorRitual.OPEN_TICKS);gate.loadWithComponents(tag,world.registryAccess());gate.tick();
             h.assertTrue(permanent?world.getBlockEntity(pos)==gate:world.isEmptyBlock(pos),"Returning gate lifetime changed");world.removeBlock(pos,false);
         }
-        }finally{clock.setGameTime(previous);}
+        }finally{clock.setGameTime(previous);world.removeBlock(pos,false);world.removeBlock(pos.below(),false);
+            for(var anchor:DreamRitual.ANCHORS)world.removeBlock(pos.below().offset(anchor[0],0,anchor[1]),false);}
         h.succeed();
     }
 }

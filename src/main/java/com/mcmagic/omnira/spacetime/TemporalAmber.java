@@ -66,7 +66,7 @@ public final class TemporalAmber extends Entity {
     }
     public static void sealDeath(Player player){
         FORCED.add(player);
-        try{player.setHealth(0);player.die(player.level().damageSources().genericKill());}
+        try{com.mcmagic.omnira.combat.OmniraDamage.execute(player,com.mcmagic.omnira.combat.OmniraDamage.source(player,"true_damage"));}
         finally{FORCED.remove(player);}
     }
     public static void beginDeath(Player player){

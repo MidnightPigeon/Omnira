@@ -1,0 +1,285 @@
+{
+  "id": "magic_pulse",
+  "title": "魔力脉冲",
+  "item": "omnira:pulse_accumulator_orb",
+  "icon": "omnira:mana_engine",
+  "recipes": false,
+  "text": [
+    "势能以MPU计量。对准机器接口连接脉冲源，或通过奥术连线与蓄能晶球组网。相连的源合计供能；不足以满足全部基础需求时，全网机器暂停。",
+    "先保障基础需求，再按接入顺序分配可加速机器的余量，最高8倍。新机器需要工作时，后接入机器优先让出额外占用。",
+    "本模组机器优先使用脉冲，未接入时依次使用应力、电力。电力按持续输入的FE/秒等价MPU，空闲时同样消耗，断供即停，不靠缓存续行。可加速机器按输入提高效率，最高倍率沿用各机器设定；灵晶熔炉不随额外供能加速。脉冲不足不会改用外源绕过停机。",
+    "机械输入（含晶球）须达到16 rpm，正反转均可，低速拒收且不占用应力。魔动装配台、灵晶砧占用16×|RPM| SU；大型反应池两侧分别占用32×|RPM| SU，合计计算效率，最高8倍。",
+    "直接连接机械动力或电力元件时，源端转换为16 rpm旋转或电能效果。1 MPU对应1 SU或1 FE/秒；时空端口转接保留源端脉冲外观，远端正常转换。",
+    "站在脉冲源输出面紧邻的一格内，每秒吸收机器未用势能的1/10作为法力，向上取整；多人共享余量，并计入源占用。旋转或电力输出不供玩家吸收。",
+    "脉冲可使法力超过上限。已有法力超过上限的150%后，再次吸收会引发半径5格的魔力爆炸：范围内生物受到20点魔法伤害，实体被推开，方块和物品保留。自身获得3分钟虚弱II、缓慢II，超额法力泄回正常上限。"
+  ],
+  "links": [
+    {
+      "target": "pulse_accumulator_orbs",
+      "label": "蓄能晶球"
+    },
+    {
+      "target": "arcane_pulse_wires",
+      "label": "奥术连线"
+    }
+  ],
+  "figures": [
+    {
+      "id": "pulse_direct",
+      "title": "直连",
+      "icons": [
+        {
+          "item": "omnira:mana_engine",
+          "x": 4,
+          "y": 35,
+          "count": 1
+        },
+        {
+          "item": "omnira:pulse_accumulator_orb",
+          "x": 104,
+          "y": 35,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 26,
+          "y1": 43,
+          "x2": 97,
+          "y2": 43,
+          "color": "#9A6EAF",
+          "arrow": true
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "512 MPU",
+          "x": 0,
+          "y": 8,
+          "width": 62,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "512 MPU",
+          "x": 67,
+          "y": 8,
+          "width": 57,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "源 → 节点\n晶球只分发，不积蓄。",
+          "x": 0,
+          "y": 80,
+          "width": 124,
+          "height": 44,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "pulse_fork",
+      "title": "分流",
+      "icons": [
+        {
+          "item": "omnira:mana_engine",
+          "x": 4,
+          "y": 53,
+          "count": 1
+        },
+        {
+          "item": "omnira:pulse_accumulator_orb",
+          "x": 104,
+          "y": 17,
+          "count": 1
+        },
+        {
+          "item": "omnira:pulse_accumulator_orb",
+          "x": 104,
+          "y": 89,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 26,
+          "y1": 61,
+          "x2": 61,
+          "y2": 61,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 61,
+          "y1": 61,
+          "x2": 61,
+          "y2": 25,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 61,
+          "y1": 25,
+          "x2": 97,
+          "y2": 25,
+          "color": "#9A6EAF",
+          "arrow": true
+        },
+        {
+          "x1": 61,
+          "y1": 61,
+          "x2": 61,
+          "y2": 97,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 61,
+          "y1": 97,
+          "x2": 97,
+          "y2": 97,
+          "color": "#9A6EAF",
+          "arrow": true
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "1024",
+          "x": 0,
+          "y": 31,
+          "width": 42,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "512",
+          "x": 68,
+          "y": 4,
+          "width": 42,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "512",
+          "x": 68,
+          "y": 108,
+          "width": 42,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "空载等分，工作可调配",
+          "x": 0,
+          "y": 119,
+          "width": 124,
+          "height": 11,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "pulse_merge",
+      "title": "合流",
+      "icons": [
+        {
+          "item": "omnira:mana_engine",
+          "x": 4,
+          "y": 16,
+          "count": 1
+        },
+        {
+          "item": "omnira:mana_engine",
+          "x": 4,
+          "y": 84,
+          "count": 1
+        },
+        {
+          "item": "omnira:pulse_accumulator_orb",
+          "x": 104,
+          "y": 50,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 25,
+          "y1": 24,
+          "x2": 61,
+          "y2": 24,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 61,
+          "y1": 24,
+          "x2": 61,
+          "y2": 58,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 25,
+          "y1": 92,
+          "x2": 61,
+          "y2": 92,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 61,
+          "y1": 92,
+          "x2": 61,
+          "y2": 58,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 61,
+          "y1": 58,
+          "x2": 97,
+          "y2": 58,
+          "color": "#9A6EAF",
+          "arrow": true
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "512",
+          "x": 0,
+          "y": 0,
+          "width": 40,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "512",
+          "x": 0,
+          "y": 106,
+          "width": 40,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "1024",
+          "x": 78,
+          "y": 28,
+          "width": 46,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "同网合计，不重复产能。",
+          "x": 0,
+          "y": 119,
+          "width": 124,
+          "height": 11,
+          "color": "#405462"
+        }
+      ]
+    }
+  ]
+}

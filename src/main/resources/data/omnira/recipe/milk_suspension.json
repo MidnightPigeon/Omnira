@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {"item": "minecraft:milk_bucket"},
+    {"item": "omnira:infused_spiritual_crystal"}
+  ],
+  "result": {"id": "omnira:milk_suspension", "count": 1}
+}

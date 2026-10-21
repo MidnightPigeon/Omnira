@@ -3,7 +3,10 @@
   "item": "omnira:guide_book",
   "title": "Omnira Handbook",
   "text": [
-    "Craft a book with a Spiritual Crystal to obtain this guide to crafting and use."
+    "Craft a book with a Spiritual Crystal to obtain this guide to crafting and use.",
+    "Carry the book in your hotbar or inventory, hover over an item in an inventory or container screen, and hold Ctrl for about one second to read its entry. Closing returns to the previous screen.",
+    "With the book in your main hand, aim at a documented block, machine or creature to see a hint. Shift + right-click opens its introduction. Quick references neither consume the book nor overwrite its reading position.",
+    "Use the text field below the book to find matching chapters and entries. Stop Search or Return Home ends the search and clears the field."
   ],
   "recipes": true
 }

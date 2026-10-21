@@ -7,11 +7,12 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.world.item.*;
 
 public final class ResonanceCrystalRenderer extends BlockEntityWithoutLevelRenderer {
+    private static final ModelResourceLocation BODY=CrystalGridRenderer.part("resonance_crystal","body"),MOTE=CrystalGridRenderer.part("resonance_crystal","mote");
     public ResonanceCrystalRenderer() {
         super(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels());
     }
     public static ModelResourceLocation model(String part) {
-        return CrystalGridRenderer.part("resonance_crystal",part);
+        return switch(part){case "body"->BODY;case "mote"->MOTE;default->CrystalGridRenderer.part("resonance_crystal",part);};
     }
     @Override public void renderByItem(ItemStack stack,ItemDisplayContext context,PoseStack pose,
             MultiBufferSource buffers,int light,int overlay) {
@@ -19,6 +20,8 @@ public final class ResonanceCrystalRenderer extends BlockEntityWithoutLevelRende
         double time=mc.level==null?net.minecraft.Util.getMillis()/50.0:
                 mc.level.getGameTime()+mc.getTimer().getGameTimeDeltaPartialTick(false);
         draw("body",stack,pose,buffers,light,overlay);
+        var motes=StaticModelQuads.collect(mc.getModelManager().getModel(model("mote")));
+        var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
         for(int i=0;i<4;i++) {
             double phase=(time*.008+i*.25)%1,angle=time*.018+i*Math.PI/2;
             pose.pushPose();
@@ -26,7 +29,7 @@ public final class ResonanceCrystalRenderer extends BlockEntityWithoutLevelRende
             float size=(float)(.55*Math.sin(phase*Math.PI));
             pose.scale(size,size,size);
             pose.translate(-.5,-.5,-.5);
-            draw("mote",stack,pose,buffers,LightTexture.FULL_BRIGHT,overlay);
+            mc.getItemRenderer().renderQuadList(pose,out,motes,stack,LightTexture.FULL_BRIGHT,overlay);
             pose.popPose();
         }
     }

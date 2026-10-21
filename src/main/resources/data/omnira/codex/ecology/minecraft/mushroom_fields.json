@@ -1,0 +1,28 @@
+{
+  "base": {
+    "Name": "minecraft:dirt"
+  },
+  "surface": {
+    "Name": "minecraft:mycelium"
+  },
+  "decorations": [
+    {
+      "kind": "tree",
+      "block": {
+        "Name": "minecraft:mushroom_stem"
+      },
+      "crown": {
+        "Name": "minecraft:red_mushroom_block"
+      }
+    },
+    {
+      "kind": "tree",
+      "block": {
+        "Name": "minecraft:mushroom_stem"
+      },
+      "crown": {
+        "Name": "minecraft:brown_mushroom_block"
+      }
+    }
+  ]
+}

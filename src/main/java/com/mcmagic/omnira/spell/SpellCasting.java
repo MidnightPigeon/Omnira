@@ -146,6 +146,7 @@ public final class SpellCasting {
     private static boolean cast(Player caster,SpellPattern pattern,SpellPayload payload,double power,
                                 double selectionBonus,double speedBonus,boolean explosive,boolean ghost,Modifiers modifiers) {
         if (pattern==null || !(caster.level() instanceof ServerLevel level) || !caster.isAlive() || caster.isSpectator()) return false;
+        if(pattern.worldRotation())return caster instanceof net.minecraft.server.level.ServerPlayer player&&com.mcmagic.omnira.spell.world.WorldRotation.cast(player);
         if(pattern.composite())return com.mcmagic.omnira.spell.entity.CompositeSpellMotion.cast(caster,pattern,payload,
                 com.mcmagic.omnira.fate.FateEffects.spellPower(caster,power),modifiers);
         SpellShapeKeyword shape = pattern.shapeKeyword();

@@ -109,6 +109,31 @@ public final class CorridorRitualGameTests {
         }finally{clock(h,previous);}
         h.succeed();
     }
+    @GameTest(template="spell_arena") public static void openedGatewaysRequireOfferingsAndStructure(GameTestHelper h){
+        var level=h.getLevel();long previous=level.getGameTime();
+        try {
+            for(boolean permanent:new boolean[]{false,true})for(int removed=0;removed<3;removed++){
+                var core=setup(h);var mirror=mirror(h,core);var id=mirror.getUUID();var player=player(h,core);
+                if(permanent)player.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(ModItems.SPACETIME_SPELL_CORE.get()));
+                h.assertTrue(CorridorRitual.activate(level,core,player,InteractionHand.MAIN_HAND),"Gateway activation failed");
+                var gateway=(CorridorGatewayBlockEntity)level.getBlockEntity(core.above());
+                var saved=gateway.saveWithFullMetadata(level.registryAccess());saved.putLong("Started",0);
+                gateway.loadWithComponents(saved,level.registryAccess());clock(h,Math.max(previous,240));gateway.tick();
+                h.assertTrue(gateway.open() && gateway.permanent()==permanent,"Wrong opened gateway state");
+                var offset=DreamRitual.ANCHORS[0];var pedestal=core.offset(offset[0],0,offset[1]);
+                if(removed==0)((CrystalPedestalBlockEntity)level.getBlockEntity(pedestal)).removeItem(0,1);
+                else level.removeBlock(removed==1?pedestal:core,false);
+                gateway.tick();gateway.release();
+                h.assertTrue(level.isEmptyBlock(core.above()),"Dismantled gateway remained open");
+                h.assertTrue(level.getEntity(id) instanceof com.mcmagic.omnira.entity.DreamMirror,"Dismantling lost mirror");
+                h.assertTrue(level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,new AABB(core).inflate(3))
+                        .stream().noneMatch(e->e.getItem().is(ModItems.SPACETIME_SPELL_CORE.get()) || UnstableAggregateItem.isAggregate(e.getItem())),
+                        "Opened gateway refunded consumed activator");
+                level.getEntity(id).discard();
+            }
+        }finally{clock(h,previous);}
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void interruptionEjectsAndDetonates(GameTestHelper h){
         var core=setup(h);mirror(h,core);var player=player(h,core);var level=h.getLevel();
         h.assertTrue(CorridorRitual.activate(level,core,player,InteractionHand.MAIN_HAND),"Could not activate");

@@ -59,6 +59,7 @@ public record AnalysisRecipe(Ingredient ingredient, int count, ItemStack result,
     public Byproduct secondaryOutput() {
         return dustMax>0?new Byproduct(java.util.List.of(new ItemStack(com.mcmagic.omnira.registry.ModItems.ARCANE_DUST.get())),dustMin,dustMax):byproduct;
     }
+    public ItemStack remainder(ItemStack input){return inputDamage>0?ItemStack.EMPTY:input.getCraftingRemainingItem();}
     public AnalysisRecipe {
         result=result.copy();
         if (count < 1 || count > 64 || dustMin < 0 || dustMax < dustMin || dustMax > 64)
@@ -87,7 +88,7 @@ public record AnalysisRecipe(Ingredient ingredient, int count, ItemStack result,
     };
     @Override public boolean matches(SingleRecipeInput input, Level level) {
         var stack=input.item();
-        return ingredient.test(stack) && stack.getCount()>=count && (inputDamage==0 ||
+        return RecipeInputSafety.empty(stack) && ingredient.test(stack) && stack.getCount()>=count && (inputDamage==0 ||
                 (stack.getCount()==1 && stack.isDamageableItem() && stack.getMaxDamage()-stack.getDamageValue()>=inputDamage));
     }
     @Override public ItemStack assemble(SingleRecipeInput input, HolderLookup.Provider registries) { return result.copy(); }

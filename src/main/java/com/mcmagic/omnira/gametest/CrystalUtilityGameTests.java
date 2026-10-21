@@ -116,18 +116,22 @@ public final class CrystalUtilityGameTests {
             h.assertTrue(work.getItem(1).is(com.mcmagic.omnira.registry.ModItems.INFUSED_SPIRITUAL_CRYSTAL.get())&&player.getInventory().getItem(0).isEmpty(),"Shift-click did not insert fuel into lower slot");
         }
         var work=machine(h,3);work.setItem(0,new ItemStack(Items.RAW_IRON,32));
-        for(boolean mechanical:new boolean[]{true,false}){
+        {
             work.setItem(1,new ItemStack(com.mcmagic.omnira.registry.ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()));
             work.tick(false,0);int full=work.burn;
             for(int tick=0;tick<10;tick++)work.tick(false,0);
             h.assertTrue(full==1600&&work.burn==1590,"Fuel timer does not descend");
-            if(!mechanical)work.energy=256;
-            work.tick(mechanical,mechanical?16:0);
+            work.tick(true,16);
             h.assertTrue(work.powered()&&work.burn==0&&work.burnTotal==0,"External power retained old fuel");
             work.energy=0;int progress=work.progress;work.tick(false,0);
             h.assertTrue(!work.powered()&&work.burn==0&&work.progress==progress,"Disconnect resumed old fuel");
         }
-        h.succeed();
+        work.setItem(1,new ItemStack(com.mcmagic.omnira.registry.ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()));work.tick(false,0);
+        work.energyInput.receiveEnergy(Integer.MAX_VALUE,false);
+        h.runAfterDelay(1,()->{
+            work.tick(false,0);h.assertTrue(work.electrical&&work.burn==0&&work.burnTotal==0,"Continuous FE retained old fuel");int progress=work.progress;
+            h.runAfterDelay(1,()->{work.tick(false,0);h.assertTrue(!work.powered()&&work.burn==0&&work.progress==progress,"Disconnect resumed old fuel");h.succeed();});
+        });
     }
     @GameTest(template="spell_arena") public static void basicGrindstoneKeepsVanillaCurses(GameTestHelper h){
         var work=machine(h,1);var player=h.makeMockPlayer(GameType.SURVIVAL);
@@ -155,29 +159,29 @@ public final class CrystalUtilityGameTests {
         h.getLevel().setBlockAndUpdate(pos,com.mcmagic.omnira.registry.ModBlocks.MANA_ENGINE.get().defaultBlockState()
                 .setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING,Direction.NORTH));
         var engine=((com.mcmagic.omnira.block.entity.ManaEngineAccess)h.getLevel().getBlockEntity(pos)).engineState();
-        engine.redstoneControl=false;engine.inventory.setItem(0,new ItemStack(com.mcmagic.omnira.registry.ModItems.TEST_SPELL_CORE.get()));
+        engine.inventory.setItem(0,new ItemStack(com.mcmagic.omnira.registry.ModItems.TEST_SPELL_CORE.get()));
         h.runAfterDelay(35,()->{
-            h.assertTrue(work.mechanical&&work.rpm!=0,"Aligned engine did not drive workstation");
+            h.assertTrue(work.pulsePowered&&!work.mechanical&&work.rpm==0,"Aligned native engine did not prioritize pulse power");
             h.getLevel().setBlockAndUpdate(pos,h.getLevel().getBlockState(pos).setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING,Direction.EAST));
-            h.runAfterDelay(30,()->{h.assertTrue(!work.mechanical,"Misaligned engine still drives workstation");h.succeed();});
+            h.runAfterDelay(30,()->{h.assertTrue(!work.powered()&&!work.pulseConnected,"Misaligned engine still drives workstation");h.succeed();});
         });
     }
     private static CrystalWorkstationEntity machine(GameTestHelper h,int index){
         var pos=h.absolutePos(new BlockPos(4,2,4));h.getLevel().setBlockAndUpdate(pos,CrystalWorkstations.BLOCKS.get(index).get().defaultBlockState());
         return CrystalWorkstations.work(h.getLevel().getBlockEntity(pos));
     }
-    @GameTest(template="spell_arena") public static void furnaceDoubleSpeedAndFixedElectricCost(GameTestHelper h){
-        var work=machine(h,3);work.setItem(0,new ItemStack(Items.RAW_IRON));work.energy=2560;
-        for(int i=0;i<99;i++)work.tick(false,0);
-        h.assertTrue(work.getItem(2).isEmpty(),"Furnace completed too early");work.tick(false,0);
-        h.assertTrue(work.getItem(2).is(Items.IRON_INGOT)&&work.energy==1280&&work.rpm==0&&work.electrical,"Electric smelting timing or fixed consumption failed");
-        h.succeed();
+    @GameTest(template="spell_arena",timeoutTicks=140) public static void furnaceDoubleSpeedAndFixedElectricCost(GameTestHelper h){
+        var work=machine(h,3);work.setItem(0,new ItemStack(Items.RAW_IRON));
+        int[] received={work.energyInput.receiveEnergy(Integer.MAX_VALUE,false)};
+        for(int i=1;i<100;i++)h.runAfterDelay(i,()->received[0]+=work.energyInput.receiveEnergy(Integer.MAX_VALUE,false));
+        h.runAfterDelay(99,()->h.assertTrue(work.getItem(2).isEmpty(),"Furnace completed too early"));
+        h.runAfterDelay(100,()->{h.assertTrue(work.getItem(2).is(Items.IRON_INGOT)&&received[0]==1280&&work.rpm==0&&work.electrical,"Continuous electric smelting timing or fixed consumption failed");h.succeed();});
     }
     @GameTest(template="spell_arena") public static void sharedAnvilEnergyLimit(GameTestHelper h){
         var work=machine(h,5);var facing=work.getBlockState().getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING);
         var front=work.energyPort(facing);var rear=work.energyPort(facing.getOpposite());
         int expected=front.receiveEnergy(Integer.MAX_VALUE,true);
-        h.assertTrue(expected>=12&&expected<=13&&work.energy==0,"Unbounded or mutating FE simulation");
+        h.assertTrue(expected>=102&&expected<=103&&work.energyInput.getEnergyStored()==0,"Unbounded or mutating FE simulation");
         h.assertTrue(front.receiveEnergy(1,false)+rear.receiveEnergy(Integer.MAX_VALUE,false)==expected,"Two faces did not share budget");
         h.assertTrue(front.receiveEnergy(100,false)==0&&rear.receiveEnergy(100,false)==0,"Two faces bypassed limit");
         h.succeed();
@@ -203,7 +207,10 @@ public final class CrystalUtilityGameTests {
     }
     @GameTest(template="spell_arena") public static void automaticAnvilAndPause(GameTestHelper h){
         var work=machine(h,5);var tool=new ItemStack(Items.IRON_PICKAXE);tool.setDamageValue(40);work.setItem(0,tool);work.setItem(1,new ItemStack(Items.IRON_INGOT));
-        int duration=work.recipe().levels()*400;for(int i=0;i<100;i++)work.tick(true,128);
+        int duration=work.recipe().levels()*400;for(int i=0;i<20;i++)work.tick(true,32);
+        h.assertTrue(work.progress==40,"32 RPM did not provide double anvil progress");
+        for(int i=0;i<20;i++)work.tick(true,128);
+        h.assertTrue(work.progress==200,"128 RPM did not provide eightfold anvil progress");
         int progress=work.progress;for(int i=0;i<20;i++)work.tick(false,0);h.assertTrue(work.progress==progress,"Power loss did not pause");
         for(int i=progress;i<duration;i++)work.tick(true,16);
         h.assertTrue(work.getItem(2).is(Items.IRON_PICKAXE)&&work.getItem(2).getDamageValue()==0&&work.durability==16,"Automatic forge timing or output incorrect");h.succeed();

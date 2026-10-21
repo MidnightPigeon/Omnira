@@ -17,6 +17,8 @@ import java.util.*;
 public final class CorridorRitual {
     public static final int FORM_TICKS=240,OPEN_TICKS=3600;
     private CorridorRitual() {}
+    public static Item activator(boolean permanent){return permanent?ModItems.SPACETIME_SPELL_CORE.get():ModItems.UNSTABLE_SPACETIME_AGGREGATE.get();}
+    public static boolean acceptsActivator(net.minecraft.world.item.ItemStack stack){return stack.is(activator(false))||stack.is(activator(true));}
     public static Item offering(int index) {
         var a=DreamRitual.ANCHORS[index];
         return a[0]==0 || a[1]==0?ModItems.SPACETIME_KNOT.get():
@@ -43,8 +45,7 @@ public final class CorridorRitual {
         return List.of();
     }
     public static boolean activate(ServerLevel level,BlockPos core,Player player,InteractionHand hand) {
-        if(!player.isAlive() || player.isSpectator() || !(player.getItemInHand(hand).is(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get())
-                || player.getItemInHand(hand).is(ModItems.SPACETIME_SPELL_CORE.get())))return false;
+        if(!player.isAlive() || player.isSpectator() || !acceptsActivator(player.getItemInHand(hand)))return false;
         var center=core.above();
         var pedestals=pedestals(level,core);
         boolean valid=level.getBlockState(core).is(ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get()) && pedestals.size()==8

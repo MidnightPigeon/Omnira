@@ -1,6 +1,7 @@
 {
   "id": "entity_barrier",
   "item": "omnira:earth_microcore",
+  "icon": "omnira:deflection_field",
   "title": "自身／生物-屏障",
   "text": [
     "形态槽放地微核；目标槽放水微核可保护自身，放火微核则可选中其他生物。屏障跟随其移动，但不抵消本次受击。",

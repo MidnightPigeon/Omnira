@@ -109,6 +109,18 @@ public record AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean out
         return operation.startsWith("staff")?StaffAssemblyRecipes.assemble(input,operation):result.copy();
     }
     public List<Ingredient> displaySlots() {return operation.equals("staff")?StaffAssemblyRecipes.displaySlots():slots;}
+    public List<AssemblyRecipe> displayRecipes() {
+        if(operation.equals("staff"))return StaffAssemblyRecipes.previews();
+        if(operation.equals("staff_upgrade"))return StaffAssemblyRecipes.upgradePreviews(this);
+        var input=new net.minecraft.world.SimpleContainer(7);
+        for(int i=0;i<7;i++)if(!slots.get(i).isEmpty()){
+            var choices=slots.get(i).getItems();
+            if(choices.length==0)return List.of();
+            input.setItem(i,choices[0].copyWithCount(1));
+        }
+        var output=assemble(new Input(input),null);
+        return output.isEmpty()?List.of():List.of(new AssemblyRecipe(slots,output,outerShapeless,operation));
+    }
     @SuppressWarnings({"unchecked","rawtypes"}) private static void copyComponent(ItemStack stack,net.minecraft.core.component.DataComponentType type,Object value){stack.set(type,value);}
     @Override public ItemStack getResultItem(HolderLookup.Provider registries) {return result.copy();}
     @Override public boolean canCraftInDimensions(int w,int h) {return true;}

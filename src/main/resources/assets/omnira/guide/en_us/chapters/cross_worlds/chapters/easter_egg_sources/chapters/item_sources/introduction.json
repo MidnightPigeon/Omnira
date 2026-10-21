@@ -1,0 +1,105 @@
+{
+  "text": [],
+  "sources": [
+    {
+      "icon": "omnira:crystallized_bone_nail",
+      "name": "Crystallized Bone Nail and its upgrades",
+      "origin": "Hollow Knight"
+    },
+    {
+      "icon": "omnira:life_ender",
+      "name": "Life Ender",
+      "origin": "Hollow Knight"
+    },
+    {
+      "icon": "omnira:arcane_needle",
+      "name": "Arcane Needle and its upgrades",
+      "origin": "Hollow Knight: Silksong"
+    },
+    {
+      "icon": "omnira:arcane_arquebus",
+      "name": "Arcane Arquebus",
+      "origin": "Arknights"
+    },
+    {
+      "icon": "omnira:ancestor_launcher",
+      "name": "Ancestor Launcher",
+      "origin": "Arknights"
+    },
+    {
+      "icon": "omnira:kings_new_clothes",
+      "name": "The King's New Clothes",
+      "origin": "Soul Knight"
+    },
+    {
+      "icon": "omnira:traveler_manuscript",
+      "name": "Traveler's Manuscript",
+      "origin": "Arknights × Warhammer 40,000"
+    },
+    {
+      "icon": "omnira:marisa_crystal_ball",
+      "name": "Marisa's Crystal Ball",
+      "origin": "Touhou Project"
+    },
+    {
+      "icon": "omnira:voyager_violin",
+      "name": "Voyager's Violin",
+      "origin": "Reverse: 1999"
+    },
+    {
+      "icon": "omnira:wonderland_poker_stand",
+      "name": "Wonderland Poker Stand",
+      "origin": "Alice's Adventures in Wonderland"
+    },
+    {
+      "icon": "omnira:dream_rabbit_remains",
+      "name": "Dream Rabbit Remains / Alice's Dream Rabbit Sigil",
+      "origin": "Alice's Adventures in Wonderland"
+    },
+    {
+      "icon": "omnira:memory_cube",
+      "name": "Memory Cube and its variants",
+      "origin": "Rusty Lake"
+    },
+    {
+      "icon": "omnira:golden_throne",
+      "name": "Golden Throne / Golden Toilet",
+      "origin": "Warhammer 40,000"
+    },
+    {
+      "icon": "omnira:psyker_talent",
+      "name": "Psyker Talent",
+      "origin": "Warhammer 40,000"
+    },
+    {
+      "icon": "omnira:khorne_blessing",
+      "name": "Blessings of Khorne, Tzeentch, Nurgle and Slaanesh",
+      "origin": "Warhammer 40,000"
+    },
+    {
+      "icon": "omnira:phantom_thieves_aggregate",
+      "name": "Phantom Thieves Aggregate and related items",
+      "origin": "Persona 5"
+    },
+    {
+      "icon": "omnira:umbrella_aggregate",
+      "name": "Umbrella Aggregate and related items",
+      "origin": "Resident Evil"
+    },
+    {
+      "icon": "omnira:foundation_aggregate",
+      "name": "Containment Aggregate and related items",
+      "origin": "SCP Foundation"
+    },
+    {
+      "icon": "omnira:night_heron_statue",
+      "name": "Crystal Night Heron Statue",
+      "origin": "Earth Online (2026 Edition)"
+    },
+    {
+      "icon": "omnira:primordial_earth_aggregate",
+      "name": "Primordial Earth Aggregate and related items",
+      "origin": "Earth Online (2026 Edition)"
+    }
+  ]
+}

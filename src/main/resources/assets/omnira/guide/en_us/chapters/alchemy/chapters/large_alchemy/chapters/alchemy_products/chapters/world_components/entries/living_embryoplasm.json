@@ -1,0 +1,15 @@
+{
+  "id": "living_embryoplasm",
+  "title": "Living Embryoplasm",
+  "item": "omnira:living_embryoplasm",
+  "recipes": false,
+  "text": [
+    "Add one Milk Suspension to form the medium of growth and ecological reproduction."
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "Ritual of World Formation"
+    }
+  ]
+}

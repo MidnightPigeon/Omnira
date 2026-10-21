@@ -1,7 +1,7 @@
 {
   "id": "alchemy_products",
   "title": "Reaction Products",
-  "icon": "omnira:water_microcore",
+  "icon": "omnira:pure_mirror",
   "introduction": "introduction.json",
   "entries": [
     "entries/dilute_spacetime.json",
@@ -11,5 +11,16 @@
     "entries/encapsulated_stable_paradox_source.json",
     "entries/encapsulated_stable_spacetime_aggregate.json"
   ],
-  "chapters": []
+  "chapters": [
+    "chapters/world_components/chapter.json"
+  ],
+  "directory_order": [
+    "dilute_spacetime",
+    "refined_spacetime",
+    "alchemical_waste",
+    "pure_mirror",
+    "encapsulated_stable_paradox_source",
+    "encapsulated_stable_spacetime_aggregate",
+    "world_components"
+  ]
 }

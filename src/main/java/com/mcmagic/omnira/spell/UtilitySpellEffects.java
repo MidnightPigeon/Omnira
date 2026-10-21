@@ -27,6 +27,14 @@ public final class UtilitySpellEffects {
         if(!(owner instanceof ServerPlayer player) || !target.isAlive() || target.isSpectator()
                 || target instanceof Player p && (p.isCreative() || !player.canHarmPlayer(p))) return;
         if(effect.operation().equals("construction")) {ConstructionLock.apply(target,effect,player);return;}
+        if(effect.operation().equals("reload")) {
+            var replacement=com.mcmagic.omnira.spell.world.ReloadEffect.replaceLiving(effect,target);
+            if(replacement!=null){
+                if(source instanceof com.mcmagic.omnira.spell.entity.SpellEntity spell)spell.remapDirectTarget(target,replacement);
+                com.mcmagic.omnira.progression.BranchProgress.record(player,"rewrite_common_sense");
+            }
+            return;
+        }
         int rounds=1+effect.enhancement(),yield=1+effect.infusion();
         for(int round=0;round<rounds && target.isAlive();round++) {
             int remaining=yield;
@@ -74,6 +82,7 @@ public final class UtilitySpellEffects {
     private static void applyBlock(SpellEffect effect,Entity owner,BlockPos hit,Direction face,BlockPos placement,BlockBatch batch) {
         if(!effect.utility() || !(owner instanceof ServerPlayer player)) return;
         var level=player.serverLevel();
+        if(effect.operation().equals("reload")){com.mcmagic.omnira.spell.world.ReloadEffect.block(effect,player,hit);return;}
         if(effect.operation().equals("dissociation")) {
             if(!allowed(player,hit)) return;
             var state=level.getBlockState(hit);

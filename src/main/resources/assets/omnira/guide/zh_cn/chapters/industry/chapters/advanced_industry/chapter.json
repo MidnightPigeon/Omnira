@@ -1,17 +1,28 @@
 {
   "id": "advanced_industry",
   "title": "时空",
-  "icon": "omnira:advanced_assembly_table",
+  "icon": "omnira:spacetime_engine",
   "introduction": "introduction.json",
   "entries": [
     "entries/advanced_crystal_aggregation_ring.json",
     "entries/spacetime_engine.json",
     "entries/spacetime_reverser.json",
+    "entries/wandering_star_cluster_orb.json",
     "entries/void_infuser.json",
     "entries/temporal_energy.json",
     "entries/spatial_energy.json"
   ],
   "chapters": [
     "chapters/spacetime_connections/chapter.json"
+  ],
+  "directory_order": [
+    "spacetime_connections",
+    "spacetime_engine",
+    "spacetime_reverser",
+    "temporal_energy",
+    "void_infuser",
+    "spatial_energy",
+    "wandering_star_cluster_orb",
+    "advanced_crystal_aggregation_ring"
   ]
 }

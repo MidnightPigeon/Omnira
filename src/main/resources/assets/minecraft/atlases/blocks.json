@@ -1,5 +1,7 @@
 {
   "sources": [
+    {"type":"minecraft:single","resource":"omnira:entity/weaver_spirit"},
+    {"type":"minecraft:single","resource":"omnira:entity/pulse_ring"},
     {"type":"minecraft:single","resource":"omnira:entity/night_heron_feathers"},
     {"type":"minecraft:single","resource":"omnira:models/armor/crystal_armor_layer_1"},
     {"type":"minecraft:single","resource":"omnira:models/armor/crystal_armor_layer_2"},

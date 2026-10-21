@@ -1,0 +1,17 @@
+{
+  "id": "marvelous_wisdom_sign",
+  "item": "omnira:marvelous_wisdom_sign",
+  "title": "Marvelous Sign of Wisdom",
+  "recipes": true,
+  "text": [
+    "Upgrade a Crystal Sign through ordinary assembly. It can stand, hang or mount on a wall, showing the same message on both sides with light level 15 and white starlight.",
+    "Right-click to draw another saying. Each sign has its own nonrepeating round; after all sayings are drawn, a new round begins. Its message and progress persist.",
+    "Text is fixed black glowing lettering; it cannot be edited or dyed."
+  ],
+  "links": [
+    {
+      "target": "crystal_sign",
+      "label": "Crystal Sign"
+    }
+  ]
+}

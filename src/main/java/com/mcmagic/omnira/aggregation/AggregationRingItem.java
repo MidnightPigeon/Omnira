@@ -5,7 +5,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 
-public final class AggregationRingItem extends BlockItem {
+public final class AggregationRingItem extends BlockItem implements com.mcmagic.omnira.item.MultiblockPlacementItem {
     public AggregationRingItem(Block block,Properties properties){super(block,properties);}
     @Override public InteractionResult place(BlockPlaceContext context){
         var player=context.getPlayer();var level=context.getLevel();

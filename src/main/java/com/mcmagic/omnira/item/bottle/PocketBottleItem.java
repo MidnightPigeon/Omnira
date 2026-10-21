@@ -25,7 +25,8 @@ public final class PocketBottleItem extends Item {
     }
     public static boolean filled(ItemStack stack) {return stack.has(ModDataComponents.BOTTLE_CAPTURE);}
     public static boolean restricted(ItemStack stack) {return stack.getItem() instanceof PocketBottleItem && filled(stack)
-            || com.mcmagic.omnira.item.PortableStorageRules.stabilized(stack);}
+            || com.mcmagic.omnira.item.PortableStorageRules.stabilized(stack)
+            || com.mcmagic.omnira.item.PortableStorageRules.packedFrame(stack);}
     @Override public boolean canFitInsideContainerItems(ItemStack stack) {return !filled(stack);}
     public static void message(Player player,String key) {player.displayClientMessage(Component.translatable("message.omnira.bottle."+key),true);}
     public static boolean capture(Player player,Entity target,ItemStack stack) {
@@ -45,6 +46,7 @@ public final class PocketBottleItem extends Item {
         var tag=new CompoundTag();
         if(!target.save(tag)) {message(player,"unsupported");return false;}
         var data=new CompoundTag();data.putString("Kind","entity");data.put("Entity",tag);
+        if(target instanceof LivingEntity)data.putUUID("CapturedBy",player.getUUID());
         var id=BottleStorage.get(level).put(data);
         stack.set(ModDataComponents.BOTTLE_CAPTURE,id);
         stack.set(DataComponents.CUSTOM_NAME,Component.translatable("item.omnira.pocket_magic_bottle.filled",target.getName()));
@@ -55,6 +57,10 @@ public final class PocketBottleItem extends Item {
     @Override public InteractionResult useOn(UseOnContext context) {
         var player=context.getPlayer();var stack=context.getItemInHand();
         if(player==null) return InteractionResult.PASS;
+        if(!filled(stack)&&!player.isShiftKeyDown()&&context.getLevel().getBlockState(context.getClickedPos()).is(net.minecraft.world.level.block.Blocks.SPAWNER)){
+            if(context.getLevel().isClientSide)return InteractionResult.SUCCESS;
+            return SpawnerBottleCapture.capture(player,context.getClickedPos(),stack,context.getClickedFace())?InteractionResult.SUCCESS:InteractionResult.FAIL;
+        }
         boolean spatial=context.getLevel().getBlockState(context.getClickedPos()).is(ModBlocks.SPATIAL_REMNANT.get());
         if(!filled(stack) && (spatial||context.getLevel().getBlockState(context.getClickedPos()).is(ModBlocks.TEMPORAL_MOTE.get()))){
             if(!(context.getLevel() instanceof ServerLevel server))return InteractionResult.SUCCESS;
@@ -138,11 +144,12 @@ public final class PocketBottleItem extends Item {
                     && level.setBlock(pos,(data.getString("Kind").equals("spatial_remnant")?ModBlocks.SPATIAL_REMNANT:ModBlocks.TEMPORAL_MOTE).get().defaultBlockState(),3);
             if(released&&level.getBlockEntity(pos) instanceof com.mcmagic.omnira.space.SpatialRemnantBlockEntity remnant)
                 remnant.restoreDistance(data.getDouble("MovementDistance"));
-        } else if(data.getString("Kind").equals("multiblock")) {
+        } else if(data.getString("Kind").equals("multiblock")||data.getString("Kind").equals("spawner")) {
             var thrown=projectile==null?null:level.getEntity(projectile);
             Player actor=thrown instanceof ThrownPocketBottle bottle && bottle.getOwner() instanceof Player owner?owner:
                     data.hasUUID("Owner")?level.getServer().getPlayerList().getPlayer(data.getUUID("Owner")):null;
-            released=MultiblockBottleCapture.release(level,data,impact,actor);
+            released=data.getString("Kind").equals("spawner")?SpawnerBottleCapture.release(level,data,impact,actor)
+                    :MultiblockBottleCapture.release(level,data,impact,actor);
         } else if(data.getString("Kind").equals("structure")) {
             released=ModList.get().isLoaded("sable") && com.mcmagic.omnira.compat.SableBottleCompat.release(level,data,impact);
         } else {
@@ -175,6 +182,7 @@ public final class PocketBottleItem extends Item {
             returnPoint=entity.position();
         }
         if(released) {
+            if(data.hasUUID("CapturedBy"))com.mcmagic.omnira.progression.BranchProgress.record(level.getServer(),data.getUUID("CapturedBy"),"pocket_traveler");
             storage.remove(id);
             if(returnEmpty) {
                 var empty=new net.minecraft.world.entity.item.ItemEntity(level,returnPoint.x,returnPoint.y,returnPoint.z,

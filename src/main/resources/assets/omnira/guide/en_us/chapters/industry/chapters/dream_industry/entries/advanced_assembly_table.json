@@ -5,10 +5,140 @@
   "title": "Advanced Assembly Table",
   "scene": "advanced_assembly_table",
   "text": [
-    "Materials: eight Crystal Casings, three Mana Engines, two Arcane Assembly Tables, and one each of the Advanced Condensation Table, Analysis Artisan Table and Crystal Processing Table. Empty their inventories, then use one Infused Spiritual Crystal on the activation assembly table to assemble.",
+    "Follow the model layout; individual block facings do not matter. Materials: eight Crystal Casings, three Mana Engines, two Arcane Assembly Tables, and one each of the Advanced Condensation Table, Analysis Artisan Table and Crystal Processing Table. Empty their inventories, then use one Infused Spiritual Crystal on the activation assembly table to assemble.",
     "The formed table cannot be mined, dismantled or pushed by pistons; the mana vortex cannot tear it apart. An empty Pocket Magic Bottle can capture any part and preserve contents and progress; without room to release, it stays bottled. Glue must encompass the whole 3x3x2 table before physical assembly. A physical structure can still be pulled by the vortex.",
     "Put six unordered materials and a power core in the main table, plus one material at each of the three hovering nodes; empty-hand right-click removes a node item. These nine-input recipes do not accept ordinary assembly recipes. The power core stays, but a core used as a node ingredient is consumed.",
     "Press the front white button and step away. Original cores take 60 seconds; dream and light-dark cores take 30. No player mana is spent. Inputs are locked while working; right-click the table afterwards for the result.",
     "While the processing light is active, players inside the 3x3x2 platform take 2 damage each second and are ignited. Core colors do not change the hazard."
+  ],
+  "figures": [
+    {
+      "id": "forge_zones",
+      "title": "Input Groups",
+      "icons": [
+        {
+          "item": "omnira:primordial_spell_core",
+          "x": 100,
+          "y": 28,
+          "count": 1
+        }
+      ],
+      "strokes": [],
+      "areas": [
+        {
+          "x": 3,
+          "y": 27,
+          "width": 18,
+          "height": 18,
+          "color": "#9DB9AD"
+        },
+        {
+          "x": 26,
+          "y": 27,
+          "width": 18,
+          "height": 18,
+          "color": "#9DB9AD"
+        },
+        {
+          "x": 49,
+          "y": 27,
+          "width": 18,
+          "height": 18,
+          "color": "#9DB9AD"
+        },
+        {
+          "x": 3,
+          "y": 49,
+          "width": 18,
+          "height": 18,
+          "color": "#9DB9AD"
+        },
+        {
+          "x": 26,
+          "y": 49,
+          "width": 18,
+          "height": 18,
+          "color": "#9DB9AD"
+        },
+        {
+          "x": 49,
+          "y": 49,
+          "width": 18,
+          "height": 18,
+          "color": "#9DB9AD"
+        },
+        {
+          "x": 3,
+          "y": 108,
+          "width": 18,
+          "height": 18,
+          "color": "#9DB6C8"
+        },
+        {
+          "x": 51,
+          "y": 108,
+          "width": 18,
+          "height": 18,
+          "color": "#9DB6C8"
+        },
+        {
+          "x": 99,
+          "y": 108,
+          "width": 18,
+          "height": 18,
+          "color": "#9DB6C8"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Six bench inputs; any order",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Core",
+          "x": 95,
+          "y": 51,
+          "width": 29,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Floating nodes: left / middle / right",
+          "x": 0,
+          "y": 79,
+          "width": 124,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "1",
+          "x": 9,
+          "y": 111,
+          "width": 12,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "2",
+          "x": 57,
+          "y": 111,
+          "width": 12,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "3",
+          "x": 105,
+          "y": 111,
+          "width": 12,
+          "height": 11,
+          "color": "#405462"
+        }
+      ]
+    }
   ]
 }

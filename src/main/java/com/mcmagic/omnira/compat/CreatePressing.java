@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 
 public final class CreatePressing {
     public static AssemblyWork find(Level level,Container inventory) {
-        if(inventory.getItem(6).isEmpty()) return null;
+        if(inventory.getItem(6).isEmpty() || !com.mcmagic.omnira.recipe.RecipeInputSafety.empty(inventory.getItem(6))) return null;
         for(int i=0;i<6;i++) if(!inventory.getItem(i).isEmpty()) return null;
         RecipeType<PressingRecipe> type=AllRecipeTypes.PRESSING.getType();
         var match=SequencedAssemblyRecipe.getRecipe(level,inventory.getItem(6),type,PressingRecipe.class);

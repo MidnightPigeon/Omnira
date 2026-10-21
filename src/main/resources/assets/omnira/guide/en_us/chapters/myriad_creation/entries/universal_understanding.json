@@ -1,0 +1,22 @@
+{
+  "id": "universal_understanding",
+  "title": "Universal Understanding",
+  "item": "omnira:universal_understanding",
+  "text": [
+    "Universal Understanding is obtained only by advancing a Guidance Orb through every stage. At its final stage, select Deconstruct All Things above the orb to display the required material, then use a Myriad Codex on it. The codex is not consumed. Mining and replacing preserves the form.",
+    "Every use instantly refills mana, without cost, cooldown or external power, and never reduces existing overflow mana. Holding a spell crystal or staff in the main hand also dismantles one held item. Offhand items are not dismantled.",
+    "Crystals return ingredients inferred from their current spell: target/shape microcores, elements and modifiers. Ordinary crystals return a Spiritual substrate; high-tier and World Rotation crystals return an Infused substrate. Elements return once, modifiers retain their counts, redundant elements are not compensated, and ink durability is never returned.",
+    "Staves return shafts, reinforcements, tips, runes and upgrades with their component data. Parts are not recursively broken into their own recipes. Returns enter the inventory first; overflow drops nearby."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "guidance_orb",
+      "label": "Guidance Orb"
+    },
+    {
+      "target": "myriad_codex",
+      "label": "Myriad Codex"
+    }
+  ]
+}

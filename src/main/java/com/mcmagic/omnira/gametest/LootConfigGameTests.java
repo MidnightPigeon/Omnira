@@ -49,6 +49,28 @@ public final class LootConfigGameTests {
         f.getAsJsonArray("whitelist").add("#invalid");boolean rejected=false;try{OmniraLootConfig.rules(defaults);}catch(IllegalArgumentException expected){rejected=true;}
         h.assertTrue(rejected,"Malformed tag accepted");h.succeed();
     }
+    @GameTest(template="spell_arena") public static void actualRollsRespectBothLists(GameTestHelper h)throws Exception{
+        var path=OmniraLootConfig.path();var original=Files.readString(path);
+        var root=JsonParser.parseString(original).getAsJsonObject();var fluid=root.getAsJsonObject("fluidTreasure");
+        var pos=h.absolutePos(new BlockPos(4,3,4));
+        try{
+            fluid.addProperty("whitelistEnabled",true);fluid.addProperty("blacklistEnabled",true);
+            fluid.add("whitelist",new Gson().toJsonTree(java.util.List.of("minecraft:water","minecraft:lava")));
+            fluid.add("blacklist",new Gson().toJsonTree(java.util.List.of("minecraft:lava")));
+            Files.writeString(path,root.toString());OmniraLootConfig.lootTable(new LootTableLoadEvent(h.getLevel().registryAccess(),ResourceLocation.parse("omnira:chests/kirisame_attic"),LootTable.EMPTY));
+            h.getLevel().setBlockAndUpdate(pos,ModBlocks.LIQUID_CRYSTAL_BALL.get().defaultBlockState());
+            var ball=(LiquidCrystalBallBlockEntity)h.getLevel().getBlockEntity(pos);
+            var player=h.makeMockPlayer(GameType.SURVIVAL);
+            for(int i=0;i<128;i++){
+                ball.tank.setFluid(net.neoforged.neoforge.fluids.FluidStack.EMPTY);ball.markFluidTreasure();ball.unpackLootTable(player);
+                h.assertTrue(!ball.hasPendingLoot()&&ball.tank.getFluid().getFluid()==Fluids.WATER,"Actual liquid treasure bypassed enabled lists");
+            }
+        }finally{
+            h.getLevel().removeBlock(pos,false);Files.writeString(path,original);
+            OmniraLootConfig.lootTable(new LootTableLoadEvent(h.getLevel().registryAccess(),ResourceLocation.parse("omnira:chests/kirisame_attic"),LootTable.EMPTY));
+        }
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void potionTreasureComponents(GameTestHelper h){
         var fluid=net.minecraft.core.registries.BuiltInRegistries.FLUID.get(ResourceLocation.parse("create:potion"));
         for(int i=0;i<32;i++){

@@ -77,9 +77,9 @@ public final class RecipeControlGameTests {
         be.upgrades.setStackInSlot(2,plate(h,false,Items.WHEAT));for(int i=0;i<200;i++)be.tick();
         h.assertTrue(be.stage()==1&&be.tank.getFluidAmount()==4000&&!be.catalyzing(),"Blocked native crop advanced");
         be.upgrades.setStackInSlot(2,plate(h,true,Items.WHEAT));for(int i=0;i<200;i++)be.tick();
-        h.assertTrue(be.stage()==2&&be.tank.getFluidAmount()==3750,"Whitelist crop did not grow");
+        h.assertTrue(be.stage()==1+(be.plan().stages()-1)/(CatalysisBlockEntity.CYCLE_STEPS-1)&&be.tank.getFluidAmount()==4000-CatalysisBlockEntity.STEP_FLUID,"Whitelist crop did not grow one catalysis step");
         be.items.setStackInSlot(1,new ItemStack(Items.OAK_SAPLING));be.upgrades.setStackInSlot(2,plate(h,true,Items.OAK_LOG));
-        for(int i=0;i<200;i++)be.tick();h.assertTrue(be.stage()==1&&be.tank.getFluidAmount()==3500,"Tree trunk provider not matched");
+        for(int i=0;i<200;i++)be.tick();h.assertTrue(be.stage()==1+(be.plan().stages()-1)/(CatalysisBlockEntity.CYCLE_STEPS-1)&&be.tank.getFluidAmount()==4000-2*CatalysisBlockEntity.STEP_FLUID,"Tree trunk provider not matched");
         be.items.setStackInSlot(1,new ItemStack(Items.POTATO));
         var possible=CatalysisProducts.possible(h.getLevel(),be.plan(),new ItemStack(Items.POTATO));
         h.assertTrue(possible.stream().anyMatch(s->s.is(Items.POISONOUS_POTATO)),"Rare crop result omitted");h.succeed();
@@ -97,8 +97,9 @@ public final class RecipeControlGameTests {
     @GameTest(template="spell_arena") public static void orbProductionAndStarSlots(GameTestHelper h){
         var pos=h.absolutePos(new BlockPos(4,3,4));h.getLevel().setBlockAndUpdate(pos,ModBlocks.LIQUID_CRYSTAL_BALL.get().defaultBlockState());
         var liquid=(LiquidCrystalBallBlockEntity)h.getLevel().getBlockEntity(pos);liquid.upgrades.setStackInSlot(0,new ItemStack(ModItems.LAVA_PRODUCTION_UPGRADE.get()));liquid.upgrades.setStackInSlot(1,plate(h,false,Items.LAVA_BUCKET));
-        OrbAutomation.tick(liquid);h.assertTrue(liquid.tank.isEmpty(),"Filtered lava produced");liquid.upgrades.setStackInSlot(1,plate(h,true,Items.LAVA_BUCKET));OrbAutomation.tick(liquid);
-        h.assertTrue(liquid.tank.getFluidAmount()==100,"Permitted lava stopped");
+        h.assertTrue(!liquid.upgrades.isItemValid(1,plate(h,true,Items.LAVA_BUCKET)),"Storage orb accepts recipe control");
+        OrbAutomation.tick(liquid);h.assertTrue(liquid.tank.getFluidAmount()==200,"Legacy recipe plate still controls storage lava generation");
+        h.assertTrue(!liquid.upgrades.extractItem(1,1,false).isEmpty(),"Legacy plate cannot be recovered");
         var starBlock=net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.parse("omnira:wandering_star_cluster_orb"));
         pos=pos.offset(3,0,0);h.getLevel().setBlockAndUpdate(pos,starBlock.defaultBlockState());var star=(com.mcmagic.omnira.space.sea.StarClusterOrbEntity)h.getLevel().getBlockEntity(pos);
         h.assertTrue(star.upgrades.insertItem(0,plate(h,false,com.mcmagic.omnira.space.sea.StarlightContent.DUST_ITEM.get()),false).isEmpty()&&star.upgrades.isItemValid(1,new ItemStack(ModItems.SPACETIME_STABILIZATION_UPGRADE.get())),"Star plate compatibility wrong");

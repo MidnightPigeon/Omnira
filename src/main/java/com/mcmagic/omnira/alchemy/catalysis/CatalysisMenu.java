@@ -23,12 +23,19 @@ public final class CatalysisMenu extends AbstractContainerMenu {
         for(int col=0;col<9;col++)addSlot(new Slot(inv,col,8+col*18,224));
     }
     @Override public boolean stillValid(Player player){return chamber.complete()&&stillValid(ContainerLevelAccess.create(player.level(),chamber.getBlockPos()),player,CatalysisContent.BLOCK.get());}
+    @Override public void clicked(int index,int button,ClickType type,Player player){
+        if(com.mcmagic.omnira.menu.UpgradeMenuFeedback.rejectClick(this,index,button,type,player,3,6))return;
+        super.clicked(index,button,type,player);
+    }
     @Override public ItemStack quickMoveStack(Player player,int index){
         if(index<0||index>=slots.size())return ItemStack.EMPTY;var slot=slots.get(index);if(!slot.hasItem())return ItemStack.EMPTY;
         var stack=slot.getItem();var copy=stack.copy();boolean moved;
         if(index<6)moved=moveItemStackTo(stack,6,slots.size(),true);
-        else if(com.mcmagic.omnira.block.entity.OrbUpgrades.kind(stack)!=null)moved=moveItemStackTo(stack,3,6,false);
+        else if(com.mcmagic.omnira.block.entity.OrbUpgrades.kind(stack)!=null){
+            moved=moveItemStackTo(stack,3,6,false);
+            if(!moved)com.mcmagic.omnira.menu.UpgradeMenuFeedback.incompatible(this,stack,player,3,6);
+        }
         else moved=moveItemStackTo(stack,0,2,false);
-        if(!moved)return ItemStack.EMPTY;if(stack.isEmpty())slot.setByPlayer(ItemStack.EMPTY);else slot.setChanged();slot.onTake(player,stack);return copy;
+        if(!moved)return ItemStack.EMPTY;if(stack.isEmpty())slot.setByPlayer(ItemStack.EMPTY);else slot.set(stack);slot.onTake(player,stack);return copy;
     }
 }

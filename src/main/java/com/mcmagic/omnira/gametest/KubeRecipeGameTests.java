@@ -35,4 +35,12 @@ public final class KubeRecipeGameTests {
         h.succeed();
     }
     private KubeRecipeGameTests() {}
+    @GameTest(template="spell_arena") public static void customAssemblyReturnsContainers(GameTestHelper h){
+        var input=new SimpleContainer(7);input.setItem(6,new ItemStack(Items.WATER_BUCKET));
+        var work=com.mcmagic.omnira.recipe.AssemblyWork.find(h.getLevel(),input);
+        h.assertTrue(work!=null&&work.id().contains("kubejs_bucket_assembly"),"Custom bucket recipe did not reach the assembly machine");
+        var output=work.finish().get();
+        h.assertTrue(output.size()==2&&output.get(0).is(Items.DIAMOND)&&output.get(1).is(Items.BUCKET)&&output.get(1).getCount()==1,"Assembly discarded or duplicated its container remainder");
+        h.assertTrue(input.getItem(6).is(Items.WATER_BUCKET),"Preparing assembly outputs consumed its input early");h.succeed();
+    }
 }

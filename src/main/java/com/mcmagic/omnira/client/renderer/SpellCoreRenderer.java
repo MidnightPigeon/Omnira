@@ -27,14 +27,13 @@ public final class SpellCoreRenderer extends BlockEntityWithoutLevelRenderer {
     public static ModelResourceLocation dreamModel(String part) {return CrystalGridRenderer.part("dream_spell_core",part);}
     public static ModelResourceLocation lightDarkModel(String part) {return CrystalGridRenderer.part("light_dark_spell_core",part);}
     public static ModelResourceLocation spacetimeModel(String part) {return CrystalGridRenderer.part("spacetime_spell_core",part);}
-    private static void draw(String part,ItemStack stack,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {
+    private static net.minecraft.client.resources.model.BakedModel baked(String part,ItemStack stack) {
         var mc=Minecraft.getInstance();
         boolean dream=stack.is(com.mcmagic.omnira.registry.ModItems.DREAM_SPELL_CORE.get());
         boolean lightDark=stack.getItem() instanceof com.mcmagic.omnira.item.SpellCoreItem core
                 && core.kind()==com.mcmagic.omnira.item.SpellCoreItem.Kind.LIGHT_DARK;
         boolean spacetime=stack.is(com.mcmagic.omnira.registry.ModItems.SPACETIME_SPELL_CORE.get());
-        mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(spacetime?spacetimeModel(part):lightDark?lightDarkModel(part):dream?dreamModel(part):model(part)),stack,light,overlay,
-                pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
+        return mc.getModelManager().getModel(spacetime?spacetimeModel(part):lightDark?lightDarkModel(part):dream?dreamModel(part):model(part));
     }
     @Override public void renderByItem(ItemStack stack,ItemDisplayContext context,PoseStack pose,
                                       MultiBufferSource buffers,int light,int overlay) {
@@ -43,6 +42,7 @@ public final class SpellCoreRenderer extends BlockEntityWithoutLevelRenderer {
         renderCore(stack,pose,buffers,light,overlay,time);
     }
     public static void renderCore(ItemStack stack,PoseStack pose,MultiBufferSource buffers,int light,int overlay,double time) {
+        var mc=Minecraft.getInstance();var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
         boolean dream=stack.is(com.mcmagic.omnira.registry.ModItems.DREAM_SPELL_CORE.get());
         boolean spacetime=stack.is(com.mcmagic.omnira.registry.ModItems.SPACETIME_SPELL_CORE.get());
         pose.pushPose();
@@ -50,14 +50,20 @@ public final class SpellCoreRenderer extends BlockEntityWithoutLevelRenderer {
             float pulse=1+(float)Math.sin(time*.065)*.035F;
             pose.translate(.5,.5,.5);pose.scale(pulse,2-pulse,pulse);pose.translate(-.5,-.5,-.5);
         }
-        if(spacetime) for(int i=0;i<9;i++) {
-            double angle=i*2.3999632297+time*(.006+i*.0005),radius=.11+(i%3)*.055;
-            double x=Math.cos(angle)*radius,y=((i*7)%9-4)*.045+Math.sin(time*.017+i)*.025,z=Math.sin(angle)*radius;
-            pose.pushPose();pose.translate(.5+x-.03125,.5+y-.03125,.5+z-.03125);
-            draw("star",stack,pose,buffers,LightTexture.FULL_BRIGHT,overlay);pose.popPose();
+        if(spacetime){
+            var stars=ParticleModelQuads.collect(baked("star",stack));
+            for(int i=0;i<9;i++) {
+                double angle=i*2.3999632297+time*(.006+i*.0005),radius=.11+(i%3)*.055;
+                double x=Math.cos(angle)*radius,y=((i*7)%9-4)*.045+Math.sin(time*.017+i)*.025,z=Math.sin(angle)*radius;
+                pose.pushPose();pose.translate(.5+x-.03125,.5+y-.03125,.5+z-.03125);
+                mc.getItemRenderer().renderQuadList(pose,out,stars,stack,LightTexture.FULL_BRIGHT,overlay);pose.popPose();
+            }
         }
-        draw("body",stack,pose,buffers,light,overlay);
+        mc.getItemRenderer().renderModelLists(baked("body",stack),stack,light,overlay,pose,out);
         pose.popPose();
+        var motes=spacetime?java.util.List.<net.minecraft.client.renderer.block.model.BakedQuad>of():ParticleModelQuads.collect(baked("mote",stack));
+        var blue=spacetime?ParticleModelQuads.collect(baked("mote_blue",stack)):motes;
+        var green=spacetime?ParticleModelQuads.collect(baked("mote_green",stack)):motes;
         for(int ring=0;ring<2;ring++) {
             pose.pushPose();
             pose.translate(.5,.5,.5);
@@ -67,7 +73,8 @@ public final class SpellCoreRenderer extends BlockEntityWithoutLevelRenderer {
                 double a=time*.025*(ring==0?1:-1)+i*Math.PI*2/3;
                 pose.pushPose();
                 pose.translate(Math.cos(a)*.41-.03125,Math.sin(a)*.41-.03125,-.03125);
-                draw(spacetime?((i+ring+(int)(time/24))&1)==0?"mote_blue":"mote_green":"mote",stack,pose,buffers,LightTexture.FULL_BRIGHT,overlay);
+                var quads=spacetime?((i+ring+(int)(time/24))&1)==0?blue:green:motes;
+                mc.getItemRenderer().renderQuadList(pose,out,quads,stack,LightTexture.FULL_BRIGHT,overlay);
                 pose.popPose();
             }
             pose.popPose();

@@ -1,0 +1,11 @@
+{
+  "type": "omnira:assembly",
+  "operation": "resonant_orb",
+  "outer_shapeless": true,
+  "slots": [
+    {"item":"omnira:resonance_crystal"}, {"item":"omnira:resonance_crystal"}, {"item":"omnira:resonance_crystal"},
+    {"item":"omnira:resonance_crystal"}, {"item":"omnira:resonance_crystal"}, {"item":"omnira:resonance_crystal"},
+    {"item":"omnira:pulse_accumulator_orb"}
+  ],
+  "result": {"id":"omnira:resonant_accumulator_orb","count":1}
+}

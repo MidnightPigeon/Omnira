@@ -34,11 +34,13 @@ public final class SpacetimeEngineEnergy {
     }
     public int rate(int side){
         if(side<0||side>=4)return 0;
-        return SpacetimeEngineController.hasKinetics()?engine.capacity(side):(int)Math.round(512*engine.gridMultiplier());
+        return engine.capacity(side);
     }
+    public void fill(){for(int i=0;i<4;i++)buffers[i].fill(rate(i));engine.setChanged();}
     private boolean running(int side){
         return engine.getLevel()!=null&&!engine.getLevel().isClientSide&&EnergyIntegration.available()
-                &&engine.getLevel().getBlockEntity(engine.getBlockPos())==engine&&engine.generatedSpeed(side)!=0;
+                &&engine.getLevel().getBlockEntity(engine.getBlockPos())==engine&&engine.generatedSpeed(side)!=0
+                &&!com.mcmagic.omnira.pulse.PulseOutput.nativeConnection(engine.getLevel(),engine.getBlockPos().below().relative(SpacetimeEngineBlock.OUTPUTS[side]),SpacetimeEngineBlock.OUTPUTS[side]);
     }
     public IEnergyStorage port(int side){return side>=0&&side<4&&EnergyIntegration.available()?ports[side]:null;}
     public void tick(){

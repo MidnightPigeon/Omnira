@@ -1,0 +1,148 @@
+{
+  "parent": "omnira:mainline/world_awakening",
+  "display": {
+    "icon": {
+      "id": "omnira:boundary_crystal_membrane"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.deconstruction.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.deconstruction.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "strata_skeleton": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:strata_skeleton"
+            ]
+          }
+        ]
+      }
+    },
+    "circulating_waterways": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:circulating_waterways"
+            ]
+          }
+        ]
+      }
+    },
+    "flowing_sky_canopy": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:flowing_sky_canopy"
+            ]
+          }
+        ]
+      }
+    },
+    "geothermal_ember": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:geothermal_ember"
+            ]
+          }
+        ]
+      }
+    },
+    "living_embryoplasm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:living_embryoplasm"
+            ]
+          }
+        ]
+      }
+    },
+    "ages_dial": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:ages_dial"
+            ]
+          }
+        ]
+      }
+    },
+    "boundary_crystal_membrane": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:boundary_crystal_membrane"
+            ]
+          }
+        ]
+      }
+    },
+    "phantasm_germinal_shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:phantasm_germinal_shard"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "strata_skeleton"
+    ],
+    [
+      "circulating_waterways"
+    ],
+    [
+      "flowing_sky_canopy"
+    ],
+    [
+      "geothermal_ember"
+    ],
+    [
+      "living_embryoplasm"
+    ],
+    [
+      "ages_dial"
+    ],
+    [
+      "boundary_crystal_membrane"
+    ],
+    [
+      "phantasm_germinal_shard"
+    ]
+  ]
+}

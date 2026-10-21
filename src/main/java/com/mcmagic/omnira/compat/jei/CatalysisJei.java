@@ -60,7 +60,8 @@ public final class CatalysisJei implements IModPlugin {
             public RecipeType<Assembly> getRecipeType(){return ASSEMBLY;}public Component getTitle(){return Component.translatable("jei.omnira.catalysis.assembly");}
             public mezz.jei.api.gui.drawable.IDrawable getIcon(){return icon;}public int getWidth(){return 170;}public int getHeight(){return 128;}
             public void setRecipe(mezz.jei.api.gui.builder.IRecipeLayoutBuilder b,Assembly a,IFocusGroup focus){
-                for(int i=0;i<3;i++)b.addSlot(RecipeIngredientRole.INPUT,131,8+(2-i)*23).setStandardSlotBackground().addItemStack(new ItemStack(CatalysisStructure.required(i)));
+                for(int i=0;i<3;i++)b.addSlot(RecipeIngredientRole.INPUT,131,8+(2-i)*23).setStandardSlotBackground().addItemStack(new ItemStack(CatalysisStructure.required(i)))
+                        .addRichTooltipCallback((view,tip)->tip.add(Component.translatable("jei.omnira.construction.free_facing")));
                 b.addSlot(RecipeIngredientRole.INPUT,131,81).setStandardSlotBackground().addItemStack(new ItemStack(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()));
                 b.addSlot(RecipeIngredientRole.OUTPUT,131,107).setStandardSlotBackground().addItemStack(new ItemStack(CatalysisContent.ITEM.get()));
             }

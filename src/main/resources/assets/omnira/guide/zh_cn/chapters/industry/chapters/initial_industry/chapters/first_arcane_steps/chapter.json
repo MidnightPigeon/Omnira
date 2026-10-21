@@ -1,10 +1,9 @@
 {
   "id": "first_arcane_steps",
-  "title": "初试魔艺",
+  "title": "初试造物",
   "icon": "omnira:infused_crystal_pickaxe",
   "introduction": "introduction.json",
   "entries": [
-    "entries/crystal_casing.json",
     "entries/infused_crystal_casing.json",
     "entries/infused_crystal_pickaxe.json",
     "entries/crystal_broom.json",
@@ -14,5 +13,14 @@
     "chapters/staff_forging/chapter.json",
     "chapters/staff_upgrades/chapter.json",
     "chapters/crystal_grids/chapter.json"
+  ],
+  "directory_order": [
+    "infused_crystal_casing",
+    "staff_forging",
+    "crystal_grids",
+    "staff_upgrades",
+    "infused_crystal_pickaxe",
+    "crystal_broom",
+    "enhanced_recall_crystal"
   ]
 }

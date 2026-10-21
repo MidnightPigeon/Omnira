@@ -28,8 +28,8 @@ public final class DeflectionFieldEvents {
         // This field reduces damage by 25%, not vanilla's complete frontal shield block.
         if(raised(event.getEntity()))event.setCanceled(true);
     }
-    @SubscribeEvent public static void nonplayerReduction(LivingDamageEvent.Pre event){
-        if(!(event.getEntity() instanceof net.minecraft.world.entity.player.Player)&&raised(event.getEntity()))event.setNewDamage(event.getNewDamage()*.75F);
+    public static void nonplayerReduction(LivingDamageEvent.Pre event){
+        if(!com.mcmagic.omnira.combat.OmniraDamage.isTrue(event.getSource())&&!(event.getEntity() instanceof net.minecraft.world.entity.player.Player)&&raised(event.getEntity()))event.setNewDamage(event.getNewDamage()*.75F);
     }
     public static boolean redirect(Entity shot,LivingEntity holder,Vec3 hit){
         var stack=held(holder);var velocity=shot.getDeltaMovement();

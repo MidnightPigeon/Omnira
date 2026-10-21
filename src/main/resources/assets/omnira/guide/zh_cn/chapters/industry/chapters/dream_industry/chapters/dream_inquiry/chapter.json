@@ -4,7 +4,7 @@
   "icon": "omnira:dark_microcore",
   "introduction": "introduction.json",
   "entries": [
-    "entries/spell_core.json",
+    "entries/pocket_magic_bottle.json",
     "entries/dark_microcore.json",
     "entries/arcane_crystal_grid_crafting.json",
     "entries/shadow_staff_shaft_crafting.json",
@@ -19,5 +19,20 @@
   ],
   "chapters": [
     "chapters/arquebuses/chapter.json"
+  ],
+  "directory_order": [
+    "dark_microcore",
+    "pocket_magic_bottle",
+    "arcane_crystal_grid_crafting",
+    "shadow_staff_shaft_crafting",
+    "light_core_reinforcement_crafting",
+    "advanced_ritual_energy_core_crafting",
+    "spacetime_knot",
+    "cruise_orb",
+    "unstable_spacetime_aggregate",
+    "paradox_mystery",
+    "paradox_ore",
+    "unstable_paradox_source",
+    "arquebuses"
   ]
 }

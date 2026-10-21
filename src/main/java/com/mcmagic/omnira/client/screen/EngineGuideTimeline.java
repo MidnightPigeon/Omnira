@@ -4,6 +4,9 @@ package com.mcmagic.omnira.client.screen;
 public final class EngineGuideTimeline {
     public static final int STAGES=5, DOCK_START=35, DOCK_END=85, POWER_ON=100, FIRST_STRIKE=110, COMPLETE=300;
     private EngineGuideTimeline() {}
+    public static String outputUnit(boolean electrical){return electrical?"FE/s":"MPU";}
+    public static String playbackGlyph(boolean paused){return paused?">":"||";}
+    public static boolean electricOutput(int stage,boolean electrical){return electrical&&stage!=4;}
     public static int duration(int stage) {return stage==4?350:200;}
     public static double ease(double time,double start,double end) {
         double t=Math.clamp((time-start)/(end-start),0,1);return t*t*(3-2*t);

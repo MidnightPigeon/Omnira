@@ -9,7 +9,7 @@ public final class BlindfishItem extends Item {
     @Override public ItemStack finishUsingItem(ItemStack stack,Level level,LivingEntity living){
         var result=super.finishUsingItem(stack,level,living);
         // Explicit health loss bypasses armor, absorption and damage multipliers.
-        if(!level.isClientSide&&living.isAlive())living.setHealth(living.getHealth()/2);
+        if(!level.isClientSide&&living.isAlive())com.mcmagic.omnira.combat.OmniraDamage.payHealth(living,living.getHealth()/2,"true_damage");
         return result;
     }
 }

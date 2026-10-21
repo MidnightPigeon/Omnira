@@ -1,7 +1,7 @@
 {
   "id": "spells",
   "title": "Writing and Casting Spells",
-  "icon": "omnira:crystal_processing_table",
+  "icon": "omnira:modular_staff",
   "introduction": "introduction.json",
   "entries": [],
   "chapters": [

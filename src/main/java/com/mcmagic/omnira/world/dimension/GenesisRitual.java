@@ -9,6 +9,9 @@ import net.minecraft.world.level.Level;
 /** Eight unordered elemental offerings; fluid is an offering, not stored inventory. */
 public final class GenesisRitual {
     public static final int REQUIRED_FLUID=10000;
+    public static net.neoforged.neoforge.fluids.FluidStack offering(){
+        return new net.neoforged.neoforge.fluids.FluidStack(com.mcmagic.omnira.alchemy.AlchemyMaterials.REFINED.source.get(),REQUIRED_FLUID);
+    }
     public static final int ABSORPTION_TICKS=40;
     public static final int FORMATION_TICKS=20;
     private GenesisRitual() {}

@@ -13,9 +13,24 @@
     "entries/affinity_ritual.json",
     "entries/cleansing_ritual.json",
     "entries/corridor_ritual.json",
-    "entries/genesis_ritual.json"
+    "entries/genesis_ritual.json",
+    "entries/world_forming_ritual.json"
   ],
   "chapters": [
     "chapters/ritual_weapons/chapter.json"
+  ],
+  "directory_order": [
+    "crystal_pedestal",
+    "ritual_energy_core",
+    "dream_ritual",
+    "sword_shaping",
+    "ritual_weapons",
+    "resonance_ritual",
+    "advanced_ritual_energy_core",
+    "affinity_ritual",
+    "cleansing_ritual",
+    "corridor_ritual",
+    "genesis_ritual",
+    "world_forming_ritual"
   ]
 }

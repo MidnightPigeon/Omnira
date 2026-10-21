@@ -1,6 +1,7 @@
 package com.mcmagic.omnira.block.entity;
 
 import com.mcmagic.omnira.item.OrbUpgradeItem.Kind;
+import com.mcmagic.omnira.storage.LogisticsRates;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
@@ -15,16 +16,21 @@ public final class OrbAutomation {
         tick(ball,true);
     }
     public static void tick(CrystalBallBlockEntity ball,boolean production) {
+        com.mcmagic.omnira.storage.LogisticsRates.transfer(()->run(ball,production));
+    }
+    private static void run(CrystalBallBlockEntity ball,boolean production){
         if(ball.getLevel()==null || ball.getLevel().isClientSide)return;
         for(int slot=0;slot<3;slot++) {
             var upgrade=ball.upgrades.getStackInSlot(slot);var kind=OrbUpgrades.kind(upgrade);
             if(kind==Kind.LAVA && production)lava(ball,slot);
-            if(kind==Kind.INTAKE || kind==Kind.OUTPUT)transfer(ball,slot,kind==Kind.INTAKE);
+            if(kind==Kind.INTAKE || kind==Kind.OUTPUT){
+                int remaining=(ball instanceof LiquidCrystalBallBlockEntity?LogisticsRates.FLUID/4:LogisticsRates.ITEMS/4)*ball.upgrades.speedMultiplier();
+                while(remaining>0){int moved=transfer(ball,slot,kind==Kind.INTAKE,remaining);if(moved<=0)break;remaining-=moved;}
+            }
         }
     }
     private static void lava(CrystalBallBlockEntity ball,int slot) {
-        if(!com.mcmagic.omnira.recipe.RecipeControl.allows(ball.getLevel(),ball.upgrades,java.util.List.of(),new FluidStack(Fluids.LAVA,100)))return;
-        if(ball instanceof LiquidCrystalBallBlockEntity liquid) {liquid.tank.fill(new FluidStack(Fluids.LAVA,100),FluidAction.EXECUTE);return;}
+        if(ball instanceof LiquidCrystalBallBlockEntity liquid) {liquid.tank.fill(new FluidStack(Fluids.LAVA,LogisticsRates.LAVA),FluidAction.EXECUTE);return;}
         var tag=OrbUpgrades.settings(ball.upgrades.getStackInSlot(slot));
         for(int i=0;i<12;i++) {
             var item=ball.getItem(i);if(item.isEmpty())continue;
@@ -35,7 +41,7 @@ public final class OrbAutomation {
             }
             var source=new FluidTank(1000);source.setFluid(new FluidStack(Fluids.LAVA,1000));
             if(!FluidUtil.tryFillContainer(item,source,1000,null,false).isSuccess())continue;
-            int credit=Math.min(1000,tag.getInt("LavaCredit")+100);
+            int credit=Math.min(1000,tag.getInt("LavaCredit")+LogisticsRates.LAVA);
             source.setFluid(new FluidStack(Fluids.LAVA,credit));
             var result=FluidUtil.tryFillContainer(item,source,credit,null,true);
             if(result.isSuccess()) {
@@ -51,7 +57,7 @@ public final class OrbAutomation {
         return input?new Direction[]{front,front.getOpposite(),front.getCounterClockWise(),front.getClockWise(),Direction.DOWN,Direction.UP}
                 :new Direction[]{Direction.DOWN,Direction.UP,front,front.getOpposite(),front.getCounterClockWise(),front.getClockWise()};
     }
-    private static void transfer(CrystalBallBlockEntity ball,int slot,boolean input) {
+    private static int transfer(CrystalBallBlockEntity ball,int slot,boolean input,int remaining) {
         var tag=OrbUpgrades.settings(ball.upgrades.getStackInSlot(slot));var directions=directions(ball,input);
         int mask=tag.contains("Directions")?tag.getInt("Directions"):1;
         int cursor=Math.floorMod(tag.getInt("Cursor"),directions.length);
@@ -59,36 +65,39 @@ public final class OrbAutomation {
             int index=(cursor+n)%directions.length;if((mask&(1<<index))==0)continue;
             var direction=directions[index];var pos=ball.getBlockPos().relative(direction);
             if(!ball.getLevel().hasChunkAt(pos))continue;
-            boolean transferred=false;
+            int transferred=0;
             if(ball instanceof LiquidCrystalBallBlockEntity liquid) {
                 var other=ball.getLevel().getCapability(Capabilities.FluidHandler.BLOCK,pos,direction.getOpposite());
                 if(other==null)continue;
-                var source=input?other:liquid.fluidHandler;var target=input?liquid.fluidHandler:other;
+                var source=input?other:liquid.transportFluids;var target=input?liquid.transportFluids:other;
                 for(int tank=0;tank<source.getTanks();tank++) {
                     var fluid=source.getFluidInTank(tank);if(fluid.isEmpty() || !ball.upgrades.matches(slot,ItemStack.EMPTY,fluid))continue;
-                    var offered=source.drain(fluid.copyWithAmount(500),FluidAction.SIMULATE);
+                    var offered=source.drain(fluid.copyWithAmount(remaining),FluidAction.SIMULATE);
                     int accepted=target.fill(offered,FluidAction.SIMULATE);if(accepted<=0)continue;
                     var taken=source.drain(offered.copyWithAmount(accepted),FluidAction.EXECUTE);
                     int filled=target.fill(taken,FluidAction.EXECUTE);
                     if(filled<taken.getAmount())source.fill(taken.copyWithAmount(taken.getAmount()-filled),FluidAction.EXECUTE);
-                    transferred=filled>0;break;
+                    transferred=filled;break;
                 }
             } else {
                 var other=ball.getLevel().getCapability(Capabilities.ItemHandler.BLOCK,pos,direction.getOpposite());if(other==null)continue;
-                var source=input?other:ball.itemHandler;var target=input?ball.itemHandler:other;
+                var own=new OrbItemHandler(ball,false);var source=input?other:own;var target=input?own:other;
                 for(int i=0;i<source.getSlots();i++) {
-                    var offered=source.extractItem(i,1,true);
-                    if(offered.isEmpty() || !ball.upgrades.matches(slot,offered,null) || !ItemHandlerHelper.insertItemStacked(target,offered,true).isEmpty())continue;
-                    var taken=source.extractItem(i,1,false);
+                    var offered=source.extractItem(i,remaining,true);
+                    if(offered.isEmpty() || !ball.upgrades.matches(slot,offered,null))continue;
+                    int acceptedCount=offered.getCount()-ItemHandlerHelper.insertItemStacked(target,offered,true).getCount();if(acceptedCount<=0)continue;
+                    var taken=source.extractItem(i,acceptedCount,false);
                     var rest=ItemHandlerHelper.insertItemStacked(target,taken,false);
+                    int accepted=taken.getCount()-rest.getCount();
                     if(!rest.isEmpty()) {
                         rest=ItemHandlerHelper.insertItemStacked(source,rest,false);
                         if(!rest.isEmpty())net.minecraft.world.level.block.Block.popResource(ball.getLevel(),ball.getBlockPos(),rest);
                     }
-                    transferred=!taken.isEmpty();break;
+                    transferred=accepted;break;
                 }
             }
-            if(transferred){tag.putInt("Cursor",(index+1)%directions.length);ball.upgrades.update(slot,tag);return;}
+            if(transferred>0){com.mcmagic.omnira.progression.BranchProgress.automated(ball,transferred);tag.putInt("Cursor",(index+1)%directions.length);ball.upgrades.update(slot,tag);return transferred;}
         }
+        return 0;
     }
 }

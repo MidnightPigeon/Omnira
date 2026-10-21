@@ -1,6 +1,7 @@
 package com.mcmagic.omnira.block.entity;
 
 import com.mcmagic.omnira.registry.ModBlockEntityTypes;
+import com.mcmagic.omnira.storage.LogisticsRates;
 import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -55,8 +56,8 @@ public final class LiquidCrystalBallBlockEntity extends CrystalBallBlockEntity {
         @Override public boolean isFluidValid(FluidStack stack){return backingTank().isFluidValid(stack);}
         @Override public boolean isFluidValid(int index,FluidStack stack){return isFluidValid(stack);}
         @Override public void setFluid(FluidStack stack){backingTank().setFluid(stack);setChanged();}
-        @Override public int fill(FluidStack stack,FluidAction action){int amount=backingTank().fill(stack,action);if(action.execute()&&amount>0)setChanged();return amount;}
-        @Override public FluidStack drain(int amount,FluidAction action){var result=backingTank().drain(amount,action);if(action.execute()&&!result.isEmpty())setChanged();return result;}
+        @Override public int fill(FluidStack stack,FluidAction action){int amount=backingTank().fill(stack,action);if(action.execute()&&amount>0){com.mcmagic.omnira.progression.BranchStorage.fluid(LiquidCrystalBallBlockEntity.this,stack,amount);setChanged();}return amount;}
+        @Override public FluidStack drain(int amount,FluidAction action){var result=backingTank().drain(amount,action);if(action.execute()&&!result.isEmpty()){com.mcmagic.omnira.progression.BranchStorage.fluid(LiquidCrystalBallBlockEntity.this,result,-result.getAmount());setChanged();}return result;}
         @Override public FluidStack drain(FluidStack stack,FluidAction action){return FluidStack.isSameFluidSameComponents(stack,getFluid())?drain(stack.getAmount(),action):FluidStack.EMPTY;}
         @Override public CompoundTag writeToNBT(HolderLookup.Provider registries,CompoundTag tag){return backingTank().writeToNBT(registries,tag);}
         @Override public FluidTank readFromNBT(HolderLookup.Provider registries,CompoundTag tag){localTank.readFromNBT(registries,tag);return this;}
@@ -68,8 +69,8 @@ public final class LiquidCrystalBallBlockEntity extends CrystalBallBlockEntity {
         public boolean isFluidValid(int index,FluidStack stack){return tank.isFluidValid(index,stack);}
         public int fill(FluidStack stack,FluidAction action) {
             if(hasPendingLoot())return 0;
-            refreshBudget();int amount=tank.fill(stack.copyWithAmount(Math.min(stack.getAmount(),budget)),action);
-            if(action.execute())budget-=amount;return amount;
+            int amount=tank.fill(stack,action);
+            if(action.execute()&&!com.mcmagic.omnira.progression.BranchStorage.manual())com.mcmagic.omnira.progression.BranchProgress.automated(LiquidCrystalBallBlockEntity.this,amount);return amount;
         }
         public FluidStack drain(FluidStack stack,FluidAction action) {
             if(!FluidStack.isSameFluidSameComponents(stack,tank.getFluid()))return FluidStack.EMPTY;
@@ -77,10 +78,21 @@ public final class LiquidCrystalBallBlockEntity extends CrystalBallBlockEntity {
         }
         public FluidStack drain(int amount,FluidAction action) {
             if(hasPendingLoot())return FluidStack.EMPTY;
-            refreshBudget();int requested=Math.max(0,Math.min(amount,budget));
+            boolean capped=!com.mcmagic.omnira.storage.LogisticsRates.internal();
+            refreshBudget();int requested=Math.max(0,Math.min(amount,capped?budget:Integer.MAX_VALUE));
             var result=infinite()?tank.getFluid().copyWithAmount(requested):tank.drain(requested,action);
-            if(action.execute())budget-=result.getAmount();return result;
+            if(action.execute()){if(capped)budget-=result.getAmount();if(!com.mcmagic.omnira.progression.BranchStorage.manual())com.mcmagic.omnira.progression.BranchProgress.automated(LiquidCrystalBallBlockEntity.this,result.getAmount());}return result;
         }
+    };
+    /** Upgrade and resonance transfers have their own schedules, independent of pipe requests. */
+    public final IFluidHandler transportFluids=new IFluidHandler(){
+        public int getTanks(){return 1;}
+        public FluidStack getFluidInTank(int i){return tank.getFluid().copy();}
+        public int getTankCapacity(int i){return tank.getCapacity();}
+        public boolean isFluidValid(int i,FluidStack f){return tank.isFluidValid(i,f);}
+        public int fill(FluidStack f,FluidAction action){return hasPendingLoot()?0:tank.fill(f,action);}
+        public FluidStack drain(FluidStack f,FluidAction action){return FluidStack.isSameFluidSameComponents(f,tank.getFluid())?drain(f.getAmount(),action):FluidStack.EMPTY;}
+        public FluidStack drain(int amount,FluidAction action){return hasPendingLoot()?FluidStack.EMPTY:infinite()?tank.getFluid().copyWithAmount(Math.max(0,amount)):tank.drain(amount,action);}
     };
     public LiquidCrystalBallBlockEntity(BlockPos pos,BlockState state){super(ModBlockEntityTypes.LIQUID_CRYSTAL_BALL.get(),pos,state);}
     @Override public int getContainerSize(){return 1;}
@@ -101,7 +113,11 @@ public final class LiquidCrystalBallBlockEntity extends CrystalBallBlockEntity {
         if(handler!=null)for(int i=0;i<handler.getTanks();i++)if(!handler.getFluidInTank(i).isEmpty())portInput=true;
         if(potionContainer(portSnapshot))portInput=com.mcmagic.omnira.compat.OrbPotionContainers.filled(portSnapshot);
     }
-    @Override public void setItem(int slot,ItemStack stack){super.setItem(slot,stack);if(slot==0)resetPort();}
+    @Override public void setItem(int slot,ItemStack stack){super.setItem(slot,stack);if(slot==0){resetPort();
+        if(!virtualStorage&&level!=null&&!level.isClientSide&&storage()!=this){
+            var tag=storage().getPersistentData();tag.putLong("PortProgressPosition",worldPosition.asLong());tag.putString("PortProgressDimension",level.dimension().location().toString());
+        }
+    }}
     @Override public ItemStack removeItem(int slot,int count){var stack=super.removeItem(slot,count);if(slot==0)resetPort();return stack;}
     @Override public ItemStack removeItemNoUpdate(int slot){var stack=super.removeItemNoUpdate(slot);if(slot==0)resetPort();return stack;}
     @Override public void onLoad(){super.onLoad();if(level!=null)budgetTime=level.getGameTime();}
@@ -114,9 +130,8 @@ public final class LiquidCrystalBallBlockEntity extends CrystalBallBlockEntity {
         if(level==null)return;long now=level.getGameTime();
         if(budgetTime==Long.MIN_VALUE)budgetTime=now;
         int speed=upgrades.speedMultiplier();
-        budget=(int)Math.min(500*speed,budget+Math.max(0,Math.min(20,now-budgetTime))*25*speed);budgetTime=now;
+        budget=(int)Math.min(LogisticsRates.FLUID*speed,budget+Math.max(0,Math.min(20,now-budgetTime))*(LogisticsRates.FLUID/20)*speed);budgetTime=now;
     }
-    public int reserveRemoteTransfer(int requested){refreshBudget();int amount=Math.min(Math.max(0,requested),budget);budget-=amount;return amount;}
     @Override public boolean fitsMultiplier(int multiplier){return tank.getFluidAmount()<=BASE_CAPACITY*multiplier;}
     @Override public void serverTick() {
         super.serverTick();refreshBudget();
@@ -130,10 +145,20 @@ public final class LiquidCrystalBallBlockEntity extends CrystalBallBlockEntity {
         }
         if(stack.isEmpty() || portDone || !canPlaceItem(0,stack))return;
         int unit=potionContainer(stack)?250:1000;
-        int reserve=Math.min(25*upgrades.speedMultiplier(),Math.min(budget,unit-portCredit));budget-=reserve;portCredit+=reserve;
+        int reserve=Math.min(LogisticsRates.FLUID/20*upgrades.speedMultiplier(),unit-portCredit);portCredit+=reserve;
         if(portCredit<unit)return;
+        var before=tank.getFluid().copy();
         var result=transferPort(stack,true);
         if(result.isSuccess()) {
+            if(virtualStorage&&level instanceof net.minecraft.server.level.ServerLevel server){
+                var tag=getPersistentData();var dimension=net.minecraft.resources.ResourceLocation.tryParse(tag.getString("PortProgressDimension"));
+                var endpointLevel=dimension==null?null:server.getServer().getLevel(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.DIMENSION,dimension));
+                var endpointPos=BlockPos.of(tag.getLong("PortProgressPosition"));
+                if(endpointLevel!=null&&endpointLevel.hasChunkAt(endpointPos)&&endpointLevel.getBlockEntity(endpointPos) instanceof LiquidCrystalBallBlockEntity endpoint&&endpoint.storage()==this){
+                    var after=tank.getFluid();int delta=after.getAmount()-before.getAmount();
+                    com.mcmagic.omnira.progression.BranchStorage.fluid(endpoint,delta>0?after:before,delta);
+                }
+            }
             portInternal=true;
             try {setItem(0,result.getResult());} finally {portInternal=false;}
             portSnapshot=getItem(0).copy();portCredit=0;

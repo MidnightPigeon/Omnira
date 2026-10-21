@@ -75,7 +75,7 @@ public final class EcologyGameTests {
         level.setBlockAndUpdate(pos,ModBlocks.ARCANE_ASSEMBLY_TABLE.get().defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING,Direction.NORTH));
         level.setBlockAndUpdate(pos.south(),ModBlocks.MANA_ENGINE.get().defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING,Direction.NORTH));
         var engine=((ManaEngineAccess)level.getBlockEntity(pos.south())).engineState();
-        engine.redstoneControl=false;engine.inventory.setItem(0,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
+        engine.inventory.setItem(0,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
         var table=((AssemblyAccess)level.getBlockEntity(pos)).assembly();
         h.assertTrue(ArcaneAssemblyTableBlockEntity.directEngine(level,pos,table.getBlockState()),"Aligned engine not recognized");
         engine.enabled=false;h.assertTrue(!ArcaneAssemblyTableBlockEntity.directEngine(level,pos,table.getBlockState()),"Disabled engine drove table");engine.enabled=true;

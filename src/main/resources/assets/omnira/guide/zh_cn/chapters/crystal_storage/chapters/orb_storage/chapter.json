@@ -1,15 +1,20 @@
 {
   "id": "orb_storage",
   "title": "物品存储",
-  "icon": "omnira:crystal_ball",
+  "icon": "minecraft:chest",
   "introduction": "introduction.json",
   "entries": [
     "entries/resonant_orbs.json",
-    "entries/void_crystal_ball.json",
-    "entries/wandering_star_cluster_orb.json"
+    "entries/void_crystal_ball.json"
   ],
   "chapters": [
     "chapters/simple_storage/chapter.json",
     "chapters/orb_upgrade_plugins/chapter.json"
+  ],
+  "directory_order": [
+    "simple_storage",
+    "orb_upgrade_plugins",
+    "resonant_orbs",
+    "void_crystal_ball"
   ]
 }

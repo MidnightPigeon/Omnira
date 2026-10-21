@@ -26,7 +26,11 @@ public final class RitualEnergyCoreBlock extends BaseEntityBlock {
     @Override public <T extends BlockEntity> net.minecraft.world.level.block.entity.BlockEntityTicker<T> getTicker(
             Level level,BlockState state,net.minecraft.world.level.block.entity.BlockEntityType<T> type){
         return createTickerHelper(type,com.mcmagic.omnira.registry.ModBlockEntityTypes.RITUAL_ENERGY_CORE.get(),
-                (world,pos,block,core)->{if(world.isClientSide)core.tickVisual();else core.tickGenesis();});
+                (world,pos,block,core)->{if(world.isClientSide)core.tickVisual();else {core.tickGenesis();core.worldForming.tick();}});
+    }
+    @Override protected void onRemove(BlockState state,Level level,BlockPos pos,BlockState next,boolean moving){
+        if(!state.is(next.getBlock()) && level.getBlockEntity(pos) instanceof RitualEnergyCoreBlockEntity core)core.worldForming.cancel();
+        super.onRemove(state,level,pos,next,moving);
     }
     @Override protected RenderShape getRenderShape(BlockState state) {return RenderShape.MODEL;}
     @Override protected VoxelShape getShape(BlockState state,BlockGetter level,BlockPos pos,CollisionContext context) {
@@ -35,6 +39,14 @@ public final class RitualEnergyCoreBlock extends BaseEntityBlock {
     @Override protected ItemInteractionResult useItemOn(ItemStack stack,BlockState state,Level level,BlockPos pos,
                                                        Player player,InteractionHand hand,BlockHitResult hit) {
         if(player.isShiftKeyDown())return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if(level.getBlockEntity(pos) instanceof RitualEnergyCoreBlockEntity core && core.worldForming.active())
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        if(stack.is(com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get())){
+            if(!level.isClientSide && level.getBlockEntity(pos) instanceof RitualEnergyCoreBlockEntity core
+                    && !core.worldForming.activate(player,hand))
+                player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.omnira.world_forming.invalid"),true);
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
         if(state.is(com.mcmagic.omnira.registry.ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get())
                 && net.neoforged.neoforge.fluids.FluidUtil.getFluidHandler(stack).isPresent()){
             if(!level.isClientSide && level.getBlockEntity(pos) instanceof RitualEnergyCoreBlockEntity core)

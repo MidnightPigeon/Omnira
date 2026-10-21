@@ -1,0 +1,43 @@
+{
+  "parent": "omnira:mainline/light_and_dark",
+  "display": {
+    "icon": {
+      "id": "omnira:advanced_ritual_energy_core"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.ritual_ascension.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.ritual_ascension.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "obtained": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:advanced_ritual_energy_core"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "obtained"
+    ]
+  ]
+}

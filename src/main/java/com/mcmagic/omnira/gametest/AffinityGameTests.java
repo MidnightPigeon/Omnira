@@ -41,7 +41,7 @@ public final class AffinityGameTests {
         p.setPos(h.absoluteVec(new net.minecraft.world.phys.Vec3(4,2,4)));
         return p;
     }
-    private static void state(FakePlayer p,Affinity affinity) {
+    private static void state(net.minecraft.server.level.ServerPlayer p,Affinity affinity) {
         p.setData(ModAttachments.AFFINITY,new AffinityState(affinity.ordinal(),0));AffinityEffects.refresh(p);
     }
     private static void fill(java.util.List<com.mcmagic.omnira.block.entity.CrystalPedestalBlockEntity> pedestals,int shift) {
@@ -64,7 +64,7 @@ public final class AffinityGameTests {
         state(p,Affinity.NONE);h.assertTrue(p.getAttributeValue(ModAttributes.MAX_MANA)==100,"Removal retains attributes");h.succeed();
     }
     @GameTest(template="spell_arena") public static void ritualValidationAndConsumption(GameTestHelper h) {
-        var p=player(h);var level=h.getLevel();var center=h.absolutePos(new BlockPos(4,2,4));
+        var p=BranchAdvancementGameTests.player(h);var level=h.getLevel();var center=h.absolutePos(new BlockPos(4,2,4));
         level.setBlockAndUpdate(center,ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get().defaultBlockState());
         var pedestals=new java.util.ArrayList<com.mcmagic.omnira.block.entity.CrystalPedestalBlockEntity>();
         for(var offset:DreamRitual.ANCHORS) {
@@ -85,6 +85,7 @@ public final class AffinityGameTests {
             h.assertTrue(!p.getMainHandItem().isEmpty() && pedestals.stream().allMatch(b->!b.getItem(0).isEmpty()),"Consumed before animation completed");
             for(int tick=0;tick<AffinityRitual.DURATION;tick++)AffinityRitual.advance(p);
             h.assertTrue(p.getMainHandItem().isEmpty() && p.getData(ModAttachments.AFFINITY).active()==affinity,"Activator not consumed whole or no affinity");
+            if(affinity!=Affinity.DREAM)h.assertTrue(BranchAdvancementGameTests.recorded(p,"elemental_pact"),"Successful affinity did not record branch");
             h.assertTrue(pedestals.stream().allMatch(b->!b.getItem(0).isEmpty()),"Ritual consumed symbolic offerings");
             fill(pedestals,7);
             p.setPos(center.getX()+1.5,center.getY(),center.getZ()+.5);
@@ -169,8 +170,23 @@ public final class AffinityGameTests {
             AffinityRitual.advance(p);
             h.assertTrue(Math.abs(p.getX()-center.getX()-.5)<.001 && p.getY()>center.getY()+1,"Acquisition did not hold above core");
             pedestals.get(0).setItem(0,ItemStack.EMPTY);AffinityRitual.advance(p);
-            h.assertTrue(!AffinityRitual.active(p) && !p.getMainHandItem().isEmpty() && !pedestals.get(1).getItem(0).isEmpty(),"Interrupted ritual consumed materials or kept hold");
+            h.assertTrue(AffinityRitual.active(p) && !p.getMainHandItem().isEmpty() && !pedestals.get(1).getItem(0).isEmpty(),"Removing offerings interrupted activated affinity");
+            AffinityRitual.cancel(p);
         }
+        fill(pedestals,0);p.setItemInHand(InteractionHand.MAIN_HAND,Affinity.LIGHT.offering());
+        h.assertTrue(AffinityRitual.activate(p,center,InteractionHand.MAIN_HAND),"Affinity did not start");
+        pedestals.forEach(pedestal->pedestal.setItem(0,ItemStack.EMPTY));
+        for(int i=0;i<120;i++)AffinityRitual.advance(p);
+        h.assertTrue(p.getData(ModAttachments.AFFINITY).active()==Affinity.LIGHT && p.getMainHandItem().isEmpty(),"Removed offerings prevented acquisition or activator debit");
+        level.removeBlock(center,false);AffinityRitual.advance(p);
+        h.assertTrue(p.getData(ModAttachments.AFFINITY).active()==Affinity.LIGHT,"Dismantling removed acquired affinity");
+        level.setBlockAndUpdate(center,ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get().defaultBlockState());
+        fill(pedestals,0);p.setItemInHand(InteractionHand.MAIN_HAND,Affinity.LIGHT.offering());
+        p.setPos(center.getX()+1.5,center.getY(),center.getZ()+.5);
+        h.assertTrue(AffinityRitual.activate(p,center,InteractionHand.MAIN_HAND),"Renunciation did not start");
+        pedestals.forEach(pedestal->pedestal.setItem(0,ItemStack.EMPTY));
+        for(int i=0;i<120;i++)AffinityRitual.advance(p);
+        h.assertTrue(!AffinityRitual.active(p) && p.getData(ModAttachments.AFFINITY).penaltyTicks()>0 && p.getMainHandItem().isEmpty(),"Removed offerings prevented renunciation");
         AffinityCommands.apply(p,Affinity.DREAM);fill(pedestals,3);p.setItemInHand(InteractionHand.MAIN_HAND,Affinity.DREAM.offering());
         p.setPos(center.getX()+1.5,center.getY(),center.getZ()+.5);
         h.assertTrue(AffinityRitual.activate(p,center,InteractionHand.MAIN_HAND),"Dream removal failed to start");

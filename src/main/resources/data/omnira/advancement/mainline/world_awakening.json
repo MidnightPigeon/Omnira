@@ -1,0 +1,43 @@
+{
+  "parent": "omnira:mainline/genesis_echo",
+  "display": {
+    "icon": {
+      "id": "omnira:active_world_seed"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.world_awakening.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.world_awakening.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "obtained": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:active_world_seed"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "obtained"
+    ]
+  ]
+}

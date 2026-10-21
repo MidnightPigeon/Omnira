@@ -1,5 +1,7 @@
 {
-  "text": [
-    "Begin with the Guidance Orb and Simple Condensation Table. Spiritual Crystals open early crafts, dream bedrock leads toward spacetime, and warp points unlock advanced exploration."
-  ]
+  "image": "omnira:textures/gui/guide/chapters/beginning.png",
+  "image_width": 1415,
+  "image_height": 1111,
+  "caption": "Obtain Spiritual Crystals with a Simple Condensation Table, then let the Guiding Orb show the way.",
+  "text": []
 }

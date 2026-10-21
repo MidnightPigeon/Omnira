@@ -71,17 +71,17 @@
       "infused": 16
     },
     {
-      "item": "omnira:time_grass",
-      "count": 8,
-      "infused": 3
+      "item": "omnira:shadow_manuscript",
+      "count": 4,
+      "infused": 4
     },
     {
-      "item": "omnira:timeflow_eel",
+      "item": "omnira:star_jellyfish",
       "count": 2,
       "infused": 4
     },
     {
-      "item": "omnira:chronal_blindfish",
+      "item": "omnira:pure_mirror",
       "count": 2,
       "infused": 4
     },
@@ -99,9 +99,94 @@
       "item": "omnira:time_sand",
       "infused": 3,
       "count": 16
+    },
+    {
+      "item": "omnira:basic_stacking_upgrade",
+      "count": 1,
+      "infused": 8
+    },
+    {
+      "item": "omnira:earth_microcore",
+      "count": 1,
+      "infused": 8
+    },
+    {
+      "item": "omnira:water_microcore",
+      "count": 1,
+      "infused": 8
+    },
+    {
+      "item": "omnira:fire_microcore",
+      "count": 1,
+      "infused": 8
+    },
+    {
+      "item": "omnira:air_microcore",
+      "count": 1,
+      "infused": 8
     }
   ],
   "rare": [
+    {
+      "item": "omnira:spatial_crystal_shard",
+      "count": 8,
+      "infused": 8,
+      "extra": 4
+    },
+    {
+      "item": "omnira:excited_rough_spatial_crystal_block",
+      "count": 16,
+      "infused": 8,
+      "extra": 4
+    },
+    {
+      "item": "omnira:deflection_crystal",
+      "count": 4,
+      "infused": 8,
+      "extra": 4
+    },
+    {
+      "item": "omnira:phase_crystal_block",
+      "count": 4,
+      "infused": 8,
+      "extra": 4
+    },
+    {
+      "item": "omnira:void_mirror_rock",
+      "count": 16,
+      "infused": 6,
+      "extra": 4
+    },
+    {
+      "item": "omnira:space_warp_point",
+      "count": 2,
+      "infused": 12,
+      "extra": 6
+    },
+    {
+      "item": "omnira:intake_upgrade",
+      "count": 1,
+      "infused": 12,
+      "extra": 6
+    },
+    {
+      "item": "omnira:output_upgrade",
+      "count": 1,
+      "infused": 12,
+      "extra": 6
+    },
+    {
+      "item": "omnira:spacetime_stabilization_upgrade",
+      "count": 1,
+      "infused": 16,
+      "extra": 8
+    },
+    {
+      "item": "omnira:recipe_control_upgrade",
+      "count": 1,
+      "infused": 40,
+      "extra": 20
+    },
     {
       "item": "omnira:analysis_crystal",
       "count": 1,
@@ -194,30 +279,35 @@
     },
     {
       "item": "omnira:ancient_archaeology_aggregate",
+      "weight": 5,
       "infused": 12,
       "extra": 6,
       "count": 1
     },
     {
       "item": "omnira:phantom_thieves_aggregate",
+      "weight": 5,
       "infused": 12,
       "extra": 6,
       "count": 1
     },
     {
       "item": "omnira:umbrella_aggregate",
+      "weight": 5,
       "infused": 12,
       "extra": 6,
       "count": 1
     },
     {
       "item": "omnira:foundation_aggregate",
+      "weight": 5,
       "infused": 12,
       "extra": 6,
       "count": 1
     },
     {
       "item": "omnira:primordial_earth_aggregate",
+      "weight": 5,
       "infused": 12,
       "extra": 6,
       "count": 1
@@ -253,20 +343,6 @@
       "count": 1,
       "infused": 48,
       "extra": 24
-    },
-    {
-      "extra": 32,
-      "item": "omnira:advanced_assembly_table",
-      "count": 1,
-      "weight": 1,
-      "infused": 64
-    },
-    {
-      "extra": 32,
-      "item": "omnira:advanced_crystal_aggregation_ring",
-      "count": 1,
-      "weight": 1,
-      "infused": 64
     },
     {
       "item": "omnira:spacetime_spell_core",

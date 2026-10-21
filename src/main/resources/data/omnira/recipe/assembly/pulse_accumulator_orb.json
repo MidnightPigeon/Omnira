@@ -1,0 +1,10 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {"item":"omnira:arcane_dust"}, {"item":"omnira:arcane_dust"}, {"item":"omnira:arcane_dust"},
+    {"item":"omnira:infused_spiritual_crystal"}, {"item":"omnira:infused_spiritual_crystal"}, {"item":"omnira:infused_spiritual_crystal"},
+    {"item":"omnira:crystal_ball"}
+  ],
+  "result": {"id":"omnira:pulse_accumulator_orb","count":1}
+}

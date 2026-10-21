@@ -39,12 +39,7 @@ public final class ManaEngineBlock extends HorizontalKineticBlock implements IBE
                 net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("create","wrench")))) return InteractionResult.PASS;
         if(level.getBlockEntity(pos) instanceof ManaEngineBlockEntity engine) {
             if(!level.isClientSide && player instanceof ServerPlayer server) {
-                // The small rear control reverses rotation; the other surfaces open the menu.
-                double y=hit.getLocation().y-pos.getY();
-                double x=state.getValue(HORIZONTAL_FACING).getAxis()==Direction.Axis.Z
-                        ?hit.getLocation().x-pos.getX():hit.getLocation().z-pos.getZ();
-                if(hit.getDirection()==state.getValue(HORIZONTAL_FACING).getOpposite()
-                        && y>=.375 && y<=.625 && x>=.375 && x<=.625) engine.engineState().control(2);
+                if(engine.engineState().controlHit(hit)) engine.engineState().control(0);
                 else server.openMenu(engine,pos);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);

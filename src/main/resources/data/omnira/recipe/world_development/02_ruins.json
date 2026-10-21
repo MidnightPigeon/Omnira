@@ -1,0 +1,1 @@
+{"type":"omnira:world_development","from":"OVERWORLD","to":"RUINS","materials":[{"ingredient":{"item":"minecraft:compass"},"count":1},{"ingredient":{"tag":"minecraft:boats"},"count":1},{"food":true,"count":64,"full_stack":true}],"duration":100}

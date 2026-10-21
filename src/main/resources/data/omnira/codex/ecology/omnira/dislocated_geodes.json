@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "omnira:deflection_crystal_block"
+  },
+  "surface": {
+    "Name": "omnira:deflection_crystal_block"
+  },
+  "decorations": [
+    {
+      "kind": "spire",
+      "block": {
+        "Name": "omnira:deflection_crystal_block"
+      },
+      "crown": {
+        "Name": "omnira:excited_rough_spatial_crystal_block"
+      }
+    }
+  ]
+}

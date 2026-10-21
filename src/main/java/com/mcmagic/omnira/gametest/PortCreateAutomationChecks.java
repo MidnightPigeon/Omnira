@@ -60,6 +60,9 @@ final class PortCreateAutomationChecks {
             }
         }
         h.assertTrue(SpacetimePortState.pair(PortAutomationGameTests.port(h,pipe,Direction.EAST),PortAutomationGameTests.port(h,pipeBridge?remote:target,Direction.DOWN)),"Pipe pair failed");
+        var progressPlayer=BranchAdvancementGameTests.player(h);
+        com.mcmagic.omnira.progression.BranchProgress.operate(progressPlayer,SpacetimePortState.at(l,pipe.east()).host);
+        h.assertTrue(!BranchAdvancementGameTests.recorded(progressPlayer,"adjacent_worlds"),"Empty pipe bridge counted as delivery");
         l.setBlockAndUpdate(pump.north(),AllBlocks.COGWHEEL.getDefaultState().setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.AXIS,Direction.Axis.X));
         l.setBlockAndUpdate(pump.north().east(),AllBlocks.CREATIVE_MOTOR.getDefaultState().setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING,Direction.WEST));
         var motor=(com.simibubi.create.content.kinetics.motor.CreativeMotorBlockEntity)l.getBlockEntity(pump.north().east());
@@ -76,6 +79,7 @@ final class PortCreateAutomationChecks {
             var localFlow=com.simibubi.create.content.fluids.FluidPropagator.getPipe(l,pipe);
             var remoteFlow=com.simibubi.create.content.fluids.FluidPropagator.getPipe(l,remote);
             h.assertTrue(amount>500,"Pump amount="+amount+" speed="+drive.getSpeed()+" local="+l.getBlockState(pipe)+" remote="+l.getBlockState(remote)+" pressure="+localFlow.hasAnyPressure()+"/"+(remoteFlow!=null&&remoteFlow.hasAnyPressure())+" connection="+new com.mcmagic.omnira.compat.PortFluidFace(l,pipe,Direction.EAST).getConnectedPos());
+            h.assertTrue(BranchAdvancementGameTests.recorded(progressPlayer,"adjacent_worlds"),"Successful pipe bridge did not grant transmission objective");
             SpacetimePortState.at(l,pipe.east()).unlink();
             h.runAfterDelay(15,()->{
                 int stopped=out.getFluidInTank(0).getAmount();

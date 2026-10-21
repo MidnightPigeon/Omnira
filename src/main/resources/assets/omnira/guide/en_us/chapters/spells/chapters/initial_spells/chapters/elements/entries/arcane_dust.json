@@ -3,8 +3,23 @@
   "item": "omnira:arcane_dust",
   "title": "Arcane Dust",
   "text": [
-    "Some materials release arcane dust during analysis: the residue of arcane vibrations.",
-    "Use Arcane Dust on an amethyst, dream, spatial or deflection crystal matrix to advance every eligible cluster by one stage. Empty or water-source faces sprout small buds. Even a single growable face triggers growth and consumes 1 dust. Nothing is consumed only when all six faces are blocked or mature. Mature clusters, other crystal families and obstructed faces are unaffected."
+    "Mana residue released by analysis can also be cultivated in a Catalysis Chamber. Water is required; the substrate and seed dust remain. It does not grow naturally without water.",
+    "Normally right-click budding crystal rock to advance all growable faces one stage, creating buds on empty or source-water faces. One dust is consumed whenever any face can grow; blocked or mature faces alone consume nothing.",
+    "Normal use on other blocks places floating Arcane Wires; use on Phase Crystal Clusters stimulates them. Sneak-right-click skips growth and places a wire beside the clicked face instead."
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "alchemical_catalysis_chamber",
+      "label": "Catalysis Chamber"
+    },
+    {
+      "target": "arcane_pulse_wires",
+      "label": "Arcane Wires"
+    },
+    {
+      "target": "phase_crystal_guide",
+      "label": "Phase Crystals"
+    }
+  ]
 }

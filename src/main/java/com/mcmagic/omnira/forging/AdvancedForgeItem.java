@@ -6,7 +6,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 
 /** Creative placement represents the complete machine, never an isolated controller. */
-public final class AdvancedForgeItem extends BlockItem {
+public final class AdvancedForgeItem extends BlockItem implements com.mcmagic.omnira.item.MultiblockPlacementItem {
     public AdvancedForgeItem(Properties properties){super(ModBlocks.ADVANCED_FORGE.get(),properties);}
     @Override public InteractionResult place(BlockPlaceContext context){
         var player=context.getPlayer();var level=context.getLevel();

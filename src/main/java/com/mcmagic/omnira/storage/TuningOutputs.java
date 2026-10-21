@@ -54,7 +54,7 @@ public final class TuningOutputs extends SavedData {
     }
     private boolean available(ResonanceCoreBlockEntity node,boolean refreshNow){
         var level=(ServerLevel)node.getLevel();
-        if(refreshNow||refreshedAt!=level.getGameTime())refresh(level);
+        if(refreshNow||refreshedAt==Long.MIN_VALUE||Math.floorDiv(refreshedAt,5)!=Math.floorDiv(level.getGameTime(),5))refresh(level);
         String key=StorageContainerIdentity.key(node);if(key==null)return false;
         for(var existing:claims.values())if(!existing.identity().equals(node.identity)&&level.hasChunkAt(existing.node())
                 &&level.getBlockEntity(existing.node()) instanceof ResonanceCoreBlockEntity other&&StorageContainerIdentity.same(node,other))return false;
@@ -63,7 +63,7 @@ public final class TuningOutputs extends SavedData {
     public boolean claim(ResonanceCoreBlockEntity node){
         return claim(node,true);
     }
-    /** Tick renewals share the ledger rebuild; interactive claims always refresh immediately. */
+    /** Staggered renewals share five-tick ledger epochs; interactive claims refresh immediately. */
     public boolean renew(ResonanceCoreBlockEntity node){return claim(node,false);}
     private boolean claim(ResonanceCoreBlockEntity node,boolean refreshNow){
         if(!available(node,refreshNow))return false;

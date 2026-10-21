@@ -1,0 +1,135 @@
+{
+  "id": "alchemical_catalysis_chamber",
+  "title": "Alchemical Catalysis Chamber",
+  "item": "omnira:alchemical_catalysis_chamber",
+  "scene": "alchemical_catalysis_chamber",
+  "recipes": false,
+  "text": [
+    "Follow the model layout; individual block facings do not matter. Build the model with one Rough Alchemy Cauldron, one Rough Alchemical Energy Core and one Crystal Orb. Empty the vessels and activate the core with one Infused Crystal. The machine cannot be mined; carry it with a Pocket Magic Bottle.",
+    "Open the base to insert a suitable substrate and seed. Supply fluid through the rear blue port, or right-click that port with a bucket or fluid container. It holds one fluid type, up to 4 B. Substrate and seed are retained. Discover combinations through experimentation.",
+    "Each catalysis uses 100 mB every 10 seconds. A full cycle always takes four catalyses: 40 seconds and 400 mB. Mature contents are harvested automatically and restart. Insufficient fluid or an occupied output pauses growth.",
+    "With no fluid, naturally growing combinations follow their ordinary speed and yield; other combinations pause. Adding fluid resumes catalysis. A cycle that included natural growth still gives ordinary yield.",
+    "Three base slots accept Intake, Output, Recipe Control or Speed Upgrades. At most one Speed Upgrade applies, to logistics only. Ordinary fluid access uses the rear port; a top resonance node can supply fluid and extract products. Ordinary hoppers can also extract substrate and seed: configure filters carefully."
+  ],
+  "links": [
+    {
+      "target": "rough_alchemy_cauldron",
+      "label": "Rough Alchemy Cauldron"
+    },
+    {
+      "target": "rough_alchemical_energy_core",
+      "label": "Rough Alchemical Energy Core"
+    },
+    {
+      "target": "intake_upgrade",
+      "label": "Intake Upgrade"
+    },
+    {
+      "target": "output_upgrade",
+      "label": "Output Upgrade"
+    }
+  ],
+  "figures": [
+    {
+      "id": "catalysis_slots",
+      "title": "Chamber Access",
+      "icons": [
+        {
+          "item": "omnira:resonance_core",
+          "x": 2,
+          "y": 4,
+          "count": 1
+        },
+        {
+          "item": "minecraft:water_bucket",
+          "x": 2,
+          "y": 77,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 20,
+          "y1": 12,
+          "x2": 27,
+          "y2": 12,
+          "color": "#6199B4",
+          "arrow": false
+        },
+        {
+          "x1": 22,
+          "y1": 85,
+          "x2": 42,
+          "y2": 85,
+          "color": "#6199B4",
+          "arrow": true
+        }
+      ],
+      "areas": [
+        {
+          "x": 32,
+          "y": 4,
+          "width": 88,
+          "height": 20,
+          "color": "#9CBFB6"
+        },
+        {
+          "x": 32,
+          "y": 32,
+          "width": 42,
+          "height": 32,
+          "color": "#9CBFB6"
+        },
+        {
+          "x": 78,
+          "y": 32,
+          "width": 42,
+          "height": 32,
+          "color": "#9CBFB6"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Output",
+          "x": 35,
+          "y": 9,
+          "width": 82,
+          "height": 15,
+          "color": "#405462"
+        },
+        {
+          "text": "Base",
+          "x": 35,
+          "y": 37,
+          "width": 36,
+          "height": 27,
+          "color": "#405462"
+        },
+        {
+          "text": "Seed",
+          "x": 81,
+          "y": 37,
+          "width": 36,
+          "height": 27,
+          "color": "#405462"
+        },
+        {
+          "text": "Rear blue port",
+          "x": 49,
+          "y": 75,
+          "width": 75,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Rear / node: fluid.\nHoppers: all items.",
+          "x": 0,
+          "y": 105,
+          "width": 124,
+          "height": 27,
+          "color": "#405462"
+        }
+      ]
+    }
+  ]
+}

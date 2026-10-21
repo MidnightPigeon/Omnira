@@ -1,0 +1,28 @@
+{
+  "base": {
+    "Name": "minecraft:netherrack"
+  },
+  "surface": {
+    "Name": "minecraft:crimson_nylium"
+  },
+  "decorations": [
+    {
+      "kind": "tree",
+      "block": {
+        "Name": "minecraft:crimson_stem"
+      },
+      "crown": {
+        "Name": "minecraft:nether_wart_block"
+      }
+    },
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "minecraft:crimson_fungus"
+      },
+      "crown": {
+        "Name": "minecraft:crimson_roots"
+      }
+    }
+  ]
+}

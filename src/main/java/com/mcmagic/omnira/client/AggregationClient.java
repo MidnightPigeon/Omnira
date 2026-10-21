@@ -3,6 +3,7 @@ package com.mcmagic.omnira.client;
 import com.mcmagic.omnira.aggregation.*;
 import com.mcmagic.omnira.client.renderer.CrystalGlassLayer;
 import com.mcmagic.omnira.client.renderer.SpellCoreRenderer;
+import com.mcmagic.omnira.client.renderer.ParticleModelQuads;
 import com.mcmagic.omnira.registry.ModDataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -95,12 +96,17 @@ public final class AggregationClient {
                 pose.pushPose();pose.translate(.5,.5,.5);pose.scale(.45F,.45F,.45F);pose.translate(-.5,-.5,-.5);
                 render(null,pose,buffers,light,overlay);pose.popPose();return;
             }
-            draw("crystal",pose,buffers,light,overlay,0xFFFFFF,.9F);
+            boolean ultimate=stack.is(com.mcmagic.omnira.registry.ModItems.WORLD_ROTATION_CRYSTAL.get());
+            int shell=ultimate?net.minecraft.util.Mth.hsvToRgb((float)((time()*.003)%1),.22F,1):0xFFFFFF;
+            draw("crystal",pose,buffers,light,overlay,shell,.9F);
             var pattern=stack.get(ModDataComponents.SPELL_PATTERN.get());double t=time();
-            for(int i=0;i<4;i++){
-                int color=pattern==null?0xADF0DE:(i%2==1&&pattern.shapeElement()!=null?pattern.shapeElement():pattern.targetElement()).tooltipColor();
-                double a=t*.04+i*Math.PI/2;
-                part("mote",.5+Math.cos(a)*.36,.5+Math.sin(a*1.5)*.28,.5+Math.sin(a)*.3,color,.9F,pose,buffers,LightTexture.FULL_BRIGHT,overlay);
+            var quads=ParticleModelQuads.collect(Minecraft.getInstance().getModelManager().getModel(model("mote")));
+            var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
+            for(int i=0;i<(ultimate?8:4);i++){
+                int color=ultimate?net.minecraft.util.Mth.hsvToRgb((float)((i/8.0+t*.003)%1),.4F,1):pattern==null?0xADF0DE:(i%2==1&&pattern.shapeElement()!=null?pattern.shapeElement():pattern.targetElement()).tooltipColor();
+                double a=t*.04+i*Math.PI*2/(ultimate?8:4);
+                pose.pushPose();pose.translate(Math.cos(a)*.36,Math.sin(a*1.5)*.28,Math.sin(a)*.3);
+                ParticleModelQuads.tinted(quads,pose,out,LightTexture.FULL_BRIGHT,overlay,color,.9F);pose.popPose();
             }
         }
     }
@@ -109,7 +115,7 @@ public final class AggregationClient {
     @SubscribeEvent public static void extensions(net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent e){
         e.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){private ItemRenderer renderer;
             @Override public BlockEntityWithoutLevelRenderer getCustomRenderer(){if(renderer==null)renderer=new ItemRenderer();return renderer;}
-        },AggregationContent.ITEM.get(),AggregationContent.CRYSTAL.get());
+        },AggregationContent.ITEM.get(),AggregationContent.CRYSTAL.get(),com.mcmagic.omnira.registry.ModItems.WORLD_ROTATION_CRYSTAL.get());
     }
     @SubscribeEvent public static void renderers(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers e){
         e.registerBlockEntityRenderer(AggregationContent.ENTITY.get(),c->new net.minecraft.client.renderer.blockentity.BlockEntityRenderer<AggregationRingBlockEntity>(){

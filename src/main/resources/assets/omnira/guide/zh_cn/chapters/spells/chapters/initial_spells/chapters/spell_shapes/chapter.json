@@ -1,7 +1,7 @@
 {
   "id": "spell_shapes",
   "title": "目标，形态与组合",
-  "icon": "omnira:air_microcore",
+  "icon": "minecraft:target",
   "introduction": "introduction.json",
   "entries": [
     "entries/spell_target_shape_basics.json"
@@ -10,5 +10,11 @@
     "chapters/spell_targets/chapter.json",
     "chapters/spell_forms/chapter.json",
     "chapters/spell_combinations/chapter.json"
+  ],
+  "directory_order": [
+    "spell_target_shape_basics",
+    "spell_targets",
+    "spell_forms",
+    "spell_combinations"
   ]
 }

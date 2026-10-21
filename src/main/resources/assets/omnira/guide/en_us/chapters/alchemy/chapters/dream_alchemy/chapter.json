@@ -5,6 +5,8 @@
   "introduction": "introduction.json",
   "entries": [
     "entries/rough_alchemical_energy_core.json",
+    "entries/large_alchemical_reaction_pool.json",
+    "entries/alchemical_catalysis_chamber.json",
     "entries/dream_microcore_conversion.json",
     "entries/encapsulated_paradox_flow.json"
   ],

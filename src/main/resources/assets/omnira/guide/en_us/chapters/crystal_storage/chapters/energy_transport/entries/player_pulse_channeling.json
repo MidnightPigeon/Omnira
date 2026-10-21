@@ -1,0 +1,16 @@
+{
+  "id": "player_pulse_channeling",
+  "title": "Temporary Power",
+  "item": "omnira:arcane_dust",
+  "icon": "omnira:psyker_talent",
+  "recipes": false,
+  "text": [
+    "Only intended to drive certain machines temporarily.",
+    "With both hands empty, aim at a pulse receiver, Arcane Wire or accumulator orb and hold Use for 5 seconds. Rings rise from your feet; five rings surround you once power begins. A short press retains the normal interaction.",
+    "Your supply in MPU equals ten times your natural mana recovery per second. While supplying, natural recovery pauses without consuming stored mana. Recovery continues during charging.",
+    "Keep holding Use and aiming at the receiver. Releasing, looking away or holding an item in either hand stops the supply."
+  ],
+  "links": [
+    { "target": "magic_pulse", "label": "Magic Pulse" }
+  ]
+}

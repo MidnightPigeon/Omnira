@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [{"item": "omnira:air_microcore"}, {"item": "minecraft:gunpowder"}, {"item": "omnira:infused_spiritual_crystal"}],
+  "result": {"id": "minecraft:wind_charge", "count": 1}
+}

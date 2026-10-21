@@ -15,6 +15,24 @@ import java.util.UUID;
 @PrefixGameTestTemplate(false)
 public final class CrystalArmorGameTests {
     @GameTest(template="spell_arena")
+    public static void renamedTopPreservesOldStacks(GameTestHelper h){
+        var item=ArmorContent.CLOTH.get(ArmorItem.Type.CHESTPLATE).get();
+        var registry=net.minecraft.core.registries.BuiltInRegistries.ITEM;
+        var oldId=net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","crystal_blouse");
+        h.assertTrue(registry.get(oldId)==item,"Legacy top ID must resolve to the same item");
+        h.assertTrue(registry.getKey(item).getPath().equals("crystal_top"),"Top must use the new canonical ID");
+        var original=new ItemStack(item);
+        original.setDamageValue(37);
+        original.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal("kept-top"));
+        var tag=(net.minecraft.nbt.CompoundTag)original.save(h.getLevel().registryAccess());
+        tag.putString("id",oldId.toString());
+        var restored=ItemStack.parseOptional(h.getLevel().registryAccess(),tag);
+        h.assertTrue(restored.is(item)&&restored.getDamageValue()==37,"Renaming discarded armor or durability");
+        h.assertTrue(restored.getHoverName().getString().equals("kept-top"),"Renaming discarded components");
+        h.succeed();
+    }
+
+    @GameTest(template="spell_arena")
     public static void setBonusesAndRemoval(GameTestHelper h){
         var p=new FakePlayer(h.getLevel(),new GameProfile(UUID.randomUUID(),"armor-test")){
             @Override public boolean isInvulnerableTo(net.minecraft.world.damagesource.DamageSource source){return false;}

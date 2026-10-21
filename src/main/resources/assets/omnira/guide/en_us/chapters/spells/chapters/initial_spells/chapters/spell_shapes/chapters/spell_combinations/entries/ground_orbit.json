@@ -1,6 +1,7 @@
 {
   "id": "ground_orbit",
   "item": "omnira:water_microcore",
+  "icon": "omnira:resonance_core",
   "title": "Ground-Orbit",
   "text": [
     "Use Earth as the target and Water as the shape. Projectiles travel around the path formed by valid nearby surfaces. The positions are chosen at casting and do not keep following you.",

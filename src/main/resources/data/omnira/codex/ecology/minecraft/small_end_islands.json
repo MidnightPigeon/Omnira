@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "minecraft:end_stone"
+  },
+  "surface": {
+    "Name": "minecraft:end_stone"
+  },
+  "decorations": [
+    {
+      "kind": "spire",
+      "block": {
+        "Name": "minecraft:obsidian"
+      },
+      "crown": {
+        "Name": "minecraft:obsidian"
+      }
+    }
+  ]
+}

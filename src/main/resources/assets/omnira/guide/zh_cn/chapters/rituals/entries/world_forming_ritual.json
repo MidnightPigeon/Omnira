@@ -1,0 +1,10 @@
+{
+  "id": "world_forming_ritual", "title": "拟界之仪", "item": "omnira:active_world_seed",
+  "scene": "world_forming_ritual", "recipes": false,
+  "text": [
+    "需要高阶仪祭能核一座、水晶基座八座，以及八种世界组件各一件，无序摆放。用激活的世界之种右键能核，启动拟界之仪。",
+    "地层、水脉、天幕、火种、生命、岁月、界域与幻景依次映现，组件随各自的吸收动画离开基座。最后凝成一个微缩世界框架，消耗世界之种及八件组件。",
+    "中途取走尚未吸收的组件或破坏仪式会终止合成，返还世界之种与已吸收的组件；原基座无法容纳时，组件会掉落在能核旁。"
+  ],
+  "links": [{"target": "world_seed", "label": "世界之种"}, {"target": "world_components", "label": "八种世界组件"}, {"target": "miniature_world_framework", "label": "微缩世界框架"}]
+}

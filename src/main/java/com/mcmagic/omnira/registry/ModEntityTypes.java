@@ -12,6 +12,12 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModEntityTypes {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(Registries.ENTITY_TYPE, Omnira.MOD_ID);
+    public static final DeferredHolder<EntityType<?>,EntityType<com.mcmagic.omnira.weaver.WeaverBolt>> WEAVER_BOLT=
+            ENTITY_TYPES.register("weaver_bolt",()->EntityType.Builder.<com.mcmagic.omnira.weaver.WeaverBolt>of(com.mcmagic.omnira.weaver.WeaverBolt::new,MobCategory.MISC)
+                    .sized(.3F,.3F).clientTrackingRange(8).updateInterval(1).noSummon().build("omnira:weaver_bolt"));
+    public static final DeferredHolder<EntityType<?>,EntityType<com.mcmagic.omnira.entity.WeaverSpirit>> WEAVER_SPIRIT=
+            ENTITY_TYPES.register("weaver_spirit",()->EntityType.Builder.of(com.mcmagic.omnira.entity.WeaverSpirit::new,MobCategory.MONSTER)
+                    .sized(3,3).eyeHeight(1.5F).clientTrackingRange(12).updateInterval(3).fireImmune().build("omnira:weaver_spirit"));
     public static final DeferredHolder<EntityType<?>,EntityType<com.mcmagic.omnira.throne.GoldenThroneSeat>> GOLDEN_THRONE_SEAT=
             ENTITY_TYPES.register("golden_throne_seat",()->EntityType.Builder.<com.mcmagic.omnira.throne.GoldenThroneSeat>of(
                     com.mcmagic.omnira.throne.GoldenThroneSeat::new,MobCategory.MISC).sized(.1F,.1F)
@@ -68,6 +74,7 @@ public final class ModEntityTypes {
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
         eventBus.addListener((net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent event)-> {
+            event.put(WEAVER_SPIRIT.get(),com.mcmagic.omnira.entity.WeaverSpirit.attributes().build());
             event.put(ARCHAEOPTERYX_SPIRIT.get(),com.mcmagic.omnira.ancient.ArchaeopteryxSpirit.attributes().build());
             event.put(VELOCIRAPTOR.get(),com.mcmagic.omnira.ancient.Velociraptor.attributes().build());
         });

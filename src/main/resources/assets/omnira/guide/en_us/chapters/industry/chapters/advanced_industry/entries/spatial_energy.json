@@ -2,6 +2,7 @@
   "id": "spatial_energy",
   "title": "Spatial Energy Materials",
   "item": "omnira:void_infuser",
+  "icon": "omnira:rough_spatial_crystal_block",
   "recipes": false,
   "text": [
     "Hover a material to see its energy per item."

@@ -1,8 +1,9 @@
 {
   "parent":"minecraft:block/block",
+  "ambientocclusion":false,
   "textures":{"surface":"minecraft:block/white_stained_glass"},
   "elements":[{"from":[-0.65,-0.65,-0.65],"to":[0.65,0.65,0.65],"faces":{
-    "north":{"texture":"#surface"},"south":{"texture":"#surface"},
-    "east":{"texture":"#surface"},"west":{"texture":"#surface"},
-    "up":{"texture":"#surface"},"down":{"texture":"#surface"}}}]
+    "north":{"texture":"#surface","uv":[0,0,16,16]},"south":{"texture":"#surface","uv":[0,0,16,16]},
+    "east":{"texture":"#surface","uv":[0,0,16,16]},"west":{"texture":"#surface","uv":[0,0,16,16]},
+    "up":{"texture":"#surface","uv":[0,0,16,16]},"down":{"texture":"#surface","uv":[0,0,16,16]}}}]
 }

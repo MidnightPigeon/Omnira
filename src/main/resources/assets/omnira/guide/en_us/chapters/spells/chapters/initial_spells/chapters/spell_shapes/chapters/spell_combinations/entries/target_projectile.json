@@ -1,6 +1,7 @@
 {
   "id": "target_projectile",
   "item": "omnira:fire_microcore",
+  "icon": "minecraft:fire_charge",
   "title": "Target-Projectile",
   "text": [
     "Use Fire in the target slot and Air in the shape slot. Select a creature or block before firing; the projectile adjusts its course as a selected creature moves.",

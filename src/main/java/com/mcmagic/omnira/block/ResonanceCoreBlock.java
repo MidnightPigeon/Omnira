@@ -15,6 +15,7 @@ import net.minecraft.world.phys.shapes.*;
 public final class ResonanceCoreBlock extends BaseEntityBlock {
     public static final IntegerProperty MODE=IntegerProperty.create("mode",0,5);
     public static final MapCodec<ResonanceCoreBlock> CODEC=simpleCodec(ResonanceCoreBlock::new);
+    private static final net.minecraft.core.particles.DustParticleOptions[] MOTES=new net.minecraft.core.particles.DustParticleOptions[6];
     public ResonanceCoreBlock(Properties properties){super(properties);registerDefaultState(stateDefinition.any().setValue(MODE,0));}
     @Override protected MapCodec<? extends BaseEntityBlock> codec(){return CODEC;}
     @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block,BlockState> builder){builder.add(MODE);}
@@ -33,11 +34,17 @@ public final class ResonanceCoreBlock extends BaseEntityBlock {
         if(!level.isClientSide && level.getBlockEntity(pos) instanceof ResonanceCoreBlockEntity core){core.owner=placer==null?null:placer.getUUID();core.setChanged();core.refresh();}
     }
     @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level,BlockState state,BlockEntityType<T> type) {
-        return level.isClientSide?null:(l,p,s,be)->{if(l.getGameTime()%20==0 && be instanceof ResonanceCoreBlockEntity core){core.refresh();com.mcmagic.omnira.storage.NodeTransport.tick(core);}};
+        return level.isClientSide?null:(l,p,s,be)->{
+            if(be instanceof ResonanceCoreBlockEntity core&&com.mcmagic.omnira.storage.NodeSchedule.due(l.getGameTime(),p,5)){
+                if(com.mcmagic.omnira.storage.NodeSchedule.due(l.getGameTime(),p,20))core.refresh();
+                com.mcmagic.omnira.storage.NodeTransport.tick(core);
+            }
+        };
     }
     @Override public void animateTick(BlockState state,Level level,BlockPos pos,net.minecraft.util.RandomSource random) {
         int color=switch(state.getValue(MODE)){case 1->0xF5A4B9;case 2->0xA2EDBB;case 3->0x7BBFFF;case 4->0xFFE58A;case 5->0x16151E;default->0xC099F1;};
-        var dust=new net.minecraft.core.particles.DustParticleOptions(new org.joml.Vector3f((color>>16&255)/255F,(color>>8&255)/255F,(color&255)/255F),.65F);
+        int mode=state.getValue(MODE);var dust=MOTES[mode];
+        if(dust==null)MOTES[mode]=dust=new net.minecraft.core.particles.DustParticleOptions(new org.joml.Vector3f((color>>16&255)/255F,(color>>8&255)/255F,(color&255)/255F),.65F);
         for(int i=0;i<5;i++) {
             double angle=(level.getGameTime()+i*12)*.14,r=.22+random.nextDouble()*.16;
             level.addParticle(dust,pos.getX()+.5+Math.cos(angle)*r,pos.getY()+.45+Math.sin(angle*1.7)*.3,pos.getZ()+.5+Math.sin(angle)*r,0,.01,0);

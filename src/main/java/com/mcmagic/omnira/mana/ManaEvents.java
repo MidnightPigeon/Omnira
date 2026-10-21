@@ -19,8 +19,8 @@ public final class ManaEvents {
             ManaState before=player.getData(ModAttachments.MANA);
             double maximum=player.getAttributeValue(com.mcmagic.omnira.registry.ModAttributes.MAX_MANA);
             ManaState after=new ManaState(before.current(),maximum,player.getData(ModAttachments.AFFINITY).active().ordinal());
-            if(player.tickCount % ManaState.REGEN_INTERVAL==0)
-                after=after.withCurrent(after.current()+maximum*.01*player.getAttributeValue(com.mcmagic.omnira.registry.ModAttributes.MANA_REGEN));
+            if(player.tickCount % ManaState.REGEN_INTERVAL==0&&!com.mcmagic.omnira.pulse.PulseChanneling.active(player))
+                after=after.withCurrent(after.current()+regenerationPerSecond(player)*ManaState.REGEN_INTERVAL/20);
             if(!after.equals(before)) player.setData(ModAttachments.MANA,after);
         }
     }
@@ -45,6 +45,12 @@ public final class ManaEvents {
             player.getData(ModAttachments.MANA);
             player.syncData(ModAttachments.MANA.get());
         }
+    }
+
+    public static double regenerationPerSecond(ServerPlayer player){
+        double amount=player.getAttributeValue(com.mcmagic.omnira.registry.ModAttributes.MAX_MANA)*.01
+                *player.getAttributeValue(com.mcmagic.omnira.registry.ModAttributes.MANA_REGEN)*(20D/ManaState.REGEN_INTERVAL);
+        return Double.isFinite(amount)?Math.max(0,amount):0;
     }
 
     public static boolean trySpend(ServerPlayer player, double amount) {

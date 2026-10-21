@@ -26,7 +26,9 @@ public final class AssemblyRenderer implements BlockEntityRenderer<BlockEntity> 
         float angle=entity instanceof ArcaneAssemblyTableBlockEntity?
                 (table.mechanicalPowered()?(float)((entity.getLevel().getGameTime()+partial)*4.8%360):0):CreateEnginePhase.degrees(entity);
         if(table.electricalPowered())light=LightTexture.FULL_BRIGHT;
+        if(table.pulsePowered()||table.pulseInsufficient())angle=0;
         renderShaft(entity,pose,buffers,light,overlay,angle);
+        if(table.pulsePowered()||table.electricalPowered())com.mcmagic.omnira.client.PulseClient.shaft(pose,buffers,entity.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING).getOpposite(),entity.getLevel().getGameTime()+partial,false,table.pulsePowered()?0:2);
     }
     public void renderPreview(BlockEntity entity,PoseStack pose,MultiBufferSource buffers,int light,int overlay,
                               double time,float angle,double strikeAge) {

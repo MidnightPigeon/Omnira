@@ -3,8 +3,9 @@
   "pools": [{
     "rolls": 1,
     "entries": [
-      {"type": "minecraft:item", "name": "omnira:dream_crystal_bedrock", "weight": 30},
-      {"type": "minecraft:item", "name": "omnira:primordial_spell_core", "weight": 20},
+      {"type": "minecraft:item", "name": "omnira:dream_crystal_bedrock", "weight": 20},
+      {"type": "minecraft:item", "name": "omnira:primordial_spell_core", "weight": 10},
+      {"type": "minecraft:item", "name": "omnira:music_disc_mi_meng_ye", "weight": 20},
       {"type": "minecraft:item", "name": "omnira:arcane_crystal_grid", "weight": 10},
       {"type": "minecraft:item", "name": "omnira:shadow_manuscript", "weight": 40},
       {"type": "minecraft:item", "name": "omnira:light_crystal_core", "weight": 40},

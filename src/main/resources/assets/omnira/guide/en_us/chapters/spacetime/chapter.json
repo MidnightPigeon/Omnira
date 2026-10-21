@@ -8,5 +8,9 @@
   ],
   "chapters": [
     "chapters/spacetime_terrain/chapter.json"
+  ],
+  "directory_order": [
+    "spacetime_entry",
+    "spacetime_terrain"
   ]
 }

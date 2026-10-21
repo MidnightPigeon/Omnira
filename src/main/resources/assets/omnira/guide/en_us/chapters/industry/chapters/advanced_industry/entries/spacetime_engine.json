@@ -5,10 +5,16 @@
   "scene": "spacetime_engine",
   "recipes": false,
   "text": [
-    "Build the model with four Infused Crystal Casings, four Mana Engines, one Enhanced Alchemical Energy Core and one Spacetime Spell Core. Empty the engines and activate the spell core with one Infused Crystal. It cannot be mined; carry it with a Pocket Magic Bottle.",
-    "The engine needs no fuel. Without Create, the screen contains grids and rotation directions only. Each face drives like one ordinary Mana Engine, including through Spacetime Ports.",
-    "With Create, configure capacity, speed and direction separately for each face: base limits are 2048 SU and 128 rpm. Front, right, rear and left use blue, gold, purple and green, matching the screen.",
-    "Three grid multipliers multiply: Basic x1.2, Elemental x1.5, Arcane x2, Omni x4. They increase stress and electrical limits, not speed. Grids float horizontally on the rotating array.",
-    "With an electricity mod, shaft faces also output FE. Without Create, each face supplies 512 FE/second times its grid multiplier. With Create, configured capacity converts at 1 SU to 1 FE/second; stopped faces produce no electricity."
+    "Follow the model layout; individual block facings do not matter. Build the model with four Infused Crystal Casings, four Mana Engines, one Enhanced Alchemical Energy Core and one Spacetime Spell Core. Empty the engines and activate the spell core with one Infused Crystal. It cannot be mined; carry it with a Pocket Magic Bottle.",
+    "No fuel or redstone is needed. Output is on by default; the UI switch controls all four independent pulse sources. Connect through Arcane Dust or Spacetime Ports. Stress conversion is clockwise at 16 rpm; use Create mechanisms to reverse it.",
+    "Configure potential for each face, up to 2048 MPU before grid multipliers. Front, right, rear and left use blue, gold, purple and green, matching the screen.",
+    "The three grid multipliers multiply: Basic x1.2, Elemental x1.5, Arcane x2 and Omni x4, increasing each face's potential limit. Grids float horizontally on the rotating array.",
+    "Native pulse output keeps shafts still while the array rotates slowly. See Magic Pulses for external conversion rules."
+  ],
+  "links": [
+    {
+      "target": "magic_pulse",
+      "label": "Magic Pulses"
+    }
   ]
 }

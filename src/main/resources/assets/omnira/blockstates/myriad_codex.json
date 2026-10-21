@@ -1,0 +1,1 @@
+{"variants":{"facing=north":{"model":"omnira:block/myriad_codex_anchor"},"facing=east":{"model":"omnira:block/myriad_codex_anchor","y":90},"facing=south":{"model":"omnira:block/myriad_codex_anchor","y":180},"facing=west":{"model":"omnira:block/myriad_codex_anchor","y":270}}}

@@ -1,6 +1,7 @@
 {
   "id": "block_barrier",
   "item": "omnira:earth_microcore",
+  "icon": "omnira:spiritual_crystal_block",
   "title": "Block or Position-Barrier",
   "text": [
     "Fire with Earth covers the exposed faces of a selected block. Crosshair creates a barrier at the selected position; Ground creates barriers at the valid surface positions.",

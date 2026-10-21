@@ -12,6 +12,10 @@ import net.minecraft.world.level.block.*;
 /** Uses the finished pool's local part layout; the dream crystal defines its front. */
 @net.neoforged.fml.common.EventBusSubscriber(modid="omnira")
 public final class ReactionPoolStructure {
+    /** Top view from the entrance: rear at the top, local +X on the viewer's left. */
+    public static int topViewPart(int layer,int row,int column){
+        return layer*9+(2-row)*3+(2-column);
+    }
     public static Block required(int part){
         return switch(part){
             case 3,5 -> ModBlocks.MANA_ENGINE.get();

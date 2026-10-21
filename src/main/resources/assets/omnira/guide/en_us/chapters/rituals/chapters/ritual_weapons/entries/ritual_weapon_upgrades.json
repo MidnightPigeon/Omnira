@@ -1,0 +1,171 @@
+{
+  "id": "ritual_weapon_upgrades",
+  "item": "omnira:paradox_ore",
+  "title": "Weapon Upgrades",
+  "recipes": false,
+  "text": [
+    "Both weapons have four Advanced Assembly Table upgrades. Each adds 2 damage, 0.1 attack speed, 3 health per complete three-second heal, and 25% of base special-ability range. Each Nail healing step gains 1 health; Area rune and upgrade range bonuses add together.",
+    "The bench always takes six Paradox Dust. Put the previous weapon on the left and Paradox Ore for the Nail, or Encapsulated Paradox Fluid for the Needle, on the right. The middle takes an Infused Crystal Block, Dream Crystal Block, bucket of Thin Spacetime, then an Omni Microcore.",
+    "Upgrades preserve damage, enchantments, custom names and the inserted spell crystal. Paradox motes increase with level."
+  ],
+  "links": [
+    {
+      "target": "crystallized_bone_nail",
+      "label": "Crystallized Bone Nail"
+    },
+    {
+      "target": "arcane_needle",
+      "label": "Arcane Needle"
+    }
+  ],
+  "figures": [
+    {
+      "id": "nail_levels",
+      "title": "Nail Upgrades",
+      "icons": [
+        {
+          "item": "omnira:sharpened_crystallized_bone_nail",
+          "x": 0,
+          "y": 26,
+          "count": 1
+        },
+        {
+          "item": "omnira:channelled_crystallized_bone_nail",
+          "x": 0,
+          "y": 52,
+          "count": 1
+        },
+        {
+          "item": "omnira:threaded_paradox_bone_nail",
+          "x": 0,
+          "y": 78,
+          "count": 1
+        },
+        {
+          "item": "omnira:pure_paradox_bone_nail",
+          "x": 0,
+          "y": 104,
+          "count": 1
+        }
+      ],
+      "areas": [],
+      "strokes": [],
+      "labels": [
+        {
+          "text": "Damage / speed\nHeal / range",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "10 / 1.9\n15 / 125%",
+          "x": 22,
+          "y": 26,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "12 / 2.0\n18 / 150%",
+          "x": 22,
+          "y": 52,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "14 / 2.1\n21 / 175%",
+          "x": 22,
+          "y": 78,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "16 / 2.2\n24 / 200%",
+          "x": 22,
+          "y": 104,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "needle_levels",
+      "title": "Needle Upgrades",
+      "icons": [
+        {
+          "item": "omnira:sharpened_arcane_needle",
+          "x": 0,
+          "y": 26,
+          "count": 1
+        },
+        {
+          "item": "omnira:shining_arcane_needle",
+          "x": 0,
+          "y": 52,
+          "count": 1
+        },
+        {
+          "item": "omnira:tempered_paradox_needle",
+          "x": 0,
+          "y": 78,
+          "count": 1
+        },
+        {
+          "item": "omnira:pale_paradox_needle",
+          "x": 0,
+          "y": 104,
+          "count": 1
+        }
+      ],
+      "areas": [],
+      "strokes": [],
+      "labels": [
+        {
+          "text": "Damage / speed\nHeal / range",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "10 / 1.9\n15 / 125%",
+          "x": 22,
+          "y": 26,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "12 / 2.0\n18 / 150%",
+          "x": 22,
+          "y": 52,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "14 / 2.1\n21 / 175%",
+          "x": 22,
+          "y": 78,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "16 / 2.2\n24 / 200%",
+          "x": 22,
+          "y": 104,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        }
+      ]
+    }
+  ]
+}

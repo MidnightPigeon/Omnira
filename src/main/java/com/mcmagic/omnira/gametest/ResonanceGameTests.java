@@ -17,8 +17,10 @@ public final class ResonanceGameTests {
         s.player.setData(ModAttachments.MANA,new com.mcmagic.omnira.mana.ManaState(500,1001));
         h.assertTrue(!s.menu.clickMenuButton(s.player,ResonanceMenu.OPEN_CONTAINER)&&s.player.containerMenu==s.menu,"Insufficient mana opened menu");
         h.assertTrue(s.player.getData(ModAttachments.MANA).current()==500,"Failed opening spent mana");
+        h.assertTrue(!BranchAdvancementGameTests.recorded(s.player,"remote_access"),"Failed opening recorded branch");
         s.player.setData(ModAttachments.MANA,new com.mcmagic.omnira.mana.ManaState(500.5,1001));
         h.assertTrue(s.menu.clickMenuButton(s.player,ResonanceMenu.OPEN_CONTAINER)&&s.player.getData(ModAttachments.MANA).current()==0,"Exact half maximum should open and spend once");
+        h.assertTrue(BranchAdvancementGameTests.recorded(s.player,"remote_access"),"Remote opening did not record branch");
         s.player.closeContainer();h.succeed();
     }
     private record Setup(net.minecraft.server.level.ServerPlayer player,ResonanceMenu menu,CrystalBallBlockEntity ball,ResonanceCoreBlockEntity core) {}
@@ -130,7 +132,7 @@ public final class ResonanceGameTests {
         p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new ItemStack(ModItems.SPACETIME_KNOT.get()));
         h.assertTrue(com.mcmagic.omnira.world.dimension.ResonanceRitual.activate(h.getLevel(),center,p,net.minecraft.world.InteractionHand.MAIN_HAND),"Ritual failed");
         h.assertTrue(p.getMainHandItem().isEmpty() && h.getLevel().getBlockState(center).is(core),"Ritual consumed center or kept knot");
-        for(var offset:com.mcmagic.omnira.world.dimension.DreamRitual.ANCHORS)h.assertTrue(!((CrystalPedestalBlockEntity)h.getLevel().getBlockEntity(center.offset(offset[0],0,offset[1]))).getItem(0).isEmpty(),"Symbolic offering consumed");
+        for(var offset:com.mcmagic.omnira.world.dimension.DreamRitual.ANCHORS)h.assertTrue(((CrystalPedestalBlockEntity)h.getLevel().getBlockEntity(center.offset(offset[0],0,offset[1]))).getItem(0).isEmpty(),"Offering not consumed");
         h.assertTrue(h.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,new net.minecraft.world.phys.AABB(center).inflate(2)).stream().anyMatch(e->e.getItem().is(ModItems.RESONANCE_TERMINAL.get())),"Terminal not ejected");h.succeed();
     }
     @GameTest(template="spell_arena") public static void bindingLimitAndInvalidLinkRemoval(GameTestHelper h) {

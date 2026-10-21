@@ -1,6 +1,7 @@
 {
   "id": "ground_projectile",
   "item": "omnira:earth_microcore",
+  "icon": "minecraft:snowball",
   "title": "Ground-Projectile",
   "text": [
     "Use Earth in the target slot and Air in the shape slot. Each valid surface creates a spell block that launches vertically and then falls under gravity.",

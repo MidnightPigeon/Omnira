@@ -1,0 +1,23 @@
+{
+  "id": "reload_element",
+  "title": "Reload",
+  "item": "omnira:active_world_seed",
+  "icon": "omnira:construction_matrix",
+  "recipes": false,
+  "text": [
+    "Use an Active World Seed as a spell element to reload affected complete blocks or creatures.",
+    "Blocks become another random complete block. Air and incomplete blocks are unaffected. Creatures change within their friendly, neutral, hostile or boss family; decorative entities are unaffected.",
+    "Initially, replacements come from vanilla and hostile creatures and bosses cannot change. Enhancement permits these targets; Infusion includes modded content. Delay and spell power do not affect Reload.",
+    "Perhaps a mysterious boss creature may emerge from Reload."
+  ],
+  "links": [
+    {
+      "target": "world_seed",
+      "label": "World Seeds"
+    },
+    {
+      "target": "advanced_spell_aggregation",
+      "label": "Advanced Spell Writing"
+    }
+  ]
+}

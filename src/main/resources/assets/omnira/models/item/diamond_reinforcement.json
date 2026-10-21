@@ -2,7 +2,7 @@
   "parent": "omnira:item/iron_reinforcement",
   "render_type": "minecraft:cutout",
   "textures": {
-    "metal": "omnira:item/modular_staff_diamond",
-    "particle": "omnira:item/modular_staff_diamond"
+    "metal": "omnira:item/reinforcement_diamond",
+    "particle": "omnira:item/reinforcement_diamond"
   }
 }

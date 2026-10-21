@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "omnira:temporal_silt"
+  },
+  "surface": {
+    "Name": "omnira:living_temporal_silt"
+  },
+  "decorations": [
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "omnira:time_grass"
+      },
+      "crown": {
+        "Name": "omnira:time_flower"
+      }
+    }
+  ]
+}

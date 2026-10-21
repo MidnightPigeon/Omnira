@@ -36,15 +36,26 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
     private final List<ItemStack> overflow=new ArrayList<>();
     public final ItemStackHandler items=new ItemStackHandler(3){
         @Override public boolean isItemValid(int slot,ItemStack stack){return slot==0?CatalysisGrowth.acceptsSubstrate(level,stack):slot==1;}
-        @Override protected void onContentsChanged(int slot){if(!internal&&slot<2)reset();setChanged();}
+        @Override protected void onContentsChanged(int slot){
+            if(!internal&&slot<2&&!ItemStack.isSameItemSameComponents(slot==0?boundSoil:boundSeed,getStackInSlot(slot)))reset();
+            setChanged();
+        }
     };
     public final ItemStackHandler upgrades=new ItemStackHandler(3){
         @Override public int getSlotLimit(int slot){return 1;}
-        @Override public boolean isItemValid(int slot,ItemStack stack){return OrbUpgrades.kind(stack)==(slot==0?Kind.INTAKE:slot==1?Kind.OUTPUT:Kind.RECIPE_CONTROL);}
+        @Override public boolean isItemValid(int slot,ItemStack stack){
+            var kind=OrbUpgrades.kind(stack);if(!com.mcmagic.omnira.item.UpgradeCompatibility.Host.CATALYSIS_CHAMBER.accepts(kind))return false;
+            if(kind==Kind.SPEED)for(int i=0;i<getSlots();i++)if(i!=slot&&kind==OrbUpgrades.kind(getStackInSlot(i)))return false;return true;
+        }
         @Override protected void onContentsChanged(int slot){setChanged();}
     };
     public final FluidTank tank=new FluidTank(CAPACITY){@Override protected void onContentsChanged(){setChanged();}};
     public final IItemHandler extractOnly=new Port(false),nodeItems=new Port(true);
+    private final com.mcmagic.omnira.storage.LogisticsRates.Budget outputBudget=new com.mcmagic.omnira.storage.LogisticsRates.Budget();
+    public final IItemHandler automationItems=new Port(false){
+        @Override public boolean isItemValid(int i,ItemStack s){return items.isItemValid(i,s);}
+        @Override public ItemStack insertItem(int i,ItemStack s,boolean simulate){return items.insertItem(i,s,simulate);}
+    };
     public final IFluidHandler nodeFluids=new IFluidHandler(){
         public int getTanks(){return 1;}public FluidStack getFluidInTank(int i){return tank.getFluidInTank(i);}
         public int getTankCapacity(int i){return CAPACITY;}public boolean isFluidValid(int i,FluidStack f){return tank.isFluidValid(i,f);}
@@ -52,14 +63,18 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
         public FluidStack drain(int amount,FluidAction action){return FluidStack.EMPTY;}
         public FluidStack drain(FluidStack f,FluidAction action){return FluidStack.EMPTY;}
     };
-    private final class Port implements IItemHandler {
+    private class Port implements IItemHandler {
         private final boolean productOnly;Port(boolean productOnly){this.productOnly=productOnly;}
         public int getSlots(){return productOnly?1:3;}private int index(int i){return productOnly?2:i;}
         public ItemStack getStackInSlot(int i){return items.getStackInSlot(index(i));}
         public int getSlotLimit(int i){return items.getSlotLimit(index(i));}
         public boolean isItemValid(int i,ItemStack s){return false;}
         public ItemStack insertItem(int i,ItemStack s,boolean simulate){return s;}
-        public ItemStack extractItem(int i,int n,boolean simulate){return items.extractItem(index(i),n,simulate);}
+        public ItemStack extractItem(int i,int n,boolean simulate){
+            int available=level==null?0:outputBudget.available(level.getGameTime(),com.mcmagic.omnira.storage.LogisticsRates.ITEMS*com.mcmagic.omnira.storage.LogisticsRates.multiplier(upgrades));
+            boolean capped=!productOnly&&!com.mcmagic.omnira.storage.LogisticsRates.internal();
+            var result=items.extractItem(index(i),capped?Math.min(n,available):n,simulate);if(!simulate&&capped)outputBudget.spend(result.getCount());return result;
+        }
     }
     public CatalysisBlockEntity(BlockPos pos,BlockState state){super(CatalysisContent.ENTITY.get(),pos,state);}
     public int stage(){return stage;}
@@ -129,7 +144,7 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
     }
     public void tick(){
         if(!(level instanceof ServerLevel server)||!complete())return;
-        if(level.getGameTime()%20==0)CatalysisAutomation.tick(this);
+        if(level.getGameTime()%5==0)CatalysisAutomation.tick(this);
         if(!overflow.isEmpty()){
             flushHarvest();return;
         }
@@ -146,10 +161,27 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
         tank.drain(STEP_FLUID,IFluidHandler.FluidAction.EXECUTE);elapsed=0;
         catalysisSteps++;
         if(plan.yield()==CatalysisGrowth.Yield.FRUIT&&!stemReady){stemStage=1+Math.min(catalysisSteps,3)*7/3;stemReady=mature;}
-        if(mature){overflow.addAll(harvest);harvest.clear();stage=1;catalysisSteps=0;naturalCycle=false;flushHarvest();}
+        if(mature){
+            com.mcmagic.omnira.progression.BranchProgress.machine(this,"perpetual_growth");
+            if(boundSoil.is(com.mcmagic.omnira.myriad.MiniatureWorldContent.PROBABILITY_CLOUD.get()))
+                com.mcmagic.omnira.progression.BranchProgress.machine(this,"from_nothing");
+            overflow.addAll(harvest);harvest.clear();stage=1;catalysisSteps=0;naturalCycle=false;flushHarvest();}
         else stage=1+catalysisSteps*(plan.stages()-1)/(CYCLE_STEPS-1);
         server.sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD,worldPosition.getX()+.5,worldPosition.getY()+1.5,worldPosition.getZ()+.5,6,.25,.45,.25,.01);
         setChanged();
+    }
+    public void worldRotation(){
+        if(naturallyGrowing()&&level instanceof ServerLevel server){
+            var plan=preparePlan();var rule=naturalRule();if(plan==null||rule==null||!allowed(plan))return;
+            var result=rule.harvest(server,worldPosition.above(),boundSoil,boundSeed);if(result.isEmpty())return;
+            overflow.addAll(result);stage=1;catalysisSteps=0;naturalCycle=false;if(rule.kind()==CatalysisNaturalGrowth.Kind.STEM){stemReady=true;stemStage=8;}
+            flushHarvest();setChanged();return;
+        }
+        if(elapsed<=0||!complete())return;
+        for(int i=catalysisSteps;i<CYCLE_STEPS;i++){
+            elapsed=STEP_TICKS-1;int before=catalysisSteps;tick();
+            if(catalysisSteps==0||catalysisSteps==before)break;
+        }
     }
     private void flushHarvest(){
         if(overflow.isEmpty())return;

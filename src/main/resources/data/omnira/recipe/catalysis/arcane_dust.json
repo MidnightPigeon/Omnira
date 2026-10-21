@@ -1,0 +1,8 @@
+{
+  "type": "omnira:catalysis",
+  "substrate": {"item": "omnira:primordial_spell_core"},
+  "seed": {"item": "omnira:arcane_dust"},
+  "fluid": {"id": "minecraft:water", "amount": 100},
+  "result": {"id": "omnira:arcane_dust", "count": 8},
+  "stages": 4
+}

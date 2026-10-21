@@ -25,7 +25,7 @@ public final class FateEffects {
     public static double spellPower(net.minecraft.world.entity.player.Player caster,double power) {
         if(caster instanceof ServerPlayer player && ManuscriptReward.equipped(player,"curse")==Kind.TZEENTCH
                 && player.getRandom().nextFloat()<.2F) {
-            player.setHealth(player.getHealth()*.5F);
+            com.mcmagic.omnira.combat.OmniraDamage.payHealth(player,player.getHealth()*.5F,"true_damage");
             return power+1;
         }
         return power;
@@ -47,17 +47,7 @@ public final class FateEffects {
     }
 
     @SubscribeEvent(priority=EventPriority.LOWEST) public static void damage(LivingDamageEvent.Pre event) {
-        if(REFLECTING.get())return;
-        float bonus=0;
-        if(event.getSource().getEntity() instanceof ServerPlayer attacker)
-            bonus+=(float)(attacker.getAttributeValue(ModAttributes.DAMAGE_DEALT)-1);
-        if(event.getSource().getEntity() instanceof ServerPlayer attacker
-                && attacker!=event.getEntity() && com.mcmagic.omnira.throne.GoldenThrone.empowered(attacker))bonus+=1F;
-        if(event.getSource().getEntity() instanceof ServerPlayer attacker
-                && attacker!=event.getEntity() && com.mcmagic.omnira.throne.GoldenToilet.empowered(attacker))bonus+=.2F;
-        if(event.getEntity() instanceof ServerPlayer victim)
-            bonus+=(float)(victim.getAttributeValue(ModAttributes.DAMAGE_TAKEN)-1);
-        if(bonus!=0)event.setNewDamage(event.getNewDamage()*(1+bonus));
+        com.mcmagic.omnira.combat.CombatRules.apply(event,!REFLECTING.get());
     }
 
     @SubscribeEvent public static void afterDamage(LivingDamageEvent.Post event) {

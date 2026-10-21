@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "omnira:light_condensate"
+  },
+  "surface": {
+    "Name": "omnira:light_condensate"
+  },
+  "decorations": [
+    {
+      "kind": "spire",
+      "block": {
+        "Name": "omnira:light_source_crystal"
+      },
+      "crown": {
+        "Name": "omnira:solidified_light_crystal_core"
+      }
+    }
+  ]
+}

@@ -77,7 +77,11 @@ public final class ResonanceMenu extends AbstractContainerMenu {
             if(!mana.canSpend(cost))return false;
             if(core.kind()!=4){
                 boolean opened=player instanceof ServerPlayer serverPlayer&&com.mcmagic.omnira.storage.RemoteContainerAccess.open(serverPlayer,core,terminal,source);
-                if(opened)player.setData(com.mcmagic.omnira.registry.ModAttachments.MANA,mana.spend(cost));
+                if(opened){
+                    player.setData(com.mcmagic.omnira.registry.ModAttachments.MANA,mana.spend(cost));
+                    com.mcmagic.omnira.progression.BranchProgress.operate(player,destination);
+                    com.mcmagic.omnira.progression.BranchProgress.record(player,"remote_access");
+                }
                 return opened;
             }
             if(!(remote.getBlockEntity(position.below()) instanceof com.mcmagic.omnira.shop.MarisaOrbBlockEntity orb))return false;
@@ -87,7 +91,9 @@ public final class ResonanceMenu extends AbstractContainerMenu {
             var previousMenu=player.containerMenu;
             merchant.openTradingScreen(player,net.minecraft.network.chat.Component.translatable("block.omnira.marisa_crystal_ball"),1);
             if(player.containerMenu==previousMenu){access.close();return false;}
-            player.setData(com.mcmagic.omnira.registry.ModAttachments.MANA,mana.spend(cost));return true;
+            com.mcmagic.omnira.progression.BranchProgress.operate(player,destination);
+            player.setData(com.mcmagic.omnira.registry.ModAttachments.MANA,mana.spend(cost));
+            com.mcmagic.omnira.progression.BranchProgress.record(player,"remote_access");return true;
         }
         if(id==UNLINK&&selected()>=0&&selected()<capacity()){
             var core=core();if(core!=null){core.terminal=null;core.setChanged();core.refresh();}

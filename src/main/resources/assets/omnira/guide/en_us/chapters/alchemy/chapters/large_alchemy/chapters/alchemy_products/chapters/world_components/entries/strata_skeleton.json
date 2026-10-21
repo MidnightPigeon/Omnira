@@ -1,0 +1,15 @@
+{
+  "id": "strata_skeleton",
+  "title": "Strata Skeleton",
+  "item": "omnira:strata_skeleton",
+  "recipes": false,
+  "text": [
+    "Add 16 Deepslate to form the world's geological layers."
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "Ritual of World Formation"
+    }
+  ]
+}

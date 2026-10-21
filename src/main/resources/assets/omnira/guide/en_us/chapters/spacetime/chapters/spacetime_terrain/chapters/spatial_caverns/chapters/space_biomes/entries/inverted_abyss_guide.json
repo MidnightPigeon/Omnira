@@ -4,8 +4,8 @@
   "item": "omnira:excited_rough_spatial_crystal_block",
   "recipes": false,
   "text": [
-    "Gravity points down in the lower cave and up in the upper cave. A five-block weightless band separates them; forward movement there follows your gaze. The spacetime amulet does not alter gravity.",
-    "Excited spatial crystals cover both surfaces, where vast fissures reach the pure solidified spacetime layers. Floating groups of six rough crystals surrounding one excited crystal mark the weightless band. Skyreach towers connect the two ends."
+    "Excited spatial crystals cover both surfaces, where vast fissures reach the pure solidified spacetime layers. Floating groups of six rough crystals surrounding one excited crystal mark the weightless band. Skyreach towers connect the two ends.",
+    "Gravity points down in the lower cave and up in the upper cave. A five-block weightless band separates them; forward movement there follows your gaze. The spacetime amulet does not alter gravity."
   ],
   "links": [
     {
@@ -15,6 +15,80 @@
     {
       "target": "dense_void_mass_guide",
       "label": "High-Density Void Mass"
+    }
+  ],
+  "figures": [
+    {
+      "id": "gravity_section",
+      "title": "Gravity Section",
+      "icons": [],
+      "strokes": [
+        {
+          "x1": 111,
+          "y1": 44,
+          "x2": 111,
+          "y2": 10,
+          "color": "#486674",
+          "arrow": true
+        },
+        {
+          "x1": 111,
+          "y1": 87,
+          "x2": 111,
+          "y2": 120,
+          "color": "#486674",
+          "arrow": true
+        }
+      ],
+      "areas": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 32,
+          "color": "#9FC4B0"
+        },
+        {
+          "x": 0,
+          "y": 48,
+          "width": 124,
+          "height": 28,
+          "color": "#BCA6CE"
+        },
+        {
+          "x": 0,
+          "y": 100,
+          "width": 124,
+          "height": 32,
+          "color": "#99BCC4"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Upper: upward gravity",
+          "x": 4,
+          "y": 6,
+          "width": 98,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Five-block zero-G band",
+          "x": 4,
+          "y": 52,
+          "width": 116,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Lower: downward gravity",
+          "x": 4,
+          "y": 105,
+          "width": 98,
+          "height": 22,
+          "color": "#405462"
+        }
+      ]
     }
   ]
 }

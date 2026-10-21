@@ -1,3 +1,7 @@
 {
-  "text": ["此处正在施工"]
+  "image": "omnira:textures/gui/guide/chapters/myriad_creation.png",
+  "image_width": 1420,
+  "image_height": 1108,
+  "caption": "捕捉创世余韵，培育微缩世界，让八系之力归于万象。",
+  "text": []
 }

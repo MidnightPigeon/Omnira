@@ -1,6 +1,7 @@
 {
   "id": "block_barrier",
   "item": "omnira:earth_microcore",
+  "icon": "omnira:spiritual_crystal_block",
   "title": "方块／位置-屏障",
   "text": [
     "火微核配地微核并选中方块时，在其未被相邻方块封住的表面形成屏障。准星目标则在选定位置形成屏障，地面目标在各个有效地表选点形成屏障。",

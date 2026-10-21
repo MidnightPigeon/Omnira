@@ -2,6 +2,7 @@
   "id": "temporal_energy",
   "title": "Temporal Energy Materials",
   "item": "omnira:spacetime_reverser",
+  "icon": "omnira:time_seed",
   "recipes": false,
   "text": [
     "Hover a material to see its energy per item."

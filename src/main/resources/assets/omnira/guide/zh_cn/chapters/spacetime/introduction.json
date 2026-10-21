@@ -1,9 +1,7 @@
 {
-  "image": "",
-  "image_width": 112,
-  "image_height": 88,
-  "caption": "",
-  "text": [
-    "时空镜廊连接着时间大陆与空间洞穴。这里收录进入方法、两层地貌和已知特产。"
-  ]
+  "image": "omnira:textures/gui/guide/chapters/spacetime.png",
+  "image_width": 1423,
+  "image_height": 1105,
+  "caption": "时间大陆、时空镜廊与空间洞穴，共同构成这片世界的三层地貌。",
+  "text": []
 }

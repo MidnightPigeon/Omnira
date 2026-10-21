@@ -1,0 +1,285 @@
+{
+  "id": "magic_pulse",
+  "title": "Magic Pulses",
+  "item": "omnira:pulse_accumulator_orb",
+  "icon": "omnira:mana_engine",
+  "recipes": false,
+  "text": [
+    "Potential is measured in MPU. Align source outputs with machine inputs, or connect through Arcane Wires and Accumulator Orbs. Sources combine; insufficient potential for all base demands pauses the entire network.",
+    "Reserve base demands first, then grant acceleration in connection order, up to 8x. New loads reclaim extra reservations from newer machines first.",
+    "Native machines prioritize pulses, then stress, then electricity. Sustained FE/second is equivalent to MPU, is consumed even while idle, and must continue without stored-energy operation after input stops. Accelerating machines scale with input up to their existing limits; extra power does not accelerate the Infused Crystal Furnace. Insufficient pulses cannot fall back to external power.",
+    "All shaft inputs, including orbs, require at least 16 rpm in either direction; slower inputs are rejected without stress use. Arcane Assembly Benches and Infused Crystal Anvils use 16 x |RPM| SU. Each Reaction Pool inlet uses 32 x |RPM| SU; both inputs combine for efficiency, capped at 8x.",
+    "Direct kinetic or electrical connections change source effects to 16 rpm rotation or electricity. 1 MPU equals 1 SU or 1 FE/second. Spacetime Ports retain source pulse effects and convert remotely.",
+    "Stand in the cell directly beside a pulse output to absorb one tenth of its unused potential as mana each second, rounded up. Machines have priority; players share the remainder and count as source usage. Kinetic and electrical output modes cannot charge players.",
+    "Pulses can overfill mana. If mana already exceeds 150% of its limit, the next input triggers a radius-5 magic blast: living creatures take 20 magic damage and entities are pushed away; blocks and items survive. Only the triggering player receives Weakness II and Slowness II for 3 minutes. Excess mana vents back to the normal limit."
+  ],
+  "links": [
+    {
+      "target": "pulse_accumulator_orbs",
+      "label": "Accumulator Orbs"
+    },
+    {
+      "target": "arcane_pulse_wires",
+      "label": "Arcane Wires"
+    }
+  ],
+  "figures": [
+    {
+      "id": "pulse_direct",
+      "title": "Direct",
+      "icons": [
+        {
+          "item": "omnira:mana_engine",
+          "x": 4,
+          "y": 35,
+          "count": 1
+        },
+        {
+          "item": "omnira:pulse_accumulator_orb",
+          "x": 104,
+          "y": 35,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 26,
+          "y1": 43,
+          "x2": 97,
+          "y2": 43,
+          "color": "#9A6EAF",
+          "arrow": true
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "512 MPU",
+          "x": 0,
+          "y": 8,
+          "width": 62,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "512 MPU",
+          "x": 67,
+          "y": 8,
+          "width": 57,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Source → node\nA node distributes; it is not a battery.",
+          "x": 0,
+          "y": 80,
+          "width": 124,
+          "height": 44,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "pulse_fork",
+      "title": "Split",
+      "icons": [
+        {
+          "item": "omnira:mana_engine",
+          "x": 4,
+          "y": 53,
+          "count": 1
+        },
+        {
+          "item": "omnira:pulse_accumulator_orb",
+          "x": 104,
+          "y": 17,
+          "count": 1
+        },
+        {
+          "item": "omnira:pulse_accumulator_orb",
+          "x": 104,
+          "y": 89,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 26,
+          "y1": 61,
+          "x2": 61,
+          "y2": 61,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 61,
+          "y1": 61,
+          "x2": 61,
+          "y2": 25,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 61,
+          "y1": 25,
+          "x2": 97,
+          "y2": 25,
+          "color": "#9A6EAF",
+          "arrow": true
+        },
+        {
+          "x1": 61,
+          "y1": 61,
+          "x2": 61,
+          "y2": 97,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 61,
+          "y1": 97,
+          "x2": 97,
+          "y2": 97,
+          "color": "#9A6EAF",
+          "arrow": true
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "1024",
+          "x": 0,
+          "y": 31,
+          "width": 42,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "512",
+          "x": 68,
+          "y": 4,
+          "width": 42,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "512",
+          "x": 68,
+          "y": 108,
+          "width": 42,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Idle split; borrow.",
+          "x": 0,
+          "y": 119,
+          "width": 124,
+          "height": 11,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "pulse_merge",
+      "title": "Merge",
+      "icons": [
+        {
+          "item": "omnira:mana_engine",
+          "x": 4,
+          "y": 16,
+          "count": 1
+        },
+        {
+          "item": "omnira:mana_engine",
+          "x": 4,
+          "y": 84,
+          "count": 1
+        },
+        {
+          "item": "omnira:pulse_accumulator_orb",
+          "x": 104,
+          "y": 50,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 25,
+          "y1": 24,
+          "x2": 61,
+          "y2": 24,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 61,
+          "y1": 24,
+          "x2": 61,
+          "y2": 58,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 25,
+          "y1": 92,
+          "x2": 61,
+          "y2": 92,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 61,
+          "y1": 92,
+          "x2": 61,
+          "y2": 58,
+          "color": "#9A6EAF",
+          "arrow": false
+        },
+        {
+          "x1": 61,
+          "y1": 58,
+          "x2": 97,
+          "y2": 58,
+          "color": "#9A6EAF",
+          "arrow": true
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "512",
+          "x": 0,
+          "y": 0,
+          "width": 40,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "512",
+          "x": 0,
+          "y": 106,
+          "width": 40,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "1024",
+          "x": 78,
+          "y": 28,
+          "width": 46,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "One shared supply.",
+          "x": 0,
+          "y": 119,
+          "width": 124,
+          "height": 11,
+          "color": "#405462"
+        }
+      ]
+    }
+  ]
+}

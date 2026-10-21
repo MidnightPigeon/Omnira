@@ -1,5 +1,7 @@
 {
-  "text": [
-    "从引导魔球与简易凝聚台开始。灵性水晶开启初级魔艺，梦境中的母岩引向时空突破；翘曲点与折跃点则开启进阶探索。"
-  ]
+  "image": "omnira:textures/gui/guide/chapters/beginning.png",
+  "image_width": 1415,
+  "image_height": 1111,
+  "caption": "从简易凝聚台取得灵性水晶，让引导魔球指引接下来的探索。",
+  "text": []
 }

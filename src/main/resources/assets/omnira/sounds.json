@@ -1,4 +1,16 @@
 {
+  "music.time": {
+    "sounds": [{"name": "omnira:music/time/liu_nian", "stream": true}]
+  },
+  "music_disc.liu_nian": {
+    "sounds": [{"name": "omnira:records/liu_nian", "stream": true}]
+  },
+  "music.mirror_dream": {
+    "sounds": [{"name": "omnira:music/mirror_dream/mi_meng_ye", "stream": true}]
+  },
+  "music_disc.mi_meng_ye": {
+    "sounds": [{"name": "omnira:records/mi_meng_ye", "stream": true}]
+  },
   "violin_allemanda": {
     "subtitle": "subtitles.omnira.violin",
     "sounds": [{"name": "omnira:violin/bach_allemanda", "stream": true, "attenuation_distance": 24}]

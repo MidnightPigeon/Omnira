@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "minecraft:terracotta"
+  },
+  "surface": {
+    "Name": "minecraft:red_sand"
+  },
+  "decorations": [
+    {
+      "kind": "spire",
+      "block": {
+        "Name": "minecraft:red_terracotta"
+      },
+      "crown": {
+        "Name": "minecraft:orange_terracotta"
+      }
+    }
+  ]
+}

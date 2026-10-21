@@ -21,14 +21,59 @@ import java.util.*;
 @GameTestHolder("omnira_marisa_trades")
 @PrefixGameTestTemplate(false)
 public final class MarisaTradeGameTests {
+    @GameTest(template="spell_arena")
+    public static void refreshedCatalogPricesAndWeights(GameTestHelper h) throws java.io.IOException {
+        try(var reader=h.getLevel().getServer().getResourceManager().getResourceOrThrow(ResourceLocation.parse("omnira:marisa_trades/default.json")).openAsReader()){
+            var json=com.google.gson.JsonParser.parseReader(reader).getAsJsonObject();
+            var products=new HashSet<String>();
+            var prices=new HashMap<String,int[]>();
+            for(var tier:List.of("common","rare","epic"))for(var entry:json.getAsJsonArray(tier)){
+                var row=entry.getAsJsonObject();String id=row.get("item").getAsString();
+                h.assertTrue(products.add(id),"Duplicate product across tiers: "+id);
+                var item=BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(id)).orElseThrow();
+                int count=row.get("count").getAsInt(),infused=row.get("infused").getAsInt();
+                int extra=row.has("extra")?row.get("extra").getAsInt():0;
+                h.assertTrue(item!=Items.AIR&&count>0&&count<=new ItemStack(item).getMaxStackSize(),"Invalid product stack: "+id);
+                h.assertTrue(infused>0&&infused<=64,"Invalid primary price: "+id);
+                h.assertTrue(tier.equals("common")?extra==0:extra>0&&extra<=64,"Invalid secondary price: "+id);
+                int weight=row.has("weight")?row.get("weight").getAsInt():10;
+                h.assertTrue(weight>0,"Invalid product weight: "+id);
+                if(id.endsWith("_aggregate"))h.assertTrue(tier.equals("rare")&&weight==5,"Archaeology fillers crowd out utility goods");
+                prices.put(id,new int[]{infused,extra});
+            }
+            for(int currency=0;currency<2;currency++){
+                int components=0;
+                for(var id:List.of("intake_upgrade","output_upgrade","spacetime_stabilization_upgrade"))components+=prices.get("omnira:"+id)[currency];
+                h.assertTrue(prices.get("omnira:recipe_control_upgrade")[currency]==components,"Recipe control price bypasses its component cost");
+            }
+            h.assertTrue(Arrays.equals(prices.get("omnira:time_warp_point"),prices.get("omnira:space_warp_point")),"Time and space point prices differ");
+            for(var id:List.of("earth_microcore","water_microcore","fire_microcore","air_microcore"))
+                h.assertTrue(Arrays.equals(prices.get("omnira:"+id),new int[]{8,0}),"Basic microcore must cost only eight infused crystals");
+            var spaceGoods=Map.of("spatial_crystal_shard",8,"excited_rough_spatial_crystal_block",16,"deflection_crystal",4,"phase_crystal_block",4,"void_mirror_rock",16);
+            for(var entry:json.getAsJsonArray("rare")){
+                var row=entry.getAsJsonObject();String id=row.get("item").getAsString().replace("omnira:","");
+                if(spaceGoods.containsKey(id)){
+                    h.assertTrue(row.get("count").getAsInt()==spaceGoods.get(id),"Wrong spatial supply quantity: "+id);
+                    h.assertTrue(Arrays.equals(prices.get("omnira:"+id),new int[]{id.equals("void_mirror_rock")?6:8,4}),"Wrong spatial supply price: "+id);
+                    h.assertTrue(!row.has("weight")||row.get("weight").getAsInt()==10,"Spatial supplies must have standard weight");
+                }
+            }
+            for(var id:List.of("stardust","dense_void_mass","star_source","phase_control_panel","mapping_stability_compass"))
+                h.assertTrue(!products.contains("omnira:"+id),"Structure treasure added to supply pool: "+id);
+        }
+        h.succeed();
+    }
     @GameTest(template="spell_arena",templateNamespace="omnira_marisa_pool_revision")
     public static void revisedPoolsAndCurrencies(GameTestHelper h) throws java.io.IOException {
         var expected=java.util.Map.of(
                 "common",Set.of("minecraft:golden_carrot","minecraft:experience_bottle","minecraft:redstone","minecraft:lapis_lazuli","minecraft:gunpowder","minecraft:book","omnira:time_sapling","omnira:resonance_crystal",
-                        "omnira:arcane_dust","omnira:spell_ink","omnira:grid_frame","omnira:crude_light_core","omnira:shadow_sapling","omnira:light_crystal_core","omnira:time_grass","omnira:timeflow_eel","omnira:chronal_blindfish","omnira:time_flower","omnira:damaged_research_facility","omnira:time_sand"),
+                        "omnira:arcane_dust","omnira:spell_ink","omnira:grid_frame","omnira:crude_light_core","omnira:shadow_sapling","omnira:light_crystal_core","omnira:shadow_manuscript","omnira:star_jellyfish","omnira:pure_mirror","omnira:time_flower","omnira:damaged_research_facility","omnira:time_sand","omnira:basic_stacking_upgrade",
+                        "omnira:earth_microcore","omnira:water_microcore","omnira:fire_microcore","omnira:air_microcore"),
                 "rare",Set.of("omnira:analysis_crystal","omnira:paradox_dust","omnira:time_seed","omnira:crystal_ball","minecraft:diamond","omnira:crystal_broom","omnira:primordial_spell_core","omnira:light_microcore","omnira:dark_microcore","omnira:dream_rabbit_remains",
-                        "omnira:time_warp_point","omnira:liquid_crystal_ball","omnira:resonant_crystal_ball","omnira:resonant_liquid_crystal_ball","omnira:resonance_tuning_rod","omnira:ancient_archaeology_aggregate","omnira:phantom_thieves_aggregate","omnira:umbrella_aggregate","omnira:foundation_aggregate","omnira:primordial_earth_aggregate"),
-                "epic",Set.of("minecraft:enchanted_golden_apple","omnira:dream_spell_core","omnira:time_microcore","omnira:space_microcore","omnira:cruise_orb","omnira:advanced_assembly_table","omnira:advanced_crystal_aggregation_ring","omnira:spacetime_spell_core"));
+                        "omnira:time_warp_point","omnira:liquid_crystal_ball","omnira:resonant_crystal_ball","omnira:resonant_liquid_crystal_ball","omnira:resonance_tuning_rod","omnira:ancient_archaeology_aggregate","omnira:phantom_thieves_aggregate","omnira:umbrella_aggregate","omnira:foundation_aggregate","omnira:primordial_earth_aggregate",
+                        "omnira:space_warp_point","omnira:intake_upgrade","omnira:output_upgrade","omnira:spacetime_stabilization_upgrade","omnira:recipe_control_upgrade",
+                        "omnira:spatial_crystal_shard","omnira:excited_rough_spatial_crystal_block","omnira:deflection_crystal","omnira:phase_crystal_block","omnira:void_mirror_rock"),
+                "epic",Set.of("minecraft:enchanted_golden_apple","omnira:dream_spell_core","omnira:time_microcore","omnira:space_microcore","omnira:cruise_orb","omnira:spacetime_spell_core"));
         try(var reader=h.getLevel().getServer().getResourceManager().getResourceOrThrow(ResourceLocation.parse("omnira:marisa_trades/default.json")).openAsReader()){
             var json=com.google.gson.JsonParser.parseReader(reader).getAsJsonObject();
             expected.forEach((tier,items)->{
@@ -63,17 +108,13 @@ public final class MarisaTradeGameTests {
         slots.set(4,new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("omnira:temporal_silt"))));
         h.assertTrue(!temporal.matches(net.minecraft.world.item.crafting.CraftingInput.of(3,3,slots),h.getLevel()),"Inactive silt accepted");h.succeed();
     }
-    @GameTest(template="spell_arena") public static void lowWeightMultiblockOffers(GameTestHelper h){
-        var counts=new HashMap<String,Integer>();
+    @GameTest(template="spell_arena") public static void multiblocksNotSold(GameTestHelper h){
+        var machines=Set.of("omnira:advanced_assembly_table","omnira:advanced_crystal_aggregation_ring");
         for(int seed=0;seed<512;seed++){
-            var product=MarisaTrades.roll(h.getLevel(),seed,19).get(5).getResult();
-            counts.merge(BuiltInRegistries.ITEM.getKey(product.getItem()).toString(),1,Integer::sum);
+            for(var offer:MarisaTrades.roll(h.getLevel(),seed,19))
+                h.assertTrue(!machines.contains(BuiltInRegistries.ITEM.getKey(offer.getResult().getItem()).toString()),"Multiblock machine offered directly");
         }
-        int machines=0;
-        for(var id:List.of("omnira:advanced_assembly_table","omnira:advanced_crystal_aggregation_ring")){
-            int count=counts.getOrDefault(id,0);h.assertTrue(count>0,"Machine never offered: "+id);machines+=count;
-        }
-        h.assertTrue(machines<60,"Multiblock trade weight is too high");h.succeed();
+        h.succeed();
     }
     private static MarisaOrbBlockEntity orb(GameTestHelper h,int x){
         var p=h.absolutePos(new BlockPos(x,3,5));h.getLevel().setBlockAndUpdate(p,KirisameContent.ORB.get().defaultBlockState());

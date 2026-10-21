@@ -2,35 +2,57 @@ package com.mcmagic.omnira.client.guide;
 
 import com.mcmagic.omnira.registry.*;
 import com.mcmagic.omnira.menu.CrystalProcessingTableMenu;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import java.util.*;
 
 public final class GuideRecipes {
-    public record Slot(int x,int y,List<ItemStack> items,boolean output) {}
-    public record Diagram(Component title,List<Slot> slots,List<Component> notes) {}
+    public record Slot(int x,int y,List<ItemStack> items,boolean output,boolean retained,Component hint) {
+        public Slot(int x,int y,List<ItemStack> items,boolean output){this(x,y,items,output,false,Component.empty());}
+    }
+    public record Diagram(Component title,List<Slot> slots,List<Component> notes,Recipe<?> source) {
+        public Diagram(Component title,List<Slot> slots,List<Component> notes){this(title,slots,notes,null);}
+    }
     private GuideRecipes() {}
     private static Slot slot(int x,int y,ItemStack stack,boolean output) {return new Slot(x,y,stack.isEmpty()?List.of():List.of(stack),output);}
     private static Slot ingredient(int x,int y,Ingredient ingredient,int count) {
         return new Slot(x,y,Arrays.stream(ingredient.getItems()).map(item->item.copyWithCount(count)).toList(),false);
     }
     private static Component mana(int amount) {return Component.translatable("guide.omnira.mana",amount);}
-    public static List<Diagram> find(Item item) {
-        var level=Minecraft.getInstance().level;
+    public static List<Diagram> find(Level level,Item item) {
         var result=new ArrayList<Diagram>();
-        if(level==null) return result;
+        if(level==null)return result;
         var manager=level.getRecipeManager();
+        if(item==com.mcmagic.omnira.codex.MyriadCodexContent.ITEM.get()){
+            for(var series:com.mcmagic.omnira.myriad.WorldDevelopmentSeries.collect(manager.getAllRecipesFor(com.mcmagic.omnira.myriad.MiniatureWorldContent.TYPE.get()))){
+                if(!series.id().equals(net.minecraft.resources.ResourceLocation.parse("omnira:myriad_codex")))continue;
+                var steps=series.steps();
+                for(int stepIndex=0;stepIndex<steps.size();stepIndex++){
+                    var step=steps.get(stepIndex);
+                    for(var recipe:step.alternatives()){
+                        var slots=new ArrayList<Slot>();int count=recipe.materials().size();
+                        for(int i=0;i<count;i++)slots.add(new Slot((144-Math.min(3,count)*24)/2+(i%3)*24,76+(i/3)*22,recipe.materials().get(i).examples(),false));
+                        var product=recipe.getResultItem(level.registryAccess());
+                        if(!product.isEmpty())slots.add(slot(64,124,product,true));
+                        var stage=Component.translatable("miniature.omnira.stage."+step.to().name().toLowerCase(Locale.ROOT));
+                        result.add(new Diagram(Component.translatable("guide.omnira.codex_step",stepIndex+1,stage),slots,
+                                List.of(Component.translatable("guide.omnira.codex_same_world")),recipe));
+                    }
+                }
+            }
+        }
         for(var holder:manager.getAllRecipesFor(ModRecipes.SWORD_SHAPING_TYPE.get())) {
             var recipe=holder.value();if(!recipe.result().is(item))continue;
             int[][] positions={{60,47},{96,83},{60,119},{24,83}};
             var slots=new ArrayList<Slot>();
             for(int i=0;i<4;i++)slots.add(ingredient(positions[i][0],positions[i][1],recipe.offerings().get(i),1));
             slots.add(ingredient(60,83,Ingredient.of(com.mcmagic.omnira.block.entity.PureVesselBlockEntity.WEAPONS),1));
+            slots.add(slot(114,59,new ItemStack(ModItems.PURE_VESSEL.get()),false));
             slots.add(slot(114,136,recipe.result(),true));
-            result.add(new Diagram(Component.translatable("guide.omnira.sword_shaping"),slots,List.of(Component.translatable("guide.omnira.sword_shaping_layout"))));
+            result.add(new Diagram(Component.translatable("guide.omnira.sword_shaping"),slots,List.of(Component.translatable("guide.omnira.sword_shaping_layout")),recipe));
         }
         for(var holder:manager.getAllRecipesFor(RecipeType.CRAFTING)) {
             var recipe=holder.value();var output=recipe.getResultItem(level.registryAccess());
@@ -38,10 +60,10 @@ public final class GuideRecipes {
                     && recipe.getIngredients().stream().anyMatch(ingredient->ingredient.test(new ItemStack(item)));
             if(!output.is(item) && !crystalConversion) continue;
             var slots=new ArrayList<Slot>();var ingredients=recipe.getIngredients();
-            int width=recipe instanceof ShapedRecipe shaped?shaped.getWidth():3;
+            int width=recipe instanceof ShapedRecipe shaped?shaped.getWidth():recipe instanceof com.mcmagic.omnira.recipe.WrappedShapedRecipe wrapped?wrapped.shaped().getWidth():3;
             for(int i=0;i<ingredients.size();i++) slots.add(ingredient(17+(i%width)*18,72+(i/width)*18,ingredients.get(i),1));
             slots.add(slot(108,90,output,true));
-            result.add(new Diagram(Component.translatable("container.crafting"),slots,List.of()));
+            result.add(new Diagram(Component.translatable("container.crafting"),slots,List.of(),recipe));
         }
         for(var holder:manager.getAllRecipesFor(RecipeType.SMITHING)) {
             var recipe=holder.value();var output=recipe.getResultItem(level.registryAccess());
@@ -51,16 +73,16 @@ public final class GuideRecipes {
                     new Slot(17,90,stacks.stream().filter(recipe::isTemplateIngredient).toList(),false),
                     new Slot(35,90,stacks.stream().filter(recipe::isBaseIngredient).toList(),false),
                     new Slot(53,90,stacks.stream().filter(recipe::isAdditionIngredient).toList(),false),
-                    slot(108,90,output,true)),List.of()));
+                    slot(108,90,output,true)),List.of(),recipe));
         }
         for(var holder:manager.getAllRecipesFor(ModRecipes.CONDENSATION_TYPE.get())) {
             var recipe=holder.value();
             if(recipe.result().is(item)) result.add(recipe.advanced()
                     ?new Diagram(ModItems.ADVANCED_CONDENSATION_TABLE.get().getDescription(),
-                            List.of(ingredient(24,88,recipe.ingredient(),1),slot(104,88,recipe.result(),true)),
-                            List.of(mana(recipe.manaCost()),Component.translatable("jei.omnira.advanced_condensation_time")))
+                            List.of(ingredient(24,88,recipe.ingredient(),recipe.inputCount()),slot(104,88,recipe.result(),true)),
+                            List.of(mana(recipe.manaCost()),Component.translatable("jei.omnira.advanced_condensation_time")),recipe)
                     :new Diagram(ModItems.SIMPLE_CONDENSATION_TABLE.get().getDescription(),
-                            List.of(slot(64,88,recipe.result(),true)),List.of(mana(recipe.manaCost()),Component.translatable("guide.omnira.no_input"))));
+                            List.of(slot(64,88,recipe.result(),true)),List.of(mana(recipe.manaCost()),Component.translatable("guide.omnira.no_input")),recipe));
         }
         for(var holder:manager.getAllRecipesFor(ModRecipes.ANALYSIS_TYPE.get())) {
             var recipe=holder.value();
@@ -69,32 +91,42 @@ public final class GuideRecipes {
             var slots=new ArrayList<Slot>();slots.add(ingredient(24,87,recipe.ingredient(),recipe.count()));
             slots.add(slot(101,72,recipe.result(),true));
             if(byproduct.max()>0) slots.add(new Slot(101,105,byproduct.displayOutputs(),true));
-            var notes=new ArrayList<Component>();notes.add(mana(50));
+            var inputs=Arrays.stream(recipe.ingredient().getItems()).map(s->s.copyWithCount(recipe.count())).toList();
+            var remainders=inputs.stream().map(recipe::remainder).toList();
+            if(remainders.stream().anyMatch(s->!s.isEmpty()))slots.add(new Slot(56,87,remainders,true,false,Component.translatable("jei.omnira.remainder")));
+            var notes=new ArrayList<Component>();notes.add(mana(com.mcmagic.omnira.recipe.AnalysisRecipe.MANA_COST));
             if(byproduct.min()!=byproduct.max()) notes.add(Component.translatable("jei.omnira.byproduct",byproduct.min(),byproduct.max()));
             if(byproduct.choices().size()>1) notes.add(Component.translatable("jei.omnira.byproduct_choice"));
             if(recipe.inputDamage()>0) notes.add(Component.translatable("jei.omnira.input_damage",recipe.inputDamage()));
             else if(Arrays.stream(recipe.ingredient().getItems()).anyMatch(stack->!stack.getCraftingRemainingItem().isEmpty()))
                 notes.add(Component.translatable("jei.omnira.remainder"));
-            result.add(new Diagram(ModItems.ANALYSIS_ARTISAN_TABLE.get().getDescription(),slots,notes));
+            result.add(new Diagram(ModItems.ANALYSIS_ARTISAN_TABLE.get().getDescription(),slots,notes,recipe));
         }
         for(var holder:manager.getAllRecipesFor(ModRecipes.ADVANCED_FORGE_TYPE.get())) {
             var recipe=holder.value();if(!recipe.result().is(item))continue;
             var slots=new ArrayList<Slot>();
             for(int i=0;i<6;i++)slots.add(ingredient(24+(i%3)*22,62+(i/3)*22,recipe.slots().get(i),1));
             for(int i=0;i<3;i++)slots.add(ingredient(24+i*22,118,recipe.slots().get(6+i),1));
-            slots.add(slot(108,84,recipe.result(),true));
+            slots.add(new Slot(108,118,com.mcmagic.omnira.item.SpellCoreItem.examples(),false,true,Component.translatable("jei.omnira.forge_core")));
+            slots.add(slot(108,84,recipe.displayResult(),true));
             result.add(new Diagram(ModItems.ADVANCED_FORGE.get().getDescription(),slots,
-                    List.of(Component.translatable("jei.omnira.forge_nodes"))));
+                    List.of(Component.translatable("jei.omnira.forge_nodes")),recipe));
         }
         for(var holder:manager.getAllRecipesFor(ModRecipes.ASSEMBLY_TYPE.get())) {
-            var recipe=holder.value();if(!recipe.result().is(item)) continue;
-            int[][] positions={{80,53},{96,81},{80,109},{48,109},{32,81},{48,53},{64,81}};
-            var slots=new ArrayList<Slot>();
-            var displaySlots=recipe.displaySlots();
-            for(int i=0;i<7;i++) slots.add(ingredient(positions[i][0],positions[i][1],displaySlots.get(i),1));
-            slots.add(slot(114,127,recipe.result(),true));
-            result.add(new Diagram(ModItems.ARCANE_ASSEMBLY_TABLE.get().getDescription(),slots,
-                    List.of(mana(50),Component.translatable("jei.omnira.assembly_progress"),Component.translatable("jei.omnira.assembly_center"))));
+            if(!holder.value().result().is(item))continue;
+            // One valid base-staff example keeps the guide compact; JEI indexes every combination.
+            var examples=holder.value().displayRecipes();
+            if(holder.value().operation().equals("staff"))examples=examples.stream().limit(1).toList();
+            for(var recipe:examples){
+                if(!recipe.result().is(item)) continue;
+                int[][] positions={{80,53},{96,81},{80,109},{48,109},{32,81},{48,53},{64,81}};
+                var slots=new ArrayList<Slot>();
+                var displaySlots=recipe.displaySlots();
+                for(int i=0;i<7;i++) slots.add(ingredient(positions[i][0],positions[i][1],displaySlots.get(i),1));
+                slots.add(slot(114,127,recipe.result(),true));
+                result.add(new Diagram(ModItems.ARCANE_ASSEMBLY_TABLE.get().getDescription(),slots,
+                        List.of(mana(50),Component.translatable("jei.omnira.assembly_progress"),Component.translatable("jei.omnira.assembly_center")),holder.value()));
+            }
         }
         if(item==ModItems.LOW_TIER_MAGIC_CRYSTAL.get()) {
             var container=new SimpleContainer(9);
@@ -102,17 +134,27 @@ public final class GuideRecipes {
             container.setItem(6,new ItemStack(ModItems.SPELL_INK.get()));container.setItem(7,new ItemStack(ModItems.SPIRITUAL_CRYSTAL.get()));
             int[][] positions={{43,48},{85,48},{21,86},{43,124},{85,124},{107,86},{50,80},{78,80},{64,104}};
             var slots=new ArrayList<Slot>();
-            for(int i=0;i<8;i++) slots.add(slot(positions[i][0],positions[i][1],container.getItem(i),false));
+            for(int i=0;i<8;i++){
+                if(i==6)slots.add(new Slot(positions[i][0],positions[i][1],net.minecraft.core.registries.BuiltInRegistries.ITEM.stream()
+                        .map(ItemStack::new).filter(CrystalProcessingTableMenu::isInk).toList(),false,false,Component.translatable("jei.omnira.ink")));
+                else slots.add(slot(positions[i][0],positions[i][1],container.getItem(i),false));
+            }
             slots.add(slot(positions[8][0],positions[8][1],CrystalProcessingTableMenu.previewCrystal(container),true));
             result.add(new Diagram(ModItems.CRYSTAL_PROCESSING_TABLE.get().getDescription(),slots,
-                    List.of(Component.translatable("guide.omnira.writing_example"),mana(20),Component.translatable("guide.omnira.ink_options"))));
+                    List.of(Component.translatable("guide.omnira.writing_example"),mana(com.mcmagic.omnira.spell.SpellPayload.of(CrystalProcessingTableMenu.previewCrystal(container)).baseCost()),Component.translatable("guide.omnira.ink_options"))));
         }
         // Alternative transformations follow the original crafting and processing routes.
         for(var holder:manager.getAllRecipesFor(ModRecipes.STARLIGHT_TYPE.get())){
             var recipe=holder.value();if(!recipe.result().is(item))continue;
             result.add(new Diagram(Component.translatable("jei.omnira.starlight_conversion"),List.of(
-                ingredient(24,88,recipe.ingredient(),1),slot(104,88,recipe.result(),true)),List.of(Component.translatable("jei.omnira.starlight_time"))));
+                ingredient(24,88,recipe.ingredient(),1),slot(104,88,recipe.result(),true)),List.of(Component.translatable("jei.omnira.starlight_time")),recipe));
         }
         return List.copyOf(result);
+    }
+    public static Optional<com.mcmagic.omnira.recipe.SwordShapingRecipe> swordExample(Level level){
+        var recipes=level.getRecipeManager().getAllRecipesFor(ModRecipes.SWORD_SHAPING_TYPE.get());
+        return recipes.stream().sorted(Comparator.comparing((RecipeHolder<com.mcmagic.omnira.recipe.SwordShapingRecipe> r)->!r.value().result().is(ModItems.CRYSTALLIZED_NAIL.get()))
+                .thenComparing(r->r.id().toString())).map(RecipeHolder::value)
+                .filter(r->r.offerings().stream().allMatch(i->i.getItems().length>0)).findFirst();
     }
 }

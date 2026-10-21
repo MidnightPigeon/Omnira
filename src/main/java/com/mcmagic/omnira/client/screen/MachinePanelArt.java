@@ -109,10 +109,9 @@ public final class MachinePanelArt {
             else if(kind==0)polygon(p,LIGHT,x,y-9,x+4,y-5,x,y-1,x-4,y-5);
             else{p.fill(x-3,y-2,x+3,y,color);p.fill(x,y-8,x+1,y-5,LIGHT);}}
     }
-    public static void dome(Pixels p){
-        polygon(p,RIM,68,17,108,17,129,25,143,43,143,109,33,109,33,43,47,25);
-        polygon(p,0xC9527581,68,19,108,19,127,27,141,44,141,107,35,107,35,44,49,27);
-        line(p,49,27,68,19,LIGHT);line(p,36,44,49,28,LIGHT);line(p,36,45,36,105,LIGHT);
+    public static void catalysis(Pixels p){
+        frame(p,33,17,110,92,0xC9527581);
+        line(p,37,21,139,21,LIGHT);line(p,36,23,36,105,LIGHT);
         frame(p,22,113,132,33,0xFF526D79);
         p.fill(43,109,133,113,0xFF90B8C4);
     }
@@ -159,8 +158,7 @@ public final class MachinePanelArt {
             if(i==(int)(time/12)%6)flow(p,hex[i*2],hex[i*2+1],hex[j*2],hex[j*2+1],time,MINT);}
         for(int i=0;i<4;i++){
             int y=43+i*28,color=colors[i];
-            if(kinetics){frame(p,57,y-1,70,20,DARK);frame(p,137,y-1,43,20,DARK);
-                p.fill(59,y+17,125,y+18,color);p.fill(139,y+17,178,y+18,color);}
+            if(kinetics){frame(p,57,y-1,151,20,DARK);p.fill(59,y+17,206,y+18,color);}
         }
     }
     public static void reversalTrim(Pixels p,float time,boolean active){

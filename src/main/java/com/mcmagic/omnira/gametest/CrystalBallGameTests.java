@@ -202,12 +202,12 @@ public final class CrystalBallGameTests {
         var handler=h.getLevel().getCapability(Capabilities.ItemHandler.BLOCK,p,Direction.UP);
         h.assertTrue(handler!=null&&handler.getSlots()==12,"Automation capability missing");
         h.assertTrue(handler.insertItem(11,new ItemStack(Items.DIAMOND,32),false).isEmpty(),"Automation insertion failed");
-        h.assertTrue(handler.extractItem(11,5,true).getCount()==5&&ball.getItem(11).getCount()==32,"Simulation modified inventory");
-        h.assertTrue(handler.extractItem(11,5,false).getCount()==5&&ball.getItem(11).getCount()==27,"Automation extraction failed");
+        h.assertTrue(handler.extractItem(11,5,true).getCount()==4&&ball.getItem(11).getCount()==32,"Simulation consumed quota or modified inventory");
+        h.assertTrue(handler.extractItem(11,5,false).getCount()==4&&ball.getItem(11).getCount()==28,"Automation extraction ignored four-item rate limit");
         h.assertTrue(AbstractContainerMenu.getRedstoneSignalFromContainer(ball)>0,"Comparator remains empty");
         h.getLevel().destroyBlock(p,false);
         int count=h.getLevel().getEntitiesOfClass(ItemEntity.class,new AABB(p).inflate(2)).stream().filter(e->e.getItem().is(Items.DIAMOND)).mapToInt(e->e.getItem().getCount()).sum();
-        h.assertTrue(count==27,"Destroyed contents lost or duplicated: "+count);
+        h.assertTrue(count==28,"Destroyed contents lost or duplicated: "+count);
         h.assertTrue(h.getLevel().getCapability(Capabilities.ItemHandler.BLOCK,p,Direction.UP)==null,"Removed capability still exposed");
         var state=ModBlocks.CRYSTAL_BALL.get().defaultBlockState();
         h.assertTrue(new ItemStack(Items.IRON_PICKAXE).isCorrectToolForDrops(state)&&!new ItemStack(Items.STONE_PICKAXE).isCorrectToolForDrops(state),"Incorrect mining tier");

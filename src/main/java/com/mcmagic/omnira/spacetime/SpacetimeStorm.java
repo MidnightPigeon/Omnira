@@ -21,7 +21,7 @@ public final class SpacetimeStorm {
         if(entity instanceof LivingEntity living && !(entity instanceof ArmorStand)){
             // Deliberately outside hurt(): armor, absorption, shields and damage events cannot reduce it.
             if(!living.isAlive())return;
-            if(living.getHealth()>40){living.setHealth(living.getHealth()-40);return;}
+            if(living.getHealth()>40){com.mcmagic.omnira.combat.OmniraDamage.unavoidable(living,40,com.mcmagic.omnira.combat.OmniraDamage.source(living,"true_damage"));return;}
             if(living instanceof net.minecraft.world.entity.player.Player player){
                 // trigger() iterates a pre-death snapshot, so this survives its creating storm only.
                 TemporalAmber.sealDeath(player);

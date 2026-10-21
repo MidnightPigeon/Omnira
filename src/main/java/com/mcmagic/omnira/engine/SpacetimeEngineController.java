@@ -17,9 +17,16 @@ public final class SpacetimeEngineController extends BlockEntity implements Menu
     public static final int BASE_LIMIT=2048,MAX_RPM=128;
     public static boolean hasKinetics(){return net.neoforged.fml.ModList.get().isLoaded("create");}
     private final int[] capacity={512,512,512,512},rpm={16,16,16,16};
-    private final boolean[] reversed=new boolean[4];
-    private boolean loading;
+    private boolean loading,enabled=true;
+    public boolean enabled(){return enabled;}
+    public void toggle(){enabled=!enabled;sync();if(level!=null)for(var face:SpacetimeEngineBlock.OUTPUTS)com.mcmagic.omnira.pulse.PulseNetworks.changed(level,worldPosition.below().relative(face));}
     private int frontSide;
+    public final int[] outputMode=new int[4];
+    public void tickOutput(){
+        if(level==null||level.isClientSide)return;boolean changed=false;
+        for(int side=0;side<4;side++){var face=SpacetimeEngineBlock.OUTPUTS[side];int mode=com.mcmagic.omnira.pulse.PulseOutput.mode(level,worldPosition.below().relative(face),face);if(mode!=outputMode[side]){outputMode[side]=mode;changed=true;}}
+        if(changed)sync();energy.tick();
+    }
     public final SpacetimeEngineEnergy energy=new SpacetimeEngineEnergy(this);
     public int frontSide(){return frontSide;}
     public int relativeSide(int absoluteSide){return Math.floorMod(absoluteSide-frontSide,4);}
@@ -40,11 +47,10 @@ public final class SpacetimeEngineController extends BlockEntity implements Menu
     public int limit(){return (int)Math.round(BASE_LIMIT*gridMultiplier());}
     private void clamp(){for(int i=0;i<4;i++){capacity[i]=Math.clamp(capacity[i],0,limit());rpm[i]=Math.clamp(rpm[i],0,MAX_RPM);}}
     public int capacity(int side){return side>=0&&side<4?Math.min(capacity[side],limit()):0;}
-    public int rpm(int side){return side>=0&&side<4?rpm[side]:0;}
-    public boolean reversed(int side){return side>=0&&side<4&&reversed[side];}
+    public int rpm(int side){return side>=0&&side<4?16:0;}
     public boolean configure(int side,int su,int speed,boolean reverse){
-        if(side<0||side>=4||su<0||su>limit()||speed<0||speed>MAX_RPM)return false;
-        capacity[side]=su;rpm[side]=speed;reversed[side]=reverse;sync();return true;
+        if(side<0||side>=4||su<0||su>limit())return false;
+        capacity[side]=su;rpm[side]=16;sync();return true;
     }
     public boolean complete(){
         if(level==null||getBlockState().getValue(SpacetimeEngineBlock.PART)!=9||isRemoved())return false;
@@ -54,12 +60,8 @@ public final class SpacetimeEngineController extends BlockEntity implements Menu
         return true;
     }
     public int generatedSpeed(int side){
-        if(side<0||side>=4||!complete()||com.mcmagic.omnira.time.StilledTime.stopped(level,worldPosition))return 0;
-        return (hasKinetics()?(capacity(side)>0?rpm(side):0):16)*(reversed(side)?-1:1);
-    }
-    public boolean configureRotation(int side,boolean reverse){
-        if(side<0||side>=4)return false;
-        reversed[side]=reverse;sync();return true;
+        if(side<0||side>=4||!enabled||!complete()||com.mcmagic.omnira.time.StilledTime.stopped(level,worldPosition))return 0;
+        return capacity(side)>0?16:0;
     }
     private void sync(){setChanged();if(level!=null&&!level.isClientSide)level.sendBlockUpdated(worldPosition,getBlockState(),getBlockState(),3);}
     public void dropUpgrades(){
@@ -68,15 +70,19 @@ public final class SpacetimeEngineController extends BlockEntity implements Menu
     }
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries){
         super.saveAdditional(tag,registries);tag.putIntArray("Capacity",capacity);tag.putIntArray("Rpm",rpm);
+        tag.putIntArray("PulseOutputMode",outputMode);
         tag.putInt("FrontSide",frontSide);
+        tag.putBoolean("OutputEnabled",enabled);
         energy.save(tag);
-        for(int i=0;i<4;i++)tag.putBoolean("Reverse"+i,reversed[i]);tag.put("Grids",grids.serializeNBT(registries));
+        tag.put("Grids",grids.serializeNBT(registries));
     }
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries){
         super.loadAdditional(tag,registries);loading=true;grids.deserializeNBT(registries,tag.getCompound("Grids"));loading=false;
+        var modes=tag.getIntArray("PulseOutputMode");for(int i=0;i<4;i++)outputMode[i]=modes.length==4?Math.clamp(modes[i],0,2):0;
         frontSide=Math.floorMod(tag.getInt("FrontSide"),4);
+        enabled=!tag.contains("OutputEnabled")||tag.getBoolean("OutputEnabled");
         var c=tag.getIntArray("Capacity");var r=tag.getIntArray("Rpm");
-        for(int i=0;i<4;i++){capacity[i]=c.length==4?c[i]:512;rpm[i]=r.length==4?r[i]:16;reversed[i]=tag.getBoolean("Reverse"+i);}clamp();energy.load(tag);
+        for(int i=0;i<4;i++){capacity[i]=c.length==4?c[i]:512;rpm[i]=r.length==4?r[i]:16;}clamp();energy.load(tag);
     }
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries){return saveWithoutMetadata(registries);}
     @Override public ClientboundBlockEntityDataPacket getUpdatePacket(){return ClientboundBlockEntityDataPacket.create(this);}

@@ -1,0 +1,34 @@
+{
+  "parent": "omnira:mainline/first_creation",
+  "display": {
+    "icon": {
+      "id": "omnira:primitive_reaction_cauldron"
+    },
+    "title": {
+      "translate": "advancement.omnira.branches.first_reaction.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.branches.first_reaction.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "performed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "performed"
+    ]
+  ]
+}

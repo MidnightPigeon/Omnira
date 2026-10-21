@@ -1,7 +1,7 @@
 {
   "id": "dream_exploration",
-  "title": "跨岛与归程",
-  "icon": "omnira:recall_crystal",
+  "title": "探索指南",
+  "icon": "minecraft:map",
   "introduction": "introduction.json",
   "entries": [
     "entries/explore_dream.json",

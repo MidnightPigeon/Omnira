@@ -190,6 +190,7 @@ public final class CrystalStorageNetworks extends SavedData {
                 var fluid=liquid.tank.getFluid();
                 var target=((LiquidCrystalBallBlockEntity)result).tank;
                 if(!fluid.isEmpty()&&target.fill(fluid.copy(),net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE)!=fluid.getAmount())return null;
+                if(!fluid.isEmpty())com.mcmagic.omnira.progression.BranchStorage.merge(source,12,result,12,0,fluid.getAmount());
             }
             for(int i=0;i<source.getContainerSize();i++){
                 var remainder=source.getItem(i).copy();
@@ -198,8 +199,11 @@ public final class CrystalStorageNetworks extends SavedData {
                     if(!result.getItem(0).isEmpty())return null;
                     result.setItem(0,remainder);continue;
                 }
-                for(int slot=0;slot<result.getContainerSize()&&!remainder.isEmpty();slot++)
-                    remainder=result.itemHandler.insertItem(slot,remainder,false);
+                int offset=0;
+                for(int slot=0;slot<result.getContainerSize()&&!remainder.isEmpty();slot++){
+                    int before=remainder.getCount();remainder=result.itemHandler.insertItem(slot,remainder,false);int moved=before-remainder.getCount();
+                    if(moved>0)com.mcmagic.omnira.progression.BranchStorage.merge(source,i,result,slot,offset,moved);offset+=moved;
+                }
                 if(!remainder.isEmpty())return null;
             }
         }

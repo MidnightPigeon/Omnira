@@ -1,0 +1,15 @@
+{
+  "id": "living_embryoplasm",
+  "title": "生命胚质",
+  "item": "omnira:living_embryoplasm",
+  "recipes": false,
+  "text": [
+    "追加1牛奶悬液，凝结出承载生长与生态繁衍的胚质。"
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "拟界之仪"
+    }
+  ]
+}

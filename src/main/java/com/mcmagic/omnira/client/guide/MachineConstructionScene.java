@@ -37,12 +37,16 @@ public final class MachineConstructionScene {
         for(int part=0;part<count;part++){
             var block=engine?com.mcmagic.omnira.engine.SpacetimeEngineStructure.required(part):chamber?com.mcmagic.omnira.alchemy.catalysis.CatalysisStructure.required(part):pool?ReactionPoolStructure.required(part):ringBlock(part,ticks);
             if(block==Blocks.AIR)continue;
-            int dx=chamber?0:part%3-1,dy=chamber?part:pool?part/9:1-part/3,dz=pool?(part%9)/3-1:0;
+            // SOUTH leaves the authored local model unrotated, for both raw and formed views.
+            var offset=engine?com.mcmagic.omnira.engine.SpacetimeEngineBlock.offset(part)
+                    :chamber?new net.minecraft.core.BlockPos(0,part,0)
+                    :pool?com.mcmagic.omnira.alchemy.ReactionPoolBlock.offset(net.minecraft.core.Direction.SOUTH,part)
+                    :com.mcmagic.omnira.aggregation.AggregationLayout.part(net.minecraft.core.BlockPos.ZERO,net.minecraft.core.Direction.SOUTH,part);
             var state=block.defaultBlockState();
-            if(engine){var offset=com.mcmagic.omnira.engine.SpacetimeEngineBlock.offset(part);dx=offset.getX();dy=offset.getY();dz=offset.getZ();
+            if(engine){
                 int side=com.mcmagic.omnira.engine.SpacetimeEngineBlock.side(part);
                 if(side>=0)state=state.setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING,com.mcmagic.omnira.engine.SpacetimeEngineBlock.OUTPUTS[side]);}
-            pose.pushPose();pose.translate(dx-.5,dy,dz-.5);
+            pose.pushPose();pose.translate(offset.getX()-.5,offset.getY(),offset.getZ()-.5);
             mc.getBlockRenderer().renderSingleBlock(state,pose,layers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
             pose.popPose();
         }

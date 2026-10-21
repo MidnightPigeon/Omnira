@@ -24,9 +24,13 @@ public final class AggregationRingScreen extends ResponsiveContainerScreen<Aggre
     @Override protected void renderContent(GuiGraphics g,int x,int y,float partial){
         super.renderContent(g,x,y,partial);
         CompositeSlotGhost.render(g,menu.getSlot(0),menu.getSlot(1),leftPos,topPos);
+        boolean ultimate=menu.getSlot(0).getItem().is(com.mcmagic.omnira.registry.ModItems.OMNI_MICROCORE.get());
+        if(ultimate)for(int i=1;i<8;i++){
+            var slot=menu.getSlot(i);if(!slot.hasItem())CompositeSlotGhost.render(g,menu.getSlot(0).getItem(),leftPos+slot.x,topPos+slot.y);
+        }
         renderTooltip(g,x,y);
         if(hoveredSlot!=null&&hoveredSlot.index<AggregationLayout.SLOTS&&!hoveredSlot.hasItem())
-            g.renderTooltip(font,Component.translatable(hoveredSlot.index==1&&com.mcmagic.omnira.spell.SpellPattern.composite(menu.getSlot(0).getItem())?
+            g.renderTooltip(font,Component.translatable(ultimate&&hoveredSlot.index<8?"tooltip.omnira.world_rotation.reserved":hoveredSlot.index==1&&com.mcmagic.omnira.spell.SpellPattern.composite(menu.getSlot(0).getItem())?
                     "tooltip.omnira.microcore.composite":"gui.omnira.aggregation."+AggregationLayout.role(hoveredSlot.index)),x,y);
     }
 }

@@ -19,14 +19,17 @@ public final class CrystalProcessingTableRenderer implements BlockEntityRenderer
             {6, 7}, {10, 7}, {8, 10}
     };
     private static final float ITEM_SCALE = 0.25F;
+    private static final float[][] ASSEMBLY_CENTERS={{10,4},{12,7},{10,10},{6,10},{4,7},{6,4},{8,7}};
+    private static final float[][] SINGLE_CENTER={{8,8}};
+    private static final float[][] TRIPLE_CENTERS={{8,4},{6,10},{10,10}};
     private static final double ITEM_CENTER_Y = (CrystalProcessingTableBlock.TABLE_HEIGHT + 2.5D) / 16.0D;
     private static final double BOB_AMPLITUDE = 0.375D / 16.0D;
     private static final int BOB_PERIOD_TICKS = 120;
     private static final int ROTATION_PERIOD_TICKS = 240;
-    public static net.minecraft.client.resources.model.ModelResourceLocation hammerModel() {
-        return net.minecraft.client.resources.model.ModelResourceLocation.standalone(
-                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","item/assembly_hammer"));
-    }
+    private static final net.minecraft.client.resources.model.ModelResourceLocation HAMMER_MODEL=
+            net.minecraft.client.resources.model.ModelResourceLocation.standalone(
+                    net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","item/assembly_hammer"));
+    public static net.minecraft.client.resources.model.ModelResourceLocation hammerModel() {return HAMMER_MODEL;}
     private final ItemRenderer itemRenderer;
 
     public CrystalProcessingTableRenderer(BlockEntityRendererProvider.Context context) {
@@ -51,7 +54,12 @@ public final class CrystalProcessingTableRenderer implements BlockEntityRenderer
                 Math.max(CrystalProcessingTableBlock.LIGHT_LEVEL, LightTexture.block(light)), LightTexture.sky(light));
         float rotation = (float)(time % ROTATION_PERIOD_TICKS) * (360.0F / ROTATION_PERIOD_TICKS);
         double bobPhase = (time % BOB_PERIOD_TICKS) * (Math.PI * 2.0D / BOB_PERIOD_TICKS);
-        float[][] centers = table.getContainerSize()==7 ? new float[][]{{10,4},{12,7},{10,10},{6,10},{4,7},{6,4},{8,7}} : table.getContainerSize() == 1 ? new float[][]{{8,8}} : table.getContainerSize() == 3 ? new float[][] {{8,4},{6,10},{10,10}} : SLOT_CENTERS;
+        float[][] centers = switch(table.getContainerSize()){
+            case 7 -> ASSEMBLY_CENTERS;
+            case 1 -> SINGLE_CENTER;
+            case 3 -> TRIPLE_CENTERS;
+            default -> SLOT_CENTERS;
+        };
         pose.pushPose();
         pose.translate(.5, 0, .5);
         pose.mulPose(Axis.YP.rotationDegrees(180 - table.getBlockState().getValue(CrystalProcessingTableBlock.FACING).toYRot()));
@@ -70,6 +78,7 @@ public final class CrystalProcessingTableRenderer implements BlockEntityRenderer
                     ItemStack.EMPTY,displayLight,overlay,pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
             pose.popPose();
         }
+        var contents=CrystalGlassLayer.contents(buffers);
         for (int slot = 0; slot < centers.length; slot++) {
             ItemStack stack = table.getItem(slot);
             if (stack.isEmpty()) {
@@ -83,7 +92,7 @@ public final class CrystalProcessingTableRenderer implements BlockEntityRenderer
             float scale=table.getContainerSize()==7 && stack.getItem() instanceof com.mcmagic.omnira.item.StaffItem?.15F:ITEM_SCALE;
             pose.scale(scale,scale,scale);
             itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, displayLight, overlay,
-                    pose, CrystalGlassLayer.contents(buffers), table.getLevel(), (int) table.getBlockPos().asLong() + slot);
+                    pose, contents, table.getLevel(), (int) table.getBlockPos().asLong() + slot);
             pose.popPose();
         }
         pose.popPose();

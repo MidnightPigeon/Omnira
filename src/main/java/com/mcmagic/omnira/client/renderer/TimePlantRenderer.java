@@ -35,11 +35,7 @@ public final class TimePlantRenderer implements BlockEntityRenderer<TimePlantBlo
         }
     }
     public static void mote(PoseStack pose,com.mojang.blaze3d.vertex.VertexConsumer mesh,float x,float y,float z,float r,int color,float alpha){
-        float[][] v={{x-r,y-r,z-r},{x+r,y-r,z-r},{x+r,y+r,z-r},{x-r,y+r,z-r},
-                {x-r,y-r,z+r},{x+r,y-r,z+r},{x+r,y+r,z+r},{x-r,y+r,z+r}};
-        for(int[] face:new int[][]{{0,3,2,1},{4,5,6,7},{0,4,7,3},{1,2,6,5},{3,7,6,2},{0,1,5,4}})
-            for(int n:face)mesh.addVertex(pose.last().pose(),v[n][0],v[n][1],v[n][2])
-                    .setColor((color>>16&255)/255F,(color>>8&255)/255F,(color&255)/255F,alpha);
+        StellarVisuals.cube(pose,mesh,x,y,z,r,color,alpha);
     }
     @Override public int getViewDistance(){return 32;}
 }

@@ -1,0 +1,43 @@
+{
+  "parent": "omnira:mainline/myriad_confluence",
+  "display": {
+    "icon": {
+      "id": "omnira:world_generation_probability_cloud"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.something_from_nothing.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.something_from_nothing.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "obtained": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:world_generation_probability_cloud"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "obtained"
+    ]
+  ]
+}

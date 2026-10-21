@@ -12,6 +12,18 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_spacetime_engine")
 @PrefixGameTestTemplate(false)
 public final class SpacetimeEngineGameTests {
+    @GameTest(template="spell_arena") public static void masterSwitchKeepsConfigurations(GameTestHelper h){
+        var e=engine(h);h.assertTrue(e.enabled(),"New engine output disabled");
+        var player=new net.neoforged.neoforge.common.util.FakePlayer(h.getLevel(),new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"spacetime-switch"));
+        var p=e.getBlockPos();player.setPos(p.getX()+.5,p.getY(),p.getZ()+1.5);
+        var menu=new SpacetimeEngineMenu(1,player.getInventory(),e);
+        h.assertTrue(menu.clickMenuButton(player,0)&&!e.enabled(),"Master switch failed");
+        for(int i=0;i<4;i++)h.assertTrue(e.generatedSpeed(i)==0&&e.capacity(i)==512,"Disabling discarded output settings");
+        var saved=e.saveWithoutMetadata(h.getLevel().registryAccess());saved.putBoolean("Reverse0",true);
+        e.loadWithComponents(saved,h.getLevel().registryAccess());h.assertTrue(!e.enabled(),"Disabled state not persistent");
+        h.assertTrue(!menu.clickMenuButton(player,1)&&menu.clickMenuButton(player,0),"Master switch packet validation failed");
+        for(int i=0;i<4;i++)h.assertTrue(e.generatedSpeed(i)==16,"Output reversed or failed after restart");h.succeed();
+    }
     private static SpacetimeEngineController engine(GameTestHelper h){
         var root=h.absolutePos(new BlockPos(5,3,5));h.assertTrue(SpacetimeEngineStructure.place(h.getLevel(),root),"Placement failed");
         return SpacetimeEngineBlock.controller(h.getLevel(),root.above());
@@ -43,8 +55,8 @@ public final class SpacetimeEngineGameTests {
         var menu=new SpacetimeEngineMenu(1,h.makeMockPlayer(GameType.SURVIVAL).getInventory(),e);
         h.assertTrue(menu.limit()==131072&&menu.capacity(0)==131072,"SU truncated to 16 bits");
         e.grids.setStackInSlot(2,ItemStack.EMPTY);
-        for(int i=0;i<4;i++)h.assertTrue(e.capacity(i)==32768&&e.rpm(i)==128,"Removal did not clamp capacity only");
-        h.assertTrue(!e.configure(4,1,1,false)&&!e.configure(0,32769,128,false)&&!e.configure(0,1,129,false)&&!e.configure(0,-1,16,false),"Invalid settings accepted");h.succeed();
+        for(int i=0;i<4;i++)h.assertTrue(e.capacity(i)==32768&&e.rpm(i)==16,"Removal changed fixed conversion speed");
+        h.assertTrue(!e.configure(4,1,1,false)&&!e.configure(0,32769,128,false)&&!e.configure(0,-1,16,false),"Invalid settings accepted");h.succeed();
     }
     @GameTest(template="spell_arena") public static void bottlePreservesAllOutputsAndGrids(GameTestHelper h){
         var e=engine(h);var l=h.getLevel();var root=e.getBlockPos().below();
@@ -58,7 +70,7 @@ public final class SpacetimeEngineGameTests {
         h.assertTrue(com.mcmagic.omnira.item.bottle.MultiblockBottleCapture.release(l,saved,net.minecraft.world.phys.Vec3.atLowerCornerOf(root),player),"Release failed");
         var restored=SpacetimeEngineBlock.controller(l,root.above());h.assertTrue(restored.complete()&&restored.limit()==8192,"Lost grid");
         h.assertTrue(restored.frontSide()==3,"Bottle lost front orientation");
-        for(int i=0;i<4;i++)h.assertTrue(restored.capacity(i)==3000+i*100&&restored.rpm(i)==16+i*16&&restored.reversed(i)==(i%2==1),"Lost output "+i);h.succeed();
+        for(int i=0;i<4;i++)h.assertTrue(restored.capacity(i)==3000+i*100&&restored.rpm(i)==16,"Lost output "+i);h.succeed();
     }
     @GameTest(template="spell_arena") public static void configurationRequiresLiveNearbyMenu(GameTestHelper h){
         var e=engine(h);var player=h.makeMockPlayer(GameType.SURVIVAL);player.setPos(net.minecraft.world.phys.Vec3.atCenterOf(e.getBlockPos()));
@@ -76,7 +88,7 @@ public final class SpacetimeEngineGameTests {
     @GameTest(template="spell_arena") public static void directDriveAndFixedArray(GameTestHelper h){
         var e=engine(h);var root=e.getBlockPos().below();
         for(int i=0;i<4;i++){var side=SpacetimeEngineBlock.OUTPUTS[i];e.configure(i,2048,16,false);
-            h.assertTrue(com.mcmagic.omnira.space.SpacetimePortState.driveAt(h.getLevel(),root.relative(side),side)==(SpacetimeEngineController.hasKinetics()?4:1),"Direct-drive capacity");
+            h.assertTrue(com.mcmagic.omnira.space.SpacetimePortState.driveAt(h.getLevel(),root.relative(side),side)==4,"Direct-drive capacity");
             h.assertTrue(com.mcmagic.omnira.space.SpacetimePortState.driveAt(h.getLevel(),root.relative(side),side.getOpposite())==0,"Inward shaft exposed");}
         h.assertTrue(Math.abs(SpacetimeEngineGeometry.arrayAngle(200)-SpacetimeEngineGeometry.arrayAngle(100)-1.2)<1e-9,"Array speed changed");
         for(int slot=0;slot<3;slot++)h.assertTrue(Math.abs(SpacetimeEngineGeometry.cornerAngle(slot)-slot*Math.PI*2/3)<1e-9,"Not alternating corners");h.succeed();
@@ -112,12 +124,12 @@ public final class SpacetimeEngineGameTests {
     @GameTest(template="spell_arena") public static void fallbackPortsDrivePoolAndAssembly(GameTestHelper h){
         if(SpacetimeEngineController.hasKinetics()){h.succeed();return;}
         var e=engine(h);var l=h.getLevel();var root=e.getBlockPos().below();
-        e.configure(3,0,0,false);
+        e.configure(3,1024,16,false);
         e.grids.setStackInSlot(0,new ItemStack(ModItems.OMNI_CRYSTAL_GRID.get()));
         var player=h.makeMockPlayer(GameType.SURVIVAL);player.setPos(net.minecraft.world.phys.Vec3.atCenterOf(e.getBlockPos()));
         player.containerMenu=new SpacetimeEngineMenu(23,player.getInventory(),e);
-        h.assertTrue(EngineConfigPayload.apply(player,new EngineConfigPayload(23,3,999999,128,true)),"Fallback direction rejected");
-        h.assertTrue(e.capacity(3)==0&&e.rpm(3)==0&&e.generatedSpeed(3)==-16,"Fallback edited hidden settings or stopped on old zero settings");
+        h.assertTrue(!EngineConfigPayload.apply(player,new EngineConfigPayload(23,3,999999,128,true)),"Out-of-range native potential accepted");
+        h.assertTrue(e.capacity(3)==1024&&e.rpm(3)==16&&e.generatedSpeed(3)==16,"Native output changed conversion speed");
         var center=h.absolutePos(new BlockPos(5,3,11));
         h.assertTrue(com.mcmagic.omnira.alchemy.ReactionPoolBlock.place(l,center,Direction.NORTH),"Pool placement failed");
         var source=fallbackPatch(h,root.west(),Direction.WEST);
@@ -133,6 +145,7 @@ public final class SpacetimeEngineGameTests {
         h.assertTrue(com.mcmagic.omnira.space.SpacetimePortState.pair(second,input),"Assembly link failed");
         h.assertTrue(com.mcmagic.omnira.block.entity.ArcaneAssemblyTableBlockEntity.directEngine(l,table,l.getBlockState(table)),"Remote assembly drive missing");
         source.unlink();second.unlink();
+        com.mcmagic.omnira.pulse.PulseNetworks.changed(l,source.host.getBlockPos());
         com.mcmagic.omnira.alchemy.ReactionPoolBlockEntity.tick(l,center,pool.getBlockState(),pool);
         h.assertTrue(!pool.powered()&&!com.mcmagic.omnira.block.entity.ArcaneAssemblyTableBlockEntity.directEngine(l,table,l.getBlockState(table)),"Disconnected fallback retained power");
         h.succeed();

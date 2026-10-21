@@ -28,6 +28,12 @@ public final class CrystalUtilityClient {
     }
     private static void render(int index,CrystalWorkstationEntity work,float partial,PoseStack p,MultiBufferSource b,int light,int overlay){
         p.pushPose();
+        if(work!=null&&(work.pulsePowered||work.electrical)){
+            int mode=work.pulsePowered?com.mcmagic.omnira.pulse.PulseOutput.PULSE:com.mcmagic.omnira.pulse.PulseOutput.ELECTRIC;
+            for(var face:net.minecraft.core.Direction.values())if((work.inputFaces&(1<<face.ordinal()))!=0
+                    &&((CrystalWorkstationBlock)work.getBlockState().getBlock()).shaft(work.getBlockState(),face))
+                PulseClient.shaft(p,b,face,work.getLevel().getGameTime()+partial,false,mode);
+        }
         if(work!=null){p.translate(.5,0,.5);p.mulPose(Axis.YP.rotationDegrees(180-work.getBlockState().getValue(CrystalWorkstationBlock.FACING).toYRot()));p.translate(-.5,0,-.5);}
         String id=CrystalWorkstations.IDS[index];body(index,id+"_glass",p,b,light,overlay,true);body(index,id+"_frame",p,b,light,overlay,false);
         body(index,id+"_detail",p,b,light,overlay,false);
@@ -38,9 +44,15 @@ public final class CrystalUtilityClient {
         }
         if(index==3||index==5){
             float speed=work==null?0:work.host instanceof WorkstationAccess access?access.shaftSpeed():work.rpm;
+            if(work!=null&&work.pulseConnected)speed=0;
             float angle=time*speed*.3F;
+            if(work!=null&&net.neoforged.fml.ModList.get().isLoaded("create")&&!work.pulseConnected&&!work.electrical){
+                var facing=work.getBlockState().getValue(CrystalWorkstationBlock.FACING);
+                angle=com.mcmagic.omnira.client.renderer.CreateEnginePhase.degrees(work.host,facing.getAxis())
+                        *(facing.getOpposite().getAxisDirection()==net.minecraft.core.Direction.AxisDirection.POSITIVE?1:-1);
+            }
             p.pushPose();p.translate(.5,.5,.5);p.mulPose(Axis.ZP.rotationDegrees(angle));p.translate(-.5,-.5,-.5);
-            draw(id+"_shaft",p,b,work!=null&&work.electrical?LightTexture.FULL_BRIGHT:light,overlay,false);p.popPose();
+            draw(id+"_shaft",p,b,work!=null&&work.electrical?LightTexture.FULL_BRIGHT:light,overlay,true);p.popPose();
         }
         if(work!=null&&index%3!=0&&(work.powered()||work.burn>0))body(index,id+"_light",p,b,LightTexture.FULL_BRIGHT,overlay,true);
         var displayed=work==null?ItemStack.EMPTY:!work.getItem(0).isEmpty()?work.getItem(0):index%3!=0?work.getItem(1):ItemStack.EMPTY;

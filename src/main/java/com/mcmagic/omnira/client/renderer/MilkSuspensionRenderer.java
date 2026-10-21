@@ -12,10 +12,12 @@ public final class MilkSuspensionRenderer extends BlockEntityWithoutLevelRendere
     public static ModelResourceLocation model() {return CrystalGridRenderer.part("milk_suspension","liquid");}
     @Override public void renderByItem(ItemStack stack,ItemDisplayContext context,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {
         var mc=Minecraft.getInstance();
+        var quads=ParticleModelQuads.collect(mc.getModelManager().getModel(model()));
+        var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
         double t=mc.level==null?0:mc.level.getGameTime()+mc.getTimer().getGameTimeDeltaPartialTick(false);
         pose.pushPose();pose.translate(.5,.5+Math.sin(t*.04)*.012,.5);
         pose.mulPose(Axis.YP.rotationDegrees((float)(t*.65%360)));
-        draw(stack,pose,buffers,light,overlay);
+        draw(stack,pose,out,quads,light,overlay);
         // Local model particles also work in inventory previews without spawning world entities.
         for(int i=0;i<6;i++) {
             double phase=t*.045+i*Math.PI/3;
@@ -23,17 +25,17 @@ public final class MilkSuspensionRenderer extends BlockEntityWithoutLevelRendere
             pose.translate(Math.cos(phase)*.39,Math.sin(phase*1.7+i)*.26,Math.sin(phase)*.39);
             float size=.065F+.015F*(float)Math.sin(phase*2);
             pose.scale(size,size,size);
-            draw(stack,pose,buffers,light,overlay);
+            draw(stack,pose,out,quads,light,overlay);
             pose.popPose();
         }
         pose.popPose();
     }
 
-    private void draw(ItemStack stack,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {
+    private void draw(ItemStack stack,PoseStack pose,com.mojang.blaze3d.vertex.VertexConsumer out,
+                      java.util.List<net.minecraft.client.renderer.block.model.BakedQuad> quads,int light,int overlay) {
         var mc=Minecraft.getInstance();
         pose.pushPose();pose.translate(-.5,-.5,-.5);
-        mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(model()),stack,light,overlay,pose,
-                buffers.getBuffer(CrystalGlassLayer.ATLAS));
+        mc.getItemRenderer().renderQuadList(pose,out,quads,stack,light,overlay);
         pose.popPose();
     }
 }

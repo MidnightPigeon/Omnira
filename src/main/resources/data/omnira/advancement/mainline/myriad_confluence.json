@@ -1,0 +1,43 @@
+{
+  "parent": "omnira:mainline/world_in_hand",
+  "display": {
+    "icon": {
+      "id": "omnira:omni_microcore"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.myriad_confluence.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.myriad_confluence.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "obtained": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:omni_microcore"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "obtained"
+    ]
+  ]
+}

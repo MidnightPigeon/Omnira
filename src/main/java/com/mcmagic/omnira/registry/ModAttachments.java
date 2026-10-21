@@ -17,7 +17,7 @@ public final class ModAttachments {
     private static final DeferredRegister<AttachmentType<?>> TYPES =
             DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, Omnira.MOD_ID);
     private static final Codec<ManaState> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.doubleRange(0, 1_000_000).fieldOf("current").forGetter(ManaState::current),
+            Codec.doubleRange(0, ManaState.MAX_CURRENT).fieldOf("current").forGetter(ManaState::current),
             Codec.doubleRange(0.000001, 1_000_000).fieldOf("maximum").forGetter(ManaState::maximum),
             Codec.intRange(0,4).optionalFieldOf("affinity",0).forGetter(ManaState::affinity)
     ).apply(instance, ManaState::new));
@@ -42,6 +42,8 @@ public final class ModAttachments {
             "rabbit_ticks",()->AttachmentType.builder(()->0).sync((holder,recipient)->holder==recipient,ByteBufCodecs.VAR_INT).build());
 
     private ModAttachments() {}
+    public static final DeferredHolder<AttachmentType<?>,AttachmentType<Long>> WORLD_ROTATION_READY=TYPES.register(
+            "world_rotation_ready",()->AttachmentType.builder(()->0L).serialize(Codec.LONG).copyOnDeath().build());
 
     public static void register(IEventBus bus) {
         TYPES.register(bus);

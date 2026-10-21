@@ -1,11 +1,12 @@
 {
   "id": "ritual_weapons",
   "title": "Ritual Weapons",
-  "icon": "omnira:crystallized_bone_nail",
+  "icon": "omnira:paradox_ore",
   "introduction": "introduction.json",
   "entries": [
     "entries/crystallized_bone_nail.json",
     "entries/arcane_needle.json",
+    "entries/ritual_weapon_upgrades.json",
     "entries/sharpened_crystallized_bone_nail.json",
     "entries/channelled_crystallized_bone_nail.json",
     "entries/threaded_paradox_bone_nail.json",

@@ -8,6 +8,7 @@ public final class ModRegistryAliases {
     private ModRegistryAliases() {}
 
     public static void install() {
+        alias(ModItems.ITEMS, "crystal_blouse", "crystal_top");
         alias(ModBlocks.BLOCKS, "void_fissure", "void_crevice");
         alias(ModItems.ITEMS, "void_fissure", "void_crevice");
         alias(ModBlocks.BLOCKS, "advanced_forge", "advanced_assembly_table");

@@ -1,7 +1,7 @@
 {
   "id": "advanced_spells",
   "title": "时空",
-  "icon": "omnira:high_tier_magic_crystal",
+  "icon": "omnira:advanced_crystal_aggregation_ring",
   "introduction": "introduction.json",
   "entries": [
     "entries/advanced_spell_aggregation.json",

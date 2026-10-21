@@ -1,5 +1,7 @@
 {
-  "text": [
-    "Transmute fluids and ingredients with catalyst blocks, from basic reactions to parallel production."
-  ]
+  "image": "omnira:textures/gui/guide/chapters/alchemy.png",
+  "image_width": 1420,
+  "image_height": 1108,
+  "caption": "Combine fluids, materials and catalysts, from a single cauldron to continuous production.",
+  "text": []
 }

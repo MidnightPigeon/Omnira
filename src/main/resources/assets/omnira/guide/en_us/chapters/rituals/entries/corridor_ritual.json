@@ -5,9 +5,9 @@
   "title": "Ritual of Time's Threshold",
   "text": [
     "Requires one Advanced Ritual Energy Core, eight Crystal Pedestals, four Spacetime Knots, two Paradox Dust and two Infused Spiritual Crystals. Lure a Dream Mirror nearby, keep the space above the core clear, then use an Unstable Spacetime Aggregate on the core.",
-    "The mirror fixes above the core as a blue-violet rift opens. After twelve seconds only the aggregate is consumed; pedestal offerings remain. The aggregate stops decaying during formation, but breaking the core or removing an offering ejects it and triggers a spacetime storm.",
-    "The gateway lasts three minutes and turns toward approaching players. Entering takes a moment. Ordinary vehicles can cross with passengers; large mechanical structures cannot. Afterwards, a free-roaming Dream Mirror appears again.",
-    "Outside spacetime, the gateway reaches a random point in the Spacetime Mirror Corridor. Within spacetime, temporary and permanent gateways instead reach your valid Overworld respawn point, falling back to world spawn. Their lifetimes remain unchanged. Corridor rifts reach the Time Continent or Space Caverns, without return rifts. The continent appears to be formed from overlapping and twisted timelines."
+    "After twelve seconds the aggregate is consumed and a three-minute gateway opens. Use a Spacetime Spell Core instead for a permanent gateway. Pedestal offerings remain. Dismantling during formation ejects the activator; an aggregate may trigger a storm.",
+    "Both gateway types require their core, pedestals and offerings. Dismantling or removing offerings closes the gateway and releases the Dream Mirror. Stay near its surface briefly to enter. Ordinary vehicles may carry passengers through; large mechanical structures cannot.",
+    "Outside spacetime, gateways reach the Mirror Corridor, whose rifts lead to the Time Continent or Space Caverns without a return rift. Within spacetime, gateways reach your valid Overworld respawn point, falling back to world spawn."
   ],
   "recipes": false,
   "links": [

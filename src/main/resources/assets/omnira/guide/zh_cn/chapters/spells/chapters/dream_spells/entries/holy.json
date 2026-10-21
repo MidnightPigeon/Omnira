@@ -1,6 +1,7 @@
 {
   "id": "holy",
   "item": "omnira:light_microcore",
+  "icon": "omnira:light_source_crystal",
   "title": "神圣",
   "text": [
     "将光微核直接放入修饰槽。伤害与治疗额外乘1.5，重复放入不再叠乘；持续药水效果不变。",

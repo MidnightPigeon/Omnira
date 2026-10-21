@@ -4,6 +4,8 @@
   "plugin": "com.mcmagic.omnira.compat.OptionalIntegrationMixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "PulseStressLedgerMixin",
+    "PulseStressSaveMixin",
     "PortFluidNetworkMixin",
     "PortFluidPropagatorMixin",
     "PortPipeConnectionMixin",

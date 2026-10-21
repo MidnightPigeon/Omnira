@@ -1,0 +1,16 @@
+{
+  "base": {
+    "Name": "omnira:sedimented_temporal_silt"
+  },
+  "surface": {
+    "Name": "omnira:decayed_timeflow"
+  },
+  "decorations": [
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "omnira:sedimented_temporal_silt"
+      }
+    }
+  ]
+}

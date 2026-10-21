@@ -2,7 +2,7 @@
   "parent": "omnira:item/iron_reinforcement",
   "render_type": "minecraft:cutout",
   "textures": {
-    "metal": "omnira:item/modular_staff_netherite",
-    "particle": "omnira:item/modular_staff_netherite"
+    "metal": "omnira:item/reinforcement_netherite",
+    "particle": "omnira:item/reinforcement_netherite"
   }
 }

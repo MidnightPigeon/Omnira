@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "minecraft:gravel"
+  },
+  "surface": {
+    "Name": "minecraft:water"
+  },
+  "decorations": [
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "minecraft:packed_ice"
+      },
+      "crown": {
+        "Name": "minecraft:blue_ice"
+      }
+    }
+  ]
+}

@@ -1,6 +1,11 @@
 // Development-only fixture, copied into the headless test instance on request.
 ServerEvents.recipes(event => {
   event.custom({
+    type: 'omnira:assembly',
+    slots: [[], [], [], [], [], [], { item: 'minecraft:water_bucket' }],
+    result: { id: 'minecraft:diamond', count: 1 }
+  }).id('omnira_test:kubejs_bucket_assembly');
+  event.custom({
     type: 'omnira:reaction',
     items: [{ ingredient: { tag: 'minecraft:planks' }, count: 1 }],
     fluid: { id: 'minecraft:water', amount: 1000 },
@@ -12,7 +17,7 @@ ServerEvents.recipes(event => {
     type: 'omnira:catalysis',
     substrate: { tag: 'minecraft:dirt' },
     seed: { item: 'minecraft:wheat_seeds' },
-    fluid: { id: 'minecraft:water', amount: 250 },
+    fluid: { id: 'minecraft:water', amount: 100 },
     result: { id: 'minecraft:wheat', count: 2 },
     stages: 4
   }).id('omnira_test:kubejs_catalysis');

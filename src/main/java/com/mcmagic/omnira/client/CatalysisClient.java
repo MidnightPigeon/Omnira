@@ -21,6 +21,19 @@ import net.neoforged.neoforge.client.extensions.common.*;
 @EventBusSubscriber(modid="omnira",value=Dist.CLIENT)
 public final class CatalysisClient {
     private static final com.google.gson.JsonObject GEOMETRY=geometry();
+    private record Part(double x,double y,double z,double xx,double yy,double zz,int color,int faces,ResourceLocation texture,boolean glow){}
+    private static final java.util.List<Part> PARTS=parts();
+    private static final ResourceLocation GLOW=ResourceLocation.parse("omnira:block/reaction_pool_glow");
+    private static final int[] CORE_COLORS={0xDDDCC18A,0xDD8DCFF7,0xDDF4A8AD,0xDDE2FFF1};
+    private static java.util.List<Part> parts(){
+        var parts=new java.util.ArrayList<Part>();
+        for(var element:GEOMETRY.getAsJsonArray("parts")){
+            var part=element.getAsJsonObject();var a=part.getAsJsonArray("from");var b=part.getAsJsonArray("to");String material=part.get("material").getAsString();
+            parts.add(new Part(a.get(0).getAsDouble(),a.get(1).getAsDouble(),a.get(2).getAsDouble(),b.get(0).getAsDouble(),b.get(1).getAsDouble(),b.get(2).getAsDouble(),
+                    (int)Long.parseLong(part.get("color").getAsString(),16),part.get("faces").getAsInt(),ResourceLocation.parse("omnira:block/reaction_pool_"+material),material.equals("glow")));
+        }
+        return java.util.List.copyOf(parts);
+    }
     private static com.google.gson.JsonObject geometry(){
         try(var reader=new java.io.InputStreamReader(java.util.Objects.requireNonNull(CatalysisClient.class.getResourceAsStream("/assets/omnira/geometry/catalysis_chamber.json")),java.nio.charset.StandardCharsets.UTF_8)){
             return com.google.gson.JsonParser.parseReader(reader).getAsJsonObject();
@@ -37,13 +50,11 @@ public final class CatalysisClient {
     });}
     public static void draw(CatalysisBlockEntity be,double time,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         var mc=Minecraft.getInstance();var atlas=mc.getTextureAtlas(InventoryMenu.BLOCK_ATLAS);
-        var glow=atlas.apply(ResourceLocation.parse("omnira:block/reaction_pool_glow"));
-        for(var element:GEOMETRY.getAsJsonArray("parts")){
-            var part=element.getAsJsonObject();var a=part.getAsJsonArray("from");var b=part.getAsJsonArray("to");String material=part.get("material").getAsString();
-            cuboid(pose,buffers,atlas.apply(ResourceLocation.parse("omnira:block/reaction_pool_"+material)),a.get(0).getAsDouble(),a.get(1).getAsDouble(),a.get(2).getAsDouble(),
-                    b.get(0).getAsDouble(),b.get(1).getAsDouble(),b.get(2).getAsDouble(),(int)Long.parseLong(part.get("color").getAsString(),16),material.equals("glow")?LightTexture.FULL_BRIGHT:light,overlay,part.get("faces").getAsInt());
+        var glow=atlas.apply(GLOW);
+        for(var part:PARTS){
+            cuboid(pose,buffers,atlas.apply(part.texture),part.x,part.y,part.z,part.xx,part.yy,part.zz,part.color,part.glow?LightTexture.FULL_BRIGHT:light,overlay,part.faces);
         }
-        for(int side:new int[]{0,1}){
+        for(int side=0;side<2;side++){
             double x=.22+side*.56;
             if(be!=null)item(be.upgrades.getStackInSlot(side),x,.45,.02,.15F,0,pose,buffers,light,overlay);
         }
@@ -75,7 +86,19 @@ public final class CatalysisClient {
                 pose.pushPose();pose.translate(.5,1.08,.5);pose.mulPose(Axis.XP.rotationDegrees(90));
                 item(soil,0,0,0,.7F,0,pose,buffers,light,overlay);pose.popPose();
             }
-            if(CatalysisGrowthVisuals.sealed(soil)){
+            if(soil.is(com.mcmagic.omnira.registry.ModItems.TEST_SPELL_CORE.get())&&be.items.getStackInSlot(1).is(com.mcmagic.omnira.registry.ModItems.ARCANE_DUST.get())){
+                item(soil,.5,1.43,.5,.35F,time*.18,pose,buffers,light,overlay);
+                float growth=(be.visualStage(time)-1)/3F;int grains=8+(int)(growth*16);
+                for(int i=0;i<grains;i++){
+                    double angle=time*.014+i*2.39996,radius=.12+(i%3)*.027;
+                    com.mcmagic.omnira.client.renderer.StellarVisuals.cube(pose,buffers,(float)(.5+Math.cos(angle)*radius),
+                            (float)(1.43+Math.sin(angle*.7)*.1),(float)(.5+Math.sin(angle)*radius),.009F,i%2==0?0xBD99EF:0x875BBE,.9F);
+                }
+            }else if(soil.is(com.mcmagic.omnira.myriad.MiniatureWorldContent.PROBABILITY_CLOUD.get())){
+                pose.pushPose();pose.translate(.5,1.4,.5);pose.scale(.65F,.65F,.65F);ProbabilityCloudClient.draw(time,pose,buffers);pose.popPose();
+                float growth=(be.visualStage(time)-1)/3F;
+                item(be.items.getStackInSlot(1),.5,1.73,.5,.2F+.15F*growth,time*.35,pose,buffers,light,overlay);
+            }else if(CatalysisGrowthVisuals.sealed(soil)){
                 CatalysisGrowthVisuals.sealedGrowth(be,time,pose,buffers,light,overlay);
             }else if(plan!=null&&CatalysisGrowthVisuals.fungal(plan)){
                 CatalysisGrowthVisuals.fungus(plan,be.visualStage(time),pose,buffers,light,overlay);
@@ -115,12 +138,11 @@ public final class CatalysisClient {
                 pose,CrystalGlassLayer.contents(buffers),working?LightTexture.FULL_BRIGHT:light,overlay);
         pose.popPose();
         if(!working)return;
-        int[] colors={0xDDDCC18A,0xDD8DCFF7,0xDDF4A8AD,0xDDE2FFF1};
         for(int i=0;i<8;i++){
             double angle=time*.035+i*Math.PI/4;
             double x=.5+Math.cos(angle)*.32,z=.5+Math.sin(angle)*.32,y=.5+Math.sin(angle*2)*.12;
             double radius=.012+(.5+.5*Math.sin(time*.08+i))*.004;
-            box(pose,buffers,glow,x-radius,y-radius,z-radius,x+radius,y+radius,z+radius,colors[i%4],LightTexture.FULL_BRIGHT,overlay);
+            box(pose,buffers,glow,x-radius,y-radius,z-radius,x+radius,y+radius,z+radius,CORE_COLORS[i%4],LightTexture.FULL_BRIGHT,overlay);
         }
     }
     private static void item(ItemStack stack,double x,double y,double z,float scale,double angle,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
@@ -128,15 +150,25 @@ public final class CatalysisClient {
         Minecraft.getInstance().getItemRenderer().renderStatic(stack,ItemDisplayContext.NONE,light,overlay,pose,CrystalGlassLayer.contents(buffers),Minecraft.getInstance().level,0);pose.popPose();
     }
     private static final int[][] FACES={{0,3,2,1},{4,5,6,7},{0,4,7,3},{1,2,6,5},{3,7,6,2},{0,1,5,4}};
+    private static final int[][] CORNERS={{0,0,0},{1,0,0},{1,1,0},{0,1,0},{0,0,1},{1,0,1},{1,1,1},{0,1,1}};
     private static void box(PoseStack pose,MultiBufferSource buffers,TextureAtlasSprite sprite,double x,double y,double z,double xx,double yy,double zz,int color,int light,int overlay){
         cuboid(pose,buffers,sprite,x,y,z,xx,yy,zz,color,light,overlay,63);
     }
     private static void cuboid(PoseStack pose,MultiBufferSource buffers,TextureAtlasSprite sprite,double x,double y,double z,double xx,double yy,double zz,int color,int light,int overlay,int mask){
-        float[][] v={{(float)x,(float)y,(float)z},{(float)xx,(float)y,(float)z},{(float)xx,(float)yy,(float)z},{(float)x,(float)yy,(float)z},
-                {(float)x,(float)y,(float)zz},{(float)xx,(float)y,(float)zz},{(float)xx,(float)yy,(float)zz},{(float)x,(float)yy,(float)zz}};
-        for(int face=0;face<6;face++){if((mask&(1<<face))==0)continue;var f=FACES[face];var a=v[f[0]];var b=v[f[1]];var d=v[f[3]];var normal=new org.joml.Vector3f(b[0]-a[0],b[1]-a[1],b[2]-a[2]).cross(new org.joml.Vector3f(d[0]-a[0],d[1]-a[1],d[2]-a[2])).normalize();
-            var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);for(int i=0;i<4;i++)out.addVertex(pose.last(),v[f[i]][0],v[f[i]][1],v[f[i]][2]).setColor(color)
-                    .setUv(sprite.getU(i>=2?1:0),sprite.getV(i==1||i==2?1:0)).setOverlay(overlay).setLight(light).setNormal(pose.last(),normal.x,normal.y,normal.z);}
+        var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
+        var normal=new org.joml.Vector3f();var across=new org.joml.Vector3f();
+        float dx=(float)xx-(float)x,dy=(float)yy-(float)y,dz=(float)zz-(float)z;
+        for(int face=0;face<6;face++){
+            if((mask&(1<<face))==0)continue;
+            var f=FACES[face];var a=CORNERS[f[0]];var b=CORNERS[f[1]];var d=CORNERS[f[3]];
+            normal.set((b[0]-a[0])*dx,(b[1]-a[1])*dy,(b[2]-a[2])*dz);
+            across.set((d[0]-a[0])*dx,(d[1]-a[1])*dy,(d[2]-a[2])*dz);normal.cross(across).normalize();
+            for(int i=0;i<4;i++){
+                var v=CORNERS[f[i]];
+                out.addVertex(pose.last(),(float)(v[0]==0?x:xx),(float)(v[1]==0?y:yy),(float)(v[2]==0?z:zz)).setColor(color)
+                        .setUv(sprite.getU(i>=2?1:0),sprite.getV(i==1||i==2?1:0)).setOverlay(overlay).setLight(light).setNormal(pose.last(),normal.x,normal.y,normal.z);
+            }
+        }
     }
     @SubscribeEvent public static void items(RegisterClientExtensionsEvent e){e.registerItem(new IClientItemExtensions(){private BlockEntityWithoutLevelRenderer renderer;
         public BlockEntityWithoutLevelRenderer getCustomRenderer(){if(renderer==null)renderer=new BlockEntityWithoutLevelRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels()){

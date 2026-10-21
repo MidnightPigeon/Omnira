@@ -36,12 +36,13 @@ public final class RitualSwordUpgradeRenderer extends BlockEntityWithoutLevelRen
     public static void particles(ItemStack stack,PoseStack pose,MultiBufferSource buffers,int overlay,boolean tail){
         var sword=(RitualSwordItem)stack.getItem();var mc=Minecraft.getInstance();
         double t=mc.level==null?net.minecraft.Util.getMillis()/50.0:mc.level.getGameTime()+mc.getTimer().getGameTimeDeltaPartialTick(false);
+        var grains=ParticleModelQuads.collect(mc.getModelManager().getModel(ParadoxMaterialRenderer.model("grain")));
+        var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
         for(int i=0;i<sword.upgradeLevel*2;i++){
             double a=t*.045+i*2.39996,y=tail?.19:.25+(i+.5)/(sword.upgradeLevel*2)*1.65;
             pose.pushPose();pose.translate(.5+Math.cos(a)*.19,y+Math.sin(a*1.3)*.04,.5+Math.sin(a)*.19);
             pose.mulPose(Axis.YP.rotationDegrees((float)(a*57.2958)));pose.translate(-.5,-.5,-.5);
-            Minecraft.getInstance().getItemRenderer().renderModelLists(mc.getModelManager().getModel(ParadoxMaterialRenderer.model("grain")),
-                    stack,LightTexture.FULL_BRIGHT,overlay,pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));pose.popPose();
+            mc.getItemRenderer().renderQuadList(pose,out,grains,stack,LightTexture.FULL_BRIGHT,overlay);pose.popPose();
         }
     }
 }

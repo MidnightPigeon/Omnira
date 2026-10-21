@@ -99,8 +99,6 @@ public final class AffinityRitual {
                 || !player.getData(ModAttachments.AFFINITY).equals(session.before)
                 || !player.getItemInHand(session.hand).is(session.offering.getItem())
                 || (session.removing()?!inside(player,session.pos):!clear(player,session,progress))) {cancel(player);return;}
-        var items=pedestals(player,session.pos);
-        if(items.size()!=8){cancel(player);return;}
         if(!session.removing())hold(player,session,progress);
         else if(session.selected==Affinity.DREAM)player.setData(ModAttachments.DREAM_SOLIDIFY,(float)progress);
         session.ticks++;
@@ -113,6 +111,7 @@ public final class AffinityRitual {
                 new AffinityState(session.selected.ordinal(),removing?session.selected.penaltyDuration():0));
         player.setData(ModAttachments.DREAM_SOLIDIFY,0F);
         AffinityEffects.refresh(player);
+        if(!removing&&session.selected!=Affinity.DREAM)com.mcmagic.omnira.progression.BranchProgress.record(player,"elemental_pact");
         player.displayClientMessage(Component.translatable(removing && session.selected==Affinity.DREAM?"message.omnira.affinity.cleared":
                 removing?"message.omnira.affinity.removing":"message.omnira.affinity.bound",Component.translatable(session.selected.key())),true);
     }

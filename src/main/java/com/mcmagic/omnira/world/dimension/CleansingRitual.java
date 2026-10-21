@@ -21,11 +21,13 @@ public final class CleansingRitual {
         if(!caster.isAlive() || caster.isSpectator() || !level.mayInteract(caster,core)
                 || !RitualEnergyCoreBlock.supportsBasicRitual(level.getBlockState(core))
                 || !caster.getItemInHand(hand).is(ModItems.PARADOX_DUST.get()))return false;
+        var pedestals=new java.util.ArrayList<CrystalPedestalBlockEntity>();
         for(int[] offset:DreamRitual.ANCHORS) {
             BlockPos pos=core.offset(offset[0],0,offset[1]);
             if(!level.hasChunkAt(pos) || !level.mayInteract(caster,pos)
                     || !(level.getBlockEntity(pos) instanceof CrystalPedestalBlockEntity pedestal)
                     || !pedestal.getItem(0).is(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()))return false;
+            pedestals.add(pedestal);
         }
         var center=core.getCenter();
         var targets=level.players().stream().filter(player->player.isAlive() && !player.isSpectator()
@@ -33,6 +35,7 @@ public final class CleansingRitual {
                 && (player.getX()-center.x)*(player.getX()-center.x)
                 +(player.getZ()-center.z)*(player.getZ()-center.z)<9).toList();
         if(targets.isEmpty())return false;
+        for(var pedestal:pedestals)pedestal.removeItem(0,1);
         caster.getItemInHand(hand).consume(1,caster);
         for(ServerPlayer player:targets) {
             for(int slot=0;slot<player.getInventory().getContainerSize();slot++) {
@@ -45,7 +48,8 @@ public final class CleansingRitual {
             }
             ManuscriptReward.cleanse(player);
             player.removeAllEffects();
-            player.setHealth(1);
+            if(player.getHealth()>1)com.mcmagic.omnira.combat.OmniraDamage.payHealth(player,player.getHealth()-1,"true_damage");
+            else player.setHealth(1);
             player.getFoodData().setFoodLevel(1);
             player.getFoodData().setSaturation(0);
             level.sendParticles(new DustParticleOptions(new Vector3f(.83F,1F,.92F),1),player.getX(),player.getY()+1,player.getZ(),32,.55,.8,.55,.02);

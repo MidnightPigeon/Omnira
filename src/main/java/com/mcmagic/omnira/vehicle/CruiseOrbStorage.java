@@ -1,6 +1,7 @@
 package com.mcmagic.omnira.vehicle;
 
 import com.mcmagic.omnira.block.entity.OrbUpgrades;
+import com.mcmagic.omnira.storage.LogisticsRates;
 import com.mcmagic.omnira.item.OrbUpgradeItem.Kind;
 import com.mcmagic.omnira.item.bottle.PocketBottleItem;
 import com.mcmagic.omnira.registry.ModItems;
@@ -24,7 +25,7 @@ public final class CruiseOrbStorage {
     public static final int SIZE=12, BASE_CAPACITY=24000;
     private final CruiseOrbEntity owner;
     private boolean loading,portInternal,portDone,portInput;
-    private int automationTicks,portCredit,fluidBudget;
+    private int automationTicks,portCredit;
     private int trashTicks;
     private ItemStack portSnapshot=ItemStack.EMPTY;
     private ItemStack installedSeat=ItemStack.EMPTY;
@@ -42,7 +43,7 @@ public final class CruiseOrbStorage {
     public final ItemStackHandler upgrades=new ItemStackHandler(3) {
         @Override public int getSlotLimit(int slot){return 1;}
         @Override public boolean isItemValid(int slot,ItemStack stack) {
-            var kind=OrbUpgrades.kind(stack);if(kind==null || kind==Kind.INTAKE || kind==Kind.OUTPUT || stack.getCount()!=1)return false;
+            var kind=OrbUpgrades.kind(stack);if(!com.mcmagic.omnira.item.UpgradeCompatibility.Host.CRUISE_ORB.accepts(kind)||stack.getCount()!=1)return false;
             for(int i=0;i<3;i++)if(i!=slot && kind.sameFamily(OrbUpgrades.kind(getStackInSlot(i))))return false;
             return fitsMultiplier(multiplierExcept(slot,stack));
         }
@@ -103,7 +104,7 @@ public final class CruiseOrbStorage {
         if(hasGoldenToilet() || !stack.is(ModItems.GOLDEN_TOILET.get()))return false;
         installedSeat=stack.copyWithCount(1);changed();return true;
     }
-    public int speedMultiplier(){for(int i=0;i<3;i++)if(OrbUpgrades.kind(upgrades.getStackInSlot(i))==Kind.SPEED)return 2;return 1;}
+    public int speedMultiplier(){return com.mcmagic.omnira.storage.LogisticsRates.multiplier(upgrades);}
     public int itemLimit(ItemStack stack,int multiplier){return stack.getMaxStackSize()>1?stack.getMaxStackSize()*multiplier:1;}
     public boolean fitsMultiplier(int multiplier) {
         if(multiplier<1 || tank.getFluidAmount()>BASE_CAPACITY*multiplier)return false;
@@ -145,8 +146,6 @@ public final class CruiseOrbStorage {
         var discarded=trash.getStackInSlot(0);
         if(filledBucket(discarded) && ++trashTicks>=200)
             trash.setStackInSlot(0,new ItemStack(net.minecraft.world.item.Items.BUCKET,discarded.getCount()));
-        int speed=speedMultiplier();
-        fluidBudget=Math.min(500*speed,fluidBudget+25*speed);
         tickPort();
         if(++automationTicks<20)return;
         automationTicks=0;
@@ -164,9 +163,8 @@ public final class CruiseOrbStorage {
         var stack=port.getStackInSlot(0);
         if(!ItemStack.matches(stack,portSnapshot))resetPort();
         if(stack.isEmpty() || portDone || !port.isItemValid(0,stack))return;
-        // Atomic bucket transfers reserve the same shared budget as automation.
-        int reserved=Math.min(25*speedMultiplier(),Math.min(fluidBudget,1000-portCredit));
-        fluidBudget-=reserved;portCredit+=reserved;
+        int reserved=Math.min(LogisticsRates.FLUID/20*speedMultiplier(),1000-portCredit);
+        portCredit+=reserved;
         if(portCredit<1000)return;
         var result=portInput?FluidUtil.tryEmptyContainer(stack,tank,1000,null,true):FluidUtil.tryFillContainer(stack,tank,1000,null,true);
         if(!result.isSuccess())return;
@@ -180,8 +178,7 @@ public final class CruiseOrbStorage {
         upgrades.getStackInSlot(slot).set(DataComponents.CUSTOM_DATA,CustomData.of(tag));changed();
     }
     private void lava(int slot) {
-        var lava=new FluidStack(Fluids.LAVA,100);
-        if(!com.mcmagic.omnira.recipe.RecipeControl.allows(owner.level(),upgrades,java.util.List.of(),lava))return;
+        var lava=new FluidStack(Fluids.LAVA,LogisticsRates.LAVA);
         if(tank.fill(lava,FluidAction.SIMULATE)>0){tank.fill(lava,FluidAction.EXECUTE);return;}
         var tag=OrbUpgrades.settings(upgrades.getStackInSlot(slot));
         for(int i=0;i<SIZE;i++) {
@@ -193,7 +190,7 @@ public final class CruiseOrbStorage {
             }
             var source=new FluidTank(1000);source.setFluid(new FluidStack(Fluids.LAVA,1000));
             if(!FluidUtil.tryFillContainer(item,source,1000,null,false).isSuccess())continue;
-            int credit=Math.clamp(tag.getInt("LavaCredit"),0,900)+100;
+            int credit=Math.min(1000,Math.max(0,tag.getInt("LavaCredit"))+LogisticsRates.LAVA);
             source.setFluid(new FluidStack(Fluids.LAVA,credit));
             var result=FluidUtil.tryFillContainer(item,source,credit,null,true);
             if(result.isSuccess()) {
@@ -237,7 +234,7 @@ public final class CruiseOrbStorage {
             trash.deserializeNBT(registries,trashTag);trashTicks=Math.clamp(tag.getInt("TrashTicks"),0,199);
             var seat=ItemStack.parseOptional(registries,tag.getCompound("InstalledSeat"));
             installedSeat=seat.is(ModItems.GOLDEN_TOILET.get())?seat.copyWithCount(1):ItemStack.EMPTY;
-            resetPort();portDone=tag.getBoolean("PortDone");portInput=tag.getBoolean("PortInput");automationTicks=0;fluidBudget=0;
+            resetPort();portDone=tag.getBoolean("PortDone");portInput=tag.getBoolean("PortInput");automationTicks=0;
         }finally{loading=false;}
     }
 }

@@ -20,13 +20,13 @@ public final class AlchemyMaterials {
     public static final Liquid REFINED=new Liquid("refined_spacetime",false);
     public static final DeferredBlock<EnhancedAlchemicalEnergyCoreBlock> ENHANCED_CORE=ModBlocks.BLOCKS.register("enhanced_alchemical_energy_core",()->
             new EnhancedAlchemicalEnergyCoreBlock(BlockBehaviour.Properties.ofFullCopy(ModBlocks.ROUGH_ALCHEMICAL_ENERGY_CORE.get())));
-    public static final DeferredItem<BlockItem> ENHANCED_CORE_ITEM=ModItems.ITEMS.registerSimpleBlockItem(ENHANCED_CORE);
+    public static final DeferredItem<BlockItem> ENHANCED_CORE_ITEM=ModItems.ITEMS.registerSimpleBlockItem(ENHANCED_CORE,new Item.Properties().rarity(Rarity.UNCOMMON));
     public static final DeferredHolder<net.minecraft.world.level.block.entity.BlockEntityType<?>,net.minecraft.world.level.block.entity.BlockEntityType<EnhancedAlchemicalEnergyCoreBlock.Core>> CORE_ENTITY=
             ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register("enhanced_alchemical_energy_core",()->net.minecraft.world.level.block.entity.BlockEntityType.Builder.of(
                     EnhancedAlchemicalEnergyCoreBlock.Core::new,ENHANCED_CORE.get()).build(null));
     public static final DeferredItem<AlchemicalWasteItem> WASTE=ModItems.ITEMS.register("alchemical_waste",()->new AlchemicalWasteItem(new Item.Properties()));
     public static final DeferredHolder<EntityType<?>,EntityType<ThrownAlchemicalWaste>> THROWN_WASTE=ModEntityTypes.ENTITY_TYPES.register("alchemical_waste",()->
-            EntityType.Builder.<ThrownAlchemicalWaste>of(ThrownAlchemicalWaste::new,MobCategory.MISC).sized(.25F,.25F).clientTrackingRange(4).updateInterval(10).build("omnira:alchemical_waste"));
+            EntityType.Builder.<ThrownAlchemicalWaste>of(ThrownAlchemicalWaste::new,MobCategory.MISC).sized(.25F,.25F).noSummon().clientTrackingRange(4).updateInterval(10).build("omnira:alchemical_waste"));
 
     public static final class Liquid {
         public final String id;

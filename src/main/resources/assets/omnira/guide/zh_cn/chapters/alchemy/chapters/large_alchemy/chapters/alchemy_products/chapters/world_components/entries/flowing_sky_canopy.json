@@ -1,0 +1,15 @@
+{
+  "id": "flowing_sky_canopy",
+  "title": "流风天幕",
+  "item": "omnira:flowing_sky_canopy",
+  "recipes": false,
+  "text": [
+    "追加1风弹，凝结出容纳流动大气的天幕。风之微核、火药与注灵水晶也可无序合成风弹。"
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "拟界之仪"
+    }
+  ]
+}

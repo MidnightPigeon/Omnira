@@ -1,0 +1,15 @@
+{
+  "id": "strata_skeleton",
+  "title": "地层骨架",
+  "item": "omnira:strata_skeleton",
+  "recipes": false,
+  "text": [
+    "追加16块深板岩，凝结出承载世界的地质层次。"
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "拟界之仪"
+    }
+  ]
+}

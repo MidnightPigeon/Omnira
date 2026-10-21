@@ -61,6 +61,7 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void additionalModels(net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional event) {
+        event.register(com.mcmagic.omnira.client.renderer.SpeedUpgradeRenderer.MODEL);
         for(String part:new String[]{"mystery","flow","grain","source","frame","genesis_grain"})event.register(com.mcmagic.omnira.client.renderer.ParadoxMaterialRenderer.model(part));
         for(String id:com.mcmagic.omnira.item.RitualSwordUpgrades.NAIL_IDS)
             event.register(com.mcmagic.omnira.client.renderer.RitualSwordUpgradeRenderer.model(id,"body"));
@@ -115,6 +116,7 @@ public final class ClientModEvents {
             event.register(com.mcmagic.omnira.client.renderer.GuideBookRenderer.model(part));
         for(String kind:new String[]{"infused","sanctified","corrupted"})
             event.register(com.mcmagic.omnira.client.renderer.GuideBookRenderer.grimoire(kind));
+        event.register(com.mcmagic.omnira.client.renderer.GuideBookRenderer.founder());
         for(String part:new String[]{"body","mote"}) {
             event.register(com.mcmagic.omnira.client.renderer.SpellCoreRenderer.model(part));
             event.register(com.mcmagic.omnira.client.renderer.SpellCoreRenderer.dreamModel(part));
@@ -174,6 +176,12 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void itemRenderers(net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent event) {
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
+            private com.mcmagic.omnira.client.renderer.SpeedUpgradeRenderer renderer;
+            @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
+                if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.SpeedUpgradeRenderer();return renderer;
+            }
+        },com.mcmagic.omnira.registry.ModItems.SPEED_UPGRADE.get());
         var upgraded=java.util.stream.Stream.concat(com.mcmagic.omnira.registry.ModItems.NAIL_UPGRADES.stream(),
                 com.mcmagic.omnira.registry.ModItems.NEEDLE_UPGRADES.stream()).map(java.util.function.Supplier::get).toArray(net.minecraft.world.item.Item[]::new);
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
@@ -284,7 +292,7 @@ public final class ClientModEvents {
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
                 if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.GuidanceOrbRenderer.ItemRenderer();return renderer;
             }
-        },com.mcmagic.omnira.guidance.GuidanceContent.ITEM.get());
+        },com.mcmagic.omnira.guidance.GuidanceContent.ITEM.get(),com.mcmagic.omnira.guidance.GuidanceContent.UNDERSTANDING_ITEM.get());
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
             private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
@@ -354,7 +362,7 @@ public final class ClientModEvents {
                 return renderer;
             }
         },com.mcmagic.omnira.registry.ModItems.GUIDE_BOOK.get(),com.mcmagic.omnira.registry.ModItems.INFUSED_GRIMOIRE.get(),
-                com.mcmagic.omnira.registry.ModItems.SANCTIFIED_GRIMOIRE.get(),com.mcmagic.omnira.registry.ModItems.CORRUPTED_GRIMOIRE.get());
+                com.mcmagic.omnira.registry.ModItems.SANCTIFIED_GRIMOIRE.get(),com.mcmagic.omnira.registry.ModItems.CORRUPTED_GRIMOIRE.get(),com.mcmagic.omnira.registry.ModItems.FOUNDER_APPROVAL.get());
         var extension=new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
             private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
@@ -371,9 +379,10 @@ public final class ClientModEvents {
     @SubscribeEvent
     public static void registerHud(RegisterGuiLayersEvent event) {
         event.registerAbove(VanillaGuiLayers.HOTBAR,ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"recall"),com.mcmagic.omnira.client.hud.RecallOverlay::render);
-        event.registerAbove(VanillaGuiLayers.HOTBAR, ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"spell_chain"),com.mcmagic.omnira.client.hud.LatticeOverlay::render);
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL,
                 ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "mana"), ManaOverlay::render);
+        event.registerAbove(ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"mana"),
+                ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"spell_chain"),com.mcmagic.omnira.client.hud.LatticeOverlay::render);
     }
 
     @SubscribeEvent
@@ -415,6 +424,8 @@ public final class ClientModEvents {
         event.registerEntityRenderer(ModEntityTypes.FLYING_NEEDLE.get(),com.mcmagic.omnira.client.renderer.FlyingNeedleRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.SHADOW_MIST.get(),com.mcmagic.omnira.client.renderer.ShadowMistRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.SHADOW_GHOST.get(),com.mcmagic.omnira.client.renderer.ShadowGhostRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.WEAVER_SPIRIT.get(),com.mcmagic.omnira.client.renderer.WeaverSpiritRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.WEAVER_BOLT.get(),com.mcmagic.omnira.client.renderer.WeaverBoltRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.DREAM_MIRROR.get(),com.mcmagic.omnira.client.renderer.DreamMirrorRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.LIGHT_SPIRIT.get(), com.mcmagic.omnira.client.renderer.LightSpiritRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.ARCHAEOPTERYX_SPIRIT.get(),context->new com.mcmagic.omnira.client.renderer.AncientCompanionRenderer<>(context,true));

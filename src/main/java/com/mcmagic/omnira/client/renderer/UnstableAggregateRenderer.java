@@ -36,11 +36,14 @@ public final class UnstableAggregateRenderer extends BlockEntityWithoutLevelRend
         draw("body",pose,buffers,overlay);
         pose.pushPose();pose.translate(.5,.5,.5);float pulse=1+(float)Math.sin(time*.07)*.025F;pose.scale(pulse,pulse,pulse);pose.translate(-.5,-.5,-.5);
         draw("halo",pose,buffers,overlay);pose.popPose();pose.popPose();
+        var grains=ParticleModelQuads.collect(mc.getModelManager().getModel(model("grain")));
+        var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
         for(int i=0;i<8;i++){
             double phase=flow==0?.45:((time/32+i*.137)%1),progress=flow<0?1-phase:phase;
             double y=1-2*(i+.5)/8,angle=i*2.3999632297+time*.012,radius=.26+.22*progress,r=Math.sqrt(1-y*y);
             pose.pushPose();pose.translate(.5+Math.cos(angle)*r*radius,.5+y*radius,.5+Math.sin(angle)*r*radius);
-            float scale=(float)(.25+.75*Math.sin(Math.PI*phase));pose.scale(scale,scale,scale);draw("grain",pose,buffers,overlay);pose.popPose();
+            float scale=(float)(.25+.75*Math.sin(Math.PI*phase));pose.scale(scale,scale,scale);
+            mc.getItemRenderer().renderQuadList(pose,out,grains,ItemStack.EMPTY,LightTexture.FULL_BRIGHT,overlay);pose.popPose();
         }
     }
 }

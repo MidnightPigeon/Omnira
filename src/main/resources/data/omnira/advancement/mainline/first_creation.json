@@ -1,0 +1,43 @@
+{
+  "parent": "omnira:mainline/spiritual_awakening",
+  "display": {
+    "icon": {
+      "id": "omnira:arcane_assembly_table"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.first_creation.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.first_creation.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "obtained": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:arcane_assembly_table"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "obtained"
+    ]
+  ]
+}

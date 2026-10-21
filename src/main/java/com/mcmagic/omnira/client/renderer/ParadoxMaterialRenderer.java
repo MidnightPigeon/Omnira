@@ -20,10 +20,15 @@ public final class ParadoxMaterialRenderer extends BlockEntityWithoutLevelRender
             pose.mulPose(Axis.ZP.rotationDegrees((float)(Math.sin(t*.02)*8)));
         }
         draw(stack,mystery?"mystery":"flow",pose,buffers,light,overlay);
-        if(mystery)for(int i=0;i<10;i++){
-            double a=t*.035+i*2.39996;
-            pose.pushPose();pose.translate(Math.cos(a)*.34,Math.sin(a*1.7)*.24,Math.sin(a)*.34);
-            draw(stack,"grain",pose,buffers,LightTexture.FULL_BRIGHT,overlay);pose.popPose();
+        if(mystery){
+            var grains=ParticleModelQuads.collect(mc.getModelManager().getModel(model("grain")));
+            var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
+            for(int i=0;i<10;i++){
+                double a=t*.035+i*2.39996;
+                pose.pushPose();pose.translate(Math.cos(a)*.40,Math.sin(a*1.7)*.28,Math.sin(a)*.40);pose.scale(.6F,.6F,.6F);
+                pose.pushPose();pose.translate(-.5,-.5,-.5);
+                mc.getItemRenderer().renderQuadList(pose,out,grains,stack,LightTexture.FULL_BRIGHT,overlay);pose.popPose();pose.popPose();
+            }
         }
         pose.popPose();
     }

@@ -39,9 +39,9 @@ public final class SpacetimeEngineEnergyGameTests {
             h.assertTrue(port.extractEnergy(10000,false)==offered&&port.extractEnergy(10000,false)==0,"Per-face duplicate output");
         }
         e.configure(0,2048,128,false);
-        h.assertTrue(e.energy.rate(0)==(SpacetimeEngineController.hasKinetics()?2048:512),"Wrong electrical ratio");
+        h.assertTrue(e.energy.rate(0)==2048,"Wrong electrical ratio");
         e.configure(0,2048,16,true);
-        h.assertTrue(e.energy.rate(0)==(SpacetimeEngineController.hasKinetics()?2048:512),"RPM or reverse multiplied FE");
+        h.assertTrue(e.energy.rate(0)==2048,"RPM or reverse multiplied FE");
         var cached=e.energy.port(1);l.setBlockAndUpdate(root.offset(-1,0,-1),Blocks.AIR.defaultBlockState());
         h.assertTrue(!cached.canExtract()&&cached.extractEnergy(100,true)==0,"Broken engine retained power");h.succeed();
     }
@@ -60,17 +60,11 @@ public final class SpacetimeEngineEnergyGameTests {
     @GameTest(template="spell_arena") public static void gridsAffectFeWithoutChangingBaseDrive(GameTestHelper h){
         var e=engine(h);
         for(int i=0;i<3;i++)e.grids.setStackInSlot(i,new net.minecraft.world.item.ItemStack(com.mcmagic.omnira.registry.ModItems.BASIC_CRYSTAL_GRID.get()));
-        if(!SpacetimeEngineController.hasKinetics())h.assertTrue(e.energy.rate(0)==(int)Math.round(512*1.2*1.2*1.2),"Fractional grids not applied to FE");
+        h.assertTrue(e.limit()==(int)Math.round(2048*1.2*1.2*1.2)&&e.energy.rate(0)==512,"Grids must raise the configurable ceiling, not override configured output");
         for(int i=0;i<3;i++)e.grids.setStackInSlot(i,new net.minecraft.world.item.ItemStack(com.mcmagic.omnira.registry.ModItems.OMNI_CRYSTAL_GRID.get()));
-        if(!SpacetimeEngineController.hasKinetics()){
-            h.assertTrue(e.energy.rate(0)==32768&&e.generatedSpeed(0)==16,"Grid FE multiplier changed fixed speed");
-            h.assertTrue(SpacetimePortState.driveAt(h.getLevel(),e.getBlockPos().below().north(),Direction.NORTH)==1,"Grid increased base mechanical drive");
-            e.configureRotation(0,true);h.assertTrue(e.energy.rate(0)==32768&&e.generatedSpeed(0)==-16,"Reverse changed FE rate");
-            for(int i=0;i<3;i++)e.grids.setStackInSlot(i,net.minecraft.world.item.ItemStack.EMPTY);
-            h.assertTrue(e.energy.rate(0)==512,"Removal retained FE multiplier");
-        }else{
-            h.assertTrue(e.configure(0,131072,128,false)&&e.energy.rate(0)==131072,"Create FE ceiling or conversion wrong");
-        }
+        h.assertTrue(e.configure(0,131072,128,false)&&e.energy.rate(0)==131072&&e.generatedSpeed(0)==16,"Unified FE ceiling or fixed conversion speed wrong");
+        for(int i=0;i<3;i++)e.grids.setStackInSlot(i,net.minecraft.world.item.ItemStack.EMPTY);
+        h.assertTrue(e.energy.rate(0)==2048,"Removal retained out-of-range configured output");
         h.succeed();
     }
     @GameTest(template="spell_arena") public static void enginePushesThroughPassivePorts(GameTestHelper h){
@@ -81,10 +75,18 @@ public final class SpacetimeEngineEnergyGameTests {
         var b=patch(h,center.east(),Direction.EAST);
         h.assertTrue(SpacetimePortState.pair(b,a),"Reverse-color link failed");
         a.tick();b.tick();h.assertTrue(pool.energyInput.getEnergyStored()==0,"Port autonomously moved energy");
-        var cached=b.energyPort(Direction.WEST);h.assertTrue(cached.canExtract(),"Remote source missing");
-        e.energy.tick();h.assertTrue(pool.energyInput.getEnergyStored()==25,"Engine did not push FE through port");
-        h.assertTrue(cached.extractEnergy(100,false)==0,"Pull duplicated pushed FE");
-        b.unlink();h.assertTrue(!cached.canExtract()&&cached.extractEnergy(100,false)==0,"Unlinked proxy retained source");h.succeed();
+        var cached=b.energyPort(Direction.WEST);h.assertTrue(!cached.canExtract()&&cached.extractEnergy(100,false)==0,"Native connection exposed duplicate FE");
+        e.energy.tick();h.assertTrue(pool.energyInput.getEnergyStored()==0,"Insufficient native network bypassed pulse priority using FE");
+        b.unlink();h.assertTrue(!cached.canExtract()&&cached.extractEnergy(100,false)==0,"Unlinked proxy retained source");
+        var external=h.absolutePos(new BlockPos(11,3,4));l.setBlockAndUpdate(external,Blocks.GOLD_BLOCK.defaultBlockState());
+        var c=patch(h,external,Direction.EAST);h.assertTrue(SpacetimePortState.pair(a,c),"External link failed");
+        var source=e.getBlockPos().below().east();
+        h.assertTrue(com.mcmagic.omnira.pulse.PulseOutput.mode(l,source,Direction.EAST)==com.mcmagic.omnira.pulse.PulseOutput.PULSE
+            &&com.mcmagic.omnira.pulse.PulseOutput.consumptionMode(l,source,Direction.EAST)==com.mcmagic.omnira.pulse.PulseOutput.ELECTRIC,"Remote external conversion lost reservation or changed source animation");
+        var output=c.energyPort(Direction.WEST);h.assertTrue(output.canExtract(),"External source missing");
+        h.assertTrue(output.extractEnergy(100,false)==25,"Passive electrical source conversion disappeared");
+        h.assertTrue(output.extractEnergy(100,false)==0,"Repeated pull duplicated FE");
+        c.unlink();h.assertTrue(!output.canExtract()&&output.extractEnergy(100,false)==0,"External unlinked proxy retained source");h.succeed();
     }
     private static SpacetimePortState patch(GameTestHelper h,BlockPos attached,Direction face){
         var pos=attached.relative(face);h.getLevel().setBlockAndUpdate(pos,ModBlocks.SPACETIME_PORT.get().defaultBlockState().setValue(SpacetimePortBlock.FACING,face));

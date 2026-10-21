@@ -11,25 +11,25 @@ import com.mojang.math.Axis;
 import com.mcmagic.omnira.config.OmniraConfig;
 
 public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBallBlockEntity> {
-    private static final net.minecraft.util.RandomSource BASE_RANDOM=net.minecraft.util.RandomSource.create(42);
-    private static final net.minecraft.core.Direction[] BASE_FACES={net.minecraft.core.Direction.DOWN,net.minecraft.core.Direction.UP,net.minecraft.core.Direction.NORTH,net.minecraft.core.Direction.SOUTH,net.minecraft.core.Direction.WEST,net.minecraft.core.Direction.EAST,null};
-    public static final String[] PARTS={"base","shell","mote","cracks_1","cracks_2","void_base","star_base","guidance_base"};
+    public static final String[] PARTS={"base","shell","mote","cracks_1","cracks_2","void_base","star_base","guidance_base","pulse_base"};
+    private static final java.util.Map<String,ModelResourceLocation> MODELS=java.util.Arrays.stream(PARTS)
+            .collect(java.util.stream.Collectors.toUnmodifiableMap(part->part,part->ModelResourceLocation.standalone(
+                    net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","item/crystal_ball_"+part))));
+    private static final float[][] UPGRADE_RIM=upgradeRim();
     public CrystalBallRenderer(BlockEntityRendererProvider.Context context) {}
-    public static ModelResourceLocation model(String part) {return CrystalGridRenderer.part("crystal_ball",part);}
+    public static ModelResourceLocation model(String part) {
+        var id=MODELS.get(part);return id!=null?id:CrystalGridRenderer.part("crystal_ball",part);
+    }
     private static void draw(String part,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {
         var mc=Minecraft.getInstance();
-        mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(model(part)),ItemStack.EMPTY,light,overlay,
-                pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
+        StaticModelQuads.draw(mc.getModelManager().getModel(model(part)),pose,buffers.getBuffer(CrystalGlassLayer.ATLAS),light,overlay);
     }
     private static void base(CrystalBallBlockEntity ball,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         var mc=Minecraft.getInstance();
         var model=ball.resonant()?com.mcmagic.omnira.client.StorageVisuals.base():model(ball instanceof com.mcmagic.omnira.block.entity.VoidCrystalBallBlockEntity?"void_base":ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity?"star_base":"base");
         int tint=ball.resonant()?com.mcmagic.omnira.client.StorageVisuals.color(ball.networkStatus):ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity?0x284E91:0xFFFFFF;
         var baked=mc.getModelManager().getModel(model);var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
-        for(var face:BASE_FACES){BASE_RANDOM.setSeed(42);for(var quad:baked.getQuads(null,face,BASE_RANDOM)){
-            int color=quad.isTinted()?tint:0xFFFFFF;
-            out.putBulkData(pose.last(),quad,(color>>16&255)/255F,(color>>8&255)/255F,(color&255)/255F,1,light,overlay);
-        }}
+        StaticModelQuads.drawTinted(baked,pose,out,light,overlay,tint,false);
     }
     private static void globe(PoseStack pose,MultiBufferSource buffers,double time,int light,int overlay,CrystalBallBlockEntity ball) {
         // Shared sorted glass batch; never let the shell write an opaque depth silhouette.
@@ -119,17 +119,21 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
         var mesh=buffers.getBuffer(CrystalGlassLayer.COLOR);
         float r=(color>>16&255)/255F,g=(color>>8&255)/255F,b=(color&255)/255F;
         // Narrow luminous rim on the occupied recess; empty slots remain unlit.
-        float outer=.077F,inner=.061F;
-        float[][] corners={{-outer,-outer},{outer,-outer},{outer,outer},{-outer,outer}};
-        for(int i=0;i<4;i++) {
-            var a=corners[i];var c=corners[(i+1)%4];float ratio=inner/outer;
-            float[][] quad={{a[0],a[1]},{a[0]*ratio,a[1]*ratio},{c[0]*ratio,c[1]*ratio},{c[0],c[1]}};
-            for(var v:quad)mesh.addVertex(pose.last().pose(),v[0],0,v[1]).setColor(r,g,b,.8F);
-        }
+        for(var v:UPGRADE_RIM)mesh.addVertex(pose.last().pose(),v[0],0,v[1]).setColor(r,g,b,.8F);
         pose.translate(0,.039,0);
         pose.mulPose(Axis.XP.rotationDegrees(45));pose.scale(.14F,.14F,.14F);
         Minecraft.getInstance().getItemRenderer().renderStatic(item,ItemDisplayContext.NONE,LightTexture.FULL_BRIGHT,overlay,pose,buffers,Minecraft.getInstance().level,slot);
         pose.popPose();
+    }
+    private static float[][] upgradeRim(){
+        float outer=.077F,ratio=.061F/outer;
+        float[][] corners={{-outer,-outer},{outer,-outer},{outer,outer},{-outer,outer}},rim=new float[16][2];
+        for(int i=0;i<4;i++){
+            var a=corners[i];var c=corners[(i+1)%4];
+            rim[i*4]=new float[]{a[0],a[1]};rim[i*4+1]=new float[]{a[0]*ratio,a[1]*ratio};
+            rim[i*4+2]=new float[]{c[0]*ratio,c[1]*ratio};rim[i*4+3]=new float[]{c[0],c[1]};
+        }
+        return rim;
     }
     public static final class ItemRenderer extends BlockEntityWithoutLevelRenderer {
         public ItemRenderer() {super(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels());}

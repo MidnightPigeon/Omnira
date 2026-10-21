@@ -25,6 +25,9 @@ public final class AlchemyClient {
     private static void draw(PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         draw(MODEL,pose,buffers,light,overlay);
     }
+    public static void renderEmptyCauldron(PoseStack pose,MultiBufferSource buffers,int light,int overlay){
+        draw(pose,buffers,light,overlay);
+    }
     private static void draw(ModelResourceLocation model,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         var mc=Minecraft.getInstance();
         mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(model),ItemStack.EMPTY,light,overlay,pose,
@@ -74,17 +77,16 @@ public final class AlchemyClient {
             double a=i*Math.PI/8+time*(ring==0?.012:-.018),b=a+Math.PI/10;
             double r=.26+ring*.105,thickness=.018;
             float alpha=(float)(.48+.22*Math.sin(time*.07+i*.4));
-            for(var point:new double[][]{{r,a},{r+thickness,a},{r+thickness,b},{r,b}})
-                mesh.addVertex(matrix,(float)(.5+point[0]*Math.cos(point[1])),.07F+ring*.025F,(float)(.5+point[0]*Math.sin(point[1])))
+            for(int corner=0;corner<4;corner++){
+                double radius=corner==1||corner==2?r+thickness:r,angle=corner<2?a:b;
+                mesh.addVertex(matrix,(float)(.5+radius*Math.cos(angle)),.07F+ring*.025F,(float)(.5+radius*Math.sin(angle)))
                         .setColor(.55F,.9F,1F,alpha);
+            }
         }
         for(int i=0;i<6;i++){
             double phase=(time*.008+i/6.0)%1,a=i*Math.PI/3+time*.015;
             float x=(float)(.5+.26*Math.cos(a)),z=(float)(.5+.26*Math.sin(a)),y=(float)(.06+phase*.18),s=.012F;
-            float[][] v={{x-s,y-s,z-s},{x+s,y-s,z-s},{x+s,y+s,z-s},{x-s,y+s,z-s},
-                    {x-s,y-s,z+s},{x+s,y-s,z+s},{x+s,y+s,z+s},{x-s,y+s,z+s}};
-            for(var face:new int[][]{{0,3,2,1},{4,5,6,7},{0,4,7,3},{1,2,6,5},{3,7,6,2},{0,1,5,4}})
-                for(int n:face)mesh.addVertex(matrix,v[n][0],v[n][1],v[n][2]).setColor(.7F,.96F,1F,(float)(.8*(1-phase)));
+            com.mcmagic.omnira.client.renderer.StellarVisuals.cube(pose,mesh,x,y,z,s,.7F,.96F,1F,(float)(.8*(1-phase)));
         }
     }
     private static void liquid(RoughAlchemyCauldronBlockEntity block,PoseStack pose,MultiBufferSource buffers,int light,int overlay){

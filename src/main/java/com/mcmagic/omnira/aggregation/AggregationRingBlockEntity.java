@@ -27,12 +27,14 @@ public final class AggregationRingBlockEntity extends CrystalProcessingTableBloc
     @Override protected Component getDefaultName(){return Component.translatable("block.omnira.advanced_crystal_aggregation_ring");}
     @Override protected AbstractContainerMenu createMenu(int id,Inventory inventory){return new AggregationRingMenu(id,inventory,this);}
     public int progress(){return progress;}
+    private boolean worldCompleting;
+    public void worldRotation(){if(progress>0){worldCompleting=true;try{progress=AggregationLayout.DURATION;tick();}finally{worldCompleting=false;}}}
     public double renderProgress(double time){
         return progress==0?0:Math.min(1,(progress+Math.min(4,Math.max(0,time-progressSyncTick)))/AggregationLayout.DURATION);
     }
     public boolean powered(){return getItem(AggregationLayout.CORE).getItem() instanceof SpellCoreItem;}
     public static boolean accepts(int slot,ItemStack stack){
-        if(slot==0)return CrystalProcessingTableMenu.isTargetMicrocore(stack);
+        if(slot==0)return CrystalProcessingTableMenu.isTargetMicrocore(stack)||stack.is(ModItems.OMNI_MICROCORE.get());
         if(slot==1)return CrystalProcessingTableMenu.isPrimaryMicrocore(stack);
         if(slot<5)return CrystalProcessingTableMenu.isElement(stack);
         if(slot<8)return true;
@@ -40,16 +42,35 @@ public final class AggregationRingBlockEntity extends CrystalProcessingTableBloc
                 slot==AggregationLayout.INK?stack.is(ModItems.SPELL_INK.get()):
                 slot==AggregationLayout.CORE&&stack.getItem() instanceof SpellCoreItem;
     }
-    @Override public boolean canPlaceItem(int slot,ItemStack stack){return progress==0&&accepts(slot,stack)&&com.mcmagic.omnira.spell.SpellPattern.compatibleSlots(this,slot,stack);}
+    public static boolean compatible(net.minecraft.world.Container inventory,int slot,ItemStack stack){
+        if(slot>=8)return true;
+        if(slot==0&&stack.is(ModItems.OMNI_MICROCORE.get())){for(int i=1;i<8;i++)if(!inventory.getItem(i).isEmpty())return false;return true;}
+        return !inventory.getItem(0).is(ModItems.OMNI_MICROCORE.get())||slot==0;
+    }
+    @Override public boolean canPlaceItem(int slot,ItemStack stack){return progress==0&&compatible(this,slot,stack)&&com.mcmagic.omnira.item.PortableStorageRules.mayPlace(this,stack)&&accepts(slot,stack)&&com.mcmagic.omnira.spell.SpellPattern.compatibleSlots(this,slot,stack);}
     public int manaCost(){int count=0;for(int i=0;i<8;i++)if(!getItem(i).isEmpty())count++;return count*20;}
     public boolean recipeReady(){
-        if(!powered()||!getItem(AggregationLayout.OUTPUT).isEmpty()||getItem(0).isEmpty()
-                ||getItem(AggregationLayout.SUBSTRATE).isEmpty()||getItem(AggregationLayout.INK).isEmpty())return false;
-        for(int i=0;i<=AggregationLayout.CORE;i++)if(!getItem(i).isEmpty()&&!accepts(i,getItem(i)))return false;
-        return com.mcmagic.omnira.spell.SpellPattern.fromMicrocores(getItem(0),getItem(1)).isPresent();
+        return recipeError().isEmpty();
+    }
+    public String recipeError(){
+        if(!powered())return "core";
+        if(!getItem(AggregationLayout.OUTPUT).isEmpty())return "output";
+        if(!getItem(AggregationLayout.SUBSTRATE).is(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()))return "substrate";
+        if(!getItem(AggregationLayout.INK).is(ModItems.SPELL_INK.get()))return "ink";
+        for(int i=0;i<8;i++)if(!getItem(i).isEmpty()&&!accepts(i,getItem(i)))return "nodes";
+        if(getItem(0).is(ModItems.OMNI_MICROCORE.get())){
+            for(int i=1;i<8;i++)if(!getItem(i).isEmpty())return "reserved";
+            return "";
+        }
+        return com.mcmagic.omnira.spell.SpellPattern.fromMicrocores(getItem(0),getItem(1)).isPresent()?"":"pattern";
     }
     public boolean start(Player player){
-        if(!(player instanceof ServerPlayer server)||progress>0||!recipeReady()||!AggregationStructure.intact(level,worldPosition,getBlockState()))return false;
+        if(!(player instanceof ServerPlayer server)||progress>0)return false;
+        String error=recipeError();
+        if(error.isEmpty()&&!AggregationStructure.intact(level,worldPosition,getBlockState()))error="structure";
+        if(!error.isEmpty()){
+            player.displayClientMessage(Component.translatable("message.omnira.aggregation."+error),true);return false;
+        }
         if(!com.mcmagic.omnira.mana.ManaCosts.canSpend(server,manaCost())){
             player.displayClientMessage(Component.translatable("message.omnira.aggregation.mana",manaCost()),true);return false;
         }
@@ -65,13 +86,15 @@ public final class AggregationRingBlockEntity extends CrystalProcessingTableBloc
         Player player=author==null?null:level.getPlayerByUUID(author);
         if(player==null&&author!=null)player=level.getServer().getPlayerList().getPlayer(author);
         if(player instanceof ServerPlayer server&&player.isAlive()
-                &&com.mcmagic.omnira.mana.ManaEvents.trySpend(server,manaCost())){
-            var result=CrystalProcessingTableMenu.previewCrystal(this,5,8,2,5,AggregationContent.CRYSTAL.get());
+                &&(worldCompleting||com.mcmagic.omnira.mana.ManaEvents.trySpend(server,manaCost()))){
+            var result=getItem(0).is(ModItems.OMNI_MICROCORE.get())?new ItemStack(ModItems.WORLD_ROTATION_CRYSTAL.get()):CrystalProcessingTableMenu.previewCrystal(this,5,8,2,5,AggregationContent.CRYSTAL.get());
             for(int i=0;i<8;i++)removeItem(i,1);
             removeItem(AggregationLayout.SUBSTRATE,1);
             var ink=getItem(AggregationLayout.INK);
             if(ink.getDamageValue()+1>=ink.getMaxDamage())ink.shrink(1);else ink.setDamageValue(ink.getDamageValue()+1);
             setItem(AggregationLayout.OUTPUT,result);
+            com.mcmagic.omnira.progression.BranchProgress.record(server,"eightfold_work");
+            com.mcmagic.omnira.progression.BranchProgress.record(server,"spell_writing");
         }
         cancel();
     }

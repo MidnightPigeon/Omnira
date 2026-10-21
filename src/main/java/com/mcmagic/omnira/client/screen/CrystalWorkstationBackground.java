@@ -11,6 +11,21 @@ final class CrystalWorkstationBackground {
     private static final ResourceLocation SCROLL=texture("crystal_workstation_scroll");
     private static final ResourceLocation VANILLA=ResourceLocation.withDefaultNamespace("textures/gui/container/crafting_table.png");
     static ResourceLocation texture(String name){return ResourceLocation.fromNamespaceAndPath("omnira","textures/gui/container/"+name+".png");}
+    static void inventory(GuiGraphics g,int x,int y,net.minecraft.world.inventory.AbstractContainerMenu menu){
+        inventory(g,x,y,menu,17);
+    }
+    static void inventory(GuiGraphics g,int x,int y,net.minecraft.world.inventory.AbstractContainerMenu menu,int header){
+        int left=Integer.MAX_VALUE,top=Integer.MAX_VALUE,right=0,bottom=0;
+        for(var slot:menu.slots)if(slot.container instanceof net.minecraft.world.entity.player.Inventory){
+            left=Math.min(left,slot.x);top=Math.min(top,slot.y);right=Math.max(right,slot.x+16);bottom=Math.max(bottom,slot.y+16);
+        }
+        if(left==Integer.MAX_VALUE)return;
+        int width=right-left+16,height=bottom-top+header+8;
+        g.blit(VANILLA,x+left-8,y+top-header,width,height,8F,72F,1,1,256,256);
+        CrystalProcessingTableScreen.renderVanillaFrame(g,x+left-8,y+top-header,width,height);
+        for(var slot:menu.slots)if(slot.container instanceof net.minecraft.world.entity.player.Inventory)
+            g.blit(VANILLA,x+slot.x-1,y+slot.y-1,7,83,18,18,256,256);
+    }
     static void draw(GuiGraphics graphics,ResourceLocation texture,int x,int y,String kind,float time,float progress,boolean active){
         RenderSystem.enableBlend();
         graphics.blit(texture,x,y+142,0,142,176,98,176,240);

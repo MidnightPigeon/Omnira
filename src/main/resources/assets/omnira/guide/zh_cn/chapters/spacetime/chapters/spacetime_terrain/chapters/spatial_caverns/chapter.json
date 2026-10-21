@@ -1,7 +1,7 @@
 {
   "id": "spatial_caverns",
   "title": "空间洞穴",
-  "icon": "omnira:rough_spatial_crystal_block",
+  "icon": "omnira:spatial_crystal_shard",
   "introduction": "introduction.json",
   "entries": [],
   "chapters": [

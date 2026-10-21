@@ -1,6 +1,7 @@
 {
   "id": "self_projectile",
   "item": "omnira:water_microcore",
+  "icon": "omnira:crystal_broom",
   "title": "Self Projectile Flight",
   "text": [
     "Combine Self with Projectile to fly along the trajectory set at casting, unaffected by water currents. Lasts 20 seconds, plus 20 per Delay, fading during the final 3 seconds.",

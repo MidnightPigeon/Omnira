@@ -1,0 +1,6 @@
+{
+  "sound_event": "omnira:music_disc.liu_nian",
+  "description": {"translate": "jukebox_song.omnira.liu_nian"},
+  "length_in_seconds": 67.0,
+  "comparator_output": 1
+}

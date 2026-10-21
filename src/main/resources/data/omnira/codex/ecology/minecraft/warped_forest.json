@@ -1,0 +1,28 @@
+{
+  "base": {
+    "Name": "minecraft:netherrack"
+  },
+  "surface": {
+    "Name": "minecraft:warped_nylium"
+  },
+  "decorations": [
+    {
+      "kind": "tree",
+      "block": {
+        "Name": "minecraft:warped_stem"
+      },
+      "crown": {
+        "Name": "minecraft:warped_wart_block"
+      }
+    },
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "minecraft:warped_fungus"
+      },
+      "crown": {
+        "Name": "minecraft:warped_roots"
+      }
+    }
+  ]
+}

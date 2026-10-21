@@ -10,6 +10,28 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_engine_core")
 @PrefixGameTestTemplate(false)
 public final class EngineCoreGameTests {
+    @GameTest(template="spell_arena") public static void outputSwitchReplacesRedstoneAndDirection(GameTestHelper h){
+        var e=engine(h);e.inventory.setItem(0,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
+        h.assertTrue(e.enabled&&e.running(),"New engine requires redstone or is disabled");
+        var tag=new net.minecraft.nbt.CompoundTag();e.write(tag,h.getLevel().registryAccess());
+        tag.putBoolean("RedstoneControl",true);tag.putBoolean("Powered",false);tag.putBoolean("Clockwise",false);
+        e.read(tag,h.getLevel().registryAccess());
+        h.assertTrue(e.running()&&(!e.kinetic||e.generatedSpeed()==16),"Legacy controls changed output");
+        var player=new net.neoforged.neoforge.common.util.FakePlayer(h.getLevel(),new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"engine-switch"));
+        var pos=e.host.getBlockPos();player.setPos(pos.getX()+.5,pos.getY(),pos.getZ()+1.5);
+        var face=e.host.getBlockState().getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING).getOpposite();
+        var point=net.minecraft.world.phys.Vec3.atCenterOf(pos).add(face.getStepX()*.5,0,face.getStepZ()*.5);
+        var hit=new net.minecraft.world.phys.BlockHitResult(point,face,pos,false);
+        e.host.getBlockState().useWithoutItem(h.getLevel(),player,hit);
+        h.assertTrue(!e.enabled&&!e.running(),"Physical button did not stop output");
+        e.host.getBlockState().useWithoutItem(h.getLevel(),player,hit);
+        h.assertTrue(e.enabled&&e.running(),"Physical button did not restart output");
+        var menu=new com.mcmagic.omnira.menu.ManaEngineMenu(1,player.getInventory(),e);
+        h.assertTrue(!menu.clickMenuButton(player,1)&&!menu.clickMenuButton(player,2),"Removed control still accepts packets");
+        h.assertTrue(menu.clickMenuButton(player,0)&&!e.enabled,"UI switch failed");
+        e.write(tag=new net.minecraft.nbt.CompoundTag(),h.getLevel().registryAccess());
+        h.assertTrue(!tag.contains("RedstoneControl")&&!tag.contains("Clockwise")&&!tag.getBoolean("Enabled"),"Saved obsolete controls");h.succeed();
+    }
     @GameTest(template="spell_arena") public static void hexPanelSlots(GameTestHelper h) throws Exception {
         var player=h.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
         var menu=new com.mcmagic.omnira.menu.ManaEngineMenu(1,player.getInventory(),engine(h));
@@ -32,7 +54,7 @@ public final class EngineCoreGameTests {
     }
     private static ManaEngineState engine(GameTestHelper h) {
         var pos=h.absolutePos(new BlockPos(5,2,5));h.getLevel().setBlockAndUpdate(pos,ModBlocks.MANA_ENGINE.get().defaultBlockState());
-        var state=((ManaEngineAccess)h.getLevel().getBlockEntity(pos)).engineState();state.redstoneControl=false;return state;
+        var state=((ManaEngineAccess)h.getLevel().getBlockEntity(pos)).engineState();return state;
     }
     @GameTest(template="spell_arena") public static void coresDriveBaseAndLatticeOutputs(GameTestHelper h) {
         var e=engine(h);

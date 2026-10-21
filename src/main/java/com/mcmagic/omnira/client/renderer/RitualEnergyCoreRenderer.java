@@ -29,6 +29,7 @@ public final class RitualEnergyCoreRenderer implements BlockEntityRenderer<Ritua
     }
     @Override public void render(RitualEnergyCoreBlockEntity core,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {
         if(core.genesisFluid()>0)GenesisOfferingRenderer.render(pose,buffers,core.visualFluid(partial),core.visualAbsorption(partial),overlay);
+        WorldFormingRenderer.render(core.worldForming,core.getLevel()==null?0:core.getLevel().getGameTime()+partial,partial,pose,buffers,overlay);
         cube(pose,buffers,core.getLevel()==null?0:core.getLevel().getGameTime()+partial,overlay,
                 core.getBlockState().is(com.mcmagic.omnira.registry.ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get()));
     }

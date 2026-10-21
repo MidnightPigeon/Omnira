@@ -4,8 +4,13 @@
   "item": "omnira:mana_engine",
   "recipes": false,
   "text": [
-    "Mana Engines provide rotation and stress capacity to Create networks. Connect to the shaft output face and inspect speed, capacity and fuel status on the engine panel.",
-    "Machines occupy part of a network's stress capacity rather than consuming stress as fuel. Large Alchemical Reaction Pool occupancy and efficiency scale with shaft RPM; Assembly Tables, Infused Crystal Furnaces and Infused Crystal Anvils retain fixed occupancy and processing speed. Crystal and Infused Crystal Casings support kinetic encasing and wrench-controlled shaft interfaces; Spacetime Ports connect real shaft interfaces even across different orientations."
+    "Direct Create connections let Mana Engines provide stress at a fixed 16 rpm, converting configured pulse potential into capacity. Engine controls show potential; Create components show rotation and stress.",
+    "Stress is occupied, not consumed. Native machines prioritize pulses; external kinetic drive has fixed total occupancy and does not accelerate with RPM. Crystal and Infused Crystal Casings cover kinetic components and pipes. Spacetime Ports connect real shafts across different orientations."
   ],
-  "links": []
+  "links": [
+    {
+      "target": "magic_pulse",
+      "label": "Magic Pulses"
+    }
+  ]
 }

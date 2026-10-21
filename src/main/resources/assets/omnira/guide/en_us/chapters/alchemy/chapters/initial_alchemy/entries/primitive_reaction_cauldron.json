@@ -6,8 +6,8 @@
   "text": [
     "Use a Rough Alchemy Cauldron on a campfire. Insert reagents by right-clicking with items or fluid containers; retrieve items with an empty hand. Breaking it returns an empty cauldron and leaves the campfire.",
     "Reactions start automatically when conditions match. Only one runs at a time; matching catalyst recipes take priority. The supporting catalyst is retained.",
-    "The base duration is 100 seconds. Items are consumed at startup; fluids are settled every 10 seconds. Full outputs wait for space; a missing catalyst pauses work.",
-    "Insufficient reagent at a fluid installment fails the reaction. If more than half was consumed, failure also causes a 10-block-radius blast dealing 15 magic damage and strong knockback, without breaking terrain."
+    "The base duration is 100 seconds. Items are consumed at startup; fluids are settled every 10 seconds. All four item types can still be inserted during work. Full outputs wait for space.",
+    "Losing a required supporting catalyst immediately cancels the reaction, clears progress and causes a blast without refunding consumed reagents. Insufficient fluid also fails the reaction and causes a blast if more than half was consumed. Blasts have a 10-block radius, deal 15 magic damage and apply strong knockback without breaking terrain."
   ],
   "links": [
     {

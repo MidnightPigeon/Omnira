@@ -63,7 +63,7 @@ public final class StaffEnhancements {
                 amplifier=Math.min(255,amplifier+iron);
             }
             effects.add(new SpellEffect(effect.healing(),amplifier,duration,effect.infused()||infusions>0,
-                    effect.operation(),Math.min(16,effect.enhancement()+iron),Math.min(8,effect.delay()+clocks),
+                    effect.operation(),Math.min(16,effect.enhancement()+iron),effect.operation().equals("reload")?0:Math.min(8,effect.delay()+clocks),
                     Math.min(16,effect.infusion()+infusions)));
         }
         var keywords=new ArrayList<>(payload.keywords());

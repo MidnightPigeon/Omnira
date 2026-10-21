@@ -1,6 +1,7 @@
 {
   "id": "ground_projectile",
   "item": "omnira:earth_microcore",
+  "icon": "minecraft:snowball",
   "title": "地面-弹射物",
   "text": [
     "目标槽放地微核，形态槽放风微核。周围有效地表位置各出现一个向上弹起的法术方块，随后受重力回落。",

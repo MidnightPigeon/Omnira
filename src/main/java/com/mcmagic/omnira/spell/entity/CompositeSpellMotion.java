@@ -117,9 +117,8 @@ public final class CompositeSpellMotion {
             touched.add(id);
             int damage=living==null?0:percentDamage(living,infused(payload));
             if(living!=null&&living.isAlive()&&!(living instanceof Player p&&(p.isCreative()||p.isSpectator()))){
-                living.setHealth(Math.max(0,living.getHealth()-damage));
-                com.mcmagic.omnira.space.phase.PhaseConcealment.afterDamage(living);
-                if(living.getHealth()<=0)living.die(SpellDamageSource.of(living,net.minecraft.world.damagesource.DamageTypes.GENERIC_KILL,spell,owner,"spell"));
+                com.mcmagic.omnira.combat.OmniraDamage.trueDamage(living,damage,
+                        SpellDamageSource.of(living,net.minecraft.world.damagesource.DamageTypes.GENERIC_KILL,spell,owner,"spell"));
             }
             if(living!=null&&living.isAlive()){
                 int protection=living.invulnerableTime;

@@ -16,10 +16,11 @@ import net.minecraft.world.level.block.state.BlockState;
 public final class ManaEngineState {
     public static final int RPM=16;
     private final com.mcmagic.omnira.energy.EngineEnergyBuffer energy=new com.mcmagic.omnira.energy.EngineEnergyBuffer();
+    public void fillEnergy(){energy.fill(ratedEnergy());host.setChanged();}
     private final net.neoforged.neoforge.energy.IEnergyStorage[] ports=new net.neoforged.neoforge.energy.IEnergyStorage[6];
     private Direction lastOutput;
     private boolean allowed() {
-        return !timeStopped() && enabled && (!redstoneControl || (host.getLevel()!=null && host.getLevel().hasNeighborSignal(host.getBlockPos())))
+        return !timeStopped() && enabled
                 && (ratedCapacity()>0 || ratedEnergy()>0) && !host.isRemoved();
     }
     public boolean running() {return allowed();}
@@ -27,8 +28,10 @@ public final class ManaEngineState {
     private Direction output() {return host.getBlockState().getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING);}
     private void prepareEnergy() {
         if(host.getLevel()!=null && !host.getLevel().isClientSide)
-            energy.beginTick(host.getLevel().getGameTime(),ratedEnergy(),allowed() && com.mcmagic.omnira.energy.EnergyIntegration.available());
+            energy.beginTick(host.getLevel().getGameTime(),ratedEnergy(),electricalOutput());
     }
+    private boolean electricalOutput(){return allowed()&&com.mcmagic.omnira.energy.EnergyIntegration.available()
+            &&!com.mcmagic.omnira.pulse.PulseOutput.nativeConnection(host.getLevel(),host.getBlockPos(),output());}
     public net.neoforged.neoforge.energy.IEnergyStorage energyPort(Direction side) {
         if(side==null || side!=output() || !com.mcmagic.omnira.energy.EnergyIntegration.available()) return null;
         if(ports[side.ordinal()]==null) ports[side.ordinal()]=new net.neoforged.neoforge.energy.IEnergyStorage() {
@@ -38,21 +41,23 @@ public final class ManaEngineState {
             }
             public int receiveEnergy(int amount,boolean simulate) {return 0;}
             public int extractEnergy(int amount,boolean simulate) {
-                if(!valid() || !allowed()) return 0;
+                if(!valid() || !electricalOutput()) return 0;
                 prepareEnergy();
                 int result=energy.extract(amount,simulate);
                 if(!simulate && result>0) host.setChanged();
                 return result;
             }
-            public int getEnergyStored() {return valid()?Math.min(energy.stored(),ratedEnergy()):0;}
+            public int getEnergyStored() {return valid()&&electricalOutput()?Math.min(energy.stored(),ratedEnergy()):0;}
             public int getMaxEnergyStored() {return ratedEnergy();}
-            public boolean canExtract() {return valid();}
+            public boolean canExtract() {return valid()&&electricalOutput();}
             public boolean canReceive() {return false;}
         };
         return ports[side.ordinal()];
     }
     public void tickEnergy() {
         if(host.getLevel()==null || host.getLevel().isClientSide) return;
+        int mode=com.mcmagic.omnira.pulse.PulseOutput.mode(host.getLevel(),host.getBlockPos(),output());
+        if(mode!=outputMode){outputMode=mode;host.setChanged();host.getLevel().sendBlockUpdated(host.getBlockPos(),host.getBlockState(),host.getBlockState(),3);}
         Direction face=output();
         if(face!=lastOutput) {lastOutput=face;host.getLevel().invalidateCapabilities(host.getBlockPos());}
         if(!com.mcmagic.omnira.energy.EnergyIntegration.available()) return;
@@ -72,9 +77,10 @@ public final class ManaEngineState {
     public final BlockEntity host;
     public final boolean kinetic;
     public final SimpleContainer inventory=new SimpleContainer(4);
-    public boolean enabled=true,redstoneControl=true,clockwise=true;
-    private boolean dirty=true,powered,loading;
+    public boolean enabled=true;
+    private boolean dirty=true,loading;
     public float rotorAngle,previousRotorAngle;
+    public int outputMode;
     public ManaEngineState(BlockEntity host,boolean kinetic) {
         this.host=host;this.kinetic=kinetic;
         inventory.addListener(container->{if(!loading) {dirty=true;host.setChanged();}});
@@ -92,7 +98,7 @@ public final class ManaEngineState {
     public int ratedCapacity() {
         return ratedOutput(false);
     }
-    public int ratedEnergy() {return ratedOutput(true);}
+    public int ratedEnergy() {return ratedCapacity();}
     private int ratedOutput(boolean electrical) {
         var stack=inventory.getItem(0);
         if(!accepts(0,stack))return 0;
@@ -102,40 +108,42 @@ public final class ManaEngineState {
         return (int)Math.min(Integer.MAX_VALUE,Math.round(result));
     }
     public float generatedSpeed() {
-        return !timeStopped() && kinetic && enabled && (!redstoneControl || powered) && ratedCapacity()>0?(clockwise?RPM:-RPM):0;
+        return !timeStopped() && kinetic && enabled && ratedCapacity()>0?RPM:0;
     }
     public boolean pollChanges() {
-        boolean signal=host.getLevel().hasNeighborSignal(host.getBlockPos());
-        boolean changed=dirty || signal!=powered;
-        powered=signal;dirty=false;return changed;
+        boolean changed=dirty;dirty=false;return changed;
     }
     public void animate() {
-        previousRotorAngle=rotorAngle;rotorAngle+=(running()?(clockwise?RPM:-RPM):0)*.3F;
+        previousRotorAngle=rotorAngle;rotorAngle+=(running()?RPM:0)*.3F;
         if(Math.abs(rotorAngle)>36000) {rotorAngle%=360;previousRotorAngle=rotorAngle;}
     }
     public void control(int id) {
         if(id==0) enabled=!enabled;
-        else if(id==1) redstoneControl=!redstoneControl;
-        else if(id==2) clockwise=!clockwise;
         else return;
         dirty=true;host.setChanged();
+        com.mcmagic.omnira.pulse.PulseNetworks.changed(host.getLevel(),host.getBlockPos());
+        if(host.getLevel()!=null)host.getLevel().sendBlockUpdated(host.getBlockPos(),host.getBlockState(),host.getBlockState(),3);
+    }
+    public boolean controlHit(net.minecraft.world.phys.BlockHitResult hit){
+        var face=output();var pos=host.getBlockPos();double y=hit.getLocation().y-pos.getY();
+        double x=face.getAxis()==Direction.Axis.Z?hit.getLocation().x-pos.getX():hit.getLocation().z-pos.getZ();
+        return hit.getDirection()==face.getOpposite()&&y>=.375&&y<=.625&&x>=.375&&x<=.625;
     }
     public void write(CompoundTag tag,HolderLookup.Provider registries) {
+        tag.putInt("PulseOutputMode",outputMode);
         var items=NonNullList.withSize(4,ItemStack.EMPTY);
         for(int i=0;i<4;i++) items.set(i,inventory.getItem(i));
         ContainerHelper.saveAllItems(tag,items,registries);
         tag.putInt("Energy",energy.stored());tag.putInt("EnergyFraction",energy.remainder());
-        tag.putBoolean("Enabled",enabled);tag.putBoolean("RedstoneControl",redstoneControl);
-        tag.putBoolean("Clockwise",clockwise);tag.putBoolean("Powered",powered);
+        tag.putBoolean("Enabled",enabled);
     }
     public void read(CompoundTag tag,HolderLookup.Provider registries) {
+        outputMode=Math.clamp(tag.getInt("PulseOutputMode"),0,2);
         var items=NonNullList.withSize(4,ItemStack.EMPTY);
         ContainerHelper.loadAllItems(tag,items,registries);
         loading=true;for(int i=0;i<4;i++) inventory.setItem(i,items.get(i));loading=false;
         enabled=!tag.contains("Enabled") || tag.getBoolean("Enabled");
-        redstoneControl=!tag.contains("RedstoneControl") || tag.getBoolean("RedstoneControl");
-        clockwise=!tag.contains("Clockwise") || tag.getBoolean("Clockwise");
-        powered=tag.getBoolean("Powered");dirty=true;
+        dirty=true;
         energy.restore(tag.getInt("Energy"),tag.getInt("EnergyFraction"));
     }
 }

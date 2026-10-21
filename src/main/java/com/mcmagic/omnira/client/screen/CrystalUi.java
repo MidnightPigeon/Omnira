@@ -9,6 +9,10 @@ final class CrystalUi {
     private CrystalUi(){}
     static MachinePanelArt.Pixels pixels(GuiGraphics g,int x,int y){return (a,b,c,d,color)->g.fill(x+a,y+b,x+c,y+d,color);}
     static float time(float partial){var level=Minecraft.getInstance().level;return level==null?0:(level.getGameTime()%24000)+partial;}
+    static void label(GuiGraphics g,Font font,Component text,int x,int y,int width,float maximumScale,int color){
+        float scale=Math.min(maximumScale,width/(float)Math.max(1,font.width(text)));g.pose().pushPose();
+        g.pose().translate(x,y,0);g.pose().scale(scale,scale,1);g.drawString(font,text,0,0,color,false);g.pose().popPose();
+    }
     static void title(GuiGraphics g,Font font,Component text,int center,int y,int width,int color){
         float scale=Math.min(1,width/(float)Math.max(1,font.width(text)));g.pose().pushPose();
         g.pose().translate(center,y,0);g.pose().scale(scale,scale,1);g.drawString(font,text,-font.width(text)/2,0,color,false);g.pose().popPose();

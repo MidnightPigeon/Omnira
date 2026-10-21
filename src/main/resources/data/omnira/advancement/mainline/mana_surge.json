@@ -1,0 +1,43 @@
+{
+  "parent": "omnira:mainline/beyond_dreams",
+  "display": {
+    "icon": {
+      "id": "omnira:primordial_spell_core"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.mana_surge.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.mana_surge.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "obtained": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:primordial_spell_core"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "obtained"
+    ]
+  ]
+}

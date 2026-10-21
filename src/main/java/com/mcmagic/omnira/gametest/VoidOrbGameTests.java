@@ -51,7 +51,7 @@ public final class VoidOrbGameTests {
     }
     @GameTest(template="spell_arena") public static void menuDestroysAndOnlyIntakeFits(GameTestHelper h){
         var ball=place(h);var player=h.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);var menu=new com.mcmagic.omnira.menu.CrystalBallMenu(1,player.getInventory(),ball);
-        h.assertTrue(menu.storageSlots==1&&menu.playerStart==2&&menu.slots.get(1).getContainerSlot()==1,"Wrong trash or upgrade layout");
+        h.assertTrue(menu.storageSlots==1&&menu.playerStart==3&&menu.slots.get(2).getContainerSlot()==1,"Wrong trash or upgrade layout");
         menu.setCarried(new ItemStack(Items.DIAMOND,8));menu.clicked(0,0,net.minecraft.world.inventory.ClickType.PICKUP,player);
         h.assertTrue(menu.getCarried().isEmpty()&&ball.isEmpty(),"Trash click did not destroy contents immediately");
         player.getInventory().setItem(9,new ItemStack(Items.STONE,64));menu.quickMoveStack(player,menu.playerStart);
@@ -68,7 +68,7 @@ public final class VoidOrbGameTests {
         var settings=OrbUpgrades.settings(ball.upgrades.getStackInSlot(1));settings.putBoolean("Whitelist",true);settings.putInt("Directions",1);ball.upgrades.update(1,settings);
         ball.upgrades.filter(1,0,new ItemStack(Items.DIAMOND));
         for(int i=0;i<20;i++)ball.serverTick();
-        h.assertTrue(inventory.countItem(Items.STONE)==4&&inventory.countItem(Items.DIAMOND)==3&&ball.isEmpty(),"Intake did not honor whitelist and 1/s rate");
+        h.assertTrue(inventory.countItem(Items.STONE)==4&&inventory.countItem(Items.DIAMOND)==0&&ball.isEmpty(),"Intake did not honor whitelist and 4/s rate");
         world.setBlockAndUpdate(ball.getBlockPos().above(),ModBlocks.RESONANCE_CORE.get().defaultBlockState());
         var node=(ResonanceCoreBlockEntity)world.getBlockEntity(ball.getBlockPos().above());
         h.assertTrue(node.kind()==5&&node.items()!=null&&node.fluids()!=null,"Resonance cannot access both sinks");node.refresh();h.succeed();

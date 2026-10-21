@@ -1,0 +1,24 @@
+{
+  "base": {
+    "Name": "minecraft:end_stone"
+  },
+  "surface": {
+    "Name": "minecraft:end_stone"
+  },
+  "decorations": [
+    {
+      "kind": "column",
+      "block": {
+        "Name": "minecraft:chorus_plant",
+        "Properties": {
+          "north": "false",
+          "east": "false",
+          "south": "false",
+          "west": "false",
+          "up": "true",
+          "down": "true"
+        }
+      }
+    }
+  ]
+}

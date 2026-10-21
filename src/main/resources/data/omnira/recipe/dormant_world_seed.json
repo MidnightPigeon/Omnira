@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["GGG", "GCG", "GGG"],
+  "key": {
+    "G": {"item": "omnira:genesis_particles"},
+    "C": {"item": "omnira:spacetime_spell_core"}
+  },
+  "result": {"id": "omnira:dormant_world_seed", "count": 1}
+}

@@ -24,7 +24,7 @@ public final class AggregationRingMenu extends AbstractContainerMenu {
         for(int i=0;i<AggregationLayout.SLOTS;i++){
             final int index=i;var xy=AggregationLayout.UI[i];
             addSlot(new Slot(inventory,i,xy[0],xy[1]){
-                @Override public boolean mayPlace(ItemStack stack){return progress()==0&&AggregationRingBlockEntity.accepts(index,stack)&&com.mcmagic.omnira.spell.SpellPattern.compatibleSlots(inventory,index,stack);}
+                @Override public boolean mayPlace(ItemStack stack){return progress()==0&&AggregationRingBlockEntity.compatible(inventory,index,stack)&&AggregationRingBlockEntity.accepts(index,stack)&&com.mcmagic.omnira.spell.SpellPattern.compatibleSlots(inventory,index,stack);}
                 @Override public boolean mayPickup(Player player){return progress()==0;}
                 @Override public int getMaxStackSize(){return index==AggregationLayout.CORE?1:super.getMaxStackSize();}
             });
@@ -41,7 +41,7 @@ public final class AggregationRingMenu extends AbstractContainerMenu {
         var copy=stack.copy();boolean moved=false;
         if(index<AggregationLayout.SLOTS)moved=moveItemStackTo(stack,AggregationLayout.SLOTS,slots.size(),true);
         else if(progress()==0){
-            int[][] ranges=com.mcmagic.omnira.menu.CrystalProcessingTableMenu.isTargetMicrocore(stack)?new int[][]{{0,2},{2,5},{5,8}}:
+            int[][] ranges=stack.is(com.mcmagic.omnira.registry.ModItems.OMNI_MICROCORE.get())?new int[][]{{0,1}}:com.mcmagic.omnira.menu.CrystalProcessingTableMenu.isTargetMicrocore(stack)?new int[][]{{0,2},{2,5},{5,8}}:
                     new int[][]{{8,11},{2,5},{5,8}};
             for(var range:ranges)if(moveItemStackTo(stack,range[0],range[1],false)){moved=true;break;}
         }

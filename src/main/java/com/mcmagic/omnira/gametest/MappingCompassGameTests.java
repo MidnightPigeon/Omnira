@@ -14,6 +14,61 @@ import net.neoforged.neoforge.gametest.*;
 
 @GameTestHolder("omnira_compass") @PrefixGameTestTemplate(false)
 public final class MappingCompassGameTests {
+    private static void stableBedReturn(GameTestHelper h,boolean stellar){
+        var level=h.getLevel();var profile=new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"compass-native");
+        var player=new ServerPlayer(level.getServer(),level,profile,ClientInformation.createDefault());
+        var connection=new net.minecraft.network.Connection(net.minecraft.network.protocol.PacketFlow.SERVERBOUND);
+        var channel=new io.netty.channel.embedded.EmbeddedChannel(connection);
+        new net.minecraft.server.network.ServerGamePacketListenerImpl(player.server,connection,player,
+                net.minecraft.server.network.CommonListenerCookie.createInitial(profile,false)){
+            @Override public void send(net.minecraft.network.protocol.Packet<?> packet){}
+            @Override public void send(net.minecraft.network.protocol.Packet<?> packet,net.minecraft.network.PacketSendListener listener){}
+        };
+        var field=h.absolutePos(new BlockPos(8,4,8));var foot=h.absolutePos(new BlockPos(4,2,4));var head=foot.north();
+        var bed=Blocks.BLUE_BED.defaultBlockState().setValue(BedBlock.FACING,Direction.NORTH);
+        try{
+            for(int x=-2;x<=2;x++)for(int z=-2;z<=2;z++)level.setBlock(head.offset(x,-1,z),Blocks.STONE.defaultBlockState(),2);
+            level.setBlock(foot,bed,2);level.setBlock(head,bed.setValue(BedBlock.PART,BedPart.HEAD),2);
+            if(stellar){
+                level.setBlockAndUpdate(field,com.mcmagic.omnira.space.sea.StellarCraftContent.ORB.get().defaultBlockState());
+                var orb=(com.mcmagic.omnira.space.sea.StarClusterOrbEntity)level.getBlockEntity(field);
+                orb.upgrades.setStackInSlot(1,new ItemStack(com.mcmagic.omnira.registry.ModItems.SPACETIME_STABILIZATION_UPGRADE.get()));
+            }else level.setBlockAndUpdate(field,com.mcmagic.omnira.space.anchor.AnchorContent.ACTIVE.get().defaultBlockState());
+            player.setRespawnPosition(level.dimension(),head,0,false,false);
+            var stack=new ItemStack(LabyrinthContent.COMPASS.get());MappingCompassItem.bind(player,stack);
+            var target=MappingCompassItem.destination(player,stack);
+            h.assertTrue(target.pos().distanceToSqr(head.getCenter())<16,"Ordinary bed had no safe destination");
+            h.assertTrue(com.mcmagic.omnira.space.anchor.StabilityField.contains(level,target.pos()),"Destination field inactive");
+            // Exercise the real ServerPlayer teleport overload and its mixins, not a fake override.
+            for(var origin:java.util.List.of(field.getCenter().add(2,0,0),field.getCenter().add(100,0,0))){
+                player.setPos(origin);player.setData(ModAttachments.MANA,new com.mcmagic.omnira.mana.ManaState(37,200));
+                h.assertTrue(!player.teleportTo(level,target.pos().x,target.pos().y,target.pos().z,java.util.Set.of(),0,0),"Ordinary teleport bypassed field");
+                h.assertTrue(MappingCompassItem.returnHome(player,stack)&&player.position().distanceToSqr(target.pos())<.001,"Compass return blocked by field");
+                h.assertTrue(BranchAdvancementGameTests.recorded(player,"bound_return"),"Successful bound return did not record branch");
+                h.assertTrue(player.getData(ModAttachments.MANA).current()==0,"Successful stable return did not spend mana");
+                h.assertTrue(!player.teleportTo(level,origin.x,origin.y,origin.z,java.util.Set.of(),0,0),"Compass exemption leaked after return");
+            }
+        }finally{level.setBlockAndUpdate(field,Blocks.AIR.defaultBlockState());channel.finishAndReleaseAll();}
+        h.succeed();
+    }
+    @GameTest(template="spell_arena",batch="compass_anchor") public static void bedReturnPassesActiveAnchorOnlyDuringRecall(GameTestHelper h){stableBedReturn(h,false);}
+    @GameTest(template="spell_arena",batch="compass_stellar") public static void bedReturnPassesUpgradedStellarOrbOnlyDuringRecall(GameTestHelper h){stableBedReturn(h,true);}
+
+    @GameTest(template="spell_arena") public static void failedReturnKeepsManaAndClearsExemption(GameTestHelper h){
+        var player=new net.neoforged.neoforge.common.util.FakePlayer(h.getLevel(),new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"compass-failure")){
+            @Override public boolean teleportTo(ServerLevel level,double x,double y,double z,java.util.Set<net.minecraft.world.entity.RelativeMovement> flags,float yaw,float pitch){return false;}
+        };
+        var field=h.absolutePos(new BlockPos(8,4,8));
+        h.getLevel().setBlockAndUpdate(field,com.mcmagic.omnira.space.anchor.AnchorContent.ACTIVE.get().defaultBlockState());
+        try{
+            player.setPos(field.getCenter());player.setData(ModAttachments.MANA,new com.mcmagic.omnira.mana.ManaState(37,200));
+            player.setRespawnPosition(h.getLevel().dimension(),field.above(3),0,true,false);
+            var stack=new ItemStack(LabyrinthContent.COMPASS.get());MappingCompassItem.bind(player,stack);
+            h.assertTrue(!MappingCompassItem.returnHome(player,stack)&&player.getData(ModAttachments.MANA).current()==37,"Failed return spent mana");
+            h.assertTrue(com.mcmagic.omnira.space.anchor.StabilityField.blocks(player,h.getLevel(),field.getCenter().add(1,0,0)),"Failed return leaked exemption");
+        }finally{h.getLevel().setBlockAndUpdate(field,Blocks.AIR.defaultBlockState());}
+        h.succeed();
+    }
     private static ServerPlayer player(GameTestHelper h){
         return new net.neoforged.neoforge.common.util.FakePlayer(h.getLevel(),new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"compass-test")){
             @Override public boolean teleportTo(ServerLevel level,double x,double y,double z,java.util.Set<net.minecraft.world.entity.RelativeMovement> flags,float yaw,float pitch){

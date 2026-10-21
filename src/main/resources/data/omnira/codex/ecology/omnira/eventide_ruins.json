@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "omnira:sedimented_temporal_silt"
+  },
+  "surface": {
+    "Name": "omnira:time_eroded_bricks"
+  },
+  "decorations": [
+    {
+      "kind": "spire",
+      "block": {
+        "Name": "omnira:time_eroded_bricks"
+      },
+      "crown": {
+        "Name": "omnira:time_eroded_bricks"
+      }
+    }
+  ]
+}

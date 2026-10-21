@@ -82,7 +82,7 @@ public final class CatalysisBlock extends BaseEntityBlock implements com.mcmagic
     @Override public java.util.Set<BlockPos> bottleParts(Level level,BlockPos pos,BlockState state){
         var be=controller(level,pos);if(be==null||!be.complete())return java.util.Set.of();var p=be.getBlockPos();return java.util.Set.of(p,p.above(),p.above(2));
     }
-    public static final class PlacementItem extends BlockItem {
+    public static final class PlacementItem extends BlockItem implements com.mcmagic.omnira.item.MultiblockPlacementItem {
         public PlacementItem(Properties properties){super(CatalysisContent.BLOCK.get(),properties);}
         @Override public InteractionResult place(BlockPlaceContext context){
             var player=context.getPlayer();var level=context.getLevel();var pos=context.getClickedPos();

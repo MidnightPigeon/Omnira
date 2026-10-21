@@ -48,11 +48,36 @@ public final class GuidanceGameTests {
         orb.interact(item("genesis_particles"),Direction.DOWN);h.assertTrue(orb.stage()==0,"Skipped stages");
         h.assertTrue(orb.projections().length==2,"Dormant projections missing");
         for(var name:java.util.List.of("spiritual_crystal","dream_crystal_bedrock","time_warp_point","genesis_particles")){
+            if(orb.view()!=GuidanceOrbEntity.HINT){orb.interact(ItemStack.EMPTY,Direction.NORTH);orb.interact(ItemStack.EMPTY,Direction.UP);}
             var stack=item(name);int before=orb.stage();orb.interact(stack,Direction.NORTH);
             h.assertTrue(orb.stage()==before+1&&stack.getCount()==1&&orb.view()==0,"Activation consumed an item or failed");
         }
-        orb.interact(ItemStack.EMPTY,Direction.UP);h.assertTrue(orb.messageKey().endsWith("terminal")&&!orb.buttonsVisible(),"Final stage not under construction");
+        orb.interact(ItemStack.EMPTY,Direction.UP);h.assertTrue(orb.messageKey().isEmpty()&&orb.projections().length==0&&orb.buttonsVisible(),"Final navigation revealed the requirement hint before the top button");
         h.assertTrue(GuidanceOrbEntity.advances(2,item("space_warp_point")),"Space alternative missing");h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void everyStageRequiresExplicitRequirementView(GameTestHelper h){
+        String[] materials={"spiritual_crystal","dream_crystal_bedrock","space_warp_point","genesis_particles","myriad_codex"};
+        for(int stage=0;stage<materials.length;stage++){
+            var orb=orb(h,stage,Direction.NORTH);var stack=item(materials[stage]);
+            orb.interact(stack,Direction.NORTH);
+            h.assertTrue(orb.stage()==stage,"First click skipped requirement view at stage "+stage);
+            if(stage>0){
+                String expected=orb.target(Direction.NORTH);
+                h.assertTrue(orb.interact(stack,Direction.NORTH).equals(expected)&&orb.stage()==stage,"Held requirement bypassed side navigation");
+                orb.interact(stack,Direction.UP);
+                h.assertTrue(orb.stage()==stage&&orb.view()==GuidanceOrbEntity.HINT,"Opening requirement also advanced");
+            }
+            orb.interact(new ItemStack(Items.STICK),Direction.NORTH);
+            h.assertTrue(orb.view()==GuidanceOrbEntity.IDLE&&orb.stage()==stage,"Dismissed requirements remained armed");
+            orb.interact(stack,Direction.NORTH);
+            if(stage>0)orb.interact(stack,Direction.UP);
+            var reloaded=new GuidanceOrbEntity(orb.getBlockPos(),orb.getBlockState());reloaded.setLevel(h.getLevel());
+            reloaded.loadWithComponents(orb.getUpdateTag(h.getLevel().registryAccess()),h.getLevel().registryAccess());
+            h.assertTrue(reloaded.view()==GuidanceOrbEntity.HINT,"Reload lost requirement state");
+            orb.interact(stack,Direction.NORTH);
+            h.assertTrue(h.getLevel().getBlockState(orb.getBlockPos()).getValue(GuidanceOrbBlock.STAGE)==stage+1&&stack.getCount()==1,"Armed progression failed or consumed catalyst");
+        }
+        h.succeed();
     }
     @GameTest(template="spell_arena") public static void directionalNavigationAndPersistentHint(GameTestHelper h){
         for(var face:Direction.Plane.HORIZONTAL){
@@ -86,7 +111,7 @@ public final class GuidanceGameTests {
     @GameTest(template="spell_arena") public static void advancedHintAndMinedStage(GameTestHelper h){
         var orb=orb(h,3,Direction.NORTH);orb.interact(ItemStack.EMPTY,Direction.NORTH);
         h.assertTrue(orb.target(Direction.NORTH).equals("spacetime_terrain")&&orb.target(Direction.EAST).equals("advanced_industry")
-                &&orb.target(Direction.SOUTH).equals("large_alchemy")&&orb.target(Direction.WEST).equals("advanced_spells"),"Advanced routes wrong");
+                &&orb.target(Direction.SOUTH).equals("dream_alchemy")&&orb.target(Direction.WEST).equals("advanced_spells"),"Advanced routes wrong");
         h.assertTrue(orb.interact(ItemStack.EMPTY,Direction.UP).equals("genesis_ritual") && orb.projections()[0].equals("genesis_particles"),"Genesis route or projection absent");
         var drops=Block.getDrops(orb.getBlockState(),h.getLevel(),orb.getBlockPos(),orb);
         h.assertTrue(drops.size()==1&&drops.getFirst().is(GuidanceContent.ITEM.get()),"Orb drop missing");
@@ -104,7 +129,8 @@ public final class GuidanceGameTests {
             if(!r.fluid().isEmpty())v.tank.fill(r.fluid(),net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
             h.assertTrue(r.support().isEmpty()&&r.matches(new ReactionRecipe.Input(v),h.getLevel()),"Uncatalysed recipe not accepted");
             for(int i=0;i<2001;i++)RoughAlchemyCauldronBlockEntity.tick(h.getLevel(),p,v.getBlockState(),v);
-            if(id.equals("water_to_fire_microcore"))h.assertTrue(count(v.items,"fire_microcore")==1&&v.tank.isEmpty()&&r.fluid().getAmount()==500,"Lava conversion accounting wrong");
+            if(id.equals("water_to_fire_microcore"))h.assertTrue(count(v.items,"fire_microcore")==1&&v.tank.isEmpty()&&r.fluidInputs().isEmpty()
+                    &&java.util.stream.IntStream.range(0,4).noneMatch(slot->v.items.getStackInSlot(slot).is(Items.BLAZE_POWDER)),"Blaze powder conversion accounting wrong");
             else h.assertTrue(count(v.items,"earth_microcore")==1&&count(v.items,"air_microcore")==1&&count(v.items,"paradox_dust")==0,"Paired outputs not guaranteed");
         }h.succeed();
     }
@@ -121,9 +147,45 @@ public final class GuidanceGameTests {
         for(var list:java.util.List.of(ModItems.NAIL_UPGRADES,ModItems.NEEDLE_UPGRADES))for(int i=0;i<4;i++)h.assertTrue(new ItemStack(list.get(i).get()).getRarity()==rarities[i],"Weapon rarity wrong");
         for(String language:java.util.List.of("zh_cn","en_us")){
             var book=guide(language);var ids=new java.util.HashSet<String>();collect(book,ids);
-            for(String id:java.util.List.of("initial_spells","initial_alchemy","initial_industry","simple_storage","visit_dream","pocket_magic_bottle","spacetime_entry","corridor_ritual","spacetime_terrain","advanced_industry","large_alchemy","advanced_spells"))
+            for(String id:java.util.List.of("initial_spells","initial_alchemy","initial_industry","simple_storage","visit_dream","pocket_magic_bottle","spacetime_entry","corridor_ritual","spacetime_terrain","advanced_industry","dream_alchemy","advanced_spells","world_forming_ritual","myriad_aggregation","world_generation_probability_cloud","omni_crystal_grid","marvelous_wisdom_sign"))
                 h.assertTrue(ids.contains(id),"Orb links to absent guide destination: "+id);
         }h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void terminalStageRotatedRoutesAndCodexTop(GameTestHelper h) {
+        for(var front:Direction.Plane.HORIZONTAL) {
+            var orb=orb(h,4,front);orb.interact(ItemStack.EMPTY,front);
+            h.assertTrue(orb.buttonsVisible()&&orb.topLabelKey().equals("guidance.omnira.deconstruct"),"Terminal buttons or top label missing");
+            var faces=new Direction[]{front,front.getClockWise(),front.getOpposite(),front.getCounterClockWise()};
+            var targets=new String[]{"world_forming_ritual","myriad_aggregation","world_generation_probability_cloud","omni_crystal_grid"};
+            for(int i=0;i<4;i++)h.assertTrue(orb.interact(ItemStack.EMPTY,faces[i]).equals(targets[i]),"Terminal route orientation wrong");
+            h.assertTrue(orb.interact(ItemStack.EMPTY,Direction.UP).equals("myriad_codex#recipe")
+                    &&orb.messageKey().equals("guidance.omnira.codex_hint")&&orb.projections()[0].equals("myriad_codex"),"Codex top route/hint/projection missing");
+            var catalyst=item("genesis_particles");orb.interact(catalyst,front);h.assertTrue(catalyst.getCount()==1&&orb.stage()==4,"Terminal interaction consumed or advanced");
+            var tag=orb.getUpdateTag(h.getLevel().registryAccess());tag.putInt("View",GuidanceOrbEntity.HINT);
+            orb.loadWithComponents(tag,h.getLevel().registryAccess());
+            h.assertTrue(orb.view()==GuidanceOrbEntity.HINT&&orb.messageKey().equals("guidance.omnira.codex_hint"),"Terminal hint lost on reload");
+        }
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void dependencyOrderAndLegacyBookmarks(GameTestHelper h)throws Exception {
+        for(String language:java.util.List.of("zh_cn","en_us")) {
+            var json=guide(language);var book=com.mcmagic.omnira.client.guide.GuideContents.fromJson(json);
+            var beginning=book.destination("beginning").orElseThrow().chapter();
+            h.assertTrue(beginning.directory().getFirst().entry().id().equals("guidance_orb"),"Orb still needs a redundant directory");
+            h.assertTrue(book.destination("guidance").orElseThrow().entry().id().equals("guidance_orb"),"Old bookmark no longer resolves");
+            var dream=book.destination("dreams").orElseThrow().chapter().directory();
+            h.assertTrue(dream.get(0).entry().id().equals("visit_dream")&&dream.get(1).chapter().id().equals("dream_exploration"),"Exploration did not precede products");
+            h.assertTrue(book.destination("orb_storage").orElseThrow().chapter().directory().getFirst().chapter().id().equals("simple_storage"),"Shared storage before ordinary storage");
+            var machines=book.destination("arcane_craft").orElseThrow().chapter().directory().stream().map(row->row.entry().id()).toList();
+            h.assertTrue(machines.indexOf("crystal_casing")<machines.indexOf("arcane_assembly_table")&&machines.indexOf("arcane_assembly_table")<machines.indexOf("mana_engine"),"Machine recipe prerequisites follow their products");
+            var industry=book.destination("dream_industry").orElseThrow().chapter().directory();
+            h.assertTrue(industry.getFirst().entry().id().equals("spell_core")&&industry.get(1).chapter().id().equals("advanced_condensation"),"Core and condensation should precede advanced machines");
+            h.assertTrue(book.destination("myriad_creation").orElseThrow().chapter().directory().getFirst().chapter().id().equals("genesis_particles"),"Genesis source not first");
+            var broken=json.deepCopy();find(broken,"dreams").remove("directory_order");boolean rejected=false;
+            try{com.mcmagic.omnira.client.guide.GuideContents.fromJson(broken);}catch(IllegalArgumentException expected){rejected=true;}
+            h.assertTrue(rejected,"Mixed directory silently fell back to entry-first sorting");
+        }
+        h.succeed();
     }
     static com.google.gson.JsonObject guide(String language)throws java.io.IOException{return com.mcmagic.omnira.client.guide.GuideResourceTree.load(path->{
         try(var in=GuidanceGameTests.class.getResourceAsStream("/assets/omnira/guide/"+language+"/"+path)){

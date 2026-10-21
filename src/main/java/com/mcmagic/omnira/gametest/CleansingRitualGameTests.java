@@ -108,7 +108,7 @@ public final class CleansingRitualGameTests {
                     "Carried grimoire was not transformed");
             for(int[] offset:DreamRitual.ANCHORS)
                 h.assertTrue(((CrystalPedestalBlockEntity)level.getBlockEntity(core.offset(offset[0],0,offset[1])))
-                        .getItem(0).is(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()),"Symbolic crystal consumed");
+                        .getItem(0).isEmpty(),"Crystal not consumed");
             h.assertTrue(ManuscriptReward.grant(caster,"talent",new ItemStack(ModItems.PSYKER_TALENT.get())),"Talent slot could not be earned again");
         } finally {
             level.players().remove(caster);

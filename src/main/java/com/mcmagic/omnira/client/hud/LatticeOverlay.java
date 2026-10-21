@@ -37,7 +37,11 @@ public final class LatticeOverlay {
                 if(CrystalGridMenu.isCrystal(stacks.get(index))) {second=index;break;}
             }
         }
-        int cx=46,cy=Math.max(44,g.guiHeight()-92),radius=32;
+        var viewport=com.mcmagic.omnira.client.screen.UiViewport.spellHud(g.guiWidth(),g.guiHeight(),mc.gui.leftHeight);
+        g.pose().pushPose();
+        try{
+        g.pose().scale(viewport.scale(),viewport.scale(),1);
+        int cx=viewport.x(),cy=viewport.y(),radius=32;
         // Hollow stepped circle, with no panel obscuring the world.
         for(int i=0;i<24;i++) {
             double a=i*Math.PI/12,b=(i+1)*Math.PI/12;
@@ -86,13 +90,15 @@ public final class LatticeOverlay {
         double reduction=CastAttributes.reduction(player,stats.reduction());
         double cost=ManaCosts.cost(payload.baseCost(),1,reduction);
         String number=number(cost);
-        if(second>=0) number+=" + "+number(ManaCosts.cost(SpellPayload.of(stacks.get(second)).baseCost(),1,reduction));
+        if(pattern!=null&&pattern.worldRotation())number=Component.translatable("hud.omnira.world_rotation.all_mana").getString();
+        if(second>=0&&(pattern==null||!pattern.worldRotation())) number+=" + "+number(ManaCosts.cost(SpellPayload.of(stacks.get(second)).baseCost(),1,reduction));
         text(g,Component.translatable("hud.omnira.chain.cost",number)
                 .withStyle(s->s.withColor(ManaCosts.canSpend(player,SpellPayload.of(crystal).baseCost())?0xDDDEE5:0xF08B8B)),cx,cy+66,86);
         if(second>=0) {
             var following=stacks.get(second).get(ModDataComponents.SPELL_PATTERN);
             text(g,patternLabel(following).copy().withStyle(s->s.withColor(0xAAB8BF)),cx,cy-46,86);
         }
+        }finally{g.pose().popPose();}
     }
     private static String number(double value) {
         return value==(int)value?Integer.toString((int)value):String.format(java.util.Locale.ROOT,"%.1f",value);

@@ -29,7 +29,9 @@ final class ResponsiveGuiHandler {
             @Override public Optional<? extends IClickableIngredient<?>> getClickableIngredientUnderMouse(IClickableIngredientFactory factory,T screen,double x,double y){
                 for(var slot:screen.getMenu().slots){
                     var area=screen.physicalRect(screen.getGuiLeft()+slot.x,screen.getGuiTop()+slot.y,16,16);
-                    if(slot.hasItem()&&area.contains((int)x,(int)y))return factory.createBuilder(slot.getItem()).buildWithArea(area);
+                    double localX=x/screen.uiScale(),localY=y/screen.uiScale();
+                    if(slot.hasItem()&&localX>=screen.getGuiLeft()+slot.x&&localX<screen.getGuiLeft()+slot.x+16
+                            &&localY>=screen.getGuiTop()+slot.y&&localY<screen.getGuiTop()+slot.y+16)return factory.createBuilder(slot.getItem()).buildWithArea(area);
                 }
                 return Optional.empty();
             }

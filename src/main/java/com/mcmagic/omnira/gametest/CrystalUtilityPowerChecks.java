@@ -12,13 +12,14 @@ final class CrystalUtilityPowerChecks {
             var machine=new KineticCrystalWorkstationEntity(BlockPos.ZERO,CrystalWorkstations.BLOCKS.get(index).get().defaultBlockState());
             for(float rpm:new float[]{1,7,16,17,32,128,129,256,4096,-4096}){
                 machine.setSpeed(rpm);
-                h.assertTrue(Math.abs(machine.calculateStressApplied()*Math.abs(rpm)-256)<.001,"Fixed machine occupancy changed with RPM");
+                float expected=Math.abs(rpm)<16?0:index==5?16*Math.abs(rpm):256;
+                h.assertTrue(Math.abs(machine.calculateStressApplied()*Math.abs(rpm)-expected)<.001,"Machine occupancy or minimum RPM mismatch");
             }
         }
         var assembly=new com.mcmagic.omnira.block.entity.KineticAssemblyBlockEntity(BlockPos.ZERO,com.mcmagic.omnira.registry.ModBlocks.ARCANE_ASSEMBLY_TABLE.get().defaultBlockState());
         for(float rpm:new float[]{1,7,16,17,32,128,129,256,4096,-4096}){
             assembly.setSpeed(rpm);
-            h.assertTrue(Math.abs(assembly.calculateStressApplied()*Math.abs(rpm)-256)<.001,"Assembly occupancy changed with RPM");
+            h.assertTrue(Math.abs(assembly.calculateStressApplied()*Math.abs(rpm)-(Math.abs(rpm)>=16?16*Math.abs(rpm):0))<.001,"Assembly RPM-scaled occupancy mismatch");
         }
     }
 }

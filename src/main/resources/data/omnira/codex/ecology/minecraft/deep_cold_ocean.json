@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "minecraft:gravel"
+  },
+  "surface": {
+    "Name": "minecraft:water"
+  },
+  "decorations": [
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "minecraft:gravel"
+      },
+      "crown": {
+        "Name": "minecraft:mossy_cobblestone"
+      }
+    }
+  ]
+}

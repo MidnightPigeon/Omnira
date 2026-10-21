@@ -6,7 +6,7 @@
   "recipes": false,
   "text": [
     "Requires one Advanced Ritual Energy Core, eight Crystal Pedestals, and one each of Earth, Water, Fire, Air, Light, Dark, Time and Space Microcores, in any order.",
-    "Once all offerings are present, offer 10B of Refined Spacetime to the core. Use buckets in several steps, portable filled fluid containers, or a directly connected pipe. Empty buckets are returned. The liquid gradually forms a clockwise ring.",
+    "Once the offerings are ready, offer 10000 mB of Refined Spacetime using fluid containers, or an Output Upgrade with Spacetime Ports. Partial inputs are accepted; buckets are returned. The liquid forms a clockwise ring.",
     "The completed ring is absorbed, consuming all eight Microcores and yielding one Genesis Particle. Removing an offering or breaking the ritual dissipates the ring without refunding liquid; remaining Microcores are retained. The core does not store fluid and rejects other liquids."
   ],
   "links": [

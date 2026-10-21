@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-/** Authored sample center (3,-60,-23); local -Z is front, +X is right. */
+/** Authored sample center (3,-60,-23); local -Z is front, +X is the entrance viewer's left. */
 @net.neoforged.fml.common.EventBusSubscriber(modid="omnira")
 public final class ForgeLayout {
     @net.neoforged.bus.api.SubscribeEvent
@@ -99,6 +99,11 @@ public final class ForgeLayout {
             if(level.isClientSide)return true;
             if(!assemble(level,center,facing))return false;
             crystal.shrink(1);
+            if(player instanceof net.minecraft.server.level.ServerPlayer serverPlayer){
+                var advancement=serverPlayer.server.getAdvancements().get(
+                        net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","mainline/further_beyond"));
+                if(advancement!=null)serverPlayer.getAdvancements().award(advancement,"assembled");
+            }
             if(level.getBlockEntity(center) instanceof AdvancedForgeBlockEntity forge)forge.beginFormation();
             level.playSound(null,center,net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_CHIME,net.minecraft.sounds.SoundSource.BLOCKS,1,.7F);
             return true;

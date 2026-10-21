@@ -1,0 +1,12 @@
+{
+  "id": "world_deflection",
+  "title": "World Deflection",
+  "item": "omnira:active_world_seed",
+  "recipes": false,
+  "text": [
+    "Use an Active World Seed on the upper surface of flat ground to unfold another realm. Each successful use consumes one seed, sampling an available biome and its terrain from any dimension.",
+    "It replaces a 4x4x4 region containing two terrain layers and two layers of surface scenery. Placement aligns to a four-block grid and then shifts upward by two blocks, rather than always centering on the clicked block. Existing terrain, containers and machines may be overwritten; unbreakable blocks remain. Use it away from buildings you wish to keep.",
+    "The biome changes with the terrain. No seed is consumed if no usable sample is found, or if you move away or stop holding it while it prepares. Active seeds can also start the Ritual of World Formation."
+  ],
+  "links": [{"target": "world_seed", "label": "Crafting World Seeds"}, {"target": "world_forming_ritual", "label": "Ritual of World Formation"}]
+}

@@ -13,7 +13,8 @@ public record ReversalRecipe(Ingredient ingredient,int count,List<ItemStack> res
     public ReversalRecipe asInfusion(){return new ReversalRecipe(ingredient,count,results,true);}
     public static final MapCodec<ReversalRecipe> CODEC=RecordCodecBuilder.mapCodec(i->i.group(Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(ReversalRecipe::ingredient),Codec.intRange(1,64).fieldOf("count").forGetter(ReversalRecipe::count),ItemStack.STRICT_CODEC.listOf().validate(v->v.isEmpty()?DataResult.error(()->"Empty reversal results"):DataResult.success(v)).fieldOf("results").forGetter(ReversalRecipe::results)).apply(i,ReversalRecipe::new));
     public static final StreamCodec<RegistryFriendlyByteBuf,ReversalRecipe> STREAM=StreamCodec.composite(Ingredient.CONTENTS_STREAM_CODEC,ReversalRecipe::ingredient,ByteBufCodecs.VAR_INT,ReversalRecipe::count,ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()),ReversalRecipe::results,ReversalRecipe::new);
-    public boolean matches(SingleRecipeInput input,net.minecraft.world.level.Level level){return ingredient.test(input.item())&&input.item().getCount()>=count;}
+    public boolean matches(SingleRecipeInput input,net.minecraft.world.level.Level level){return ingredient.test(input.item())&&input.item().getCount()>=count
+            &&(input.item().is(com.mcmagic.omnira.registry.ModItems.MEMORY_CUBE.get())||com.mcmagic.omnira.recipe.RecipeInputSafety.empty(input.item()));}
     public List<ItemStack> outputs(ItemStack input){
         if(input.is(com.mcmagic.omnira.registry.ModItems.MEMORY_CUBE.get()))return List.of(com.mcmagic.omnira.item.MemoryCubeBlockItem.withState(input.copyWithCount(1),!com.mcmagic.omnira.item.MemoryCubeBlockItem.peaceful(input)));
         return results;

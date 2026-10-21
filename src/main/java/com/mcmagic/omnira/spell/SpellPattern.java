@@ -12,18 +12,19 @@ public record SpellPattern(ElementType targetElement, ElementType shapeElement) 
     ).apply(instance, (target, shape) -> new SpellPattern(target, shape.orElse(null))));
 
     public SpellPattern {
-        if (!targetElement.isPrimary() && targetElement!=ElementType.TIME && targetElement!=ElementType.SPACE) {
+        if (!targetElement.isPrimary() && targetElement!=ElementType.TIME && targetElement!=ElementType.SPACE && targetElement!=ElementType.OMNI) {
             throw new IllegalArgumentException("Low-tier spell target element must be primary: " + targetElement);
         }
         if (shapeElement != null && !shapeElement.isPrimary()) {
             throw new IllegalArgumentException("Low-tier spell shape element must be primary: " + shapeElement);
         }
-        if((targetElement==ElementType.TIME || targetElement==ElementType.SPACE) && shapeElement!=null)
+        if((targetElement==ElementType.TIME || targetElement==ElementType.SPACE || targetElement==ElementType.OMNI) && shapeElement!=null)
             throw new IllegalArgumentException("Composite microcores reserve the second shape slot");
     }
 
-    public boolean composite(){return targetElement==ElementType.TIME || targetElement==ElementType.SPACE;}
-    public String compositeName(){return targetElement==ElementType.TIME?"reverse_timeflow":"spatial_blade";}
+    public boolean worldRotation(){return targetElement==ElementType.OMNI;}
+    public boolean composite(){return targetElement==ElementType.TIME || targetElement==ElementType.SPACE || worldRotation();}
+    public String compositeName(){return worldRotation()?"world_rotation":targetElement==ElementType.TIME?"reverse_timeflow":"spatial_blade";}
     public static boolean composite(ItemStack stack){return ElementType.byMicrocore(stack).filter(e->e==ElementType.TIME||e==ElementType.SPACE).isPresent();}
     public static boolean compatibleSlots(net.minecraft.world.Container inventory,int slot,ItemStack stack){
         if(slot==0)return !composite(stack)||inventory.getItem(1).isEmpty();
@@ -31,10 +32,12 @@ public record SpellPattern(ElementType targetElement, ElementType shapeElement) 
     }
 
     public SpellTargetKeyword targetKeyword() {
+        if(worldRotation())return SpellTargetKeyword.SELF;
         return targetElement.targetKeyword().orElseThrow();
     }
 
     public SpellShapeKeyword shapeKeyword() {
+        if(worldRotation())return SpellShapeKeyword.BURST;
         return composite()?targetElement.shapeKeyword().orElseThrow():shapeElement == null ? null : shapeElement.shapeKeyword().orElseThrow();
     }
 

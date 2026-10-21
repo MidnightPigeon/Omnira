@@ -13,7 +13,17 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 public final class GuideBookClient {
     private GuideBookClient() {}
     public static void open() {Minecraft.getInstance().setScreen(new com.mcmagic.omnira.client.screen.GuideBookScreen());}
-    public static void open(String destination) {Minecraft.getInstance().setScreen(new com.mcmagic.omnira.client.screen.GuideBookScreen(destination));}
+    public static void openReference(String destination,net.minecraft.client.gui.screens.Screen parent){
+        Minecraft.getInstance().setScreen(new com.mcmagic.omnira.client.screen.GuideBookScreen(destination,parent));
+    }
+    public static void open(String destination) {
+        if(destination.equals("myriad_codex#recipe")){
+            if(net.neoforged.fml.ModList.get().isLoaded("jei")&&com.mcmagic.omnira.compat.jei.OmniraJeiPlugin.openCrafting(
+                    new net.minecraft.world.item.ItemStack(com.mcmagic.omnira.codex.MyriadCodexContent.ITEM.get())))return;
+            destination="myriad_codex";
+        }
+        Minecraft.getInstance().setScreen(new com.mcmagic.omnira.client.screen.GuideBookScreen(destination));
+    }
     public static void open(com.mcmagic.omnira.guidance.GuideReadingPayload reading) {
         Minecraft.getInstance().setScreen(new com.mcmagic.omnira.client.screen.GuideBookScreen(reading.bookmark().destination(),reading.bookmark().page(),
                 bookmark->net.neoforged.neoforge.network.PacketDistributor.sendToServer(new com.mcmagic.omnira.guidance.GuideReadingPayload(reading.bookId(),reading.hand(),bookmark))));

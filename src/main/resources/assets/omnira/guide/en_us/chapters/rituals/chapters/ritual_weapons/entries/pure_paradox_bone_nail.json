@@ -4,7 +4,7 @@
   "title": "Pure Paradox Bone Nail",
   "recipes": true,
   "text": [
-    "On the Advanced Assembly Table, put the previous-stage weapon at the left node, Omni Microcore at the middle and Paradox Ore at the right. The six surface ingredients are Paradox Dust. Damage, enchantments, custom names and loaded crystals are retained.",
+    "Upgrade the preceding weapon at the Advanced Assembly Table. Damage, enchantments, custom names and the inserted spell crystal are preserved.",
     "Upgrade 4: 16 damage, 2.2 attack speed, 24 total healing and 200% base special range. Paradox motes increase with level.",
     "§b§oAt least upgrading needs no smithing template)§r"
   ],
@@ -16,6 +16,10 @@
     {
       "target": "advanced_assembly_table",
       "label": "Advanced Assembly Table"
+    },
+    {
+      "target": "ritual_weapon_upgrades",
+      "label": "Shared Upgrade Rules"
     }
   ]
 }

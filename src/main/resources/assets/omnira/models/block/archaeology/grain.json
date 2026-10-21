@@ -17,22 +17,22 @@
       ],
       "faces": {
         "north": {
-          "texture": "#body"
+          "texture": "#body", "uv": [0,0,16,16]
         },
         "south": {
-          "texture": "#body"
+          "texture": "#body", "uv": [0,0,16,16]
         },
         "east": {
-          "texture": "#body"
+          "texture": "#body", "uv": [0,0,16,16]
         },
         "west": {
-          "texture": "#body"
+          "texture": "#body", "uv": [0,0,16,16]
         },
         "up": {
-          "texture": "#body"
+          "texture": "#body", "uv": [0,0,16,16]
         },
         "down": {
-          "texture": "#body"
+          "texture": "#body", "uv": [0,0,16,16]
         }
       }
     }

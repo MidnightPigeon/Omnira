@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "omnira:shadow_rock"
+  },
+  "surface": {
+    "Name": "omnira:mossy_shadow_rock"
+  },
+  "decorations": [
+    {
+      "kind": "tree",
+      "block": {
+        "Name": "omnira:shadow_log"
+      },
+      "crown": {
+        "Name": "omnira:shadow_leaves"
+      }
+    }
+  ]
+}

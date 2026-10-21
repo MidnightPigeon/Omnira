@@ -18,7 +18,7 @@ public record AdvancedForgeRecipe(List<Ingredient> slots,ItemStack result,String
     public AdvancedForgeRecipe {
         slots=List.copyOf(slots);
         result=result.copy();
-        if(!operation.equals("fixed") && !operation.equals("staff_enhancement") && !operation.equals("ritual_sword_upgrade"))throw new IllegalArgumentException("Unknown advanced assembly operation: "+operation);
+        if(!operation.equals("fixed") && !operation.equals("staff_enhancement") && !operation.equals("ritual_sword_upgrade") && !operation.equals("grid_upgrade"))throw new IllegalArgumentException("Unknown advanced assembly operation: "+operation);
         if(slots.size()!=9 || slots.stream().allMatch(Ingredient::isEmpty))throw new IllegalArgumentException("Expected nine material positions");
     }
     public record Input(Container container) implements RecipeInput {
@@ -35,7 +35,7 @@ public record AdvancedForgeRecipe(List<Ingredient> slots,ItemStack result,String
     };
     public boolean matches(Input input,Level level){
         for(int i=0;i<input.size();i++) {
-            boolean preserves=operation.equals("staff_enhancement")&&i==7 || operation.equals("ritual_sword_upgrade")&&i==6;
+            boolean preserves=(operation.equals("staff_enhancement")||operation.equals("grid_upgrade"))&&i==7 || operation.equals("ritual_sword_upgrade")&&i==6;
             if(!preserves&&!com.mcmagic.omnira.recipe.RecipeInputSafety.empty(input.getItem(i)))return false;
         }
         for(int i=6;i<9;i++)if(slots.get(i).isEmpty()?!input.getItem(i).isEmpty():!slots.get(i).test(input.getItem(i)))return false;
@@ -47,11 +47,13 @@ public record AdvancedForgeRecipe(List<Ingredient> slots,ItemStack result,String
         }
         return net.neoforged.neoforge.common.util.RecipeMatcher.findMatches(materials,ingredients)!=null
                 && (!operation.equals("staff_enhancement") || !com.mcmagic.omnira.item.staff.StaffEnhancements.assemble(input.container()).isEmpty())
-                && (!operation.equals("ritual_sword_upgrade") || com.mcmagic.omnira.item.RitualSwordUpgrades.valid(input.getItem(6),result));
+                && (!operation.equals("ritual_sword_upgrade") || com.mcmagic.omnira.item.RitualSwordUpgrades.valid(input.getItem(6),result))
+                && (!operation.equals("grid_upgrade") || !com.mcmagic.omnira.recipe.GridAssemblyRecipes.upgrade(input.getItem(7),result).isEmpty());
     }
     public ItemStack assemble(Input input,HolderLookup.Provider registries){return operation.equals("staff_enhancement")?
             com.mcmagic.omnira.item.staff.StaffEnhancements.assemble(input.container()):operation.equals("ritual_sword_upgrade")?
-            com.mcmagic.omnira.item.RitualSwordUpgrades.assemble(input.getItem(6),result):result.copy();}
+            com.mcmagic.omnira.item.RitualSwordUpgrades.assemble(input.getItem(6),result):operation.equals("grid_upgrade")?
+            com.mcmagic.omnira.recipe.GridAssemblyRecipes.upgrade(input.getItem(7),result):result.copy();}
     public ItemStack displayResult(){
         if(!operation.equals("staff_enhancement"))return result.copy();
         var input=new net.minecraft.world.SimpleContainer(9);

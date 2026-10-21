@@ -189,37 +189,15 @@ public final class SpellEntityRenderer extends EntityRenderer<SpellEntity> {
     }
 
     private void ring(VertexConsumer mesh, Matrix4f pose, float radius, float width, float alpha) {
-        float unit = radius / 4;
-        for (int x = -4; x < 4; x++) for (int z = -4; z < 4; z++) {
-            double distance = (x+.5)*(x+.5) + (z+.5)*(z+.5);
-            if (distance < 9 || distance > 16) continue;
-            quad(mesh, pose, new Vec3(x*unit,0,z*unit), new Vec3((x+1)*unit,0,z*unit),
-                    new Vec3((x+1)*unit,0,(z+1)*unit), new Vec3(x*unit,0,(z+1)*unit), alpha);
-        }
+        volume(mesh,pose,radius,alpha,com.mcmagic.omnira.spell.visual.SpellVolumeGeometry.ring());
     }
 
     private void ball(VertexConsumer mesh, Matrix4f pose, float radius, float alpha) {
-        double unit = radius / 2;
-        // An exposed-face voxel shell replaces latitude/longitude tessellation.
-        for (int x=-2; x<2; x++) for (int y=-2; y<2; y++) for (int z=-2; z<2; z++) {
-            if (!voxel(x,y,z)) continue;
-            for (var direction : net.minecraft.core.Direction.values()) {
-                if (voxel(x+direction.getStepX(),y+direction.getStepY(),z+direction.getStepZ())) continue;
-                double a=x*unit,b=y*unit,c=z*unit, d=a+unit,e=b+unit,f=c+unit;
-                switch (direction) {
-                    case UP -> quad(mesh,pose,new Vec3(a,e,c),new Vec3(d,e,c),new Vec3(d,e,f),new Vec3(a,e,f),alpha);
-                    case DOWN -> quad(mesh,pose,new Vec3(a,b,c),new Vec3(a,b,f),new Vec3(d,b,f),new Vec3(d,b,c),alpha);
-                    case EAST -> quad(mesh,pose,new Vec3(d,b,c),new Vec3(d,b,f),new Vec3(d,e,f),new Vec3(d,e,c),alpha);
-                    case WEST -> quad(mesh,pose,new Vec3(a,b,c),new Vec3(a,e,c),new Vec3(a,e,f),new Vec3(a,b,f),alpha);
-                    case NORTH -> quad(mesh,pose,new Vec3(a,b,c),new Vec3(d,b,c),new Vec3(d,e,c),new Vec3(a,e,c),alpha);
-                    case SOUTH -> quad(mesh,pose,new Vec3(a,b,f),new Vec3(a,e,f),new Vec3(d,e,f),new Vec3(d,b,f),alpha);
-                }
-            }
-        }
+        volume(mesh,pose,radius,alpha,com.mcmagic.omnira.spell.visual.SpellVolumeGeometry.ball());
     }
-
-    private static boolean voxel(int x, int y, int z) {
-        return (x+.5)*(x+.5)+(y+.5)*(y+.5)+(z+.5)*(z+.5) <= 3;
+    private void volume(VertexConsumer mesh,Matrix4f pose,float radius,float alpha,java.util.List<com.mcmagic.omnira.spell.visual.SpellVolumeGeometry.Quad> geometry){
+        for(var quad:geometry)for(var p:quad.vertices())mesh.addVertex(pose,p[0]*radius,p[1]*radius,p[2]*radius)
+                .setColor(((color>>16)&255)/255F,((color>>8)&255)/255F,(color&255)/255F,alpha);
     }
 
     private void quad(VertexConsumer mesh, Matrix4f pose, Vec3 a, Vec3 b, Vec3 c, Vec3 d, float alpha) {

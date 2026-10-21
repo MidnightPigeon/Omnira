@@ -47,15 +47,23 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     @Override public boolean canPlaceItem(int slot,ItemStack stack){return !com.mcmagic.omnira.item.bottle.PocketBottleItem.restricted(stack);}
     @Override public boolean isEmpty() {return hasPendingLoot() || super.isEmpty();}
     @Override public ItemStack getItem(int slot) {return hasPendingLoot()?ItemStack.EMPTY:super.getItem(slot);}
-    @Override public ItemStack removeItem(int slot,int amount) {return hasPendingLoot()?ItemStack.EMPTY:super.removeItem(slot,amount);}
+    @Override public ItemStack removeItem(int slot,int amount) {
+        if(hasPendingLoot())return ItemStack.EMPTY;var before=getItem(slot).copy();var result=super.removeItem(slot,amount);
+        com.mcmagic.omnira.progression.BranchStorage.items(this,slot,before,getItem(slot));return result;
+    }
     @Override public ItemStack removeItemNoUpdate(int slot) {return hasPendingLoot()?ItemStack.EMPTY:super.removeItemNoUpdate(slot);}
-    @Override public void setItem(int slot,ItemStack stack) {if(hasPendingLoot())return;getItems().set(slot,stack);setChanged();}
+    @Override public void setItem(int slot,ItemStack stack) {if(hasPendingLoot())return;var before=getItem(slot).copy();getItems().set(slot,stack);
+        com.mcmagic.omnira.progression.BranchStorage.items(this,slot,before,stack);setChanged();}
     private int automationTicks;
+    private final com.mcmagic.omnira.storage.LogisticsRates.Budget itemOutputBudget=new com.mcmagic.omnira.storage.LogisticsRates.Budget();
+    public int outputItems(){return level==null?0:itemOutputBudget.available(level.getGameTime(),com.mcmagic.omnira.storage.LogisticsRates.ITEMS*upgrades.speedMultiplier());}
+    public void outputItems(int used){itemOutputBudget.spend(used);}
     public void serverTick() {
+        outputItems();
         if(resonant() && level instanceof net.minecraft.server.level.ServerLevel server && server.getGameTime()%20==0)
             com.mcmagic.omnira.storage.CrystalStorageNetworks.get(server).register(this);
         if(++automationTicks>=20){automationTicks=0;com.mcmagic.omnira.world.structure.AuthoredStructureConnections.initialize(this);com.mcmagic.omnira.mire.MillPlan.initialize(this);OrbAutomation.tick(this);}
-        else if(automationTicks==10 && upgrades.speedMultiplier()>1)OrbAutomation.tick(this,false);
+        else if(automationTicks%5==0)OrbAutomation.tick(this,false);
     }
     protected void shattered(net.minecraft.server.level.ServerLevel server) {}
     protected boolean shatterDrops(){return true;}

@@ -5,8 +5,8 @@
   "recipes": true,
   "text": [
     "Assemble a pair of ports from a Resonance Core, two Time Warp Points and two Space Warp Points. Attach them to block faces and link two within 32 blocks in the same dimension using the Tuning Rod. Use either linked port to disconnect.",
-    "The attached faces act as neighbours, even with different orientations. Ports neither move contents automatically nor add a rate limit. Containers, upgrades, pipes and machines determine item, fluid and energy transfers.",
-    "Engines can drive remote machines through ports. Create connections require exposed shaft faces at both ends; plain casings do not work. Horizontal and vertical shafts can connect, as can hopper outlets and pumped pipe networks.",
+    "The attached faces act as neighbours, even with different orientations. Ports neither move contents automatically nor add a rate limit. Power sources or cables initiate electrical transfers at the source rate, respecting the receiving face's limits. Items and fluids likewise follow the endpoints' own rules.",
+    "Engines can drive remote machines through ports. Create connections require exposed shaft faces at both ends; plain casings do not work. Horizontal and vertical shafts can connect, as can hopper outlets and Create's pumped pipe networks.",
     "White and black spheres float and rotate above linked ports. Holding the Tuning Rod reveals their line. After selecting one end, use air or another block to cancel selection."
   ],
   "links": [
@@ -17,6 +17,83 @@
     {
       "target": "output_upgrade",
       "label": "Ejection Upgrade"
+    }
+  ],
+  "figures": [
+    {
+      "id": "port_faces",
+      "title": "Adjacent Faces",
+      "icons": [
+        {
+          "item": "minecraft:chest",
+          "x": 0,
+          "y": 20,
+          "count": 1
+        },
+        {
+          "item": "omnira:spacetime_port",
+          "x": 22,
+          "y": 20,
+          "count": 1
+        },
+        {
+          "item": "omnira:spacetime_port",
+          "x": 83,
+          "y": 74,
+          "count": 1
+        },
+        {
+          "item": "minecraft:hopper",
+          "x": 105,
+          "y": 74,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 44,
+          "y1": 28,
+          "x2": 66,
+          "y2": 28,
+          "color": "#7973A2",
+          "arrow": false
+        },
+        {
+          "x1": 66,
+          "y1": 28,
+          "x2": 66,
+          "y2": 82,
+          "color": "#7973A2",
+          "arrow": false
+        },
+        {
+          "x1": 66,
+          "y1": 82,
+          "x2": 78,
+          "y2": 82,
+          "color": "#7973A2",
+          "arrow": false
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "Container / hopper",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Ports do not pump.\nAttached devices set\nflow and speed.",
+          "x": 0,
+          "y": 99,
+          "width": 124,
+          "height": 33,
+          "color": "#405462"
+        }
+      ]
     }
   ]
 }

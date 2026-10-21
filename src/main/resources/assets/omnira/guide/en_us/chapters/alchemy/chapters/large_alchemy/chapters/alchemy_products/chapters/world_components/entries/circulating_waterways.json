@@ -1,0 +1,15 @@
+{
+  "id": "circulating_waterways",
+  "title": "Circulating Waterways",
+  "item": "omnira:circulating_waterways",
+  "recipes": false,
+  "text": [
+    "Add 1B Water to form the cycle connecting oceans, rivers and rainfall."
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "Ritual of World Formation"
+    }
+  ]
+}

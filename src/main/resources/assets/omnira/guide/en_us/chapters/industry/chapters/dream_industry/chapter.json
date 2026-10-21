@@ -1,9 +1,10 @@
 {
   "id": "dream_industry",
   "title": "Dream",
-  "icon": "omnira:advanced_condensation_table",
+  "icon": "omnira:primordial_spell_core",
   "introduction": "introduction.json",
   "entries": [
+    "entries/spell_core.json",
     "entries/advanced_assembly_table.json",
     "entries/staff_enhancement_crafting.json",
     "entries/infused_crystal_furnace.json",
@@ -13,5 +14,15 @@
   "chapters": [
     "chapters/dream_inquiry/chapter.json",
     "chapters/advanced_condensation/chapter.json"
+  ],
+  "directory_order": [
+    "spell_core",
+    "advanced_condensation",
+    "advanced_assembly_table",
+    "dream_inquiry",
+    "infused_crystal_furnace",
+    "infused_crystal_grindstone",
+    "infused_crystal_anvil",
+    "staff_enhancement_crafting"
   ]
 }

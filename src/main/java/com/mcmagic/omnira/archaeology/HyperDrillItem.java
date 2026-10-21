@@ -10,7 +10,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
 
-public final class HyperDrillItem extends BlockItem {
+public final class HyperDrillItem extends BlockItem implements com.mcmagic.omnira.item.MultiblockPlacementItem {
     public HyperDrillItem(Block b,Properties p){super(b,p);}
     public static int charge(ItemStack s){var n=s.getOrDefault(DataComponents.CUSTOM_DATA,CustomData.EMPTY).copyTag();return n.contains("DrillCharge")?Math.clamp(n.getInt("DrillCharge"),0,1200):1200;}
     public static ItemStack withCharge(ItemStack s,int charge){var n=s.getOrDefault(DataComponents.CUSTOM_DATA,CustomData.EMPTY).copyTag();n.putInt("DrillCharge",charge);s.set(DataComponents.CUSTOM_DATA,CustomData.of(n));return s;}

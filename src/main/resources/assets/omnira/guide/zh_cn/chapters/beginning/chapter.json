@@ -3,10 +3,16 @@
   "title": "基础制作与入门",
   "icon": "omnira:guide_book",
   "introduction": "introduction.json",
-  "entries": [],
+  "entries": [
+    "entries/guidance_orb.json"
+  ],
   "chapters": [
-    "chapters/guidance/chapter.json",
     "chapters/initial_crafting/chapter.json",
     "chapters/building/chapter.json"
+  ],
+  "directory_order": [
+    "guidance_orb",
+    "initial_crafting",
+    "building"
   ]
 }

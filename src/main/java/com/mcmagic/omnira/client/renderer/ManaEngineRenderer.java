@@ -41,6 +41,7 @@ public final class ManaEngineRenderer implements BlockEntityRenderer<BlockEntity
             case SOUTH,EAST -> -1;
             default -> 1;
         };
+        if(engine.outputMode!=com.mcmagic.omnira.pulse.PulseOutput.ROTATION)shaftAngle=0;
         pose.pushPose();pose.translate(0,.5,0);pose.mulPose(Axis.ZP.rotationDegrees(shaftAngle));pose.translate(-.5,-.5,-.5);
         part("shaft",pose,buffers,light,overlay);pose.popPose();
         pose.pushPose();pose.mulPose(Axis.YP.rotationDegrees(angle));pose.translate(-.5,0,-.5);
@@ -53,5 +54,7 @@ public final class ManaEngineRenderer implements BlockEntityRenderer<BlockEntity
         pose.popPose();
         pose.translate(0,14.9/16,0);item(engine.inventory.getItem(0),pose,buffers,light,overlay,entity);
         pose.popPose();
+        if(entity.getLevel()!=null&&engine.running()&&engine.outputMode!=com.mcmagic.omnira.pulse.PulseOutput.ROTATION)
+            com.mcmagic.omnira.client.PulseClient.shaft(pose,buffers,facing,entity.getLevel().getGameTime()+partialTick,true,engine.outputMode);
     }
 }

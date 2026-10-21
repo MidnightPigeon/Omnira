@@ -1,0 +1,8 @@
+{
+  "id": "contact_author",
+  "title": "Contact the Author",
+  "icon": "minecraft:feather",
+  "introduction": "introduction.json",
+  "entries": [],
+  "chapters": []
+}

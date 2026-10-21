@@ -81,6 +81,10 @@ public class SpellEntity extends Entity {
         entityData.set(GHOST,value);ghostTargetBlock=target==null?null:target.immutable();
     }
     private UUID directTarget;
+    /** The follow-up blast must exclude the replacement, not the now-removed original entity. */
+    public void remapDirectTarget(Entity original,Entity replacement){
+        if(original.getUUID().equals(directTarget))directTarget=replacement.getUUID();
+    }
     private net.minecraft.core.BlockPos directBlock;
     public void explosiveImpact(boolean enabled) {explosiveImpact=enabled;}
     public boolean explosiveImpact() {return explosiveImpact;}
@@ -212,6 +216,7 @@ public class SpellEntity extends Entity {
         knowledgeShock=true;knowledgeLeech=leech;entityData.set(KNOWLEDGE_BLOOD,blood);
     }
     public boolean knowledgeBlood(){return entityData.get(KNOWLEDGE_BLOOD);}
+    public boolean knowledgeLeech(){return knowledgeLeech;}
     public void configure(double power, SpellPayload payload) {
         this.payload=payload;
         configure(power,payload.damage());
@@ -260,12 +265,9 @@ public class SpellEntity extends Entity {
         if(cabin!=null && owner!=target){cabin.impact();return;}
         triggerCloud(target.position());
         if(holy())com.mcmagic.omnira.spell.HolyMagic.touch(owner,living);
-        float before=living.getHealth();
         if(damage>0) target.hurt(SpellDamageSource.physical(living,this,owner,"spell"),damage*(holy()?1.5F:1));
         if(knowledgeShock && knowledgeBlood() && living.isAlive())
-            living.hurt(SpellDamageSource.of(living,net.minecraft.world.damagesource.DamageTypes.GENERIC_KILL,this,owner,"spell"),2);
-        if(knowledgeLeech && owner instanceof LivingEntity caster)
-            caster.heal(Math.max(0,before-living.getHealth())*.5F);
+            com.mcmagic.omnira.combat.OmniraDamage.trueDamage(living,2,SpellDamageSource.of(living,net.minecraft.world.damagesource.DamageTypes.GENERIC_KILL,this,owner,"spell"));
         for(var effect:effects) effect.apply(this,owner,target,power());
     }
     public void applyBlockEffects(net.minecraft.world.phys.BlockHitResult hit) {

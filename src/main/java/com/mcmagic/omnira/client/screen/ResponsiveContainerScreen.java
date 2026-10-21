@@ -16,9 +16,9 @@ public abstract class ResponsiveContainerScreen<M extends AbstractContainerMenu>
     protected int leftExtension(){return 0;}
     protected int rightExtension(){return 0;}
     @Override protected void init(){
-        physicalWidth=width;physicalHeight=height;
-        uiScale=UiViewport.fit(width,height,imageWidth+leftExtension()+rightExtension(),imageHeight);
-        width=Math.round(width/uiScale);height=Math.round(height/uiScale);
+        physicalWidth=minecraft.getWindow().getGuiScaledWidth();physicalHeight=minecraft.getWindow().getGuiScaledHeight();
+        var viewport=UiViewport.layout(physicalWidth,physicalHeight,imageWidth+leftExtension()+rightExtension(),imageHeight);
+        uiScale=viewport.scale();width=viewport.width();height=viewport.height();
         super.init();
         leftPos=(width-imageWidth-leftExtension()-rightExtension())/2+leftExtension();
     }
@@ -36,6 +36,7 @@ public abstract class ResponsiveContainerScreen<M extends AbstractContainerMenu>
         return new Rect2i(left,top,(int)Math.ceil((x+w)*uiScale)-left,(int)Math.ceil((y+h)*uiScale)-top);
     }
     @Override public final void render(GuiGraphics g,int x,int y,float partial){
+        g=new ViewportGraphics(g,width,height);
         widgetTooltip.begin();
         g.pose().pushPose();g.pose().scale(uiScale,uiScale,1);
         try{renderContent(g,(int)(x/uiScale),(int)(y/uiScale),partial);widgetTooltip.render(g,font,(int)(x/uiScale),(int)(y/uiScale));}finally{g.pose().popPose();}

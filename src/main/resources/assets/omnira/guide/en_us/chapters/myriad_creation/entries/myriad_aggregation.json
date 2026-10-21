@@ -1,0 +1,21 @@
+{
+  "id": "myriad_aggregation",
+  "title": "Myriad Aggregation",
+  "item": "omnira:omni_microcore",
+  "recipes": false,
+  "text": [
+    "Start Myriad Aggregation in a Miniature World Framework with wood and dirt, or an Analysis Crystal and Genesis Particles.",
+    "The world develops through the Overworld, Nether and End. After its final scene, a Nether Star or Encapsulated Stable Spacetime Aggregate collapses it into one Omni Microcore. Frame projections and JEI show each stage's materials.",
+    "Dimension crossings and the final collapse clear leftover materials. The microcore remains inside until taken; only then does the frame reset."
+  ],
+  "links": [
+    {
+      "target": "miniature_world_framework",
+      "label": "Miniature World Framework"
+    },
+    {
+      "target": "world_forming_ritual",
+      "label": "World Formation Ritual"
+    }
+  ]
+}

@@ -5,10 +5,12 @@
       "items": [
         "guide_book",
         "guidance_orb",
+        "universal_understanding",
         "modular_staff",
         "infused_grimoire",
         "sanctified_grimoire",
-        "corrupted_grimoire"
+        "corrupted_grimoire",
+        "founder_approval"
       ]
     },
     {
@@ -46,7 +48,8 @@
         "sharp_breath",
         "healing_dew",
         "dissociation_thread",
-        "construction_matrix"
+        "construction_matrix",
+        "world_rotation_crystal"
       ]
     },
     {
@@ -117,7 +120,7 @@
         "crystal_leggings",
         "crystal_boots",
         "crystal_sunhat",
-        "crystal_blouse",
+        "crystal_top",
         "crystal_skirt",
         "crystal_stocking_shoes",
         "kings_new_clothes"
@@ -199,7 +202,9 @@
         "rough_alchemy_cauldron",
         "primitive_reaction_cauldron",
         "large_alchemical_reaction_pool",
-        "alchemical_catalysis_chamber"
+        "alchemical_catalysis_chamber",
+        "miniature_world_framework",
+        "myriad_codex"
       ]
     },
     {
@@ -207,6 +212,8 @@
       "items": [
         "mana_engine",
         "spacetime_engine",
+        "pulse_accumulator_orb",
+        "resonant_accumulator_orb",
         "crystal_casing",
         "infused_crystal_casing",
         "hyperdimensional_drill"
@@ -449,6 +456,10 @@
   ],
   "misc": [
     {
+      "group": "Music",
+      "items": ["music_disc_liu_nian", "music_disc_mi_meng_ye", "music_disc_space"]
+    },
+    {
       "group": "Crystals and dust",
       "items": [
         "spiritual_crystal",
@@ -482,7 +493,18 @@
         "unstable_paradox_source",
         "encapsulated_stable_paradox_source",
         "encapsulated_stable_spacetime_aggregate",
-        "genesis_particles"
+        "genesis_particles",
+        "world_generation_probability_cloud",
+        "dormant_world_seed",
+        "active_world_seed",
+        "strata_skeleton",
+        "circulating_waterways",
+        "flowing_sky_canopy",
+        "geothermal_ember",
+        "living_embryoplasm",
+        "ages_dial",
+        "boundary_crystal_membrane",
+        "phantasm_germinal_shard"
       ]
     },
     {

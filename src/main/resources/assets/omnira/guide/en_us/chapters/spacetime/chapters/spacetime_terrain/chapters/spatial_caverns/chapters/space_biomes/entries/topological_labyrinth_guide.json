@@ -4,9 +4,9 @@
   "item": "omnira:void_portal",
   "recipes": false,
   "text": [
-    "Sealed upper rooms have pale-blue Long-Range Portals in their ceilings. Touch one to reach the Time Continent directly above, or a nearby landing if blocked. Neither portal type can be broken.",
     "Two labyrinth floors lie beneath the level cave surface. A few rooms have diggable excited spatial crystal roofs; pure solidified spacetime seals the others. Light Crystal Torches mark the room corners.",
     "Touch a Void Portal vortex to travel immediately to a nearby room through the opposite-facing exit. A new destination is chosen each time, so returning through an exit need not lead back. Liquids do not obstruct the portals.",
+    "Sealed upper rooms have pale-blue Long-Range Portals in their ceilings. Touch one to reach the Time Continent directly above, or a nearby landing if blocked. Neither portal type can be broken.",
     "Rooms may be empty or contain treasure orbs, relics, crystal matrices and suspicious Time Sand. Some floors are covered in Void Starflow or Decayed Timeflow."
   ],
   "links": [
@@ -17,6 +17,108 @@
     {
       "target": "void_starflow_guide",
       "label": "Void Starflow"
+    }
+  ],
+  "figures": [
+    {
+      "id": "maze_exit",
+      "title": "Portal Exits",
+      "icons": [
+        {
+          "item": "omnira:void_portal",
+          "x": 0,
+          "y": 46,
+          "count": 1
+        },
+        {
+          "item": "omnira:void_portal",
+          "x": 108,
+          "y": 46,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 8,
+          "y1": 39,
+          "x2": 8,
+          "y2": 19,
+          "color": "#9F73AD",
+          "arrow": false
+        },
+        {
+          "x1": 8,
+          "y1": 19,
+          "x2": 116,
+          "y2": 19,
+          "color": "#9F73AD",
+          "arrow": false
+        },
+        {
+          "x1": 116,
+          "y1": 19,
+          "x2": 116,
+          "y2": 41,
+          "color": "#9F73AD",
+          "arrow": true
+        }
+      ],
+      "areas": [
+        {
+          "x": 0,
+          "y": 30,
+          "width": 46,
+          "height": 50,
+          "color": "#6E818C"
+        },
+        {
+          "x": 4,
+          "y": 34,
+          "width": 38,
+          "height": 42,
+          "color": "#ADBEB3"
+        },
+        {
+          "x": 78,
+          "y": 30,
+          "width": 46,
+          "height": 50,
+          "color": "#6E818C"
+        },
+        {
+          "x": 82,
+          "y": 34,
+          "width": 38,
+          "height": 42,
+          "color": "#ADBEB3"
+        }
+      ],
+      "labels": [
+        {
+          "text": "A",
+          "x": 18,
+          "y": 0,
+          "width": 20,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "B",
+          "x": 96,
+          "y": 0,
+          "width": 20,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "A left → B right\nEach trip chooses anew.",
+          "x": 0,
+          "y": 96,
+          "width": 124,
+          "height": 33,
+          "color": "#405462"
+        }
+      ]
     }
   ]
 }

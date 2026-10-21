@@ -1,7 +1,7 @@
 {
   "id": "time_continent",
   "title": "时间大陆",
-  "icon": "omnira:temporal_silt",
+  "icon": "omnira:time_sapling",
   "introduction": "introduction.json",
   "entries": [],
   "chapters": [

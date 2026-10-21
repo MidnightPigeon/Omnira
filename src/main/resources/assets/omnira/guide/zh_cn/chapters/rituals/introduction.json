@@ -1,3 +1,7 @@
 {
+  "image": "omnira:textures/gui/guide/chapters/rituals.png",
+  "image_width": 1416,
+  "image_height": 1111,
+  "caption": "摆放基座与供物，以引子唤醒仪式。留意供物消耗与维持条件。",
   "text": []
 }

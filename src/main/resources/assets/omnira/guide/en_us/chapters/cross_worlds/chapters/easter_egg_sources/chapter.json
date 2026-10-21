@@ -1,0 +1,11 @@
+{
+  "id": "easter_egg_sources",
+  "title": "Easter Egg Sources",
+  "icon": "omnira:traveler_manuscript",
+  "introduction": "introduction.json",
+  "entries": [],
+  "chapters": [
+    "chapters/item_sources/chapter.json",
+    "chapters/structure_sources/chapter.json"
+  ]
+}

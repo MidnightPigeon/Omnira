@@ -4,7 +4,13 @@
   "title": "Infused Crystal Anvil",
   "text": [
     "Upgrade a crystal anvil using the same advanced assembly layout. It has unlimited durability and still allows immediate forging by paying experience.",
-    "Either end of the through-shaft can drive automatic forging, replacing each experience level with 20 seconds. Requires at least 16 rpm with a fixed 256 SU load, or 256 FE/second. More power does not speed it up. Power loss pauses progress; changed inputs or names restart it. Electric drive leaves the shaft still."
+    "Front and rear inputs accept pulses: 256 MPU base and 20 seconds per experience level; up to 2048 MPU gives 8x efficiency. Stopping preserves progress; changing inputs or names recalculates it."
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "magic_pulse",
+      "label": "Magic Pulses"
+    }
+  ]
 }

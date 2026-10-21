@@ -16,10 +16,8 @@ public record AssemblyWork(String id,Supplier<List<ItemStack>> finish) {
             return new AssemblyWork("assembly/"+holder.id(),()->{
                 var results=new java.util.ArrayList<ItemStack>();
                 results.add(holder.value().assemble(new AssemblyRecipe.Input(inventory),level.registryAccess()));
-                for(int i=0;i<7;i++) {
-                    var input=inventory.getItem(i);
-                    if(results.getFirst().is(com.mcmagic.omnira.registry.ModItems.LAVA_PRODUCTION_UPGRADE.get()) && input.hasCraftingRemainingItem())results.add(input.getCraftingRemainingItem());
-                }
+                for(var remainder:holder.value().getRemainingItems(new AssemblyRecipe.Input(inventory)))
+                    if(!remainder.isEmpty())results.add(remainder.copy());
                 return results;
             });
         }

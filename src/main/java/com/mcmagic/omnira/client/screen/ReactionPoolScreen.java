@@ -10,13 +10,9 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 /** The tank, reaction inventory and upgrade strip retain separate crystal frames. */
 public final class ReactionPoolScreen extends ResponsiveContainerScreen<ReactionPoolMenu> {
     public ReactionPoolScreen(ReactionPoolMenu menu,Inventory inventory,Component title){super(menu,inventory,title);imageWidth=250;imageHeight=240;inventoryLabelX=45;inventoryLabelY=144;titleLabelX=14;titleLabelY=8;}
-    private void frame(GuiGraphics g,int x,int y,int w,int h){
-        g.fill(x+3,y,x+w-3,y+h,0xFF8FACB6);g.fill(x,y+3,x+w,y+h-3,0xFF8FACB6);
-        g.fill(x+2,y+3,x+w-2,y+h-3,0xFFCEE2E7);g.fill(x+4,y+5,x+w-4,y+h-5,0xFF476773);
-    }
     @Override protected void renderBg(GuiGraphics g,float partial,int mouseX,int mouseY){
         int x=leftPos,y=topPos;
-        MachinePanelArt.pool(CrystalUi.pixels(g,x,y));frame(g,x+35,y+139,180,100);
+        MachinePanelArt.pool(CrystalUi.pixels(g,x,y));CrystalWorkstationBackground.inventory(g,x,y,menu);
         g.fill(x+19,y+28,x+66,y+102,0xFF284956);
         for(var layer:ReactionPoolFluidLayout.layers(menu.pool.fluids,menu.pool.capacity())){
             var fluid=menu.pool.fluids.getFluidInTank(layer.row());int top=y+layer.top(),liquidBottom=y+layer.bottom();
@@ -38,9 +34,10 @@ public final class ReactionPoolScreen extends ResponsiveContainerScreen<Reaction
             g.fill(x+72,yy+1,x+74,yy+16,0xFF000000|(color&0xFFFFFF));
             String name=font.plainSubstrByWidth(fluid.getHoverName().getString(),65);
             g.drawString(font,name,x+77,yy+1,0xFFE8F5F7,false);
-            g.drawString(font,fluid.getAmount()+" mB",x+77,yy+9,0xFFB6DEE8,false);
+            CrystalUi.label(g,font,Component.literal(fluid.getAmount()+" mB"),x+77,yy+10,65,.75F,0xFFB6DEE8);
         }
         for(var slot:menu.slots){
+            if(slot.container instanceof Inventory)continue;
             g.fill(x+slot.x-1,y+slot.y-1,x+slot.x+17,y+slot.y+17,0xFFAECBD5);
             g.fill(x+slot.x,y+slot.y,x+slot.x+16,y+slot.y+16,0xFF476373);
         }
@@ -53,7 +50,7 @@ public final class ReactionPoolScreen extends ResponsiveContainerScreen<Reaction
     }
     @Override protected void renderLabels(GuiGraphics g,int x,int y){
         CrystalUi.title(g,font,title,imageWidth/2,titleLabelY,226,0xFFE9F6F8);
-        g.drawString(font,playerInventoryTitle,inventoryLabelX,inventoryLabelY,0xFFE9F6F8,false);
+        g.drawString(font,playerInventoryTitle,inventoryLabelX,inventoryLabelY,0xFF404040,false);
     }
     @Override protected void renderContent(GuiGraphics g,int x,int y,float partial){
         super.renderContent(g,x,y,partial);renderTooltip(g,x,y);

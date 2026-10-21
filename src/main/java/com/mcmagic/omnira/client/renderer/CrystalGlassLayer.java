@@ -29,15 +29,23 @@ public abstract class CrystalGlassLayer extends RenderType {
     public static final RenderType LIGHT_SPIRIT=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/light_spirit.png"));
     public static final RenderType SHADOW_GHOST=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/shadow_ghost.png"));
     public static final RenderType SHADOW_MIST=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/shadow_mist.png"));
-    private static final java.util.List<RenderType> ENTITY_LAYERS=java.util.List.of(HERON,ARMOR_OUTER,ARMOR_INNER,AMBER,ARCHAEOPTERYX,STAR_JELLYFISH,LIGHT_SPIRIT,SHADOW_GHOST,SHADOW_MIST);
+    public static final RenderType PULSE_RING=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/pulse_ring.png"));
+    public static final RenderType WEAVER_SPIRIT=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/weaver_spirit.png"));
+    private static final java.util.List<RenderType> ENTITY_LAYERS=java.util.List.of(HERON,ARMOR_OUTER,ARMOR_INNER,AMBER,ARCHAEOPTERYX,STAR_JELLYFISH,LIGHT_SPIRIT,SHADOW_GHOST,SHADOW_MIST,PULSE_RING,WEAVER_SPIRIT);
     static {
         String[] textures={"entity/night_heron_feathers","models/armor/crystal_armor_layer_1","models/armor/crystal_armor_layer_2",
-                "entity/solid_white","entity/archaeopteryx_spirit","entity/star_jellyfish","entity/light_spirit","entity/shadow_ghost","entity/shadow_mist"};
+                "entity/solid_white","entity/archaeopteryx_spirit","entity/star_jellyfish","entity/light_spirit","entity/shadow_ghost","entity/shadow_mist","entity/pulse_ring","entity/weaver_spirit"};
         for(int i=0;i<textures.length;i++)ENTITY_TEXTURES.put(ENTITY_LAYERS.get(i),ResourceLocation.parse("omnira:"+textures[i]));
     }
     static ResourceLocation atlasTexture(RenderType type){return ENTITY_TEXTURES.get(type);}
     public static MultiBufferSource contents(MultiBufferSource source){
-        return type->source.getBuffer(type==Sheets.translucentItemSheet() || type==Sheets.translucentCullBlockSheet()?ATLAS:type);
+        return source instanceof ContentsBuffer ? source : new ContentsBuffer(source);
+    }
+    // Repeated nested model helpers share the same adapter, never a cached frame buffer.
+    private record ContentsBuffer(MultiBufferSource source) implements MultiBufferSource {
+        @Override public VertexConsumer getBuffer(RenderType type){
+            return source.getBuffer(type==Sheets.translucentItemSheet() || type==Sheets.translucentCullBlockSheet()?ATLAS:type);
+        }
     }
     private CrystalGlassLayer(){super("omnira_glass",DefaultVertexFormat.NEW_ENTITY,VertexFormat.Mode.QUADS,1536,false,true,()->{},()->{});}
     public static final RenderType ATLAS=create("omnira_glass",DefaultVertexFormat.NEW_ENTITY,VertexFormat.Mode.QUADS,1536,false,true,

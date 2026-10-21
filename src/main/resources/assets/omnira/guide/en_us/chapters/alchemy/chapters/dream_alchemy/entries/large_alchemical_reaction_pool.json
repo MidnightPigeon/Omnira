@@ -1,0 +1,100 @@
+{
+  "id": "large_alchemical_reaction_pool",
+  "title": "Large Alchemical Reaction Pool",
+  "item": "omnira:large_alchemical_reaction_pool",
+  "scene": "large_alchemical_reaction_pool",
+  "text": [
+    "Follow the model layout; individual block facings do not matter. Build the model with eight Crystal Casings, three Infused Crystal Casings, two Mana Engines, and one each of Rough Alchemical Energy Core, Crystal Orb, Liquid Crystal Orb, Dream Crystal Block and Primitive Reaction Cauldron. Empty vessels, engines and upgrades, finish any reaction, then use one Infused Crystal on the Dream Crystal Block. Carry the completed machine with a Pocket Magic Bottle; it cannot be mined.",
+    "Open the control panel to inspect nine item types, four fluid types and four upgrades. A Recipe Control Upgrade can filter reactions. Base total fluid capacity is 40 B; storage upgrades expand it. Any block in the 3x3 catalyst area below may satisfy a reaction.",
+    "Both pulse inputs combine, even from separate networks: 1024 MPU base, up to 8192 MPU for 8x efficiency. Each kinetic input requires at least 16 RPM and uses 32 x |RPM| SU (512 SU at 16 RPM). Combined SU divided by 1024 determines efficiency: at least 1x to start, capped at 8x. Sustained FE/second is equivalent; stopping input stops operation. See Magic Pulses for power priority.",
+    "Matching recipes run independently. Catalyst recipes consume items first. Shared fluid need only meet the largest startup requirement, but each recipe consumes its own amount: keep the supply replenished. Full outputs pause only the affected reaction.",
+    "While powered, base export is 4 items/s from the green port and 2000 mB/s from the blue port. Output Upgrades filter both. One Speed Upgrade may increase logistics, never reaction speed. Automatic export takes the bottom fluid; handheld containers take the top. Click a fluid layer to move it to the bottom. The top supports nine resonance nodes.",
+    "Losing a required floor catalyst cancels the affected reaction, clears progress and causes a blast even while unpowered, without refunding consumed reagents. Insufficient fluid also fails that reaction and causes a blast if more than half was consumed. Blasts have a 20-block radius, deal 30 magic damage and apply strong knockback without breaking terrain."
+  ],
+  "recipes": false,
+  "links": [
+    {
+      "target": "primitive_reaction_cauldron",
+      "label": "Primitive Reaction Cauldron"
+    },
+    {
+      "target": "alchemical_products",
+      "label": "Fluid Transmutation"
+    },
+    {
+      "target": "magic_pulse",
+      "label": "Magic Pulses"
+    }
+  ],
+  "figures": [
+    {
+      "id": "pool_ports",
+      "title": "Pool Interfaces",
+      "icons": [
+        {
+          "item": "omnira:large_alchemical_reaction_pool",
+          "x": 54,
+          "y": 42,
+          "count": 1
+        },
+        {
+          "item": "minecraft:chest",
+          "x": 0,
+          "y": 42,
+          "count": 1
+        },
+        {
+          "item": "minecraft:water_bucket",
+          "x": 108,
+          "y": 42,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 47,
+          "y1": 50,
+          "x2": 23,
+          "y2": 50,
+          "color": "#599267",
+          "arrow": true
+        },
+        {
+          "x1": 77,
+          "y1": 50,
+          "x2": 101,
+          "y2": 50,
+          "color": "#4C9CBD",
+          "arrow": true
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "Green: items",
+          "x": 0,
+          "y": 8,
+          "width": 61,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Blue: fluids",
+          "x": 64,
+          "y": 8,
+          "width": 60,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Power inputs on two sides\nNine top resonance nodes",
+          "x": 0,
+          "y": 80,
+          "width": 124,
+          "height": 44,
+          "color": "#405462"
+        }
+      ]
+    }
+  ]
+}

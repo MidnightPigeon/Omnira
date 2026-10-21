@@ -20,7 +20,7 @@ public final class ManaEngineMenu extends AbstractContainerMenu {
     public ManaEngineMenu(int id,Inventory player,ManaEngineState engine) {
         this(id,player,engine.inventory,ContainerLevelAccess.create(engine.host.getLevel(),engine.host.getBlockPos()),engine,new ContainerData() {
             public int get(int i) {return switch(i) {
-                case 0->engine.enabled?1:0;case 1->engine.redstoneControl?1:0;case 2->engine.clockwise?1:0;
+                case 0->engine.enabled?1:0;case 1->0;case 2->1;
                 case 3->engine.ratedCapacity()&0xffff;case 5->engine.kinetic?1:0;
                 case 7->engine.ratedCapacity()>>>16;case 8->engine.ratedEnergy()&0xffff;case 9->engine.ratedEnergy()>>>16;
                 case 6->com.mcmagic.omnira.energy.EnergyIntegration.available()?1:0;default->engine.running()?1:0;
@@ -50,7 +50,7 @@ public final class ManaEngineMenu extends AbstractContainerMenu {
     public boolean running() {return data.get(4)!=0;}
     @Override public boolean stillValid(Player player) {return stillValid(access,player,ModBlocks.MANA_ENGINE.get());}
     @Override public boolean clickMenuButton(Player player,int id) {
-        if(engine==null || id<0 || id>2 || !stillValid(player)) return false;
+        if(engine==null || id!=0 || !stillValid(player)) return false;
         engine.control(id);broadcastChanges();return true;
     }
     @Override public ItemStack quickMoveStack(Player player,int index) {

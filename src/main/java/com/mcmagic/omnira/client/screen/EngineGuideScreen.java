@@ -10,6 +10,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -28,6 +29,7 @@ public final class EngineGuideScreen extends ResponsiveScreen {
     private final Screen parent;
     private int stage,ticks;
     private boolean electrical,paused;
+    private Button pulseMode,electricMode;
     private BlockEntity preview;
     private ArcaneAssemblyTableBlockEntity assembly;
     public EngineGuideScreen(Screen parent) {super(Component.translatable("gui.omnira.engine.guide"));this.parent=parent;}
@@ -39,21 +41,29 @@ public final class EngineGuideScreen extends ResponsiveScreen {
         assembly.setLevel(minecraft.level);
         refreshPreview();
         int center=width/2;
-        addRenderableWidget(Button.builder(Component.translatable("gui.omnira.engine.mechanical"),b->electrical=false)
+        pulseMode=addRenderableWidget(Button.builder(Component.translatable("gui.omnira.engine.mechanical"),b->electrical=false)
                 .bounds(center-(EnergyIntegration.available()?94:45),30,90,20).build());
-        if(EnergyIntegration.available()) addRenderableWidget(Button.builder(Component.translatable("gui.omnira.engine.electric"),b->electrical=true)
+        electricMode=null;
+        if(EnergyIntegration.available()) electricMode=addRenderableWidget(Button.builder(Component.translatable("gui.omnira.engine.electric"),b->electrical=true)
                 .bounds(center+4,30,90,20).build());
-        addRenderableWidget(Button.builder(Component.literal("<"),b->change(-1)).bounds(center-50,height-27,22,20).build());
-        addRenderableWidget(Button.builder(Component.literal("||"),b->{paused=!paused;b.setMessage(Component.literal(paused?">":"||"));})
-                .bounds(center-24,height-27,22,20).build());
-        addRenderableWidget(Button.builder(Component.literal(">"),b->change(1)).bounds(center+2,height-27,22,20).build());
+        addRenderableWidget(Button.builder(Component.literal("<"),b->change(-1)).bounds(center-50,height-27,22,20)
+                .tooltip(Tooltip.create(Component.translatable("gui.omnira.engine.guide.previous"))).build());
+        var playback=addRenderableWidget(Button.builder(Component.literal(EngineGuideTimeline.playbackGlyph(paused)),b->{paused=!paused;playbackLabel(b);})
+                .bounds(center-24,height-27,22,20).build());playbackLabel(playback);
+        addRenderableWidget(Button.builder(Component.literal(">"),b->change(1)).bounds(center+2,height-27,22,20)
+                .tooltip(Tooltip.create(Component.translatable("gui.omnira.engine.guide.next"))).build());
         addRenderableWidget(Button.builder(Component.translatable("gui.back"),b->onClose()).bounds(width-68,height-27,58,20).build());
+    }
+    private void playbackLabel(Button button){
+        button.setMessage(Component.literal(EngineGuideTimeline.playbackGlyph(paused)));
+        button.setTooltip(Tooltip.create(Component.translatable(paused?"gui.omnira.engine.guide.play":"gui.omnira.engine.guide.pause")));
     }
     private void change(int delta) {stage=Math.floorMod(stage+delta,EngineGuideTimeline.STAGES);ticks=0;refreshPreview();}
     private void refreshPreview() {
         if(!(preview instanceof ManaEngineAccess access)) return;
         var state=access.engineState();
-        state.enabled=true;state.redstoneControl=false;
+        state.enabled=EngineGuideTimeline.powered(stage,ticks);
+        state.outputMode=EngineGuideTimeline.electricOutput(stage,electrical)?com.mcmagic.omnira.pulse.PulseOutput.ELECTRIC:com.mcmagic.omnira.pulse.PulseOutput.PULSE;
         state.inventory.setItem(0,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
         for(int i=1;i<4;i++) state.inventory.setItem(i,i<=EngineGuideTimeline.grids(stage,ticks)?new ItemStack(ModItems.ELEMENTAL_CRYSTAL_GRID.get()):ItemStack.EMPTY);
         boolean complete=ticks>=EngineGuideTimeline.COMPLETE;
@@ -99,14 +109,13 @@ public final class EngineGuideScreen extends ResponsiveScreen {
             var renderer=minecraft.getBlockEntityRenderDispatcher().getRenderer((BlockEntity)assembly);
             if(renderer instanceof AssemblyRenderer model)model.renderPreview(assembly,pose,buffers,
                     LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY,time,
-                    preview instanceof ManaEngineAccess access?access.engineState().rotorAngle:0,EngineGuideTimeline.strikeAge(time));
+                    0,EngineGuideTimeline.strikeAge(time));
             pose.popPose();
         }
-        if(stage==2) block(Blocks.LEVER.defaultBlockState().setValue(BlockStateProperties.POWERED,EngineGuideTimeline.powered(stage,time)),-1,0,0,pose,buffers);
         buffers.endBatch();pose.popPose();RenderSystem.disableDepthTest();
         String mode=electrical?"electric":"mechanical";
-        int capacity=(int)(512*Math.pow(1.5,EngineGuideTimeline.grids(stage,ticks)));
-        graphics.drawCenteredString(font,Component.literal(capacity+(electrical?" FE/s":" su | 16 rpm")),width/2,sceneBottom+5,0xFFE4F5F5);
+        int capacity=preview instanceof ManaEngineAccess access?access.engineState().ratedCapacity():0;
+        graphics.drawCenteredString(font,Component.literal(capacity+" "+EngineGuideTimeline.outputUnit(EngineGuideTimeline.electricOutput(stage,electrical))),width/2,sceneBottom+5,0xFFE4F5F5);
         graphics.drawCenteredString(font,Component.translatable("gui.omnira.engine.guide.stage",stage+1),width/2,sceneBottom+18,0xFFADCBD2);
         var description=Component.translatable("gui.omnira.engine.guide."+mode+"."+stage);
         int y=sceneBottom+33;
@@ -120,6 +129,8 @@ public final class EngineGuideScreen extends ResponsiveScreen {
         for(int i=0;i<lines.size();i++) graphics.drawString(font,lines.get(i),0,i*10,0xFFE0E1DC,false);
         pose.popPose();
         super.renderContent(graphics,mouseX,mouseY,partialTick);
+        var selected=electrical&&electricMode!=null?electricMode:pulseMode;
+        graphics.fill(selected.getX()+3,selected.getY()+selected.getHeight()-3,selected.getX()+selected.getWidth()-3,selected.getY()+selected.getHeight()-2,0xFF9EDFCB);
     }
     @Override public boolean isPauseScreen() {return false;}
     @Override public void onClose() {minecraft.setScreen(parent);}

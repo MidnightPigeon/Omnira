@@ -17,14 +17,13 @@ public final class StarlightRenderer implements BlockEntityRenderer<StarlightEnt
     @Override public void render(StarlightEntity e,float partial,PoseStack p,MultiBufferSource b,int light,int overlay) {
         double t=e.getLevel()==null?0:e.getLevel().getGameTime()+partial;
         boolean source=e.getBlockState().is(StarlightContent.SOURCE.get());
-        p.pushPose();
         if (source) {
+            p.pushPose();
             p.translate(.5,.5+Math.sin(t*.04+e.getBlockPos().asLong()%31)*.025,.5);
             p.mulPose(Axis.YP.rotationDegrees((float)(t*.5)));p.translate(-.5,-.5,-.5);
         }
         var mc=Minecraft.getInstance();
-        mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(source?MODEL:DUST),ItemStack.EMPTY,LightTexture.FULL_BRIGHT,
-                overlay,p,b.getBuffer(CrystalGlassLayer.ATLAS));
-        p.popPose();
+        StaticModelQuads.draw(mc.getModelManager().getModel(source?MODEL:DUST),p,b.getBuffer(CrystalGlassLayer.ATLAS),LightTexture.FULL_BRIGHT,overlay);
+        if(source)p.popPose();
     }
 }

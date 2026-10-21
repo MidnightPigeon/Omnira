@@ -14,7 +14,7 @@ public record EngineConfigPayload(int menu,int side,int capacity,int rpm,boolean
     public static boolean apply(net.minecraft.world.entity.player.Player player,EngineConfigPayload p){
         return player.containerMenu instanceof SpacetimeEngineMenu m&&m.containerId==p.menu&&m.stillValid(player)
                 &&player.level().mayInteract(player,m.engine.getBlockPos())
-                &&(SpacetimeEngineController.hasKinetics()?m.engine.configure(p.side,p.capacity,p.rpm,p.reverse):m.engine.configureRotation(p.side,p.reverse));
+                &&m.engine.configure(p.side,p.capacity,16,false);
     }
     @net.neoforged.fml.common.EventBusSubscriber(modid="omnira") public static final class Registration {
         @net.neoforged.bus.api.SubscribeEvent public static void register(net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent e){

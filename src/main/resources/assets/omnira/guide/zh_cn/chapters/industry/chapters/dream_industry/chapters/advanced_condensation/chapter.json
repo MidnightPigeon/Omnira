@@ -1,7 +1,7 @@
 {
   "id": "advanced_condensation",
   "title": "高阶凝聚",
-  "icon": "omnira:advanced_condensation_table",
+  "icon": "omnira:paradox_dust",
   "introduction": "introduction.json",
   "entries": [
     "entries/paradox_dust.json",

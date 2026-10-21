@@ -16,6 +16,28 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_crystal_growth")
 @PrefixGameTestTemplate(false)
 public final class ArcaneDustGameTests {
+    @GameTest(template="spell_arena") public static void sneakingPlacesWireInsteadOfCatalyzing(GameTestHelper h){
+        var level=h.getLevel();var pos=h.absolutePos(new BlockPos(6,6,6));var player=player(h,GameType.SURVIVAL);
+        var targets=new java.util.ArrayList<Block>();for(var family:CrystalFamilies.all())targets.add(family[0]);
+        targets.add(com.mcmagic.omnira.space.phase.PhaseContent.CLUSTER.get());
+        player.setShiftKeyDown(true);
+        for(var target:targets)for(var face:new Direction[]{Direction.UP,Direction.NORTH,Direction.SOUTH,Direction.EAST,Direction.WEST}){
+            for(var direction:Direction.values())level.setBlockAndUpdate(pos.relative(direction),Blocks.AIR.defaultBlockState());
+            level.setBlockAndUpdate(pos.below(),Blocks.STONE.defaultBlockState());level.setBlockAndUpdate(pos,target.defaultBlockState());
+            var dust=new ItemStack(ModItems.ARCANE_DUST.get(),2);player.setItemInHand(InteractionHand.MAIN_HAND,dust);
+            var hit=new BlockHitResult(pos.getCenter(),face,pos,false);
+            h.assertTrue(dust.getItem().useOn(new UseOnContext(player,InteractionHand.MAIN_HAND,hit)).consumesAction()
+                    &&level.getBlockState(pos.relative(face)).is(com.mcmagic.omnira.pulse.PulseContent.WIRE.get())&&dust.getCount()==1,
+                    "Sneaking did not place one wire at the clicked face");
+            h.assertTrue(level.getBlockState(pos).is(target),"Sneaking triggered catalyst transformation");
+            for(var direction:Direction.values())if(direction!=face&&direction!=Direction.DOWN)
+                h.assertTrue(level.getBlockState(pos.relative(direction)).isAir(),"Sneaking grew other matrix faces");
+            level.setBlockAndUpdate(pos.relative(face),Blocks.STONE.defaultBlockState());
+            h.assertTrue(!dust.getItem().useOn(new UseOnContext(player,InteractionHand.MAIN_HAND,hit)).consumesAction()
+                    &&dust.getCount()==1&&level.getBlockState(pos).is(target),"Blocked placement fell back to catalysis or consumed dust");
+        }
+        h.succeed();
+    }
     private static Player player(GameTestHelper h,GameType mode){
         var player=h.makeMockPlayer(mode);mode.updatePlayerAbilities(player.getAbilities());return player;
     }
@@ -77,7 +99,8 @@ public final class ArcaneDustGameTests {
         var level=h.getLevel();var pos=h.absolutePos(new BlockPos(6,6,6));var player=player(h,GameType.CREATIVE);
         var dust=new ItemStack(ModItems.ARCANE_DUST.get(),2);player.setItemInHand(InteractionHand.MAIN_HAND,dust);
         level.setBlockAndUpdate(pos,Blocks.STONE.defaultBlockState());
-        h.assertTrue(!use(player,pos).consumesAction()&&dust.getCount()==2,"Dust grew a non-matrix block");
+        h.assertTrue(use(player,pos).consumesAction()&&dust.getCount()==2&&level.getBlockState(pos).is(Blocks.STONE)
+                &&level.getBlockState(pos.above()).is(com.mcmagic.omnira.pulse.PulseContent.WIRE.get()),"Non-matrix use did not place a wire while preserving the clicked block");
         level.setBlockAndUpdate(pos,Blocks.BUDDING_AMETHYST.defaultBlockState());
         for(var face:Direction.values())level.setBlockAndUpdate(pos.relative(face),Blocks.AIR.defaultBlockState());
         h.assertTrue(use(player,pos).consumesAction()&&dust.getCount()==2,"Creative growth consumed dust");

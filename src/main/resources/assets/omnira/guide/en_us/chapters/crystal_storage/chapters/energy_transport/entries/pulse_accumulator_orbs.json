@@ -1,0 +1,113 @@
+{
+  "id": "pulse_accumulator_orbs",
+  "title": "Accumulator Orbs",
+  "item": "omnira:pulse_accumulator_orb",
+  "icon": "omnira:resonance_core",
+  "recipes": false,
+  "text": [
+    "Both orbs have a white base and support all six mounting directions. They distribute potential, not stored fuel: 8192 MPU throughput, with one slot for Stacking or Infused Stacking.",
+    "The base only accepts pulses, stress or FE. Other faces accept only pulses and output all three. FE converts at its actual rate per second. Shaft inputs require at least 16 rpm; outputs are fixed at 16 rpm. Shafts must be perpendicular; unloaded spinning costs nothing. All outputs share one MPU budget, shown in gold. Spacetime Ports extend these faces. Orbs do not charge nearby players.",
+    "Same-frequency orbs in one dimension are one node, sharing potential and one upgrade slot accessible from any orb. Merging retains the strongest capacity upgrade and returns extras. Stabilization shares the group across dimensions, retaining the 8192 MPU limit.",
+    "Cyan is this node's unused quota; gold is working potential passing through it. The bar limit is throughput capacity. Idle branches share quotas; active loads can borrow idle shares. Serial nodes may carry the same working flow: summing their gold readings does not measure total network consumption."
+  ],
+  "links": [
+    {
+      "target": "magic_pulse",
+      "label": "Magic Pulses"
+    },
+    {
+      "target": "pulse_accumulator_orb_crafting",
+      "label": "Pulse Orb Crafting"
+    },
+    {
+      "target": "resonant_accumulator_orb_crafting",
+      "label": "Resonant Orb Crafting"
+    }
+  ],
+  "figures": [
+    {
+      "id": "node_meter",
+      "title": "Node Reading",
+      "icons": [
+        {
+          "item": "omnira:pulse_accumulator_orb",
+          "x": 0,
+          "y": 0,
+          "count": 1
+        }
+      ],
+      "strokes": [],
+      "areas": [
+        {
+          "x": 0,
+          "y": 26,
+          "width": 124,
+          "height": 12,
+          "color": "#B5AB92"
+        },
+        {
+          "x": 1,
+          "y": 27,
+          "width": 61,
+          "height": 10,
+          "color": "#C79943"
+        },
+        {
+          "x": 62,
+          "y": 27,
+          "width": 31,
+          "height": 10,
+          "color": "#71BBD3"
+        },
+        {
+          "x": 1,
+          "y": 54,
+          "width": 5,
+          "height": 5,
+          "color": "#C79943"
+        },
+        {
+          "x": 1,
+          "y": 79,
+          "width": 5,
+          "height": 5,
+          "color": "#71BBD3"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Capacity: 8192 MPU",
+          "x": 22,
+          "y": 2,
+          "width": 102,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Used: 4096",
+          "x": 12,
+          "y": 52,
+          "width": 112,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Free: 2048",
+          "x": 12,
+          "y": 77,
+          "width": 112,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Unfilled: capacity\nwithout supply.",
+          "x": 0,
+          "y": 104,
+          "width": 124,
+          "height": 28,
+          "color": "#405462"
+        }
+      ]
+    }
+  ]
+}

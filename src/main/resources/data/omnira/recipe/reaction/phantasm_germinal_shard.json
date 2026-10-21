@@ -1,0 +1,7 @@
+{
+  "type": "omnira:reaction",
+  "items": [{"ingredient": {"item": "omnira:genesis_particles"}}, {"ingredient": {"item": "omnira:dream_crystal_shard"}}],
+  "fluid": {"id": "omnira:refined_spacetime", "amount": 1000},
+  "support": {"item": "omnira:enhanced_alchemical_energy_core"},
+  "results": [{"id": "omnira:phantasm_germinal_shard"}]
+}

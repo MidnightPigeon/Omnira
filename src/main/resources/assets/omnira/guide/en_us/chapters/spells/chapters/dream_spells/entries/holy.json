@@ -1,6 +1,7 @@
 {
   "id": "holy",
   "item": "omnira:light_microcore",
+  "icon": "omnira:light_source_crystal",
   "title": "Holy",
   "text": [
     "Place a Light Microcore directly in a modifier slot. Damage and healing gain a separate x1.5 multiplier; duplicate Holy modifiers do not multiply again. Sustained potion effects are unchanged.",

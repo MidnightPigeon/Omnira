@@ -1,0 +1,16 @@
+{
+  "base": {
+    "Name": "minecraft:mud"
+  },
+  "surface": {
+    "Name": "minecraft:water"
+  },
+  "decorations": [
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "minecraft:mud"
+      }
+    }
+  ]
+}

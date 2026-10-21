@@ -6,6 +6,7 @@
   "text": [
     "Craft nine Excited Rough Spatial Crystal Blocks into one Spatial Fold Point at a crafting table.",
     "Harvest a point with a Dissociation spell or a ritual sword's melee, charged slash or flying needle. It leaves an unbreakable Spatial Remnant. The harvested point item cannot be placed directly.",
+    "Like Time Warp Points, a stack of 16 Spatial Fold Points collapses into one Unstable Spacetime Aggregate in non-hotbar inventory slots or ordinary storage. Spacetime Stabilization protects stacks inside crystal orbs.",
     "Move remnants with a Pocket Magic Bottle, or condense eight fold points into one placeable remnant at an Advanced Condensation Table for 300 mana.",
     "Spatial disturbance drives regeneration: moving entities accumulate disturbances that allow a fold point to form again. A Spatial Remnant pools movement from all entities within its five-block spherical range, including players, creatures and dropped items. After a combined 100 blocks of movement, it regenerates into a Spatial Fold Point in place. Standing still contributes nothing; earned distance survives leaving the area, reloading and transport by bottle.",
     "Folding checks a safe landing for the entire vehicle and passenger group and grants a brief arrival cooldown. Leaving the sphere interrupts charging.",
@@ -19,6 +20,63 @@
     {
       "target": "spacetime_port",
       "label": "Spacetime Port"
+    }
+  ],
+  "figures": [
+    {
+      "id": "space_regrowth",
+      "title": "Space Regrowth",
+      "icons": [
+        {
+          "item": "omnira:space_warp_point",
+          "x": 5,
+          "y": 22,
+          "count": 1
+        },
+        {
+          "item": "omnira:spatial_remnant",
+          "x": 102,
+          "y": 22,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 29,
+          "y1": 30,
+          "x2": 94,
+          "y2": 30,
+          "color": "#9B80B3",
+          "arrow": true
+        },
+        {
+          "x1": 101,
+          "y1": 62,
+          "x2": 20,
+          "y2": 62,
+          "color": "#9B80B3",
+          "arrow": true
+        }
+      ],
+      "areas": [],
+      "labels": [
+        {
+          "text": "Harvest leaves a remnant",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Radius: 5 blocks.\nMove 100 blocks total\nto reform the point.\nStillness adds none.",
+          "x": 0,
+          "y": 82,
+          "width": 124,
+          "height": 44,
+          "color": "#405462"
+        }
+      ]
     }
   ]
 }

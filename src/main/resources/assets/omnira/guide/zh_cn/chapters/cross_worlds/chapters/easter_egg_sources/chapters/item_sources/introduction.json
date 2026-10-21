@@ -1,0 +1,105 @@
+{
+  "text": [],
+  "sources": [
+    {
+      "icon": "omnira:crystallized_bone_nail",
+      "name": "晶化骨钉及其升级版",
+      "origin": "空洞骑士"
+    },
+    {
+      "icon": "omnira:life_ender",
+      "name": "生命终结者",
+      "origin": "空洞骑士"
+    },
+    {
+      "icon": "omnira:arcane_needle",
+      "name": "奥能织针及其升级版",
+      "origin": "空洞骑士：丝之歌"
+    },
+    {
+      "icon": "omnira:arcane_arquebus",
+      "name": "魔能圣铳",
+      "origin": "明日方舟"
+    },
+    {
+      "icon": "omnira:ancestor_launcher",
+      "name": "祖宗发射器",
+      "origin": "明日方舟"
+    },
+    {
+      "icon": "omnira:kings_new_clothes",
+      "name": "国王的新装",
+      "origin": "元气骑士"
+    },
+    {
+      "icon": "omnira:traveler_manuscript",
+      "name": "穿越者手稿",
+      "origin": "明日方舟 × 战锤40K"
+    },
+    {
+      "icon": "omnira:marisa_crystal_ball",
+      "name": "魔理沙的水晶球",
+      "origin": "东方Project"
+    },
+    {
+      "icon": "omnira:voyager_violin",
+      "name": "远旅的小提琴",
+      "origin": "重返未来：1999"
+    },
+    {
+      "icon": "omnira:wonderland_poker_stand",
+      "name": "仙境扑克展台",
+      "origin": "爱丽丝梦游仙境"
+    },
+    {
+      "icon": "omnira:dream_rabbit_remains",
+      "name": "梦境兔残迹、爱丽丝的梦境兔印记",
+      "origin": "爱丽丝梦游仙境"
+    },
+    {
+      "icon": "omnira:memory_cube",
+      "name": "记忆立方体及其衍生物",
+      "origin": "锈湖"
+    },
+    {
+      "icon": "omnira:golden_throne",
+      "name": "黄金王座、黄金马桶",
+      "origin": "战锤40K"
+    },
+    {
+      "icon": "omnira:psyker_talent",
+      "name": "灵能者天赋",
+      "origin": "战锤40K"
+    },
+    {
+      "icon": "omnira:khorne_blessing",
+      "name": "恐虐、奸奇、纳垢与色孽的祝福",
+      "origin": "战锤40K"
+    },
+    {
+      "icon": "omnira:phantom_thieves_aggregate",
+      "name": "怪盗聚合体及相关衍生物",
+      "origin": "女神异闻录5"
+    },
+    {
+      "icon": "omnira:umbrella_aggregate",
+      "name": "保护伞聚合体及相关衍生物",
+      "origin": "生化危机"
+    },
+    {
+      "icon": "omnira:foundation_aggregate",
+      "name": "收容聚合体及相关衍生物",
+      "origin": "SCP基金会"
+    },
+    {
+      "icon": "omnira:night_heron_statue",
+      "name": "夜鹭水晶雕像",
+      "origin": "地球Online（2026版）"
+    },
+    {
+      "icon": "omnira:primordial_earth_aggregate",
+      "name": "远古地球聚合体及相关衍生物",
+      "origin": "地球Online（2026版）"
+    }
+  ]
+}

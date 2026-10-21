@@ -25,6 +25,12 @@ import java.util.*;
 @JeiPlugin
 public final class OmniraJeiPlugin implements IModPlugin {
     private static mezz.jei.api.runtime.IJeiRuntime runtime;
+    private static mezz.jei.api.recipe.IFocusFactory focuses;
+    public static boolean openCrafting(ItemStack output){
+        if(runtime==null||focuses==null)return false;
+        runtime.getRecipesGui().show(List.of(focuses.createFocus(RecipeIngredientRole.OUTPUT,mezz.jei.api.constants.VanillaTypes.ITEM_STACK,output)));
+        return true;
+    }
     @Override public void onRuntimeAvailable(mezz.jei.api.runtime.IJeiRuntime available) {
         runtime=available;
         runtime.getIngredientManager().removeIngredientsAtRuntime(mezz.jei.api.constants.VanillaTypes.ITEM_STACK,
@@ -41,6 +47,15 @@ public final class OmniraJeiPlugin implements IModPlugin {
         return Minecraft.getInstance().screen==runtime.getRecipesGui()
                 && runtime.getRecipesGui().getIngredientUnderMouse(type).filter(item->item.is(ModItems.MANA_ENGINE.get())).isPresent();
     }
+    public static ItemStack itemUnderMouse(){
+        if(runtime==null)return ItemStack.EMPTY;
+        var type=mezz.jei.api.constants.VanillaTypes.ITEM_STACK;
+        var stack=runtime.getIngredientListOverlay().getIngredientUnderMouse(type);
+        if(stack!=null&&!stack.isEmpty())return stack;
+        stack=runtime.getBookmarkOverlay().getIngredientUnderMouse(type);
+        if(stack!=null&&!stack.isEmpty())return stack;
+        return Minecraft.getInstance().screen==runtime.getRecipesGui()?runtime.getRecipesGui().getIngredientUnderMouse(type).orElse(ItemStack.EMPTY):ItemStack.EMPTY;
+    }
     public record Writing(List<ItemStack> inputs,ItemStack output) {}
     public static final RecipeType<AnalysisRecipe> ANALYSIS=RecipeType.create("omnira","analysis",AnalysisRecipe.class);
     public static final RecipeType<com.mcmagic.omnira.forging.AdvancedForgeRecipe> ADVANCED_FORGE=RecipeType.create("omnira","advanced_assembly_table",com.mcmagic.omnira.forging.AdvancedForgeRecipe.class);
@@ -50,6 +65,11 @@ public final class OmniraJeiPlugin implements IModPlugin {
     public static final RecipeType<Writing> WRITING=RecipeType.create("omnira","writing",Writing.class);
     public static final RecipeType<StarlightConversionRecipe> STARLIGHT=RecipeType.create("omnira","starlight_conversion",StarlightConversionRecipe.class);
     @Override public ResourceLocation getPluginUid() {return ResourceLocation.fromNamespaceAndPath("omnira","workstations");}
+    @Override public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration registration) {
+        var extension=new WrappedShapedJei();
+        registration.getCraftingCategory().addExtension(SafeShapedRecipe.class,extension);
+        registration.getCraftingCategory().addExtension(StarClusterOrbCraftRecipe.class,extension);
+    }
     @Override public void registerItemSubtypes(ISubtypeRegistration registration) {
         registration.registerSubtypeInterpreter(ModItems.MODULAR_STAFF.get(),new mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter<ItemStack>() {
             @Override public Object getSubtypeData(ItemStack stack,mezz.jei.api.ingredients.subtypes.UidContext context) {
@@ -107,6 +127,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
         }
     }
     @Override public void registerCategories(IRecipeCategoryRegistration registration) {
+        focuses=registration.getJeiHelpers().getFocusFactory();
         var gui=registration.getJeiHelpers().getGuiHelper();
         registration.addRecipeCategories(new ReactionCategory(gui));
         registration.addRecipeCategories(new Category<StarlightConversionRecipe>(STARLIGHT,com.mcmagic.omnira.space.sea.StellarCraftContent.ORB_ITEM.get(),gui){
@@ -127,7 +148,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
                 for(int i=0;i<6;i++){int[] p=ArcaneAssemblyTableMenu.CENTERS[i];slot(b,RecipeIngredientRole.INPUT,p[0]-30,p[1]-20).addIngredients(r.slots().get(i));}
                 // Facing into the entrance, local +X is the player's left.
                 for(int i=0;i<3;i++)slot(b,RecipeIngredientRole.INPUT,30+i*50,118).addIngredients(r.slots().get(6+i));
-                slot(b,RecipeIngredientRole.CATALYST,58,58).addItemStacks(List.of(new ItemStack(ModItems.TEST_SPELL_CORE.get()),new ItemStack(ModItems.DREAM_SPELL_CORE.get()),new ItemStack(ModItems.LIGHT_DARK_SPELL_CORE.get()),new ItemStack(ModItems.SPACETIME_SPELL_CORE.get())))
+                slot(b,RecipeIngredientRole.CATALYST,58,58).addItemStacks(com.mcmagic.omnira.item.SpellCoreItem.examples())
                         .addRichTooltipCallback((view,tooltip)->tooltip.add(Component.translatable("jei.omnira.forge_core")));
                 slot(b,RecipeIngredientRole.OUTPUT,147,58).addItemStack(r.displayResult());
             }
@@ -151,7 +172,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
                                     if(r.secondaryOutput().choices().size()>1) tooltip.add(Component.translatable("jei.omnira.byproduct_choice"));
                                 });
                     }
-                    var remains=inputs.stream().map(ItemStack::getCraftingRemainingItem).filter(stack->!stack.isEmpty()).toList();
+                    var remains=inputs.stream().map(r::remainder).filter(stack->!stack.isEmpty()).toList();
                     if(r.inputDamage()==0 && !remains.isEmpty()) slot(b,RecipeIngredientRole.OUTPUT,140,28).addItemStacks(remains)
                             .addRichTooltipCallback((view,tooltip)->tooltip.add(Component.translatable("jei.omnira.remainder")));
                 }
@@ -202,7 +223,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
                 final int[][] points={{66,26},{108,26},{38,75},{66,124},{108,124},{136,75},{73,68},{101,68},{87,96}};
                 @Override public void setRecipe(IRecipeLayoutBuilder b,Writing r,IFocusGroup focus) {
                     for(int i=0;i<8;i++) {
-                        var slot=slot(b,RecipeIngredientRole.INPUT,points[i][0],points[i][1]);
+                        var slot=slot(b,i!=6&&r.inputs().get(i).isEmpty()?RecipeIngredientRole.RENDER_ONLY:RecipeIngredientRole.INPUT,points[i][0],points[i][1]);
                         if(i==6) slot.addItemStacks(List.of(new ItemStack(ModItems.SPELL_INK.get()),new ItemStack(Items.INK_SAC),new ItemStack(Items.GLOW_INK_SAC)))
                                 .addRichTooltipCallback((view,tooltip)->tooltip.add(Component.translatable("jei.omnira.ink")));
                         else if(!r.inputs().get(i).isEmpty()) slot.addItemStack(r.inputs().get(i));
@@ -233,7 +254,9 @@ public final class OmniraJeiPlugin implements IModPlugin {
         var rituals=new ArrayList<RitualJei.Entry>();
         rituals.add(new RitualJei.Entry(new RitualJei.Dream()));
         rituals.add(new RitualJei.Entry(new RitualJei.Genesis()));
-        rituals.add(new RitualJei.Entry(new RitualJei.Corridor()));
+        rituals.add(new RitualJei.Entry(new RitualJei.WorldForming()));
+        rituals.add(new RitualJei.Entry(new RitualJei.Corridor(false)));
+        rituals.add(new RitualJei.Entry(new RitualJei.Corridor(true)));
         rituals.add(new RitualJei.Entry(new RitualJei.Resonance()));
         rituals.add(new RitualJei.Entry(new RitualJei.Cleansing()));
         for(var affinity:List.of(com.mcmagic.omnira.mana.Affinity.LIGHT,com.mcmagic.omnira.mana.Affinity.DARK,
@@ -246,8 +269,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
         registration.addRecipes(ADVANCED_CONDENSATION,recipes.getAllRecipesFor(ModRecipes.CONDENSATION_TYPE.get()).stream().map(RecipeHolder::value).filter(CondensationRecipe::advanced).toList());
         var assemblyRecipes=new ArrayList<AssemblyRecipe>();
         for(var holder:recipes.getAllRecipesFor(ModRecipes.ASSEMBLY_TYPE.get())) {
-            if(holder.value().operation().equals("staff")) assemblyRecipes.addAll(StaffAssemblyRecipes.previews());
-            else assemblyRecipes.add(holder.value());
+            assemblyRecipes.addAll(holder.value().displayRecipes());
         }
         registration.addRecipes(ASSEMBLY,assemblyRecipes);
         registration.addRecipes(WRITING,writingRecipes());
@@ -310,6 +332,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
         ResponsiveGuiHandler.register(registration,SundialScreen.class);
         ResponsiveGuiHandler.register(registration,CrystalUtilityScreen.class);
         ResponsiveGuiHandler.register(registration,WaymarkScreen.class);
+        ResponsiveGuiHandler.register(registration,com.mcmagic.omnira.client.screen.PulseOrbScreen.class);
         ResponsiveGuiHandler.clickArea(registration,CrystalProcessingTableScreen.class,WRITING);
         ResponsiveGuiHandler.clickArea(registration,AnalysisArtisanTableScreen.class,ANALYSIS);
         ResponsiveGuiHandler.clickArea(registration,SimpleCondensationTableScreen.class,CONDENSATION,ADVANCED_CONDENSATION);

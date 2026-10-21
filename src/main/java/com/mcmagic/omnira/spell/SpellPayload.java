@@ -34,7 +34,7 @@ public record SpellPayload(int baseCost,float damage,java.util.List<SpellEffect>
     }
     private static boolean isElementKeyword(String key) {
         return switch(key) {
-            case "harm","healing","dark_breath","dissociation","construction" -> true;
+            case "harm","healing","dark_breath","dissociation","construction","reload" -> true;
             default -> false;
         };
     }

@@ -1,6 +1,7 @@
 package com.mcmagic.omnira.block.entity;
 
 import net.minecraft.core.BlockPos;
+import com.mcmagic.omnira.storage.LogisticsRates;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,27 +32,31 @@ public final class VoidCrystalBallBlockEntity extends CrystalBallBlockEntity {
     @Override protected Component getDefaultName(){return Component.translatable("block.omnira.void_crystal_ball");}
     private int ticks;
     @Override public void serverTick(){
-        if(level==null||level.isClientSide||++ticks%20!=0||!upgrades.has(com.mcmagic.omnira.item.OrbUpgradeItem.Kind.INTAKE))return;
+        if(level==null||level.isClientSide||++ticks%5!=0||!upgrades.has(com.mcmagic.omnira.item.OrbUpgradeItem.Kind.INTAKE))return;
+        com.mcmagic.omnira.storage.LogisticsRates.transfer(this::intake);
+    }
+    private void intake(){
         var tag=OrbUpgrades.settings(upgrades.getStackInSlot(1));
         var directions=OrbAutomation.directions(this,true);int mask=tag.contains("Directions")?tag.getInt("Directions"):1;
         int cursor=Math.floorMod(tag.getInt("Cursor"),directions.length);boolean itemTaken=false,fluidTaken=false;
+        int itemRemaining=LogisticsRates.ITEMS/4*upgrades.speedMultiplier(),fluidRemaining=LogisticsRates.FLUID/4*upgrades.speedMultiplier();
         for(int n=0;n<directions.length;n++){
             int index=(cursor+n)%directions.length;if((mask&(1<<index))==0)continue;
             var direction=directions[index];var pos=worldPosition.relative(direction);if(!level.hasChunkAt(pos))continue;
             var items=level.getCapability(Capabilities.ItemHandler.BLOCK,pos,direction.getOpposite());
-            if(!itemTaken&&items!=null)for(int i=0;i<items.getSlots();i++){
-                var offered=items.extractItem(i,1,true);
-                if(!offered.isEmpty()&&upgrades.matches(1,offered,null)){itemTaken=!items.extractItem(i,1,false).isEmpty();break;}
+            if(itemRemaining>0&&items!=null)for(int i=0;i<items.getSlots()&&itemRemaining>0;i++){
+                var offered=items.extractItem(i,itemRemaining,true);
+                if(!offered.isEmpty()&&upgrades.matches(1,offered,null)){int count=items.extractItem(i,offered.getCount(),false).getCount();itemRemaining-=count;itemTaken|=count>0;}
             }
             var fluids=level.getCapability(Capabilities.FluidHandler.BLOCK,pos,direction.getOpposite());
-            if(!fluidTaken&&fluids!=null)for(int i=0;i<fluids.getTanks();i++){
+            if(fluidRemaining>0&&fluids!=null)for(int i=0;i<fluids.getTanks()&&fluidRemaining>0;i++){
                 var offered=fluids.getFluidInTank(i);
                 if(!offered.isEmpty()&&upgrades.matches(1,ItemStack.EMPTY,offered)){
-                    fluidTaken=!fluids.drain(offered.copyWithAmount(500),IFluidHandler.FluidAction.EXECUTE).isEmpty();break;
+                    int count=fluids.drain(offered.copyWithAmount(fluidRemaining),IFluidHandler.FluidAction.EXECUTE).getAmount();fluidRemaining-=count;fluidTaken|=count>0;
                 }
             }
             if(itemTaken||fluidTaken){tag.putInt("Cursor",(index+1)%directions.length);}
-            if(itemTaken&&fluidTaken)break;
+            if(itemRemaining<=0&&fluidRemaining<=0)break;
         }
         if(itemTaken||fluidTaken)upgrades.update(1,tag);
     }

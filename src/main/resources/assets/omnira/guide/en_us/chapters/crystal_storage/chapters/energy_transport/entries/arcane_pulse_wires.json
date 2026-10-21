@@ -1,0 +1,128 @@
+{
+  "id": "arcane_pulse_wires",
+  "title": "Arcane Wires",
+  "item": "omnira:arcane_dust",
+  "recipes": false,
+  "text": [
+    "Right-click with Arcane Dust to place floating wires, one per block. Budding rock and Phase Crystal Clusters normally trigger growth; sneak-right-click skips growth to place wire. Straight horizontal or vertical spans reach up to 16 blocks; nearby interfaces connect automatically.",
+    "The first wire directly connected to a source is loss-free. Each later wire removes 5% of its shortest chain's original transfer value: two wires total 10%, not compounded. Branch losses use their own transfers; merges combine contributions, without taxing unrelated branches.",
+    "Machines show useful consumption only. Wires show local attenuation and orbs show upstream chain attenuation. Sources cover those losses."
+  ],
+  "links": [
+    {
+      "target": "magic_pulse",
+      "label": "Magic Pulses"
+    },
+    {
+      "target": "arcane_dust",
+      "label": "Arcane Dust"
+    },
+    {
+      "target": "pulse_accumulator_orbs",
+      "label": "Accumulator Orbs"
+    }
+  ],
+  "figures": [
+    {
+      "id": "wire_loss",
+      "title": "Line Loss",
+      "icons": [
+        {
+          "item": "omnira:spacetime_engine",
+          "x": 0,
+          "y": 38,
+          "count": 1
+        },
+        {
+          "item": "omnira:pulse_accumulator_orb",
+          "x": 108,
+          "y": 38,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 19,
+          "y1": 46,
+          "x2": 103,
+          "y2": 46,
+          "color": "#9A6EAF",
+          "arrow": true
+        }
+      ],
+      "areas": [
+        {
+          "x": 32,
+          "y": 44,
+          "width": 5,
+          "height": 5,
+          "color": "#B889D0"
+        },
+        {
+          "x": 57,
+          "y": 44,
+          "width": 5,
+          "height": 5,
+          "color": "#B889D0"
+        },
+        {
+          "x": 82,
+          "y": 44,
+          "width": 5,
+          "height": 5,
+          "color": "#B889D0"
+        }
+      ],
+      "labels": [
+        {
+          "text": "1000 MPU",
+          "x": 0,
+          "y": 8,
+          "width": 70,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "900 MPU",
+          "x": 70,
+          "y": 8,
+          "width": 54,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "0%",
+          "x": 24,
+          "y": 62,
+          "width": 26,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "5%",
+          "x": 52,
+          "y": 62,
+          "width": 26,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "5%",
+          "x": 79,
+          "y": 62,
+          "width": 26,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "First wire: no loss.\nEach later wire: 5% of the original flow.",
+          "x": 0,
+          "y": 86,
+          "width": 124,
+          "height": 44,
+          "color": "#405462"
+        }
+      ]
+    }
+  ]
+}

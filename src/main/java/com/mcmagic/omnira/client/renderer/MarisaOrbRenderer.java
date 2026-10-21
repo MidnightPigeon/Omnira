@@ -9,11 +9,12 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.world.item.*;
 
 public final class MarisaOrbRenderer implements BlockEntityRenderer<MarisaOrbBlockEntity> {
+    private static final ModelResourceLocation BASE=CrystalGridRenderer.part("marisa_crystal_ball","base"),SHELL=CrystalGridRenderer.part("marisa_crystal_ball","shell");
     public MarisaOrbRenderer(BlockEntityRendererProvider.Context context){}
-    public static ModelResourceLocation model(String part){return CrystalGridRenderer.part("marisa_crystal_ball",part);}
+    public static ModelResourceLocation model(String part){return switch(part){case "base"->BASE;case "shell"->SHELL;default->CrystalGridRenderer.part("marisa_crystal_ball",part);};}
     private static void draw(String part,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
-        var mc=Minecraft.getInstance();mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(model(part)),ItemStack.EMPTY,
-                light,overlay,pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
+        var mc=Minecraft.getInstance();StaticModelQuads.draw(mc.getModelManager().getModel(model(part)),pose,
+                buffers.getBuffer(CrystalGlassLayer.ATLAS),light,overlay);
     }
     private static void globe(PoseStack pose,MultiBufferSource buffers,double time,int light,int overlay){
         var mc=Minecraft.getInstance();

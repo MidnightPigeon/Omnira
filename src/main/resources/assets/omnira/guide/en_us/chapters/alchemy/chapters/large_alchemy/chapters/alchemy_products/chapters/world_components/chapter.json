@@ -1,0 +1,4 @@
+{
+  "id": "world_components", "title": "World Components", "icon": "omnira:boundary_crystal_membrane", "introduction": "introduction.json",
+  "entries": ["entries/strata_skeleton.json", "entries/circulating_waterways.json", "entries/flowing_sky_canopy.json", "entries/geothermal_ember.json", "entries/living_embryoplasm.json", "entries/ages_dial.json", "entries/boundary_crystal_membrane.json", "entries/phantasm_germinal_shard.json"], "chapters": []
+}

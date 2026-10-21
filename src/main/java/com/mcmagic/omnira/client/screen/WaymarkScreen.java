@@ -97,13 +97,18 @@ public final class WaymarkScreen extends ResponsiveContainerScreen<WaymarkMenu> 
             if(row.visible) row.setMessage(Component.literal(label(filtered.get(index))));
         }
     }
+    @Override public void resize(net.minecraft.client.Minecraft mc,int width,int height){
+        String value=input==null?null:input.getValue();int previousPage=page;boolean focused=input!=null&&input.isFocused();
+        super.resize(mc,width,height);
+        if(value!=null){input.setValue(value);page=previousPage;if(!menu.editing)updateRows();if(focused)setFocused(input);}
+    }
     @Override protected void containerTick() {super.containerTick();if(!menu.editing) updateRows();}
     @Override protected void renderBg(GuiGraphics g,float partial,int mx,int my) {
         g.fill(leftPos,topPos,leftPos+imageWidth,topPos+imageHeight,0xFFC6C6C6);
         CrystalProcessingTableScreen.renderVanillaFrame(g,leftPos,topPos,imageWidth,imageHeight);
     }
     @Override protected void renderLabels(GuiGraphics g,int mx,int my) {
-        g.drawString(font,title,12,12,0xFF303030,false);
+        CrystalUi.label(g,font,title,12,12,imageWidth-24,1,0xFF303030);
         if(menu.editing) {
             var entry=menu.entries.getFirst();
             g.drawString(font,font.plainSubstrByWidth(dimensionName(entry.dimension()),imageWidth-24),12,60,0xFF555555,false);
@@ -113,7 +118,7 @@ public final class WaymarkScreen extends ResponsiveContainerScreen<WaymarkMenu> 
         }
     }
     @Override public boolean keyPressed(int key,int scan,int modifiers) {
-        if(input.isFocused() && key!=256) return input.keyPressed(key,scan,modifiers) || input.canConsumeInput();
+        if(input.isFocused() && key!=256&&key!=org.lwjgl.glfw.GLFW.GLFW_KEY_TAB) return input.keyPressed(key,scan,modifiers) || input.canConsumeInput();
         return super.keyPressed(key,scan,modifiers);
     }
 }

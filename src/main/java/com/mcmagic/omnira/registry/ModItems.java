@@ -12,6 +12,15 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Omnira.MOD_ID);
+    public static final DeferredItem<Item> MUSIC_DISC_LIU_NIAN=ITEMS.registerSimpleItem("music_disc_liu_nian",new Item.Properties().stacksTo(1).rarity(Rarity.RARE)
+            .jukeboxPlayable(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.JUKEBOX_SONG,
+                    net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","liu_nian"))));
+    public static final DeferredItem<Item> MUSIC_DISC_MI_MENG_YE=ITEMS.registerSimpleItem("music_disc_mi_meng_ye",new Item.Properties().stacksTo(1).rarity(Rarity.RARE)
+            .jukeboxPlayable(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.JUKEBOX_SONG,
+                    net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","mi_meng_ye"))));
+    public static final DeferredItem<Item> MUSIC_DISC_SPACE=ITEMS.registerSimpleItem("music_disc_space",new Item.Properties().stacksTo(1).rarity(Rarity.RARE));
+    public static final DeferredItem<com.mcmagic.omnira.weaver.FounderApprovalItem> FOUNDER_APPROVAL=
+            ITEMS.registerItem("founder_approval",com.mcmagic.omnira.weaver.FounderApprovalItem::new);
     public static final DeferredItem<Item> VOYAGER_VIOLIN=ITEMS.register("voyager_violin",()->
             new com.mcmagic.omnira.music.VoyagerViolinItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
     public static final DeferredItem<BlockItem> CRYSTAL_SIGN=ITEMS.register("crystal_sign",()->new com.mcmagic.omnira.sign.CrystalSigns.PlacementItem(
@@ -41,7 +50,7 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> GOLDEN_THRONE=ITEMS.registerSimpleBlockItem(ModBlocks.GOLDEN_THRONE);
     public static final DeferredItem<BlockItem> GOLDEN_TOILET=ITEMS.registerSimpleBlockItem(ModBlocks.GOLDEN_TOILET);
     public static final DeferredItem<BlockItem> PURE_SOLIDIFIED_SPACETIME=ITEMS.registerSimpleBlockItem(ModBlocks.PURE_SOLIDIFIED_SPACETIME);
-    public static final DeferredItem<Item> UNSTABLE_SPACETIME_AGGREGATE=ITEMS.registerItem("unstable_spacetime_aggregate",com.mcmagic.omnira.spacetime.UnstableAggregateItem::new,new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> UNSTABLE_SPACETIME_AGGREGATE=ITEMS.registerItem("unstable_spacetime_aggregate",com.mcmagic.omnira.spacetime.UnstableAggregateItem::new,new Item.Properties().rarity(Rarity.UNCOMMON));
     public static final DeferredItem<BlockItem> ADVANCED_FORGE=ITEMS.register("advanced_assembly_table",()->new com.mcmagic.omnira.forging.AdvancedForgeItem(new Item.Properties()));
     public static final DeferredItem<BlockItem> RESONANCE_CORE=ITEMS.registerSimpleBlockItem(ModBlocks.RESONANCE_CORE);
     public static final DeferredItem<BlockItem> SPACETIME_PORT=ITEMS.registerSimpleBlockItem(ModBlocks.SPACETIME_PORT);
@@ -88,7 +97,7 @@ public final class ModItems {
     public static final DeferredItem<Item> POCKET_MAGIC_BOTTLE=ITEMS.register("pocket_magic_bottle",()->
             new com.mcmagic.omnira.item.bottle.PocketBottleItem(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<BlockItem> RITUAL_ENERGY_CORE=ITEMS.registerSimpleBlockItem(ModBlocks.RITUAL_ENERGY_CORE);
-    public static final DeferredItem<BlockItem> ADVANCED_RITUAL_ENERGY_CORE=ITEMS.registerSimpleBlockItem(ModBlocks.ADVANCED_RITUAL_ENERGY_CORE);
+    public static final DeferredItem<BlockItem> ADVANCED_RITUAL_ENERGY_CORE=ITEMS.registerSimpleBlockItem(ModBlocks.ADVANCED_RITUAL_ENERGY_CORE,new Item.Properties().rarity(Rarity.UNCOMMON));
     // Display-only ritual results; neither item is obtainable or listed in a creative tab.
     public static final DeferredItem<BlockItem> DREAM_PORTAL=ITEMS.registerSimpleBlockItem(ModBlocks.DREAM_PORTAL);
     public static final DeferredItem<BlockItem> CORRIDOR_GATEWAY=ITEMS.registerSimpleBlockItem(ModBlocks.CORRIDOR_GATEWAY);
@@ -150,6 +159,8 @@ public final class ModItems {
     public static final DeferredItem<Item> TIME_MICROCORE = ITEMS.registerItem("time_microcore",com.mcmagic.omnira.item.CompositeMicrocoreItem::new,new Item.Properties().rarity(Rarity.RARE));
 
     public static final DeferredItem<Item> OMNI_MICROCORE = registerMicrocore("omni_microcore", Rarity.EPIC);
+    public static final DeferredItem<Item> WORLD_ROTATION_CRYSTAL=ITEMS.registerItem("world_rotation_crystal",
+            com.mcmagic.omnira.item.WorldRotationCrystalItem::new,new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
 
     public static final DeferredItem<Item> TEST_SPELL_CORE=ITEMS.registerItem("primordial_spell_core",com.mcmagic.omnira.item.SpellCoreItem::new,new Item.Properties());
     public static final DeferredItem<Item> DREAM_SPELL_CORE=ITEMS.registerItem("dream_spell_core",p->new com.mcmagic.omnira.item.SpellCoreItem(p,true),new Item.Properties().rarity(Rarity.UNCOMMON));

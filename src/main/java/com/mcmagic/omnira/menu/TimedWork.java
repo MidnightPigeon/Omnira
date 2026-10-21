@@ -14,6 +14,9 @@ final class TimedWork {
     TimedWork(int duration) { this.duration = duration; }
     boolean active() { return progress.get() > 0; }
     void cancel() { progress.set(0); snapshot=null; }
+    void complete(Player player,Container container,boolean valid,Runnable finish){
+        if(!active())return;started=player.level().getGameTime()-duration;tick(player,container,valid,finish);
+    }
     float fraction() { return Math.min(1F, progress.get() / (float) duration); }
     boolean start(Player player, Container container) {
         if (active()) return false;

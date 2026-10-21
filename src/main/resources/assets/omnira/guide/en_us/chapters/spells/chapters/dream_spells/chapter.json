@@ -1,7 +1,7 @@
 {
   "id": "dream_spells",
   "title": "Dream",
-  "icon": "omnira:dream_crystal",
+  "icon": "omnira:infused_grimoire",
   "introduction": "introduction.json",
   "entries": [
     "entries/infused_grimoire_usage.json",
@@ -15,5 +15,16 @@
   ],
   "chapters": [
     "chapters/arquebuses_usage/chapter.json"
+  ],
+  "directory_order": [
+    "light_microcore",
+    "shadow_mist",
+    "holy",
+    "infused_grimoire_usage",
+    "shadow_staff_shaft",
+    "light_core_reinforcement",
+    "arcane_crystal_grid",
+    "staff_enhancement_usage",
+    "arquebuses_usage"
   ]
 }

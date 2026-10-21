@@ -17,6 +17,16 @@ import net.neoforged.neoforge.gametest.*;
 
 @GameTestHolder("omnira_spacetime_ports") @PrefixGameTestTemplate(false)
 public final class SpacetimePortGameTests {
+    @net.neoforged.fml.common.EventBusSubscriber(modid="omnira")
+    public static final class EnergyFixture {
+        private record Face(net.minecraft.world.level.Level level,BlockPos pos,Direction side){}
+        private static final java.util.Map<Face,net.neoforged.neoforge.energy.IEnergyStorage> FACES=new java.util.HashMap<>();
+        @net.neoforged.bus.api.SubscribeEvent
+        public static void register(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event){
+            if(Boolean.getBoolean("omnira.testEnergyProvider"))event.registerBlock(Capabilities.EnergyStorage.BLOCK,
+                    (level,pos,state,entity,side)->FACES.get(new Face(level,pos,side)),Blocks.DIAMOND_BLOCK);
+        }
+    }
     private static SpacetimePortState port(GameTestHelper h,BlockPos support,Direction face){
         var pos=support.relative(face);h.getLevel().setBlockAndUpdate(pos,ModBlocks.SPACETIME_PORT.get().defaultBlockState().setValue(SpacetimePortBlock.FACING,face));
         var result=SpacetimePortState.at(h.getLevel(),pos);h.assertTrue(result!=null,"Missing port host");return result;
@@ -80,7 +90,7 @@ public final class SpacetimePortGameTests {
     @GameTest(template="spell_arena") public static void remoteEngineRequiresItsOutputFace(GameTestHelper h){
         var l=h.getLevel();var a=h.absolutePos(new BlockPos(2,3,2));var b=h.absolutePos(new BlockPos(8,3,8));
         l.setBlockAndUpdate(a,ModBlocks.MANA_ENGINE.get().defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING,Direction.EAST));
-        var engine=((ManaEngineAccess)l.getBlockEntity(a)).engineState();engine.redstoneControl=false;engine.inventory.setItem(0,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
+        var engine=((ManaEngineAccess)l.getBlockEntity(a)).engineState();engine.inventory.setItem(0,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
         l.setBlockAndUpdate(b,Blocks.STONE.defaultBlockState());
         var white=port(h,a,Direction.EAST);var black=port(h,b,Direction.UP);h.assertTrue(SpacetimePortState.pair(white,black),"Engine pair failed");
         h.assertTrue(SpacetimePortState.engineAt(l,black.host.getBlockPos(),Direction.DOWN)!=null,"Remote engine output not found");
@@ -99,16 +109,18 @@ public final class SpacetimePortGameTests {
             ports[i]=port(h,socket,com.mcmagic.omnira.alchemy.ReactionPoolBlock.outward(Direction.NORTH,3));
         }
         h.assertTrue(SpacetimePortState.pair(ports[0],ports[1]),"Energy pair failed");
-        pools[0].energyInput.receiveEnergy(100,false);
+        int seeded=pools[0].energyInput.receiveEnergy(100,false);
+        h.assertTrue(seeded>0,"Receiver rejected the fixture's initial FE input");
         for(var p:ports)p.tick();
-        h.assertTrue(pools[0].energyInput.getEnergyStored()==100&&pools[1].energyInput.getEnergyStored()==0,"Ports moved energy automatically");
+        h.assertTrue(pools[0].energyInput.getEnergyStored()==seeded&&pools[1].energyInput.getEnergyStored()==0,"Ports moved energy automatically");
         for(int i=0;i<2;i++){
             var p=ports[i];var target=pools[1-i].energyInput;
             var proxy=l.getCapability(Capabilities.EnergyStorage.BLOCK,p.host.getBlockPos(),p.face().getOpposite());
             h.assertTrue(proxy!=null&&proxy.canReceive()&&!proxy.canExtract(),"Remote permissions depend on pair color");
             int before=target.getEnergyStored();
-            h.assertTrue(proxy.receiveEnergy(120,true)==120&&target.getEnergyStored()==before,"Simulation changed energy");
-            h.assertTrue(proxy.receiveEnergy(120,false)==120&&target.getEnergyStored()==before+120,"Caller-driven transfer failed");
+            int accepted=target.receiveEnergy(120,true);
+            h.assertTrue(proxy.receiveEnergy(120,true)==accepted&&target.getEnergyStored()==before,"Proxy changed the receiver's limit or simulated energy");
+            h.assertTrue(proxy.receiveEnergy(120,false)==accepted&&target.getEnergyStored()==before+accepted,"Caller-driven transfer failed");
             int remaining=target.receiveEnergy(Integer.MAX_VALUE,true);
             h.assertTrue(proxy.receiveEnergy(Integer.MAX_VALUE,false)==remaining&&target.receiveEnergy(1,false)==0,"Remote and direct input did not share a rate budget");
             h.assertTrue(proxy.extractEnergy(120,false)==0,"Receiver became an energy source");
@@ -125,13 +137,61 @@ public final class SpacetimePortGameTests {
         var socket=center.offset(com.mcmagic.omnira.alchemy.ReactionPoolBlock.offset(Direction.NORTH,3));
         var direction=com.mcmagic.omnira.alchemy.ReactionPoolBlock.outward(Direction.NORTH,3);
         var source=h.absolutePos(new BlockPos(2,3,2));l.setBlockAndUpdate(source,ModBlocks.MANA_ENGINE.get().defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING,Direction.EAST));
-        var engine=((ManaEngineAccess)l.getBlockEntity(source)).engineState();engine.redstoneControl=false;engine.inventory.setItem(0,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
+        var engine=((ManaEngineAccess)l.getBlockEntity(source)).engineState();engine.inventory.setItem(0,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
         var white=port(h,source,Direction.EAST);var black=port(h,socket,direction);h.assertTrue(SpacetimePortState.pair(white,black),"Energy pair failed");
         white.tick();black.tick();h.assertTrue(pool.energyInput.getEnergyStored()==0,"Port autonomously extracted energy");
-        engine.tickEnergy();h.assertTrue(pool.energyInput.getEnergyStored()>0,"Engine could not drive remote receiver");
+        engine.tickEnergy();h.assertTrue(pool.energyInput.getEnergyStored()==0,"Native pulse connection also exported FE");
+        h.assertTrue(com.mcmagic.omnira.pulse.PulseNetworks.power(l,center).connected(),"Port lost native pulse connection");
         white.unlink();h.assertTrue(SpacetimePortState.pair(black,white),"Reverse pairing failed");
-        var output=black.energyPort(direction.getOpposite());h.assertTrue(output.canExtract()&&!output.canReceive(),"Remote source permissions depend on color");
+        var output=black.energyPort(direction.getOpposite());h.assertTrue(!output.canExtract()&&!output.canReceive(),"Reversed color enabled duplicate FE on native pulse link");
         int before=pool.energyInput.getEnergyStored();white.tick();black.tick();
-        h.assertTrue(pool.energyInput.getEnergyStored()==before,"Reversed ports autonomously moved energy");h.succeed();
+        h.assertTrue(pool.energyInput.getEnergyStored()==before,"Reversed ports autonomously moved energy");
+        black.unlink();var external=h.absolutePos(new BlockPos(11,3,3));
+        var key=new EnergyFixture.Face(l,external,Direction.UP);
+        var receiver=new net.neoforged.neoforge.energy.EnergyStorage(100000);
+        l.setBlockAndUpdate(external,Blocks.DIAMOND_BLOCK.defaultBlockState());EnergyFixture.FACES.put(key,receiver);l.invalidateCapabilities(external);
+        var externalPort=port(h,external,Direction.UP);
+        try{
+            h.assertTrue(SpacetimePortState.pair(white,externalPort),"External receiver pair failed");
+            white.tick();externalPort.tick();h.assertTrue(receiver.getEnergyStored()==0,"Port autonomously supplied external receiver");
+            engine.tickEnergy();h.assertTrue(receiver.getEnergyStored()>0,"Source did not initiate external FE transfer");
+        }finally{white.unlink();EnergyFixture.FACES.remove(key);l.invalidateCapabilities(external);}
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void highPowerFacesHaveNoPortBudgetOrAutomaticTransfer(GameTestHelper h){
+        h.assertTrue(Boolean.getBoolean("omnira.testEnergyProvider"),"Run with -PtestEnergyProvider");
+        var level=h.getLevel();var a=h.absolutePos(new BlockPos(3,3,3));var b=h.absolutePos(new BlockPos(10,3,10));
+        var source=new net.neoforged.neoforge.energy.EnergyStorage(200000,0,50000,150000);
+        var sink=new net.neoforged.neoforge.energy.EnergyStorage(200000,50000,0,0);
+        var from=new EnergyFixture.Face(level,a,Direction.EAST);var to=new EnergyFixture.Face(level,b,Direction.UP);
+        level.setBlockAndUpdate(a,Blocks.DIAMOND_BLOCK.defaultBlockState());level.setBlockAndUpdate(b,Blocks.DIAMOND_BLOCK.defaultBlockState());
+        EnergyFixture.FACES.put(from,source);EnergyFixture.FACES.put(to,sink);
+        level.invalidateCapabilities(a);level.invalidateCapabilities(b);
+        var white=port(h,a,Direction.EAST);var black=port(h,b,Direction.UP);
+        try{
+            h.assertTrue(SpacetimePortState.pair(white,black),"High power pair failed");
+            var input=black.energyPort(Direction.DOWN);var output=white.energyPort(Direction.WEST);
+            for(int i=0;i<40;i++){white.tick();black.tick();}
+            h.assertTrue(source.getEnergyStored()==150000&&sink.getEnergyStored()==0,"Port automatically moved electrical energy");
+            h.assertTrue(input.extractEnergy(Integer.MAX_VALUE,true)==50000&&output.receiveEnergy(Integer.MAX_VALUE,true)==50000,
+                    "Port imposed a lower limit than its attached faces");
+            h.assertTrue(source.getEnergyStored()==150000&&sink.getEnergyStored()==0,"Simulation moved energy");
+            for(int i=0;i<2;i++){
+                int offered=input.extractEnergy(Integer.MAX_VALUE,true);
+                int accepted=output.receiveEnergy(offered,true);
+                h.assertTrue(accepted==50000&&output.receiveEnergy(input.extractEnergy(accepted,false),false)==50000,
+                        "Caller-driven transfer was throttled by port-local budget");
+            }
+            h.assertTrue(source.getEnergyStored()==50000&&sink.getEnergyStored()==100000,"Energy not conserved");
+            black.unlink();h.assertTrue(input.extractEnergy(1,false)==0&&output.receiveEnergy(1,false)==0,"Unlinked proxy retained energy access");
+            h.assertTrue(SpacetimePortState.pair(black,white),"Reversed colors failed");
+            h.assertTrue(white.energyPort(Direction.WEST).canReceive()&&black.energyPort(Direction.DOWN).canExtract(),"Color changed electrical direction");
+            level.setBlockAndUpdate(b,Blocks.STONE.defaultBlockState());
+            h.assertTrue(output.receiveEnergy(50000,false)==0,"Replaced receiver retained energy access");
+        }finally{
+            white.unlink();EnergyFixture.FACES.remove(from);EnergyFixture.FACES.remove(to);
+            level.invalidateCapabilities(a);level.invalidateCapabilities(b);
+        }
+        h.succeed();
     }
 }

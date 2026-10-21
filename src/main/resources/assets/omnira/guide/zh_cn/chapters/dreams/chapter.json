@@ -12,5 +12,13 @@
     "chapters/dream_crafting/chapter.json",
     "chapters/travel_crafting/chapter.json",
     "chapters/dream_exploration/chapter.json"
+  ],
+  "directory_order": [
+    "visit_dream",
+    "dream_exploration",
+    "dream_creatures",
+    "dream_products",
+    "dream_crafting",
+    "travel_crafting"
   ]
 }

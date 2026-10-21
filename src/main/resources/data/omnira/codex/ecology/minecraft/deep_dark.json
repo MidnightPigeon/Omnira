@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "minecraft:deepslate"
+  },
+  "surface": {
+    "Name": "minecraft:sculk"
+  },
+  "decorations": [
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "minecraft:sculk"
+      },
+      "crown": {
+        "Name": "minecraft:sculk"
+      }
+    }
+  ]
+}

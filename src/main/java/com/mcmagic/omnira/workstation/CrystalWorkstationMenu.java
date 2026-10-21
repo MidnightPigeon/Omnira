@@ -46,6 +46,17 @@ public final class CrystalWorkstationMenu extends AbstractContainerMenu {
     }
     public int value(int i){return data.get(i);}
     @Override public boolean stillValid(Player p){return machine==null||machine.stillValid(p);}
+    @Override public void clicked(int slotIndex,int button,ClickType type,Player player){
+        if(slotIndex==2&&type==ClickType.SWAP&&(button>=0&&button<9||button==40)){
+            if(!player.getInventory().getItem(button).isEmpty())return;
+            var slot=getSlot(2);
+            // A preview is not stored output: always settle the recipe through its removal path.
+            var result=slot.safeTake(Integer.MAX_VALUE,slot.getItem().getMaxStackSize(),player);
+            if(!result.isEmpty())player.getInventory().setItem(button,result);
+            return;
+        }
+        super.clicked(slotIndex,button,type,player);
+    }
     @Override public ItemStack quickMoveStack(Player p,int slotIndex){
         if(slotIndex<0||slotIndex>=slots.size())return ItemStack.EMPTY;
         var slot=slots.get(slotIndex);if(!slot.hasItem()||!slot.mayPickup(p))return ItemStack.EMPTY;

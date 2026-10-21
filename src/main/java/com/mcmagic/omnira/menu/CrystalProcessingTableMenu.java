@@ -20,7 +20,12 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class CrystalProcessingTableMenu extends AbstractContainerMenu {
+public class CrystalProcessingTableMenu extends AbstractContainerMenu implements WorldRotationWork {
+    private boolean worldCompleting;
+    @Override public void worldRotation(net.minecraft.server.level.ServerLevel level,BlockPos pos){
+        if(!work.active()||!access.evaluate((at,p)->at==level&&p.equals(pos),false))return;
+        worldCompleting=true;try{work.complete(owner,container,stillValid(owner)&&canProcessCrystal(),()->finishWriting(owner,WRITE_BUTTON));}finally{worldCompleting=false;}
+    }
     public static final int WRITE_BUTTON = 0;
     public static final int MANA_COST = com.mcmagic.omnira.spell.SpellPayload.componentCost(2);
     public static final int TARGET_CORE_SLOT = 0;
@@ -95,13 +100,15 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu {
             return false;
         }
 
-        if (!com.mcmagic.omnira.mana.ManaEvents.trySpend(serverPlayer, baseManaCost())) return false;
+        if (!worldCompleting&&!com.mcmagic.omnira.mana.ManaEvents.trySpend(serverPlayer, baseManaCost())) return false;
         processCrystal();
+        com.mcmagic.omnira.progression.BranchProgress.record(player,"spell_writing");
         return true;
     }
 
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
+        if(index<0||index>=slots.size())return ItemStack.EMPTY;
         ItemStack result = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot.hasItem()) {
@@ -178,7 +185,7 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu {
     public boolean canProcessCrystal() {
         for(int i=ELEMENT_SLOT_START;i<ELEMENT_SLOT_END;i++)
             if(!container.getItem(i).isEmpty() && !isElement(container.getItem(i))) return false;
-        return com.mcmagic.omnira.mana.ManaCosts.canSpend(owner,baseManaCost())
+        return (worldCompleting||com.mcmagic.omnira.mana.ManaCosts.canSpend(owner,baseManaCost()))
                 && SpellPattern.fromMicrocores(container.getItem(TARGET_CORE_SLOT),container.getItem(SHAPE_CORE_SLOT)).isPresent()
                 && isInk(container.getItem(INK_SLOT))
                 && container.getItem(SUBSTRATE_SLOT).is(ModItems.SPIRITUAL_CRYSTAL.get())
@@ -238,6 +245,7 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu {
             if(stack.is(ModItems.DISSOCIATION_THREAD.get())) effects.add(com.mcmagic.omnira.spell.SpellEffect.utility("dissociation",iron,clocks,infusions));
             if(stack.is(ModItems.DARK_MICROCORE.get())) effects.add(com.mcmagic.omnira.spell.SpellEffect.utility("dark_breath",iron,clocks,infusions));
             if(stack.is(ModItems.CONSTRUCTION_MATRIX.get())) effects.add(com.mcmagic.omnira.spell.SpellEffect.utility("construction",iron,clocks,infusions));
+            if(stack.is(com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get())) effects.add(com.mcmagic.omnira.spell.SpellEffect.utility("reload",iron,0,infusions));
             if(stack.is(ModItems.SHARP_BREATH.get()) || stack.is(ModItems.HEALING_DEW.get()))
                 effects.add(new com.mcmagic.omnira.spell.SpellEffect(stack.is(ModItems.HEALING_DEW.get()),
                         (clocks>0?0:1)+iron,clocks>0?800+(clocks-1)*1200:0,infused));
@@ -267,6 +275,7 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu {
             if(stack.is(ModItems.DARK_MICROCORE.get())) keywords.add("dark_breath");
             if(stack.is(ModItems.DISSOCIATION_THREAD.get())) keywords.add("dissociation");
             if(stack.is(ModItems.CONSTRUCTION_MATRIX.get())) keywords.add("construction");
+            if(stack.is(com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get())) keywords.add("reload");
             if(stack.is(ModItems.HEALING_DEW.get())) keywords.add("healing");
         }
         for(int i=modifierStart;i<modifierEnd;i++) {

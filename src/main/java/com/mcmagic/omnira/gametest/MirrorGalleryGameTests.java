@@ -54,19 +54,24 @@ public final class MirrorGalleryGameTests {
     @GameTest(template="spell_arena",timeoutTicks=200) public static void lootTablesHaveCorrectRewards(GameTestHelper h) {
         var params=new LootParams.Builder(h.getLevel()).withParameter(LootContextParams.ORIGIN,Vec3.ZERO).create(LootContextParamSets.CHEST);
         for(String kind:new String[]{"pool","gallery"}) {
-            var table=h.getLevel().getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE,id("chests/mirror_gallery_"+kind)));
+            // Probability contracts describe shipped defaults, not a server owner's editable overrides.
+            var json=com.mcmagic.omnira.config.OmniraLootConfig.defaults().getAsJsonObject("treasureTables").get("omnira:chests/mirror_gallery_"+kind);
+            var ops=h.getLevel().registryAccess().createSerializationContext(com.mojang.serialization.JsonOps.INSTANCE);
+            var table=LootTable.DIRECT_CODEC.parse(ops,json).getOrThrow();
             int[] counts=new int[5];
             for(int seed=1;seed<=2000;seed++) {
                 boolean ordinary=false;
-                for(var stack:table.getRandomItems(params,net.minecraft.world.level.levelgen.RandomSupport.mixStafford13(seed))) {
-                    if(stack.is(kind.equals("pool")?ModItems.DREAM_CRYSTAL_SHARD.get():ModItems.PARADOX_DUST.get()))ordinary=true;
+                var loot=table.getRandomItems(params,net.minecraft.world.level.levelgen.RandomSupport.mixStafford13(seed));
+                for(var stack:loot) {
+                    if(kind.equals("pool")?stack.is(ModItems.DREAM_CRYSTAL_SHARD.get()):
+                            stack.is(ModItems.PARADOX_DUST.get())||stack.is(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()))ordinary=true;
                     if(stack.is(ModItems.DREAM_SPELL_CORE.get()))counts[0]++;
                     if(stack.is(DreamContent.DREAM_CRYSTAL_BEDROCK.get().asItem()))counts[1]++;
                     if(stack.is(net.minecraft.core.registries.BuiltInRegistries.ITEM.get(id("arcane_crystal_grid"))))counts[2]++;
                     if(stack.is(ModItems.POCKET_MAGIC_BOTTLE.get())){counts[3]++;h.assertTrue(stack.getCount()==1,"Bottle count must be one");}
                     if(stack.is(ModItems.LIGHT_MICROCORE.get()) || stack.is(ModItems.DARK_MICROCORE.get()))counts[4]++;
                 }
-                h.assertTrue(ordinary,"Missing guaranteed ordinary loot");
+                h.assertTrue(ordinary,"Missing guaranteed ordinary loot in "+kind+" seed="+seed+": "+loot);
             }
             if(kind.equals("gallery")) {
                 h.assertTrue(counts[0]>50 && counts[0]<150,"Core not approximately 5 percent");

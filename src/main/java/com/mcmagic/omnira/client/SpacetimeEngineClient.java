@@ -30,17 +30,28 @@ public final class SpacetimeEngineClient {
         @Override public AABB getRenderBoundingBox(SpacetimeEngineController be){return new AABB(be.getBlockPos()).inflate(1.1,0,1.1).expandTowards(0,-1,0);}
     });}
     public static void draw(SpacetimeEngineController be,double ticks,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
+        boolean active=be!=null&&be.complete()&&!com.mcmagic.omnira.time.StilledTime.stopped(be.getLevel(),be.getBlockPos());
         for(var b:SpacetimeEngineGeometry.BASE)box(b,pose,buffers,light,overlay,63);
         // Square axles meet neighbouring shaft centres at Y=8, exactly at the outer faces.
         for(int side=0;side<4;side++){
             int color=SpacetimeEngineGeometry.outputColor(be==null?side:be.relativeSide(side));
             pose.pushPose();pose.translate(.5,.5,.5);pose.mulPose(Axis.YP.rotationDegrees(-side*90));
             for(var b:SpacetimeEngineGeometry.DRIVE)box(b,pose,buffers,light,overlay,63);
-            pose.translate(0,0,-1);pose.mulPose(Axis.ZP.rotationDegrees((float)(ticks*(be==null?16:be.generatedSpeed(side))*.3)));
+            float angle=(float)(ticks*16*.3);
+            if(be!=null&&net.neoforged.fml.ModList.get().isLoaded("create")){
+                var face=SpacetimeEngineBlock.OUTPUTS[side];var host=be.getLevel().getBlockEntity(be.getBlockPos().below().relative(face));
+                angle=host==null?0:com.mcmagic.omnira.client.renderer.CreateEnginePhase.degrees(host,face.getAxis())
+                        *(face.getOpposite().getAxisDirection()==net.minecraft.core.Direction.AxisDirection.POSITIVE?1:-1);
+            }
+            if(!active||be.capacity(side)<=0||be.outputMode[side]!=com.mcmagic.omnira.pulse.PulseOutput.ROTATION)angle=0;
+            pose.translate(0,0,-1);pose.mulPose(Axis.ZP.rotationDegrees(angle));
             box(SpacetimeEngineGeometry.SHAFT.tint(color),pose,buffers,light,overlay,63);
             // Four rigid bearing lugs make the motor silhouette readable without a solid faceted shell.
             for(int a=0;a<4;a++){pose.pushPose();pose.mulPose(Axis.ZP.rotationDegrees(a*90));box(SpacetimeEngineGeometry.BEARING.tint(color),pose,buffers,light,overlay,63);pose.popPose();}
             pose.popPose();
+            if(active&&be.capacity(side)>0&&be.outputMode[side]!=com.mcmagic.omnira.pulse.PulseOutput.ROTATION){
+                var face=SpacetimeEngineBlock.OUTPUTS[side];pose.pushPose();pose.translate(face.getStepX(),0,face.getStepZ());PulseClient.shaft(pose,buffers,face,ticks,true,be.outputMode[side]);pose.popPose();
+            }
         }
         pose.pushPose();pose.translate(.5,0,.5);pose.mulPose(Axis.YP.rotation((float)(ticks*.018)));
         for(var b:SpacetimeEngineGeometry.ROTOR)box(b,pose,buffers,light,overlay,63);

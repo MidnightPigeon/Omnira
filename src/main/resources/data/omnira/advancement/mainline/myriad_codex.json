@@ -1,0 +1,20 @@
+{
+  "parent": "omnira:mainline/something_from_nothing",
+  "display": {
+    "icon": { "id": "omnira:myriad_codex" },
+    "title": { "translate": "advancement.omnira.mainline.myriad_codex.title" },
+    "description": { "translate": "advancement.omnira.mainline.myriad_codex.description" },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": { "trigger": "minecraft:impossible" },
+    "obtained": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [{ "items": ["omnira:myriad_codex"] }] }
+    }
+  },
+  "requirements": [["previous_completed"], ["obtained"]]
+}

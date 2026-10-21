@@ -4,14 +4,14 @@
   "title": "Arcane Needle",
   "recipes": true,
   "text": [
-    "The needle's base range is ten blocks, increased to fifteen by a Wide Area Rune on an offhand staff. The range is fixed when launched.",
+    "The needle reaches ten blocks, or fifteen with an Area rune staff in the offhand, determined when launched.",
     "Hold Attack for at least one second, then release to launch the needle up to ten blocks. A miss returns it; hitting a block or creature pulls you toward a safe position near the impact. A creature hit also receives one attack and the loaded spell. The initial press performs a normal attack.",
     "While charging, the blade aims at the crosshair and draws back. Only the tail ring remains in hand while the needle is away; attacks and another throw are unavailable until it returns. The attached spell has a two-second trigger cooldown, separate from ordinary melee.",
     "Taking damage interrupts both needle charging and healing, including damage absorbed by absorption hearts. Release the button before starting again.",
     "8 attack damage, 1.8 attack speed and 1024 durability. Accepts sword enchantments. Mana repair, self-barrier crystal loading and downward bounces work as with the crystallized nail.",
     "Hold use for three uninterrupted seconds to heal 12 health. Movement is locked, and you hover when airborne. On a moving structure, the anchor follows that structure. Cannot be used while riding.",
     "The channel gradually spends one quarter of the maximum mana at its start, unaffected by discounts. Interrupting it gives no healing and does not refund mana.",
-    "Upgrade four times on the Advanced Assembly Table. Each level adds 2 attack damage, 0.1 attack speed, 3 total healing and 25% of base special range. The nail gains 1 healing per segment. Level four has 16 damage, 2.2 speed, 24 total healing and double special range. Wide Area Rune range bonuses add to upgrade bonuses."
+    "Upgrade four times at the Advanced Assembly Table; see Weapon Upgrades for shared rules and progression."
   ],
   "links": [
     {
@@ -37,6 +37,10 @@
     {
       "target": "pale_paradox_needle",
       "label": "Pale Paradox Needle"
+    },
+    {
+      "target": "ritual_weapon_upgrades",
+      "label": "Weapon Upgrades"
     }
   ]
 }

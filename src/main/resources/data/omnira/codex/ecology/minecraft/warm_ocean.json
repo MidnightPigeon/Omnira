@@ -1,0 +1,19 @@
+{
+  "base": {
+    "Name": "minecraft:sand"
+  },
+  "surface": {
+    "Name": "minecraft:water"
+  },
+  "decorations": [
+    {
+      "kind": "patch",
+      "block": {
+        "Name": "minecraft:tube_coral_block"
+      },
+      "crown": {
+        "Name": "minecraft:brain_coral_block"
+      }
+    }
+  ]
+}

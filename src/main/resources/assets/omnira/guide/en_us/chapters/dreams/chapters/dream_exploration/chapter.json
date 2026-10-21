@@ -1,7 +1,7 @@
 {
   "id": "dream_exploration",
-  "title": "Travel and Return",
-  "icon": "omnira:recall_crystal",
+  "title": "Exploration Guide",
+  "icon": "minecraft:map",
   "introduction": "introduction.json",
   "entries": [
     "entries/explore_dream.json",

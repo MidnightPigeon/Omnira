@@ -1,7 +1,7 @@
 {
   "id": "staff_parts",
   "title": "法杖部件",
-  "icon": "omnira:wooden_staff_shaft",
+  "icon": "omnira:iron_reinforcement",
   "introduction": "introduction.json",
   "entries": [
     "entries/wooden_staff_shaft.json",

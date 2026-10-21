@@ -16,5 +16,17 @@
     "chapters/staff_parts/chapter.json",
     "chapters/crystal_grids_usage/chapter.json",
     "chapters/staff_upgrades_usage/chapter.json"
+  ],
+  "directory_order": [
+    "elements",
+    "spell_shapes",
+    "spell_elements",
+    "spell_modifiers",
+    "spell_ink",
+    "low_tier_magic_crystal",
+    "staff_parts",
+    "crystal_grids_usage",
+    "staff_casting",
+    "staff_upgrades_usage"
   ]
 }

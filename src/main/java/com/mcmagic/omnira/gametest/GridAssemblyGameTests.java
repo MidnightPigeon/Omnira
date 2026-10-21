@@ -17,6 +17,59 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_grid_assembly")
 @PrefixGameTestTemplate(false)
 public final class GridAssemblyGameTests {
+    private static ItemStack arcaneGrid() {
+        var grid=populatedGrid().transmuteCopy(ModItems.ARCANE_CRYSTAL_GRID.get(),1);
+        var contents=NonNullList.withSize(8,ItemStack.EMPTY);
+        grid.get(DataComponents.CONTAINER).copyInto(contents);
+        contents.set(7,contents.get(2).copy());
+        grid.set(DataComponents.CONTAINER,ItemContainerContents.fromItems(contents));return grid;
+    }
+    private static void assertOmniUpgrade(GameTestHelper h,ItemStack before,ItemStack after) {
+        h.assertTrue(after.is(ModItems.OMNI_CRYSTAL_GRID.get())&&after.getCount()==1,"Wrong omni upgrade result");
+        h.assertTrue(before.getComponents().equals(after.getComponents()),"Upgrade changed grid data or spell ordering");
+        var slots=NonNullList.withSize(12,ItemStack.EMPTY);after.get(DataComponents.CONTAINER).copyInto(slots);
+        for(int i=8;i<12;i++)h.assertTrue(slots.get(i).isEmpty(),"New slots must be empty");
+    }
+    @GameTest(template="spell_arena")
+    public static void omniGridRecipePreservesDataAndRequiresNodes(GameTestHelper h) {
+        var recipe=(com.mcmagic.omnira.forging.AdvancedForgeRecipe)h.getLevel().getRecipeManager()
+                .byKey(id("advanced_assembly_table/omni_crystal_grid")).orElseThrow().value();
+        var inventory=new SimpleContainer(9);var grid=arcaneGrid();var before=grid.copy();
+        inventory.setItem(6,new ItemStack(ModItems.OMNI_MICROCORE.get()));inventory.setItem(7,grid);
+        inventory.setItem(8,new ItemStack(ModItems.OMNI_MICROCORE.get()));
+        var input=new com.mcmagic.omnira.forging.AdvancedForgeRecipe.Input(inventory);
+        for(int rotation=0;rotation<6;rotation++){
+            for(int i=0;i<6;i++)inventory.setItem(i,new ItemStack((i+rotation)%6<3?
+                    com.mcmagic.omnira.paradox.ParadoxContent.GENESIS.get():ModItems.GRID_FRAME.get()));
+            h.assertTrue(recipe.matches(input,h.getLevel()),"Shuffled tabletop materials rejected");
+            assertOmniUpgrade(h,before,recipe.assemble(input,h.getLevel().registryAccess()));
+            h.assertTrue(ItemStack.matches(before,grid),"Upgrade preview changed source");
+        }
+        inventory.setItem(0,ItemStack.EMPTY);h.assertTrue(!recipe.matches(input,h.getLevel()),"Missing material accepted");
+        inventory.setItem(0,new ItemStack(ModItems.GRID_FRAME.get()));
+        inventory.setItem(7,inventory.getItem(6));inventory.setItem(6,grid);
+        h.assertTrue(!recipe.matches(input,h.getLevel()),"Wrong node order accepted");
+        inventory.setItem(6,new ItemStack(ModItems.OMNI_MICROCORE.get()));inventory.setItem(7,grid);
+        var invalid=NonNullList.withSize(9,new ItemStack(ModItems.LOW_TIER_MAGIC_CRYSTAL.get()));
+        grid.set(DataComponents.CONTAINER,ItemContainerContents.fromItems(invalid));
+        h.assertTrue(!recipe.matches(input,h.getLevel()),"Oversized source inventory accepted");h.succeed();
+    }
+    @GameTest(template="spell_arena")
+    public static void realAdvancedForgeUpgradesOmniGrid(GameTestHelper h) {
+        var center=h.absolutePos(new net.minecraft.core.BlockPos(5,2,5));
+        var player=AdvancedForgeGameTests.player(h,center);AdvancedForgeGameTests.build(h,center,net.minecraft.core.Direction.SOUTH);
+        h.assertTrue(com.mcmagic.omnira.forging.ForgeLayout.form(h.getLevel(),center,player,new ItemStack(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get())),"Cannot form advanced forge");
+        var forge=(com.mcmagic.omnira.forging.AdvancedForgeBlockEntity)h.getLevel().getBlockEntity(center);
+        var recipe=(com.mcmagic.omnira.forging.AdvancedForgeRecipe)h.getLevel().getRecipeManager()
+                .byKey(id("advanced_assembly_table/omni_crystal_grid")).orElseThrow().value();
+        for(int i=0;i<9;i++)forge.setItem(i,recipe.slots().get(i).getItems()[0].copy());
+        var source=arcaneGrid();forge.setItem(7,source);forge.setItem(9,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
+        h.assertTrue(forge.start(player),"Populated grid cannot start forging");
+        for(int i=0;i<com.mcmagic.omnira.forging.AdvancedForgeBlockEntity.duration(forge.getItem(9));i++)forge.tick();
+        h.assertTrue(!forge.working(),"Advanced forge did not finish");assertOmniUpgrade(h,source,forge.output());
+        for(int i=0;i<9;i++)h.assertTrue(forge.getItem(i).isEmpty(),"Upgrade ingredients not consumed");
+        h.assertTrue(forge.getItem(9).is(ModItems.TEST_SPELL_CORE.get()),"Power core consumed");h.succeed();
+    }
     @GameTest(template="spell_arena")
     public static void advancedGridsProvideEquippedCooldownAttribute(GameTestHelper h) {
         var player=new net.neoforged.neoforge.common.util.FakePlayer(h.getLevel(),
@@ -44,12 +97,12 @@ public final class GridAssemblyGameTests {
         h.assertTrue(com.mcmagic.omnira.item.StaffItem.sequenceCooldown(grid,1,20)==20,"Chain interior lost staff interval");
         h.assertTrue(com.mcmagic.omnira.item.StaffItem.sequenceCooldown(grid,2,20)==80,"Burst ending at boundary missed cycle cooldown");
         grid.set(ModDataComponents.GRID_CURSOR,2);
-        h.assertTrue(com.mcmagic.omnira.item.StaffItem.sequenceCooldown(grid,2,100)==80,"Burst crossing boundary missed cycle cooldown");
+        h.assertTrue(com.mcmagic.omnira.item.StaffItem.sequenceCooldown(grid,2,100)==100,"Burst boundary must keep the greater cooldown");
         var slots=NonNullList.withSize(3,ItemStack.EMPTY);
         slots.set(2,grid.get(DataComponents.CONTAINER).getStackInSlot(2));
         grid.set(DataComponents.CONTAINER,ItemContainerContents.fromItems(slots));
         for(int base:new int[]{20,60,100}) for(int shots:new int[]{1,2})
-            h.assertTrue(com.mcmagic.omnira.item.StaffItem.sequenceCooldown(grid,shots,base)==80,"Single spell must use cycle cooldown");
+            h.assertTrue(com.mcmagic.omnira.item.StaffItem.sequenceCooldown(grid,shots,base)==Math.max(80,base),"Single spell must keep the greater cooldown");
         h.assertTrue(SpellCooldowns.ticks(80,.2,1)==64 && SpellCooldowns.ticks(80,1,1)==40,"Cycle reduction/cap changed");
         h.assertTrue(grid.get(ModDataComponents.GRID_CURSOR)==2,"Cooldown preview advanced live cursor");
         h.assertTrue(com.mcmagic.omnira.item.ArquebusPlugin.NONE.cooldownTicks==40

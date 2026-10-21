@@ -18,10 +18,10 @@ public final class ReversalScreen extends ResponsiveContainerScreen<ReversalMenu
         com.mojang.blaze3d.systems.RenderSystem.enableBlend();
         if(menu.infusion){
             com.mojang.blaze3d.systems.RenderSystem.setShaderColor(.85F,.65F,1,1);
-            g.blit(TEXTURE,leftPos,topPos,0,0,176,146,176,244);
+            g.blit(TEXTURE,leftPos,topPos,0,0,176,144,176,244);
             com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1,1,1,1);
-            g.blit(TEXTURE,leftPos,topPos+146,0,146,176,98,176,244);
-        }else g.blit(TEXTURE,leftPos,topPos,0,0,176,244,176,244);
+        }else g.blit(TEXTURE,leftPos,topPos,0,0,176,144,176,244);
+        CrystalWorkstationBackground.inventory(g,leftPos,topPos,menu,14);
         var art=CrystalUi.pixels(g,leftPos,topPos);
         MachinePanelArt.reversalTrim(art,CrystalUi.time(partial),menu.progress()>0,menu.infusion);
         g.fill(leftPos-24,topPos+39,leftPos-8,topPos+105,0xFF152F39);
@@ -37,6 +37,6 @@ public final class ReversalScreen extends ResponsiveContainerScreen<ReversalMenu
         }
         g.pose().popPose();
     }
-    @Override protected void renderLabels(GuiGraphics g,int x,int y){CrystalUi.title(g,font,title,88,4,168,0xE6F6F8);g.drawString(font,playerInventoryTitle,8,148,0xD6E8E9,false);}
+    @Override protected void renderLabels(GuiGraphics g,int x,int y){CrystalUi.title(g,font,title,88,4,168,0xE6F6F8);g.drawString(font,playerInventoryTitle,8,148,0xFF404040,false);}
     @Override protected void renderContent(GuiGraphics g,int x,int y,float partial){super.renderContent(g,x,y,partial);renderTooltip(g,x,y);if(x>=leftPos-29&&x<leftPos-3&&y>=topPos+34&&y<topPos+108)g.renderTooltip(font,Component.translatable(menu.infusion?"tooltip.omnira.space_energy":"tooltip.omnira.reversal_energy",menu.energy(),64),x,y);}
 }

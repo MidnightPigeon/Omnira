@@ -22,13 +22,6 @@ public final class RoughAlchemyCauldronBlockEntity extends BlockEntity {
         @Override public net.minecraft.world.item.ItemStack insertItem(int slot,net.minecraft.world.item.ItemStack stack,boolean simulate){
             if(stack.isEmpty())return stack;
             for(int i=0;i<4;i++)if(i!=slot&&net.minecraft.world.item.ItemStack.isSameItemSameComponents(stack,getStackInSlot(i)))return stack;
-            var remainder=super.insertItem(slot,stack,true);
-            int added=stack.getCount()-remainder.getCount();
-            if(!internal&&active!=null&&added>0){
-                var trial=snapshot();var old=trial.get(slot);
-                trial.set(slot,stack.copyWithCount(old.getCount()+added));
-                if(!outputsFit(active,trial))return stack;
-            }
             return super.insertItem(slot,stack,simulate);
         }
         @Override protected void onContentsChanged(int slot){changed();}
@@ -56,6 +49,7 @@ public final class RoughAlchemyCauldronBlockEntity extends BlockEntity {
         if(level!=null&&!level.isClientSide)level.sendBlockUpdated(worldPosition,getBlockState(),getBlockState(),3);
     }
     public boolean working(){return active!=null;}
+    public void worldRotation(){if(active!=null){progress=active.duration()-1;tick(level,worldPosition,getBlockState(),this);}}
     public int progress(){return progress;}
     public net.minecraft.world.item.ItemStack insert(net.minecraft.world.item.ItemStack stack){
         var remaining=stack.copy();
@@ -105,7 +99,13 @@ public final class RoughAlchemyCauldronBlockEntity extends BlockEntity {
                     .stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).toList());
             return;
         }
-        var recipe=vessel.active;if(!recipe.supportMatches(vessel))return;
+        var recipe=vessel.active;
+        if(!recipe.supportMatches(vessel)){
+            vessel.active=null;vessel.output=net.minecraft.world.item.ItemStack.EMPTY;
+            vessel.progress=vessel.consumed=vessel.batches=0;vessel.changed();
+            ReactionFailure.blast((net.minecraft.server.level.ServerLevel)level,pos,false);
+            return;
+        }
         int next=Math.min(recipe.duration(),vessel.progress+1);
         int due=Math.min(10,(int)((long)next*10/recipe.duration()));
         vessel.internal=true;
@@ -137,6 +137,7 @@ public final class RoughAlchemyCauldronBlockEntity extends BlockEntity {
                 for(var result:recipe.completeOutputs(vessel.output)){
                     if(!vessel.insert(result).isEmpty())throw new IllegalStateException("Reserved reaction output lost");
                 }
+                com.mcmagic.omnira.progression.BranchProgress.machine(vessel,"first_reaction");
                 vessel.active=null;vessel.output=net.minecraft.world.item.ItemStack.EMPTY;vessel.progress=vessel.consumed=vessel.batches=0;
                 vessel.changed();
             }else vessel.setChanged();

@@ -25,11 +25,10 @@ public final class MemoryCubeItem extends Item {
         if(peaceful)player.setData(ModAttachments.MANA,mana.withCurrent(0));
         else {
             player.addEffect(new MobEffectInstance(MobEffects.WITHER,200,2));
-            if(!fatal)player.setHealth(player.getHealth()-(float)Math.ceil(player.getMaxHealth()/2));
+            if(!fatal)com.mcmagic.omnira.combat.OmniraDamage.payHealth(player,(float)Math.ceil(player.getMaxHealth()/2),"true_damage");
         }
         if(fatal||!player.isAlive()){
-            player.setHealth(0);
-            player.die(player.damageSources().genericKill());
+            com.mcmagic.omnira.combat.OmniraDamage.execute(player,com.mcmagic.omnira.combat.OmniraDamage.source(player,"true_damage"));
         }
         return InteractionResultHolder.success(stack);
     }

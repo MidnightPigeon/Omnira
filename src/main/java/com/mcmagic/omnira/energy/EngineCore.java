@@ -2,7 +2,7 @@ package com.mcmagic.omnira.energy;
 
 import net.minecraft.world.item.ItemStack;
 
-/** A core owns independent base mechanical and electrical outputs, before lattice multipliers. */
+/** Native potential uses the stress field; the legacy FE field remains for source/API compatibility. */
 public interface EngineCore {
     Output engineOutput(ItemStack stack);
 

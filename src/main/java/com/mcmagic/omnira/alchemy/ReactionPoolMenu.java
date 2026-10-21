@@ -39,26 +39,8 @@ public final class ReactionPoolMenu extends AbstractContainerMenu {
     }
     public boolean stillValid(Player player){return stillValid(access,player,ModBlocks.REACTION_POOL.get());}
     @Override public void clicked(int index,int button,ClickType type,Player player){
-        if(index>=0&&index<9&&type==ClickType.PICKUP){
-            var slot=slots.get(index);var stored=slot.getItem();var carried=getCarried();
-            if(carried.isEmpty()){
-                int take=Math.min(stored.getCount(),stored.getMaxStackSize());if(button==1)take=(take+1)/2;setCarried(slot.remove(take));
-            }else if(slot.mayPlace(carried)&&(stored.isEmpty()||ItemStack.isSameItemSameComponents(stored,carried))){
-                var rest=pool.items.insertItem(index,carried.copyWithCount(button==1?1:carried.getCount()),false);
-                carried.shrink((button==1?1:carried.getCount())-rest.getCount());
-            }else if(button==0&&stored.getCount()<=stored.getMaxStackSize()&&pool.canSetItem(index,carried)){
-                slot.set(carried);setCarried(stored);
-            }
-            slot.setChanged();return;
-        }
-        if(index>=0&&index<9&&type==ClickType.SWAP&&slots.get(index).getItem().getCount()>slots.get(index).getItem().getMaxStackSize()){
-            if((button>=0&&button<9||button==40)&&player.getInventory().getItem(button).isEmpty()){
-                var slot=slots.get(index);player.getInventory().setItem(button,slot.remove(slot.getItem().getMaxStackSize()));slot.setChanged();
-            }return;
-        }
-        if(index>=0&&index<9&&type==ClickType.THROW&&getCarried().isEmpty()){
-            var slot=slots.get(index);player.drop(slot.remove(button==0?1:Math.min(slot.getItem().getCount(),slot.getItem().getMaxStackSize())),true);return;
-        }
+        if(com.mcmagic.omnira.menu.UpgradeMenuFeedback.rejectClick(this,index,button,type,player,9,13))return;
+        if(com.mcmagic.omnira.menu.LargeStackMenuClicks.handle(this,index,button,type,player,0,9))return;
         super.clicked(index,button,type,player);
     }
     public ItemStack quickMoveStack(Player player,int index){
@@ -67,8 +49,11 @@ public final class ReactionPoolMenu extends AbstractContainerMenu {
         var stack=slot.getItem();var copy=stack.copy();
         boolean moved;
         if(index<13)moved=moveItemStackTo(stack,13,slots.size(),true);
-        else if(com.mcmagic.omnira.block.entity.OrbUpgrades.kind(stack)!=null)moved=moveItemStackTo(stack,9,13,false);
-        else {int before=stack.getCount();for(int i=0;i<9&&!stack.isEmpty();i++)stack.setCount(pool.items.insertItem(i,stack,false).getCount());moved=stack.getCount()!=before;}
-        if(!moved)return ItemStack.EMPTY;if(stack.isEmpty())slot.setByPlayer(ItemStack.EMPTY);else slot.setChanged();slot.onTake(player,stack);return copy;
+        else if(com.mcmagic.omnira.block.entity.OrbUpgrades.kind(stack)!=null){
+            moved=moveItemStackTo(stack,9,13,false);
+            if(!moved)com.mcmagic.omnira.menu.UpgradeMenuFeedback.incompatible(this,stack,player,9,13);
+        }
+        else {int before=stack.getCount();for(int i=0;i<9&&!stack.isEmpty();i++)stack.setCount(pool.items.insertItem(i,stack.copy(),false).getCount());moved=stack.getCount()!=before;}
+        if(!moved)return ItemStack.EMPTY;if(stack.isEmpty())slot.setByPlayer(ItemStack.EMPTY);else slot.set(stack);slot.onTake(player,stack);return copy;
     }
 }

@@ -1,0 +1,17 @@
+{
+  "id": "myriad_heart",
+  "title": "Heart of Myriad",
+  "item": "omnira:myriad_heart",
+  "recipes": false,
+  "text": [
+    "With sufficient power, a heart floats above the codex. Take it with an empty main hand, then place it on a block face or right-click air to place it in a nearby empty space ahead. Pixel boundaries preview its range and a dotted link marks its source. Once placed, right-click the codex empty-handed to configure it. Use the placed heart directly with an empty main hand to pick it up again; breaking it recalls it to the codex.",
+    "The heart is a temporary placement marker. Switching items, releasing, dropping or breaking it recalls it; deliberate placement keeps the marker. Beyond 32 blocks it fades once per second and returns after ten seconds. Returning within range cancels the fade.",
+    "Only one linked heart can be valid at a time. It is not a material and cannot go inside portable containers. Losing power recalls it. Execution recalls it automatically, and the accepted world edit can continue even if its codex is erased."
+  ],
+  "links": [
+    {
+      "target": "myriad_codex",
+      "label": "Myriad Codex"
+    }
+  ]
+}

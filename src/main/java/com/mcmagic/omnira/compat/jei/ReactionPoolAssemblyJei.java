@@ -25,9 +25,10 @@ public final class ReactionPoolAssemblyJei implements IModPlugin {
             @Override public int getHeight(){return 130;}
             @Override public void setRecipe(mezz.jei.api.gui.builder.IRecipeLayoutBuilder builder,Assembly recipe,IFocusGroup focus){
                 for(int layer=0;layer<2;layer++)for(int row=0;row<3;row++)for(int col=0;col<3;col++){
-                    int part=layer*9+(2-row)*3+col;
+                    int part=ReactionPoolStructure.topViewPart(layer,row,col);
                     var slot=builder.addSlot(RecipeIngredientRole.INPUT,8+layer*74+col*19,20+row*19).setStandardSlotBackground();
-                    slot.addItemStack(new ItemStack(ReactionPoolStructure.required(part)));
+                    slot.addItemStack(new ItemStack(ReactionPoolStructure.required(part)))
+                            .addRichTooltipCallback((view,tip)->tip.add(Component.translatable("jei.omnira.construction.free_facing")));
                 }
                 builder.addSlot(RecipeIngredientRole.INPUT,8,88).setStandardSlotBackground().addItemStack(new ItemStack(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()));
                 builder.addSlot(RecipeIngredientRole.OUTPUT,186,39).setStandardSlotBackground().addItemStack(new ItemStack(ModItems.REACTION_POOL.get()));

@@ -19,6 +19,8 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import static com.mcmagic.omnira.storage.LogisticsRates.ITEMS;
+import static com.mcmagic.omnira.storage.LogisticsRates.FLUID;
 import net.neoforged.neoforge.items.*;
 import java.util.*;
 
@@ -38,16 +40,17 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
     private List<ReactionRecipe> availableRecipes=List.of();
     private net.minecraft.world.item.crafting.RecipeManager cachedRecipeManager;
     private boolean internal,loading;
-    private int energy;
-    private final com.mcmagic.omnira.energy.EnergyInputLimit inputLimit=new com.mcmagic.omnira.energy.EnergyInputLimit(512*16);
-    private final int[] arrivals=new int[20];
-    private long energyTick=Long.MIN_VALUE;
     private int itemBudget,fluidBudget;
     private long outputTick=Long.MIN_VALUE;
+    private long activeOutputTick=Long.MIN_VALUE;
+    private int activeItems,activeFluid;
     private double factor;
     private boolean electricalPowered;
+    private boolean pulsePowered,pulseConnected;
+    public int inputFaces;
+    public boolean pulsePowered(){return pulsePowered;}
+    public boolean pulseInsufficient(){return pulseConnected&&!pulsePowered;}
     public boolean electricalPowered(){return electricalPowered;}
-    private double energyRemainder;
     private ItemStack lastOutputItem=ItemStack.EMPTY;
     private FluidStack lastOutputFluid=FluidStack.EMPTY;
     private long lastItemTick,lastFluidTick;
@@ -60,6 +63,7 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         @Override public int getSlotLimit(int slot){return 64*multiplier(-1);}
         @Override protected int getStackLimit(int slot,ItemStack stack){return itemLimit(stack,multiplier(-1));}
         @Override public boolean isItemValid(int slot,ItemStack stack){
+            if(com.mcmagic.omnira.item.bottle.PocketBottleItem.restricted(stack))return false;
             for(int i=0;i<9;i++)if(i!=slot&&ItemStack.isSameItemSameComponents(stack,getStackInSlot(i)))return false;
             return true;
         }
@@ -77,7 +81,7 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         @Override public int getSlotLimit(int slot){return 1;}
         @Override public boolean isItemValid(int slot,ItemStack stack){
             var kind=OrbUpgrades.kind(stack);
-            if(kind!=OrbUpgradeItem.Kind.INTAKE&&kind!=OrbUpgradeItem.Kind.OUTPUT&&kind!=OrbUpgradeItem.Kind.STACKING&&kind!=OrbUpgradeItem.Kind.INFUSED_STACKING&&kind!=OrbUpgradeItem.Kind.RECIPE_CONTROL)return false;
+            if(!com.mcmagic.omnira.item.UpgradeCompatibility.Host.REACTION_POOL.accepts(kind))return false;
             for(int i=0;i<getSlots();i++)if(i!=slot&&kind.sameFamily(OrbUpgrades.kind(getStackInSlot(i))))return false;
             return true;
         }
@@ -89,19 +93,11 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
     public final IFluidHandler fluidInput=new FluidPort(true,false);
     public final IFluidHandler fluidOutput=new FluidPort(true,true);
     public final IItemHandler itemInput=new ItemPort(false),itemOutput=new ItemPort(true);
-    public final IEnergyStorage energyInput=new IEnergyStorage(){
-        public int receiveEnergy(int amount,boolean simulate){
-            if(amount<=0||level==null||level.isClientSide)return 0;
-            advanceEnergyClock();int accepted=inputLimit.receive(level.getGameTime(),amount,40000-energy,simulate);
-            if(!simulate&&accepted>0){energy+=accepted;arrivals[(int)Math.floorMod(level.getGameTime(),20)]+=accepted;setChanged();}
-            return accepted;
-        }
-        public int extractEnergy(int n,boolean simulate){return 0;}
-        public int getEnergyStored(){return energy;}
-        public int getMaxEnergyStored(){return 40000;}
-        public boolean canExtract(){return false;}
-        public boolean canReceive(){return true;}
-    };
+    public final com.mcmagic.omnira.energy.ContinuousEnergyInput energyInput=new com.mcmagic.omnira.energy.ContinuousEnergyInput(
+            1024,8192,()->level==null?0:level.getGameTime(),
+            ()->level!=null&&!level.isClientSide&&!com.mcmagic.omnira.pulse.PulseNetworks.power(level,worldPosition).connected()&&mechanicalPower()<1);
+    private final com.mcmagic.omnira.energy.EnergyInputFaces energyFaces=new com.mcmagic.omnira.energy.EnergyInputFaces(energyInput,()->level==null?0:level.getGameTime());
+    public IEnergyStorage energyPort(Direction face){return energyFaces.port(face);}
     public ReactionPoolBlockEntity(BlockPos pos,BlockState state){super(ModBlockEntityTypes.REACTION_POOL.get(),pos,state);}
     public int multiplier(int except){int multiplier=1;if(upgrades!=null)for(int i=0;i<upgrades.getSlots();i++)if(i!=except){var kind=OrbUpgrades.kind(upgrades.getStackInSlot(i));if(kind!=null)multiplier=Math.max(multiplier,kind.capacityMultiplier);}return multiplier;}
     public int capacity(){return PoolFluids.CAPACITY*multiplier(-1);}
@@ -118,9 +114,10 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
     public boolean controller(){return getBlockState().getValue(ReactionPoolBlock.PART)==4;}
     public boolean complete(){return level!=null&&ReactionPoolBlock.complete(level,worldPosition,getBlockState().getValue(ReactionPoolBlock.FACING));}
     public double efficiency(){return factor;}
-    public double electricalEfficiency(){advanceEnergyClock();return Math.min(16,Math.min(Arrays.stream(arrivals).sum(),energy*20.0)/512.0);}
+    public double electricalEfficiency(){return energyInput.factor();}
     public boolean powered(){return factor>=1&&complete();}
     public boolean reacting(){return !jobs.isEmpty();}
+    public void worldRotation(){if(complete())advance(Integer.MAX_VALUE);changed();}
     public int reactionCount(){return jobs.size();}
     public int progressPercent(){return jobs.isEmpty()?0:(int)jobs.stream().mapToDouble(j->100*j.progress/j.recipe.duration()).average().orElse(0);}
     public boolean supportMatches(Ingredient support){
@@ -195,20 +192,16 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
     }
     public static void tick(Level level,BlockPos pos,BlockState state,ReactionPoolBlockEntity pool){
         if(!pool.controller()||level.isClientSide)return;
-        pool.advanceEnergyClock();
-        double mechanical=pool.mechanicalPower(),electric=pool.electricalEfficiency();
-        double next=pool.complete()?Math.max(mechanical,electric):0;
+        pool.failMissingCatalysts();
+        var pulse=com.mcmagic.omnira.pulse.PulseNetworks.power(level,pos);
+        boolean previousPulse=pool.pulsePowered,previousConnection=pool.pulseConnected;
+        pool.pulseConnected=pulse.connected();pool.pulsePowered=pulse.connected()&&pulse.running();
+        double mechanical=pool.pulseConnected?0:pool.mechanicalPower(),electric=pool.pulseConnected||mechanical>=1?0:pool.electricalEfficiency();
+        double next=pool.complete()?(pool.pulseConnected?pulse.factor(1024):Math.max(mechanical,electric)):0;
         if(next<1)next=0;
         boolean electrical=next>=1&&electric>mechanical;
-        boolean modeChanged=electrical!=pool.electricalPowered;pool.electricalPowered=electrical;
-        if(electrical)for(int part:new int[]{3,5}){
-            var facing=state.getValue(ReactionPoolBlock.FACING);
-            com.mcmagic.omnira.energy.ShaftCurrent.spark(level,pos.offset(ReactionPoolBlock.offset(facing,part)),ReactionPoolBlock.outward(facing,part));
-        }
-        if(next>=1&&electric>mechanical){
-            double cost=next*512/20+pool.energyRemainder;int whole=(int)cost;
-            pool.energy-=whole;pool.energyRemainder=cost-whole;
-        }
+        int inputFaces=pool.pulsePowered?com.mcmagic.omnira.pulse.PulseNetworks.inputFaces(level,pos):electrical?pool.energyFaces.mask():0;
+        boolean modeChanged=electrical!=pool.electricalPowered||previousPulse!=pool.pulsePowered||previousConnection!=pool.pulseConnected||inputFaces!=pool.inputFaces;pool.electricalPowered=electrical;pool.inputFaces=inputFaces;
         if(modeChanged||Math.abs(next-pool.factor)>.001){pool.factor=next;pool.changed();}else pool.factor=next;
         if(pool.powered()){
             pool.outputBudget();pool.pushOutputs();
@@ -225,13 +218,20 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
     }
     /** Settled input and output are proportional cumulative integers, including non-divisible mod recipes. */
     public void advance(double work){
+        failMissingCatalysts();
         if(work<=0)return;
         for(var job:new ArrayList<>(jobs))advanceJob(job,work);
+    }
+    private void failMissingCatalysts(){
+        if(level instanceof net.minecraft.server.level.ServerLevel server
+                &&jobs.removeIf(job->!supportMatches(job.recipe.support()))){
+            changed();
+            ReactionFailure.blast(server,worldPosition,true);
+        }
     }
     private void advanceJob(Job job,double work){
         var active=job.recipe;
         if(!com.mcmagic.omnira.recipe.RecipeControl.allows(level,upgrades,active.allItemResults(),active.fluidResult()))return;
-        if(!supportMatches(active.support()))return;
         double next=Math.min(active.duration(),job.progress+work);int due=Math.min(10,(int)Math.floor(next*10/active.duration()));
         while(job.batches<due){
             int step=job.batches+1;
@@ -260,29 +260,20 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
                 var rest=output.copy();for(int i=0;i<9;i++)rest=items.insertItem(i,rest,false);
                 if(!rest.isEmpty())throw new IllegalStateException("Reserved reaction output lost");}
             }finally{internal=false;}
+            com.mcmagic.omnira.progression.BranchProgress.machine(this,"rivers_alchemy");
+            com.mcmagic.omnira.progression.BranchProgress.processed(this);
             jobs.remove(job);changed();
         }
     }
     private double mechanicalPower(){
-        if(net.neoforged.fml.ModList.get().isLoaded("create"))return com.mcmagic.omnira.compat.CreateReactionPool.power(this);
-        double count=0;var facing=getBlockState().getValue(ReactionPoolBlock.FACING);
-        for(int part:new int[]{3,5}){
-            var side=ReactionPoolBlock.outward(facing,part);var at=worldPosition.offset(ReactionPoolBlock.offset(facing,part)).relative(side);
-            count+=com.mcmagic.omnira.space.SpacetimePortState.driveAt(level,at,side.getOpposite());
-        }
-        return count;
-    }
-    private void advanceEnergyClock(){
-        if(level==null)return;long now=level.getGameTime();
-        if(energyTick==Long.MIN_VALUE||now-energyTick>=20||now<energyTick)Arrays.fill(arrivals,0);
-        else for(long tick=energyTick+1;tick<=now;tick++)arrivals[(int)Math.floorMod(tick,20)]=0;
-        energyTick=now;
+        if(net.neoforged.fml.ModList.get().isLoaded("create"))return Math.min(8,com.mcmagic.omnira.compat.CreateReactionPool.power(this));
+        return 0;
     }
     private boolean allowed(OrbUpgradeItem.Kind kind,ItemStack item,FluidStack fluid){
         for(int i=0;i<upgrades.getSlots();i++)if(OrbUpgrades.kind(upgrades.getStackInSlot(i))==kind){
-            var tag=OrbUpgrades.settings(upgrades.getStackInSlot(i));boolean match=false;
-            for(int j=0;j<3;j++)if(OrbFilterMatcher.matches(level,ItemStack.parseOptional(level.registryAccess(),tag.getCompound("Filter"+j)),item,fluid))match=true;
-            return match==tag.getBoolean("Whitelist");
+            var tag=OrbUpgrades.settings(upgrades.getStackInSlot(i));var samples=new ItemStack[3];
+            for(int j=0;j<3;j++)samples[j]=ItemStack.parseOptional(level.registryAccess(),tag.getCompound("Filter"+j));
+            return OrbFilterMatcher.allowsTyped(level,samples,tag.getBoolean("Whitelist"),item,fluid);
         }
         return true;
     }
@@ -310,9 +301,14 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
     }
     private void outputBudget(){
         if(level==null)return;long second=Math.floorDiv(level.getGameTime(),20);
-        if(outputTick!=second){outputTick=second;itemBudget=1;fluidBudget=500;}
+        int speed=com.mcmagic.omnira.storage.LogisticsRates.multiplier(upgrades);
+        if(outputTick!=second){outputTick=second;itemBudget=ITEMS*speed;fluidBudget=FLUID*speed;}
+        itemBudget=Math.min(itemBudget,ITEMS*speed);fluidBudget=Math.min(fluidBudget,FLUID*speed);
     }
     private void pushOutputs(){
+        int speed=com.mcmagic.omnira.storage.LogisticsRates.multiplier(upgrades);long second=Math.floorDiv(level.getGameTime(),20);
+        if(activeOutputTick!=second){activeOutputTick=second;activeItems=ITEMS*speed;activeFluid=FLUID*speed;}
+        activeItems=Math.min(activeItems,ITEMS*speed);activeFluid=Math.min(activeFluid,FLUID*speed);
         var facing=getBlockState().getValue(ReactionPoolBlock.FACING);
         for(int part:new int[]{6,8}){
             var direction=ReactionPoolBlock.outward(facing,part);var at=worldPosition.offset(ReactionPoolBlock.offset(facing,part)).relative(direction);
@@ -320,17 +316,20 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
             if(part==6){
                 var target=level.getCapability(Capabilities.ItemHandler.BLOCK,at,direction.getOpposite());if(target==null)continue;
                 for(int slot=0;slot<9;slot++){
-                    var sample=itemOutput.extractItem(slot,1,true);if(sample.isEmpty())continue;
+                    var sample=allowed(OrbUpgradeItem.Kind.OUTPUT,items.getStackInSlot(slot),null)?items.extractItem(slot,activeItems,true):ItemStack.EMPTY;if(sample.isEmpty())continue;
                     var rest=ItemHandlerHelper.insertItemStacked(target,sample,true);
-                    if(rest.isEmpty()){var extracted=itemOutput.extractItem(slot,1,false);var rejected=ItemHandlerHelper.insertItemStacked(target,extracted,false);
-                        if(!rejected.isEmpty()){internal=true;try{items.insertItem(slot,rejected,false);}finally{internal=false;}}break;}
+                    if(rest.isEmpty()){var extracted=items.extractItem(slot,sample.getCount(),false);var rejected=ItemHandlerHelper.insertItemStacked(target,extracted,false);
+                        activeItems-=extracted.getCount()-rejected.getCount();if(!extracted.isEmpty()){lastOutputItem=extracted.copyWithCount(1);lastItemTick=level.getGameTime();changed();}
+                        com.mcmagic.omnira.progression.BranchProgress.automated(this,extracted.getCount()-rejected.getCount());
+                        if(!rejected.isEmpty()){internal=true;try{items.insertItem(slot,rejected,false);}finally{internal=false;}}}
                 }
             }else{
                 var target=level.getCapability(Capabilities.FluidHandler.BLOCK,at,direction.getOpposite());if(target==null)continue;
-                var sample=fluidOutput.drain(500,IFluidHandler.FluidAction.SIMULATE);
+                var sample=FluidStack.EMPTY;
+                var stored=fluids.snapshot();for(int i=stored.size()-1;i>=0;i--){var fluid=stored.get(i);if(allowed(OrbUpgradeItem.Kind.OUTPUT,ItemStack.EMPTY,fluid)){sample=fluids.drain(fluid.copyWithAmount(activeFluid),IFluidHandler.FluidAction.SIMULATE);if(!sample.isEmpty())break;}}
                 if(sample.isEmpty())continue;int accepted=target.fill(sample,IFluidHandler.FluidAction.SIMULATE);
-                if(accepted>0){var extracted=fluidOutput.drain(sample.copyWithAmount(accepted),IFluidHandler.FluidAction.EXECUTE);
-                    int filled=target.fill(extracted,IFluidHandler.FluidAction.EXECUTE);if(filled<extracted.getAmount())fluids.fill(extracted.copyWithAmount(extracted.getAmount()-filled),IFluidHandler.FluidAction.EXECUTE);}
+                if(accepted>0){var extracted=fluids.drain(sample.copyWithAmount(accepted),IFluidHandler.FluidAction.EXECUTE);
+                    int filled=target.fill(extracted,IFluidHandler.FluidAction.EXECUTE);activeFluid-=filled;if(filled>0){lastOutputFluid=extracted.copyWithAmount(filled);lastFluidTick=level.getGameTime();changed();}com.mcmagic.omnira.progression.BranchProgress.automated(this,filled);if(filled<extracted.getAmount())fluids.fill(extracted.copyWithAmount(extracted.getAmount()-filled),IFluidHandler.FluidAction.EXECUTE);}
             }
         }
     }
@@ -343,9 +342,10 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         public boolean isItemValid(int slot,ItemStack stack){return !output&&allowed(OrbUpgradeItem.Kind.INTAKE,stack,null)&&items.isItemValid(slot,stack);}
         public ItemStack insertItem(int slot,ItemStack stack,boolean simulate){return isItemValid(slot,stack)?items.insertItem(slot,stack,simulate):stack;}
         public ItemStack extractItem(int slot,int count,boolean simulate){
-            outputBudget();if(!output||!powered()||itemBudget<=0||!allowed(OrbUpgradeItem.Kind.OUTPUT,items.getStackInSlot(slot),null))return ItemStack.EMPTY;
-            var extracted=items.extractItem(slot,Math.min(count,itemBudget),simulate);
-            if(!simulate){itemBudget-=extracted.getCount();if(!extracted.isEmpty()){lastOutputItem=extracted.copyWithCount(1);lastItemTick=level.getGameTime();changed();}}return extracted;
+            boolean capped=!com.mcmagic.omnira.storage.LogisticsRates.internal();
+            outputBudget();if(!output||!powered()||capped&&itemBudget<=0||!allowed(OrbUpgradeItem.Kind.OUTPUT,items.getStackInSlot(slot),null))return ItemStack.EMPTY;
+            var extracted=items.extractItem(slot,capped?Math.min(count,itemBudget):count,simulate);
+            if(!simulate){if(capped)itemBudget-=extracted.getCount();if(!extracted.isEmpty()){lastOutputItem=extracted.copyWithCount(1);lastItemTick=level.getGameTime();changed();}}return extracted;
         }
     }
     private final class FluidPort implements IFluidHandler {
@@ -362,9 +362,10 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         public FluidStack drain(FluidStack fluid,FluidAction action){
             if(fluid.isEmpty()||filtered&&!output)return FluidStack.EMPTY;
             int amount=Math.min(fluid.getAmount(),fluids.amount(fluid));
-            if(output){outputBudget();if(!powered()||!allowed(OrbUpgradeItem.Kind.OUTPUT,ItemStack.EMPTY,fluid))return FluidStack.EMPTY;amount=Math.min(amount,fluidBudget);}
+            boolean capped=!com.mcmagic.omnira.storage.LogisticsRates.internal();
+            if(output){outputBudget();if(!powered()||!allowed(OrbUpgradeItem.Kind.OUTPUT,ItemStack.EMPTY,fluid))return FluidStack.EMPTY;if(capped)amount=Math.min(amount,fluidBudget);}
             var result=fluids.drain(fluid.copyWithAmount(amount),action);
-            if(output&&action.execute()){fluidBudget-=result.getAmount();if(!result.isEmpty()){lastOutputFluid=result.copy();lastFluidTick=level.getGameTime();changed();}}return result;
+            if(output&&action.execute()){if(capped)fluidBudget-=result.getAmount();if(!result.isEmpty()){lastOutputFluid=result.copy();lastFluidTick=level.getGameTime();changed();}}return result;
         }
         public FluidStack drain(int amount,FluidAction action){
             var stored=fluids.snapshot();
@@ -380,7 +381,7 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         public int getSlotLimit(int slot){return items.getSlotLimit(slot);}
         public boolean isItemValid(int slot,ItemStack stack){return itemInput.isItemValid(slot,stack);}
         public ItemStack insertItem(int slot,ItemStack stack,boolean simulate){return itemInput.insertItem(slot,stack,simulate);}
-        public ItemStack extractItem(int slot,int count,boolean simulate){return items.extractItem(slot,count,simulate);}
+        public ItemStack extractItem(int slot,int count,boolean simulate){return allowed(OrbUpgradeItem.Kind.OUTPUT,items.getStackInSlot(slot),null)?items.extractItem(slot,count,simulate):ItemStack.EMPTY;}
     };
     public final IFluidHandler nodeFluids=new IFluidHandler(){
         public int getTanks(){return fluids.getTanks();}
@@ -388,8 +389,11 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         public int getTankCapacity(int tank){return fluids.getTankCapacity(tank);}
         public boolean isFluidValid(int tank,FluidStack stack){return fluidInput.isFluidValid(tank,stack);}
         public int fill(FluidStack stack,FluidAction action){return fluidInput.fill(stack,action);}
-        public FluidStack drain(FluidStack stack,FluidAction action){return manualFluid.drain(stack,action);}
-        public FluidStack drain(int amount,FluidAction action){return manualFluid.drain(amount,action);}
+        public FluidStack drain(FluidStack stack,FluidAction action){return allowed(OrbUpgradeItem.Kind.OUTPUT,ItemStack.EMPTY,stack)?manualFluid.drain(stack,action):FluidStack.EMPTY;}
+        public FluidStack drain(int amount,FluidAction action){
+            for(var fluid:fluids.snapshot()){var result=drain(fluid.copyWithAmount(amount),action);if(!result.isEmpty())return result;}
+            return FluidStack.EMPTY;
+        }
     };
     public void changed(){
         if(loading)return;setChanged();
@@ -404,8 +408,9 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         var compact=new ItemStackHandler(9);int[] counts=new int[9];
         for(int i=0;i<9;i++){counts[i]=items.getStackInSlot(i).getCount();compact.setStackInSlot(i,items.getStackInSlot(i).copyWithCount(1));}
         tag.put("Items",compact.serializeNBT(registries));tag.putIntArray("ItemCounts",counts);
-        tag.put("Upgrades",upgrades.serializeNBT(registries));tag.put("Fluids",fluids.save(registries));tag.putInt("Energy",energy);
+        tag.put("Upgrades",upgrades.serializeNBT(registries));tag.put("Fluids",fluids.save(registries));
         tag.putDouble("Factor",factor);tag.putBoolean("ElectricalPowered",electricalPowered);
+        tag.putBoolean("PulsePowered",pulsePowered);tag.putBoolean("PulseConnected",pulseConnected);tag.putInt("InputFaces",inputFaces);
         if(!lastOutputItem.isEmpty())tag.put("OutputItem",lastOutputItem.save(registries));
         if(!lastOutputFluid.isEmpty())tag.put("OutputFluid",lastOutputFluid.save(registries));
         tag.putLong("OutputItemTick",lastItemTick);tag.putLong("OutputFluidTick",lastFluidTick);
@@ -415,12 +420,14 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         }tag.put("Reactions",reactions);
     }
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries){
+        energyInput.reset();
+        pulsePowered=tag.getBoolean("PulsePowered");pulseConnected=tag.getBoolean("PulseConnected");inputFaces=tag.getInt("InputFaces")&63;
         super.loadAdditional(tag,registries);loading=true;
         var upgradeData=tag.getCompound("Upgrades").copy();upgradeData.putInt("Size",4);
         try{upgrades.deserializeNBT(registries,upgradeData);items.deserializeNBT(registries,tag.getCompound("Items"));
             var counts=tag.getIntArray("ItemCounts");for(int i=0;i<Math.min(9,counts.length);i++)if(!items.getStackInSlot(i).isEmpty())items.getStackInSlot(i).setCount(Math.clamp(counts[i],1,itemLimit(items.getStackInSlot(i),multiplier(-1))));
             fluids.load(tag.getList("Fluids",Tag.TAG_COMPOUND),registries);
-            energy=Math.clamp(tag.getInt("Energy"),0,40000);factor=tag.getDouble("Factor");electricalPowered=tag.getBoolean("ElectricalPowered");
+            factor=tag.getDouble("Factor");electricalPowered=tag.getBoolean("ElectricalPowered");
             lastOutputItem=ItemStack.parseOptional(registries,tag.getCompound("OutputItem"));
             lastOutputFluid=FluidStack.parseOptional(registries,tag.getCompound("OutputFluid"));
             lastItemTick=tag.getLong("OutputItemTick");lastFluidTick=tag.getLong("OutputFluidTick");

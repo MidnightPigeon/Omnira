@@ -3,6 +3,7 @@
   "temperature": 0.8,
   "downfall": 0,
   "effects": {
+    "music": {"sound":"omnira:music.time","min_delay":12000,"max_delay":24000,"replace_current_music":true},
     "sky_color": 8107462,
     "fog_color": 9671856,
     "water_color": 11587738,

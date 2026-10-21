@@ -64,6 +64,12 @@ public final class StaffEvents {
         }
         if(player.level().getGameTime()<burst.due) return;
         BURSTS.remove(player.getUUID());
+        int fixed=com.mcmagic.omnira.item.StaffItem.nextSpellCooldown(player);
+        if(fixed>0){
+            if(StaffItem.castSequence(player,burst.staff,1)>0)player.getCooldowns().addCooldown(burst.staff.getItem(),Math.max(fixed,burst.cooldown));
+            else player.getCooldowns().addCooldown(burst.staff.getItem(),burst.cooldown);
+            return;
+        }
         if(StaffItem.castSequence(player,burst.staff,1)>0 && burst.remaining>1)
             BURSTS.put(player.getUUID(),new Burst(burst.staff,burst.snapshot,burst.grid,burst.hand,burst.dimension,
                     player.level().getGameTime()+SHOT_INTERVAL,burst.remaining-1,burst.cooldown));
