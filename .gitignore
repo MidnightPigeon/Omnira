@@ -96,3 +96,6 @@ hs_err_pid*.log
 hs_err_pid*.mdmp
 hs_err_pid*.dmp
 replay_pid*.log
+
+# Public README banner.
+!/banner.png
