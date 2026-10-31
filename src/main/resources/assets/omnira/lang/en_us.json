@@ -531,7 +531,6 @@
   "curios.identifier.talent": "Talent",
   "curios.identifier.curse": "Curse",
   "item.omnira.primordial_spell_core": "Primordial Spell Core",
-  "item.omnira.test_damage_element": "Test Damage Element",
   "item.omnira.basic_crystal_grid": "Basic Crystal Grid",
   "item.omnira.elemental_crystal_grid": "Elemental Crystal Grid",
   "item.omnira.arcane_crystal_grid": "Arcane Crystal Grid",
@@ -1276,5 +1275,11 @@
   "item.omnira.amplification_star": "Amplification Star",
   "item.omnira.lingering_thread": "Lingering Thread",
   "item.omnira.infusion_bud": "Infusion Bud",
-  "item.omnira.miniature_world": "Miniature World"
+  "item.omnira.miniature_world": "Miniature World",
+  "item.omnira.fulfillment_star": "Star of Fulfillment",
+  "tooltip.omnira.fulfillment_star": "Truth is beauty.",
+  "message.omnira.fulfillment_star.no_effect": "No affinity to perfect or curse to dispel",
+  "tooltip.omnira.affinity.dream.2.perfected": "Your body is translucent.",
+  "tooltip.omnira.affinity.dream.3.perfected": "Free flight; Fortune +1, Looting +1.",
+  "tooltip.omnira.affinity.perfected": "Perfected: +100 mana, +10% spell power/life steal/damage reduction; no abandonment penalty"
 }

@@ -9,13 +9,18 @@
     "Psyker grants 20% more mana regeneration and spell power, plus 10% cooldown reduction.",
     "Khorne increases damage dealt by 20% and damage taken by 50%. Tzeentch gives each cast a 20% chance to cost half your current health and add 100% spell power to that cast.",
     "Nurgle maintains Regeneration I and has a 20% chance to summon a zombie variant nearby when hurt. Slaanesh encourages nearby adult animals to breed; taking damage causes three seconds of Pleasurable Agony, preventing movement and reflecting damage to the attacker.",
-    "Talents and curses cannot be removed by hand. The cleansing ritual removes them together."
+    "Talents and curses cannot be removed by hand. The cleansing ritual removes them together.",
+    "The Star of Fulfillment removes only the curse. The retained talent still prevents obtaining another talent."
   ],
   "recipes": false,
   "links": [
     {
       "target": "frozen_terra_guide",
       "label": "Stilled Wastes"
+    },
+    {
+      "target": "fulfillment_star",
+      "label": "Star of Fulfillment"
     }
   ],
   "related_items": [

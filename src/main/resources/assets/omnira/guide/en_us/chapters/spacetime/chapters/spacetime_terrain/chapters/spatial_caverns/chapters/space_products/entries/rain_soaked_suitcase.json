@@ -7,7 +7,8 @@
     "Spatial-biome treasure orbs have a separate 5% chance to contain this suitcase. Right-click to awaken Arcanist and The Storm immediately, without consuming it. Existing talents or curses are never overwritten.",
     "Neither can be removed manually. The Cleansing Ritual removes both.",
     "Sneak-use on the ground to place it open. Use an item to display one; use an empty hand to retrieve it. The case stays half-open while displaying an item.",
-    "Placing Voyager's Violin inside starts continuous music, granting Regeneration II and Resistance II to living creatures within 10 blocks. Remove the violin to stop."
+    "Placing Voyager's Violin inside starts continuous music, granting Regeneration II and Resistance II to living creatures within 10 blocks. Remove the violin to stop.",
+    "The Star of Fulfillment removes only the curse. The retained talent still prevents obtaining another talent."
   ],
   "links": [
     {
@@ -21,6 +22,10 @@
     {
       "target": "voyager_violin",
       "label": "Voyager's Violin"
+    },
+    {
+      "target": "fulfillment_star",
+      "label": "Star of Fulfillment"
     }
   ]
 }

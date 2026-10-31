@@ -7,7 +7,8 @@
   "text": [
     "Requires eight Crystal Pedestals, eight Infused Spiritual Crystals and one basic or advanced Ritual Energy Core.",
     "Use Paradox Dust on the core. Every player within the ritual area loses all potion effects, talents and curses, including the slots created for them. Health and hunger are set to 1.",
-    "The Paradox Dust and eight infused crystals are consumed. Pedestals and the core remain. Carried Infused Grimoires may also be sanctified or corrupted."
+    "The Paradox Dust and eight infused crystals are consumed. Pedestals and the core remain. Carried Infused Grimoires may also be sanctified or corrupted.",
+    "The Star of Fulfillment removes only curses and retains talents; this ritual still removes those retained talents."
   ],
   "links": [
     {
@@ -17,6 +18,10 @@
     {
       "target": "ritual_energy_core",
       "label": "Ritual Energy Core"
+    },
+    {
+      "target": "fulfillment_star",
+      "label": "Star of Fulfillment"
     }
   ]
 }

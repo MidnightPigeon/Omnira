@@ -10,7 +10,7 @@
 | --- | --- |
 | `omnira:condensation` | `mana_cost`、`result`；高阶输入另加`ingredient`、`count` |
 | `omnira:analysis` | `ingredient`、`count`、`result`；可选副产物及原料耐久，见对应codec |
-| `omnira:assembly` | 七个`slots`、`result`；可选`outer_shapeless`与`operation` |
+| `omnira:assembly` | 七个`slots`、`result`；可选`outer_shapeless`、`operation`与`return_remainders` |
 | `omnira:advanced_assembly_table` | 九个`slots`、`result`；可选`operation` |
 | `omnira:reaction` | `items`、`fluid`、`additional_fluids`、`support`、`results`、`guaranteed_results`、`fluid_result`、`duration` |
 | `omnira:catalysis` | `substrate`、`seed`、`fluid`、`result`、`stages` |
@@ -61,11 +61,11 @@ ServerEvents.recipes(event => {
 
 属性ID与公开holder维持 `registry.ModAttributes`；点数与百分比使用NeoForge原生格式，同类百分比基础乘区加算，不因物品来源追加独立倍率。
 
-`combat.OmniraDamage.TRUE_DAMAGE` 是唯一自定义伤害类型。`trueDamage(target, amount, originalSource)` 保留攻击者和范围语义并精确扣生命；`payHealth(target, amount, reason)` 支付自身生命，不足时走 `execute`。真实伤害不经过普通增减伤链，但会发送标准 `LivingDamageEvent.Post` 和死亡事件，记录实际生命损失、玩家归属及战斗统计。联动不应仅构造真实伤害来源后调用 `LivingEntity.hurt`，也不要自行 `setHealth`。普通伤害的结算顺序见[设计说明](docs/design/combat.md)。
+`combat.OmniraDamage.TRUE_DAMAGE` 表示普通真实伤害；`OVERDRAW` 是独立的透支死亡类型。`trueDamage(target, amount, originalSource)` 保留攻击者和范围语义并精确扣生命；`payHealth(target, amount, reason)` 支付自身生命，不足时走 `overdraw`，不能用图腾豁免。`execute` 是致死量的普通真伤，仍允许原版不死图腾复生。真实伤害不经过普通增减伤链，但会发送标准 `LivingDamageEvent.Post` 和死亡事件，记录实际生命损失、玩家归属及战斗统计。联动不应仅构造真实伤害来源后调用 `LivingEntity.hurt`，也不要自行 `setHealth`。普通伤害保留原版护甲流程；受法术强度影响的攻击先乘法强，再叠加全体伤害平面值，同类百分比在同一基础乘区加算。
 
 ## 可选依赖与客户端边界
 
-终末世界法术的专项兼容入口为 `spell.world.WorldRotationHooks.registerMachine` 和 `registerEntity`。适配器只结算一次当前工作，保留原料/产出空间检查，不应启动无限循环或制造空原料产物；施法者可能为空。FE 能力会按所有面去重，标准 EnergyStorage 补满，自定义拒收或按 tick 限流的能源需要专项适配。实体分类可用 `world_magic_immune`、`reload_neutral`、`reload_hostile`、`reload_friendly` 标签扩展。具体已覆盖机器和边界见[终末世界法术](docs/design/world-magic.md)，没有通用反射强改未知机器计时器。
+终末世界法术的专项兼容入口为 `spell.world.WorldRotationHooks.registerMachine` 和 `registerEntity`。适配器只结算一次当前工作，保留原料/产出空间检查，不应启动无限循环或制造空原料产物；施法者可能为空。FE 能力会按所有面去重，标准 EnergyStorage 补满，自定义拒收或按 tick 限流的能源需要专项适配。实体分类可用 `world_magic_immune`、`reload_neutral`、`reload_hostile`、`reload_friendly` 标签扩展。已覆盖机器以 `WorldRotationHooks` 注册的适配器为准，没有通用反射强改未知机器计时器。
 
 Create、Sable与Simulated的专属Mixin由`OptionalIntegrationMixins`在加载早期按模组ID启用；不存在时不解析第三方类型，存在时不静默跳过失效注入。基础机器能力独立于可选模组。JEI实现集中在`compat/jei`；渲染器、屏幕及音乐客户端类仅由客户端入口加载，不要在服务端联动入口调用它们。
 
@@ -84,3 +84,5 @@ Sable整机选取复用`BottleMultiblock`完整部件集合，微缩框架另按
 ```
 
 测试脚本仅复制到无界面开发实例，结束时清理，不写玩家整合包、不进入发布JAR。覆盖真实KubeJS自定义配方加载、标签及空槽匹配、已加载Omnira配方JSON/网络往返、结果模板保护。未安装第三方的隔离运行可另选`omnira_recipe_integration`及`-PwithoutExternalMods -PwithoutCreate -PwithoutSable -PwithoutJei`，不带KubeJS夹具开关。
+
+普通装配的 `return_remainders` 默认为 `true`，沿用物品的容器/工具返还。显式设为 `false` 时消耗整份材料、不返还；原始法术核心的解析晶体装配采用此设置。

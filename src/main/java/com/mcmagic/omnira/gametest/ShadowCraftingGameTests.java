@@ -36,7 +36,9 @@ public final class ShadowCraftingGameTests {
                 .withParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.DAMAGE_SOURCE,h.getLevel().damageSources().generic())
                 .create(net.minecraft.world.level.storage.loot.parameters.LootContextParamSets.ENTITY);
         var drops=h.getLevel().getServer().reloadableRegistries().getLootTable(ghost.getLootTable()).getRandomItems(params);
-        h.assertTrue(drops.size()==1 && drops.getFirst().is(ModItems.SHADOW_MANUSCRIPT.get()),"Shadow ghost manuscript drop missing");
+        h.assertTrue(drops.stream().filter(stack->stack.is(ModItems.SHADOW_MANUSCRIPT.get())).mapToInt(ItemStack::getCount).sum()==1,"Shadow ghost manuscript drop count incorrect");
+        int dust=drops.stream().filter(stack->stack.is(ModItems.ARCANE_DUST.get())).mapToInt(ItemStack::getCount).sum();
+        h.assertTrue(dust>=1&&dust<=2,"Shadow ghost arcane dust count incorrect");
         h.succeed();
     }
     @GameTest(template="spell_arena")

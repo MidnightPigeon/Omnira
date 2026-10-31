@@ -91,7 +91,7 @@
     "JeiCategoryPriorityMixin",
     "JeiRecipePriorityMixin",
     "JeiChanceOrderMixin",
-    "HiddenSmokeWindowMixin"
+    "FulfillmentHeldItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

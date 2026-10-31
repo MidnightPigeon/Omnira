@@ -51,7 +51,7 @@ public final class ToolRepairGameTests {
         h.succeed();
     }
     @GameTest(template="spell_arena") public static void analysisRepairConsumesBothCrystals(GameTestHelper h) {
-        for (int[] damages : new int[][] {{110,70,46},{0,0,0},{0,70,0}}) {
+        for (int[] damages : new int[][] {{7,5,4},{0,0,0},{0,5,0}}) {
         var first=new ItemStack(ModItems.ANALYSIS_CRYSTAL.get());first.setDamageValue(damages[0]);
         var second=new ItemStack(ModItems.ANALYSIS_CRYSTAL.get());second.setDamageValue(damages[1]);
         var input=CraftingInput.of(2,2,java.util.List.of(first,ItemStack.EMPTY,ItemStack.EMPTY,second));

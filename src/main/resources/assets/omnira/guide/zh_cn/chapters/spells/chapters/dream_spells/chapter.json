@@ -11,7 +11,8 @@
     "entries/shadow_staff_shaft.json",
     "entries/light_core_reinforcement.json",
     "entries/arcane_crystal_grid.json",
-    "entries/staff_enhancement_usage.json"
+    "entries/staff_enhancement_usage.json",
+    "entries/fulfillment_star.json"
   ],
   "chapters": [
     "chapters/dream_spell_modifiers/chapter.json",
@@ -22,6 +23,7 @@
     "shadow_mist",
     "dark_breath",
     "dream_spell_modifiers",
+    "fulfillment_star",
     "infused_grimoire_usage",
     "shadow_staff_shaft",
     "light_core_reinforcement",

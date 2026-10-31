@@ -19,7 +19,8 @@ public final class EpochalGameTests {
     public static void livingExemption(GameTestHelper h){
         var level=h.getLevel();var p=h.absolutePos(new BlockPos(4,3,4));
         var biome=level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(StilledTime.BIOME);
-        level.getChunkAt(p).fillBiomesFromNoise((x,y,z,s)->biome,level.getChunkSource().randomState().sampler());
+        for(int cx=(p.getX()>>4)-1;cx<=(p.getX()>>4)+1;cx++)for(int cz=(p.getZ()>>4)-1;cz<=(p.getZ()>>4)+1;cz++)
+            level.getChunk(cx,cz).fillBiomesFromNoise((x,y,z,s)->biome,level.getChunkSource().randomState().sampler());
         var cow=EntityType.COW.create(level);cow.moveTo(p.getCenter());
         var item=new ItemEntity(level,p.getX(),p.getY(),p.getZ(),new ItemStack(Items.STICK));
         h.assertTrue(!StilledTime.stopped(cow),"Living entities must remain active");

@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "omnira:sharp_breath"
+    },
+    {
+      "item": "omnira:healing_dew"
+    },
+    {
+      "item": "omnira:dissociation_thread"
+    },
+    {
+      "item": "omnira:construction_matrix"
+    },
+    {
+      "item": "omnira:life_drain_origin"
+    },
+    {
+      "item": "omnira:amplification_star"
+    },
+    {
+      "item": "omnira:lingering_thread"
+    },
+    {
+      "item": "omnira:infusion_bud"
+    },
+    {
+      "item": "omnira:holy_halo"
+    }
+  ],
+  "result": {
+    "id": "omnira:fulfillment_star",
+    "count": 1
+  }
+}

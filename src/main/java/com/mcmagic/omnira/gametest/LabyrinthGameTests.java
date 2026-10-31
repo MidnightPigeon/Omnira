@@ -183,7 +183,7 @@ public final class LabyrinthGameTests {
             var tag=be.saveWithoutMetadata(level.registryAccess());
             if(block==ModBlocks.CRYSTAL_BALL.get())h.assertTrue(tag.getString("LootTable").equals("omnira:chests/topological_labyrinth"),"Wrong pending loot table");
             if(block==ModBlocks.LIQUID_CRYSTAL_BALL.get())h.assertTrue(tag.getBoolean("FluidTreasure"),"Liquid orb is not treasure");
-            if(block==ModBlocks.CRYSTAL_PEDESTAL.get())h.assertTrue(((com.mcmagic.omnira.block.entity.CrystalPedestalBlockEntity)be).getItem(0).is(ModItems.CRUISE_ORB.get()),"Pedestal lacks cruise orb");
+            if(block==ModBlocks.CRYSTAL_PEDESTAL.get())h.assertTrue(((com.mcmagic.omnira.block.entity.CrystalPedestalBlockEntity)be).getItem(0).is(LabyrinthTerrain.plan(LabyrinthTerrain.room(p)).kind()==6?ModBlocks.NIGHT_HERON_STATUE.get().asItem():ModItems.CRUISE_ORB.get()),"Pedestal content does not match room kind");
             level.removeBlock(p,false);
         }
         h.succeed();

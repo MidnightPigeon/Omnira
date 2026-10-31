@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class AffinityVerticalFlightMixin {
     @WrapOperation(method="aiStep",at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/player/Abilities;getFlyingSpeed()F"))
     private float omnira$verticalSpeed(Abilities abilities,Operation<Float> original) {
-        return original.call(abilities)*(((LocalPlayer)(Object)this).getData(ModAttachments.DREAM_AFFINITY)?.5F:1);
+        return original.call(abilities)*((((LocalPlayer)(Object)this).getData(ModAttachments.DREAM_AFFINITY)&&!((LocalPlayer)(Object)this).getData(ModAttachments.PERFECTED_AFFINITY))?.5F:1);
     }
 }

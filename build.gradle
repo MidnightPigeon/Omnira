@@ -38,7 +38,6 @@ runs {
 
     client {
         systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        if (providers.gradleProperty('clientSmoke').isPresent()) systemProperty 'omnira.clientSmoke', 'true'
     }
 
     server {
@@ -99,12 +98,13 @@ dependencies {
     def installedCurios = file('../.minecraft/versions/WizardryCraft/mods/curios-neoforge-9.5.1+1.21.1.jar')
     if (installedCurios.exists()) implementation files(installedCurios)
     else implementation 'top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1'
-    if (!providers.gradleProperty('withoutExternalMods').isPresent()) {
-        def snapshot = new groovy.json.JsonSlurper().parse(file('config/development-mods.json'))
+    def localTestMods = file('config/development-mods.local.json')
+    if (!providers.gradleProperty('withoutExternalMods').isPresent() && localTestMods.isFile()) {
+        def snapshot = new groovy.json.JsonSlurper().parse(localTestMods)
         snapshot.server.each { name ->
             if (name.startsWith('kubejs-create-') && providers.gradleProperty('withoutCreate').isPresent()) return
             def installed = file("../.minecraft/versions/WizardryCraft/mods/$name")
-            if (!installed.isFile()) throw new GradleException("External test mod missing: $name; refresh config/development-mods.json against the installed instance.")
+            if (!installed.isFile()) throw new GradleException("External test mod missing: $name; refresh config/development-mods.local.json against the installed instance.")
             localRuntime files(installed)
         }
     }

@@ -27,7 +27,7 @@ public final class MireLandscapeGameTests {
             l.getChunkAt(new BlockPos(ox,224,oz)).fillBiomesFromNoise((x,y,z,s)->y*4>=192?mire:corridor,l.getChunkSource().randomState().sampler());
             for(int x=ox;x<ox+16;x++)for(int z=oz;z<oz+16;z++){
                 for(int y=225;y<245;y++)l.setBlock(new BlockPos(x,y,z),Blocks.AIR.defaultBlockState(),2);
-                l.setBlock(new BlockPos(x,224,z),x%16<8?TimeNatureContent.SILT.get().defaultBlockState():MireContent.LIQUID.get().defaultBlockState(),2);
+                l.setBlock(new BlockPos(x,224,z),Math.floorMod(x,16)<8?TimeNatureContent.SILT.get().defaultBlockState():MireContent.LIQUID.get().defaultBlockState(),2);
             }
             feature.placeWithBiomeCheck(l,l.getChunkSource().getGenerator(),net.minecraft.util.RandomSource.create(cx*31L+cz),new BlockPos(ox,0,oz));
             for(int x=ox;x<ox+16;x++)for(int z=oz;z<oz+16;z++){

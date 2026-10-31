@@ -142,7 +142,7 @@ public final class CorridorRitualGameTests {
         var drops=level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,new AABB(core).inflate(3));
         h.assertTrue(drops.size()==1 && UnstableAggregateItem.isAggregate(drops.getFirst().getItem()),"Interruption must eject aggregate exactly once");
         var victim=EntityType.COW.create(level);victim.setPos(Vec3.atCenterOf(core).add(2,1,0));level.addFreshEntity(victim);
-        drops.getFirst().tick();h.assertTrue(victim.isRemoved(),"Ejected aggregate did not trigger storm");h.succeed();
+        drops.getFirst().tick();h.assertTrue(victim.isDeadOrDying(),"Ejected aggregate did not trigger lethal storm damage");h.succeed();
     }
     @GameTest(template="spell_arena",timeoutTicks=200,batch="anchor_corridor_portal") public static void vehicleGroupEntryAndReturn(GameTestHelper h)throws Exception{
         var level=h.getLevel();var pos=Vec3.atBottomCenterOf(h.absolutePos(new BlockPos(5,10,5)));

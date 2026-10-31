@@ -196,7 +196,7 @@ public final class InvertedAbyssGameTests {
                 states++;
                 h.assertTrue(variant.getMapColor(h.getLevel(),h.absolutePos(BlockPos.ZERO))!=net.minecraft.world.level.material.MapColor.NONE,"Missing map colour: "+entry.getKey()+" "+variant);
                 if(variant.getRenderShape()==net.minecraft.world.level.block.RenderShape.INVISIBLE)
-                    h.assertTrue(block instanceof net.minecraft.world.level.block.LiquidBlock||block instanceof com.mcmagic.omnira.block.DreamPortalBlock||block instanceof com.mcmagic.omnira.spacetime.CorridorGatewayBlock||block instanceof com.mcmagic.omnira.time.WonderlandPokerStandBlock,"Unreviewed map-invisible block: "+entry.getKey());
+                    h.assertTrue(block instanceof net.minecraft.world.level.block.LiquidBlock||block instanceof com.mcmagic.omnira.block.DreamPortalBlock||block instanceof com.mcmagic.omnira.spacetime.CorridorGatewayBlock||block instanceof com.mcmagic.omnira.time.WonderlandPokerStandBlock||block instanceof com.mcmagic.omnira.codex.WorldHeartBlock,"Unreviewed map-invisible block: "+entry.getKey());
             }
             var row=new JsonObject();row.addProperty("block",entry.getKey().location().toString());row.addProperty("states",block.getStateDefinition().getPossibleStates().size());row.addProperty("map_color",state.getMapColor(h.getLevel(),h.absolutePos(BlockPos.ZERO)).col);row.addProperty("render_shape",state.getRenderShape().name());audit.add(row);
             if(!(block instanceof com.mcmagic.omnira.block.CrystalBallBlock)&&!(block instanceof com.mcmagic.omnira.shop.MarisaOrbBlock))continue;

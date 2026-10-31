@@ -116,6 +116,4 @@ public final class ConstructionLock {
                 event.getLevel().removeBlock(event.getPos(),false);
         }
     }
-    /** Legacy packets cannot kill a creature without actually breaking its prison. */
-    public static void mine(ServerPlayer player,int id) {}
 }

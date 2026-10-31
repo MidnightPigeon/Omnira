@@ -21,8 +21,10 @@ public final class TimeflowStorageGameTests {
         ball.tank.fill(new FluidStack(MireContent.SOURCE.get(),1000),FluidAction.EXECUTE);
         h.assertTrue(ball.infinite(),"Timeflow must be renewable in liquid storage");
         h.runAfterDelay(22,()->{
-            h.assertTrue(ball.fluidHandler.drain(1000,FluidAction.SIMULATE).getAmount()==500,"External renewable simulation ignored transfer budget");
-            h.assertTrue(ball.fluidHandler.drain(1000,FluidAction.EXECUTE).getAmount()==500&&ball.tank.getFluidAmount()==1000,"External timeflow extraction depleted reserve");
+            int limit=com.mcmagic.omnira.storage.LogisticsRates.FLUID;
+            h.assertTrue(ball.fluidHandler.drain(limit*2,FluidAction.SIMULATE).getAmount()==limit,"External renewable simulation ignored transfer budget");
+            h.assertTrue(ball.fluidHandler.drain(limit*2,FluidAction.EXECUTE).getAmount()==limit&&ball.tank.getFluidAmount()==1000,"External timeflow extraction depleted reserve");
+            h.assertTrue(ball.fluidHandler.drain(1,FluidAction.EXECUTE).isEmpty(),"Renewable fluid bypassed the exhausted external budget");
             h.assertTrue(ball.tank.drain(1000,FluidAction.EXECUTE).getAmount()==1000&&ball.tank.isEmpty(),"Internal timeflow extraction did not debit real volume");h.succeed();
         });
     }

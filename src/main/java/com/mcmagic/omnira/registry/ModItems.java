@@ -173,13 +173,13 @@ public final class ModItems {
     public static final DeferredItem<Item> SPACETIME_SPELL_CORE=ITEMS.registerItem("spacetime_spell_core",p->new com.mcmagic.omnira.item.SpellCoreItem(p,com.mcmagic.omnira.item.SpellCoreItem.Kind.SPACETIME),new Item.Properties().rarity(Rarity.EPIC));
     public static final DeferredItem<Item> SHARP_BREATH=ITEMS.registerSimpleItem("sharp_breath",new Item.Properties());
     public static final DeferredItem<Item> HEALING_DEW=ITEMS.registerSimpleItem("healing_dew",new Item.Properties());
+    public static final DeferredItem<com.mcmagic.omnira.item.FulfillmentStarItem> FULFILLMENT_STAR=ITEMS.registerItem("fulfillment_star",com.mcmagic.omnira.item.FulfillmentStarItem::new,new Item.Properties().stacksTo(1).rarity(Rarity.RARE));
     public static final DeferredItem<Item> AMPLIFICATION_STAR=ITEMS.registerSimpleItem("amplification_star",new Item.Properties());
     public static final DeferredItem<Item> LINGERING_THREAD=ITEMS.registerSimpleItem("lingering_thread",new Item.Properties());
     public static final DeferredItem<Item> INFUSION_BUD=ITEMS.registerSimpleItem("infusion_bud",new Item.Properties());
     public static final DeferredItem<Item> HOLY_HALO=ITEMS.registerSimpleItem("holy_halo",new Item.Properties());
     public static final DeferredItem<Item> MINIATURE_WORLD=ITEMS.registerSimpleItem("miniature_world",new Item.Properties());
     public static final DeferredItem<Item> LIFE_DRAIN_ORIGIN=ITEMS.registerSimpleItem("life_drain_origin",new Item.Properties());
-    public static final DeferredItem<Item> TEST_DAMAGE_ELEMENT=ITEMS.registerSimpleItem("test_damage_element",new Item.Properties());
     public static final DeferredItem<Item> GRID_FRAME=ITEMS.registerSimpleItem("grid_frame");
     public static final DeferredItem<Item> CRUDE_LIGHT_CORE=ITEMS.registerSimpleItem("crude_light_core");
     public static final DeferredItem<Item> ANALYSIS_CRYSTAL=ITEMS.register("analysis_crystal",com.mcmagic.omnira.item.AnalysisCrystalItem::new);

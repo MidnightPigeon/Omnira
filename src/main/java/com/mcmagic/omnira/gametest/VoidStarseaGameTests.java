@@ -57,7 +57,7 @@ public final class VoidStarseaGameTests {
         h.assertTrue(e.attractingWater(p),"Starflow rejected");h.succeed();
     }
     @GameTest(template="spell_arena") public static void ridingDoesNotShareFissureImmunity(GameTestHelper h){
-        var p=player(h);var manta=VoidSeaContent.MANTA.get().create(h.getLevel());manta.tame(p);
+        var p=player(h);var manta=VoidSeaContent.MANTA.get().create(h.getLevel());manta.tame(p);manta.setPos(p.position());
         h.assertTrue(p.startRiding(manta),"Owner cannot ride");
         h.assertTrue(SpatialImmunity.starflow(p)&&!SpatialImmunity.fissure(p)&&SpatialImmunity.fissure(manta),"Rider inherited fissure immunity");
         p.setHealth(19);VoidFissureBlock.affect(p);h.assertTrue(p.getHealth()==9,"Mounted player escaped true damage");

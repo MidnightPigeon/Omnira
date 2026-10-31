@@ -45,9 +45,27 @@ public final class ManuscriptReward {
 
     public static void cleanse(ServerPlayer player) {
         FateRuntime.clear(player);
+        clearSlots(player,java.util.List.of("talent","curse"));
+    }
+
+    /** Remove only the curse; the earned talent continues to block other talent grants. */
+    public static void cleanseCurse(ServerPlayer player){
+        var kind=equipped(player,"curse");
+        clearSlots(player,java.util.List.of("curse"));
+        var runtime=FateRuntime.data(player);
+        runtime.remove("OmniraDistortionTicks");
+        var arcanist=runtime.getCompound(ArcanistFate.KEY);
+        for(String key:java.util.List.of("Clock","Rain","RainTick"))arcanist.remove(key);
+        if(kind==FateCurioItem.Kind.SLAANESH)player.removeEffect(com.mcmagic.omnira.registry.ModEffects.PLEASURABLE_AGONY);
+        if(kind==FateCurioItem.Kind.TIME_DISTORTION){
+            player.removeEffect(com.mcmagic.omnira.registry.ModEffects.TIME_PASSAGE);
+            player.getPersistentData().remove(com.mcmagic.omnira.mire.TimePassage.RECORD);
+        }
+    }
+    private static void clearSlots(ServerPlayer player,java.util.List<String> slots){
         var inventory=CuriosApi.getCuriosInventory(player).orElse(null);
         if(inventory==null)return;
-        for(String slot:java.util.List.of("talent","curse")) {
+        for(String slot:slots) {
             inventory.getStacksHandler(slot).ifPresent(handler->{
                 for(int i=0;i<handler.getSlots();i++) {
                     handler.getStacks().setStackInSlot(i,ItemStack.EMPTY);

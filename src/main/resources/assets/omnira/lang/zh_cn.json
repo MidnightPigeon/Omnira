@@ -531,7 +531,6 @@
   "curios.identifier.talent": "天赋",
   "curios.identifier.curse": "诅咒",
   "item.omnira.primordial_spell_core": "原始法术核心",
-  "item.omnira.test_damage_element": "测试伤害要素",
   "item.omnira.basic_crystal_grid": "基础水晶格栅",
   "item.omnira.elemental_crystal_grid": "元素水晶格栅",
   "item.omnira.arcane_crystal_grid": "魔能水晶格栅",
@@ -1276,5 +1275,11 @@
   "item.omnira.amplification_star": "增幅星芒",
   "item.omnira.lingering_thread": "绵延之缕",
   "item.omnira.infusion_bud": "灌魔之芽",
-  "item.omnira.miniature_world": "微缩之界"
+  "item.omnira.miniature_world": "微缩之界",
+  "item.omnira.fulfillment_star": "完满之星",
+  "tooltip.omnira.fulfillment_star": "真理至美。",
+  "message.omnira.fulfillment_star.no_effect": "当前没有可以完善的亲和或需要解除的诅咒",
+  "tooltip.omnira.affinity.dream.2.perfected": "身体半透明。",
+  "tooltip.omnira.affinity.dream.3.perfected": "自由飞行；时运 +1，抢夺 +1。",
+  "tooltip.omnira.affinity.perfected": "完满：法力 +100，法强/生命吸取/减伤 +10%；无背弃代价"
 }

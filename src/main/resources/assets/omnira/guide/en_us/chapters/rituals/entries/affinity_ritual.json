@@ -14,7 +14,8 @@
     "Renouncing Light burns you for two minutes and deals one suffocation damage every half-second. Renouncing Dark applies Poison II for one minute and creates a self-harming, twenty-second mist every five seconds; death stops new mist.",
     "Renouncing Fourfold applies Slowness III, Mining Fatigue III and Darkness for two minutes, with one base magic damage every half-second. Logging out pauses rather than removes the penalty.",
     "Hover over the mana bar to view your affinity bonuses.",
-    "{dream}Rumor speaks of a powerful and dangerous Dream Affinity..."
+    "{dream}Rumor speaks of a powerful and dangerous Dream Affinity...",
+    "The Star of Fulfillment perfects the current affinity and removes the abandonment penalties above. Active abilities still cost mana."
   ],
   "links": [
     {
@@ -24,6 +25,10 @@
     {
       "target": "advanced_ritual_energy_core",
       "label": "Advanced Ritual Energy Core"
+    },
+    {
+      "target": "fulfillment_star",
+      "label": "Star of Fulfillment"
     }
   ],
   "figures": [

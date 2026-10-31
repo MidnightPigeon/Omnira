@@ -47,12 +47,7 @@ public final class BottleCopyGameTests {
     private static final class SableChecks {
     private static void run(GameTestHelper h) throws Exception {
         String fixture=System.getenv("OMNIRA_BOTTLE_FIXTURE");
-        h.assertTrue(fixture!=null,"Set OMNIRA_BOTTLE_FIXTURE to a read-only bottle save");
-        var root=NbtIo.readCompressed(Path.of(fixture),NbtAccounter.unlimitedHeap());
-        var data=root.getCompound("data").getList("Captures",Tag.TAG_COMPOUND).stream()
-                .map(value->((CompoundTag)value).getCompound("Data"))
-                .filter(value->!value.getList("Ships",Tag.TAG_COMPOUND).isEmpty())
-                .findFirst().orElseThrow(()->new IllegalArgumentException("Fixture contains no captured structure"));
+        var data=fixture==null?generatedFixture(h):readFixture(fixture);
         var original=data.copy();var container=SubLevelContainer.getContainer(h.getLevel());
         var before=new HashSet<>(container.getAllSubLevels());
         h.runAfterDelay(5,()->{
@@ -68,6 +63,31 @@ public final class BottleCopyGameTests {
                 for(var ship:new ArrayList<>(container.getAllSubLevels())) if(!before.contains(ship)) container.removeSubLevel(ship,SubLevelRemovalReason.REMOVED);
             }
         });
+    }
+    private static CompoundTag readFixture(String fixture) throws Exception {
+        var root=NbtIo.readCompressed(Path.of(fixture),NbtAccounter.unlimitedHeap());
+        return root.getCompound("data").getList("Captures",Tag.TAG_COMPOUND).stream()
+                .map(value->((CompoundTag)value).getCompound("Data"))
+                .filter(value->!value.getList("Ships",Tag.TAG_COMPOUND).isEmpty())
+                .findFirst().orElseThrow(()->new IllegalArgumentException("Fixture contains no captured structure"));
+    }
+    /** A small dream-height structure keeps ordinary regression runs independent of player saves. */
+    private static CompoundTag generatedFixture(GameTestHelper h) {
+        var level=h.getLevel().getServer().getLevel(com.mcmagic.omnira.world.dimension.ModDimensions.DREAM_REALM);
+        var base=new net.minecraft.core.BlockPos(h.absolutePos(net.minecraft.core.BlockPos.ZERO).getX(),200,h.absolutePos(net.minecraft.core.BlockPos.ZERO).getZ());
+        var cells=Set.of(base,base.above());
+        level.getChunkAt(base);
+        for(var cell:cells)level.setBlockAndUpdate(cell,net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+        var gathered=dev.ryanhcode.sable.api.SubLevelAssemblyHelper.gatherConnectedBlocks(base,level,8,(a,b,c,d,e)->cells.contains(c));
+        var ship=dev.ryanhcode.sable.api.SubLevelAssemblyHelper.assembleBlocks(level,base,gathered.blocks(),gathered.boundingBox());
+        h.assertTrue(ship!=null,"Could not assemble generated dream fixture");
+        try {
+            var ships=new ListTag();
+            ships.add(dev.ryanhcode.sable.sublevel.storage.serialization.SubLevelSerializer.toData(ship,List.of(ship.getUniqueId())).fullTag().copy());
+            var data=new CompoundTag();data.putString("Kind","structure");data.put("Ships",ships);data.put("Entities",new ListTag());
+            data.putInt("SourceMinSection",level.getMinSection());data.putString("SourceDimension",level.dimension().location().toString());
+            return data;
+        } finally {SubLevelContainer.getContainer(level).removeSubLevel(ship,SubLevelRemovalReason.REMOVED);}
     }
     }
 }

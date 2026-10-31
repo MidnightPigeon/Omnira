@@ -78,7 +78,6 @@ repo/
 
 # Local runtime configuration and asset-script caches.
 /config/*
-!/config/development-mods.json
 __pycache__/
 *.pyc
 *.pyo

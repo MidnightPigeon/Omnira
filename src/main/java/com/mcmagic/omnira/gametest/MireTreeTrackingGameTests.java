@@ -16,7 +16,8 @@ import java.util.List;
 @PrefixGameTestTemplate(false)
 public final class MireTreeTrackingGameTests {
     private static BlockPos setup(GameTestHelper h){
-        var level=h.getLevel();var p=h.absolutePos(new BlockPos(4101,3,4101));
+        // Delayed assertions must stay inside the test's loaded chunks.
+        var level=h.getLevel();var p=h.absolutePos(new BlockPos(5,3,5));
         var biome=level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(MireCycle.BIOME);
         for(int cx=(p.getX()>>4)-1;cx<=(p.getX()>>4)+1;cx++)for(int cz=(p.getZ()>>4)-1;cz<=(p.getZ()>>4)+1;cz++)
             level.getChunk(cx,cz).fillBiomesFromNoise((x,y,z,s)->biome,level.getChunkSource().randomState().sampler());
@@ -63,7 +64,7 @@ public final class MireTreeTrackingGameTests {
         h.runAfterDelay(2,()->{
             h.assertTrue(tracked(h,p),"Vanilla feature not registered");
             var data=MireTrees.get(l);data.pulse(l,6000);
-            h.assertTrue(l.getBlockState(p).is(Blocks.OAK_SAPLING),"Wrong vanilla sapling: "+l.getBlockState(p)+" records="+data.save(new CompoundTag(),l.registryAccess()));
+            h.assertTrue(l.getBlockState(p).is(Blocks.OAK_SAPLING),"Wrong vanilla sapling at "+p+": "+l.getBlockState(p));
             ((SaplingBlock)Blocks.OAK_SAPLING).advanceTree(l,p,l.getBlockState(p),l.random);
             h.assertTrue(l.getBlockState(p).is(Blocks.OAK_SAPLING),"Rewound sapling grew early");
             data.pulse(l,7200);h.assertTrue(l.getBlockState(p).is(Blocks.OAK_LOG),"Oak not restored");

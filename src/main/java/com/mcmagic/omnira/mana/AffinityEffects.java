@@ -18,12 +18,15 @@ public final class AffinityEffects {
 
     public static void refresh(ServerPlayer player) {
         var affinity=player.getData(ModAttachments.AFFINITY).active();
-        attribute(player,ModAttributes.MAX_MANA,affinity.capacity,AttributeModifier.Operation.ADD_VALUE);
+        boolean perfect=affinity!=Affinity.NONE&&player.getData(ModAttachments.AFFINITY).perfected();
+        attribute(player,ModAttributes.MAX_MANA,affinity.capacity+(perfect?100:0),AttributeModifier.Operation.ADD_VALUE);
         attribute(player,ModAttributes.MANA_REGEN,affinity.regeneration,AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
-        attribute(player,ModAttributes.SPELL_POWER,affinity.power,AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        attribute(player,ModAttributes.SPELL_POWER,affinity.power+(perfect?.1:0),AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         attribute(player,ModAttributes.COST_REDUCTION,affinity.reduction,AttributeModifier.Operation.ADD_VALUE);
-        attribute(player,ModAttributes.DAMAGE_TAKEN,affinity==Affinity.DREAM?.5:0,AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        attribute(player,ModAttributes.DAMAGE_TAKEN,perfect?-.1:affinity==Affinity.DREAM?.5:0,AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         attribute(player,net.neoforged.neoforge.common.NeoForgeMod.CREATIVE_FLIGHT,affinity==Affinity.DREAM?1:0,AttributeModifier.Operation.ADD_VALUE);
+        attribute(player,ModAttributes.LIFESTEAL,perfect?.1:0,AttributeModifier.Operation.ADD_VALUE);
+        if(player.getData(ModAttachments.PERFECTED_AFFINITY)!=perfect)player.setData(ModAttachments.PERFECTED_AFFINITY,perfect);
         boolean dream=affinity==Affinity.DREAM;
         if(player.getData(ModAttachments.DREAM_AFFINITY)!=dream) {
             if(!dream && !player.mayFly() && player.getAbilities().flying) {

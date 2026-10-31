@@ -12,10 +12,11 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import java.util.List;
 
-public record AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean outerShapeless,String operation) implements Recipe<AssemblyRecipe.Input> {
+public record AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean outerShapeless,String operation,boolean returnRemainders) implements Recipe<AssemblyRecipe.Input> {
     private static final java.util.Set<String> PRESERVING_OPERATIONS=java.util.Set.of("resonant_orb","grid_upgrade","staff_upgrade","arquebus_upgrade");
     public AssemblyRecipe(List<Ingredient> slots,ItemStack result) {this(slots,result,false,"fixed");}
     public AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean outerShapeless) {this(slots,result,outerShapeless,"fixed");}
+    public AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean outerShapeless,String operation) {this(slots,result,outerShapeless,operation,true);}
     public AssemblyRecipe {
         slots=List.copyOf(slots);
         // Legacy JSON/network flags remain readable; outer materials are unordered except diagonal staff assembly.
@@ -34,18 +35,20 @@ public record AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean out
             Ingredient.CODEC.listOf().fieldOf("slots").forGetter(AssemblyRecipe::slots),
             ItemStack.STRICT_CODEC.fieldOf("result").forGetter(AssemblyRecipe::result),
             com.mojang.serialization.Codec.BOOL.optionalFieldOf("outer_shapeless",false).forGetter(AssemblyRecipe::outerShapeless),
-            com.mojang.serialization.Codec.STRING.optionalFieldOf("operation","fixed").forGetter(AssemblyRecipe::operation)).apply(i,AssemblyRecipe::new));
+            com.mojang.serialization.Codec.STRING.optionalFieldOf("operation","fixed").forGetter(AssemblyRecipe::operation),
+            com.mojang.serialization.Codec.BOOL.optionalFieldOf("return_remainders",true).forGetter(AssemblyRecipe::returnRemainders)).apply(i,AssemblyRecipe::new));
     public static final StreamCodec<RegistryFriendlyByteBuf,AssemblyRecipe> STREAM_CODEC=new StreamCodec<>() {
         @Override public AssemblyRecipe decode(RegistryFriendlyByteBuf buf) {
             var slots=new java.util.ArrayList<Ingredient>();
             for(int i=0;i<7;i++) slots.add(Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
-            return new AssemblyRecipe(slots,ItemStack.STREAM_CODEC.decode(buf),buf.readBoolean(),buf.readUtf());
+            return new AssemblyRecipe(slots,ItemStack.STREAM_CODEC.decode(buf),buf.readBoolean(),buf.readUtf(),buf.readBoolean());
         }
         @Override public void encode(RegistryFriendlyByteBuf buf,AssemblyRecipe recipe) {
             for(var ingredient:recipe.slots) Ingredient.CONTENTS_STREAM_CODEC.encode(buf,ingredient);
             ItemStack.STREAM_CODEC.encode(buf,recipe.result);
             buf.writeBoolean(recipe.outerShapeless);
             buf.writeUtf(recipe.operation);
+            buf.writeBoolean(recipe.returnRemainders);
         }
     };
     @Override public boolean matches(Input input,Level level) {
@@ -109,7 +112,10 @@ public record AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean out
             input.setItem(i,choices[0].copyWithCount(1));
         }
         var output=assemble(new Input(input),null);
-        return output.isEmpty()?List.of():List.of(new AssemblyRecipe(slots,output,outerShapeless,operation));
+        return output.isEmpty()?List.of():List.of(new AssemblyRecipe(slots,output,outerShapeless,operation,returnRemainders));
+    }
+    @Override public net.minecraft.core.NonNullList<ItemStack> getRemainingItems(Input input) {
+        return returnRemainders?Recipe.super.getRemainingItems(input):net.minecraft.core.NonNullList.withSize(input.size(),ItemStack.EMPTY);
     }
     @SuppressWarnings({"unchecked","rawtypes"}) private static void copyComponent(ItemStack stack,net.minecraft.core.component.DataComponentType type,Object value){stack.set(type,value);}
     @Override public ItemStack getResultItem(HolderLookup.Provider registries) {return result.copy();}

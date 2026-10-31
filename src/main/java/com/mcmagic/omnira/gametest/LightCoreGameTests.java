@@ -75,4 +75,23 @@ public final class LightCoreGameTests {
             h.succeed();
         });
     }
+    @GameTest(template="spell_arena") public static void remainderPolicyRoundTrips(GameTestHelper h) {
+        var recipe=(AssemblyRecipe)recipe(h,"assembly/spell_core_analysis");
+        var ops=h.getLevel().registryAccess().createSerializationContext(com.mojang.serialization.JsonOps.INSTANCE);
+        var json=AssemblyRecipe.CODEC.codec().encodeStart(ops,recipe).getOrThrow();
+        var decoded=AssemblyRecipe.CODEC.codec().parse(ops,json).getOrThrow();
+        var buffer=new net.minecraft.network.RegistryFriendlyByteBuf(io.netty.buffer.Unpooled.buffer(),h.getLevel().registryAccess());
+        try {
+            AssemblyRecipe.STREAM_CODEC.encode(buffer,decoded);
+            var synced=AssemblyRecipe.STREAM_CODEC.decode(buffer);
+            for(var variant:java.util.List.of(recipe,decoded,synced,recipe.displayRecipes().getFirst())) {
+                var input=new SimpleContainer(7);input.setItem(6,new ItemStack(ModItems.CRUDE_LIGHT_CORE.get()));
+                var crystal=new ItemStack(ModItems.ANALYSIS_CRYSTAL.get());crystal.setDamageValue(3);input.setItem(2,crystal);
+                h.assertTrue(variant.matches(new AssemblyRecipe.Input(input),h.getLevel()),"Worn crystal or unordered slot rejected");
+                h.assertTrue(variant.getRemainingItems(new AssemblyRecipe.Input(input)).stream().allMatch(ItemStack::isEmpty),"Consumption policy lost in serialization or display");
+                h.assertTrue(crystal.getCount()==1&&crystal.getDamageValue()==3,"Inspecting remainders mutated input");
+            }
+        } finally {buffer.release();}
+        h.succeed();
+    }
 }

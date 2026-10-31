@@ -66,7 +66,7 @@ public final class ShadowLibraryGameTests {
                     }
                     if(stack.is(ModItems.ANALYSIS_CRYSTAL.get())) {
                         tools++;int remaining=stack.getMaxDamage()-stack.getDamageValue();
-                        h.assertTrue(remaining>=25 && remaining<=64,"Analysis crystal not damaged to 20-50 percent");
+                        h.assertTrue(remaining>=(int)Math.ceil(stack.getMaxDamage()*.2) && remaining<=(int)Math.ceil(stack.getMaxDamage()*.5),"Analysis crystal not damaged to 20-50 percent");
                     }
                     if(stack.is(ModItems.DREAM_SPELL_CORE.get()))cores++;
                     if(stack.is(ModItems.LIGHT_MICROCORE.get())) {light++;hasLight=true;}

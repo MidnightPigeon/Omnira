@@ -1,6 +1,7 @@
 {
   "type": "omnira:assembly",
   "outer_shapeless": true,
+  "return_remainders": false,
   "slots": [
     {
       "item": "omnira:analysis_crystal"

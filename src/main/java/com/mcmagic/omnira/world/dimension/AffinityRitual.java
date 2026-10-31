@@ -107,12 +107,12 @@ public final class AffinityRitual {
         ACTIVE.remove(player.getUUID());
         player.getItemInHand(session.hand).shrink(1);
         boolean removing=session.removing();
-        player.setData(ModAttachments.AFFINITY,removing && session.selected==Affinity.DREAM?AffinityState.NONE:
+        player.setData(ModAttachments.AFFINITY,removing && (session.selected==Affinity.DREAM||session.before.perfected())?AffinityState.NONE:
                 new AffinityState(session.selected.ordinal(),removing?session.selected.penaltyDuration():0));
         player.setData(ModAttachments.DREAM_SOLIDIFY,0F);
         AffinityEffects.refresh(player);
         if(!removing&&session.selected!=Affinity.DREAM)com.mcmagic.omnira.progression.BranchProgress.record(player,"elemental_pact");
-        player.displayClientMessage(Component.translatable(removing && session.selected==Affinity.DREAM?"message.omnira.affinity.cleared":
+        player.displayClientMessage(Component.translatable(removing && (session.selected==Affinity.DREAM||session.before.perfected())?"message.omnira.affinity.cleared":
                 removing?"message.omnira.affinity.removing":"message.omnira.affinity.bound",Component.translatable(session.selected.key())),true);
     }
     public static void cancel(ServerPlayer player){ACTIVE.remove(player.getUUID());player.setData(ModAttachments.DREAM_SOLIDIFY,0F);message(player,"cancelled");}

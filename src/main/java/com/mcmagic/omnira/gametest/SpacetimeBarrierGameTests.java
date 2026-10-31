@@ -14,7 +14,8 @@ public final class SpacetimeBarrierGameTests {
         for(int z=-8;z<=8;z++)for(int x=-2;x<=2;x++)for(int y=128;y<=132;y++){
             var state=CorridorLayout.block(x,y,z);
             if(y==128 || y==132 || Math.abs(x)==2)h.assertTrue(state.is(DreamContent.MIRROR_ROCK.get())
-                    || state.is(DreamContent.ENGRAVED_MIRROR_ROCK.get()),"Non-mirror corridor shell");
+                    || state.is(DreamContent.ENGRAVED_MIRROR_ROCK.get())
+                    || state.is(DreamContent.VOID_MIRROR_ROCK.get()) || state.is(DreamContent.VOID_ENGRAVED_MIRROR_ROCK.get()),"Non-mirror corridor shell");
             else h.assertTrue(state.isAir(),"Corridor interior changed");
         }
         var world=h.getLevel().getServer().getLevel(com.mcmagic.omnira.world.dimension.ModDimensions.SPACETIME_CORRIDOR);
@@ -23,7 +24,7 @@ public final class SpacetimeBarrierGameTests {
         var settings=world.getBiome(new BlockPos(0,130,0)).value().getMobSettings();
         for(var category:net.minecraft.world.entity.MobCategory.values())
             h.assertTrue(settings.getMobs(category).isEmpty(),"Vanilla mobs can spawn naturally in the corridor dimension");
-        h.assertTrue(!world.dimensionType().natural() && !world.dimensionType().hasSkyLight(),"Corridor dimension permits ordinary natural sky spawning");
+        h.assertTrue(!world.dimensionType().natural() && world.dimensionType().hasSkyLight(),"Spacetime must retain authored skylight without natural dimension behavior");
         h.succeed();
     }
     @GameTest(template="spell_arena") public static void pistonAndSlimeCannotMoveSeparator(GameTestHelper h){

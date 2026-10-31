@@ -43,7 +43,13 @@ public final class ManaBarTooltips {
             text.add(Component.literal(area.current+" / "+area.maximum));
             text.add(Component.translatable(area.affinity.key()).withStyle(style->style.withColor(area.affinity.color)));
             int lines=switch(area.affinity){case NONE -> 1;case DREAM -> 4;default -> 2;};
-            for(int line=1;line<=lines;line++)text.add(Component.translatable("tooltip.omnira.affinity."+area.affinity.name().toLowerCase(java.util.Locale.ROOT)+"."+line));
+            boolean perfected=mc.player!=null&&mc.player.getData(ModAttachments.PERFECTED_AFFINITY)&&area.affinity!=Affinity.NONE;
+            for(int line=1;line<=lines;line++) {
+                String key="tooltip.omnira.affinity."+area.affinity.name().toLowerCase(java.util.Locale.ROOT)+"."+line;
+                if(perfected&&area.affinity==Affinity.DREAM&&(line==2||line==3))key+=".perfected";
+                text.add(Component.translatable(key));
+            }
+            if(perfected)text.add(Component.translatable("tooltip.omnira.affinity.perfected").withStyle(net.minecraft.ChatFormatting.GOLD));
             g.pose().pushPose();g.pose().translate(0,0,500);
             g.renderComponentTooltip(mc.font,text,event.getMouseX(),event.getMouseY());g.pose().popPose();break;
         }

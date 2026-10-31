@@ -32,7 +32,7 @@ public final class ElementExtractionGameTests {
             final int i=n;
             h.runAtTickTime(1+n*50,()->{
                 s.table.clearContent();s.player.setData(ModAttachments.MANA,ManaState.initial());
-                var stack=new ItemStack(inputs[i],counts[i]);if(i==2) stack.setDamageValue(7);
+                var stack=new ItemStack(inputs[i],counts[i]);if(i==2) stack.setDamageValue(stack.getMaxDamage()-2);
                 s.table.setItem(0,stack);original[i]=s.table.getItem(0);
                 h.assertTrue(s.menu.clickMenuButton(s.player,0),"Extraction did not start: "+i);
                 h.assertTrue(original[i].getCount()==counts[i] && s.player.getData(ModAttachments.MANA).current()==100,"Charged before completion");
@@ -44,7 +44,7 @@ public final class ElementExtractionGameTests {
                 if(i==0) h.assertTrue(bonus.is(Items.STICK) && bonus.getCount()==1,"Wrong sword byproduct");
                 if(i==1) h.assertTrue(bonus.is(Items.MELON_SEEDS) && bonus.getCount()>=3 && bonus.getCount()<=5,"Wrong seeds");
                 if(i==2) {
-                    h.assertTrue(s.table.getItem(0)==original[i] && original[i].getDamageValue()==8,"Crystal was replaced instead of damaged in place");
+                    h.assertTrue(s.table.getItem(0)==original[i] && original[i].getDamageValue()==original[i].getMaxDamage()-1,"Crystal was replaced instead of damaged in place");
                     h.assertTrue(java.util.Set.of(ModItems.EARTH_MICROCORE.get(),ModItems.WATER_MICROCORE.get(),ModItems.FIRE_MICROCORE.get(),ModItems.AIR_MICROCORE.get()).contains(bonus.getItem()) && bonus.getCount()==1,"Invalid microcore");
                 } else h.assertTrue(s.table.getItem(0).isEmpty(),"Input not consumed");
                 if(i==3) h.assertTrue(bonus.is(ModItems.SPIRITUAL_CRYSTAL.get()) && bonus.getCount()==8,"Wrong casing byproduct");
@@ -55,9 +55,9 @@ public final class ElementExtractionGameTests {
     }
     @GameTest(template="spell_arena")
     public static void blockedOutputAndLastDurability(GameTestHelper h) {
-        var s=station(h);var crystal=new ItemStack(ModItems.ANALYSIS_CRYSTAL.get());crystal.setDamageValue(127);s.table.setItem(0,crystal);
+        var s=station(h);var crystal=new ItemStack(ModItems.ANALYSIS_CRYSTAL.get());crystal.setDamageValue(crystal.getMaxDamage()-1);s.table.setItem(0,crystal);
         s.table.setItem(2,new ItemStack(ModItems.EARTH_MICROCORE.get()));
-        h.assertTrue(!s.menu.clickMenuButton(s.player,0) && crystal.getDamageValue()==127 && s.player.getData(ModAttachments.MANA).current()==100,"Blocked random output charged resources");
+        h.assertTrue(!s.menu.clickMenuButton(s.player,0) && crystal.getDamageValue()==crystal.getMaxDamage()-1 && s.player.getData(ModAttachments.MANA).current()==100,"Blocked random output charged resources");
         s.table.setItem(2,ItemStack.EMPTY);
         h.assertTrue(s.menu.clickMenuButton(s.player,0),"Final durability cannot be used");
         h.runAtTickTime(43,()->{

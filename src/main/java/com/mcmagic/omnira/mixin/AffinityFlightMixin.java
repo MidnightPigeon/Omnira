@@ -12,11 +12,11 @@ public abstract class AffinityFlightMixin {
     @ModifyExpressionValue(method="getFlyingSpeed",at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/player/Player;isSprinting()Z"))
     private boolean omnira$noDreamFlightSprintBoost(boolean sprinting) {
         var player=(Player)(Object)this;
-        return sprinting && !(player.getAbilities().flying && !player.isPassenger() && player.getData(ModAttachments.DREAM_AFFINITY));
+        return sprinting && !(player.getAbilities().flying && !player.isPassenger() && (player.getData(ModAttachments.DREAM_AFFINITY)&&!player.getData(ModAttachments.PERFECTED_AFFINITY)));
     }
     @ModifyReturnValue(method="getFlyingSpeed",at=@At("RETURN"))
     private float omnira$flightSpeed(float original) {
         var player=(Player)(Object)this;
-        return player.getAbilities().flying && !player.isPassenger() && player.getData(ModAttachments.DREAM_AFFINITY)?original*.5F:original;
+        return player.getAbilities().flying && !player.isPassenger() && (player.getData(ModAttachments.DREAM_AFFINITY)&&!player.getData(ModAttachments.PERFECTED_AFFINITY))?original*.5F:original;
     }
 }

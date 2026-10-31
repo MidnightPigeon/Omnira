@@ -28,6 +28,12 @@ public final class ModAttachments {
     public static final DeferredHolder<AttachmentType<?>,AttachmentType<com.mcmagic.omnira.mana.AffinityState>> AFFINITY=TYPES.register(
             "affinity",()->AttachmentType.builder(()->com.mcmagic.omnira.mana.AffinityState.NONE)
                     .serialize(com.mcmagic.omnira.mana.AffinityState.CODEC).copyOnDeath().build());
+    public static final DeferredHolder<AttachmentType<?>,AttachmentType<Integer>> FULFILLMENT_EFFECTS=TYPES.register(
+            "fulfillment_effects",()->AttachmentType.builder(()->0).build());
+    public static final DeferredHolder<AttachmentType<?>,AttachmentType<Integer>> FULFILLMENT_ACTIVATION=TYPES.register(
+            "fulfillment_activation",()->AttachmentType.builder(()->0).sync(ByteBufCodecs.VAR_INT).build());
+    public static final DeferredHolder<AttachmentType<?>,AttachmentType<Boolean>> PERFECTED_AFFINITY=TYPES.register(
+            "perfected_affinity",()->AttachmentType.builder(()->false).sync(ByteBufCodecs.BOOL).build());
     public static final DeferredHolder<AttachmentType<?>,AttachmentType<Boolean>> DREAM_AFFINITY=TYPES.register(
             "dream_affinity",()->AttachmentType.builder(()->false).sync(ByteBufCodecs.BOOL).build());
     public static final DeferredHolder<AttachmentType<?>,AttachmentType<Float>> DREAM_SOLIDIFY=TYPES.register(
