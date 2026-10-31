@@ -15,6 +15,20 @@ import java.util.List;
 
 @GameTestHolder("omnira_guide_reference") @PrefixGameTestTemplate(false)
 public final class GuideReferenceGameTests {
+    @GameTest(template="spell_arena") public static void sharedEntriesExposeAllAuthoredItems(GameTestHelper h)throws Exception{
+        for(var language:List.of("zh_cn","en_us")){
+            var book=GuideContents.fromJson(GuidanceGameTests.guide(language));var index=new GuideReferenceIndex(book);
+            for(var id:List.of("tyrannosaurus_essence","mosasaurus_essence","pterosaur_essence")){
+                var key=net.minecraft.resources.ResourceLocation.parse("omnira:"+id);
+                var stack=new ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM.get(key));
+                h.assertTrue(index.item(stack).orElse("").equals("ancient_essences_guide"),"Essence shortcut missing: "+id);
+                h.assertTrue(book.itemDestination(key.toString()).orElseThrow().entry().id().equals("ancient_essences_guide"),"Recipe link differs from shortcut");
+            }
+            h.assertTrue(book.itemDestination("omnira:repaired_mechanical_component").isPresent(),"Repaired part has no page");
+            h.assertTrue(book.destination("ancient_essences_guide").isPresent(),"ID navigation broken by related items");
+        }
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void holdRequiresContinuousTargetAndRelease(GameTestHelper h){
         var hold=new GuideReferenceHold();
         for(int i=1;i<20;i++)h.assertTrue(!hold.tick("item-a",true)&&hold.percent("item-a")==i*5,"Hold triggered early");

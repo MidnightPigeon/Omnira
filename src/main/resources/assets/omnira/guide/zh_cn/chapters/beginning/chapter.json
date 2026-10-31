@@ -8,11 +8,13 @@
   ],
   "chapters": [
     "chapters/initial_crafting/chapter.json",
+    "chapters/overworld_ruins/chapter.json",
     "chapters/building/chapter.json"
   ],
   "directory_order": [
     "guidance_orb",
     "initial_crafting",
+    "overworld_ruins",
     "building"
   ]
 }

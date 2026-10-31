@@ -137,6 +137,8 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     }
     /** Read without unpacking a structure's pending loot table. */
     public ItemStack displayItem(int slot) {return hasPendingLoot()?ItemStack.EMPTY:getItems().get(slot);}
+    /** Rendering reads one storage view without unpacking pending loot. Do not mutate it. */
+    public java.util.List<ItemStack> displayItems(){return hasPendingLoot()?java.util.List.of():java.util.Collections.unmodifiableList(getItems());}
     @Override public void setChanged() {
         if(virtualStorage){storageChanged.run();return;}
         super.setChanged();

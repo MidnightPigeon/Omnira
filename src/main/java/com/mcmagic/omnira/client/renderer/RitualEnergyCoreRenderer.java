@@ -23,8 +23,7 @@ public final class RitualEnergyCoreRenderer implements BlockEntityRenderer<Ritua
         pose.mulPose(Axis.ZP.rotationDegrees((float)(time*.45%360)));
         pose.translate(-.5,-.5,-.5);
         var mc=Minecraft.getInstance();
-        mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(advanced?advancedModel():model()),ItemStack.EMPTY,
-                LightTexture.FULL_BRIGHT,overlay,pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
+        com.mcmagic.omnira.client.renderer.StaticModelQuads.draw(mc.getModelManager().getModel(advanced?advancedModel():model()),pose,buffers.getBuffer(CrystalGlassLayer.ATLAS),LightTexture.FULL_BRIGHT,overlay);
         pose.popPose();
     }
     @Override public void render(RitualEnergyCoreBlockEntity core,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {

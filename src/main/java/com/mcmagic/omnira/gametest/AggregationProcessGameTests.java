@@ -20,8 +20,8 @@ public final class AggregationProcessGameTests {
                 var machine=(AggregationRingBlockEntity)h.getLevel().getBlockEntity(pos);
                 machine.setItem(0,new ItemStack(ModItems.AIR_MICROCORE.get()));
                 machine.setItem(1,new ItemStack(ModItems.FIRE_MICROCORE.get()));
-                machine.setItem(3,new ItemStack(com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get()));
-                machine.setItem(5,new ItemStack(ModItems.SPIRITUAL_CRYSTAL.get()));
+                machine.setItem(3,new ItemStack(com.mcmagic.omnira.registry.ModItems.MINIATURE_WORLD.get()));
+                machine.setItem(5,new ItemStack(ModItems.INFUSION_BUD.get()));
                 machine.setItem(8,new ItemStack(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get(),2));
                 machine.setItem(9,new ItemStack(ModItems.SPELL_INK.get()));
                 h.assertTrue(machine.recipeError().equals("core")&&!machine.start(player)&&machine.progress()==0,

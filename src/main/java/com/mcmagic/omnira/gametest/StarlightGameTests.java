@@ -49,6 +49,7 @@ public final class StarlightGameTests {
     }
     @GameTest(template="spell_arena") public static void dustIsThinInstantHarvest(GameTestHelper h) {
         var l=h.getLevel();var p=h.absolutePos(new BlockPos(4,4,4));var s=StarlightContent.DUST.get().defaultBlockState();
+        l.setBlockAndUpdate(p.below(),Blocks.STONE.defaultBlockState());
         l.setBlockAndUpdate(p,s);
         h.assertTrue(s.getDestroySpeed(l,p)==0,"Scatter must break in one hit");
         h.assertTrue(s.getShape(l,p).max(Direction.Axis.Y)<=1.0/16,"Scatter floats above the floor");

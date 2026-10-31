@@ -1,25 +1,137 @@
 {
+  "music.shadow": {
+    "sounds": [
+      {
+        "name": "omnira:music/shadow/hui_hun_ye",
+        "stream": true
+      }
+    ]
+  },
+  "music.light": {
+    "sounds": [
+      {
+        "name": "omnira:music/light/guang_ming_song",
+        "stream": true
+      }
+    ]
+  },
+  "music.space": {
+    "sounds": [
+      {
+        "name": "omnira:music/space/po_sui_shi_jie",
+        "stream": true
+      },
+      {
+        "name": "omnira:music/space/gong_zhen",
+        "stream": true
+      },
+      {
+        "name": "omnira:music/space/zhe_guang_yu_jing",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.po_sui_shi_jie": {
+    "sounds": [
+      {
+        "name": "omnira:records/po_sui_shi_jie",
+        "stream": true
+      }
+    ]
+  },
   "music.time": {
-    "sounds": [{"name": "omnira:music/time/liu_nian", "stream": true}]
+    "sounds": [
+      {
+        "name": "omnira:music/time/liu_nian",
+        "stream": true
+      },
+      {
+        "name": "omnira:music/time/du_miao_yu_dao_dai",
+        "stream": true
+      },
+      {
+        "name": "omnira:music/time/zhong_qing_yin",
+        "stream": true
+      }
+    ]
   },
   "music_disc.liu_nian": {
-    "sounds": [{"name": "omnira:records/liu_nian", "stream": true}]
+    "sounds": [
+      {
+        "name": "omnira:records/liu_nian",
+        "stream": true
+      }
+    ]
   },
   "music.mirror_dream": {
-    "sounds": [{"name": "omnira:music/mirror_dream/mi_meng_ye", "stream": true}]
+    "sounds": [
+      {
+        "name": "omnira:music/mirror_dream/mi_meng_ye",
+        "stream": true
+      }
+    ]
   },
   "music_disc.mi_meng_ye": {
-    "sounds": [{"name": "omnira:records/mi_meng_ye", "stream": true}]
+    "sounds": [
+      {
+        "name": "omnira:records/mi_meng_ye",
+        "stream": true
+      }
+    ]
   },
   "violin_allemanda": {
     "subtitle": "subtitles.omnira.violin",
-    "sounds": [{"name": "omnira:violin/bach_allemanda", "stream": true, "attenuation_distance": 24}]
+    "sounds": [
+      {
+        "name": "omnira:violin/bach_allemanda",
+        "stream": true,
+        "attenuation_distance": 24
+      }
+    ]
   },
   "violin_adagio": {
     "subtitle": "subtitles.omnira.violin",
-    "sounds": [{"name": "omnira:violin/bach_adagio", "stream": true, "attenuation_distance": 24}]
+    "sounds": [
+      {
+        "name": "omnira:violin/bach_adagio",
+        "stream": true,
+        "attenuation_distance": 24
+      }
+    ]
   },
   "night_heron_call": {
-    "sounds": ["omnira:night_heron_call"]
+    "sounds": [
+      "omnira:night_heron_call"
+    ]
+  },
+  "violin_caprice20": {
+    "subtitle": "subtitles.omnira.violin",
+    "sounds": [
+      {
+        "name": "omnira:violin/paganini_caprice20",
+        "stream": true,
+        "attenuation_distance": 24
+      }
+    ]
+  },
+  "violin_caprice24": {
+    "subtitle": "subtitles.omnira.violin",
+    "sounds": [
+      {
+        "name": "omnira:violin/paganini_caprice24",
+        "stream": true,
+        "attenuation_distance": 24
+      }
+    ]
+  },
+  "violin_sonata6": {
+    "subtitle": "subtitles.omnira.violin",
+    "sounds": [
+      {
+        "name": "omnira:violin/ysaye_sonata6",
+        "stream": true,
+        "attenuation_distance": 24
+      }
+    ]
   }
 }

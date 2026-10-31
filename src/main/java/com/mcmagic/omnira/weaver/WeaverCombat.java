@@ -35,7 +35,7 @@ public final class WeaverCombat {
         Vec3 center=owner.getBoundingBox().getCenter();visual(level,outward?0:1,center,center,15);
         boolean previous=REACTING.get();REACTING.set(true);
         try{
-            for(var target:level.getEntitiesOfClass(LivingEntity.class,new AABB(center,center).inflate(15),t->eligible(t,owner))){
+            for(var target:level.getEntitiesOfClass(LivingEntity.class,new AABB(center,center).inflate(15),t->outward?trueTarget(t,owner):eligible(t,owner))){
                 var delta=target.getBoundingBox().getCenter().subtract(center);double length=delta.length();if(length>15)continue;
                 var src=source(target,outward?OmniraDamage.TRUE_DAMAGE:DamageTypes.INDIRECT_MAGIC,owner,owner,false,outward);
                 if(outward)OmniraDamage.trueDamage(target,damage(owner,5),src);else target.hurt(src,damage(owner,8));
@@ -44,20 +44,21 @@ public final class WeaverCombat {
             }
         }finally{REACTING.set(previous);}
     }
-    public static boolean eligible(LivingEntity target,LivingEntity owner){return target!=owner&&target.isAlive()&&!target.isSpectator()&&!(target instanceof ArmorStand)
+    private static boolean trueTarget(LivingEntity target,LivingEntity owner){return target!=owner&&target.isAlive()&&!(target instanceof ArmorStand);}
+    public static boolean eligible(LivingEntity target,LivingEntity owner){return trueTarget(target,owner)&&!target.isSpectator()
             &&(!(target instanceof net.minecraft.world.entity.player.Player p)||!p.isCreative());}
     public static void lockedRay(LivingEntity owner,LivingEntity target){
-        if(!(owner.level() instanceof ServerLevel level)||!eligible(target,owner))return;
+        if(!(owner.level() instanceof ServerLevel level)||!trueTarget(target,owner))return;
         visual(level,2,owner.getEyePosition(),target.getBoundingBox().getCenter(),0);rayHit(owner,target);
     }
     public static void ray(LivingEntity owner,Vec3 direction){
         if(!(owner.level() instanceof ServerLevel level))return;
         Vec3 start=owner.getEyePosition(),end=start.add(direction.normalize().scale(64));visual(level,2,start,end,0);
-        for(var target:level.getEntitiesOfClass(LivingEntity.class,new AABB(start,end).inflate(1),t->eligible(t,owner)))
+        for(var target:level.getEntitiesOfClass(LivingEntity.class,new AABB(start,end).inflate(1),t->trueTarget(t,owner)))
             if(target.getBoundingBox().inflate(.15).contains(start)||target.getBoundingBox().inflate(.15).clip(start,end).isPresent())rayHit(owner,target);
     }
     public static void rayHit(LivingEntity owner,LivingEntity target){
-        if(!eligible(target,owner)||!OmniraDamage.trueDamage(target,damage(owner,3),source(target,OmniraDamage.TRUE_DAMAGE,owner,owner,false,false)))return;
+        if(!trueTarget(target,owner)||!OmniraDamage.trueDamage(target,damage(owner,3),source(target,OmniraDamage.TRUE_DAMAGE,owner,owner,false,false)))return;
         boolean armorBroken=false;var seen=Collections.newSetFromMap(new IdentityHashMap<net.minecraft.world.item.ItemStack,Boolean>());
         for(var slot:List.of(EquipmentSlot.MAINHAND,EquipmentSlot.OFFHAND,EquipmentSlot.HEAD,EquipmentSlot.CHEST,EquipmentSlot.LEGS,EquipmentSlot.FEET)){
             var stack=target.getItemBySlot(slot);int max=stack.getMaxDamage();if(stack.isEmpty()||max<=0||!seen.add(stack))continue;

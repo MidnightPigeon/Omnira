@@ -79,10 +79,18 @@ public final class CrystalStorageNetworks extends SavedData {
         if(ball.virtualStorage||ball.hasPendingLoot())return;
         var e=endpoints.get(ball.storageIdentity);
         if(e!=null&&(!e.pos.equals(ball.getBlockPos())||!e.dimension.equals(ball.getLevel().dimension().location().toString()))){
-            ball.storageIdentity=UUID.randomUUID();e=null;
+            var previous=level(e);
+            // Native structure assembly moves the block entity while retaining its shared payload.
+            // Only adopt a relocation once the loaded old position proves it is no longer occupied
+            // by that identity; a live or unloaded original must not be stolen by a copied block.
+            if(previous!=null&&previous.hasChunkAt(e.pos)&&loaded(e)==null){
+                locations.remove(new Location(e.dimension,e.pos),e);
+                e.pos=ball.getBlockPos();e.dimension=ball.getLevel().dimension().location().toString();
+                locations.put(new Location(e.dimension,e.pos),e);topologyDirty=true;setDirty();
+            }else{ball.storageIdentity=UUID.randomUUID();e=null;}
         }
         if(e!=null&&e.rejected){ball.frequency[0]=ItemStack.EMPTY;ball.frequency[1]=ItemStack.EMPTY;ball.networkStatus=3;return;}
-        if(ball.frequency[0].isEmpty()&&ball.frequency[1].isEmpty())return;
+        if(ball.frequency[0].isEmpty()||ball.frequency[1].isEmpty()){detach(ball);return;}
         boolean added=e==null;
         if(added){
             e=new Endpoint();e.id=ball.storageIdentity;e.store=UUID.randomUUID();e.pos=ball.getBlockPos();
@@ -107,7 +115,7 @@ public final class CrystalStorageNetworks extends SavedData {
         ball.networkStatus=0;setDirty();reconcile();
     }
     private boolean sameFrequency(Endpoint a,Endpoint b){
-        return a.liquid==b.liquid&&ItemStack.isSameItemSameComponents(a.frequency[0],b.frequency[0])
+        return !a.frequency[0].isEmpty()&&!a.frequency[1].isEmpty()&&!b.frequency[0].isEmpty()&&!b.frequency[1].isEmpty()&&a.liquid==b.liquid&&ItemStack.isSameItemSameComponents(a.frequency[0],b.frequency[0])
             &&ItemStack.isSameItemSameComponents(a.frequency[1],b.frequency[1]);
     }
     public void reconcile(){

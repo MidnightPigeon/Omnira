@@ -1,0 +1,29 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:arcane_dust"
+    },
+    {
+      "item": "omnira:arcane_dust"
+    },
+    {
+      "item": "omnira:arcane_dust"
+    },
+    {
+      "item": "omnira:spiritual_crystal"
+    },
+    {
+      "item": "omnira:spiritual_crystal"
+    },
+    {
+      "item": "omnira:spiritual_crystal"
+    },
+    []
+  ],
+  "result": {
+    "id": "omnira:infusion_bud",
+    "count": 1
+  }
+}

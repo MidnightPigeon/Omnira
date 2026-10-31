@@ -13,5 +13,14 @@
       "target": "advanced_condensation_table",
       "label": "高阶凝聚台"
     }
+  ],
+  "related_items": [
+    "omnira:mosasaurus_essence",
+    "omnira:pterosaur_essence",
+    "omnira:land_king",
+    "omnira:sea_king",
+    "omnira:sky_king",
+    "omnira:time_distortion",
+    "omnira:distorted_psychic_talent_solution"
   ]
 }

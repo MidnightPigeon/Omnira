@@ -5,6 +5,7 @@
   "introduction": "introduction.json",
   "entries": [
     "entries/voyager_violin.json",
+    "entries/rain_soaked_suitcase_relic.json",
     "entries/night_heron_statue.json",
     "entries/dream_spell_core.json",
     "entries/traveler_manuscript.json",

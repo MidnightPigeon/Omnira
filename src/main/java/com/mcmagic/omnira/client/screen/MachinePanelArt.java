@@ -34,10 +34,10 @@ public final class MachinePanelArt {
         for(int i=1;i<=64;i++){double a=i*Math.PI/32;int xx=cx+(int)Math.round(Math.cos(a)*rx),yy=cy+(int)Math.round(Math.sin(a)*ry);
             line(p,x,y,xx,yy,color);x=xx;y=yy;}
     }
-    public static void orbit(Pixels p,int cx,int cy,int rx,int ry,float time,int color){
+    public static void orbit(Pixels p,int cx,int cy,int rx,int ry,double time,int color){
         for(int i=0;i<3;i++){double a=time*.04+i*Math.PI*2/3;int x=cx+(int)Math.round(Math.cos(a)*rx),y=cy+(int)Math.round(Math.sin(a)*ry);p.fill(x-1,y-1,x+2,y+2,color);}
     }
-    public static void flow(Pixels p,int x,int y,int xx,int yy,float time,int color){
+    public static void flow(Pixels p,int x,int y,int xx,int yy,double time,int color){
         line(p,x,y,xx,yy,0xFF789AA8);
         for(int i=0;i<2;i++){double f=((time*.018+i*.5)%1+1)%1;int a=(int)Math.round(x+(xx-x)*f),b=(int)Math.round(y+(yy-y)*f);p.fill(a-1,b-1,a+2,b+2,color);}
     }
@@ -57,7 +57,7 @@ public final class MachinePanelArt {
         polygon(p,BODY,50,35,126,35,153,77,126,117,50,117,23,77);
         line(p,49,32,127,32,LIGHT);line(p,19,77,49,32,LIGHT);
     }
-    public static void workstation(Pixels p,String kind,float time,float progress,boolean active){
+    public static void workstation(Pixels p,String kind,double time,float progress,boolean active){
         if(kind.equals("condensation")){
             polygon(p,RIM,43,100,133,100,148,116,135,123,41,123,28,116);
             polygon(p,BODY,44,102,132,102,143,114,132,119,44,119,33,114);
@@ -71,7 +71,7 @@ public final class MachinePanelArt {
             case "analysis" -> {
                 ring(p,88,56,15,15,GOLD);
                 line(p,88,71,88,82,RIM);line(p,64,82,112,82,RIM);
-                if(active){flow(p,88,82,64,98,time,MINT);flow(p,88,82,112,98,time,LILAC);}
+                if(active){flow(p,64,82,64,96,time,MINT);flow(p,112,82,112,96,time,LILAC);}
                 else{line(p,64,82,64,96,RIM);line(p,112,82,112,96,RIM);}
                 slot(p,88,56,GOLD);slot(p,64,104,MINT);slot(p,112,104,LILAC);
                 if(active){int y=44+(int)(progress*22);p.fill(77,y,99,y+1,LIGHT);}
@@ -79,7 +79,7 @@ public final class MachinePanelArt {
             case "processing" -> {
                 int[][] nodes={{60,40},{116,40},{32,76},{60,112},{116,112},{144,76}};
                 int[] colors={LIGHT,LIGHT,MINT,MINT,LILAC,LILAC};
-                for(int i=0;i<nodes.length;i++){int[] n=nodes[i];line(p,n[0],n[1],88,76,0xFF8AA5B7);if(active)flow(p,n[0],n[1],88,96,time,colors[i]);}
+                for(int i=0;i<nodes.length;i++){int[] n=nodes[i];if(active)flow(p,n[0],n[1],88,96,time,colors[i]);else line(p,n[0],n[1],88,96,0xFF8AA5B7);}
                 for(int i=0;i<nodes.length;i++)slot(p,nodes[i][0],nodes[i][1],colors[i]);
                 slot(p,74,72,BLUE);slot(p,102,72,GOLD);slot(p,88,96,0xFFE7B6D4);
             }
@@ -104,10 +104,27 @@ public final class MachinePanelArt {
         }
     }
     private static void tool(Pixels p,int x,int y,int kind,int color){
-        if(kind==1){line(p,x-4,y-5,x+1,y+6,color);line(p,x+4,y-5,x-1,y+6,color);p.fill(x-1,y-1,x+2,y+2,LIGHT);}
-        else{p.fill(x-1,y-5,x+1,y+7,color);if(kind==3)p.fill(x-5,y-6,x+5,y-2,color);
-            else if(kind==0)polygon(p,LIGHT,x,y-9,x+4,y-5,x,y-1,x-4,y-5);
-            else{p.fill(x-3,y-2,x+3,y,color);p.fill(x,y-8,x+1,y-5,LIGHT);}}
+        if(kind==1){
+            line(p,x-4,y-6,x+2,y+6,color);line(p,x-3,y-6,x+3,y+6,color);
+            line(p,x+4,y-6,x-2,y+6,color);line(p,x+3,y-6,x-3,y+6,color);
+            p.fill(x-5,y-6,x-3,y-3,LIGHT);p.fill(x+3,y-6,x+5,y-3,LIGHT);
+            p.fill(x-1,y-1,x+2,y+2,DARK);p.fill(x,y,x+1,y+1,LIGHT);
+        }else{
+            p.fill(x-2,y-2,x+2,y+7,DARK);p.fill(x-1,y-2,x+1,y+7,color);
+            p.fill(x-2,y+4,x+2,y+5,GOLD);
+            if(kind==3){frame(p,x-6,y-7,12,6,color);p.fill(x-4,y-5,x+4,y-3,color);}
+            else if(kind==0){polygon(p,color,x,y-10,x+4,y-6,x,y-2,x-4,y-6);line(p,x,y-9,x,y-4,LIGHT);}
+            else{p.fill(x-3,y-2,x+3,y,color);p.fill(x-1,y-6,x+1,y-2,LIGHT);p.fill(x,y-9,x+1,y-6,color);}
+        }
+    }
+    public static void frequencyPanel(Pixels p,int y){
+        frame(p,178,y,29,58,0xE03D3659);
+        for(int i=0;i<2;i++){
+            int sy=y+5+i*27;
+            p.fill(183,sy,201,sy+18,LILAC);p.fill(184,sy+1,200,sy+17,0xFF403B53);
+            p.fill(184,sy+17,201,sy+18,0xFFDDCFF2);
+        }
+        p.fill(191,y+25,193,y+29,0xFF9C83C2);
     }
     public static void catalysis(Pixels p){
         frame(p,33,17,110,92,0xC9527581);
@@ -123,9 +140,9 @@ public final class MachinePanelArt {
         frame(p,160,20,68,68,0xFF476773);frame(p,150,97,88,32,0xFF476773);
         p.fill(154,27,155,90,0xFF92B4C0);
     }
-    public static void grid(Pixels p,int count,int selected,float time){
+    public static void grid(Pixels p,int count,int selected,double time){
         int color=count==3?LIGHT:count==5?MINT:count==8?LILAC:GOLD;
-        ring(p,88,80,59,50,color);ring(p,88,80,44,32,0xFF7196A7);
+        if(count<8)ring(p,88,80,59,50,color);
         for(int i=0;i<count;i++){
             double a=i*Math.PI*2/count;int x=88+(int)Math.round(Math.sin(a)*52),y=80-(int)Math.round(Math.cos(a)*44);
             int xx=88+(int)Math.round(Math.sin((i+1)*Math.PI*2/count)*52),yy=80-(int)Math.round(Math.cos((i+1)*Math.PI*2/count)*44);
@@ -138,7 +155,7 @@ public final class MachinePanelArt {
             if(i==selected)p.fill(x-2,y-12,x+3,y-10,color);
         }
     }
-    public static void aggregation(Pixels p,int[][] points,int[] colors,float time,float progress){
+    public static void aggregation(Pixels p,int[][] points,int[] colors,double time,float progress){
         for(int i=0;i<8;i++){
             var a=points[i];var b=points[(i+1)%8];int color=progress>0&&i<=Math.min(7,(int)(progress*8))?LIGHT:RIM;
             line(p,a[0]+8,a[1]+8,b[0]+8,b[1]+8,color);
@@ -151,7 +168,7 @@ public final class MachinePanelArt {
             slot(p,x,y,color);
         }
     }
-    public static void engineControls(Pixels p,boolean kinetics,float time,int[] colors){
+    public static void engineControls(Pixels p,boolean kinetics,double time,int[] colors){
         frame(p,kinetics?0:76,18,kinetics?268:116,137,0xE84F707C);
         int[] hex={190,181,162,196,106,196,78,181,106,166,162,166};
         for(int i=0;i<6;i++){int j=(i+1)%6;line(p,hex[i*2],hex[i*2+1],hex[j*2],hex[j*2+1],RIM);
@@ -161,10 +178,10 @@ public final class MachinePanelArt {
             if(kinetics){frame(p,57,y-1,151,20,DARK);p.fill(59,y+17,206,y+18,color);}
         }
     }
-    public static void reversalTrim(Pixels p,float time,boolean active){
+    public static void reversalTrim(Pixels p,double time,boolean active){
         reversalTrim(p,time,active,false);
     }
-    public static void reversalTrim(Pixels p,float time,boolean active,boolean infusion){
+    public static void reversalTrim(Pixels p,double time,boolean active,boolean infusion){
         frame(p,-29,34,26,101,0xE0355665);line(p,-3,68,38,68,RIM);line(p,-3,71,38,71,0xFF7196A7);
         for(int i=0;i<12;i++){double a=i*Math.PI/6;int x=88+(int)Math.round(Math.cos(a)*43),y=64+(int)Math.round(Math.sin(a)*43);p.fill(x,y,x+2,y+2,LIGHT);}
         if(active)orbit(p,88,64,47,47,-time,infusion?0xFFBD97EC:MINT);

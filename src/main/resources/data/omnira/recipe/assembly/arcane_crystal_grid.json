@@ -27,5 +27,6 @@
   "result": {
     "id": "omnira:arcane_crystal_grid",
     "count": 1
-  }
+  },
+  "outer_shapeless": true
 }

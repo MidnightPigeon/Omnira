@@ -66,7 +66,7 @@ public final class BranchAdvancementGameTests {
     @GameTest(template="spell_arena") public static void sharedItemsRequireRealWithdrawalThroughOtherEnd(GameTestHelper h){
         var p=player(h);var a=orb(h,3,false);var b=orb(h,6,false);BranchProgress.operate(p,a);BranchProgress.operate(p,b);
         var marker=new ItemStack(Items.PAPER);marker.set(DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(UUID.randomUUID().toString()));
-        a.setFrequency(0,marker);b.setFrequency(0,marker);
+        a.setFrequency(0,marker);a.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));b.setFrequency(0,marker);b.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));
         h.assertTrue(!recorded(p,"distant_echo"),"Frequency alone counted");a.setItem(0,new ItemStack(Items.EMERALD,2));
         b.setItem(0,new ItemStack(Items.EMERALD,3));
         b.itemHandler.extractItem(0,1,true);h.assertTrue(!recorded(p,"distant_echo"),"Simulated withdrawal counted");
@@ -76,7 +76,7 @@ public final class BranchAdvancementGameTests {
     }
     @GameTest(template="spell_arena") public static void sharedFluidReceiptSurvivesNetworkReload(GameTestHelper h){
         var p=player(h);var a=(LiquidCrystalBallBlockEntity)orb(h,3,true);var b=(LiquidCrystalBallBlockEntity)orb(h,6,true);BranchProgress.operate(p,b);
-        var marker=new ItemStack(Items.PAPER);marker.set(DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(UUID.randomUUID().toString()));a.setFrequency(0,marker);b.setFrequency(0,marker);
+        var marker=new ItemStack(Items.PAPER);marker.set(DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(UUID.randomUUID().toString()));a.setFrequency(0,marker);a.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));b.setFrequency(0,marker);b.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));
         a.tank.fill(new FluidStack(net.minecraft.world.level.material.Fluids.LAVA,1000),FluidAction.EXECUTE);
         var tag=CrystalStorageNetworks.get(h.getLevel()).save(new net.minecraft.nbt.CompoundTag(),h.getLevel().registryAccess());
         h.getLevel().getServer().overworld().getDataStorage().set("omnira_crystal_storage",CrystalStorageNetworks.load(tag,h.getLevel().registryAccess()));
@@ -89,7 +89,7 @@ public final class BranchAdvancementGameTests {
         level.setBlockAndUpdate(pos,CrystalStorageContent.ITEM_ORB.get().defaultBlockState());var b=(CrystalBallBlockEntity)level.getBlockEntity(pos);
         try{
             BranchProgress.operate(p,b);var marker=new ItemStack(Items.PAPER);marker.set(DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(UUID.randomUUID().toString()));
-            a.setFrequency(0,marker);b.setFrequency(0,marker);a.setItem(0,new ItemStack(Items.DIAMOND));
+            a.setFrequency(0,marker);a.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));b.setFrequency(0,marker);b.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));a.setItem(0,new ItemStack(Items.DIAMOND));
             h.assertTrue(b.removeItem(0,1).isEmpty()&&!recorded(p,"across_dimensions"),"Unstabilized cross-dimensional transfer counted");
             a.upgrades.setStackInSlot(0,new ItemStack(ModItems.SPACETIME_STABILIZATION_UPGRADE.get()));CrystalStorageNetworks.get(h.getLevel()).reconcile();
             h.assertTrue(!recorded(p,"across_dimensions"),"Installing upgrade alone counted");

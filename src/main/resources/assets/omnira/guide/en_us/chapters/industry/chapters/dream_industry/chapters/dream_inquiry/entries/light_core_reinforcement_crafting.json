@@ -1,9 +1,9 @@
 {
   "id": "light_core_reinforcement_crafting",
   "item": "omnira:light_core_reinforcement",
-  "title": "Light Core Reinforcement · Crafting",
+  "title": "Light Crystal Core Reinforcement · Crafting",
   "text": [
-    "Use the assembly recipe below to forge this item."
+    "Station: Arcane Assembly Bench."
   ],
   "recipes": true,
   "links": [

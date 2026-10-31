@@ -23,7 +23,7 @@ public final class TravelerManuscriptScreen extends ResponsiveScreen {
     }
 
     private Button pageButton(int x,int y,String glyph,int direction) {
-        return addRenderableWidget(new Button(x,y,22,18,Component.literal(glyph),button->turn(direction),supplier->supplier.get()) {
+        var button=addRenderableWidget(new Button(x,y,22,18,Component.literal(glyph),b->turn(direction),supplier->supplier.get()) {
             @Override protected void renderWidget(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
                 int rim=active?0xFF648FA3:0xFF9AAFB7;
                 int face=active?(isHoveredOrFocused()?0xFFC5EBF2:0xFFA8D7E2):0xFFCFDADC;
@@ -32,9 +32,11 @@ public final class TravelerManuscriptScreen extends ResponsiveScreen {
                 graphics.fill(getX()+3,getY()+2,getX()+19,getY()+16,face);
                 graphics.fill(getX()+2,getY()+4,getX()+20,getY()+14,face);
                 graphics.fill(getX()+4,getY()+3,getX()+18,getY()+4,0xFFE6F7F7);
-                graphics.drawCenteredString(font,getMessage(),getX()+11,getY()+5,active?0xFF315B70:0xFF879DA4);
+                PixelUiIcons.draw(graphics::fill,glyph,getX()+11,getY()+9,active?0xFF315B70:0xFF879DA4);
             }
         });
+        button.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable(direction<0?"guide.omnira.previous":"guide.omnira.next")));
+        return button;
     }
 
     private void turn(int direction) {

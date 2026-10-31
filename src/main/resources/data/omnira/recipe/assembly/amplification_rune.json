@@ -1,6 +1,32 @@
 {
   "type": "omnira:assembly",
   "operation": "fixed",
-  "slots": [{"item":"minecraft:gold_ingot"},{"item":"minecraft:gold_ingot"},{"item":"minecraft:gold_ingot"},{"item":"minecraft:gold_ingot"},{"item":"minecraft:gold_ingot"},{"item":"minecraft:gold_ingot"},{"item":"minecraft:amethyst_block"}],
-  "result": {"id":"omnira:amplification_rune","count":1}
+  "slots": [
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:amethyst_block"
+    }
+  ],
+  "result": {
+    "id": "omnira:amplification_rune",
+    "count": 1
+  },
+  "outer_shapeless": true
 }

@@ -14,6 +14,22 @@ import java.util.*;
 @GameTestHolder("omnira_dense_industry")
 @PrefixGameTestTemplate(false)
 public final class DenseIndustryGameTests {
+    @GameTest(template="spell_arena") public static void displayFluidSnapshotsInvalidateOnRealChanges(GameTestHelper h){
+        var tank=new com.mcmagic.omnira.alchemy.PoolFluids(()->{});
+        var water=new net.neoforged.neoforge.fluids.FluidStack(net.minecraft.world.level.material.Fluids.WATER,1000);
+        var execute=net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE;
+        var simulate=net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE;
+        tank.fill(water,execute);
+        var a=com.mcmagic.omnira.client.ReactionPoolDisplayFluids.layers(tank);
+        tank.fill(water,simulate);tank.drain(500,simulate);
+        h.assertTrue(a==com.mcmagic.omnira.client.ReactionPoolDisplayFluids.layers(tank),"Simulation invalidated display");
+        tank.drain(500,execute);
+        var b=com.mcmagic.omnira.client.ReactionPoolDisplayFluids.layers(tank);
+        h.assertTrue(a!=b&&a.getFirst().getAmount()==1000&&b.getFirst().getAmount()==500,"Display snapshot stale or mutated");
+        tank.load(new net.minecraft.nbt.ListTag(),h.getLevel().registryAccess());
+        h.assertTrue(com.mcmagic.omnira.client.ReactionPoolDisplayFluids.layers(tank).isEmpty(),"Empty sync retained old liquid");
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void spatialPhasesPreserveCadenceAndSpreadOneThousandNodes(GameTestHelper h){
         int[] transfers=new int[5],refreshes=new int[20];
         for(int x=0;x<40;x++)for(int z=0;z<25;z++){

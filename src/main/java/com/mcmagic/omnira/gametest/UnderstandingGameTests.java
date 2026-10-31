@@ -93,19 +93,19 @@ public final class UnderstandingGameTests {
     @GameTest(template="spell_arena") public static void inverseWritingDeduplicatesElementsButRetainsModifierCounts(GameTestHelper h){
         var input=new SimpleContainer(9);
         input.setItem(0,new ItemStack(ModItems.EARTH_MICROCORE.get()));input.setItem(1,new ItemStack(ModItems.AIR_MICROCORE.get()));
-        input.setItem(2,new ItemStack(Items.IRON_BLOCK));input.setItem(3,new ItemStack(Items.IRON_BLOCK));
+        input.setItem(2,new ItemStack(ModItems.AMPLIFICATION_STAR.get()));input.setItem(3,new ItemStack(ModItems.AMPLIFICATION_STAR.get()));
         input.setItem(4,new ItemStack(ModItems.SHARP_BREATH.get()));input.setItem(5,new ItemStack(ModItems.SHARP_BREATH.get()));
         var crystal=CrystalProcessingTableMenu.previewCrystal(input);var before=crystal.copy();
         var out=UniversalUnderstanding.materials(crystal);
-        h.assertTrue(count(out,Items.IRON_BLOCK)==2&&count(out,ModItems.SHARP_BREATH.get())==1,"Merged modifiers or refunded redundant element");
+        h.assertTrue(count(out,ModItems.AMPLIFICATION_STAR.get())==2&&count(out,ModItems.SHARP_BREATH.get())==1,"Merged modifiers or refunded redundant element");
         h.assertTrue(count(out,ModItems.SPIRITUAL_CRYSTAL.get())==1&&out.stream().mapToInt(ItemStack::getCount).sum()==6,"Wrong substrate or microcores");
         h.assertTrue(ItemStack.matches(before,crystal)&&crystal.getComponents().equals(before.getComponents()),"Dismantle preview changed crystal data");
         var high=new SimpleContainer(12);
         high.setItem(0,input.getItem(0));high.setItem(1,input.getItem(1));
         high.setItem(2,new ItemStack(ModItems.SHARP_BREATH.get()));high.setItem(3,new ItemStack(ModItems.HEALING_DEW.get()));high.setItem(4,high.getItem(2).copy());
-        high.setItem(5,new ItemStack(Items.CLOCK));high.setItem(6,new ItemStack(Items.CLOCK));high.setItem(7,new ItemStack(ModItems.SPIRITUAL_CRYSTAL.get()));
+        high.setItem(5,new ItemStack(ModItems.LINGERING_THREAD.get()));high.setItem(6,new ItemStack(ModItems.LINGERING_THREAD.get()));high.setItem(7,new ItemStack(ModItems.INFUSION_BUD.get()));
         out=UniversalUnderstanding.materials(CrystalProcessingTableMenu.previewCrystal(high,5,8,2,5,com.mcmagic.omnira.aggregation.AggregationContent.CRYSTAL.get()));
-        h.assertTrue(count(out,Items.CLOCK)==2&&count(out,ModItems.SPIRITUAL_CRYSTAL.get())==1&&count(out,ModItems.INFUSED_SPIRITUAL_CRYSTAL.get())==1
+        h.assertTrue(count(out,ModItems.LINGERING_THREAD.get())==2&&count(out,ModItems.INFUSION_BUD.get())==1&&count(out,ModItems.INFUSED_SPIRITUAL_CRYSTAL.get())==1
                 &&count(out,ModItems.SHARP_BREATH.get())==1&&count(out,ModItems.HEALING_DEW.get())==1,"High-tier inverse duplicated shared modifiers or returned wrong substrate");
         h.succeed();
     }

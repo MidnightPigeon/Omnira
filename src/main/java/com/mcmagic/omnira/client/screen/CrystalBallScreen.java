@@ -43,12 +43,7 @@ public final class CrystalBallScreen extends ResponsiveContainerScreen<CrystalBa
             }
         }
         if(menu.ball.resonant()){
-            g.fill(leftPos+178,topPos+37,leftPos+207,topPos+95,0xE03D3659);
-            for(int i=0;i<2;i++){
-                int y=topPos+42+i*27;
-                g.fill(leftPos+183,y,leftPos+201,y+18,0xFFB9A5DA);
-                g.fill(leftPos+184,y+1,leftPos+200,y+17,0xFF403B53);
-            }
+            MachinePanelArt.frequencyPanel(CrystalUi.pixels(g,leftPos,topPos),37);
         }
         if(menu.ball instanceof LiquidCrystalBallBlockEntity liquid) {
             g.blit(PORT,leftPos-31,topPos+37,0,0,26,56,26,56);

@@ -2,8 +2,24 @@
   "type": "omnira:assembly",
   "outer_shapeless": true,
   "slots": [
-    {"item": "omnira:spiritual_crystal"}, {"item": "minecraft:iron_ingot"}, {"item": "minecraft:diamond"},
-    [], [], [], {"item": "omnira:crystal_pickaxe"}
+    {
+      "item": "omnira:spiritual_crystal"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    [],
+    [],
+    [],
+    {
+      "item": "omnira:crystal_pickaxe"
+    }
   ],
-  "result": {"id": "omnira:infused_crystal_pickaxe", "count": 1}
+  "result": {
+    "id": "omnira:infused_crystal_pickaxe",
+    "count": 1
+  }
 }

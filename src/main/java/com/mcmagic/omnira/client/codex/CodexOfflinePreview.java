@@ -136,7 +136,8 @@ public final class CodexOfflinePreview {
                 for(var face:heart){int c=CodexGeometry.color(face.tint(),time,false);c=(c&0xFFFFFF)|(Math.round(255*CodexGeometry.opacity(fade))<<24);geometry.add(new Painted(rotateHeart(face.vertices(),time),c));}
                 if(cell==7){
                     for(var face:CodexGeometry.range(15))geometry.add(new Painted(face.geometry().vertices(),
-                            (face.ring()?CodexGeometry.RANGE_RING_ALPHA:CodexGeometry.RANGE_SHELL_ALPHA)<<24|0xA7E4DE,true));
+                            CodexGeometry.RANGE_RING_ALPHA<<24|0xA7E4DE,true));
+                    for(var face:CodexProjection.mesh(15,0,1))geometry.add(new Painted(face.vertices(),CodexGeometry.RANGE_GRID_ALPHA<<24|0xA7E4DE,true));
                     int count=CodexGeometry.linkSamples(6.5);
                     for(int i=0;i<count;i++){
                         float f=(float)CodexGeometry.linkFraction(i,count),x=-6+6.5F*f,y=.5F,z=.5F;
@@ -184,7 +185,8 @@ public final class CodexOfflinePreview {
             g.setColor(new Color(0xA1C5FA));g.fillRect(cell*400,0,400,260);
             g.setColor(new Color(0x5F773B));g.fillRect(cell*400,260,400,260);
             for(var face:CodexGeometry.range(diameter))geometry.add(new Painted(face.geometry().vertices(),
-                    (face.ring()?CodexGeometry.RANGE_RING_ALPHA:CodexGeometry.RANGE_SHELL_ALPHA)<<24|0xA7E4DE,true));
+                    CodexGeometry.RANGE_RING_ALPHA<<24|0xA7E4DE,true));
+            for(var face:CodexProjection.mesh(diameter,0,1))geometry.add(new Painted(face.vertices(),CodexGeometry.RANGE_GRID_ALPHA<<24|0xA7E4DE,true));
             draw(g,geometry,cell,cell%2==0?.3:1.1,diameter==7?44:19);
             g.setColor(new Color(0x263C49));g.setFont(new Font(Font.MONOSPACED,Font.BOLD,15));
             g.drawString("BURST PIXEL RANGE / DIAMETER "+diameter,cell*400+15,28);

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "omnira:arcanist_talent",
     "omnira:psyker_talent",
     "omnira:land_king",
     "omnira:sea_king",

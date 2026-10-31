@@ -14,13 +14,10 @@ import java.util.List;
 
 @GameTestHolder("omnira_biome_music") @PrefixGameTestTemplate(false)
 public final class BiomeMusicGameTests {
-    @GameTest(template="spell_arena") public static void blankSpaceDiscIsTaggedButHasNoPlayback(GameTestHelper h){
+    @GameTest(template="spell_arena") public static void spaceDiscUsesNativePlaybackAndSave(GameTestHelper h){
         var stack=new ItemStack(ModItems.MUSIC_DISC_SPACE.get());
-        h.assertTrue(stack.is(net.neoforged.neoforge.common.Tags.Items.MUSIC_DISCS)&&stack.getMaxStackSize()==1,"Blank space disc lacks disc identity");
-        h.assertTrue(!stack.has(DataComponents.JUKEBOX_PLAYABLE)&&JukeboxSong.fromStack(h.getLevel().registryAccess(),stack).isEmpty(),"Blank space disc references invented audio");
-        var pos=new BlockPos(5,3,5);h.setBlock(pos,Blocks.JUKEBOX);var jukebox=(JukeboxBlockEntity)h.getBlockEntity(pos);
-        h.assertTrue(!jukebox.canPlaceItem(0,stack),"Unrecorded disc entered playback");
-        h.assertTrue(com.mcmagic.omnira.registry.ModCreativeModeTabs.contents(com.mcmagic.omnira.registry.ModCreativeModeTabs.Category.MISC).stream().anyMatch(s->s.is(stack.getItem())),"Blank space disc missing from creative catalog");h.succeed();
+        checkDisc(h,stack.getItem(),"po_sui_shi_jie",1500,3);
+        h.assertTrue(com.mcmagic.omnira.registry.ModCreativeModeTabs.contents(com.mcmagic.omnira.registry.ModCreativeModeTabs.Category.MISC).stream().anyMatch(s->s.is(stack.getItem())),"Space disc missing from creative catalog");h.succeed();
     }
     @GameTest(template="spell_arena") public static void bothMachinesConvertEveryTaggedDisc(GameTestHelper h){
         var level=h.getLevel();var discs=new java.util.ArrayList<Item>();
@@ -66,6 +63,7 @@ public final class BiomeMusicGameTests {
     @GameTest(template="spell_arena") public static void timeMusicIsBoundOnlyToUpperBiomes(GameTestHelper h){
         var biomes=h.getLevel().registryAccess().registryOrThrow(Registries.BIOME);
         var selected=List.of("temporal_continent","stilled_wastes","fleeting_woods","reversion_mire","epochal_cliffs","recurrence_garden","eventide_ruins");
+        var spatial=List.of("folded_caverns","dislocated_geodes","inverted_abyss","void_starsea","phase_crystal_grove","topological_labyrinth");
         for(var biome:biomes){
             var id=biomes.getKey(biome);if(!id.getNamespace().equals("omnira"))continue;
             var music=biome.getBackgroundMusic();
@@ -73,7 +71,16 @@ public final class BiomeMusicGameTests {
             h.assertTrue(time==selected.contains(id.getPath()),"Time music assigned to wrong biome: "+id);
             boolean mirror=music.isPresent()&&music.get().getEvent().value().getLocation().toString().equals("omnira:music.mirror_dream");
             h.assertTrue(mirror==id.getPath().equals("mirror_dream_border"),"Mirror dream music assigned to wrong biome: "+id);
-            if(time||mirror)h.assertTrue(music.get().getMinDelay()==12000&&music.get().getMaxDelay()==24000&&music.get().replaceCurrentMusic(),"Native background timing changed");
+            boolean space=music.isPresent()&&music.get().getEvent().value().getLocation().toString().equals("omnira:music.space");
+            h.assertTrue(space==spatial.contains(id.getPath()),"Space music assigned to wrong biome: "+id);
+            boolean light=music.isPresent()&&music.get().getEvent().value().getLocation().toString().equals("omnira:music.light");
+            h.assertTrue(light==id.getPath().equals("dawn_crystal_fields"),"Light music assigned to wrong biome: "+id);
+            boolean shadow=music.isPresent()&&music.get().getEvent().value().getLocation().toString().equals("omnira:music.shadow");
+            h.assertTrue(shadow==id.getPath().equals("shadow_woodland"),"Shadow music assigned to wrong biome: "+id);
+            if(time||mirror||space||light||shadow){
+                int minimum=time||space?600:12000,maximum=time||space?1200:24000;
+                h.assertTrue(music.get().getMinDelay()==minimum&&music.get().getMaxDelay()==maximum&&music.get().replaceCurrentMusic(),"Wrong background interval for "+id);
+            }
         }h.succeed();
     }
     @GameTest(template="spell_arena") public static void discUsesNativeJukeboxPlaybackAndSave(GameTestHelper h){

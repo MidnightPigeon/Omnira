@@ -16,10 +16,18 @@ public final class StaffEnhancements {
     private StaffEnhancements() {}
 
     public static String keyword(ItemStack stack) {
-        if(stack.is(Items.IRON_BLOCK))return "enhancement";
-        if(stack.is(Items.CLOCK))return "delay";
-        if(stack.is(ModItems.LIGHT_MICROCORE.get()))return "holy";
-        if(stack.is(ModItems.SPIRITUAL_CRYSTAL.get()))return "infusion";
+        if(stack.is(ModItems.AMPLIFICATION_STAR.get()))return "enhancement";
+        if(stack.is(ModItems.LINGERING_THREAD.get()))return "delay";
+        if(stack.is(ModItems.HOLY_HALO.get()))return "holy";
+        // Preserve modifiers already installed before the material split.
+        if(stack.is(ModItems.LIGHT_MICROCORE.get()) && StaffPart.is(stack,StaffPart.Role.UPGRADE)
+                && StaffPart.of(stack).upgradeSlot()==StaffPart.SlotKind.ENHANCEMENT)return "holy";
+        if(stack.is(ModItems.INFUSION_BUD.get()))return "infusion";
+        if(StaffPart.is(stack,StaffPart.Role.UPGRADE) && StaffPart.of(stack).upgradeSlot()==StaffPart.SlotKind.ENHANCEMENT) {
+            if(stack.is(Items.IRON_BLOCK))return "enhancement";
+            if(stack.is(Items.CLOCK))return "delay";
+            if(stack.is(ModItems.SPIRITUAL_CRYSTAL.get()))return "infusion";
+        }
         return "";
     }
 

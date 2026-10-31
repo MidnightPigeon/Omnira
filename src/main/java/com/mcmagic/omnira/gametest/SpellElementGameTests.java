@@ -20,6 +20,27 @@ import java.util.*;
 @GameTestHolder("omnira_spell_elements")
 @PrefixGameTestTemplate(false)
 public final class SpellElementGameTests {
+    @GameTest(template="spell_arena") public static void dedicatedModifiersReplaceRawMaterials(GameTestHelper h) {
+        var slots=new net.minecraft.world.SimpleContainer(9);
+        slots.setItem(0,new ItemStack(ModItems.AIR_MICROCORE.get()));slots.setItem(1,new ItemStack(ModItems.AIR_MICROCORE.get()));
+        slots.setItem(4,new ItemStack(ModItems.SHARP_BREATH.get()));
+        var raw=java.util.List.of(Items.IRON_BLOCK,Items.CLOCK,ModItems.SPIRITUAL_CRYSTAL.get());
+        var refined=java.util.List.of(ModItems.AMPLIFICATION_STAR.get(),ModItems.LINGERING_THREAD.get(),ModItems.INFUSION_BUD.get());
+        var words=java.util.List.of("enhancement","delay","infusion");
+        for(int i=0;i<3;i++) {
+            slots.setItem(2,new ItemStack(raw.get(i)));
+            var before=CrystalProcessingTableMenu.previewCrystal(slots);
+            h.assertTrue(!com.mcmagic.omnira.spell.SpellPayload.of(before).keywords().contains(words.get(i)),"Raw material still applies modifier");
+            h.assertTrue(com.mcmagic.omnira.item.staff.StaffEnhancements.keyword(slots.getItem(2)).isEmpty(),"Raw staff modifier accepted");
+            slots.setItem(2,new ItemStack(refined.get(i)));
+            var crystal=CrystalProcessingTableMenu.previewCrystal(slots);
+            h.assertTrue(com.mcmagic.omnira.spell.SpellPayload.of(crystal).keywords().contains(words.get(i)),"Dedicated modifier missing");
+            var expected=refined.get(i);
+            h.assertTrue(com.mcmagic.omnira.guidance.UniversalUnderstanding.materials(crystal).stream().anyMatch(s->s.is(expected)),"Inverse recipe returned raw modifier");
+        }
+        h.assertTrue(CrystalProcessingTableMenu.mayPlace(7,new ItemStack(ModItems.SPIRITUAL_CRYSTAL.get()))&&!CrystalProcessingTableMenu.mayPlace(7,new ItemStack(ModItems.INFUSION_BUD.get())),"Substrate changed with modifier");
+        h.succeed();
+    }
     @GameTest(template="spell_arena")
     public static void compositionAndSlotRoles(GameTestHelper h) {
         var inventory=new SimpleContainer(9);
@@ -27,7 +48,7 @@ public final class SpellElementGameTests {
         inventory.setItem(5,new ItemStack(ModItems.HEALING_DEW.get()));
         for(int clocks=0;clocks<=2;clocks++) for(int iron=0;iron<=2-clocks;iron++) {
             inventory.setItem(2,ItemStack.EMPTY);inventory.setItem(3,ItemStack.EMPTY);
-            for(int i=0;i<clocks+iron;i++) inventory.setItem(2+i,new ItemStack(i<clocks?Items.CLOCK:Items.IRON_BLOCK,64));
+            for(int i=0;i<clocks+iron;i++) inventory.setItem(2+i,new ItemStack(i<clocks?ModItems.LINGERING_THREAD.get():ModItems.AMPLIFICATION_STAR.get(),64));
             var effects=CrystalProcessingTableMenu.composeEffects(inventory);
             h.assertTrue(effects.size()==2 && !effects.getFirst().healing() && effects.getLast().healing(),"Wrong element mapping");
             for(var effect:effects) {
@@ -35,12 +56,12 @@ public final class SpellElementGameTests {
                 h.assertTrue(effect.duration()==(clocks==0?0:800+1200*(clocks-1)),"Wrong duration");
             }
         }
-        inventory.setItem(2,new ItemStack(ModItems.SPIRITUAL_CRYSTAL.get()));
-        inventory.setItem(3,new ItemStack(Items.CLOCK));
+        inventory.setItem(2,new ItemStack(ModItems.INFUSION_BUD.get()));
+        inventory.setItem(3,new ItemStack(ModItems.LINGERING_THREAD.get()));
         h.assertTrue(CrystalProcessingTableMenu.composeEffects(inventory).stream().allMatch(e->e.infused() && e.duration()==800),
                 "Infusion must preserve delayed composition");
         h.assertTrue(CrystalProcessingTableMenu.mayPlace(4,new ItemStack(ModItems.SHARP_BREATH.get())),"Tag missing");
-        h.assertTrue(!CrystalProcessingTableMenu.mayPlace(5,new ItemStack(Items.CLOCK)),"Clock accepted as element");
+        h.assertTrue(!CrystalProcessingTableMenu.mayPlace(5,new ItemStack(ModItems.LINGERING_THREAD.get())),"Clock accepted as element");
         h.assertTrue(CrystalProcessingTableMenu.mayPlace(2,new ItemStack(Items.DIAMOND)),"Modifiers incorrectly whitelisted");
         inventory.setItem(5,new ItemStack(ModItems.SHARP_BREATH.get()));
         h.assertTrue(CrystalProcessingTableMenu.composeEffects(inventory).size()==1,"Repeated elements must apply once");
@@ -106,8 +127,8 @@ public final class SpellElementGameTests {
         var menu=new CrystalProcessingTableMenu(1,player.getInventory(),table,table);
         table.setItem(0,new ItemStack(ModItems.WATER_MICROCORE.get()));
         table.setItem(1,new ItemStack(ModItems.FIRE_MICROCORE.get()));
-        table.setItem(2,new ItemStack(Items.CLOCK,4));
-        table.setItem(3,new ItemStack(Items.IRON_BLOCK,4));
+        table.setItem(2,new ItemStack(ModItems.LINGERING_THREAD.get(),4));
+        table.setItem(3,new ItemStack(ModItems.AMPLIFICATION_STAR.get(),4));
         table.setItem(4,new ItemStack(ModItems.SHARP_BREATH.get(),4));
         table.setItem(5,new ItemStack(ModItems.HEALING_DEW.get(),4));
         table.setItem(6,new ItemStack(Items.INK_SAC));

@@ -1,0 +1,6 @@
+{
+  "sound_event": "omnira:music_disc.po_sui_shi_jie",
+  "description": {"translate": "jukebox_song.omnira.po_sui_shi_jie"},
+  "length_in_seconds": 75.0,
+  "comparator_output": 3
+}

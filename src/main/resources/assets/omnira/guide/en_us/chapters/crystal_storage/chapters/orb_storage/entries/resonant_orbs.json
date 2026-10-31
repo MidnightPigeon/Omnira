@@ -5,8 +5,8 @@
   "recipes": true,
   "text": [
     "Assemble an item or liquid crystal ball into its resonant form. Existing contents and upgrades are preserved.",
-    "The two slots on the right hold frequency markers. Click or drag any item to mark without consuming it; click with an empty cursor to clear. Order and item components matter, and at least one marker is required. Matching orbs of the same kind share one storage capacity. Item networks glow green and fluid networks blue.",
-    "Without stabilization, matching frequencies in different dimensions are independent. One stabilization upgrade in the network enables cross-dimensional sharing. All members show the same upgrades, which can be removed from any member; capacity is not multiplied by orb count.",
+    "The two slots on the right hold frequency markers. Click or drag any item to mark without consuming it; click with an empty cursor to clear. Both slots must be marked to activate a frequency; order and item components matter. Matching orbs of the same kind share one storage capacity. Item networks glow green and fluid networks blue.",
+    "Cross-dimensional networking requires Spacetime Stabilization. Upgrades are shared and can be viewed, installed or removed through any member. Storage capacity is shared once, never multiplied by orb count.",
     "If contents or upgrades cannot merge, only the newcomer turns red and clears its frequency. Contents and the existing network are safe. Clear or set a marker to retry; without a matching partner the base stays purple.",
     "Changing frequency, removing members or splitting dimensions keeps exactly one copy of contents and upgrades with a surviving original channel member. Chunk unload does not erase shared storage."
   ],

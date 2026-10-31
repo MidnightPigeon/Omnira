@@ -85,7 +85,9 @@ public final class DreamContent {
             .lightLevel(s->light).isRedstoneConductor((s,l,p)->false).isViewBlocking((s,l,p)->false).isSuffocating((s,l,p)->false));}
     private static DeferredBlock<Block> block(String name,Supplier<Block> factory) {
         var block=ModBlocks.BLOCKS.register(name,factory);
-        var item=ModItems.ITEMS.register(name,()->new BlockItem(block.get(),new Item.Properties()));
+        var item=ModItems.ITEMS.register(name,()->name.equals("shadow_berries")
+                ?new com.mcmagic.omnira.item.ShadowBerriesItem(block.get(),new Item.Properties())
+                :new BlockItem(block.get(),new Item.Properties()));
         if(!name.equals("crystal_column_capital"))ITEMS.add(item);
         return block;
     }

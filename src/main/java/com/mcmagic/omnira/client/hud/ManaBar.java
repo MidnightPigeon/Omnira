@@ -9,6 +9,9 @@ import net.minecraft.util.Mth;
 public final class ManaBar {
     private ManaBar() {}
     public static void render(GuiGraphics g, Font font, ManaState mana, int x, int y, int width) {
+        render(g,font,mana,x,y,width,true);
+    }
+    public static void render(GuiGraphics g, Font font, ManaState mana, int x, int y, int width,boolean numbers) {
         ManaBarTooltips.record(g,mana,x,y,width);
         int color=0xFF000000|mana.color(), left=x+5, right=x+width-5;
         g.fill(left,y+1,right,y+12,0xFF343139);
@@ -61,6 +64,7 @@ public final class ManaBar {
             }
         }
         if(mana.current()>mana.maximum())g.fill(left+2,y+1,right-2,y+2,mana.pulseOverloaded()?0xFFF28282:0xFFF1C76B);
+        if(!numbers)return;
         String label=(int)mana.current()+"/"+(int)mana.maximum();
         float scale=Math.min(.75F,(width-14F)/Math.max(1,font.width(label)));
         g.pose().pushPose();

@@ -16,7 +16,7 @@ public final class EnhancedAlchemyCoreRenderer {
     private static ModelResourceLocation model(String id){return ModelResourceLocation.standalone(ResourceLocation.parse("omnira:block/"+id));}
     private static void draw(ModelResourceLocation model,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         var mc=Minecraft.getInstance();
-        mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(model),ItemStack.EMPTY,light,overlay,pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
+        com.mcmagic.omnira.client.renderer.StaticModelQuads.draw(mc.getModelManager().getModel(model),pose,buffers.getBuffer(CrystalGlassLayer.ATLAS),light,overlay);
     }
     public static void render(PoseStack pose,MultiBufferSource buffers,int light,int overlay,double time){
         draw(FRAME,pose,buffers,light,overlay);

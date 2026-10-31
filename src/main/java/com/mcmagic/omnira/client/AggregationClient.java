@@ -23,8 +23,7 @@ public final class AggregationClient {
     private static double time(){var mc=Minecraft.getInstance();return mc.level==null?net.minecraft.Util.getMillis()/50.0:mc.level.getGameTime()+mc.getTimer().getGameTimeDeltaPartialTick(false);}
     private static void draw(String name,PoseStack pose,MultiBufferSource buffers,int light,int overlay,int color,float alpha){
         var out=buffers.getBuffer(name.equals("button")?Sheets.solidBlockSheet():CrystalGlassLayer.ATLAS);
-        for(var quad:Minecraft.getInstance().getModelManager().getModel(model(name)).getQuads(null,null,net.minecraft.util.RandomSource.create(42)))
-            out.putBulkData(pose.last(),quad,((color>>16)&255)/255F,((color>>8)&255)/255F,(color&255)/255F,alpha,light,overlay);
+        com.mcmagic.omnira.client.renderer.PreparedStaticMesh.drawUnculled(Minecraft.getInstance().getModelManager().getModel(model(name)),pose,out,light,overlay,color,alpha,42);
     }
     private static void part(String name,double x,double y,double z,int color,float alpha,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         pose.pushPose();pose.translate(x-.5,y-.5,z-.5);draw(name,pose,buffers,light,overlay,color,alpha);pose.popPose();

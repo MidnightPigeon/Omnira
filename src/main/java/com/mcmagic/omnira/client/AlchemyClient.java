@@ -30,8 +30,7 @@ public final class AlchemyClient {
     }
     private static void draw(ModelResourceLocation model,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         var mc=Minecraft.getInstance();
-        mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(model),ItemStack.EMPTY,light,overlay,pose,
-                buffers.getBuffer(CrystalGlassLayer.ATLAS));
+        com.mcmagic.omnira.client.renderer.StaticModelQuads.draw(mc.getModelManager().getModel(model),pose,buffers.getBuffer(CrystalGlassLayer.ATLAS),light,overlay);
     }
     @SubscribeEvent public static void models(ModelEvent.RegisterAdditional event){event.register(MODEL);event.register(CORE);
         event.register(EnhancedAlchemyCoreRenderer.FRAME);event.register(EnhancedAlchemyCoreRenderer.HEART);

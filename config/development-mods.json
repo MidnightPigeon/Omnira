@@ -3,11 +3,11 @@
   "minecraft": "1.21.1",
   "neoforge": "21.1.251",
   "server": [
-    "AdvancedCoreInfo-neoforge-1.21.1-1.4.0.jar",
-    "AdvancedLootInfo-neoforge-1.21.1-2.4.0.jar",
+    "AdvancedCoreInfo-neoforge-1.21.1-1.5.0.jar",
+    "AdvancedLootInfo-neoforge-1.21.1-2.5.0.jar",
     "architectury-13.0.11-neoforge.jar",
     "balm-neoforge-1.21.1-21.0.66.jar",
-    "brnquest-mc1.21.1-1.0.2.jar",
+    "brnquest-mc1.21.1-1.1.0.jar",
     "cloth-config-15.0.140-neoforge.jar",
     "ExplorersCompass-1.21.1-3.4.0-neoforge.jar",
     "Jade-1.21.1-NeoForge-15.10.6.jar",
@@ -23,7 +23,7 @@
   "clientOnlyTestExclusions": [
     "Opticores-1.1.0+1.21.1.jar",
     "appleskin-neoforge-mc1.21-3.0.9.jar",
-    "sablexaeromaps-1.21.1-1.4.0.jar",
+    "sablexaeromaps-1.21.1-1.4.2.jar",
     "sodium-neoforge-0.8.13+mc1.21.1.jar",
     "xaerominimap-neoforge-1.21.1-26.6.0.jar",
     "xaeroworldmap-neoforge-1.21.1-1.47.0.jar"

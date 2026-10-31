@@ -16,7 +16,7 @@ public final class AdvancedForgeRenderer implements BlockEntityRenderer<Advanced
     public AdvancedForgeRenderer(BlockEntityRendererProvider.Context context){}
     public static ModelResourceLocation model(String part){return ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("omnira","block/advanced_assembly_table_"+part));}
     private static void draw(String part,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
-        var mc=Minecraft.getInstance();mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(model(part)),ItemStack.EMPTY,light,overlay,pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
+        var mc=Minecraft.getInstance();com.mcmagic.omnira.client.renderer.StaticModelQuads.draw(mc.getModelManager().getModel(model(part)),pose,buffers.getBuffer(CrystalGlassLayer.ATLAS),light,overlay);
     }
     private static void item(ItemStack stack,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         if(stack.isEmpty())return;pose.pushPose();pose.scale(.25F,.25F,.25F);

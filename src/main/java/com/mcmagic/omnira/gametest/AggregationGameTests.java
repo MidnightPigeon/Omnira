@@ -95,7 +95,7 @@ public final class AggregationGameTests {
         var machine=(AggregationRingBlockEntity)h.getLevel().getBlockEntity(p);
         machine.setItem(0,new ItemStack(ModItems.EARTH_MICROCORE.get()));
         machine.setItem(2,new ItemStack(ModItems.SHARP_BREATH.get()));machine.setItem(3,new ItemStack(ModItems.HEALING_DEW.get()));machine.setItem(4,new ItemStack(ModItems.CONSTRUCTION_MATRIX.get()));
-        machine.setItem(5,new ItemStack(Items.IRON_BLOCK));machine.setItem(6,new ItemStack(Items.CLOCK));machine.setItem(7,new ItemStack(ModItems.SPIRITUAL_CRYSTAL.get()));
+        machine.setItem(5,new ItemStack(ModItems.AMPLIFICATION_STAR.get()));machine.setItem(6,new ItemStack(ModItems.LINGERING_THREAD.get()));machine.setItem(7,new ItemStack(ModItems.INFUSION_BUD.get()));
         machine.setItem(8,new ItemStack(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()));machine.setItem(9,new ItemStack(ModItems.SPELL_INK.get()));machine.setItem(10,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
         h.assertTrue(machine.recipeReady()&&machine.manaCost()==140,"Optional shape or crafting cost incorrect");
         var crystal=com.mcmagic.omnira.menu.CrystalProcessingTableMenu.previewCrystal(machine,5,8,2,5,AggregationContent.CRYSTAL.get());

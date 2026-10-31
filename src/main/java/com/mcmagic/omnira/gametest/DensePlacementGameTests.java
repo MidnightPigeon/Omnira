@@ -72,7 +72,7 @@ public final class DensePlacementGameTests {
             h.setBlock(p,block);
             var entity=h.getLevel().getBlockEntity(h.absolutePos(p));
             if(entity instanceof CrystalBallBlockEntity orb){
-                if(orb.resonant())orb.setFrequency(0,marker);
+                if(orb.resonant()){orb.setFrequency(0,marker);orb.setFrequency(1,new ItemStack(Items.QUARTZ));}
                 orb.setItem(0,new ItemStack(Items.DIAMOND,32));orbs.add(orb);
             }
             var work=CrystalWorkstations.work(entity);

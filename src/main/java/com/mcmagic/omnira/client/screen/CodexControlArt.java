@@ -45,7 +45,7 @@ public final class CodexControlArt {
             }
             case PLANE->{line(p,-7,1,-2,-4,color);line(p,-2,-4,7,-1,color);line(p,7,-1,2,4,color);line(p,2,4,-7,1,color);line(p,-3,0,3,1,0xFF82A9B9);}
             case EXECUTE->{line(p,-5,0,4,0,color);line(p,1,-4,5,0,color);line(p,5,0,1,4,color);p.fill(-7,-2,-6,3,color);}
-            case CLOSE->{line(p,-3,-3,3,3,color);line(p,-3,3,3,-3,color);}
+            case CLOSE->PixelUiIcons.draw(p::fill,"X",0,0,color);
         }
     }
     private static void line(Pixels p,int x,int y,int xx,int yy,int c){MachinePanelArt.line(p::fill,x,y,xx,yy,c);}

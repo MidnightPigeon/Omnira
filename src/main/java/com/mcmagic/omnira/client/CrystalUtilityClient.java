@@ -19,7 +19,7 @@ public final class CrystalUtilityClient {
     private static void draw(String name,PoseStack p,MultiBufferSource buffers,int light,int overlay,boolean glass){
         var baked=Minecraft.getInstance().getModelManager().getModel(model(name));
         var out=buffers.getBuffer(glass?CrystalGlassLayer.ATLAS:Sheets.solidBlockSheet());
-        for(var quad:baked.getQuads(null,null,net.minecraft.util.RandomSource.create(71)))out.putBulkData(p.last(),quad,1,1,1,glass?.8F:1,light,overlay);
+        com.mcmagic.omnira.client.renderer.PreparedStaticMesh.drawUnculled(baked,p,out,light,overlay,0xFFFFFF,glass?.8F:1,71);
     }
     private static void body(int index,String name,PoseStack p,MultiBufferSource buffers,int light,int overlay,boolean glass){
         p.pushPose();

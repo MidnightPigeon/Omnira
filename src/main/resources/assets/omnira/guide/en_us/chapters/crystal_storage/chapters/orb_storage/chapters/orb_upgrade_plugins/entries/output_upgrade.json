@@ -4,8 +4,18 @@
   "title": "Output Upgrade",
   "text": [
     "Right-click the held plate to configure directions and filters before installing it. Settings remain on the plate after removal.",
-    "Enable any of six sides to push into adjacent containers at a base 4 items or 2000 mB per second, increased by Speed Upgrades. Enabled directions are visited in order.",
-    "Uses the same filters as Intake Upgrades. Output, external extraction and resonance use independent rate allowances."
+    "Enable any of six sides, visited in order, to push into adjacent containers at the host's logistics limit, increased by Speed Upgrades.",
+    "Uses the same filter controls as Intake Upgrades."
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "crystal_logistics",
+      "label": "Logistics"
+    },
+    {
+      "target": "intake_upgrade",
+      "label": "Intake Upgrade"
+    }
+  ]
 }

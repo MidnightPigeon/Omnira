@@ -26,7 +26,7 @@ final class CrystalWorkstationBackground {
         for(var slot:menu.slots)if(slot.container instanceof net.minecraft.world.entity.player.Inventory)
             g.blit(VANILLA,x+slot.x-1,y+slot.y-1,7,83,18,18,256,256);
     }
-    static void draw(GuiGraphics graphics,ResourceLocation texture,int x,int y,String kind,float time,float progress,boolean active){
+    static void draw(GuiGraphics graphics,ResourceLocation texture,int x,int y,String kind,double time,float progress,boolean active){
         RenderSystem.enableBlend();
         graphics.blit(texture,x,y+142,0,142,176,98,176,240);
         MachinePanelArt.workstation(CrystalUi.pixels(graphics,x,y),kind,time,progress,active);

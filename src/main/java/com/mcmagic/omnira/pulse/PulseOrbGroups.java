@@ -29,9 +29,15 @@ public final class PulseOrbGroups extends SavedData {
     };}
     public ItemStackHandler view(PulseOrbEntity orb){var e=endpoints.get(orb.storageIdentity);return e==null?orb.upgrade:stores.get(e.store);}
     public void register(PulseOrbEntity orb){
-        if(!orb.resonant()||!orb.hasFrequency())return;
+        if(!orb.resonant()||!orb.hasFrequency()){detach(orb);return;}
         var e=endpoints.get(orb.storageIdentity);String dimension=orb.getLevel().dimension().location().toString();
-        if(e!=null&&(!e.pos.equals(orb.getBlockPos())||!e.dimension.equals(dimension))){orb.storageIdentity=UUID.randomUUID();e=null;}
+        if(e!=null&&(!e.pos.equals(orb.getBlockPos())||!e.dimension.equals(dimension))){
+            var previous=level(e);
+            // Relocate a vacated endpoint, not a copied identity with a live/unloaded original.
+            if(previous!=null&&previous.hasChunkAt(e.pos)&&loaded(e)==null){
+                e.pos=orb.getBlockPos();e.dimension=dimension;setDirty();reconcile();notifyLoaded();
+            }else{orb.storageIdentity=UUID.randomUUID();e=null;}
+        }
         if(e==null){
             e=new Endpoint();e.id=orb.storageIdentity;e.store=UUID.randomUUID();e.pos=orb.getBlockPos();e.dimension=dimension;
             e.first=orb.frequency[0].copy();e.second=orb.frequency[1].copy();
@@ -52,7 +58,7 @@ public final class PulseOrbGroups extends SavedData {
         }
         setDirty();reconcile();notifyLoaded();
     }
-    private static boolean same(Endpoint a,Endpoint b){return ItemStack.isSameItemSameComponents(a.first,b.first)&&ItemStack.isSameItemSameComponents(a.second,b.second);}
+    private static boolean same(Endpoint a,Endpoint b){return !a.first.isEmpty()&&!a.second.isEmpty()&&!b.first.isEmpty()&&!b.second.isEmpty()&&ItemStack.isSameItemSameComponents(a.first,b.first)&&ItemStack.isSameItemSameComponents(a.second,b.second);}
     private static boolean stabilized(ItemStack stack){return stack.getItem() instanceof OrbUpgradeItem item&&item.kind==OrbUpgradeItem.Kind.STABILIZATION;}
     private static int rank(ItemStack stack){return stack.isEmpty()?0:stabilized(stack)?100:((OrbUpgradeItem)stack.getItem()).kind.capacityMultiplier;}
     private void reconcile(){
@@ -91,8 +97,11 @@ public final class PulseOrbGroups extends SavedData {
             setDirty();
         }finally{reconciling=false;}
     }
+    private ServerLevel level(Endpoint e){
+        return server.getLevel(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.DIMENSION,net.minecraft.resources.ResourceLocation.parse(e.dimension)));
+    }
     private PulseOrbEntity loaded(Endpoint e){
-        var level=server.getLevel(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.DIMENSION,net.minecraft.resources.ResourceLocation.parse(e.dimension)));
+        var level=level(e);
         var orb=level!=null&&level.hasChunkAt(e.pos)?PulseOrbEntity.from(level.getBlockEntity(e.pos)):null;
         return orb!=null&&orb.storageIdentity.equals(e.id)?orb:null;
     }

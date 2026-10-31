@@ -19,7 +19,7 @@ public final class ManaEvents {
             ManaState before=player.getData(ModAttachments.MANA);
             double maximum=player.getAttributeValue(com.mcmagic.omnira.registry.ModAttributes.MAX_MANA);
             ManaState after=new ManaState(before.current(),maximum,player.getData(ModAttachments.AFFINITY).active().ordinal());
-            if(player.tickCount % ManaState.REGEN_INTERVAL==0&&!com.mcmagic.omnira.pulse.PulseChanneling.active(player))
+            if(player.tickCount % ManaState.REGEN_INTERVAL==0&&!com.mcmagic.omnira.pulse.PulseChanneling.active(player)&&!com.mcmagic.omnira.fate.ArcanistFate.storm(player))
                 after=after.withCurrent(after.current()+regenerationPerSecond(player)*ManaState.REGEN_INTERVAL/20);
             if(!after.equals(before)) player.setData(ModAttachments.MANA,after);
         }

@@ -1,7 +1,7 @@
 {
   "id": "crystallized_bone_nail",
   "item": "omnira:crystallized_bone_nail",
-  "title": "Crystallized Nail",
+  "title": "Crystallized Bone Nail",
   "recipes": true,
   "text": [
     "Hold Attack for at least one second, then release a forward fan of sword energy with twice the reach and damage. Each struck entity receives one attack, and its attached spell gains an additional 50% of base spell power. Charging keeps the normal holding pose. The initial press performs a normal attack.",

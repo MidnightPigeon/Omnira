@@ -5,7 +5,7 @@
   "recipes": false,
   "text": [
     "A mirror-rock and crystal observatory in the Dislocated Geodes. Its calibration corridor holds deflection clusters at different growth stages. A Spatial Stability Anchor protects the surrounding area from deflection and teleportation.",
-    "The storeroom holds two item treasure orbs and one random fluid treasure orb. Supplies include deflection and spatial crystals, occasional Space Microcores and Space Warp Points, and other laboratory materials."
+    "The storeroom holds two item treasure orbs and one random fluid treasure orb. Supplies include deflection and spatial crystals, occasional Space Microcores and Spatial Fold Points, and other laboratory materials."
   ],
   "links": [
     {
@@ -22,7 +22,7 @@
     },
     {
       "target": "space_warp_point_guide",
-      "label": "Space Warp Points"
+      "label": "Spatial Fold Points"
     }
   ]
 }

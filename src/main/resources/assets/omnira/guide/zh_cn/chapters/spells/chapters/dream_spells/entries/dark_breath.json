@@ -1,0 +1,22 @@
+{
+  "id": "dark_breath",
+  "item": "omnira:life_drain_origin",
+  "title": "汲命原点",
+  "text": [
+    "将一枚暗之微核通过高阶凝聚加工即可获得汲命原点。",
+    "将汲命原点放入要素槽。触发时形成半径1.5格暗雾，持续20秒，每秒基础1点伤害，按实际伤害等额吸血。施法者同样被伤害，但自伤不吸血。",
+    "延时每份增加20秒；强化每份增加每秒1点基础伤害；注魔使暗雾追踪5格内实体，不分敌我。暗雾范围只受范围增幅影响。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "dark_microcore",
+      "label": "微核获取"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    }
+  ],
+  "icon": "omnira:life_drain_origin"
+}

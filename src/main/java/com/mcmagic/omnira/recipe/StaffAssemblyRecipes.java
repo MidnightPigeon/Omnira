@@ -52,7 +52,7 @@ public final class StaffAssemblyRecipes {
         for(var shaft:shafts) for(var reinforcement:reinforcements) for(var tip:tips) {
             var slots=new ArrayList<Ingredient>(Collections.nCopies(7,Ingredient.EMPTY));
             slots.set(3,Ingredient.of(shaft));slots.set(6,Ingredient.of(reinforcement));slots.set(0,Ingredient.of(tip));
-            result.add(new AssemblyRecipe(slots,new StaffAssembly(shaft,reinforcement,tip,List.of()).create()));
+            result.add(new AssemblyRecipe(slots,new StaffAssembly(shaft,reinforcement,tip,List.of()).create(),false,"staff"));
         }
         return List.copyOf(result);
     }

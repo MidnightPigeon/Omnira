@@ -20,7 +20,8 @@ public final class PhaseConcealment extends MobEffect {
     public static boolean singleTarget(Entity source){
         if(source instanceof SpellEntity spell)return switch(spell.kind()){
             case BURST -> spell.directSingleTarget();
-            case REVERSE_FLOW,SPATIAL_BLADE,BARRIER,FACE_BARRIER,WARD -> false;
+            case SPATIAL_BLADE -> true;
+            case REVERSE_FLOW,BARRIER,FACE_BARRIER,WARD -> false;
             default -> !spell.explosiveImpact();
         };
         return source!=null&&!(source instanceof ThrownPotion)&&!(source instanceof AreaEffectCloud)&&!(source instanceof FireworkRocketEntity)&&!(source instanceof LightningBolt);

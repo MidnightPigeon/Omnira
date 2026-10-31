@@ -1,0 +1,11 @@
+{
+  "id": "overworld_ruins",
+  "title": "前人残迹",
+  "icon": "minecraft:mossy_stone_bricks",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/abandoned_apprentice_hut.json",
+    "entries/ruined_crystal_workshop.json",
+    "entries/abandoned_wizard_tower.json"
+  ]
+}

@@ -58,6 +58,7 @@ public final class TemporalDislocation extends MobEffect {
         boolean previousPermission=p.getPersistentData().getCompound(FLIGHT).getBoolean("MayFly");
         p.getPersistentData().remove(FLIGHT);
         p.getAbilities().mayfly=previousPermission||p.isCreative()||p.isSpectator();
+        if(!p.getAbilities().mayfly)p.getAbilities().flying=false;
         p.noPhysics=p.isSpectator();p.onUpdateAbilities();
     }
     public static void finish(ServerPlayer p){

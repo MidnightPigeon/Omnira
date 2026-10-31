@@ -35,8 +35,7 @@ public final class WorldComponentClient {
     private static void part(WorldComponent component, String name, boolean glass, PoseStack pose, MultiBufferSource buffers, int light, int overlay) {
         pose.pushPose(); pose.translate(-.5,-.5,-.5);
         var mc=Minecraft.getInstance();
-        mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(model(component,name)),ItemStack.EMPTY,light,overlay,pose,
-                buffers.getBuffer(glass ? CrystalGlassLayer.ATLAS : RenderType.entityCutoutNoCull(InventoryMenu.BLOCK_ATLAS)));
+        com.mcmagic.omnira.client.renderer.StaticModelQuads.draw(mc.getModelManager().getModel(model(component,name)),pose,buffers.getBuffer(glass ? CrystalGlassLayer.ATLAS : RenderType.entityCutoutNoCull(InventoryMenu.BLOCK_ATLAS)),light,overlay);
         pose.popPose();
     }
 

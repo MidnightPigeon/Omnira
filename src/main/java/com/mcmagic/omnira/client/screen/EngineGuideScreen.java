@@ -46,13 +46,13 @@ public final class EngineGuideScreen extends ResponsiveScreen {
         electricMode=null;
         if(EnergyIntegration.available()) electricMode=addRenderableWidget(Button.builder(Component.translatable("gui.omnira.engine.electric"),b->electrical=true)
                 .bounds(center+4,30,90,20).build());
-        addRenderableWidget(Button.builder(Component.literal("<"),b->change(-1)).bounds(center-50,height-27,22,20)
+        addRenderableWidget(PixelButtons.builder(Component.literal("<"),b->change(-1)).bounds(center-50,height-27,22,20)
                 .tooltip(Tooltip.create(Component.translatable("gui.omnira.engine.guide.previous"))).build());
-        var playback=addRenderableWidget(Button.builder(Component.literal(EngineGuideTimeline.playbackGlyph(paused)),b->{paused=!paused;playbackLabel(b);})
+        var playback=addRenderableWidget(PixelButtons.builder(Component.literal(EngineGuideTimeline.playbackGlyph(paused)),b->{paused=!paused;playbackLabel(b);})
                 .bounds(center-24,height-27,22,20).build());playbackLabel(playback);
-        addRenderableWidget(Button.builder(Component.literal(">"),b->change(1)).bounds(center+2,height-27,22,20)
+        addRenderableWidget(PixelButtons.builder(Component.literal(">"),b->change(1)).bounds(center+2,height-27,22,20)
                 .tooltip(Tooltip.create(Component.translatable("gui.omnira.engine.guide.next"))).build());
-        addRenderableWidget(Button.builder(Component.translatable("gui.back"),b->onClose()).bounds(width-68,height-27,58,20).build());
+        addRenderableWidget(PixelButtons.builder(Component.literal("<"),b->onClose()).bounds(width-68,height-27,58,20).tooltip(Tooltip.create(Component.translatable("gui.back"))).build());
     }
     private void playbackLabel(Button button){
         button.setMessage(Component.literal(EngineGuideTimeline.playbackGlyph(paused)));

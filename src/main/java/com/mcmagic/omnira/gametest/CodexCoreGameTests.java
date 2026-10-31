@@ -13,6 +13,22 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_codex_core")
 @PrefixGameTestTemplate(false)
 public final class CodexCoreGameTests {
+    @GameTest(template="spell_arena") public static void heartProjectionTracksAndSavesShape(GameTestHelper h){
+        var be=codex(h);be.potential=16384;be.mode=1;be.shape=2;be.axis=2;
+        var p=AdvancedForgeGameTests.player(h,be.getBlockPos());be.takeHeart(p);
+        var at=be.getBlockPos().east(3);h.assertTrue(be.placeHeart(p,at),"Heart placement failed");
+        var heart=(WorldHeartEntity)h.getLevel().getBlockEntity(at);
+        h.assertTrue(heart.shape==2&&heart.axis==2&&heart.diameter==15,"Initial preview missing configuration");
+        for(int shape=0;shape<3;shape++)for(int axis=0;axis<3;axis++){
+            be.shape=shape;be.axis=axis;be.hollow=!be.hollow;heart.tick();
+            var tag=heart.getUpdateTag(h.getLevel().registryAccess());
+            var loaded=new WorldHeartEntity(at,heart.getBlockState());loaded.loadWithComponents(tag,h.getLevel().registryAccess());
+            h.assertTrue(loaded.shape==shape&&loaded.axis==axis&&loaded.diameter==15,"Reload/network snapshot lost shape");
+        }
+        be.mode=2;heart.tick();h.assertTrue(heart.shape==0,"Ecology inherited form preview");
+        be.mode=0;heart.tick();h.assertTrue(heart.shape==0,"Matter inherited form preview");
+        be.recall();h.succeed();
+    }
     @GameTest(template="spell_arena") public static void matterTargetAcceptsModBlocksAndMachines(GameTestHelper h){
         var be=codex(h);var p=AdvancedForgeGameTests.player(h,be.getBlockPos());
         var menu=new MyriadCodexMenu(7,p.getInventory(),be);p.containerMenu=menu;

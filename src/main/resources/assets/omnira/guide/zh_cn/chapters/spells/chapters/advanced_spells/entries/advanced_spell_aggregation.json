@@ -11,5 +11,8 @@
       "target": "advanced_crystal_aggregation_ring",
       "label": "高阶水晶聚合环"
     }
+  ],
+  "related_items": [
+    "omnira:high_tier_magic_crystal"
   ]
 }

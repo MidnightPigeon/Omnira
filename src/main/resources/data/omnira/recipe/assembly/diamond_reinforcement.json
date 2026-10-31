@@ -25,5 +25,6 @@
   "result": {
     "id": "omnira:diamond_reinforcement",
     "count": 1
-  }
+  },
+  "outer_shapeless": true
 }

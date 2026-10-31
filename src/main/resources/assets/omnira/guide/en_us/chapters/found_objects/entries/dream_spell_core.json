@@ -4,7 +4,7 @@
   "title": "Dream Spell Core",
   "text": [
     "Rarely found in the loot Crystal Ball of a Radiant Courtyard or the sealed archive of a Shadow Library.",
-    "Equipping grants 400 maximum mana, 20% spell power, 30% mana regeneration and 10 cost reduction. In a Mana Engine, its base output is 1024 su and 1024 FE/s before grid multipliers.",
+    "Equipping grants 400 maximum mana, 20% spell power, 30% mana regeneration and 10 cost reduction. In a Mana Engine, its base output is 1024 MPU before grid multipliers.",
     "{dream}It seems to resonate with your mana..."
   ],
   "recipes": false,

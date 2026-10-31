@@ -1,0 +1,19 @@
+{
+  "id": "repaired_mechanical_component",
+  "item": "omnira:repaired_mechanical_component",
+  "title": "Repaired Mechanical Component",
+  "text": [
+    "Restored from a Damaged Research Apparatus and used to craft the Void Infuser."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "damaged_research_facility_guide",
+      "label": "Damaged Research Apparatus"
+    },
+    {
+      "target": "void_infuser",
+      "label": "Void Infuser"
+    }
+  ]
+}

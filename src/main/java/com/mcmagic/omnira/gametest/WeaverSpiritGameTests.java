@@ -62,9 +62,9 @@ public final class WeaverSpiritGameTests {
             var slots=new net.minecraft.world.SimpleContainer(9);
             slots.setItem(0,new net.minecraft.world.item.ItemStack(ModItems.FIRE_MICROCORE.get()));
             slots.setItem(1,new net.minecraft.world.item.ItemStack(ModItems.AIR_MICROCORE.get()));
-            slots.setItem(5,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.IRON_BLOCK));
-            slots.setItem(6,new net.minecraft.world.item.ItemStack(ModItems.SPIRITUAL_CRYSTAL.get()));
-            slots.setItem(2,new net.minecraft.world.item.ItemStack(com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get()));
+            slots.setItem(5,new net.minecraft.world.item.ItemStack(ModItems.AMPLIFICATION_STAR.get()));
+            slots.setItem(6,new net.minecraft.world.item.ItemStack(ModItems.INFUSION_BUD.get()));
+            slots.setItem(2,new net.minecraft.world.item.ItemStack(com.mcmagic.omnira.registry.ModItems.MINIATURE_WORLD.get()));
             var crystal=com.mcmagic.omnira.menu.CrystalProcessingTableMenu.previewCrystal(slots,5,8,2,5,com.mcmagic.omnira.aggregation.AggregationContent.CRYSTAL.get());
             p.lookAt(net.minecraft.commands.arguments.EntityAnchorArgument.Anchor.EYES,wither.getBoundingBox().getCenter());
             h.assertTrue(com.mcmagic.omnira.spell.SpellCasting.castArquebus(p,crystal.get(ModDataComponents.SPELL_PATTERN),crystal.get(ModDataComponents.SPELL_PAYLOAD),1,

@@ -27,5 +27,6 @@
   "result": {
     "id": "omnira:dark_microcore",
     "count": 1
-  }
+  },
+  "outer_shapeless": true
 }

@@ -75,7 +75,7 @@ public final class VoidOrbGameTests {
     }
     @GameTest(template="spell_arena") public static void unorderedAssembly(GameTestHelper h){
         var inventory=new net.minecraft.world.SimpleContainer(7);
-        inventory.setItem(6,new ItemStack(ModItems.CRYSTAL_BALL.get()));inventory.setItem(0,new ItemStack(Items.ENDER_EYE));
+        inventory.setItem(5,new ItemStack(ModItems.CRYSTAL_BALL.get()));inventory.setItem(0,new ItemStack(Items.ENDER_EYE));
         inventory.setItem(2,new ItemStack(ModItems.LIQUID_CRYSTAL_BALL.get()));inventory.setItem(4,new ItemStack(ModItems.DARK_MICROCORE.get()));
         var work=com.mcmagic.omnira.recipe.AssemblyWork.find(h.getLevel(),inventory);
         h.assertTrue(work!=null&&work.finish().get().getFirst().is(CrystalStorageContent.VOID_ITEM.get()),"Unordered four-input recipe rejected");h.succeed();

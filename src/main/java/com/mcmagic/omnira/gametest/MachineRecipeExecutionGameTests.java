@@ -59,12 +59,12 @@ public final class MachineRecipeExecutionGameTests {
             var recipe=manager.getRecipeFor(net.minecraft.world.item.crafting.RecipeType.SMELTING,new net.minecraft.world.item.crafting.SingleRecipeInput(input),h.getLevel()).orElseThrow().value();
             var work=new CrystalWorkstationEntity(h.absolutePos(new BlockPos(5,4,5)),CrystalWorkstations.BLOCKS.get(3).get().defaultBlockState());work.setLevel(h.getLevel());
             work.setItem(0,input.copy());
-            for(int tick=0;tick<Math.max(1,recipe.getCookingTime()/2);tick++){work.energy=5120;work.tick(false,0);}
+            for(int tick=0;tick<Math.max(1,recipe.getCookingTime()/2);tick++)work.tick(true,16);
             var expected=recipe.assemble(new net.minecraft.world.item.crafting.SingleRecipeInput(input),h.getLevel().registryAccess());
             h.assertTrue(ItemStack.matches(work.getItem(2),expected)&&work.getItem(0).isEmpty(),"Smelting execution failed for "+holder.id());tested++;
         }
         h.assertTrue(tested>20,"Smelting execution coverage unexpectedly small");
-        org.slf4j.LoggerFactory.getLogger("OmniraRecipeAudit").info("Executed {} smelting inputs using their resolved recipe, with isolated external power",tested);h.succeed();
+        org.slf4j.LoggerFactory.getLogger("OmniraRecipeAudit").info("Executed {} smelting inputs using their resolved recipe, with continuous mechanical power",tested);h.succeed();
     }
     private static boolean outputMatches(ReactionPoolBlockEntity pool,List<ItemStack> outputs){
         var remaining=new ArrayList<ItemStack>();for(var output:outputs)remaining.add(output.copy());

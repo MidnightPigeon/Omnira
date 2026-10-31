@@ -233,9 +233,9 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu implements
         int clocks=0,iron=0,infusions=0;
         boolean infused=false;
         for(int i=modifierStart;i<modifierEnd;i++) {
-            if(container.getItem(i).is(Items.CLOCK)) clocks++;
-            if(container.getItem(i).is(Items.IRON_BLOCK)) iron++;
-            if(container.getItem(i).is(ModItems.SPIRITUAL_CRYSTAL.get())) {infused=true;infusions++;}
+            if(container.getItem(i).is(ModItems.LINGERING_THREAD.get())) clocks++;
+            if(container.getItem(i).is(ModItems.AMPLIFICATION_STAR.get())) iron++;
+            if(container.getItem(i).is(ModItems.INFUSION_BUD.get())) {infused=true;infusions++;}
         }
         var effects=new java.util.ArrayList<com.mcmagic.omnira.spell.SpellEffect>();
         var seen=new java.util.HashSet<net.minecraft.world.item.Item>();
@@ -243,9 +243,9 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu implements
             var stack=container.getItem(i);
             if(stack.isEmpty() || !seen.add(stack.getItem())) continue;
             if(stack.is(ModItems.DISSOCIATION_THREAD.get())) effects.add(com.mcmagic.omnira.spell.SpellEffect.utility("dissociation",iron,clocks,infusions));
-            if(stack.is(ModItems.DARK_MICROCORE.get())) effects.add(com.mcmagic.omnira.spell.SpellEffect.utility("dark_breath",iron,clocks,infusions));
+            if(stack.is(ModItems.LIFE_DRAIN_ORIGIN.get())) effects.add(com.mcmagic.omnira.spell.SpellEffect.utility("dark_breath",iron,clocks,infusions));
             if(stack.is(ModItems.CONSTRUCTION_MATRIX.get())) effects.add(com.mcmagic.omnira.spell.SpellEffect.utility("construction",iron,clocks,infusions));
-            if(stack.is(com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get())) effects.add(com.mcmagic.omnira.spell.SpellEffect.utility("reload",iron,0,infusions));
+            if(stack.is(com.mcmagic.omnira.registry.ModItems.MINIATURE_WORLD.get())) effects.add(com.mcmagic.omnira.spell.SpellEffect.utility("reload",iron,0,infusions));
             if(stack.is(ModItems.SHARP_BREATH.get()) || stack.is(ModItems.HEALING_DEW.get()))
                 effects.add(new com.mcmagic.omnira.spell.SpellEffect(stack.is(ModItems.HEALING_DEW.get()),
                         (clocks>0?0:1)+iron,clocks>0?800+(clocks-1)*1200:0,infused));
@@ -272,18 +272,18 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu implements
             var stack=container.getItem(i);
             if(stack.isEmpty() || !seenKeywords.add(stack.getItem())) continue;
             if(stack.is(ModItems.SHARP_BREATH.get())) keywords.add("harm");
-            if(stack.is(ModItems.DARK_MICROCORE.get())) keywords.add("dark_breath");
+            if(stack.is(ModItems.LIFE_DRAIN_ORIGIN.get())) keywords.add("dark_breath");
             if(stack.is(ModItems.DISSOCIATION_THREAD.get())) keywords.add("dissociation");
             if(stack.is(ModItems.CONSTRUCTION_MATRIX.get())) keywords.add("construction");
-            if(stack.is(com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get())) keywords.add("reload");
+            if(stack.is(com.mcmagic.omnira.registry.ModItems.MINIATURE_WORLD.get())) keywords.add("reload");
             if(stack.is(ModItems.HEALING_DEW.get())) keywords.add("healing");
         }
         for(int i=modifierStart;i<modifierEnd;i++) {
             var stack=container.getItem(i);
-            if(stack.is(Items.CLOCK)) keywords.add("delay");
-            if(stack.is(ModItems.LIGHT_MICROCORE.get())) keywords.add("holy");
-            if(stack.is(Items.IRON_BLOCK)) keywords.add("enhancement");
-            if(stack.is(ModItems.SPIRITUAL_CRYSTAL.get())) keywords.add("infusion");
+            if(stack.is(ModItems.LINGERING_THREAD.get())) keywords.add("delay");
+            if(stack.is(ModItems.HOLY_HALO.get())) keywords.add("holy");
+            if(stack.is(ModItems.AMPLIFICATION_STAR.get())) keywords.add("enhancement");
+            if(stack.is(ModItems.INFUSION_BUD.get())) keywords.add("infusion");
         }
         ItemStack output = outputItem.getDefaultInstance();
         output.set(ModDataComponents.SPELL_PATTERN.get(), pattern);

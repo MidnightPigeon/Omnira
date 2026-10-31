@@ -19,7 +19,12 @@ public final class PulseClient {
             net.minecraft.client.resources.model.ModelResourceLocation.standalone(net.minecraft.resources.ResourceLocation.parse("omnira:block/mana_engine_shaft"));
     @SubscribeEvent public static void screens(RegisterMenuScreensEvent e){e.register(PulseContent.MENU.get(),com.mcmagic.omnira.client.screen.PulseOrbScreen::new);}
     @SubscribeEvent public static void renderers(EntityRenderersEvent.RegisterRenderers e){
-        e.registerBlockEntityRenderer(PulseContent.ENTITY.get(),c->(host,partial,pose,buffers,light,overlay)->{
+        e.registerBlockEntityRenderer(PulseContent.ENTITY.get(),c->new BlockEntityRenderer<net.minecraft.world.level.block.entity.BlockEntity>(){
+            @Override public net.minecraft.world.phys.AABB getRenderBoundingBox(net.minecraft.world.level.block.entity.BlockEntity host){
+                var orb=PulseOrbEntity.from(host);
+                return new net.minecraft.world.phys.AABB(host.getBlockPos()).inflate(orb!=null&&orb.resonant()?.3:0);
+            }
+            @Override public void render(net.minecraft.world.level.block.entity.BlockEntity host,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
             var orb=PulseOrbEntity.from(host);if(orb==null)return;
             pose.pushPose();pose.translate(.5,.5,.5);
             pose.mulPose(com.mcmagic.omnira.block.OrbMount.rotation(host.getBlockState().getValue(PulseOrbBlock.MOUNT)));
@@ -27,10 +32,11 @@ public final class PulseClient {
             boolean kinetic=net.neoforged.fml.ModList.get().isLoaded("create");
             float angle=kinetic&&PulseOrbShaftState.mode(orb.shaftState,orb.inlet())==PulseOutput.ROTATION?PulseOrbShaftPhase.degrees(orb,orb.inlet()):0;
             orb((orb.potential+orb.occupied)/(double)orb.capacity(),orb.occupied/(double)orb.capacity(),orb.upgrade.getStackInSlot(0),pose,buffers,orb.getLevel().getGameTime()+partial,overlay,angle);
+            if(orb.resonant())ResonanceSatellites.render(orb.frequency,pose,buffers,orb.getLevel().getGameTime()+partial,overlay);
             pose.popPose();
             for(var face:Direction.values())if(PulseOrbShaftState.connected(orb.shaftState,face)){
                 int mode=PulseOrbShaftState.mode(orb.shaftState,face);
-                if(face!=orb.inlet()){
+                if(face!=orb.inlet()&&mode!=PulseOutput.PULSE){
                     pose.pushPose();pose.translate(.5,.5,.5);pose.mulPose(com.mcmagic.omnira.block.OrbMount.rotation(face.getOpposite()));pose.translate(-.5,-.5,-.5);
                     axle(pose,buffers,overlay,kinetic&&mode==PulseOutput.ROTATION?PulseOrbShaftPhase.degrees(orb,face):0);pose.popPose();
                 }
@@ -38,6 +44,7 @@ public final class PulseClient {
                     if(PulseOrbShaftState.incoming(orb.shaftState,face))shaft(pose,buffers,face,orb.getLevel().getGameTime()+partial,false,mode);
                     if(PulseOrbShaftState.outgoing(orb.shaftState,face))shaft(pose,buffers,face,orb.getLevel().getGameTime()+partial,true,mode);
                 }
+            }
             }
         });
         e.registerBlockEntityRenderer(PulseContent.WIRE_ENTITY.get(),c->(wire,partial,pose,buffers,light,overlay)->wire(wire,pose,buffers,wire.getLevel().getGameTime()+partial));

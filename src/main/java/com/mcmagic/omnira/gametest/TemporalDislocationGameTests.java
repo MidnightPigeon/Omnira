@@ -60,7 +60,7 @@ public final class TemporalDislocationGameTests {
         p.doTick();h.assertTrue(p.noPhysics,"Player tick overwrote wall phase");
         p.setPos(start.add(3,0,0));p.removeEffect(ModEffects.TEMPORAL_DISLOCATION);
         TemporalDislocation.tick(new net.neoforged.neoforge.event.tick.PlayerTickEvent.Pre(p));
-        h.assertTrue(!p.mayFly()&&!p.getAbilities().mayfly&&!p.noPhysics,"Temporary flight permission or no-clip leaked");
+        h.assertTrue(!p.mayFly()&&!p.getAbilities().mayfly&&!p.getAbilities().flying&&!p.noPhysics,"Temporary flight permission or no-clip leaked");
         h.assertTrue(p.position().distanceTo(start)<.001,"Did not return after phase");
         p.setGameMode(net.minecraft.world.level.GameType.CREATIVE);p.getAbilities().flying=true;
         p.addEffect(new MobEffectInstance(ModEffects.TEMPORAL_DISLOCATION,200,1));

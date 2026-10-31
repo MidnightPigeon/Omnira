@@ -16,7 +16,7 @@ public final class CorridorGatewayRenderer implements BlockEntityRenderer<Corrid
     private static final ResourceLocation WHITE=ResourceLocation.fromNamespaceAndPath("omnira","textures/entity/solid_white.png");
     private final ModelPart frame=DreamMirrorRenderer.createFrame();
     public CorridorGatewayRenderer(BlockEntityRendererProvider.Context context) {}
-    @Override public boolean shouldRenderOffScreen(CorridorGatewayBlockEntity gateway){return true;}
+    @Override public net.minecraft.world.phys.AABB getRenderBoundingBox(CorridorGatewayBlockEntity gateway){return new net.minecraft.world.phys.AABB(gateway.getBlockPos()).inflate(.3,0,.3).expandTowards(0,1,0);}
     @Override public void render(CorridorGatewayBlockEntity gateway,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         pose.pushPose();pose.translate(.5,0,.5);
         var camera=net.minecraft.client.Minecraft.getInstance().gameRenderer.getMainCamera();

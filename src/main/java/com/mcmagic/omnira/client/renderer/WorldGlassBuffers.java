@@ -20,6 +20,8 @@ public final class WorldGlassBuffers {
     private static ByteBufferBuilder memory;
     private static MultiBufferSource.BufferSource deferred;
     private static boolean collecting,pending;
+    private static net.minecraft.client.renderer.culling.Frustum frustum;
+    public static boolean visible(net.minecraft.world.phys.AABB bounds){return !collecting()||frustum==null||frustum.isVisible(bounds);}
     private static final java.util.Map<RenderType,VertexConsumer> ADAPTERS=new java.util.IdentityHashMap<>();
     public static boolean collecting(){return collecting&&!MirrorScene.rendering();}
 
@@ -43,7 +45,7 @@ public final class WorldGlassBuffers {
             CrystalInteriorMotes.beginFrame();
             // Never replay camera-relative vertices left by an aborted frame.
             if(pending)reset();
-            ADAPTERS.clear();
+            ADAPTERS.clear();frustum=event.getFrustum();
             collecting=true;
         }else if(event.getStage()==RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS){
             collecting=false;
@@ -55,8 +57,8 @@ public final class WorldGlassBuffers {
     }
     public static void reset(){
         CrystalInteriorMotes.reset();
-        collecting=false;pending=false;deferred=null;
-        ADAPTERS.clear();StaticModelQuads.reset();com.mcmagic.omnira.client.ReactionPoolPanelMesh.reset();
+        collecting=false;pending=false;deferred=null;frustum=null;
+        ADAPTERS.clear();StaticModelQuads.reset();PreparedStaticMesh.reset();com.mcmagic.omnira.client.ReactionPoolDisplayFluids.reset();com.mcmagic.omnira.client.ReactionPoolPanelMesh.reset();
         if(memory!=null){memory.close();memory=null;}
     }
     @SubscribeEvent public static void logout(ClientPlayerNetworkEvent.LoggingOut event){reset();}

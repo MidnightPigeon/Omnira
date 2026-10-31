@@ -80,6 +80,7 @@ public final class StaffItem extends Item {
             var pattern=crystal.get(ModDataComponents.SPELL_PATTERN);
             if(pattern!=null&&pattern.worldRotation()){
                 if(!com.mcmagic.omnira.spell.world.WorldRotation.cast(player))break;
+                com.mcmagic.omnira.fate.ArcanistFate.completed(player,grid);
                 grid.set(ModDataComponents.GRID_CURSOR,(slot+1)%item.capacity);
                 com.mcmagic.omnira.progression.BranchProgress.spell(player,grid,slot,CrystalGridMenu.next(grid,item.capacity));successes++;break;
             }
@@ -88,7 +89,7 @@ public final class StaffItem extends Item {
             if(!player.getData(ModAttachments.MANA).canSpend(cost)) {
                 player.displayClientMessage(Component.translatable("message.omnira.mana.insufficient"),true);break;
             }
-            if(!SpellCasting.cast(player,crystal.get(ModDataComponents.SPELL_PATTERN),payload,context.power(),
+            if(!SpellCasting.castFrom(player,grid,crystal.get(ModDataComponents.SPELL_PATTERN),payload,context.power(),
                     new SpellCasting.Modifiers(context.stats().speedMultiplier(),context.stats().rangeMultiplier()))) {
                 player.displayClientMessage(Component.translatable("message.omnira.crystal.invalid_target"),true);break;
             }

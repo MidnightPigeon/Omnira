@@ -61,7 +61,7 @@ public final class TuningContainerGameTests {
         h.assertTrue(NodeTransport.pair(first,second),"Independent liquid stores could not link");
         var marker=new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.PAPER);
         marker.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(java.util.UUID.randomUUID().toString()));
-        left.setFrequency(0,marker);right.setFrequency(0,marker);
+        left.setFrequency(0,marker);left.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));right.setFrequency(0,marker);right.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));
         NodeTransport.tick(first);
         h.assertTrue(left.networkStatus==0&&right.networkStatus==3&&first.peer!=null&&second.peer!=null,"Failed entrant affected the first orb or cancelled transport");
         NodeTransport.unpair(first);h.succeed();
@@ -88,7 +88,7 @@ public final class TuningContainerGameTests {
             var right=(com.mcmagic.omnira.block.entity.CrystalBallBlockEntity)h.getBlockEntity(b.below());
             var marker=new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.PAPER);
             marker.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(java.util.UUID.randomUUID().toString()));
-            left.setFrequency(0,marker);right.setFrequency(0,marker);
+            left.setFrequency(0,marker);left.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));right.setFrequency(0,marker);right.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));
             h.assertTrue(first.peer==null&&second.peer==null,"Shared storage did not immediately cancel transport");
             h.assertTrue(firstTerminal.equals(first.terminal)&&secondTerminal.equals(second.terminal),"Transport cancellation removed terminal bindings");
             h.assertTrue(!NodeTransport.pair(first,second),"Shared store accepted a self-transfer link");
@@ -113,7 +113,7 @@ public final class TuningContainerGameTests {
             var right=(com.mcmagic.omnira.block.entity.CrystalBallBlockEntity)h.getBlockEntity(b.below());
             var marker=new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.PAPER);
             marker.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(java.util.UUID.randomUUID().toString()));
-            left.setFrequency(0,marker);right.setFrequency(0,marker);
+            left.setFrequency(0,marker);left.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));right.setFrequency(0,marker);right.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));
             com.mcmagic.omnira.item.ResonanceLinks.prune(terminal,h.getLevel(),false);
             var data=com.mcmagic.omnira.item.ResonanceTerminalItem.data(terminal);
             h.assertTrue(data.contains("Link0")&&!data.contains("Link1")&&first.terminal!=null&&second.terminal==null,"Shared network did not evict later link");

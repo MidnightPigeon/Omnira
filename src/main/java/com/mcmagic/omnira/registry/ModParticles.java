@@ -8,6 +8,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 public final class ModParticles {
     public static final DeferredRegister<ParticleType<?>> TYPES=DeferredRegister.create(Registries.PARTICLE_TYPE,"omnira");
+    public static final DeferredHolder<ParticleType<?>,SimpleParticleType> STORM_RAIN=TYPES.register("storm_rain",()->new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>,SimpleParticleType> STORM_WARNING=TYPES.register("storm_warning",()->new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> STARFLOW_RIPPLE=TYPES.register("starflow_ripple",()->new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> STARFLOW_BUBBLE=TYPES.register("starflow_bubble",()->new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> NAIL_FOCUS=TYPES.register("nail_focus",()->new SimpleParticleType(false));

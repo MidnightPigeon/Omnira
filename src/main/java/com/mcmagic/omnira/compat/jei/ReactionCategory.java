@@ -60,8 +60,8 @@ public final class ReactionCategory implements IRecipeCategory<ReactionRecipe> {
         int count=outputCount(recipe);for(int i=0;i<count;i++)frame(g,outputX(count,i),outputY(count,i));
         int[][] points=pool?new int[][]{{14,12},{58,12},{64,18},{64,52},{58,58},{14,58},{8,52},{8,18}}:new int[][]{{39,3},{72,3},{94,25},{94,57},{72,79},{39,79},{17,57},{17,25}};
         for(int i=0;i<8;i++)line(g,points[i][0],points[i][1],points[(i+1)%8][0],points[(i+1)%8][1],0xFFB9DDE2);
-        int arrowY=pool?76:41;
-        line(g,101,arrowY,132,arrowY,0xFF92ADB5);line(g,126,arrowY-5,132,arrowY,0xFF92ADB5);line(g,132,arrowY,126,arrowY+5,0xFF92ADB5);
+        int arrowY=(outputY(count,0)+outputY(count,count-1))/2+8;
+        com.mcmagic.omnira.client.screen.PixelUiIcons.arrow(g::fill,pool?121:101,arrowY,pool?15:35,0xFF92ADB5);
         g.drawString(Minecraft.getInstance().font,Component.translatable("jei.omnira.reaction.seconds",recipe.duration()/20),105,count>3?110:pool||count>2?94:70,0xFF405760,false);
         if(recipe.support().isEmpty())g.drawString(Minecraft.getInstance().font,Component.translatable("jei.omnira.reaction.any_support"),28,94,0xFF405760,false);
     }

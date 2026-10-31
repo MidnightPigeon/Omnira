@@ -1,14 +1,14 @@
 {
   "id": "reload_element",
   "title": "Reload",
-  "item": "omnira:active_world_seed",
-  "icon": "omnira:construction_matrix",
-  "recipes": false,
+  "item": "omnira:miniature_world",
+  "icon": "omnira:miniature_world",
+  "recipes": true,
   "text": [
-    "Use an Active World Seed as a spell element to reload affected complete blocks or creatures.",
+    "Process one Active World Seed through advanced condensation to obtain a Miniature World. It provides spells with the Reload element, allowing them to reload complete blocks or creatures they touch.",
     "Blocks become another random complete block. Air and incomplete blocks are unaffected. Creatures change within their friendly, neutral, hostile or boss family; decorative entities are unaffected.",
     "Initially, replacements come from vanilla and hostile creatures and bosses cannot change. Enhancement permits these targets; Infusion includes modded content. Delay and spell power do not affect Reload.",
-    "Perhaps a mysterious boss creature may emerge from Reload."
+    "§5§l§oPerhaps a mysterious boss creature may emerge from Reload?"
   ],
   "links": [
     {
@@ -18,6 +18,10 @@
     {
       "target": "advanced_spell_aggregation",
       "label": "Advanced Spell Writing"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
     }
   ]
 }

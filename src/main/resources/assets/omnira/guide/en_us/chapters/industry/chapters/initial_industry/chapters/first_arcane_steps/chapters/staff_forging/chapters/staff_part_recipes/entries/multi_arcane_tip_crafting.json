@@ -1,9 +1,9 @@
 {
   "id": "multi_arcane_tip_crafting",
   "item": "omnira:multi_arcane_tip",
-  "title": "Multi-Arcane Tip · Crafting",
+  "title": "Multi-Arcane Staff Tip · Crafting",
   "text": [
-    "Use the assembly recipe below to forge this item."
+    "Station: Arcane Assembly Bench."
   ],
   "recipes": true,
   "links": [

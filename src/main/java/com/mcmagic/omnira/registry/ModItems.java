@@ -18,7 +18,9 @@ public final class ModItems {
     public static final DeferredItem<Item> MUSIC_DISC_MI_MENG_YE=ITEMS.registerSimpleItem("music_disc_mi_meng_ye",new Item.Properties().stacksTo(1).rarity(Rarity.RARE)
             .jukeboxPlayable(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.JUKEBOX_SONG,
                     net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","mi_meng_ye"))));
-    public static final DeferredItem<Item> MUSIC_DISC_SPACE=ITEMS.registerSimpleItem("music_disc_space",new Item.Properties().stacksTo(1).rarity(Rarity.RARE));
+    public static final DeferredItem<Item> MUSIC_DISC_SPACE=ITEMS.registerSimpleItem("music_disc_space",new Item.Properties().stacksTo(1).rarity(Rarity.RARE)
+            .jukeboxPlayable(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.JUKEBOX_SONG,
+                    net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","po_sui_shi_jie"))));
     public static final DeferredItem<com.mcmagic.omnira.weaver.FounderApprovalItem> FOUNDER_APPROVAL=
             ITEMS.registerItem("founder_approval",com.mcmagic.omnira.weaver.FounderApprovalItem::new);
     public static final DeferredItem<Item> VOYAGER_VIOLIN=ITEMS.register("voyager_violin",()->
@@ -130,6 +132,9 @@ public final class ModItems {
     public static final DeferredItem<Item> SHADOW_MANUSCRIPT = ITEMS.registerSimpleItem("shadow_manuscript");
     public static final DeferredItem<Item> TRAVELER_MANUSCRIPT = ITEMS.registerItem("traveler_manuscript",com.mcmagic.omnira.item.TravelerManuscriptItem::new,new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> PSYKER_TALENT=fate("psyker_talent",com.mcmagic.omnira.item.FateCurioItem.Kind.PSYKER);
+    public static final DeferredItem<Item> ARCANIST_TALENT=fate("arcanist_talent",com.mcmagic.omnira.item.FateCurioItem.Kind.ARCANIST);
+    public static final DeferredItem<Item> STORM_CURSE=fate("storm_curse",com.mcmagic.omnira.item.FateCurioItem.Kind.STORM);
+    public static final DeferredItem<Item> RAIN_SOAKED_SUITCASE=ITEMS.registerItem("rain_soaked_suitcase",com.mcmagic.omnira.fate.RainSoakedSuitcaseItem::new,new Item.Properties().stacksTo(1).rarity(Rarity.RARE));
     public static final DeferredItem<Item> KHORNE_BLESSING=fate("khorne_blessing",com.mcmagic.omnira.item.FateCurioItem.Kind.KHORNE);
     public static final DeferredItem<Item> TZEENTCH_BLESSING=fate("tzeentch_blessing",com.mcmagic.omnira.item.FateCurioItem.Kind.TZEENTCH);
     public static final DeferredItem<Item> NURGLE_BLESSING=fate("nurgle_blessing",com.mcmagic.omnira.item.FateCurioItem.Kind.NURGLE);
@@ -168,6 +173,12 @@ public final class ModItems {
     public static final DeferredItem<Item> SPACETIME_SPELL_CORE=ITEMS.registerItem("spacetime_spell_core",p->new com.mcmagic.omnira.item.SpellCoreItem(p,com.mcmagic.omnira.item.SpellCoreItem.Kind.SPACETIME),new Item.Properties().rarity(Rarity.EPIC));
     public static final DeferredItem<Item> SHARP_BREATH=ITEMS.registerSimpleItem("sharp_breath",new Item.Properties());
     public static final DeferredItem<Item> HEALING_DEW=ITEMS.registerSimpleItem("healing_dew",new Item.Properties());
+    public static final DeferredItem<Item> AMPLIFICATION_STAR=ITEMS.registerSimpleItem("amplification_star",new Item.Properties());
+    public static final DeferredItem<Item> LINGERING_THREAD=ITEMS.registerSimpleItem("lingering_thread",new Item.Properties());
+    public static final DeferredItem<Item> INFUSION_BUD=ITEMS.registerSimpleItem("infusion_bud",new Item.Properties());
+    public static final DeferredItem<Item> HOLY_HALO=ITEMS.registerSimpleItem("holy_halo",new Item.Properties());
+    public static final DeferredItem<Item> MINIATURE_WORLD=ITEMS.registerSimpleItem("miniature_world",new Item.Properties());
+    public static final DeferredItem<Item> LIFE_DRAIN_ORIGIN=ITEMS.registerSimpleItem("life_drain_origin",new Item.Properties());
     public static final DeferredItem<Item> TEST_DAMAGE_ELEMENT=ITEMS.registerSimpleItem("test_damage_element",new Item.Properties());
     public static final DeferredItem<Item> GRID_FRAME=ITEMS.registerSimpleItem("grid_frame");
     public static final DeferredItem<Item> CRUDE_LIGHT_CORE=ITEMS.registerSimpleItem("crude_light_core");

@@ -13,19 +13,19 @@
   "links": [
     {
       "target": "earth_microcore",
-      "label": "地元素微核"
+      "label": "地之微核"
     },
     {
       "target": "water_microcore",
-      "label": "水元素微核"
+      "label": "水之微核"
     },
     {
       "target": "fire_microcore",
-      "label": "火元素微核"
+      "label": "火之微核"
     },
     {
       "target": "air_microcore",
-      "label": "风元素微核"
+      "label": "风之微核"
     },
     {
       "target": "crystal_processing_table",

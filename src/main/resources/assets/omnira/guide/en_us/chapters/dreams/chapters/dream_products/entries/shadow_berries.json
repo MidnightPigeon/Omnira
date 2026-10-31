@@ -3,7 +3,7 @@
   "item": "omnira:shadow_berries",
   "title": "Shadow Berries",
   "text": [
-    "Grows on the sides of shadow tree trunks. Wait for the hanging fruit to mature before harvesting."
+    "Grows on the sides of shadow tree trunks. Wait for the hanging fruit to mature before harvesting. Eating restores 3 hunger, 4 saturation and immediately restores 20% of maximum mana."
   ],
   "recipes": true
 }

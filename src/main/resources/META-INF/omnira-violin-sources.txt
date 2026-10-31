@@ -1,10 +1,16 @@
 Voyager's Violin recordings
 
-Both recordings are designated CC0 1.0 Universal by their source pages.
+The first two recordings are designated CC0 1.0 Universal by their source pages.
 License: https://creativecommons.org/publicdomain/zero/1.0/
 The CC0 designation applies to the recordings, not merely Bach's compositions.
 Performer/recording author: unknown, as credited by Wikimedia Commons.
 Retrieved: 2026-10-06. Audio converted to mono for positional playback.
+
+Processing revision 2026-10-23 (all five recordings): rebuilt from verified originals,
+48 kHz mono Vorbis, 70 Hz high-pass and gentle 6 dB stationary noise reduction
+(noise floor -50 dB, no adaptive note tracking), followed by two-pass EBU R128
+normalization targeting -18 LUFS and -2 dBTP. Original durations are preserved.
+Processing script: scripts/prepare-violin-audio.py; measured results in build/violin-audio-balance.json.
 
 bach_allemanda.ogg
 J. S. Bach, Partita No. 2 in D minor, BWV 1004, I. Allemanda
@@ -17,3 +23,33 @@ J. S. Bach, Violin Sonata No. 1 in G minor, BWV 1001, I. Adagio
 Recorded 22 September 2014, William Goodenough House, London.
 https://commons.wikimedia.org/wiki/File:J._S._Bach_%E2%80%93_Violin_Sonata_No.1_in_G_minor,_BWV_1001,_I._Adagio.ogg
 Original SHA1: da651f5155df5a33df06e7362c32edb1953f4dc9
+
+Additional recordings retrieved 2026-10-23:
+Source metadata explicitly designates the following recordings CC0 or Public Domain Mark.
+Performer not identified by the source. These are contemporary solo recordings,
+not historical commercial discs. Converted to mono Vorbis; gain adjusted without clipping.
+Archive uploader: mattwhiteski. No claim that all performances of these works are public domain.
+
+paganini_caprice20.ogg
+Niccolo Paganini, Caprice No. 20 in D major, Op. 1
+Recorded 18 April 2013, MAT Listening Room, QMUL, London.
+https://archive.org/details/PaganiniCaprice20_QMUL_ListeningRoom2
+Source file: Mixes/Paganini1.ogg
+Original SHA1: 3a416cfa36ad778c38afeda5a50ed21f2f5a1710
+License: https://creativecommons.org/publicdomain/zero/1.0/
+
+paganini_caprice24.ogg
+Niccolo Paganini, Caprice No. 24 in A minor, Op. 1
+Recorded in the Performance Lab, Queen Mary University of London.
+https://archive.org/details/Paganini_Caprice24
+Source file: C414_L03.ogg
+Original SHA1: d73df10dbc72c57998f29a035307eaefb98d68e5
+Source designation: https://creativecommons.org/publicdomain/mark/1.0/
+
+ysaye_sonata6.ogg
+Eugene Ysaye, Sonata No. 6 for Solo Violin, Op. 27 (Manuel Quiroga)
+Recorded in the MAT Listening Room, QMUL, London.
+https://archive.org/details/Ysaye_6thSonata
+Source file: Ysaye_1.ogg
+Original SHA1: fa52325f453272f5cdbb3a9630037d719b744d33
+Source designation: https://creativecommons.org/publicdomain/mark/1.0/

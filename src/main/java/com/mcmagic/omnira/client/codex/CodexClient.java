@@ -41,10 +41,12 @@ public final class CodexClient {
                 var be=MyriadCodexEntity.from(entity);if(be==null)return;
                 double time=be.getLevel()==null?0:be.getLevel().getGameTime()+partial;
                 var facing=be.getBlockState().getValue(MyriadCodexBlock.FACING);
-                float angle=net.neoforged.fml.ModList.get().isLoaded("create")?com.mcmagic.omnira.client.renderer.CreateEnginePhase.degrees(entity,facing.getAxis()):0;
-                angle*=switch(facing){case NORTH,WEST->-1;default->1;};
-                CodexVisuals.codex(facing,time,be.busy(),be.potential>=8192&&!be.busy()&&be.holder==null&&be.heartPos==null,pose,buffers,light,overlay,angle);
-                if(be.potential>0&&be.shaftSpeed()==0)CodexVisuals.input(facing.getOpposite(),time,pose,buffers,be.electrical?com.mcmagic.omnira.pulse.PulseOutput.ELECTRIC:com.mcmagic.omnira.pulse.PulseOutput.PULSE);
+                if(com.mcmagic.omnira.client.renderer.WorldGlassBuffers.visible(new AABB(be.getBlockPos()).inflate(.1).expandTowards(0,.7,0))){
+                    float angle=net.neoforged.fml.ModList.get().isLoaded("create")?com.mcmagic.omnira.client.renderer.CreateEnginePhase.degrees(entity,facing.getAxis()):0;
+                    angle*=switch(facing){case NORTH,WEST->-1;default->1;};
+                    CodexVisuals.codex(facing,time,be.busy(),be.potential>=8192&&!be.busy()&&be.holder==null&&be.heartPos==null,pose,buffers,light,overlay,angle);
+                    if(be.potential>0&&be.shaftSpeed()==0)CodexVisuals.input(facing.getOpposite(),time,pose,buffers,be.electrical?com.mcmagic.omnira.pulse.PulseOutput.ELECTRIC:com.mcmagic.omnira.pulse.PulseOutput.PULSE);
+                }
                 var target=CodexVisuals.target(be,partial);
                 if(target!=null){
                     var local=target.subtract(Vec3.atLowerCornerOf(be.getBlockPos()));
@@ -55,9 +57,8 @@ public final class CodexClient {
             @Override public AABB getRenderBoundingBox(net.minecraft.world.level.block.entity.BlockEntity entity){
                 var be=MyriadCodexEntity.from(entity);
                 var box=new AABB(be.getBlockPos()).inflate(.1).expandTowards(0,.7,0);
-                var target=CodexVisuals.target(be,1);return target==null?box:box.minmax(new AABB(target,target).inflate(.1));
+                var target=CodexVisuals.target(be,1);return target==null?box:box.minmax(new AABB(target,target).inflate(.5));
             }
-            @Override public boolean shouldRenderOffScreen(net.minecraft.world.level.block.entity.BlockEntity entity){var be=MyriadCodexEntity.from(entity);return be.holder!=null||be.heartPos!=null;}
             @Override public int getViewDistance(){return 96;}
         });
         e.registerBlockEntityRenderer(MyriadCodexContent.HEART_ENTITY.get(),context->new BlockEntityRenderer<WorldHeartEntity>(){
@@ -65,7 +66,8 @@ public final class CodexClient {
                 double time=be.getLevel()==null?0:be.getLevel().getGameTime()+partial;
                 var source=CodexVisuals.origin(be.link);int fade=source==null?be.fade:source.fade;
                 CodexVisuals.heart(time,fade,pose,buffers,overlay);
-                CodexVisuals.sphere(source==null?be.diameter:source.diameter(),fade,pose,buffers);
+                CodexVisuals.sphere(source==null?be.diameter:source.diameter(),fade,
+                        source==null?be.shape:source.mode==1?source.shape:0,source==null?be.axis:source.axis,pose,buffers);
             }
             @Override public AABB getRenderBoundingBox(WorldHeartEntity be){return new AABB(be.getBlockPos()).inflate(Math.max(0,(Math.clamp(be.diameter,1,15)-1)/2.0)+.1);}
             @Override public int getViewDistance(){return 96;}

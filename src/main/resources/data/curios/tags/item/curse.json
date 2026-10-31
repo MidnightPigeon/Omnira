@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "omnira:storm_curse",
     "omnira:khorne_blessing",
     "omnira:tzeentch_blessing",
     "omnira:nurgle_blessing",

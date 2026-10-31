@@ -4,8 +4,7 @@
   "title": "Sharpened Arcane Needle",
   "recipes": true,
   "text": [
-    "Upgrade the preceding weapon at the Advanced Assembly Table. Damage, enchantments, custom names and the inserted spell crystal are preserved.",
-    "Upgrade 1: 10 damage, 1.9 attack speed, 15 total healing and 125% base special range. Paradox motes increase with level.",
+    "Upgrade 1: 10 damage, 1.9 attack speed, 15 total healing and 125% base special range.",
     "§d§oAt least upgrading needs no smithing template)§r"
   ],
   "links": [

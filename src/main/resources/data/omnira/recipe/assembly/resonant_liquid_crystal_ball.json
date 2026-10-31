@@ -27,5 +27,6 @@
     "id": "omnira:resonant_liquid_crystal_ball",
     "count": 1
   },
-  "operation": "resonant_orb"
+  "operation": "resonant_orb",
+  "outer_shapeless": true
 }

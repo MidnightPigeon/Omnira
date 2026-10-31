@@ -6,6 +6,21 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_sable_machines")
 @PrefixGameTestTemplate(false)
 public final class SableMultiblockGameTests {
+    @GameTest(template="spell_arena") public static void tuningNodesMoveTogether(GameTestHelper h){
+        if(net.neoforged.fml.ModList.get().isLoaded("sable"))SableStorageChecks.nodes(h,true);else h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void tuningNodesDisconnectAcrossStructures(GameTestHelper h){
+        if(net.neoforged.fml.ModList.get().isLoaded("sable"))SableStorageChecks.nodes(h,false);else h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void sharedPulseUpgradeSurvivesAssembly(GameTestHelper h){
+        if(net.neoforged.fml.ModList.get().isLoaded("sable"))SableStorageChecks.pulse(h);else h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void resonantItemsSurviveAssembly(GameTestHelper h){
+        if(net.neoforged.fml.ModList.get().isLoaded("sable"))SableStorageChecks.run(h,false);else h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void resonantFluidsSurviveAssembly(GameTestHelper h){
+        if(net.neoforged.fml.ModList.get().isLoaded("sable"))SableStorageChecks.run(h,true);else h.succeed();
+    }
     private static void check(GameTestHelper h,String machine){
         if(net.neoforged.fml.ModList.get().isLoaded("sable"))SableMachineChecks.run(h,machine);else h.succeed();
     }

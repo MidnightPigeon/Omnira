@@ -1,0 +1,26 @@
+{
+  "id": "rain_soaked_suitcase",
+  "item": "omnira:rain_soaked_suitcase",
+  "title": "被暴雨浸湿的手提箱",
+  "recipes": false,
+  "text": [
+    "各空间群系的战利品水晶球有5%概率额外藏有手提箱。右键立即激发神秘学家与暴雨，手提箱不消耗。已有天赋或诅咒时不会覆盖。",
+    "天赋和诅咒不能手动摘除，可通过洁身之仪一起清除。",
+    "潜行右键地面可放置并打开。手持物品右键放入一件，空手右键取回；展示时箱体保持半开。",
+    "放入远旅的小提琴后会自动持续演奏，为半径10格内的生物提供生命恢复II与抗性提升II；取出小提琴即可停止。"
+  ],
+  "links": [
+    {
+      "target": "arcanist_talent",
+      "label": "神秘学家"
+    },
+    {
+      "target": "storm_curse",
+      "label": "暴雨"
+    },
+    {
+      "target": "voyager_violin",
+      "label": "远旅的小提琴"
+    }
+  ]
+}

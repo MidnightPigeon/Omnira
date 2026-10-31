@@ -1,0 +1,11 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {
+    "item": "minecraft:iron_block"
+  },
+  "mana_cost": 300,
+  "result": {
+    "id": "omnira:amplification_star",
+    "count": 1
+  }
+}

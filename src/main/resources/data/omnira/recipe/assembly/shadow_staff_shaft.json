@@ -15,5 +15,6 @@
   "result": {
     "id": "omnira:shadow_staff_shaft",
     "count": 1
-  }
+  },
+  "outer_shapeless": true
 }

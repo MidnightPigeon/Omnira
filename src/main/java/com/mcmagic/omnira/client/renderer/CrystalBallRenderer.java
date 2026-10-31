@@ -42,8 +42,9 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
         if(stellar)StellarVisuals.cluster(pose,buffers,time);
         if(ball!=null && ball.hasPendingLoot())fog(pose,buffers,time);
         // Independent, bounded orbits remain inside the hollow shell at every phase.
-        for(int i=0;ball!=null && !liquid && i<CrystalBallBlockEntity.SIZE;i++) {
-            var item=ball.displayItem(i);
+        var displayed=ball!=null&&!liquid?ball.displayItems():java.util.List.<ItemStack>of();
+        for(int i=0;i<displayed.size();i++) {
+            var item=displayed.get(i);
             if(item.isEmpty())continue;
             if(stellar){StellarVisuals.centeredItem(item,pose,buffers,overlay);continue;}
             double phase=time*.025+i*1.93;
@@ -81,6 +82,9 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
     @Override public boolean shouldRender(CrystalBallBlockEntity ball,net.minecraft.world.phys.Vec3 camera){
         return BlockEntityRenderer.super.shouldRender(ball,camera)&&com.mcmagic.omnira.client.LabyrinthDisplayVisibility.visible(ball,camera,new net.minecraft.world.phys.AABB(ball.getBlockPos()).inflate(.3));
     }
+    @Override public net.minecraft.world.phys.AABB getRenderBoundingBox(CrystalBallBlockEntity ball){
+        return new net.minecraft.world.phys.AABB(ball.getBlockPos()).inflate(ball.resonant()?.3:0);
+    }
     public static void vortex(PoseStack pose,MultiBufferSource buffers,double time){
         vortex(pose,buffers,time,false);
     }
@@ -107,6 +111,7 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
         base(ball,pose,buffers,light,overlay);
         for(int i=0;i<3;i++)upgrade(ball.upgrades.getStackInSlot(i),i,pose,buffers,light,overlay);
         globe(pose,buffers,time+(ball.getBlockPos().asLong()&255),light,overlay,ball);
+        if(ball.resonant())ResonanceSatellites.render(ball.frequency,pose,buffers,time,overlay);
         if(ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity)StellarVisuals.baseStars(pose,buffers,time);
         pose.popPose();
     }

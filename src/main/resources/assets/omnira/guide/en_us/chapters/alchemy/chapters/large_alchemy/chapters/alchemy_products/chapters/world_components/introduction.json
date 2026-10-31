@@ -1,4 +1,15 @@
 {
-  "text": ["Genesis Particles provide creation's potential; a representative material gives it a world feature. Each component requires one particle, 1B of Refined Spacetime and its specific ingredient, catalyzed by an Enhanced Alchemical Energy Core for 100 seconds. Recipes with two fluids require a Large Alchemical Reaction Pool."],
-  "links": [{"target": "world_forming_ritual", "label": "Ritual of World Formation"}, {"target": "capturing_inspiration", "label": "Genesis Particles"}]
+  "text": [
+    "Genesis Particles provide creation’s potential; a representative material gives it a world feature. Each reaction produces one component from one Genesis Particle, 1 B of Refined Spacetime and its specific ingredient, with an Enhanced Alchemical Energy Core as catalyst. Recipes with two fluids require a Large Alchemical Reaction Pool."
+  ],
+  "links": [
+    {
+      "target": "world_forming_ritual",
+      "label": "Ritual of World Formation"
+    },
+    {
+      "target": "capturing_inspiration",
+      "label": "Genesis Particles"
+    }
+  ]
 }

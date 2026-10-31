@@ -25,31 +25,28 @@
         "light_dark_spell_core",
         "spacetime_spell_core",
         "low_tier_magic_crystal",
-        "high_tier_magic_crystal"
+        "high_tier_magic_crystal",
+        "world_rotation_crystal"
       ]
     },
     {
-      "group": "Elements",
-      "items": [
-        "earth_microcore",
-        "water_microcore",
-        "fire_microcore",
-        "air_microcore",
-        "light_microcore",
-        "dark_microcore",
-        "time_microcore",
-        "space_microcore",
-        "omni_microcore"
-      ]
-    },
-    {
-      "group": "Spell ingredients",
+      "group": "Spell elements",
       "items": [
         "sharp_breath",
         "healing_dew",
         "dissociation_thread",
         "construction_matrix",
-        "world_rotation_crystal"
+        "life_drain_origin",
+        "miniature_world"
+      ]
+    },
+    {
+      "group": "Spell modifiers",
+      "items": [
+        "amplification_star",
+        "lingering_thread",
+        "infusion_bud",
+        "holy_halo"
       ]
     },
     {
@@ -153,6 +150,7 @@
       "group": "Talents",
       "items": [
         "psyker_talent",
+        "arcanist_talent",
         "land_king",
         "sea_king",
         "sky_king"
@@ -165,7 +163,8 @@
         "tzeentch_blessing",
         "nurgle_blessing",
         "slaanesh_blessing",
-        "time_distortion"
+        "time_distortion",
+        "storm_curse"
       ]
     }
   ],
@@ -232,6 +231,13 @@
         "ritual_energy_core",
         "advanced_ritual_energy_core",
         "pure_vessel"
+      ]
+    },
+    {
+      "group": "Alchemy energy cores",
+      "items": [
+        "rough_alchemical_energy_core",
+        "enhanced_alchemical_energy_core"
       ]
     }
   ],
@@ -457,7 +463,11 @@
   "misc": [
     {
       "group": "Music",
-      "items": ["music_disc_liu_nian", "music_disc_mi_meng_ye", "music_disc_space"]
+      "items": [
+        "music_disc_liu_nian",
+        "music_disc_mi_meng_ye",
+        "music_disc_space"
+      ]
     },
     {
       "group": "Crystals and dust",
@@ -476,6 +486,20 @@
         "spell_ink",
         "shadow_mist",
         "milk_suspension"
+      ]
+    },
+    {
+      "group": "Microcore materials",
+      "items": [
+        "earth_microcore",
+        "water_microcore",
+        "fire_microcore",
+        "air_microcore",
+        "light_microcore",
+        "dark_microcore",
+        "time_microcore",
+        "space_microcore",
+        "omni_microcore"
       ]
     },
     {
@@ -517,8 +541,6 @@
     {
       "group": "Alchemy materials",
       "items": [
-        "rough_alchemical_energy_core",
-        "enhanced_alchemical_energy_core",
         "alchemical_waste",
         "pure_mirror"
       ]
@@ -538,6 +560,7 @@
       "items": [
         "shadow_manuscript",
         "traveler_manuscript",
+        "rain_soaked_suitcase",
         "desire_crystal",
         "damaged_research_facility",
         "repaired_mechanical_component",

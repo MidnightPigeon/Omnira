@@ -27,6 +27,16 @@ public final class ViolinRender {
         mc.getItemRenderer().render(new ItemStack(ModItems.VOYAGER_VIOLIN.get()),ItemDisplayContext.NONE,false,pose,buffers,
                 light,OverlayTexture.NO_OVERLAY,mc.getModelManager().getModel(model(bow)));
     }
+    public static void showcase(double time,PoseStack pose,MultiBufferSource buffers,int light){
+        float stroke=(float)Math.sin(time*.18);
+        pose.pushPose();pose.mulPose(Axis.XP.rotationDegrees(-72));
+        pose.mulPose(Axis.ZP.rotationDegrees(-90+stroke*1.5F));pose.scale(.65F,.65F,.65F);
+        part(false,pose,buffers,light);
+        // Keep the bow hair on the bridge while sliding across the strings, not through the body.
+        pose.pushPose();pose.translate(stroke*.18,-.171875,.169);
+        pose.mulPose(Axis.ZP.rotationDegrees(90));pose.mulPose(Axis.YP.rotationDegrees(180));
+        part(true,pose,buffers,light);pose.popPose();pose.popPose();
+    }
     public static void thirdPerson(Player player,HumanoidModel<?> body,PoseStack pose,MultiBufferSource buffers,int light){
         int side=player.getMainArm()==HumanoidArm.RIGHT?1:-1;
         pose.pushPose();pose.translate(side*.27,.06,-.45);

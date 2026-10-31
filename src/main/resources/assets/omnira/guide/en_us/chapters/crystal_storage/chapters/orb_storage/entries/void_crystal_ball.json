@@ -4,9 +4,9 @@
   "title": "Void Crystal Orb",
   "recipes": true,
   "text": [
-    "Forge a crystal orb, liquid crystal orb, darkness microcore and eye of ender in any arrangement on the assembly table.",
+    "Leave the center empty and forge a Crystal Ball, Liquid Crystal Ball, Dark Microcore and Eye of Ender in any outer slots to make a Void Crystal Orb.",
     "The central trash slot and item/fluid ports immediately destroy all input. There is no temporary storage or undo. Resonance nodes and compatible pipes from other mods can insert, but nothing can be extracted. A terminal-bound node turns black and is named Void; unbound nodes remain red.",
-    "Accepts one Intake and one Speed Upgrade. Intake follows the host's rate, directions and filters: base 4 items and 2000 mB per second. Direct input and resonance bypass its filter and intake allowance.",
+    "Accepts one Intake and one Speed Upgrade. Intake follows the host's rate, directions and filters; direct input and resonance bypass its filter and intake allowance.",
     "Shattering a Void Crystal Orb by stepping on it is risky."
   ],
   "links": [
@@ -17,6 +17,10 @@
     {
       "target": "orb_upgrade_plugins",
       "label": "Upgrade Plugins"
+    },
+    {
+      "target": "crystal_logistics",
+      "label": "Logistics"
     }
   ]
 }

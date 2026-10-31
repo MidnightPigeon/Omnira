@@ -100,6 +100,11 @@
       "icon": "omnira:primordial_earth_aggregate",
       "name": "远古地球聚合体及相关衍生物",
       "origin": "地球Online（2026版）"
+    },
+    {
+      "icon": "omnira:rain_soaked_suitcase",
+      "name": "被暴雨浸湿的手提箱、神秘学家与暴雨",
+      "origin": "重返未来：1999"
     }
   ]
 }

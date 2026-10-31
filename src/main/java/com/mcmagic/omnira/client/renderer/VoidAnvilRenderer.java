@@ -15,8 +15,7 @@ public final class VoidAnvilRenderer extends EntityRenderer<VoidAnvil> {
     public VoidAnvilRenderer(EntityRendererProvider.Context context){super(context);shadowRadius=.4F;}
     @Override public void render(VoidAnvil entity,float yaw,float partial,PoseStack pose,MultiBufferSource buffers,int light){
         pose.pushPose();pose.translate(-.5,0,-.5);
-        var mc=Minecraft.getInstance();mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(MODEL),ItemStack.EMPTY,
-                light,OverlayTexture.NO_OVERLAY,pose,buffers.getBuffer(RenderType.cutout()));
+        var mc=Minecraft.getInstance();com.mcmagic.omnira.client.renderer.StaticModelQuads.draw(mc.getModelManager().getModel(MODEL),pose,buffers.getBuffer(RenderType.cutout()),light,OverlayTexture.NO_OVERLAY);
         pose.popPose();super.render(entity,yaw,partial,pose,buffers,light);
     }
     @Override public ResourceLocation getTextureLocation(VoidAnvil entity){return TextureAtlas.LOCATION_BLOCKS;}

@@ -16,11 +16,14 @@ import java.util.*;
 @EventBusSubscriber(modid="omnira")
 public final class VoyagerPerformance {
     private static final Map<UUID,Session> SESSIONS=new HashMap<>();
-    public static final int[] TRACK_TICKS={3630,5421};
+    private static int next(Player p){
+        var data=p.getPersistentData();var bag=data.getCompound("OmniraViolinBag");
+        int track=ViolinTracks.draw(bag,p.getRandom());data.put("OmniraViolinBag",bag);return track;
+    }
     private static final class Session {
         final ItemStack instrument;
         int age,track,remaining;
-        Session(Player p){instrument=p.getOffhandItem();track=p.getRandom().nextInt(2);remaining=TRACK_TICKS[track];}
+        Session(Player p){instrument=p.getOffhandItem();track=next(p);remaining=ViolinTracks.ticks(track);}
     }
     private VoyagerPerformance() {}
     public static boolean playing(Player p){return SESSIONS.containsKey(p.getUUID());}
@@ -47,11 +50,14 @@ public final class VoyagerPerformance {
         // Regeneration II heals every 25 ticks; refreshing on the same cadence preserves its rhythm.
         if(session.age%25==1) {
             affect(p);
-            for(var living:p.level().getEntitiesOfClass(LivingEntity.class,p.getBoundingBox().inflate(10),
-                    e->e!=p&&e.isAlive()&&!e.isSpectator()&&e.distanceToSqr(p)<=100))affect(living);
+            affectAround(p.level(),p.position(),p);
         }
         if(session.age%20==0)repairCarried(p);
-        if(--session.remaining<=0){session.track=1-session.track;session.remaining=TRACK_TICKS[session.track];send(p,session.track);}
+        if(--session.remaining<=0){session.track=next(p);session.remaining=ViolinTracks.ticks(session.track);send(p,session.track);}
+    }
+    public static void affectAround(net.minecraft.world.level.Level level,net.minecraft.world.phys.Vec3 center,LivingEntity performer){
+        for(var living:level.getEntitiesOfClass(LivingEntity.class,new net.minecraft.world.phys.AABB(center,center).inflate(10),
+                e->e!=performer&&e.isAlive()&&!e.isSpectator()&&e.position().distanceToSqr(center)<=100))affect(living);
     }
     private static void affect(LivingEntity e){
         e.addEffect(new MobEffectInstance(MobEffects.REGENERATION,50,1,true,false,true));

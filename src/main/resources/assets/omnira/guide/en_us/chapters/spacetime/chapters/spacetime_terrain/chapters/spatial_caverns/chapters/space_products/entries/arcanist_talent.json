@@ -1,0 +1,10 @@
+{
+  "id": "arcanist_talent",
+  "item": "omnira:arcanist_talent",
+  "title": "Arcanist",
+  "recipes": false,
+  "text": [
+    "Mana regeneration +30%. Consecutive successful casts from the same installation cycle through ranks one, two and three, adding 0%, 25% and 50% spell power.",
+    "Spells in one lattice share ranks regardless of staff. Nails, guns and other implements each use their own installation; changing to another resets the rank. Failed casts do not advance."
+  ]
+}

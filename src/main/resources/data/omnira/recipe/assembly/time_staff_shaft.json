@@ -1,5 +1,20 @@
 {
-  "type": "omnira:assembly", "operation": "fixed",
-  "slots": [[], [], [], [], [], [], {"tag": "omnira:time_logs"}],
-  "result": {"id": "omnira:time_staff_shaft", "count": 1}
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "slots": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "tag": "omnira:time_logs"
+    }
+  ],
+  "result": {
+    "id": "omnira:time_staff_shaft",
+    "count": 1
+  },
+  "outer_shapeless": true
 }

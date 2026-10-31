@@ -1,9 +1,31 @@
 {
   "type": "omnira:assembly",
   "slots": [
-    {"item": "omnira:stardust"}, {"item": "omnira:stardust"}, {"item": "omnira:stardust"},
-    {"item": "omnira:stardust"}, {"item": "omnira:stardust"}, {"item": "omnira:stardust"},
-    {"item": "omnira:crystal_ball"}
+    {
+      "item": "omnira:stardust"
+    },
+    {
+      "item": "omnira:stardust"
+    },
+    {
+      "item": "omnira:stardust"
+    },
+    {
+      "item": "omnira:stardust"
+    },
+    {
+      "item": "omnira:stardust"
+    },
+    {
+      "item": "omnira:stardust"
+    },
+    {
+      "item": "omnira:crystal_ball"
+    }
   ],
-  "result": {"id": "omnira:wandering_star_cluster_orb", "count": 1}
+  "result": {
+    "id": "omnira:wandering_star_cluster_orb",
+    "count": 1
+  },
+  "outer_shapeless": true
 }

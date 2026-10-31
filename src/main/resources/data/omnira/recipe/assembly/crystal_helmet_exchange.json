@@ -15,5 +15,6 @@
   "result": {
     "id": "omnira:crystal_helmet",
     "count": 1
-  }
+  },
+  "outer_shapeless": true
 }

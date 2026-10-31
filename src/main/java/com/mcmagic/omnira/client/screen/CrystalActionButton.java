@@ -11,6 +11,7 @@ final class CrystalActionButton extends Button {
     @Override protected void renderWidget(GuiGraphics g,int x,int y,float partial){
         MachinePanelArt.button(CrystalUi.pixels(g,getX(),getY()),getWidth(),getHeight(),active,isHoveredOrFocused());
         var font=Minecraft.getInstance().font;
+        if(getWidth()<=22&&PixelUiIcons.draw(g::fill,getMessage().getString(),getX()+getWidth()/2,getY()+getHeight()/2,active?getFGColor():0xFF9EADB3))return;
         CrystalUi.title(g,font,getMessage(),getX()+getWidth()/2,getY()+(getHeight()-font.lineHeight)/2,getWidth()-8,active?getFGColor():0xFF9EADB3);
     }
 }

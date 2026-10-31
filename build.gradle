@@ -62,7 +62,7 @@ configurations {
 
 def installedCreate = file('../.minecraft/versions/WizardryCraft/mods/create-1.21.1-6.0.10.jar')
 def installedSable = file('../.minecraft/versions/WizardryCraft/mods/sable-neoforge-1.21.1-2.0.6.jar')
-def installedJei = file('../.minecraft/versions/WizardryCraft/mods/jei-1.21.1-neoforge-19.57.0.451.jar')
+def installedJei = file('../.minecraft/versions/WizardryCraft/mods/jei-1.21.1-neoforge-19.70.0.460.jar')
 def extractSableLibraries = tasks.register('extractSableLibraries', Sync) {
     from(zipTree(installedSable)) {
         include 'META-INF/jarjar/*.jar'

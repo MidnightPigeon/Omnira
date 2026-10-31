@@ -1,0 +1,22 @@
+{
+  "id": "dark_breath",
+  "item": "omnira:life_drain_origin",
+  "title": "Life-Draining Origin",
+  "text": [
+    "Process one Dark Microcore through advanced condensation to obtain a Life-Draining Origin.",
+    "Place a Life-Draining Origin in an element slot. Triggers a 1.5-block-radius cloud for 20 seconds, dealing 1 base damage per second and healing the caster for actual damage dealt. The cloud can also harm the caster; this self-damage grants no healing.",
+    "Each Delay adds 20 seconds; each Enhancement adds 1 base damage per second. Infusion seeks entities within 5 blocks, including the caster. Only area bonuses enlarge the cloud."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "dark_microcore",
+      "label": "Obtaining microcores"
+    },
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    }
+  ],
+  "icon": "omnira:life_drain_origin"
+}

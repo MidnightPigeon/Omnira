@@ -1,0 +1,15 @@
+{
+  "text": [
+    "高阶凝聚使强化、延时与神圣成为可用的法术修饰。它们沿用水晶加工台的修饰槽与费用规则。"
+  ],
+  "links": [
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    },
+    {
+      "target": "spell_modifiers",
+      "label": "修饰基础"
+    }
+  ]
+}

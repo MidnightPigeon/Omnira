@@ -4,6 +4,7 @@
   "title": "Arcane Assembly Bench",
   "text": [
     "Place recipe materials, strike the hammer and collect the result. A manual strike costs 50 base mana, advances progress by 5% or 10%, and has a half-second interval.",
+    "Keep the recipe base in the center; outer ingredients may be placed in any order. Staff bodies alone require their diagonal layout.",
     "The rear interface prioritizes pulses without player mana: 256 MPU base, up to 2048 MPU for 8x efficiency, including through Spacetime Ports.",
     "Stopping preserves progress. See Magic Pulses for connections and external power.",
     "With Create, a pressing ingredient in the center and empty outer slots also allows pressing recipes to be forged."

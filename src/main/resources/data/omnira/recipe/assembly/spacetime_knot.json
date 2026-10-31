@@ -15,5 +15,6 @@
   "result": {
     "id": "omnira:spacetime_knot",
     "count": 1
-  }
+  },
+  "outer_shapeless": true
 }

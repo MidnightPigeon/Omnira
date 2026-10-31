@@ -18,6 +18,8 @@ public record AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean out
     public AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean outerShapeless) {this(slots,result,outerShapeless,"fixed");}
     public AssemblyRecipe {
         slots=List.copyOf(slots);
+        // Legacy JSON/network flags remain readable; outer materials are unordered except diagonal staff assembly.
+        outerShapeless=!operation.equals("staff");
         result=result.copy();
         if(!List.of("fixed","alternating","grid_upgrade","staff","staff_upgrade","arquebus","arquebus_upgrade","armor_exchange","resonant_orb","void_orb").contains(operation)) throw new IllegalArgumentException("Unknown assembly operation: "+operation);
         boolean pairedPorts=result.is(com.mcmagic.omnira.registry.ModItems.SPACETIME_PORT.get()) && result.getCount()==2;
@@ -52,30 +54,18 @@ public record AssemblyRecipe(List<Ingredient> slots,ItemStack result,boolean out
             if(!preserves && !RecipeInputSafety.empty(input.getItem(i)))return false;
         }
         if(result.is(com.mcmagic.omnira.space.sea.StellarCraftContent.ORB_ITEM.get())&&!StarClusterOrbCraftRecipe.emptyOrb(input.getItem(6)))return false;
-        if(operation.equals("void_orb"))return matchSlots(input,0,0,7);
+
         if(operation.equals("armor_exchange") && com.mcmagic.omnira.registry.ArmorContent.exchange(input.getItem(6),result).isEmpty())return false;
         if(result.is(com.mcmagic.omnira.registry.ModItems.LIQUID_CRYSTAL_BALL.get()) && input.getItem(6).has(net.minecraft.core.component.DataComponents.BLOCK_ENTITY_DATA))return false;
         if(result.is(com.mcmagic.omnira.registry.ModItems.SPACETIME_STABILIZATION_UPGRADE.get()) && input.getItem(6).getOrDefault(net.minecraft.core.component.DataComponents.CONTAINER,
                 net.minecraft.world.item.component.ItemContainerContents.EMPTY).stream().anyMatch(s->!s.isEmpty()))return false;
         if(operation.equals("arquebus_upgrade") && (!(input.getItem(6).getItem() instanceof com.mcmagic.omnira.item.ArcaneArquebusItem)
                 || com.mcmagic.omnira.item.ArcaneArquebusItem.upgraded(input.getItem(6)))) return false;
-        if(operation.equals("alternating")) return matches(slots.get(6),input.getItem(6))
-                && (matchAlternating(input,0,0,0) || matchAlternating(input,0,0,1));
         if(operation.startsWith("staff")) return !StaffAssemblyRecipes.assemble(input,operation).isEmpty();
-        if(outerShapeless) return matches(slots.get(6),input.getItem(6)) && matchOuter(input,0,0)
+        return matches(slots.get(6),input.getItem(6)) && matchOuter(input,0,0)
                 && (!operation.equals("grid_upgrade") || !GridAssemblyRecipes.upgrade(input,result).isEmpty());
-        for(int i=0;i<7;i++)
-            if(slots.get(i).isEmpty()?!input.getItem(i).isEmpty():!slots.get(i).test(input.getItem(i))) return false;
-        return !operation.equals("grid_upgrade") || !GridAssemblyRecipes.upgrade(input,result).isEmpty();
     }
     private static boolean matches(Ingredient ingredient,ItemStack stack) {return ingredient.isEmpty()?stack.isEmpty():ingredient.test(stack);}
-    private boolean matchAlternating(Input input,int slot,int used,int parity) {
-        if(slot==6) return true;
-        for(int i=(slot+parity)%2;i<6;i+=2)
-            if((used&(1<<i))==0 && matches(slots.get(i),input.getItem(slot))
-                    && matchAlternating(input,slot+1,used|(1<<i),parity)) return true;
-        return false;
-    }
     private boolean matchOuter(Input input,int slot,int used) {
         return matchSlots(input,slot,used,6);
     }

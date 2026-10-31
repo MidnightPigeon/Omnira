@@ -100,6 +100,11 @@
       "icon": "omnira:primordial_earth_aggregate",
       "name": "Primordial Earth Aggregate and related items",
       "origin": "Earth Online (2026 Edition)"
+    },
+    {
+      "icon": "omnira:rain_soaked_suitcase",
+      "name": "Rain-soaked Suitcase, Arcanist and The Storm",
+      "origin": "Reverse: 1999"
     }
   ]
 }

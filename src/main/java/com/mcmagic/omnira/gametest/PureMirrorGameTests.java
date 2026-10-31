@@ -45,9 +45,9 @@ public final class PureMirrorGameTests {
         h.assertTrue(CatalysisGrowth.acceptsSubstrate(level,be.items.getStackInSlot(0)),"Non-block substrate rejected");
         h.assertTrue(CatalysisNaturalGrowth.resolve(level,be.items.getStackInSlot(0),be.items.getStackInSlot(1))==null,"Dry rock production invented");
         be.tank.setFluid(new FluidStack(Fluids.WATER,4000));
-        for(int i=0;i<800;i++)be.tick();
+        for(int i=0;i<800&&be.items.getStackInSlot(2).isEmpty();i++)be.tick();
         h.assertTrue(be.items.getStackInSlot(2).is(rock())&&be.items.getStackInSlot(2).getCount()==16,"Catalytic yield must be sixteen");
-        h.assertTrue(be.items.getStackInSlot(0).getCount()==1&&be.items.getStackInSlot(1).getCount()==1&&be.tank.getFluidAmount()==3000,"Substrate/seed consumed or wrong stage advancement cost");h.succeed();
+        h.assertTrue(be.items.getStackInSlot(0).getCount()==1&&be.items.getStackInSlot(1).getCount()==1&&be.tank.getFluidAmount()==4000-CatalysisBlockEntity.STEP_FLUID*CatalysisBlockEntity.CYCLE_STEPS,"Substrate/seed consumed or wrong stage advancement cost");h.succeed();
     }
     @GameTest(template="spell_arena") public static void migrationAndRewardBalance(GameTestHelper h)throws IOException {
         JsonObject old;
@@ -59,7 +59,8 @@ public final class PureMirrorGameTests {
         var defaults=OmniraLootConfig.defaults().getAsJsonObject("treasureTables");
         for(var entry:old.entrySet()){
             var before=entry.getValue().getAsJsonObject().getAsJsonArray("pools");var after=defaults.getAsJsonObject(entry.getKey()).getAsJsonArray("pools");
-            h.assertTrue(before.size()==after.size(),"Independent reward pools changed");
+            boolean suitcase=entry.getKey().startsWith("omnira:chests/");
+            h.assertTrue(after.size()==before.size()+(suitcase?1:0) && (!suitcase||after.get(after.size()-1).toString().contains("omnira:rain_soaked_suitcase")),"Expected only the additional suitcase pool");
             for(int i=1;i<before.size();i++)h.assertTrue(before.get(i).equals(after.get(i)),"Relic probability changed");
             int delta=entry.getKey().contains("fold_observatory")?1:0;
             h.assertTrue(weight(after.get(0).getAsJsonObject())==weight(before.get(0).getAsJsonObject())+delta,"Unrelated pool weights changed");

@@ -36,7 +36,7 @@ public final class CodexGeometry {
     private static final WorldMesh[] WORLDS=new WorldMesh[33];
     private static final List<Face> HEART=buildHeart();
     private static final List<Face> PARTICLE=buildParticle();
-    public static final int RANGE_SHELL_ALPHA=24,RANGE_RING_ALPHA=64;
+    public static final int RANGE_GRID_ALPHA=48,RANGE_RING_ALPHA=64;
     private static final List<List<RangeFace>> RANGES=List.of(buildRange(7),buildRange(9),buildRange(11),buildRange(13),buildRange(15));
 
     public static List<Face> model(Reader reader) {
@@ -122,7 +122,6 @@ public final class CodexGeometry {
     }
     private static List<RangeFace> buildRange(int diameter) {
         int radius=(diameter-1)/2;var result=new ArrayList<RangeFace>();
-        for(var quad:SpellVolumeGeometry.ball())result.add(rangeFace(quad,radius,-1));
         var ring=SpellVolumeGeometry.rangeRing(radius,1);
         for(int axis=0;axis<3;axis++)for(var quad:ring)result.add(rangeFace(quad,radius,axis));
         return List.copyOf(result);

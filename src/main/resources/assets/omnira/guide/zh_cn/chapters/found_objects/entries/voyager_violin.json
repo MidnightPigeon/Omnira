@@ -14,6 +14,10 @@
     {
       "target": "void_lighthouse_guide",
       "label": "虚空灯塔"
+    },
+    {
+      "target": "rain_soaked_suitcase",
+      "label": "手提箱自动演奏"
     }
   ]
 }

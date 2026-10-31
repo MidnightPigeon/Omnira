@@ -3,7 +3,7 @@
   "item": "omnira:elemental_crystal_grid",
   "title": "Elemental Crystal Grid · Crafting",
   "text": [
-    "Place a basic grid in the center and any elemental microcore on each side, left and right. Leave the other four slots empty. The two cores may be different elements."
+    "Place a Basic Crystal Grid in the center of the Arcane Assembly Bench and one microcore in each of any two outer slots. Leave the other four slots empty. The cores may be different elements."
   ],
   "recipes": true,
   "links": [

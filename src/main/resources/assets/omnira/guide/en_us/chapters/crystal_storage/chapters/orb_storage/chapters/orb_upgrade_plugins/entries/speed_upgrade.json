@@ -5,7 +5,13 @@
   "recipes": true,
   "text": [
     "Forge a swiftness rune with six resonance crystals. Right-click while holding to open two real core slots. Base multiplier: 2; each primordial core adds 1, dream or light-dark adds 2, and spacetime adds 3. Bonuses add, up to 8x. Cores are recoverable and appear below the arrows.",
-    "Install at most one per device. Multiplies the base 4 items/s and 2000 mB/s transfer limits and speeds up bucket exchange. External extraction, Intake/Output and resonance have independent limits. Resonance uses the sender's rate; Intake uses its host's rate. Ordinary receiving is unthrottled.",
+    "Install at most one per device to multiply logistics limits and speed up bucket exchange. Each transfer method retains its own allowance.",
     "Adds no automatic transfer and does not speed up processing or lava generation. Cruise orbs still reject Intake/Output Upgrades. Their movement bonus remains 2x, regardless of the cores inside this upgrade."
+  ],
+  "links": [
+    {
+      "target": "crystal_logistics",
+      "label": "Logistics"
+    }
   ]
 }

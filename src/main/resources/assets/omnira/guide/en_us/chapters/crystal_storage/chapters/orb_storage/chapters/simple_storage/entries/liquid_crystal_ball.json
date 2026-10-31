@@ -4,10 +4,10 @@
   "title": "Liquid Crystal Ball",
   "text": [
     "Stores 24,000 mB (24 buckets) of one fluid. The central floating fluid globe changes volume with its contents; an empty globe contains drifting air motes.",
-    "The left slot exchanges buckets and containers against actual stored volume; a bucket takes 0.5 seconds before upgrades. Ports work on any side. Ordinary receiving is unthrottled; external extraction is capped at 2000 mB/s before Speed Upgrades. Renewable fluids are infinite for automatic extraction, but an empty globe supplies nothing.",
+    "The left slot exchanges buckets and fluid containers against actual stored volume. Ports work on any side; receiving is unthrottled and external extraction follows logistics limits. Renewable fluids supply unlimited automatic extraction, but an empty globe supplies nothing.",
     "With Create installed, the left slot also accepts glass and potion bottles. Each bottle exchanges 250 mB while preserving its effects and regular, splash or lingering type. Bottling consumes actual stored volume; incomplete exchanges consume neither bottle nor fluid.",
     "Fluid containers must support storage in item form. Liquid orbs require Spacetime Stabilization to carry fluid as items and retain finite volume in that form. Create tanks cannot serve as portable fluid containers.",
-    "Three upgrade slots below the storage area correspond to the three recesses in the base. A heron statue can deposit 1,000 mB of milk directly; incompatible or full tanks leave the milk suspension output unchanged.",
+    "Three upgrade slots for different upgrade categories below the storage area correspond to the three recesses in the base. A heron statue can deposit 1,000 mB of milk directly; incompatible or full tanks leave the milk suspension output unchanged.",
     "Repeated landings crack and shatter the globe, dropping a glass pane and releasing placeable fluid sources nearby."
   ],
   "recipes": true,
@@ -15,6 +15,14 @@
     {
       "target": "orb_upgrade_plugins",
       "label": "Upgrade Plugins"
+    },
+    {
+      "target": "spacetime_stabilization_upgrade",
+      "label": "Spacetime Stabilization Upgrade"
+    },
+    {
+      "target": "crystal_logistics",
+      "label": "Logistics"
     }
   ]
 }

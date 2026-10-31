@@ -73,7 +73,7 @@ public final class MiniatureWorldJei implements IModPlugin {
             stage=selected.step();alternative=selected.alternative();
             for(boolean stages:new boolean[]{true,false})for(int direction:new int[]{-1,1}){
                 var area=EvolutionNavigation.button(stages,direction);
-                buttons.add(net.minecraft.client.gui.components.Button.builder(Component.literal(direction<0?"<":">"),button->navigate(stages,direction))
+                buttons.add(com.mcmagic.omnira.client.screen.PixelButtons.builder(Component.literal(direction<0?"<":">"),button->navigate(stages,direction))
                         .bounds(area.x(),area.y(),area.width(),area.height()).build());
             }
             updateSlots();

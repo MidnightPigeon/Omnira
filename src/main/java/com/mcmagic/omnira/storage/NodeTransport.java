@@ -40,6 +40,7 @@ public final class NodeTransport {
     }
     public static boolean pair(ResonanceCoreBlockEntity source,ResonanceCoreBlockEntity destination){
         if(!(source.getLevel() instanceof net.minecraft.server.level.ServerLevel level)||source.getLevel()!=destination.getLevel()
+                ||source.getBlockPos().distSqr(destination.getBlockPos())>32*32
                 ||StorageContainerIdentity.sameStorage(source,destination)
                 ||!TuningOutputs.get(level).available(source))return false;
         unpair(source);unpair(destination);

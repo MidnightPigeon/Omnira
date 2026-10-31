@@ -24,5 +24,12 @@
       "target": "advanced_condensation_table",
       "label": "高阶凝聚台"
     }
+  ],
+  "related_items": [
+    "omnira:spatial_crystal_shard",
+    "omnira:small_spatial_bud",
+    "omnira:medium_spatial_bud",
+    "omnira:large_spatial_bud",
+    "omnira:spatial_crystal_cluster"
   ]
 }

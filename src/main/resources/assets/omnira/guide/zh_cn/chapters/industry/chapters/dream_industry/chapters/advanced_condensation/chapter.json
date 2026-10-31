@@ -4,10 +4,10 @@
   "icon": "omnira:paradox_dust",
   "introduction": "introduction.json",
   "entries": [
+    "entries/advanced_condensation_table.json",
     "entries/paradox_dust.json",
     "entries/infused_grimoire.json",
-    "entries/pure_vessel.json",
-    "entries/advanced_condensation_table.json"
+    "entries/pure_vessel.json"
   ],
   "chapters": []
 }

@@ -17,7 +17,7 @@ import net.neoforged.neoforge.gametest.*;
 public final class GuideRevisionGameTests {
     private static ResourceLocation id(String path) {return ResourceLocation.fromNamespaceAndPath("omnira",path);}
     @GameTest(template="spell_arena")
-    public static void engineRequiresFixedMaterials(GameTestHelper h) {
+    public static void engineAcceptsUnorderedMaterials(GameTestHelper h) {
         var manager=h.getLevel().getRecipeManager();
         h.assertTrue(manager.byKey(id("mana_engine")).isEmpty(),"Old crafting recipe still present");
         var recipe=(AssemblyRecipe)manager.byKey(id("assembly/mana_engine")).orElseThrow().value();
@@ -36,11 +36,10 @@ public final class GuideRevisionGameTests {
             }
             inventory.setItem(6,new ItemStack(ModItems.CRYSTAL_CASING.get()));
             var input=new AssemblyRecipe.Input(inventory);
-            boolean fixed=parity==0 && a==0 && b==1;
-            h.assertTrue(recipe.matches(input,h.getLevel())==fixed,"Engine must accept only the fixed arrangement");
+            h.assertTrue(recipe.matches(input,h.getLevel()),"Engine must accept every outer arrangement");
             h.assertTrue(recipe.assemble(input,h.getLevel().registryAccess()).is(ModItems.MANA_ENGINE.get()),"Wrong result");
             var first=inventory.getItem(0);inventory.setItem(0,inventory.getItem(1));inventory.setItem(1,first);
-            h.assertTrue(!recipe.matches(input,h.getLevel()),"Adjacent crystals incorrectly accepted");
+            h.assertTrue(recipe.matches(input,h.getLevel()),"Adjacent crystals rejected");
             combinations++;
         }
         h.assertTrue(combinations==12,"Missing permutation coverage");h.succeed();

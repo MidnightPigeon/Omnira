@@ -6,18 +6,18 @@
   "entries": [
     "entries/world_seed.json",
     "entries/world_deflection.json",
+    "entries/reload_element.json",
     "entries/miniature_world_framework.json",
     "entries/myriad_aggregation.json",
+    "entries/omni_crystal_grid.json",
+    "entries/world_rotation.json",
     "entries/world_generation_probability_cloud.json",
     "entries/myriad_codex.json",
+    "entries/universal_understanding.json",
     "entries/myriad_heart.json",
     "entries/myriad_matter.json",
     "entries/myriad_form.json",
-    "entries/myriad_ecology.json",
-    "entries/universal_understanding.json",
-    "entries/omni_crystal_grid.json",
-    "entries/reload_element.json",
-    "entries/world_rotation.json"
+    "entries/myriad_ecology.json"
   ],
   "chapters": [
     "chapters/genesis_particles/chapter.json"
@@ -29,14 +29,14 @@
     "reload_element",
     "miniature_world_framework",
     "myriad_aggregation",
+    "omni_crystal_grid",
+    "world_rotation",
     "world_generation_probability_cloud",
     "myriad_codex",
+    "universal_understanding",
     "myriad_heart",
     "myriad_matter",
     "myriad_form",
-    "myriad_ecology",
-    "universal_understanding",
-    "omni_crystal_grid",
-    "world_rotation"
+    "myriad_ecology"
   ]
 }

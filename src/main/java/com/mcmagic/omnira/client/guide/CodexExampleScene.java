@@ -60,7 +60,7 @@ public final class CodexExampleScene {
         int mode=scene.equals("codex_matter")?0:scene.equals("codex_ecology")?4:1+(int)(time/180)%3;
         double phase=time%180;float radius=(float)Math.clamp((phase-20)/100,0,1)*RADIUS;
         var pose=g.pose();var buffers=mc.renderBuffers().bufferSource();
-        g.flush();g.enableScissor(x,y,x+132,y+132);RenderSystem.enableDepthTest();pose.pushPose();
+        g.flush();com.mcmagic.omnira.client.screen.UiScissor.enable(g,x,y,x+132,y+132);RenderSystem.enableDepthTest();pose.pushPose();
         pose.translate(x+66,y+60,180);pose.scale(2.1F,-2.1F,2.1F);
         pose.mulPose(Axis.XP.rotationDegrees(24+pitch));pose.mulPose(Axis.YP.rotationDegrees(-35+yaw+(float)Math.sin(time*.008)*12));
         for(var face:MODELS.get(mode)){

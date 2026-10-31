@@ -20,7 +20,7 @@ public final class LinkPerformanceGameTests {
     @GameTest(template="spell_arena") public static void stableRegistrationDoesNotRebuild(GameTestHelper h){
         var a=orb(h,3);var b=orb(h,6);var marker=new ItemStack(Items.PAPER);
         marker.set(DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(java.util.UUID.randomUUID().toString()));
-        a.setFrequency(0,marker);b.setFrequency(0,marker);
+        a.setFrequency(0,marker);a.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));b.setFrequency(0,marker);b.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));
         h.runAfterDelay(2,()->{
             // Other save/reload tests replace the world's ledger during their initial tick.
             var networks=CrystalStorageNetworks.get(h.getLevel());networks.register(a);networks.register(b);
@@ -43,7 +43,7 @@ public final class LinkPerformanceGameTests {
         var b=(CrystalBallBlockEntity)other.getBlockEntity(pos);
         try{
             var marker=new ItemStack(Items.PAPER);marker.set(DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(java.util.UUID.randomUUID().toString()));
-            a.setFrequency(0,marker);b.setFrequency(0,marker);
+            a.setFrequency(0,marker);a.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));b.setFrequency(0,marker);b.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));
             a.setItem(0,new ItemStack(Items.DIAMOND,3));b.setItem(0,new ItemStack(Items.DIAMOND,2));
             a.upgrades.setStackInSlot(0,new ItemStack(ModItems.SPACETIME_STABILIZATION_UPGRADE.get()));
             var networks=CrystalStorageNetworks.get(h.getLevel());networks.register(a);
@@ -56,9 +56,9 @@ public final class LinkPerformanceGameTests {
     @GameTest(template="spell_arena") public static void contentsNotifyOnlyTheirChannel(GameTestHelper h) throws Exception{
         var a=orb(h,3);var b=orb(h,6);var c=orb(h,9);
         var marker=new ItemStack(Items.PAPER);marker.set(DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(java.util.UUID.randomUUID().toString()));
-        a.setFrequency(0,marker);b.setFrequency(0,marker);
+        a.setFrequency(0,marker);a.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));b.setFrequency(0,marker);b.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));
         var independent=marker.copy();independent.set(DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(java.util.UUID.randomUUID().toString()));
-        c.setFrequency(0,independent);
+        c.setFrequency(0,independent);c.setFrequency(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.QUARTZ));
         var networks=CrystalStorageNetworks.get(h.getLevel());
         var field=CrystalStorageNetworks.class.getDeclaredField("views");field.setAccessible(true);
         var views=(java.util.Map<?,?>)field.get(networks);

@@ -3,7 +3,13 @@
   "item": "omnira:infused_stacking_upgrade",
   "title": "Infused Stacking Upgrade",
   "text": [
-    "Quadruples stackable item limits or fluid capacity. Cannot be installed alongside a basic stacking upgrade."
+    "Quadruples stackable-item slot limits or Liquid Crystal Ball capacity."
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "orb_upgrade_plugins",
+      "label": "Upgrade Plugins"
+    }
+  ]
 }

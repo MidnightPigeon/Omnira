@@ -4,9 +4,9 @@
   "title": "Spiritual Crystal",
   "text": [
     "Spiritual crystals are a fundamental condensed magical material, used to build further workstations.",
-    "With a Primordial Spell Core as catalyst, a reaction cauldron or pool continuously produces Spiritual Crystals without item or fluid ingredients: 1 crystal per base 100 seconds. The core is not consumed.",
+    "With a Primordial Spell Core as catalyst, each reaction in a cauldron or pool produces one Spiritual Crystal without item or fluid ingredients.",
     "They also serve as the substrate for low-tier spell crystals. Place one in the crystal processing table alongside ink and the microcores.",
-    "React 1 Spiritual Crystal into 1 Infused Spiritual Crystal over an Infused Crystal Block, or into 1 Resonance Crystal over a Resonance Core. Both reactions need no fluid, take a base 100 seconds, and preserve the catalyst block."
+    "Each reaction converts one Spiritual Crystal into one Infused Spiritual Crystal over an Infused Crystal Block, or into one Resonance Crystal over a Resonance Core. Neither needs fluid."
   ],
   "recipes": true,
   "links": [
@@ -69,6 +69,10 @@
     {
       "target": "travel_waymark",
       "label": "Spacetime Waymark"
+    },
+    {
+      "target": "primitive_reaction_cauldron",
+      "label": "Primitive Reaction Cauldron"
     }
   ]
 }

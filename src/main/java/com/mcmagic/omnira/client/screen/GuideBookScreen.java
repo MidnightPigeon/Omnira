@@ -95,9 +95,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
         buttons();
     }
     private void fit(GuiGraphics g,String text,int x,int y,int maxWidth,int color) {
-        float scale=Math.min(1,maxWidth/(float)Math.max(1,font.width(text)));
-        g.pose().pushPose();g.pose().translate(x,y,0);g.pose().scale(scale,scale,1);
-        g.drawString(font,text,0,0,color,false);g.pose().popPose();
+        CrystalUi.label(g,font,Component.literal(text),x,y,maxWidth,1,color);
     }
     private Button row(String name,String item,int index,int pageX,Runnable action) {
         var icon=GuideContents.icon(item);
@@ -288,7 +286,9 @@ public final class GuideBookScreen extends ResponsiveScreen {
                 }
                 // Single ASCII glyphs have a trailing advance pixel and seven visible rows.
                 // Center the ink rather than the full nine-pixel text line (including its gap).
-                if(symbol.equals("home")) {
+                if(buttonWidth==BUTTON_SIZE&&PixelUiIcons.draw(g::fill,symbol,x+getWidth()/2,y+getHeight()/2,ink)) {
+                    // Shared pixel glyphs do not depend on the selected language font.
+                } else if(symbol.equals("home")) {
                     // A pixel path travels left, then turns upward toward the home page.
                     g.fill(x+6,y+6,x+8,y+14,ink);
                     g.fill(x+6,y+12,x+15,y+14,ink);
@@ -296,7 +296,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
                     g.fill(x+4,y+7,x+10,y+9,ink);
                     g.fill(x+6,y+5,x+8,y+7,ink);
                 } else if(buttonWidth>BUTTON_SIZE){
-                    fit(g,getMessage().getString(),x+4,y+(getHeight()-font.lineHeight)/2,getWidth()-8,ink);
+                    CrystalUi.title(g,font,getMessage(),x+getWidth()/2,y+(getHeight()-font.lineHeight)/2,getWidth()-8,ink);
                 } else {
                     int inkWidth=Math.max(1,font.width(getMessage())-1);
                     g.drawString(font,getMessage(),x+(getWidth()-inkWidth)/2,y+(getHeight()-7)/2,ink,false);

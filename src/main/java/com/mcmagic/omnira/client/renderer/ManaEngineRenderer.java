@@ -19,8 +19,8 @@ public final class ManaEngineRenderer implements BlockEntityRenderer<BlockEntity
     public ManaEngineRenderer(BlockEntityRendererProvider.Context context) {}
     private static void part(String name,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {
         var minecraft=Minecraft.getInstance();
-        minecraft.getItemRenderer().renderModelLists(minecraft.getModelManager().getModel(model(name)),ItemStack.EMPTY,
-                light,overlay,pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
+        StaticModelQuads.draw(minecraft.getModelManager().getModel(model(name)),pose,
+                buffers.getBuffer(CrystalGlassLayer.ATLAS),light,overlay);
     }
     private static void item(ItemStack stack,PoseStack pose,MultiBufferSource buffers,int light,int overlay,BlockEntity entity) {
         pose.pushPose();pose.mulPose(Axis.XP.rotationDegrees(90));pose.scale(.22F,.22F,.22F);

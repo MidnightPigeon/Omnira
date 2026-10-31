@@ -24,12 +24,12 @@ public final class SpellAuditGameTests {
     }
     @GameTest(template="spell_arena")
     public static void allModifierPairsAndElements(GameTestHelper h) {
-        Item[] modifiers={Items.AIR,Items.CLOCK,Items.IRON_BLOCK,ModItems.SPIRITUAL_CRYSTAL.get()};
+        Item[] modifiers={Items.AIR,ModItems.LINGERING_THREAD.get(),ModItems.AMPLIFICATION_STAR.get(),ModItems.INFUSION_BUD.get()};
         Item[] elements={ModItems.SHARP_BREATH.get(),ModItems.HEALING_DEW.get(),ModItems.DISSOCIATION_THREAD.get(),ModItems.CONSTRUCTION_MATRIX.get()};
         for(var a:modifiers)for(var b:modifiers)for(int i=0;i<elements.length;i++) {
             var inventory=new net.minecraft.world.SimpleContainer(9);inventory.setItem(2,new ItemStack(a));inventory.setItem(3,new ItemStack(b));inventory.setItem(4,new ItemStack(elements[i]));
             var effect=com.mcmagic.omnira.menu.CrystalProcessingTableMenu.composeEffects(inventory).getFirst();
-            int delay=(a==Items.CLOCK?1:0)+(b==Items.CLOCK?1:0),enhancement=(a==Items.IRON_BLOCK?1:0)+(b==Items.IRON_BLOCK?1:0),infusion=(a==modifiers[3]?1:0)+(b==modifiers[3]?1:0);
+            int delay=(a==ModItems.LINGERING_THREAD.get()?1:0)+(b==ModItems.LINGERING_THREAD.get()?1:0),enhancement=(a==ModItems.AMPLIFICATION_STAR.get()?1:0)+(b==ModItems.AMPLIFICATION_STAR.get()?1:0),infusion=(a==modifiers[3]?1:0)+(b==modifiers[3]?1:0);
             if(i<2) {
                 h.assertTrue(effect.healing()==(i==1)&&effect.infused()==(infusion>0)&&effect.amplifier()==(delay>0?0:1)+enhancement,"Damage/healing composition mismatch");
                 h.assertTrue(effect.duration()==(delay==0?0:800+(delay-1)*1200),"Potion delay mismatch");

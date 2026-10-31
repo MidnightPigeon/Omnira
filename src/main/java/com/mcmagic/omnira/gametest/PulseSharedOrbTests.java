@@ -11,6 +11,19 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_pulse_shared")
 @PrefixGameTestTemplate(false)
 public final class PulseSharedOrbTests {
+    @GameTest(template="spell_arena") public static void bothMarkersRequiredAndRemovalPreservesOneUpgrade(GameTestHelper h){
+        var a=orb(h,3);var b=orb(h,9);
+        var marker=new ItemStack(Items.PAPER);marker.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(java.util.UUID.randomUUID().toString()));
+        a.frequency(0,marker);b.frequency(0,marker);
+        a.upgrade.setStackInSlot(0,new ItemStack(ModItems.BASIC_STACKING_UPGRADE.get()));
+        h.assertTrue(!a.hasFrequency()&&!b.hasFrequency()&&b.upgrade.getStackInSlot(0).isEmpty(),"One marker shared upgrades");
+        a.frequency(1,new ItemStack(Items.QUARTZ));b.frequency(1,new ItemStack(Items.QUARTZ));
+        h.assertTrue(b.capacity()==16384,"Two markers did not activate sharing");
+        b.frequency(1,ItemStack.EMPTY);
+        h.assertTrue(!b.hasFrequency()&&b.upgrade.getStackInSlot(0).isEmpty()&&a.capacity()==16384,"Disconnect copied or lost the shared upgrade");
+        a.frequency(1,ItemStack.EMPTY);
+        h.assertTrue(a.upgrade.getStackInSlot(0).is(ModItems.BASIC_STACKING_UPGRADE.get()),"Last endpoint lost the upgrade");h.succeed();
+    }
     private static PulseOrbEntity orb(GameTestHelper h,int x){var pos=new BlockPos(x,3,4);h.setBlock(pos,PulseContent.RESONANT.get());return PulseOrbEntity.from(h.getBlockEntity(pos));}
     private static void source(GameTestHelper h,int x){
         var pos=new BlockPos(x,3,3);h.setBlock(pos,ModBlocks.MANA_ENGINE.get().defaultBlockState().setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING,Direction.SOUTH));

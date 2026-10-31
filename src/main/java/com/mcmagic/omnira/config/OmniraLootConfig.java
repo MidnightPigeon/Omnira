@@ -127,6 +127,7 @@ public final class OmniraLootConfig {
     public static boolean migrateDefaultSpatialDiversity(JsonObject tables){
         return migrateDefaults(tables,"spatial_diversity_v1");
     }
+    public static boolean migrateDefaultStormSuitcase(JsonObject tables){return migrateDefaults(tables,"storm_suitcase_v1");}
     private static boolean migrateDefaults(JsonObject tables,String revision){
         try(var stream=Objects.requireNonNull(OmniraLootConfig.class.getResourceAsStream("/loot_migrations/"+revision+".json"));
             var reader=new InputStreamReader(stream,StandardCharsets.UTF_8)){
@@ -238,6 +239,7 @@ public final class OmniraLootConfig {
             added=migrateDefaultDeflectionBiome(tables)||added;
             added=migrateDefaultSpatialFishing(tables)||added;
             added=migrateDefaultSpatialDiversity(tables)||added;
+            added=migrateDefaultStormSuitcase(tables)||added;
             current=decode(root,registries);
             for(var entry:defaults().getAsJsonObject("treasureTables").entrySet())if(!tables.has(entry.getKey())){tables.add(entry.getKey(),entry.getValue());added=true;}
             if(added){Files.writeString(path,GSON.toJson(root)+"\n",StandardCharsets.UTF_8);loadedStamp=Files.getLastModifiedTime(path)+":"+Files.size(path);}

@@ -36,7 +36,7 @@ public final class ReactionPoolAssemblyJei implements IModPlugin {
             @Override public void draw(Assembly recipe,mezz.jei.api.gui.ingredient.IRecipeSlotsView slots,net.minecraft.client.gui.GuiGraphics g,double x,double y){
                 label(g,"jei.omnira.reaction_pool.lower",8,5,58);label(g,"jei.omnira.reaction_pool.upper",82,5,58);
                 label(g,"jei.omnira.reaction_pool.activate",32,91,174);label(g,"jei.omnira.reaction_pool.front",8,114,198);
-                g.fill(152,46,173,48,0xFF8DB6BB);g.fill(170,43,172,51,0xFF8DB6BB);
+                com.mcmagic.omnira.client.screen.PixelUiIcons.arrow(g::fill,152,47,21,0xFF8DB6BB);
             }
         });
     }

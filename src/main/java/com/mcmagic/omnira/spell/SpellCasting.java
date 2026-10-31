@@ -116,6 +116,10 @@ public final class SpellCasting {
     public static boolean cast(Player caster,SpellPattern pattern,SpellPayload payload,double power,Modifiers modifiers) {
         return cast(caster,pattern,payload,power,1,1,false,false,modifiers);
     }
+    public static boolean castFrom(Player caster,net.minecraft.world.item.ItemStack carrier,SpellPattern pattern,SpellPayload payload,double power,Modifiers modifiers) {
+        return com.mcmagic.omnira.fate.ArcanistFate.cast(caster,carrier,
+                bonus->cast(caster,pattern,payload,power+bonus,1,1,false,false,modifiers));
+    }
 
     public static boolean castArquebus(Player caster,SpellPattern pattern,SpellPayload payload,double power,boolean explosive) {
         if(pattern==null || pattern.shapeKeyword()!=SpellShapeKeyword.PROJECTILE

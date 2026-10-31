@@ -91,7 +91,9 @@ public final class RitualSwordItem extends SwordItem {
                 // The sword's physical strike must not suppress its separate spell payload.
                 target.invulnerableTime=0;
                 try {
-                    double power=CastAttributes.power(player,SwordActions.spellBonus(player));
+                    double power=CastAttributes.power(player,SwordActions.spellBonus(player))
+                            +com.mcmagic.omnira.fate.ArcanistFate.bonus(player,weapon);
+                    com.mcmagic.omnira.fate.ArcanistFate.completed(player,weapon);
                     boolean holy=HolyMagic.enabled(payload);
                     if(holy)HolyMagic.touch(player,target);
                     HolyMagic.cloud(player.serverLevel(),player,payload,power,1,target.position());

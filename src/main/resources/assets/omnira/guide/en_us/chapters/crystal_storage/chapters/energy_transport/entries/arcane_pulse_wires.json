@@ -5,7 +5,7 @@
   "recipes": false,
   "text": [
     "Right-click with Arcane Dust to place floating wires, one per block. Budding rock and Phase Crystal Clusters normally trigger growth; sneak-right-click skips growth to place wire. Straight horizontal or vertical spans reach up to 16 blocks; nearby interfaces connect automatically.",
-    "The first wire directly connected to a source is loss-free. Each later wire removes 5% of its shortest chain's original transfer value: two wires total 10%, not compounded. Branch losses use their own transfers; merges combine contributions, without taxing unrelated branches.",
+    "The first wire directly connected to a source is loss-free. Each later wire removes 5% of its shortest chain's original transfer value: two loss-bearing wires total 10%, not compounded. Branch losses use their own transfers; merges combine contributions, without taxing unrelated branches.",
     "Machines show useful consumption only. Wires show local attenuation and orbs show upstream chain attenuation. Sources cover those losses."
   ],
   "links": [

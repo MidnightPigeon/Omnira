@@ -1,11 +1,12 @@
 {
   "id": "modifier_infusion",
-  "item": "omnira:spiritual_crystal",
-  "title": "Spiritual Crystal - Infusion",
+  "item": "omnira:infusion_bud",
+  "title": "Infusion Bud",
   "text": [
-    "In a modifier slot, a spiritual crystal writes Infusion and counts toward component cost. This is separate from its use as the substrate.",
+    "Place three Arcane Dust and three Spiritual Crystals in any order around an empty center on the ordinary Assembly Table to make one Infusion Bud.",
+    "Place an Infusion Bud in a modifier slot to add Infusion; it counts toward component cost.",
     "Undelayed Harm becomes Instant Damage II, including vanilla's reversed effect on undead. Instant healing gains brief Saturation; Regeneration gains Resistance of matching level and duration. Infusion does not change Poison into another effect.",
-    "For dissociation, it increases produce and equipment limits per round, and raises Fortune for blocks. For construction, it makes void crystal permanent and allows locked creatures to be mined."
+    "For Dissociation, it increases produce and equipment limits per round and raises Fortune for blocks. For Construction, impact crystals become permanent; creatures are enclosed in mineable crystals that last only until the lock ends."
   ],
   "recipes": true
 }

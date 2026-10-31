@@ -27,8 +27,7 @@ public final class PulseOrbScreen extends ResponsiveContainerScreen<PulseOrbMenu
             g.pose().popPose();
         }
         slot(g,80,34);if(menu.orb.resonant()){
-            g.fill(leftPos+178,topPos+10,leftPos+207,topPos+68,0xE03D3659);
-            for(int i=0;i<2;i++){int y=topPos+15+i*27;g.fill(leftPos+183,y,leftPos+201,y+18,0xFFB9A5DA);g.fill(leftPos+184,y+1,leftPos+200,y+17,0xFF403B53);}
+            MachinePanelArt.frequencyPanel(CrystalUi.pixels(g,leftPos,topPos),10);
         }
     }
     private void slot(GuiGraphics g,int x,int y){g.fill(leftPos+x-1,topPos+y-1,leftPos+x+17,topPos+y+17,0xFFCBE9F4);g.fill(leftPos+x,topPos+y,leftPos+x+16,topPos+y+16,0xFF294657);}

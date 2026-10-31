@@ -7,7 +7,7 @@
   "text": [
     "Both orbs have a white base and support all six mounting directions. They distribute potential, not stored fuel: 8192 MPU throughput, with one slot for Stacking or Infused Stacking.",
     "The base only accepts pulses, stress or FE. Other faces accept only pulses and output all three. FE converts at its actual rate per second. Shaft inputs require at least 16 rpm; outputs are fixed at 16 rpm. Shafts must be perpendicular; unloaded spinning costs nothing. All outputs share one MPU budget, shown in gold. Spacetime Ports extend these faces. Orbs do not charge nearby players.",
-    "Same-frequency orbs in one dimension are one node, sharing potential and one upgrade slot accessible from any orb. Merging retains the strongest capacity upgrade and returns extras. Stabilization shares the group across dimensions, retaining the 8192 MPU limit.",
+    "Set a Resonant Accumulator Orb's frequency with two item markers. Same-frequency orbs in one dimension are one node, sharing potential and one upgrade slot accessible from any orb. Merging retains the strongest capacity upgrade and returns extras. Stabilization shares the group across dimensions without adding or reducing throughput capacity.",
     "Cyan is this node's unused quota; gold is working potential passing through it. The bar limit is throughput capacity. Idle branches share quotas; active loads can borrow idle shares. Serial nodes may carry the same working flow: summing their gold readings does not measure total network consumption."
   ],
   "links": [

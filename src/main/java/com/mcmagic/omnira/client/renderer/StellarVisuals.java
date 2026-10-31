@@ -8,6 +8,12 @@ import net.minecraft.world.item.*;
 public final class StellarVisuals {
     private static final int[][] CORNERS={{-1,-1,-1},{1,-1,-1},{1,1,-1},{-1,1,-1},{-1,-1,1},{1,-1,1},{1,1,1},{-1,1,1}};
     private static final int[][] FACES={{0,3,2,1},{4,5,6,7},{0,4,7,3},{1,2,6,5},{3,7,6,2},{0,1,5,4}};
+    private static double clusterTime=Double.NaN;
+    private static final float[] CLUSTER=new float[72*3];
+    private static final org.joml.Vector3f[] TRANSFORMED=java.util.stream.IntStream.range(0,8).mapToObj(i->new org.joml.Vector3f()).toArray(org.joml.Vector3f[]::new);
+    private static void transformCube(PoseStack pose,float x,float y,float z,float radius){
+        for(int n=0;n<8;n++)pose.last().pose().transformPosition(x+CORNERS[n][0]*radius,y+CORNERS[n][1]*radius,z+CORNERS[n][2]*radius,TRANSFORMED[n]);
+    }
     private static final double[] RADII=new double[72],LATITUDES=new double[72],HORIZONTALS=new double[72];
     private static final float[] BASE_X=new float[12],BASE_Z=new float[12];
     static {
@@ -33,13 +39,13 @@ public final class StellarVisuals {
         cube(pose,mesh,x,y,z,radius,(color>>16&255)/255F,(color>>8&255)/255F,(color&255)/255F,alpha);
     }
     public static void cube(PoseStack pose,com.mojang.blaze3d.vertex.VertexConsumer mesh,float x,float y,float z,float radius,float red,float green,float blue,float alpha){
-        var matrix=pose.last().pose();
-        for(var face:FACES)for(int n:face)mesh.addVertex(matrix,x+CORNERS[n][0]*radius,y+CORNERS[n][1]*radius,z+CORNERS[n][2]*radius)
+        transformCube(pose,x,y,z,radius);
+        for(var face:FACES)for(int n:face)mesh.addVertex(TRANSFORMED[n].x,TRANSFORMED[n].y,TRANSFORMED[n].z)
             .setColor(red,green,blue,alpha);
     }
     public static void cube(PoseStack pose,com.mojang.blaze3d.vertex.VertexConsumer mesh,float x,float y,float z,float radius,int color){
-        var matrix=pose.last().pose();
-        for(var face:FACES)for(int n:face)mesh.addVertex(matrix,x+CORNERS[n][0]*radius,y+CORNERS[n][1]*radius,z+CORNERS[n][2]*radius)
+        transformCube(pose,x,y,z,radius);
+        for(var face:FACES)for(int n:face)mesh.addVertex(TRANSFORMED[n].x,TRANSFORMED[n].y,TRANSFORMED[n].z)
             .setColor(color);
     }
     public static void cluster(PoseStack pose,MultiBufferSource buffers,double time){
@@ -48,14 +54,24 @@ public final class StellarVisuals {
     public static void cluster(PoseStack pose,MultiBufferSource buffers,double time,boolean white){
         int count=detail(pose,72),step=72/count;
         var mesh=buffers.getBuffer(CrystalGlassLayer.COLOR);
+        var points=clusterPositions(time);
         for(int i=0;i<72;i+=step){
+            cube(pose,mesh,points[i*3],points[i*3+1],points[i*3+2],.006F+(i%4)*.0015F,white?0xFFFFFF:i%3==0?0xFFE8B8:i%3==1?0xD4EFFF:0xDCC9FF,.85F);
+        }
+    }
+    private static float[] clusterPositions(double time){
+        if(time!=clusterTime){
+          for(int i=0;i<72;i++){
             double phase=time*(.012+(i%7)*.001)+i*2.39996;
             double radius=RADII[i],latitude=LATITUDES[i];
             float x=.5F+(float)(Math.cos(phase)*radius*HORIZONTALS[i]);
             float z=.5F+(float)(Math.sin(phase)*radius*HORIZONTALS[i]);
             float y=.5F+(float)(latitude*radius+Math.sin(phase*1.5)*.025);
-            cube(pose,mesh,x,y,z,.006F+(i%4)*.0015F,white?0xFFFFFF:i%3==0?0xFFE8B8:i%3==1?0xD4EFFF:0xDCC9FF,.85F);
+            CLUSTER[i*3]=x;CLUSTER[i*3+1]=y;CLUSTER[i*3+2]=z;
+          }
+          clusterTime=time;
         }
+        return CLUSTER;
     }
     public static void centeredItem(ItemStack item,PoseStack pose,MultiBufferSource buffers,int overlay){
         if(item.isEmpty())return;

@@ -12,6 +12,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModBlockEntityTypes {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Omnira.MOD_ID);
+    public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.fate.SuitcaseEntity>> SUITCASE=
+            BLOCK_ENTITY_TYPES.register("rain_soaked_suitcase",()->BlockEntityType.Builder.of(com.mcmagic.omnira.fate.SuitcaseEntity::new,ModBlocks.RAIN_SOAKED_SUITCASE.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<net.minecraft.world.level.block.entity.BlockEntity>> SPACETIME_PORT=
             BLOCK_ENTITY_TYPES.register("spacetime_port",()->BlockEntityType.Builder.of((net.minecraft.core.BlockPos pos,net.minecraft.world.level.block.state.BlockState state)->
                     ((com.mcmagic.omnira.space.SpacetimePortBlock)ModBlocks.SPACETIME_PORT.get()).newBlockEntity(pos,state),ModBlocks.SPACETIME_PORT.get()).build(null));

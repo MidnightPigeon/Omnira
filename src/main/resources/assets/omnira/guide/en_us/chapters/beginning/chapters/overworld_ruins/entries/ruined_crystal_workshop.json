@@ -1,0 +1,10 @@
+{
+  "id": "ruined_crystal_workshop",
+  "item": "omnira:crystal_casing",
+  "title": "Ruined Crystal Workshop",
+  "text": [
+    "Crystal-working equipment and material stores remain among this workshop’s ruins. Look for the crystal orbs holding supplies left by its former artisans.",
+    "Alongside Spiritual Crystals, Arcane Dust and everyday supplies, you may find a Crystal Pickaxe, an Infused Crystal Pickaxe or a Primordial Spell Core, and occasionally a Night Heron Statue."
+  ],
+  "recipes": false
+}

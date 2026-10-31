@@ -1,0 +1,11 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {
+    "item": "omnira:dark_microcore"
+  },
+  "mana_cost": 300,
+  "result": {
+    "id": "omnira:life_drain_origin",
+    "count": 1
+  }
+}

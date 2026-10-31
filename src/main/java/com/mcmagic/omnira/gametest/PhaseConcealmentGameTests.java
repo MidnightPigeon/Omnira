@@ -71,6 +71,13 @@ public final class PhaseConcealmentGameTests {
         com.mcmagic.omnira.space.sea.VoidSeaEffects.trueDamage(p,2,p.damageSources().mobAttack(mob));
         h.assertTrue(p.getHealth()==18&&PhaseConcealment.active(p),"True damage did not trigger charm");
         h.assertTrue(!com.mcmagic.omnira.space.sea.VoidSeaEffects.trueDamage(p,10,p.damageSources().mobAttack(mob))&&p.getHealth()==18,"True melee bypassed phase");
+        var manta=com.mcmagic.omnira.space.sea.VoidSeaContent.MANTA.get().create(h.getLevel());
+        h.assertTrue(!manta.doHurtTarget(p)&&p.getHealth()==18,"Void manta hit phased target");
+        var blade=SpellEntity.spawn(h.getLevel(),mob,SpellEntity.Kind.SPATIAL_BLADE,p.position());
+        try{
+            var source=SpellDamageSource.of(p,net.minecraft.world.damagesource.DamageTypes.GENERIC_KILL,blade,mob,"spell");
+            h.assertTrue(PhaseConcealment.blocks(p,source)&&!com.mcmagic.omnira.combat.OmniraDamage.trueDamage(p,2,source)&&p.getHealth()==18,"Spatial blade hit phased target");
+        }finally{blade.discard();}
         var jelly=com.mcmagic.omnira.space.sea.VoidSeaContent.JELLYFISH.get().create(h.getLevel());
         h.assertTrue(com.mcmagic.omnira.space.sea.VoidSeaEffects.trueDamage(p,8,p.damageSources().explosion(jelly,jelly))&&p.getHealth()==10,"True area explosion blocked");h.succeed();
     }

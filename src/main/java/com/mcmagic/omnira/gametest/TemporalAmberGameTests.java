@@ -59,11 +59,12 @@ public final class TemporalAmberGameTests {
         p.setPos(center);p.getInventory().setItem(0,new ItemStack(Items.DIAMOND,4));level.addFreshEntity(p);
         CuriosApi.getCuriosInventory(p).orElseThrow().setEquippedCurio("spell_core",0,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
         var pig=EntityType.PIG.create(level);pig.setPos(center.add(2,0,0));level.addFreshEntity(pig);
+        pig.setItemSlot(EquipmentSlot.MAINHAND,new ItemStack(Items.EMERALD));pig.setDropChance(EquipmentSlot.MAINHAND,2);
         SpacetimeStorm.trigger(level,center);
         var area=new AABB(center,center).inflate(10);
         var amber=level.getEntitiesOfClass(TemporalAmber.class,area);
-        h.assertTrue(p.getHealth()==0 && pig.isRemoved() && amber.size()==1 && amber.getFirst().storedStacks()==2,"Death did not seal player or erase mob");
-        h.assertTrue(level.getEntitiesOfClass(ItemEntity.class,area).isEmpty(),"Storm death generated loose loot");
+        h.assertTrue(p.getHealth()==0 && !pig.isAlive() && !pig.isRemoved() && amber.size()==1 && amber.getFirst().storedStacks()==2,"Storm did not use normal mob death or seal the deceased player");
+        h.assertTrue(level.getEntitiesOfClass(ItemEntity.class,area).stream().anyMatch(e->e.getItem().is(Items.EMERALD)),"Storm mob death skipped native equipment drops");
         SpacetimeStorm.trigger(level,center);
         h.assertTrue(amber.getFirst().isRemoved() && level.getEntitiesOfClass(ItemEntity.class,area).isEmpty(),"Second storm spilled amber contents");h.succeed();
     }

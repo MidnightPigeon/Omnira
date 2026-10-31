@@ -20,5 +20,5 @@ public final class WaymarkRenderer implements BlockEntityRenderer<WaymarkBlockEn
         mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(model()),ItemStack.EMPTY,LightTexture.FULL_BRIGHT,overlay,pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
         pose.popPose();
     }
-    @Override public boolean shouldRenderOffScreen(WaymarkBlockEntity mark) {return true;}
+    @Override public net.minecraft.world.phys.AABB getRenderBoundingBox(WaymarkBlockEntity mark){return new net.minecraft.world.phys.AABB(mark.getBlockPos()).inflate(.25).expandTowards(0,.75,0);}
 }

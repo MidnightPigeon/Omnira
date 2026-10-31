@@ -115,6 +115,27 @@ public final class GridAssemblyGameTests {
         return (AssemblyRecipe)h.getLevel().getRecipeManager().byKey(id("assembly/"+name)).orElseThrow().value();
     }
     @GameTest(template="spell_arena")
+    public static void infusionBudHasUniqueEmptyCenterRecipe(GameTestHelper h) {
+        var recipe=recipe(h,"infusion_bud");
+        for(int mask=0;mask<64;mask++) {
+            if(Integer.bitCount(mask)!=3)continue;
+            var inventory=new SimpleContainer(7);
+            for(int i=0;i<6;i++)inventory.setItem(i,new ItemStack((mask&(1<<i))!=0
+                    ?ModItems.ARCANE_DUST.get():ModItems.SPIRITUAL_CRYSTAL.get()));
+            var input=new AssemblyRecipe.Input(inventory);
+            var matches=h.getLevel().getRecipeManager().getAllRecipesFor(ModRecipes.ASSEMBLY_TYPE.get())
+                    .stream().filter(r->r.value().matches(input,h.getLevel())).toList();
+            h.assertTrue(matches.size()==1 && matches.getFirst().id().equals(id("assembly/infusion_bud")),"Ambiguous or missing dust/crystal assembly");
+            var result=recipe.assemble(input,h.getLevel().registryAccess());
+            h.assertTrue(result.is(ModItems.INFUSION_BUD.get())&&result.getCount()==1,"Wrong bud output");
+            inventory.setItem(6,new ItemStack(ModItems.TEST_SPELL_CORE.get()));
+            h.assertTrue(!recipe.matches(input,h.getLevel()),"Bud accepted a core");
+            inventory.setItem(6,ItemStack.EMPTY);inventory.setItem(0,ItemStack.EMPTY);
+            h.assertTrue(!recipe.matches(input,h.getLevel()),"Bud accepted missing material");
+        }
+        h.succeed();
+    }
+    @GameTest(template="spell_arena")
     public static void frameCraftingAndEquipmentRestrictions(GameTestHelper h) {
         var frame=new ItemStack(ModItems.GRID_FRAME.get());
         h.assertTrue(!(frame.getItem() instanceof top.theillusivec4.curios.api.type.capability.ICurioItem),"Frame implements equipment behavior");
@@ -134,7 +155,7 @@ public final class GridAssemblyGameTests {
         h.succeed();
     }
     @GameTest(template="spell_arena")
-    public static void basicGridRequiresAlternatingCrystals(GameTestHelper h) {
+    public static void basicGridAcceptsEitherFormerAlternatingLayout(GameTestHelper h) {
         var recipe=recipe(h,"basic_crystal_grid");
         for(int parity=0;parity<2;parity++) {
             var input=new SimpleContainer(7);input.setItem(6,new ItemStack(ModItems.GRID_FRAME.get()));
@@ -199,5 +220,5 @@ public final class GridAssemblyGameTests {
         });
     }
     @GameTest(template="spell_arena")
-    public static void engineHasOnlyOneArrangement(GameTestHelper h) {GuideRevisionGameTests.engineRequiresFixedMaterials(h);}
+    public static void engineAcceptsUnorderedMaterials(GameTestHelper h) {GuideRevisionGameTests.engineAcceptsUnorderedMaterials(h);}
 }

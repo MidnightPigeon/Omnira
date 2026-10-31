@@ -4,7 +4,7 @@
   "item": "omnira:world_rotation_crystal",
   "recipes": false,
   "text": [
-    "Put one Myriad Microcore in the Advanced Crystal Aggregation Ring, reserving all eight writing nodes. Supply an Infused Crystal, Spell Ink and a power core to create World Rotation.",
+    "Put one Omni Microcore in the Advanced Crystal Aggregation Ring, reserving all eight writing nodes. Supply an Infused Crystal, Spell Ink and a power core to create World Rotation.",
     "Casting consumes all current mana with a fixed 60-second cooldown. Cost and cooldown reductions do not apply. Use it directly or cast through a staff and grid; when grid wrap cooldown also applies, use the longer cooldown.",
     "Removes every potion effect from the caster, restores health and hunger, and repairs carried equipment. A sphere expands outward to a fixed radius of 32 blocks, collecting dropped items as it reaches them. Items that do not fit gather at the caster's feet.",
     "Erases hostile creatures and angry neutral creatures without kills or loot. Bosses lose half their maximum health; those at or below half health are erased.",
@@ -14,7 +14,7 @@
   "links": [
     {
       "target": "miniature_world_framework",
-      "label": "Obtaining Myriad Microcores"
+      "label": "Obtaining Omni Microcores"
     },
     {
       "target": "advanced_spell_aggregation",

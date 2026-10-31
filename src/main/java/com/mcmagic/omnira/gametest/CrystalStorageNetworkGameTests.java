@@ -13,11 +13,35 @@ import net.neoforged.neoforge.fluids.FluidStack;
 @GameTestHolder("omnira_storage_network")
 @PrefixGameTestTemplate(false)
 public final class CrystalStorageNetworkGameTests {
+    @GameTest(template="spell_arena") public static void copiedIdentityCannotRelocateLiveEndpoint(GameTestHelper h){
+        var a=orb(h,3,false);a.setItem(0,new ItemStack(Items.DIAMOND,23));frequency(h,a);
+        var original=a.storageIdentity;var b=orb(h,6,false);
+        b.loadWithComponents(a.saveWithFullMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());
+        CrystalStorageNetworks.get(h.getLevel()).register(b);
+        h.assertTrue(a.storageIdentity.equals(original)&&!b.storageIdentity.equals(original),"Copied orb stole live endpoint identity");
+        b.setFrequency(1,ItemStack.EMPTY);
+        h.assertTrue(count(a)==23&&count(b)==0,"Copied endpoint duplicated or stole shared contents");h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void legacySingleMarkerDisconnectKeepsOnePayload(GameTestHelper h){
+        var a=orb(h,3,false);var b=orb(h,6,false);
+        a.setItem(0,new ItemStack(Items.DIAMOND,23));frequency(h,a,b);
+        var registries=h.getLevel().registryAccess();
+        var saved=CrystalStorageNetworks.get(h.getLevel()).save(new net.minecraft.nbt.CompoundTag(),registries);
+        for(var value:saved.getList("Endpoints",10))((net.minecraft.nbt.CompoundTag)value).remove("F1");
+        a.frequency[1]=ItemStack.EMPTY;b.frequency[1]=ItemStack.EMPTY;
+        h.getLevel().getServer().overworld().getDataStorage().set("omnira_crystal_storage",CrystalStorageNetworks.load(saved,registries));
+        var networks=CrystalStorageNetworks.get(h.getLevel());networks.register(a);networks.register(b);
+        h.assertTrue(a.networkStatus==0&&b.networkStatus==0&&count(a)+count(b)==23,"Legacy partial channel lost or duplicated its payload");
+        networks.register(a);networks.register(b);
+        h.assertTrue(count(a)+count(b)==23,"Repeated registration changed detached contents");h.succeed();
+    }
     @GameTest(template="spell_arena") public static void frequencyChangesPublishColorsImmediately(GameTestHelper h){
         for(boolean liquid:new boolean[]{false,true}){
             var a=orb(h,liquid?9:3,liquid);var b=orb(h,liquid?12:6,liquid);
             var marker=new ItemStack(Items.PAPER);marker.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(java.util.UUID.randomUUID().toString()));
             a.setFrequency(0,marker);b.setFrequency(0,marker);
+            h.assertTrue(a.networkStatus==0&&b.networkStatus==0,"A single marker activated a frequency");
+            a.setFrequency(1,new ItemStack(Items.QUARTZ));b.setFrequency(1,new ItemStack(Items.QUARTZ));
             int color=liquid?2:1;
             h.assertTrue(a.getUpdateTag(h.getLevel().registryAccess()).getInt("NetworkStatus")==color&&b.getUpdateTag(h.getLevel().registryAccess()).getInt("NetworkStatus")==color,"Connected color waits for periodic tick");
             b.setFrequency(0,ItemStack.EMPTY);
@@ -32,7 +56,7 @@ public final class CrystalStorageNetworkGameTests {
     private static void frequency(GameTestHelper h,CrystalBallBlockEntity... balls){
         var marker=new ItemStack(Items.PAPER);
         marker.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal(java.util.UUID.randomUUID().toString()));
-        for(var ball:balls){ball.frequency[0]=marker.copy();CrystalStorageNetworks.get(h.getLevel()).register(ball);}
+        for(var ball:balls){ball.frequency[0]=marker.copy();ball.frequency[1]=new ItemStack(Items.QUARTZ);CrystalStorageNetworks.get(h.getLevel()).register(ball);}
     }
     private static int count(CrystalBallBlockEntity ball){int sum=0;for(int i=0;i<ball.getContainerSize();i++)sum+=ball.getItem(i).getCount();return sum;}
     @GameTest(template="spell_arena") public static void sharedContentsUpgradesAndDetach(GameTestHelper h){
@@ -54,7 +78,7 @@ public final class CrystalStorageNetworkGameTests {
         var a=orb(h,3,false);var b=orb(h,6,false);var existing=orb(h,9,false);
         for(int i=0;i<12;i++)a.setItem(i,new ItemStack(Items.COBBLESTONE,64));
         frequency(h,a,existing);var marker=a.frequency[0].copy();
-        b.setItem(0,new ItemStack(Items.DIAMOND));b.setFrequency(0,marker);
+        b.setItem(0,new ItemStack(Items.DIAMOND));b.setFrequency(0,marker);b.setFrequency(1,new ItemStack(Items.QUARTZ));
         h.assertTrue(a.networkStatus==1&&existing.networkStatus==1&&b.networkStatus==3,"Failed entrant affected the established network");
         h.assertTrue(b.frequency[0].isEmpty()&&b.frequency[1].isEmpty(),"Rejected frequency markers were retained");
         h.assertTrue(count(a)==768&&count(b)==1,"Failed merge changed either payload");
@@ -66,7 +90,7 @@ public final class CrystalStorageNetworkGameTests {
         h.assertTrue(b.networkStatus==3&&count(b)==1,"Reload cleared rejection or retried connection");
         b.setFrequency(1,ItemStack.EMPTY);
         h.assertTrue(b.networkStatus==0&&count(b)==1,"Clearing an empty frequency did not reset failure");
-        b.setFrequency(0,marker);
+        b.setFrequency(0,marker);b.setFrequency(1,new ItemStack(Items.QUARTZ));
         h.assertTrue(a.networkStatus==1&&b.networkStatus==1&&count(a)==705&&count(b)==705,"Manual retuning failed to join after space was freed");
         a.detachNetwork();b.detachNetwork();existing.detachNetwork();h.succeed();
     }

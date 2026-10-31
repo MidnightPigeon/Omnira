@@ -111,16 +111,17 @@ public final class SpacetimePortGameTests {
         h.assertTrue(SpacetimePortState.pair(ports[0],ports[1]),"Energy pair failed");
         int seeded=pools[0].energyInput.receiveEnergy(100,false);
         h.assertTrue(seeded>0,"Receiver rejected the fixture's initial FE input");
+        int[] budgets={pools[0].energyInput.receiveEnergy(Integer.MAX_VALUE,true),pools[1].energyInput.receiveEnergy(Integer.MAX_VALUE,true)};
         for(var p:ports)p.tick();
-        h.assertTrue(pools[0].energyInput.getEnergyStored()==seeded&&pools[1].energyInput.getEnergyStored()==0,"Ports moved energy automatically");
+        for(int i=0;i<2;i++)h.assertTrue(pools[i].energyInput.getEnergyStored()==0&&pools[i].energyInput.receiveEnergy(Integer.MAX_VALUE,true)==budgets[i],"Ports moved energy automatically or banked continuous input");
         for(int i=0;i<2;i++){
             var p=ports[i];var target=pools[1-i].energyInput;
             var proxy=l.getCapability(Capabilities.EnergyStorage.BLOCK,p.host.getBlockPos(),p.face().getOpposite());
             h.assertTrue(proxy!=null&&proxy.canReceive()&&!proxy.canExtract(),"Remote permissions depend on pair color");
-            int before=target.getEnergyStored();
+            int before=target.receiveEnergy(Integer.MAX_VALUE,true);
             int accepted=target.receiveEnergy(120,true);
-            h.assertTrue(proxy.receiveEnergy(120,true)==accepted&&target.getEnergyStored()==before,"Proxy changed the receiver's limit or simulated energy");
-            h.assertTrue(proxy.receiveEnergy(120,false)==accepted&&target.getEnergyStored()==before+accepted,"Caller-driven transfer failed");
+            h.assertTrue(proxy.receiveEnergy(120,true)==accepted&&target.receiveEnergy(Integer.MAX_VALUE,true)==before,"Proxy changed the receiver's limit or simulated energy");
+            h.assertTrue(proxy.receiveEnergy(120,false)==accepted&&target.receiveEnergy(Integer.MAX_VALUE,true)==before-accepted&&target.getEnergyStored()==0,"Caller-driven transfer failed");
             int remaining=target.receiveEnergy(Integer.MAX_VALUE,true);
             h.assertTrue(proxy.receiveEnergy(Integer.MAX_VALUE,false)==remaining&&target.receiveEnergy(1,false)==0,"Remote and direct input did not share a rate budget");
             h.assertTrue(proxy.extractEnergy(120,false)==0,"Receiver became an energy source");

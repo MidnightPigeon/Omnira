@@ -25,8 +25,7 @@ public abstract class ResponsiveContainerScreen<M extends AbstractContainerMenu>
     public float uiScale(){return uiScale;}
     /** GuiGraphics scissor coordinates do not inherit the current pose transform. */
     protected final void enableUiScissor(GuiGraphics g,int x,int y,int xx,int yy){
-        var bounds=UiViewport.scissor(g.pose().last().pose(),x,y,xx,yy);
-        g.enableScissor(bounds[0],bounds[1],bounds[2],bounds[3]);
+        UiScissor.enable(g,x,y,xx,yy);
     }
     public int physicalWidth(){return physicalWidth;}
     public int physicalHeight(){return physicalHeight;}

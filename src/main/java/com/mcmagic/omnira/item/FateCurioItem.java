@@ -18,8 +18,8 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 public final class FateCurioItem extends Item implements ICurioItem {
-    public enum Kind { PSYKER, KHORNE, TZEENTCH, NURGLE, SLAANESH, LAND_KING, SEA_KING, SKY_KING, TIME_DISTORTION;
-        public boolean talent(){return this==PSYKER||this==LAND_KING||this==SEA_KING||this==SKY_KING;}
+    public enum Kind { PSYKER, KHORNE, TZEENTCH, NURGLE, SLAANESH, LAND_KING, SEA_KING, SKY_KING, TIME_DISTORTION, ARCANIST, STORM;
+        public boolean talent(){return this==PSYKER||this==LAND_KING||this==SEA_KING||this==SKY_KING||this==ARCANIST;}
     }
     private final Kind kind;
     public FateCurioItem(Properties properties,Kind kind) {super(properties.stacksTo(1));this.kind=kind;}
@@ -44,6 +44,7 @@ public final class FateCurioItem extends Item implements ICurioItem {
             SlotContext context,ResourceLocation id,ItemStack stack) {
         var modifiers=LinkedHashMultimap.<Holder<Attribute>,AttributeModifier>create();
         if(context.identifier().equals("talent")) {
+            if(kind==Kind.ARCANIST)modifiers.put(ModAttributes.MANA_REGEN,new AttributeModifier(id,.3,AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
             if(kind==Kind.LAND_KING)modifiers.put(ModAttributes.DAMAGE_DEALT,new AttributeModifier(id,.1,AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
             if(kind==Kind.SEA_KING){
                 modifiers.put(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH,new AttributeModifier(id,.2,AttributeModifier.Operation.ADD_MULTIPLIED_BASE));

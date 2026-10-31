@@ -14,8 +14,10 @@ public final class ArquebusScreen extends ResponsiveContainerScreen<ArquebusMenu
         g.fill(leftPos,topPos,leftPos+imageWidth,topPos+imageHeight,0xFFC6C6C6);
         CrystalProcessingTableScreen.renderVanillaFrame(g,leftPos,topPos,imageWidth,imageHeight);
         g.blit(VANILLA,leftPos+7,topPos+83,7,83,162,76,256,256);
-        g.fill(leftPos+69,topPos+24,leftPos+107,topPos+62,0xFF779DA9);
-        g.fill(leftPos+72,topPos+27,leftPos+104,topPos+59,0xFFCEE3EA);
+        var pixels=CrystalUi.pixels(g,leftPos,topPos);
+        MachinePanelArt.polygon(pixels,MachinePanelArt.RIM,80,26,96,26,105,35,105,51,96,60,80,60,71,51,71,35);
+        MachinePanelArt.polygon(pixels,MachinePanelArt.DARK,81,28,95,28,103,36,103,50,95,58,81,58,73,50,73,36);
+        MachinePanelArt.slot(pixels,88,43,MachinePanelArt.LIGHT);
         g.blit(VANILLA,leftPos+79,topPos+34,7,83,18,18,256,256);
     }
     @Override protected void renderContent(GuiGraphics g,int x,int y,float partial) {super.renderContent(g,x,y,partial);renderTooltip(g,x,y);}

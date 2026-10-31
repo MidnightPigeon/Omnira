@@ -4,8 +4,14 @@
   "title": "Intake Upgrade",
   "text": [
     "Right-click the held plate to configure directions and filters before installing it. Settings remain on the plate after removal.",
-    "Enable any of six sides. Active intake uses its host's limit: base 4 items or 2000 mB per second, increased by Speed Upgrades. Selected sides are visited in order. Unlike ordinary receiving, intake is rate-limited, but does not spend the source's external extraction allowance.",
+    "Enable any of six sides, visited in order. Active intake uses its host's logistics limit, increased by Speed Upgrades, without spending the source's external extraction allowance.",
     "Three ghost filters support allowlists and denylists. Click with a carried item to set a filter without consuming it; right-click clears it. Select fluids using filled buckets, ordinary water bottles or fluid containers. Empty buckets and bottles select no fluid. With Create installed, potion bottles, honey bottles and Create filters also work; potions match their specific contents."
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "crystal_logistics",
+      "label": "Logistics"
+    }
+  ]
 }

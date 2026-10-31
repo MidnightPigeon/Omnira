@@ -89,7 +89,7 @@ public final class StorageVisuals {
         @Override public void render(ResonanceCoreBlockEntity node,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
             var player=Minecraft.getInstance().player;
             boolean selected=node.selectedUntil>node.getLevel().getGameTime();
-            if(node.peer!=null||selected){
+            if((node.peer!=null||selected)&&com.mcmagic.omnira.client.renderer.WorldGlassBuffers.visible(new net.minecraft.world.phys.AABB(node.getBlockPos()).inflate(.1))){
                 var mesh=buffers.getBuffer(CrystalGlassLayer.COLOR);double time=node.getLevel().getGameTime()+partial;
                 int color=selected||node.output?0xF5FFFFFF:0xF5201729;
                 var points=ResonanceNodeMotion.ring(time);

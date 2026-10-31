@@ -31,7 +31,7 @@ public final class PulseOrbEntity extends BlockEntity implements MenuProvider,Pu
             (resonant()?com.mcmagic.omnira.item.UpgradeCompatibility.Host.RESONANT_PULSE_ORB:com.mcmagic.omnira.item.UpgradeCompatibility.Host.PULSE_ORB).accepts(item.kind);}
     public boolean stabilized(){return upgrade.getStackInSlot(0).getItem() instanceof OrbUpgradeItem item&&item.kind==OrbUpgradeItem.Kind.STABILIZATION;}
     public int capacity(){return 8192*(upgrade.getStackInSlot(0).getItem() instanceof OrbUpgradeItem item?item.kind.capacityMultiplier:1);}
-    public boolean hasFrequency(){return !frequency[0].isEmpty()||!frequency[1].isEmpty();}
+    public boolean hasFrequency(){return !frequency[0].isEmpty()&&!frequency[1].isEmpty();}
     public void frequency(int slot,ItemStack sample){if(!resonant()||slot<0||slot>1)return;
         if(ItemStack.isSameItemSameComponents(frequency[slot],sample))return;
         if(level instanceof net.minecraft.server.level.ServerLevel server)PulseOrbGroups.get(server).detach(this);

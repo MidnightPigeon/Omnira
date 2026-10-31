@@ -69,7 +69,7 @@ public final class PulseGameTests {
         engine(h,new BlockPos(3,3,2),Direction.SOUTH,0);
         h.setBlock(new BlockPos(3,3,3),PulseContent.RESONANT.get());h.setBlock(new BlockPos(9,3,3),PulseContent.RESONANT.get());
         var a=PulseOrbEntity.from(h.getBlockEntity(new BlockPos(3,3,3)));var b=PulseOrbEntity.from(h.getBlockEntity(new BlockPos(9,3,3)));
-        a.frequency(0,new ItemStack(Items.EMERALD));b.frequency(0,new ItemStack(Items.EMERALD));
+        a.frequency(0,new ItemStack(Items.EMERALD));b.frequency(0,new ItemStack(Items.EMERALD));a.frequency(1,new ItemStack(Items.QUARTZ));b.frequency(1,new ItemStack(Items.QUARTZ));
         table(h,new BlockPos(9,3,4),Direction.SOUTH);var pos=h.absolutePos(new BlockPos(9,3,4));
         close(h,PulseNetworks.power(h.getLevel(),pos).allocated(),512);
         b.frequency(0,new ItemStack(Items.DIAMOND));h.assertTrue(!PulseNetworks.power(h.getLevel(),pos).running(),"Old frequency retained power");
@@ -176,7 +176,7 @@ public final class PulseGameTests {
     @GameTest(template="spell_arena") public static void sharedSourcesCannotInventAvailablePotential(GameTestHelper h){
         for(int x:new int[]{3,7}){var source=engine(h,new BlockPos(x,3,2),Direction.SOUTH,2);source.inventory.setItem(3,new ItemStack(ModItems.OMNI_CRYSTAL_GRID.get()));}
         for(int x:new int[]{3,7,11}){
-            var pos=new BlockPos(x,3,3);h.setBlock(pos,PulseContent.RESONANT.get());var orb=PulseOrbEntity.from(h.getBlockEntity(pos));orb.frequency(0,new ItemStack(Items.AMETHYST_SHARD));
+            var pos=new BlockPos(x,3,3);h.setBlock(pos,PulseContent.RESONANT.get());var orb=PulseOrbEntity.from(h.getBlockEntity(pos));orb.frequency(0,new ItemStack(Items.AMETHYST_SHARD));orb.frequency(1,new ItemStack(Items.QUARTZ));
             for(var face:Direction.Plane.HORIZONTAL)if(x==11||face!=Direction.NORTH)table(h,pos.relative(face),face);
         }
         double total=0;for(int x:new int[]{3,7,11})for(var face:Direction.Plane.HORIZONTAL)if(x==11||face!=Direction.NORTH)total+=PulseNetworks.power(h.getLevel(),h.absolutePos(new BlockPos(x,3,3).relative(face))).allocated();
@@ -222,7 +222,7 @@ public final class PulseGameTests {
         var level=h.getLevel();var remote=level.getServer().getLevel(net.minecraft.world.level.Level.NETHER);h.assertTrue(remote!=null,"Missing vanilla Nether");
         var aPos=h.absolutePos(new BlockPos(5,3,5));h.setBlock(new BlockPos(5,3,5),PulseContent.RESONANT.get());engine(h,new BlockPos(5,3,6),Direction.NORTH,0);
         var bPos=new BlockPos(aPos.getX(),80,aPos.getZ());remote.getChunkAt(bPos);remote.setBlockAndUpdate(bPos,PulseContent.RESONANT.get().defaultBlockState());
-        var a=PulseOrbEntity.from(level.getBlockEntity(aPos));var b=PulseOrbEntity.from(remote.getBlockEntity(bPos));a.frequency(0,new ItemStack(Items.CLAY_BALL));b.frequency(0,new ItemStack(Items.CLAY_BALL));
+        var a=PulseOrbEntity.from(level.getBlockEntity(aPos));var b=PulseOrbEntity.from(remote.getBlockEntity(bPos));a.frequency(0,new ItemStack(Items.CLAY_BALL));b.frequency(0,new ItemStack(Items.CLAY_BALL));a.frequency(1,new ItemStack(Items.QUARTZ));b.frequency(1,new ItemStack(Items.QUARTZ));
         var target=bPos.east();remote.setBlockAndUpdate(target,ModBlocks.ARCANE_ASSEMBLY_TABLE.get().defaultBlockState().setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING,Direction.EAST));
         PulseNetworks.available(b);h.assertTrue(!PulseNetworks.power(remote,target).running(),"Unstabilized frequency crossed dimensions");
         a.upgrade.setStackInSlot(0,new ItemStack(ModItems.SPACETIME_STABILIZATION_UPGRADE.get()));close(h,PulseNetworks.power(remote,target).allocated(),512);

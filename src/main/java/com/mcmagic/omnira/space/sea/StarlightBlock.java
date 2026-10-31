@@ -38,7 +38,11 @@ public final class StarlightBlock extends BaseEntityBlock {
             default -> Fluids.EMPTY.defaultFluidState();
         };
     }
+    @Override protected boolean canSurvive(BlockState state,LevelReader level,BlockPos pos) {
+        return source||level.getBlockState(pos.below()).isFaceSturdy(level,pos.below(),Direction.UP);
+    }
     @Override protected BlockState updateShape(BlockState s, Direction d, BlockState n, LevelAccessor l, BlockPos p, BlockPos q) {
+        if(!source&&d==Direction.DOWN&&!s.canSurvive(l,p))return Blocks.AIR.defaultBlockState();
         if (s.getValue(WATER) != 0) l.scheduleTick(p, s.getFluidState().getType(), 5);
         return super.updateShape(s, d, n, l, p, q);
     }

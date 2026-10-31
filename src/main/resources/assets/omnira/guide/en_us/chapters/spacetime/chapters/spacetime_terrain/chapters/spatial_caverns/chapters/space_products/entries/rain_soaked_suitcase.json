@@ -1,0 +1,26 @@
+{
+  "id": "rain_soaked_suitcase",
+  "item": "omnira:rain_soaked_suitcase",
+  "title": "Rain-soaked Suitcase",
+  "recipes": false,
+  "text": [
+    "Spatial-biome treasure orbs have a separate 5% chance to contain this suitcase. Right-click to awaken Arcanist and The Storm immediately, without consuming it. Existing talents or curses are never overwritten.",
+    "Neither can be removed manually. The Cleansing Ritual removes both.",
+    "Sneak-use on the ground to place it open. Use an item to display one; use an empty hand to retrieve it. The case stays half-open while displaying an item.",
+    "Placing Voyager's Violin inside starts continuous music, granting Regeneration II and Resistance II to living creatures within 10 blocks. Remove the violin to stop."
+  ],
+  "links": [
+    {
+      "target": "arcanist_talent",
+      "label": "Arcanist"
+    },
+    {
+      "target": "storm_curse",
+      "label": "Storm"
+    },
+    {
+      "target": "voyager_violin",
+      "label": "Voyager's Violin"
+    }
+  ]
+}

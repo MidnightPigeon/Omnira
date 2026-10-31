@@ -15,5 +15,12 @@
       "target": "arcane_assembly_table",
       "label": "魔动装配台"
     }
+  ],
+  "related_items": [
+    "omnira:ancient_archaeology_aggregate",
+    "omnira:phantom_thieves_aggregate",
+    "omnira:umbrella_aggregate",
+    "omnira:foundation_aggregate",
+    "omnira:primordial_earth_aggregate"
   ]
 }

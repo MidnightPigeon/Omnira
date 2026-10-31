@@ -24,5 +24,5 @@ public final class FoldGateRenderer implements BlockEntityRenderer<FoldGateBlock
         }
         pose.popPose();
     }
-    @Override public boolean shouldRenderOffScreen(FoldGateBlockEntity gate){return true;}
+    @Override public net.minecraft.world.phys.AABB getRenderBoundingBox(FoldGateBlockEntity gate){return new net.minecraft.world.phys.AABB(gate.getBlockPos()).inflate(.05).expandTowards(0,1,0);}
 }

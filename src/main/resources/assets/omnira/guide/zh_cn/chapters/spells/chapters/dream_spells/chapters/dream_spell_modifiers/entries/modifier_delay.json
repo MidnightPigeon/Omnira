@@ -1,0 +1,17 @@
+{
+  "id": "modifier_delay",
+  "item": "omnira:lingering_thread",
+  "title": "绵延之缕",
+  "text": [
+    "将一个时钟通过高阶凝聚加工即可获得绵延之缕。",
+    "写入“延时”修饰。将伤害、治疗转为对应的延时效果，基础持续 40 秒；额外一份增加 60 秒。强化仍可提升这些持续效果的等级。",
+    "对解离，取消其对生物的伤害，不改变方块解离；对构筑，每份延时将水晶存在时间和生物锁止时间翻倍。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "advanced_condensation_table",
+      "label": "高阶凝聚台"
+    }
+  ]
+}

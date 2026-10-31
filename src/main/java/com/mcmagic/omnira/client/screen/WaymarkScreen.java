@@ -55,14 +55,14 @@ public final class WaymarkScreen extends ResponsiveContainerScreen<WaymarkMenu> 
                         g.pose().popPose();
                     }
                 }));
-                deleteButtons.add(addRenderableWidget(Button.builder(Component.literal("×"),b->{
+                deleteButtons.add(addRenderableWidget(PixelButtons.builder(Component.literal("×"),b->{
                     int index=page*rowCount+slot;
                     if(index<filtered.size()) PacketDistributor.sendToServer(new SelectWaymarkPayload(menu.containerId,-filtered.get(index)-1));
                 }).bounds(leftPos+imageWidth-32,topPos+61+row*28,20,20)
                         .tooltip(Tooltip.create(Component.translatable("gui.omnira.waymark.delete"))).build()));
             }
-            previous=addRenderableWidget(Button.builder(Component.literal("<"),b->{page--;updateRows();}).bounds(leftPos+imageWidth-54,topPos+imageHeight-28,20,20).build());
-            next=addRenderableWidget(Button.builder(Component.literal(">"),b->{page++;updateRows();}).bounds(leftPos+imageWidth-30,topPos+imageHeight-28,20,20).build());
+            previous=addRenderableWidget(PixelButtons.builder(Component.literal("<"),b->{page--;updateRows();}).bounds(leftPos+imageWidth-54,topPos+imageHeight-28,20,20).build());
+            next=addRenderableWidget(PixelButtons.builder(Component.literal(">"),b->{page++;updateRows();}).bounds(leftPos+imageWidth-30,topPos+imageHeight-28,20,20).build());
             input.setResponder(value->{page=0;filter();});filter();
         }
     }

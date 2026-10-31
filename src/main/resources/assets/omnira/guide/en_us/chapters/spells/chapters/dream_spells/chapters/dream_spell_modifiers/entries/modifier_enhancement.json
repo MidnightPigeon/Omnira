@@ -1,0 +1,17 @@
+{
+  "id": "modifier_enhancement",
+  "item": "omnira:amplification_star",
+  "title": "Amplification Star",
+  "text": [
+    "Process one Iron Block through advanced condensation to obtain an Amplification Star.",
+    "Writes Enhancement. Each raises instant healing, infused instant damage, or a sustained potion effect by one level. Ordinary physical harm gains 3 base damage instead.",
+    "For dissociation, it adds harvest rounds and raises mining tier. For construction, it raises crystal hardness and blast resistance and adds crushing damage to locked creatures."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    }
+  ]
+}

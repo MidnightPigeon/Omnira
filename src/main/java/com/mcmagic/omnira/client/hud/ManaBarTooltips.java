@@ -14,7 +14,7 @@ import net.neoforged.neoforge.client.event.ScreenEvent;
 
 @EventBusSubscriber(modid="omnira",value=Dist.CLIENT)
 public final class ManaBarTooltips {
-    private record Area(float left,float top,float right,float bottom,Affinity affinity) {
+    private record Area(float left,float top,float right,float bottom,Affinity affinity,int current,int maximum) {
         boolean contains(double x,double y){return x>=left && x<=right && y>=top && y<=bottom;}
     }
     private static final java.util.List<Area> AREAS=new java.util.ArrayList<>();
@@ -25,7 +25,7 @@ public final class ManaBarTooltips {
         var transform=g.pose().last().pose();
         var a=transform.transformPosition(new org.joml.Vector3f(x,y-1,0));
         var b=transform.transformPosition(new org.joml.Vector3f(x+width,y+14,0));
-        AREAS.add(new Area(Math.min(a.x,b.x),Math.min(a.y,b.y),Math.max(a.x,b.x),Math.max(a.y,b.y),Affinity.byId(mana.affinity())));
+        AREAS.add(new Area(Math.min(a.x,b.x),Math.min(a.y,b.y),Math.max(a.x,b.x),Math.max(a.y,b.y),Affinity.byId(mana.affinity()),(int)mana.current(),(int)mana.maximum()));
     }
     @SubscribeEvent public static void before(ScreenEvent.Render.Pre event){AREAS.clear();collecting=true;}
     @SubscribeEvent public static void after(ScreenEvent.Render.Post event) {
@@ -40,6 +40,7 @@ public final class ManaBarTooltips {
             var area=AREAS.get(i);
             if(!area.contains(event.getMouseX(),event.getMouseY()))continue;
             var text=new java.util.ArrayList<Component>();
+            text.add(Component.literal(area.current+" / "+area.maximum));
             text.add(Component.translatable(area.affinity.key()).withStyle(style->style.withColor(area.affinity.color)));
             int lines=switch(area.affinity){case NONE -> 1;case DREAM -> 4;default -> 2;};
             for(int line=1;line<=lines;line++)text.add(Component.translatable("tooltip.omnira.affinity."+area.affinity.name().toLowerCase(java.util.Locale.ROOT)+"."+line));

@@ -4,8 +4,7 @@
   "title": "Pale Paradox Needle",
   "recipes": true,
   "text": [
-    "Upgrade the preceding weapon at the Advanced Assembly Table. Damage, enchantments, custom names and the inserted spell crystal are preserved.",
-    "Upgrade 4: 16 damage, 2.2 attack speed, 24 total healing and 200% base special range. Paradox motes increase with level.",
+    "Upgrade 4: 16 damage, 2.2 attack speed, 24 total healing and 200% base special range.",
     "§d§oAt least upgrading needs no smithing template)§r"
   ],
   "links": [

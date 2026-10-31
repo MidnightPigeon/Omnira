@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 abstract class FleetingBlockEntityMixin {
     @WrapOperation(method="tickBlockEntities",at=@At(value="INVOKE",target="Lnet/minecraft/world/level/block/entity/TickingBlockEntity;tick()V"))
     private void omnira$machine(TickingBlockEntity ticker,Operation<Void> original){
-        if(com.mcmagic.omnira.time.StilledTime.stopped((Level)(Object)this,ticker.getPos()))return;
+        if(com.mcmagic.omnira.time.StilledTime.blockTickStopped((Level)(Object)this,ticker.getPos()))return;
         original.call(ticker);var level=(Level)(Object)this;
         if(!level.isClientSide&&!ticker.isRemoved()&&FleetingTime.accelerated(level,ticker.getPos()))original.call(ticker);
     }

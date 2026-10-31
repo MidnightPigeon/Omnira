@@ -5,5 +5,11 @@
   "text": [
     "Decorative mirror stone, with stair and slab forms available through crafting and stonecutting."
   ],
-  "recipes": true
+  "recipes": true,
+  "links": [
+    {
+      "target": "decorative_variants",
+      "label": "Decorative Stairs and Slabs"
+    }
+  ]
 }

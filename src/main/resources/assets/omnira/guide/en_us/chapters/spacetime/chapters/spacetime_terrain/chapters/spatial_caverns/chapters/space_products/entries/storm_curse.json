@@ -1,0 +1,11 @@
+{
+  "id": "storm_curse",
+  "item": "omnira:storm_curse",
+  "title": "The Storm",
+  "recipes": false,
+  "text": [
+    "Every 5 minutes, blue raindrops rise for a 10-second warning. The ensuing 15-second Storm turns them blue-black and ignores walls, roofs and dimensions.",
+    "Ranks reset and cannot build; mana regeneration stops and 5% maximum mana drains each second. Once empty, subsequent pulses cost ceil(1% maximum mana) health and can be fatal.",
+    "Milk and potion cleansing cannot end the Storm. Logging out pauses its timer; respawning does not reset it. The Cleansing Ritual removes the curse and its timer."
+  ]
+}

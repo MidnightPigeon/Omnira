@@ -1,0 +1,11 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {
+    "item": "omnira:light_microcore"
+  },
+  "mana_cost": 300,
+  "result": {
+    "id": "omnira:holy_halo",
+    "count": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "abandoned_apprentice_hut",
+  "item": "minecraft:oak_door",
+  "title": "Abandoned Apprentice Hut",
+  "text": [
+    "These weathered wood-and-stone huts can be found in Overworld plains, forests and similar terrain. Beneath their damaged roofs, basic condensation equipment remains from an apprentice’s studies.",
+    "Their loot orbs contain supplies such as paper, bottles, food and Spiritual Crystals, with a chance of partially used Spell Ink."
+  ],
+  "recipes": false
+}

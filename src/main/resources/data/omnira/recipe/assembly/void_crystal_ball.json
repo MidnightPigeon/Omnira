@@ -21,5 +21,6 @@
   "result": {
     "id": "omnira:void_crystal_ball",
     "count": 1
-  }
+  },
+  "outer_shapeless": true
 }

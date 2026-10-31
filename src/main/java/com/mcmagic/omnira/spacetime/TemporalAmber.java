@@ -64,9 +64,9 @@ public final class TemporalAmber extends Entity {
         }));
         return amber;
     }
-    public static void sealDeath(Player player){
+    public static void stormDamage(Player player){
         FORCED.add(player);
-        try{com.mcmagic.omnira.combat.OmniraDamage.execute(player,com.mcmagic.omnira.combat.OmniraDamage.source(player,"true_damage"));}
+        try{com.mcmagic.omnira.combat.OmniraDamage.trueDamage(player,40,player.damageSources().explosion(null,null));}
         finally{FORCED.remove(player);}
     }
     public static void beginDeath(Player player){

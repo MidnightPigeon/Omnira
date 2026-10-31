@@ -97,7 +97,7 @@ public final class ReactionPoolClient {
             pose.pushPose();pose.translate(offset.getX(),offset.getY(),offset.getZ());PulseClient.shaft(pose,buffers,face,time,false,pool.pulsePowered()?0:2);pose.popPose();
         }
         double height=ReactionPoolGeometry.LIQUID_BOTTOM;boolean wet=pool.fluids.total()>0;boolean bottom=true;
-        for(var fluid:pool.fluids.snapshot().reversed()){
+        for(var fluid:ReactionPoolDisplayFluids.layers(pool.fluids)){
             double top=height+(ReactionPoolGeometry.LIQUID_TOP-ReactionPoolGeometry.LIQUID_BOTTOM)*fluid.getAmount()/pool.capacity();
             var ext=IClientFluidTypeExtensions.of(fluid.getFluid());int color=ext.getTintColor(fluid);if((color>>>24)==0)color|=0xFF000000;
             int packed=LightTexture.pack(Math.max(fluid.getFluidType().getLightLevel(fluid),LightTexture.block(light)),LightTexture.sky(light));
@@ -156,7 +156,7 @@ public final class ReactionPoolClient {
     private static void panelLiquid(ReactionPoolBlockEntity pool,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         var atlas=Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS);
         double base=.75/16-1.95/16,radius=1.95/16;
-        for(var fluid:pool.fluids.snapshot().reversed()){
+        for(var fluid:ReactionPoolDisplayFluids.layers(pool.fluids)){
             double top=base+2*radius*fluid.getAmount()/pool.capacity();
             var ext=IClientFluidTypeExtensions.of(fluid.getFluid());int color=ext.getTintColor(fluid);if((color>>>24)==0)color|=0xFF000000;
             var sprite=atlas.apply(ext.getStillTexture(fluid));int packed=LightTexture.pack(Math.max(fluid.getFluidType().getLightLevel(fluid),LightTexture.block(light)),LightTexture.sky(light));

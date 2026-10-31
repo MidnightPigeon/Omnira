@@ -17,7 +17,10 @@
     "entries/voyager_violin_source.json",
     "entries/dense_void_mass_guide.json",
     "entries/mapping_stability_compass_guide.json",
-    "entries/deflection_field.json"
+    "entries/deflection_field.json",
+    "entries/rain_soaked_suitcase.json",
+    "entries/arcanist_talent.json",
+    "entries/storm_curse.json"
   ],
   "chapters": []
 }

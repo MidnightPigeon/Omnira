@@ -28,12 +28,25 @@ public final class WorldMagicGameTests {
         WorldRotation.collect(drop,p);h.assertTrue(drop.getItem().getCount()==5&&drop.position().distanceToSqr(p.position())<.000001,"Full inventory did not gather intact items");h.succeed();
     }
     @GameTest(template="spell_arena") public static void reloadComposesAndIgnoresDelayAndPower(GameTestHelper h){
-        var slots=new net.minecraft.world.SimpleContainer(9);slots.setItem(4,new ItemStack(com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get()));
-        slots.setItem(2,new ItemStack(Items.CLOCK));slots.setItem(3,new ItemStack(Items.IRON_BLOCK));
+        var slots=new net.minecraft.world.SimpleContainer(9);slots.setItem(4,new ItemStack(com.mcmagic.omnira.registry.ModItems.MINIATURE_WORLD.get()));
+        slots.setItem(2,new ItemStack(ModItems.LINGERING_THREAD.get()));slots.setItem(3,new ItemStack(ModItems.AMPLIFICATION_STAR.get()));
         var effect=com.mcmagic.omnira.menu.CrystalProcessingTableMenu.composeEffects(slots).getFirst();
         h.assertTrue(effect.operation().equals("reload")&&effect.delay()==0&&effect.enhancement()==1&&effect.physicalDamage(1000)==0,"Reload composed ordinary damage or delay");
         effect=com.mcmagic.omnira.item.staff.StaffEnhancements.apply(new SpellPayload(30,0,List.of(effect)),List.of("delay")).effects().getFirst();
         h.assertTrue(effect.delay()==0,"Staff reintroduced delay");h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void miniatureWorldReplacesSeedAndDisassembles(GameTestHelper h){
+        var slots=new net.minecraft.world.SimpleContainer(9);
+        slots.setItem(0,new ItemStack(ModItems.AIR_MICROCORE.get()));slots.setItem(1,new ItemStack(ModItems.FIRE_MICROCORE.get()));
+        var seed=new ItemStack(com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get());slots.setItem(4,seed);
+        h.assertTrue(!com.mcmagic.omnira.menu.CrystalProcessingTableMenu.mayPlace(4,seed)&&com.mcmagic.omnira.menu.CrystalProcessingTableMenu.composeEffects(slots).isEmpty(),"Seed still acts as Reload element");
+        var material=new ItemStack(ModItems.MINIATURE_WORLD.get());slots.setItem(4,material);
+        h.assertTrue(com.mcmagic.omnira.menu.CrystalProcessingTableMenu.mayPlace(4,material),"New element rejected");
+        var crystal=com.mcmagic.omnira.menu.CrystalProcessingTableMenu.previewCrystal(slots);
+        h.assertTrue(SpellPayload.of(crystal).keywords().contains("reload"),"Reload keyword missing");
+        var returned=com.mcmagic.omnira.guidance.UniversalUnderstanding.materials(crystal);
+        h.assertTrue(returned.stream().filter(x->x.is(ModItems.MINIATURE_WORLD.get())).mapToInt(ItemStack::getCount).sum()==1&&returned.stream().noneMatch(x->x.is(seed.getItem())),"Disassembly returns obsolete seed or wrong count");
+        h.succeed();
     }
     @GameTest(template="spell_arena") public static void reloadPreservesAirAndIncompleteBlocks(GameTestHelper h){
         var p=player(h);var effect=SpellEffect.utility("reload",0,0,0);
@@ -113,7 +126,7 @@ public final class WorldMagicGameTests {
     @GameTest(template="spell_arena") public static void omniWritingReservesAllEightAndOnlyAdvancedRing(GameTestHelper h){
         var core=new ItemStack(ModItems.OMNI_MICROCORE.get());var inventory=new net.minecraft.world.SimpleContainer(12);inventory.setItem(0,core);
         h.assertTrue(!com.mcmagic.omnira.menu.CrystalProcessingTableMenu.isTargetMicrocore(core),"Ordinary table accepts ultimate core");
-        for(int i=1;i<8;i++)h.assertTrue(!com.mcmagic.omnira.aggregation.AggregationRingBlockEntity.compatible(inventory,i,new ItemStack(Items.IRON_BLOCK)),"Ultimate core did not reserve node "+i);
+        for(int i=1;i<8;i++)h.assertTrue(!com.mcmagic.omnira.aggregation.AggregationRingBlockEntity.compatible(inventory,i,new ItemStack(ModItems.AMPLIFICATION_STAR.get())),"Ultimate core did not reserve node "+i);
         var crystal=new ItemStack(ModItems.WORLD_ROTATION_CRYSTAL.get());h.assertTrue(crystal.get(ModDataComponents.SPELL_PATTERN).worldRotation(),"Special crystal missing fixed pattern");h.succeed();
     }
     @GameTest(template="spell_arena") public static void advancedRingProducesUltimateCrystal(GameTestHelper h){

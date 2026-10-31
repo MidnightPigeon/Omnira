@@ -15,5 +15,6 @@
   "result": {
     "id": "omnira:crystal_stocking_shoes",
     "count": 1
-  }
+  },
+  "outer_shapeless": true
 }

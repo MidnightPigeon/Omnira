@@ -5,7 +5,9 @@
   "icon": "omnira:mana_engine",
   "recipes": false,
   "text": [
-    "Potential is measured in MPU. Align source outputs with machine inputs, or connect through Arcane Wires and Accumulator Orbs. Sources combine; insufficient potential for all base demands pauses the entire network.",
+    "This mod uses Magic Pulse Potential, measured in MPU. Supply is based on how much load a source can support at once: each pulse source provides potential, and working arcane machines reserve part of it. Machines can run when their combined demand does not exceed the potential their sources can provide.",
+    "If you are familiar with industrial machinery, think of MPU as Create stress units (SU) without rotational speed (RPM). The two can be converted equivalently: 1 MPU corresponds to 1 SU.",
+    "Align source outputs with machine inputs, or connect through Arcane Wires and Accumulator Orbs. Connected sources combine their supply; insufficient potential for all base demands pauses the entire network.",
     "Reserve base demands first, then grant acceleration in connection order, up to 8x. New loads reclaim extra reservations from newer machines first.",
     "Native machines prioritize pulses, then stress, then electricity. Sustained FE/second is equivalent to MPU, is consumed even while idle, and must continue without stored-energy operation after input stops. Accelerating machines scale with input up to their existing limits; extra power does not accelerate the Infused Crystal Furnace. Insufficient pulses cannot fall back to external power.",
     "All shaft inputs, including orbs, require at least 16 rpm in either direction; slower inputs are rejected without stress use. Arcane Assembly Benches and Infused Crystal Anvils use 16 x |RPM| SU. Each Reaction Pool inlet uses 32 x |RPM| SU; both inputs combine for efficiency, capped at 8x.",

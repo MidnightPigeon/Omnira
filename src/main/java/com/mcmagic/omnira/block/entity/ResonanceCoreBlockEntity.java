@@ -15,6 +15,7 @@ public final class ResonanceCoreBlockEntity extends BlockEntity {
     public java.util.UUID peerIdentity;
     public boolean output;
     public long selectedUntil;
+    private boolean relocated;
     public ResonanceCoreBlockEntity(BlockPos pos,BlockState state){super(ModBlockEntityTypes.RESONANCE_CORE.get(),pos,state);}
     public IItemHandler items() {
         if(level==null || !level.hasChunkAt(worldPosition.below()))return null;
@@ -47,15 +48,17 @@ public final class ResonanceCoreBlockEntity extends BlockEntity {
                 &&com.mcmagic.omnira.item.ResonanceLinks.get(server).consumeRemovedBinding(identity,terminal)){
             terminal=null;setChanged();
         }
-        if(peer!=null&&level.hasChunkAt(peer)&&(!(level.getBlockEntity(peer) instanceof ResonanceCoreBlockEntity other)||!identity.equals(other.peerIdentity))){
+        if(peer!=null&&(relocated||level.hasChunkAt(peer))&&(!level.hasChunkAt(peer)||!(level.getBlockEntity(peer) instanceof ResonanceCoreBlockEntity other)
+                ||!peerIdentity.equals(other.identity)||!identity.equals(other.peerIdentity)||!worldPosition.equals(other.peer))){
             peer=null;peerIdentity=null;setChanged();
         }
+        relocated=false;
         int kind=kind(),mode=kind==0?0:terminal==null?1:kind;
         if(getBlockState().getValue(com.mcmagic.omnira.block.ResonanceCoreBlock.MODE)!=mode)
             level.setBlockAndUpdate(worldPosition,getBlockState().setValue(com.mcmagic.omnira.block.ResonanceCoreBlock.MODE,mode));
     }
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries) {
-        super.saveAdditional(tag,registries);tag.putUUID("Identity",identity);
+        super.saveAdditional(tag,registries);tag.putUUID("Identity",identity);tag.putLong("NodeAnchor",worldPosition.asLong());
         if(owner!=null)tag.putUUID("Owner",owner);if(terminal!=null)tag.putUUID("Terminal",terminal);
         if(peer!=null&&peerIdentity!=null){tag.putLong("Peer",peer.asLong());tag.putUUID("PeerIdentity",peerIdentity);tag.putBoolean("Output",output);}
     }
@@ -65,6 +68,11 @@ public final class ResonanceCoreBlockEntity extends BlockEntity {
         owner=tag.hasUUID("Owner")?tag.getUUID("Owner"):null;terminal=tag.hasUUID("Terminal")?tag.getUUID("Terminal"):null;
         peer=tag.hasUUID("PeerIdentity")?BlockPos.of(tag.getLong("Peer")):null;
         peerIdentity=tag.hasUUID("PeerIdentity")?tag.getUUID("PeerIdentity"):null;output=tag.getBoolean("Output");
+        relocated=tag.contains("NodeAnchor")&&!worldPosition.equals(BlockPos.of(tag.getLong("NodeAnchor")));
+        if(relocated){
+            if(peer!=null)peer=peer.offset(worldPosition.subtract(BlockPos.of(tag.getLong("NodeAnchor"))));
+            terminal=null;selectedUntil=0;
+        }
     }
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries){var tag=saveWithoutMetadata(registries);tag.putLong("SelectedUntil",selectedUntil);return tag;}
     @Override public net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket getUpdatePacket(){return net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket.create(this);}

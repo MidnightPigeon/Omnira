@@ -1,0 +1,15 @@
+{
+  "id": "rain_soaked_suitcase_relic",
+  "title": "被暴雨浸湿的手提箱",
+  "item": "omnira:rain_soaked_suitcase",
+  "recipes": false,
+  "text": [
+    "各空间群系的战利品水晶球中有机会发现这只手提箱。"
+  ],
+  "links": [
+    {
+      "target": "rain_soaked_suitcase",
+      "label": "功能说明"
+    }
+  ]
+}

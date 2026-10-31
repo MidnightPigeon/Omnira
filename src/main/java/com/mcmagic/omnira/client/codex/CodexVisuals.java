@@ -133,14 +133,18 @@ public final class CodexVisuals {
     private static void vertex(double x,double y,double z,int color,PoseStack pose,VertexConsumer out){
         out.addVertex(pose.last().pose(),(float)x,(float)y,(float)z).setColor(color);
     }
-    public static void sphere(int diameter,int fade,PoseStack pose,MultiBufferSource buffers){
+    public static void sphere(int diameter,int fade,int shape,int axis,PoseStack pose,MultiBufferSource buffers){
         if(fade>=10)return;
         var out=buffers.getBuffer(CrystalGlassLayer.COLOR);
         for(var face:CodexGeometry.range(diameter)){
-            int alpha=Math.round((face.ring()?CodexGeometry.RANGE_RING_ALPHA:CodexGeometry.RANGE_SHELL_ALPHA)*CodexGeometry.opacity(fade));
+            if(!CodexProjection.visibleRing(face.geometry(),shape,axis))continue;
+            int alpha=Math.round(CodexGeometry.RANGE_RING_ALPHA*CodexGeometry.opacity(fade));
             int color=alpha<<24|0xA7E4DE;
             for(var p:face.geometry().vertices())vertex(p[0],p[1],p[2],color,pose,out);
         }
+        int color=Math.round(CodexGeometry.RANGE_GRID_ALPHA*CodexGeometry.opacity(fade))<<24|0xA7E4DE;
+        for(var face:CodexProjection.mesh(diameter,shape,axis))
+            for(var p:face.vertices())vertex(p[0],p[1],p[2],color,pose,out);
     }
     private CodexVisuals(){}
 }

@@ -28,7 +28,7 @@ public final class MemoryCubeItem extends Item {
             if(!fatal)com.mcmagic.omnira.combat.OmniraDamage.payHealth(player,(float)Math.ceil(player.getMaxHealth()/2),"true_damage");
         }
         if(fatal||!player.isAlive()){
-            com.mcmagic.omnira.combat.OmniraDamage.execute(player,com.mcmagic.omnira.combat.OmniraDamage.source(player,"true_damage"));
+            com.mcmagic.omnira.combat.OmniraDamage.overdraw(player);
         }
         return InteractionResultHolder.success(stack);
     }

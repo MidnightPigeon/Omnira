@@ -3,6 +3,7 @@ package com.mcmagic.omnira.client.guide;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
+import com.mcmagic.omnira.client.screen.UiScissor;
 
 public final class GuideFigureRenderer {
     public record Hover(ItemStack item,String text) {}
@@ -12,7 +13,7 @@ public final class GuideFigureRenderer {
         var wrapped=linesByFigure.computeIfAbsent(figure,value->value.labels().stream().map(label->GuideTextLayout.wrap(label.text(),label.width(),font::width)).toList());
         var hovered=ItemStack.EMPTY;
         String tooltip="";
-        g.enableScissor(x,y,x+GuideFigure.WIDTH,y+GuideFigure.HEIGHT);
+        UiScissor.enable(g,x,y,x+GuideFigure.WIDTH,y+GuideFigure.HEIGHT);
         for(var a:figure.areas())g.fill(x+a.x(),y+a.y(),x+a.x()+a.width(),y+a.y()+a.height(),a.color());
         for(var s:figure.strokes()) {
             line(g,x+s.x1(),y+s.y1(),x+s.x2(),y+s.y2(),s.color());
@@ -30,7 +31,7 @@ public final class GuideFigureRenderer {
         for(int index=0;index<figure.labels().size();index++) {
             var label=figure.labels().get(index);var lines=wrapped.get(index);
             if((lines.size()-1)*11+font.lineHeight>label.height()&&mouseX>=x+label.x()&&mouseX<x+label.x()+label.width()&&mouseY>=y+label.y()&&mouseY<y+label.y()+label.height())tooltip=label.text();
-            g.enableScissor(x+label.x(),y+label.y(),x+label.x()+label.width(),y+label.y()+label.height());
+            UiScissor.enable(g,x+label.x(),y+label.y(),x+label.x()+label.width(),y+label.y()+label.height());
             for(int i=0;i<lines.size();i++)g.drawString(font,lines.get(i),x+label.x(),y+label.y()+i*11,label.color(),false);
             g.disableScissor();
         }

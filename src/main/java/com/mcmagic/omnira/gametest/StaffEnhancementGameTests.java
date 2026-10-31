@@ -29,7 +29,7 @@ public final class StaffEnhancementGameTests {
         grid.set(DataComponents.CONTAINER,net.minecraft.world.item.component.ItemContainerContents.fromItems(List.of(crystal)));
         top.theillusivec4.curios.api.CuriosApi.getCuriosInventory(player).orElseThrow().setEquippedCurio("crystal_grid",0,grid);
         var plain=StaffAssembly.basic().create();
-        var holy=StaffEnhancements.assemble(input(plain,ModItems.LIGHT_MICROCORE.get()));
+        var holy=StaffEnhancements.assemble(input(plain,ModItems.HOLY_HALO.get()));
         player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,holy);
         h.assertTrue(com.mcmagic.omnira.item.StaffItem.castSequence(player,holy,1)==1,"Enhanced staff did not cast");
         var shots=h.getLevel().getEntitiesOfClass(com.mcmagic.omnira.spell.entity.SpellEntity.class,player.getBoundingBox().inflate(4),e->e.ownedBy(player));
@@ -78,7 +78,7 @@ public final class StaffEnhancementGameTests {
         var assembly=new StaffAssembly(new ItemStack(ModItems.SHADOW_STAFF_SHAFT.get()),StaffAssembly.basic().reinforcement(),
                 StaffAssembly.basic().tip(),List.of(new ItemStack(ModItems.AMPLIFICATION_RUNE.get())));
         var staff=assembly.create();staff.set(DataComponents.CUSTOM_NAME,Component.literal("Preserved"));
-        for(var material:List.of(Items.IRON_BLOCK,Items.CLOCK,ModItems.LIGHT_MICROCORE.get(),ModItems.SPIRITUAL_CRYSTAL.get())) {
+        for(var material:List.of(ModItems.AMPLIFICATION_STAR.get(),ModItems.LINGERING_THREAD.get(),ModItems.HOLY_HALO.get(),ModItems.INFUSION_BUD.get())) {
             var inputs=input(staff,material);
             var recipe=h.getLevel().getRecipeManager().getRecipeFor(ModRecipes.ADVANCED_FORGE_TYPE.get(),
                     new com.mcmagic.omnira.forging.AdvancedForgeRecipe.Input(inputs),h.getLevel()).orElseThrow();

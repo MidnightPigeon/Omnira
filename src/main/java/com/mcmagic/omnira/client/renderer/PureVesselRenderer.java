@@ -19,7 +19,7 @@ public final class PureVesselRenderer implements BlockEntityRenderer<PureVesselB
         var consumer=buffers.getBuffer(Sheets.cutoutBlockSheet());
         float progress=vessel.ritual.collapseProgress(partial);
         if(progress<=0) {
-            mc.getItemRenderer().renderModelLists(model,ItemStack.EMPTY,light,overlay,pose,consumer);
+            com.mcmagic.omnira.client.renderer.StaticModelQuads.draw(model,pose,consumer,light,overlay);
             return;
         }
         var random=RandomSource.create(42);

@@ -2,23 +2,65 @@
   "omnira:chests/topological_labyrinth": {
     "type": "minecraft:chest",
     "pools": [
-      {"rolls": 1, "entries": [
-        {"type": "minecraft:loot_table", "value": "omnira:chests/calibration_materials"},
-        {"type": "minecraft:loot_table", "value": "omnira:chests/calibration_supplies"}
-      ]},
-      {"rolls": 1, "conditions": [{"condition": "minecraft:random_chance", "chance": 0.2}],
-       "entries": [{"type": "minecraft:item", "name": "omnira:mapping_stability_compass"}]}
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:loot_table",
+            "value": "omnira:chests/calibration_materials"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "value": "omnira:chests/calibration_supplies"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.2
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:mapping_stability_compass"
+          }
+        ]
+      }
     ]
   },
   "omnira:archaeology/topological_labyrinth": {
     "type": "minecraft:archaeology",
-    "pools": [{"rolls": 1, "entries": [
-      {"type": "minecraft:loot_table", "value": "omnira:archaeology/epoch_0"},
-      {"type": "minecraft:loot_table", "value": "omnira:archaeology/epoch_1"},
-      {"type": "minecraft:loot_table", "value": "omnira:archaeology/epoch_2"},
-      {"type": "minecraft:loot_table", "value": "omnira:archaeology/epoch_3"},
-      {"type": "minecraft:loot_table", "value": "omnira:archaeology/epoch_4"}
-    ]}]
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:loot_table",
+            "value": "omnira:archaeology/epoch_0"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "value": "omnira:archaeology/epoch_1"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "value": "omnira:archaeology/epoch_2"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "value": "omnira:archaeology/epoch_3"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "value": "omnira:archaeology/epoch_4"
+          }
+        ]
+      }
+    ]
   },
   "omnira:chests/apprentice_hut": {
     "type": "minecraft:chest",
@@ -1289,6 +1331,27 @@
           {
             "type": "minecraft:item",
             "name": "omnira:dream_spell_core"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.05
+          },
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "biomes": "omnira:void_starsea"
+            }
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:rain_soaked_suitcase"
           }
         ]
       }
@@ -2891,6 +2954,21 @@
             "weight": 1
           }
         ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.05
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:rain_soaked_suitcase"
+          }
+        ]
       }
     ]
   },
@@ -2994,6 +3072,21 @@
           {
             "type": "minecraft:item",
             "name": "omnira:spatial_remnant"
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.05
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:rain_soaked_suitcase"
           }
         ]
       }
@@ -3209,6 +3302,21 @@
             "name": "omnira:voyager_violin"
           }
         ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.05
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:rain_soaked_suitcase"
+          }
+        ]
       }
     ]
   },
@@ -3291,6 +3399,21 @@
             ]
           }
         ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.05
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:rain_soaked_suitcase"
+          }
+        ]
       }
     ]
   },
@@ -3360,7 +3483,9 @@
                 "conditions": [
                   {
                     "condition": "minecraft:location_check",
-                    "predicate": { "biomes": "omnira:dislocated_geodes" }
+                    "predicate": {
+                      "biomes": "omnira:dislocated_geodes"
+                    }
                   }
                 ]
               },
@@ -3388,6 +3513,105 @@
                 }
               }
             ]
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.05
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:rain_soaked_suitcase"
+          }
+        ]
+      }
+    ]
+  },
+  "omnira:chests/skyreach_supplies": {
+    "type": "minecraft:chest",
+    "pools": [
+      {
+        "rolls": {
+          "type": "minecraft:uniform",
+          "min": 4,
+          "max": 6
+        },
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:spatial_crystal_shard",
+            "weight": 8,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 3,
+                  "max": 8
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:infused_spiritual_crystal",
+            "weight": 5,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:arcane_dust",
+            "weight": 4,
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "min": 3,
+                  "max": 6
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_microcore",
+            "weight": 1
+          },
+          {
+            "type": "minecraft:item",
+            "name": "omnira:space_warp_point",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "rolls": 1,
+        "conditions": [
+          {
+            "condition": "minecraft:random_chance",
+            "chance": 0.05
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "omnira:rain_soaked_suitcase"
           }
         ]
       }

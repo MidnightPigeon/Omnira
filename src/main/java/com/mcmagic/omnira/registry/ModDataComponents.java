@@ -11,6 +11,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModDataComponents {
     public static final DeferredRegister.DataComponents DATA_COMPONENTS =
             DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Omnira.MOD_ID);
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<java.util.UUID>> ARCANIST_CARRIER=
+            DATA_COMPONENTS.registerComponentType("arcanist_carrier",b->b.persistent(net.minecraft.core.UUIDUtil.CODEC));
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<Long>> SUITCASE_OPEN_UNTIL=
+            DATA_COMPONENTS.registerComponentType("suitcase_open_until",b->b.persistent(com.mojang.serialization.Codec.LONG));
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Integer>> AGGREGATE_TICKS=
             DATA_COMPONENTS.registerComponentType("aggregate_ticks",b->b.persistent(com.mojang.serialization.Codec.intRange(0,9)));
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Long>> AGGREGATE_REPAIRED_AT=

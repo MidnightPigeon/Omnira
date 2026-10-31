@@ -23,7 +23,7 @@ public final class EpochalGameTests {
         var cow=EntityType.COW.create(level);cow.moveTo(p.getCenter());
         var item=new ItemEntity(level,p.getX(),p.getY(),p.getZ(),new ItemStack(Items.STICK));
         h.assertTrue(!StilledTime.stopped(cow),"Living entities must remain active");
-        h.assertTrue(StilledTime.stopped(item),"Dropped items must freeze");
+        h.assertTrue(!StilledTime.stopped(item),"Dropped items must not fully freeze");
         h.assertTrue(StilledTime.stopped(level,p),"Block time must stop");h.succeed();
     }
     @GameTest(template="spell_arena")

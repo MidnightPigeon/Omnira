@@ -90,7 +90,9 @@ public final class InfusedGrimoireItem extends Item {
             if(!com.mcmagic.omnira.combat.OmniraDamage.payHealth(player,healthCost,"knowledge_extraction"))return InteractionResultHolder.success(stack);
         }
         var projectile=SpellEntity.spawn(server,player,SpellEntity.Kind.PROJECTILE,player.getEyePosition());
-        projectile.configure(com.mcmagic.omnira.fate.FateEffects.spellPower(player,CastAttributes.power(player,0)),10);
+        projectile.configure(com.mcmagic.omnira.fate.FateEffects.spellPower(player,CastAttributes.power(player,0)
+                +com.mcmagic.omnira.fate.ArcanistFate.bonus(player,stack)),10);
+        com.mcmagic.omnira.fate.ArcanistFate.completed(player,stack);
         projectile.speedMultiplier(speed);
         projectile.setSpellColor(healthCost>0?0xF1A9B2:kind==Kind.SANCTIFIED?mana.color():0xA9DBF4);
         projectile.knowledgeShock(healthCost>0,kind==Kind.CORRUPTED);

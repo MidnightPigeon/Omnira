@@ -1,0 +1,15 @@
+{
+  "id": "rain_soaked_suitcase_relic",
+  "title": "Rain-soaked Suitcase",
+  "item": "omnira:rain_soaked_suitcase",
+  "recipes": false,
+  "text": [
+    "This suitcase can be found in treasure crystal balls across the spatial biomes."
+  ],
+  "links": [
+    {
+      "target": "rain_soaked_suitcase",
+      "label": "Function Guide"
+    }
+  ]
+}

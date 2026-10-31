@@ -3,14 +3,30 @@
   "item": "omnira:modular_staff",
   "title": "Staff Modifier Effects",
   "text": [
-    "Each installed modifier applies once to spells cast by that staff, without changing crystals in the grid or adding per-cast mana cost. Iron improves damage or effect level; clocks delay instant effects and extend existing delays; light microcores add holy magic; spiritual crystals add infusion.",
-    "The rules match spell writing, combining modifiers before resolving effects. Holy magic does not multiply repeatedly, and repeated infusion does not duplicate bonus saturation or resistance. Dissociation, construction and dark breath retain their own modifier rules."
+    "Each installed modifier applies once when the staff casts, without changing grid crystals or increasing per-cast mana cost. Its effects match the same modifier written into a spell crystal.",
+    "Modifiers combine before effects resolve. Holy magic does not multiply repeatedly; repeated Infusion does not duplicate bonus Saturation or Resistance. Dissociation, Construction and Dark Breath retain their own modifier rules."
   ],
   "recipes": false,
   "links": [
     {
       "target": "staff_enhancement_crafting",
       "label": "Installation"
+    },
+    {
+      "target": "modifier_enhancement",
+      "label": "Amplification Star"
+    },
+    {
+      "target": "modifier_delay",
+      "label": "Lingering Thread"
+    },
+    {
+      "target": "holy",
+      "label": "Holy Halo"
+    },
+    {
+      "target": "modifier_infusion",
+      "label": "Infusion Bud"
     }
   ]
 }

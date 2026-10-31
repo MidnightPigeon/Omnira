@@ -1,19 +1,16 @@
 {
   "id": "damaged_research_facility_guide",
-  "title": "Damaged Research Facility",
+  "title": "Damaged Research Apparatus",
   "item": "omnira:damaged_research_facility",
   "text": [
-    "Regional loot comes only from the Umbrella archaeology layer of Epochal Cliffs. Damaged research apparatus cannot be placed. Craft it with a time warp point, or store it in Reversion Mire until the next reversal, to repair it."
+    "Found in the Umbrella Corporation archaeological layers of Epochal Cliffs. It cannot be placed.",
+    "Craft it with a Time Warp Point to obtain a Repaired Mechanical Component, or store it in a container in Reversal Wetland until the next reversal begins."
   ],
   "recipes": false,
   "links": [
     {
-      "target": "epochal_cliffs",
-      "label": "Epochal Cliffs"
-    },
-    {
-      "target": "spacetime_reverser",
-      "label": "Spacetime Reverser"
+      "target": "repaired_mechanical_component",
+      "label": "Repaired Mechanical Component"
     }
   ]
 }

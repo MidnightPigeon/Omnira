@@ -13,6 +13,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModBlocks {
     public static final net.minecraft.resources.ResourceLocation RESONANCE_CORE_ID=net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","resonance_core");
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Omnira.MOD_ID);
+    public static final DeferredBlock<Block> RAIN_SOAKED_SUITCASE=BLOCKS.register("rain_soaked_suitcase",()->
+            new com.mcmagic.omnira.fate.SuitcaseBlock(BlockBehaviour.Properties.of().strength(.5F).sound(SoundType.WOOD).noOcclusion()));
     public static final DeferredBlock<Block> SPACETIME_PORT=BLOCKS.register("spacetime_port",()->{
         var p=BlockBehaviour.Properties.of().strength(.5F).sound(SoundType.AMETHYST).noOcclusion();
         return net.neoforged.fml.ModList.get().isLoaded("create")?com.mcmagic.omnira.compat.CreateSpacetimePort.block(p):new com.mcmagic.omnira.space.SpacetimePortBlock(p);

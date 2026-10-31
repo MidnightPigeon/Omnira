@@ -23,7 +23,8 @@ public final class StarlightRenderer implements BlockEntityRenderer<StarlightEnt
             p.mulPose(Axis.YP.rotationDegrees((float)(t*.5)));p.translate(-.5,-.5,-.5);
         }
         var mc=Minecraft.getInstance();
-        StaticModelQuads.draw(mc.getModelManager().getModel(source?MODEL:DUST),p,b.getBuffer(CrystalGlassLayer.ATLAS),LightTexture.FULL_BRIGHT,overlay);
+        if(source)StaticModelQuads.draw(mc.getModelManager().getModel(MODEL),p,b.getBuffer(CrystalGlassLayer.ATLAS),LightTexture.FULL_BRIGHT,overlay);
+        else PreparedStaticMesh.draw(mc.getModelManager().getModel(DUST),p,b.getBuffer(CrystalGlassLayer.ATLAS),overlay);
         if(source)p.popPose();
     }
 }

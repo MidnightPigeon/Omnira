@@ -46,8 +46,9 @@ public final class GuideContactGameTests {
         for(var language:List.of("zh_cn","en_us")){
             var book=GuideContents.fromJson(GuidanceGameTests.guide(language));
             var sources=book.destination("item_sources").orElseThrow().chapter().introduction().sources();
-            h.assertTrue(sources.size()==20,"Series were not consolidated");
+            h.assertTrue(!sources.isEmpty()&&sources.stream().map(GuideContents.Source::icon).distinct().count()==sources.size(),"Source catalogue is empty or repeats a series");
             for(var source:sources){
+                h.assertTrue(!source.name().isBlank()&&!source.origin().isBlank(),"Source attribution is incomplete");
                 h.assertTrue(net.minecraft.core.registries.BuiltInRegistries.ITEM.containsKey(net.minecraft.resources.ResourceLocation.parse(source.icon())),"Unregistered source icon: "+source.icon());
                 if(expected.containsKey(source.icon())&&language.equals("zh_cn"))
                     h.assertTrue(source.origin().equals(expected.get(source.icon()))&&source.name().endsWith("聚合体及相关衍生物"),"Aggregate attribution or concise naming changed");

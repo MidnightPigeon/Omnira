@@ -17,7 +17,7 @@ public final class ViolinClient {
     public static boolean active(Player p){return PLAYING.containsKey(p.getUUID())&&VoyagerPerformance.eligible(p);}
     public static void receive(ViolinPayload payload){
         var previous=PLAYING.remove(payload.player());if(previous!=null)previous.finish();
-        if(payload.track()<0||payload.track()>1)return;
+        if(payload.track()<0||payload.track()>=ViolinTracks.size())return;
         var sound=new PerformanceSound(payload.player(),payload.track());PLAYING.put(payload.player(),sound);
         Minecraft.getInstance().getSoundManager().play(sound);
     }
@@ -32,7 +32,7 @@ public final class ViolinClient {
         private final net.minecraft.client.multiplayer.ClientLevel world=Minecraft.getInstance().level;
         private int age;
         PerformanceSound(UUID id,int track){
-            super(track==0?ModSounds.VIOLIN_ALLEMANDA.get():ModSounds.VIOLIN_ADAGIO.get(),SoundSource.RECORDS,RandomSource.create());
+            super(ViolinTracks.sound(track),SoundSource.RECORDS,RandomSource.create());
             player=id;volume=1;pitch=1;looping=false;
             var p=world==null?null:world.getPlayerByUUID(id);if(p!=null){x=p.getX();y=p.getEyeY();z=p.getZ();}
         }

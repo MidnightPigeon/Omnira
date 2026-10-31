@@ -29,7 +29,7 @@ public final class SpacetimePortClient {
         },ModItems.SPACETIME_PORT.get());
     }
     private static void draw(String id,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
-        var mc=Minecraft.getInstance();mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(model(id)),ItemStack.EMPTY,light,overlay,pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
+        var mc=Minecraft.getInstance();com.mcmagic.omnira.client.renderer.StaticModelQuads.draw(mc.getModelManager().getModel(model(id)),pose,buffers.getBuffer(CrystalGlassLayer.ATLAS),light,overlay);
     }
     private static Vec3 marker(SpacetimePortState p){return Vec3.atCenterOf(p.host.getBlockPos()).add(Vec3.atLowerCornerOf(p.face().getNormal()).scale(-3.0/16));}
     private static void quad(VertexConsumer out,PoseStack pose,Vec3 a,Vec3 b,Vec3 c,Vec3 d,int color){

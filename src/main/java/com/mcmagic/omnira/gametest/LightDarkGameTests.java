@@ -10,14 +10,36 @@ import net.neoforged.neoforge.gametest.*;
 
 @GameTestHolder("omnira_light_dark") @PrefixGameTestTemplate(false)
 public final class LightDarkGameTests {
+    @GameTest(template="spell_arena") public static void condensedMaterialsReplaceMicrocores(GameTestHelper h) {
+        var slots=new net.minecraft.world.SimpleContainer(9);
+        slots.setItem(0,new ItemStack(ModItems.AIR_MICROCORE.get()));slots.setItem(1,new ItemStack(ModItems.AIR_MICROCORE.get()));
+        slots.setItem(2,new ItemStack(ModItems.LIGHT_MICROCORE.get()));slots.setItem(4,new ItemStack(ModItems.DARK_MICROCORE.get()));
+        var old=SpellPayload.of(com.mcmagic.omnira.menu.CrystalProcessingTableMenu.previewCrystal(slots));
+        h.assertTrue(old.effects().isEmpty()&&!old.keywords().contains("holy"),"Raw microcores still write spell effects");
+        h.assertTrue(!com.mcmagic.omnira.menu.CrystalProcessingTableMenu.mayPlace(4,slots.getItem(4)),"Raw dark microcore accepted as element");
+        h.assertTrue(com.mcmagic.omnira.item.staff.StaffEnhancements.keyword(slots.getItem(2)).isEmpty(),"Raw light microcore remains a staff modifier");
+        slots.setItem(2,new ItemStack(ModItems.HOLY_HALO.get()));slots.setItem(4,new ItemStack(ModItems.LIFE_DRAIN_ORIGIN.get()));
+        var crystal=com.mcmagic.omnira.menu.CrystalProcessingTableMenu.previewCrystal(slots);
+        var materials=com.mcmagic.omnira.guidance.UniversalUnderstanding.materials(crystal);
+        h.assertTrue(materials.stream().anyMatch(s->s.is(ModItems.HOLY_HALO.get()))&&materials.stream().anyMatch(s->s.is(ModItems.LIFE_DRAIN_ORIGIN.get())),"Disassembly did not return new materials");
+        for(var pair:java.util.List.of(new Item[]{ModItems.LIGHT_MICROCORE.get(),ModItems.HOLY_HALO.get()},new Item[]{ModItems.DARK_MICROCORE.get(),ModItems.LIFE_DRAIN_ORIGIN.get()},new Item[]{Items.IRON_BLOCK,ModItems.AMPLIFICATION_STAR.get()},new Item[]{Items.CLOCK,ModItems.LINGERING_THREAD.get()},new Item[]{com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get(),ModItems.MINIATURE_WORLD.get()})) {
+            var matches=h.getLevel().getRecipeManager().getRecipes().stream().map(r->r.value())
+                    .filter(r->r instanceof com.mcmagic.omnira.recipe.CondensationRecipe)
+                    .map(r->(com.mcmagic.omnira.recipe.CondensationRecipe)r)
+                    .filter(r->r.matches(new net.minecraft.world.item.crafting.SingleRecipeInput(new ItemStack(pair[0])),h.getLevel())).toList();
+            h.assertTrue(matches.size()==1,"Conflicting microcore condensation recipes");
+            var recipe=matches.getFirst();h.assertTrue(recipe.advanced()&&recipe.manaCost()==300&&recipe.result().is(pair[1])&&recipe.result().getCount()==1,"Incorrect condensation tier, cost or output");
+        }
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void microcoresComposeWithoutChangingTargets(GameTestHelper h) {
         var slots=new net.minecraft.world.SimpleContainer(9);
         slots.setItem(0,new ItemStack(ModItems.AIR_MICROCORE.get()));slots.setItem(1,new ItemStack(ModItems.AIR_MICROCORE.get()));
-        slots.setItem(2,new ItemStack(ModItems.LIGHT_MICROCORE.get()));slots.setItem(3,new ItemStack(Items.IRON_BLOCK));slots.setItem(4,new ItemStack(ModItems.DARK_MICROCORE.get()));
+        slots.setItem(2,new ItemStack(ModItems.HOLY_HALO.get()));slots.setItem(3,new ItemStack(ModItems.AMPLIFICATION_STAR.get()));slots.setItem(4,new ItemStack(ModItems.LIFE_DRAIN_ORIGIN.get()));
         var crystal=com.mcmagic.omnira.menu.CrystalProcessingTableMenu.previewCrystal(slots);var payload=SpellPayload.of(crystal);
         h.assertTrue(payload.baseCost()==50 && payload.keywords().containsAll(java.util.List.of("holy","dark_breath","enhancement")),"New components missing");
         h.assertTrue(payload.effects().getFirst().darkness() && payload.effects().getFirst().enhancement()==1,"Dark enhancement not composed");
-        h.assertTrue(com.mcmagic.omnira.menu.CrystalProcessingTableMenu.mayPlace(4,new ItemStack(ModItems.DARK_MICROCORE.get())),"Dark element tag missing");
+        h.assertTrue(com.mcmagic.omnira.menu.CrystalProcessingTableMenu.mayPlace(4,new ItemStack(ModItems.LIFE_DRAIN_ORIGIN.get())),"Dark element tag missing");
         h.assertTrue(SpellPattern.fromMicrocores(new ItemStack(ModItems.LIGHT_MICROCORE.get()),new ItemStack(ModItems.AIR_MICROCORE.get())).isEmpty(),"Light incorrectly opened a target tier");h.succeed();
     }
     @GameTest(template="spell_arena") public static void holyCloudActualLifeStealAndSelfDamage(GameTestHelper h) {

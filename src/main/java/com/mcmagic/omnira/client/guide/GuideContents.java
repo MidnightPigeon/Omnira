@@ -29,7 +29,10 @@ public record GuideContents(String title,Introduction introduction,List<Chapter>
         public String icon(){return entry!=null?entry.icon():chapter.icon();}
     }
     public record Link(String target,String label) {}
-    public record Entry(String id,String item,String icon,String title,List<String> text,boolean recipes,String scene,List<Link> links,List<GuideFigure> figures) {
+    public record Entry(String id,String item,String icon,String title,List<String> text,boolean recipes,String scene,List<Link> links,List<GuideFigure> figures,List<String> relatedItems) {
+        public Entry(String id,String item,String icon,String title,List<String> text,boolean recipes,String scene,List<Link> links,List<GuideFigure> figures){
+            this(id,item,icon,title,text,recipes,scene,links,figures,List.of());
+        }
         public Entry(String id,String item,String title,List<String> text,boolean recipes,String scene,List<Link> links,List<GuideFigure> figures){
             this(id,item,item,title,text,recipes,scene,links,figures);
         }
@@ -64,7 +67,7 @@ public record GuideContents(String title,Introduction introduction,List<Chapter>
             for(var row:chapter.directory()) {
                 if(row.entry()!=null) {
                     var entry=row.entry();
-                    if(entry.id().equals(id)||entry.item().equals(item))return Optional.of(new Destination(List.copyOf(path),entry));
+                    if(entry.id().equals(id)||entry.item().equals(item)||item!=null&&entry.relatedItems().contains(item))return Optional.of(new Destination(List.copyOf(path),entry));
                 }else{
                     var child=locate(List.of(row.chapter()),path,id,item);
                     if(child.isPresent())return child;
@@ -100,7 +103,7 @@ public record GuideContents(String title,Introduction introduction,List<Chapter>
             }
             entries.add(new Entry(entry.get("id").getAsString(),entry.get("item").getAsString(),
                     entry.has("icon")?entry.get("icon").getAsString():entry.get("item").getAsString(),
-                    entry.get("title").getAsString(),List.copyOf(text),!entry.has("recipes") || entry.get("recipes").getAsBoolean(),entry.has("scene")?entry.get("scene").getAsString():"",List.copyOf(links),GuideFigure.read(entry.getAsJsonArray("figures"))));
+                    entry.get("title").getAsString(),List.copyOf(text),!entry.has("recipes") || entry.get("recipes").getAsBoolean(),entry.has("scene")?entry.get("scene").getAsString():"",List.copyOf(links),GuideFigure.read(entry.getAsJsonArray("figures")),entry.has("related_items")?entry.getAsJsonArray("related_items").asList().stream().map(JsonElement::getAsString).toList():List.of()));
         }
         var children=new ArrayList<Chapter>();
         if(chapter.has("chapters")) for(var child:chapter.getAsJsonArray("chapters")) children.add(chapter(child.getAsJsonObject()));

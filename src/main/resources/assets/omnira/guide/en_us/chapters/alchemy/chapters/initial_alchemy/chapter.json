@@ -6,7 +6,9 @@
   "entries": [
     "entries/rough_alchemy_cauldron.json",
     "entries/primitive_reaction_cauldron.json",
-    "entries/microcore_conversion.json"
+    "entries/microcore_conversion.json",
+    "entries/rough_alchemical_energy_core.json",
+    "entries/alchemical_catalysis_chamber.json"
   ],
   "chapters": []
 }

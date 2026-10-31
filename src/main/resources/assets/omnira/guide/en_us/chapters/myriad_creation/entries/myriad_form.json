@@ -5,7 +5,7 @@
   "text": [
     "Select Form, choose Sphere, Inscribed Cube or Plane, then solid or hollow. Insert one block or item; ordinary items and complete multiblock machines appear as drops. Leave the slot empty to clear blocks at selected positions without consuming materials.",
     "A plane may be parallel to YZ, XZ or XY. Spheres use the current radius; cubes fit completely inside that sphere. Hollow spheres have a single boundary, hollow cubes retain all six faces rather than a frame, and hollow planes have two-block-wide rings whose outer radius follows power.",
-    "Only selected shape positions are overwritten; hollow interiors remain untouched. Selected positions can replace unbreakable blocks, containers and inventories without refunds. Gravity, liquids and machines behave normally after placement."
+    "Only selected shape positions are overwritten, including unbreakable blocks; hollow interiors remain untouched. Gravity, liquids and machines behave normally after placement."
   ],
   "scene": "codex_form",
   "recipes": false,

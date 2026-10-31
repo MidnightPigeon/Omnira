@@ -4,7 +4,7 @@
   "title": "Resonance Crystal",
   "text": [
     "Resonance Crystals are a foundation of logistics equipment. Craft one from a Spiritual Crystal and eight Arcane Dust; other devices and rituals also use them.",
-    "Alternatively, react 1 Spiritual Crystal into 1 Resonance Crystal over a Resonance Core. No fluid is needed; the base reaction time is 100 seconds and the catalyst is preserved."
+    "Alternatively, each reaction over a Resonance Core converts one Spiritual Crystal into one Resonance Crystal. No fluid is needed."
   ],
   "recipes": true,
   "links": [
@@ -27,6 +27,10 @@
     {
       "target": "shadow_lantern",
       "label": "Shadow Lantern"
+    },
+    {
+      "target": "primitive_reaction_cauldron",
+      "label": "Primitive Reaction Cauldron"
     }
   ]
 }

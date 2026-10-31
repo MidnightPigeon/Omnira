@@ -1,6 +1,32 @@
 {
   "type": "omnira:assembly",
   "operation": "fixed",
-  "slots": [{"item":"minecraft:diamond"},{"item":"minecraft:diamond"},{"item":"minecraft:diamond"},{"item":"minecraft:diamond"},{"item":"minecraft:diamond"},{"item":"minecraft:diamond"},{"item":"minecraft:amethyst_block"}],
-  "result": {"id":"omnira:wide_area_rune","count":1}
+  "slots": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:amethyst_block"
+    }
+  ],
+  "result": {
+    "id": "omnira:wide_area_rune",
+    "count": 1
+  },
+  "outer_shapeless": true
 }

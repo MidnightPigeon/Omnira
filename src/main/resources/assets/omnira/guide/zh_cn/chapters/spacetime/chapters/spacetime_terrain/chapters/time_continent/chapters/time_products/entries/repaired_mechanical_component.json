@@ -1,0 +1,19 @@
+{
+  "id": "repaired_mechanical_component",
+  "item": "omnira:repaired_mechanical_component",
+  "title": "修复的机械部件",
+  "text": [
+    "由损坏的科研设施修复而来，可用于制作虚空侵染仪。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "damaged_research_facility_guide",
+      "label": "损坏的科研设施"
+    },
+    {
+      "target": "void_infuser",
+      "label": "虚空侵染仪"
+    }
+  ]
+}

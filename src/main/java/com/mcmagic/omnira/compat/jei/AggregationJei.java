@@ -41,7 +41,7 @@ public final class AggregationJei implements IModPlugin {
                     float scale=Math.min(1,144F/font.width(text));g.pose().pushPose();g.pose().translate(8,68+i*13,0);g.pose().scale(scale,scale,1);
                     g.drawString(font,text,0,0,0x404040,false);g.pose().popPose();
                 }
-                g.fill(101,31,122,33,0xFF8DB6BB);
+                com.mcmagic.omnira.client.screen.PixelUiIcons.arrow(g::fill,101,32,21,0xFF8DB6BB);
             }
         });
     }

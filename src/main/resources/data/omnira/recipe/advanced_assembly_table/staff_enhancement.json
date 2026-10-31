@@ -2,11 +2,11 @@
   "type": "omnira:advanced_assembly_table",
   "operation": "staff_enhancement",
   "slots": [
-    {"item": "minecraft:iron_block"}, {"item": "minecraft:iron_block"},
-    {"item": "minecraft:iron_block"}, {"item": "minecraft:iron_block"},
-    {"item": "minecraft:iron_block"}, {"item": "minecraft:iron_block"},
-    {"item": "minecraft:iron_block"}, {"item": "omnira:modular_staff"},
-    {"item": "minecraft:iron_block"}
+    {"item": "omnira:amplification_star"}, {"item": "omnira:amplification_star"},
+    {"item": "omnira:amplification_star"}, {"item": "omnira:amplification_star"},
+    {"item": "omnira:amplification_star"}, {"item": "omnira:amplification_star"},
+    {"item": "omnira:amplification_star"}, {"item": "omnira:modular_staff"},
+    {"item": "omnira:amplification_star"}
   ],
   "result": {"id": "omnira:modular_staff", "count": 1}
 }

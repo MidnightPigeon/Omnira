@@ -6,7 +6,7 @@
   "text": [
     "Assemble a Resonance Crystal with six Paradox Dust. Select two container nodes within 32 blocks. White particle rings send to black rings, preserving the nodes' original colors and terminal bindings.",
     "After selecting the first end, use air or another block to cancel. Use either linked node to disconnect the whole transfer link. Holding the rod reveals lines; no mana is required.",
-    "Base transfer is 4 items or 2000 mB per second, increased by the sending container's Speed Upgrade; receiving is unthrottled. Accepted contents are selected in slot order. Resonance, Intake/Output and external extraction have independent allowances. Intake/Output filters do not affect ordinary tuning links.",
+    "Transfers at the sending container's logistics limit, increased by its Speed Upgrade; receiving is unthrottled. Accepted contents are selected in slot order with an independent allowance. Intake and Output filters do not affect tuning links.",
     "Both ends must use separate storage. A complete large container supports one tuning output; other nodes may receive or bind terminals. If linked resonant orbs successfully join one network, the link is removed and will not return after splitting.",
     "A durability-free weapon with 4 attack damage and 2 attack speed, supporting sword and axe combat enchantments. Use mature crops to harvest; crops normally destroyed by harvesting restart growth. Coffee, shadow berries, sweet berries and cave berries support Fortune.",
     "Pumpkin and melon harvests break the fruit without resetting stems. Without Silk Touch, melons drop slices unaffected by Fortune; Silk Touch yields the whole melon."
@@ -15,6 +15,10 @@
     {
       "target": "resonance_core",
       "label": "Resonance Nodes"
+    },
+    {
+      "target": "crystal_logistics",
+      "label": "Logistics"
     }
   ],
   "figures": [

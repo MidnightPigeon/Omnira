@@ -30,8 +30,8 @@ public final class TimeWarpPointBlock extends BaseEntityBlock {
     @Override protected RenderShape getRenderShape(BlockState state){return RenderShape.MODEL;}
     @Override public BlockEntity newBlockEntity(BlockPos pos,BlockState state){return new TimeWarpPointBlockEntity(pos,state);}
     @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level,BlockState state,BlockEntityType<T> type){
-        return level.isClientSide?null:(world,pos,current,entity)->{
-            if(entity instanceof TimeWarpPointBlockEntity warp)warp.serverTick();
+        return (world,pos,current,entity)->{
+            if(entity instanceof TimeWarpPointBlockEntity warp)warp.tickExposure();
         };
     }
     @Override protected VoxelShape getShape(BlockState state,BlockGetter level,BlockPos pos,CollisionContext context){return SHAPE;}

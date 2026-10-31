@@ -103,7 +103,7 @@ public final class CrystalUtilityScreen extends ResponsiveContainerScreen<Crysta
             g.fill(x+1,y+1,x+1+fill,y+BAR_HEIGHT-1,menu.index==2?0xFF87C8B0:0xFF8ACBDD);
         }
         if(menu.index==4){
-            int x=leftPos+176;g.fill(x,topPos,x+122,topPos+80,0xFF373737);g.fill(x+1,topPos+1,x+121,topPos+79,0xFFFFFFFF);g.fill(x+3,topPos+3,x+119,topPos+77,0xFFC6C6C6);
+            int x=leftPos+176;g.fill(x+3,topPos+3,x+119,topPos+77,0xFFC6C6C6);CrystalProcessingTableScreen.renderVanillaFrame(g,x,topPos,122,80);
             CrystalUi.title(g,font,Component.translatable("gui.omnira.workstation.enchantments"),x+61,topPos+6,110,0xFF404040);
             if(menu.getSlot(0).hasItem()&&menu.getSlot(1).hasItem()){
                 CrystalUi.title(g,font,Component.translatable("gui.omnira.workstation.unavailable"),x+61,topPos+40,110,0xFF606060);

@@ -60,8 +60,8 @@ public final class ArcaneArquebusItem extends Item {
         double cost=manaCost(player,gun,payload);
         var mana=player.getData(ModAttachments.MANA);
         if(!mana.canSpend(cost)) {player.displayClientMessage(Component.translatable("message.omnira.mana.insufficient"),true);return false;}
-        if(!SpellCasting.castArquebus(player,crystal.get(ModDataComponents.SPELL_PATTERN),payload,
-                CastAttributes.power(player,ArquebusPlugin.of(gun).powerBonus),ArquebusPlugin.of(gun))) {
+        if(!com.mcmagic.omnira.fate.ArcanistFate.cast(player,gun,bonus->SpellCasting.castArquebus(player,crystal.get(ModDataComponents.SPELL_PATTERN),payload,
+                CastAttributes.power(player,ArquebusPlugin.of(gun).powerBonus)+bonus,ArquebusPlugin.of(gun)))) {
             player.displayClientMessage(Component.translatable("message.omnira.crystal.invalid_target"),true);return false;
         }
         player.setData(ModAttachments.MANA,mana.spend(cost));

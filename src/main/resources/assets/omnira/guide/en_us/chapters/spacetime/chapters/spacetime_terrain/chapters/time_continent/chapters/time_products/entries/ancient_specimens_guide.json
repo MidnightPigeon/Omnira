@@ -5,7 +5,8 @@
   "text": [
     "Suspicious sand in the ancient Earth layer contains unknown organism fossils and eggs. The reverser recalls a fossil as a tyrannosaur, mosasaur or pterosaur remnant with equal chances; condensation yields its essence. Unknown eggs become dormant organism eggs or spirit seeds; advanced condensation restores their vitality.",
     "Use an active spirit seed to summon a translucent Archaeopteryx Spirit, or an active organism egg to summon a Velociraptor. This is their only source. They are immediately tamed to you and follow you. The spirit has 16 health and deals 6 base damage with a flying charge; the raptor has 20 health and deals 6 base damage with a melee bite. Both recover half their maximum health every minute.",
-    "Sneak-use your companion to switch between following and staying. Use your raptor to ride without a saddle, steer and jump; sneak to dismount. Both are time creatures, immune to Decayed Timeflow's wither and slowdown, Reversion Mire's rewind and Eventide Ruins' life-ending cycle."
+    "Sneak-use your companion to switch between following and staying. Use your raptor to ride without a saddle, steer and jump; sneak to dismount. Both are time creatures, immune to Decayed Timeflow's wither and slowdown, Reversion Mire's rewind and Eventide Ruins' life-ending cycle.",
+    "Archaeopteryx Spirits drop 2–4 Time Warp Points. Velociraptors drop 1–2 Time Warp Points, 2–4 bones and 2–4 rotten flesh."
   ],
   "recipes": false,
   "links": [
@@ -25,5 +26,15 @@
       "target": "advanced_condensation_table",
       "label": "Advanced Condensation Table"
     }
+  ],
+  "related_items": [
+    "omnira:unknown_egg",
+    "omnira:tyrannosaurus_remains",
+    "omnira:mosasaurus_remains",
+    "omnira:pterosaur_remains",
+    "omnira:inactive_creature_egg",
+    "omnira:creature_egg",
+    "omnira:inactive_spirit_seed",
+    "omnira:spirit_seed"
   ]
 }

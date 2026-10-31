@@ -1,0 +1,10 @@
+{
+  "id": "abandoned_wizard_tower",
+  "item": "omnira:shadow_rock_stairs",
+  "title": "Silent Wizard Tower",
+  "text": [
+    "An octagonal stone tower crowned with a Shadow Rock roof. Interior ladders connect its research floors and attic; the equipment and stores left behind reward a careful search.",
+    "Material orbs may yield Arcane Dust, Spiritual Crystals and the four primary Microcores. Research stores may also hold Spell Ink, Resonance Crystals, an Infused Crystal Pickaxe, an Elemental Crystal Grid or a Primordial Spell Core."
+  ],
+  "recipes": false
+}

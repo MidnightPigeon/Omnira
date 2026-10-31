@@ -15,6 +15,16 @@ import net.neoforged.neoforge.gametest.*;
 
 @GameTestHolder("omnira_violin") @PrefixGameTestTemplate(false)
 public final class VoyagerViolinGameTests {
+    @GameTest(template="spell_arena") public static void stopDoesNotResetDrawPool(GameTestHelper h){
+        var p=player(h);var seen=new java.util.HashSet<Integer>();
+        try{
+            for(int i=0;i<ViolinTracks.size();i++){
+                VoyagerPerformance.toggle(p);int track=p.getPersistentData().getCompound("OmniraViolinBag").getInt("Last");
+                h.assertTrue(seen.add(track),"Stop restarted the violin pool");VoyagerPerformance.stop(p);
+            }
+            VoyagerPerformance.toggle(p);h.assertTrue(p.getPersistentData().getCompound("OmniraViolinBag").getIntArray("Remaining").length==ViolinTracks.size()-1,"Exhausted pool not refilled");
+        }finally{VoyagerPerformance.stop(p);}h.succeed();
+    }
     private static Player player(GameTestHelper h){
         var p=h.makeMockPlayer(GameType.SURVIVAL);p.setPos(h.absolutePos(new BlockPos(4,3,4)).getCenter());
         p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(ModItems.VOYAGER_VIOLIN.get()));return p;

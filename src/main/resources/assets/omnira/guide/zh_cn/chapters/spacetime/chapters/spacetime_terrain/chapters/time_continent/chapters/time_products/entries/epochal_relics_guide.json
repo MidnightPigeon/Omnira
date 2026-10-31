@@ -14,5 +14,17 @@
       "target": "epochal_cliffs",
       "label": "纪元断崖"
     }
+  ],
+  "related_items": [
+    "omnira:phantom_calling_card",
+    "omnira:enhanced_phantom_calling_card",
+    "omnira:d_class_credentials",
+    "omnira:c_class_credentials",
+    "omnira:b_class_credentials",
+    "omnira:a_class_credentials",
+    "omnira:scp_714",
+    "omnira:ring_of_lust",
+    "omnira:ring_of_greed",
+    "omnira:desire_crystal"
   ]
 }

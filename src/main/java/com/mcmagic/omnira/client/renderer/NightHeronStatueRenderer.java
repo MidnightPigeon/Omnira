@@ -22,7 +22,7 @@ public final class NightHeronStatueRenderer implements BlockEntityRenderer<Night
         draw(pose,buffers,light,overlay,statue.color(),statue.getBlockState().getValue(NightHeronStatueBlock.STANDING),statue.getLevel().getGameTime()+partial,statue.stretch(partial));
         pose.popPose();
     }
-    @Override public boolean shouldRenderOffScreen(NightHeronStatueBlockEntity statue){return true;}
+    @Override public net.minecraft.world.phys.AABB getRenderBoundingBox(NightHeronStatueBlockEntity statue){return new net.minecraft.world.phys.AABB(statue.getBlockPos()).inflate(.5,0,.5).expandTowards(0,1,0);}
     public static void draw(PoseStack pose,MultiBufferSource buffers,int light,int overlay,int color,boolean standing,double time,float stretch) {
         var parts=NightHeronGeometry.parts(standing,time,stretch,color==0);
         // Finish each material pass before switching buffers. Eyes never inherit crystal alpha.

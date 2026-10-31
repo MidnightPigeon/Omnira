@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 abstract class StilledServerLevelMixin {
     @org.spongepowered.asm.mixin.Shadow private void tickPassenger(Entity mount,Entity passenger){throw new AssertionError();}
     private boolean omnira$paused(Entity entity){
-        if(!StilledTime.stopped(entity)&&!com.mcmagic.omnira.archaeology.BrushStasis.held(entity))return false;
+        if(!StilledTime.skipTick(entity)&&!com.mcmagic.omnira.archaeology.BrushStasis.held(entity))return false;
         for(var passenger:entity.getPassengers())tickPassenger(entity,passenger);
         return true;
     }
@@ -25,7 +25,7 @@ abstract class StilledServerLevelMixin {
     @Inject(method="tickBlock",at=@At("HEAD"),cancellable=true)
     private void omnira$block(BlockPos pos,Block block,CallbackInfo ci){
         var level=(ServerLevel)(Object)this;
-        if(StilledTime.stopped(level,pos)){level.scheduleTick(pos,block,20);ci.cancel();}
+        if(StilledTime.blockTickStopped(level,pos)){level.scheduleTick(pos,block,20);ci.cancel();}
     }
     @Inject(method="tickFluid",at=@At("HEAD"),cancellable=true)
     private void omnira$fluid(BlockPos pos,Fluid fluid,CallbackInfo ci){

@@ -30,20 +30,19 @@ public final class OrbUpgradeScreen extends ResponsiveContainerScreen<OrbUpgrade
             @Override protected void renderWidget(GuiGraphics g,int mouseX,int mouseY,float partial){
                 boolean lit=enabled.getAsBoolean(),hover=isHoveredOrFocused();
                 int x=getX(),y=getY(),w=getWidth(),h=getHeight();
-                g.fill(x,y,x+w,y+h,hover?0xFFE6F6F8:lit?0xFFB1CED8:0xFF688091);
-                g.fill(x+1,y+1,x+w-1,y+h-1,lit?(hover?0xFFCAE5EC:0xFFB1CED8):(hover?0xFF688091:0xFF4C606D));
-                g.fill(x+1,y+h-2,x+w-1,y+h-1,lit?0xFF8CAEBB:0xFF384650);
-                g.drawCenteredString(font,getMessage(),x+w/2,y+(h-font.lineHeight)/2,lit?0xFF263D48:0xFFE6F6F8);
+                MachinePanelArt.button(CrystalUi.pixels(g,x,y),w,h,true,hover);
+                if(lit)g.fill(x+4,y+h-4,x+w-4,y+h-3,MachinePanelArt.MINT);
+                CrystalUi.title(g,font,getMessage(),x+w/2,y+(h-font.lineHeight)/2,w-8,0xFFE6F6F8);
             }
         };
     }
     @Override protected void renderBg(GuiGraphics g,float partial,int mouseX,int mouseY) {
-        g.fill(leftPos+4,topPos+2,leftPos+172,topPos+117,0xFFAABFCB);
-        g.fill(leftPos+6,topPos+4,leftPos+170,topPos+115,0xFF384650);
+        MachinePanelArt.frame(CrystalUi.pixels(g,leftPos,topPos),4,2,168,115,MachinePanelArt.DARK);
         for(int i=0;i<(menu.speed?2:menu.recipeControl?9:3);i++) {
             int x=leftPos+(menu.speed?62+i*36:62+i%3*18),y=topPos+30+(menu.recipeControl?i/3*18:0);
             g.fill(x-1,y-1,x+17,y+17,0xFFB1CED8);
             g.fill(x,y,x+16,y+16,0xFF688091);
+            g.fill(x,y+16,x+17,y+17,MachinePanelArt.LIGHT);
         }
         g.blit(ORIGINAL,leftPos,topPos+118,0,123,176,99,176,222);
     }

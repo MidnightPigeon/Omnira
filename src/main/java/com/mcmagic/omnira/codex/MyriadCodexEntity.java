@@ -49,7 +49,7 @@ public final class MyriadCodexEntity extends BlockEntity implements MenuProvider
     public boolean placeHeart(ServerPlayer p,BlockPos pos){
         if(!validHolder(p)||!level.setBlock(pos,MyriadCodexContent.HEART.get().defaultBlockState(),3))return false;
         if(!(level.getBlockEntity(pos) instanceof WorldHeartEntity heart)){level.removeBlock(pos,false);return false;}
-        heartPos=pos.immutable();holder=null;heart.link=link();heart.diameter=diameter();heart.setChanged();
+        heartPos=pos.immutable();holder=null;heart.link=link();heart.diameter=diameter();heart.shape=mode==1?shape:0;heart.axis=axis;heart.setChanged();
         p.getMainHandItem().setCount(0);level.sendBlockUpdated(pos,heart.getBlockState(),heart.getBlockState(),2);sync();return true;
     }
     public void recall(){

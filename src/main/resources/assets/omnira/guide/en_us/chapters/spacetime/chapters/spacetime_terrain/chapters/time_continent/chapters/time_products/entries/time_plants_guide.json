@@ -41,5 +41,8 @@
       "target": "travel_waymark",
       "label": "Spacetime Waymark"
     }
+  ],
+  "related_items": [
+    "omnira:time_grass"
   ]
 }

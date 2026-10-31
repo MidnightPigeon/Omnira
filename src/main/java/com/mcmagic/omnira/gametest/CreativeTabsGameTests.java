@@ -14,7 +14,7 @@ public final class CreativeTabsGameTests {
                 ModCreativeModeTabs.Category.BUILDING,List.of("spatial_stability_anchor","dormant_spatial_stability_anchor","star_source","void_crevice"),
                 ModCreativeModeTabs.Category.RESEARCH,List.of("rough_alchemy_cauldron","primitive_reaction_cauldron","large_alchemical_reaction_pool","marisa_crystal_ball","spacetime_reverser","split_time_sundial"),
                 ModCreativeModeTabs.Category.STORAGE,List.of("pocket_magic_bottle","dream_rabbit_remains","alice_dream_rabbit_sigil","spacetime_waymark","recall_crystal","enhanced_recall_crystal"),
-                ModCreativeModeTabs.Category.MISC,List.of("rough_alchemical_energy_core","enhanced_alchemical_energy_core","alchemical_waste","stardust","decayed_timeflow_bucket","void_starflow_bucket","dilute_spacetime_bucket","refined_spacetime_bucket"));
+                ModCreativeModeTabs.Category.MISC,List.of("alchemical_waste","stardust","decayed_timeflow_bucket","void_starflow_bucket","dilute_spacetime_bucket","refined_spacetime_bucket"));
         expected.forEach((category,ids)->h.assertTrue(ModCreativeModeTabs.declaredIds(category).containsAll(ids),"Functional category drift: "+category));
         var building=ModCreativeModeTabs.declaredIds(ModCreativeModeTabs.Category.BUILDING);
         for(var family:List.of("spiritual_crystal","infused_crystal","dream_crystal","spatial_crystal")){
@@ -23,7 +23,9 @@ public final class CreativeTabsGameTests {
         }
         adjacent(h,ModCreativeModeTabs.Category.BUILDING,List.of("spatial_stability_anchor","dormant_spatial_stability_anchor"));
         adjacent(h,ModCreativeModeTabs.Category.RESEARCH,List.of("rough_alchemy_cauldron","primitive_reaction_cauldron","large_alchemical_reaction_pool"));
-        adjacent(h,ModCreativeModeTabs.Category.MISC,List.of("rough_alchemical_energy_core","enhanced_alchemical_energy_core","alchemical_waste"));
+        adjacent(h,ModCreativeModeTabs.Category.RESEARCH,List.of("rough_alchemical_energy_core","enhanced_alchemical_energy_core"));
+        adjacent(h,ModCreativeModeTabs.Category.MISC,List.of("earth_microcore","water_microcore","fire_microcore","air_microcore","light_microcore","dark_microcore","time_microcore","space_microcore","omni_microcore"));
+        adjacent(h,ModCreativeModeTabs.Category.SPELLS,List.of("amplification_star","lingering_thread","infusion_bud","holy_halo"));
         adjacent(h,ModCreativeModeTabs.Category.MISC,List.of("decayed_timeflow_bucket","void_starflow_bucket","dilute_spacetime_bucket","refined_spacetime_bucket"));
         adjacent(h,ModCreativeModeTabs.Category.STORAGE,List.of("dream_rabbit_remains","alice_dream_rabbit_sigil"));
         h.succeed();

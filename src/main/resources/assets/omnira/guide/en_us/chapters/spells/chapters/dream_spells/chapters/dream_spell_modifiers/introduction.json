@@ -1,0 +1,15 @@
+{
+  "text": [
+    "Advanced condensation provides enhancement, delay and holy spell modifiers. They use the Crystal Processing Table’s modifier slots and the same cost rules."
+  ],
+  "links": [
+    {
+      "target": "advanced_condensation_table",
+      "label": "Advanced Condensation Table"
+    },
+    {
+      "target": "spell_modifiers",
+      "label": "Modifier Basics"
+    }
+  ]
+}

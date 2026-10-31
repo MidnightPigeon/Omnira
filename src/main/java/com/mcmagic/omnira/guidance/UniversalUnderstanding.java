@@ -31,14 +31,14 @@ public final class UniversalUnderstanding {
             Item item=switch(keyword) {
                 case "harm" -> ModItems.SHARP_BREATH.get();
                 case "healing" -> ModItems.HEALING_DEW.get();
-                case "dark_breath" -> ModItems.DARK_MICROCORE.get();
+                case "dark_breath" -> ModItems.LIFE_DRAIN_ORIGIN.get();
                 case "dissociation" -> ModItems.DISSOCIATION_THREAD.get();
                 case "construction" -> ModItems.CONSTRUCTION_MATRIX.get();
-                case "reload" -> com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get();
-                case "delay" -> Items.CLOCK;
-                case "holy" -> ModItems.LIGHT_MICROCORE.get();
-                case "enhancement" -> Items.IRON_BLOCK;
-                case "infusion" -> ModItems.SPIRITUAL_CRYSTAL.get();
+                case "reload" -> com.mcmagic.omnira.registry.ModItems.MINIATURE_WORLD.get();
+                case "delay" -> ModItems.LINGERING_THREAD.get();
+                case "holy" -> ModItems.HOLY_HALO.get();
+                case "enhancement" -> ModItems.AMPLIFICATION_STAR.get();
+                case "infusion" -> ModItems.INFUSION_BUD.get();
                 default -> null;
             };
             boolean modifier=Set.of("delay","holy","enhancement","infusion").contains(keyword);

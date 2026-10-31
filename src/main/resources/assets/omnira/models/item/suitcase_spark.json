@@ -1,0 +1,75 @@
+{
+  "textures": {
+    "body": "omnira:item/suitcase_palette"
+  },
+  "elements": [
+    {
+      "from": [
+        -0.25,
+        -0.25,
+        -0.25
+      ],
+      "to": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "faces": {
+        "north": {
+          "texture": "#body",
+          "uv": [
+            15,
+            0,
+            16,
+            1
+          ]
+        },
+        "south": {
+          "texture": "#body",
+          "uv": [
+            15,
+            0,
+            16,
+            1
+          ]
+        },
+        "west": {
+          "texture": "#body",
+          "uv": [
+            15,
+            0,
+            16,
+            1
+          ]
+        },
+        "east": {
+          "texture": "#body",
+          "uv": [
+            15,
+            0,
+            16,
+            1
+          ]
+        },
+        "up": {
+          "texture": "#body",
+          "uv": [
+            15,
+            0,
+            16,
+            1
+          ]
+        },
+        "down": {
+          "texture": "#body",
+          "uv": [
+            15,
+            0,
+            16,
+            1
+          ]
+        }
+      }
+    }
+  ]
+}

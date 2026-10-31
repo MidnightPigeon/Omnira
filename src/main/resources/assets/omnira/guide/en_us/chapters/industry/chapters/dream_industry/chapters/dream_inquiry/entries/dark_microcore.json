@@ -10,11 +10,11 @@
   "links": [
     {
       "target": "dark_breath",
-      "label": "Dark Breath"
+      "label": "Life-Draining Origin"
     },
     {
       "target": "holy",
-      "label": "Holy"
+      "label": "Holy Halo"
     }
   ]
 }

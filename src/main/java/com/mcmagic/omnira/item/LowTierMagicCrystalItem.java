@@ -32,7 +32,7 @@ public class LowTierMagicCrystalItem extends Item {
             return InteractionResultHolder.fail(stack);
         }
         if (!level.isClientSide) {
-            if (!SpellCasting.cast(player, stack.get(ModDataComponents.SPELL_PATTERN.get()), com.mcmagic.omnira.spell.SpellPayload.of(stack), player.getAttributeValue(com.mcmagic.omnira.registry.ModAttributes.SPELL_POWER))) {
+            if (!SpellCasting.castFrom(player,stack, stack.get(ModDataComponents.SPELL_PATTERN.get()), com.mcmagic.omnira.spell.SpellPayload.of(stack), player.getAttributeValue(com.mcmagic.omnira.registry.ModAttributes.SPELL_POWER),SpellCasting.Modifiers.NONE)) {
                 player.displayClientMessage(Component.translatable("message.omnira.crystal.invalid_target"), true);
                 return InteractionResultHolder.fail(stack);
             }

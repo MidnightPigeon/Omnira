@@ -45,8 +45,7 @@ public final class AssemblyRenderer implements BlockEntityRenderer<BlockEntity> 
         pose.mulPose(Axis.ZP.rotationDegrees(angle));
         pose.translate(-.5,-.5,-.5);
         var mc=Minecraft.getInstance();
-        mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(shaft()),ItemStack.EMPTY,light,overlay,
-                pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
+        com.mcmagic.omnira.client.renderer.StaticModelQuads.draw(mc.getModelManager().getModel(shaft()),pose,buffers.getBuffer(CrystalGlassLayer.ATLAS),light,overlay);
         pose.popPose();
     }
 }

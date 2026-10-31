@@ -21,6 +21,10 @@ public final class GuideReferenceIndex {
             else {
                 var entry=row.entry();var id=ResourceLocation.tryParse(entry.item());
                 if(id!=null&&!id.equals(ResourceLocation.withDefaultNamespace("air")))items.putIfAbsent(id,entry.id());
+                for(String related:entry.relatedItems()){
+                    var key=ResourceLocation.tryParse(related);
+                    if(key!=null&&!key.equals(ResourceLocation.withDefaultNamespace("air")))items.putIfAbsent(key,entry.id());
+                }
             }
         }
     }

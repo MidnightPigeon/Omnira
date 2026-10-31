@@ -59,7 +59,7 @@ public final class MyriadCodexScreen extends ResponsiveContainerScreen<MyriadCod
     }
     private int lastMode=-1,lastShape=-1;
     @Override protected void containerTick(){super.containerTick();if(lastMode!=menu.mode()||lastShape!=menu.shape()){lastMode=menu.mode();lastShape=menu.shape();buttons();}}
-    private void fit(GuiGraphics g,Component text,int x,int y,int width,int color){float scale=Math.min(1,width/(float)Math.max(1,font.width(text)));g.pose().pushPose();g.pose().translate(x,y,0);g.pose().scale(scale,scale,1);g.drawString(font,text,0,0,color,false);g.pose().popPose();}
+    private void fit(GuiGraphics g,Component text,int x,int y,int width,int color){CrystalUi.label(g,font,text,x,y,width,1,color);}
     @Override protected void renderBg(GuiGraphics g,float partial,int mouseX,int mouseY){
         CodexBookArt.spread((x,y,xx,yy,c)->g.fill(leftPos+x,topPos+y,leftPos+xx,topPos+yy,c));
         fit(g,title,leftPos+24,topPos+25,112,0xFF334C60);
@@ -69,8 +69,7 @@ public final class MyriadCodexScreen extends ResponsiveContainerScreen<MyriadCod
         ring(g,240,112,(net.minecraft.Util.getMillis()-openedAt)/50.0);
         for(int i=0;i<4;i++)if(menu.slots.get(i).isActive()){var s=menu.slots.get(i);slot(g,s.x,s.y);}
         if(menu.mode()==0){
-            g.fill(leftPos+226,topPos+111,leftPos+253,topPos+113,0xFF547E91);
-            for(int i=0;i<5;i++)g.fill(leftPos+253-i,topPos+107+i,leftPos+255-i,topPos+117-i,0xFF547E91);
+            PixelUiIcons.arrow(CrystalUi.pixels(g,leftPos,topPos),226,112,29,0xFF547E91);
         }
         fit(g,Component.literal(menu.power()+" MPU"),leftPos+27,topPos+165,108,0xFF466778);
         int diameter=MyriadCodexEntity.diameter(menu.power());

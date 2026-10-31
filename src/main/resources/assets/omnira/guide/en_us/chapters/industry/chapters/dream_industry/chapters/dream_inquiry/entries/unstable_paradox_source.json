@@ -3,7 +3,7 @@
   "item": "omnira:unstable_paradox_source",
   "title": "Unstable Paradox Source",
   "text": [
-    "Assemble Paradox Ore with Encapsulated Paradox Flow on an Arcane Assembly Table. Cannot be placed; carrying it gradually wears it down. Impact, expiry or dropping it triggers a spacetime storm: handle carefully.",
+    "Assemble Paradox Ore with Encapsulated Paradox Flow on an Arcane Assembly Bench. Cannot be placed; carrying it gradually wears it down. Impact, expiry or dropping it triggers a spacetime storm: handle carefully.",
     "Storage and storm rules follow the Unstable Spacetime Aggregate. Alchemy can encapsulate it into a stable form."
   ],
   "recipes": true,

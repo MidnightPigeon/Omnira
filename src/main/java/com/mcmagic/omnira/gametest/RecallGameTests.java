@@ -144,7 +144,7 @@ public final class RecallGameTests {
         h.succeed();
     }
     @GameTest(template="spell_arena",timeoutTicks=230)
-    public static void alternatingUpgradeAssembles(GameTestHelper h) {
+    public static void unorderedUpgradeAssembles(GameTestHelper h) {
         h.setBlock(4,2,4,ModBlocks.ARCANE_ASSEMBLY_TABLE.get());
         var table=((AssemblyAccess)h.getLevel().getBlockEntity(h.absolutePos(new BlockPos(4,2,4)))).assembly();
         for(int parity=0;parity<2;parity++) {
@@ -152,6 +152,8 @@ public final class RecallGameTests {
             for(int i=0;i<6;i++) table.setItem(i,new ItemStack((i+parity)%2==0?Items.ENDER_EYE:Items.ENDER_PEARL));
             h.assertTrue(table.recipe()!=null && table.recipe().value().getResultItem(h.getLevel().registryAccess()).is(ModItems.ENHANCED_RECALL_CRYSTAL.get()),"Alternating ring not recognized");
         }
+        for(int i=0;i<6;i++)table.setItem(i,new ItemStack(i<3?Items.ENDER_EYE:Items.ENDER_PEARL));
+        h.assertTrue(table.recipe()!=null,"Grouped outer materials rejected");
         var normal=(RecallCrystalItem)ModItems.RECALL_CRYSTAL.get();var enhanced=(RecallCrystalItem)ModItems.ENHANCED_RECALL_CRYSTAL.get();
         h.assertTrue(normal.baseCost(false)==100 && normal.baseCost(true)==300 && enhanced.baseCost(false)==0 && enhanced.baseCost(true)==100,"Cost table differs from design");
         var smith=player(h,ModItems.RECALL_CRYSTAL.get());smith.setData(ModAttachments.MANA,new ManaState(2000,2000));

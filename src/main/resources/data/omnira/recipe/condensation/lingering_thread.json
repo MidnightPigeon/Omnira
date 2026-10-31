@@ -1,0 +1,11 @@
+{
+  "type": "omnira:condensation",
+  "ingredient": {
+    "item": "minecraft:clock"
+  },
+  "mana_cost": 300,
+  "result": {
+    "id": "omnira:lingering_thread",
+    "count": 1
+  }
+}

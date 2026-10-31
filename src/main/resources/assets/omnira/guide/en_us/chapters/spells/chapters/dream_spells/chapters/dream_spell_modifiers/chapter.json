@@ -1,0 +1,11 @@
+{
+  "id": "dream_spell_modifiers",
+  "title": "Modifiers",
+  "icon": "omnira:holy_halo",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/modifier_enhancement.json",
+    "entries/modifier_delay.json",
+    "entries/holy.json"
+  ]
+}

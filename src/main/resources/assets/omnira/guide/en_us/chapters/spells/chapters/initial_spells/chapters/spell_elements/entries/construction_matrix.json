@@ -4,8 +4,8 @@
   "title": "Construction Matrix",
   "text": [
     "Creates Void Crystals at the spell impact, normally lasting twenty seconds. Enhancement strengthens them and raises blast resistance; each Delay doubles their lifetime, while Infusion makes them permanent. Use a staff to left-click them away.",
-    "On creatures, construction locks movement and actions for 5 seconds. Delay doubles this duration, Enhancement adds crushing damage, and Infusion allows the locked creature to be mined.",
-    "Mining difficulty depends on the creature's health. Finish mining before the lock expires to kill it; the tool's Fortune is treated as Looting for drops."
+    "On creatures, Construction locks movement and actions for 5 seconds, but has no effect on bosses. Delay doubles the duration and Enhancement adds crushing damage. Infusion encloses the creature in temporary Void Crystals, requiring free space around it.",
+    "The enclosing crystals' mining difficulty increases with the creature's health and armor. Before the lock ends, mine any one of them with a suitable pickaxe to kill the target; the tool's Fortune acts as Looting for drops. The remaining crystals disappear when the lock ends."
   ],
   "recipes": false,
   "links": [

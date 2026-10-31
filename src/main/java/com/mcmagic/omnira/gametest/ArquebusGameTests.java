@@ -224,7 +224,9 @@ public final class ArquebusGameTests {
         for(int i=0;i<6;i++)input.setItem(i,new ItemStack(i%2==0?Items.TNT:ModItems.FIRE_MICROCORE.get()));
         h.assertTrue(recipe(h,"ancestor_launcher").matches(wrapped,h.getLevel()),"Rotated alternating recipe failed");
         input.setItem(0,new ItemStack(ModItems.FIRE_MICROCORE.get()));
-        h.assertTrue(!recipe(h,"ancestor_launcher").matches(wrapped,h.getLevel()),"Nonalternating recipe accepted");
+        h.assertTrue(!recipe(h,"ancestor_launcher").matches(wrapped,h.getLevel()),"Wrong material counts accepted");
+        input.setItem(1,new ItemStack(Items.TNT));
+        h.assertTrue(recipe(h,"ancestor_launcher").matches(wrapped,h.getLevel()),"Unordered outer materials rejected");
         h.succeed();
     }
     @GameTest(template="spell_arena",timeoutTicks=80)

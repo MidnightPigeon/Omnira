@@ -34,7 +34,8 @@ public final class ParadoxLootGameTests {
         var defaults=OmniraLootConfig.defaults().getAsJsonObject("treasureTables");
         for(var before:previous().entrySet()){
             var key=before.getKey();var oldPools=before.getValue().getAsJsonObject().getAsJsonArray("pools");
-            var pools=defaults.getAsJsonObject(key).getAsJsonArray("pools");
+            var pools=defaults.getAsJsonObject(key).getAsJsonArray("pools").deepCopy();
+            pools.asList().removeIf(pool -> pool.toString().contains("omnira:rain_soaked_suitcase"));
             h.assertTrue(pools.size()==oldPools.size(),"Pool count changed: "+key);
             boolean spatial=Set.of("omnira:chests/fold_observatory_lower","omnira:chests/fold_observatory_upper",
                     "omnira:chests/calibration_materials","omnira:chests/void_lighthouse").contains(key);
