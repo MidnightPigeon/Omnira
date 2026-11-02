@@ -3,8 +3,9 @@
   "item": "omnira:simple_condensation_table",
   "title": "Simple Condensation Table",
   "text": [
-    "Spiritual condensation begins with wood and stone. The simple condensation table forms spiritual crystals from mana, without consuming input materials.",
-    "Start condensation at the table. The base cost is 100 mana. Collect the completed crystal from its output slot."
+    "Condense your own mana into Spiritual Crystals without supplying ingredients.",
+    "Hold right-click anywhere on the table to channel mana and condense a crystal. Each cycle takes 5 seconds and charges 100 base mana on completion; cost reductions apply. Briefly right-click the central output area to collect crystals.",
+    "Releasing right-click, moving away or running short of mana cancels the current cycle. After a mana shortage, release and press again to retry."
   ],
   "recipes": true
 }

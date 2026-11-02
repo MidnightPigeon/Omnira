@@ -23,6 +23,8 @@ public class SimpleCondensationTableBlock extends CrystalProcessingTableBlock {
         return shape[0].optimize();
     }
     public SimpleCondensationTableBlock(Properties properties) {super(properties);}
+    @Override protected net.minecraft.world.InteractionResult useWithoutItem(BlockState state,net.minecraft.world.level.Level level,BlockPos pos,net.minecraft.world.entity.player.Player player,net.minecraft.world.phys.BlockHitResult hit){return net.minecraft.world.InteractionResult.sidedSuccess(level.isClientSide);}
+    @Override protected net.minecraft.world.ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack stack,BlockState state,net.minecraft.world.level.Level level,BlockPos pos,net.minecraft.world.entity.player.Player player,net.minecraft.world.InteractionHand hand,net.minecraft.world.phys.BlockHitResult hit){return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);}
     @Override protected MapCodec<? extends CrystalProcessingTableBlock> codec() {return CODEC;}
     @Override public BlockEntity newBlockEntity(BlockPos pos,BlockState state) {return new SimpleCondensationTableBlockEntity(pos,state);}
     @Override protected VoxelShape getShape(BlockState state,BlockGetter level,BlockPos pos,CollisionContext context) {return state.getValue(FACING).getAxis()==net.minecraft.core.Direction.Axis.X?EAST_WEST:SHAPE;}

@@ -20,6 +20,7 @@ public final class LiquidCrystalBallBlockEntity extends CrystalBallBlockEntity {
         return com.mcmagic.omnira.config.OmniraLootConfig.treasureFluids();
     }
     @Override public void unpackLootTable(net.minecraft.world.entity.player.Player player){
+        if(!virtualStorage && com.mcmagic.omnira.compat.LootrOrbs.manage(this))return;
         if(fluidTreasure && player!=null && !player.isSpectator() && level!=null && !level.isClientSide){
             var choices=treasureFluids();
             if(!choices.isEmpty()){
@@ -101,7 +102,7 @@ public final class LiquidCrystalBallBlockEntity extends CrystalBallBlockEntity {
     private static boolean potionContainer(ItemStack stack){
         return net.neoforged.fml.ModList.get().isLoaded("create") && com.mcmagic.omnira.compat.OrbPotionContainers.accepts(stack);
     }
-    @Override public boolean canPlaceItem(int slot,ItemStack stack){return slot==0 && (stack.getCapability(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM)!=null || potionContainer(stack));}
+    @Override public boolean canPlaceItem(int slot,ItemStack stack){return !com.mcmagic.omnira.compat.LootrOrbs.manage(this) && slot==0 && (stack.getCapability(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM)!=null || potionContainer(stack));}
     private FluidActionResult transferPort(ItemStack stack,boolean execute){
         if(potionContainer(stack))return com.mcmagic.omnira.compat.OrbPotionContainers.transfer(stack,tank,portInput,execute);
         return portInput?FluidUtil.tryEmptyContainer(stack,tank,1000,null,execute):FluidUtil.tryFillContainer(stack,tank,1000,null,execute);
@@ -134,6 +135,7 @@ public final class LiquidCrystalBallBlockEntity extends CrystalBallBlockEntity {
     }
     @Override public boolean fitsMultiplier(int multiplier){return tank.getFluidAmount()<=BASE_CAPACITY*multiplier;}
     @Override public void serverTick() {
+        if(!virtualStorage && com.mcmagic.omnira.compat.LootrOrbs.manage(this))return;
         super.serverTick();refreshBudget();
         ((LiquidCrystalBallBlockEntity)storage()).tickPort();
     }

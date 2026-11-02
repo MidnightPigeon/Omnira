@@ -22,6 +22,7 @@ public final class OrbUpgrades extends ItemStackHandler {
     public CompoundTag serializeLocal(HolderLookup.Provider registries){return super.serializeNBT(registries);}
     @Override public int getSlotLimit(int slot) {return 1;}
     @Override public boolean isItemValid(int slot,ItemStack stack) {
+        if(com.mcmagic.omnira.compat.LootrOrbs.appearance(owner)||com.mcmagic.omnira.compat.LootrOrbs.manage(owner))return false;
         var candidate=kind(stack);if(candidate==null)return false;
         var host=owner instanceof VoidCrystalBallBlockEntity?com.mcmagic.omnira.item.UpgradeCompatibility.Host.VOID_ORB:
                 owner instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity?com.mcmagic.omnira.item.UpgradeCompatibility.Host.STAR_ORB:

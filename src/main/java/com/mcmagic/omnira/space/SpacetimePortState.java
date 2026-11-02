@@ -35,6 +35,7 @@ public final class SpacetimePortState {
         var other=other();if(other==null)return null;
         var l=host.getLevel();if(!l.hasChunkAt(other.attached()))return null;var state=l.getBlockState(other.attached());
         if(state.getBlock() instanceof SpacetimePortBlock||state.isAir())return null;
+        if(com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(l.getBlockEntity(other.attached())))return null;
         return l.getCapability(cap,other.attached(),other.face());
     }
     public static boolean pair(SpacetimePortState a,SpacetimePortState b){

@@ -88,16 +88,16 @@ public final class EnhancedResonanceGameTests {
         var table=(AdvancedCondensationTableBlockEntity)h.getLevel().getBlockEntity(pos);
         p.setPos(pos.getCenter());p.setData(ModAttachments.MANA,new com.mcmagic.omnira.mana.ManaState(500,500));
         p.getInventory().setItem(0,ItemStack.EMPTY);table.setItem(0,stack);
-        var menu=new SimpleCondensationTableMenu(1,p.getInventory(),table);
-        h.assertTrue(menu.recipe().advanced()&&menu.recipe().manaCost()==300&&menu.clickMenuButton(p,0),"Upgrade recipe did not start");
+        var menu=table.work;
+        h.assertTrue(menu.recipe().advanced()&&menu.recipe().manaCost()==300&&menu.start(p),"Upgrade recipe did not start");
         h.runAfterDelay(200,()->{
-            menu.broadcastChanges();var output=table.getItem(0);
+            menu.tick();var output=table.getItem(0);
             h.assertTrue(output.is(ModItems.ENHANCED_RESONANCE_TERMINAL.get())&&ResonanceTerminalItem.capacity(output)==6,"Condensation did not produce enhanced terminal");
             h.assertTrue(ResonanceTerminalItem.data(output).equals(original)&&p.getData(ModAttachments.MANA).current()==200,"Upgrade lost identity/links or charged wrong mana");
             table.setItem(0,ItemStack.EMPTY);p.getInventory().setItem(0,output);
             var terminalMenu=new ResonanceMenu(2,p.getInventory(),0);
             h.assertTrue(terminalMenu.clickMenuButton(p,0)&&terminalMenu.kind()==6,"Preserved link cannot access original node");
-            terminalMenu.removed(p);menu.removed(p);h.succeed();
+            terminalMenu.removed(p);menu.cancel();h.succeed();
         });
     }
 }

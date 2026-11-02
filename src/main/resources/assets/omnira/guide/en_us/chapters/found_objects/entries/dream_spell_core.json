@@ -5,7 +5,8 @@
   "text": [
     "Rarely found in the loot Crystal Ball of a Radiant Courtyard or the sealed archive of a Shadow Library.",
     "Equipping grants 400 maximum mana, 20% spell power, 30% mana regeneration and 10 cost reduction. In a Mana Engine, its base output is 1024 MPU before grid multipliers.",
-    "{dream}It seems to resonate with your mana..."
+    "{dream}It seems to resonate with your mana...",
+    "Wandering traders have a 2% chance to offer a Dream Spell Core for 64 emeralds."
   ],
   "recipes": false,
   "links": [

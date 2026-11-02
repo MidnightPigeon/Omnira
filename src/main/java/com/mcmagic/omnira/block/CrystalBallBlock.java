@@ -36,6 +36,12 @@ public final class CrystalBallBlock extends BaseEntityBlock {
         return level.isClientSide?null:(l,p,s,be)->{if(be instanceof CrystalBallBlockEntity ball)ball.serverTick();};
     }
     @Override protected java.util.List<net.minecraft.world.item.ItemStack> getDrops(BlockState state,net.minecraft.world.level.storage.loot.LootParams.Builder builder) {
+        var entity=builder.getOptionalParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.BLOCK_ENTITY);
+        if(entity instanceof CrystalBallBlockEntity orb && com.mcmagic.omnira.compat.LootrOrbs.manage(orb)){
+            var breaker=builder.getOptionalParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY);
+            return breaker instanceof Player player && com.mcmagic.omnira.compat.LootrOrbs.mayBreak(player)
+                    ?java.util.List.of(new net.minecraft.world.item.ItemStack(asItem())):java.util.List.of();
+        }
         var drops=super.getDrops(state,builder);
         var be=builder.getOptionalParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.BLOCK_ENTITY);
         if(be instanceof CrystalBallBlockEntity networkBall)networkBall.detachNetwork();
@@ -69,6 +75,7 @@ public final class CrystalBallBlock extends BaseEntityBlock {
     }
     @Override protected void onRemove(BlockState state,Level level,BlockPos pos,BlockState next,boolean moving) {
         if(!state.is(next.getBlock()) && level.getBlockEntity(pos) instanceof CrystalBallBlockEntity networkBall)networkBall.detachNetwork();
+        if(!state.is(next.getBlock()) && level.getBlockEntity(pos) instanceof CrystalBallBlockEntity orb)com.mcmagic.omnira.compat.LootrOrbs.manage(orb);
         if(!state.is(next.getBlock()) && level.getBlockEntity(pos) instanceof CrystalBallBlockEntity ball && !ball.stabilized() && ball.dropsOnRemoval()) {
             if(!level.isClientSide)ball.unpackLootTable(null);
             Containers.dropContentsOnDestroy(state,next,level,pos);

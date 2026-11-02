@@ -11,7 +11,7 @@ import com.mojang.math.Axis;
 import com.mcmagic.omnira.config.OmniraConfig;
 
 public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBallBlockEntity> {
-    public static final String[] PARTS={"base","shell","mote","cracks_1","cracks_2","void_base","star_base","guidance_base","pulse_base"};
+    public static final String[] PARTS={"base","shell","mote","cracks_1","cracks_2","void_base","star_base","guidance_base","lootr_open_base","pulse_base"};
     private static final java.util.Map<String,ModelResourceLocation> MODELS=java.util.Arrays.stream(PARTS)
             .collect(java.util.stream.Collectors.toUnmodifiableMap(part->part,part->ModelResourceLocation.standalone(
                     net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","item/crystal_ball_"+part))));
@@ -26,10 +26,10 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
     }
     private static void base(CrystalBallBlockEntity ball,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         var mc=Minecraft.getInstance();
-        var model=ball.resonant()?com.mcmagic.omnira.client.StorageVisuals.base():model(ball instanceof com.mcmagic.omnira.block.entity.VoidCrystalBallBlockEntity?"void_base":ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity?"star_base":"base");
-        int tint=ball.resonant()?com.mcmagic.omnira.client.StorageVisuals.color(ball.networkStatus):ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity?0x284E91:0xFFFFFF;
+        var model=ball.resonant()?com.mcmagic.omnira.client.StorageVisuals.base():model(com.mcmagic.omnira.compat.LootrOrbs.appearance(ball)?(ball.lootrOpened||ball.lootrPersonalView?"lootr_open_base":"guidance_base"):ball instanceof com.mcmagic.omnira.block.entity.VoidCrystalBallBlockEntity?"void_base":ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity?"star_base":"base");
+        int tint=(com.mcmagic.omnira.compat.LootrOrbs.appearance(ball))?(ball.lootrOpened||ball.lootrPersonalView?0xFFFFFF:0xEACB79):ball.resonant()?com.mcmagic.omnira.client.StorageVisuals.color(ball.networkStatus):ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity?0x284E91:0xFFFFFF;
         var baked=mc.getModelManager().getModel(model);var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
-        StaticModelQuads.drawTinted(baked,pose,out,light,overlay,tint,false);
+        StaticModelQuads.drawTinted(baked,pose,out,light,overlay,tint,com.mcmagic.omnira.compat.LootrOrbs.appearance(ball));
     }
     private static void globe(PoseStack pose,MultiBufferSource buffers,double time,int light,int overlay,CrystalBallBlockEntity ball) {
         // Shared sorted glass batch; never let the shell write an opaque depth silhouette.
@@ -40,7 +40,7 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
         if(ball instanceof com.mcmagic.omnira.block.entity.VoidCrystalBallBlockEntity)vortex(pose,buffers,time);
         boolean stellar=ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity;
         if(stellar)StellarVisuals.cluster(pose,buffers,time);
-        if(ball!=null && ball.hasPendingLoot())fog(pose,buffers,time);
+        if(ball!=null && ball.hasPendingLoot() && !(com.mcmagic.omnira.compat.LootrOrbs.appearance(ball)&&ball.lootrOpened))fog(pose,buffers,time,com.mcmagic.omnira.compat.LootrOrbs.appearance(ball));
         // Independent, bounded orbits remain inside the hollow shell at every phase.
         var displayed=ball!=null&&!liquid?ball.displayItems():java.util.List.<ItemStack>of();
         for(int i=0;i<displayed.size();i++) {
@@ -65,10 +65,13 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
             }
             pose.popPose();
         }
-        draw(ball!=null && ball.crackStage()>0?"cracks_"+ball.crackStage():"shell",pose,buffers,light,overlay);
+        String shell=ball!=null && ball.crackStage()>0?"cracks_"+ball.crackStage():"shell";
+        if(com.mcmagic.omnira.compat.LootrOrbs.appearance(ball))StaticModelQuads.drawTinted(Minecraft.getInstance().getModelManager().getModel(model(shell)),pose,
+                buffers.getBuffer(CrystalGlassLayer.ATLAS),light,overlay,0x9DDED5,true);
+        else draw(shell,pose,buffers,light,overlay);
         pose.popPose();
     }
-    private static void fog(PoseStack pose,MultiBufferSource buffers,double time) {
+    private static void fog(PoseStack pose,MultiBufferSource buffers,double time,boolean lootr) {
         var mesh=buffers.getBuffer(CrystalGlassLayer.COLOR);
         for(int i=0;i<9;i++) {
             double phase=time*.012+i*2.4;
@@ -76,7 +79,7 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
             float y=.5F+(float)Math.sin(phase*.83+i)*.07F;
             float z=.5F+(float)Math.cos(phase*1.13)*.08F;
             float r=.075F+.012F*(float)Math.sin(phase*.7+i);
-            StellarVisuals.cube(pose,mesh,x,y,z,r,0xABBADB,.18F);
+            StellarVisuals.cube(pose,mesh,x,y,z,r,lootr?0xE8D9A3:0xABBADB,.18F);
         }
     }
     @Override public boolean shouldRender(CrystalBallBlockEntity ball,net.minecraft.world.phys.Vec3 camera){
@@ -109,7 +112,7 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
         pose.mulPose(Axis.YP.rotationDegrees(180-ball.getBlockState().getValue(com.mcmagic.omnira.block.CrystalBallBlock.FACING).toYRot()));
         pose.translate(-.5,0,-.5);
         base(ball,pose,buffers,light,overlay);
-        for(int i=0;i<3;i++)upgrade(ball.upgrades.getStackInSlot(i),i,pose,buffers,light,overlay);
+        if(!com.mcmagic.omnira.compat.LootrOrbs.appearance(ball))for(int i=0;i<3;i++)upgrade(ball.upgrades.getStackInSlot(i),i,pose,buffers,light,overlay);
         globe(pose,buffers,time+(ball.getBlockPos().asLong()&255),light,overlay,ball);
         if(ball.resonant())ResonanceSatellites.render(ball.frequency,pose,buffers,time,overlay);
         if(ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity)StellarVisuals.baseStars(pose,buffers,time);

@@ -121,7 +121,7 @@ public final class MachineMenuGameTests {
         }finally{player.stopRiding();orb.discard();}h.succeed();
     }
     @GameTest(template="spell_arena") public static void ordinaryMachineShiftConservation(GameTestHelper h){
-        var ids=List.of("crystal_processing_table","analysis_artisan_table","arcane_assembly_table","mana_engine","simple_condensation_table","advanced_condensation_table","spacetime_reverser","void_infuser","split_time_sundial",
+        var ids=List.of("crystal_processing_table","analysis_artisan_table","arcane_assembly_table","mana_engine","spacetime_reverser","void_infuser","split_time_sundial",
                 "crystal_furnace","crystal_grindstone","crystal_anvil","infused_crystal_furnace","infused_crystal_grindstone","infused_crystal_anvil");
         var player=h.makeMockPlayer(GameType.SURVIVAL);var pos=new BlockPos(5,3,5);
         for(var id:ids){

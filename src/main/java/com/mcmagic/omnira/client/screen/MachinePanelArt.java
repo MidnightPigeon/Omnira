@@ -58,14 +58,6 @@ public final class MachinePanelArt {
         line(p,49,32,127,32,LIGHT);line(p,19,77,49,32,LIGHT);
     }
     public static void workstation(Pixels p,String kind,double time,float progress,boolean active){
-        if(kind.equals("condensation")){
-            polygon(p,RIM,43,100,133,100,148,116,135,123,41,123,28,116);
-            polygon(p,BODY,44,102,132,102,143,114,132,119,44,119,33,114);
-            ring(p,88,110,40,7,MINT);ring(p,88,76,41,26,0xFF81ACBA);ring(p,88,76,29,38,RIM);
-            if(active){orbit(p,88,76,41,26,time,LIGHT);orbit(p,88,76,29,38,-time,MINT);}
-            for(int side:new int[]{-1,1}){int x=88+side*55;polygon(p,BLUE,x,76,x+4,83,x,92,x-4,83);}
-            slot(p,88,78,LIGHT);return;
-        }
         table(p,kind.equals("forge"));
         switch(kind){
             case "analysis" -> {

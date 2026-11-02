@@ -44,7 +44,7 @@ public final class RemoteContainerAccess implements AutoCloseable {
         var level=core.getLevel();var pos=core.getBlockPos().below();var state=level.getBlockState(pos);
         MenuProvider provider=state.getMenuProvider(level,pos);
         if(provider==null)return false;
-        var target=provider instanceof BlockEntity be?be:level.getBlockEntity(pos);if(target==null)return false;
+        var target=provider instanceof BlockEntity be?be:level.getBlockEntity(pos);if(target==null||com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(target))return false;
         var access=new RemoteContainerAccess(player,core,target,terminal,slot);
         if(!access.valid()){access.close();return false;}
         try {

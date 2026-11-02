@@ -86,3 +86,4 @@ Sable整机选取复用`BottleMultiblock`完整部件集合，微缩框架另按
 测试脚本仅复制到无界面开发实例，结束时清理，不写玩家整合包、不进入发布JAR。覆盖真实KubeJS自定义配方加载、标签及空槽匹配、已加载Omnira配方JSON/网络往返、结果模板保护。未安装第三方的隔离运行可另选`omnira_recipe_integration`及`-PwithoutExternalMods -PwithoutCreate -PwithoutSable -PwithoutJei`，不带KubeJS夹具开关。
 
 普通装配的 `return_remainders` 默认为 `true`，沿用物品的容器/工具返还。显式设为 `false` 时消耗整份材料、不返还；原始法术核心的解析晶体装配采用此设置。
+

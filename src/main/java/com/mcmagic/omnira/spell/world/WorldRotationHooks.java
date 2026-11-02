@@ -20,6 +20,7 @@ public final class WorldRotationHooks {
         var level=machine.getLevel();if(level==null||machine.isRemoved())return;
         if(level instanceof net.minecraft.server.level.ServerLevel server)for(var player:server.getServer().getPlayerList().getPlayers())
             if(player.containerMenu instanceof com.mcmagic.omnira.menu.WorldRotationWork work)work.worldRotation(server,machine.getBlockPos());
+        if(machine instanceof com.mcmagic.omnira.block.entity.SimpleCondensationTableBlockEntity table)table.work.worldRotation();
         if(machine instanceof com.mcmagic.omnira.block.entity.AssemblyAccess access)access.assembly().worldRotation();
         if(machine instanceof com.mcmagic.omnira.workstation.WorkstationAccess access)access.workstation().worldRotation();
         if(machine instanceof com.mcmagic.omnira.reversal.ReversalBlockEntity reversal)reversal.worldRotation();

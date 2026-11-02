@@ -38,10 +38,7 @@ public final class ModMenuTypes {
     public static final DeferredHolder<MenuType<?>,MenuType<com.mcmagic.omnira.menu.CrystalGridMenu>> CRYSTAL_GRID =
             MENU_TYPES.register("crystal_grid",()->IMenuTypeExtension.create(com.mcmagic.omnira.menu.CrystalGridMenu::new));
 
-    public static final DeferredHolder<MenuType<?>,MenuType<com.mcmagic.omnira.menu.SimpleCondensationTableMenu>> SIMPLE_CONDENSATION_TABLE=
-            MENU_TYPES.register("simple_condensation_table",()->IMenuTypeExtension.create(com.mcmagic.omnira.menu.SimpleCondensationTableMenu::new));
-    public static final DeferredHolder<MenuType<?>,MenuType<com.mcmagic.omnira.menu.SimpleCondensationTableMenu>> ADVANCED_CONDENSATION_TABLE=
-            MENU_TYPES.register("advanced_condensation_table",()->IMenuTypeExtension.create(com.mcmagic.omnira.menu.SimpleCondensationTableMenu::advanced));
+
     public static final DeferredHolder<MenuType<?>,MenuType<com.mcmagic.omnira.menu.ArcaneAssemblyTableMenu>> ARCANE_ASSEMBLY_TABLE=
             MENU_TYPES.register("arcane_assembly_table",()->IMenuTypeExtension.create(com.mcmagic.omnira.menu.ArcaneAssemblyTableMenu::new));
     private ModMenuTypes() {

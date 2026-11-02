@@ -41,7 +41,9 @@ public final class CrystalBallMenu extends AbstractContainerMenu {
         for(int i=0;i<(voidOrb()?2:3);i++) {
             final int slot=i;
             addSlot(new SlotItemHandler(ball.upgrades,slot,voidOrb()?66+i*28:53+i*27,119) {
-                @Override public boolean mayPickup(Player player){return ball.upgrades.mayRemove(slot);}
+                @Override public boolean isActive(){return !com.mcmagic.omnira.compat.LootrOrbs.appearance(ball);}
+                @Override public boolean mayPlace(ItemStack stack){return isActive()&&super.mayPlace(stack);}
+                @Override public boolean mayPickup(Player player){return isActive()&&ball.upgrades.mayRemove(slot);}
             });
         }
         if(ball.resonant())for(int i=0;i<2;i++){
@@ -72,7 +74,8 @@ public final class CrystalBallMenu extends AbstractContainerMenu {
         if(LargeStackMenuClicks.handle(this,index,button,type,player,0,storageSlots))return;
         super.clicked(index,button,type,player);
     }
-    @Override public boolean stillValid(Player player){return ball.stillValid(player);}
+    @Override public boolean stillValid(Player player){return ball.lootrPersonalView?ball.personalValid.getAsBoolean() && player.level().getBlockState(ball.getBlockPos()).is(ball.getBlockState().getBlock()) && player.distanceToSqr(net.minecraft.world.phys.Vec3.atCenterOf(ball.getBlockPos()))<=64:ball.stillValid(player);}
+    @Override public void broadcastChanges(){if(ball.lootrPersonalView && !ball.getLevel().isClientSide){if(ball instanceof LiquidCrystalBallBlockEntity liquid)liquid.serverTick();ball.setChanged();}super.broadcastChanges();}
     @Override public ItemStack quickMoveStack(Player player,int index) {
         var result=new ItemStack[]{ItemStack.EMPTY};
         com.mcmagic.omnira.progression.BranchStorage.manually(()->result[0]=moveStorage(player,index));return result[0];
@@ -103,5 +106,5 @@ public final class CrystalBallMenu extends AbstractContainerMenu {
         }
         if(stack.isEmpty())slot.setByPlayer(ItemStack.EMPTY);else slot.setChanged();slot.onTake(player,stack);return original;
     }
-    @Override public void removed(Player player){super.removed(player);ball.stopOpen(player);}
+    @Override public void removed(Player player){super.removed(player);ball.stopOpen(player);if(ball.lootrPersonalView)ball.personalClose.accept(player);}
 }

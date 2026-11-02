@@ -26,6 +26,7 @@ public final class CrystalBallScreen extends ResponsiveContainerScreen<CrystalBa
     }
     @Override protected void renderBg(GuiGraphics g,float partial,int mouseX,int mouseY) {
         g.blit(menu.singleOrb()?VOID:menu.liquid()?LIQUID:ITEMS,leftPos,topPos,0,0,176,244,176,244);
+        if(com.mcmagic.omnira.compat.LootrOrbs.appearance(menu.ball))g.fill(leftPos+47,topPos+117,leftPos+129,topPos+137,0xFF384650);
         if(menu.ball instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity star){
             g.fill(leftPos+47,topPos+117,leftPos+129,topPos+137,0xFF384650);
             for(int xx:new int[]{53,80,107}){g.fill(leftPos+xx-1,topPos+118,leftPos+xx+17,topPos+136,0xFFB1CED8);g.fill(leftPos+xx,topPos+119,leftPos+xx+16,topPos+135,0xFF688091);}

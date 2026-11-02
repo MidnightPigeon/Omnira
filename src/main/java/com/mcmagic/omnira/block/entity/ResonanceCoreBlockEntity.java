@@ -18,7 +18,7 @@ public final class ResonanceCoreBlockEntity extends BlockEntity {
     private boolean relocated;
     public ResonanceCoreBlockEntity(BlockPos pos,BlockState state){super(ModBlockEntityTypes.RESONANCE_CORE.get(),pos,state);}
     public IItemHandler items() {
-        if(level==null || !level.hasChunkAt(worldPosition.below()))return null;
+        if(level==null || !level.hasChunkAt(worldPosition.below()) || com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(level.getBlockEntity(worldPosition.below())))return null;
         var chamber=com.mcmagic.omnira.alchemy.catalysis.CatalysisBlock.controller(level,worldPosition.below());
         if(chamber!=null)return chamber.complete()?chamber.nodeItems:null;
         if(level.getBlockEntity(worldPosition.below()) instanceof LiquidCrystalBallBlockEntity)return null;
@@ -27,14 +27,14 @@ public final class ResonanceCoreBlockEntity extends BlockEntity {
         return level.getBlockEntity(worldPosition.below()) instanceof net.minecraft.world.Container c?new net.neoforged.neoforge.items.wrapper.InvWrapper(c):null;
     }
     public IFluidHandler fluids() {
-        if(level==null || !level.hasChunkAt(worldPosition.below()))return null;
+        if(level==null || !level.hasChunkAt(worldPosition.below()) || com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(level.getBlockEntity(worldPosition.below())))return null;
         var chamber=com.mcmagic.omnira.alchemy.catalysis.CatalysisBlock.controller(level,worldPosition.below());
         if(chamber!=null)return chamber.complete()?chamber.nodeFluids:null;
         return level.getCapability(Capabilities.FluidHandler.BLOCK,worldPosition.below(),Direction.UP);
     }
     public int kind(){return level!=null && level.getBlockEntity(worldPosition.below()) instanceof VoidCrystalBallBlockEntity?5:level!=null && level.getBlockEntity(worldPosition.below()) instanceof com.mcmagic.omnira.shop.MarisaOrbBlockEntity?4:fluids()!=null?3:items()!=null?2:0;}
     public boolean permits(net.minecraft.world.entity.player.Player player) {
-        return level!=null && player.getUUID().equals(owner) && level.mayInteract(player,worldPosition)
+        return level!=null && !com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(level.getBlockEntity(worldPosition.below())) && player.getUUID().equals(owner) && level.mayInteract(player,worldPosition)
                 && level.mayInteract(player,worldPosition.below())
                 && (!(level.getBlockEntity(worldPosition.below()) instanceof net.minecraft.world.level.block.entity.BaseContainerBlockEntity container) || container.canOpen(player));
     }

@@ -1,0 +1,8 @@
+{
+  "parent": "omnira:item/crystal_ball_guidance_base",
+  "textures": {
+    "base": "omnira:block/lootr_open_base",
+    "edge": "omnira:block/lootr_open_edge",
+    "particle": "omnira:block/lootr_open_base"
+  }
+}

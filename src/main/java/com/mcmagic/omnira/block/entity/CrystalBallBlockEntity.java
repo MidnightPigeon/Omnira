@@ -18,6 +18,11 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     public final ItemStack[] frequency={ItemStack.EMPTY,ItemStack.EMPTY};
     public int networkStatus;
     public boolean virtualStorage;
+    public boolean lootrManaged,lootrPersonalView;
+    /** Client-only personal appearance; never saved as shared world state. */
+    public boolean lootrOpened;
+    public java.util.function.Consumer<net.minecraft.world.entity.player.Player> personalClose=player->{};
+    public java.util.function.BooleanSupplier personalValid=()->level!=null && level.isClientSide;
     public Runnable storageChanged=()->{};
     public boolean resonant(){return com.mcmagic.omnira.storage.CrystalStorageContent.resonant(getBlockState());}
     public CrystalBallBlockEntity storage(){
@@ -44,7 +49,7 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     }
     @Override public int getMaxStackSize() {return 64*multiplier();}
     @Override public int getMaxStackSize(ItemStack stack) {return itemLimit(stack,multiplier());}
-    @Override public boolean canPlaceItem(int slot,ItemStack stack){return !com.mcmagic.omnira.item.bottle.PocketBottleItem.restricted(stack);}
+    @Override public boolean canPlaceItem(int slot,ItemStack stack){return !com.mcmagic.omnira.compat.LootrOrbs.manage(this)&&!com.mcmagic.omnira.item.bottle.PocketBottleItem.restricted(stack);}
     @Override public boolean isEmpty() {return hasPendingLoot() || super.isEmpty();}
     @Override public ItemStack getItem(int slot) {return hasPendingLoot()?ItemStack.EMPTY:super.getItem(slot);}
     @Override public ItemStack removeItem(int slot,int amount) {
@@ -59,6 +64,7 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     public int outputItems(){return level==null?0:itemOutputBudget.available(level.getGameTime(),com.mcmagic.omnira.storage.LogisticsRates.ITEMS*upgrades.speedMultiplier());}
     public void outputItems(int used){itemOutputBudget.spend(used);}
     public void serverTick() {
+        if(!virtualStorage && com.mcmagic.omnira.compat.LootrOrbs.manage(this))return;
         outputItems();
         if(resonant() && level instanceof net.minecraft.server.level.ServerLevel server && server.getGameTime()%20==0)
             com.mcmagic.omnira.storage.CrystalStorageNetworks.get(server).register(this);
@@ -68,18 +74,20 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     protected void shattered(net.minecraft.server.level.ServerLevel server) {}
     protected boolean shatterDrops(){return true;}
     private boolean shattering;
-    public boolean dropsOnRemoval(){return !shattering||shatterDrops();}
+    public boolean dropsOnRemoval(){return !lootrManaged && (!shattering||shatterDrops());}
     public static final int SIZE=12;
     private NonNullList<ItemStack> items=NonNullList.withSize(SIZE,ItemStack.EMPTY);
     private boolean pendingLootDisplay;
     private boolean lootContainer;
     @Override public void unpackLootTable(net.minecraft.world.entity.player.Player player) {
+        if(!virtualStorage && com.mcmagic.omnira.compat.LootrOrbs.manage(this))return;
         if(lootTable!=null) lootContainer=true;
         super.unpackLootTable(player);
     }
     @Override public AbstractContainerMenu createMenu(int id,Inventory inventory,net.minecraft.world.entity.player.Player player) {
-        var menu=super.createMenu(id,inventory,player);
-        if(menu!=null && lootContainer && !player.isSpectator() && player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+        var menu=player instanceof net.minecraft.server.level.ServerPlayer opener && com.mcmagic.omnira.compat.LootrOrbs.manage(this)
+                ?com.mcmagic.omnira.compat.LootrOrbs.menu(id,inventory,opener,this):super.createMenu(id,inventory,player);
+        if(menu!=null && (lootContainer||lootrManaged) && !player.isSpectator() && player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
             var advancement=serverPlayer.server.getAdvancements().get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","beyond_the_mist"));
             if(advancement!=null)serverPlayer.getAdvancements().award(advancement,"open_loot_ball");
         }
@@ -91,14 +99,15 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     public int crackStage() {return impacts/3;}
     public int impactCount() {return impacts;}
     public void landedOn(net.minecraft.world.entity.LivingEntity entity) {
+        boolean personal=com.mcmagic.omnira.compat.LootrOrbs.manage(this);
         if(!(level instanceof net.minecraft.server.level.ServerLevel server) || isRemoved() || stabilized()) return;
         if(++impacts>=9) {
             unpackLootTable(entity instanceof net.minecraft.world.entity.player.Player player?player:null);
             // onRemove drops the inventory once; setting air skips the ball's own loot table.
             shattering=true;
             try{if(server.setBlockAndUpdate(worldPosition,net.minecraft.world.level.block.Blocks.AIR.defaultBlockState())) {
-                shattered(server);
-                if(shatterDrops())net.minecraft.world.level.block.Block.popResource(server,worldPosition,new ItemStack(this instanceof LiquidCrystalBallBlockEntity?net.minecraft.world.item.Items.GLASS_PANE:net.minecraft.world.item.Items.GLASS));
+                if(!personal)shattered(server);
+                if(!personal&&shatterDrops())net.minecraft.world.level.block.Block.popResource(server,worldPosition,new ItemStack(this instanceof LiquidCrystalBallBlockEntity?net.minecraft.world.item.Items.GLASS_PANE:net.minecraft.world.item.Items.GLASS));
                 server.levelEvent(2001,worldPosition,net.minecraft.world.level.block.Block.getId(net.minecraft.world.level.block.Blocks.GLASS.defaultBlockState()));
             }}finally{shattering=false;}
             return;
@@ -147,6 +156,8 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     }
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         var tag=new CompoundTag();
+        tag.putBoolean("LootrManaged",lootrManaged);
+        tag.putBoolean("LootrPersonalView",lootrPersonalView);
         tag.putInt("Impacts",impacts);
         tag.putBoolean("PendingLoot",lootTable!=null);
         tag.put("Upgrades",upgrades.serializeNBT(registries));
@@ -162,19 +173,26 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries) {
         super.saveAdditional(tag,registries);
         tag.putBoolean("LootContainer",lootContainer || lootTable!=null);
+        tag.putBoolean("LootrManaged",lootrManaged);
+        tag.putBoolean("LootrPersonalView",lootrPersonalView);
         tag.putInt("Impacts",impacts);tag.putLong("RepairAt",repairAt);
         tag.put("Upgrades",upgrades.serializeLocal(registries));
         saveFrequency(tag,registries);
         if(!trySaveLootTable(tag))saveItems(tag,registries);
     }
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries) {
+        lootrManaged=tag.getBoolean("LootrManaged");lootrPersonalView=tag.getBoolean("LootrPersonalView");
         int previousNetworkStatus=networkStatus;
         if(tag.contains("LootTable")){
             tag=tag.copy();tag.putString("LootTable",com.mcmagic.omnira.config.OmniraLootConfig.canonicalTableId(tag.getString("LootTable")));
         }
         super.loadAdditional(tag,registries);items=NonNullList.withSize(SIZE,ItemStack.EMPTY);
         networkStatus=tag.getInt("NetworkStatus");
-        if(tag.hasUUID("StorageIdentity"))storageIdentity=tag.getUUID("StorageIdentity");
+        if(tag.hasUUID("StorageIdentity")){
+            var identity=tag.getUUID("StorageIdentity");
+            if(!identity.equals(storageIdentity))lootrOpened=false;
+            storageIdentity=identity;
+        }
         for(int i=0;i<2;i++)frequency[i]=ItemStack.parseOptional(registries,tag.getCompound("Frequency"+i));
         pendingLootDisplay=tag.getBoolean("PendingLoot");
         impacts=Math.clamp(tag.getInt("Impacts"),0,8);repairAt=tag.getLong("RepairAt");

@@ -64,7 +64,7 @@ public final class ReloadEffect {
         for(var type:shuffled){
             var entity=type.create(level);if(!(entity instanceof Mob replacement))continue;
             replacement.moveTo(target.getX(),target.getY(),target.getZ(),target.getYRot(),target.getXRot());
-            if(!level.noCollision(replacement)){replacement.discard();continue;}
+            if(!replacementFits(level,target,replacement)){replacement.discard();continue;}
             replacement.finalizeSpawn(level,level.getCurrentDifficultyAt(target.blockPosition()),MobSpawnType.CONVERSION,null);
             replacement.setHealth(replacement.getMaxHealth()*Math.clamp(target.getHealth()/target.getMaxHealth(),.01F,1F));
             replacement.setCustomName(target.getCustomName());replacement.setCustomNameVisible(target.isCustomNameVisible());
@@ -80,5 +80,16 @@ public final class ReloadEffect {
         return null;
     }
     public static void clear(){POOLS.clear();}
+    /** Vanilla collision rules, excluding only the body and multipart children being replaced. */
+    public static boolean replacementFits(ServerLevel level,LivingEntity target,Mob replacement){
+        var box=replacement.getBoundingBox();
+        for(var shape:level.getBlockCollisions(replacement,box))if(!shape.isEmpty())return false;
+        if(!level.getEntities(target,box.inflate(1.0E-7),entity->!entity.isSpectator()
+                &&!(entity instanceof net.neoforged.neoforge.entity.PartEntity<?> part && part.getParent()==target)
+                &&replacement.canCollideWith(entity)).isEmpty())return false;
+        var border=level.getWorldBorder();
+        return !border.isInsideCloseToBorder(replacement,box)||!net.minecraft.world.phys.shapes.Shapes.joinIsNotEmpty(
+                border.getCollisionShape(),net.minecraft.world.phys.shapes.Shapes.create(box),net.minecraft.world.phys.shapes.BooleanOp.AND);
+    }
     private ReloadEffect(){}
 }

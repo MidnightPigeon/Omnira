@@ -4,7 +4,8 @@
   "title": "Crystal Night Heron Statue",
   "text": [
     "Found in loot crystal balls in Crystal Workshops. The purple front button changes its colors; interact with the upper half or apply a redstone signal to switch walking and standing poses.",
-    "May produce Milk Suspension after a neck-stretch cycle. The white rear button toggles production. Facing the front button, place a container to the right of the base to collect it."
+    "May produce Milk Suspension after a neck-stretch cycle. The white rear button toggles production. Facing the front button, place a container to the right of the base to collect it.",
+    "Wandering traders have a 5% chance to offer a Crystal Night Heron Statue for 32 emeralds."
   ],
   "recipes": false
 }

@@ -397,8 +397,6 @@ public final class ClientModEvents {
         event.register(ModMenuTypes.WAYMARK.get(),com.mcmagic.omnira.client.screen.WaymarkScreen::new);
         event.register(ModMenuTypes.MANA_ENGINE.get(),com.mcmagic.omnira.client.screen.ManaEngineScreen::new);
         event.register(ModMenuTypes.ARCANE_ASSEMBLY_TABLE.get(),com.mcmagic.omnira.client.screen.ArcaneAssemblyTableScreen::new);
-        event.register(ModMenuTypes.SIMPLE_CONDENSATION_TABLE.get(),com.mcmagic.omnira.client.screen.SimpleCondensationTableScreen::new);
-        event.register(ModMenuTypes.ADVANCED_CONDENSATION_TABLE.get(),com.mcmagic.omnira.client.screen.SimpleCondensationTableScreen::new);
         event.register(ModMenuTypes.CRYSTAL_GRID.get(),com.mcmagic.omnira.client.screen.CrystalGridScreen::new);
         event.register(ModMenuTypes.ANALYSIS_ARTISAN_TABLE.get(), AnalysisArtisanTableScreen::new);
         event.register(ModMenuTypes.CRYSTAL_PROCESSING_TABLE.get(), CrystalProcessingTableScreen::new);

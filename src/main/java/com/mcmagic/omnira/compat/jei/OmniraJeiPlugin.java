@@ -328,14 +328,12 @@ public final class OmniraJeiPlugin implements IModPlugin {
         ResponsiveGuiHandler.register(registration,OrbUpgradeScreen.class);
         ResponsiveGuiHandler.register(registration,ResonanceScreen.class);
         ResponsiveGuiHandler.register(registration,ReversalScreen.class);
-        ResponsiveGuiHandler.register(registration,SimpleCondensationTableScreen.class);
         ResponsiveGuiHandler.register(registration,SundialScreen.class);
         ResponsiveGuiHandler.register(registration,CrystalUtilityScreen.class);
         ResponsiveGuiHandler.register(registration,WaymarkScreen.class);
         ResponsiveGuiHandler.register(registration,com.mcmagic.omnira.client.screen.PulseOrbScreen.class);
         ResponsiveGuiHandler.clickArea(registration,CrystalProcessingTableScreen.class,WRITING);
         ResponsiveGuiHandler.clickArea(registration,AnalysisArtisanTableScreen.class,ANALYSIS);
-        ResponsiveGuiHandler.clickArea(registration,SimpleCondensationTableScreen.class,CONDENSATION,ADVANCED_CONDENSATION);
         ResponsiveGuiHandler.clickArea(registration,ArcaneAssemblyTableScreen.class,ASSEMBLY);
     }
 }

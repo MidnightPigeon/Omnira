@@ -139,8 +139,8 @@ public final class ModBlockEntityTypes {
                 (core,side)->core.getBlockState().is(ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get())?core.genesisOffering:null);
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,ROUGH_ALCHEMY_CAULDRON.get(),(vessel,side)->com.mcmagic.omnira.progression.BranchAutomation.fluids(vessel,vessel.tank));
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,ROUGH_ALCHEMY_CAULDRON.get(),(vessel,side)->com.mcmagic.omnira.progression.BranchAutomation.items(vessel,vessel.items));
-        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,LIQUID_CRYSTAL_BALL.get(),(ball,side)->ball.fluidHandler);
-        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,CRYSTAL_BALL.get(),(ball,side)->ball.itemHandler);
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,LIQUID_CRYSTAL_BALL.get(),(ball,side)->com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(ball)?null:ball.fluidHandler);
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,CRYSTAL_BALL.get(),(ball,side)->com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(ball)?null:ball.itemHandler);
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,CRYSTAL_BALL.get(),(ball,side)->ball instanceof com.mcmagic.omnira.block.entity.VoidCrystalBallBlockEntity sink?sink.fluidHandler:null);
     }
 }

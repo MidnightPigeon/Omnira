@@ -17,6 +17,7 @@ public final class NodeTransport {
     }
     private static net.neoforged.neoforge.items.IItemHandler items(ResonanceCoreBlockEntity node){
         var level=node.getLevel();var pos=node.getBlockPos().below();
+        if(com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(level.getBlockEntity(pos)))return null;
         var pool=com.mcmagic.omnira.alchemy.ReactionPoolBlock.controller(level,pos);if(pool!=null)return pool.nodeItems;
         if(level.getBlockEntity(pos) instanceof LiquidCrystalBallBlockEntity)return null;
         if(level.getBlockEntity(pos) instanceof CrystalBallBlockEntity ball)return new OrbItemHandler(ball,false);
@@ -24,6 +25,7 @@ public final class NodeTransport {
     }
     private static net.neoforged.neoforge.fluids.capability.IFluidHandler fluids(ResonanceCoreBlockEntity node){
         var level=node.getLevel();var pos=node.getBlockPos().below();
+        if(com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(level.getBlockEntity(pos)))return null;
         var pool=com.mcmagic.omnira.alchemy.ReactionPoolBlock.controller(level,pos);if(pool!=null)return pool.nodeFluids;
         if(level.getBlockEntity(pos) instanceof LiquidCrystalBallBlockEntity ball)return ball.transportFluids;
         return node.fluids();
@@ -43,6 +45,8 @@ public final class NodeTransport {
                 ||source.getBlockPos().distSqr(destination.getBlockPos())>32*32
                 ||StorageContainerIdentity.sameStorage(source,destination)
                 ||!TuningOutputs.get(level).available(source))return false;
+        if(com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(level.getBlockEntity(source.getBlockPos().below()))
+                ||com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(level.getBlockEntity(destination.getBlockPos().below())))return false;
         unpair(source);unpair(destination);
         source.peer=destination.getBlockPos();source.peerIdentity=destination.identity;source.output=true;
         destination.peer=source.getBlockPos();destination.peerIdentity=source.identity;destination.output=false;

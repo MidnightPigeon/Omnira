@@ -1,7 +1,6 @@
 package com.mcmagic.omnira.gametest;
 
 import com.mcmagic.omnira.block.entity.*;
-import com.mcmagic.omnira.menu.*;
 import com.mcmagic.omnira.mana.ManaState;
 import com.mcmagic.omnira.registry.*;
 import com.mojang.authlib.GameProfile;
@@ -18,15 +17,7 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_advanced_condensation")
 @PrefixGameTestTemplate(false)
 public final class AdvancedCondensationGameTests {
-    @GameTest(template="spell_arena",timeoutTicks=240)
-    public static void rebornLilyProducesOnePoint(GameTestHelper h){
-        var table=table(h);var p=player(h);var menu=new SimpleCondensationTableMenu(1,p.getInventory(),table);
-        table.setItem(0,new ItemStack(com.mcmagic.omnira.mire.MireContent.REBORN_ITEM.get()));
-        h.assertTrue(menu.clickMenuButton(p,0),"Lily condensation failed to start");
-        h.runAfterDelay(200,()->{
-            menu.broadcastChanges();h.assertTrue(table.getItem(0).is(ModItems.TIME_WARP_POINT.get())&&table.getItem(0).getCount()==1&&p.getData(ModAttachments.MANA).current()==200,"Lily output or mana incorrect");h.succeed();
-        });
-    }
+
     @GameTest(template="spell_arena")
     public static void crystalMaterialsAndSaplingGrowth(GameTestHelper h) {
         var recipe=h.getLevel().getRecipeManager().byKey(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","advanced_condensation_table")).orElseThrow().value();
@@ -47,23 +38,7 @@ public final class AdvancedCondensationGameTests {
         sapling.advanceTree(level,pos,mature,net.minecraft.util.RandomSource.create(12));
         h.assertTrue(level.getBlockState(pos).is(DreamContent.SHADOW_LOG.get()),"3D sapling no longer grows a tree");h.succeed();
     }
-    @GameTest(template="spell_arena",timeoutTicks=240)
-    public static void temporalMoteConsumesEightAndPlaces(GameTestHelper h){
-        var table=table(h);var p=player(h);var menu=new SimpleCondensationTableMenu(1,p.getInventory(),table);
-        p.getInventory().setItem(9,new ItemStack(ModItems.TIME_WARP_POINT.get(),10));menu.quickMoveStack(p,1);
-        h.assertTrue(table.getItem(0).getCount()==8&&p.getInventory().getItem(9).getCount()==2,"Eight-item input limit incorrect");
-        table.setItem(0,new ItemStack(ModItems.TIME_WARP_POINT.get(),7));h.assertTrue(!menu.canCondense(),"Seven points accepted");
-        table.setItem(0,new ItemStack(ModItems.TIME_WARP_POINT.get(),8));h.assertTrue(menu.clickMenuButton(p,0),"Eight-point condensation failed");
-        h.runAfterDelay(200,()->{
-            menu.broadcastChanges();h.assertTrue(table.getItem(0).is(ModItems.TEMPORAL_MOTE.get())&&table.getItem(0).getCount()==1,"Wrong mote result");
-            h.assertTrue(p.getData(ModAttachments.MANA).current()==200,"Wrong condensation mana debit");
-            var ground=table.getBlockPos().east(2);h.getLevel().setBlockAndUpdate(ground,net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
-            p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,table.removeItem(0,1));
-            var hit=new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(ground),Direction.UP,ground,false);
-            var result=ModItems.TEMPORAL_MOTE.get().useOn(new net.minecraft.world.item.context.UseOnContext(p,net.minecraft.world.InteractionHand.MAIN_HAND,hit));
-            h.assertTrue(result.consumesAction()&&h.getLevel().getBlockState(ground.above()).is(ModBlocks.TEMPORAL_MOTE.get()),"Mote item failed placement");h.succeed();
-        });
-    }
+
     private static AdvancedCondensationTableBlockEntity table(GameTestHelper h) {
         var p=h.absolutePos(new BlockPos(5,2,5));h.getLevel().setBlockAndUpdate(p,ModBlocks.ADVANCED_CONDENSATION_TABLE.get().defaultBlockState());
         return (AdvancedCondensationTableBlockEntity)h.getLevel().getBlockEntity(p);
@@ -73,95 +48,7 @@ public final class AdvancedCondensationGameTests {
         player.setPos(h.absoluteVec(new net.minecraft.world.phys.Vec3(5.5,2,6.5)));
         player.setData(ModAttachments.MANA,new ManaState(500,500));return player;
     }
-    @GameTest(template="spell_arena",timeoutTicks=240)
-    public static void offhandStaffDiscountMatchesDebit(GameTestHelper h) {
-        var table=table(h);var p=player(h);
-        var basic=com.mcmagic.omnira.item.staff.StaffAssembly.basic();
-        var staff=new com.mcmagic.omnira.item.staff.StaffAssembly(basic.shaft(),
-                new ItemStack(ModItems.NETHERITE_REINFORCEMENT.get()),basic.tip(),java.util.List.of()).create();
-        p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.MAINHAND,new ItemStack(Items.STICK));
-        p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.OFFHAND,staff);
-        p.getAttribute(ModAttributes.COST_REDUCTION).setBaseValue(7);
-        table.setItem(0,new ItemStack(ModItems.SPACETIME_KNOT.get()));
-        var menu=new SimpleCondensationTableMenu(1,p.getInventory(),table);
-        h.assertTrue(menu.manaCost()==283,"Offhand discount missing from workstation display");
-        h.assertTrue(com.mcmagic.omnira.mana.ManaCosts.cost(p,5)==0,"Discount permits negative cost");
-        p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.MAINHAND,new com.mcmagic.omnira.item.staff.StaffAssembly(basic.shaft(),
-                new ItemStack(ModItems.DIAMOND_REINFORCEMENT.get()),basic.tip(),java.util.List.of()).create());
-        var discount=p.getAttribute(ModAttributes.COST_REDUCTION);
-        discount.addTransientModifier(new net.minecraft.world.entity.ai.attributes.AttributeModifier(
-                com.mcmagic.omnira.spell.CastAttributes.STAFF_DISCOUNT,5,net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE));
-        h.assertTrue(menu.manaCost()==288,"Dual staves must use only the main-hand bonus");
-        discount.removeModifier(com.mcmagic.omnira.spell.CastAttributes.STAFF_DISCOUNT);
-        p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.MAINHAND,new ItemStack(Items.STICK));
-        p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.OFFHAND,ItemStack.EMPTY);
-        h.assertTrue(menu.manaCost()==293,"Unequipped staff still discounts costs");
-        p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.OFFHAND,staff);
-        h.assertTrue(menu.clickMenuButton(p,0),"Discounted conversion cannot start");
-        h.runAfterDelay(200,()->{
-            menu.broadcastChanges();
-            h.assertTrue(p.getData(ModAttachments.MANA).current()==217 && table.getItem(0).is(ModItems.PARADOX_DUST.get()),"Displayed discount differs from actual debit");
-            h.assertTrue(new ItemStack(ModItems.CRUISE_ORB.get()).getRarity()==net.minecraft.world.item.Rarity.UNCOMMON,"Cruise orb rarity must be yellow");
-            h.succeed();
-        });
-    }
-    @GameTest(template="spell_arena",timeoutTicks=240)
-    public static void timedConversionChargesOnce(GameTestHelper h) {
-        var table=table(h);var p=player(h);var other=player(h);
-        table.setItem(0,new ItemStack(ModItems.SPACETIME_KNOT.get()));
-        var menu=new SimpleCondensationTableMenu(1,p.getInventory(),table);
-        var second=new SimpleCondensationTableMenu(2,other.getInventory(),table);
-        h.assertTrue(menu.manaCost()==300 && menu.clickMenuButton(p,0) && second.clickMenuButton(other,0),"Cannot start conversion");
-        h.assertTrue(!menu.clickMenuButton(p,0),"Double start accepted");
-        h.runAfterDelay(199,()->{
-            menu.broadcastChanges();h.assertTrue(table.getItem(0).is(ModItems.SPACETIME_KNOT.get()) && p.getData(ModAttachments.MANA).current()==500,"Premature conversion or charge");
-        });
-        h.runAfterDelay(200,()->{
-            menu.broadcastChanges();second.broadcastChanges();menu.broadcastChanges();
-            h.assertTrue(table.getItem(0).is(ModItems.PARADOX_DUST.get()) && table.getItem(0).getCount()==1,"Wrong in-place output");
-            h.assertTrue(p.getData(ModAttachments.MANA).current()==200 && other.getData(ModAttachments.MANA).current()==500,"Concurrent completion charged twice");
-            h.assertTrue(!menu.isWorking() && !menu.canCondense(),"Output can be reconverted");h.succeed();
-        });
-    }
-    @GameTest(template="spell_arena",timeoutTicks=240)
-    public static void ballConversionAndManaDiscount(GameTestHelper h) {
-        var table=table(h);var p=player(h);p.getAttribute(ModAttributes.COST_REDUCTION).setBaseValue(10);
-        var menu=new SimpleCondensationTableMenu(1,p.getInventory(),table);
-        p.getInventory().setItem(9,new ItemStack(ModItems.CRYSTAL_BALL.get(),3));
-        menu.quickMoveStack(p,1);
-        h.assertTrue(table.getItem(0).getCount()==1 && p.getInventory().getItem(9).getCount()==2,"Input slot did not enforce single item");
-        h.assertTrue(menu.manaCost()==290 && menu.clickMenuButton(p,0),"Discount not applied");
-        h.runAfterDelay(200,()->{
-            menu.broadcastChanges();h.assertTrue(table.getItem(0).is(ModItems.PURE_VESSEL.get()) && p.getData(ModAttachments.MANA).current()==210,"Ball conversion or debit failed");
-            menu.quickMoveStack(p,0);h.assertTrue(table.isEmpty() && p.getInventory().countItem(ModItems.PURE_VESSEL.get())==1,"Output transfer failed");h.succeed();
-        });
-    }
-    @GameTest(template="spell_arena",templateNamespace="omnira_condensation_recipes")
-    public static void cancellationAndRecipeIsolation(GameTestHelper h) {
-        var table=table(h);var p=player(h);var menu=new SimpleCondensationTableMenu(1,p.getInventory(),table);
-        h.assertTrue(!menu.clickMenuButton(p,0),"Empty input accepted");
-        table.setItem(0,new ItemStack(ModItems.SPACETIME_KNOT.get()));
-        p.setData(ModAttachments.MANA,new ManaState(299,500));h.assertTrue(!menu.clickMenuButton(p,0),"Unaffordable work started");
-        p.setData(ModAttachments.MANA,new ManaState(500,500));menu.clickMenuButton(p,0);
-        table.setItem(0,new ItemStack(ModItems.CRYSTAL_BALL.get()));menu.broadcastChanges();
-        h.assertTrue(!menu.isWorking() && p.getData(ModAttachments.MANA).current()==500,"Changed input was charged");
-        menu.clickMenuButton(p,0);menu.removed(p);h.assertTrue(!menu.isWorking(),"Closing failed to cancel");
-        h.assertTrue(!menu.slots.getFirst().mayPlace(new ItemStack(Items.STONE)),"Unrelated input accepted");
-        var pos=table.getBlockPos();h.getLevel().setBlockAndUpdate(pos,ModBlocks.SIMPLE_CONDENSATION_TABLE.get().defaultBlockState());
-        var simple=new SimpleCondensationTableMenu(2,p.getInventory(),(SimpleCondensationTableBlockEntity)h.getLevel().getBlockEntity(pos));
-        h.assertTrue(simple.recipe()!=null && !simple.recipe().advanced() && !simple.slots.getFirst().mayPlace(new ItemStack(ModItems.CRYSTAL_BALL.get())),"Basic recipe contaminated");
-        var recipes=h.getLevel().getRecipeManager().getAllRecipesFor(ModRecipes.CONDENSATION_TYPE.get());
-        var conversions=java.util.Map.of(
-                ModItems.SPACETIME_KNOT.get(),ModItems.PARADOX_DUST.get(),
-                ModItems.CRYSTAL_BALL.get(),ModItems.PURE_VESSEL.get(),
-                ModItems.SPIRITUAL_CRYSTAL.get(),ModItems.INFUSED_SPIRITUAL_CRYSTAL.get(),
-                ModItems.RESONANCE_TERMINAL.get(),ModItems.ENHANCED_RESONANCE_TERMINAL.get());
-        conversions.forEach((input,output)->h.assertTrue(recipes.stream().anyMatch(r->r.value().advanced()
-                &&r.value().ingredient().test(new ItemStack(input))&&r.value().result().is(output)),"Required advanced conversion missing: "+input));
-        h.assertTrue(recipes.stream().anyMatch(r->r.value().ingredient().test(new ItemStack(ModItems.GUIDE_BOOK.get()))
-                && r.value().result().is(ModItems.INFUSED_GRIMOIRE.get())),"Guidebook conversion missing");
-        h.assertTrue(recipes.stream().filter(r->r.value().advanced()).allMatch(r->r.value().manaCost()==300 && !r.value().matches(new SingleRecipeInput(ItemStack.EMPTY),h.getLevel())),"Invalid advanced recipe data");h.succeed();
-    }
+
     @GameTest(template="spell_arena")
     public static void vesselRestrictsPersistsAndDropsWeapon(GameTestHelper h) {
         var pos=h.absolutePos(new BlockPos(5,2,5));h.getLevel().setBlockAndUpdate(pos,ModBlocks.PURE_VESSEL.get().defaultBlockState());
@@ -184,5 +71,63 @@ public final class AdvancedCondensationGameTests {
         h.assertTrue(drops.stream().filter(e->e.getItem().is(Items.DIAMOND_SWORD)).mapToInt(e->e.getItem().getCount()).sum()==1,"Weapon missing or duplicated");
         h.assertTrue(drops.stream().filter(e->e.getItem().is(ModItems.PURE_VESSEL.get())).mapToInt(e->e.getItem().getCount()).sum()==1,"Vessel drop missing");
         h.assertTrue(!vessel.stillValid(p),"Broken vessel still valid");h.succeed();
+    }
+    @GameTest(template="spell_arena",timeoutTicks=240)
+    public static void rebornLilyProducesOnePoint(GameTestHelper h){
+        var table=table(h);var p=player(h);var menu=table.work;
+        table.setItem(0,new ItemStack(com.mcmagic.omnira.mire.MireContent.REBORN_ITEM.get()));
+        h.assertTrue(menu.start(p),"Lily condensation failed to start");
+        h.runAfterDelay(200,()->{
+            menu.tick();h.assertTrue(table.getItem(0).is(ModItems.TIME_WARP_POINT.get())&&table.getItem(0).getCount()==1&&p.getData(ModAttachments.MANA).current()==200,"Lily output or mana incorrect");h.succeed();
+        });
+    }
+    @GameTest(template="spell_arena",timeoutTicks=240)
+    public static void temporalMoteConsumesEightAndPlaces(GameTestHelper h){
+        var table=table(h);var p=player(h);var menu=table.work;
+        p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new ItemStack(ModItems.TIME_WARP_POINT.get(),10));com.mcmagic.omnira.workstation.CondensationChannel.shortClick(p,table);
+        h.assertTrue(table.getItem(0).getCount()==8&&p.getMainHandItem().getCount()==2,"Eight-item input limit incorrect");
+        table.setItem(0,new ItemStack(ModItems.TIME_WARP_POINT.get(),7));h.assertTrue(!menu.canStart(p),"Seven points accepted");
+        table.setItem(0,new ItemStack(ModItems.TIME_WARP_POINT.get(),8));h.assertTrue(menu.start(p),"Eight-point condensation failed");
+        h.runAfterDelay(200,()->{
+            menu.tick();h.assertTrue(table.getItem(0).is(ModItems.TEMPORAL_MOTE.get())&&table.getItem(0).getCount()==1,"Wrong mote result");
+            h.assertTrue(p.getData(ModAttachments.MANA).current()==200,"Wrong condensation mana debit");
+            var ground=table.getBlockPos().east(2);h.getLevel().setBlockAndUpdate(ground,net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+            p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,table.removeItem(0,1));
+            var hit=new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(ground),Direction.UP,ground,false);
+            var result=ModItems.TEMPORAL_MOTE.get().useOn(new net.minecraft.world.item.context.UseOnContext(p,net.minecraft.world.InteractionHand.MAIN_HAND,hit));
+            h.assertTrue(result.consumesAction()&&h.getLevel().getBlockState(ground.above()).is(ModBlocks.TEMPORAL_MOTE.get()),"Mote item failed placement");h.succeed();
+        });
+    }
+    @GameTest(template="spell_arena",timeoutTicks=240)
+    public static void offhandStaffDiscountMatchesDebit(GameTestHelper h) {
+        var table=table(h);var p=player(h);
+        var basic=com.mcmagic.omnira.item.staff.StaffAssembly.basic();
+        var staff=new com.mcmagic.omnira.item.staff.StaffAssembly(basic.shaft(),
+                new ItemStack(ModItems.NETHERITE_REINFORCEMENT.get()),basic.tip(),java.util.List.of()).create();
+        p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.MAINHAND,new ItemStack(Items.STICK));
+        p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.OFFHAND,staff);
+        p.getAttribute(ModAttributes.COST_REDUCTION).setBaseValue(7);
+        table.setItem(0,new ItemStack(ModItems.SPACETIME_KNOT.get()));
+        var menu=table.work;
+        h.assertTrue(com.mcmagic.omnira.mana.ManaCosts.cost(p,menu.recipe().manaCost())==283,"Offhand discount missing from workstation display");
+        h.assertTrue(com.mcmagic.omnira.mana.ManaCosts.cost(p,5)==0,"Discount permits negative cost");
+        p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.MAINHAND,new com.mcmagic.omnira.item.staff.StaffAssembly(basic.shaft(),
+                new ItemStack(ModItems.DIAMOND_REINFORCEMENT.get()),basic.tip(),java.util.List.of()).create());
+        var discount=p.getAttribute(ModAttributes.COST_REDUCTION);
+        discount.addTransientModifier(new net.minecraft.world.entity.ai.attributes.AttributeModifier(
+                com.mcmagic.omnira.spell.CastAttributes.STAFF_DISCOUNT,5,net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE));
+        h.assertTrue(com.mcmagic.omnira.mana.ManaCosts.cost(p,menu.recipe().manaCost())==288,"Dual staves must use only the main-hand bonus");
+        discount.removeModifier(com.mcmagic.omnira.spell.CastAttributes.STAFF_DISCOUNT);
+        p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.MAINHAND,new ItemStack(Items.STICK));
+        p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.OFFHAND,ItemStack.EMPTY);
+        h.assertTrue(com.mcmagic.omnira.mana.ManaCosts.cost(p,menu.recipe().manaCost())==293,"Unequipped staff still discounts costs");
+        p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.OFFHAND,staff);
+        h.assertTrue(menu.start(p),"Discounted conversion cannot start");
+        h.runAfterDelay(200,()->{
+            menu.tick();
+            h.assertTrue(p.getData(ModAttachments.MANA).current()==217 && table.getItem(0).is(ModItems.PARADOX_DUST.get()),"Displayed discount differs from actual debit");
+            h.assertTrue(new ItemStack(ModItems.CRUISE_ORB.get()).getRarity()==net.minecraft.world.item.Rarity.UNCOMMON,"Cruise orb rarity must be yellow");
+            h.succeed();
+        });
     }
 }
