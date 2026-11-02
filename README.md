@@ -4,6 +4,8 @@
 
 [中文](#中文) · [English](#english) · [Issues](https://github.com/MidnightPigeon/Omnira/issues) · [作者主页 / Author's website](https://midnightpigeon.github.io/) · [联动开发 / Integration reference](INTEGRATION.md)
 
+[CurseForge Link](https://www.curseforge.com/minecraft/mc-mods/omnira)
+
 ## 中文
 
 **万象之力恒存于万物之中。**
