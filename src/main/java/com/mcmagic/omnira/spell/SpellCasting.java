@@ -31,11 +31,13 @@ public final class SpellCasting {
     private SpellCasting() {}
 
     public record GroundPoint(BlockPos block, Vec3 surface) {}
-    public record Modifiers(double speed, double range) {
+    public record Modifiers(double speed, double range, double selectionBonus) {
+        public Modifiers(double speed,double range){this(speed,range,0);}
         public static final Modifiers NONE = new Modifiers(1,1);
         public Modifiers {
             speed=Math.clamp(speed,1,11);
             range=Math.clamp(range,1,3);
+            selectionBonus=Math.clamp(selectionBonus,0,2);
         }
     }
 
@@ -162,7 +164,7 @@ public final class SpellCasting {
         if (target == SpellTargetKeyword.GROUND && ground.isEmpty()) return false;
         double selectionScale = range > 1 && (target == SpellTargetKeyword.TARGET || target == SpellTargetKeyword.AIM) ? 2 : 1;
         double selectionRange = (target == SpellTargetKeyword.TARGET
-                ? SpellTargetingRule.TARGET_MAX_RANGE : SpellTargetingRule.AIM_MAX_RANGE) * selectionScale * selectionBonus;
+                ? SpellTargetingRule.TARGET_MAX_RANGE : SpellTargetingRule.AIM_MAX_RANGE) * (selectionScale + modifiers.selectionBonus()) * selectionBonus;
         HitResult hit = ghost?ghostTarget(caster,selectionRange,target==SpellTargetKeyword.TARGET):target(caster, selectionRange, target == SpellTargetKeyword.TARGET,
                 payload.effects().stream().anyMatch(e->e.operation().equals("dissociation")));
         if (target == SpellTargetKeyword.TARGET && hit.getType() == HitResult.Type.MISS) return false;
@@ -256,7 +258,7 @@ public final class SpellCasting {
 
     private static boolean castDirect(Player caster,ServerLevel level,SpellTargetKeyword target,
                                       SpellPayload payload,double power,Modifiers modifiers) {
-        double blockRange=caster.blockInteractionRange(),entityRange=caster.entityInteractionRange();
+        double blockRange=caster.blockInteractionRange()*(1+modifiers.selectionBonus()),entityRange=caster.entityInteractionRange()*(1+modifiers.selectionBonus());
         List<GroundPoint> ground=target==SpellTargetKeyword.GROUND
                 ?groundPoints(level,caster.position(),(int)Math.round(2*modifiers.range())):List.of();
         if(target==SpellTargetKeyword.GROUND && ground.isEmpty())return false;

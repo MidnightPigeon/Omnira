@@ -48,10 +48,12 @@ public final class StaffEnhancements {
     }
 
     public static List<String> keywords(ItemStack staff) {
-        return StaffAssembly.of(staff).upgrades().stream()
+        var result=new ArrayList<>(StaffAssembly.of(staff).upgrades().stream()
                 .filter(s->StaffPart.is(s,StaffPart.Role.UPGRADE)
                         && StaffPart.of(s).upgradeSlot()==StaffPart.SlotKind.ENHANCEMENT)
-                .map(StaffEnhancements::keyword).filter(s->!s.isEmpty()).toList();
+                .map(StaffEnhancements::keyword).filter(s->!s.isEmpty()).toList());
+        if(StaffAssembly.of(staff).tip().is(ModItems.ABYSS_TIP.get()))result.add("omnira:abyss_tip");
+        return List.copyOf(result);
     }
 
     public static SpellPayload apply(SpellPayload payload,List<String> additions) {
@@ -76,6 +78,7 @@ public final class StaffEnhancements {
         }
         var keywords=new ArrayList<>(payload.keywords());
         keywords.addAll(additions);
+        if(additions.contains("omnira:abyss_tip"))keywords.add("omnira:abyss_cast/"+java.util.UUID.randomUUID());
         return new SpellPayload(payload.baseCost(),payload.damage()>0?payload.damage()+3*iron:payload.damage(),effects,keywords);
     }
 }

@@ -1,0 +1,10 @@
+{
+  "id": "cataclysm_ignitium_reinforcement",
+  "title": "腾炎加固部件",
+  "item": "omnira:ignitium_reinforcement",
+  "text": [
+    "将腾炎锭置于普通装配台中央，外围留空，加工即可获得。",
+    "继承了腾炎炽烈的力量，让法术更为强劲，施展更为从容。"
+  ],
+  "recipes": true
+}

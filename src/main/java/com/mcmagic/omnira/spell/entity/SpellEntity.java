@@ -62,6 +62,7 @@ public class SpellEntity extends Entity {
     private boolean knowledgeShock;
     private boolean knowledgeLeech;
     private SpellPayload payload=SpellPayload.EMPTY;
+    public boolean abyssTip(){return payload.keywords().contains("omnira:abyss_tip");}
     private boolean explosiveImpact;
     private boolean directSingleTarget;
     public void directSingleTarget(boolean value){directSingleTarget=value;}

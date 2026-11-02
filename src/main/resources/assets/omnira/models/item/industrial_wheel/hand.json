@@ -1,0 +1,9 @@
+{
+  "parent": "create:block/deployer/hand_pointing",
+  "textures": {
+    "18": "omnira:item/basic_staff_facets",
+    "mechanical_press_head": "omnira:item/basic_staff_facets",
+    "mechanical_press_pole": "omnira:item/basic_staff_facets",
+    "particle": "omnira:item/basic_staff_facets"
+  }
+}

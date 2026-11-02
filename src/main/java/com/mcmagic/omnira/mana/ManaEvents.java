@@ -54,7 +54,11 @@ public final class ManaEvents {
     }
 
     public static boolean trySpend(ServerPlayer player, double amount) {
-        amount = ManaCosts.cost(player,amount);
+        return trySpendExact(player,ManaCosts.cost(player,amount));
+    }
+
+    /** Debit an exact amount without applying modifiers again; also supports fixed-cost processing. */
+    public static boolean trySpendExact(ServerPlayer player,double amount){
         ManaState mana = player.getData(ModAttachments.MANA);
         if (!mana.canSpend(amount)) {
             return false;

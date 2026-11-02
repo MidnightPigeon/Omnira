@@ -4,8 +4,8 @@
   "title": "Simple Condensation Table",
   "text": [
     "Condense your own mana into Spiritual Crystals without supplying ingredients.",
-    "Hold right-click anywhere on the table to channel mana and condense a crystal. Each cycle takes 5 seconds and charges 100 base mana on completion; cost reductions apply. Briefly right-click the central output area to collect crystals.",
-    "Releasing right-click, moving away or running short of mana cancels the current cycle. After a mana shortage, release and press again to retry."
+    "Hold right-click anywhere on the table to channel mana and condense a crystal. Each cycle takes 5 seconds and costs 100 mana, paid in equal installments once per second; mana cost reductions do not apply. Briefly right-click the central output area to collect crystals.",
+    "Releasing right-click, moving away or running short of mana cancels the current cycle; mana already spent is not refunded. After a mana shortage, release and press again to retry."
   ],
   "recipes": true
 }

@@ -4,7 +4,8 @@
   "title": "Low-Tier Magic Crystal",
   "text": [
     "A spell crystal stores its target, shape, elements, modifiers and authored base cost. Its keywords reflect the components used.",
-    "Right-click to cast once and consume the crystal. Alternatively, install it in an equipped crystal grid and cast repeatedly with a staff, consuming mana instead."
+    "Right-click to cast once and consume the crystal. Alternatively, install it in an equipped crystal grid and cast repeatedly with a staff, consuming mana instead.",
+    "While exploring ruins and vanilla loot chests, you may also find low-tier magic crystals with spells already inscribed, ready to use or install in a grid."
   ],
   "recipes": true,
   "links": [

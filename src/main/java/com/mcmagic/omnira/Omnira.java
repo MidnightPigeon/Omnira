@@ -71,6 +71,7 @@ public final class Omnira {
         ModItems.register(modEventBus);
         com.mcmagic.omnira.registry.ArmorContent.register(modEventBus);
         ModRecipes.register(modEventBus);
+        com.mcmagic.omnira.loot.PreparedSpellLoot.TYPES.register(modEventBus);
         ModBlockEntityTypes.register(modEventBus);
         ModEntityTypes.register(modEventBus);
         com.mcmagic.omnira.registry.ModParticles.TYPES.register(modEventBus);

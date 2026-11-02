@@ -60,6 +60,8 @@ public final class LootConfigGameTests {
             Files.writeString(path,root.toString());OmniraLootConfig.lootTable(new LootTableLoadEvent(h.getLevel().registryAccess(),ResourceLocation.parse("omnira:chests/kirisame_attic"),LootTable.EMPTY));
             h.getLevel().setBlockAndUpdate(pos,ModBlocks.LIQUID_CRYSTAL_BALL.get().defaultBlockState());
             var ball=(LiquidCrystalBallBlockEntity)h.getLevel().getBlockEntity(pos);
+            // Exercise generation itself, not Lootr's public shell which intentionally remains unopened.
+            ball.virtualStorage=true;
             var player=h.makeMockPlayer(GameType.SURVIVAL);
             for(int i=0;i<128;i++){
                 ball.tank.setFluid(net.neoforged.neoforge.fluids.FluidStack.EMPTY);ball.markFluidTreasure();ball.unpackLootTable(player);
@@ -108,12 +110,14 @@ public final class LootConfigGameTests {
             root.getAsJsonObject("treasureTables").add(key.toString(),JsonParser.parseString("{\"type\":\"minecraft:chest\",\"pools\":[{\"rolls\":1,\"entries\":[{\"type\":\"minecraft:item\",\"name\":\"minecraft:diamond\"}]}]}"));
             Files.writeString(path,root.toString());
             var event=new LootTableLoadEvent(level.registryAccess(),key,LootTable.EMPTY);OmniraLootConfig.lootTable(event);
+            h.assertTrue(key.equals(event.getTable().getLootTableId()),"Config table lost its ID");
             var params=new LootParams.Builder(level).withParameter(LootContextParams.ORIGIN,h.absolutePos(new BlockPos(3,3,3)).getCenter()).create(LootContextParamSets.CHEST);
             var drops=event.getTable().getRandomItems(params);
             h.assertTrue(drops.size()==1&&drops.getFirst().is(Items.DIAMOND),"Config table replacement not used");
             h.assertTrue(LiquidCrystalBallBlockEntity.treasureFluids().isEmpty(),"Empty whitelist must stay empty");
             var pos=h.absolutePos(new BlockPos(4,3,4));level.setBlockAndUpdate(pos,ModBlocks.LIQUID_CRYSTAL_BALL.get().defaultBlockState());
             var ball=(LiquidCrystalBallBlockEntity)level.getBlockEntity(pos);var tag=new net.minecraft.nbt.CompoundTag();tag.putBoolean("FluidTreasure",true);ball.loadWithComponents(tag,level.registryAccess());
+            ball.virtualStorage=true;
             var player=h.makeMockPlayer(GameType.SURVIVAL);ball.unpackLootTable(player);
             h.assertTrue(ball.hasPendingLoot()&&ball.tank.isEmpty(),"Empty choices must preserve unopened treasure");
             root.getAsJsonObject("fluidTreasure").getAsJsonArray("whitelist").add("minecraft:lava");

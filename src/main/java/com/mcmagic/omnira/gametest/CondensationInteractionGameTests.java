@@ -25,7 +25,11 @@ public final class CondensationInteractionGameTests {
         var t=table(h,true);var p=player(h,t);var q=player(h,t);
         t.setItem(0,new ItemStack(ModItems.SPACETIME_KNOT.get()));
         h.assertTrue(t.work.start(p)&&!t.work.start(q),"Concurrent table work accepted");
-        h.runAfterDelay(199,()->{t.work.tick();h.assertTrue(t.getItem(0).is(ModItems.SPACETIME_KNOT.get())&&p.getData(ModAttachments.MANA).current()==500,"Premature debit or output");});
+        h.assertTrue(t.getUpdateTag(h.getLevel().registryAccess()).getBoolean("Condensing")
+                &&!t.saveWithoutMetadata(h.getLevel().registryAccess()).contains("Condensing"),"Working visual not synced or incorrectly persisted");
+        h.runAfterDelay(19,()->{t.work.tick();h.assertTrue(p.getData(ModAttachments.MANA).current()==500,"Charged before one second");});
+        h.runAfterDelay(20,()->{t.work.tick();t.work.tick();h.assertTrue(p.getData(ModAttachments.MANA).current()==470,"First installment missing or duplicated");});
+        h.runAfterDelay(199,()->{t.work.tick();h.assertTrue(t.getItem(0).is(ModItems.SPACETIME_KNOT.get())&&p.getData(ModAttachments.MANA).current()==230,"Incorrect installments or premature output");});
         h.runAfterDelay(200,()->{t.work.tick();h.assertTrue(t.getItem(0).is(ModItems.PARADOX_DUST.get())&&p.getData(ModAttachments.MANA).current()==200&&q.getData(ModAttachments.MANA).current()==500,"Wrong output or debit");h.succeed();});
     }
     @GameTest(template="spell_arena",timeoutTicks=150) public static void shortClickAndLongHoldDoNotOverlap(GameTestHelper h){
@@ -53,6 +57,18 @@ public final class CondensationInteractionGameTests {
         for(int tick=233;tick<=241;tick++)h.runAtTickTime(tick,()->CondensationChannel.input(p,true,t.getBlockPos()));
         h.runAtTickTime(242,()->{h.assertTrue(t.work.active(),"Fresh press did not retry");CondensationChannel.stop(p);h.succeed();});
     }
+    @GameTest(template="spell_arena",timeoutTicks=80) public static void installmentsCancellationIgnoresDiscount(GameTestHelper h){
+        var t=table(h,false);var p=player(h,t);
+        p.getAttribute(ModAttributes.COST_REDUCTION).setBaseValue(10);
+        p.setData(ModAttachments.MANA,new ManaState(20,500));
+        h.assertTrue(t.work.start(p),"First installment should suffice to start");
+        h.runAfterDelay(20,()->{
+            t.work.tick();
+            h.assertTrue(p.getData(ModAttachments.MANA).current()==0&&!t.work.active()&&t.isEmpty(),"Condensation accepted a discount or shortage produced output");
+            p.setData(ModAttachments.MANA,new ManaState(100,500));h.assertTrue(t.work.start(p),"Restart failed");
+        });
+        h.runAfterDelay(40,()->{t.work.tick();t.work.cancel();h.assertTrue(p.getData(ModAttachments.MANA).current()==80&&t.isEmpty(),"Cancellation refunded invested mana");h.succeed();});
+    }
     @GameTest(template="spell_arena") public static void ingredientCountsCancellationAndDiscount(GameTestHelper h){
         var t=table(h,true);var p=player(h,t);
         p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new ItemStack(ModItems.TIME_WARP_POINT.get(),10));
@@ -61,7 +77,8 @@ public final class CondensationInteractionGameTests {
         t.setItem(0,new ItemStack(ModItems.TIME_WARP_POINT.get(),7));t.work.tick();
         h.assertTrue(!t.work.active()&&!t.work.start(p)&&p.getData(ModAttachments.MANA).current()==500,"Changed ingredients charged mana");
         t.setItem(0,new ItemStack(ModItems.SPACETIME_KNOT.get()));p.getAttribute(ModAttributes.COST_REDUCTION).setBaseValue(10);
-        p.setData(ModAttachments.MANA,new ManaState(290,500));h.assertTrue(t.work.start(p),"Cost reduction ignored");t.work.cancel();
+        p.setData(ModAttachments.MANA,new ManaState(29,500));h.assertTrue(!t.work.start(p),"Discount incorrectly lowered installment");
+        p.setData(ModAttachments.MANA,new ManaState(30,500));h.assertTrue(t.work.start(p),"First installment rejected");t.work.cancel();
         h.assertTrue(t.createMenu(1,p.getInventory(),p)==null,"Condensation still opens UI");h.succeed();
     }
 }

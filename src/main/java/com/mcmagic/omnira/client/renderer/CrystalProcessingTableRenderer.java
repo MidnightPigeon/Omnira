@@ -35,6 +35,11 @@ public final class CrystalProcessingTableRenderer implements BlockEntityRenderer
     public CrystalProcessingTableRenderer(BlockEntityRendererProvider.Context context) {
         itemRenderer = context.getItemRenderer();
     }
+    @Override public net.minecraft.world.phys.AABB getRenderBoundingBox(CrystalProcessingTableBlockEntity table){
+        var bounds=BlockEntityRenderer.super.getRenderBoundingBox(table);
+        return table instanceof com.mcmagic.omnira.block.entity.SimpleCondensationTableBlockEntity condensation && condensation.condensationVisible()
+                ?bounds.expandTowards(0,.7,0):bounds;
+    }
 
     @Override
     public void render(CrystalProcessingTableBlockEntity table, float partialTick, PoseStack pose,
@@ -64,6 +69,11 @@ public final class CrystalProcessingTableRenderer implements BlockEntityRenderer
         pose.translate(.5, 0, .5);
         pose.mulPose(Axis.YP.rotationDegrees(180 - table.getBlockState().getValue(CrystalProcessingTableBlock.FACING).toYRot()));
         pose.translate(-.5, 0, -.5);
+        if(table instanceof com.mcmagic.omnira.block.entity.SimpleCondensationTableBlockEntity condensation){
+            if(condensation.condensing())CondensationWorkVisuals.render(time-condensation.condensationStarted(),Double.POSITIVE_INFINITY,pose,buffers);
+            if(condensation.condensationTailVisible(time))CondensationWorkVisuals.render(time-condensation.condensationTailStarted(),
+                    condensation.condensationTailStopped()-condensation.condensationTailStarted(),pose,buffers);
+        }
         if(table instanceof com.mcmagic.omnira.block.entity.AdvancedCondensationTableBlockEntity) {
             AdvancedCondensationVisuals.render(time,pose,buffers,overlay);
         }

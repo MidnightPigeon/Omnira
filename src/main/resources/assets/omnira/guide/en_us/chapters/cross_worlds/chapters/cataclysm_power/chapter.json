@@ -1,0 +1,18 @@
+{
+  "id": "cataclysm_power",
+  "title": "Power of Cataclysm",
+  "icon": "omnira:monstrous_staff_shaft",
+  "required_mod": "cataclysm",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/cataclysm_staff_tips.json",
+    "entries/cataclysm_abyss_tip.json",
+    "entries/cataclysm_monstrous_staff_shaft.json",
+    "entries/cataclysm_remnant_staff_shaft.json",
+    "entries/cataclysm_ignitium_reinforcement.json",
+    "entries/cataclysm_witherite_reinforcement.json",
+    "entries/cataclysm_cursium_reinforcement.json",
+    "entries/cataclysm_guard_reinforcement.json"
+  ],
+  "chapters": []
+}

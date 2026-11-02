@@ -33,6 +33,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
     }
     @Override public void onRuntimeAvailable(mezz.jei.api.runtime.IJeiRuntime available) {
         runtime=available;
+        if(!com.mcmagic.omnira.item.IndustrialWheelItem.available())runtime.getIngredientManager().removeIngredientsAtRuntime(mezz.jei.api.constants.VanillaTypes.ITEM_STACK,List.of(new ItemStack(ModItems.INDUSTRIAL_WHEEL.get()),new ItemStack(ModItems.INCOMPLETE_INDUSTRIAL_WHEEL.get())));
         runtime.getIngredientManager().removeIngredientsAtRuntime(mezz.jei.api.constants.VanillaTypes.ITEM_STACK,
                 List.of(new ItemStack(ModItems.PERMANENT_VOID_CRYSTAL.get()),new ItemStack(DreamContent.CRYSTAL_COLUMN_CAPITAL.get())));
     }

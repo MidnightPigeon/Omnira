@@ -1,0 +1,76 @@
+{
+  "textures": {
+    "material_0": "create:block/brass_block",
+    "particle": "create:block/brass_block"
+  },
+  "elements": [
+    {
+      "from": [
+        6.75,
+        9.1,
+        7.65
+      ],
+      "to": [
+        9.25,
+        10.5,
+        8.35
+      ],
+      "faces": {
+        "up": {
+          "texture": "#material_0",
+          "uv": [
+            4,
+            4,
+            6.5,
+            4.699999999999999
+          ]
+        },
+        "down": {
+          "texture": "#material_0",
+          "uv": [
+            4,
+            4,
+            6.5,
+            4.699999999999999
+          ]
+        },
+        "north": {
+          "texture": "#material_0",
+          "uv": [
+            4,
+            4,
+            6.5,
+            5.4
+          ]
+        },
+        "south": {
+          "texture": "#material_0",
+          "uv": [
+            4,
+            4,
+            6.5,
+            5.4
+          ]
+        },
+        "east": {
+          "texture": "#material_0",
+          "uv": [
+            4,
+            4,
+            4.699999999999999,
+            5.4
+          ]
+        },
+        "west": {
+          "texture": "#material_0",
+          "uv": [
+            4,
+            4,
+            4.699999999999999,
+            5.4
+          ]
+        }
+      }
+    }
+  ]
+}

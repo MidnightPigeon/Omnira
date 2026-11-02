@@ -99,7 +99,7 @@ public final class AdvancedCondensationGameTests {
         });
     }
     @GameTest(template="spell_arena",timeoutTicks=240)
-    public static void offhandStaffDiscountMatchesDebit(GameTestHelper h) {
+    public static void condensationIgnoresStaffDiscount(GameTestHelper h) {
         var table=table(h);var p=player(h);
         var basic=com.mcmagic.omnira.item.staff.StaffAssembly.basic();
         var staff=new com.mcmagic.omnira.item.staff.StaffAssembly(basic.shaft(),
@@ -125,7 +125,7 @@ public final class AdvancedCondensationGameTests {
         h.assertTrue(menu.start(p),"Discounted conversion cannot start");
         h.runAfterDelay(200,()->{
             menu.tick();
-            h.assertTrue(p.getData(ModAttachments.MANA).current()==217 && table.getItem(0).is(ModItems.PARADOX_DUST.get()),"Displayed discount differs from actual debit");
+            h.assertTrue(p.getData(ModAttachments.MANA).current()==200 && table.getItem(0).is(ModItems.PARADOX_DUST.get()),"Condensation must ignore all mana discounts");
             h.assertTrue(new ItemStack(ModItems.CRUISE_ORB.get()).getRarity()==net.minecraft.world.item.Rarity.UNCOMMON,"Cruise orb rarity must be yellow");
             h.succeed();
         });

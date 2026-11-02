@@ -1,0 +1,166 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "omnira:spiritual_crystal_tip"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "omnira:industrial_wheel"
+    }
+  ],
+  "transitional_item": {
+    "id": "omnira:incomplete_industrial_wheel"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "omnira:incomplete_industrial_wheel"
+        },
+        {
+          "item": "create:brass_casing"
+        }
+      ],
+      "results": [
+        {
+          "id": "omnira:incomplete_industrial_wheel"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "omnira:incomplete_industrial_wheel"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 1000,
+          "fluid": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "omnira:incomplete_industrial_wheel"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "omnira:incomplete_industrial_wheel"
+        },
+        {
+          "item": "create:shaft"
+        }
+      ],
+      "results": [
+        {
+          "id": "omnira:incomplete_industrial_wheel"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "omnira:incomplete_industrial_wheel"
+        },
+        {
+          "item": "omnira:infused_crystal_casing"
+        }
+      ],
+      "results": [
+        {
+          "id": "omnira:incomplete_industrial_wheel"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "omnira:incomplete_industrial_wheel"
+        },
+        {
+          "item": "create:large_cogwheel"
+        }
+      ],
+      "results": [
+        {
+          "id": "omnira:incomplete_industrial_wheel"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "omnira:incomplete_industrial_wheel"
+        },
+        {
+          "item": "create:cogwheel"
+        }
+      ],
+      "results": [
+        {
+          "id": "omnira:incomplete_industrial_wheel"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "omnira:incomplete_industrial_wheel"
+        },
+        {
+          "item": "create:cogwheel"
+        }
+      ],
+      "results": [
+        {
+          "id": "omnira:incomplete_industrial_wheel"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "omnira:incomplete_industrial_wheel"
+        },
+        {
+          "item": "create:precision_mechanism"
+        }
+      ],
+      "results": [
+        {
+          "id": "omnira:incomplete_industrial_wheel"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "omnira:incomplete_industrial_wheel"
+        }
+      ],
+      "results": [
+        {
+          "id": "omnira:incomplete_industrial_wheel"
+        }
+      ]
+    }
+  ]
+}

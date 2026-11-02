@@ -34,12 +34,16 @@ public final class ModularStaffRenderer extends BlockEntityWithoutLevelRenderer 
                         && !p.model().equals(StaffPart.EMPTY_MODEL)).count();
         double time = mc.level == null ? 0 : mc.level.getGameTime()
                 + mc.getTimer().getGameTimeDeltaPartialTick(false);
+        pose.pushPose();StaffCastMotion.apply(stack,context,pose,time);
         int runeIndex = 0;
         // ItemRenderer already applied the staff's display transform and origin offset.
         for (var partStack : components) {
             if (partStack.isEmpty()) continue;
             var definition = StaffPart.of(partStack);
             if (definition == null || definition.model().equals(StaffPart.EMPTY_MODEL)) continue;
+            if(BossStaffTipRenderer.supports(partStack)){
+                BossStaffTipRenderer.renderTip(partStack,pose,buffers,light,overlay,time);continue;
+            }
             var model = mc.getModelManager().getModel(part(definition.model()));
             pose.pushPose();
             if (definition.role() == StaffPart.Role.UPGRADE
@@ -69,5 +73,6 @@ public final class ModularStaffRenderer extends BlockEntityWithoutLevelRenderer 
             }
             pose.popPose();
         }
+        pose.popPose();
     }
 }

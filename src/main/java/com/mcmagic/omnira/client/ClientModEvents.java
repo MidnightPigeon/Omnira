@@ -62,6 +62,10 @@ public final class ClientModEvents {
     @SubscribeEvent
     public static void additionalModels(net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional event) {
         event.register(com.mcmagic.omnira.client.renderer.SpeedUpgradeRenderer.MODEL);
+        if(com.mcmagic.omnira.item.IndustrialWheelItem.available()){
+            for(String part:new String[]{"body","glass","support","hand","vane"})event.register(com.mcmagic.omnira.client.renderer.IndustrialWheelRenderer.model(part));
+            event.register(com.mcmagic.omnira.client.renderer.IndustrialWheelRenderer.gear(true));event.register(com.mcmagic.omnira.client.renderer.IndustrialWheelRenderer.gear(false));
+        }
         for(String part:new String[]{"mystery","flow","grain","source","frame","genesis_grain"})event.register(com.mcmagic.omnira.client.renderer.ParadoxMaterialRenderer.model(part));
         for(String id:com.mcmagic.omnira.item.RitualSwordUpgrades.NAIL_IDS)
             event.register(com.mcmagic.omnira.client.renderer.RitualSwordUpgradeRenderer.model(id,"body"));
@@ -327,6 +331,12 @@ public final class ClientModEvents {
                 return renderer;
             }
         },com.mcmagic.omnira.registry.ModItems.SPACETIME_AGGREGATE_TIP.get());
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
+            private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
+            @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
+                if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.BossStaffTipRenderer();return renderer;
+            }
+        },com.mcmagic.omnira.registry.ModItems.STORM_TIP.get(),com.mcmagic.omnira.registry.ModItems.ABYSS_TIP.get());
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
             private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
@@ -341,6 +351,10 @@ public final class ClientModEvents {
                 return renderer;
             }
         },com.mcmagic.omnira.registry.ModItems.MODULAR_STAFF.get());
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
+            private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
+            @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.IndustrialWheelRenderer();return renderer;}
+        },com.mcmagic.omnira.registry.ModItems.INDUSTRIAL_WHEEL.get());
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
             private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {

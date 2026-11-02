@@ -1,0 +1,150 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "storm_shell": "omnira:item/storm_shell",
+    "storm_core": "omnira:item/storm_core",
+    "abyss_shell": "omnira:item/abyss_shell",
+    "abyss_core": "omnira:item/abyss_core",
+    "boss_tip_socket": "omnira:item/boss_tip_socket"
+  },
+  "elements": [
+    {
+      "from": [
+        6.5,
+        12,
+        6.5
+      ],
+      "to": [
+        9.5,
+        14,
+        9.5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#boss_tip_socket",
+          "uv": [
+            6,
+            6,
+            9.0,
+            9.0
+          ]
+        },
+        "down": {
+          "texture": "#boss_tip_socket",
+          "uv": [
+            6,
+            6,
+            9.0,
+            9.0
+          ]
+        },
+        "north": {
+          "texture": "#boss_tip_socket",
+          "uv": [
+            6,
+            6,
+            9.0,
+            8
+          ]
+        },
+        "south": {
+          "texture": "#boss_tip_socket",
+          "uv": [
+            6,
+            6,
+            9.0,
+            8
+          ]
+        },
+        "east": {
+          "texture": "#boss_tip_socket",
+          "uv": [
+            6,
+            6,
+            9.0,
+            8
+          ]
+        },
+        "west": {
+          "texture": "#boss_tip_socket",
+          "uv": [
+            6,
+            6,
+            9.0,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        5.5,
+        14,
+        5.5
+      ],
+      "to": [
+        10.5,
+        15.5,
+        10.5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#boss_tip_socket",
+          "uv": [
+            6,
+            6,
+            11.0,
+            11.0
+          ]
+        },
+        "down": {
+          "texture": "#boss_tip_socket",
+          "uv": [
+            6,
+            6,
+            11.0,
+            11.0
+          ]
+        },
+        "north": {
+          "texture": "#boss_tip_socket",
+          "uv": [
+            6,
+            6,
+            11.0,
+            7.5
+          ]
+        },
+        "south": {
+          "texture": "#boss_tip_socket",
+          "uv": [
+            6,
+            6,
+            11.0,
+            7.5
+          ]
+        },
+        "east": {
+          "texture": "#boss_tip_socket",
+          "uv": [
+            6,
+            6,
+            11.0,
+            7.5
+          ]
+        },
+        "west": {
+          "texture": "#boss_tip_socket",
+          "uv": [
+            6,
+            6,
+            11.0,
+            7.5
+          ]
+        }
+      }
+    }
+  ]
+}

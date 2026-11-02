@@ -5,12 +5,18 @@
   "recipes": false,
   "text": [
     "Direct Create connections let Mana Engines provide stress at a fixed 16 rpm, converting configured pulse potential into capacity. Engine controls show potential; Create components show rotation and stress.",
-    "Stress is occupied, not consumed. Native machines prioritize pulses. External kinetic input requires at least 16 rpm and converts into effective potential according to each machine; machines that support acceleration gain efficiency from it. See Magic Pulses for calculations. Crystal and Infused Crystal Casings cover kinetic components and pipes. Spacetime Ports connect real shafts across different orientations."
+    "Stress is occupied, not consumed. Native machines prioritize pulses. External kinetic input requires at least 16 rpm and converts into effective potential according to each machine; machines that support acceleration gain efficiency from it. See Magic Pulses for calculations. Crystal and Infused Crystal Casings cover kinetic components and pipes. Spacetime Ports connect real shafts across different orientations.",
+    "Create sequenced assembly also offers a special staff: the Industrial Wheel."
   ],
   "links": [
     {
       "target": "magic_pulse",
       "label": "Magic Pulses"
+    },
+    {
+      "required_mod": "create",
+      "target": "industrial_hand",
+      "label": "The Hand of Industry"
     }
   ]
 }

@@ -1281,5 +1281,22 @@
   "message.omnira.fulfillment_star.no_effect": "当前没有可以完善的亲和或需要解除的诅咒",
   "tooltip.omnira.affinity.dream.2.perfected": "身体半透明。",
   "tooltip.omnira.affinity.dream.3.perfected": "自由飞行；时运 +1，抢夺 +1。",
-  "tooltip.omnira.affinity.perfected": "完满：法力 +100，法强/生命吸取/减伤 +10%；无背弃代价"
+  "tooltip.omnira.affinity.perfected": "完满：法力 +100，法强/生命吸取/减伤 +10%；无背弃代价",
+  "item.omnira.storm_tip": "风暴杖端",
+  "item.omnira.abyss_tip": "深渊杖端",
+  "tooltip.omnira.staff.abyss": "伤害随机附加30秒深渊诅咒Ⅱ或深渊恐惧Ⅰ；暗雾每次施法对各目标仅触发一次",
+  "tooltip.omnira.staff.selection_bonus": "目标选择范围 +%s%%",
+  "item.omnira.monstrous_staff_shaft": "恶兽杖体",
+  "item.omnira.remnant_staff_shaft": "遗魂杖体",
+  "item.omnira.ignitium_reinforcement": "腾炎加固部件",
+  "item.omnira.witherite_reinforcement": "凋灵合金加固部件",
+  "item.omnira.cursium_reinforcement": "咒魂加固部件",
+  "item.omnira.guard_reinforcement": "守卫加固部件",
+  "tooltip.omnira.staff.cursium": "手持成品法杖时：生命吸取 +10%",
+  "tooltip.omnira.staff.monstrous": "手持成品法杖时：总伤害 +10%",
+  "tooltip.omnira.staff.guard": "手持成品法杖时：伤害减免 10%",
+  "item.omnira.industrial_wheel": "工业之轮",
+  "item.omnira.incomplete_industrial_wheel": "未完成的工业之轮",
+  "tooltip.omnira.industrial_wheel.toggle": "右键开启连续施法，再次右键停止；忽略法术链末尾冷却",
+  "tooltip.omnira.industrial_wheel.edit": "潜行右键编辑格栅"
 }

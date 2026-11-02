@@ -88,9 +88,11 @@ public record StaffAssembly(ItemStack shaft,ItemStack reinforcement,ItemStack ti
         int count=Math.clamp(shots,1,64);
         return new Stats(Math.max(-.99,power),Math.max(0,reduction),count,
                 Math.clamp(cooldown,Math.max(com.mcmagic.omnira.spell.SpellCooldowns.MIN_BASE_TICKS,(count-1)*StaffEvents.SHOT_INTERVAL+1),72000),
-                Math.clamp(1+speed,1,11),Math.clamp(1+range,1,3),Math.clamp(cooldownReduction,0,com.mcmagic.omnira.spell.SpellCooldowns.MAX_REDUCTION));
+                Math.clamp(1+speed,1,11),Math.clamp(1+range,1,3),Math.clamp(cooldownReduction,0,com.mcmagic.omnira.spell.SpellCooldowns.MAX_REDUCTION),tip.is(ModItems.STORM_TIP.get())?.5:0);
     }
-    public record Stats(double power,double reduction,int shots,int cooldownTicks,double speedMultiplier,double rangeMultiplier,double cooldownReduction) {}
+    public record Stats(double power,double reduction,int shots,int cooldownTicks,double speedMultiplier,double rangeMultiplier,double cooldownReduction,double selectionBonus) {
+        public Stats(double power,double reduction,int shots,int cooldownTicks,double speedMultiplier,double rangeMultiplier,double cooldownReduction){this(power,reduction,shots,cooldownTicks,speedMultiplier,rangeMultiplier,cooldownReduction,0);}
+    }
     public ItemStack create() {
         var result=new ItemStack(ModItems.MODULAR_STAFF.get());result.set(ModDataComponents.STAFF_ASSEMBLY,this);return result;
     }

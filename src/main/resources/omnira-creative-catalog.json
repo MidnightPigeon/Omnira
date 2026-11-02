@@ -7,6 +7,7 @@
         "guidance_orb",
         "universal_understanding",
         "modular_staff",
+        "industrial_wheel",
         "infused_grimoire",
         "sanctified_grimoire",
         "corrupted_grimoire",
@@ -55,7 +56,9 @@
         "wooden_staff_shaft",
         "shadow_staff_shaft",
         "time_staff_shaft",
-        "blaze_staff_shaft"
+        "blaze_staff_shaft",
+        "monstrous_staff_shaft",
+        "remnant_staff_shaft"
       ]
     },
     {
@@ -64,7 +67,11 @@
         "iron_reinforcement",
         "diamond_reinforcement",
         "netherite_reinforcement",
-        "light_core_reinforcement"
+        "light_core_reinforcement",
+        "ignitium_reinforcement",
+        "witherite_reinforcement",
+        "cursium_reinforcement",
+        "guard_reinforcement"
       ]
     },
     {
@@ -73,6 +80,8 @@
         "spiritual_crystal_tip",
         "infused_crystal_tip",
         "spacetime_aggregate_tip",
+        "storm_tip",
+        "abyss_tip",
         "multi_arcane_tip",
         "elemental_fusion_tip",
         "amplification_rune",

@@ -38,6 +38,7 @@ public final class StaffItem extends Item {
         int spellCooldown=nextSpellCooldown(player);
         int successes=castSequenceContents(player,context,1);
         if(successes==0) return InteractionResultHolder.fail(held);
+        held.set(ModDataComponents.STAFF_CAST_AT,player.level().getGameTime());
         int cooldown=Math.max(spellCooldown,SpellCooldowns.ticks(baseCooldown,context.cooldownReduction(),1));
         player.getCooldowns().addCooldown(this,cooldown+(spellCooldown>0?0:(stats.shots()-1)*com.mcmagic.omnira.item.staff.StaffEvents.SHOT_INTERVAL));
         com.mcmagic.omnira.item.staff.StaffEvents.queue(player,held,spellCooldown>0?0:stats.shots()-1,cooldown);
@@ -63,9 +64,11 @@ public final class StaffItem extends Item {
     }
     public static int castSequence(ServerPlayer player,ItemStack staff,int count) {
         if(!(staff.getItem() instanceof StaffItem)) return 0;
-        return castSequenceContents(player,StaffCastContext.capture(player,staff),count);
+        int successes=castSequenceContents(player,StaffCastContext.capture(player,staff),count);
+        if(successes>0)staff.set(ModDataComponents.STAFF_CAST_AT,player.level().getGameTime());
+        return successes;
     }
-    private static int castSequenceContents(ServerPlayer player,StaffCastContext context,int count) {
+    public static int castSequenceContents(ServerPlayer player,StaffCastContext context,int count) {
         ItemStack grid=CrystalGridMenu.locate(player,-2);
         if(!(grid.getItem() instanceof CrystalGridItem item)) {
             player.displayClientMessage(Component.translatable("message.omnira.grid.missing"),true);return 0;
@@ -90,7 +93,7 @@ public final class StaffItem extends Item {
                 player.displayClientMessage(Component.translatable("message.omnira.mana.insufficient"),true);break;
             }
             if(!SpellCasting.castFrom(player,grid,crystal.get(ModDataComponents.SPELL_PATTERN),payload,context.power(),
-                    new SpellCasting.Modifiers(context.stats().speedMultiplier(),context.stats().rangeMultiplier()))) {
+                    new SpellCasting.Modifiers(context.stats().speedMultiplier(),context.stats().rangeMultiplier(),context.stats().selectionBonus()))) {
                 player.displayClientMessage(Component.translatable("message.omnira.crystal.invalid_target"),true);break;
             }
             player.setData(ModAttachments.MANA,player.getData(ModAttachments.MANA).spend(cost));
@@ -99,6 +102,12 @@ public final class StaffItem extends Item {
             successes++;
         }
         return successes;
+    }
+    @Override public boolean shouldCauseReequipAnimation(ItemStack oldStack,ItemStack newStack,boolean slotChanged){
+        if(slotChanged)return true;
+        var oldCopy=oldStack.copy();var newCopy=newStack.copy();
+        oldCopy.remove(ModDataComponents.STAFF_CAST_AT);newCopy.remove(ModDataComponents.STAFF_CAST_AT);
+        return !ItemStack.matches(oldCopy,newCopy);
     }
     @Override public void appendHoverText(ItemStack stack,TooltipContext context,List<Component> lines,TooltipFlag flag) {
         var assembly=com.mcmagic.omnira.item.staff.StaffAssembly.of(stack);
@@ -110,6 +119,8 @@ public final class StaffItem extends Item {
                         assembly.usedSlots(kind),assembly.slotCapacity(kind)).withStyle(net.minecraft.ChatFormatting.GRAY));
         } else lines.add(Component.translatable("tooltip.omnira.staff.details").withStyle(net.minecraft.ChatFormatting.DARK_GRAY));
         var stats=assembly.stats();
+        if(assembly.tip().is(com.mcmagic.omnira.registry.ModItems.ABYSS_TIP.get()))lines.add(Component.translatable("tooltip.omnira.staff.abyss").withStyle(net.minecraft.ChatFormatting.DARK_PURPLE));
+        if(stats.selectionBonus()>0)lines.add(Component.translatable("tooltip.omnira.staff.selection_bonus",50).withStyle(net.minecraft.ChatFormatting.AQUA));
         if(stats.rangeMultiplier()>1) lines.add(Component.translatable("tooltip.omnira.staff.range").withStyle(net.minecraft.ChatFormatting.AQUA));
         if(stats.speedMultiplier()>1) lines.add(Component.translatable("tooltip.omnira.staff.speed",
                 Math.round((stats.speedMultiplier()-1)*100)).withStyle(net.minecraft.ChatFormatting.AQUA));

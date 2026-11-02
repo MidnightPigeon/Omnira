@@ -362,7 +362,7 @@ public final class ModularStaffGameTests {
             }
         }
         // This is a snapshot of today's registry, never a crafting limit or variant table.
-        h.assertTrue(combinations == 80, "Current registered part combination count changed: " + combinations);
+        h.assertTrue(combinations == 336, "Current registered part combination count changed: " + combinations);
         var basic = StaffAssembly.basic();
         for (int slot : new int[]{0, 3, 6}) {
             var missing = layout(basic.shaft(), basic.reinforcement(), basic.tip());
@@ -551,6 +551,7 @@ public final class ModularStaffGameTests {
         h.assertTrue(StaffEvents.SHOT_INTERVAL == 6, "Burst interval changed");
         use(h, caster, true);
         state(h, caster, 80, 1);
+        h.assertTrue(caster.staff().has(ModDataComponents.STAFF_CAST_AT),"Successful spell did not trigger casting gesture");
         use(h, caster, false);
         state(h, caster, 80, 1);
         long started = h.getLevel().getGameTime();

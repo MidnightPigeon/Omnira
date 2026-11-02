@@ -4,8 +4,8 @@
   "title": "Advanced Condensation Table",
   "text": [
     "A light-source crystal tabletop rests on resonance crystal legs, with a Primordial Spell Core at its center.",
-    "Briefly right-click the center while holding an ingredient to place the recipe quantity. If an item is already there, a brief click retrieves it. Hold right-click anywhere, including the center, to channel mana. After 10 seconds, the ingredient becomes the result for 300 base mana, charged on completion. Cost reductions apply.",
-    "Releasing, moving away, changing ingredients or running short of mana cancels condensation. After a mana shortage, release and press again to retry. Holding never triggers a brief-click transfer."
+    "Briefly right-click the center while holding an ingredient to place the recipe quantity. If an item is already there, a brief click retrieves it. Hold right-click anywhere, including the center, to channel mana. After 10 seconds, the ingredient becomes the result for 300 mana, paid in equal installments once per second. Mana cost reductions do not apply.",
+    "Releasing, moving away, changing ingredients or running short of mana cancels condensation; mana already spent is not refunded. After a mana shortage, release and press again to retry. Holding never triggers a brief-click transfer."
   ],
   "recipes": true
 }

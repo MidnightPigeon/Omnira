@@ -1,0 +1,10 @@
+{
+  "id": "cataclysm_remnant_staff_shaft",
+  "title": "Remnant Staff Shaft",
+  "item": "omnira:remnant_staff_shaft",
+  "text": [
+    "Crafted by processing Remnant Skull in the center of an Arcane Assembly Table, with the outer slots empty.",
+    "It inherits the remnant’s enduring power, sustaining mana through long journeys."
+  ],
+  "recipes": true
+}

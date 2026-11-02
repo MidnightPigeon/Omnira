@@ -1,0 +1,643 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "horn": "omnira:item/cataclysm_staff_horn",
+    "ember": "omnira:item/cataclysm_staff_ember",
+    "particle": "omnira:item/cataclysm_staff_horn"
+  },
+  "elements": [
+    {
+      "from": [
+        7,
+        -8,
+        7
+      ],
+      "to": [
+        8,
+        -7,
+        8
+      ],
+      "faces": {
+        "up": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            3
+          ]
+        },
+        "down": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            3
+          ]
+        },
+        "north": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            3
+          ]
+        },
+        "south": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            3
+          ]
+        },
+        "east": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            3
+          ]
+        },
+        "west": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7,
+        -6,
+        7
+      ],
+      "to": [
+        8,
+        5,
+        8
+      ],
+      "faces": {
+        "up": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            3
+          ]
+        },
+        "down": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            3
+          ]
+        },
+        "north": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            13
+          ]
+        },
+        "south": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            13
+          ]
+        },
+        "east": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            13
+          ]
+        },
+        "west": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            13
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7,
+        6,
+        7
+      ],
+      "to": [
+        8,
+        11,
+        8
+      ],
+      "faces": {
+        "up": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            3
+          ]
+        },
+        "down": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            3
+          ]
+        },
+        "north": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            7
+          ]
+        },
+        "south": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            7
+          ]
+        },
+        "east": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            7
+          ]
+        },
+        "west": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            7
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        6,
+        7
+      ],
+      "to": [
+        7.25,
+        10.75,
+        8
+      ],
+      "faces": {
+        "up": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            2.75,
+            3
+          ]
+        },
+        "down": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            2.75,
+            3
+          ]
+        },
+        "north": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            2.75,
+            6.75
+          ]
+        },
+        "south": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            2.75,
+            6.75
+          ]
+        },
+        "east": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            6.75
+          ]
+        },
+        "west": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            6.75
+          ]
+        }
+      },
+      "rotation": {
+        "origin": [
+          7.5,
+          6,
+          7.5
+        ],
+        "axis": "z",
+        "angle": 22.5
+      }
+    },
+    {
+      "from": [
+        7.75,
+        6,
+        7
+      ],
+      "to": [
+        8.5,
+        10.75,
+        8
+      ],
+      "faces": {
+        "up": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            2.75,
+            3
+          ]
+        },
+        "down": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            2.75,
+            3
+          ]
+        },
+        "north": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            2.75,
+            6.75
+          ]
+        },
+        "south": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            2.75,
+            6.75
+          ]
+        },
+        "east": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            6.75
+          ]
+        },
+        "west": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            6.75
+          ]
+        }
+      },
+      "rotation": {
+        "origin": [
+          7.5,
+          6,
+          7.5
+        ],
+        "axis": "z",
+        "angle": -22.5
+      }
+    },
+    {
+      "from": [
+        6,
+        6,
+        7
+      ],
+      "to": [
+        9,
+        6.75,
+        8
+      ],
+      "faces": {
+        "up": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            5,
+            3
+          ]
+        },
+        "down": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            5,
+            3
+          ]
+        },
+        "north": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            5,
+            2.75
+          ]
+        },
+        "south": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            5,
+            2.75
+          ]
+        },
+        "east": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            2.75
+          ]
+        },
+        "west": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            3,
+            2.75
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7.05,
+        7.25,
+        6.8
+      ],
+      "to": [
+        7.95,
+        9.75,
+        7
+      ],
+      "faces": {
+        "up": {
+          "texture": "#ember",
+          "uv": [
+            2,
+            2,
+            2.9000000000000004,
+            2.2
+          ]
+        },
+        "down": {
+          "texture": "#ember",
+          "uv": [
+            2,
+            2,
+            2.9000000000000004,
+            2.2
+          ]
+        },
+        "north": {
+          "texture": "#ember",
+          "uv": [
+            2,
+            2,
+            2.9000000000000004,
+            4.5
+          ]
+        },
+        "south": {
+          "texture": "#ember",
+          "uv": [
+            2,
+            2,
+            2.9000000000000004,
+            4.5
+          ]
+        },
+        "east": {
+          "texture": "#ember",
+          "uv": [
+            2,
+            2,
+            2.2,
+            4.5
+          ]
+        },
+        "west": {
+          "texture": "#ember",
+          "uv": [
+            2,
+            2,
+            2.2,
+            4.5
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        -5,
+        6.5
+      ],
+      "to": [
+        8.5,
+        -4.4,
+        8.5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            4.0,
+            4.0
+          ]
+        },
+        "down": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            4.0,
+            4.0
+          ]
+        },
+        "north": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            4.0,
+            2.5999999999999996
+          ]
+        },
+        "south": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            4.0,
+            2.5999999999999996
+          ]
+        },
+        "east": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            4.0,
+            2.5999999999999996
+          ]
+        },
+        "west": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            4.0,
+            2.5999999999999996
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        -3,
+        6.5
+      ],
+      "to": [
+        8.5,
+        -2.4,
+        8.5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            4.0,
+            4.0
+          ]
+        },
+        "down": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            4.0,
+            4.0
+          ]
+        },
+        "north": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            4.0,
+            2.6
+          ]
+        },
+        "south": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            4.0,
+            2.6
+          ]
+        },
+        "east": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            4.0,
+            2.6
+          ]
+        },
+        "west": {
+          "texture": "#horn",
+          "uv": [
+            2,
+            2,
+            4.0,
+            2.6
+          ]
+        }
+      }
+    }
+  ],
+  "parent": "minecraft:block/block",
+  "gui_light": "side",
+  "render_type": "minecraft:cutout"
+}

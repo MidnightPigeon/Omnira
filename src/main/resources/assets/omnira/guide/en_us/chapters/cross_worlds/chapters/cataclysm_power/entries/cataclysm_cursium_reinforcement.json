@@ -1,0 +1,10 @@
+{
+  "id": "cataclysm_cursium_reinforcement",
+  "title": "Cursium Reinforcement",
+  "item": "omnira:cursium_reinforcement",
+  "text": [
+    "Crafted by processing Cursium Ingot in the center of an Arcane Assembly Table, with the outer slots empty.",
+    "It inherits Cursium’s life-stealing power, drawing vitality from wounded foes."
+  ],
+  "recipes": true
+}

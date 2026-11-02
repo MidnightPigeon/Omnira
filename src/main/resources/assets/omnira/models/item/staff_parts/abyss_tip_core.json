@@ -1,0 +1,354 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "storm_shell": "omnira:item/storm_shell",
+    "storm_core": "omnira:item/storm_core",
+    "abyss_shell": "omnira:item/abyss_shell",
+    "abyss_core": "omnira:item/abyss_core",
+    "boss_tip_socket": "omnira:item/boss_tip_socket"
+  },
+  "elements": [
+    {
+      "from": [
+        7.5,
+        17.5,
+        7.5
+      ],
+      "to": [
+        8.5,
+        18.5,
+        8.5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            7.0,
+            7.0
+          ]
+        },
+        "down": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            7.0,
+            7.0
+          ]
+        },
+        "north": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            7.0,
+            7.0
+          ]
+        },
+        "south": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            7.0,
+            7.0
+          ]
+        },
+        "east": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            7.0,
+            7.0
+          ]
+        },
+        "west": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            7.0,
+            7.0
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7.0,
+        18.5,
+        7.0
+      ],
+      "to": [
+        9.0,
+        19.5,
+        9.0
+      ],
+      "faces": {
+        "up": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            8.0,
+            8.0
+          ]
+        },
+        "down": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            8.0,
+            8.0
+          ]
+        },
+        "north": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            8.0,
+            7.0
+          ]
+        },
+        "south": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            8.0,
+            7.0
+          ]
+        },
+        "east": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            8.0,
+            7.0
+          ]
+        },
+        "west": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            8.0,
+            7.0
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        19.5,
+        6.5
+      ],
+      "to": [
+        9.5,
+        20.5,
+        9.5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            9.0,
+            9.0
+          ]
+        },
+        "down": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            9.0,
+            9.0
+          ]
+        },
+        "north": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            9.0,
+            7.0
+          ]
+        },
+        "south": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            9.0,
+            7.0
+          ]
+        },
+        "east": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            9.0,
+            7.0
+          ]
+        },
+        "west": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            9.0,
+            7.0
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7.0,
+        20.5,
+        7.0
+      ],
+      "to": [
+        9.0,
+        21.5,
+        9.0
+      ],
+      "faces": {
+        "up": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            8.0,
+            8.0
+          ]
+        },
+        "down": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            8.0,
+            8.0
+          ]
+        },
+        "north": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            8.0,
+            7.0
+          ]
+        },
+        "south": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            8.0,
+            7.0
+          ]
+        },
+        "east": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            8.0,
+            7.0
+          ]
+        },
+        "west": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            8.0,
+            7.0
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7.5,
+        21.5,
+        7.5
+      ],
+      "to": [
+        8.5,
+        22.5,
+        8.5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            7.0,
+            7.0
+          ]
+        },
+        "down": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            7.0,
+            7.0
+          ]
+        },
+        "north": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            7.0,
+            7.0
+          ]
+        },
+        "south": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            7.0,
+            7.0
+          ]
+        },
+        "east": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            7.0,
+            7.0
+          ]
+        },
+        "west": {
+          "texture": "#abyss_core",
+          "uv": [
+            6,
+            6,
+            7.0,
+            7.0
+          ]
+        }
+      }
+    }
+  ]
+}

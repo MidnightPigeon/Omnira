@@ -1,0 +1,10 @@
+{
+  "id": "cataclysm_staff_tips",
+  "title": "风暴杖端",
+  "item": "omnira:storm_tip",
+  "text": [
+    "将风暴精华置于普通装配台中央，外围留空，加工即可获得。",
+    "继承了风暴迅疾而遥远的力量，让法术如疾风般奔赴远方。"
+  ],
+  "recipes": true
+}

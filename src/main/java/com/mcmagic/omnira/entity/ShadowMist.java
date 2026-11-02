@@ -18,6 +18,9 @@ public final class ShadowMist extends Entity {
     private boolean excludeOwner;
     public void excludeOwner(boolean value){excludeOwner=value;}
     private boolean seeking,holy;
+    private java.util.UUID abyssCast;
+    public void abyssCast(java.util.UUID id){abyssCast=id;}
+    public java.util.UUID abyssCast(){return abyssCast;}
     public boolean spellCloud(){return entityData.get(SPELL_SIZE)>0;}
     public int lifetime(){return spellCloud()?entityData.get(SPELL_LIFE):LIFETIME;}
     public void configureSpell(Entity owner,com.mcmagic.omnira.spell.SpellEffect effect,double power,double range,boolean holy) {
@@ -106,6 +109,12 @@ public final class ShadowMist extends Entity {
         if(caster!=null)tag.putUUID("Caster",caster);
         tag.putFloat("SpellDamage",spellDamage);tag.putBoolean("Seeking",seeking);tag.putBoolean("Holy",holy);
         tag.putBoolean("ExcludeOwner",excludeOwner);
+        if(abyssCast!=null){
+            tag.putUUID("AbyssCast",abyssCast);
+            var hits=new net.minecraft.nbt.ListTag();
+            for(var id:com.mcmagic.omnira.compat.AbyssTipEffects.mistHits(level(),abyssCast))hits.add(net.minecraft.nbt.NbtUtils.createUUID(id));
+            tag.put("AbyssHits",hits);
+        }
     }
     @Override protected void readAdditionalSaveData(CompoundTag tag) {
         entityData.set(SPELL_SIZE,Math.clamp(tag.getFloat("SpellSize"),0,9));
@@ -113,6 +122,9 @@ public final class ShadowMist extends Entity {
         caster=tag.hasUUID("Caster")?tag.getUUID("Caster"):null;
         spellDamage=Math.clamp(tag.getFloat("SpellDamage"),0,100000);seeking=tag.getBoolean("Seeking");holy=tag.getBoolean("Holy");
         excludeOwner=tag.getBoolean("ExcludeOwner");
+        abyssCast=tag.hasUUID("AbyssCast")?tag.getUUID("AbyssCast"):null;
+        if(abyssCast!=null)for(var hit:tag.getList("AbyssHits",net.minecraft.nbt.Tag.TAG_INT_ARRAY))
+            com.mcmagic.omnira.compat.AbyssTipEffects.mistHits(level(),abyssCast).add(net.minecraft.nbt.NbtUtils.loadUUID(hit));
         entityData.set(AGE,Math.clamp(tag.getInt("MistAge"),0,lifetime()));
         entityData.set(COLLAPSE_START,tag.contains("CollapseStart")?Math.clamp(tag.getInt("CollapseStart"),-1,age()):-1);
     }

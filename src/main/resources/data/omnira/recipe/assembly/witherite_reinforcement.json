@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "cataclysm"
+    }
+  ],
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "outer_shapeless": true,
+  "slots": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "cataclysm:witherite_ingot"
+    }
+  ],
+  "result": {
+    "id": "omnira:witherite_reinforcement",
+    "count": 1
+  }
+}

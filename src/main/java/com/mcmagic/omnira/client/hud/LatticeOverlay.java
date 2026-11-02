@@ -22,9 +22,9 @@ public final class LatticeOverlay {
         var mc=Minecraft.getInstance();
         var player=mc.player;
         if(player==null || mc.screen!=null || mc.options.hideGui || !player.isAlive() || player.isSpectator()) return;
-        ItemStack staff=player.getMainHandItem().getItem() instanceof StaffItem?player.getMainHandItem():player.getOffhandItem();
-        if(!(staff.getItem() instanceof StaffItem))return;
-        var stats=com.mcmagic.omnira.item.staff.StaffAssembly.of(staff).stats();
+        ItemStack staff=(player.getMainHandItem().getItem() instanceof StaffItem||player.getMainHandItem().getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem)?player.getMainHandItem():player.getOffhandItem();
+        if(!(staff.getItem() instanceof StaffItem)&&!(staff.getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem))return;
+        var stats=staff.getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem?com.mcmagic.omnira.item.IndustrialWheelItem.STATS:com.mcmagic.omnira.item.staff.StaffAssembly.of(staff).stats();
         ItemStack grid=CrystalGridMenu.locate(player,-2);
         if(!(grid.getItem() instanceof CrystalGridItem item)) return;
         NonNullList<ItemStack> stacks=NonNullList.withSize(item.capacity,ItemStack.EMPTY);

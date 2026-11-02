@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "cataclysm"
+    }
+  ],
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "outer_shapeless": true,
+  "slots": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "cataclysm:cursium_ingot"
+    }
+  ],
+  "result": {
+    "id": "omnira:cursium_reinforcement",
+    "count": 1
+  }
+}

@@ -1,0 +1,502 @@
+{
+  "type": "omnira:prepared_spell",
+  "conditions": [],
+  "chance": 0.05,
+  "replaceable": {
+    "minecraft:chests/abandoned_mineshaft": [
+      "minecraft:activator_rail",
+      "minecraft:beetroot_seeds",
+      "minecraft:book",
+      "minecraft:bread",
+      "minecraft:coal",
+      "minecraft:detector_rail",
+      "minecraft:glow_berries",
+      "minecraft:melon_seeds",
+      "minecraft:powered_rail",
+      "minecraft:pumpkin_seeds",
+      "minecraft:rail",
+      "minecraft:redstone",
+      "minecraft:torch"
+    ],
+    "minecraft:chests/ancient_city": [
+      "minecraft:bone",
+      "minecraft:book",
+      "minecraft:candle",
+      "minecraft:coal",
+      "minecraft:glow_berries",
+      "minecraft:soul_torch"
+    ],
+    "minecraft:chests/ancient_city_ice_box": [
+      "minecraft:baked_potato",
+      "minecraft:packed_ice",
+      "minecraft:snowball"
+    ],
+    "minecraft:chests/bastion_bridge": [
+      "minecraft:arrow",
+      "minecraft:gold_nugget",
+      "minecraft:iron_nugget",
+      "minecraft:leather",
+      "minecraft:spectral_arrow",
+      "minecraft:string"
+    ],
+    "minecraft:chests/bastion_hoglin_stable": [
+      "minecraft:arrow",
+      "minecraft:cooked_porkchop",
+      "minecraft:crimson_fungus",
+      "minecraft:crimson_nylium",
+      "minecraft:crimson_roots",
+      "minecraft:gold_nugget",
+      "minecraft:leather",
+      "minecraft:porkchop",
+      "minecraft:soul_sand",
+      "minecraft:string"
+    ],
+    "minecraft:chests/bastion_other": [
+      "minecraft:arrow",
+      "minecraft:book",
+      "minecraft:cooked_porkchop",
+      "minecraft:gold_nugget",
+      "minecraft:iron_nugget",
+      "minecraft:magma_cream",
+      "minecraft:spectral_arrow",
+      "minecraft:string"
+    ],
+    "minecraft:chests/bastion_treasure": [
+      "minecraft:magma_cream",
+      "minecraft:quartz",
+      "minecraft:spectral_arrow"
+    ],
+    "minecraft:chests/buried_treasure": [
+      "minecraft:cooked_cod",
+      "minecraft:cooked_salmon"
+    ],
+    "minecraft:chests/desert_pyramid": [
+      "minecraft:bone",
+      "minecraft:book",
+      "minecraft:gunpowder",
+      "minecraft:rotten_flesh",
+      "minecraft:sand",
+      "minecraft:spider_eye",
+      "minecraft:string"
+    ],
+    "minecraft:chests/end_city_treasure": [
+      "minecraft:beetroot_seeds"
+    ],
+    "minecraft:chests/igloo_chest": [
+      "minecraft:apple",
+      "minecraft:coal",
+      "minecraft:gold_nugget",
+      "minecraft:rotten_flesh",
+      "minecraft:wheat"
+    ],
+    "minecraft:chests/jungle_temple": [
+      "minecraft:bamboo",
+      "minecraft:bone",
+      "minecraft:book",
+      "minecraft:rotten_flesh"
+    ],
+    "minecraft:chests/nether_bridge": [
+      "minecraft:nether_wart"
+    ],
+    "minecraft:chests/pillager_outpost": [
+      "minecraft:arrow",
+      "minecraft:book",
+      "minecraft:carrot",
+      "minecraft:dark_oak_log",
+      "minecraft:potato",
+      "minecraft:string",
+      "minecraft:wheat"
+    ],
+    "minecraft:chests/ruined_portal": [
+      "minecraft:flint",
+      "minecraft:gold_nugget",
+      "minecraft:iron_nugget"
+    ],
+    "minecraft:chests/shipwreck_map": [
+      "minecraft:book",
+      "minecraft:feather",
+      "minecraft:paper"
+    ],
+    "minecraft:chests/shipwreck_supply": [
+      "minecraft:bamboo",
+      "minecraft:carrot",
+      "minecraft:coal",
+      "minecraft:gunpowder",
+      "minecraft:moss_block",
+      "minecraft:paper",
+      "minecraft:poisonous_potato",
+      "minecraft:potato",
+      "minecraft:pumpkin",
+      "minecraft:rotten_flesh",
+      "minecraft:wheat"
+    ],
+    "minecraft:chests/shipwreck_treasure": [
+      "minecraft:gold_nugget",
+      "minecraft:iron_nugget"
+    ],
+    "minecraft:chests/simple_dungeon": [
+      "minecraft:beetroot_seeds",
+      "minecraft:bone",
+      "minecraft:book",
+      "minecraft:bread",
+      "minecraft:coal",
+      "minecraft:gunpowder",
+      "minecraft:melon_seeds",
+      "minecraft:pumpkin_seeds",
+      "minecraft:redstone",
+      "minecraft:rotten_flesh",
+      "minecraft:string",
+      "minecraft:wheat"
+    ],
+    "minecraft:chests/spawn_bonus_chest": [
+      "minecraft:acacia_log",
+      "minecraft:apple",
+      "minecraft:birch_log",
+      "minecraft:bread",
+      "minecraft:dark_oak_log",
+      "minecraft:jungle_log",
+      "minecraft:mangrove_log",
+      "minecraft:oak_log",
+      "minecraft:oak_planks",
+      "minecraft:salmon",
+      "minecraft:spruce_log",
+      "minecraft:stick"
+    ],
+    "minecraft:chests/stronghold_corridor": [
+      "minecraft:apple",
+      "minecraft:book",
+      "minecraft:bread",
+      "minecraft:redstone"
+    ],
+    "minecraft:chests/stronghold_crossing": [
+      "minecraft:apple",
+      "minecraft:book",
+      "minecraft:bread",
+      "minecraft:coal",
+      "minecraft:redstone"
+    ],
+    "minecraft:chests/stronghold_library": [
+      "minecraft:book",
+      "minecraft:paper"
+    ],
+    "minecraft:chests/trial_chambers/corridor": [
+      "minecraft:bamboo_hanging_sign",
+      "minecraft:bamboo_planks",
+      "minecraft:honeycomb",
+      "minecraft:scaffolding",
+      "minecraft:torch",
+      "minecraft:tuff"
+    ],
+    "minecraft:chests/trial_chambers/entrance": [
+      "minecraft:arrow",
+      "minecraft:honeycomb",
+      "minecraft:stick"
+    ],
+    "minecraft:chests/trial_chambers/intersection_barrel": [
+      "minecraft:baked_potato",
+      "minecraft:bamboo_planks"
+    ],
+    "minecraft:chests/trial_chambers/supply": [
+      "minecraft:acacia_planks",
+      "minecraft:arrow",
+      "minecraft:baked_potato",
+      "minecraft:bone_meal",
+      "minecraft:glow_berries",
+      "minecraft:moss_block",
+      "minecraft:torch",
+      "minecraft:tuff"
+    ],
+    "minecraft:chests/underwater_ruin_big": [
+      "minecraft:book",
+      "minecraft:coal",
+      "minecraft:gold_nugget",
+      "minecraft:wheat"
+    ],
+    "minecraft:chests/underwater_ruin_small": [
+      "minecraft:coal",
+      "minecraft:rotten_flesh",
+      "minecraft:wheat"
+    ],
+    "minecraft:chests/village/village_armorer": [
+      "minecraft:bread"
+    ],
+    "minecraft:chests/village/village_butcher": [
+      "minecraft:beef",
+      "minecraft:coal",
+      "minecraft:mutton",
+      "minecraft:porkchop",
+      "minecraft:wheat"
+    ],
+    "minecraft:chests/village/village_cartographer": [
+      "minecraft:bread",
+      "minecraft:paper",
+      "minecraft:stick"
+    ],
+    "minecraft:chests/village/village_desert_house": [
+      "minecraft:book",
+      "minecraft:bread",
+      "minecraft:cactus",
+      "minecraft:clay_ball",
+      "minecraft:dead_bush",
+      "minecraft:green_dye",
+      "minecraft:wheat"
+    ],
+    "minecraft:chests/village/village_fisher": [
+      "minecraft:coal",
+      "minecraft:cod",
+      "minecraft:salmon",
+      "minecraft:wheat_seeds"
+    ],
+    "minecraft:chests/village/village_fletcher": [
+      "minecraft:arrow",
+      "minecraft:egg",
+      "minecraft:feather",
+      "minecraft:flint",
+      "minecraft:stick"
+    ],
+    "minecraft:chests/village/village_mason": [
+      "minecraft:bread",
+      "minecraft:clay_ball",
+      "minecraft:flower_pot",
+      "minecraft:smooth_stone",
+      "minecraft:stone",
+      "minecraft:stone_bricks",
+      "minecraft:yellow_dye"
+    ],
+    "minecraft:chests/village/village_plains_house": [
+      "minecraft:apple",
+      "minecraft:book",
+      "minecraft:bread",
+      "minecraft:dandelion",
+      "minecraft:feather",
+      "minecraft:gold_nugget",
+      "minecraft:oak_sapling",
+      "minecraft:poppy",
+      "minecraft:potato"
+    ],
+    "minecraft:chests/village/village_savanna_house": [
+      "minecraft:acacia_sapling",
+      "minecraft:bread",
+      "minecraft:gold_nugget",
+      "minecraft:short_grass",
+      "minecraft:tall_grass",
+      "minecraft:torch",
+      "minecraft:wheat_seeds"
+    ],
+    "minecraft:chests/village/village_shepherd": [
+      "minecraft:black_wool",
+      "minecraft:brown_wool",
+      "minecraft:gray_wool",
+      "minecraft:light_gray_wool",
+      "minecraft:wheat",
+      "minecraft:white_wool"
+    ],
+    "minecraft:chests/village/village_snowy_house": [
+      "minecraft:beetroot_seeds",
+      "minecraft:beetroot_soup",
+      "minecraft:blue_ice",
+      "minecraft:bread",
+      "minecraft:coal",
+      "minecraft:potato",
+      "minecraft:snow_block",
+      "minecraft:snowball"
+    ],
+    "minecraft:chests/village/village_taiga_house": [
+      "minecraft:bread",
+      "minecraft:fern",
+      "minecraft:iron_nugget",
+      "minecraft:large_fern",
+      "minecraft:potato",
+      "minecraft:pumpkin_pie",
+      "minecraft:pumpkin_seeds",
+      "minecraft:spruce_log",
+      "minecraft:spruce_sapling",
+      "minecraft:spruce_sign",
+      "minecraft:sweet_berries"
+    ],
+    "minecraft:chests/village/village_tannery": [
+      "minecraft:bread",
+      "minecraft:leather"
+    ],
+    "minecraft:chests/village/village_temple": [
+      "minecraft:bread",
+      "minecraft:redstone",
+      "minecraft:rotten_flesh"
+    ],
+    "minecraft:chests/village/village_toolsmith": [
+      "minecraft:bread",
+      "minecraft:coal",
+      "minecraft:stick"
+    ],
+    "minecraft:chests/village/village_weaponsmith": [
+      "minecraft:apple",
+      "minecraft:bread",
+      "minecraft:oak_sapling"
+    ],
+    "minecraft:chests/woodland_mansion": [
+      "minecraft:beetroot_seeds",
+      "minecraft:bone",
+      "minecraft:book",
+      "minecraft:bread",
+      "minecraft:coal",
+      "minecraft:gunpowder",
+      "minecraft:melon_seeds",
+      "minecraft:pumpkin_seeds",
+      "minecraft:redstone",
+      "minecraft:rotten_flesh",
+      "minecraft:string",
+      "minecraft:wheat"
+    ],
+    "omnira:chests/apprentice_hut": [
+      "minecraft:bread",
+      "minecraft:coal",
+      "minecraft:glass_bottle",
+      "minecraft:ink_sac",
+      "minecraft:paper",
+      "minecraft:stick",
+      "omnira:spiritual_crystal"
+    ],
+    "omnira:chests/calibration_materials": [
+      "omnira:excited_rough_spatial_crystal_block",
+      "omnira:pure_mirror",
+      "omnira:spatial_crystal_shard"
+    ],
+    "omnira:chests/calibration_supplies": [
+      "omnira:excited_rough_spatial_crystal_block",
+      "omnira:infused_spiritual_crystal",
+      "omnira:resonance_crystal",
+      "omnira:spiritual_crystal"
+    ],
+    "omnira:chests/crystal_workshop": [
+      "minecraft:bread",
+      "minecraft:glass_bottle",
+      "minecraft:iron_ingot",
+      "omnira:arcane_dust",
+      "omnira:spiritual_crystal"
+    ],
+    "omnira:chests/doomsday_rite": [
+      "omnira:infused_spiritual_crystal",
+      "omnira:time_flower"
+    ],
+    "omnira:chests/drilling_platform": [
+      "omnira:infused_spiritual_crystal",
+      "omnira:time_flower"
+    ],
+    "omnira:chests/fold_observatory_lower": [
+      "omnira:infused_spiritual_crystal",
+      "omnira:pure_mirror",
+      "omnira:spatial_crystal_shard"
+    ],
+    "omnira:chests/fold_observatory_upper": [
+      "omnira:infused_spiritual_crystal",
+      "omnira:pure_mirror",
+      "omnira:spatial_crystal_shard"
+    ],
+    "omnira:chests/golden_throne": [
+      "omnira:infused_spiritual_crystal",
+      "omnira:time_flower",
+      "omnira:time_seed"
+    ],
+    "omnira:chests/golden_throne_tower": [
+      "omnira:infused_spiritual_crystal",
+      "omnira:time_flower",
+      "omnira:time_seed"
+    ],
+    "omnira:chests/kirisame_attic": [
+      "omnira:dream_crystal_shard",
+      "omnira:infused_spiritual_crystal",
+      "omnira:time_seed"
+    ],
+    "omnira:chests/kirisame_workshop": [
+      "minecraft:book",
+      "minecraft:brown_mushroom",
+      "minecraft:red_mushroom",
+      "omnira:infused_spiritual_crystal",
+      "omnira:resonance_crystal",
+      "omnira:spiritual_crystal",
+      "omnira:time_seed"
+    ],
+    "omnira:chests/looking_glass_garden_rabbit": [
+      "minecraft:cookie",
+      "omnira:dream_crystal_shard",
+      "omnira:infused_spiritual_crystal",
+      "omnira:time_flower",
+      "omnira:time_seed"
+    ],
+    "omnira:chests/mirror_gallery_gallery": [
+      "omnira:infused_spiritual_crystal"
+    ],
+    "omnira:chests/mirror_gallery_pool": [
+      "omnira:dream_crystal_shard"
+    ],
+    "omnira:chests/radiant_courtyard": [
+      "omnira:crude_light_core",
+      "omnira:light_crystal_core",
+      "omnira:light_crystal_torch",
+      "omnira:spiritual_crystal"
+    ],
+    "omnira:chests/rusty_lake_mill_cellar": [
+      "minecraft:feather",
+      "omnira:dream_crystal_shard",
+      "omnira:infused_spiritual_crystal",
+      "omnira:time_seed"
+    ],
+    "omnira:chests/rusty_lake_mill_echo": [
+      "minecraft:feather",
+      "omnira:infused_spiritual_crystal",
+      "omnira:resonance_crystal",
+      "omnira:time_seed"
+    ],
+    "omnira:chests/rusty_lake_mill_memory": [
+      "omnira:dream_crystal_shard",
+      "omnira:infused_spiritual_crystal",
+      "omnira:time_seed"
+    ],
+    "omnira:chests/rusty_lake_mill_workshop": [
+      "minecraft:book",
+      "minecraft:feather",
+      "omnira:infused_spiritual_crystal",
+      "omnira:resonance_crystal",
+      "omnira:time_seed"
+    ],
+    "omnira:chests/shadow_library_research": [
+      "minecraft:book",
+      "minecraft:paper",
+      "omnira:resonance_crystal"
+    ],
+    "omnira:chests/shadow_library_stacks": [
+      "minecraft:book",
+      "minecraft:paper"
+    ],
+    "omnira:chests/skyreach_supplies": [
+      "omnira:arcane_dust",
+      "omnira:infused_spiritual_crystal",
+      "omnira:spatial_crystal_shard"
+    ],
+    "omnira:chests/topological_labyrinth": [
+      "omnira:excited_rough_spatial_crystal_block",
+      "omnira:infused_spiritual_crystal",
+      "omnira:pure_mirror",
+      "omnira:resonance_crystal",
+      "omnira:spatial_crystal_shard",
+      "omnira:spiritual_crystal"
+    ],
+    "omnira:chests/void_lighthouse": [
+      "omnira:infused_spiritual_crystal",
+      "omnira:pure_mirror",
+      "omnira:resonance_crystal",
+      "omnira:spatial_crystal_shard"
+    ],
+    "omnira:chests/wizard_tower_materials": [
+      "minecraft:glass_bottle",
+      "minecraft:paper",
+      "omnira:arcane_dust",
+      "omnira:spiritual_crystal"
+    ],
+    "omnira:chests/wizard_tower_research": [
+      "omnira:arcane_dust",
+      "omnira:resonance_crystal",
+      "omnira:spiritual_crystal"
+    ]
+  }
+}

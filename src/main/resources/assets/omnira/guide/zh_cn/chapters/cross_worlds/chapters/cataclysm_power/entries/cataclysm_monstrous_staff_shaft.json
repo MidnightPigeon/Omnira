@@ -1,0 +1,10 @@
+{
+  "id": "cataclysm_monstrous_staff_shaft",
+  "title": "恶兽杖体",
+  "item": "omnira:monstrous_staff_shaft",
+  "text": [
+    "将恶兽犄角置于普通装配台中央，外围留空，加工即可获得。",
+    "继承了恶兽摧折强敌的力量，将凶猛的攻势融入施法。"
+  ],
+  "recipes": true
+}

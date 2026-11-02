@@ -25,6 +25,7 @@ public final class HolyMagic {
             if(mist==null)continue;
             mist.configureSpell(owner,effect,power,range,enabled(payload));
             mist.excludeOwner(excludeOwner);
+            mist.abyssCast(com.mcmagic.omnira.compat.AbyssTipEffects.castId(payload));
             mist.setPos(point);level.addFreshEntity(mist);
         }
     }

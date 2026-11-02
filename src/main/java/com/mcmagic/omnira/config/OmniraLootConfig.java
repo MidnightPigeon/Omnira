@@ -253,8 +253,12 @@ public final class OmniraLootConfig {
         if(!event.getName().getNamespace().equals("omnira")||!(event.getName().getPath().startsWith("chests/")||event.getName().getPath().startsWith("fishing/")||event.getName().getPath().startsWith("archaeology/")||event.getName().getPath().startsWith("memory/")))return;
         refresh(event.getRegistries());
         var replacement=current.tables().get(event.getName());
-        // Decode per reload: NeoForge assigns IDs/freezes table instances after this event.
-        if(replacement!=null)event.setTable(LootTable.DIRECT_CODEC.parse(
-                RegistryOps.create(JsonOps.INSTANCE,event.getRegistries()),replacement).getOrThrow());
+        // NeoForge assigns the ID BEFORE this event; a decoded replacement must retain it.
+        if(replacement!=null){
+            var table=LootTable.DIRECT_CODEC.parse(
+                    RegistryOps.create(JsonOps.INSTANCE,event.getRegistries()),replacement).getOrThrow();
+            table.setLootTableId(event.getName());
+            event.setTable(table);
+        }
     }
 }

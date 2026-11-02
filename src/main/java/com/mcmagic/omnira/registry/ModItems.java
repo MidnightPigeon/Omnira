@@ -12,6 +12,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Omnira.MOD_ID);
+    public static final DeferredItem<com.mcmagic.omnira.item.IndustrialWheelItem> INDUSTRIAL_WHEEL=ITEMS.registerItem("industrial_wheel",com.mcmagic.omnira.item.IndustrialWheelItem::new);
+    public static final DeferredItem<Item> INCOMPLETE_INDUSTRIAL_WHEEL=ITEMS.registerSimpleItem("incomplete_industrial_wheel",new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> MUSIC_DISC_LIU_NIAN=ITEMS.registerSimpleItem("music_disc_liu_nian",new Item.Properties().stacksTo(1).rarity(Rarity.RARE)
             .jukeboxPlayable(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.JUKEBOX_SONG,
                     net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","liu_nian"))));
@@ -210,6 +212,23 @@ public final class ModItems {
                     com.mcmagic.omnira.item.staff.StaffPart.SlotKind.ENHANCEMENT,0,.1,0,0,true)),new Item.Properties());
     public static final DeferredItem<Item> MULTI_ARCANE_TIP=staffPart("multi_arcane_tip",com.mcmagic.omnira.item.staff.StaffPart.Role.TIP,0,0,2,60,2);
     public static final DeferredItem<Item> ELEMENTAL_FUSION_TIP=staffPart("elemental_fusion_tip",com.mcmagic.omnira.item.staff.StaffPart.Role.TIP,0,0,1,20,2);
+    public static final DeferredItem<Item> STORM_TIP=bossTip("storm_tip",.1,40,1,.5,.1,0,true);
+    public static final DeferredItem<Item> ABYSS_TIP=bossTip("abyss_tip",.5,20,2,0,0,0,false);
+    private static DeferredItem<Item> bossTip(String id,double power,int cooldown,int runes,double speed,double reduction,double range,boolean independent){
+        return ITEMS.registerItem(id,p->new com.mcmagic.omnira.item.staff.StaffPartItem(p,
+                new com.mcmagic.omnira.item.staff.StaffPart(com.mcmagic.omnira.item.staff.StaffPart.Role.TIP,power,0,1,cooldown,
+                        net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","item/staff_parts/"+id),1,0,runes,
+                        com.mcmagic.omnira.item.staff.StaffPart.SlotKind.ENHANCEMENT,speed,reduction,range,0,independent)),new Item.Properties());
+    }
+    public static final DeferredItem<Item> MONSTROUS_STAFF_SHAFT=staffPart("monstrous_staff_shaft",com.mcmagic.omnira.item.staff.StaffPart.Role.SHAFT,.2,0,0,0,2);
+    public static final DeferredItem<Item> REMNANT_STAFF_SHAFT=ITEMS.registerItem("remnant_staff_shaft",p->new com.mcmagic.omnira.item.staff.StaffPartItem(p,
+            com.mcmagic.omnira.item.staff.StaffPart.component("remnant_staff_shaft",com.mcmagic.omnira.item.staff.StaffPart.Role.SHAFT,0,10,0,0).withSlots(2,0).withRegeneration(.3)),new Item.Properties());
+    public static final DeferredItem<Item> IGNITIUM_REINFORCEMENT=staffPart("ignitium_reinforcement",com.mcmagic.omnira.item.staff.StaffPart.Role.REINFORCEMENT,.3,5,0,0);
+    public static final DeferredItem<Item> WITHERITE_REINFORCEMENT=ITEMS.registerItem("witherite_reinforcement",p->new com.mcmagic.omnira.item.staff.StaffPartItem(p,
+            new com.mcmagic.omnira.item.staff.StaffPart(com.mcmagic.omnira.item.staff.StaffPart.Role.REINFORCEMENT,.1,10,0,0,
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","item/staff_parts/witherite_reinforcement"),1,0,0,com.mcmagic.omnira.item.staff.StaffPart.SlotKind.ENHANCEMENT,0,.1)),new Item.Properties());
+    public static final DeferredItem<Item> CURSIUM_REINFORCEMENT=staffPart("cursium_reinforcement",com.mcmagic.omnira.item.staff.StaffPart.Role.REINFORCEMENT,.15,0,0,0);
+    public static final DeferredItem<Item> GUARD_REINFORCEMENT=staffPart("guard_reinforcement",com.mcmagic.omnira.item.staff.StaffPart.Role.REINFORCEMENT,0,10,0,0);
     public static final DeferredItem<Item> SWIFTNESS_RUNE=ITEMS.registerItem("swiftness_rune",p ->
             new com.mcmagic.omnira.item.staff.StaffPartItem(p,new com.mcmagic.omnira.item.staff.StaffPart(
                     com.mcmagic.omnira.item.staff.StaffPart.Role.UPGRADE,0,0,0,0,

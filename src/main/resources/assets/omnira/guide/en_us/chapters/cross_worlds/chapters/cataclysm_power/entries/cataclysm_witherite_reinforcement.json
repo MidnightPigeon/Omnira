@@ -1,0 +1,10 @@
+{
+  "id": "cataclysm_witherite_reinforcement",
+  "title": "Witherite Reinforcement",
+  "item": "omnira:witherite_reinforcement",
+  "text": [
+    "Crafted by processing Witherite Ingot in the center of an Arcane Assembly Table, with the outer slots empty.",
+    "It inherits Witherite’s resilient, efficient power, keeping spells flowing with ease."
+  ],
+  "recipes": true
+}

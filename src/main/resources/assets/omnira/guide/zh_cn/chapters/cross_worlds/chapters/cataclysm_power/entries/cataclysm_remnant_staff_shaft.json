@@ -1,0 +1,10 @@
+{
+  "id": "cataclysm_remnant_staff_shaft",
+  "title": "遗魂杖体",
+  "item": "omnira:remnant_staff_shaft",
+  "text": [
+    "将遗魂头骨置于普通装配台中央，外围留空，加工即可获得。",
+    "继承了遗魂绵延不息的力量，助你在漫长的探索中维系法力。"
+  ],
+  "recipes": true
+}

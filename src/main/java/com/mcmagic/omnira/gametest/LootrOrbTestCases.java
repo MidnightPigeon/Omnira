@@ -15,6 +15,32 @@ import net.neoforged.neoforge.gametest.*;
 
 
 final class LootrOrbTestCases {
+    public static void preparedCrystalPersists(GameTestHelper h) {
+        var key=ResourceKey.create(Registries.LOOT_TABLE,ResourceLocation.parse("omnira:chests/apprentice_hut"));
+        var table=h.getLevel().getServer().reloadableRegistries().getLootTable(key);
+        var params=new net.minecraft.world.level.storage.loot.LootParams.Builder(h.getLevel())
+                .withParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.ORIGIN,
+                        h.absoluteVec(new net.minecraft.world.phys.Vec3(4,2,4)))
+                .create(net.minecraft.world.level.storage.loot.parameters.LootContextParamSets.CHEST);
+        long seed=1;
+        while(seed<1000 && table.getRandomItems(params,seed).stream().noneMatch(s->s.is(com.mcmagic.omnira.registry.ModItems.LOW_TIER_MAGIC_CRYSTAL))) seed++;
+        h.assertTrue(seed<1000,"No prepared crystal seed found");
+        var source=orb(h,false);source.setLootTable(key,seed);
+        var a=player(h,"spell-a");var b=player(h,"spell-b");
+        h.assertTrue(LootrOrbs.manage(source),"Treasure was not managed");
+        var first=(CrystalBallMenu)LootrOrbs.menu(1,a.getInventory(),a,source);
+        int slot=-1;
+        for(int i=0;i<first.ball.getContainerSize();i++) if(first.ball.getItem(i).is(com.mcmagic.omnira.registry.ModItems.LOW_TIER_MAGIC_CRYSTAL)) {slot=i;break;}
+        h.assertTrue(slot>=0,"Lootr personal generation bypassed crystal modifier");
+        first.ball.removeItem(slot,1);first.removed(a);
+        var reopened=(CrystalBallMenu)LootrOrbs.menu(2,a.getInventory(),a,source);
+        h.assertTrue(reopened.ball.displayItems().stream().noneMatch(s->s.is(com.mcmagic.omnira.registry.ModItems.LOW_TIER_MAGIC_CRYSTAL)),"Reopening rerolled personal loot");
+        reopened.removed(a);
+        var other=(CrystalBallMenu)LootrOrbs.menu(3,b.getInventory(),b,source);
+        h.assertTrue(other.ball.displayItems().stream().anyMatch(s->s.is(com.mcmagic.omnira.registry.ModItems.LOW_TIER_MAGIC_CRYSTAL)),"One player removed another's prepared crystal");
+        other.removed(b);h.succeed();
+    }
+
     private static ServerPlayer player(GameTestHelper h,String name){
         var profile=new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),name);
         var p=new ServerPlayer(h.getLevel().getServer(),h.getLevel(),profile,net.minecraft.server.level.ClientInformation.createDefault());

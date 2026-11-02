@@ -1,0 +1,7 @@
+{
+  "parent": "omnira:item/iron_reinforcement",
+  "textures": {
+    "metal": "omnira:item/cataclysm_staff_cursium",
+    "particle": "omnira:item/cataclysm_staff_cursium"
+  }
+}

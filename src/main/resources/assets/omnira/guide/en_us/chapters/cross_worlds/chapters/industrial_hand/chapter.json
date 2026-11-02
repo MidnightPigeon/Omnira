@@ -1,0 +1,11 @@
+{
+  "id": "industrial_hand",
+  "title": "The Hand of Industry",
+  "icon": "omnira:industrial_wheel",
+  "required_mod": "create",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/industrial_wheel.json"
+  ],
+  "chapters": []
+}

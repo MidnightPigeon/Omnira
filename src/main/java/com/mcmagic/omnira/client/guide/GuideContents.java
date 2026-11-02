@@ -123,11 +123,49 @@ public record GuideContents(String title,Introduction introduction,List<Chapter>
                 chapter.get("icon").getAsString(),introduction(chapter),List.copyOf(entries),List.copyOf(children),List.copyOf(directory));
     }
     public static GuideContents fromJson(JsonObject root) {
+        return fromJson(root,net.neoforged.fml.ModList.get()::isLoaded);
+    }
+    /** Filter once before building directories, search and quick-reference indexes. */
+    public static GuideContents fromJson(JsonObject root,java.util.function.Predicate<String> modLoaded) {
+        root=root.deepCopy();
+        filterChapters(root,modLoaded);
         var chapters=new ArrayList<Chapter>();
         for(var value:root.getAsJsonArray("chapters"))chapters.add(chapter(value.getAsJsonObject()));
         var aliases=new LinkedHashMap<String,String>();
         if(root.has("aliases"))for(var entry:root.getAsJsonObject("aliases").entrySet())aliases.put(entry.getKey(),entry.getValue().getAsString());
         return new GuideContents(root.get("title").getAsString(),introduction(root),List.copyOf(chapters),Map.copyOf(aliases));
+    }
+    private static void filterChapters(JsonObject node,java.util.function.Predicate<String> modLoaded) {
+        filterConditionalContent(node,modLoaded);
+        if(node.has("entries"))for(var entry:node.getAsJsonArray("entries"))filterConditionalContent(entry.getAsJsonObject(),modLoaded);
+        if(!node.has("chapters"))return;
+        var visible=new JsonArray();var optional=new JsonArray();var optionalIds=new HashSet<String>();var hidden=new HashSet<String>();
+        for(var value:node.getAsJsonArray("chapters")) {
+            var child=value.getAsJsonObject();
+            if(child.has("required_mod")&&!modLoaded.test(child.get("required_mod").getAsString())) {
+                hidden.add(child.get("id").getAsString());continue;
+            }
+            filterChapters(child,modLoaded);
+            if(child.has("required_mod")){optional.add(child);optionalIds.add(child.get("id").getAsString());}
+            else visible.add(child);
+        }
+        visible.addAll(optional);
+        node.add("chapters",visible);
+        if(node.has("directory_order")) {
+            var order=new JsonArray();var optionalOrder=new JsonArray();
+            for(var id:node.getAsJsonArray("directory_order"))if(!hidden.contains(id.getAsString())) {
+                if(optionalIds.contains(id.getAsString()))optionalOrder.add(id);else order.add(id);
+            }
+            order.addAll(optionalOrder);
+            node.add("directory_order",order);
+        }
+    }
+    private static void filterConditionalContent(JsonObject node,java.util.function.Predicate<String> modLoaded){
+        if(node.has("links")){
+            var links=new JsonArray();for(var value:node.getAsJsonArray("links")){
+                var link=value.getAsJsonObject();if(!link.has("required_mod")||modLoaded.test(link.get("required_mod").getAsString()))links.add(link);
+            }node.add("links",links);
+        }
     }
     public static ItemStack icon(String item) {
         var id=ResourceLocation.tryParse(item);

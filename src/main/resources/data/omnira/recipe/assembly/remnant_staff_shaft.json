@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "cataclysm"
+    }
+  ],
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "outer_shapeless": true,
+  "slots": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    {
+      "item": "cataclysm:remnant_skull"
+    }
+  ],
+  "result": {
+    "id": "omnira:remnant_staff_shaft",
+    "count": 1
+  }
+}

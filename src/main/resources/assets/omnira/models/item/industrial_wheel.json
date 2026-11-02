@@ -1,0 +1,128 @@
+{
+  "parent": "minecraft:builtin/entity",
+  "gui_light": "side",
+  "textures": {
+    "particle": "omnira:item/basic_staff_facets"
+  },
+  "display": {
+    "gui": {
+      "rotation": [
+        0,
+        -25,
+        -35
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        0.288,
+        0.288,
+        0.288
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.54,
+        0.54,
+        0.54
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        0.72,
+        0.72,
+        0.72
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        0.72,
+        0.72,
+        0.72
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        -35,
+        10
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        0.648,
+        0.648,
+        0.648
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        -35,
+        10
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        0.648,
+        0.648,
+        0.648
+      ]
+    }
+  }
+}

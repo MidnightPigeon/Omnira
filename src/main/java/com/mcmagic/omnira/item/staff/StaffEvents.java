@@ -31,6 +31,7 @@ public final class StaffEvents {
             return;
         }
         if(!(event.getItemStack().getItem() instanceof StaffItem)) return;
+        BossStaffParts.attributes(event);
         var stats=StaffAssembly.of(event.getItemStack()).stats();
         double regeneration=StaffAssembly.of(event.getItemStack()).components().stream().map(StaffPart::of)
                 .filter(Objects::nonNull).mapToDouble(StaffPart::regeneration).sum();
@@ -43,6 +44,9 @@ public final class StaffEvents {
                 CastAttributes.STAFF_POWER,stats.power(),AttributeModifier.Operation.ADD_MULTIPLIED_BASE),EquipmentSlotGroup.MAINHAND);
         if(stats.reduction()!=0) event.replaceModifier(ModAttributes.COST_REDUCTION,new AttributeModifier(
                 CastAttributes.STAFF_DISCOUNT,stats.reduction(),AttributeModifier.Operation.ADD_VALUE),EquipmentSlotGroup.MAINHAND);
+    }
+    private static boolean sameStaff(ItemStack a,ItemStack b){
+        var left=a.copy();var right=b.copy();left.remove(com.mcmagic.omnira.registry.ModDataComponents.STAFF_CAST_AT);right.remove(com.mcmagic.omnira.registry.ModDataComponents.STAFF_CAST_AT);return ItemStack.matches(left,right);
     }
     public static void queue(ServerPlayer player,ItemStack staff,int remaining,int cooldown) {
         BURSTS.remove(player.getUUID());
@@ -58,7 +62,7 @@ public final class StaffEvents {
         }
         // A queued shot must not borrow bonuses from a replacement staff or survive dimension changes.
         if(!player.isAlive() || player.isSpectator() || player.getItemInHand(burst.hand)!=burst.staff
-                || !ItemStack.matches(burst.snapshot,burst.staff) || !player.level().dimension().equals(burst.dimension)
+                || !sameStaff(burst.snapshot,burst.staff) || !player.level().dimension().equals(burst.dimension)
                 || player.containerMenu instanceof CrystalGridMenu || CrystalGridMenu.locate(player,-2)!=burst.grid) {
             BURSTS.remove(player.getUUID());return;
         }

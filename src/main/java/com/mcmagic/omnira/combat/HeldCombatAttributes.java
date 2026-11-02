@@ -24,6 +24,7 @@ public final class HeldCombatAttributes {
             .add(ModAttributes.LIFESTEAL,new AttributeModifier(FOUNDER_LEECH,.25,AttributeModifier.Operation.ADD_VALUE),EquipmentSlotGroup.HAND).build();}
     public static boolean corrupted(Player player){return player.getMainHandItem().getItem() instanceof InfusedGrimoireItem book&&book.kind()==InfusedGrimoireItem.Kind.CORRUPTED;}
     public static void refresh(Player player){
+        com.mcmagic.omnira.item.staff.BossStaffParts.refresh(player);
         boolean founder=FounderApprovalItem.held(player);
         set(player,ModAttributes.DAMAGE_BONUS,FOUNDER_DAMAGE,founder?2:0);
         set(player,ModAttributes.LIFESTEAL,FOUNDER_LEECH,founder?.25:0);

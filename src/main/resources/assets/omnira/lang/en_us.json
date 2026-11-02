@@ -1281,5 +1281,22 @@
   "message.omnira.fulfillment_star.no_effect": "No affinity to perfect or curse to dispel",
   "tooltip.omnira.affinity.dream.2.perfected": "Your body is translucent.",
   "tooltip.omnira.affinity.dream.3.perfected": "Free flight; Fortune +1, Looting +1.",
-  "tooltip.omnira.affinity.perfected": "Perfected: +100 mana, +10% spell power/life steal/damage reduction; no abandonment penalty"
+  "tooltip.omnira.affinity.perfected": "Perfected: +100 mana, +10% spell power/life steal/damage reduction; no abandonment penalty",
+  "item.omnira.storm_tip": "Storm Staff Tip",
+  "item.omnira.abyss_tip": "Abyssal Staff Tip",
+  "tooltip.omnira.staff.abyss": "Damage randomly inflicts Abyssal Curse II or Abyssal Fear I for 30s; mist triggers once per target per cast",
+  "tooltip.omnira.staff.selection_bonus": "Target selection range +%s%%",
+  "item.omnira.monstrous_staff_shaft": "Monstrous Staff Shaft",
+  "item.omnira.remnant_staff_shaft": "Remnant Staff Shaft",
+  "item.omnira.ignitium_reinforcement": "Ignitium Reinforcement",
+  "item.omnira.witherite_reinforcement": "Witherite Reinforcement",
+  "item.omnira.cursium_reinforcement": "Cursium Reinforcement",
+  "item.omnira.guard_reinforcement": "Guardian Reinforcement",
+  "tooltip.omnira.staff.cursium": "While holding the assembled staff: +10% Life Steal",
+  "tooltip.omnira.staff.monstrous": "While holding the assembled staff: +10% damage dealt",
+  "tooltip.omnira.staff.guard": "While holding the assembled staff: 10% damage reduction",
+  "item.omnira.industrial_wheel": "Industrial Wheel",
+  "item.omnira.incomplete_industrial_wheel": "Incomplete Industrial Wheel",
+  "tooltip.omnira.industrial_wheel.toggle": "Right-click to toggle continuous casting; ignores the spell-chain end cooldown",
+  "tooltip.omnira.industrial_wheel.edit": "Sneak-right-click to edit the grid"
 }

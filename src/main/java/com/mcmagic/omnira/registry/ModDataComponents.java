@@ -11,6 +11,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModDataComponents {
     public static final DeferredRegister.DataComponents DATA_COMPONENTS =
             DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Omnira.MOD_ID);
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<Long>> STAFF_CAST_AT=DATA_COMPONENTS.registerComponentType("staff_cast_at",b->b.networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_LONG));
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<Long>> WHEEL_SPIN_START=DATA_COMPONENTS.registerComponentType("wheel_spin_start",b->b.networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_LONG));
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<Double>> WHEEL_PHASE=DATA_COMPONENTS.registerComponentType("wheel_phase",b->b.persistent(com.mojang.serialization.Codec.DOUBLE));
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<Integer>> WHEEL_STEP=DATA_COMPONENTS.registerComponentType("wheel_step",b->b.persistent(com.mojang.serialization.Codec.intRange(0,15)));
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<Long>> WHEEL_CAST_AT=DATA_COMPONENTS.registerComponentType("wheel_cast_at",b->b.persistent(com.mojang.serialization.Codec.LONG));
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<java.util.UUID>> ARCANIST_CARRIER=
             DATA_COMPONENTS.registerComponentType("arcanist_carrier",b->b.persistent(net.minecraft.core.UUIDUtil.CODEC));
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Long>> SUITCASE_OPEN_UNTIL=

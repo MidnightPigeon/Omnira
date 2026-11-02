@@ -10,6 +10,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 public final class CombatRules {
     public static double incoming(LivingEntity target){
+        if(target instanceof Player player)com.mcmagic.omnira.item.staff.BossStaffParts.refresh(player);
         var attribute=target.getAttribute(ModAttributes.DAMAGE_TAKEN);
         double factor=attribute==null?1:attribute.getValue();
         if(target instanceof Player player)factor-=CrystalArmorEffects.equipped(player).reduction;
@@ -17,6 +18,7 @@ public final class CombatRules {
         return Math.max(0,factor);
     }
     public static double outgoing(ServerPlayer attacker,LivingEntity target){
+        com.mcmagic.omnira.item.staff.BossStaffParts.refresh(attacker);
         double factor=attacker.getAttributeValue(ModAttributes.DAMAGE_DEALT);
         if(attacker!=target){
             if(com.mcmagic.omnira.throne.GoldenThrone.empowered(attacker))factor+=1;

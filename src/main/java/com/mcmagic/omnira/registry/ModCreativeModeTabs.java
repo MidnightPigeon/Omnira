@@ -48,7 +48,9 @@ public final class ModCreativeModeTabs {
         }catch(java.io.IOException ex){throw new IllegalStateException("Cannot read creative catalog",ex);}
     }
     public static boolean hidden(Item item){
-        return item==ModItems.PERMANENT_VOID_CRYSTAL.get()
+        return item==ModItems.INCOMPLETE_INDUSTRIAL_WHEEL.get()
+                ||item==ModItems.INDUSTRIAL_WHEEL.get()&&!com.mcmagic.omnira.item.IndustrialWheelItem.available()
+                ||item==ModItems.PERMANENT_VOID_CRYSTAL.get()
                 ||item==com.mcmagic.omnira.codex.MyriadCodexContent.HEART_ITEM.get()
                 ||item==DreamContent.CRYSTAL_COLUMN_CAPITAL.get().asItem()
                 ||item==ModItems.DREAM_PORTAL.get()||item==ModItems.CORRIDOR_GATEWAY.get();
