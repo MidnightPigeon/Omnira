@@ -43,31 +43,36 @@ public final class EventideRuins {
         var matrices=new ArrayList<BlockPos>();
         var pos=new BlockPos.MutableBlockPos();
         for(int x=cx<<4;x<(cx<<4)+16;x++)for(int z=cz<<4;z<(cz<<4)+16;z++){
-            for(int y=level.getMinBuildHeight();y<level.getMaxBuildHeight();y++){
-                pos.set(x,y,z);var state=level.getBlockState(pos);
-                if(state.isAir()||!level.getBiome(pos).is(BIOME))continue;
-                if(state.getBlock() instanceof LiquidBlock&&!com.mcmagic.omnira.mire.MireContent.fluid(state.getFluidState())){
-                    level.setBlockAndUpdate(pos,com.mcmagic.omnira.mire.MireContent.LIQUID.get().defaultBlockState());
-                }else if(state.is(Blocks.STONE_BRICKS)){
-                    level.setBlockAndUpdate(pos,EventideMasonry.BRICKS.get().defaultBlockState());
-                }else if(state.is(Blocks.CRACKED_STONE_BRICKS)){
-                    level.setBlockAndUpdate(pos,EventideMasonry.CRACKED.get().defaultBlockState());
-                }else if(state.is(com.mcmagic.omnira.time.TemporalSoils.SILTS)&&!state.is(com.mcmagic.omnira.mire.MireContent.SILT.get())){
-                    level.setBlockAndUpdate(pos,com.mcmagic.omnira.mire.MireContent.SILT.get().defaultBlockState());
-                }else if(!state.hasBlockEntity()&&com.mcmagic.omnira.spacetime.TemporalWeathering.mineralNext(state)!=state){
-                    level.setBlockAndUpdate(pos,com.mcmagic.omnira.spacetime.TemporalWeathering.mineralNext(state));
-                }else if(!state.is(TemporalSoils.SILTS)&&(state.is(BlockTags.DIRT)||state.is(COMMON_DIRTS))){
-                    // One transition per node: the new silt rots only on the next pass.
-                    level.setBlockAndUpdate(pos,DreamContent.TEMPORAL_SILT.get().defaultBlockState());
-                }else if(mature(state)){
-                    level.setBlockAndUpdate(pos,ArchaeologyContent.SAND.get().defaultBlockState());
-                }else if(matrix(state))matrices.add(pos.immutable());
-                else{
-                    var next=advance(state);
-                    if(next!=null)level.setBlockAndUpdate(pos,next);
-                    else if(withers(state)){
-                        level.setBlockAndUpdate(pos,Blocks.AIR.defaultBlockState());
-                        level.sendParticles(ParticleTypes.LARGE_SMOKE,x+.5,y+.4,z+.5,3,.18,.12,.18,.01);
+            for(int sectionIndex=0;sectionIndex<chunk.getSections().length;sectionIndex++){
+                var section=chunk.getSection(sectionIndex);
+                if(section.hasOnlyAir())continue; // BiomeManager blends adjacent sections; keep per-block biome checks.
+                int baseY=chunk.getSectionYFromSectionIndex(sectionIndex)<<4;
+                for(int y=baseY;y<baseY+16;y++){
+                    pos.set(x,y,z);var state=level.getBlockState(pos);
+                    if(state.isAir()||!level.getBiome(pos).is(BIOME))continue;
+                    if(state.getBlock() instanceof LiquidBlock&&!com.mcmagic.omnira.mire.MireContent.fluid(state.getFluidState())){
+                        level.setBlockAndUpdate(pos,com.mcmagic.omnira.mire.MireContent.LIQUID.get().defaultBlockState());
+                    }else if(state.is(Blocks.STONE_BRICKS)){
+                        level.setBlockAndUpdate(pos,EventideMasonry.BRICKS.get().defaultBlockState());
+                    }else if(state.is(Blocks.CRACKED_STONE_BRICKS)){
+                        level.setBlockAndUpdate(pos,EventideMasonry.CRACKED.get().defaultBlockState());
+                    }else if(state.is(com.mcmagic.omnira.time.TemporalSoils.SILTS)&&!state.is(com.mcmagic.omnira.mire.MireContent.SILT.get())){
+                        level.setBlockAndUpdate(pos,com.mcmagic.omnira.mire.MireContent.SILT.get().defaultBlockState());
+                    }else if(!state.hasBlockEntity()&&com.mcmagic.omnira.spacetime.TemporalWeathering.mineralNext(state)!=state){
+                        level.setBlockAndUpdate(pos,com.mcmagic.omnira.spacetime.TemporalWeathering.mineralNext(state));
+                    }else if(!state.is(TemporalSoils.SILTS)&&(state.is(BlockTags.DIRT)||state.is(COMMON_DIRTS))){
+                        // One transition per node: the new silt rots only on the next pass.
+                        level.setBlockAndUpdate(pos,DreamContent.TEMPORAL_SILT.get().defaultBlockState());
+                    }else if(mature(state)){
+                        level.setBlockAndUpdate(pos,ArchaeologyContent.SAND.get().defaultBlockState());
+                    }else if(matrix(state))matrices.add(pos.immutable());
+                    else{
+                        var next=advance(state);
+                        if(next!=null)level.setBlockAndUpdate(pos,next);
+                        else if(withers(state)){
+                            level.setBlockAndUpdate(pos,Blocks.AIR.defaultBlockState());
+                            level.sendParticles(ParticleTypes.LARGE_SMOKE,x+.5,y+.4,z+.5,3,.18,.12,.18,.01);
+                        }
                     }
                 }
             }

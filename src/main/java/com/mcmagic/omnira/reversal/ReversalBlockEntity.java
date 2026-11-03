@@ -9,6 +9,8 @@ public final class ReversalBlockEntity extends com.mcmagic.omnira.block.entity.C
     public static final int CAPACITY=64,DURATION=100;
     private int energy,progress;
     private ItemStack started=ItemStack.EMPTY;
+    private final com.mcmagic.omnira.recipe.RecipeRetryGate recipeGate=new com.mcmagic.omnira.recipe.RecipeRetryGate();
+    private ReversalRecipe cachedRecipe;
     public ReversalBlockEntity(BlockPos p,BlockState s){super(s.is(ReversalContent.INFUSER.get())?ReversalContent.INFUSER_ENTITY.get():ReversalContent.ENTITY.get(),p,s,3);}
     public boolean infusion(){return getBlockState().is(ReversalContent.INFUSER.get());}
     public int duration(){return infusion()?200:DURATION;}
@@ -33,7 +35,9 @@ public final class ReversalBlockEntity extends com.mcmagic.omnira.block.entity.C
             if(progress>0){progress=0;started=input.copy();setChanged();}
             return;
         }
-        var recipe=level.getRecipeManager().getRecipeFor(recipeType(),new net.minecraft.world.item.crafting.SingleRecipeInput(input),level).map(net.minecraft.world.item.crafting.RecipeHolder::value).orElse(null);
+        recipeGate.begin(level);recipeGate.items(this);recipeGate.value(recipeType());
+        if(recipeGate.changed())cachedRecipe=level.getRecipeManager().getRecipeFor(recipeType(),new net.minecraft.world.item.crafting.SingleRecipeInput(input),level).map(net.minecraft.world.item.crafting.RecipeHolder::value).orElse(null);
+        var recipe=cachedRecipe;
         // Random outputs are rolled only on completion; require room for every possibility.
         boolean ready=energy>0&&recipe!=null&&recipe.outputs(input).stream().allMatch(this::fits);
         if(!ready||!ItemStack.isSameItemSameComponents(started,input)){boolean wasWorking=progress>0;progress=0;started=input.copy();if(wasWorking)setChanged();}
@@ -41,7 +45,7 @@ public final class ReversalBlockEntity extends com.mcmagic.omnira.block.entity.C
         if(++progress>=duration()){
             var choices=recipe.outputs(input);var result=choices.get(level.random.nextInt(choices.size())).copy();
             input.shrink(recipe.count());if(getItem(1).isEmpty())setItem(1,result);else getItem(1).grow(result.getCount());
-            energy--;progress=0;started=input.copy();
+            energy--;progress=0;started=input.copy();recipeGate.invalidate();
             if(!infusion())com.mcmagic.omnira.progression.BranchProgress.machine(this,"yesterday_again");
         }
         // Save actual progress every tick; send the world render snapshot only twice a second.

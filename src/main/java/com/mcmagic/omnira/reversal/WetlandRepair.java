@@ -13,6 +13,7 @@ public final class WetlandRepair {
     public static void changed(BlockEntity be){if(be.getLevel()!=null&&!be.getLevel().isClientSide)TRACKED.add(be);}
     public static boolean repair(IItemHandler raw,boolean apply){
         if(raw==null)return false;var handler=com.mcmagic.omnira.item.bottle.BottleStorageHandler.unwrap(raw);boolean found=false;
+        if(com.mcmagic.omnira.storage.PassiveStorageInspection.unopened(handler))return false;
         for(int i=0;i<handler.getSlots();i++){
             var s=handler.getStackInSlot(i);if(!s.is(com.mcmagic.omnira.archaeology.ArchaeologyContent.DAMAGED_FACILITY.get()))continue;
             found=true;
@@ -20,22 +21,29 @@ public final class WetlandRepair {
         }
         return found;
     }
+    private static boolean repairOnce(com.mcmagic.omnira.storage.PassiveStorageInspection.Pass pass,IItemHandler handler,boolean apply){
+        return pass.first(handler) && repair(handler,apply);
+    }
     @SubscribeEvent public static void tick(net.neoforged.neoforge.event.tick.ServerTickEvent.Post event){
         long now=event.getServer().overworld().getGameTime();if(now%20!=0)return;
         for(var be:java.util.List.copyOf(TRACKED)){
-            TRACKED.remove(be);var l=be.getLevel();if(be.isRemoved()||l==null||!l.hasChunkAt(be.getBlockPos()))continue;
+            TRACKED.remove(be);var l=be.getLevel();if(be.isRemoved()||l==null||!l.hasChunkAt(be.getBlockPos())
+                    ||com.mcmagic.omnira.storage.PassiveStorageInspection.unopened(be))continue;
             boolean apply=now>0&&now%com.mcmagic.omnira.mire.MireCycle.PERIOD==0&&l.getBiome(be.getBlockPos()).is(com.mcmagic.omnira.mire.MireCycle.BIOME);
-            boolean found=be instanceof net.minecraft.world.Container c&&repair(new net.neoforged.neoforge.items.wrapper.InvWrapper(c),apply);
-            found|=repair(l.getCapability(Capabilities.ItemHandler.BLOCK,be.getBlockPos(),null),apply);
-            for(var side:net.minecraft.core.Direction.values())found|=repair(l.getCapability(Capabilities.ItemHandler.BLOCK,be.getBlockPos(),side),apply);
+            var pass=new com.mcmagic.omnira.storage.PassiveStorageInspection.Pass();
+            boolean found=be instanceof net.minecraft.world.Container c&&repairOnce(pass,new net.neoforged.neoforge.items.wrapper.InvWrapper(c),apply);
+            found|=repairOnce(pass,l.getCapability(Capabilities.ItemHandler.BLOCK,be.getBlockPos(),null),apply);
+            for(var side:net.minecraft.core.Direction.values())found|=repairOnce(pass,l.getCapability(Capabilities.ItemHandler.BLOCK,be.getBlockPos(),side),apply);
             if(found){TRACKED.add(be);if(apply)be.setChanged();}
         }
     }
     @SubscribeEvent public static void entity(net.neoforged.neoforge.event.tick.EntityTickEvent.Post event){
         var e=event.getEntity();long now=e.level().getGameTime();
         if(e.level().isClientSide||e instanceof net.minecraft.world.entity.player.Player||now==0||now%6000!=0||!e.level().getBiome(e.blockPosition()).is(com.mcmagic.omnira.mire.MireCycle.BIOME))return;
-        if(e instanceof net.minecraft.world.Container c)repair(new net.neoforged.neoforge.items.wrapper.InvWrapper(c),true);
-        repair(e.getCapability(Capabilities.ItemHandler.ENTITY,null),true);
+        if(com.mcmagic.omnira.storage.PassiveStorageInspection.unopened(e))return;
+        var pass=new com.mcmagic.omnira.storage.PassiveStorageInspection.Pass();
+        if(e instanceof net.minecraft.world.Container c)repairOnce(pass,new net.neoforged.neoforge.items.wrapper.InvWrapper(c),true);
+        repairOnce(pass,e.getCapability(Capabilities.ItemHandler.ENTITY,null),true);
     }
     @SubscribeEvent public static void stop(net.neoforged.neoforge.event.server.ServerStoppedEvent event){TRACKED.clear();}
     private WetlandRepair(){}

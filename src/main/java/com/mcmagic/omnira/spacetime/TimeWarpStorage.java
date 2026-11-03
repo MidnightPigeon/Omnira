@@ -12,7 +12,8 @@ public final class TimeWarpStorage {
     private TimeWarpStorage(){}
     private static boolean warpPoint(ItemStack stack){return stack.is(ModItems.TIME_WARP_POINT.get())||stack.is(ModItems.SPACE_WARP_POINT.get());}
     public static boolean container(Container storage,boolean immune){
-        if(immune || storage instanceof net.minecraft.world.inventory.ResultContainer)return false;
+        if(immune || storage instanceof net.minecraft.world.inventory.ResultContainer
+                || com.mcmagic.omnira.storage.PassiveStorageInspection.unopened(storage))return false;
         boolean active=false;
         for(int slot=0;slot<storage.getContainerSize();slot++){
             var stack=storage.getItem(slot);
@@ -23,7 +24,8 @@ public final class TimeWarpStorage {
         return active;
     }
     public static boolean handler(IItemHandler storage,boolean immune){
-        if(immune || !(storage instanceof IItemHandlerModifiable mutable))return false;
+        if(immune || !(storage instanceof IItemHandlerModifiable mutable)
+                || com.mcmagic.omnira.storage.PassiveStorageInspection.unopened(storage))return false;
         boolean active=false;
         for(int slot=0;slot<storage.getSlots();slot++){
             var stack=storage.getStackInSlot(slot);

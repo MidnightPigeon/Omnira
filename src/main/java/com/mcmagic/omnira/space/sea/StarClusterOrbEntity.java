@@ -17,6 +17,9 @@ public final class StarClusterOrbEntity extends CrystalBallBlockEntity {
     private final SpatialActivation activation=new SpatialActivation(this,32);
     private int progress;
     private ItemStack processing=ItemStack.EMPTY;
+    private final com.mcmagic.omnira.recipe.RecipeRetryGate recipeGate=new com.mcmagic.omnira.recipe.RecipeRetryGate();
+    private ItemStack cachedOutput=ItemStack.EMPTY;
+    private boolean cachedAllowed;
     public StarClusterOrbEntity(BlockPos pos,BlockState state){super(pos,state);}
     @Override public int getContainerSize(){return 1;}
     public int progress(){return progress;}
@@ -33,13 +36,19 @@ public final class StarClusterOrbEntity extends CrystalBallBlockEntity {
     @Override public void serverTick(){
         if(!(level instanceof ServerLevel server))return;
         if(stabilized())activation.tick(server);else activation.clear();
-        var input=getItem(0);var output=result(input);
+        var input=getItem(0);
+        recipeGate.begin(level);recipeGate.item(input);recipeGate.items(upgrades);
+        if(recipeGate.changed()){
+            cachedOutput=result(input);
+            cachedAllowed=!cachedOutput.isEmpty()&&com.mcmagic.omnira.recipe.RecipeControl.allows(level,upgrades,java.util.List.of(cachedOutput),net.neoforged.neoforge.fluids.FluidStack.EMPTY);
+        }
+        var output=cachedOutput;
         if(output.isEmpty()||output.getCount()>output.getMaxStackSize()){
             if(progress!=0){progress=0;processing=ItemStack.EMPTY;setChanged();}return;
         }
         if(!ItemStack.matches(processing,input)){processing=input.copy();progress=0;}
-        if(!com.mcmagic.omnira.recipe.RecipeControl.allows(level,upgrades,java.util.List.of(output),net.neoforged.neoforge.fluids.FluidStack.EMPTY))return;
-        if(++progress>=DURATION){progress=0;processing=ItemStack.EMPTY;setItem(0,output);
+        if(!cachedAllowed)return;
+        if(++progress>=DURATION){progress=0;processing=ItemStack.EMPTY;recipeGate.invalidate();setItem(0,output.copy());
             server.sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD,worldPosition.getX()+.5,worldPosition.getY()+.625,worldPosition.getZ()+.5,16,.2,.2,.2,.02);
         }else if(progress%10==0)setChanged();
     }

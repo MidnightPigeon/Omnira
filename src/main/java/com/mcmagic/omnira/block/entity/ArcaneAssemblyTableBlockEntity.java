@@ -98,8 +98,13 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
                 .getRecipeFor(ModRecipes.ASSEMBLY_TYPE.get(),new AssemblyRecipe.Input(this),level).orElse(null);
     }
     private com.mcmagic.omnira.recipe.AssemblyWork work() {
-        return level==null || finished?null:com.mcmagic.omnira.recipe.AssemblyWork.find(level,this);
+        if(level==null||finished)return null;
+        recipeGate.begin(level);recipeGate.items(this);
+        if(recipeGate.changed())cachedWork=com.mcmagic.omnira.recipe.AssemblyWork.find(level,this);
+        return cachedWork;
     }
+    private final com.mcmagic.omnira.recipe.RecipeRetryGate recipeGate=new com.mcmagic.omnira.recipe.RecipeRetryGate();
+    private com.mcmagic.omnira.recipe.AssemblyWork cachedWork;
     public static boolean directEngine(net.minecraft.world.level.Level level,BlockPos pos,BlockState state) {
         var back=state.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING).getOpposite();
         return com.mcmagic.omnira.space.SpacetimePortState.driveAt(level,pos.relative(back),back.getOpposite())>=1;
@@ -141,6 +146,7 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
         activeRecipe=id;lastStrike=level.getGameTime();
         progress=Math.min(100,progress+(level.random.nextBoolean()?5:10));
         if(progress==100) {
+            recipeGate.invalidate();
             var results=recipe.finish().get();
             // All seven slots are limited to one item; replace the entire recipe atomically.
             for(int i=0;i<7;i++) getItems().set(i,ItemStack.EMPTY);

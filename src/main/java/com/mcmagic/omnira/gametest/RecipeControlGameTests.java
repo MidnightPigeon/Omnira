@@ -24,6 +24,16 @@ import java.util.List;
 @GameTestHolder("omnira_recipe_control")
 @PrefixGameTestTemplate(false)
 public final class RecipeControlGameTests {
+    @GameTest(template="spell_arena") public static void filterEditsApplyWithinSameTick(GameTestHelper h){
+        var upgrades=new ItemStackHandler(1);var plate=plate(h,true,Items.DIAMOND);upgrades.setStackInSlot(0,plate);
+        var diamond=List.of(new ItemStack(Items.DIAMOND));
+        for(int i=0;i<32;i++)h.assertTrue(RecipeControl.allows(h.getLevel(),upgrades,diamond,FluidStack.EMPTY),"Repeated check changed result");
+        OrbUpgrades.setFilter(plate,8,new ItemStack(Items.IRON_INGOT),h.getLevel().registryAccess());
+        h.assertTrue(!RecipeControl.allows(h.getLevel(),upgrades,diamond,FluidStack.EMPTY),"Same-tick sample edit stayed cached");
+        var tag=OrbUpgrades.settings(plate);tag.putBoolean("Whitelist",false);plate.set(DataComponents.CUSTOM_DATA,CustomData.of(tag));
+        h.assertTrue(RecipeControl.allows(h.getLevel(),upgrades,diamond,FluidStack.EMPTY),"Same-tick mode edit stayed cached");
+        h.assertTrue(!RecipeControl.allows(h.getLevel(),upgrades,List.of(new ItemStack(Items.IRON_INGOT)),FluidStack.EMPTY),"Product result was incorrectly cached");h.succeed();
+    }
     private static ItemStack plate(GameTestHelper h,boolean white,Item sample){
         var stack=new ItemStack(ModItems.RECIPE_CONTROL_UPGRADE.get());
         var data=OrbUpgrades.settings(stack);data.putBoolean("Whitelist",white);stack.set(DataComponents.CUSTOM_DATA,CustomData.of(data));

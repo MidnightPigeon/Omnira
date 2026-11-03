@@ -45,16 +45,21 @@ public final class RecurrenceGarden {
         if(chunk==null||java.util.Arrays.stream(chunk.getSections()).noneMatch(section->section.getBiomes().maybeHas(biome->biome.is(BIOME))))return;
         var pos=new BlockPos.MutableBlockPos();
         for(int x=cx<<4;x<(cx<<4)+16;x++)for(int z=cz<<4;z<(cz<<4)+16;z++){
-            for(int y=level.getMinBuildHeight();y<level.getMaxBuildHeight();y++){
-                pos.set(x,y,z);
-                var state=level.getBlockState(pos);
-                if(state.isAir()||!level.getBiome(pos).is(BIOME))continue;
-                if(state.is(com.mcmagic.omnira.registry.ModBlocks.WONDERLAND_POKER_STAND.get())
-                        &&state.getValue(WonderlandPokerStandBlock.HALF)==net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER
-                        &&level.getBlockEntity(pos) instanceof WonderlandPokerStandBlockEntity stand)stand.advanceGarden();
-                var next=next(level,pos,state);
-                if(next!=null)level.setBlock(pos,next,2);
-                else if(isMatrix(state))matrices.add(pos.immutable());
+            for(int sectionIndex=0;sectionIndex<chunk.getSections().length;sectionIndex++){
+                var section=chunk.getSection(sectionIndex);
+                if(section.hasOnlyAir())continue; // BiomeManager blends adjacent sections; keep per-block biome checks.
+                int baseY=chunk.getSectionYFromSectionIndex(sectionIndex)<<4;
+                for(int y=baseY;y<baseY+16;y++){
+                    pos.set(x,y,z);
+                    var state=level.getBlockState(pos);
+                    if(state.isAir()||!level.getBiome(pos).is(BIOME))continue;
+                    if(state.is(com.mcmagic.omnira.registry.ModBlocks.WONDERLAND_POKER_STAND.get())
+                            &&state.getValue(WonderlandPokerStandBlock.HALF)==net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER
+                            &&level.getBlockEntity(pos) instanceof WonderlandPokerStandBlockEntity stand)stand.advanceGarden();
+                    var next=next(level,pos,state);
+                    if(next!=null)level.setBlock(pos,next,2);
+                    else if(isMatrix(state))matrices.add(pos.immutable());
+                }
             }
         }
     }

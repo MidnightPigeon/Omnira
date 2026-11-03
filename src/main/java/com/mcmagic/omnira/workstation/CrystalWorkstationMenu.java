@@ -30,7 +30,7 @@ public final class CrystalWorkstationMenu extends AbstractContainerMenu {
             final int slot=i;
             addSlot(new Slot(storage,i,xs[i],ys[i]){
                 @Override public boolean mayPlace(ItemStack s){return machine==null||machine.canPlaceItem(slot,s);}
-                @Override public int getMaxStackSize(){return index%3==1?1:64;}
+                @Override public int getMaxStackSize(){return CrystalWorkstationMenu.this.index%3==1?1:64;}
             });
         }
         addSlot(new Slot(storage,2,xs[2],ys[2]){

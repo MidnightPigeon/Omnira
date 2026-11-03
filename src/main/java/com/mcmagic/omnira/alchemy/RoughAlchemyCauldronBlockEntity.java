@@ -18,6 +18,7 @@ public final class RoughAlchemyCauldronBlockEntity extends BlockEntity {
     private net.minecraft.world.item.ItemStack output=net.minecraft.world.item.ItemStack.EMPTY;
     private int progress,consumed,batches;
     private boolean internal;
+    private final com.mcmagic.omnira.recipe.RecipeRetryGate recipeGate=new com.mcmagic.omnira.recipe.RecipeRetryGate();
     public final net.neoforged.neoforge.items.ItemStackHandler items=new net.neoforged.neoforge.items.ItemStackHandler(4){
         @Override public net.minecraft.world.item.ItemStack insertItem(int slot,net.minecraft.world.item.ItemStack stack,boolean simulate){
             if(stack.isEmpty())return stack;
@@ -95,11 +96,15 @@ public final class RoughAlchemyCauldronBlockEntity extends BlockEntity {
             return;
         }
         if(vessel.active==null){
+            vessel.recipeGate.begin(level);vessel.recipeGate.items(vessel.items);vessel.recipeGate.fluids(vessel.tank);
+            vessel.recipeGate.value(level.getBlockState(pos.below()));
+            if(!vessel.recipeGate.changed())return;
             vessel.startNext(level.getRecipeManager().getAllRecipesFor(com.mcmagic.omnira.registry.ModRecipes.REACTION_TYPE.get())
                     .stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).toList());
             return;
         }
         var recipe=vessel.active;
+        vessel.recipeGate.invalidate(); // Completion or failure must allow the next idle check.
         if(!recipe.supportMatches(vessel)){
             vessel.active=null;vessel.output=net.minecraft.world.item.ItemStack.EMPTY;
             vessel.progress=vessel.consumed=vessel.batches=0;vessel.changed();

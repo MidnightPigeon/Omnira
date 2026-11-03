@@ -93,11 +93,23 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
     }
     public int stemStage(){return stemStage;}
     public boolean stemReady(){return stemReady;}
-    public CatalysisNaturalGrowth.Rule naturalRule(){return level==null?null:CatalysisNaturalGrowth.resolve(level,items.getStackInSlot(0),items.getStackInSlot(1));}
+    private final com.mcmagic.omnira.recipe.RecipeRetryGate planGate=new com.mcmagic.omnira.recipe.RecipeRetryGate(),naturalGate=new com.mcmagic.omnira.recipe.RecipeRetryGate(),allowedGate=new com.mcmagic.omnira.recipe.RecipeRetryGate();
+    private CatalysisGrowth.Plan cachedPlan;
+    private CatalysisNaturalGrowth.Rule cachedNatural;
+    public CatalysisNaturalGrowth.Rule naturalRule(){
+        if(level==null)return null;
+        naturalGate.begin(level);naturalGate.item(items.getStackInSlot(0));naturalGate.item(items.getStackInSlot(1));
+        if(naturalGate.changed())cachedNatural=CatalysisNaturalGrowth.resolve(level,items.getStackInSlot(0),items.getStackInSlot(1));
+        return cachedNatural;
+    }
     public CatalysisGrowth.Plan plan(){
         if(level==null)return null;
-        if(tank.isEmpty()){var rule=naturalRule();return rule==null?null:rule.plan();}
-        return CatalysisGrowth.resolve(level,items.getStackInSlot(0),items.getStackInSlot(1),tank.getFluid());
+        planGate.begin(level);planGate.item(items.getStackInSlot(0));planGate.item(items.getStackInSlot(1));planGate.fluid(tank.getFluid());
+        if(planGate.changed()){
+            if(tank.isEmpty()){var rule=naturalRule();cachedPlan=rule==null?null:rule.plan();}
+            else cachedPlan=CatalysisGrowth.resolve(level,items.getStackInSlot(0),items.getStackInSlot(1),tank.getFluid());
+        }
+        return cachedPlan;
     }
     public boolean complete(){
         if(level==null||getBlockState().getValue(CatalysisBlock.PART)!=0)return false;
@@ -124,6 +136,8 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
         return plan;
     }
     private boolean allowed(CatalysisGrowth.Plan plan){
+        allowedGate.begin(level);allowedGate.value(plan);allowedGate.items(upgrades);allowedGate.item(items.getStackInSlot(1));
+        if(!allowedGate.changed())return recipeAllowed;
         boolean allow=!com.mcmagic.omnira.recipe.RecipeControl.installed(upgrades)||
                 com.mcmagic.omnira.recipe.RecipeControl.allows(level,upgrades,CatalysisProducts.possible((ServerLevel)level,plan,items.getStackInSlot(1)),FluidStack.EMPTY);
         if(recipeAllowed!=allow){recipeAllowed=allow;setChanged();}return allow;
@@ -188,6 +202,7 @@ public final class CatalysisBlockEntity extends BlockEntity implements MenuProvi
         var next=overflow.getFirst();var old=items.getStackInSlot(2);
         if(!old.isEmpty()&&!ItemStack.isSameItemSameComponents(old,next))return;
         int amount=Math.min(next.getCount(),next.getMaxStackSize()-old.getCount());if(amount<=0)return;
+        planGate.invalidate();naturalGate.invalidate();allowedGate.invalidate();
         internal=true;try{items.setStackInSlot(2,next.copyWithCount(old.getCount()+amount));}finally{internal=false;}
         next.shrink(amount);if(next.isEmpty())overflow.removeFirst();setChanged();
     }

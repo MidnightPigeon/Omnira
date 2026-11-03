@@ -11,6 +11,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.neoforged.neoforge.gametest.*;
 
 
@@ -137,13 +138,22 @@ final class LootrOrbTestCases {
         var pos=boxes.stream().filter(b->b.nbt()!=null&&b.nbt().contains("LootTable")).findFirst().orElseThrow().pos();
         var chest=(net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity)level.getBlockEntity(pos);
         h.assertTrue(chest!=null && chest.getLootTable()!=null,"Actual external chest/table missing");
-        noobanidus.mods.lootr.common.block.entity.BlockEntityTicker.addEntity(chest,level,new net.minecraft.world.level.ChunkPos(pos));
+        var center=new net.minecraft.world.level.ChunkPos(pos);
+        var loaded=net.minecraft.world.level.ChunkPos.rangeClosed(
+                new net.minecraft.world.level.ChunkPos(center.x-2,center.z-2),
+                new net.minecraft.world.level.ChunkPos(center.x+2,center.z+2)).toList();
+        for(var chunk:loaded){level.setChunkForced(chunk.x,chunk.z,true);level.getChunk(chunk.x,chunk.z);}
+        // Let template/NBT loading discover this container through Lootr's own hooks.
         h.succeedWhen(()->{
             var provider=noobanidus.mods.lootr.common.api.LootrAPI.resolveBlockEntity(level.getBlockEntity(pos));
-            h.assertTrue(provider!=null,"Actual external chest not converted");
+            var current=level.getBlockEntity(pos);
+            h.assertTrue(provider!=null,"Actual external chest not converted: "+id+" at "+pos
+                    +" state="+level.getBlockState(pos)+" table="+(current instanceof RandomizableContainerBlockEntity c?c.getLootTable():null)
+                    +" eligible="+noobanidus.mods.lootr.common.block.entity.BlockEntityTicker.isValidEntityFull(current));
             var owner=player(h,"structory-owner");
             var loot=noobanidus.mods.lootr.common.api.LootrAPI.getInventory(provider,owner);
             h.assertTrue(loot!=null && !loot.isEmpty(),"Converted external chest generated no personal loot");
+            for(var chunk:loaded)level.setChunkForced(chunk.x,chunk.z,false);
         });
     }
 

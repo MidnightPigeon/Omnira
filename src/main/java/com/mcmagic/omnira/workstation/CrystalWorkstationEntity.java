@@ -27,6 +27,8 @@ public final class CrystalWorkstationEntity extends CrystalProcessingTableBlockE
     public final java.util.Set<String> removedEnchantments=new java.util.HashSet<>();
     private ItemStack previous0=ItemStack.EMPTY,previous1=ItemStack.EMPTY;
     private WorkstationRecipes.Result cached;
+    private final com.mcmagic.omnira.recipe.RecipeRetryGate smeltingGate=new com.mcmagic.omnira.recipe.RecipeRetryGate();
+    private net.minecraft.world.item.crafting.SmeltingRecipe smeltingRecipe;
     private int ticks;
     private boolean ticking,syncPending;
     public CrystalWorkstationEntity(BlockPos pos,BlockState s){super(CrystalWorkstations.ENTITY.get(),pos,s,3);}
@@ -172,9 +174,10 @@ public final class CrystalWorkstationEntity extends CrystalProcessingTableBlockE
         if(powered()){burn=0;burnTotal=0;}
         else if(burn>0)burn--;
         if(getItem(0).isEmpty()){progress=0;return;}
-        var found=level.getRecipeManager().getRecipeFor(RecipeType.SMELTING,new SingleRecipeInput(getItem(0)),level);
-        if(found.isEmpty()){progress=0;return;}
-        var recipe=found.get().value();var result=recipe.assemble(new SingleRecipeInput(getItem(0)),level.registryAccess());
+        smeltingGate.begin(level);smeltingGate.items(this);
+        if(smeltingGate.changed())smeltingRecipe=level.getRecipeManager().getRecipeFor(RecipeType.SMELTING,new SingleRecipeInput(getItem(0)),level).map(net.minecraft.world.item.crafting.RecipeHolder::value).orElse(null);
+        if(smeltingRecipe==null){progress=0;return;}
+        var recipe=smeltingRecipe;var result=recipe.assemble(new SingleRecipeInput(getItem(0)),level.registryAccess());
         duration=Math.max(1,recipe.getCookingTime()/2);
         var output=getItem(2);
         if(result.isEmpty()||!output.isEmpty()&&(!ItemStack.isSameItemSameComponents(output,result)||output.getCount()+result.getCount()>output.getMaxStackSize()))return;
@@ -186,7 +189,7 @@ public final class CrystalWorkstationEntity extends CrystalProcessingTableBlockE
         if(ticks%8==0)WorkstationEffects.processing(this);
         if(++progress>=duration){
             getItem(0).shrink(1);if(output.isEmpty())setItem(2,result.copy());else output.grow(result.getCount());
-            experience+=recipe.getExperience();progress=0;setChanged();
+            experience+=recipe.getExperience();progress=0;smeltingGate.invalidate();setChanged();
             com.mcmagic.omnira.progression.BranchProgress.processed(this);
         }
         // Fuel and input counts are bookkeeping, not a changed smelting recipe.

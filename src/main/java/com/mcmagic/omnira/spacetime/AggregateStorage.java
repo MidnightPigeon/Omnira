@@ -34,13 +34,14 @@ public final class AggregateStorage {
         return container(storage,now,false);
     }
     private static boolean container(Container storage,long now,boolean immune){
+        if(com.mcmagic.omnira.storage.PassiveStorageInspection.unopened(storage))return false;
         boolean warped=TimeWarpStorage.container(storage,immune || storage instanceof com.mcmagic.omnira.block.entity.CrystalBallBlockEntity ball && ball.stabilized());
         if(storage instanceof Inventory || storage instanceof net.minecraft.world.inventory.CraftingContainer || storage instanceof net.minecraft.world.inventory.ResultContainer)return warped;
         boolean active=false;
         for(int i=0;i<storage.getContainerSize();i++){
             var stack=storage.getItem(i);
             if(!UnstableAggregateItem.isAggregate(stack))continue;
-            var copy=stack.copy();if(repair(copy,now))storage.setItem(i,copy);
+            if(needsRepair(stack,now)){var copy=stack.copy();if(repair(copy,now))storage.setItem(i,copy);}
             active=true;
         }
         return active || warped;
@@ -57,23 +58,28 @@ public final class AggregateStorage {
         boolean active=false;
         for(int i=0;i<storage.getSlots();i++){
             var stack=storage.getStackInSlot(i);if(!UnstableAggregateItem.isAggregate(stack))continue;
-            var copy=stack.copy();
-            if(repair(copy,now)){
-                mutable.setStackInSlot(i,copy);
-            }
+            if(needsRepair(stack,now)){var copy=stack.copy();if(repair(copy,now))mutable.setStackInSlot(i,copy);}
             active=true;
         }
         return active || warped;
+    }
+    private static boolean needsRepair(ItemStack stack,long now){
+        return stack.getDamageValue()>0 && stack.getOrDefault(ModDataComponents.AGGREGATE_REPAIRED_AT,Long.MIN_VALUE)!=now;
+    }
+    private static boolean handlerOnce(com.mcmagic.omnira.storage.PassiveStorageInspection.Pass pass,IItemHandler storage,long now,boolean immune){
+        return (pass==null || pass.first(storage)) && handler(storage,now,immune);
     }
     @SubscribeEvent public static void tick(net.neoforged.neoforge.event.tick.ServerTickEvent.Post event){
         long now=event.getServer().overworld().getGameTime();if(now%10!=0)return;
         for(var block:java.util.List.copyOf(PENDING)){
             PENDING.remove(block);var level=block.getLevel();
-            if(block.isRemoved() || level==null || !level.hasChunkAt(block.getBlockPos()))continue;
+            if(block.isRemoved() || level==null || !level.hasChunkAt(block.getBlockPos())
+                    || com.mcmagic.omnira.storage.PassiveStorageInspection.unopened(block))continue;
             boolean immune=block instanceof com.mcmagic.omnira.block.entity.CrystalBallBlockEntity ball && ball.stabilized();
-            boolean active=block instanceof Container inventory && container(inventory,now);
-            active|=handler(level.getCapability(Capabilities.ItemHandler.BLOCK,block.getBlockPos(),null),now,immune);
-            for(var side:net.minecraft.core.Direction.values())active|=handler(level.getCapability(Capabilities.ItemHandler.BLOCK,block.getBlockPos(),side),now,immune);
+            var pass=new com.mcmagic.omnira.storage.PassiveStorageInspection.Pass();
+            boolean active=block instanceof Container inventory && pass.first(inventory) && container(inventory,now);
+            active|=handlerOnce(pass,level.getCapability(Capabilities.ItemHandler.BLOCK,block.getBlockPos(),null),now,immune);
+            for(var side:net.minecraft.core.Direction.values())active|=handlerOnce(pass,level.getCapability(Capabilities.ItemHandler.BLOCK,block.getBlockPos(),side),now,immune);
             if(active){PENDING.add(block);AggregateParticles.emit((net.minecraft.server.level.ServerLevel)level,net.minecraft.world.phys.Vec3.atCenterOf(block.getBlockPos()),true);}
         }
         for(var player:event.getServer().getPlayerList().getPlayers()){
@@ -99,8 +105,10 @@ public final class AggregateStorage {
         }
         if(entity.tickCount%10!=0)return;
         long now=entity.level().getServer().overworld().getGameTime();
-        boolean stored=entity instanceof Container inventory && container(inventory,now);
-        if(!(entity instanceof net.minecraft.world.entity.LivingEntity))stored|=handler(entity.getCapability(Capabilities.ItemHandler.ENTITY,null),now,
+        if(com.mcmagic.omnira.storage.PassiveStorageInspection.unopened(entity))return;
+        var pass=entity instanceof Container?new com.mcmagic.omnira.storage.PassiveStorageInspection.Pass():null;
+        boolean stored=entity instanceof Container inventory && pass.first(inventory) && container(inventory,now);
+        if(!(entity instanceof net.minecraft.world.entity.LivingEntity))stored|=handlerOnce(pass,entity.getCapability(Capabilities.ItemHandler.ENTITY,null),now,
                 entity instanceof com.mcmagic.omnira.vehicle.CruiseOrbEntity orb && orb.storage.stabilized());
         if(stored)AggregateParticles.emit((net.minecraft.server.level.ServerLevel)entity.level(),entity.position().add(0,entity.getBbHeight()*.5,0),true);
     }

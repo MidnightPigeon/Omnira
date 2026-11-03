@@ -38,7 +38,8 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
     private final List<Job> jobs=new ArrayList<>();
     private final Map<ReactionRecipe,net.minecraft.nbt.Tag> recipeKeys=new IdentityHashMap<>();
     private List<ReactionRecipe> availableRecipes=List.of();
-    private net.minecraft.world.item.crafting.RecipeManager cachedRecipeManager;
+    private final com.mcmagic.omnira.recipe.RecipeRetryGate recipeGate=new com.mcmagic.omnira.recipe.RecipeRetryGate();
+    private Object cachedRecipes;
     private boolean internal,loading;
     private int itemBudget,fluidBudget;
     private long outputTick=Long.MIN_VALUE;
@@ -206,13 +207,17 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         if(pool.powered()){
             pool.outputBudget();pool.pushOutputs();
             pool.advance(next);
-            if(pool.cachedRecipeManager!=level.getRecipeManager()||level.getGameTime()%20==0){
-                pool.cachedRecipeManager=level.getRecipeManager();
+            var recipeSet=level.getRecipeManager().getRecipes();
+            if(pool.cachedRecipes!=recipeSet){
+                pool.cachedRecipes=recipeSet;
                 pool.availableRecipes=level.getRecipeManager().getAllRecipesFor(ModRecipes.REACTION_TYPE.get())
                         .stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).toList();
                 pool.recipeKeys.keySet().removeIf(r->!pool.availableRecipes.contains(r)&&pool.jobs.stream().noneMatch(j->j.recipe==r));
             }
-            pool.startAvailable(pool.availableRecipes);
+            pool.recipeGate.begin(level);pool.recipeGate.items(pool.items);pool.recipeGate.items(pool.upgrades);pool.recipeGate.fluids(pool.fluids);
+            pool.recipeGate.value(pool.jobs.size());
+            for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++)pool.recipeGate.value(level.getBlockState(pos.offset(x,-1,z)));
+            if(pool.recipeGate.changed())pool.startAvailable(pool.availableRecipes);
         }
         if(level.getGameTime()%20==0)pool.changed();
     }

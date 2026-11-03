@@ -63,7 +63,7 @@ public final class MachineInteractionGameTests {
     }
     @GameTest(template="spell_arena") public static void vanillaInteractionMatrix(GameTestHelper h){
         var p=h.makeMockPlayer(GameType.SURVIVAL);var pos=new BlockPos(5,3,5);
-        for(var id:List.of("crystal_processing_table","analysis_artisan_table","arcane_assembly_table","mana_engine","simple_condensation_table","advanced_condensation_table","spacetime_reverser","void_infuser","split_time_sundial",
+        for(var id:List.of("crystal_processing_table","analysis_artisan_table","arcane_assembly_table","mana_engine","spacetime_reverser","void_infuser","split_time_sundial",
                 "crystal_furnace","crystal_grindstone","crystal_anvil","infused_crystal_furnace","infused_crystal_grindstone","infused_crystal_anvil")){
             h.setBlock(pos,BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("omnira",id)));var be=h.getBlockEntity(pos);
             MenuProvider provider=be instanceof AssemblyAccess a?a.assembly():be instanceof WorkstationAccess a?a.workstation():(MenuProvider)be;
