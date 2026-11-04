@@ -27,8 +27,8 @@ import java.util.UUID;
 @PrefixGameTestTemplate(false)
 public final class MainlineAdvancementGameTests {
     private static final String[] ORDER={"spiritual_awakening","first_creation","beyond_dreams","mana_surge",
-            "further_beyond","light_and_dark","ritual_ascension","spacetime_gate","eightfold_gathering",
-            "genesis_echo","world_awakening","deconstruction","world_in_hand","myriad_confluence","something_from_nothing","myriad_codex"};
+            "higher_condensation","further_beyond","light_and_dark","ritual_ascension","spacetime_gate","refined_time",
+            "genesis_echo","world_awakening","world_in_hand","myriad_confluence","something_from_nothing","myriad_codex"};
 
     private static ResourceLocation id(String path){return ResourceLocation.fromNamespaceAndPath("omnira",path);}
     private static AdvancementHolder advancement(GameTestHelper h,String name){
@@ -68,14 +68,14 @@ public final class MainlineAdvancementGameTests {
         var dream=ResourceKey.create(Registries.DIMENSION,id("dream_realm"));
         var spacetime=ResourceKey.create(Registries.DIMENSION,id("spacetime_corridor"));
         CriteriaTriggers.CHANGED_DIMENSION.trigger(p,Level.OVERWORLD,dream);
-        acquire(p,"primordial_spell_core");
+        acquire(p,"primordial_spell_core");acquire(p,"advanced_condensation_table");
         var center=h.absolutePos(new BlockPos(5,2,5));
         AdvancedForgeGameTests.build(h,center,Direction.NORTH);
         h.assertTrue(ForgeLayout.form(h.getLevel(),center,p,new ItemStack(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get())),"Survival activation failed");
         acquire(p,"light_dark_spell_core");acquire(p,"advanced_ritual_energy_core");
         CriteriaTriggers.CHANGED_DIMENSION.trigger(p,dream,spacetime);
         for(var core:new String[]{"earth","water","fire","air","light","dark","time","space"})acquire(p,core+"_microcore");
-        acquire(p,"genesis_particles");acquire(p,"active_world_seed");
+        acquire(p,"refined_spacetime_bucket");acquire(p,"genesis_particles");acquire(p,"active_world_seed");
         for(var component:WorldComponent.values())acquire(p,component.id);
         acquire(p,"miniature_world_framework");acquire(p,"omni_microcore");
         acquire(p,"world_generation_probability_cloud");acquire(p,"myriad_codex");
@@ -88,7 +88,7 @@ public final class MainlineAdvancementGameTests {
         var all=h.getLevel().getServer().getAdvancements();
         long count=all.getAllAdvancements().stream().filter(a->a.id().getNamespace().equals("omnira")
                 && a.id().getPath().startsWith("mainline/")).count();
-        h.assertTrue(count==16,"Unexpected mainline count");
+        h.assertTrue(count==ORDER.length+2,"Unexpected mainline count");
         for(int i=0;i<ORDER.length;i++){
             var a=advancement(h,ORDER[i]).value();
             h.assertTrue(a.parent().equals(i==0?java.util.Optional.empty():java.util.Optional.of(id("mainline/"+ORDER[i-1]))),"Wrong parent: "+ORDER[i]);
@@ -134,8 +134,8 @@ public final class MainlineAdvancementGameTests {
             acquire(p,component.id);
             h.assertTrue(!done(h,p,"deconstruction")&&recorded(h,p,"deconstruction",component.id),"Early component tracking incorrect");
         }
-        completeBefore(h,p,"eightfold_gathering");h.assertTrue(done(h,p,"eightfold_gathering"),"Recorded cores required reacquisition");
-        completeBefore(h,p,"deconstruction");h.assertTrue(done(h,p,"deconstruction"),"Recorded components required reacquisition");
+        completeBefore(h,p,"refined_time");h.assertTrue(done(h,p,"eightfold_gathering"),"Recorded cores required reacquisition");
+        completeBefore(h,p,"world_in_hand");h.assertTrue(done(h,p,"deconstruction"),"Recorded components required reacquisition");
         h.succeed();
     }
 
@@ -185,6 +185,19 @@ public final class MainlineAdvancementGameTests {
         for(var name:ORDER)h.assertTrue(!done(h,p,name),"Revoked chain remained done: "+name);
         h.assertTrue(recorded(h,p,"myriad_codex","obtained"),"Revocation deleted early objective");
         acquire(p,"spiritual_crystal");h.assertTrue(done(h,p,"myriad_codex"),"Re-earned root did not restore recorded chain");
+        h.succeed();
+    }
+
+    @GameTest(template="spell_arena")
+    public static void completedLegacyRouteKeepsItsMilestones(GameTestHelper h){
+        var p=player(h);
+        for(var name:ORDER){
+            if(name.equals("higher_condensation")||name.equals("refined_time"))continue;
+            var old=advancement(h,name);
+            for(var key:old.value().criteria().keySet())p.getAdvancements().getOrStartProgress(old).grantProgress(key);
+        }
+        AdvancementDependencies.sync(p);
+        for(var name:ORDER)h.assertTrue(done(h,p,name),"Legacy path lost "+name);
         h.succeed();
     }
 

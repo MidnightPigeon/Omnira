@@ -60,7 +60,7 @@ public final class CatalysisClient {
         }
         if(be!=null)item(be.upgrades.getStackInSlot(2),.5,.225,.02,.15F,0,pose,buffers,light,overlay);
         var plan=be==null?null:be.plan();boolean working=be!=null&&be.catalyzing();
-        baseCore(time,working,pose,buffers,light,overlay,glow);
+        baseCore(be,time,working,pose,buffers,light,overlay,glow);
         if(be!=null){
             var fluid=be.tank.getFluid();
             if(!fluid.isEmpty()){
@@ -129,10 +129,11 @@ public final class CatalysisClient {
             box(pose,buffers,glow,x-.012,y-.012,z-.012,x+.012,y+.012,z+.012,natural?0xC29CE8A0:i%2==0?0xD9DBFFFF:0xC2AEF0CE,LightTexture.FULL_BRIGHT,overlay);
         }
     }
-    private static void baseCore(double time,boolean working,PoseStack pose,MultiBufferSource buffers,int light,int overlay,TextureAtlasSprite glow){
+    private static final MachineRotation CORE_ROTATION=new MachineRotation(45,5);
+    private static void baseCore(CatalysisBlockEntity be,double time,boolean working,PoseStack pose,MultiBufferSource buffers,int light,int overlay,TextureAtlasSprite glow){
         pose.pushPose();
         pose.translate(.5,.5+(working?Math.sin(time*.045)*.025:0),.5);
-        pose.mulPose(Axis.YP.rotationDegrees((float)(working?time*.9%360:45)));
+        pose.mulPose(Axis.YP.rotationDegrees((float)CORE_ROTATION.angle(be,time,working?.6:0)));
         pose.scale(.4375F,.4375F,.4375F);pose.translate(-.5,-.5,-.5);
         Minecraft.getInstance().getBlockRenderer().renderSingleBlock(com.mcmagic.omnira.registry.ModBlocks.ROUGH_ALCHEMICAL_ENERGY_CORE.get().defaultBlockState(),
                 pose,CrystalGlassLayer.contents(buffers),working?LightTexture.FULL_BRIGHT:light,overlay);

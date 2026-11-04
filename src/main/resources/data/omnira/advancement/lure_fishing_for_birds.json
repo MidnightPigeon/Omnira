@@ -1,0 +1,22 @@
+{
+  "parent": "omnira:easter_eggs/root",
+  "display": {
+    "icon": {"id": "omnira:night_heron_statue"},
+    "title": {"translate": "advancement.omnira.lure_fishing_for_birds.title", "color": "light_purple"},
+    "description": {"translate": "advancement.omnira.lure_fishing_for_birds.description"},
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "fished_statue": {
+      "trigger": "minecraft:fishing_rod_hooked",
+      "conditions": {
+        "rod": {"items": "omnira:starlight_fishing_rod"},
+        "entity": {"type": "minecraft:fishing_bobber"},
+        "item": {"items": "omnira:night_heron_statue"}
+      }
+    }
+  }
+}

@@ -59,12 +59,15 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     @Override public ItemStack removeItemNoUpdate(int slot) {return hasPendingLoot()?ItemStack.EMPTY:super.removeItemNoUpdate(slot);}
     @Override public void setItem(int slot,ItemStack stack) {if(hasPendingLoot())return;var before=getItem(slot).copy();getItems().set(slot,stack);
         com.mcmagic.omnira.progression.BranchStorage.items(this,slot,before,stack);setChanged();}
+    private final com.mcmagic.omnira.storage.InfusedIntake intake=new com.mcmagic.omnira.storage.InfusedIntake();
     private int automationTicks;
     private final com.mcmagic.omnira.storage.LogisticsRates.Budget itemOutputBudget=new com.mcmagic.omnira.storage.LogisticsRates.Budget();
     public int outputItems(){return level==null?0:itemOutputBudget.available(level.getGameTime(),com.mcmagic.omnira.storage.LogisticsRates.ITEMS*upgrades.speedMultiplier());}
     public void outputItems(int used){itemOutputBudget.spend(used);}
     public void serverTick() {
         if(!virtualStorage && com.mcmagic.omnira.compat.LootrOrbs.manage(this))return;
+        if(!(this instanceof LiquidCrystalBallBlockEntity)&&!(this instanceof VoidCrystalBallBlockEntity)&&!(this instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity)&&!hasPendingLoot())
+            intake.tick((net.minecraft.server.level.ServerLevel)level,worldPosition.getCenter(),upgrades,new OrbItemHandler(this,false));
         outputItems();
         if(resonant() && level instanceof net.minecraft.server.level.ServerLevel server && server.getGameTime()%20==0)
             com.mcmagic.omnira.storage.CrystalStorageNetworks.get(server).register(this);
@@ -83,6 +86,14 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
         if(!virtualStorage && com.mcmagic.omnira.compat.LootrOrbs.manage(this))return;
         if(lootTable!=null) lootContainer=true;
         super.unpackLootTable(player);
+    }
+    @Override public void writeClientSideData(AbstractContainerMenu menu,net.minecraft.network.RegistryFriendlyByteBuf buffer){
+        buffer.writeBlockPos(worldPosition);
+        if(menu instanceof CrystalBallMenu orbMenu && orbMenu.ball.lootrPersonalView){
+            buffer.writeBoolean(true);
+            if(orbMenu.ball instanceof LiquidCrystalBallBlockEntity liquid)
+                orbMenu.writeInitialPersonalFluid(buffer,liquid);
+        }
     }
     @Override public AbstractContainerMenu createMenu(int id,Inventory inventory,net.minecraft.world.entity.player.Player player) {
         var menu=player instanceof net.minecraft.server.level.ServerPlayer opener && com.mcmagic.omnira.compat.LootrOrbs.manage(this)

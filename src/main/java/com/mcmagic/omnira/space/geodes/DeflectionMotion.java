@@ -15,28 +15,37 @@ public final class DeflectionMotion {
     @SubscribeEvent public static void tick(EntityTickEvent.Post event){sample(event.getEntity());}
     public static void sample(Entity entity){
         if(!(entity.level() instanceof ServerLevel level)||!entity.isAlive()||entity.isSpectator())return;
-        if(com.mcmagic.omnira.space.anchor.StabilityField.contains(entity)){
-            var data=entity.getPersistentData();data.remove("DeflectionPending");data.remove("DeflectionRemainder");data.remove("DeflectionCurveSign");data.remove("DeflectionInside");data.remove("DeflectionSampleTick");
-            if(!data.getBoolean("StabilityDeflectionInside")&&entity instanceof ServerPlayer player)net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(player,new DeflectionPayload(0));
-            data.putBoolean("StabilityDeflectionInside",true);return;
+        var data=entity.getPersistentData();
+        int count=DeflectionSources.coverage(level,entity);
+        boolean pending=data.getFloat("DeflectionPending")!=0;
+        if((count>0||pending||entity instanceof ServerPlayer)&&com.mcmagic.omnira.space.anchor.StabilityField.contains(entity)){
+            clearTrack(data);
+            data.remove("DeflectionPending");
+            if(entity instanceof ServerPlayer player&&!data.getBoolean("StabilityDeflectionInside")){
+                net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(player,new DeflectionPayload(0));
+                data.putBoolean("StabilityDeflectionInside",true);
+            }
+            return;
         }
-        entity.getPersistentData().remove("StabilityDeflectionInside");
-        var data=entity.getPersistentData();long now=level.getGameTime();
-        if(data.contains("DeflectionSampleTick")&&data.getLong("DeflectionSampleTick")==now)return;
+        if(data.contains("StabilityDeflectionInside"))data.remove("StabilityDeflectionInside");
+        if(count==0&&!pending){clearTrack(data);return;}
+        long now=level.getGameTime();
+        boolean sameDimension=data.getString("DeflectionDimension").equals(level.dimension().location().toString());
+        if(sameDimension&&data.contains("DeflectionSampleTick")&&data.getLong("DeflectionSampleTick")==now)return;
         Vec3 current=entity.position();
         boolean consecutive=data.contains("DeflectionSampleTick")&&data.getLong("DeflectionSampleTick")==now-1
-                &&data.getString("DeflectionDimension").equals(level.dimension().location().toString());
+                &&sameDimension;
         double moved=consecutive?current.distanceTo(new Vec3(data.getDouble("DeflectionX"),data.getDouble("DeflectionY"),data.getDouble("DeflectionZ"))):0;
         data.putLong("DeflectionSampleTick",now);data.putString("DeflectionDimension",level.dimension().location().toString());
         data.putDouble("DeflectionX",current.x);data.putDouble("DeflectionY",current.y);data.putDouble("DeflectionZ",current.z);
         if(!consecutive||moved>32){
             data.remove("DeflectionRemainder");data.remove("DeflectionCurveSign");
             if(data.getLong("DeflectionQueuedAt")!=now)data.remove("DeflectionPending");
-            data.putBoolean("DeflectionInside",coverage(level,entity)>0);return;
+            data.putBoolean("DeflectionInside",count>0);return;
         }
         if(moved<=0)return;
         advance(entity);
-        int count=coverage(level,entity);
+
         if(count==0){data.remove("DeflectionCurveSign");data.remove("DeflectionRemainder");data.remove("DeflectionInside");return;}
         boolean inside=data.getBoolean("DeflectionInside");data.putBoolean("DeflectionInside",true);
         if(!inside)return;
@@ -51,31 +60,25 @@ public final class DeflectionMotion {
         data.putDouble("DeflectionRemainder",progress);
         if(degrees!=0)apply(entity,(float)degrees);
     }
+    private static void clearTrack(net.minecraft.nbt.CompoundTag data){
+        if(!data.contains("DeflectionSampleTick")&&!data.contains("DeflectionX"))return;
+        data.remove("DeflectionSampleTick");data.remove("DeflectionDimension");
+        data.remove("DeflectionX");data.remove("DeflectionY");data.remove("DeflectionZ");
+        data.remove("DeflectionInside");data.remove("DeflectionCurveSign");data.remove("DeflectionRemainder");
+    }
     public static int coverage(ServerLevel level,Entity entity){
-        if(com.mcmagic.omnira.space.anchor.StabilityField.contains(entity))return 0;
-        var box=entity.getBoundingBox().inflate(5);int count=0;
-        for(int cx=net.minecraft.util.Mth.floor(box.minX)>>4;cx<=net.minecraft.util.Mth.floor(box.maxX)>>4;cx++)
-            for(int cz=net.minecraft.util.Mth.floor(box.minZ)>>4;cz<=net.minecraft.util.Mth.floor(box.maxZ)>>4;cz++){
-                var chunk=level.getChunkSource().getChunkNow(cx,cz);if(chunk==null)continue;
-                int minY=Math.max(level.getMinBuildHeight(),net.minecraft.util.Mth.floor(box.minY));
-                int maxY=Math.min(level.getMaxBuildHeight()-1,net.minecraft.util.Mth.floor(box.maxY));
-                for(int sy=minY>>4;sy<=maxY>>4;sy++){
-                    var section=chunk.getSection(chunk.getSectionIndex(sy<<4));
-                    if(!section.maybeHas(s->DeflectionContent.radius(s)>0))continue;
-                    for(int x=Math.max(cx<<4,net.minecraft.util.Mth.floor(box.minX));x<=Math.min((cx<<4)+15,net.minecraft.util.Mth.floor(box.maxX));x++)
-                        for(int z=Math.max(cz<<4,net.minecraft.util.Mth.floor(box.minZ));z<=Math.min((cz<<4)+15,net.minecraft.util.Mth.floor(box.maxZ));z++)
-                            for(int y=Math.max(sy<<4,minY);y<=Math.min((sy<<4)+15,maxY);y++){
-                                int radius=DeflectionContent.radius(section.getBlockState(x&15,y&15,z&15));if(radius==0)continue;
-                                var center=Vec3.atCenterOf(new BlockPos(x,y,z));var bounds=entity.getBoundingBox();
-                                if(center.distanceToSqr(Math.clamp(center.x,bounds.minX,bounds.maxX),Math.clamp(center.y,bounds.minY,bounds.maxY),Math.clamp(center.z,bounds.minZ,bounds.maxZ))<=radius*radius)count++;
-                            }
-                }
-            }
-        return count;
+        return com.mcmagic.omnira.space.anchor.StabilityField.contains(entity)?0:DeflectionSources.coverage(level,entity);
     }
     public static void turn(Entity entity,float degrees){
         if(com.mcmagic.omnira.space.anchor.StabilityField.contains(entity))return;
         var data=entity.getPersistentData();
+        // A floor contact can occur before this tick's post-movement event, outside every cluster.
+        // Preserve movement on the contact tick without sampling the approach in empty space.
+        if(!data.contains("DeflectionSampleTick")){
+            data.putLong("DeflectionSampleTick",entity.level().getGameTime()-1);
+            data.putString("DeflectionDimension",entity.level().dimension().location().toString());
+            data.putDouble("DeflectionX",entity.xo);data.putDouble("DeflectionY",entity.yo);data.putDouble("DeflectionZ",entity.zo);
+        }
         data.putFloat("DeflectionPending",data.getFloat("DeflectionPending")+degrees);
         data.putLong("DeflectionQueuedAt",entity.level().getGameTime());
     }

@@ -12,7 +12,7 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 @EventBusSubscriber(modid=Omnira.MOD_ID,value=Dist.CLIENT)
 public final class GuideBookClient {
     private GuideBookClient() {}
-    public static void open() {Minecraft.getInstance().setScreen(new com.mcmagic.omnira.client.screen.GuideBookScreen());}
+    public static void open() {Minecraft.getInstance().setScreen(new com.mcmagic.omnira.client.screen.GuideBookScreen().preferredScreen());}
     public static void openReference(String destination,net.minecraft.client.gui.screens.Screen parent){
         Minecraft.getInstance().setScreen(new com.mcmagic.omnira.client.screen.GuideBookScreen(destination,parent));
     }
@@ -26,7 +26,7 @@ public final class GuideBookClient {
     }
     public static void open(com.mcmagic.omnira.guidance.GuideReadingPayload reading) {
         Minecraft.getInstance().setScreen(new com.mcmagic.omnira.client.screen.GuideBookScreen(reading.bookmark().destination(),reading.bookmark().page(),
-                bookmark->net.neoforged.neoforge.network.PacketDistributor.sendToServer(new com.mcmagic.omnira.guidance.GuideReadingPayload(reading.bookId(),reading.hand(),bookmark))));
+                bookmark->net.neoforged.neoforge.network.PacketDistributor.sendToServer(new com.mcmagic.omnira.guidance.GuideReadingPayload(reading.bookId(),reading.hand(),bookmark))).preferredScreen());
     }
     @SubscribeEvent public static void tooltip(ItemTooltipEvent event) {
         if(event.getItemStack().is(ModItems.NIGHT_HERON_STATUE.get()))

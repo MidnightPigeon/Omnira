@@ -72,7 +72,7 @@ final class LootrOrbStorage {
             for(var watcher:server.getChunkSource().chunkMap.getPlayers(new net.minecraft.world.level.ChunkPos(source.getBlockPos()),false))sync(source,watcher);
         var existing=SESSIONS.get(personal);
         if(existing!=null){
-            existing.viewers().add(player);player.connection.send(existing.orb().getUpdatePacket());
+            existing.viewers().add(player);
             LootrAPI.award(provider,player);return new CrystalBallMenu(id,inventory,existing.orb());
         }
         var orb=view(source,personal.getItem(0).get(DataComponents.CUSTOM_DATA).copyTag());
@@ -87,11 +87,10 @@ final class LootrOrbStorage {
             last[0]=state.copy();
             var marker=new ItemStack(Items.GLASS_BOTTLE);marker.set(DataComponents.CUSTOM_DATA,CustomData.of(state));
             personal.setItem(0,marker);personal.setChanged();
-            for(var viewer:viewers)viewer.connection.send(orb.getUpdatePacket());
         };
         orb.personalClose=closing->{
             orb.storageChanged.run();viewers.remove(closing);
-            if(closing instanceof ServerPlayer viewer){viewer.connection.send(source.getUpdatePacket());sync(source,viewer);}
+            if(closing instanceof ServerPlayer viewer)sync(source,viewer);
             if(viewers.isEmpty())SESSIONS.remove(personal);
         };
         orb.storageChanged.run();LootrAPI.award(provider,player);

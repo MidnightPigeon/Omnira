@@ -3,7 +3,7 @@
   "title": "Rough Alchemical Energy Core",
   "item": "omnira:rough_alchemical_energy_core",
   "text": [
-    "In a Primitive Reaction Cauldron above a Spiritual Crystal Block, each reaction consumes 4000 mB of lava and one Earth, Water, Fire and Air Microcore to produce one Rough Alchemical Energy Core.",
+    "Make the core in a Primitive Reaction Cauldron with a Spiritual Crystal Block as its floor catalyst.",
     "A Large Alchemical Reaction Pool supports the same recipe; any block in its catalyst floor may be a Spiritual Crystal Block. The core is a placeable alchemical component, not a processing machine by itself."
   ],
   "recipes": true,

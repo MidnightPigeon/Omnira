@@ -1,0 +1,9 @@
+{
+  "id": "starlight_cluster",
+  "title": "星光簇",
+  "item": "omnira:starlight_cluster",
+  "recipes": true,
+  "text": [
+    "一小团悬浮的星光。放置后发出15级光照，也可用于制作游离星团晶球。"
+  ]
+}

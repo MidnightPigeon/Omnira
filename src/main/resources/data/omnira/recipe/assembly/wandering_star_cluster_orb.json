@@ -2,7 +2,7 @@
   "type": "omnira:assembly",
   "slots": [
     {
-      "item": "omnira:stardust"
+      "item": "omnira:starlight_cluster"
     },
     {
       "item": "omnira:stardust"
@@ -10,15 +10,9 @@
     {
       "item": "omnira:stardust"
     },
-    {
-      "item": "omnira:stardust"
-    },
-    {
-      "item": "omnira:stardust"
-    },
-    {
-      "item": "omnira:stardust"
-    },
+    [],
+    [],
+    [],
     {
       "item": "omnira:crystal_ball"
     }

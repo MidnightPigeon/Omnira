@@ -67,6 +67,7 @@ public final class ModItems {
     public static final DeferredItem<Item> INFUSED_STACKING_UPGRADE=upgrade("infused_stacking_upgrade",com.mcmagic.omnira.item.OrbUpgradeItem.Kind.INFUSED_STACKING);
     public static final DeferredItem<Item> SPACETIME_STABILIZATION_UPGRADE=upgrade("spacetime_stabilization_upgrade",com.mcmagic.omnira.item.OrbUpgradeItem.Kind.STABILIZATION);
     public static final DeferredItem<Item> LAVA_PRODUCTION_UPGRADE=upgrade("lava_production_upgrade",com.mcmagic.omnira.item.OrbUpgradeItem.Kind.LAVA);
+    public static final DeferredItem<Item> INFUSED_INTAKE_UPGRADE=upgrade("infused_intake_upgrade",com.mcmagic.omnira.item.OrbUpgradeItem.Kind.INFUSED_INTAKE);
     public static final DeferredItem<Item> INTAKE_UPGRADE=upgrade("intake_upgrade",com.mcmagic.omnira.item.OrbUpgradeItem.Kind.INTAKE);
     public static final DeferredItem<Item> OUTPUT_UPGRADE=upgrade("output_upgrade",com.mcmagic.omnira.item.OrbUpgradeItem.Kind.OUTPUT);
     public static final DeferredItem<Item> SPEED_UPGRADE=upgrade("speed_upgrade",com.mcmagic.omnira.item.OrbUpgradeItem.Kind.SPEED);
@@ -185,6 +186,7 @@ public final class ModItems {
     public static final DeferredItem<Item> GRID_FRAME=ITEMS.registerSimpleItem("grid_frame");
     public static final DeferredItem<Item> CRUDE_LIGHT_CORE=ITEMS.registerSimpleItem("crude_light_core");
     public static final DeferredItem<Item> ANALYSIS_CRYSTAL=ITEMS.register("analysis_crystal",com.mcmagic.omnira.item.AnalysisCrystalItem::new);
+    public static final DeferredItem<Item> PHILOSOPHERS_STONE=ITEMS.register("crystallized_philosophers_stone",com.mcmagic.omnira.item.CrystallizedPhilosophersStoneItem::new);
     public static final DeferredItem<Item> BASIC_CRYSTAL_GRID=grid("basic_crystal_grid",3,50,0,0,0,0);
     public static final DeferredItem<Item> ELEMENTAL_CRYSTAL_GRID=grid("elemental_crystal_grid",5,100,.1,10,.05,0);
     public static final DeferredItem<Item> ARCANE_CRYSTAL_GRID=grid("arcane_crystal_grid",8,300,.2,10,.1,.1);

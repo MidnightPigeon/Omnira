@@ -4,7 +4,7 @@
   "title": "Advanced Crystal Aggregation Ring",
   "scene": "advanced_crystal_aggregation_ring",
   "text": [
-    "Follow the model layout; individual block facings do not matter. Materials: four Infused Crystal Casings, two Excited Rough Spatial Crystal Blocks or Spatial Crystal Blocks, two Living Temporal Silt blocks (including sedimented), and one Crystal Processing Table. Use one Infused Spiritual Crystal on the processing table to assemble.",
+    "Follow the model layout; individual block facings do not matter. Excited Rough Spatial Crystal Blocks can replace Spatial Crystal Blocks, and sedimented Living Temporal Silt also works. Use one Infused Spiritual Crystal on the processing table to assemble.",
     "Both blue upper nodes define the shape: the first selects the required target, and the second selects its optional shape modifier. The three green nodes are elements and the three purple nodes are modifiers. Only the target is required. Duplicate elements do not stack.",
     "Install a spell core centrally and place infused crystal and spell ink in the two smaller orbs. Use the floating button inside the lower ring to begin the eight-second synthesis of a High-Tier Magic Crystal. Each occupied spell node costs 20 crafting mana; casting retains the usual 10 per node. The core is retained.",
     "Use nodes to insert or remove ingredients. Use the center to open the inventory or take the finished crystal. The ring cannot be mined, but can be transported whole in a Pocket Magic Bottle."

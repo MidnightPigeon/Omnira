@@ -5,10 +5,11 @@
   "recipes": true,
   "text": [
     "The needle reaches ten blocks, or fifteen with an Area rune staff in the offhand, determined when launched.",
+    "A “tribute” to contact damage in the original game. While wielded in the main hand, touching a hostile mob deals 2 true damage to you, or 4 for a hostile boss. Overlapping enemies deal only the highest amount, at most once every 10 ticks.",
     "Hold Attack for at least one second, then release to launch the needle up to ten blocks. A miss returns it; hitting a block or creature pulls you toward a safe position near the impact. A creature hit also receives one attack and the loaded spell. The initial press performs a normal attack.",
     "While charging, the blade aims at the crosshair and draws back. Only the tail ring remains in hand while the needle is away; attacks and another throw are unavailable until it returns. The attached spell has a two-second trigger cooldown, separate from ordinary melee.",
     "Taking damage interrupts both needle charging and healing, including damage absorbed by absorption hearts. Release the button before starting again.",
-    "8 attack damage, 1.8 attack speed and 1024 durability. Accepts sword enchantments. Mana repair, self-barrier crystal loading and downward bounces work as with the crystallized nail.",
+    "Mana repair, self-barrier crystal loading and downward bounces work as with the crystallized nail.",
     "Hold use for three uninterrupted seconds to heal 12 health. Movement is locked, and you hover when airborne. On a moving structure, the anchor follows that structure. Cannot be used while riding.",
     "The channel gradually spends one quarter of the maximum mana at its start, unaffected by discounts. Interrupting it gives no healing and does not refund mana.",
     "Upgrade four times at the Advanced Assembly Table; see Weapon Upgrades for shared rules and progression."

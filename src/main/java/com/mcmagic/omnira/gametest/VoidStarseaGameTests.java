@@ -14,6 +14,19 @@ import net.neoforged.neoforge.gametest.*;
 
 @GameTestHolder("omnira_void_starsea") @PrefixGameTestTemplate(false)
 public final class VoidStarseaGameTests {
+    @GameTest(template="spell_arena") public static void starflowLeavesItemsAndBoatsInPlace(GameTestHelper h){
+        var level=h.getLevel();
+        var p=h.absolutePos(new BlockPos(6,4,6));
+        level.setBlockAndUpdate(p,VoidSeaContent.LIQUID.get().defaultBlockState());
+        var item=h.spawnItem(Items.DIAMOND,6,4,6);
+        item.setPos(p.getCenter());item.setDeltaMovement(Vec3.ZERO);
+        level.tickNonPassenger(item);
+        h.assertTrue(item.getPersistentData().contains("OmniraStarflowHit")&&!item.getPersistentData().contains("OmniraStarflowTeleportUntil")&&!item.isRemoved(),"Item did not stay in starflow");
+        var boat=EntityType.BOAT.create(level);boat.setPos(p.getCenter());
+        var cow=EntityType.COW.create(level);cow.startRiding(boat,true);
+        h.assertTrue(!VoidSeaEffects.teleport(level,boat)&&cow.getVehicle()==boat,"Starflow moved or split a boat and rider");
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void heldSpatialCrystalAttractsManta(GameTestHelper h){
         var p=player(h);var manta=VoidSeaContent.MANTA.get().create(h.getLevel());
         manta.setPos(p.position().add(4,0,0));

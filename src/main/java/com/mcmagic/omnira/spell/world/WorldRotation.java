@@ -31,7 +31,19 @@ public final class WorldRotation {
     }
     public static boolean cast(ServerPlayer player){
         var mana=player.getData(ModAttachments.MANA);long now=player.server.overworld().getGameTime();
-        if(!player.isAlive()||player.isSpectator()||mana.current()<=0||now<player.getData(ModAttachments.WORLD_ROTATION_READY))return false;
+        if(!player.isAlive()||player.isSpectator())return false;
+        long ready=player.getData(ModAttachments.WORLD_ROTATION_READY);
+        // A saved deadline cannot be more than one cooldown ahead of this world clock.
+        // Rebuilt worlds may retain player attachments from the old timeline.
+        if(ready>now && ready-now>COOLDOWN){
+            player.setData(ModAttachments.WORLD_ROTATION_READY,0L);ready=0;
+        }
+        if(now<ready){
+            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.omnira.world_rotation.cooldown",(ready-now+19)/20),true);return false;
+        }
+        if(mana.current()<=0){
+            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.omnira.mana.insufficient"),true);return false;
+        }
         player.setData(ModAttachments.WORLD_ROTATION_READY,now+COOLDOWN);
         player.setData(ModAttachments.MANA,mana.withCurrent(0));player.removeAllEffects();player.setHealth(player.getMaxHealth());
         player.getFoodData().setFoodLevel(20);player.getFoodData().setSaturation(20);repairCarried(player);

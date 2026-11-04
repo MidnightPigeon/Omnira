@@ -1,0 +1,27 @@
+{
+  "type": "omnira:assembly",
+  "outer_shapeless": true,
+  "slots": [
+    {
+      "item": "omnira:dissociation_thread"
+    },
+    {
+      "item": "omnira:construction_matrix"
+    },
+    {
+      "item": "omnira:resonance_core"
+    },
+    {
+      "item": "omnira:infused_spiritual_crystal"
+    },
+    [],
+    [],
+    {
+      "item": "omnira:intake_upgrade"
+    }
+  ],
+  "result": {
+    "id": "omnira:infused_intake_upgrade",
+    "count": 1
+  }
+}

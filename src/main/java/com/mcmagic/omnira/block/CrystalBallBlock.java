@@ -70,7 +70,7 @@ public final class CrystalBallBlock extends BaseEntityBlock {
         if(level.getBlockEntity(pos) instanceof CrystalBallBlockEntity ball) ball.repairCracks();
     }
     @Override protected InteractionResult useWithoutItem(BlockState state,Level level,BlockPos pos,Player player,BlockHitResult hit) {
-        if(!level.isClientSide && level.getBlockEntity(pos) instanceof CrystalBallBlockEntity ball) player.openMenu(ball,pos);
+        if(!level.isClientSide && level.getBlockEntity(pos) instanceof CrystalBallBlockEntity ball) player.openMenu(ball);
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
     @Override protected void onRemove(BlockState state,Level level,BlockPos pos,BlockState next,boolean moving) {

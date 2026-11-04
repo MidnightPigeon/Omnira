@@ -3,7 +3,7 @@
   "item": "omnira:dark_microcore",
   "title": "Dark Microcore",
   "text": [
-    "Forge shadow mist with six shadow berries. Used alongside a light microcore and dream crystals to upgrade an arcane crystal grid.",
+    "Extract a Dark Microcore from Shadow Mist or assemble one at the Arcane Assembly Table. Both Light and Dark Microcores help upgrade the Arcane Crystal Grid.",
     "Use a dark microcore on a light crystal core, or drop it against the block, to convert one microcore to light. The block becomes light condensate."
   ],
   "recipes": true,

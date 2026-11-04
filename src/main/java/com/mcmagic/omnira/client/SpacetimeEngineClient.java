@@ -20,6 +20,7 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 
 @EventBusSubscriber(modid="omnira",value=Dist.CLIENT)
 public final class SpacetimeEngineClient {
+    private static final MachineRotation ROTOR=new MachineRotation(0,0);
     private static final int[] ARRAY_FACES=SpacetimeEngineGeometry.ARRAY.stream().mapToInt(SpacetimeEngineClient::visibleArrayFaces).toArray();
     @SubscribeEvent public static void screens(RegisterMenuScreensEvent e){e.register(SpacetimeEngineContent.MENU.get(),com.mcmagic.omnira.client.screen.SpacetimeEngineScreen::new);}
     @SubscribeEvent public static void renderers(EntityRenderersEvent.RegisterRenderers e){e.registerBlockEntityRenderer(SpacetimeEngineContent.CONTROLLER.get(),context->new BlockEntityRenderer<SpacetimeEngineController>(){
@@ -30,7 +31,7 @@ public final class SpacetimeEngineClient {
         @Override public AABB getRenderBoundingBox(SpacetimeEngineController be){return new AABB(be.getBlockPos()).inflate(1.1,0,1.1).expandTowards(0,-1,0);}
     });}
     public static void draw(SpacetimeEngineController be,double ticks,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
-        boolean active=be!=null&&be.complete()&&!com.mcmagic.omnira.time.StilledTime.stopped(be.getLevel(),be.getBlockPos());
+        boolean active=be!=null&&be.enabled()&&be.complete()&&!com.mcmagic.omnira.time.StilledTime.stopped(be.getLevel(),be.getBlockPos());
         for(var b:SpacetimeEngineGeometry.BASE)box(b,pose,buffers,light,overlay,63);
         // Square axles meet neighbouring shaft centres at Y=8, exactly at the outer faces.
         for(int side=0;side<4;side++){
@@ -53,14 +54,14 @@ public final class SpacetimeEngineClient {
                 var face=SpacetimeEngineBlock.OUTPUTS[side];pose.pushPose();pose.translate(face.getStepX(),0,face.getStepZ());PulseClient.shaft(pose,buffers,face,ticks,true,be.outputMode[side]);pose.popPose();
             }
         }
-        pose.pushPose();pose.translate(.5,0,.5);pose.mulPose(Axis.YP.rotation((float)(ticks*.018)));
+        pose.pushPose();pose.translate(.5,0,.5);pose.mulPose(Axis.YP.rotation((float)Math.toRadians(ROTOR.angle(be,ticks,active?1:0))));
         for(var b:SpacetimeEngineGeometry.ROTOR)box(b,pose,buffers,light,overlay,63);
         pose.popPose();
         pose.pushPose();pose.translate(.5,0,.5);pose.mulPose(Axis.YP.rotationDegrees((be==null?0:be.frontSide())*-90));
         for(var b:SpacetimeEngineGeometry.FRONT)box(b,pose,buffers,light,overlay,63);
         pose.popPose();
         pose.pushPose();pose.translate(.5,SpacetimeEngineGeometry.ARRAY_HEIGHT/16,.5);
-        pose.mulPose(Axis.YP.rotation((float)SpacetimeEngineGeometry.arrayAngle(ticks)));
+        pose.mulPose(Axis.YP.rotation((float)SpacetimeEngineGeometry.arrayAngle(ticks*.25)));
         for(int i=0;i<SpacetimeEngineGeometry.ARRAY.size();i++)box(SpacetimeEngineGeometry.ARRAY.get(i),pose,buffers,light,overlay,ARRAY_FACES[i]);
         for(int i=0;i<6;i++){
             double angle=i*Math.PI/3,x=Math.cos(angle)*SpacetimeEngineGeometry.ARRAY_RADIUS/16,z=Math.sin(angle)*SpacetimeEngineGeometry.ARRAY_RADIUS/16;

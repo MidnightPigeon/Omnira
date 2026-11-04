@@ -3,7 +3,7 @@
   "item": "omnira:infusion_bud",
   "title": "Infusion Bud",
   "text": [
-    "Place three Arcane Dust and three Spiritual Crystals in any order around an empty center on the ordinary Assembly Table to make one Infusion Bud.",
+    "Craft at an Arcane Assembly Bench.",
     "Place an Infusion Bud in a modifier slot to add Infusion; it counts toward component cost.",
     "Undelayed Harm becomes Instant Damage II, including vanilla's reversed effect on undead. Instant healing gains brief Saturation; Regeneration gains Resistance of matching level and duration. Infusion does not change Poison into another effect.",
     "For Dissociation, it increases produce and equipment limits per round and raises Fortune for blocks. For Construction, impact crystals become permanent; creatures are enclosed in mineable crystals that last only until the lock ends."

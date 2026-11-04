@@ -3,7 +3,7 @@
   "item": "omnira:arcane_crystal_grid",
   "title": "Arcane Crystal Grid · Crafting",
   "text": [
-    "Place an Elemental Crystal Grid in the center of the Arcane Assembly Bench, with one Light Microcore, one Dark Microcore and four Dream Crystals in any order around it. The spell chain is preserved; new empty slots follow it."
+    "Craft at an Arcane Assembly Bench. The spell chain is preserved; new empty slots follow it."
   ],
   "recipes": true,
   "links": [

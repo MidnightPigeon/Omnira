@@ -1,0 +1,43 @@
+{
+  "parent": "omnira:mainline/mana_surge",
+  "display": {
+    "icon": {
+      "id": "omnira:advanced_condensation_table"
+    },
+    "title": {
+      "translate": "advancement.omnira.mainline.higher_condensation.title"
+    },
+    "description": {
+      "translate": "advancement.omnira.mainline.higher_condensation.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "previous_completed": {
+      "trigger": "minecraft:impossible"
+    },
+    "obtained": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "omnira:advanced_condensation_table"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "previous_completed"
+    ],
+    [
+      "obtained"
+    ]
+  ]
+}

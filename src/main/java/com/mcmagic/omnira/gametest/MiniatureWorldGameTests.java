@@ -40,7 +40,7 @@ public final class MiniatureWorldGameTests {
     }
     @GameTest(template="spell_arena") public static void completeNineSceneSurvivalCycle(GameTestHelper h){
         var be=frame(h);be.insert(new ItemStack(Items.DIAMOND,7));
-        advance(h,be,MiniatureWorldBlockEntity.Stage.OVERWORLD,new ItemStack(Items.OAK_LOG,64),new ItemStack(Items.DIRT,64));
+        advance(h,be,MiniatureWorldBlockEntity.Stage.OVERWORLD,new ItemStack(Items.OAK_LOG,64),new ItemStack(Items.DIRT,64),new ItemStack(com.mcmagic.omnira.registry.ModItems.PHILOSOPHERS_STONE.get()));
         h.assertTrue(be.material(0).is(Items.DIAMOND),"Same-dimension scene erased unrelated material");
         advance(h,be,MiniatureWorldBlockEntity.Stage.RUINS,new ItemStack(Items.COMPASS),new ItemStack(Items.OAK_BOAT),new ItemStack(Items.BREAD,64));
         advance(h,be,MiniatureWorldBlockEntity.Stage.PORTAL,new ItemStack(Items.WATER_BUCKET),new ItemStack(Items.DIAMOND_PICKAXE),new ItemStack(Items.FLINT_AND_STEEL));
@@ -66,7 +66,9 @@ public final class MiniatureWorldGameTests {
         be.query(net.minecraft.core.Direction.SOUTH);tick(be,600);h.assertTrue(be.hint()==0,"Initial panels must persist until dismissed");
         be.query(net.minecraft.core.Direction.SOUTH,0);be.query(net.minecraft.core.Direction.SOUTH,0);h.assertTrue(be.initialAlternative(0)==0,"Initial alternatives must loop without hiding");
         be.query(net.minecraft.core.Direction.SOUTH);h.assertTrue(be.hint()==-1,"Blank click must dismiss initial panels");
-        be.insert(new ItemStack(com.mcmagic.omnira.registry.ModItems.ANALYSIS_CRYSTAL.get()));be.insert(new ItemStack(com.mcmagic.omnira.paradox.ParadoxContent.GENESIS.get()));tick(be,26);
+        be.insert(new ItemStack(com.mcmagic.omnira.registry.ModItems.ANALYSIS_CRYSTAL.get()));be.insert(new ItemStack(com.mcmagic.omnira.paradox.ParadoxContent.GENESIS.get()));tick(be,1);
+        h.assertTrue(!be.developing(),"Genesis route started without its Philosopher's Stone");
+        be.insert(new ItemStack(com.mcmagic.omnira.registry.ModItems.PHILOSOPHERS_STONE.get()));tick(be,26);
         int remaining=be.remaining();var saved=be.packed();be.loadWithComponents(saved.get(DataComponents.BLOCK_ENTITY_DATA).copyTag(),h.getLevel().registryAccess());
         h.assertTrue(be.remaining()==remaining&&be.developing()&&be.insert(new ItemStack(Items.STONE))==0,"Animation reload/uninterruptible input error");tick(be,remaining);
         h.assertTrue(be.stage()==MiniatureWorldBlockEntity.Stage.OVERWORLD,"Alternative did not develop");

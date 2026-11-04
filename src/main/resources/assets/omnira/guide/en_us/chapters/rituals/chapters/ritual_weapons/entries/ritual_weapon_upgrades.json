@@ -4,8 +4,8 @@
   "title": "Weapon Upgrades",
   "recipes": false,
   "text": [
-    "Both weapons have four Advanced Assembly Table upgrades. Each adds 2 damage, 0.1 attack speed, 3 health per complete three-second heal, and 25% of base special-ability range. Each Nail healing step gains 1 health; Area rune and upgrade range bonuses add together.",
-    "The bench always takes six Paradox Dust. Put the previous weapon on the left and Paradox Ore for the Nail, or Encapsulated Paradox Fluid for the Needle, on the right. The middle takes an Infused Crystal Block, Dream Crystal Block, bucket of Dilute Spacetime, then an Omni Microcore.",
+    "Both weapons have four Advanced Assembly Table upgrades. Each upgrade adds 3 health to a full three-second heal and increases special-ability range by 25% of its base value. Each Nail healing step gains 1 health; Area rune and upgrade range bonuses add together.",
+    "Each upgrade requires the previous stage of the weapon.",
     "Upgrades preserve damage, enchantments, custom names and the inserted spell crystal. Paradox motes increase with level."
   ],
   "links": [
@@ -52,7 +52,7 @@
       "strokes": [],
       "labels": [
         {
-          "text": "Damage / speed\nHeal / range",
+          "text": "Full heal / special range",
           "x": 0,
           "y": 0,
           "width": 124,
@@ -60,7 +60,7 @@
           "color": "#405462"
         },
         {
-          "text": "10 / 1.9\n15 / 125%",
+          "text": "15 / 125%",
           "x": 22,
           "y": 26,
           "width": 102,
@@ -68,7 +68,7 @@
           "color": "#405462"
         },
         {
-          "text": "12 / 2.0\n18 / 150%",
+          "text": "18 / 150%",
           "x": 22,
           "y": 52,
           "width": 102,
@@ -76,7 +76,7 @@
           "color": "#405462"
         },
         {
-          "text": "14 / 2.1\n21 / 175%",
+          "text": "21 / 175%",
           "x": 22,
           "y": 78,
           "width": 102,
@@ -84,7 +84,7 @@
           "color": "#405462"
         },
         {
-          "text": "16 / 2.2\n24 / 200%",
+          "text": "24 / 200%",
           "x": 22,
           "y": 104,
           "width": 102,
@@ -126,7 +126,7 @@
       "strokes": [],
       "labels": [
         {
-          "text": "Damage / speed\nHeal / range",
+          "text": "Full heal / special range",
           "x": 0,
           "y": 0,
           "width": 124,
@@ -134,7 +134,7 @@
           "color": "#405462"
         },
         {
-          "text": "10 / 1.9\n15 / 125%",
+          "text": "15 / 125%",
           "x": 22,
           "y": 26,
           "width": 102,
@@ -142,7 +142,7 @@
           "color": "#405462"
         },
         {
-          "text": "12 / 2.0\n18 / 150%",
+          "text": "18 / 150%",
           "x": 22,
           "y": 52,
           "width": 102,
@@ -150,7 +150,7 @@
           "color": "#405462"
         },
         {
-          "text": "14 / 2.1\n21 / 175%",
+          "text": "21 / 175%",
           "x": 22,
           "y": 78,
           "width": 102,
@@ -158,7 +158,7 @@
           "color": "#405462"
         },
         {
-          "text": "16 / 2.2\n24 / 200%",
+          "text": "24 / 200%",
           "x": 22,
           "y": 104,
           "width": 102,

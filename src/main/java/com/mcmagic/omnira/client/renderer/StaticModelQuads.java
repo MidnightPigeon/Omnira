@@ -9,9 +9,14 @@ import net.minecraft.client.resources.model.*;
 /** Cache only vanilla immutable baked models; resource-pack dynamic models stay live. */
 public final class StaticModelQuads {
     private static final Map<BakedModel,List<BakedQuad>> CACHE=new WeakHashMap<>();
+    private static final Map<BakedModel,List<BakedQuad>> UNCULLED=new WeakHashMap<>();
     private static final float[] BRIGHTNESS={1,1,1,1};
     public static List<BakedQuad> collect(BakedModel model){
         return model.getClass()==SimpleBakedModel.class?CACHE.computeIfAbsent(model,ParticleModelQuads::collect):ParticleModelQuads.collect(model);
+    }
+    public static List<BakedQuad> unculled(BakedModel model,long seed){
+        if(model.getClass()!=SimpleBakedModel.class)return model.getQuads(null,null,net.minecraft.util.RandomSource.create(seed));
+        return UNCULLED.computeIfAbsent(model,key->List.copyOf(key.getQuads(null,null,net.minecraft.util.RandomSource.create(seed))));
     }
     public static void draw(BakedModel model,PoseStack pose,VertexConsumer out,int light,int overlay){
         if(PreparedStaticMesh.draw(model,pose,out,light,overlay,0xFFFFFF,false,true))return;
@@ -27,6 +32,6 @@ public final class StaticModelQuads {
             out.putBulkData(pose.last(),quad,BRIGHTNESS,(color>>16&255)/255F,(color>>8&255)/255F,(color&255)/255F,1,lights,overlay,false);
         }
     }
-    public static void reset(){CACHE.clear();PreparedStaticMesh.reset();}
+    public static void reset(){CACHE.clear();UNCULLED.clear();PreparedStaticMesh.reset();}
     private StaticModelQuads(){}
 }

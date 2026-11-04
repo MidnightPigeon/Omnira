@@ -30,6 +30,12 @@ public final class StaffEvents {
                     CastAttributes.ARQUEBUS_POWER,com.mcmagic.omnira.item.ArquebusPlugin.of(event.getItemStack()).powerBonus,AttributeModifier.Operation.ADD_MULTIPLIED_BASE),EquipmentSlotGroup.MAINHAND);
             return;
         }
+        if(event.getItemStack().getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem){
+            var wheel=com.mcmagic.omnira.item.IndustrialWheelItem.stats(event.getItemStack());
+            event.replaceModifier(ModAttributes.SPELL_POWER,new AttributeModifier(CastAttributes.STAFF_POWER,wheel.power(),AttributeModifier.Operation.ADD_MULTIPLIED_BASE),EquipmentSlotGroup.MAINHAND);
+            if(wheel.cooldownReduction()!=0)event.replaceModifier(ModAttributes.COOLDOWN_REDUCTION,new AttributeModifier(CastAttributes.STAFF_COOLDOWN,wheel.cooldownReduction(),AttributeModifier.Operation.ADD_VALUE),EquipmentSlotGroup.MAINHAND);
+            return;
+        }
         if(!(event.getItemStack().getItem() instanceof StaffItem)) return;
         BossStaffParts.attributes(event);
         var stats=StaffAssembly.of(event.getItemStack()).stats();

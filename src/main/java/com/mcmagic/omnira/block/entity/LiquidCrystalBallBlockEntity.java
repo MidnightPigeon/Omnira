@@ -137,9 +137,9 @@ public final class LiquidCrystalBallBlockEntity extends CrystalBallBlockEntity {
     @Override public void serverTick() {
         if(!virtualStorage && com.mcmagic.omnira.compat.LootrOrbs.manage(this))return;
         super.serverTick();refreshBudget();
-        ((LiquidCrystalBallBlockEntity)storage()).tickPort();
+        ((LiquidCrystalBallBlockEntity)storage()).tickContainerPort();
     }
-    private void tickPort(){
+    public void tickContainerPort(){
         int tick=level.getServer().getTickCount();if(lastPortTick==tick)return;lastPortTick=tick;refreshBudget();
         var stack=getItem(0);
         if(!ItemStack.matches(stack,portSnapshot)) {

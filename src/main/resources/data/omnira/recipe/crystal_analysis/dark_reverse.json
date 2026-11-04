@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "omnira:analysis_tools"
+    },
+    {
+      "item": "omnira:dark_microcore"
+    }
+  ],
+  "result": {
+    "id": "omnira:shadow_mist",
+    "count": 8
+  }
+}

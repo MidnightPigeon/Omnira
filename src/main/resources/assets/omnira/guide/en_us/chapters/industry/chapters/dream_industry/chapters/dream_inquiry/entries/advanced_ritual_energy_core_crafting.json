@@ -4,7 +4,7 @@
   "title": "Advanced Ritual Energy Core · Crafting",
   "recipes": true,
   "text": [
-    "Place three ritual energy cores and three blaze rods in the forge. From the entrance, the left, middle and right nodes hold paradox dust, a light-dark spell core and paradox dust. The node core is consumed; the power-slot core is retained."
+    "Craft at an Advanced Assembly Table. The spell core powering the table is retained, while the core supplied as an ingredient is consumed."
   ],
   "links": [
     {

@@ -19,6 +19,11 @@ public final class AdvancementDependencies {
         if(!SYNCING.add(player.getUUID()))return;
         try{
             var manager=player.server.getAdvancements();
+            if(!player.getPersistentData().getBoolean("OmniraResearchPathV2")){
+                player.getPersistentData().putBoolean("OmniraResearchPathV2",true);
+                carryMilestone(player,"further_beyond","higher_condensation");
+                carryMilestone(player,"genesis_echo","refined_time");
+            }
             var gated=manager.getAllAdvancements().stream().filter(a->a.id().getNamespace().equals("omnira")
                     &&a.value().parent().isPresent()&&a.value().criteria().containsKey(PREVIOUS)).toList();
             // Resource iteration order is unspecified; settle both grants and revoked parent chains.
@@ -34,6 +39,14 @@ public final class AdvancementDependencies {
                 }
             }while(changed);
         }finally{SYNCING.remove(player.getUUID());}
+    }
+    private static void carryMilestone(ServerPlayer player,String completed,String inserted){
+        var manager=player.server.getAdvancements();
+        var prefix="omnira:mainline/";
+        var old=manager.get(net.minecraft.resources.ResourceLocation.parse(prefix+completed));
+        var added=manager.get(net.minecraft.resources.ResourceLocation.parse(prefix+inserted));
+        if(old!=null&&added!=null&&player.getAdvancements().getOrStartProgress(old).isDone())
+            player.getAdvancements().award(added,"obtained");
     }
 
     @SubscribeEvent public static void earned(AdvancementEvent.AdvancementEarnEvent event){

@@ -7,7 +7,19 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public final class ReversalBlockEntity extends com.mcmagic.omnira.block.entity.CrystalProcessingTableBlockEntity implements net.minecraft.world.WorldlyContainer {
     public static final int CAPACITY=64,DURATION=100;
-    private int energy,progress;
+    private int energy,progress,fluidCredit;
+    final EnergyFluidInput fluidInput=new EnergyFluidInput(this);
+
+    int remainingFluidCapacity(){
+        return Math.max(0,(CAPACITY-energy)*EnergyFluidInput.UNIT-fluidCredit);
+    }
+    void creditFluid(int amount){
+        int total=fluidCredit+amount;
+        energy+=total/EnergyFluidInput.UNIT;
+        fluidCredit=total%EnergyFluidInput.UNIT;
+        if(total>=EnergyFluidInput.UNIT)setChanged();
+        else if(level!=null)level.blockEntityChanged(worldPosition);
+    }
     private ItemStack started=ItemStack.EMPTY;
     private final com.mcmagic.omnira.recipe.RecipeRetryGate recipeGate=new com.mcmagic.omnira.recipe.RecipeRetryGate();
     private ReversalRecipe cachedRecipe;
@@ -53,7 +65,7 @@ public final class ReversalBlockEntity extends com.mcmagic.omnira.block.entity.C
         if(progress==0||progress==1||progress%10==0)setChanged();
     }
     private boolean fits(ItemStack s){var out=getItem(1);return out.isEmpty()||(ItemStack.isSameItemSameComponents(out,s)&&out.getCount()+s.getCount()<=out.getMaxStackSize());}
-    @Override protected void saveAdditional(CompoundTag n,HolderLookup.Provider r){super.saveAdditional(n,r);n.putInt("Energy",energy);n.putInt("Progress",progress);if(!started.isEmpty())n.put("Started",started.save(r));}
-    @Override protected void loadAdditional(CompoundTag n,HolderLookup.Provider r){super.loadAdditional(n,r);energy=Math.clamp(n.getInt("Energy"),0,CAPACITY);progress=Math.clamp(n.getInt("Progress"),0,duration()-1);started=ItemStack.parseOptional(r,n.getCompound("Started"));}
+    @Override protected void saveAdditional(CompoundTag n,HolderLookup.Provider r){super.saveAdditional(n,r);n.putInt("Energy",energy);n.putInt("FluidCredit",fluidCredit);n.putInt("Progress",progress);if(!started.isEmpty())n.put("Started",started.save(r));}
+    @Override protected void loadAdditional(CompoundTag n,HolderLookup.Provider r){super.loadAdditional(n,r);energy=Math.clamp(n.getInt("Energy"),0,CAPACITY);fluidCredit=Math.clamp(n.getInt("FluidCredit"),0,EnergyFluidInput.UNIT-1);progress=Math.clamp(n.getInt("Progress"),0,duration()-1);started=ItemStack.parseOptional(r,n.getCompound("Started"));}
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider r){var n=super.getUpdateTag(r);n.putInt("Energy",energy);n.putInt("Progress",progress);return n;}
 }

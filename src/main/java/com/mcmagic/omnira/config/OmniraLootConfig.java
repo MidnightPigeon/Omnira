@@ -238,6 +238,7 @@ public final class OmniraLootConfig {
             added=migrateDefaultParadoxScarcity(tables)||added;
             added=migrateDefaultDeflectionBiome(tables)||added;
             added=migrateDefaultSpatialFishing(tables)||added;
+            added=migrateDefaults(tables,"fishing_open_water_v1")||added;
             added=migrateDefaultSpatialDiversity(tables)||added;
             added=migrateDefaultStormSuitcase(tables)||added;
             current=decode(root,registries);

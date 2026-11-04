@@ -1,0 +1,37 @@
+{
+  "type": "omnira:advanced_assembly_table",
+  "operation": "consume_all",
+  "slots": [
+    {
+      "item": "omnira:analysis_crystal"
+    },
+    {
+      "item": "omnira:analysis_crystal"
+    },
+    {
+      "item": "omnira:analysis_crystal"
+    },
+    {
+      "item": "omnira:analysis_crystal"
+    },
+    {
+      "item": "omnira:analysis_crystal"
+    },
+    {
+      "item": "omnira:analysis_crystal"
+    },
+    {
+      "item": "omnira:time_microcore"
+    },
+    {
+      "item": "omnira:light_dark_spell_core"
+    },
+    {
+      "item": "omnira:space_microcore"
+    }
+  ],
+  "result": {
+    "id": "omnira:crystallized_philosophers_stone",
+    "count": 1
+  }
+}

@@ -13,7 +13,7 @@ import net.minecraft.world.level.biome.Biome;
 public final class FleetingTime {
     public static final ResourceKey<Biome> BIOME=ResourceKey.create(Registries.BIOME,ResourceLocation.fromNamespaceAndPath("omnira","fleeting_woods"));
     private static final ThreadLocal<Entity> BONUS=new ThreadLocal<>();
-    public static boolean accelerated(Level level,BlockPos pos){return level.hasChunkAt(pos)&&level.getBiome(pos).is(BIOME);}
+    public static boolean accelerated(Level level,BlockPos pos){return pos!=null&&level.hasChunkAt(pos)&&level.getBiome(pos).is(BIOME);}
     public static boolean bonus(Entity entity){return BONUS.get()==entity;}
     public static boolean inBonus(){return BONUS.get()!=null;}
     public static void extra(Entity entity,Runnable step,boolean incrementAge){

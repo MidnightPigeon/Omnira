@@ -25,16 +25,17 @@ public final class VoidSeaEffects {
         data.putLong("OmniraStarflowHit",now);
         if(e instanceof LivingEntity living)trueDamage(living,1,living.damageSources().genericKill());
         else e.hurt(com.mcmagic.omnira.combat.OmniraDamage.source(e,"true_damage"),1);
-        if(!e.isAlive())return;
+        if(!e.isAlive()||!isCreature(e))return;
         Entity root=e.getRootVehicle();
         if(root.getPersistentData().getLong("OmniraStarflowTeleportUntil")>now||!DreamTransitRules.allowed(root))return;
         root.getPersistentData().putLong("OmniraStarflowTeleportUntil",now+20);
         teleport(level,root);
     }
+    private static boolean isCreature(Entity entity){return entity instanceof Player || entity instanceof Mob;}
     public static boolean teleport(ServerLevel level,Entity root){
         var members=root.getSelfAndPassengers().toList();
         // Do not let an unprotected passenger teleport an otherwise protected mount/group.
-        if(members.stream().anyMatch(SpatialImmunity::starflow))return false;
+        if(members.stream().anyMatch(member->!isCreature(member)||SpatialImmunity.starflow(member)))return false;
         for(int attempt=0;attempt<16;attempt++){
             BlockPos p=root.blockPosition().offset(level.random.nextInt(33)-16,level.random.nextInt(17)-8,level.random.nextInt(33)-16);
             if(!level.hasChunkAt(p))continue;

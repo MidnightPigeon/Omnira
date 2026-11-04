@@ -26,6 +26,7 @@ public final class CruiseOrbStorage {
     private final CruiseOrbEntity owner;
     private boolean loading,portInternal,portDone,portInput;
     private int automationTicks,portCredit;
+    private final com.mcmagic.omnira.storage.InfusedIntake intake=new com.mcmagic.omnira.storage.InfusedIntake();
     private int trashTicks;
     private ItemStack portSnapshot=ItemStack.EMPTY;
     private ItemStack installedSeat=ItemStack.EMPTY;
@@ -141,6 +142,7 @@ public final class CruiseOrbStorage {
 
     public void tick() {
         if(owner.level().isClientSide)return;
+        intake.tick((net.minecraft.server.level.ServerLevel)owner.level(),owner.position(),upgrades,items);
         if(owner.level().getGameTime()%10==0)
             com.mcmagic.omnira.spacetime.AggregateStorage.handler(items,owner.level().getGameTime(),stabilized());
         var discarded=trash.getStackInSlot(0);

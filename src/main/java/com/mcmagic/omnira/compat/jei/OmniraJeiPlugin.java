@@ -248,6 +248,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
     @Override public void registerRecipes(IRecipeRegistration registration) {
         var level=Minecraft.getInstance().level;
         if(level==null) return;
+        if(com.mcmagic.omnira.item.IndustrialWheelItem.available())WheelRuneJei.register(registration);
         var recipes=level.getRecipeManager();
         registration.addRecipes(ReactionCategory.TYPE,recipes.getAllRecipesFor(ModRecipes.REACTION_TYPE.get()).stream().map(RecipeHolder::value).toList());
         registration.addRecipes(STARLIGHT,recipes.getAllRecipesFor(ModRecipes.STARLIGHT_TYPE.get()).stream().map(RecipeHolder::value).toList());

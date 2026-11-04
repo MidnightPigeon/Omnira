@@ -4,7 +4,7 @@
   "item": "omnira:spatial_crystal_matrix",
   "text": [
     "A spatial crystal matrix grows small, medium, and large buds on adjacent faces, eventually producing a full cluster. Mature clusters yield Spatial Crystals; Silk Touch preserves the cluster.",
-    "The matrix drops nothing when mined, even with Silk Touch. Both rough crystal states drop ordinary Rough Spatial Crystal Blocks. An Advanced Condensation Table excites them again. Alternatively, right-click a block with an Infused Spiritual Crystal to excite it, consuming one crystal."
+    "The matrix drops nothing when mined, even with Silk Touch. Use Silk Touch on naturally excited rough crystal blocks to preserve their excited state."
   ],
   "recipes": false,
   "links": [

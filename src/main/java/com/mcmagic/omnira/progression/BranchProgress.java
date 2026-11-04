@@ -16,14 +16,14 @@ import net.neoforged.fml.common.EventBusSubscriber;
 @EventBusSubscriber(modid="omnira")
 public final class BranchProgress {
     private static final String OPERATOR="OmniraProgressOperator";
-    private static final Set<String> EGGS=Set.of("beyond_the_mist","personal_spaceflight","too_late_scholar","needle_sick_donkey");
+    private static final Set<String> EGGS=Set.of("beyond_the_mist","personal_spaceflight","too_late_scholar","needle_sick_donkey","lure_fishing_for_birds");
     public static void record(Player player,String id){record(player,id,"performed");}
     public static void record(Player player,String id,String criterion){
         if(!(player instanceof ServerPlayer server)||player.isSpectator())return;
         award(server,id,criterion);
     }
     static boolean award(ServerPlayer server,String id,String criterion){
-        var advancement=server.server.getAdvancements().get(ResourceLocation.fromNamespaceAndPath("omnira","branches/"+id));
+        var advancement=server.server.getAdvancements().get(ResourceLocation.fromNamespaceAndPath("omnira",id.contains("/")?id:"branches/"+id));
         if(advancement==null||!advancement.value().criteria().containsKey(criterion))return false;
         server.getAdvancements().award(advancement,criterion);return true;
     }

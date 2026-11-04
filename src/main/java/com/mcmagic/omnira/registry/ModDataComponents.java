@@ -13,6 +13,8 @@ public final class ModDataComponents {
             DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Omnira.MOD_ID);
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Long>> STAFF_CAST_AT=DATA_COMPONENTS.registerComponentType("staff_cast_at",b->b.networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_LONG));
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Long>> WHEEL_SPIN_START=DATA_COMPONENTS.registerComponentType("wheel_spin_start",b->b.networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_LONG));
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<net.minecraft.world.item.component.ItemContainerContents>> WHEEL_RUNE=
+            DATA_COMPONENTS.registerComponentType("wheel_rune",b->b.persistent(net.minecraft.world.item.component.ItemContainerContents.CODEC).networkSynchronized(net.minecraft.world.item.component.ItemContainerContents.STREAM_CODEC));
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Double>> WHEEL_PHASE=DATA_COMPONENTS.registerComponentType("wheel_phase",b->b.persistent(com.mojang.serialization.Codec.DOUBLE));
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Integer>> WHEEL_STEP=DATA_COMPONENTS.registerComponentType("wheel_step",b->b.persistent(com.mojang.serialization.Codec.intRange(0,15)));
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Long>> WHEEL_CAST_AT=DATA_COMPONENTS.registerComponentType("wheel_cast_at",b->b.persistent(com.mojang.serialization.Codec.LONG));

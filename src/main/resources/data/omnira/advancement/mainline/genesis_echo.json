@@ -1,5 +1,5 @@
 {
-  "parent": "omnira:mainline/eightfold_gathering",
+  "parent": "omnira:mainline/refined_time",
   "display": {
     "icon": {
       "id": "omnira:genesis_particles"

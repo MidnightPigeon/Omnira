@@ -1,1 +1,26 @@
-{"type":"omnira:world_development","from":"EMPTY","to":"OVERWORLD","materials":[{"ingredient":{"tag":"minecraft:logs"},"count":64},{"ingredient":{"tag":"minecraft:dirt"},"count":64}],"duration":100}
+{
+  "type": "omnira:world_development",
+  "from": "EMPTY",
+  "to": "OVERWORLD",
+  "materials": [
+    {
+      "ingredient": {
+        "tag": "minecraft:logs"
+      },
+      "count": 64
+    },
+    {
+      "ingredient": {
+        "tag": "minecraft:dirt"
+      },
+      "count": 64
+    },
+    {
+      "ingredient": {
+        "item": "omnira:crystallized_philosophers_stone"
+      },
+      "count": 1
+    }
+  ],
+  "duration": 100
+}

@@ -22,8 +22,7 @@ public final class DeflectionContent {
     private static DeferredBlock<Block> register(String id,java.util.function.Supplier<Block> factory){
         var block=ModBlocks.BLOCKS.register(id,factory);ModItems.ITEMS.registerSimpleBlockItem(block);return block;
     }
-    private static DeferredBlock<Block> bud(String id,int height,int inset){return register(id,()->new AmethystClusterBlock(height,inset,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_CLUSTER).requiresCorrectToolForDrops().lightLevel(s->5)));}
+    private static DeferredBlock<Block> bud(String id,int height,int inset){return register(id,()->new DeflectionBudBlock(height,inset));}
     public static Block[] stages(){return new Block[]{SMALL.get(),MEDIUM.get(),LARGE.get(),CLUSTER.get()};}
     public static int radius(net.minecraft.world.level.block.state.BlockState state){
         if(state.is(SMALL.get()))return 2;if(state.is(MEDIUM.get()))return 3;

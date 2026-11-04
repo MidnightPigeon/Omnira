@@ -44,7 +44,7 @@ public final class AlchemyMaterialsGameTests {
         for(var input:r.fluidInputs())h.assertTrue(p.fluids.amount(input)==9000,"First batch did not debit both reagents equally");
         h.assertTrue(p.fluids.amount(r.fluidResult())==100&&waste(p)==0,"Mixed output timing incorrect");
         var copy=new ReactionPoolBlockEntity(p.getBlockPos(),p.getBlockState());copy.setLevel(h.getLevel());
-        copy.loadWithComponents(p.getUpdateTag(h.getLevel().registryAccess()),h.getLevel().registryAccess());
+        copy.loadWithComponents(p.saveWithFullMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());
         copy.advance(1800);
         h.assertTrue(!copy.reacting()&&copy.fluids.total()==1000&&copy.fluids.amount(r.fluidResult())==1000&&waste(copy)==1,"Reload lost reagents, progress or mixed output");
         copy.advance(2000);h.assertTrue(waste(copy)==1&&copy.fluids.total()==1000,"Completed recipe duplicated outputs");

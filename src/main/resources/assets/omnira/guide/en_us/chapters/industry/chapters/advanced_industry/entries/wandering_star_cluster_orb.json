@@ -7,7 +7,8 @@
     "Stars shimmer over a deep-blue base. Numerous dust motes wander inside the light-level-15 globe. Its stored item remains suspended at the center, including items that cannot be processed.",
     "One item slot and separate Recipe Control, Spacetime Stabilization and Speed Upgrade slots. Speed affects logistics only, not conversion. Permitted Starlight Conversion starts automatically and transforms the whole stack one-for-one after 10 seconds. Changing input resets the timer.",
     "With Spacetime Stabilization installed, a 32-block spherical field prevents spatial deflection and ordinary teleportation. Hostile creatures take 1 true damage each second. Rough Spatial Crystal and eligible temporal silts are surrounded by light motes and activated after one minute. Portals and enhanced Recall Crystals and rabbit marks remain usable.",
-    "Craft an empty Crystal Ball with 8 Stardust, or assemble it with 6 Stardust. Remove its contents and upgrades before crafting."
+    "Craft at a crafting table or an Arcane Assembly Bench. Empty the orb and remove its upgrades first.",
+    "With a Spacetime Stabilization Upgrade installed, sneak-right-click with an empty main hand to briefly reveal its 32-block range. Unupgraded orbs do not show a range."
   ],
   "links": [
     {

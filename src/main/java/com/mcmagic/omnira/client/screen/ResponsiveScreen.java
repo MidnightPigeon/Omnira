@@ -29,6 +29,7 @@ public abstract class ResponsiveScreen extends Screen {
     protected boolean mouseReleasedContent(double x,double y,int b){return super.mouseReleased(x,y,b);}
     @Override public boolean mouseDragged(double x,double y,int b,double dx,double dy){return mouseDraggedContent(x/uiScale,y/uiScale,b,dx/uiScale,dy/uiScale);}
     protected boolean mouseDraggedContent(double x,double y,int b,double dx,double dy){return super.mouseDragged(x,y,b,dx,dy);}
-    @Override public boolean mouseScrolled(double x,double y,double dx,double dy){return super.mouseScrolled(x/uiScale,y/uiScale,dx,dy);}
+    @Override public boolean mouseScrolled(double x,double y,double dx,double dy){return mouseScrolledContent(x/uiScale,y/uiScale,dx,dy);}
+    protected boolean mouseScrolledContent(double x,double y,double dx,double dy){return super.mouseScrolled(x,y,dx,dy);}
     @Override public void mouseMoved(double x,double y){super.mouseMoved(x/uiScale,y/uiScale);}
 }

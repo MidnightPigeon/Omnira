@@ -1,1 +1,1 @@
-{"id":"resonant_accumulator_orb_crafting","title":"共振蓄能晶球 · 制作","item":"omnira:resonant_accumulator_orb","recipes":true,"text":["脉冲蓄能晶球放在装配台中央，台面放入六枚共振水晶，装配为共振蓄能晶球。保留原球安装的升级。"],"links":[{"target":"magic_pulse","label":"势能网络与使用"}]}
+{"id":"resonant_accumulator_orb_crafting","title":"共振蓄能晶球 · 制作","item":"omnira:resonant_accumulator_orb","recipes":true,"text":["可在魔动装配台升级脉冲蓄能晶球。已安装的升级会保留。"],"links":[{"target":"magic_pulse","label":"势能网络与使用"}]}

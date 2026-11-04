@@ -1,20 +1,5 @@
 {
   "parent": "omnira:branches/spell_writing",
-  "display": {
-    "icon": {
-      "id": "omnira:basic_crystal_grid"
-    },
-    "title": {
-      "translate": "advancement.omnira.branches.spell_cycle.title"
-    },
-    "description": {
-      "translate": "advancement.omnira.branches.spell_cycle.description"
-    },
-    "frame": "goal",
-    "show_toast": true,
-    "announce_to_chat": false,
-    "hidden": false
-  },
   "criteria": {
     "previous_completed": {
       "trigger": "minecraft:impossible"

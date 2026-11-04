@@ -92,39 +92,7 @@
           "item": "omnira:incomplete_industrial_wheel"
         },
         {
-          "item": "create:large_cogwheel"
-        }
-      ],
-      "results": [
-        {
-          "id": "omnira:incomplete_industrial_wheel"
-        }
-      ]
-    },
-    {
-      "type": "create:deploying",
-      "ingredients": [
-        {
-          "item": "omnira:incomplete_industrial_wheel"
-        },
-        {
-          "item": "create:cogwheel"
-        }
-      ],
-      "results": [
-        {
-          "id": "omnira:incomplete_industrial_wheel"
-        }
-      ]
-    },
-    {
-      "type": "create:deploying",
-      "ingredients": [
-        {
-          "item": "omnira:incomplete_industrial_wheel"
-        },
-        {
-          "item": "create:cogwheel"
+          "item": "create:sequenced_gearshift"
         }
       ],
       "results": [
@@ -141,19 +109,6 @@
         },
         {
           "item": "create:precision_mechanism"
-        }
-      ],
-      "results": [
-        {
-          "id": "omnira:incomplete_industrial_wheel"
-        }
-      ]
-    },
-    {
-      "type": "create:pressing",
-      "ingredients": [
-        {
-          "item": "omnira:incomplete_industrial_wheel"
         }
       ],
       "results": [

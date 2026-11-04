@@ -4,7 +4,8 @@
   "item": "omnira:dense_void_mass",
   "recipes": false,
   "text": [
-    "Mine the floating mass in a Skyreach Tower with a pickaxe and place it again. In the Inverted Abyss's weightless band it strongly attracts entities within a five-block sphere. Elsewhere it exerts only a weak pull, without changing gravity direction. It is also a component of the Void Infuser."
+    "Mine the floating mass in a Skyreach Tower with a pickaxe and place it again. In the Inverted Abyss's weightless band it strongly attracts entities within a five-block sphere. Elsewhere it exerts only a weak pull, without changing gravity direction. It is also a component of the Void Infuser.",
+    "Sneak-right-click with an empty main hand to preview its 5-block attraction radius."
   ],
   "links": [
     {

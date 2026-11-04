@@ -5,6 +5,7 @@
   "icon": "omnira:rough_spatial_crystal_block",
   "recipes": false,
   "text": [
-    "将鼠标移到材料上查看每件提供的能量。"
+    "将鼠标移到材料上查看每件提供的能量。",
+    "输入虚空星流也能供能，每累计1 B获得1点能量。拆除器械会清除未满1 B的进度。"
   ]
 }

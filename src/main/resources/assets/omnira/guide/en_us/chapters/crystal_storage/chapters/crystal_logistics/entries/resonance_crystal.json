@@ -3,7 +3,7 @@
   "item": "omnira:resonance_crystal",
   "title": "Resonance Crystal",
   "text": [
-    "Resonance Crystals are a foundation of logistics equipment. Craft one from a Spiritual Crystal and eight Arcane Dust; other devices and rituals also use them.",
+    "Resonance Crystals are used in logistics equipment and some rituals.",
     "Alternatively, each reaction over a Resonance Core converts one Spiritual Crystal into one Resonance Crystal. No fluid is needed."
   ],
   "recipes": true,

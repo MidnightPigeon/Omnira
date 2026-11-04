@@ -20,7 +20,7 @@ public final class OrbUpgradeScreen extends ResponsiveContainerScreen<OrbUpgrade
     @Override protected void init() {
         super.init();
         if(!menu.speed)mode=addRenderableWidget(panelButton(leftPos+44,topPos+(menu.recipeControl?90:54),88,0,menu::whitelist));
-        for(int i=0;!menu.speed&&!menu.recipeControl&&i<directions.length;i++) {
+        for(int i=0;!menu.speed&&!menu.recipeControl&&!menu.areaIntake&&i<directions.length;i++) {
             final int index=i;
             directions[i]=addRenderableWidget(panelButton(leftPos+10+(i%3)*52,topPos+76+(i/3)*20,51,index+1,()->(menu.directions()&(1<<index))!=0));
         }
@@ -56,7 +56,7 @@ public final class OrbUpgradeScreen extends ResponsiveContainerScreen<OrbUpgrade
     @Override protected void renderContent(GuiGraphics g,int mouseX,int mouseY,float partial) {
         if(!menu.speed)mode.setMessage(Component.translatable("gui.omnira.orb."+(menu.whitelist()?"whitelist":"blacklist")));
         String[] names=menu.intake?new String[]{"front","back","left","right","down","up"}:new String[]{"down","up","front","back","left","right"};
-        for(int i=0;!menu.speed&&!menu.recipeControl&&i<directions.length;i++)directions[i].setMessage(Component.literal((menu.directions()&(1<<i))!=0?"+ ":"- ").append(Component.translatable("gui.omnira.orb."+names[i])));
+        for(int i=0;!menu.speed&&!menu.recipeControl&&!menu.areaIntake&&i<directions.length;i++)directions[i].setMessage(Component.literal((menu.directions()&(1<<i))!=0?"+ ":"- ").append(Component.translatable("gui.omnira.orb."+names[i])));
         super.renderContent(g,mouseX,mouseY,partial);renderTooltip(g,mouseX,mouseY);
     }
 }

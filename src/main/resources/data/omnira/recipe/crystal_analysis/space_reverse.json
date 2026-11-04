@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "omnira:analysis_tools"
+    },
+    {
+      "item": "omnira:space_microcore"
+    }
+  ],
+  "result": {
+    "id": "omnira:space_warp_point",
+    "count": 4
+  }
+}

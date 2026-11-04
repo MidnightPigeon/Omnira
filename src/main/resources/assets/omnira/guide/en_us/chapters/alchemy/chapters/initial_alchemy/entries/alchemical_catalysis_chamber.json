@@ -5,7 +5,7 @@
   "scene": "alchemical_catalysis_chamber",
   "recipes": false,
   "text": [
-    "Follow the model layout with one Rough Alchemy Cauldron, one Rough Alchemical Energy Core and one Crystal Ball; individual block facings do not matter. Empty the vessels and activate the core with one Infused Crystal. The machine cannot be mined; carry it with a Pocket Magic Bottle.",
+    "Follow the model layout; individual block facings do not matter. Empty the vessels and activate the core with one Infused Crystal. The machine cannot be mined; carry it with a Pocket Magic Bottle.",
     "Open the base to insert a suitable substrate and seed. Supply fluid through the rear blue port, or right-click that port with a bucket or fluid container. It holds one fluid type, up to 4 B. Substrate and seed are retained. Discover combinations through experimentation.",
     "Each catalysis uses 100 mB every 10 seconds. A full cycle always takes four catalyses: 40 seconds and 400 mB. Mature contents are harvested automatically and restart. Insufficient fluid or an occupied output pauses growth.",
     "With no fluid, naturally growing combinations follow their ordinary speed and yield; other combinations pause. Adding fluid resumes catalysis. A cycle that included natural growth still gives ordinary yield.",

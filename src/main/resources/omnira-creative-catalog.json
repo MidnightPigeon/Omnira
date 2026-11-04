@@ -93,6 +93,8 @@
       "group": "Tools",
       "items": [
         "analysis_crystal",
+        "crystallized_philosophers_stone",
+        "starlight_fishing_rod",
         "crystal_pickaxe",
         "infused_crystal_pickaxe",
         "spacetime_archaeology_brush",
@@ -271,6 +273,7 @@
         "spacetime_stabilization_upgrade",
         "lava_production_upgrade",
         "intake_upgrade",
+        "infused_intake_upgrade",
         "output_upgrade",
         "speed_upgrade",
         "recipe_control_upgrade"
@@ -441,6 +444,7 @@
         "light_crystal_torch",
         "shadow_lantern",
         "star_source",
+        "starlight_cluster",
         "crystal_sign",
         "marvelous_wisdom_sign",
         "crystal_column_base",

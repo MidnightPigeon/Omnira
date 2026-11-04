@@ -23,6 +23,7 @@ import java.util.*;
 
 @EventBusSubscriber(modid="omnira",value=Dist.CLIENT)
 public final class ReactionPoolClient {
+    private static final double[] TRANSFER_POINT=new double[3];
     private static final int[][] WORKING_GLYPH={{0,0},{0,1},{0,2},{-1,1},{1,-1}};
     private record Mesh(float[][] vertices,int[][] faces,String material,int color,String motion,float[] pivot,ResourceLocation texture){}
     private static final List<Mesh> MESHES=new ArrayList<>();
@@ -81,8 +82,8 @@ public final class ReactionPoolClient {
     private static void draw(ReactionPoolBlockEntity pool,double time,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         var mc=Minecraft.getInstance();var atlas=mc.getTextureAtlas(InventoryMenu.BLOCK_ATLAS);var motion=motion(pool,time);double phase=motion.phase;boolean working=pool!=null&&pool.powered();
         for(var mesh:MESHES){
-            pose.pushPose();float angle=switch(mesh.motion){case "drive"->(float)(phase*1.5%360);case "counter"->(float)(-phase*2.1%360);case "left"->(float)motion.left;case "right"->(float)motion.right;default->0;};
-            if(!mesh.motion.isEmpty()){pose.translate(mesh.pivot[0],mesh.pivot[1],mesh.pivot[2]);pose.mulPose((mesh.motion.equals("left")||mesh.motion.equals("right")?Axis.XP:Axis.YP).rotationDegrees(angle));pose.translate(-mesh.pivot[0],-mesh.pivot[1],-mesh.pivot[2]);}
+            pose.pushPose();float angle=switch(mesh.motion){case "sigil_item","port_item"->(float)(phase*.125%360);case "sigil_fluid","port_fluid"->(float)(-phase*.125%360);case "drive"->(float)(phase*1.5%360);case "counter"->(float)(-phase*2.1%360);case "left"->(float)motion.left;case "right"->(float)motion.right;default->0;};
+            if(!mesh.motion.isEmpty()){pose.translate(mesh.pivot[0],mesh.pivot[1],mesh.pivot[2]);pose.mulPose((mesh.motion.equals("left")||mesh.motion.equals("right")?Axis.XP:mesh.motion.startsWith("port_")?Axis.ZP:Axis.YP).rotationDegrees(angle));pose.translate(-mesh.pivot[0],-mesh.pivot[1],-mesh.pivot[2]);}
             var sprite=atlas.apply(mesh.texture);
             boolean electric=pool!=null&&pool.electricalPowered()&&(mesh.motion.equals("left")||mesh.motion.equals("right"));
             for(var f:mesh.faces)quad(pose,buffers,sprite,mesh.vertices[f[0]],mesh.vertices[f[1]],mesh.vertices[f[2]],mesh.vertices[f[3]],electric?0xFFE0FAFF:mesh.color,electric||working&&mesh.material.equals("glow")?LightTexture.FULL_BRIGHT:light,overlay,64);
@@ -109,12 +110,32 @@ public final class ReactionPoolClient {
             double y=wet?height+.13+Math.sin(time*.045+i)*.02:ReactionPoolGeometry.VESSEL_FLOOR+.115;
             item(stack,.5+(i%3-1)*.54,y,.5+(i/3-1)*.54,wet?time*.4+i*35:i*35,.23F,pool,pose,sorted,light,overlay,i);
         }
+        transferParticles(pool,time,pose,buffers);
         double age=time-pool.outputItemTick();var output=pool.outputItem();
-        if(!output.isEmpty()&&age>=0&&age<18){var p=ReactionPoolGeometry.outputPoint(false,age/18);item(output,p[0],p[1],p[2],age*12,.15F,pool,pose,sorted,light,overlay,20);}
+        if(!output.isEmpty()&&age>0&&age<18){
+            var p=TRANSFER_POINT;ReactionPoolGeometry.outputPoint(false,age/18,p);float visibility=transferVisibility(age/18);
+            MultiBufferSource fading=type->new FadeVertices(sorted.getBuffer(
+                    type==Sheets.solidBlockSheet()||type==Sheets.cutoutBlockSheet()||type==Sheets.translucentItemSheet()
+                            ?CrystalGlassLayer.ATLAS:type),visibility);
+            item(output,p[0],p[1],p[2],age*12,.15F*visibility,pool,pose,fading,light,overlay,20);
+        }
         age=time-pool.outputFluidTick();var fluid=pool.outputFluid();
-        if(!fluid.isEmpty()&&age>=0&&age<18){var ext=IClientFluidTypeExtensions.of(fluid.getFluid());int color=ext.getTintColor(fluid);if((color>>>24)==0)color|=0xFF000000;
-            for(int i=0;i<4;i++){double progress=age/18-i*.06;if(progress<0)continue;var p=ReactionPoolGeometry.outputPoint(true,progress);
-                box(pose,buffers,atlas.apply(ext.getStillTexture(fluid)),p[0]-.065,p[1]-.065,p[2]-.065,p[0]+.065,p[1]+.065,p[2]+.065,color,light,overlay);}}
+        if(!fluid.isEmpty()&&age>0&&age<18){var ext=IClientFluidTypeExtensions.of(fluid.getFluid());int color=ext.getTintColor(fluid);if((color>>>24)==0)color|=0xFF000000;
+            var p=TRANSFER_POINT;ReactionPoolGeometry.outputPoint(true,age/18,p);
+            // A small stepped fluid globe passes through the liquid sigil.
+            float visibility=transferVisibility(age/18);
+            double r=.09*visibility;
+            color=(Math.round((color>>>24)*visibility)<<24)|(color&0xFFFFFF);
+            var sprite=atlas.apply(ext.getStillTexture(fluid));
+            for(int x=-1;x<=1;x++)for(int y=-1;y<=1;y++)for(int z=-1;z<=1;z++){
+                if(Math.abs(x)+Math.abs(y)+Math.abs(z)>2)continue;
+                var vertices=points(p[0]+(x-.5)*r,p[1]+(y-.5)*r,p[2]+(z-.5)*r,p[0]+(x+.5)*r,p[1]+(y+.5)*r,p[2]+(z+.5)*r);
+                int[][] normals={{0,0,-1},{0,0,1},{-1,0,0},{1,0,0},{0,1,0},{0,-1,0}};
+                for(int side=0;side<6;side++){var n=normals[side];int xx=x+n[0],yy=y+n[1],zz=z+n[2];
+                    if(Math.abs(xx)<=1&&Math.abs(yy)<=1&&Math.abs(zz)<=1&&Math.abs(xx)+Math.abs(yy)+Math.abs(zz)<=2)continue;
+                    var f=FACES[side];quad(pose,buffers,sprite,vertices[f[0]],vertices[f[1]],vertices[f[2]],vertices[f[3]],color,light,overlay,16);
+                }
+            }}
         if(working){
             var out=buffers.getBuffer(CrystalGlassLayer.COLOR);
             for(int i=0;i<4;i++){
@@ -125,11 +146,35 @@ public final class ReactionPoolClient {
             if(pool.reacting())for(int i=0;i<24;i++){
                 double cycle=(time*.014+i/24.0)%1,a=time*.035+i*Math.PI/6,r=.4+cycle*.5;
                 cube(out,pose,(float)(.5+r*Math.cos(a)),(float)(height+.1+cycle*.7),(float)(.5+r*Math.sin(a)),.018F,i%2==0?0xDED1F4E8:0xDED6ECFF);
-                double angle=phase*.05+i*Math.PI/12;
-                double x=Math.cos(angle),z=Math.sin(angle),radius=1.42/Math.max(Math.max(Math.abs(x),Math.abs(z)),(Math.abs(x)+Math.abs(z))/Math.sqrt(2));
-                cube(out,pose,(float)(.5+x*radius),1.92F,(float)(.5+z*radius),.019F,i%2==0?0xE0BAF8D6:0xE0BDE5FF);
             }
         }
+    }
+    /** Existing successful-transfer timestamps drive short trails; no idle particles or extra packets. */
+    private static void transferParticles(ReactionPoolBlockEntity pool,double time,PoseStack pose,MultiBufferSource buffers){
+        var out=buffers.getBuffer(CrystalGlassLayer.COLOR);
+        for(boolean fluid:new boolean[]{false,true}){
+            if(fluid?pool.outputFluid().isEmpty():pool.outputItem().isEmpty())continue;
+            double age=time-(fluid?pool.outputFluidTick():pool.outputItemTick());
+            if(age<0||age>=18)continue;
+            for(int i=0;i<5;i++){
+                double progress=(age-i*1.8)/12;if(progress<0||progress>1)continue;
+                var p=TRANSFER_POINT;ReactionPoolGeometry.outputPoint(fluid,progress,p);
+                double phase=i*2.4+age*.22;
+                float visibility=transferVisibility(progress);
+                int alpha=Math.round(200*visibility);
+                cube(out,pose,(float)(p[0]+Math.cos(phase)*.035),(float)(p[1]+Math.sin(phase)*.035),(float)p[2],.014F*visibility,(alpha<<24)|(fluid?0x9AE8FF:0xD4B0FF));
+            }
+        }
+    }
+    private static float transferVisibility(double progress){return (float)Math.sin(Math.PI*Math.clamp(progress,0,1));}
+    /** Preserve the item's tint and the shared glass sorting path while fading each vertex. */
+    private record FadeVertices(VertexConsumer target,float alpha) implements VertexConsumer {
+        public VertexConsumer addVertex(float x,float y,float z){target.addVertex(x,y,z);return this;}
+        public VertexConsumer setColor(int r,int g,int b,int a){target.setColor(r,g,b,Math.round(a*alpha));return this;}
+        public VertexConsumer setUv(float u,float v){target.setUv(u,v);return this;}
+        public VertexConsumer setUv1(int u,int v){target.setUv1(u,v);return this;}
+        public VertexConsumer setUv2(int u,int v){target.setUv2(u,v);return this;}
+        public VertexConsumer setNormal(float x,float y,float z){target.setNormal(x,y,z);return this;}
     }
     private static void item(ItemStack stack,double x,double y,double z,double angle,float scale,ReactionPoolBlockEntity pool,PoseStack pose,MultiBufferSource buffers,int light,int overlay,int seed){
         pose.pushPose();pose.translate(x,y,z);pose.mulPose(Axis.YP.rotationDegrees((float)angle));pose.scale(scale,scale,scale);

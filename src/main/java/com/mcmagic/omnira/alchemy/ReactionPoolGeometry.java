@@ -47,19 +47,26 @@ public final class ReactionPoolGeometry {
         }
         return SHAPES[index][part]=Shapes.or(Shapes.empty(),boxes.toArray(VoxelShape[]::new)).optimize();
     }
-    public static double[] outputPoint(boolean fluid,double progress){
-        var path=DATA.getAsJsonObject("output_paths").getAsJsonArray(fluid?"fluid":"item");
-        double[] lengths=new double[path.size()-1];double total=0;
+    private static final OutputPath ITEM_PATH=outputPath("item"),FLUID_PATH=outputPath("fluid");
+    private record OutputPath(double[][] points,double[] lengths,double total){}
+    private static OutputPath outputPath(String name){
+        var json=DATA.getAsJsonObject("output_paths").getAsJsonArray(name);
+        double[][] points=new double[json.size()][3];double[] lengths=new double[json.size()-1];double total=0;
+        for(int i=0;i<points.length;i++)for(int a=0;a<3;a++)points[i][a]=json.get(i).getAsJsonArray().get(a).getAsDouble()/16;
         for(int i=0;i<lengths.length;i++){
-            double squared=0;for(int a=0;a<3;a++){double delta=path.get(i+1).getAsJsonArray().get(a).getAsDouble()-path.get(i).getAsJsonArray().get(a).getAsDouble();squared+=delta*delta;}
+            double squared=0;for(int a=0;a<3;a++){double delta=points[i+1][a]-points[i][a];squared+=delta*delta;}
             total+=lengths[i]=Math.sqrt(squared);
         }
-        double distance=Math.clamp(progress,0,1)*total;int segment=0;
-        while(segment<lengths.length-1&&distance>lengths[segment])distance-=lengths[segment++];
-        double t=lengths[segment]>0?distance/lengths[segment]:0;
-        double[] result=new double[3];for(int a=0;a<3;a++)result[a]=(path.get(segment).getAsJsonArray().get(a).getAsDouble()*(1-t)
-                +path.get(segment+1).getAsJsonArray().get(a).getAsDouble()*t)/16;
-        return result;
+        return new OutputPath(points,lengths,total);
+    }
+    public static double[] outputPoint(boolean fluid,double progress){
+        double[] result=new double[3];outputPoint(fluid,progress,result);return result;
+    }
+    public static void outputPoint(boolean fluid,double progress,double[] result){
+        var path=fluid?FLUID_PATH:ITEM_PATH;double distance=Math.clamp(progress,0,1)*path.total;int segment=0;
+        while(segment<path.lengths.length-1&&distance>path.lengths[segment])distance-=path.lengths[segment++];
+        double t=path.lengths[segment]>0?distance/path.lengths[segment]:0;
+        for(int a=0;a<3;a++)result[a]=path.points[segment][a]*(1-t)+path.points[segment+1][a]*t;
     }
     private ReactionPoolGeometry(){}
 }

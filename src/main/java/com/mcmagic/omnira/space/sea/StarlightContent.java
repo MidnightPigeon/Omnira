@@ -11,6 +11,9 @@ public final class StarlightContent {
     public static final DeferredItem<BlockItem> SOURCE_ITEM = ModItems.ITEMS.registerSimpleBlockItem(SOURCE);
     // Harvestable material, deliberately not a BlockItem.
     public static final DeferredItem<Item> DUST_ITEM = ModItems.ITEMS.registerSimpleItem("stardust", new Item.Properties());
+    public static final DeferredBlock<StarlightClusterBlock> CLUSTER = ModBlocks.BLOCKS.register("starlight_cluster", StarlightClusterBlock::new);
+    public static final DeferredItem<BlockItem> CLUSTER_ITEM = ModItems.ITEMS.registerSimpleBlockItem(CLUSTER);
+    public static final DeferredItem<StarlightRodItem> ROD = ModItems.ITEMS.register("starlight_fishing_rod", StarlightRodItem::new);
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<StarlightEntity>> ENTITY = ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register(
             "starlight", () -> BlockEntityType.Builder.of(StarlightEntity::new, SOURCE.get(), DUST.get()).build(null));
     public static void init() {}

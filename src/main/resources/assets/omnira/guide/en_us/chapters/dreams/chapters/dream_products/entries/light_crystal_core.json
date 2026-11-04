@@ -5,7 +5,8 @@
   "text": [
     "Find Light Crystal Cores inside pale-gold spheres in the Dawn Crystal Fields. They are used in forging, rituals and lighting.",
     "Player-placed cores slowly grow Light Condensate and Light Source Crystal into nearby empty space, leaving the six adjacent positions clear. Natural cores remain dormant.",
-    "Emits light level 15 and has zero mass with Aeronautics."
+    "Emits light level 15 and has zero mass with Aeronautics.",
+    "While growing, sneak-right-click with an empty main hand to preview its 5-block growth radius."
   ],
   "recipes": true,
   "links": [

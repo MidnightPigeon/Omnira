@@ -20,7 +20,19 @@
           "type": "minecraft:loot_table",
           "value": "omnira:fishing/mire_treasure",
           "weight": 5,
-          "quality": 2
+          "quality": 2,
+          "conditions": [
+            {
+              "condition": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "type_specific": {
+                  "type": "minecraft:fishing_hook",
+                  "in_open_water": true
+                }
+              }
+            }
+          ]
         }
       ]
     }

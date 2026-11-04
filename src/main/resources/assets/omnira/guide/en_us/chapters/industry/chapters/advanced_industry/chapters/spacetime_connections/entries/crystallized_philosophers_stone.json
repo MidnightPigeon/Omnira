@@ -1,0 +1,25 @@
+{
+  "id": "crystallized_philosophers_stone",
+  "title": "Crystallized Philosopher's Stone",
+  "item": "omnira:crystallized_philosophers_stone",
+  "recipes": true,
+  "text": [
+    "A deeper understanding of the world lets you assemble this pinnacle of alchemy from Analysis Crystals.",
+    "Use the stone in place of an Analysis Crystal to convert materials into microcores and back, or to extract Dissociation Thread at the Analysis Artisan Table. It never wears out.",
+    "Use the stone on a stone block to turn it into a Block of Raw Gold."
+  ],
+  "links": [
+    {
+      "target": "analysis_crystal",
+      "label": "Analysis Crystal"
+    },
+    {
+      "target": "myriad_aggregation",
+      "label": "Myriad Aggregation"
+    },
+    {
+      "target": "elemental_cycle",
+      "label": "Elemental Cycling"
+    }
+  ]
+}

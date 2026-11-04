@@ -4,7 +4,7 @@
   "item": "omnira:enhanced_alchemical_energy_core",
   "recipes": true,
   "text": [
-    "React one Rough Alchemical Energy Core with 4 B of Dilute Spacetime in a Primitive Reaction Cauldron or Large Alchemical Reaction Pool to produce one Enhanced Alchemical Energy Core. No floor catalyst is required.",
+    "Make the core in a Primitive Reaction Cauldron or Large Alchemical Reaction Pool without a floor catalyst.",
     "A blue-green nucleus floats and rotates among orbiting crystal motes. This placeable component does not process materials on its own."
   ],
   "links": [

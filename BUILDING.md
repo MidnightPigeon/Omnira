@@ -42,6 +42,9 @@ Headless server tests use the same installed dependency environment:
 
 The required structure fixture is `scripts/tests/spell_arena.snbt`.
 Do not start the Minecraft client as an automated validation step.
+The active development instance is the compatibility baseline. Keep its mods
+enabled during in-game acceptance, including Sodium for rendering changes.
+Report headless gameplay checks and client visual acceptance separately.
 
 ## Repository Boundaries
 

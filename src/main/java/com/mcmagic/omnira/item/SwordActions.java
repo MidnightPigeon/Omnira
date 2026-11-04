@@ -3,6 +3,8 @@ package com.mcmagic.omnira.item;
 import com.mcmagic.omnira.registry.ModEntityTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
+import com.mcmagic.omnira.spell.world.WorldEntityKinds;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.*;
@@ -95,8 +97,35 @@ public final class SwordActions {
     @SubscribeEvent public static void stop(ServerStoppedEvent e) {CHARGES.clear();POWER_STRIKE.remove();}
     @SubscribeEvent public static void tick(PlayerTickEvent.Post event) {
         if(event.getEntity() instanceof ServerPlayer p) {
+            if(p.getMainHandItem().getItem() instanceof RitualSwordItem)contactDamage(p);
             var charge=CHARGES.get(p);
             if(charge!=null && (!eligible(p) || p.getMainHandItem()!=charge.weapon || p.serverLevel().getGameTime()-charge.start>1200))CHARGES.remove(p);
+        }
+    }
+    private static final Map<ServerPlayer,Long> LAST_CONTACT=new WeakHashMap<>();
+    static void contactDamage(ServerPlayer player){
+        if(!player.isAlive())return;
+        long now=player.serverLevel().getGameTime();
+        var last=LAST_CONTACT.get(player);
+        if(last!=null&&now>=last&&now-last<10)return;
+        int damage=0;
+        for(var entity:player.level().getEntities(player,player.getBoundingBox())){
+            var owner=entity instanceof net.neoforged.neoforge.entity.PartEntity<?> part?part.getParent():entity;
+            if(!(owner instanceof Mob mob)||!mob.isAlive()||mob.isRemoved())continue;
+            var family=WorldEntityKinds.kind(mob);
+            if(family==WorldEntityKinds.Kind.BOSS){
+                boolean hostile=mob instanceof com.mcmagic.omnira.entity.WeaverSpirit spirit?spirit.active():
+                        mob instanceof net.minecraft.world.entity.boss.enderdragon.EnderDragon
+                        ||mob instanceof net.minecraft.world.entity.boss.wither.WitherBoss
+                        ||mob.getTarget()!=null||mob.isAggressive()
+                        ||mob.getBrain().hasMemoryValue(net.minecraft.world.entity.ai.memory.MemoryModuleType.ATTACK_TARGET);
+                if(hostile){damage=4;break;}
+            }else if(family==WorldEntityKinds.Kind.HOSTILE
+                    ||family==WorldEntityKinds.Kind.NEUTRAL&&WorldEntityKinds.hostileNow(mob))damage=2;
+        }
+        if(damage>0){
+            LAST_CONTACT.put(player,now);
+            com.mcmagic.omnira.combat.OmniraDamage.trueDamage(player,damage,player.damageSources().generic());
         }
     }
 }

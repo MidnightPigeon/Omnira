@@ -3,7 +3,7 @@
   "item": "omnira:milk_suspension",
   "title": "Milk Suspension",
   "text": [
-    "Dissociate cows, or shapelessly craft one Milk Bucket with one Infused Spiritual Crystal, to obtain a portion. The empty bucket stays in its crafting slot. Suspension does not stack. Craft it with a bucket, or collect a dropped portion with a bucket, to obtain a Milk Bucket.",
+    "Obtain Milk Suspension by dissociating a cow or processing a Milk Bucket at a crafting table. The empty bucket stays in its slot. Suspension does not stack. It can be bottled in a bucket at the crafting table, or collected by using an empty bucket on the dropped item.",
     "Right-click a compatible fluid container to inject up to 1000 mB of milk. If less room remains, fill that space and consume the whole suspension. No transfer means no consumption.",
     "Existing milk is topped up first; empty containers are offered compatible milk.",
     "Suspension can replace Milk Buckets in shaped and shapeless workbench recipes, including standard recipes from other mods and mixed combinations. Only Milk Buckets return buckets. Making suspension itself still requires a Milk Bucket."

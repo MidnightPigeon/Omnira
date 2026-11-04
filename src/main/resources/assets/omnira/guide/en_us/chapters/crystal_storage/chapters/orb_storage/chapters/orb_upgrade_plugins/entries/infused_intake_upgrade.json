@@ -1,0 +1,12 @@
+{
+  "id": "infused_intake_upgrade",
+  "title": "Infused Intake Upgrade",
+  "item": "omnira:infused_intake_upgrade",
+  "text": [
+    "Installed in a Crystal Ball, Resonant Crystal Ball or Cruise Orb, it harvests mature crops and collects dropped items within 8 blocks every 10 seconds. Ordinary blocks are not broken.",
+    "Right-click while holding it to configure three whitelist or blacklist samples. Filters match harvested and dropped items. Crops are not harvested without enough storage space; a seed is retained for regrowth.",
+    "Each adult cow provides one Milk Suspension per cycle, while sheep yield wool through normal shearing. Neither takes damage. Only eggs already laid by chickens are collected.",
+    "Sneak-right-click the installed Crystal Ball with an empty main hand to preview its 8-block range."
+  ],
+  "recipes": true
+}

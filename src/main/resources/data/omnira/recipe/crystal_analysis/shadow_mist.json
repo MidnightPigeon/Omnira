@@ -2,11 +2,17 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "omnira:analysis_crystal"
+      "tag": "omnira:analysis_tools"
     },
-    {"item": "omnira:shadow_manuscript"},
-    {"item": "omnira:shadow_manuscript"},
-    {"item": "omnira:shadow_manuscript"},
+    {
+      "item": "omnira:shadow_manuscript"
+    },
+    {
+      "item": "omnira:shadow_manuscript"
+    },
+    {
+      "item": "omnira:shadow_manuscript"
+    },
     {
       "item": "omnira:shadow_manuscript"
     }

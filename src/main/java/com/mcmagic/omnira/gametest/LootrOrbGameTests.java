@@ -3,6 +3,9 @@ import net.minecraft.gametest.framework.*;
 import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_lootr") @PrefixGameTestTemplate(false)
 public final class LootrOrbGameTests {
+    @GameTest(template="spell_arena") public static void creativeFirstOpenSurvivesPublicRefresh(GameTestHelper h){
+        if(!net.neoforged.fml.ModList.get().isLoaded("lootr")){h.succeed();return;}LootrOrbTestCases.creativeFirstOpenSurvivesPublicRefresh(h);
+    }
     @GameTest(template="spell_arena") public static void playerBreakDropsOnlyCleanShell(GameTestHelper h){
         if(!net.neoforged.fml.ModList.get().isLoaded("lootr")){h.succeed();return;}LootrOrbTestCases.playerBreakDropsOnlyCleanShell(h);
     }

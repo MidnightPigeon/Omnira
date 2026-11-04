@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "omnira:analysis_crystal"
+      "tag": "omnira:analysis_tools"
     },
     {
       "item": "omnira:air_microcore"

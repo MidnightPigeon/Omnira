@@ -42,6 +42,7 @@ public final class CrystalEncasing {
                 .noOcclusion().isRedstoneConductor((s,l,p)->false).isSuffocating((s,l,p)->false).isViewBlocking((s,l,p)->false);
     }
     public static void register(IEventBus bus) {
+        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(WheelRuneDeploying::search);
         bus.addListener((BlockEntityTypeAddBlocksEvent event)->{
             event.modify(AllBlockEntityTypes.ENCASED_FLUID_PIPE.get(),PIPE.get(),INFUSED_PIPE.get());
             event.modify(AllBlockEntityTypes.ENCASED_SHAFT.get(),SHAFT.get(),INFUSED_SHAFT.get());

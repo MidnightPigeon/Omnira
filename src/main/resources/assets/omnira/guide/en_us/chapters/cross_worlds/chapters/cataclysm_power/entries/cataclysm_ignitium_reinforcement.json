@@ -3,7 +3,7 @@
   "title": "Ignitium Reinforcement",
   "item": "omnira:ignitium_reinforcement",
   "text": [
-    "Crafted by processing Ignitium Ingot in the center of an Arcane Assembly Table, with the outer slots empty.",
+    "Fashioned from Ignitium Ingot.",
     "It inherits Ignitium’s blazing power, strengthening spells while easing their cost."
   ],
   "recipes": true

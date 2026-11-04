@@ -3,9 +3,10 @@
   "title": "Industrial Wheel",
   "item": "omnira:industrial_wheel",
   "text": [
-    "Begin Create sequenced assembly with a Spiritual Crystal Staff Tip: deploy a Brass Casing, fill with 1000 mB of lava, then deploy a Shaft, an Infused Crystal Casing, a Large Cogwheel, two Cogwheels and a Precision Mechanism. Finish with pressing. One loop always produces the Industrial Wheel.",
+    "Start Create’s sequenced assembly with a Spiritual Crystal Staff Tip. One complete sequence yields the Industrial Wheel.",
     "With a crystal grid equipped, right-click to start continuous casting and right-click again to stop immediately. It cycles through the grid in order, ignoring the fixed spell-chain end cooldown. World Rotation retains its own special cooldown. Sneak-right-click to edit the grid.",
-    "The crystal hand and gears rotate slowly while continuous casting is active, and stop when casting ends. Casting stops if mana is insufficient, the target is invalid, the grid becomes unavailable or the staff leaves your hand. Right-click again to restart."
+    "The crystal hand and gears rotate slowly while continuous casting is active, and stop when casting ends. Casting stops if mana is insufficient, the target is invalid, the grid becomes unavailable or the staff leaves your hand. Right-click again to restart.",
+    "The Industrial Wheel has one rune slot. Place the staff on a depot or belt and use a Deployer holding a rune to fit it. The installed rune orbits the crystal hand."
   ],
   "recipes": true
 }

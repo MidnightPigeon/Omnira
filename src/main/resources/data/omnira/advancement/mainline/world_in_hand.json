@@ -1,5 +1,5 @@
 {
-  "parent": "omnira:mainline/deconstruction",
+  "parent": "omnira:mainline/world_awakening",
   "display": {
     "icon": {
       "id": "omnira:miniature_world_framework"

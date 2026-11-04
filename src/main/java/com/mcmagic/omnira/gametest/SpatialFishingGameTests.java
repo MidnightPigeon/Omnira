@@ -58,5 +58,55 @@ public final class SpatialFishingGameTests {
                 &&categories.get(i).getAsJsonObject().get("quality").getAsInt()==quality[i],"Category or luck balance changed");
         h.succeed();
     }
+    @GameTest(template="spell_arena") public static void castFromAboveBothPools(GameTestHelper h){
+        var level=h.getLevel();
+        var center=h.absolutePos(new net.minecraft.core.BlockPos(7,5,7));
+        var owner=net.neoforged.neoforge.common.util.FakePlayerFactory.get(level,new com.mojang.authlib.GameProfile(UUID.randomUUID(),"pond-angler"));
+        var rod=com.mcmagic.omnira.space.sea.StarlightContent.ROD.get().getDefaultInstance();
+        owner.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,rod);
+        for(var liquid:List.of(com.mcmagic.omnira.mire.MireContent.LIQUID.get(),com.mcmagic.omnira.space.sea.VoidSeaContent.LIQUID.get())){
+            for(int x=-3;x<=3;x++)for(int z=-3;z<=3;z++)for(int y=-1;y<=0;y++)
+                level.setBlockAndUpdate(center.offset(x,y,z),liquid.defaultBlockState());
+            owner.setPos(center.getCenter().add(2,40,2));
+            rod.use(level,owner,net.minecraft.world.InteractionHand.MAIN_HAND);
+            var hook=owner.fishing;
+            hook.setPos(center.getCenter().add(0,1.3,0));
+            hook.setDeltaMovement(0,-.22,0);
+            hook.getRandom().setSeed(42L);
+            var stages=new HashSet<Integer>();
+            for(int i=0;i<1800 && !hook.isRemoved() && !stages.contains(3);i++){
+                level.tickNonPassenger(hook);
+                stages.add(((com.mcmagic.omnira.space.sea.StarlightFloat)hook).omnira$fishingPhase());
+            }
+            h.assertTrue(!hook.isRemoved()&&stages.containsAll(List.of(1,2,3))&&hook.position().distanceToSqr(center.getCenter())<4,"Float did not remain in pool through a natural bite: "+stages);
+            owner.setPos(center.getCenter().add(0,68,0));
+            level.tickNonPassenger(hook);
+            h.assertTrue(hook.isRemoved(),"Overextended line did not retract");
+        }
+        h.succeed();
+    }
     private SpatialFishingGameTests(){}
+    @GameTest(template="spell_arena") public static void specialFluidsUseVanillaOpenWater(GameTestHelper h)throws Exception{
+        var level=h.getLevel();var center=h.absolutePos(new net.minecraft.core.BlockPos(7,5,7));
+        var hook=new net.minecraft.world.entity.projectile.FishingHook(net.minecraft.world.entity.EntityType.FISHING_BOBBER,level);
+        var area=hook.getClass().getDeclaredMethod("calculateOpenWater",net.minecraft.core.BlockPos.class);
+        area.setAccessible(true);
+        JsonArray vanilla;
+        var path=net.minecraft.resources.ResourceLocation.withDefaultNamespace("loot_table/gameplay/fishing.json");
+        try(var reader=level.getServer().getResourceManager().getResourceOrThrow(path).openAsReader()){
+            vanilla=JsonParser.parseReader(reader).getAsJsonObject().getAsJsonArray("pools").get(0).getAsJsonObject().getAsJsonArray("entries");
+        }
+        var treasureGate=vanilla.asList().stream().map(JsonElement::getAsJsonObject).filter(e->e.get("value").getAsString().endsWith("/treasure")).findFirst().orElseThrow().get("conditions");
+        for(String table:List.of("void_starflow","reversion_mire")){
+            var entries=read("/data/omnira/loot_table/fishing/"+table+".json").getAsJsonArray("pools").get(0).getAsJsonObject().getAsJsonArray("entries");
+            h.assertTrue(treasureGate.equals(entries.get(2).getAsJsonObject().get("conditions")),"Treasure differs from the vanilla open-water rule");
+            var liquid=table.equals("void_starflow")?com.mcmagic.omnira.space.sea.VoidSeaContent.LIQUID.get():com.mcmagic.omnira.mire.MireContent.LIQUID.get();
+            for(int x=-2;x<=2;x++)for(int z=-2;z<=2;z++)for(int y=-1;y<=2;y++)
+                level.setBlockAndUpdate(center.offset(x,y,z),y<=0?liquid.defaultBlockState():net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+            h.assertTrue((boolean)area.invoke(hook,center),"Unobstructed source pool rejected");
+            level.setBlockAndUpdate(center.east(),net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+            h.assertTrue(!(boolean)area.invoke(hook,center),"Obstructed pool qualified for treasure");
+        }
+        h.succeed();
+    }
 }

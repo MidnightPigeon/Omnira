@@ -8,7 +8,8 @@
     "Neither can be removed manually. The Cleansing Ritual removes both.",
     "Sneak-use on the ground to place it open. Use an item to display one; use an empty hand to retrieve it. The case stays half-open while displaying an item.",
     "Placing Voyager's Violin inside starts continuous music, granting Regeneration II and Resistance II to living creatures within 10 blocks. Remove the violin to stop.",
-    "The Star of Fulfillment removes only the curse. The retained talent still prevents obtaining another talent."
+    "The Star of Fulfillment removes only the curse. The retained talent still prevents obtaining another talent.",
+    "With Voyager's Violin inside, sneak-right-click with an empty main hand to preview its 10-block performance effect radius."
   ],
   "links": [
     {

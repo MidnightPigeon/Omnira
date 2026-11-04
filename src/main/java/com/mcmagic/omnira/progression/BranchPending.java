@@ -18,7 +18,7 @@ final class BranchPending extends SavedData {
     }
     void deliver(ServerPlayer player){
         var pending=objectives.get(player.getUUID());if(pending==null)return;
-        pending.removeIf(value->{int split=value.indexOf('/');return BranchProgress.award(player,value.substring(0,split),value.substring(split+1));});
+        pending.removeIf(value->{int split=value.lastIndexOf('/');return BranchProgress.award(player,value.substring(0,split),value.substring(split+1));});
         if(pending.isEmpty())objectives.remove(player.getUUID());setDirty();
     }
     @Override public CompoundTag save(CompoundTag tag,HolderLookup.Provider registries){

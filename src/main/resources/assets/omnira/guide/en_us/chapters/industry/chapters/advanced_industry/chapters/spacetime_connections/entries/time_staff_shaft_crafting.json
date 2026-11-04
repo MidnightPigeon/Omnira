@@ -3,7 +3,7 @@
   "item": "omnira:time_staff_shaft",
   "title": "Time Wood Staff Shaft · Crafting",
   "text": [
-    "Uses the Shadow Wood Staff Shaft recipes with time logs instead; crafting and assembly are both supported."
+    "Shape the shaft from a Time Log, either by crafting or at an Arcane Assembly Bench."
   ],
   "recipes": true,
   "links": [

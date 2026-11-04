@@ -101,6 +101,22 @@ public final class ReactionPoolGameTests {
         h.assertTrue(java.util.stream.IntStream.range(0,9).map(i->pool.items.getStackInSlot(i).getCount()).sum()==1,"Pool left or duplicated ingredients");h.succeed();
     }
     private static final IFluidHandler.FluidAction EXECUTE=IFluidHandler.FluidAction.EXECUTE;
+    @GameTest(template="spell_arena") public static void compactDisplayPreservesReservationsAndDiskJobs(GameTestHelper h){
+        var pool=pool(h);var access=h.getLevel().registryAccess();
+        pool.items.setStackInSlot(0,new ItemStack(Items.STICK));
+        h.assertTrue(pool.start(recipe(Items.STICK,Items.DIAMOND,2000)),"Job did not start");pool.advance(200);
+        var packet=pool.getUpdateTag(access);var disk=pool.saveWithFullMetadata(access);
+        h.assertTrue(!packet.contains("Reactions")&&disk.getList("Reactions",10).size()==1,"Display packet included full recipe or save lost job");
+        var view=new ReactionPoolBlockEntity(pool.getBlockPos(),pool.getBlockState());view.setLevel(h.getLevel());view.loadWithComponents(packet,access);
+        h.assertTrue(view.reactionCount()==pool.reactionCount()&&view.progressPercent()==pool.progressPercent(),"Display lost reaction summary");
+        for(int i=0;i<9;i++)for(var item:List.of(Items.DIRT,Items.DIAMOND))for(int count:new int[]{1,64,65})
+            h.assertTrue(pool.canSetItem(i,new ItemStack(item,count))==view.canSetItem(i,new ItemStack(item,count)),"Manual slot reservation differs on display");
+        h.assertTrue(pool.fitsMultiplier(1)==view.fitsMultiplier(1),"Upgrade removal reservation differs");
+        var restored=new ReactionPoolBlockEntity(pool.getBlockPos(),pool.getBlockState());restored.setLevel(h.getLevel());restored.loadWithComponents(disk,access);
+        restored.advance(2000);h.assertTrue(restored.reactionCount()==0&&restored.items.getStackInSlot(0).is(Items.DIAMOND),"Disk job could not finish");
+        pool.advance(2000);view.loadWithComponents(pool.getUpdateTag(access),access);
+        h.assertTrue(!view.reacting()&&view.items.getStackInSlot(0).is(Items.DIAMOND),"Completion left stale client reservation");h.succeed();
+    }
     private static final IFluidHandler.FluidAction SIMULATE=IFluidHandler.FluidAction.SIMULATE;
     private static ReactionPoolBlockEntity pool(GameTestHelper h){
         var pos=h.absolutePos(new BlockPos(5,3,5));

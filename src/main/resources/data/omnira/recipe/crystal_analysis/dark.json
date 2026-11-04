@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "omnira:analysis_tools"
+    },
+    {
+      "item": "omnira:shadow_mist"
+    },
+    {
+      "item": "omnira:shadow_mist"
+    },
+    {
+      "item": "omnira:shadow_mist"
+    },
+    {
+      "item": "omnira:shadow_mist"
+    }
+  ],
+  "result": {
+    "id": "omnira:dark_microcore",
+    "count": 1
+  }
+}

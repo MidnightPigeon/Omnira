@@ -24,6 +24,33 @@ public class IndustrialWheelGameTests {
         top.theillusivec4.curios.api.CuriosApi.getCuriosInventory(p).orElseThrow().setEquippedCurio("crystal_grid",0,grid);return p;
     }
     private static void ticks(FakePlayer p,int n){for(int i=0;i<n;i++){p.tickCount++;p.getCooldowns().tick();IndustrialWheelItem.tick(new PlayerTickEvent.Post(p));}}
+    @GameTest(template="spell_arena") public static void deployOneRune(GameTestHelper h){
+        if(!IndustrialWheelItem.available()){h.succeed();return;}
+        var wheel=new ItemStack(ModItems.INDUSTRIAL_WHEEL.get());
+        wheel.set(DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal("Workshop wheel"));
+        var pos=h.absolutePos(new net.minecraft.core.BlockPos(3,3,3));
+        h.getLevel().setBlockAndUpdate(pos,com.simibubi.create.AllBlocks.DEPLOYER.getDefaultState());
+        var deployer=(com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity)h.getLevel().getBlockEntity(pos);
+        var inputs=new net.neoforged.neoforge.items.ItemStackHandler(2);
+        inputs.setStackInSlot(0,wheel);
+        for(var rune:List.of(ModItems.SWIFTNESS_RUNE,ModItems.WIDE_AREA_RUNE,ModItems.AMPLIFICATION_RUNE)){
+            inputs.setStackInSlot(1,new ItemStack(rune.get()));
+            var event=new com.simibubi.create.content.kinetics.deployer.DeployerRecipeSearchEvent(deployer,new net.neoforged.neoforge.items.wrapper.RecipeWrapper(inputs));
+            net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(event);
+            var recipe=(com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe)event.getRecipe().value();
+            var result=recipe.rollResults(h.getLevel().random).getFirst();
+            var stats=IndustrialWheelItem.stats(result);
+            h.assertTrue(!recipe.shouldKeepHeldItem() && result.getHoverName().equals(wheel.getHoverName()) && IndustrialWheelItem.rune(result).is(rune.get()),"Rune or wheel data lost");
+            h.assertTrue(com.mcmagic.omnira.compat.WheelRuneDeploying.recipe(result,inputs.getStackInSlot(1)).isEmpty(),"Occupied slot accepted another rune");
+            h.assertTrue(switch(rune.getId().getPath()){
+                case "swiftness_rune" -> stats.speedMultiplier()==1.5 && stats.cooldownReduction()==.2;
+                case "wide_area_rune" -> stats.rangeMultiplier()==1.5;
+                default -> Math.abs(stats.power()-.7)<.00001;
+            },"Rune did not affect casting stats");
+        }
+        h.assertTrue(com.mcmagic.omnira.compat.WheelRuneDeploying.recipe(wheel,new ItemStack(Items.DIAMOND)).isEmpty(),"Non-rune accepted");
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void continuousWrapAndImmediateStop(GameTestHelper h){
         if(!IndustrialWheelItem.available()){h.succeed();return;}
         var p=caster(h);var s=p.getMainHandItem();IndustrialWheelItem.toggle(p,InteractionHand.MAIN_HAND);
@@ -44,6 +71,17 @@ public class IndustrialWheelGameTests {
         ticks(p,40);p.setData(ModAttachments.MANA,new ManaState(10,100));IndustrialWheelItem.toggle(p,InteractionHand.MAIN_HAND);
         ticks(p,40);h.assertTrue(!IndustrialWheelItem.active(p)&&p.getData(ModAttachments.MANA).current()==0,"Mana exhaustion did not stop");
         p.setData(ModAttachments.MANA,ManaState.initial());ticks(p,40);h.assertTrue(!IndustrialWheelItem.active(p),"Mana regeneration restarted session");h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void rotationRecoversOldWorldDeadline(GameTestHelper h){
+        if(!IndustrialWheelItem.available()){h.succeed();return;}
+        var p=caster(h);long now=p.server.overworld().getGameTime();
+        var grid=com.mcmagic.omnira.menu.CrystalGridMenu.locate(p,-2);
+        grid.set(DataComponents.CONTAINER,ItemContainerContents.fromItems(List.of(new ItemStack(ModItems.WORLD_ROTATION_CRYSTAL.get()))));
+        p.setData(ModAttachments.WORLD_ROTATION_READY,now+800000L);
+        IndustrialWheelItem.toggle(p,InteractionHand.MAIN_HAND);
+        h.assertTrue(IndustrialWheelItem.active(p)&&p.getData(ModAttachments.MANA).current()==0,"Wheel could not cast after world clock reset");
+        h.assertTrue(p.getData(ModAttachments.WORLD_ROTATION_READY)==now+1200,"Wheel changed fixed cooldown");
+        IndustrialWheelItem.stop(p);com.mcmagic.omnira.spell.world.WorldRotation.cancel(p.getUUID());h.succeed();
     }
     @GameTest(template="spell_arena") public static void propertiesAndConditionalRecipe(GameTestHelper h){
         var stack=new ItemStack(ModItems.INDUSTRIAL_WHEEL.get());h.assertTrue(stack.getRarity()==Rarity.UNCOMMON&&stack.getMaxStackSize()==1,"Yellow rarity/stack size");

@@ -12,6 +12,28 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_geodes")
 @PrefixGameTestTemplate(false)
 public final class DislocatedGeodesGameTests {
+    @GameTest(template="spell_arena") public static void trajectoryExistsOnlyInsideCluster(GameTestHelper h){
+        var l=h.getLevel();var at=h.absolutePos(new BlockPos(6,4,6));
+        var pig=h.spawn(EntityType.PIG,new BlockPos(6,4,6));pig.setNoAi(true);
+        var data=pig.getPersistentData();
+        DeflectionMotion.sample(pig);
+        h.assertFalse(data.contains("DeflectionX"),"Ordinary mob acquired trajectory data");
+        l.setBlockAndUpdate(at.below(),Blocks.STONE.defaultBlockState());
+        l.setBlockAndUpdate(at,DeflectionContent.CLUSTER.get().defaultBlockState());
+        DeflectionMotion.sample(pig);
+        h.assertTrue(data.getBoolean("DeflectionInside"),"New source did not start sampling");
+        data.putString("DeflectionDimension","minecraft:the_end");data.putDouble("DeflectionX",pig.getX()-1);
+        float yaw=pig.getYRot();DeflectionMotion.sample(pig);
+        h.assertTrue(yaw==pig.getYRot() && data.getDouble("DeflectionX")==pig.getX(),"Dimension change applied stale movement");
+        var chunk=l.getChunkAt(at);
+        DeflectionSources.unload(new net.neoforged.neoforge.event.level.ChunkEvent.Unload(chunk));
+        h.assertTrue(DeflectionMotion.coverage(l,pig)==0,"Unloaded cluster retained its influence");
+        DeflectionSources.load(new net.neoforged.neoforge.event.level.ChunkEvent.Load(chunk,false));
+        h.assertTrue(DeflectionMotion.coverage(l,pig)==1,"Reloaded cluster did not restore its field");
+        l.removeBlock(at,false);DeflectionMotion.sample(pig);
+        h.assertFalse(data.contains("DeflectionSampleTick")||data.contains("DeflectionX"),"Removed source retained trajectory");
+        pig.discard();h.succeed();
+    }
     private static void biome(net.minecraft.server.level.ServerLevel level,BlockPos pos,Holder<net.minecraft.world.level.biome.Biome> biome){
         // Biome lookup jitters into neighbouring quart cells, including across chunk boundaries.
         for(int x=(pos.getX()-8)>>4;x<=(pos.getX()+8)>>4;x++)for(int z=(pos.getZ()-8)>>4;z<=(pos.getZ()+8)>>4;z++)

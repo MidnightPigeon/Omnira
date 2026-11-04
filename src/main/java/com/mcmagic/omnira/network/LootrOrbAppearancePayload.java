@@ -19,6 +19,11 @@ public record LootrOrbAppearancePayload(ResourceLocation dimension,BlockPos pos,
     @Override public Type<LootrOrbAppearancePayload> type(){return TYPE;}
     @EventBusSubscriber(modid="omnira") public static final class Registration {
         @SubscribeEvent public static void register(RegisterPayloadHandlersEvent event){
+            event.registrar("1").playToClient(LootrMenuFluidPayload.TYPE,LootrMenuFluidPayload.CODEC,(payload,context)->context.enqueueWork(()->{
+                if(context.player().containerMenu instanceof com.mcmagic.omnira.menu.CrystalBallMenu menu && menu.containerId==payload.menuId()
+                        && menu.ball.lootrPersonalView && menu.ball instanceof com.mcmagic.omnira.block.entity.LiquidCrystalBallBlockEntity liquid)
+                    liquid.tank.setFluid(payload.fluid());
+            }));
             event.registrar("1").playToClient(TYPE,CODEC,(payload,context)->context.enqueueWork(()->{
                 var level=context.player().level();
                 if(level.dimension().location().equals(payload.dimension)&&level.getBlockEntity(payload.pos) instanceof CrystalBallBlockEntity orb

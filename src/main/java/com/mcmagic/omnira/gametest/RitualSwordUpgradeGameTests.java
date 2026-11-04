@@ -22,6 +22,30 @@ import java.util.*;
 @GameTestHolder("omnira_sword_upgrades")
 @PrefixGameTestTemplate(false)
 public final class RitualSwordUpgradeGameTests {
+    @GameTest(template="spell_arena") public static void hostileContactUsesOnlyMainHandAndHighestDamage(GameTestHelper h){
+        var p=new FakePlayer(h.getLevel(),new GameProfile(UUID.randomUUID(),"contact"));
+        var at=new BlockPos(5,5,5);
+        var wolf=h.spawn(net.minecraft.world.entity.EntityType.WOLF,at);
+        p.setPos(wolf.position());var event=new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(p);
+        var needle=weapon(RitualSwordItem.Kind.NEEDLE,4);p.setItemInHand(InteractionHand.MAIN_HAND,needle);
+        float hp=p.getHealth();
+        SwordActions.tick(event);h.assertTrue(p.getHealth()==hp,"Calm wolf dealt contact damage");
+        wolf.setTarget(p);SwordActions.tick(event);
+        h.assertTrue(p.getHealth()==hp-2,"Angry wolf did not deal one heart");
+        SwordActions.tick(event);h.assertTrue(p.getHealth()==hp-2,"Contact cooldown failed");
+        var other=new FakePlayer(h.getLevel(),new GameProfile(UUID.randomUUID(),"contact2"));
+        other.setPos(wolf.position());var tick=new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(other);
+        other.setItemInHand(InteractionHand.OFF_HAND,needle.copy());float before=other.getHealth();
+        h.spawn(net.minecraft.world.entity.EntityType.ZOMBIE,at);
+        var boss=h.spawn(net.minecraft.world.entity.EntityType.WITHER,at);
+        boss.setTarget(other);
+        SwordActions.tick(tick);h.assertTrue(other.getHealth()==before,"Offhand triggered contact");
+        other.setItemInHand(InteractionHand.MAIN_HAND,weapon(RitualSwordItem.Kind.NAIL,0));
+        other.getAttribute(Attributes.MAX_ABSORPTION).setBaseValue(8);
+        other.setAbsorptionAmount(8);SwordActions.tick(tick);
+        h.assertTrue(other.getHealth()==before-4&&other.getAbsorptionAmount()==8,"Stacked enemies or absorption changed boss contact damage");
+        boss.discard();wolf.discard();h.succeed();
+    }
     @GameTest(template="spell_arena") public static void renamedStagesReadLegacyItems(GameTestHelper h){
         String[][] legacy={{"sharpened_bone_nail","channelled_bone_nail","coiled_bone_nail","pure_bone_nail"},
                 {"sharpened_arcane_needle","shining_arcane_needle","hivesteel_arcane_needle","pale_steel_arcane_needle"}};

@@ -11,7 +11,8 @@ import net.minecraft.world.level.block.state.BlockState;
 public final class MireFishingEffects {
     public static boolean surface(BlockState state){return state.is(Blocks.WATER)||MireContent.fluid(state.getFluidState());}
     public static ParticleOptions particle(ParticleOptions original){
-        return original==ParticleTypes.BUBBLE?ModParticles.TIMEFLOW_BUBBLE.get():ModParticles.TIMEFLOW_RIPPLE.get();
+        if(original==ParticleTypes.SPLASH || original==ParticleTypes.BUBBLE)return ModParticles.TIMEFLOW_FOAM.get();
+        return ModParticles.TIMEFLOW_RIPPLE.get();
     }
     public static int emit(ServerLevel level,ParticleOptions original,double x,double y,double z,int count,double dx,double dy,double dz,double speed){
         var p=BlockPos.containing(x,y-.01,z);
@@ -21,7 +22,7 @@ public final class MireFishingEffects {
         double surface=p.getY()+fluid.getHeight(level,p)+.025;
         boolean bubble=original==ParticleTypes.BUBBLE;
         // Wake velocity stays tangent to the surface; bite rings do not leap like water splashes.
-        return level.sendParticles(particle(original),x,surface,z,count,dx,bubble?dy:0,dz,bubble?Math.min(speed,.04):Math.min(speed,.1));
+        return level.sendParticles(particle(original),x,bubble || original==ParticleTypes.SPLASH?surface-.10:surface,z,count,dx,bubble?dy:0,dz,bubble?Math.min(speed,.04):Math.min(speed,.1));
     }
     private MireFishingEffects(){}
 }

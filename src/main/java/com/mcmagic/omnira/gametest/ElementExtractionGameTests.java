@@ -90,4 +90,18 @@ public final class ElementExtractionGameTests {
     }
     @GameTest(template="spell_arena",timeoutTicks=240)
     public static void legacyBucketsAndDust(GameTestHelper h) {AnalysisGameTests.fourRecipesAndMana(h);}
+    @GameTest(template="spell_arena") public static void permanentToolSurvivesAnalysis(GameTestHelper h){
+        var s=station(h);
+        var tool=ModItems.PHILOSOPHERS_STONE.get().getDefaultInstance();
+        tool.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal("Preserved"));
+        var before=tool.copy();
+        s.table.setItem(0,tool);
+        h.assertTrue(s.menu.clickMenuButton(s.player,0),"Permanent analysis tool rejected");
+        h.runAtTickTime(43,()->{
+            s.menu.broadcastChanges();
+            h.assertTrue(s.table.getItem(1).is(ModItems.DISSOCIATION_THREAD.get())&&s.table.getItem(2).getCount()==1,"Missing thread or secondary microcore");
+            h.assertTrue(ItemStack.matches(before,s.table.getItem(0)),"Analysis consumed or damaged the stone");
+            h.succeed();
+        });
+    }
 }

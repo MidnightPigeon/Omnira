@@ -13,7 +13,7 @@ public final class SpatialImmunity {
     public static final TagKey<EntityType<?>> STARFLOW=TagKey.create(Registries.ENTITY_TYPE,ResourceLocation.parse("omnira:starflow_creatures"));
     public static boolean protectedPlayer(Entity e){return e instanceof Player p&&(p.isCreative()||p.isSpectator()||AnchoringSigilItem.equipped(p));}
     public static boolean fissure(Entity e){return e.isSpectator()||protectedPlayer(e)||e.getType().is(SPACE);}
-    public static boolean starflow(Entity e){return fissure(e)||e.getType().is(STARFLOW)||e instanceof Player&&e.getRootVehicle() instanceof VoidManta manta&&manta.isTame();}
+    public static boolean starflow(Entity e){return e instanceof net.minecraft.world.entity.projectile.FishingHook||fissure(e)||e.getType().is(STARFLOW)||e instanceof Player&&e.getRootVehicle() instanceof VoidManta manta&&manta.isTame();}
     private static final TagKey<net.minecraft.world.damagesource.DamageType> MAGIC=TagKey.create(Registries.DAMAGE_TYPE,ResourceLocation.parse("c:is_magic"));
     public static boolean evades(Entity entity,net.minecraft.world.damagesource.DamageSource source){
         if(!entity.getType().is(SPACE) || source instanceof com.mcmagic.omnira.spell.SpellDamageSource

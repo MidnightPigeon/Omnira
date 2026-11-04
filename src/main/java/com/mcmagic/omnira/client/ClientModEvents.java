@@ -31,6 +31,10 @@ public final class ClientModEvents {
     @SubscribeEvent
     public static void setupCurios(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
         event.enqueueWork(()->{
+            var cast = ResourceLocation.withDefaultNamespace("cast");
+            var vanillaCast = net.minecraft.client.renderer.item.ItemProperties.getProperty(net.minecraft.world.item.Items.FISHING_ROD.getDefaultInstance(), cast);
+            net.minecraft.client.renderer.item.ItemProperties.register(com.mcmagic.omnira.space.sea.StarlightContent.ROD.get(), cast,
+                    (stack,level,entity,seed)->vanillaCast.call(stack,level,entity,seed));
             net.minecraft.client.renderer.item.ItemProperties.register(com.mcmagic.omnira.space.sea.StellarCraftContent.SHIELD.get(),
                     ResourceLocation.withDefaultNamespace("blocking"),(stack,level,entity,seed)->entity!=null&&entity.isUsingItem()&&entity.getUseItem()==stack?1F:0F);
             net.minecraft.client.renderer.item.ItemProperties.register(com.mcmagic.omnira.registry.ModItems.MEMORY_CUBE.get(),
@@ -61,6 +65,7 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void additionalModels(net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional event) {
+        event.register(net.minecraft.client.resources.model.ModelResourceLocation.standalone(ResourceLocation.parse("omnira:item/starlight_float")));
         event.register(com.mcmagic.omnira.client.renderer.SpeedUpgradeRenderer.MODEL);
         if(com.mcmagic.omnira.item.IndustrialWheelItem.available()){
             for(String part:new String[]{"body","glass","support","hand","vane"})event.register(com.mcmagic.omnira.client.renderer.IndustrialWheelRenderer.model(part));
@@ -99,6 +104,7 @@ public final class ClientModEvents {
         event.register(com.mcmagic.omnira.client.renderer.ArcaneMaterialRenderer.spark());
         for(String part:com.mcmagic.omnira.client.renderer.AnalysisCrystalRenderer.PARTS)
             event.register(com.mcmagic.omnira.client.renderer.AnalysisCrystalRenderer.model(part));
+        event.register(com.mcmagic.omnira.client.renderer.AnalysisCrystalRenderer.STONE_SHELL);
         event.register(com.mcmagic.omnira.client.renderer.WaymarkRenderer.model());
         event.register(com.mcmagic.omnira.client.renderer.RitualEnergyCoreRenderer.model());
         event.register(com.mcmagic.omnira.client.renderer.RitualEnergyCoreRenderer.advancedModel());
@@ -316,7 +322,7 @@ public final class ClientModEvents {
                 if(renderer==null) renderer=new com.mcmagic.omnira.client.renderer.AnalysisCrystalRenderer();
                 return renderer;
             }
-        },com.mcmagic.omnira.registry.ModItems.ANALYSIS_CRYSTAL.get());
+        },com.mcmagic.omnira.registry.ModItems.ANALYSIS_CRYSTAL.get(),com.mcmagic.omnira.registry.ModItems.PHILOSOPHERS_STONE.get());
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
             private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {

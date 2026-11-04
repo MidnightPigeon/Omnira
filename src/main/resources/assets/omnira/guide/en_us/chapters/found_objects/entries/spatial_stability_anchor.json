@@ -7,7 +7,8 @@
     "An active anchor is found in the Calibration Station. Mining it yields a Dormant Spatial Stability Anchor. Use one Space Microcore on the dormant anchor to activate it again.",
     "The active anchor prevents deflection within a 64-block sphere. Non-portal teleportation is blocked whenever either endpoint lies inside, including Endermen, warp points, ordinary Recall Crystals and disposable Dream Rabbit Remnants.",
     "Portals remain usable. Enhanced Recall Crystals and Alice's Dream Rabbit Sigil also allow travel both ways. Normal transit requirements, costs and cooldowns still apply.",
-    "Hostile creatures in range take 2 true damage each second, surrounded by crystal light. Nearby rough spatial crystals are gradually excited, while ordinary and sedimented temporal silt are activated. Selected blocks are surrounded by particles for one minute before conversion."
+    "Hostile creatures in range take 2 true damage each second, surrounded by crystal light. Nearby rough spatial crystals are gradually excited, while ordinary and sedimented temporal silt are activated. Selected blocks are surrounded by particles for one minute before conversion.",
+    "Once active, sneak-right-click with an empty main hand to reveal its 64-block range. The display expands at 3 blocks per second, holds at the boundary for 5 seconds, then fades without damage or other effects."
   ],
   "links": [
     {

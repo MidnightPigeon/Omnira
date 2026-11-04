@@ -56,5 +56,19 @@ public final class WorldInteractionGameTests {
         h.assertTrue(level.getBlockState(pos).is(DreamContent.SPIRITUAL_CRYSTAL_BLOCK.get())&&crystal.getCount()==2,"Sneaking exception changed");
         h.succeed();
     }
+    @GameTest(template="spell_arena") public static void touchOfGold(GameTestHelper h){
+        var level=h.getLevel();var pos=h.absolutePos(new BlockPos(5,3,5));
+        var player=AdvancedForgeGameTests.player(h,pos);player.setGameMode(GameType.SURVIVAL);
+        var tool=ModItems.PHILOSOPHERS_STONE.get().getDefaultInstance();
+        player.setItemInHand(InteractionHand.MAIN_HAND,tool);
+        var hit=new BlockHitResult(pos.getCenter(),Direction.UP,pos,false);
+        var blocks=net.minecraft.world.level.block.Blocks.STONE;
+        level.setBlockAndUpdate(pos,blocks.defaultBlockState());
+        player.gameMode.useItemOn(player,level,tool,InteractionHand.MAIN_HAND,hit);
+        h.assertTrue(level.getBlockState(pos).is(net.minecraft.world.level.block.Blocks.RAW_GOLD_BLOCK)&&player.getMainHandItem()==tool&&tool.getCount()==1,"Stone was not transmuted without cost");
+        level.setBlockAndUpdate(pos,net.minecraft.world.level.block.Blocks.DIRT.defaultBlockState());
+        player.gameMode.useItemOn(player,level,tool,InteractionHand.MAIN_HAND,hit);
+        h.assertTrue(level.getBlockState(pos).is(net.minecraft.world.level.block.Blocks.DIRT),"Transmuted non-stone");h.succeed();
+    }
     private WorldInteractionGameTests(){}
 }

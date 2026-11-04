@@ -98,7 +98,10 @@ public final class MachineMenuGameTests {
             var be=h.getLevel().getBlockEntity(h.absolutePos(pos));
             if(be instanceof com.mcmagic.omnira.block.entity.CrystalBallBlockEntity ball){
                 var menu=new CrystalBallMenu(1,player.getInventory(),ball);
-                upgrades(h,menu,player,menu.upgradeStart,menu.frequencyStart,menu.playerStart,all);
+                var allowed=new HashSet<Item>(all);
+                if(ball instanceof com.mcmagic.omnira.block.entity.LiquidCrystalBallBlockEntity)
+                    allowed.remove(ModItems.INFUSED_INTAKE_UPGRADE.get());
+                upgrades(h,menu,player,menu.upgradeStart,menu.frequencyStart,menu.playerStart,allowed);
             }else{
                 var orb=com.mcmagic.omnira.pulse.PulseOrbEntity.from(be);h.assertTrue(orb!=null,"Missing energy orb");
                 var allowed=new HashSet<Item>();for(var item:all)if(orb.accepts(new ItemStack(item)))allowed.add(item);

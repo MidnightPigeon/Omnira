@@ -25,8 +25,8 @@ public final class EnhancedAlchemyCoreRenderer {
         draw(HEART,pose,buffers,LightTexture.FULL_BRIGHT,overlay);pose.popPose();
         for(int i=0;i<6;i++){
             double angle=time*.028+i*Math.PI/3;
-            pose.pushPose();pose.translate(.5+.25*Math.cos(angle),.5+.15*Math.sin(angle*2),.5+.25*Math.sin(angle));
-            pose.mulPose(Axis.YP.rotationDegrees((float)(time*2+i*60)));pose.translate(-.5,-.5,-.5);
+            pose.pushPose();pose.translate(.5+.25*Math.cos(angle),.5+.05*Math.sin(angle*2),.5+.25*Math.sin(angle));
+            pose.mulPose(Axis.YP.rotationDegrees((float)(time*.4+i*60)));pose.translate(-.5,-.5,-.5);
             draw(i%2==0?TIME:SPACE,pose,buffers,LightTexture.FULL_BRIGHT,overlay);pose.popPose();
         }
     }

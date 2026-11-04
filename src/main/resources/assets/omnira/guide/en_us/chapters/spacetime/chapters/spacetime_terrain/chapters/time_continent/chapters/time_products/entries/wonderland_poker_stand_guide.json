@@ -5,7 +5,8 @@
   "text": [
     "The stand illuminates its surroundings and keeps its chunk loaded. It cycles through hearts, spades, diamonds and clubs, benefiting players within that chunk.",
     "Every 30 seconds, hearts grant Instant Health II and Saturation; spades grant one minute of Haste II and Speed II; diamonds grant one minute of Resistance II. Clubs grant an extra level of Looting and Fortune. Players still in the chunk when clubs end receive a random consumable memory cube.",
-    "Suits normally change every five minutes. Fleeting Woods doubles the pace; Stilled Wastes stops it; Recurrence Garden advances it at biome nodes. During a mire reversal, the previous suit briefly returns while the normal timer continues."
+    "Suits normally change every five minutes. Fleeting Woods doubles the pace; Stilled Wastes stops it; Recurrence Garden advances it at biome nodes. During a mire reversal, the previous suit briefly returns while the normal timer continues.",
+    "Sneak-right-click with an empty main hand to reveal the enclosing chunk’s corner edges and walls. The display expands outward at 3 blocks per second, holds at the chunk boundary for 5 seconds, then fades. It is only a marker and does not block movement. The walls and corner edges fade gradually toward the top."
   ],
   "recipes": false,
   "links": [

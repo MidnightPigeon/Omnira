@@ -61,9 +61,9 @@ public final class AggregationClient {
             part("orb",p.x,p.y,0,AggregationLayout.COLORS[8+i],.65F,pose,buffers,light,overlay);
             if(machine!=null)item(machine.getItem(8+i),p.x,p.y,0,.27F,pose,buffers,light,overlay);
         }
-        if(powered)for(int i=0;i<10;i++){
+        if(progress>0)for(int i=0;i<6;i++){
             var p=AggregationLayout.decoration(t,i);
-            int color=net.minecraft.util.Mth.hsvToRgb((float)((t*.002+i*.075)%1),.32F,1);
+            int color=AggregationLayout.COLORS[i];
             mote(p.x,p.y,p.z,color,.6F,.9F,pose,buffers,overlay);
         }
         if(machine!=null){
@@ -76,11 +76,10 @@ public final class AggregationClient {
                 for(int i=0;i<8;i++)if(!machine.getItem(i).isEmpty()){
                     var at=AggregationLayout.ingredient(progress,i);if(at==null)continue;
                     pose.pushPose();pose.translate(at.x,at.y,at.z);
-                    pose.mulPose(Axis.ZP.rotationDegrees((float)(t*2.4+i*35)));
-                    pose.mulPose(Axis.YP.rotationDegrees((float)(t*1.8+i*20)));
+                    pose.mulPose(Axis.YP.rotationDegrees((float)(t*.5+i*20)));
                     item(machine.getItem(i),0,0,0,.2F,pose,buffers,LightTexture.FULL_BRIGHT,overlay);pose.popPose();
-                    for(int j=1;j<=6;j++){
-                        var tail=AggregationLayout.ingredient(Math.max(0,progress-j*.006),i);if(tail==null)continue;
+                    for(int j=1;j<=3;j++){
+                        var tail=AggregationLayout.ingredient(Math.max(0,progress-j*.004),i);if(tail==null)continue;
                         mote(tail.x,tail.y,tail.z,AggregationLayout.COLORS[i],.5F-j*.045F,.85F-j*.1F,pose,buffers,overlay);
                     }
                 }

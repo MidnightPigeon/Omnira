@@ -1,0 +1,25 @@
+{
+  "id": "crystallized_philosophers_stone",
+  "title": "晶化哲人石",
+  "item": "omnira:crystallized_philosophers_stone",
+  "recipes": true,
+  "text": [
+    "在更进一步解析真理后，你将能装配这一炼金的巅峰产物。使用解析之晶合成。",
+    "晶化哲人石可代替解析之晶，反复转换材料与微核，也可在解析工匠桌加工解离之线。",
+    "手持哲人石右键石材，可将其化为粗金块。"
+  ],
+  "links": [
+    {
+      "target": "analysis_crystal",
+      "label": "解析之晶"
+    },
+    {
+      "target": "myriad_aggregation",
+      "label": "万象凝聚"
+    },
+    {
+      "target": "elemental_cycle",
+      "label": "元素循环"
+    }
+  ]
+}

@@ -34,6 +34,7 @@ public final class AdvancedForgeRenderer implements BlockEntityRenderer<Advanced
     public static void renderLocal(AdvancedForgeBlockEntity forge,float progress,double time,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         ItemStack core=forge==null?ItemStack.EMPTY:forge.getItem(9);
         boolean powered=core.getItem() instanceof SpellCoreItem;
+        boolean working=powered&&progress>0&&progress<1;
         int coreColor=color(core,time);
         MultiBufferSource glow=type->new Tint(buffers.getBuffer(CrystalGlassLayer.ATLAS),coreColor);
         MultiBufferSource baseTint=type->new Tint(buffers.getBuffer(CrystalGlassLayer.ATLAS),0xC1D7E4);
@@ -51,7 +52,7 @@ public final class AdvancedForgeRenderer implements BlockEntityRenderer<Advanced
             pose.pushPose();pose.translate(pos[0]*distance,1.3075,pos[1]*distance);
             pose.mulPose(Axis.YP.rotationDegrees((float)Math.toDegrees(Math.atan2(-pos[0],-pos[1]))));pose.mulPose(Axis.XP.rotationDegrees(45+45*approach));
             draw("node",pose,buffers,light,overlay);
-            if(powered){
+            if(working){
                 // Four bounded pixel motes orbit beneath each plate, following its full transform.
                 for(int j=0;j<4;j++){
                     double phase=time*.035+n*2+j*Math.PI/2;
@@ -72,7 +73,7 @@ public final class AdvancedForgeRenderer implements BlockEntityRenderer<Advanced
             double bob=powered?Math.sin(time*.055+i*Math.PI/2)*.045*(1-motion):0;
             int[] at=ForgeLayout.TOOLS[i];pose.pushPose();pose.translate(at[0]*(1-.85*motion),1.4+.2*motion+bob,at[1]*(1-.85*motion));
             pose.mulPose(Axis.ZP.rotationDegrees((i%2==0?1:-1)*20));draw(PARTS[3+i],pose,toolBuffers,light,overlay);
-            if(i==2){for(int j=0;j<3;j++){pose.pushPose();pose.translate(Math.sin(time*.06+j*2)*.13,j*.12-.1,Math.cos(time*.06+j*2)*.13);pose.scale(.35F,.35F,.35F);draw("rune",pose,toolBuffers,LightTexture.FULL_BRIGHT,overlay);pose.popPose();}}
+            if(i==2&&working){for(int j=0;j<3;j++){pose.pushPose();pose.translate(Math.sin(time*.06+j*2)*.13,j*.12-.1,Math.cos(time*.06+j*2)*.13);pose.scale(.35F,.35F,.35F);draw("rune",pose,toolBuffers,LightTexture.FULL_BRIGHT,overlay);pose.popPose();}}
             pose.popPose();
         }
         if(forge!=null){

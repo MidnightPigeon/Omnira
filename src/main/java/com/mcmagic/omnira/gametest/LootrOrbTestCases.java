@@ -56,6 +56,28 @@ final class LootrOrbTestCases {
         else orb.setLootTable(ResourceKey.create(Registries.LOOT_TABLE,ResourceLocation.parse("lootr_test:chests/foreign_structure")),42);
         return orb;
     }
+    static void creativeFirstOpenSurvivesPublicRefresh(GameTestHelper h){
+        var player=player(h,"creative-first");
+        player.setGameMode(net.minecraft.world.level.GameType.CREATIVE);
+        for(boolean fluid:new boolean[]{false,true}){
+            var source=orb(h,fluid);
+            var server=(CrystalBallMenu)source.createMenu(7,player.getInventory(),player);
+            var data=new net.minecraft.network.RegistryFriendlyByteBuf(io.netty.buffer.Unpooled.buffer(),h.getLevel().registryAccess());
+            CrystalBallMenu client;
+            try {
+                source.writeClientSideData(server,data);
+                client=new CrystalBallMenu(7,player.getInventory(),data);
+                h.assertTrue(!data.isReadable() && client.ball!=source && client.ball.lootrPersonalView,"Menu still bound to public storage");
+            } finally {data.release();}
+            // Replay a delayed public block update after vanilla's first slot snapshot.
+            client.initializeContents(1,server.getItems().stream().map(ItemStack::copy).toList(),ItemStack.EMPTY);
+            source.handleUpdateTag(source.getUpdateTag(h.getLevel().registryAccess()),h.getLevel().registryAccess());
+            if(fluid)h.assertTrue(((LiquidCrystalBallBlockEntity)client.ball).tank.getFluidAmount()==24000,"Public tank update cleared personal fluid");
+            else h.assertTrue(client.ball.displayItems().stream().anyMatch(stack->stack.is(Items.DIAMOND)),"Public loot update cleared first-open slots");
+            client.removed(player);server.removed(player);
+        }
+        h.succeed();
+    }
     public static void personalItemsPersistAndStayIsolated(GameTestHelper h){
         var source=orb(h,false);var a=player(h,"orb-a");var b=player(h,"orb-b");
         h.assertTrue(LootrOrbs.manage(source),"Lootr did not manage treasure");

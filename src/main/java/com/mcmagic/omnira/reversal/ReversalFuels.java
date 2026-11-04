@@ -16,7 +16,8 @@ public final class ReversalFuels {
         return (spatial?SPACE_VALUES:TIME_VALUES).getOrDefault(id,0);
     }
     private static final List<Fuel> SPACE=List.of(new Fuel("omnira:rough_spatial_crystal_block",1),
-            new Fuel("omnira:excited_rough_spatial_crystal_block",2),new Fuel("omnira:spatial_crystal_shard",4),new Fuel("omnira:deflection_crystal",6));
+            new Fuel("omnira:excited_rough_spatial_crystal_block",2),new Fuel("omnira:starlight_cluster",2),
+            new Fuel("omnira:spatial_crystal_shard",4),new Fuel("omnira:star_jellyfish",4),new Fuel("omnira:deflection_crystal",6));
     private static final List<Fuel> TIME=List.of(new Fuel("omnira:spatial_crystal_shard",1),new Fuel("omnira:time_warp_point",4),
             new Fuel("omnira:reborn_rottenleaf_lily",4),new Fuel("omnira:peaceful_memory_cube",4),new Fuel("omnira:corrupted_memory_cube",4),
             new Fuel("omnira:timeflow_eel",2),new Fuel("omnira:chronal_blindfish",2),new Fuel("omnira:time_microcore",8),new Fuel("omnira:space_microcore",8));

@@ -26,6 +26,7 @@ public final class OrbUpgrades extends ItemStackHandler {
         var candidate=kind(stack);if(candidate==null)return false;
         var host=owner instanceof VoidCrystalBallBlockEntity?com.mcmagic.omnira.item.UpgradeCompatibility.Host.VOID_ORB:
                 owner instanceof com.mcmagic.omnira.space.sea.StarClusterOrbEntity?com.mcmagic.omnira.item.UpgradeCompatibility.Host.STAR_ORB:
+                        owner instanceof LiquidCrystalBallBlockEntity?com.mcmagic.omnira.item.UpgradeCompatibility.Host.LIQUID_CRYSTAL_BALL:
                         com.mcmagic.omnira.item.UpgradeCompatibility.Host.CRYSTAL_BALL;
         if(!host.accepts(candidate))return false;
         if(owner instanceof VoidCrystalBallBlockEntity)return slot==1&&candidate==OrbUpgradeItem.Kind.INTAKE||slot==0&&candidate==OrbUpgradeItem.Kind.SPEED;

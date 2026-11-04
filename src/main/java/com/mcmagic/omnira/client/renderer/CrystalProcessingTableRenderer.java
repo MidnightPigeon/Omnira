@@ -74,8 +74,8 @@ public final class CrystalProcessingTableRenderer implements BlockEntityRenderer
             if(condensation.condensationTailVisible(time))CondensationWorkVisuals.render(time-condensation.condensationTailStarted(),
                     condensation.condensationTailStopped()-condensation.condensationTailStarted(),pose,buffers);
         }
-        if(table instanceof com.mcmagic.omnira.block.entity.AdvancedCondensationTableBlockEntity) {
-            AdvancedCondensationVisuals.render(time,pose,buffers,overlay);
+        if(table instanceof com.mcmagic.omnira.block.entity.AdvancedCondensationTableBlockEntity advanced) {
+            AdvancedCondensationVisuals.render(time,advanced.condensing(),pose,buffers,overlay);
         }
         if(table instanceof com.mcmagic.omnira.block.entity.ArcaneAssemblyTableBlockEntity assembly) {
             var motion=AssemblyHammerMotion.at(strikeAge);

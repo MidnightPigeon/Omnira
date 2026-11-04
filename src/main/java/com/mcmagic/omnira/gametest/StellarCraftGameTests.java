@@ -19,6 +19,110 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_stellar_crafts")
 @PrefixGameTestTemplate(false)
 public final class StellarCraftGameTests {
+    @GameTest(template="spell_arena") public static void heronIsAnExtraCatchAndHiddenChallenge(GameTestHelper h) throws ReflectiveOperationException {
+        var level=h.getLevel();
+        var profile=new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"bird-angler");
+        var p=new net.minecraft.server.level.ServerPlayer(level.getServer(),level,profile,net.minecraft.server.level.ClientInformation.createDefault());
+        p.connection=new net.neoforged.neoforge.common.util.FakePlayer(level,profile).connection;
+        p.setPos(Vec3.atCenterOf(h.absolutePos(new BlockPos(5,5,5))));
+        var rod=StarlightContent.ROD.get().getDefaultInstance();
+        var statue=ModItems.NIGHT_HERON_STATUE.get();
+        var challenge=p.server.getAdvancements().get(net.minecraft.resources.ResourceLocation.parse("omnira:lure_fishing_for_birds"));
+        var root=p.server.getAdvancements().get(net.minecraft.resources.ResourceLocation.parse("omnira:easter_eggs/root"));
+        p.setItemInHand(InteractionHand.MAIN_HAND,rod);
+        rod.use(level,p,InteractionHand.MAIN_HAND);
+        var hit=net.minecraft.world.entity.projectile.FishingHook.class.getDeclaredMethod("onHitEntity",net.minecraft.world.phys.EntityHitResult.class);
+        hit.setAccessible(true);
+        var dropped=new net.minecraft.world.entity.item.ItemEntity(level,p.getX(),p.getY(),p.getZ(),new ItemStack(statue));
+        level.addFreshEntity(dropped);
+        hit.invoke(p.fishing,new net.minecraft.world.phys.EntityHitResult(dropped));
+        rod.use(level,p,InteractionHand.MAIN_HAND);
+        h.assertFalse(p.getAdvancements().getOrStartProgress(challenge).isDone(),"Hooking a dropped statue unlocked the challenge");
+        dropped.discard();
+        rod.use(level,p,InteractionHand.MAIN_HAND);
+        var hook=p.fishing;
+        var bite=net.minecraft.world.entity.projectile.FishingHook.class.getDeclaredField("nibble");
+        bite.setAccessible(true);bite.setInt(hook,20);
+        long seed=0;
+        while(true){
+            var rng=net.minecraft.util.RandomSource.create(seed);
+            if(rng.nextInt(5)==0&&rng.nextInt(100)<3)break;
+            seed++;
+        }
+        hook.getRandom().setSeed(seed);
+        var area=hook.getBoundingBox().inflate(1);
+        rod.use(level,p,InteractionHand.MAIN_HAND);
+        var loot=level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,area);
+        h.assertTrue(loot.stream().anyMatch(e->e.getItem().is(statue))&&loot.stream().anyMatch(e->e.getItem().is(StarlightContent.DUST_ITEM.get()))
+                &&loot.stream().anyMatch(e->!e.getItem().is(statue)&&!e.getItem().is(StarlightContent.DUST_ITEM.get())),"Missing bonus or ordinary catch");
+        h.assertTrue(p.getAdvancements().getOrStartProgress(challenge).isDone()&&p.getAdvancements().getOrStartProgress(root).isDone(),"Catch did not reveal the challenge");
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void castAndReelStrikeWithCastingRod(GameTestHelper h) throws ReflectiveOperationException {
+        var level=h.getLevel();
+        var hit=net.minecraft.world.entity.projectile.FishingHook.class.getDeclaredMethod("onHitEntity",net.minecraft.world.phys.EntityHitResult.class);
+        var cooldown=LivingEntity.class.getDeclaredField("attackStrengthTicker");
+        var equip=LivingEntity.class.getDeclaredMethod("detectEquipmentUpdates");
+        hit.setAccessible(true);cooldown.setAccessible(true);equip.setAccessible(true);
+        for(var hand:InteractionHand.values()){
+            var player=net.neoforged.neoforge.common.util.FakePlayerFactory.get(level,
+                    new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"hook-strike"));
+            player.setPos(Vec3.atCenterOf(h.absolutePos(new BlockPos(3,5,3))));
+            var rod=StarlightContent.ROD.get().getDefaultInstance();
+            rod.enchant(level.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT)
+                    .getHolderOrThrow(net.minecraft.world.item.enchantment.Enchantments.SHARPNESS),1);
+            var axe=Items.DIAMOND_AXE.getDefaultInstance();
+            if(hand==InteractionHand.OFF_HAND)player.setItemInHand(InteractionHand.MAIN_HAND,axe);
+            player.setItemInHand(hand,rod);equip.invoke(player);
+            var target=h.spawn(EntityType.IRON_GOLEM,new BlockPos(7,5,7));
+            float start=target.getHealth();
+            cooldown.setInt(player,40);rod.use(level,player,hand);
+            hit.invoke(player.fishing,new net.minecraft.world.phys.EntityHitResult(target));
+            h.assertTrue(start-target.getHealth()==7 && target.hasEffect(net.minecraft.world.effect.MobEffects.GLOWING),"Hook missed rod damage/enchantment: "+hand+" "+(start-target.getHealth()));
+            player.fishing.tick();
+            h.assertTrue(target.getHealth()==start-7,"Attached hook attacked again");
+            target.invulnerableTime=0;cooldown.setInt(player,40);rod.use(level,player,hand);
+            h.assertTrue(target.getHealth()==start-14 && player.fishing==null,"Missing reel attack: "+hand);
+            h.assertTrue(player.getItemInHand(hand)==rod && (hand!=InteractionHand.OFF_HAND || player.getMainHandItem()==axe),"Attack changed equipped items");
+            target.discard();
+        }
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void starlightRodFishingCombatAndEnchantments(GameTestHelper h) throws ReflectiveOperationException {
+        var level=h.getLevel();
+        var player=net.neoforged.neoforge.common.util.FakePlayerFactory.get(level,
+                new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"starlight"));
+        player.setPos(Vec3.atCenterOf(h.absolutePos(new BlockPos(4,5,4))));
+        var rod=StarlightContent.ROD.get().getDefaultInstance();
+        player.setItemInHand(InteractionHand.MAIN_HAND,rod);
+        var enchants=level.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT);
+        for(var key:java.util.List.of(net.minecraft.world.item.enchantment.Enchantments.SHARPNESS,net.minecraft.world.item.enchantment.Enchantments.LURE))
+            h.assertTrue(rod.isEnchantable()&&rod.isPrimaryItemFor(enchants.getHolderOrThrow(key))&&rod.supportsEnchantment(enchants.getHolderOrThrow(key)),"Rod rejected sword or fishing enchantment");
+        for(var key:java.util.List.of(net.minecraft.world.item.enchantment.Enchantments.UNBREAKING,net.minecraft.world.item.enchantment.Enchantments.MENDING))
+            h.assertTrue(!rod.supportsEnchantment(enchants.getHolderOrThrow(key))&&!rod.isPrimaryItemFor(enchants.getHolderOrThrow(key)),"Rod accepted durability enchantment");
+        h.assertTrue(!rod.isDamageableItem(),"Rod can wear out");
+        rod.use(level,player,InteractionHand.MAIN_HAND);
+        h.assertTrue(player.fishing!=null&&((StarlightFloat)player.fishing).omnira$isStarlight(),"Missing starlight float");
+        rod.use(level,player,InteractionHand.MAIN_HAND);
+        h.assertTrue(player.fishing==null,"Float did not retract");
+        rod.use(level,player,InteractionHand.MAIN_HAND);
+        var hook=player.fishing;
+        var bite=net.minecraft.world.entity.projectile.FishingHook.class.getDeclaredField("nibble");
+        bite.setAccessible(true);
+        bite.setInt(hook,20);
+        long seed=0;
+        while(net.minecraft.util.RandomSource.create(seed).nextInt(5)!=0)seed++;
+        hook.getRandom().setSeed(seed);
+        var catchArea=hook.getBoundingBox().inflate(1);
+        rod.use(level,player,InteractionHand.MAIN_HAND);
+        var caught=level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,catchArea);
+        h.assertTrue(caught.stream().filter(e->e.getItem().is(StarlightContent.DUST_ITEM.get())).mapToInt(e->e.getItem().getCount()).sum()==1
+                &&caught.stream().anyMatch(e->!e.getItem().is(StarlightContent.DUST_ITEM.get())),"Bonus did not accompany the ordinary catch");
+        var cow=h.spawn(EntityType.COW,new BlockPos(4,5,5));
+        rod.hurtEnemy(cow,player);
+        h.assertTrue(cow.hasEffect(net.minecraft.world.effect.MobEffects.GLOWING)&&cow.getEffect(net.minecraft.world.effect.MobEffects.GLOWING).getDuration()==600,"Missing melee glow");
+        h.succeed();
+    }
     private static StarClusterOrbEntity orb(GameTestHelper h){
         var pos=h.absolutePos(new BlockPos(6,5,6));h.getLevel().setBlockAndUpdate(pos,StellarCraftContent.ORB.get().defaultBlockState());
         return (StarClusterOrbEntity)h.getLevel().getBlockEntity(pos);
@@ -107,13 +211,13 @@ public final class StellarCraftGameTests {
         var reaction=manager.getAllRecipesFor(ModRecipes.REACTION_TYPE.get()).stream().map(RecipeHolder::value).filter(r->r.results().stream().anyMatch(s->s.is(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get()))
             &&r.items().size()==1&&r.items().getFirst().ingredient().test(new ItemStack(VoidSeaContent.JELLY_ITEM.get()))).findFirst().orElseThrow();
         h.assertTrue(reaction.support().isEmpty()&&reaction.fluidInputs().isEmpty()&&reaction.duration()==2000,"Jellyfish reaction has unrequested requirement");
-        var grid=NonNullList.withSize(9,new ItemStack(StarlightContent.DUST_ITEM.get()));grid.set(4,new ItemStack(ModItems.CRYSTAL_BALL.get()));
-        var input=CraftingInput.of(3,3,grid);var craft=manager.getRecipeFor(RecipeType.CRAFTING,input,level).orElseThrow();
-        h.assertTrue(craft.value().assemble(input,level.registryAccess()).is(StellarCraftContent.ORB_ITEM.get()),"8-dust manual recipe missing");
-        grid.get(4).set(DataComponents.BLOCK_ENTITY_DATA,net.minecraft.world.item.component.CustomData.of(new net.minecraft.nbt.CompoundTag()));
-        h.assertTrue(!craft.value().matches(CraftingInput.of(3,3,grid),level),"Crafting consumed source orb metadata");
+        var grid=NonNullList.withSize(3,new ItemStack(StarlightContent.CLUSTER_ITEM.get()));grid.set(1,new ItemStack(ModItems.CRYSTAL_BALL.get()));
+        var input=CraftingInput.of(3,1,grid);var craft=manager.getRecipeFor(RecipeType.CRAFTING,input,level).orElseThrow();
+        h.assertTrue(craft.value().assemble(input,level.registryAccess()).is(StellarCraftContent.ORB_ITEM.get()),"Two-cluster manual recipe missing");
+        grid.get(1).set(DataComponents.BLOCK_ENTITY_DATA,net.minecraft.world.item.component.CustomData.of(new net.minecraft.nbt.CompoundTag()));
+        h.assertTrue(!craft.value().matches(CraftingInput.of(3,1,grid),level),"Crafting consumed source orb metadata");
         var assembly=manager.getAllRecipesFor(ModRecipes.ASSEMBLY_TYPE.get()).stream().map(RecipeHolder::value).filter(r->r.result().is(StellarCraftContent.ORB_ITEM.get())).findFirst().orElseThrow();
-        h.assertTrue(assembly.slots().size()==7&&assembly.slots().get(6).test(new ItemStack(ModItems.CRYSTAL_BALL.get())),"6-dust assembly recipe missing");h.succeed();
+        h.assertTrue(assembly.slots().getFirst().test(StarlightContent.CLUSTER_ITEM.get().getDefaultInstance())&&assembly.slots().get(6).test(new ItemStack(ModItems.CRYSTAL_BALL.get())),"Cluster assembly recipe missing");h.succeed();
     }
     @GameTest(template="spell_arena",batch="stellar_dodge") public static void attackEvasionDoesNotCancelEnvironmentalDamage(GameTestHelper h){
         var p=player(h);p.getRandom().setSeed(71234);p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(StellarCraftContent.SHIELD.get()));

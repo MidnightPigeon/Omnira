@@ -5,7 +5,7 @@ import net.minecraft.world.item.Item;
 public final class OrbUpgradeItem extends Item {
     public enum Kind {
         STACKING(2,0xC9A6F5), INFUSED_STACKING(4,0xC9A6F5),
-        STABILIZATION(1,0xA9E8B9), RECIPE_CONTROL(1,0xA9E8B9), LAVA(1,0xFFA34F), INTAKE(1,0x9FD8F1), OUTPUT(1,0x9FD8F1), SPEED(1,0xBF91ED);
+        STABILIZATION(1,0xA9E8B9), RECIPE_CONTROL(1,0xA9E8B9), LAVA(1,0xFFA34F), INTAKE(1,0x9FD8F1), OUTPUT(1,0x9FD8F1), INFUSED_INTAKE(1,0xD9C3F5), SPEED(1,0xBF91ED);
         public final int capacityMultiplier;
         public final int displayColor;
         Kind(int capacityMultiplier,int displayColor) {
@@ -22,18 +22,18 @@ public final class OrbUpgradeItem extends Item {
     @Override public net.minecraft.world.InteractionResultHolder<net.minecraft.world.item.ItemStack> use(
             net.minecraft.world.level.Level level,net.minecraft.world.entity.player.Player player,net.minecraft.world.InteractionHand hand) {
         var stack=player.getItemInHand(hand);
-        if(kind!=Kind.INTAKE && kind!=Kind.OUTPUT && kind!=Kind.RECIPE_CONTROL && kind!=Kind.SPEED)return net.minecraft.world.InteractionResultHolder.pass(stack);
+        if(kind!=Kind.INFUSED_INTAKE && kind!=Kind.INTAKE && kind!=Kind.OUTPUT && kind!=Kind.RECIPE_CONTROL && kind!=Kind.SPEED)return net.minecraft.world.InteractionResultHolder.pass(stack);
         if(!level.isClientSide) {
             int source=hand==net.minecraft.world.InteractionHand.OFF_HAND?40:player.getInventory().selected;
             player.openMenu(new net.minecraft.world.SimpleMenuProvider((id,inventory,p)->
-                    new com.mcmagic.omnira.menu.OrbUpgradeMenu(id,inventory,source,kind==Kind.INTAKE),stack.getHoverName()),
-                    data->{data.writeInt(source);data.writeBoolean(kind==Kind.INTAKE);});
+                    new com.mcmagic.omnira.menu.OrbUpgradeMenu(id,inventory,source,(kind==Kind.INTAKE||kind==Kind.INFUSED_INTAKE)),stack.getHoverName()),
+                    data->{data.writeInt(source);data.writeBoolean((kind==Kind.INTAKE||kind==Kind.INFUSED_INTAKE));});
         }
         return net.minecraft.world.InteractionResultHolder.sidedSuccess(stack,level.isClientSide);
     }
     @Override public void appendHoverText(net.minecraft.world.item.ItemStack stack,TooltipContext context,java.util.List<net.minecraft.network.chat.Component> lines,net.minecraft.world.item.TooltipFlag flag) {
         lines.add(net.minecraft.network.chat.Component.translatable("tooltip.omnira.orb."+kind.name().toLowerCase(java.util.Locale.ROOT)).withStyle(net.minecraft.ChatFormatting.GRAY));
-        if(kind==Kind.INTAKE || kind==Kind.OUTPUT || kind==Kind.RECIPE_CONTROL || kind==Kind.SPEED)lines.add(net.minecraft.network.chat.Component.translatable("gui.omnira.orb.configure_held").withStyle(net.minecraft.ChatFormatting.GRAY));
+        if((kind==Kind.INTAKE||kind==Kind.INFUSED_INTAKE) || kind==Kind.OUTPUT || kind==Kind.RECIPE_CONTROL || kind==Kind.SPEED)lines.add(net.minecraft.network.chat.Component.translatable("gui.omnira.orb.configure_held").withStyle(net.minecraft.ChatFormatting.GRAY));
         if(kind==Kind.SPEED)lines.add(net.minecraft.network.chat.Component.translatable("gui.omnira.orb.speed_multiplier",SpeedUpgrade.multiplier(stack)).withStyle(net.minecraft.ChatFormatting.AQUA));
     }
     @Override public void inventoryTick(net.minecraft.world.item.ItemStack stack,net.minecraft.world.level.Level level,net.minecraft.world.entity.Entity entity,int slot,boolean selected) {

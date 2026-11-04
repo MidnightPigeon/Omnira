@@ -20,13 +20,15 @@ import net.neoforged.fml.common.EventBusSubscriber;
 
 @EventBusSubscriber(modid="omnira",value=Dist.CLIENT)
 public final class SundialClient {
+    private static final MachineRotation SWEEP=new MachineRotation(0,5);
+    private static final MachineRotation CUTTING=new MachineRotation(0,5);
     private static ModelResourceLocation model(String name){
         return ModelResourceLocation.standalone(ResourceLocation.parse("omnira:block/sundial/"+name));
     }
     private static void draw(String name,PoseStack pose,MultiBufferSource buffers,int light,int overlay,boolean glass,float alpha){
         var baked=Minecraft.getInstance().getModelManager().getModel(model(name));
         var out=buffers.getBuffer(glass?CrystalGlassLayer.ATLAS:Sheets.solidBlockSheet());
-        for(var quad:baked.getQuads(null,null,net.minecraft.util.RandomSource.create(81)))
+        for(var quad:com.mcmagic.omnira.client.renderer.StaticModelQuads.unculled(baked,81))
             out.putBulkData(pose.last(),quad,1,1,1,alpha,light,overlay);
     }
     private static double time(){var mc=Minecraft.getInstance();return mc.level==null?net.minecraft.Util.getMillis()/50.0:
@@ -40,6 +42,7 @@ public final class SundialClient {
     }
     public static void render(SundialBlockEntity machine,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
         double t=time();boolean active=machine!=null&&machine.progress()>0;
+        double sweep=SWEEP.angle(machine,t,active?.8:.2),cutting=CUTTING.angle(machine,t,active?1:0);
         pose.pushPose();
         if(machine!=null){
             pose.translate(.5,0,.5);
@@ -49,13 +52,13 @@ public final class SundialClient {
         draw("base",pose,buffers,light,overlay,false,1);
         draw("needle",pose,buffers,light,overlay,false,1);
         draw("face",pose,buffers,LightTexture.FULL_BRIGHT,overlay,true,.84F);
-        pose.pushPose();spinOnDial(pose,(float)(t*(active?2:.35)%360));
+        pose.pushPose();spinOnDial(pose,(float)sweep);
         draw("sweep",pose,buffers,LightTexture.FULL_BRIGHT,overlay,true,active?.85F:.5F);pose.popPose();
         if(machine!=null)for(int i=0;i<32*machine.energy()/SundialBlockEntity.CAPACITY;i++)
             draw("charge_"+i,pose,buffers,LightTexture.FULL_BRIGHT,overlay,true,.95F);
         if(active){
             for(int side=0;side<2;side++){
-                pose.pushPose();spinOnDial(pose,(float)((side==0?1:-1)*t*3.5+side*180)%360);
+                pose.pushPose();spinOnDial(pose,(float)((side==0?1:-1)*cutting+side*180));
                 draw("cutting_arc",pose,buffers,LightTexture.FULL_BRIGHT,overlay,true,.55F);
                 pose.popPose();
             }

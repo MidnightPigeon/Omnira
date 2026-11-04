@@ -112,6 +112,7 @@ public final class RitualSwordItem extends SwordItem {
     }
     @Override public void appendHoverText(ItemStack stack,TooltipContext context,List<Component> lines,TooltipFlag flag) {
         super.appendHoverText(stack,context,lines,flag);
+        lines.add(Component.translatable("tooltip.omnira.ritual_sword.contact").withStyle(ChatFormatting.RED));
         lines.add(Component.translatable("tooltip.omnira.ritual_sword."+(kind==Kind.NAIL?"nail":"needle")+".lore")
                 .withStyle(style->style.withColor(kind==Kind.NAIL?0xFFFFFF:0xFFAAAA).withItalic(true)));
         lines.add(Component.translatable("tooltip.omnira.ritual_sword."+(kind==Kind.NAIL?"nail":"needle")+".charge").withStyle(ChatFormatting.GRAY));

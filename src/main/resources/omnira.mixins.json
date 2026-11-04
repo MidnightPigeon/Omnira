@@ -49,6 +49,7 @@
     "MireSaplingMixin",
     "FleetingServerLevelMixin",
     "FleetingBlockEntityMixin",
+    "MachineTimeSectionMixin",
     "FleetingPlayerMixin",
     "FleetingMotionMixin",
     "FleetingTravelMixin",
@@ -67,10 +68,13 @@
     "BottleStorageCapabilityMixin",
     "BottleEntityCapabilityMixin",
     "MireFishingMixin",
+    "StarlightRodAttackMixin",
     "MireFluidMovementMixin",
     "MireFishingRodMixin"
   ],
   "client": [
+    "StarlightFloatRendererMixin",
+    "StarlightRodHandMixin",
     "AbyssCameraMixin",
     "AbyssLivingRenderMixin",
     "ViolinPoseMixin",

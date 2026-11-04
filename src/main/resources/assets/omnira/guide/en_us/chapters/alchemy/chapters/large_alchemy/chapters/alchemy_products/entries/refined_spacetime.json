@@ -4,7 +4,7 @@
   "item": "omnira:refined_spacetime_bucket",
   "recipes": false,
   "text": [
-    "Only a Large Alchemical Reaction Pool can react 10 B of Dilute Spacetime, one Time Warp Point and one Spatial Fold Point into 1 B of Refined Spacetime, with a Spacetime Spell Core in its catalyst floor. A Primitive Reaction Cauldron cannot perform this conversion.",
+    "Produce it in a Large Alchemical Reaction Pool using a Spacetime Spell Core as the floor catalyst.",
     "Refined Spacetime has denser, stronger flowing light, but cannot form infinite sources or provide unlimited extraction from Liquid Crystal Balls. A Rough Alchemical Energy Core can catalyze 1 B into one Time Microcore and one Space Microcore together."
   ],
   "links": [

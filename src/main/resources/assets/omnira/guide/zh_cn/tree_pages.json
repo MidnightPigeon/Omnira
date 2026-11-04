@@ -1,0 +1,457 @@
+{
+  "pages": [
+    {
+      "id": "map:construction",
+      "title": "基础构件",
+      "icon": "omnira:spiritual_crystal",
+      "text": [
+        "用灵性水晶制成机壳、基座和格栅框架。机壳包住器械的内部结构，基座托起供物，框架用来制作法术格栅。"
+      ],
+      "links": [
+        "spiritual_crystal",
+        "crystal_casing",
+        "crystal_pedestal",
+        "grid_frame"
+      ]
+    },
+    {
+      "id": "map:basic_materials",
+      "title": "四系微核与初级要素",
+      "icon": "omnira:earth_microcore",
+      "text": [
+        "在解析工匠桌分解材料，可提取地、水、火、风四系微核。编写法术时，微核决定形态，要素决定法术触及目标时的效果。"
+      ],
+      "links": [
+        "earth_microcore",
+        "water_microcore",
+        "fire_microcore",
+        "air_microcore",
+        "analysis_crystal",
+        "sharp_breath",
+        "healing_dew",
+        "dissociation_thread",
+        "construction_matrix"
+      ]
+    },
+    {
+      "id": "map:early_ruins",
+      "title": "前人残迹",
+      "icon": "minecraft:oak_door",
+      "text": [
+        "主世界的旧屋、工坊和巫师塔里留有魔法材料。仔细找找工坊和塔里的储物晶球，有机会发现原始法术核心。"
+      ],
+      "links": [
+        "abandoned_apprentice_hut",
+        "ruined_crystal_workshop",
+        "abandoned_wizard_tower",
+        "night_heron_statue",
+        "spell_core",
+        "mana_engine"
+      ]
+    },
+    {
+      "id": "map:early_logistics",
+      "title": "共振与初级物流",
+      "icon": "omnira:resonance_core",
+      "text": [
+        "水晶球储物，液晶球储液。在装配台上把它们制成共振晶球，设为同一频率，便可在不同地点存取同一份物资。"
+      ],
+      "links": [
+        "resonance_core",
+        "resonant_orbs",
+        "liquid_crystal_ball",
+        "crystal_ball"
+      ]
+    },
+    {
+      "id": "map:early_staff",
+      "title": "法杖与魔纹",
+      "icon": "omnira:modular_staff",
+      "text": [
+        "选好杖端、杖体和加固部件，在装配台上拼成一根法杖。杖端的空槽可以嵌入魔纹。"
+      ],
+      "links": [
+        "modular_staff",
+        "assemble_staff",
+        "rune_embedding",
+        "staff_casting"
+      ]
+    },
+    {
+      "id": "map:early_grid",
+      "title": "格栅与连续施法",
+      "icon": "omnira:basic_crystal_grid",
+      "text": [
+        "把写好的法术水晶按施放顺序装进格栅。手持法杖施法时，格栅会依次调用其中的法术。"
+      ],
+      "links": [
+        "basic_crystal_grid",
+        "elemental_crystal_grid",
+        "grid_frame"
+      ]
+    },
+    {
+      "id": "map:early_workstations",
+      "title": "水晶工作器械",
+      "icon": "omnira:crystal_furnace",
+      "text": [
+        "用水晶熔炉熔炼材料，在水晶砧上加工装备，或用水晶砂轮打磨物品。"
+      ],
+      "links": [
+        "crystal_furnace",
+        "crystal_anvil",
+        "crystal_grindstone"
+      ]
+    },
+    {
+      "id": "map:dream_materials",
+      "title": "梦境材料",
+      "icon": "omnira:crude_light_core",
+      "text": [
+        "在光照充盈之处寻找光晶核，穿过镜面采集梦境水晶，再到阴暗处寻觅暗影浆果。"
+      ],
+      "links": [
+        "crude_light_core",
+        "light_crystal_core",
+        "dream_crystal_shard",
+        "shadow_mist",
+        "shadow_berries"
+      ]
+    },
+    {
+      "id": "map:infused",
+      "title": "注灵与高阶加工",
+      "icon": "omnira:advanced_condensation_table",
+      "text": [
+        "将灵性水晶放在高阶凝聚台中央，持续注入法力便可制成注灵水晶。"
+      ],
+      "links": [
+        "advanced_condensation_table",
+        "infused_crystal_casing",
+        "modifier_enhancement",
+        "modifier_delay",
+        "holy"
+      ]
+    },
+    {
+      "id": "map:dream_ritual_prep",
+      "title": "叩时的准备",
+      "icon": "omnira:advanced_ritual_energy_core",
+      "text": [
+        "围绕高阶仪祭能核布置八座基座，摆上四个时空扭结、两个悖论尘和两枚注灵水晶。引来梦之镜后，手持不稳定的时空聚合体启动仪式。"
+      ],
+      "links": [
+        "advanced_ritual_energy_core",
+        "unstable_spacetime_aggregate",
+        "corridor_ritual"
+      ]
+    },
+    {
+      "id": "map:light_dark",
+      "title": "光与暗的微核",
+      "icon": "omnira:light_microcore",
+      "text": [
+        "粗制光核与暗影雾可分别提取光、暗微核。用解析之晶也能将两种微核还原为对应材料。"
+      ],
+      "links": [
+        "light_microcore",
+        "dark_microcore"
+      ]
+    },
+    {
+      "id": "map:knots",
+      "title": "道标、扭结与悖论尘",
+      "icon": "omnira:spacetime_waymark",
+      "text": [
+        "可在梦境遗迹回收自然生成的时空道标，也可用梦境材料制作。将道标在普通装配台加工成时空扭结，再通过高阶凝聚获得悖论尘。"
+      ],
+      "links": [
+        "spacetime_waymark",
+        "spacetime_knot",
+        "paradox_dust"
+      ]
+    },
+    {
+      "id": "map:light_dark_core",
+      "title": "光暗法术核心",
+      "icon": "omnira:primordial_spell_core",
+      "text": [
+        "光暗法术核心可在高阶装配台制作。"
+      ],
+      "links": [
+        "spell_core",
+        "advanced_ritual_energy_core_crafting"
+      ]
+    },
+    {
+      "id": "map:dream_staff",
+      "title": "梦境施法装备",
+      "icon": "omnira:shadow_staff_shaft",
+      "text": [
+        "用暗影材料制作杖体，用光晶核加固法杖。魔能水晶格栅则用来编排随杖施放的法术。"
+      ],
+      "links": [
+        "shadow_staff_shaft",
+        "light_core_reinforcement",
+        "arcane_crystal_grid",
+        "staff_enhancement_usage"
+      ]
+    },
+    {
+      "id": "map:dream_tools",
+      "title": "灵晶加工与便携工具",
+      "icon": "omnira:infused_crystal_furnace",
+      "text": [
+        "将受损装备留在灵晶砂轮内，它会慢慢恢复耐久。出门探索时，方寸魔瓶能收容生物，再将它们带往别处释放。"
+      ],
+      "links": [
+        "infused_crystal_furnace",
+        "infused_crystal_anvil",
+        "infused_crystal_grindstone",
+        "pocket_magic_bottle"
+      ]
+    },
+    {
+      "id": "map:pulse_network",
+      "title": "脉冲供能与分配",
+      "icon": "omnira:mana_engine",
+      "text": [
+        "将法术核心装入魔能引擎，从输出面对接器械。距离较远时可铺设奥术连线，也可用蓄能晶球分配势能。"
+      ],
+      "links": [
+        "magic_pulse",
+        "pulse_accumulator_orbs",
+        "resonant_accumulator_orb_crafting"
+      ]
+    },
+    {
+      "id": "map:spacetime_resources",
+      "title": "时空资源分流",
+      "icon": "omnira:time_warp_point",
+      "text": [
+        "时间大陆的地表覆盖着时序尘泥，有些仍带着活化的纹路。空间洞穴中能采到粗糙空间晶块，也能从成熟晶簇中取得空间水晶。"
+      ],
+      "links": [
+        "time_warp_point_guide",
+        "space_warp_point_guide",
+        "temporal_silt_guide",
+        "spatial_growth_guide",
+        "damaged_research_facility_guide"
+      ]
+    },
+    {
+      "id": "map:spacetime_fluids",
+      "title": "两种原液",
+      "icon": "omnira:decayed_timeflow_bucket",
+      "text": [
+        "分别收集破败时流与虚空星流。将两种原液与粗糙炼金能核投入大型炼金反应池，即可炼出稀薄时空。"
+      ],
+      "links": [
+        "decayed_timeflow_guide",
+        "void_starflow_guide",
+        "large_alchemical_reaction_pool"
+      ]
+    },
+    {
+      "id": "map:first_cores",
+      "title": "时间与空间微核",
+      "icon": "omnira:time_warp_point",
+      "text": [
+        "两种微核都能在时空遗迹的宝藏中找到。垂钓时，破败时流的宝藏有机会开出时间微核，虚空星流的宝藏有机会开出空间微核。",
+        "时间翘曲点与空间折跃点都可解析为对应的微核。解析工匠桌会额外产出奥术尘；工作台上的解析之晶还能将微核还原为对应的点，每次转换消耗1点耐久。",
+        "时空回溯仪也能加工微核：2个时间翘曲点制成1枚时间微核，16个空间水晶制成1枚空间微核。",
+        "用粗糙炼金能核催化1000 mB精炼时空，一次反应可同时得到时间微核与空间微核各1枚。"
+      ],
+      "links": [
+        "time_warp_point_guide",
+        "space_warp_point_guide",
+        "spacetime_reverser",
+        "refined_spacetime",
+        "doomsday_rite",
+        "fold_observatory_guide",
+        "decayed_timeflow_guide",
+        "void_starflow_guide"
+      ]
+    },
+    {
+      "id": "map:aggregation_materials",
+      "title": "聚合环材料准备",
+      "icon": "omnira:living_temporal_silt",
+      "text": [
+        "在时间大陆挖取活化时序尘泥，沉积态也可用于搭环。在空间洞穴用精准采集取下激发态粗糙空间晶块，或改用空间水晶块。配齐灵晶机壳、水晶加工台和注灵水晶，即可组装聚合环。"
+      ],
+      "links": [
+        "temporal_silt_guide",
+        "spatial_growth_guide",
+        "advanced_crystal_aggregation_ring"
+      ]
+    },
+    {
+      "id": "map:time_relics",
+      "title": "时间遗迹珍藏",
+      "icon": "omnira:golden_throne",
+      "text": [
+        "在旧宫殿寻找王座，在钻井平台寻找钻机。雾雨小店与锈湖磨坊也各自留有珍藏。"
+      ],
+      "links": [
+        "golden_throne_relic",
+        "traveler_manuscript",
+        "hyperdimensional_drill_relic",
+        "marisa_crystal_ball_relic",
+        "memory_cube_relic"
+      ]
+    },
+    {
+      "id": "map:time_relic_devices",
+      "title": "循环与终末遗物",
+      "icon": "omnira:wonderland_poker_stand",
+      "text": [
+        "走进循环花园的遗迹，寻找仙境扑克展台。分时日晷则藏在终时废墟的末日仪轨。"
+      ],
+      "links": [
+        "wonderland_poker_stand_relic",
+        "split_time_sundial_relic"
+      ]
+    },
+    {
+      "id": "map:epochal_relics",
+      "title": "纪元碎层与远古精华",
+      "icon": "omnira:phantom_calling_card",
+      "text": [
+        "从纪元断崖带回未知化石，回溯成远古残骸，再高阶凝聚为精华。找到损坏的科研设施后，可用时间翘曲点修复其中的机械部件。"
+      ],
+      "links": [
+        "epochal_relics_guide",
+        "ancient_essences_guide",
+        "epochal_aggregates_guide",
+        "damaged_research_facility_guide"
+      ]
+    },
+    {
+      "id": "map:spacetime_weapons",
+      "title": "时空法杖与武器",
+      "icon": "omnira:time_staff_shaft",
+      "text": [
+        "单独写入一枚时间微核，逆序时流会把目标拉向中心；换成空间微核，裂空利刃便沿准星方向飞出。时空材料也能制成杖端和杖体。"
+      ],
+      "links": [
+        "time_staff_shaft",
+        "infused_crystal_tip",
+        "spacetime_aggregate_tip",
+        "spatial_blade",
+        "reverse_timeflow"
+      ]
+    },
+    {
+      "id": "map:spacetime_defense",
+      "title": "锚定、相位与偏折",
+      "icon": "omnira:spacetime_anchoring_sigil",
+      "text": [
+        "锚定印记能在死亡地点封存随身物品。相位隐匿护符可在受击后短暂隐去身形，偏折力场则能把来袭的弹射物反射回去。"
+      ],
+      "links": [
+        "spacetime_anchoring_sigil",
+        "phase_concealment_charm",
+        "deflection_field"
+      ]
+    },
+    {
+      "id": "map:space_relics",
+      "title": "空间遗迹珍藏",
+      "icon": "omnira:spatial_stability_anchor",
+      "text": [
+        "空间稳定锚可稳定周围的空间。探索时也可以带上映射稳定罗盘，用它寻找归途。"
+      ],
+      "links": [
+        "spatial_stability_anchor",
+        "phase_control_panel_relic",
+        "mapping_stability_compass_guide"
+      ]
+    },
+    {
+      "id": "map:starsea_relics",
+      "title": "灯塔与星海奇珍",
+      "icon": "omnira:star_source",
+      "text": [
+        "星辰之源会在地面或水底铺下发光的星屑。远旅的小提琴可以奏响乐曲，而那只手提箱上的水渍竟沿着箱体向上流动。"
+      ],
+      "links": [
+        "star_source_relic",
+        "voyager_violin",
+        "rain_soaked_suitcase_relic"
+      ]
+    },
+    {
+      "id": "map:spacetime_energy",
+      "title": "星光转化与星尘",
+      "icon": "omnira:time_seed",
+      "text": [
+        "将材料放入游离星团晶球，球内的星尘会缓缓改变它。灯塔小岛地面上的星屑也可直接采集，轻击便会掉落星尘。"
+      ],
+      "links": [
+        "wandering_star_cluster_orb",
+        "stardust_guide",
+        "temporal_energy",
+        "spatial_energy"
+      ]
+    },
+    {
+      "id": "map:world_components",
+      "title": "八种世界构件",
+      "icon": "omnira:strata_skeleton",
+      "text": [
+        "以强化炼金能核催化，将创世微粒、精炼时空与各自的材料反应，分别制成地层、水脉、天幕等八种世界构件。"
+      ],
+      "links": [
+        "strata_skeleton",
+        "circulating_waterways",
+        "flowing_sky_canopy",
+        "geothermal_ember",
+        "living_embryoplasm",
+        "ages_dial",
+        "boundary_crystal_membrane",
+        "phantasm_germinal_shard"
+      ]
+    },
+    {
+      "id": "map:world_editing",
+      "title": "改写世界",
+      "icon": "omnira:myriad_heart",
+      "text": [
+        "放置万象之心，回到原典选定术式。物质可替换方块，形体按指定形状铺设材料，生态能构筑一座包裹在水晶中的小天地。"
+      ],
+      "links": [
+        "myriad_heart",
+        "myriad_matter",
+        "myriad_form",
+        "myriad_ecology"
+      ]
+    },
+    {
+      "id": "map:world_spells",
+      "title": "世界之力的其他用途",
+      "icon": "omnira:dormant_world_seed",
+      "text": [
+        "用激活的世界之种触碰平整地面，可在眼前展开另一片天地。也可将种子高阶凝聚为微缩之界，把重载写入法术。"
+      ],
+      "links": [
+        "world_seed",
+        "reload_element",
+        "world_deflection"
+      ]
+    },
+    {
+      "id": "map:spacetime_fishing",
+      "title": "时空垂钓",
+      "icon": "omnira:starlight_fishing_rod",
+      "text": [
+        "破败时流与虚空星流都可供垂钓。将浮漂抛入液面，等它下沉时收竿。"
+      ],
+      "links": [
+        "decayed_timeflow_guide",
+        "void_starflow_guide",
+        "starlight_fishing_rod"
+      ]
+    }
+  ]
+}

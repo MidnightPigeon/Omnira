@@ -14,7 +14,7 @@ public final class UpgradeCompatibility {
         RESONANT_LIQUID_CRYSTAL_BALL("resonant_liquid_crystal_ball",storageKinds()),
         VOID_ORB("void_crystal_ball",INTAKE,SPEED),
         STAR_ORB("wandering_star_cluster_orb",STABILIZATION,RECIPE_CONTROL,SPEED),
-        CRUISE_ORB("cruise_orb",STACKING,INFUSED_STACKING,STABILIZATION,LAVA,SPEED),
+        CRUISE_ORB("cruise_orb",INFUSED_INTAKE,STACKING,INFUSED_STACKING,STABILIZATION,LAVA,SPEED),
         REACTION_POOL("large_alchemical_reaction_pool",INTAKE,OUTPUT,STACKING,INFUSED_STACKING,RECIPE_CONTROL,SPEED),
         CATALYSIS_CHAMBER("alchemical_catalysis_chamber",INTAKE,OUTPUT,RECIPE_CONTROL,SPEED),
         PULSE_ORB("pulse_accumulator_orb",STACKING,INFUSED_STACKING),
@@ -23,7 +23,7 @@ public final class UpgradeCompatibility {
         public final String id;
         private final Set<OrbUpgradeItem.Kind> kinds;
         Host(String id,OrbUpgradeItem.Kind... kinds){this.id=id;var accepted=EnumSet.noneOf(OrbUpgradeItem.Kind.class);Collections.addAll(accepted,kinds);this.kinds=Collections.unmodifiableSet(accepted);}
-        public boolean accepts(OrbUpgradeItem.Kind kind){return kinds.contains(kind);}
+        public boolean accepts(OrbUpgradeItem.Kind kind){return kind==INFUSED_INTAKE?(this==CRYSTAL_BALL||this==RESONANT_CRYSTAL_BALL||this==CRUISE_ORB):kinds.contains(kind);}
         public String translationKey(){return (this==CRUISE_ORB?"item.omnira.":"block.omnira.")+id;}
     }
     private static OrbUpgradeItem.Kind[] storageKinds(){return Arrays.stream(OrbUpgradeItem.Kind.values()).filter(kind->kind!=RECIPE_CONTROL).toArray(OrbUpgradeItem.Kind[]::new);}

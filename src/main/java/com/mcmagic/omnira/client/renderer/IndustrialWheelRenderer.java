@@ -36,6 +36,21 @@ public final class IndustrialWheelRenderer extends BlockEntityWithoutLevelRender
             if(i>0){p.pushPose();p.translate(x/16,29.4/16,z/16);p.mulPose(Axis.YP.rotationDegrees(a));p.scale(.8F,.8F,.8F);p.translate(-.5,-.5,-.5);draw(model("vane"),s,p,b,light,overlay,false);p.popPose();}
         }
         p.pushPose();p.translate(.5,30.2/16,.5);p.mulPose(Axis.YP.rotationDegrees((float)angle));p.scale(.72F,.72F,.72F);p.mulPose(Axis.XP.rotationDegrees(-90));p.translate(-.5,-.5,-12./16);draw(model("hand"),s,p,b,light,overlay,true);p.popPose();
+        var rune=com.mcmagic.omnira.item.IndustrialWheelItem.rune(s);
+        var part=com.mcmagic.omnira.item.staff.StaffPart.of(rune);
+        if(part!=null){
+            p.pushPose();
+            p.translate(.5,36.0/16,.5);
+            p.mulPose(Axis.YP.rotationDegrees((float)(time*.6%360)));
+            p.translate(6.5/16,0,0);
+            p.mulPose(Axis.YP.rotationDegrees(90));
+            p.scale(.28F,.28F,.28F);
+            p.translate(-.5,-.5,-.5);
+            var glyph=mc.getModelManager().getModel(ModularStaffRenderer.part(part.model()));
+            for(var pass:glyph.getRenderPasses(rune,true))for(var layer:pass.getRenderTypes(rune,true))
+                mc.getItemRenderer().renderModelLists(pass,rune,light,overlay,p,b.getBuffer(layer));
+            p.popPose();
+        }
         p.popPose();
     }
 }

@@ -96,9 +96,10 @@ public final class ReversionMireGameTests {
         var l=h.getLevel();var p=h.absolutePos(new BlockPos(4,3,4));
         var key=ResourceKey.create(Registries.LOOT_TABLE,ResourceLocation.parse("omnira:fishing/reversion_mire"));var table=l.getServer().reloadableRegistries().getLootTable(key);
         int[] treasures=new int[2];
-        var accepted=java.util.Set.of("timeflow_eel","infused_spiritual_crystal","dream_crystal_shard","time_seed","time_sapling","life_ender","time_warp_point","dream_spell_core","time_microcore","space_microcore","enchanted_book");
+        var openWaterFloat=new net.minecraft.world.entity.projectile.FishingHook(net.minecraft.world.entity.EntityType.FISHING_BOBBER,l);
+        var accepted=java.util.Set.of("timeflow_eel","chronal_blindfish","infused_spiritual_crystal","dream_crystal_shard","time_seed","time_sapling","life_ender","time_warp_point","dream_spell_core","time_microcore","enchanted_book");
         for(int luck=0;luck<=3;luck+=3)for(int i=0;i<1500;i++){
-            var params=new LootParams.Builder(l).withParameter(LootContextParams.ORIGIN,p.getCenter()).withParameter(LootContextParams.TOOL,new ItemStack(Items.FISHING_ROD)).withLuck(luck).create(LootContextParamSets.FISHING);
+            var params=new LootParams.Builder(l).withParameter(LootContextParams.ORIGIN,p.getCenter()).withParameter(LootContextParams.THIS_ENTITY,openWaterFloat).withParameter(LootContextParams.TOOL,new ItemStack(Items.FISHING_ROD)).withLuck(luck).create(LootContextParamSets.FISHING);
             var drops=table.getRandomItems(params,i+100L);h.assertTrue(drops.size()==1,"Fishing must yield one item");
             String id=net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(drops.getFirst().getItem()).getPath();h.assertTrue(accepted.contains(id),"Unexpected catch: "+id);
             if(java.util.Set.of("time_warp_point","enchanted_book","dream_spell_core","time_microcore","space_microcore").contains(id))treasures[luck/3]++;

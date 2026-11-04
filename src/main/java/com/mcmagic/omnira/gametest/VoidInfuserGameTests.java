@@ -28,6 +28,36 @@ public final class VoidInfuserGameTests {
         int charged=be.energy();be.tick();
         h.assertTrue(be.getItem(0).isEmpty()&&be.getItem(1).is(stack(output).getItem())&&be.getItem(1).getCount()==1&&be.energy()==charged-1,"Wrong conversion or energy: "+input);
     }
+    @GameTest(template="spell_arena") public static void fluidEnergyCredit(GameTestHelper h){
+        var simulate=net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE;
+        var execute=net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE;
+        var level=h.getLevel();
+        for(boolean spatial:new boolean[]{false,true}){
+            var be=machine(h,spatial);
+            var pos=be.getBlockPos();
+            var state=be.getBlockState();
+            var cap=net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK;
+            var port=level.getCapability(cap,pos,Direction.WEST);
+            var time=com.mcmagic.omnira.mire.MireContent.SOURCE.get();
+            var space=com.mcmagic.omnira.space.sea.VoidSeaContent.SOURCE.get();
+            var fluid=new net.neoforged.neoforge.fluids.FluidStack(spatial?space:time,600);
+            var wrong=new net.neoforged.neoforge.fluids.FluidStack(spatial?time:space,1000);
+            h.assertTrue(port!=null && port.fill(wrong,execute)==0,"Wrong fluid accepted");
+            h.assertTrue(port.fill(fluid,simulate)==600 && port.fill(fluid,execute)==600 && be.energy()==0,"Partial or simulated fill credited energy");
+            var saved=be.saveWithFullMetadata(level.registryAccess());
+            level.removeBlock(pos,false);level.setBlockAndUpdate(pos,state);
+            be=(ReversalBlockEntity)level.getBlockEntity(pos);
+            port=level.getCapability(cap,pos,Direction.UP);
+            h.assertTrue(port.getTankCapacity(0)==64000,"Replacement retained partial credit");
+            be.loadWithComponents(saved,level.registryAccess());
+            fluid.setAmount(1401);
+            h.assertTrue(port.fill(fluid,execute)==1401 && be.energy()==2,"Reload lost partial credit");
+            h.assertTrue(port.drain(1000,execute).isEmpty() && port.getFluidInTank(0).isEmpty(),"Energy inlet exposed stored fluid");
+            fluid.setAmount(64000);
+            h.assertTrue(port.fill(fluid,execute)==61999 && be.energy()==64 && port.fill(fluid,execute)==0,"Over-cap fluid consumed");
+        }
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void allConversionsAndBothSaplingRecipes(GameTestHelper h){
         var be=machine(h,true);
         for(String[] pair:new String[][]{{"omnira:mirror_rock","omnira:void_mirror_rock"},{"omnira:light_condensate","omnira:shadow_rock"},{"minecraft:slime_ball","minecraft:ender_pearl"},{"minecraft:obsidian","minecraft:crying_obsidian"}})
@@ -44,8 +74,8 @@ public final class VoidInfuserGameTests {
     }
     @GameTest(template="spell_arena") public static void energyCapPersistenceAndOutputProtection(GameTestHelper h){
         var be=machine(h,true);
-        String[] fuels={"rough_spatial_crystal_block","excited_rough_spatial_crystal_block","spatial_crystal_shard","deflection_crystal"};
-        int[] values={1,2,4,6};
+        String[] fuels={"rough_spatial_crystal_block","excited_rough_spatial_crystal_block","starlight_cluster","spatial_crystal_shard","star_jellyfish","deflection_crystal"};
+        int[] values={1,2,2,4,4,6};
         for(int i=0;i<fuels.length;i++)h.assertTrue(ReversalBlockEntity.spaceFuel(stack("omnira:"+fuels[i]))==values[i],"Wrong fuel value");
         h.assertTrue(!be.canPlaceItem(2,stack("omnira:time_microcore")),"Temporal fuel accepted");
         be.setItem(2,new ItemStack(stack("omnira:deflection_crystal").getItem(),11));ticks(be,11);

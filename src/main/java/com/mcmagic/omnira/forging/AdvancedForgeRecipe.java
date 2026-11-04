@@ -18,7 +18,7 @@ public record AdvancedForgeRecipe(List<Ingredient> slots,ItemStack result,String
     public AdvancedForgeRecipe {
         slots=List.copyOf(slots);
         result=result.copy();
-        if(!operation.equals("fixed") && !operation.equals("staff_enhancement") && !operation.equals("ritual_sword_upgrade") && !operation.equals("grid_upgrade"))throw new IllegalArgumentException("Unknown advanced assembly operation: "+operation);
+        if(!operation.equals("fixed") && !operation.equals("consume_all") && !operation.equals("staff_enhancement") && !operation.equals("ritual_sword_upgrade") && !operation.equals("grid_upgrade"))throw new IllegalArgumentException("Unknown advanced assembly operation: "+operation);
         if(slots.size()!=9 || slots.stream().allMatch(Ingredient::isEmpty))throw new IllegalArgumentException("Expected nine material positions");
     }
     public record Input(Container container) implements RecipeInput {
@@ -62,6 +62,9 @@ public record AdvancedForgeRecipe(List<Ingredient> slots,ItemStack result,String
     }
     public ItemStack getResultItem(HolderLookup.Provider registries){return displayResult();}
     public boolean canCraftInDimensions(int width,int height){return true;}
+    @Override public net.minecraft.core.NonNullList<ItemStack> getRemainingItems(Input input){
+        return operation.equals("consume_all")?net.minecraft.core.NonNullList.withSize(input.size(),ItemStack.EMPTY):Recipe.super.getRemainingItems(input);
+    }
     public boolean isSpecial(){return true;}
     public ItemStack getToastSymbol(){return new ItemStack(com.mcmagic.omnira.registry.ModItems.ADVANCED_FORGE.get());}
     public RecipeType<?> getType(){return ModRecipes.ADVANCED_FORGE_TYPE.get();}

@@ -21,6 +21,7 @@ public final class OrbUpgradeMenu extends AbstractContainerMenu {
     public final boolean intake;
     public final boolean recipeControl;
     public final boolean speed;
+    public final boolean areaIntake;
     private boolean loading;
     private final int filterCount;
     public OrbUpgradeMenu(int id,Inventory inventory,RegistryFriendlyByteBuf data) {
@@ -31,6 +32,7 @@ public final class OrbUpgradeMenu extends AbstractContainerMenu {
         this.owner=inventory.player;this.source=source;this.intake=intake;
         bound=inventory.getItem(source);
         recipeControl=OrbUpgrades.kind(bound)==OrbUpgradeItem.Kind.RECIPE_CONTROL;
+        areaIntake=OrbUpgrades.kind(bound)==OrbUpgradeItem.Kind.INFUSED_INTAKE;
         speed=OrbUpgrades.kind(bound)==OrbUpgradeItem.Kind.SPEED;
         filterCount=speed?2:recipeControl?9:3;filters=new SimpleContainer(filterCount){
             @Override public void setChanged(){super.setChanged();if(speed&&!loading&&!owner.level().isClientSide&&stillValid(owner)){
@@ -58,7 +60,7 @@ public final class OrbUpgradeMenu extends AbstractContainerMenu {
     @Override public boolean stillValid(Player player) {
         return player==owner && player.isAlive() && (player.level().isClientSide ||
                 owner.getInventory().getItem(source)==bound && OrbUpgrades.kind(bound)==
-                        (speed?OrbUpgradeItem.Kind.SPEED:recipeControl?OrbUpgradeItem.Kind.RECIPE_CONTROL:intake?OrbUpgradeItem.Kind.INTAKE:OrbUpgradeItem.Kind.OUTPUT));
+                        (areaIntake?OrbUpgradeItem.Kind.INFUSED_INTAKE:speed?OrbUpgradeItem.Kind.SPEED:recipeControl?OrbUpgradeItem.Kind.RECIPE_CONTROL:intake?OrbUpgradeItem.Kind.INTAKE:OrbUpgradeItem.Kind.OUTPUT));
     }
     @Override public void broadcastChanges() {
         if(!owner.level().isClientSide && stillValid(owner)) {
@@ -76,7 +78,7 @@ public final class OrbUpgradeMenu extends AbstractContainerMenu {
         if(player.level().isClientSide || !stillValid(player) || speed)return false;
         var tag=OrbUpgrades.settings(bound);
         if(id==0)tag.putBoolean("Whitelist",!tag.getBoolean("Whitelist"));
-        else if(!recipeControl && id>=1 && id<=6)
+        else if(!recipeControl && !areaIntake && id>=1 && id<=6)
             tag.putInt("Directions",directions.get()^(1<<(id-1)));
         else return false;
         bound.set(DataComponents.CUSTOM_DATA,CustomData.of(tag));

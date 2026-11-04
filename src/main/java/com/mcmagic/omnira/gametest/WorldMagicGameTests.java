@@ -72,6 +72,20 @@ public final class WorldMagicGameTests {
         var stand=new net.minecraft.world.entity.decoration.ArmorStand(EntityType.ARMOR_STAND,h.getLevel());
         h.assertTrue(!ReloadEffect.living(SpellEffect.utility("reload",1,0,1),stand),"Decoration transformed");h.succeed();
     }
+    @GameTest(template="spell_arena") public static void rotationCrystalRecoversOldWorldDeadline(GameTestHelper h){
+        var p=player(h);long now=p.server.overworld().getGameTime();
+        p.setData(ModAttachments.MANA,new com.mcmagic.omnira.mana.ManaState(100,100));
+        p.setData(ModAttachments.WORLD_ROTATION_READY,now+800000L);
+        var crystal=new ItemStack(ModItems.WORLD_ROTATION_CRYSTAL.get(),2);
+        p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,crystal);
+        var result=crystal.getItem().use(h.getLevel(),p,net.minecraft.world.InteractionHand.MAIN_HAND);
+        h.assertTrue(result.getResult().consumesAction()&&crystal.getCount()==1&&p.getData(ModAttachments.MANA).current()==0,"Old world deadline blocked direct crystal use");
+        h.assertTrue(p.getData(ModAttachments.WORLD_ROTATION_READY)==now+WorldRotation.COOLDOWN,"Recovered cast did not restore normal cooldown");
+        p.setData(ModAttachments.MANA,new com.mcmagic.omnira.mana.ManaState(100,100));
+        crystal.getItem().use(h.getLevel(),p,net.minecraft.world.InteractionHand.MAIN_HAND);
+        h.assertTrue(crystal.getCount()==1&&p.getData(ModAttachments.MANA).current()==100,"Valid cooldown consumed crystal or mana");
+        WorldRotation.cancel(p.getUUID());h.succeed();
+    }
     @GameTest(template="spell_arena") public static void rotationRestoresPlayerAndCannotDiscountCooldown(GameTestHelper h)throws Exception{
         var p=player(h);p.setHealth(2);p.getFoodData().setFoodLevel(1);p.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.POISON,100));
         var pick=new ItemStack(Items.IRON_PICKAXE);pick.setDamageValue(100);p.getInventory().setItem(0,pick);

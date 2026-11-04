@@ -12,7 +12,8 @@
     "entries/analysis_crystal.json"
   ],
   "chapters": [
-    "chapters/element_recipes/chapter.json"
+    "chapters/element_recipes/chapter.json",
+    "chapters/elemental_cycle/chapter.json"
   ],
   "directory_order": [
     "earth_microcore",
@@ -20,6 +21,7 @@
     "fire_microcore",
     "air_microcore",
     "analysis_crystal",
+    "elemental_cycle",
     "arcane_dust",
     "element_recipes"
   ]

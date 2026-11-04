@@ -10,13 +10,17 @@ public final class ModParticles {
     public static final DeferredRegister<ParticleType<?>> TYPES=DeferredRegister.create(Registries.PARTICLE_TYPE,"omnira");
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> STORM_RAIN=TYPES.register("storm_rain",()->new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> STORM_WARNING=TYPES.register("storm_warning",()->new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>,SimpleParticleType> STARFLOW_BITE_RING=TYPES.register("starflow_bite_ring",()->new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> STARFLOW_RIPPLE=TYPES.register("starflow_ripple",()->new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>,SimpleParticleType> STARFLOW_FOAM=TYPES.register("starflow_foam",()->new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> STARFLOW_BUBBLE=TYPES.register("starflow_bubble",()->new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> NAIL_FOCUS=TYPES.register("nail_focus",()->new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> NEEDLE_FOCUS=TYPES.register("needle_focus",()->new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> PARADOX_SPARK=TYPES.register("paradox_spark",()->new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> TIME_WARP_SPARK=TYPES.register("time_warp_spark",()->new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>,SimpleParticleType> TIMEFLOW_BITE_RING=TYPES.register("timeflow_bite_ring",()->new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> TIMEFLOW_RIPPLE=TYPES.register("timeflow_ripple",()->new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>,SimpleParticleType> TIMEFLOW_FOAM=TYPES.register("timeflow_foam",()->new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> TIMEFLOW_BUBBLE=TYPES.register("timeflow_bubble",()->new SimpleParticleType(false));
     private ModParticles() {}
     public static final DeferredHolder<ParticleType<?>,SimpleParticleType> PEACEFUL_MEMORY_GLYPH=TYPES.register("peaceful_memory_glyph",()->new SimpleParticleType(false));

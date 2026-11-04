@@ -3,7 +3,7 @@
   "item": "omnira:crude_light_core",
   "title": "Crude Light Core",
   "text": [
-    "Craft nine light source crystals into a crude light core, or forge one from a light source crystal at a arcane assembly bench. It cannot be reversed into crystals.",
+    "Process Light Source Crystals at a crafting table or an Arcane Assembly Bench. Crude Light Cores cannot be converted back.",
     "Forge it into a primordial spell core, or analyze it for a light microcore.",
     "Assembling a Primordial Spell Core consumes the entire Analysis Crystal as a material; it is not returned."
   ],

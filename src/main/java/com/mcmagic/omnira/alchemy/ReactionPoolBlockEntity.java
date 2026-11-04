@@ -36,6 +36,10 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         int outputLeft(){return recipe.fluidResult().getAmount()-recipe.fluidResult().getAmount()*batches/10;}
     }
     private final List<Job> jobs=new ArrayList<>();
+    private boolean displayState;
+    private int displayCount,displayProgress,reservedFluidSpace;
+    private final List<ItemStack> reservedItems=new ArrayList<>();
+    private final List<FluidStack> reservedFluids=new ArrayList<>();
     private final Map<ReactionRecipe,net.minecraft.nbt.Tag> recipeKeys=new IdentityHashMap<>();
     private List<ReactionRecipe> availableRecipes=List.of();
     private final com.mcmagic.omnira.recipe.RecipeRetryGate recipeGate=new com.mcmagic.omnira.recipe.RecipeRetryGate();
@@ -69,7 +73,7 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
             return true;
         }
         @Override public ItemStack insertItem(int slot,ItemStack stack,boolean simulate){
-            if(!internal&&!jobs.isEmpty()){
+            if(!internal&&reacting()){
                 var remainder=super.insertItem(slot,stack,true);int added=stack.getCount()-remainder.getCount();
                 var trial=snapshot();trial.set(slot,stack.copyWithCount(getStackInSlot(slot).getCount()+added));
                 if(!pendingItemsFit(trial,null))return stack;
@@ -117,10 +121,10 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
     public double efficiency(){return factor;}
     public double electricalEfficiency(){return energyInput.factor();}
     public boolean powered(){return factor>=1&&complete();}
-    public boolean reacting(){return !jobs.isEmpty();}
+    public boolean reacting(){return reactionCount()>0;}
     public void worldRotation(){if(complete())advance(Integer.MAX_VALUE);changed();}
-    public int reactionCount(){return jobs.size();}
-    public int progressPercent(){return jobs.isEmpty()?0:(int)jobs.stream().mapToDouble(j->100*j.progress/j.recipe.duration()).average().orElse(0);}
+    public int reactionCount(){return displayState?displayCount:jobs.size();}
+    public int progressPercent(){return displayState?displayProgress:jobs.isEmpty()?0:(int)jobs.stream().mapToDouble(j->100*j.progress/j.recipe.duration()).average().orElse(0);}
     public boolean supportMatches(Ingredient support){
         if(support.isEmpty())return true;
         for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++)if(support.test(new ItemStack(level.getBlockState(worldPosition.offset(x,-1,z)).getBlock())))return true;
@@ -147,7 +151,7 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         // Test every outcome of a new random recipe; existing jobs have already fixed their outcome.
         var outcomes=candidate==null?List.<List<ItemStack>>of(List.of()):candidate.outputOptions();
         for(var outcome:outcomes){
-            var outputs=new ArrayList<ItemStack>();for(var job:jobs)outputs.addAll(job.recipe.completeOutputs(job.result));
+            var outputs=new ArrayList<ItemStack>(reservedItems);for(var job:jobs)outputs.addAll(job.recipe.completeOutputs(job.result));
             outputs.addAll(outcome);
             if(!ReactionItemOutputs.fit(stored,outputs,s->itemLimit(s,multiplier)))return false;
         }
@@ -219,7 +223,7 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
             for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++)pool.recipeGate.value(level.getBlockState(pos.offset(x,-1,z)));
             if(pool.recipeGate.changed())pool.startAvailable(pool.availableRecipes);
         }
-        if(level.getGameTime()%20==0)pool.changed();
+        if(pool.powered()&&pool.reacting()&&level.getGameTime()%20==0)pool.changed();
     }
     /** Settled input and output are proportional cumulative integers, including non-divisible mod recipes. */
     public void advance(double work){
@@ -266,6 +270,8 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
                 if(!rest.isEmpty())throw new IllegalStateException("Reserved reaction output lost");}
             }finally{internal=false;}
             com.mcmagic.omnira.progression.BranchProgress.machine(this,"rivers_alchemy");
+            if(active.fluidResult().getFluid()==AlchemyMaterials.REFINED.source.get())
+                com.mcmagic.omnira.progression.BranchProgress.machine(this,"mainline/refined_time");
             com.mcmagic.omnira.progression.BranchProgress.processed(this);
             jobs.remove(job);changed();
         }
@@ -286,7 +292,8 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         return pendingFluidsFit(contents,capacity());
     }
     private boolean pendingFluidsFit(List<FluidStack> contents,int capacity){
-        int total=contents.stream().mapToInt(FluidStack::getAmount).sum();var kinds=new ArrayList<>(contents);
+        int total=contents.stream().mapToInt(FluidStack::getAmount).sum()+reservedFluidSpace;var kinds=new ArrayList<>(contents);
+        for(var output:reservedFluids)if(kinds.stream().noneMatch(f->FluidStack.isSameFluidSameComponents(f,output)))kinds.add(output);
         for(var job:jobs){
             total+=Math.max(0,job.outputLeft()-job.inputLeft());
             var output=job.recipe.fluidResult();
@@ -296,7 +303,7 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
     }
     private int safeFill(FluidStack fluid){
         int accepted=fluids.fill(fluid,IFluidHandler.FluidAction.SIMULATE);
-        if(jobs.isEmpty())return accepted;
+        if(!reacting())return accepted;
         int low=0,high=accepted;
         while(low<high){int mid=(low+high+1)/2;var trial=new PoolFluids(()->{},this::capacity);for(var f:fluids.snapshot())trial.fill(f,IFluidHandler.FluidAction.EXECUTE);
             trial.fill(fluid.copyWithAmount(mid),IFluidHandler.FluidAction.EXECUTE);
@@ -324,7 +331,7 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
                     var sample=allowed(OrbUpgradeItem.Kind.OUTPUT,items.getStackInSlot(slot),null)?items.extractItem(slot,activeItems,true):ItemStack.EMPTY;if(sample.isEmpty())continue;
                     var rest=ItemHandlerHelper.insertItemStacked(target,sample,true);
                     if(rest.isEmpty()){var extracted=items.extractItem(slot,sample.getCount(),false);var rejected=ItemHandlerHelper.insertItemStacked(target,extracted,false);
-                        activeItems-=extracted.getCount()-rejected.getCount();if(!extracted.isEmpty()){lastOutputItem=extracted.copyWithCount(1);lastItemTick=level.getGameTime();changed();}
+                        activeItems-=extracted.getCount()-rejected.getCount();if(extracted.getCount()>rejected.getCount()){lastOutputItem=extracted.copyWithCount(1);lastItemTick=level.getGameTime();changed();}
                         com.mcmagic.omnira.progression.BranchProgress.automated(this,extracted.getCount()-rejected.getCount());
                         if(!rejected.isEmpty()){internal=true;try{items.insertItem(slot,rejected,false);}finally{internal=false;}}}
                 }
@@ -410,6 +417,13 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
     public AbstractContainerMenu createMenu(int id,Inventory inventory,Player player){return new ReactionPoolMenu(id,inventory,this);}
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries){
         super.saveAdditional(tag,registries);
+        writeDisplayState(tag,registries);
+        var reactions=new ListTag();for(var job:jobs){var entry=new CompoundTag();
+            entry.put("Recipe",ReactionRecipe.CODEC.codec().encodeStart(registries.createSerializationContext(NbtOps.INSTANCE),job.recipe).getOrThrow());
+            entry.putDouble("Progress",job.progress);entry.putInt("Batches",job.batches);if(!job.result.isEmpty())entry.put("Result",job.result.save(registries));reactions.add(entry);
+        }tag.put("Reactions",reactions);
+    }
+    private void writeDisplayState(CompoundTag tag,HolderLookup.Provider registries){
         var compact=new ItemStackHandler(9);int[] counts=new int[9];
         for(int i=0;i<9;i++){counts[i]=items.getStackInSlot(i).getCount();compact.setStackInSlot(i,items.getStackInSlot(i).copyWithCount(1));}
         tag.put("Items",compact.serializeNBT(registries));tag.putIntArray("ItemCounts",counts);
@@ -419,13 +433,22 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
         if(!lastOutputItem.isEmpty())tag.put("OutputItem",lastOutputItem.save(registries));
         if(!lastOutputFluid.isEmpty())tag.put("OutputFluid",lastOutputFluid.save(registries));
         tag.putLong("OutputItemTick",lastItemTick);tag.putLong("OutputFluidTick",lastFluidTick);
-        var reactions=new ListTag();for(var job:jobs){var entry=new CompoundTag();
-            entry.put("Recipe",ReactionRecipe.CODEC.codec().encodeStart(registries.createSerializationContext(NbtOps.INSTANCE),job.recipe).getOrThrow());
-            entry.putDouble("Progress",job.progress);entry.putInt("Batches",job.batches);if(!job.result.isEmpty())entry.put("Result",job.result.save(registries));reactions.add(entry);
-        }tag.put("Reactions",reactions);
     }
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries){
         energyInput.reset();
+        displayState=tag.getBoolean("DisplayState");
+        displayCount=tag.getInt("ReactionCount");displayProgress=tag.getInt("ReactionProgress");
+        reservedItems.clear();reservedFluids.clear();reservedFluidSpace=0;
+        if(displayState){
+            reservedFluidSpace=tag.getInt("ReservedFluidSpace");
+            for(var value:tag.getList("ReservedItems",Tag.TAG_COMPOUND)){
+                var entry=(CompoundTag)value;var item=ItemStack.parseOptional(registries,entry.getCompound("Stack"));
+                if(!item.isEmpty()){item.setCount(entry.getInt("Count"));reservedItems.add(item);}
+            }
+            for(var value:tag.getList("ReservedFluids",Tag.TAG_COMPOUND)){
+                var fluid=FluidStack.parseOptional(registries,(CompoundTag)value);if(!fluid.isEmpty())reservedFluids.add(fluid);
+            }
+        }
         pulsePowered=tag.getBoolean("PulsePowered");pulseConnected=tag.getBoolean("PulseConnected");inputFaces=tag.getInt("InputFaces")&63;
         super.loadAdditional(tag,registries);loading=true;
         var upgradeData=tag.getCompound("Upgrades").copy();upgradeData.putInt("Size",4);
@@ -442,6 +465,20 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
             }
         }finally{loading=false;}
     }
-    @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries){return saveWithoutMetadata(registries);}
+    @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries){
+        var tag=new CompoundTag();writeDisplayState(tag,registries);tag.putBoolean("DisplayState",true);
+        tag.putInt("ReactionCount",reactionCount());tag.putInt("ReactionProgress",progressPercent());
+        var outputs=new ListTag();var fluidKinds=new ListTag();int extra=0;
+        for(var job:jobs){
+            for(var output:job.recipe.completeOutputs(job.result)){
+                if(output.isEmpty())continue;var entry=new CompoundTag();
+                entry.put("Stack",output.copyWithCount(1).save(registries));entry.putInt("Count",output.getCount());outputs.add(entry);
+            }
+            extra+=Math.max(0,job.outputLeft()-job.inputLeft());
+            if(job.outputLeft()>0&&!job.recipe.fluidResult().isEmpty())fluidKinds.add(job.recipe.fluidResult().copyWithAmount(1).save(registries));
+        }
+        tag.put("ReservedItems",outputs);tag.put("ReservedFluids",fluidKinds);tag.putInt("ReservedFluidSpace",extra);
+        return tag;
+    }
     @Override public ClientboundBlockEntityDataPacket getUpdatePacket(){return ClientboundBlockEntityDataPacket.create(this);}
 }

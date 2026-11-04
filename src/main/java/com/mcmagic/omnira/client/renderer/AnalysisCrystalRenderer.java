@@ -8,11 +8,13 @@ import net.minecraft.world.item.*;
 
 public final class AnalysisCrystalRenderer extends BlockEntityWithoutLevelRenderer {
     public static final String[] PARTS={"shell","earth","water","fire","air"};
+    public static final ModelResourceLocation STONE_SHELL=CrystalGridRenderer.part("crystallized_philosophers_stone","shell");
     public AnalysisCrystalRenderer() {super(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels());}
     public static ModelResourceLocation model(String part) {return CrystalGridRenderer.part("analysis_crystal",part);}
     private void draw(String part,ItemStack stack,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {
         var mc=Minecraft.getInstance();
-        mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(model(part)),stack,light,overlay,
+        var mesh=part.equals("shell")&&stack.is(com.mcmagic.omnira.registry.ModItems.PHILOSOPHERS_STONE.get())?STONE_SHELL:model(part);
+        mc.getItemRenderer().renderModelLists(mc.getModelManager().getModel(mesh),stack,light,overlay,
                 pose,buffers.getBuffer(CrystalGlassLayer.ATLAS));
     }
     @Override public void renderByItem(ItemStack stack,ItemDisplayContext context,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {

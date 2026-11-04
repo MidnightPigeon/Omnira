@@ -4,7 +4,7 @@
   "item": "omnira:rough_spatial_crystal_block",
   "text": [
     "Spatial Caverns contain ordinary and excited rough crystal. Excited crystals are clearer, with drifting lights inside.",
-    "Both states drop ordinary Rough Spatial Crystal Blocks. Restore excitation through Advanced Condensation, or use one Infused Spiritual Crystal directly on a block."
+    "Mining normally yields a Rough Spatial Crystal Block. Silk Touch preserves the excited state. Use advanced condensation to excite an ordinary block, or right-click it with one Infused Spiritual Crystal."
   ],
   "recipes": false,
   "links": [

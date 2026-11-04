@@ -1,0 +1,968 @@
+{
+  "radius": 720,
+  "nodes": [
+    {
+      "id": "simple_condensation_table",
+      "stage": 0,
+      "kind": "main",
+      "target": "simple_condensation_table",
+      "parent": null,
+      "also": [],
+      "overview": true,
+      "column": 0,
+      "row": 13
+    },
+    {
+      "id": "map:construction",
+      "stage": 0,
+      "kind": "junction",
+      "target": "map:construction",
+      "parent": "simple_condensation_table",
+      "also": [],
+      "overview": false,
+      "column": 0,
+      "row": 12
+    },
+    {
+      "id": "analysis_artisan_table",
+      "stage": 0,
+      "kind": "branch",
+      "target": "analysis_artisan_table",
+      "parent": "simple_condensation_table",
+      "also": [],
+      "overview": false,
+      "column": -1,
+      "row": 12
+    },
+    {
+      "id": "map:basic_materials",
+      "stage": 0,
+      "kind": "junction",
+      "target": "map:basic_materials",
+      "parent": "analysis_artisan_table",
+      "also": [],
+      "overview": false,
+      "column": -1,
+      "row": 11
+    },
+    {
+      "id": "analysis_crystal",
+      "stage": 0,
+      "kind": "branch",
+      "target": "analysis_crystal",
+      "parent": "map:basic_materials",
+      "also": [],
+      "column": -1,
+      "row": 10
+    },
+    {
+      "id": "elemental_cycle",
+      "stage": 0,
+      "kind": "branch",
+      "target": "elemental_cycle",
+      "parent": "analysis_crystal",
+      "also": [],
+      "column": -1,
+      "row": 9,
+      "related": [
+        "crystallized_philosophers_stone"
+      ]
+    },
+    {
+      "id": "arcane_assembly_table",
+      "stage": 0,
+      "kind": "main",
+      "target": "arcane_assembly_table",
+      "parent": "map:construction",
+      "also": [],
+      "overview": true,
+      "column": 0,
+      "row": 11
+    },
+    {
+      "id": "crystal_processing_table",
+      "stage": 0,
+      "kind": "branch",
+      "target": "crystal_processing_table",
+      "parent": "map:construction",
+      "also": [
+        "crystal_ball"
+      ],
+      "overview": false,
+      "column": 1,
+      "row": 11
+    },
+    {
+      "id": "low_tier_magic_crystal",
+      "stage": 0,
+      "kind": "branch",
+      "target": "low_tier_magic_crystal",
+      "parent": "crystal_processing_table",
+      "also": [
+        "map:basic_materials"
+      ],
+      "overview": false,
+      "column": 1,
+      "row": 10
+    },
+    {
+      "id": "primitive_reaction_cauldron",
+      "stage": 0,
+      "kind": "branch",
+      "target": "primitive_reaction_cauldron",
+      "parent": "map:construction",
+      "also": [],
+      "overview": false,
+      "column": -2,
+      "row": 11
+    },
+    {
+      "id": "rough_alchemical_energy_core",
+      "stage": 0,
+      "kind": "branch",
+      "target": "rough_alchemical_energy_core",
+      "parent": "primitive_reaction_cauldron",
+      "also": [
+        "map:basic_materials"
+      ],
+      "overview": false,
+      "column": -2,
+      "row": 10
+    },
+    {
+      "id": "alchemical_catalysis_chamber",
+      "stage": 0,
+      "kind": "branch",
+      "target": "alchemical_catalysis_chamber",
+      "parent": "rough_alchemical_energy_core",
+      "also": [
+        "map:infused"
+      ],
+      "overview": false,
+      "column": -2,
+      "row": 9
+    },
+    {
+      "id": "mana_engine",
+      "stage": 0,
+      "kind": "branch",
+      "target": "mana_engine",
+      "parent": "arcane_assembly_table",
+      "also": [
+        "low_tier_magic_crystal"
+      ],
+      "overview": false,
+      "column": 1,
+      "row": 9
+    },
+    {
+      "id": "ritual_energy_core",
+      "stage": 0,
+      "kind": "main",
+      "target": "ritual_energy_core",
+      "parent": "arcane_assembly_table",
+      "also": [],
+      "overview": false,
+      "column": 0,
+      "row": 10
+    },
+    {
+      "id": "dream_ritual",
+      "stage": 0,
+      "kind": "main",
+      "target": "dream_ritual",
+      "parent": "ritual_energy_core",
+      "also": [],
+      "overview": true,
+      "column": 0,
+      "row": 9
+    },
+    {
+      "id": "map:early_ruins",
+      "stage": 0,
+      "kind": "ring",
+      "x": -252.0,
+      "y": 588.0,
+      "ring_side": -1,
+      "target": "map:early_ruins",
+      "parent": null,
+      "also": [],
+      "overview": true
+    },
+    {
+      "id": "crystal_ball",
+      "stage": 0,
+      "kind": "ring",
+      "x": -252.0,
+      "y": 526.4,
+      "ring_side": -1,
+      "target": "crystal_ball",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "liquid_crystal_ball",
+      "stage": 0,
+      "kind": "ring",
+      "x": -252.0,
+      "y": 487.2,
+      "ring_side": -1,
+      "target": "liquid_crystal_ball",
+      "parent": "crystal_ball",
+      "also": [
+        "arcane_assembly_table"
+      ],
+      "overview": false
+    },
+    {
+      "id": "map:early_logistics",
+      "stage": 0,
+      "kind": "ring",
+      "x": -252.0,
+      "y": 425.6,
+      "ring_side": -1,
+      "target": "map:early_logistics",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "map:early_staff",
+      "stage": 0,
+      "kind": "ring",
+      "x": 252.0,
+      "y": 554.4,
+      "ring_side": 1,
+      "target": "map:early_staff",
+      "parent": null,
+      "also": [],
+      "overview": true
+    },
+    {
+      "id": "map:early_grid",
+      "stage": 0,
+      "kind": "ring",
+      "x": 252.0,
+      "y": 515.2,
+      "ring_side": 1,
+      "target": "map:early_grid",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "modifier_infusion",
+      "stage": 0,
+      "kind": "ring",
+      "x": 252.0,
+      "y": 453.6,
+      "ring_side": 1,
+      "target": "modifier_infusion",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "map:early_workstations",
+      "stage": 0,
+      "kind": "ring",
+      "x": 252.0,
+      "y": 414.4,
+      "ring_side": 1,
+      "target": "map:early_workstations",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "visit_dream",
+      "stage": 1,
+      "kind": "main",
+      "target": "visit_dream",
+      "parent": "dream_ritual",
+      "also": [],
+      "overview": true,
+      "column": 0,
+      "row": 8
+    },
+    {
+      "id": "map:dream_materials",
+      "stage": 1,
+      "kind": "junction",
+      "target": "map:dream_materials",
+      "parent": "visit_dream",
+      "also": [],
+      "overview": false,
+      "column": 0,
+      "row": 7
+    },
+    {
+      "id": "spell_core",
+      "stage": 1,
+      "kind": "main",
+      "target": "spell_core",
+      "parent": "map:dream_materials",
+      "also": [
+        "map:basic_materials"
+      ],
+      "overview": true,
+      "column": 0,
+      "row": 6
+    },
+    {
+      "id": "advanced_condensation_table",
+      "stage": 1,
+      "kind": "main",
+      "target": "advanced_condensation_table",
+      "parent": "spell_core",
+      "also": [],
+      "overview": false,
+      "column": 0,
+      "row": 5
+    },
+    {
+      "id": "map:infused",
+      "stage": 1,
+      "kind": "junction",
+      "target": "map:infused",
+      "parent": "advanced_condensation_table",
+      "also": [],
+      "overview": false,
+      "column": 0,
+      "row": 4
+    },
+    {
+      "id": "advanced_assembly_table",
+      "stage": 1,
+      "kind": "main",
+      "target": "advanced_assembly_table",
+      "parent": "map:infused",
+      "also": [
+        "mana_engine"
+      ],
+      "overview": true,
+      "column": 0,
+      "row": 3
+    },
+    {
+      "id": "map:dream_ritual_prep",
+      "stage": 1,
+      "kind": "junction",
+      "target": "map:dream_ritual_prep",
+      "parent": "advanced_assembly_table",
+      "also": [
+        "advanced_ritual_energy_core",
+        "unstable_spacetime_aggregate"
+      ],
+      "overview": false,
+      "column": 0,
+      "row": 2
+    },
+    {
+      "id": "corridor_ritual",
+      "stage": 1,
+      "kind": "main",
+      "target": "corridor_ritual",
+      "parent": "map:dream_ritual_prep",
+      "also": [],
+      "overview": true,
+      "column": 0,
+      "row": 1
+    },
+    {
+      "id": "map:light_dark",
+      "stage": 1,
+      "kind": "junction",
+      "target": "map:light_dark",
+      "parent": "map:dream_materials",
+      "also": [],
+      "overview": false,
+      "column": -1,
+      "row": 6
+    },
+    {
+      "id": "map:knots",
+      "stage": 1,
+      "kind": "junction",
+      "target": "map:knots",
+      "parent": "map:dream_materials",
+      "also": [
+        "advanced_condensation_table"
+      ],
+      "overview": false,
+      "column": -1,
+      "row": 4
+    },
+    {
+      "id": "map:light_dark_core",
+      "stage": 1,
+      "kind": "junction",
+      "target": "map:light_dark_core",
+      "parent": "map:light_dark",
+      "also": [
+        "advanced_assembly_table",
+        "map:knots"
+      ],
+      "overview": false,
+      "column": -1,
+      "row": 3
+    },
+    {
+      "id": "advanced_ritual_energy_core",
+      "stage": 1,
+      "kind": "branch",
+      "target": "advanced_ritual_energy_core",
+      "parent": "map:light_dark_core",
+      "also": [],
+      "overview": false,
+      "column": -1,
+      "row": 2
+    },
+    {
+      "id": "unstable_spacetime_aggregate",
+      "stage": 1,
+      "kind": "branch",
+      "target": "unstable_spacetime_aggregate",
+      "parent": "advanced_assembly_table",
+      "also": [
+        "map:knots"
+      ],
+      "overview": false,
+      "column": 1,
+      "row": 2
+    },
+    {
+      "id": "large_alchemical_reaction_pool",
+      "stage": 1,
+      "kind": "branch",
+      "target": "large_alchemical_reaction_pool",
+      "parent": "map:infused",
+      "also": [
+        "rough_alchemical_energy_core",
+        "mana_engine"
+      ],
+      "overview": false,
+      "column": 1,
+      "row": 3
+    },
+    {
+      "id": "dream_spell_core",
+      "stage": 1,
+      "kind": "ring",
+      "x": -252.0,
+      "y": 252.0,
+      "ring_side": -1,
+      "target": "dream_spell_core",
+      "parent": null,
+      "also": [],
+      "overview": true
+    },
+    {
+      "id": "dream_rabbit_relics_guide",
+      "stage": 1,
+      "kind": "ring",
+      "x": -252.0,
+      "y": 212.8,
+      "ring_side": -1,
+      "target": "dream_rabbit_relics_guide",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "map:dream_staff",
+      "stage": 1,
+      "kind": "ring",
+      "x": -252.0,
+      "y": 134.4,
+      "ring_side": -1,
+      "target": "map:dream_staff",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "map:dream_tools",
+      "stage": 1,
+      "kind": "ring",
+      "x": 252.0,
+      "y": 196.0,
+      "ring_side": 1,
+      "target": "map:dream_tools",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "map:pulse_network",
+      "stage": 1,
+      "kind": "ring",
+      "x": 252.0,
+      "y": 252.0,
+      "ring_side": 1,
+      "target": "map:pulse_network",
+      "parent": null,
+      "also": [],
+      "overview": true
+    },
+    {
+      "id": "spacetime_entry",
+      "stage": 2,
+      "kind": "main",
+      "target": "spacetime_entry",
+      "parent": "corridor_ritual",
+      "also": [],
+      "overview": true,
+      "column": 0,
+      "row": 0
+    },
+    {
+      "id": "map:spacetime_resources",
+      "stage": 2,
+      "kind": "junction",
+      "target": "map:spacetime_resources",
+      "parent": "spacetime_entry",
+      "also": [],
+      "overview": false,
+      "column": 0,
+      "row": -1
+    },
+    {
+      "id": "map:spacetime_fluids",
+      "stage": 2,
+      "kind": "junction",
+      "target": "map:spacetime_fluids",
+      "parent": "map:spacetime_resources",
+      "also": [],
+      "overview": false,
+      "column": 0,
+      "row": -2
+    },
+    {
+      "id": "map:first_cores",
+      "stage": 2,
+      "kind": "junction",
+      "target": "map:first_cores",
+      "parent": "map:spacetime_resources",
+      "also": [],
+      "overview": false,
+      "column": -1,
+      "row": -2
+    },
+    {
+      "id": "crystallized_philosophers_stone",
+      "stage": 2,
+      "kind": "branch",
+      "target": "crystallized_philosophers_stone",
+      "parent": "map:first_cores",
+      "also": [
+        "advanced_assembly_table",
+        "map:light_dark_core",
+        "analysis_crystal"
+      ],
+      "column": -2,
+      "row": -4
+    },
+    {
+      "id": "repaired_mechanical_component",
+      "stage": 2,
+      "kind": "branch",
+      "target": "repaired_mechanical_component",
+      "parent": "map:spacetime_resources",
+      "also": [],
+      "overview": false,
+      "column": 1,
+      "row": -2
+    },
+    {
+      "id": "spacetime_reverser",
+      "stage": 2,
+      "kind": "branch",
+      "target": "spacetime_reverser",
+      "parent": "repaired_mechanical_component",
+      "also": [
+        "map:first_cores",
+        "advanced_assembly_table",
+        "mana_engine"
+      ],
+      "overview": false,
+      "column": 1,
+      "row": -3
+    },
+    {
+      "id": "spacetime_spell_core_crafting",
+      "stage": 2,
+      "kind": "branch",
+      "target": "spacetime_spell_core_crafting",
+      "parent": "map:first_cores",
+      "also": [
+        "map:light_dark_core",
+        "advanced_assembly_table"
+      ],
+      "overview": false,
+      "column": -1,
+      "row": -3
+    },
+    {
+      "id": "dilute_spacetime",
+      "stage": 2,
+      "kind": "main",
+      "target": "dilute_spacetime",
+      "parent": "map:spacetime_fluids",
+      "also": [
+        "large_alchemical_reaction_pool"
+      ],
+      "overview": true,
+      "column": 0,
+      "row": -3
+    },
+    {
+      "id": "map:aggregation_materials",
+      "stage": 2,
+      "kind": "junction",
+      "target": "map:aggregation_materials",
+      "parent": "map:spacetime_resources",
+      "also": [],
+      "overview": false,
+      "column": -2,
+      "row": -2
+    },
+    {
+      "id": "advanced_crystal_aggregation_ring",
+      "stage": 2,
+      "kind": "branch",
+      "target": "advanced_crystal_aggregation_ring",
+      "parent": "map:aggregation_materials",
+      "also": [
+        "map:infused",
+        "crystal_processing_table"
+      ],
+      "overview": false,
+      "column": -2,
+      "row": -3
+    },
+    {
+      "id": "void_infuser",
+      "stage": 2,
+      "kind": "branch",
+      "target": "void_infuser",
+      "parent": "repaired_mechanical_component",
+      "also": [
+        "arcane_assembly_table",
+        "map:light_dark"
+      ],
+      "overview": false,
+      "column": 1,
+      "row": -4
+    },
+    {
+      "id": "enhanced_alchemical_energy_core",
+      "stage": 2,
+      "kind": "branch",
+      "target": "enhanced_alchemical_energy_core",
+      "parent": "dilute_spacetime",
+      "also": [
+        "rough_alchemical_energy_core"
+      ],
+      "overview": false,
+      "column": -1,
+      "row": -4
+    },
+    {
+      "id": "spacetime_engine",
+      "stage": 2,
+      "kind": "branch",
+      "target": "spacetime_engine",
+      "parent": "enhanced_alchemical_energy_core",
+      "also": [
+        "spacetime_spell_core_crafting",
+        "mana_engine",
+        "map:infused"
+      ],
+      "overview": true,
+      "column": -1,
+      "row": -5
+    },
+    {
+      "id": "refined_spacetime",
+      "stage": 2,
+      "kind": "main",
+      "target": "refined_spacetime",
+      "parent": "dilute_spacetime",
+      "also": [
+        "spacetime_spell_core_crafting"
+      ],
+      "overview": true,
+      "column": 0,
+      "row": -5
+    },
+    {
+      "id": "map:time_relics",
+      "stage": 2,
+      "kind": "ring",
+      "x": -252.0,
+      "y": -5.6,
+      "ring_side": -1,
+      "target": "map:time_relics",
+      "parent": null,
+      "also": [],
+      "overview": true
+    },
+    {
+      "id": "map:time_relic_devices",
+      "stage": 2,
+      "kind": "ring",
+      "x": -252.0,
+      "y": -44.8,
+      "ring_side": -1,
+      "target": "map:time_relic_devices",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "map:epochal_relics",
+      "stage": 2,
+      "kind": "ring",
+      "x": -252.0,
+      "y": -84.0,
+      "ring_side": -1,
+      "target": "map:epochal_relics",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "map:spacetime_weapons",
+      "stage": 2,
+      "kind": "ring",
+      "x": -252.0,
+      "y": -196.0,
+      "ring_side": -1,
+      "target": "map:spacetime_weapons",
+      "parent": null,
+      "also": [],
+      "overview": true
+    },
+    {
+      "id": "map:spacetime_defense",
+      "stage": 2,
+      "kind": "ring",
+      "x": -252.0,
+      "y": -235.2,
+      "ring_side": -1,
+      "target": "map:spacetime_defense",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "map:space_relics",
+      "stage": 2,
+      "kind": "ring",
+      "x": 252.0,
+      "y": -5.6,
+      "ring_side": 1,
+      "target": "map:space_relics",
+      "parent": null,
+      "also": [],
+      "overview": true
+    },
+    {
+      "id": "map:starsea_relics",
+      "stage": 2,
+      "kind": "ring",
+      "x": 252.0,
+      "y": -44.8,
+      "ring_side": 1,
+      "target": "map:starsea_relics",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "map:spacetime_energy",
+      "stage": 2,
+      "kind": "ring",
+      "x": 252.0,
+      "y": -145.6,
+      "ring_side": 1,
+      "target": "map:spacetime_energy",
+      "parent": null,
+      "also": [],
+      "overview": false
+    },
+    {
+      "id": "genesis_ritual",
+      "stage": 3,
+      "kind": "main",
+      "target": "genesis_ritual",
+      "parent": "refined_spacetime",
+      "also": [
+        "advanced_ritual_energy_core",
+        "map:first_cores"
+      ],
+      "overview": true,
+      "column": 0,
+      "row": -6
+    },
+    {
+      "id": "world_seed",
+      "stage": 3,
+      "kind": "main",
+      "target": "world_seed",
+      "parent": "genesis_ritual",
+      "also": [
+        "advanced_condensation_table",
+        "spacetime_spell_core_crafting"
+      ],
+      "overview": false,
+      "column": 0,
+      "row": -7
+    },
+    {
+      "id": "map:world_components",
+      "stage": 3,
+      "kind": "junction",
+      "target": "map:world_components",
+      "parent": "genesis_ritual",
+      "also": [
+        "enhanced_alchemical_energy_core"
+      ],
+      "overview": false,
+      "column": -1,
+      "row": -7
+    },
+    {
+      "id": "world_forming_ritual",
+      "stage": 3,
+      "kind": "main",
+      "target": "world_forming_ritual",
+      "parent": "world_seed",
+      "also": [
+        "map:world_components"
+      ],
+      "overview": false,
+      "column": 0,
+      "row": -8
+    },
+    {
+      "id": "miniature_world_framework",
+      "stage": 3,
+      "kind": "main",
+      "target": "miniature_world_framework",
+      "parent": "world_forming_ritual",
+      "also": [],
+      "overview": true,
+      "column": 0,
+      "row": -9
+    },
+    {
+      "id": "myriad_aggregation",
+      "stage": 3,
+      "kind": "main",
+      "target": "myriad_aggregation",
+      "parent": "miniature_world_framework",
+      "also": [],
+      "overview": false,
+      "column": 0,
+      "row": -10
+    },
+    {
+      "id": "world_generation_probability_cloud",
+      "stage": 3,
+      "kind": "main",
+      "target": "world_generation_probability_cloud",
+      "parent": "myriad_aggregation",
+      "also": [],
+      "overview": false,
+      "column": 0,
+      "row": -11
+    },
+    {
+      "id": "myriad_codex",
+      "stage": 3,
+      "kind": "main",
+      "target": "myriad_codex",
+      "parent": "world_generation_probability_cloud",
+      "also": [],
+      "overview": true,
+      "column": 0,
+      "row": -12
+    },
+    {
+      "id": "omni_crystal_grid",
+      "stage": 3,
+      "kind": "branch",
+      "target": "omni_crystal_grid",
+      "parent": "myriad_aggregation",
+      "also": [
+        "advanced_assembly_table"
+      ],
+      "overview": false,
+      "column": -1,
+      "row": -11
+    },
+    {
+      "id": "world_rotation",
+      "stage": 3,
+      "kind": "branch",
+      "target": "world_rotation",
+      "parent": "myriad_aggregation",
+      "also": [
+        "advanced_crystal_aggregation_ring"
+      ],
+      "overview": false,
+      "column": 1,
+      "row": -11
+    },
+    {
+      "id": "universal_understanding",
+      "stage": 3,
+      "kind": "branch",
+      "target": "universal_understanding",
+      "parent": "myriad_codex",
+      "also": [],
+      "overview": false,
+      "column": 0,
+      "row": -13
+    },
+    {
+      "id": "map:world_editing",
+      "stage": 3,
+      "kind": "ring",
+      "x": 252.0,
+      "y": -537.6,
+      "ring_side": 1,
+      "target": "map:world_editing",
+      "parent": null,
+      "also": [],
+      "overview": true
+    },
+    {
+      "id": "map:world_spells",
+      "stage": 3,
+      "kind": "ring",
+      "x": -252.0,
+      "y": -453.6,
+      "ring_side": -1,
+      "target": "map:world_spells",
+      "parent": null,
+      "also": [],
+      "overview": true
+    },
+    {
+      "id": "map:spacetime_fishing",
+      "target": "map:spacetime_fishing",
+      "kind": "ring",
+      "stage": 2,
+      "ring_side": 1,
+      "x": 252,
+      "y": -96,
+      "parent": null,
+      "also": [],
+      "overview": false
+    }
+  ]
+}

@@ -4,7 +4,7 @@
   "item": "omnira:crystal_ball",
   "icon": "omnira:arcane_assembly_table",
   "text": [
-    "用箱子与四枚灵性水晶在工作台合成水晶球。使用与升级见物品存储。"
+    "可在工作台制作。使用与升级见物品存储。"
   ],
   "recipes": true,
   "links": [

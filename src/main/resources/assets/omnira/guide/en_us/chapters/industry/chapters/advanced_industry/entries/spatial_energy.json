@@ -5,6 +5,7 @@
   "icon": "omnira:rough_spatial_crystal_block",
   "recipes": false,
   "text": [
-    "Hover a material to see its energy per item."
+    "Hover a material to see its energy per item.",
+    "Feed in Void Starflow to gain one energy point per 1,000 mB. Breaking the machine clears any partial credit."
   ]
 }

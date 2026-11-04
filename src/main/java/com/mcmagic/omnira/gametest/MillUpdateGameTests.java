@@ -48,8 +48,8 @@ public final class MillUpdateGameTests {
         h.assertTrue(get(hook,"nibble")>=20&&get(hook,"nibble")<=40,"Bite window changed");
         h.assertTrue(MireFishingEffects.surface(MireContent.LIQUID.get().defaultBlockState())&&MireFishingEffects.surface(Blocks.WATER.defaultBlockState()),"Surface check broken");
         h.assertTrue(!MireFishingEffects.surface(Blocks.STONE.defaultBlockState()),"Trail allowed on land");
-        h.assertTrue(MireFishingEffects.particle(ParticleTypes.BUBBLE)==ModParticles.TIMEFLOW_BUBBLE.get(),"Bubble not replaced");
-        h.assertTrue(MireFishingEffects.particle(ParticleTypes.SPLASH)==ModParticles.TIMEFLOW_RIPPLE.get()&&MireFishingEffects.particle(ParticleTypes.FISHING)==ModParticles.TIMEFLOW_RIPPLE.get(),"Wake/splash not replaced");
+        h.assertTrue(MireFishingEffects.particle(ParticleTypes.BUBBLE)==ModParticles.TIMEFLOW_FOAM.get(),"Bubble not replaced");
+        h.assertTrue(MireFishingEffects.particle(ParticleTypes.SPLASH)==ModParticles.TIMEFLOW_FOAM.get()&&MireFishingEffects.particle(ParticleTypes.FISHING)==ModParticles.TIMEFLOW_RIPPLE.get(),"Wake/splash not replaced");
         hook.discard();h.succeed();
     }
     @GameTest(template="spell_arena")
@@ -62,12 +62,18 @@ public final class MillUpdateGameTests {
         for(var e:cells.entrySet())if(e.getValue().get("name").getAsString().equals("omnira:time_grass")){
             var below=cells.get(e.getKey().below());h.assertTrue(below!=null&&below.get("name").getAsString().endsWith("temporal_silt"),"Template has floating grass");
         }
-        var l=h.getLevel();var pos=h.absolutePos(new BlockPos(5,4,5));l.setBlockAndUpdate(pos,ModBlocks.CRYSTAL_BALL.get().defaultBlockState());
-        var ball=(CrystalBallBlockEntity)l.getBlockEntity(pos);var player=h.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        var l=h.getLevel();var pos=h.absolutePos(new BlockPos(5,4,5));
+        var profile=new com.mojang.authlib.GameProfile(UUID.randomUUID(),"mill-loot");
+        var player=new net.minecraft.server.level.ServerPlayer(l.getServer(),l,profile,net.minecraft.server.level.ClientInformation.createDefault());
+        player.connection=new net.neoforged.neoforge.common.util.FakePlayer(l,profile).connection;
         for(String suffix:List.of("cellar","workshop")){
+            pos=pos.east();l.setBlockAndUpdate(pos,ModBlocks.CRYSTAL_BALL.get().defaultBlockState());
+            var ball=(CrystalBallBlockEntity)l.getBlockEntity(pos);
             var tag=new CompoundTag();tag.putString("LootTable","omnira:chests/reversion_mill_"+suffix);ball.loadWithComponents(tag,l.registryAccess());
             h.assertTrue(ball.hasPendingLoot()&&ball.getLootTable().location().getPath().equals("chests/rusty_lake_mill_"+suffix),"Legacy ball missing mist or table");
-            ball.createMenu(1,player.getInventory(),player);h.assertTrue(!ball.hasPendingLoot()&&!ball.isEmpty(),"Renamed treasure cannot be opened");
+            var menu=(com.mcmagic.omnira.menu.CrystalBallMenu)ball.createMenu(1,player.getInventory(),player);
+            h.assertTrue(menu!=null&&!menu.ball.isEmpty(),"Renamed treasure cannot be opened");
+            menu.removed(player);
         }
         h.succeed();
     }

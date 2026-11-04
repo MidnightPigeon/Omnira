@@ -46,7 +46,21 @@ public final class IndustrialWheelItem extends Item {
             held.set(ModDataComponents.WHEEL_PHASE,rotation(held,p.level().getGameTime()));held.remove(ModDataComponents.WHEEL_SPIN_START);
         }
     }
-    public static StaffCastContext context(Player p){return new StaffCastContext(STATS,CastAttributes.power(p,.2),CastAttributes.reduction(p,10),CastAttributes.cooldownReduction(p,0),List.of());}
+    public static ItemStack rune(ItemStack staff){
+        var contents=staff.get(ModDataComponents.WHEEL_RUNE);
+        return contents==null?ItemStack.EMPTY:contents.copyOne();
+    }
+    public static StaffAssembly.Stats stats(ItemStack staff){
+        var rune=StaffPart.of(rune(staff));
+        if(rune==null)return STATS;
+        return new StaffAssembly.Stats(STATS.power()+rune.power(),STATS.reduction()+rune.reduction(),
+                STATS.shots(),STATS.cooldownTicks(),1+rune.speed(),1+rune.range(),rune.cooldownReduction(),0);
+    }
+    private static StaffCastContext context(Player p,ItemStack stack){
+        var stats=stats(stack);
+        return new StaffCastContext(stats,CastAttributes.power(p,stats.power()),CastAttributes.reduction(p,stats.reduction()),
+                CastAttributes.cooldownReduction(p,stats.cooldownReduction()),List.of());
+    }
     @Override public InteractionResultHolder<ItemStack> use(Level level,Player p,InteractionHand hand){
         if(p instanceof ServerPlayer server)toggle(server,hand);
         return InteractionResultHolder.success(p.getItemInHand(hand));
@@ -65,9 +79,9 @@ public final class IndustrialWheelItem extends Item {
     }
     private static boolean cast(ServerPlayer p,ItemStack stack){
         int special=StaffItem.nextSpellCooldown(p);
-        var context=context(p);
-        if(StaffItem.castSequenceContents(p,context,1)==0)return false;
-        p.getCooldowns().addCooldown(stack.getItem(),Math.max(special,SpellCooldowns.ticks(40,context.cooldownReduction(),1)));
+        var context=context(p,stack);
+        if(StaffItem.castSequenceContents(p,context,STATS.shots())==0)return false;
+        p.getCooldowns().addCooldown(stack.getItem(),Math.max(special,SpellCooldowns.ticks(STATS.cooldownTicks(),context.cooldownReduction(),1)));
         int step=(stack.getOrDefault(ModDataComponents.WHEEL_STEP,0)+1)%16;
         stack.set(ModDataComponents.WHEEL_STEP,step);
         stack.set(ModDataComponents.WHEEL_CAST_AT,p.level().getGameTime());
@@ -86,6 +100,11 @@ public final class IndustrialWheelItem extends Item {
     @SubscribeEvent public static void shutdown(net.neoforged.neoforge.event.server.ServerStoppedEvent e){ACTIVE.clear();}
     @Override public boolean shouldCauseReequipAnimation(ItemStack oldStack,ItemStack newStack,boolean slotChanged){return slotChanged||!oldStack.is(newStack.getItem());}
     @Override public void appendHoverText(ItemStack stack,TooltipContext context,List<Component> lines,TooltipFlag flag){
+        lines.add(Component.translatable("tooltip.omnira.staff.cycle",STATS.shots(),StaffPartItem.format(STATS.cooldownTicks()/20D)).withStyle(net.minecraft.ChatFormatting.GRAY));
+        var rune=rune(stack);
+        var slots=Component.translatable("tooltip.omnira.staff.slots.rune",rune.isEmpty()?0:1,1);
+        if(!rune.isEmpty())slots.append(" · ").append(rune.getHoverName());
+        lines.add(slots.withStyle(net.minecraft.ChatFormatting.GRAY));
         lines.add(Component.translatable("tooltip.omnira.industrial_wheel.toggle").withStyle(net.minecraft.ChatFormatting.GRAY));
         lines.add(Component.translatable("tooltip.omnira.industrial_wheel.edit").withStyle(net.minecraft.ChatFormatting.DARK_GRAY));
     }

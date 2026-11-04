@@ -47,4 +47,23 @@ public final class AnalysisCrystalGameTests {
         h.assertTrue(recipe(h,"analysis_crystal").matches(creation,h.getLevel()),"Four-core recipe failed");
         h.succeed();
     }
+    @GameTest(template="spell_arena") public static void reusableStoneInAllConversions(GameTestHelper h){
+        var stone=ModItems.PHILOSOPHERS_STONE.get().getDefaultInstance();
+        stone.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal("Kept"));
+        var level=h.getLevel();int tested=0;
+        for(var holder:level.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING)){
+            if(!holder.id().getNamespace().equals("omnira")||!holder.id().getPath().startsWith("crystal_analysis/"))continue;
+            var recipe=holder.value();var slots=NonNullList.withSize(9,ItemStack.EMPTY);int index=0,toolSlot=-1;
+            for(var ingredient:recipe.getIngredients()){
+                if(ingredient.test(ModItems.ANALYSIS_CRYSTAL.get().getDefaultInstance())){
+                    toolSlot=index;slots.set(index++,stone.copy());
+                }else slots.set(index++,ingredient.getItems()[0].copy());
+            }
+            var input=CraftingInput.of(3,3,slots);
+            h.assertTrue(recipe.matches(input,level)&&toolSlot>=0,"Stone cannot convert "+holder.id());
+            h.assertTrue(ItemStack.matches(stone,recipe.getRemainingItems(input).get(toolSlot)),"Stone remainder changed");
+            tested++;
+        }
+        h.assertTrue(tested>0,"No analysis conversions tested");h.succeed();
+    }
 }

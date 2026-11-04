@@ -51,7 +51,10 @@ public final class ReversalContent {
     private static DeferredItem<Item> talent(String name,FateCurioItem.Kind kind){return ModItems.ITEMS.register(name,()->new FateCurioItem(new Item.Properties().rarity(Rarity.RARE),kind));}
     private static DeferredItem<Item> essence(String name,java.util.function.Supplier<Item> talent,boolean drink){return ModItems.ITEMS.register(name,()->new TalentEssenceItem(new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON),talent,drink));}
     public static void register(IEventBus bus){TYPES.register(bus);SERIALIZERS.register(bus);bus.addListener((net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent e)->{
-        for(var type:java.util.List.of(ENTITY.get(),INFUSER_ENTITY.get()))e.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,type,(be,side)->com.mcmagic.omnira.progression.BranchAutomation.items(be,new net.neoforged.neoforge.items.wrapper.SidedInvWrapper(be,side==null?net.minecraft.core.Direction.UP:side)));
+        for(var type:java.util.List.of(ENTITY.get(),INFUSER_ENTITY.get())){
+            e.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,type,(be,side)->be.fluidInput);
+            e.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,type,(be,side)->com.mcmagic.omnira.progression.BranchAutomation.items(be,new net.neoforged.neoforge.items.wrapper.SidedInvWrapper(be,side==null?net.minecraft.core.Direction.UP:side)));
+        }
     });}
     private ReversalContent(){}
 }

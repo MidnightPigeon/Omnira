@@ -17,8 +17,13 @@ public final class GuideBookScreen extends ResponsiveScreen {
     private static final int BUTTON_SIZE=20,LEFT_BUTTON=18,RIGHT_BUTTON=282,HEADER_BUTTON_Y=18,FOOTER_BUTTON_Y=190;
     private static final ResourceLocation BOOK=ResourceLocation.fromNamespaceAndPath("omnira","textures/gui/guide_book.png");
     private static final ResourceLocation VANILLA=ResourceLocation.withDefaultNamespace("textures/gui/container/crafting_table.png");
-    private final GuideContents contents=GuideContents.load();
-    private final GuideSearchSession search=new GuideSearchSession(contents);
+    private final GuideContents contents;
+    private final GuideSearchSession search;
+    private GuideTreeScreen treeScreen,treeOrigin;
+    private GuideContents.Entry initialMapEntry;
+    private GuideContents.Entry searchMapEntry;
+    private record TreeReading(GuideContents.Chapter chapter,GuideContents.Entry entry,int introPage,int page){}
+    private final Deque<TreeReading> treeHistory=new ArrayDeque<>();
     private EditBox searchBox;
     private Button findButton;
     private String searchText="";
@@ -36,7 +41,25 @@ public final class GuideBookScreen extends ResponsiveScreen {
     private GuideContents.Introduction cachedSourceIntroduction;
     private final GuideFigureRenderer figureRenderer=new GuideFigureRenderer();
     private List<List<GuideSourceLayout.Row>> cachedSourcePages=List.of();
-    public GuideBookScreen() {super(Component.translatable("item.omnira.guide_book"));}
+    public GuideBookScreen() {this(GuideContents.load());}
+    private GuideBookScreen(GuideContents contents){super(Component.translatable("item.omnira.guide_book"));this.contents=contents;search=new GuideSearchSession(contents);}
+    static GuideBookScreen fromTree(GuideContents contents,GuideTreeScreen origin,GuideTree.Node node){
+        var screen=new GuideBookScreen(contents);screen.treeOrigin=origin;
+        if(node.mapPage()!=null)screen.initialMapEntry=node.mapPage();else screen.initialDestination=node.target();
+        return screen;
+    }
+    public Screen preferredScreen(){return GuideTreeScreen.preferred?tree():this;}
+    private GuideTreeScreen tree(){
+        if(treeScreen==null)treeScreen=new GuideTreeScreen(this,contents);
+        return treeScreen;
+    }
+    private void openTree(){
+        GuideTreeScreen.preferred=true;
+        if(treeOrigin!=null){minecraft.setScreen(treeOrigin);return;}
+        minecraft.setScreen(tree());
+    }
+    void treeHome(){home();}
+    private void rememberTreeReading(){if(restored&&treeOrigin!=null&&!search.active())treeHistory.push(new TreeReading(chapter,entry,introPage,page));}
     private String initialDestination;
     private int initialPage;
     private boolean restored;
@@ -51,8 +74,13 @@ public final class GuideBookScreen extends ResponsiveScreen {
         returnMenu=player==null?null:player.containerMenu;
     }
     @Override public void onClose(){
+        if(treeOrigin!=null){treeOrigin.onClose();return;}
+        closeGuide();
+    }
+    void closeGuide(){
+        var minecraft=net.minecraft.client.Minecraft.getInstance();
         if(returnScreen!=null&&minecraft.player!=null&&minecraft.player.containerMenu==returnMenu)minecraft.setScreen(returnScreen);
-        else super.onClose();
+        else minecraft.setScreen(null);
     }
     public GuideBookScreen(String destination,int page,java.util.function.Consumer<com.mcmagic.omnira.guidance.GuideBookmark> remember){
         this(destination);this.initialPage=page;this.remember=remember;
@@ -68,6 +96,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
         searchBox.setResponder(value->{searchText=value;if(findButton!=null)findButton.active=search.active()||!GuideTextSearch.normalize(value).isEmpty();});
         buttons();
         if(!restored){
+            if(initialMapEntry!=null){loadEntry(initialMapEntry);initialMapEntry=null;}
             if(initialDestination!=null){
                 String target=initialDestination;initialDestination=null;var found=contents.destination(target);
                 if(found.isPresent())jump(found.get());else if(!target.isEmpty())initialPage=0;
@@ -78,6 +107,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
         }
     }
     private void select(GuideContents.Entry next) {
+        rememberTreeReading();
         loadEntry(next);
         buttons();
     }
@@ -88,6 +118,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
         recipes=GuideEnergy.supports(entry.id())?GuideEnergy.pages(entry.id()):entry.recipes()?GuideRecipes.find(minecraft.level,GuideContents.icon(entry.item()).getItem()):List.of();
     }
     private void jump(GuideContents.Destination target) {
+        rememberTreeReading();
         chapter=target.chapter();entry=null;introPage=0;page=0;
         if(target.entry()!=null) {
             loadEntry(target.entry());
@@ -112,15 +143,18 @@ public final class GuideBookScreen extends ResponsiveScreen {
     }
     private int directorySize() {return chapter==null?contents.chapters().size():chapter.directory().size();}
     private void openChapter(GuideContents.Chapter target) {
+        rememberTreeReading();
         chapter=target;entry=null;introPage=0;page=0;buttons();
     }
     private int scenePages() {return entry!=null && (CodexExampleScene.supports(entry.scene()) || MachineConstructionScene.supports(entry.scene()) || entry.scene().equals("world_forming_ritual") || entry.scene().equals("genesis_ritual") || entry.scene().equals("dream_ritual") || entry.scene().equals("resonance_ritual") || entry.scene().equals("affinity_ritual") || entry.scene().equals("corridor_ritual") || entry.scene().equals("cleansing_ritual") || entry.scene().equals("sword_shaping") || entry.scene().equals("advanced_assembly_table"))?1:0;}
     private void buttons() {
         clearWidgets();
-        bookButton(left+RIGHT_BUTTON,top+HEADER_BUTTON_Y,"X","gui.close",this::onClose);
+        bookButton(left+RIGHT_BUTTON,top+HEADER_BUTTON_Y,"X","codex.omnira.close",this::onClose);
         bookButton(left+150,top+HEADER_BUTTON_Y,"home","guide.omnira.home",this::home);
-        if(!search.results()&&(chapter!=null||search.returnsToResults(destination()))) {
-            bookButton(left+LEFT_BUTTON,top+HEADER_BUTTON_Y,"<",search.returnsToResults(destination())?"guide.omnira.back_search":"guide.omnira.back",this::back);
+        bookButton(left+44,top+FOOTER_BUTTON_Y,"tree","guide.omnira.tree",this::openTree);
+        if(!search.results()&&(chapter!=null||treeOrigin!=null||search.returnsToResults(destination()))) {
+            String backKey=search.returnsToResults(destination())?"guide.omnira.back_search":treeOrigin!=null&&!search.active()?(treeHistory.isEmpty()?"guide.omnira.tree_back":"guide.omnira.tree_previous"):"guide.omnira.back";
+            bookButton(left+LEFT_BUTTON,top+HEADER_BUTTON_Y,"<",backKey,this::back);
         }
         for(int side=0;side<2;side++) {
             if(search.results()){
@@ -161,7 +195,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
         rememberPage();
     }
     private void rememberPage(){
-        if(!restored||remember==null||search.active())return;
+        if(!restored||remember==null||search.active()||treeOrigin!=null)return;
         var position=new com.mcmagic.omnira.guidance.GuideBookmark(entry!=null?entry.id():chapter!=null?chapter.id():"",entry!=null?page:introPage);
         if(!position.equals(lastBookmark)){lastBookmark=position;remember.accept(position);}
     }
@@ -182,11 +216,13 @@ public final class GuideBookScreen extends ResponsiveScreen {
     }
     private void toggleSearch(){
         if(!search.active()){
+            searchMapEntry=entry!=null&&entry.id().startsWith("map:")?entry:null;
             if(search.start(searchText,new GuideSearchSession.Position(destination(),currentPage()))){rotatingScene=false;setFocused(null);buttons();}
             return;
         }
         var before=search.stop();searchBox.setValue("");chapter=null;entry=null;page=0;introPage=0;rotatingScene=false;
-        if(before!=null&&!before.destination().isEmpty())contents.destination(before.destination()).ifPresent(target->{
+        if(before!=null&&before.destination().startsWith("map:")&&treeOrigin!=null&&searchMapEntry!=null)loadEntry(searchMapEntry);
+        else if(before!=null&&!before.destination().isEmpty())contents.destination(before.destination()).ifPresent(target->{
             chapter=target.chapter();if(target.entry()!=null)loadEntry(target.entry());
         });
         int restoredPage=before==null?0:Math.min(before.page(),Math.max(0,totalPages()-1))&~1;
@@ -435,6 +471,12 @@ public final class GuideBookScreen extends ResponsiveScreen {
     }
     private void back() {
         if(search.back(destination())){rotatingScene=false;buttons();return;}
+        if(treeOrigin!=null&&!search.active()){
+            if(treeHistory.isEmpty()){minecraft.setScreen(treeOrigin);return;}
+            var previous=treeHistory.pop();chapter=previous.chapter();entry=null;
+            if(previous.entry()!=null)loadEntry(previous.entry());
+            introPage=previous.introPage();page=previous.page();buttons();return;
+        }
         if(chapter==null)return;
         var parent=contents.parentDirectory(entry==null?chapter.id():entry.id());
         chapter=parent.chapter();
@@ -443,6 +485,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
         buttons();
     }
     private void home() {
+        if(treeOrigin!=null){treeOrigin.homeBook();return;}
         search.stop();searchBox.setValue("");
         chapter=null;entry=null;page=0;introPage=0;rotatingScene=false;
         buttons();
@@ -457,9 +500,23 @@ public final class GuideBookScreen extends ResponsiveScreen {
     }
     private List<List<FormattedCharSequence>> textPages(List<String> paragraphs,int linesPerPage) {
         return GuideTextLayout.paginate(paragraphs,124,linesPerPage,font::width).stream()
-                .map(lines->lines.stream().map(line->(line.startsWith(com.mcmagic.omnira.mana.DreamText.MARKER)
-                        ?com.mcmagic.omnira.mana.DreamText.colored(line.substring(com.mcmagic.omnira.mana.DreamText.MARKER.length()))
-                        :Component.literal(line)).getVisualOrderText()).toList()).toList();
+                .map(lines->lines.stream().map(this::bookLine).toList()).toList();
+    }
+
+    private FormattedCharSequence bookLine(String line) {
+        if(line.startsWith(com.mcmagic.omnira.mana.DreamText.MARKER))
+            return com.mcmagic.omnira.mana.DreamText.colored(line.substring(com.mcmagic.omnira.mana.DreamText.MARKER.length())).getVisualOrderText();
+        var glyphs=Component.literal(line).getVisualOrderText();
+        if(entry==null || !entry.id().equals("universal_understanding") || !line.startsWith("§3§l§o"))return glyphs;
+        // Animate the ink at draw time; line breaks and glyph advances stay cached.
+        return sink->{
+            double phase=(net.minecraft.Util.getMillis()%6000L)*2*Math.PI/6000;
+            return glyphs.accept((index,style,codePoint)->{
+                float blend=(float)(0.5+0.5*Math.cos(phase-index*0.24));
+                int ink=net.minecraft.util.FastColor.ARGB32.lerp(blend,0xFF22686B,0xFF774280);
+                return sink.accept(index,style.withColor(ink & 0xFFFFFF),codePoint);
+            });
+        };
     }
     private List<List<GuideSourceLayout.Row>> sourcePages() {
         if(cachedSourceIntroduction!=introduction()) {
@@ -514,7 +571,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
             if(!search.active()&&(key==org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER||key==org.lwjgl.glfw.GLFW.GLFW_KEY_KP_ENTER)){toggleSearch();return true;}
             return super.keyPressed(key,scanCode,modifiers);
         }
-        if(key==org.lwjgl.glfw.GLFW.GLFW_KEY_BACKSPACE && !search.results()&&(chapter!=null||search.returnsToResults(destination()))) {back();return true;}
+        if(key==org.lwjgl.glfw.GLFW.GLFW_KEY_BACKSPACE && !search.results()&&(chapter!=null||treeOrigin!=null||search.returnsToResults(destination()))) {back();return true;}
         return super.keyPressed(key,scanCode,modifiers);
     }
     @Override public boolean isPauseScreen() {return false;}

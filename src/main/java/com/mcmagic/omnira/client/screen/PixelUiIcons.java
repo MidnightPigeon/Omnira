@@ -5,6 +5,13 @@ public final class PixelUiIcons {
     private PixelUiIcons() {}
     public static boolean draw(MachinePanelArt.Pixels p,String symbol,int cx,int cy,int color) {
         switch(symbol) {
+            case "tree" -> {
+                p.fill(cx-1,cy-1,cx+1,cy+5,color);
+                p.fill(cx-4,cy-1,cx+4,cy+1,color);
+                p.fill(cx-4,cy-4,cx-2,cy,color);p.fill(cx+2,cy-4,cx+4,cy,color);
+                p.fill(cx-5,cy-5,cx-1,cy-3,color);p.fill(cx+1,cy-5,cx+5,cy-3,color);
+                p.fill(cx-2,cy-5,cx+2,cy-2,color);
+            }
             case "<", ">" -> {
                 int direction=symbol.equals(">")?1:-1;
                 for(int i=0;i<5;i++)p.fill(cx+direction*(2-i),cy-i,cx+direction*(2-i)+2,cy+i+1,color);

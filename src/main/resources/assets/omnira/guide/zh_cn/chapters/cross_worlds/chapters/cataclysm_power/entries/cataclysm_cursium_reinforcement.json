@@ -3,7 +3,7 @@
   "title": "咒魂加固部件",
   "item": "omnira:cursium_reinforcement",
   "text": [
-    "将咒魂锭置于普通装配台中央，外围留空，加工即可获得。",
+    "由咒魂锭加工而成。",
     "继承了咒魂攫取生机的力量，从伤敌之中汲取生命。"
   ],
   "recipes": true

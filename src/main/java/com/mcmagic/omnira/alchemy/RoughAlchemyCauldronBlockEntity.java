@@ -143,6 +143,8 @@ public final class RoughAlchemyCauldronBlockEntity extends BlockEntity {
                     if(!vessel.insert(result).isEmpty())throw new IllegalStateException("Reserved reaction output lost");
                 }
                 com.mcmagic.omnira.progression.BranchProgress.machine(vessel,"first_reaction");
+                if(recipe.fluidResult().getFluid()==AlchemyMaterials.REFINED.source.get())
+                    com.mcmagic.omnira.progression.BranchProgress.machine(vessel,"mainline/refined_time");
                 vessel.active=null;vessel.output=net.minecraft.world.item.ItemStack.EMPTY;vessel.progress=vessel.consumed=vessel.batches=0;
                 vessel.changed();
             }else vessel.setChanged();

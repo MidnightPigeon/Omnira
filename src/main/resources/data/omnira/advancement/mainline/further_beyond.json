@@ -1,5 +1,5 @@
 {
-  "parent": "omnira:mainline/mana_surge",
+  "parent": "omnira:mainline/higher_condensation",
   "display": {
     "icon": {
       "id": "omnira:advanced_assembly_table"

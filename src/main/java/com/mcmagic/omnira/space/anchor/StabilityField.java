@@ -52,9 +52,12 @@ public final class StabilityField extends SavedData {
         return strength(level,point)>0;
     }
     public static int strength(ServerLevel level,Vec3 point){
-        var data=get(level);data.index();var center=BlockPos.containing(point);
+        var data=get(level);data.index();
+        if(data.anchorIndex.isEmpty()&&data.orbIndex.isEmpty())return 0;
+        var center=BlockPos.containing(point);
         for(int strength=2;strength>=1;strength--){
             var map=strength==2?data.anchorIndex:data.orbIndex;int radius=strength==2?64:32;
+            if(map.isEmpty())continue;
             for(int dx=-1;dx<=1;dx++)for(int dy=-1;dy<=1;dy++)for(int dz=-1;dz<=1;dz++){
                 var bucket=map.get(BlockPos.asLong((center.getX()>>6)+dx,(center.getY()>>6)+dy,(center.getZ()>>6)+dz));
                 if(bucket==null)continue;

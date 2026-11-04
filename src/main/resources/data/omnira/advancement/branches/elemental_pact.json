@@ -1,20 +1,5 @@
 {
   "parent": "omnira:mainline/ritual_ascension",
-  "display": {
-    "icon": {
-      "id": "omnira:light_microcore"
-    },
-    "title": {
-      "translate": "advancement.omnira.branches.elemental_pact.title"
-    },
-    "description": {
-      "translate": "advancement.omnira.branches.elemental_pact.description"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": false,
-    "hidden": false
-  },
   "criteria": {
     "previous_completed": {
       "trigger": "minecraft:impossible"

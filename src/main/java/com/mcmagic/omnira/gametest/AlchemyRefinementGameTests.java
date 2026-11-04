@@ -46,7 +46,7 @@ public final class AlchemyRefinementGameTests {
         p.advance(199);h.assertTrue(p.fluids.amount(r.fluid())==10000&&p.fluids.amount(r.fluidResult())==0,"Early refinement debit");
         p.advance(1);h.assertTrue(p.fluids.amount(r.fluid())==9000&&p.fluids.amount(r.fluidResult())==100,"Wrong refinement installment");
         var copy=new ReactionPoolBlockEntity(p.getBlockPos(),p.getBlockState());copy.setLevel(h.getLevel());
-        copy.loadWithComponents(p.getUpdateTag(h.getLevel().registryAccess()),h.getLevel().registryAccess());copy.advance(1800);
+        copy.loadWithComponents(p.saveWithFullMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());copy.advance(1800);
         h.assertTrue(!copy.reacting()&&copy.fluids.total()==1000&&copy.fluids.amount(r.fluidResult())==1000,"Refinement reload lost fluid accounting");
         h.assertTrue(h.getLevel().getBlockState(catalyst).is(ModBlocks.SPACETIME_SPELL_CORE.get()),"Catalyst consumed");h.succeed();
     }
@@ -82,7 +82,7 @@ public final class AlchemyRefinementGameTests {
         h.getLevel().setBlockAndUpdate(p.getBlockPos().below(),ModBlocks.ROUGH_ALCHEMICAL_ENERGY_CORE.get().defaultBlockState());
         h.assertTrue(p.start(r),"Pool pair did not start");p.advance(400);
         var copy=new ReactionPoolBlockEntity(p.getBlockPos(),p.getBlockState());copy.setLevel(h.getLevel());
-        copy.loadWithComponents(p.getUpdateTag(h.getLevel().registryAccess()),h.getLevel().registryAccess());copy.advance(1600);
+        copy.loadWithComponents(p.saveWithFullMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());copy.advance(1600);
         pair(h,copy.items);h.assertTrue(!copy.reacting()&&copy.fluids.total()==0,"Pool pair did not finish");copy.advance(2000);pair(h,copy.items);h.succeed();
     }
     @GameTest(template="spell_arena") public static void pairNeedsTwoSlotsAndReservesBoth(GameTestHelper h){

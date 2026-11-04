@@ -93,15 +93,15 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
     }
     public static void vortex(PoseStack pose,MultiBufferSource buffers,double time,boolean paleBlue){
         var mesh=buffers.getBuffer(CrystalGlassLayer.COLOR);var matrix=pose.last().pose();
-        for(int arm=0;arm<3;arm++)for(int i=0;i<18;i++){
-            double radius=.025+i*.011,angle=time*.065+i*.3+arm*Math.PI*2/3;
+        for(int arm=0;arm<3;arm++)for(int i=0;i<18;i+=i<8?1:2){
+            double radius=.025+i*.011,angle=time*.022+i*.3+arm*Math.PI*2/3;
             float x=.5F+(float)(Math.cos(angle)*radius),z=.5F+(float)(Math.sin(angle)*radius);
             float y=.5F+(float)Math.sin(angle*2)*.025F,r=.018F+i*.0004F;
             float shade=.12F+i*.018F;
             int red=(int)((paleBlue?.36F+shade*.6F:shade*.8F)*255);
             int green=(int)((paleBlue?.62F+shade*.5F:shade*.55F)*255);
             int blue=(int)((paleBlue?.8F+shade*.3F:shade+.12F)*255);
-            StellarVisuals.cube(pose,mesh,x,y,z,r,red<<16|green<<8|blue,.94F);
+            StellarVisuals.cube(pose,mesh,x,y,z,r,red<<16|green<<8|blue,.65F);
         }
     }
     @Override public void render(CrystalBallBlockEntity ball,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {
@@ -111,6 +111,10 @@ public final class CrystalBallRenderer implements BlockEntityRenderer<CrystalBal
         pose.translate(0,-.5,0);
         pose.mulPose(Axis.YP.rotationDegrees(180-ball.getBlockState().getValue(com.mcmagic.omnira.block.CrystalBallBlock.FACING).toYRot()));
         pose.translate(-.5,0,-.5);
+        var viewer=Minecraft.getInstance().player;
+        if(viewer!=null && viewer.containerMenu instanceof com.mcmagic.omnira.menu.CrystalBallMenu menu
+                && menu.ball.lootrPersonalView && menu.ball.getLevel()==ball.getLevel() && menu.ball.getBlockPos().equals(ball.getBlockPos()))
+            ball=menu.ball;
         base(ball,pose,buffers,light,overlay);
         if(!com.mcmagic.omnira.compat.LootrOrbs.appearance(ball))for(int i=0;i<3;i++)upgrade(ball.upgrades.getStackInSlot(i),i,pose,buffers,light,overlay);
         globe(pose,buffers,time+(ball.getBlockPos().asLong()&255),light,overlay,ball);

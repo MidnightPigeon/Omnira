@@ -15,12 +15,14 @@ public final class StilledTime {
         return net.neoforged.fml.ModList.get().isLoaded("sable")&&com.mcmagic.omnira.compat.SableLocalTime.inPlot(level,pos);
     }
     public static boolean stopped(Level level,BlockPos pos){
-        if(shipPlot(level,pos)||!level.hasChunkAt(pos))return false;
+        if(pos==null||shipPlot(level,pos)||!level.hasChunkAt(pos))return false;
         return level.getBiome(pos).is(BIOME);
     }
     /** Warp points and their remnants drive the biome's own hazard/regrowth, not machine time. */
     public static boolean blockTickStopped(Level level,BlockPos pos){
-        if(!stopped(level,pos))return false;
+        return stopped(level,pos)&&freezesBlock(level,pos);
+    }
+    public static boolean freezesBlock(Level level,BlockPos pos){
         var block=level.getBlockState(pos).getBlock();
         return !(block instanceof com.mcmagic.omnira.spacetime.TimeWarpPointBlock)
                 && !(block instanceof com.mcmagic.omnira.spacetime.TemporalMoteBlock);

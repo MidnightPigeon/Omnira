@@ -31,7 +31,7 @@ public final class WorldInteractionJei implements IModPlugin {
             public int getWidth(){return 170;}public int getHeight(){return 94;}
             public void setRecipe(mezz.jei.api.gui.builder.IRecipeLayoutBuilder b,Interaction a,IFocusGroup f){
                 boolean guidance=a.note().equals("guidance");
-                b.addSlot(guidance?RecipeIngredientRole.CATALYST:RecipeIngredientRole.INPUT,16,8).setStandardSlotBackground().addItemStack(a.tool());
+                b.addSlot(guidance||a.note().equals("transmutation")?RecipeIngredientRole.CATALYST:RecipeIngredientRole.INPUT,16,8).setStandardSlotBackground().addItemStack(a.tool());
                 boolean retained=a.note().equals("campfire");
                 var target=b.addSlot(a.targetRole(),16,38).setStandardSlotBackground().addItemStack(a.target());
                 if(retained)target.addRichTooltipCallback((v,t)->t.add(Component.translatable("jei.omnira.world_target_retained")));
@@ -58,6 +58,10 @@ public final class WorldInteractionJei implements IModPlugin {
     public void registerRecipes(IRecipeRegistration r){r.addRecipes(TYPE,entries());}
     public static List<Interaction> entries(){
         var entries=new ArrayList<Interaction>();
+        for (var block:net.minecraft.core.registries.BuiltInRegistries.BLOCK.getTagOrEmpty(com.mcmagic.omnira.item.CrystallizedPhilosophersStoneItem.STONES)) {
+            var target=block.value().asItem();
+            if (target!=Items.AIR) entries.add(action(ModItems.PHILOSOPHERS_STONE.get(),target,Items.RAW_GOLD_BLOCK,"transmutation"));
+        }
         entries.add(action(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get(),DreamContent.SPIRITUAL_CRYSTAL_BLOCK.get().asItem(),ModBlocks.INFUSED_CRYSTAL_CASING.get().asItem(),"replace"));
         entries.add(action(ModBlocks.SPACE_WARP_POINT.get().asItem(),ModBlocks.FOLD_GATE_FRAME.get().asItem(),ModBlocks.STABLE_FOLD_GATE.get().asItem(),"replace"));
         entries.add(action(ModItems.UNSTABLE_SPACETIME_AGGREGATE.get(),ModBlocks.FOLD_GATE_FRAME.get().asItem(),ModBlocks.UNSTABLE_FOLD_GATE.get().asItem(),"replace"));

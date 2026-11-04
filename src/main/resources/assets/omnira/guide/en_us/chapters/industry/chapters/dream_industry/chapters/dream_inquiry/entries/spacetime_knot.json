@@ -3,7 +3,7 @@
   "item": "omnira:spacetime_knot",
   "title": "Spacetime Knot",
   "text": [
-    "Process a spacetime waymark in the center of a arcane assembly bench to obtain this flowing knot. The waymark is consumed."
+    "Process a Spacetime Waymark at an Arcane Assembly Bench."
   ],
   "recipes": true
 }
