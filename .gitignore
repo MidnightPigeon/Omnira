@@ -75,6 +75,7 @@ repo/
 
 # Local collaboration preferences; do not distribute with source.
 /DEVELOPMENT_PREFERENCES.local.md
+/BUILDING.md
 
 # Local runtime configuration and asset-script caches.
 /config/*
