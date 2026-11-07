@@ -178,6 +178,16 @@
       "row": 9
     },
     {
+      "id": "cross_worlds",
+      "target": "cross_worlds",
+      "kind": "ring",
+      "stage": 0,
+      "ring_side": 1,
+      "x": 0,
+      "y": 720,
+      "overview": true
+    },
+    {
       "id": "map:early_ruins",
       "stage": 0,
       "kind": "ring",
@@ -322,6 +332,21 @@
       "row": 5
     },
     {
+      "id": "fulfillment_star",
+      "stage": 1,
+      "kind": "branch",
+      "target": "fulfillment_star",
+      "parent": "advanced_condensation_table",
+      "also": [
+        "map:light_dark",
+        "map:basic_materials",
+        "modifier_infusion"
+      ],
+      "overview": true,
+      "column": 1,
+      "row": 4
+    },
+    {
       "id": "map:infused",
       "stage": 1,
       "kind": "junction",
@@ -398,7 +423,7 @@
       "id": "map:light_dark_core",
       "stage": 1,
       "kind": "junction",
-      "target": "map:light_dark_core",
+      "target": "light_dark_spell_core",
       "parent": "map:light_dark",
       "also": [
         "advanced_assembly_table",
@@ -963,6 +988,18 @@
       "parent": null,
       "also": [],
       "overview": false
+    },
+    {
+      "id": "spacetime_creatures",
+      "target": "spacetime_creatures",
+      "kind": "ring",
+      "stage": 2,
+      "ring_side": 1,
+      "x": 0,
+      "y": -196,
+      "parent": null,
+      "also": [],
+      "overview": true
     }
   ]
 }

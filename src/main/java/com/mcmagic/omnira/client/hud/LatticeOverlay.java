@@ -24,7 +24,17 @@ public final class LatticeOverlay {
         if(player==null || mc.screen!=null || mc.options.hideGui || !player.isAlive() || player.isSpectator()) return;
         ItemStack staff=(player.getMainHandItem().getItem() instanceof StaffItem||player.getMainHandItem().getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem)?player.getMainHandItem():player.getOffhandItem();
         if(!(staff.getItem() instanceof StaffItem)&&!(staff.getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem))return;
-        var stats=staff.getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem?com.mcmagic.omnira.item.IndustrialWheelItem.STATS:com.mcmagic.omnira.item.staff.StaffAssembly.of(staff).stats();
+        var stats=staff.getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem?com.mcmagic.omnira.item.IndustrialWheelItem.stats(staff):com.mcmagic.omnira.item.staff.StaffAssembly.of(staff).stats();
+        var viewport=com.mcmagic.omnira.client.screen.UiViewport.spellHud(g.guiWidth(),g.guiHeight(),mc.gui.leftHeight);
+        g.pose().pushPose();
+        try{
+        g.pose().scale(viewport.scale(),viewport.scale(),1);
+        int cx=viewport.x(),cy=viewport.y(),radius=32;
+        if(com.mcmagic.omnira.mana.SpacetimeBlink.staff(player.getMainHandItem())
+                && player.getData(ModAttachments.MANA).affinity()==com.mcmagic.omnira.mana.Affinity.SPACETIME.ordinal()){
+            float cooldown=player.getCooldowns().getCooldownPercent(staff.getItem(),delta.getGameTimeDeltaPartialTick(false));
+            blinkGlyph(g,cx,cy,cooldown,player.getData(ModAttachments.MANA).canSpend(com.mcmagic.omnira.mana.SpacetimeBlink.manaCost(CastAttributes.reduction(player,stats.reduction()))));
+        }
         ItemStack grid=CrystalGridMenu.locate(player,-2);
         if(!(grid.getItem() instanceof CrystalGridItem item)) return;
         NonNullList<ItemStack> stacks=NonNullList.withSize(item.capacity,ItemStack.EMPTY);
@@ -37,11 +47,6 @@ public final class LatticeOverlay {
                 if(CrystalGridMenu.isCrystal(stacks.get(index))) {second=index;break;}
             }
         }
-        var viewport=com.mcmagic.omnira.client.screen.UiViewport.spellHud(g.guiWidth(),g.guiHeight(),mc.gui.leftHeight);
-        g.pose().pushPose();
-        try{
-        g.pose().scale(viewport.scale(),viewport.scale(),1);
-        int cx=viewport.x(),cy=viewport.y(),radius=32;
         // Hollow stepped circle, with no panel obscuring the world.
         for(int i=0;i<24;i++) {
             double a=i*Math.PI/12,b=(i+1)*Math.PI/12;
@@ -99,6 +104,19 @@ public final class LatticeOverlay {
             text(g,patternLabel(following).copy().withStyle(s->s.withColor(0xAAB8BF)),cx,cy-46,86);
         }
         }finally{g.pose().popPose();}
+    }
+    // Each illuminated row marks recovered cooldown; the two halves share the mana bar palette.
+    private static void blinkGlyph(GuiGraphics g,int x,int y,float cooldown,boolean funded){
+        for(int row=0;row<11;row++){
+            int half=Math.abs(row-5)*4/5;
+            int color=row<11*cooldown || !funded?0xFF676579:row<5?0xFFAFF2B2:0xFF91D6FF;
+            g.fill(x-half-1,y+row-5,x+half+2,y+row-4,0xFF37364D);
+            if(row==0 || row==10 || row==5)g.fill(x-half,y+row-5,x+half+1,y+row-4,color);
+            else{
+                g.fill(x-half,y+row-5,x-half+1,y+row-4,color);
+                g.fill(x+half,y+row-5,x+half+1,y+row-4,color);
+            }
+        }
     }
     private static String number(double value) {
         return value==(int)value?Integer.toString((int)value):String.format(java.util.Locale.ROOT,"%.1f",value);

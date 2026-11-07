@@ -17,7 +17,7 @@ public final class WaymarkBlockEntity extends BlockEntity {
     public WaymarkBlockEntity(BlockPos pos,BlockState state) {super(ModBlockEntityTypes.WAYMARK.get(),pos,state);}
     public UUID id() {return id;}
     public String name() {return name;}
-    public WaymarkDirectory.Entry entry() {return new WaymarkDirectory.Entry(id,level.dimension().location(),worldPosition,name);}
+    public WaymarkDirectory.Entry entry() {return new WaymarkDirectory.Entry(id,level.dimension().location(),worldPosition,name,level instanceof ServerLevel server ? WaymarkDirectory.biomeAt(server,worldPosition) : null);}
     public void register() {if(level instanceof ServerLevel server) WaymarkDirectory.get(server).put(entry());}
     public void placedByPlayer() {unclaimed=false;setChanged();}
     public void discover(net.minecraft.server.level.ServerPlayer player) {

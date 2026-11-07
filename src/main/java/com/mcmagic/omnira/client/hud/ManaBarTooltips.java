@@ -45,7 +45,9 @@ public final class ManaBarTooltips {
             int lines=switch(area.affinity){case NONE -> 1;case DREAM -> 4;default -> 2;};
             boolean perfected=mc.player!=null&&mc.player.getData(ModAttachments.PERFECTED_AFFINITY)&&area.affinity!=Affinity.NONE;
             for(int line=1;line<=lines;line++) {
+                if(perfected && area.affinity==Affinity.ARCANE && line==2)continue;
                 String key="tooltip.omnira.affinity."+area.affinity.name().toLowerCase(java.util.Locale.ROOT)+"."+line;
+                if(perfected&&(area.affinity==Affinity.ARCANE||area.affinity==Affinity.SPACETIME)&&line==1)key+=".perfected";
                 if(perfected&&area.affinity==Affinity.DREAM&&(line==2||line==3))key+=".perfected";
                 text.add(Component.translatable(key));
             }

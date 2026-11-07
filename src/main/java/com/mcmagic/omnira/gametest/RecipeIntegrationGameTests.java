@@ -27,6 +27,8 @@ public final class RecipeIntegrationGameTests {
             if(typeId.getNamespace().equals("omnira"))
                 h.assertTrue(recipe.getType().toString().equals(typeId.toString()),"Noncanonical recipe type: "+typeId);
             var json=Recipe.CODEC.encodeStart(ops,recipe).getOrThrow();
+            if(recipe instanceof com.mcmagic.omnira.alchemy.catalysis.CatalysisRecipe)
+                h.assertTrue(!json.getAsJsonObject().has("stages"),"Deprecated catalysis stages still serialized");
             var decoded=Recipe.CODEC.parse(ops,json).getOrThrow();
             h.assertTrue(Recipe.CODEC.encodeStart(ops,decoded).getOrThrow().equals(json),"JSON round trip changed "+holder.id());
             var raw=Unpooled.buffer();

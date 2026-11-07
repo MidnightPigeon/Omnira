@@ -12,11 +12,12 @@ public final class ManaEngineScreen extends ResponsiveContainerScreen<ManaEngine
     private static final ResourceLocation BACKGROUND=CrystalWorkstationBackground.texture("workstation_engine");
     private static final ResourceLocation ICONS=ResourceLocation.fromNamespaceAndPath("omnira","textures/gui/engine_controls.png");
     private final Button[] controls=new Button[1];
+    private Boolean lastEnabled;
     public ManaEngineScreen(ManaEngineMenu menu,Inventory inventory,Component title) {
         super(menu,inventory,title);imageWidth=176;imageHeight=240;inventoryLabelY=146;
     }
     @Override protected void init() {
-        super.init();
+        super.init();lastEnabled=null;
         for(int i=0;i<controls.length;i++) {
             final int index=i;
             controls[i]=addRenderableWidget(new Button(leftPos+145,topPos+122,20,20,Component.empty(),button->{
@@ -33,6 +34,9 @@ public final class ManaEngineScreen extends ResponsiveContainerScreen<ManaEngine
         updateTooltips();
     }
     private void updateTooltips() {
+        boolean enabled=menu.setting(0);
+        if(lastEnabled!=null && lastEnabled==enabled)return;
+        lastEnabled=enabled;
         for(int i=0;i<controls.length;i++) {
             Component text=Component.translatable("gui.omnira.engine.enabled")
                     .append(": ").append(Component.translatable("options."+(menu.setting(i)?"on":"off")));

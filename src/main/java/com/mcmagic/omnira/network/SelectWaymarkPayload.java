@@ -19,9 +19,13 @@ public record SelectWaymarkPayload(int menuId,int index) implements CustomPacket
     @EventBusSubscriber(modid="omnira")
     public static final class Registration {
         @SubscribeEvent public static void register(RegisterPayloadHandlersEvent event) {
-            event.registrar("1").playToServer(TYPE,CODEC,(value,context)->context.enqueueWork(()->{
+            event.registrar("1").playBidirectional(TYPE,CODEC,(value,context)->context.enqueueWork(()->{
                 var player=context.player();
-                if(player.containerMenu instanceof WaymarkMenu menu && menu.containerId==value.menuId()) menu.clickMenuButton(player,value.index());
+                if(player.containerMenu instanceof WaymarkMenu menu && menu.containerId==value.menuId()) {
+                    if(player.level().isClientSide) {
+                        if(value.index()<0 && value.index()>=-menu.entries.size())menu.removedEntries.add(-value.index()-1);
+                    } else menu.clickMenuButton(player,value.index());
+                }
             }));
         }
     }

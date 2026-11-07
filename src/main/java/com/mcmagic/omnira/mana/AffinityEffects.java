@@ -20,8 +20,8 @@ public final class AffinityEffects {
         var affinity=player.getData(ModAttachments.AFFINITY).active();
         boolean perfect=affinity!=Affinity.NONE&&player.getData(ModAttachments.AFFINITY).perfected();
         attribute(player,ModAttributes.MAX_MANA,affinity.capacity+(perfect?100:0),AttributeModifier.Operation.ADD_VALUE);
-        attribute(player,ModAttributes.MANA_REGEN,affinity.regeneration,AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
-        attribute(player,ModAttributes.SPELL_POWER,affinity.power+(perfect?.1:0),AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        attribute(player,ModAttributes.MANA_REGEN,(perfect?Math.max(0,affinity.regeneration):affinity.regeneration),AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        attribute(player,ModAttributes.SPELL_POWER,(perfect?Math.max(0,affinity.power)+.1:affinity.power),AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         attribute(player,ModAttributes.COST_REDUCTION,affinity.reduction,AttributeModifier.Operation.ADD_VALUE);
         attribute(player,ModAttributes.DAMAGE_TAKEN,perfect?-.1:affinity==Affinity.DREAM?.5:0,AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         attribute(player,net.neoforged.neoforge.common.NeoForgeMod.CREATIVE_FLIGHT,affinity==Affinity.DREAM?1:0,AttributeModifier.Operation.ADD_VALUE);
@@ -76,7 +76,10 @@ public final class AffinityEffects {
         var affinity=state.affinity();
         int elapsed=affinity.penaltyDuration()-remaining+1;
         // Short renewed effects survive reconnects without restarting the persisted penalty clock.
-        if(elapsed%20==1) {
+        if(affinity==Affinity.ARCANE){
+            if(!com.mcmagic.omnira.spell.ConstructionLock.locked(player))
+                com.mcmagic.omnira.spell.ConstructionLock.confine(player,remaining);
+        }else if(elapsed%20==1) {
             if(affinity==Affinity.LIGHT)player.igniteForSeconds(Math.min(1,remaining/20F));
             else if(affinity==Affinity.DARK)player.addEffect(new MobEffectInstance(MobEffects.POISON,Math.min(40,remaining),1));
             else {
@@ -89,7 +92,7 @@ public final class AffinityEffects {
             var cloud=new com.mcmagic.omnira.entity.ShadowMist(ModEntityTypes.SHADOW_MIST.get(),player.level());
             cloud.configureSpell(null,com.mcmagic.omnira.spell.SpellEffect.utility("dark_breath",0,0,0),1,1,false);
             cloud.setPos(player.position());player.level().addFreshEntity(cloud);
-        } else if(affinity!=Affinity.DARK && elapsed%10==0) {
+        } else if(affinity!=Affinity.DARK && affinity!=Affinity.ARCANE && elapsed%10==0) {
             player.hurt(penaltyDamage(player,affinity),1);
         }
         // A lethal tick clears the attachment in died(); do not resurrect that state here.

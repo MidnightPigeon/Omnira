@@ -1,0 +1,10 @@
+{
+  "id": "time_thief_talent",
+  "title": "时间窃取者",
+  "item": "omnira:time_thief_talent",
+  "recipes": false,
+  "text": [
+    "生命吸取提高20%。",
+    "造成伤害时，分别尝试赋予目标10秒迟缓II、虚弱II与凋零II。每项成功施加后，自身对应获得10秒迅捷II、力量II或生命恢复II。目标免疫或未能施加的效果，不会给予对应增益。"
+  ]
+}

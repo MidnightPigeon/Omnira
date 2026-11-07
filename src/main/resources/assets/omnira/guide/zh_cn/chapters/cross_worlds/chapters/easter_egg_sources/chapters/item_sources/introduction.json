@@ -105,6 +105,11 @@
       "icon": "omnira:rain_soaked_suitcase",
       "name": "被暴雨浸湿的手提箱、神秘学家与暴雨",
       "origin": "重返未来：1999"
+    },
+    {
+      "icon": "omnira:time_thieving_monocle",
+      "name": "窃时之镜、时间窃取者与阿蒙的注视",
+      "origin": "诡秘之主"
     }
   ]
 }

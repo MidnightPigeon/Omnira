@@ -21,6 +21,9 @@ public final class GuideTreeGameTests {
             var book=GuideContents.fromJson(GuideResourceTree.load(path->resource(language+"/"+path)),id->false);
             var index=new GuideTextSearch(book);var tree=GuideTree.read(resource("tree.json"),resource(language+"/tree_pages.json"),book);
             var ids=new HashSet<String>();int summaries=0,rings=0;
+            var outside=tree.nodes().stream().filter(n->n.id().equals("cross_worlds")).findFirst().orElseThrow();
+            h.assertTrue(outside.ring() && outside.x()==0 && outside.y()==tree.radius() && outside.overview()
+                    && book.destination(outside.target()).orElseThrow().chapter()!=null,"Missing bottom-ring chapter shortcut");
             for(var n:tree.nodes()){
                 h.assertTrue(ids.add(n.id()),"Duplicate map node");
                 if(n.ring()){rings++;h.assertTrue(Math.abs(Math.hypot(n.x(),n.y())-tree.radius())<1e-8,"Outer node is not on a true circle");}
@@ -67,6 +70,10 @@ public final class GuideTreeGameTests {
         var tree=GuideTree.read(resource("tree.json"),resource("zh_cn/tree_pages.json"),book);
         var nodes=new HashMap<String,GuideTree.Node>();tree.nodes().forEach(n->nodes.put(n.id(),n));
         for(var n:tree.nodes())visit(n,nodes,new HashSet<>());
+        var star=nodes.get("fulfillment_star");
+        h.assertTrue(star!=null&&star.stage()==1&&star.parents().getFirst().equals("advanced_condensation_table"),"Fulfillment Star should be reachable after dream condensation");
+        h.assertTrue(star.mapPage()==null&&star.target().equals("fulfillment_star"),"Star must open its existing formal entry");
+        for(var n:tree.nodes())if(n!=star)h.assertTrue(Math.hypot(star.x()-n.x(),star.y()-n.y())>=40,"Star overlaps another node");
         h.assertTrue(nodes.get("map:aggregation_materials").parents().equals(List.of("map:spacetime_resources")),"Naturally obtainable ring materials must branch directly from spacetime exploration");
         h.assertTrue(nodes.get("world_rotation").parents().contains("myriad_aggregation")&&!nodes.get("world_rotation").parents().contains("omni_crystal_grid"),"World Rotation incorrectly requires the grid");
         h.assertTrue(!nodes.get("map:first_cores").parents().contains("spacetime_reverser"),"Bootstrap microcores depend on their own consumer");

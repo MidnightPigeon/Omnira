@@ -1,0 +1,16 @@
+{
+  "id": "light_dark_spell_core",
+  "item": "omnira:light_dark_spell_core",
+  "title": "Light/Dark Spell Core",
+  "text": [
+    "Unite the light and dark microcores with a Primordial Spell Core at the Advanced Assembly Table. The resulting core supplies 1,024 MPU in a Mana Engine and shortens processing time in an Advanced Assembly Table.",
+    "Wear it in a spell core slot to increase maximum mana, mana regeneration and spell strength."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "advanced_assembly_table",
+      "label": "Advanced Assembly Table"
+    }
+  ]
+}

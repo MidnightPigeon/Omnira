@@ -1,1 +1,17 @@
-{"type":"omnira:catalysis","substrate":{"item":"omnira:world_generation_probability_cloud"},"seed":{"item":"omnira:time_microcore"},"fluid":{"id":"omnira:dilute_spacetime","amount":100},"result":{"id":"omnira:time_microcore","count":4},"stages":4}
+{
+  "type": "omnira:catalysis",
+  "substrate": {
+    "item": "omnira:world_generation_probability_cloud"
+  },
+  "seed": {
+    "item": "omnira:time_microcore"
+  },
+  "fluid": {
+    "id": "omnira:dilute_spacetime",
+    "amount": 100
+  },
+  "result": {
+    "id": "omnira:time_microcore",
+    "count": 4
+  }
+}

@@ -29,5 +29,5 @@ abstract class PortFluidNetworkMixin {
         }return amount;
     }
     @WrapOperation(method="tick",at=@At(value="NEW",target="net/createmod/catnip/math/BlockFace"))
-    private BlockFace omnira$edge(BlockPos pos,Direction face,Operation<BlockFace> original){return new PortFluidFace(world,pos,face);}
+    private BlockFace omnira$edge(BlockPos pos,Direction face,Operation<BlockFace> original){return PortFluidFace.wrap(world,original.call(pos,face));}
 }

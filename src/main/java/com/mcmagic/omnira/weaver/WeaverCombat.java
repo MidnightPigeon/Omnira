@@ -57,12 +57,17 @@ public final class WeaverCombat {
         for(var target:level.getEntitiesOfClass(LivingEntity.class,new AABB(start,end).inflate(1),t->trueTarget(t,owner)))
             if(target.getBoundingBox().inflate(.15).contains(start)||target.getBoundingBox().inflate(.15).clip(start,end).isPresent())rayHit(owner,target);
     }
-    public static void rayHit(LivingEntity owner,LivingEntity target){
-        if(!trueTarget(target,owner)||!OmniraDamage.trueDamage(target,damage(owner,3),source(target,OmniraDamage.TRUE_DAMAGE,owner,owner,false,false)))return;
+    public static void lockedRay(LivingEntity owner,LivingEntity target,float damage,float wearFraction){
+        if(!(owner.level() instanceof ServerLevel level)||!trueTarget(target,owner))return;
+        visual(level,2,owner.getEyePosition(),target.getBoundingBox().getCenter(),0);rayHit(owner,target,damage,wearFraction);
+    }
+    public static void rayHit(LivingEntity owner,LivingEntity target){rayHit(owner,target,damage(owner,3),.1F);}
+    private static void rayHit(LivingEntity owner,LivingEntity target,float amount,float wearFraction){
+        if(!trueTarget(target,owner)||!OmniraDamage.trueDamage(target,amount,source(target,OmniraDamage.TRUE_DAMAGE,owner,owner,false,false)))return;
         boolean armorBroken=false;var seen=Collections.newSetFromMap(new IdentityHashMap<net.minecraft.world.item.ItemStack,Boolean>());
         for(var slot:List.of(EquipmentSlot.MAINHAND,EquipmentSlot.OFFHAND,EquipmentSlot.HEAD,EquipmentSlot.CHEST,EquipmentSlot.LEGS,EquipmentSlot.FEET)){
-            var stack=target.getItemBySlot(slot);int max=stack.getMaxDamage();if(stack.isEmpty()||max<=0||!seen.add(stack))continue;
-            int loss=max/10+(max%10==0?0:1);long remaining=(long)stack.getDamageValue()+loss;
+            var stack=target.getItemBySlot(slot);int max=stack.getMaxDamage();if(stack.isEmpty()||!stack.isDamageableItem()||max<=0||!seen.add(stack))continue;
+            int loss=(int)Math.ceil(max*(double)wearFraction-0.00001);long remaining=(long)stack.getDamageValue()+loss;
             if(remaining>=max){
                 var item=stack.getItem();target.setItemSlot(slot,net.minecraft.world.item.ItemStack.EMPTY);target.onEquippedItemBroken(item,slot);
                 if(slot.getType()==EquipmentSlot.Type.HUMANOID_ARMOR)armorBroken=true;

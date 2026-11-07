@@ -1,0 +1,9 @@
+{
+  "id": "riftstep_deer_chapter",
+  "title": "Riftstep Deer",
+  "icon": "omnira:riftstep_deer_spawn_egg",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/riftstep_deer.json"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "spatial_overload",
+  "title": "空间过载",
+  "item": "omnira:spatial_overload",
+  "recipes": false,
+  "text": [
+    "移动速度降低20%，受到伤害增加50%；每次受伤会尝试随机瞬移至附近安全位置。"
+  ]
+}

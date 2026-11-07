@@ -1,0 +1,721 @@
+{
+  "width": 128,
+  "height": 128,
+  "parts": [
+    {
+      "name": "body",
+      "parent": "root",
+      "pivot": [
+        0,
+        17,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "shell",
+      "cubes": [
+        [
+          -2,
+          -2,
+          -3,
+          4,
+          4,
+          6,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "abdomen",
+      "parent": "body",
+      "pivot": [
+        0,
+        0,
+        3
+      ],
+      "rotation": [
+        -0.18,
+        0,
+        0
+      ],
+      "material": "pale",
+      "cubes": [
+        [
+          -2,
+          -1,
+          0,
+          4,
+          3,
+          5,
+          22,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "abdomen_tip",
+      "parent": "abdomen",
+      "pivot": [
+        0,
+        0,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "shell",
+      "cubes": [
+        [
+          -1,
+          -1,
+          0,
+          2,
+          2,
+          3,
+          41,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "body",
+      "pivot": [
+        0,
+        -0.5,
+        -4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "shell",
+      "cubes": [
+        [
+          -2,
+          -2,
+          -3,
+          4,
+          4,
+          4,
+          52,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "eyes",
+      "parent": "head",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "eye",
+      "cubes": [
+        [
+          -2,
+          -1,
+          -4,
+          1,
+          2,
+          1,
+          69,
+          1
+        ],
+        [
+          1,
+          -1,
+          -4,
+          1,
+          2,
+          1,
+          74,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "proboscis",
+      "parent": "head",
+      "pivot": [
+        0,
+        1,
+        -3
+      ],
+      "rotation": [
+        -0.28,
+        0,
+        0
+      ],
+      "material": "dark",
+      "cubes": [
+        [
+          -0.5,
+          -0.5,
+          -7,
+          1,
+          1,
+          7,
+          79,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "monocle",
+      "parent": "head",
+      "pivot": [
+        1.5,
+        0,
+        -4.15
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "gold",
+      "cubes": [
+        [
+          -2,
+          -2,
+          -0.5,
+          4,
+          1,
+          1,
+          96,
+          1
+        ],
+        [
+          -2,
+          1,
+          -0.5,
+          4,
+          1,
+          1,
+          107,
+          1
+        ],
+        [
+          -2,
+          -1,
+          -0.5,
+          1,
+          2,
+          1,
+          118,
+          1
+        ],
+        [
+          1,
+          -1,
+          -0.5,
+          1,
+          2,
+          1,
+          123,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "lens",
+      "parent": "monocle",
+      "pivot": [
+        0,
+        0,
+        0.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "pale",
+      "cubes": [
+        [
+          -1,
+          -1,
+          0,
+          2,
+          2,
+          1,
+          1,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "chain",
+      "parent": "head",
+      "pivot": [
+        3,
+        1,
+        -3
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.25
+      ],
+      "material": "gold",
+      "cubes": [
+        [
+          0,
+          0,
+          0,
+          1,
+          3,
+          1,
+          8,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "antenna-1",
+      "parent": "head",
+      "pivot": [
+        -1.5,
+        -2,
+        -1
+      ],
+      "rotation": [
+        -0.3,
+        0,
+        -0.4
+      ],
+      "material": "dark",
+      "cubes": [
+        [
+          -0.5,
+          -4,
+          -0.5,
+          1,
+          4,
+          1,
+          13,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "wing_left",
+      "parent": "body",
+      "pivot": [
+        -1.5,
+        -2,
+        0
+      ],
+      "rotation": [
+        0,
+        0.25,
+        0.18
+      ],
+      "material": "wing",
+      "cubes": [
+        [
+          -9,
+          0,
+          -2,
+          9,
+          0,
+          5,
+          18,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "leg0",
+      "parent": "body",
+      "pivot": [
+        -1.7,
+        1,
+        -2
+      ],
+      "rotation": [
+        -0.35,
+        0,
+        0.8
+      ],
+      "material": "dark",
+      "cubes": [
+        [
+          -0.5,
+          0,
+          -0.5,
+          1,
+          5,
+          1,
+          47,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "foot0",
+      "parent": "leg0",
+      "pivot": [
+        0,
+        5,
+        0
+      ],
+      "rotation": [
+        -0.2,
+        0,
+        -0.55
+      ],
+      "material": "shell",
+      "cubes": [
+        [
+          -0.5,
+          0,
+          -0.5,
+          1,
+          6,
+          1,
+          52,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "leg1",
+      "parent": "body",
+      "pivot": [
+        -1.7,
+        1,
+        0
+      ],
+      "rotation": [
+        0.0,
+        0,
+        0.8
+      ],
+      "material": "dark",
+      "cubes": [
+        [
+          -0.5,
+          0,
+          -0.5,
+          1,
+          5,
+          1,
+          57,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "foot1",
+      "parent": "leg1",
+      "pivot": [
+        0,
+        5,
+        0
+      ],
+      "rotation": [
+        0.04999999999999999,
+        0,
+        -0.55
+      ],
+      "material": "shell",
+      "cubes": [
+        [
+          -0.5,
+          0,
+          -0.5,
+          1,
+          6,
+          1,
+          62,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "leg2",
+      "parent": "body",
+      "pivot": [
+        -1.7,
+        1,
+        2
+      ],
+      "rotation": [
+        0.35,
+        0,
+        0.8
+      ],
+      "material": "dark",
+      "cubes": [
+        [
+          -0.5,
+          0,
+          -0.5,
+          1,
+          5,
+          1,
+          67,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "foot2",
+      "parent": "leg2",
+      "pivot": [
+        0,
+        5,
+        0
+      ],
+      "rotation": [
+        0.3,
+        0,
+        -0.55
+      ],
+      "material": "shell",
+      "cubes": [
+        [
+          -0.5,
+          0,
+          -0.5,
+          1,
+          6,
+          1,
+          72,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "antenna1",
+      "parent": "head",
+      "pivot": [
+        1.5,
+        -2,
+        -1
+      ],
+      "rotation": [
+        -0.3,
+        0,
+        0.4
+      ],
+      "material": "dark",
+      "cubes": [
+        [
+          -0.5,
+          -4,
+          -0.5,
+          1,
+          4,
+          1,
+          77,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "wing_right",
+      "parent": "body",
+      "pivot": [
+        1.5,
+        -2,
+        0
+      ],
+      "rotation": [
+        0,
+        -0.25,
+        -0.18
+      ],
+      "material": "wing",
+      "cubes": [
+        [
+          0,
+          0,
+          -2,
+          9,
+          0,
+          5,
+          82,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "leg3",
+      "parent": "body",
+      "pivot": [
+        1.7,
+        1,
+        -2
+      ],
+      "rotation": [
+        -0.35,
+        0,
+        -0.8
+      ],
+      "material": "dark",
+      "cubes": [
+        [
+          -0.5,
+          0,
+          -0.5,
+          1,
+          5,
+          1,
+          111,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "foot3",
+      "parent": "leg3",
+      "pivot": [
+        0,
+        5,
+        0
+      ],
+      "rotation": [
+        -0.2,
+        0,
+        0.55
+      ],
+      "material": "shell",
+      "cubes": [
+        [
+          -0.5,
+          0,
+          -0.5,
+          1,
+          6,
+          1,
+          116,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "leg4",
+      "parent": "body",
+      "pivot": [
+        1.7,
+        1,
+        0
+      ],
+      "rotation": [
+        0.0,
+        0,
+        -0.8
+      ],
+      "material": "dark",
+      "cubes": [
+        [
+          -0.5,
+          0,
+          -0.5,
+          1,
+          5,
+          1,
+          121,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "foot4",
+      "parent": "leg4",
+      "pivot": [
+        0,
+        5,
+        0
+      ],
+      "rotation": [
+        0.04999999999999999,
+        0,
+        0.55
+      ],
+      "material": "shell",
+      "cubes": [
+        [
+          -0.5,
+          0,
+          -0.5,
+          1,
+          6,
+          1,
+          1,
+          20
+        ]
+      ]
+    },
+    {
+      "name": "leg5",
+      "parent": "body",
+      "pivot": [
+        1.7,
+        1,
+        2
+      ],
+      "rotation": [
+        0.35,
+        0,
+        -0.8
+      ],
+      "material": "dark",
+      "cubes": [
+        [
+          -0.5,
+          0,
+          -0.5,
+          1,
+          5,
+          1,
+          6,
+          20
+        ]
+      ]
+    },
+    {
+      "name": "foot5",
+      "parent": "leg5",
+      "pivot": [
+        0,
+        5,
+        0
+      ],
+      "rotation": [
+        0.3,
+        0,
+        0.55
+      ],
+      "material": "shell",
+      "cubes": [
+        [
+          -0.5,
+          0,
+          -0.5,
+          1,
+          6,
+          1,
+          11,
+          20
+        ]
+      ]
+    }
+  ]
+}

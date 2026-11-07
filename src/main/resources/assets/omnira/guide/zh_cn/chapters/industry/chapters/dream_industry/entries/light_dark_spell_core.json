@@ -1,0 +1,16 @@
+{
+  "id": "light_dark_spell_core",
+  "item": "omnira:light_dark_spell_core",
+  "title": "光暗法术核心",
+  "text": [
+    "在高阶装配台将光暗两系微核与原始法术核心装配成光暗法术核心。装入魔能引擎可提供1024 MPU；装入高阶装配台可缩短加工时间。",
+    "佩戴在法术核心槽中可提高法力上限、法力恢复速度与法术强度。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "advanced_assembly_table",
+      "label": "高阶装配台"
+    }
+  ]
+}

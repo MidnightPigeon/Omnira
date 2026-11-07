@@ -1,0 +1,21 @@
+{
+  "id": "crystal_dress",
+  "item": "omnira:crystal_top",
+  "title": "Crystal Dress",
+  "text": [
+    "Reshape Crystal Plate Armor at the Arcane Assembly Table to make the matching sunhat, top, skirt or shoes. Each piece keeps the protection of its plate counterpart and raises maximum mana.",
+    "A full dress set increases spell strength, reduces incoming damage and lowers gravity. Mixing dress and plate pieces retains their individual bonuses; the set bonus requires four matching pieces."
+  ],
+  "recipes": true,
+  "related_items": [
+    "omnira:crystal_sunhat",
+    "omnira:crystal_skirt",
+    "omnira:crystal_stocking_shoes"
+  ],
+  "links": [
+    {
+      "target": "crystal_plate_armor",
+      "label": "Crystal Plate Armor"
+    }
+  ]
+}

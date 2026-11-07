@@ -98,7 +98,7 @@ public final class DreamRitualScene {
             graphics.drawString(mc.font,amount,0,0,0xFF405462,false);graphics.pose().popPose();
         }
         if(worldForming)graphics.renderItem(new ItemStack(com.mcmagic.omnira.myriad.WorldSeedContent.ACTIVE.get()),x+54,y+108);
-        if(affinity)graphics.renderItem(com.mcmagic.omnira.mana.Affinity.byId(1+(ticks/60)%3).offering(),x+54,y+108);
+        if(affinity)graphics.renderItem(com.mcmagic.omnira.mana.Affinity.VISIBLE.get((ticks/60)%com.mcmagic.omnira.mana.Affinity.VISIBLE.size()).offering(),x+54,y+108);
         if(corridor)graphics.renderItem(new ItemStack(com.mcmagic.omnira.spacetime.CorridorRitual.activator(ticks/80%2!=0)),x+54,y+108);
         var label=net.minecraft.network.chat.Component.translatable(active?"guide.omnira.dream.active":"guide.omnira.dream.layout");
         graphics.drawString(mc.font,label,x+(124-mc.font.width(label))/2,y+132,0xFF514333,false);

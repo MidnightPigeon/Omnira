@@ -9,7 +9,14 @@ import net.minecraft.world.level.Level;
 /** A pipe edge whose destination face may be rotated across a paired port. */
 public final class PortFluidFace extends BlockFace {
     private final Level level;
-    public PortFluidFace(Level level,BlockPos pos,Direction face){super(pos,face);this.level=level;}
+    private final BlockFace delegate;
+    public PortFluidFace(Level level,BlockPos pos,Direction face){this(level,new BlockFace(pos,face));}
+    private PortFluidFace(Level level,BlockFace delegate){super(delegate.getPos(),delegate.getFace());this.level=level;this.delegate=delegate;}
+    public static BlockFace wrap(Level level,BlockFace original){
+        return original instanceof PortFluidFace || remote(level,original.getPos(),original.getFace())==null
+                ?original:new PortFluidFace(level,original);
+    }
+    public boolean connected(){return remote(level,getPos(),getFace())!=null;}
     public static BlockFace remote(Level level,BlockPos pos,Direction face){
         var port=SpacetimePortState.at(level,pos.relative(face));
         if(port==null||port.face()!=face)return null;
@@ -19,7 +26,7 @@ public final class PortFluidFace extends BlockFace {
         return pipe!=null&&pipe.canHaveFlowToward(level.getBlockState(other.attached()),other.face())
                 ?new BlockFace(other.attached(),other.face()):null;
     }
-    @Override public BlockPos getConnectedPos(){var remote=remote(level,getPos(),getFace());return remote==null?super.getConnectedPos():remote.getPos();}
-    @Override public Direction getOppositeFace(){var remote=remote(level,getPos(),getFace());return remote==null?super.getOppositeFace():remote.getFace();}
-    @Override public BlockFace getOpposite(){return new PortFluidFace(level,getConnectedPos(),getOppositeFace());}
+    @Override public BlockPos getConnectedPos(){var remote=remote(level,getPos(),getFace());return remote==null?delegate.getConnectedPos():remote.getPos();}
+    @Override public Direction getOppositeFace(){var remote=remote(level,getPos(),getFace());return remote==null?delegate.getOppositeFace():remote.getFace();}
+    @Override public BlockFace getOpposite(){var remote=remote(level,getPos(),getFace());return remote==null?delegate.getOpposite():wrap(level,remote);}
 }

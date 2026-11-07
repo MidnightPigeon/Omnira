@@ -62,6 +62,7 @@ public final class ManuscriptReward {
             player.getPersistentData().remove(com.mcmagic.omnira.mire.TimePassage.RECORD);
         }
     }
+    public static void destroyTalent(ServerPlayer player){clearSlots(player,java.util.List.of("talent"));}
     private static void clearSlots(ServerPlayer player,java.util.List<String> slots){
         var inventory=CuriosApi.getCuriosInventory(player).orElse(null);
         if(inventory==null)return;

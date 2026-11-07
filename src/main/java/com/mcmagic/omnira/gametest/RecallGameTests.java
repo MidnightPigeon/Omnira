@@ -22,6 +22,60 @@ import java.util.UUID;
 @GameTestHolder("omnira_recall")
 @PrefixGameTestTemplate(false)
 public final class RecallGameTests {
+    @GameTest(template="spell_arena")
+    public static void locationNamesPersistAndMigrate(GameTestHelper h) {
+        var mark=mark(h);
+        var level=h.getLevel();
+        var entry=mark.entry();
+        var expected=level.getBiome(mark.getBlockPos()).unwrapKey().orElseThrow().location();
+        h.assertTrue(expected.equals(entry.biome()),"Waymark did not capture destination biome");
+        var old=new WaymarkDirectory.Entry(entry.id(),entry.dimension(),entry.pos(),entry.name());
+        var directory=new WaymarkDirectory();
+        directory.put(old);
+        var saved=directory.save(new net.minecraft.nbt.CompoundTag(),level.registryAccess());
+        var loaded=WaymarkDirectory.load(saved,level.registryAccess());
+        h.assertTrue(loaded.get(entry.id()).biome()==null,"Missing biome became an empty minecraft identifier");
+        var migrated=loaded.withLocation(level,loaded.get(entry.id()));
+        h.assertTrue(expected.equals(migrated.biome()),"Old destination did not acquire its actual biome");
+        h.assertTrue(migrated.name().equals(old.name()) && migrated.pos().equals(old.pos()),"Migration changed user bookmark");
+        loaded.discover(java.util.UUID.randomUUID(),entry.id());
+        var restored=WaymarkDirectory.load(loaded.save(new net.minecraft.nbt.CompoundTag(),level.registryAccess()),level.registryAccess());
+        h.assertTrue(migrated.equals(restored.get(entry.id())),"Destination biome did not survive saving");
+        h.succeed();
+    }
+
+    @GameTest(template="spell_arena")
+    public static void remoteLegacyBookmarkDoesNotLoadChunk(GameTestHelper h) {
+        var level=h.getLevel();
+        var pos=new BlockPos(24000000,80,24000000);
+        h.assertTrue(!level.hasChunkAt(pos),"Remote test chunk unexpectedly loaded");
+        var entry=new WaymarkDirectory.Entry(UUID.randomUUID(),level.dimension().location(),pos,"Remote");
+        var directory=new WaymarkDirectory();directory.put(entry);
+        h.assertTrue(directory.withLocation(level,entry).equals(entry),"Unloaded bookmark was modified");
+        h.assertTrue(!level.hasChunkAt(pos),"Opening bookmark loaded remote terrain");
+        h.succeed();
+    }
+
+    @GameTest(template="spell_arena")
+    public static void deleteBookmarkKeepsOpenMenu(GameTestHelper h) {
+        var player=player(h,ModItems.RECALL_CRYSTAL.get());
+        var mark=mark(h);mark.discover(player);
+        var entry=mark.entry();
+        var buffer=new net.minecraft.network.RegistryFriendlyByteBuf(io.netty.buffer.Unpooled.buffer(),h.getLevel().registryAccess());
+        buffer.writeBoolean(false);buffer.writeEnum(InteractionHand.MAIN_HAND);buffer.writeVarInt(1);
+        buffer.writeUUID(entry.id());buffer.writeResourceLocation(entry.dimension());buffer.writeBlockPos(entry.pos());buffer.writeUtf(entry.name(),32);
+        buffer.writeNullable(entry.biome(),net.minecraft.network.FriendlyByteBuf::writeResourceLocation);
+        var menu=new com.mcmagic.omnira.menu.WaymarkMenu(7,player.getInventory(),buffer);buffer.release();
+        player.containerMenu=menu;
+        h.assertTrue(menu.clickMenuButton(player,-1),"Deletion was rejected");
+        h.assertTrue(player.containerMenu==menu && menu.removedEntries.contains(0),"Deletion replaced menu or missed acknowledgment state");
+        h.assertTrue(!menu.clickMenuButton(player,0),"Removed row remained selectable");
+        var directory=WaymarkDirectory.get(h.getLevel());
+        h.assertTrue(!directory.knows(player.getUUID(),entry.id()) && directory.get(entry.id())!=null,"Deletion changed global destination");
+        h.assertTrue(h.getLevel().getBlockEntity(mark.getBlockPos())==mark,"Deletion destroyed waymark");
+        h.succeed();
+    }
+
     private static FakePlayer player(GameTestHelper h,Item item) {
         var player=new FakePlayer(h.getLevel(),new GameProfile(UUID.randomUUID(),"recall-test")) {
             @Override public boolean isInvulnerableTo(DamageSource source) {return false;}

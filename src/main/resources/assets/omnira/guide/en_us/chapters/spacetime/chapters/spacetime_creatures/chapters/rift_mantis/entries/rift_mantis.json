@@ -1,0 +1,17 @@
+{
+  "id": "rift_mantis",
+  "title": "Rift Mantis",
+  "item": "omnira:rift_mantis_spawn_egg",
+  "recipes": false,
+  "text": [
+    "A rare predator of space biomes, with a dark blue body, pale violet scythes and a narrow glowing fissure. It detects players within 32 blocks.",
+    "It walks to roughly 24 blocks away, then reveals a crack in the direction of its strike. After one second it teleports 24 blocks to attack, dealing 15 true damage, and immediately retreats 16 blocks. It cannot attack without teleporting first: move away from the marked landing point.",
+    "Drops 3–5 Space Warp Points when killed."
+  ],
+  "links": [
+    {
+      "target": "plunder_scythe",
+      "label": "Scythe of Plunder"
+    }
+  ]
+}

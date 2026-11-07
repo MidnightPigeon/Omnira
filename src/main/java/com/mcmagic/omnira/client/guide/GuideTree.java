@@ -36,7 +36,8 @@ public record GuideTree(double radius,List<Node> nodes) {
             boolean grid=!kind.equals("ring")&&n.has("column");
             double x=grid?n.get("column").getAsBigDecimal().intValueExact()*(double)COLUMN_WIDTH:n.get("x").getAsDouble();
             double y=grid?n.get("row").getAsBigDecimal().intValueExact()*(double)ROW_HEIGHT:n.get("y").getAsDouble();
-            if(stage<0||stage>3||!Double.isFinite(x)||!Double.isFinite(y)||Math.abs(y)>=radius||Math.abs(x)>=radius)throw new IllegalArgumentException("Invalid tree node position: "+id);
+            boolean outsideY=kind.equals("ring")?Math.abs(y)>radius:Math.abs(y)>=radius;
+            if(stage<0||stage>3||!Double.isFinite(x)||!Double.isFinite(y)||outsideY||Math.abs(x)>=radius)throw new IllegalArgumentException("Invalid tree node position: "+id);
             if(kind.equals("ring"))x=(n.get("ring_side").getAsInt()<0?-1:1)*Math.sqrt(radius*radius-y*y);
             var mapPage=pages.get(target);var formal=book.destination(target);
             // The book has already applied required_mod visibility to chapters, entries and links.

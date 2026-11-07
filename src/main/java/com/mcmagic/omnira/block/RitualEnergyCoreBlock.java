@@ -55,8 +55,12 @@ public final class RitualEnergyCoreBlock extends BaseEntityBlock {
         }
         if(stack.is(com.mcmagic.omnira.registry.ModItems.UNSTABLE_SPACETIME_AGGREGATE.get())
                 || stack.is(com.mcmagic.omnira.registry.ModItems.SPACETIME_SPELL_CORE.get())) {
-            if(level instanceof net.minecraft.server.level.ServerLevel server)
-                com.mcmagic.omnira.spacetime.CorridorRitual.activate(server,pos,player,hand);
+            if(player instanceof net.minecraft.server.level.ServerPlayer server){
+                if(stack.is(com.mcmagic.omnira.registry.ModItems.SPACETIME_SPELL_CORE.get())
+                        && com.mcmagic.omnira.world.dimension.AffinityRitual.matchesOfferings(server,pos))
+                    com.mcmagic.omnira.world.dimension.AffinityRitual.activate(server,pos,hand);
+                else com.mcmagic.omnira.spacetime.CorridorRitual.activate(server.serverLevel(),pos,player,hand);
+            }
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
         if(com.mcmagic.omnira.mana.Affinity.offering(stack)!=com.mcmagic.omnira.mana.Affinity.NONE) {

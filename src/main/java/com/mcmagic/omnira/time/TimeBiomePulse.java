@@ -49,6 +49,8 @@ public final class TimeBiomePulse {
         for(var player:level.players()){
             // Players are sampled at the node, not later as queued chunks are processed.
             EventideRuins.pulsePlayer(level,player,level.getGameTime()/PERIOD);
+            TimeMosquitoSpawning.pulsePlayer(level,player);
+            com.mcmagic.omnira.entity.spacetime.SpacetimeFaunaSpawning.pulsePlayer(level,player);
             if(level.getBiome(player.blockPosition()).is(RecurrenceGarden.BIOME))RecurrenceGarden.advanceGrid(player);
             int cx=player.getBlockX()>>4,cz=player.getBlockZ()>>4;
             for(int dx=-radius;dx<=radius;dx++)for(int dz=-radius;dz<=radius;dz++){

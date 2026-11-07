@@ -11,14 +11,14 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 /** Fixed products can be extended or overridden by data packs; common crops derive their real loot. */
-public record CatalysisRecipe(Ingredient substrate,Ingredient seed,FluidStack fluid,ItemStack result,int stages,CatalysisGrowth.Yield yield) implements Recipe<CatalysisRecipe.Input> {
-    public CatalysisRecipe(Ingredient substrate,Ingredient seed,FluidStack fluid,ItemStack result,int stages){
-        this(substrate,seed,fluid,result,stages,CatalysisGrowth.Yield.FIXED);
+public record CatalysisRecipe(Ingredient substrate,Ingredient seed,FluidStack fluid,ItemStack result,CatalysisGrowth.Yield yield) implements Recipe<CatalysisRecipe.Input> {
+    public CatalysisRecipe(Ingredient substrate,Ingredient seed,FluidStack fluid,ItemStack result){
+        this(substrate,seed,fluid,result,CatalysisGrowth.Yield.FIXED);
     }
     public CatalysisRecipe {
         fluid=fluid.copy();result=result.copy();
         if(substrate.isEmpty()||seed.isEmpty()||fluid.isEmpty()||fluid.getAmount()!=100||result.isEmpty()
-                ||result.getCount()>result.getMaxStackSize()||stages<2||stages>64
+                ||result.getCount()>result.getMaxStackSize()
                 ||yield!=CatalysisGrowth.Yield.FIXED&&yield!=CatalysisGrowth.Yield.FUNGUS)throw new IllegalArgumentException("Invalid catalysis recipe");
     }
     public static final MapCodec<CatalysisRecipe> CODEC=RecordCodecBuilder.mapCodec(i->i.group(
@@ -26,7 +26,6 @@ public record CatalysisRecipe(Ingredient substrate,Ingredient seed,FluidStack fl
             Ingredient.CODEC_NONEMPTY.fieldOf("seed").forGetter(CatalysisRecipe::seed),
             FluidStack.CODEC.fieldOf("fluid").forGetter(CatalysisRecipe::fluid),
             ItemStack.STRICT_CODEC.fieldOf("result").forGetter(CatalysisRecipe::result),
-            Codec.intRange(2,64).optionalFieldOf("stages",4).forGetter(CatalysisRecipe::stages),
             CatalysisGrowth.Yield.CODEC.optionalFieldOf("yield",CatalysisGrowth.Yield.FIXED).forGetter(CatalysisRecipe::yield)).apply(i,CatalysisRecipe::new));
     public static final StreamCodec<RegistryFriendlyByteBuf,CatalysisRecipe> STREAM=new StreamCodec<>(){
         public CatalysisRecipe decode(RegistryFriendlyByteBuf b){return CODEC.codec().parse(b.registryAccess().createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE),b.readNbt()).getOrThrow();}

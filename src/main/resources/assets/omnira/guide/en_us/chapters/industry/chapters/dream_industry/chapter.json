@@ -9,7 +9,10 @@
     "entries/staff_enhancement_crafting.json",
     "entries/infused_crystal_furnace.json",
     "entries/infused_crystal_grindstone.json",
-    "entries/infused_crystal_anvil.json"
+    "entries/infused_crystal_anvil.json",
+    "entries/light_dark_spell_core.json",
+    "entries/crystal_plate_armor.json",
+    "entries/crystal_dress.json"
   ],
   "chapters": [
     "chapters/dream_inquiry/chapter.json",
@@ -18,7 +21,10 @@
   "directory_order": [
     "spell_core",
     "advanced_condensation",
+    "crystal_plate_armor",
+    "crystal_dress",
     "advanced_assembly_table",
+    "light_dark_spell_core",
     "dream_inquiry",
     "infused_crystal_furnace",
     "infused_crystal_grindstone",

@@ -17,6 +17,7 @@ public final class WaymarkMenu extends AbstractContainerMenu {
     public final boolean editing;
     public final InteractionHand hand;
     public final List<WaymarkDirectory.Entry> entries;
+    public final Set<Integer> removedEntries=new HashSet<>();
     private final ItemStack bound;
     private final Player owner;
     public WaymarkMenu(int id,Inventory inventory,RegistryFriendlyByteBuf data) {
@@ -29,15 +30,17 @@ public final class WaymarkMenu extends AbstractContainerMenu {
     private static List<WaymarkDirectory.Entry> readEntries(RegistryFriendlyByteBuf buf) {
         int count=buf.readVarInt();if(count<0 || count>1024) throw new IllegalArgumentException("Invalid waymark count");
         var entries=new ArrayList<WaymarkDirectory.Entry>();
-        for(int i=0;i<count;i++) entries.add(new WaymarkDirectory.Entry(buf.readUUID(),buf.readResourceLocation(),buf.readBlockPos(),buf.readUtf(32)));
+        for(int i=0;i<count;i++) entries.add(new WaymarkDirectory.Entry(buf.readUUID(),buf.readResourceLocation(),buf.readBlockPos(),buf.readUtf(32),buf.readNullable(net.minecraft.network.FriendlyByteBuf::readResourceLocation)));
         return entries;
     }
     private static void open(ServerPlayer player,boolean editing,InteractionHand hand,List<WaymarkDirectory.Entry> entries) {
+        var directory = WaymarkDirectory.get(player.serverLevel());
+        var located = entries.stream().map(entry -> directory.withLocation(player.serverLevel(),entry)).toList();
         RecallTravel.cancel(player,null);
-        player.openMenu(new SimpleMenuProvider((id,inventory,p)->new WaymarkMenu(id,inventory,editing,hand,entries),
+        player.openMenu(new SimpleMenuProvider((id,inventory,p)->new WaymarkMenu(id,inventory,editing,hand,located),
                 Component.translatable(editing?"block.omnira.spacetime_waymark":"item.omnira.recall_crystal")),buf->{
-            buf.writeBoolean(editing);buf.writeEnum(hand);buf.writeVarInt(entries.size());
-            for(var entry:entries) {buf.writeUUID(entry.id());buf.writeResourceLocation(entry.dimension());buf.writeBlockPos(entry.pos());buf.writeUtf(entry.name(),32);}
+            buf.writeBoolean(editing);buf.writeEnum(hand);buf.writeVarInt(located.size());
+            for(var entry:located) {buf.writeUUID(entry.id());buf.writeResourceLocation(entry.dimension());buf.writeBlockPos(entry.pos());buf.writeUtf(entry.name(),32);buf.writeNullable(entry.biome(),net.minecraft.network.FriendlyByteBuf::writeResourceLocation);}
         });
     }
     public static void openRecall(ServerPlayer player,InteractionHand hand) {
@@ -66,9 +69,11 @@ public final class WaymarkMenu extends AbstractContainerMenu {
             var target=entries.get(-index-1).id();
             if(com.mcmagic.omnira.spacetime.AmberDirectory.get(server.serverLevel()).owns(server.getUUID(),target))return false;
             WaymarkDirectory.get(server.serverLevel()).forget(server.getUUID(),target);
-            openRecall(server,hand);return true;
+            removedEntries.add(-index-1);
+            net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(server,new com.mcmagic.omnira.network.SelectWaymarkPayload(containerId,index));
+            return true;
         }
-        if(index>=entries.size()) return false;
+        if(index>=entries.size() || removedEntries.contains(index)) return false;
         if(RecallTravel.start(server,hand,entries.get(index).id())) {server.closeContainer();return true;}
         return false;
     }

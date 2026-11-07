@@ -97,7 +97,7 @@ public final class RitualSwordItem extends SwordItem {
                     boolean holy=HolyMagic.enabled(payload);
                     if(holy)HolyMagic.touch(player,target);
                     HolyMagic.cloud(player.serverLevel(),player,payload,power,1,target.position());
-                    if(payload.damage()>0)hit.hurt(SpellDamageSource.physical(target,player,player,"spell"),(float)(payload.damage()*power*(holy?1.5:1)));
+                    if(payload.damage()>0)SpellDamageSource.direct(hit,SpellDamageSource.physical(target,player,player,"spell"),(float)(payload.damage()*power*(holy?1.5:1)));
                     for(var effect:payload.effects())effect.apply(player,player,hit,power,holy);
                 } finally {target.invulnerableTime=Math.max(invulnerability,target.invulnerableTime);}
             }

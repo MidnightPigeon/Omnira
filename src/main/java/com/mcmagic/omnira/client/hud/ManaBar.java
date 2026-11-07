@@ -55,6 +55,21 @@ public final class ManaBar {
                     g.fill(tip+2,y+5,tip+4,y+7,0xFFF28D81);
                     g.fill(tip-1,y+11,tip+1,y+13,0xFFACDFB4);
                 }
+                case ARCANE -> { // Faceted violet focus with four cardinal contacts.
+                    g.fill(tip-2,y+3,tip+3,y+10,0xFF62427F);
+                    for(int d=-2;d<=2;d++){
+                        int half=2-Math.abs(d);
+                        g.fill(tip-half,y+6+d,tip+half+1,y+7+d,0xFFF4DFFF);
+                    }
+                    g.fill(tip,y+1,tip+1,y+3,color);g.fill(tip,y+10,tip+1,y+12,color);
+                }
+                case SPACETIME -> { // Two opposed wedges meeting at an hourglass waist.
+                    for(int d=0;d<3;d++){
+                        g.fill(tip-2+d,y+3+d,tip+3-d,y+4+d,0xFFBBF8A7);
+                        g.fill(tip-2+d,y+9-d,tip+3-d,y+10-d,0xFF9AC9FF);
+                    }
+                    g.fill(tip,y+6,tip+1,y+7,0xFFF3FFFF);
+                }
                 case DREAM -> {
                     g.fill(tip-2,y+3,tip+2,y+5,0xFF88B5FF);
                     g.fill(tip-1,y+8,tip+3,y+10,0xFFC49DF0);

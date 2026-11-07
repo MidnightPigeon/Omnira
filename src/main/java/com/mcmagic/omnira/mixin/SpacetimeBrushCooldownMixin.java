@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.*;
 
 @Mixin(BrushableBlockEntity.class)
 abstract class SpacetimeBrushCooldownMixin {
-    @ModifyConstant(method="brush",constant=@Constant(longValue=10L))
+    @com.llamalad7.mixinextras.injector.ModifyExpressionValue(method="brush",at=@At(value="CONSTANT",args="longValue=10"))
     private long omnira$fasterBrush(long original,long now,Player player,Direction direction){
         return player.getUseItem().getItem() instanceof com.mcmagic.omnira.archaeology.SpacetimeBrushItem?5L:original;
     }

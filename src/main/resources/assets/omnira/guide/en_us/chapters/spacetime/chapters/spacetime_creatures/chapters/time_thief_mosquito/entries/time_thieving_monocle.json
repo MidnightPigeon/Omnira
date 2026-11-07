@@ -1,0 +1,10 @@
+{
+  "id": "time_thieving_monocle",
+  "title": "Time-Thieving Monocle",
+  "item": "omnira:time_thieving_monocle",
+  "recipes": false,
+  "text": [
+    "A slain Time-Thief Mosquito has a 5% chance to drop this monocle, increased by 5 percentage points per level of Looting. Mosquitoes dissolving after feeding leave no drops.",
+    "Using the monocle consumes it and grants Time Thief and Amon’s Gaze. You cannot use it while you already have a talent or curse."
+  ]
+}

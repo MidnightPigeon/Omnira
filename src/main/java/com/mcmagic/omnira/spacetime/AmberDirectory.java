@@ -34,7 +34,7 @@ public final class AmberDirectory extends SavedData {
             WaymarkDirectory.get(level).remove(previous.entity());pending.put(previous.entity(),previous);
         }
         var marks=WaymarkDirectory.get(level);
-        marks.put(new WaymarkDirectory.Entry(grave.entity(),grave.dimension(),grave.pos(),MARK_NAME));
+        marks.put(new WaymarkDirectory.Entry(grave.entity(),grave.dimension(),grave.pos(),MARK_NAME,WaymarkDirectory.biomeAt(level,grave.pos())));
         marks.discover(grave.owner(),grave.entity());setDirty();spillPending(level);
     }
     public void removed(TemporalAmber amber){

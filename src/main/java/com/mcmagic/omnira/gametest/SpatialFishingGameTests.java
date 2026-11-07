@@ -67,7 +67,7 @@ public final class SpatialFishingGameTests {
         for(var liquid:List.of(com.mcmagic.omnira.mire.MireContent.LIQUID.get(),com.mcmagic.omnira.space.sea.VoidSeaContent.LIQUID.get())){
             for(int x=-3;x<=3;x++)for(int z=-3;z<=3;z++)for(int y=-1;y<=0;y++)
                 level.setBlockAndUpdate(center.offset(x,y,z),liquid.defaultBlockState());
-            owner.setPos(center.getCenter().add(2,40,2));
+            owner.setPos(center.getCenter().add(2,24,2));
             rod.use(level,owner,net.minecraft.world.InteractionHand.MAIN_HAND);
             var hook=owner.fishing;
             hook.setPos(center.getCenter().add(0,1.3,0));
@@ -79,11 +79,36 @@ public final class SpatialFishingGameTests {
                 stages.add(((com.mcmagic.omnira.space.sea.StarlightFloat)hook).omnira$fishingPhase());
             }
             h.assertTrue(!hook.isRemoved()&&stages.containsAll(List.of(1,2,3))&&hook.position().distanceToSqr(center.getCenter())<4,"Float did not remain in pool through a natural bite: "+stages);
-            owner.setPos(center.getCenter().add(0,68,0));
+            owner.setPos(center.getCenter().add(0,extendedRange()?324:36,0));
             level.tickNonPassenger(hook);
             h.assertTrue(hook.isRemoved(),"Overextended line did not retract");
         }
         h.succeed();
+    }
+    private static boolean extendedRange(){return net.neoforged.fml.ModList.get().isLoaded("omnira_fishing_distance_fixture");}
+    @GameTest(template="spell_arena") public static void lineRangeAndOwnerValidity(GameTestHelper h)throws Exception{
+        var level=h.getLevel();
+        var owner=net.neoforged.neoforge.common.util.FakePlayerFactory.get(level,new com.mojang.authlib.GameProfile(UUID.randomUUID(),"range-angler"));
+        var stop=net.minecraft.world.entity.projectile.FishingHook.class.getDeclaredMethod("shouldStopFishing",net.minecraft.world.entity.player.Player.class);stop.setAccessible(true);
+        var origin=h.absoluteVec(new Vec3(5,5,5));owner.setPos(origin);
+        for(boolean star:new boolean[]{false,true})for(var hand:net.minecraft.world.InteractionHand.values()){
+            owner.setItemInHand(hand,star?com.mcmagic.omnira.space.sea.StarlightContent.ROD.get().getDefaultInstance():net.minecraft.world.item.Items.FISHING_ROD.getDefaultInstance());
+            owner.setItemInHand(hand==net.minecraft.world.InteractionHand.MAIN_HAND?net.minecraft.world.InteractionHand.OFF_HAND:net.minecraft.world.InteractionHand.MAIN_HAND,net.minecraft.world.item.ItemStack.EMPTY);
+            double limit=extendedRange()?320:32;
+            for(double distance:new double[]{32,32.01,64,64.01,320,320.01}){
+                var hook=new net.minecraft.world.entity.projectile.FishingHook(net.minecraft.world.entity.EntityType.FISHING_BOBBER,level);
+                if(star)((com.mcmagic.omnira.space.sea.StarlightFloat)hook).omnira$markStarlight();
+                hook.setPos(origin.add(0,distance,0));
+                h.assertTrue((boolean)stop.invoke(hook,owner)==(distance>limit),"Incorrect range: star="+star+" hand="+hand+" distance="+distance+" expected limit="+limit);
+            }
+        }
+        var hook=new net.minecraft.world.entity.projectile.FishingHook(net.minecraft.world.entity.EntityType.FISHING_BOBBER,level);
+        ((com.mcmagic.omnira.space.sea.StarlightFloat)hook).omnira$markStarlight();hook.setPos(origin);
+        for(var hand:net.minecraft.world.InteractionHand.values())owner.setItemInHand(hand,net.minecraft.world.item.ItemStack.EMPTY);
+        h.assertTrue((boolean)stop.invoke(hook,owner),"Empty hands retained star float");
+        owner.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,com.mcmagic.omnira.space.sea.StarlightContent.ROD.get().getDefaultInstance());
+        owner.setHealth(0);
+        h.assertTrue((boolean)stop.invoke(hook,owner),"Dead owner retained star float");h.succeed();
     }
     private SpatialFishingGameTests(){}
     @GameTest(template="spell_arena") public static void specialFluidsUseVanillaOpenWater(GameTestHelper h)throws Exception{

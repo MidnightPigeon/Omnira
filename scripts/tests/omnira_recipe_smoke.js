@@ -18,8 +18,7 @@ ServerEvents.recipes(event => {
     substrate: { tag: 'minecraft:dirt' },
     seed: { item: 'minecraft:wheat_seeds' },
     fluid: { id: 'minecraft:water', amount: 100 },
-    result: { id: 'minecraft:wheat', count: 2 },
-    stages: 4
+    result: { id: 'minecraft:wheat', count: 2 }
   }).id('omnira_test:kubejs_catalysis');
 
   event.custom({

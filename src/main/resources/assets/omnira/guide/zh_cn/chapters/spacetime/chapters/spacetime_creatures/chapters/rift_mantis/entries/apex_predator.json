@@ -1,0 +1,9 @@
+{
+  "id": "apex_predator",
+  "title": "顶级掠食者",
+  "item": "omnira:apex_predator",
+  "recipes": false,
+  "text": [
+    "击杀生物或成功钓鱼时，额外抽取一次对应战利品。"
+  ]
+}

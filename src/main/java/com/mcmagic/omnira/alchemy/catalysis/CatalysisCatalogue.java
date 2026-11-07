@@ -46,7 +46,7 @@ public final class CatalysisCatalogue {
                 com.mcmagic.omnira.Omnira.LOGGER.warn("Cannot preview catalysis seed {}: {}",BuiltInRegistries.ITEM.getKey(item),failure.toString());
             }
             for(var product:products.values())result.add(new CatalysisRecipe(
-                    Ingredient.of(accepted.stream()),Ingredient.of(seed),water,product,plan.stages()));
+                    Ingredient.of(accepted.stream()),Ingredient.of(seed),water,product));
         }
         return List.copyOf(result);
     }

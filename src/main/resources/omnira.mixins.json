@@ -70,7 +70,8 @@
     "MireFishingMixin",
     "StarlightRodAttackMixin",
     "MireFluidMovementMixin",
-    "MireFishingRodMixin"
+    "MireFishingRodMixin",
+    "PredatorLootMixin"
   ],
   "client": [
     "StarlightFloatRendererMixin",

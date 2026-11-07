@@ -14,8 +14,10 @@ public final class GuideContactGameTests {
         for(var language:List.of("zh_cn","en_us")){
             var book=GuideContents.fromJson(GuidanceGameTests.guide(language));var chapters=book.chapters();
             h.assertTrue(chapters.getLast().id().equals("cross_worlds")&&chapters.stream().noneMatch(c->c.id().equals("contact_author")),"Contact escaped the cross-world chapter");
-            var contact=chapters.getLast().chapters().getLast();var intro=contact.introduction();
-            h.assertTrue(contact.id().equals("contact_author")&&book.destination("contact_author").orElseThrow().path().size()==2,"Contact bookmark does not resolve to its nested chapter");
+            var bookmark=book.destination("contact_author").orElseThrow();
+            var contact=bookmark.chapter();var intro=contact.introduction();
+            h.assertTrue(bookmark.entry()==null && bookmark.path().equals(List.of(chapters.getLast(),contact))
+                    && contact.id().equals("contact_author"),"Contact bookmark does not resolve to its nested chapter");
             h.assertTrue(contact.entries().isEmpty()&&contact.chapters().isEmpty()&&!intro.hasArtwork(),"Contact created a redundant directory or artwork placeholder");
             h.assertTrue(intro.externalLinks().stream().map(link->link.uri().toString()).toList().equals(List.of(
                     "https://github.com/MidnightPigeon/Omnira","https://midnightpigeon.github.io/")),"Incorrect contact URLs");

@@ -1,0 +1,12 @@
+{
+  "id": "rift_mantis_chapter",
+  "title": "裂隙螳",
+  "icon": "omnira:rift_mantis_spawn_egg",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/rift_mantis.json",
+    "entries/plunder_scythe.json",
+    "entries/apex_predator.json",
+    "entries/spatial_overload.json"
+  ]
+}

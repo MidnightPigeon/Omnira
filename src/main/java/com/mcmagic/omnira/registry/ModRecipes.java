@@ -68,13 +68,6 @@ public final class ModRecipes {
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<StarClusterOrbCraftRecipe>> STELLAR_ORB_CRAFT_SERIALIZER =
             SERIALIZERS.register("star_cluster_orb_crafting", () -> RecipeRegistration.serializer(StarClusterOrbCraftRecipe.CODEC, StarClusterOrbCraftRecipe.STREAM));
 
-    public static void aliasAdvancedAssemblyTable() {
-        var oldId = ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "advanced_forge");
-        var newId = ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "advanced_assembly_table");
-        TYPES.addAlias(oldId, newId);
-        SERIALIZERS.addAlias(oldId, newId);
-    }
-
     public static void register(IEventBus bus) {
         TYPES.register(bus);
         SERIALIZERS.register(bus);

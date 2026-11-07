@@ -1,0 +1,9 @@
+{
+  "id": "apex_predator",
+  "title": "Apex Predator",
+  "item": "omnira:apex_predator",
+  "recipes": false,
+  "text": [
+    "Killing creatures or successfully fishing rolls the corresponding loot once more."
+  ]
+}

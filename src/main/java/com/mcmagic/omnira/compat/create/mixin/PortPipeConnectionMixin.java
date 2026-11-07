@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 abstract class PortPipeConnectionMixin {
     @Shadow public Direction side;
     @WrapOperation(method="determineSource",at=@At(value="NEW",target="net/createmod/catnip/math/BlockFace"))
-    private BlockFace omnira$edge(BlockPos pos,Direction face,Operation<BlockFace> original,Level level,BlockPos origin){return new PortFluidFace(level,pos,face);}
+    private BlockFace omnira$edge(BlockPos pos,Direction face,Operation<BlockFace> original,Level level,BlockPos origin){return PortFluidFace.wrap(level,original.call(pos,face));}
     @WrapOperation(method="determineSource",at=@At(value="INVOKE",target="Lcom/simibubi/create/foundation/blockEntity/behaviour/BlockEntityBehaviour;get(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lcom/simibubi/create/foundation/blockEntity/behaviour/BehaviourType;)Lcom/simibubi/create/foundation/blockEntity/behaviour/BlockEntityBehaviour;"))
     private BlockEntityBehaviour omnira$pipe(BlockGetter world,BlockPos pos,BehaviourType<?> type,Operation<BlockEntityBehaviour> original,Level level,BlockPos origin){
         var remote=PortFluidFace.remote(level,origin,side);

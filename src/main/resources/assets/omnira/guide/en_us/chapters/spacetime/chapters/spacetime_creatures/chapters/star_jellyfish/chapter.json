@@ -1,0 +1,9 @@
+{
+  "id": "star_jellyfish_creature",
+  "title": "Star Jellyfish",
+  "icon": "omnira:star_jellyfish",
+  "entries": [
+    "entries/star_jellyfish_guide.json"
+  ],
+  "introduction": "introduction.json"
+}

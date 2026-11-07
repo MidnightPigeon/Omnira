@@ -10,6 +10,11 @@
     {"type":"minecraft:single","resource":"omnira:entity/light_spirit"},
     {"type":"minecraft:single","resource":"omnira:entity/shadow_ghost"},
     {"type":"minecraft:single","resource":"omnira:entity/shadow_mist"},
+    {"type":"minecraft:single","resource":"omnira:entity/time_thief_mosquito"},
+    {"type":"minecraft:single","resource":"omnira:entity/agecoil_snail"},
+    {"type":"minecraft:single","resource":"omnira:entity/riftstep_deer"},
+    {"type":"minecraft:single","resource":"omnira:entity/rift_mantis"},
+    {"type":"minecraft:single","resource":"omnira:entity/rift_moth"},
     {
       "type": "minecraft:single",
       "resource": "omnira:entity/solid_white"

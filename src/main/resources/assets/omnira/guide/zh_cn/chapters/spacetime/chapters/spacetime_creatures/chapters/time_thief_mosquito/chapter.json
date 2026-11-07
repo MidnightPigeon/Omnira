@@ -1,0 +1,12 @@
+{
+  "id": "time_thief_mosquito_creature",
+  "title": "窃时之蚊",
+  "icon": "omnira:time_thief_mosquito_spawn_egg",
+  "entries": [
+    "entries/time_thief_mosquito.json",
+    "entries/time_thieving_monocle.json",
+    "entries/time_thief_talent.json",
+    "entries/amon_gaze.json"
+  ],
+  "introduction": "introduction.json"
+}

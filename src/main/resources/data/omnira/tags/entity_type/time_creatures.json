@@ -1,1 +1,11 @@
-{"replace":false,"values":["omnira:timeflow_eel","omnira:chronal_blindfish","omnira:archaeopteryx_spirit","omnira:velociraptor"]}
+{
+  "replace": false,
+  "values": [
+    "omnira:timeflow_eel",
+    "omnira:chronal_blindfish",
+    "omnira:archaeopteryx_spirit",
+    "omnira:velociraptor",
+    "omnira:time_thief_mosquito",
+    "omnira:agecoil_snail"
+  ]
+}

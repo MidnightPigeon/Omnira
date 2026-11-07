@@ -31,10 +31,15 @@ public abstract class CrystalGlassLayer extends RenderType {
     public static final RenderType SHADOW_MIST=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/shadow_mist.png"));
     public static final RenderType PULSE_RING=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/pulse_ring.png"));
     public static final RenderType WEAVER_SPIRIT=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/weaver_spirit.png"));
-    private static final java.util.List<RenderType> ENTITY_LAYERS=java.util.List.of(HERON,ARMOR_OUTER,ARMOR_INNER,AMBER,ARCHAEOPTERYX,STAR_JELLYFISH,LIGHT_SPIRIT,SHADOW_GHOST,SHADOW_MIST,PULSE_RING,WEAVER_SPIRIT);
+    public static final RenderType TIME_MOSQUITO=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/time_thief_mosquito.png"));
+    public static final RenderType FAUNA_0=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/agecoil_snail.png"));
+    public static final RenderType FAUNA_1=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/riftstep_deer.png"));
+    public static final RenderType FAUNA_2=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/rift_mantis.png"));
+    public static final RenderType FAUNA_3=ENTITY.apply(ResourceLocation.parse("omnira:textures/entity/rift_moth.png"));
+    private static final java.util.List<RenderType> ENTITY_LAYERS=java.util.List.of(HERON,ARMOR_OUTER,ARMOR_INNER,AMBER,ARCHAEOPTERYX,STAR_JELLYFISH,LIGHT_SPIRIT,SHADOW_GHOST,SHADOW_MIST,PULSE_RING,WEAVER_SPIRIT,TIME_MOSQUITO,FAUNA_0,FAUNA_1,FAUNA_2,FAUNA_3);
     static {
         String[] textures={"entity/night_heron_feathers","models/armor/crystal_armor_layer_1","models/armor/crystal_armor_layer_2",
-                "entity/solid_white","entity/archaeopteryx_spirit","entity/star_jellyfish","entity/light_spirit","entity/shadow_ghost","entity/shadow_mist","entity/pulse_ring","entity/weaver_spirit"};
+                "entity/solid_white","entity/archaeopteryx_spirit","entity/star_jellyfish","entity/light_spirit","entity/shadow_ghost","entity/shadow_mist","entity/pulse_ring","entity/weaver_spirit","entity/time_thief_mosquito","entity/agecoil_snail","entity/riftstep_deer","entity/rift_mantis","entity/rift_moth"};
         for(int i=0;i<textures.length;i++)ENTITY_TEXTURES.put(ENTITY_LAYERS.get(i),ResourceLocation.parse("omnira:"+textures[i]));
     }
     static ResourceLocation atlasTexture(RenderType type){return ENTITY_TEXTURES.get(type);}

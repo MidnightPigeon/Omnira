@@ -58,7 +58,7 @@ public final class UtilitySpellEffects {
                 for(int i=0;i<yield;i++) target.spawnAtLocation(new ItemStack(ModItems.MILK_SUSPENSION.get()));
             }
         }
-        if(physicalDamage && effect.delay()==0) target.hurt(SpellDamageSource.physical(target,source,owner,"dissociation"),effect.physicalDamage(power));
+        if(physicalDamage && effect.delay()==0) SpellDamageSource.direct(target,SpellDamageSource.physical(target,source,owner,"dissociation"),effect.physicalDamage(power));
     }
     public static void applyBlock(SpellEffect effect,Entity owner,BlockPos hit,Direction face,BlockPos placement) {
         applyBlock(effect,owner,hit,face,placement,new BlockBatch());

@@ -1,0 +1,31 @@
+{
+  "id": "star_jellyfish_guide",
+  "title": "星水母",
+  "item": "omnira:star_jellyfish",
+  "recipes": false,
+  "related_items": [
+    "omnira:star_jellyfish_bucket",
+    "omnira:star_jellyfish_spawn_egg"
+  ],
+  "links": [
+    {
+      "target": "void_starflow_guide",
+      "label": "虚空星流"
+    },
+    {
+      "target": "void_crevice_guide",
+      "label": "虚空裂隙"
+    },
+    {
+      "target": "void_manta_guide",
+      "label": "虚空蝠鲼"
+    }
+  ],
+  "text": [
+    "星水母不会主动攻击玩家。受到攻击后会追踪攻击者并蓄力，释放半径5格、8点真实伤害的爆发，自身不会因此死亡或受伤。",
+    "星水母可以竖直或横向游动。",
+    "星水母属于空间生物，免疫空间群系负面效果和星流本身，不免疫时间系负面效果。它会闪避物理攻击，包括近战与箭矢，但不能闪避法术弹射物。",
+    "星水母死亡后掉落1个星水母物品和3–5个星尘。",
+    "星水母可以食用，恢复4点饥饿值，并像紫颂果一样尝试随机传送。它也可以在反应釜或反应池中无催化方块、无液体地反应为1个不稳定的时空聚合体。"
+  ]
+}

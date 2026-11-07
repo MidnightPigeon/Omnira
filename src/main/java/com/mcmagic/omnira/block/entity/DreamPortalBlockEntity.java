@@ -1,6 +1,7 @@
 package com.mcmagic.omnira.block.entity;
 
 import com.mcmagic.omnira.registry.*;
+import com.mcmagic.omnira.network.TransitViewPayload;
 import com.mcmagic.omnira.world.dimension.*;
 import net.minecraft.core.*;
 import net.minecraft.core.particles.*;
@@ -25,7 +26,7 @@ public final class DreamPortalBlockEntity extends BlockEntity {
     public static final int OPEN_TICKS=40;
     private long openedAt=-1;
     private final java.util.Map<java.util.UUID,Integer> entering=new java.util.HashMap<>();
-    public static final int TRANSIT_TICKS=24;
+    public static final int TRANSIT_TICKS=TransitViewPayload.PORTAL_TICKS;
     public DreamPortalBlockEntity(BlockPos pos,BlockState state) {super(ModBlockEntityTypes.DREAM_PORTAL.get(),pos,state);}
     public void initialize(boolean exit) {this.exit=exit;collapseAt=-1;openedAt=level==null?-1:level.getGameTime();sync();}
     public static BlockPos mappedReturn(ServerLevel source,BlockPos origin){
@@ -77,6 +78,7 @@ public final class DreamPortalBlockEntity extends BlockEntity {
                     enter(root);
                     if(!entering.containsKey(root.getUUID()))continue;
                     int ticks=entering.merge(root.getUUID(),1,Integer::sum);
+                    TransitViewPayload.charging(root, TransitViewPayload.Style.DREAM, ticks);
                     if(ticks%4==0)TransitionParticles.ring(source,root.position(),Math.max(.6,root.getBbWidth()*.6)*(1-ticks/(double)TRANSIT_TICKS),root.getBbHeight(),ticks/(double)TRANSIT_TICKS);
                     if(ticks>=TRANSIT_TICKS){entering.remove(root.getUUID());transfer(root);}
                 }

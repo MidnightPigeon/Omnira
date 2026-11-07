@@ -35,6 +35,49 @@ public final class AffinityGameTests {
         h.assertTrue(Math.abs((float)speed.invoke(p)-.16F)<.0001,"Unaligned flight lost vanilla sprint bonus");
         h.succeed();
     }
+    @GameTest(template="spell_arena") public static void deathResetsManaButEndReturnKeepsIt(GameTestHelper h) {
+        var player = player(h);
+        state(player, Affinity.DREAM);
+        double maximum = player.getAttributeValue(ModAttributes.MAX_MANA);
+        var charged = new ManaState(maximum + 50, maximum, Affinity.DREAM.ordinal());
+        player.setData(ModAttachments.MANA, charged);
+        ManaEvents.respawn(new net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerRespawnEvent(player, true));
+        h.assertTrue(player.getData(ModAttachments.MANA).equals(charged), "End return lost mana");
+        ManaEvents.respawn(new net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerRespawnEvent(player, false));
+        h.assertTrue(player.getData(ModAttachments.MANA).equals(charged.withCurrent(0)), "Death retained mana or lost affinity");
+        player.tickCount = ManaState.REGEN_INTERVAL;
+        ManaEvents.tick(new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(player));
+        h.assertTrue(player.getData(ModAttachments.MANA).current() > 0, "Mana did not regenerate after death");
+        h.succeed();
+    }
+
+    @GameTest(template="spell_arena") public static void spacetimeBlinkAndDirectHits(GameTestHelper h){
+        var cookie=net.minecraft.server.network.CommonListenerCookie.createInitial(new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"blink-test"),false);
+        var p=new net.minecraft.server.level.ServerPlayer(h.getLevel().getServer(),h.getLevel(),cookie.gameProfile(),cookie.clientInformation());
+        p.connection=new net.minecraft.server.network.ServerGamePacketListenerImpl(h.getLevel().getServer(),new net.minecraft.network.Connection(net.minecraft.network.protocol.PacketFlow.SERVERBOUND),p,cookie){
+            @Override public void send(net.minecraft.network.protocol.Packet<?> packet){}
+        };
+        state(p,Affinity.SPACETIME);
+        p.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(ModItems.MODULAR_STAFF.get()));
+        p.setPos(h.absoluteVec(new net.minecraft.world.phys.Vec3(4.5,45,4.5)));p.setXRot(0);p.setYRot(0);
+        var start=p.position();var mana=new ManaState(100,100);p.setData(ModAttachments.MANA,mana);
+        var context=com.mcmagic.omnira.item.staff.StaffCastContext.capture(p,p.getMainHandItem());
+        h.getLevel().getChunkAt(p.blockPosition().south(24));
+        h.assertTrue(SpacetimeBlink.cast(p),"Air blink was rejected");
+        h.assertTrue(Math.abs(start.distanceTo(p.position())-24)<.001,"Air blink did not travel 24 blocks");
+        h.assertTrue(p.getData(ModAttachments.MANA).current()==100-ManaCosts.cost(50,1,context.reduction()) && !SpacetimeBlink.cast(p),"Blink cost or shared cooldown incorrect");
+        p.getCooldowns().removeCooldown(p.getMainHandItem().getItem());p.setPos(start);
+        var wall=BlockPos.containing(p.getEyePosition()).south(5);h.getLevel().setBlockAndUpdate(wall,net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+        var sight=(net.minecraft.world.phys.BlockHitResult)p.pick(24,1,false);
+        h.assertTrue(sight.getType()==net.minecraft.world.phys.HitResult.Type.BLOCK && sight.getBlockPos().equals(wall),"Did not sight test wall: "+sight+" from "+p.position());
+        h.assertTrue(SpacetimeBlink.cast(p),"Side hit blink rejected: mana="+p.getData(ModAttachments.MANA));
+        h.assertTrue(p.blockPosition().equals(wall.above()),"Side hit landed at "+p.position()+" instead of "+wall.above());
+        var target=EntityType.COW.create(h.getLevel());target.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_ABSORPTION).setBaseValue(8);target.setAbsorptionAmount(8);float hp=target.getHealth();
+        var source=com.mcmagic.omnira.spell.SpellDamageSource.physical(target,p,p,"spell");
+        com.mcmagic.omnira.spell.SpellDamageSource.direct(target,source,2);
+        h.assertTrue(target.getHealth()==hp-2 && target.getAbsorptionAmount()==8,"Direct hit did not bypass absorption");
+        h.succeed();
+    }
     private static FakePlayer player(GameTestHelper h) {
         var p=new FakePlayer(h.getLevel(),new GameProfile(UUID.randomUUID(),"affinity-test"));
         p.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);
@@ -72,7 +115,7 @@ public final class AffinityGameTests {
             var pedestal=(com.mcmagic.omnira.block.entity.CrystalPedestalBlockEntity)level.getBlockEntity(pos);
             pedestal.setItem(0,new ItemStack(DreamContent.DREAM_CRYSTAL_BEDROCK.get()));pedestals.add(pedestal);
         }
-        for(var affinity:new Affinity[]{Affinity.LIGHT,Affinity.DARK,Affinity.ELEMENTAL,Affinity.DREAM}) {
+        for(var affinity:new Affinity[]{Affinity.LIGHT,Affinity.DARK,Affinity.ELEMENTAL,Affinity.DREAM,Affinity.ARCANE,Affinity.SPACETIME}) {
             state(p,Affinity.NONE);
             p.setPos(center.getX()+1.5,center.getY(),center.getZ()+.5);
             fill(pedestals,affinity.ordinal());
@@ -94,12 +137,23 @@ public final class AffinityGameTests {
             h.assertTrue(pedestals.get(1).getItem(0).getCount()==1,"Rejected switch consumed offerings");
             p.setItemInHand(InteractionHand.MAIN_HAND,affinity.offering());
             h.assertTrue(AffinityRitual.activate(p,center,InteractionHand.MAIN_HAND),"Same ritual did not start removal");
+            if(affinity==Affinity.SPACETIME){
+                com.mcmagic.omnira.fate.ManuscriptReward.grant(p,"talent",new ItemStack(ModItems.TIME_THIEF_TALENT.get()));
+                com.mcmagic.omnira.fate.ManuscriptReward.grant(p,"curse",new ItemStack(ModItems.AMON_GAZE.get()));
+                p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(net.minecraft.world.item.Items.TOTEM_OF_UNDYING));
+            }
             var removalPosition=p.position();
             for(int tick=0;tick<AffinityRitual.DURATION;tick++) {
                 AffinityRitual.advance(p);
                 h.assertTrue(p.position().equals(removalPosition),"Removal immobilized or lifted player");
                 if(affinity==Affinity.DREAM && tick==59)h.assertTrue(Math.abs(p.getData(ModAttachments.DREAM_SOLIDIFY)-.5F)<.001,"Dream removal did not solidify progressively");
             }
+            if(affinity==Affinity.SPACETIME){
+                h.assertTrue(p.getData(ModAttachments.AFFINITY).equals(AffinityState.NONE) && p.isAlive() && p.getOffhandItem().isEmpty(),"Renunciation must invoke true damage with totem revival");
+                h.assertTrue(com.mcmagic.omnira.fate.ManuscriptReward.equipped(p,"talent")==null && com.mcmagic.omnira.fate.ManuscriptReward.equipped(p,"curse")!=null,"Renunciation must destroy only the talent");
+                continue;
+            }
+            if(affinity==Affinity.ARCANE)h.assertTrue(com.mcmagic.omnira.spell.ConstructionLock.locked(p),"Arcane penalty did not confine");
             h.assertTrue(p.getData(ModAttachments.AFFINITY).penaltyTicks()==(affinity==Affinity.DREAM?0:affinity.penaltyDuration()),"Wrong removal duration");
             h.assertTrue(p.getAttributeValue(ModAttributes.MAX_MANA)==100,"Penalty retains bonuses");
             if(affinity==Affinity.DREAM){h.assertTrue(p.getData(ModAttachments.AFFINITY).equals(AffinityState.NONE),"Dream removal imposed penalty");continue;}

@@ -172,18 +172,6 @@
       ]
     },
     {
-      "id": "map:light_dark_core",
-      "title": "Light-Dark Spell Core",
-      "icon": "omnira:primordial_spell_core",
-      "text": [
-        "Craft a Light-Dark Spell Core at an Advanced Assembly Table."
-      ],
-      "links": [
-        "spell_core",
-        "advanced_ritual_energy_core_crafting"
-      ]
-    },
-    {
       "id": "map:dream_staff",
       "title": "Dream Casting Equipment",
       "icon": "omnira:shadow_staff_shaft",
@@ -208,7 +196,9 @@
         "infused_crystal_furnace",
         "infused_crystal_anvil",
         "infused_crystal_grindstone",
-        "pocket_magic_bottle"
+        "pocket_magic_bottle",
+        "crystal_plate_armor",
+        "crystal_dress"
       ]
     },
     {
@@ -390,6 +380,7 @@
       ],
       "links": [
         "wandering_star_cluster_orb",
+        "starlight_cluster",
         "stardust_guide",
         "temporal_energy",
         "spatial_energy"
@@ -442,7 +433,7 @@
     },
     {
       "id": "map:spacetime_fishing",
-      "title": "Fishing in Spacetime",
+      "title": "Fishing in the Spacetime Interstice",
       "icon": "omnira:starlight_fishing_rod",
       "text": [
         "Cast into Decayed Timeflow or Void Starflow. Reel in when the bobber dips beneath the surface."

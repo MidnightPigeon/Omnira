@@ -77,14 +77,14 @@ public final class CatalysisJei implements IModPlugin {
         dynamic=com.mcmagic.omnira.client.CatalysisCatalogueView.recipes.stream().map(recipe->new Display(recipe,true)).toList();
         recipes.addAll(dynamic);
         recipes.add(new Display(new CatalysisRecipe(Ingredient.of(DreamContent.TEMPORAL_SILT.get(),DreamContent.LIVING_TEMPORAL_SILT.get(),TimeNatureContent.SILT.get(),TimeNatureContent.LIVING_SILT.get(),com.mcmagic.omnira.mire.MireContent.SILT.get()),Ingredient.of(TimeNatureContent.SAPLING.get()),
-                new FluidStack(com.mcmagic.omnira.mire.MireContent.SOURCE.get(),100),new ItemStack(TimeNatureContent.LOG.get()),4),true));
+                new FluidStack(com.mcmagic.omnira.mire.MireContent.SOURCE.get(),100),new ItemStack(TimeNatureContent.LOG.get())),true));
         var shadowSoils=net.minecraft.core.registries.BuiltInRegistries.BLOCK.stream()
                 .filter(block->block.defaultBlockState().is(com.mcmagic.omnira.time.TemporalSoils.SHADOW))
                 .map(ItemStack::new).filter(stack->!stack.isEmpty());
         recipes.add(new Display(new CatalysisRecipe(Ingredient.of(shadowSoils),Ingredient.of(ShadowWoodContent.SAPLING.get()),
-                water,new ItemStack(DreamContent.SHADOW_LOG.get()),4),true));
+                water,new ItemStack(DreamContent.SHADOW_LOG.get())),true));
         for(var item:net.minecraft.core.registries.BuiltInRegistries.ITEM){var ore=CatalysisGrowth.ore(new ItemStack(item));if(ore.isEmpty())continue;
-            recipes.add(new Display(new CatalysisRecipe(Ingredient.of(DreamContent.EXCITED_SPATIAL_CRYSTAL.get()),Ingredient.of(item),new FluidStack(com.mcmagic.omnira.space.sea.VoidSeaContent.SOURCE.get(),100),ore,4),false));}
+            recipes.add(new Display(new CatalysisRecipe(Ingredient.of(DreamContent.EXCITED_SPATIAL_CRYSTAL.get()),Ingredient.of(item),new FluidStack(com.mcmagic.omnira.space.sea.VoidSeaContent.SOURCE.get(),100),ore),false));}
         r.addRecipes(TYPE,recipes);r.addRecipes(ASSEMBLY,List.of(new Assembly()));
     }
     public void registerRecipeCatalysts(IRecipeCatalystRegistration r){r.addRecipeCatalyst(new ItemStack(CatalysisContent.ITEM.get()),TYPE);r.addRecipeCatalyst(new ItemStack(ModItems.ROUGH_ALCHEMICAL_ENERGY_CORE.get()),ASSEMBLY);}

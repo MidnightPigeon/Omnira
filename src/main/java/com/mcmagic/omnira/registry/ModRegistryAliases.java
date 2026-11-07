@@ -11,10 +11,6 @@ public final class ModRegistryAliases {
         alias(ModItems.ITEMS, "crystal_blouse", "crystal_top");
         alias(ModBlocks.BLOCKS, "void_fissure", "void_crevice");
         alias(ModItems.ITEMS, "void_fissure", "void_crevice");
-        alias(ModBlocks.BLOCKS, "advanced_forge", "advanced_assembly_table");
-        alias(ModItems.ITEMS, "advanced_forge", "advanced_assembly_table");
-        alias(ModBlockEntityTypes.BLOCK_ENTITY_TYPES, "advanced_forge", "advanced_assembly_table");
-        alias(ModMenuTypes.MENU_TYPES, "advanced_forge", "advanced_assembly_table");
 
         alias(ModBlocks.BLOCKS, "test_spell_core", "primordial_spell_core");
         alias(ModItems.ITEMS, "test_spell_core", "primordial_spell_core");
@@ -42,7 +38,6 @@ public final class ModRegistryAliases {
             }
         }
 
-        ModRecipes.aliasAdvancedAssemblyTable();
     }
 
     private static void alias(DeferredRegister<?> register, String oldId, String newId) {

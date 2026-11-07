@@ -7,10 +7,12 @@
     "entries/spacetime_entry.json"
   ],
   "chapters": [
-    "chapters/spacetime_terrain/chapter.json"
+    "chapters/spacetime_terrain/chapter.json",
+    "chapters/spacetime_creatures/chapter.json"
   ],
   "directory_order": [
     "spacetime_entry",
-    "spacetime_terrain"
+    "spacetime_terrain",
+    "spacetime_creatures"
   ]
 }

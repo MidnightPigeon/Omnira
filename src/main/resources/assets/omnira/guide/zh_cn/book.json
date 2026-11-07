@@ -16,6 +16,7 @@
     "chapters/cross_worlds/chapter.json"
   ],
   "aliases": {
-    "guidance": "guidance_orb"
+    "guidance": "guidance_orb",
+    "star_sea_creatures_guide": "star_jellyfish_guide"
   }
 }

@@ -1,0 +1,9 @@
+{
+  "id": "plunder_scythe",
+  "title": "掠夺之镰",
+  "item": "omnira:plunder_scythe",
+  "recipes": false,
+  "text": [
+    "裂隙螳的稀有掉落物，基础掉落概率5%，每级抢夺增加5个百分点。右键使用后消耗，获得天赋“顶级掠食者”与诅咒“空间过载”；已有天赋或诅咒时无法激发。"
+  ]
+}

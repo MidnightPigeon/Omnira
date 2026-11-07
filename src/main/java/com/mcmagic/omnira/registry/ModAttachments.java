@@ -19,7 +19,7 @@ public final class ModAttachments {
     private static final Codec<ManaState> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.doubleRange(0, ManaState.MAX_CURRENT).fieldOf("current").forGetter(ManaState::current),
             Codec.doubleRange(0.000001, 1_000_000).fieldOf("maximum").forGetter(ManaState::maximum),
-            Codec.intRange(0,4).optionalFieldOf("affinity",0).forGetter(ManaState::affinity)
+            Codec.intRange(0,com.mcmagic.omnira.mana.Affinity.values().length-1).optionalFieldOf("affinity",0).forGetter(ManaState::affinity)
     ).apply(instance, ManaState::new));
     private static final StreamCodec<RegistryFriendlyByteBuf, ManaState> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.DOUBLE, ManaState::current, ByteBufCodecs.DOUBLE, ManaState::maximum,

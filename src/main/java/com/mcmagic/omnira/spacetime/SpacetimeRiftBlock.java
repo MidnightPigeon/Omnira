@@ -1,5 +1,7 @@
 package com.mcmagic.omnira.spacetime;
 
+import com.mcmagic.omnira.network.TransitViewPayload;
+import net.minecraft.server.level.ServerPlayer;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.*;
 import net.minecraft.server.level.ServerLevel;
@@ -26,6 +28,7 @@ public final class SpacetimeRiftBlock extends Block {
         if(!com.mcmagic.omnira.world.dimension.DreamTransitRules.allowed(root) || data.getLong("OmniraRiftCooldown")>level.getGameTime())return;
         if(Math.abs(pos.getX())!=2 || pos.getY()<CorridorLayout.FLOOR+1 || pos.getY()>CorridorLayout.FLOOR+3)return;
         Vec3 landing=null;
+        TransitViewPayload.Style arrival=null;
         var members=root.getSelfAndPassengers().toList();
         for(int attempt=0;attempt<16;attempt++){
             boolean time=level.random.nextBoolean();
@@ -44,10 +47,19 @@ public final class SpacetimeRiftBlock extends Block {
                     for(int cz=net.minecraft.util.Mth.floor(box.minZ)>>4;cz<=net.minecraft.util.Mth.floor(box.maxZ)>>4;cz++)level.getChunk(cx,cz);
                 if(!level.getWorldBorder().isWithinBounds(box) || !level.noCollision(box)){clear=false;break;}
             }
-            if(clear){landing=point;break;}
+            if(clear){
+                landing=point;
+                arrival=time ? TransitViewPayload.Style.TIME : TransitViewPayload.Style.SPACE;
+                break;
+            }
         }
         if(landing==null)return;
         for(var member:root.getSelfAndPassengers().toList())member.getPersistentData().putLong("OmniraRiftCooldown",level.getGameTime()+40);
-        com.mcmagic.omnira.space.anchor.StabilityField.portalTravel(root,new net.minecraft.world.level.portal.DimensionTransition(level,landing,Vec3.ZERO,root.getYRot(),root.getXRot(),e->e.fallDistance=0));
+        var moved = com.mcmagic.omnira.space.anchor.StabilityField.portalTravel(root,new net.minecraft.world.level.portal.DimensionTransition(level,landing,Vec3.ZERO,root.getYRot(),root.getXRot(),e->e.fallDistance=0));
+        if (moved != null) {
+            for (var member : moved.getSelfAndPassengers().toList()) {
+                if (member instanceof ServerPlayer player) TransitViewPayload.send(player, arrival);
+            }
+        }
     }
 }

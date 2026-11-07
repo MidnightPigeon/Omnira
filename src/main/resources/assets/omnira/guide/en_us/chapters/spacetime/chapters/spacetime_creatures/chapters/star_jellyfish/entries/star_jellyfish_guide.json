@@ -1,0 +1,31 @@
+{
+  "id": "star_jellyfish_guide",
+  "title": "Star Jellyfish",
+  "item": "omnira:star_jellyfish",
+  "recipes": false,
+  "related_items": [
+    "omnira:star_jellyfish_bucket",
+    "omnira:star_jellyfish_spawn_egg"
+  ],
+  "links": [
+    {
+      "target": "void_starflow_guide",
+      "label": "Void Starflow"
+    },
+    {
+      "target": "void_crevice_guide",
+      "label": "Void Crevice"
+    },
+    {
+      "target": "void_manta_guide",
+      "label": "Void Manta"
+    }
+  ],
+  "text": [
+    "Star Jellyfish do not proactively attack players. When struck, they pursue their attacker, charge and burst for 8 true damage within 5 blocks without harming themselves.",
+    "Star Jellyfish fly and swim. They prefer reachable waterlike pools within 16 blocks with at least a continuous 3x3x2 volume, and avoid Decayed Timeflow. Without suitable water, they wander roughly 2 to 6 blocks above the ground. They swim vertically and horizontally.",
+    "Star Jellyfish are space creatures, protected against spatial biome hazards and starflow, but not against time hazards. They evade physical attacks, including melee attacks and arrows, but cannot evade spell projectiles.",
+    "A Star Jellyfish drops one Star Jellyfish item and 3–5 Stardust.",
+    "Star Jellyfish can be eaten, restoring 4 hunger and attempting a random teleport like chorus fruit. One also reacts into one Unstable Spacetime Aggregate in either reaction vessel without liquid or a catalyst."
+  ]
+}

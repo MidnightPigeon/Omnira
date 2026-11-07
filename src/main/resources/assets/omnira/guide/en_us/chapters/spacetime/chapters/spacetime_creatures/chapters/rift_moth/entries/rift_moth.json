@@ -1,0 +1,10 @@
+{
+  "id": "rift_moth",
+  "title": "Rift Moth",
+  "item": "omnira:rift_moth_spawn_egg",
+  "recipes": false,
+  "text": [
+    "Rift Moths travel in flocks of 3–5 throughout the spacetime dimension, drifting near crystals and plants. Their wings glow gold-green in time biomes, blue-violet in space biomes, and alternate between the two in the Spacetime Corridor.",
+    "They do not attack, scatter when frightened, and leave no drops."
+  ]
+}

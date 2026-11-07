@@ -1,0 +1,10 @@
+{
+  "id": "time_thief_talent",
+  "title": "Time Thief",
+  "item": "omnira:time_thief_talent",
+  "recipes": false,
+  "text": [
+    "Grants 20% Life Steal.",
+    "Dealing damage attempts to inflict Slowness II, Weakness II and Wither II for 10 seconds. Each successfully applied effect grants you Speed II, Strength II or Regeneration II, respectively, for 10 seconds. An effect that is resisted or cannot be applied grants no corresponding benefit."
+  ]
+}

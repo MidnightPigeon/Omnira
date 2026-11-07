@@ -16,7 +16,8 @@ import java.util.*;
 /** Death storage owns its stacks; discard never spills them. */
 @net.neoforged.fml.common.EventBusSubscriber(modid="omnira")
 public final class TemporalAmber extends Entity {
-    private static final Map<Player,TemporalAmber> DYING=new IdentityHashMap<>();
+    private record PendingDeath(TemporalAmber amber, boolean sealDrops, Map<ItemStack,Entry> curioSlots) {}
+    private static final Map<Player,PendingDeath> DYING=new IdentityHashMap<>();
     private static final Set<Player> FORCED=Collections.newSetFromMap(new IdentityHashMap<>());
     private record Entry(String group,int slot,boolean cosmetic,ItemStack stack) {}
     private final List<Entry> contents=new ArrayList<>();
@@ -42,27 +43,40 @@ public final class TemporalAmber extends Entity {
         super.remove(reason);
     }
 
-    public static TemporalAmber capture(Player player){
+    private static TemporalAmber marker(Player player){
         var amber=ModEntityTypes.TEMPORAL_AMBER.get().create(player.level());
         amber.owner=player.getUUID();amber.setPos(player.position());
+        return amber;
+    }
+    public static TemporalAmber capture(Player player){
+        var amber=marker(player);
+        amber.captureInventory(player);
+        return amber;
+    }
+    private void captureInventory(Player player){
         var inventory=player.getInventory();
         for(int i=0;i<inventory.getContainerSize();i++){
-            amber.store("inventory",i,false,inventory.getItem(i));inventory.setItem(i,ItemStack.EMPTY);
+            store("inventory",i,false,inventory.getItem(i));inventory.setItem(i,ItemStack.EMPTY);
         }
         // Cursor and the personal crafting grid are also carried possessions, not the open chest.
-        amber.store("extra",-1,false,player.containerMenu.getCarried());player.containerMenu.setCarried(ItemStack.EMPTY);
+        store("extra",-1,false,player.containerMenu.getCarried());player.containerMenu.setCarried(ItemStack.EMPTY);
         for(int i=1;i<=4;i++){
-            var slot=player.inventoryMenu.getSlot(i);amber.store("extra",-1,false,slot.getItem());slot.set(ItemStack.EMPTY);
+            var slot=player.inventoryMenu.getSlot(i);store("extra",-1,false,slot.getItem());slot.set(ItemStack.EMPTY);
         }
+    }
+    // Track original slots, leaving the stacks and their death rules to Curios.
+    private static Map<ItemStack,Entry> curioSlots(Player player){
+        Map<ItemStack,Entry> slots=new IdentityHashMap<>();
         CuriosApi.getCuriosInventory(player).ifPresent(inv->new ArrayList<>(inv.getCurios().entrySet()).forEach(pair->{
             for(boolean cosmetic:new boolean[]{false,true}){
                 var stacks=cosmetic?pair.getValue().getCosmeticStacks():pair.getValue().getStacks();
                 for(int i=0;i<stacks.getSlots();i++){
-                    amber.store(pair.getKey(),i,cosmetic,stacks.getStackInSlot(i));stacks.setStackInSlot(i,ItemStack.EMPTY);
+                    var stack=stacks.getStackInSlot(i);
+                    if(!stack.isEmpty())slots.put(stack,new Entry(pair.getKey(),i,cosmetic,stack));
                 }
             }
         }));
-        return amber;
+        return slots;
     }
     public static void stormDamage(Player player){
         FORCED.add(player);
@@ -70,19 +84,29 @@ public final class TemporalAmber extends Entity {
         finally{FORCED.remove(player);}
     }
     public static void beginDeath(Player player){
-        if(!DYING.containsKey(player) && (FORCED.contains(player)||AnchoringSigilItem.equipped(player)))DYING.put(player,capture(player));
+        if(DYING.containsKey(player) || !(FORCED.contains(player)||AnchoringSigilItem.equipped(player)))return;
+        boolean keep=player.level().getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_KEEPINVENTORY);
+        var amber=marker(player);
+        if(!player.level().addFreshEntity(amber))return;
+        if(!keep)amber.captureInventory(player);
+        DYING.put(player,new PendingDeath(amber,!keep,keep?Map.of():curioSlots(player)));
     }
     public static void finishDeath(Player player){
-        var amber=DYING.remove(player);if(amber==null)return;
+        var death=DYING.remove(player);if(death==null)return;
+        var amber=death.amber();
         if(player.isAlive()){amber.interact(player,InteractionHand.MAIN_HAND);return;}
-        if(player.level().addFreshEntity(amber)){
-            amber.registered=true;AmberDirectory.get((net.minecraft.server.level.ServerLevel)player.level()).register(amber);
-        }
+        amber.registered=true;AmberDirectory.get((net.minecraft.server.level.ServerLevel)player.level()).register(amber);
     }
-    @net.neoforged.bus.api.SubscribeEvent(priority=net.neoforged.bus.api.EventPriority.LOWEST,receiveCanceled=true)
+    @net.neoforged.bus.api.SubscribeEvent(priority=net.neoforged.bus.api.EventPriority.LOWEST)
     public static void captureDeathDrops(net.neoforged.neoforge.event.entity.living.LivingDropsEvent event){
-        var amber=DYING.get(event.getEntity());if(amber==null)return;
-        for(var drop:event.getDrops())amber.storeExtra(drop.getItem());
+        var death=DYING.get(event.getEntity());if(death==null||!death.sealDrops())return;
+        var amber=death.amber();
+        for(var drop:event.getDrops()){
+            var stack=drop.getItem();
+            var origin=death.curioSlots().remove(stack);
+            if(origin==null)amber.storeExtra(stack);
+            else amber.store(origin.group(),origin.slot(),origin.cosmetic(),stack);
+        }
         event.getDrops().clear();event.setCanceled(true);
     }
     public void storeExtra(ItemStack stack){store("extra",-1,false,stack);}

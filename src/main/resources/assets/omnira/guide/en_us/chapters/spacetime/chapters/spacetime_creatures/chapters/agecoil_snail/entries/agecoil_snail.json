@@ -1,0 +1,11 @@
+{
+  "id": "agecoil_snail",
+  "title": "Agecoil Snail",
+  "item": "omnira:agecoil_snail_spawn_egg",
+  "recipes": false,
+  "text": [
+    "Agecoil Snails crawl across time biomes, their pale green shells traced with golden growth rings. Brief bursts of speed interrupt their leisurely pace. They are unaffected by the harmful effects of time biomes.",
+    "When hurt, it withdraws for one second, becoming invulnerable and untargetable. It then fires one wall-piercing disintegration ray at its attacker, dealing 1 true damage and removing 5% of maximum durability from both held items and four armor pieces, rounded up. Broken armor still triggers a disintegration explosion. The snail then returns to neutrality.",
+    "Drops 3–5 Time Warp Points when killed."
+  ]
+}

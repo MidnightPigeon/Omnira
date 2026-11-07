@@ -1,0 +1,10 @@
+{
+  "id": "time_thieving_monocle",
+  "title": "窃时之镜",
+  "item": "omnira:time_thieving_monocle",
+  "recipes": false,
+  "text": [
+    "窃时之蚊被击杀时有5%概率掉落，每级抢夺额外增加5个百分点。得手后自行消散的蚊子不会留下它。",
+    "右键使用会消耗窃时之镜，赋予天赋“时间窃取者”与诅咒“阿蒙的注视”。已有天赋或诅咒时无法使用。"
+  ]
+}

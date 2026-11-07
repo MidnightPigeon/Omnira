@@ -1,0 +1,9 @@
+{
+  "id": "timeflow_eel_creature",
+  "title": "时流鳗",
+  "icon": "omnira:timeflow_eel",
+  "entries": [
+    "entries/timeflow_eel_guide.json"
+  ],
+  "introduction": "introduction.json"
+}

@@ -70,7 +70,7 @@ public record SpellEffect(boolean healing,int amplifier,int duration,boolean inf
         if(holy && (duration==0 || utility()))power*=1.5;
         if(utility()) {UtilitySpellEffects.applyLiving(this,source,owner,target,power);return;}
         if(duration==0 && !healing && !infused) {
-            hit.hurt(SpellDamageSource.physical(target,source,owner,"spell"),
+            SpellDamageSource.direct(hit,SpellDamageSource.physical(target,source,owner,"spell"),
                     physicalDamage(power));
             return;
         }
@@ -82,7 +82,7 @@ public record SpellEffect(boolean healing,int amplifier,int duration,boolean inf
         if(duration==0&&healing==target.isInvertedHealAndHarm()) {
             // Vanilla instant-effect amount and undead inversion, with a spell-specific death message.
             int amount=instantAmount(6,amplifier,power);
-            target.hurt(SpellDamageSource.of(target,source==null?net.minecraft.world.damagesource.DamageTypes.MAGIC:net.minecraft.world.damagesource.DamageTypes.INDIRECT_MAGIC,source,owner,"spell"),amount);
+            SpellDamageSource.direct(target,SpellDamageSource.of(target,source==null?net.minecraft.world.damagesource.DamageTypes.MAGIC:net.minecraft.world.damagesource.DamageTypes.INDIRECT_MAGIC,source,owner,"spell"),amount);
         }
         else if(duration==0) target.heal(holy?(float)Math.ceil(Math.scalb(4D,amplifier)*power):instantAmount(4,amplifier,power));
         else target.addEffect(new MobEffectInstance(type(),duration,sustainedAmplifier(power)),owner);

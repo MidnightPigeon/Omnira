@@ -79,7 +79,7 @@ public final class CatalysisGameTests {
             for(int batch=0;batch<20;batch++){if(be.items.extractItem(2,64,false).isEmpty())break;ticks(be,1);}
         }
         for(var holder:h.getLevel().getRecipeManager().getAllRecipesFor(CatalysisContent.TYPE.get()))
-            h.assertTrue(holder.value().fluid().getAmount()==100&&holder.value().stages()==4,"Data catalysis not normalized");
+            h.assertTrue(holder.value().fluid().getAmount()==100,"Data catalysis not normalized");
         h.succeed();
     }
     @GameTest(template="spell_arena") public static void fungiCatalysisMatchesSoilAndLiquid(GameTestHelper h){

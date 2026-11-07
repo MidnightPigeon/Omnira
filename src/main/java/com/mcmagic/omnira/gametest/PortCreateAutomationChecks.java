@@ -16,6 +16,35 @@ import net.neoforged.neoforge.fluids.*;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 
 final class PortCreateAutomationChecks {
+    static void ordinaryPipes(GameTestHelper h){
+        var l=h.getLevel();var source=h.absolutePos(new BlockPos(2,4,2));var pump=source.east();var pipe=pump.east();var target=pipe.east();
+        l.setBlockAndUpdate(source,AllBlocks.FLUID_TANK.getDefaultState());
+        l.setBlockAndUpdate(target,AllBlocks.FLUID_TANK.getDefaultState());
+        l.setBlockAndUpdate(pump,AllBlocks.MECHANICAL_PUMP.getDefaultState().setValue(PumpBlock.FACING,Direction.EAST));
+        l.setBlockAndUpdate(pipe,AllBlocks.FLUID_PIPE.getDefaultState().setValue(FluidPipeBlock.PROPERTY_BY_DIRECTION.get(Direction.EAST),true).setValue(FluidPipeBlock.PROPERTY_BY_DIRECTION.get(Direction.WEST),true));
+        l.setBlockAndUpdate(pump.north(),AllBlocks.COGWHEEL.getDefaultState().setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.AXIS,Direction.Axis.X));
+        l.setBlockAndUpdate(pump.north().east(),AllBlocks.CREATIVE_MOTOR.getDefaultState().setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING,Direction.WEST));
+        ((com.simibubi.create.content.kinetics.motor.CreativeMotorBlockEntity)l.getBlockEntity(pump.north().east())).generatedSpeed.setValue(-64);
+        h.runAfterDelay(15,()->{
+            l.getCapability(Capabilities.FluidHandler.BLOCK,source,Direction.EAST).fill(new FluidStack(Fluids.LAVA,4000),FluidAction.EXECUTE);
+            ((PumpBlockEntity)l.getBlockEntity(pump)).updatePressureChange();
+        });
+        h.runAfterDelay(150,()->{
+            var out=l.getCapability(Capabilities.FluidHandler.BLOCK,target,Direction.WEST);
+            h.assertTrue(out!=null&&out.getFluidInTank(0).getAmount()>500,"Ordinary pump stopped transferring");h.succeed();
+        });
+    }
+    static void foreignFace(GameTestHelper h){
+        var pos=h.absolutePos(new BlockPos(4,4,4));
+        var foreign=new net.createmod.catnip.math.BlockFace(pos,Direction.EAST){
+            @Override public BlockPos getConnectedPos(){return pos.above(2);}
+            @Override public Direction getOppositeFace(){return Direction.DOWN;}
+        };
+        var result=com.mcmagic.omnira.compat.PortFluidFace.wrap(h.getLevel(),foreign);
+        h.assertTrue(result==foreign,"Ordinary network replaced a foreign connection object");
+        h.assertTrue(result.getConnectedPos().equals(pos.above(2))&&result.getOppositeFace()==Direction.DOWN,"Foreign topology lost");
+        h.succeed();
+    }
     static void funnel(GameTestHelper h){
         var l=h.getLevel();var a=h.absolutePos(new BlockPos(2,4,2));var b=h.absolutePos(new BlockPos(8,4,8));
         l.setBlockAndUpdate(a,Blocks.CHEST.defaultBlockState());l.setBlockAndUpdate(b,Blocks.CHEST.defaultBlockState());

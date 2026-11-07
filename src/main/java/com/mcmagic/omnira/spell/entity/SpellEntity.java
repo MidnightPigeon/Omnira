@@ -266,7 +266,7 @@ public class SpellEntity extends Entity {
         if(cabin!=null && owner!=target){cabin.impact();return;}
         triggerCloud(target.position());
         if(holy())com.mcmagic.omnira.spell.HolyMagic.touch(owner,living);
-        if(damage>0) target.hurt(SpellDamageSource.physical(living,this,owner,"spell"),damage*(holy()?1.5F:1));
+        if(damage>0) SpellDamageSource.direct(target,SpellDamageSource.physical(living,this,owner,"spell"),damage*(holy()?1.5F:1));
         if(knowledgeShock && knowledgeBlood() && living.isAlive())
             com.mcmagic.omnira.combat.OmniraDamage.trueDamage(living,2,SpellDamageSource.of(living,net.minecraft.world.damagesource.DamageTypes.GENERIC_KILL,this,owner,"spell"));
         for(var effect:effects) effect.apply(this,owner,target,power());
@@ -288,7 +288,7 @@ public class SpellEntity extends Entity {
             if(attacker instanceof LivingEntity living)com.mcmagic.omnira.spell.HolyMagic.touch(owner,living);
         }
         if(damage>0 && attacker instanceof LivingEntity living)
-            living.hurt(SpellDamageSource.physical(living,this,owner,"spell"),damage*(holy()?1.5F:1));
+            SpellDamageSource.direct(living,SpellDamageSource.physical(living,this,owner,"spell"),damage*(holy()?1.5F:1));
         for(var effect:effects) {
             Entity target=effect.healing()?bearer:attacker;
             if(target instanceof LivingEntity living && living.isAlive()) effect.apply(this,owner,living,power());

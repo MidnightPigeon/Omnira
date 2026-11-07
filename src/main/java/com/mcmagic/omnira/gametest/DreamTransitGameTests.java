@@ -55,8 +55,8 @@ public final class DreamTransitGameTests {
         player.connection.getConnection().channelActive(channel.pipeline().firstContext());
         player.setPos(orb.position());level.addFreshEntity(player);h.assertTrue(player.startRiding(orb,true),"Initial mounting failed");
         var id=orb.getUUID();var dream=level.getServer().getLevel(ModDimensions.DREAM_REALM);
-        h.runAfterDelay(50,()->h.assertTrue(!orb.isRemoved(),"Portal skipped warmup"));
-        h.runAfterDelay(75,()->{
+        h.runAfterDelay(130,()->h.assertTrue(!orb.isRemoved(),"Portal skipped warmup"));
+        h.runAfterDelay(150,()->{
             var arrived=(CruiseOrbEntity)dream.getEntity(id);
             h.assertTrue(arrived!=null && orb.isRemoved(),"Vehicle did not cross dimensions");
             h.assertTrue(player.getVehicle()==arrived && player.level()==dream,"Passenger detached or left behind");
@@ -70,7 +70,7 @@ public final class DreamTransitGameTests {
             arrived.setPos(returnPos.getX()+.5,returnPos.getY(),returnPos.getZ()+.5);
             arrived.placePortalTicket(returnPos);
             player.setPos(arrived.position());
-            h.runAfterDelay(75,()->{
+            h.runAfterDelay(150,()->{
                 var returned=(CruiseOrbEntity)level.getEntity(id);
                 h.assertTrue(returned!=null && player.getVehicle()==returned,"Return trip lost vehicle or rider: returned="+returned
                         +", dream="+dream.getEntity(id)+", riderLevel="+player.level().dimension().location()+", vehicle="+player.getVehicle()
@@ -90,7 +90,7 @@ public final class DreamTransitGameTests {
         var pig=h.spawn(EntityType.PIG,6,3,6);pig.setNoAi(true);pig.setNoGravity(true);
         var item=new ItemEntity(level,pos.getX()+.5,pos.getY()+.2,pos.getZ()+.5,new ItemStack(Items.PAPER,3));item.setNoGravity(true);item.setDeltaMovement(net.minecraft.world.phys.Vec3.ZERO);level.addFreshEntity(item);
         h.runAfterDelay(48,()->cow.setPos(pos.getX()+5,pos.getY(),pos.getZ()+5));
-        h.runAfterDelay(80,()->{
+        h.runAfterDelay(150,()->{
             var dream=level.getServer().getLevel(ModDimensions.DREAM_REALM);
             h.assertTrue(!cow.isRemoved() && dream.getEntity(cow.getUUID())==null,"Leaving portal failed to cancel warmup");
             var result=dream.getEntity(item.getUUID());

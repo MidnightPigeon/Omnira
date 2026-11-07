@@ -14,6 +14,10 @@ public final class ManaEvents {
 
     @SubscribeEvent
     public static void tick(PlayerTickEvent.Post event) {
+        if (event.getEntity() instanceof ServerPlayer player && player.deathTime > 0) {
+            clearCurrentMana(player);
+            return;
+        }
         if (event.getEntity() instanceof ServerPlayer player && player.isAlive() && !player.isSpectator()) {
             AffinityEffects.tick(player);
             ManaState before=player.getData(ModAttachments.MANA);
@@ -32,12 +36,22 @@ public final class ManaEvents {
 
     @SubscribeEvent
     public static void respawn(PlayerEvent.PlayerRespawnEvent event) {
+        if (!event.isEndConquered() && event.getEntity() instanceof ServerPlayer player) {
+            clearCurrentMana(player);
+        }
         synchronize(event);
     }
 
     @SubscribeEvent
     public static void changeDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
         synchronize(event);
+    }
+
+    private static void clearCurrentMana(ServerPlayer player) {
+        ManaState mana = player.getData(ModAttachments.MANA);
+        if (mana.current() > 0) {
+            player.setData(ModAttachments.MANA, mana.withCurrent(0));
+        }
     }
 
     private static void synchronize(PlayerEvent event) {

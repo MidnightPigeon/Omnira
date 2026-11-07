@@ -15,6 +15,25 @@ import java.util.UUID;
 @GameTestHolder("omnira_unified_damage")
 @PrefixGameTestTemplate(false)
 public final class UnifiedDamageGameTests {
+    @GameTest(template="spell_arena") public static void trueDamageDoesNotTriggerThorns(GameTestHelper h){
+        var attacker=h.spawn(EntityType.HUSK,3,3,3);var victim=h.spawn(EntityType.HUSK,4,3,3);
+        for(var mob:java.util.List.of(attacker,victim)){
+            mob.setNoAi(true);mob.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).setBaseValue(200);mob.setHealth(200);
+        }
+        var armor=new ItemStack(net.minecraft.world.item.Items.DIAMOND_CHESTPLATE);
+        // A test-only high level makes the native retaliation chance certain rather than flaky.
+        armor.enchant(h.getLevel().registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT)
+                .getHolderOrThrow(net.minecraft.world.item.enchantment.Enchantments.THORNS),10);
+        victim.setItemSlot(EquipmentSlot.CHEST,armor);
+        for(int i=0;i<10;i++)h.assertTrue(OmniraDamage.trueDamage(victim,1,victim.damageSources().mobAttack(attacker)),"True damage rejected");
+        h.assertTrue(victim.getHealth()==190,"True damage was reduced by armor");
+        h.assertTrue(attacker.getHealth()==200&&armor.getDamageValue()==0,"True damage triggered thorns or armor wear");
+        victim.invulnerableTime=0;attacker.invulnerableTime=0;
+        h.assertTrue(attacker.doHurtTarget(victim),"Ordinary control attack failed");
+        h.assertTrue(attacker.getHealth()<200,"Thorns positive control did not retaliate");
+        h.assertTrue(armor.getDamageValue()>0,"Ordinary attack did not use armor");h.succeed();
+    }
+
     @GameTest(template="spell_arena") public static void stormTotemRevivesBeforeAmberCapture(GameTestHelper h){
         for(var mode:new net.minecraft.world.level.GameType[]{net.minecraft.world.level.GameType.SURVIVAL,net.minecraft.world.level.GameType.CREATIVE,net.minecraft.world.level.GameType.SPECTATOR}){
             for(var hand:net.minecraft.world.InteractionHand.values()){

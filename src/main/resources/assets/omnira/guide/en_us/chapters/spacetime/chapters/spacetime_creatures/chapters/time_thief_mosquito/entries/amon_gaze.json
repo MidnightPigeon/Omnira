@@ -1,0 +1,10 @@
+{
+  "id": "amon_gaze",
+  "title": "Amon’s Gaze",
+  "item": "omnira:amon_gaze",
+  "recipes": false,
+  "text": [
+    "Each second, durability-bearing equipment in your main hand and offhand loses 1 durability, subject to Unbreaking. A monocle appears over your left eye while the curse remains.",
+    "A Star of Fulfillment removes the curse while preserving the talent. The Cleansing Rite removes both."
+  ]
+}

@@ -4,7 +4,7 @@
   "item": "omnira:spacetime_anchoring_sigil",
   "recipes": true,
   "text": [
-    "Wear in a charm slot to become immune to Slowness and Wither. On death, carried items, equipment and curios are sealed in Spacetime Amber. Right-click your amber to restore items to their original slots where possible; overflow remains inside.",
+    "Wear in a charm slot to become immune to Slowness and Wither. On death, carried items, equipment and any curios that drop are sealed in Spacetime Amber. Right-click your amber to restore items to their original slots where possible; overflow remains inside. With Keep Inventory enabled, you keep your items and an empty amber marks the destination for your recall crystal.",
     "The sigil protects against Decayed Timeflow, Reversion Mire rewinds and Eventide Ruins' half-maximum-health damage. This environmental protection does not cover Time Warp Points: their movement, attack and mining slowdown is independent of vanilla Slowness and still affects the wearer. The sigil does not cancel voluntarily used Time Potions or protect against spacetime storms.",
     "Both recall crystals record its Death Marker. Travelling there does not consume the marker; it remains until the amber is emptied or removed. Each player can have only one amber. Creating another breaks the old amber, spills its contents and moves the marker to the new location.",
     "Attacking amber breaks it and releases its items. A spacetime storm erases both the amber and its contents."

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "omnira:folded_caverns",
+    "omnira:dislocated_geodes",
+    "omnira:phase_crystal_grove",
+    "omnira:topological_labyrinth",
+    "omnira:inverted_abyss",
+    "omnira:void_starsea"
+  ]
+}

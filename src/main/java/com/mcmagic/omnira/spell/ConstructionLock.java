@@ -24,6 +24,12 @@ public final class ConstructionLock {
         apply(target,effect,null);
     }
     public static void apply(LivingEntity target,SpellEffect effect,ServerPlayer caster) {
+        apply(target,caster,100*(1<<effect.delay()),effect.infusion()>0,effect.enhancement());
+    }
+    public static void confine(ServerPlayer player,int ticks){
+        apply(player,null,ticks,false,0);
+    }
+    private static void apply(LivingEntity target,ServerPlayer caster,int duration,boolean mineable,int crush){
         if(target.level().isClientSide||!target.isAlive()||ConstructionPrison.boss(target))return;
         if(!locked(target) && target.getPersistentData().contains(KEY)) tick(target);
         var tag=target.getPersistentData().getCompound(KEY);
@@ -35,10 +41,10 @@ public final class ConstructionLock {
             if(target instanceof Mob mob) tag.putBoolean("no_ai",mob.isNoAi());
             target.stopRiding();
         }
-        long until=Math.max(tag.getLong("until"),target.level().getGameTime()+100L*(1<<effect.delay()));
+        long until=Math.max(tag.getLong("until"),target.level().getGameTime()+duration);
         tag.putLong("until",until);
-        tag.putBoolean("mineable",tag.getBoolean("mineable") || effect.infusion()>0);
-        tag.putInt("crush",Math.max(tag.getInt("crush"),effect.enhancement()));
+        tag.putBoolean("mineable",tag.getBoolean("mineable") || mineable);
+        tag.putInt("crush",Math.max(tag.getInt("crush"),crush));
         if(tag.getBoolean("mineable")) {
             int ticks=(int)(until-target.level().getGameTime());
             if(tag.hasUUID("seal"))ConstructionPrison.refresh(target,tag,ticks);

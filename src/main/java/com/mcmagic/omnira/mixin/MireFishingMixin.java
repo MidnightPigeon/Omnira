@@ -69,6 +69,12 @@ abstract class MireFishingMixin implements StarlightFloat {
         var target=((FishingHook)(Object)this).getHookedIn();
         if(rod==omnira$castingRod&&target!=null)omnira$strike(target);
     }
+    @WrapOperation(method="retrieve",at=@At(value="INVOKE",target="Lnet/minecraft/world/level/storage/loot/LootTable;getRandomItems(Lnet/minecraft/world/level/storage/loot/LootParams;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"))
+    private ObjectArrayList<ItemStack> omnira$predatorCatch(LootTable table,net.minecraft.world.level.storage.loot.LootParams params,Operation<ObjectArrayList<ItemStack>> original){
+        var items=original.call(table,params);
+        if(com.mcmagic.omnira.fate.PredatorFate.extraLoot(((FishingHook)(Object)this).getPlayerOwner()))items.addAll(original.call(table,params));
+        return items;
+    }
     // Roll each bonus independently before ItemFishedEvent, so cancellation discards the whole catch.
     @ModifyExpressionValue(method="retrieve",at=@At(value="INVOKE",target="Lnet/minecraft/world/level/storage/loot/LootTable;getRandomItems(Lnet/minecraft/world/level/storage/loot/LootParams;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"))
     private ObjectArrayList<ItemStack> omnira$starlightCatch(ObjectArrayList<ItemStack> catchItems, ItemStack rod) {
@@ -97,12 +103,6 @@ abstract class MireFishingMixin implements StarlightFloat {
             SynchedEntityData.defineId(FishingHook.class, EntityDataSerializers.BYTE);
 
     @Override public int omnira$fishingPhase(){return ((FishingHook)(Object)this).getEntityData().get(omnira$phase);}
-
-    @org.spongepowered.asm.mixin.injection.ModifyConstant(method="shouldStopFishing",
-            constant=@org.spongepowered.asm.mixin.injection.Constant(doubleValue=1024.0))
-    private double omnira$lineLength(double vanilla){
-        return omnira$isStarlight()?64.0*64.0:vanilla;
-    }
 
     @Inject(method="catchingFish",at=@At("RETURN"))
     private void omnira$syncFishingPhase(BlockPos pos,CallbackInfo ci){

@@ -1,0 +1,21 @@
+{
+  "id": "crystal_dress",
+  "item": "omnira:crystal_top",
+  "title": "灵晶裙装",
+  "text": [
+    "灵晶板甲可在魔动装配台改塑为同部位的裙装。遮阳帽、上装、中裙与袜鞋保有同部位板甲的防护，每件也能提高法力上限。",
+    "穿齐裙装可增强法术、减轻受到的伤害，并降低自身重力。混搭板甲与裙装仍有单件加成，套装效果需要同套四件。"
+  ],
+  "recipes": true,
+  "related_items": [
+    "omnira:crystal_sunhat",
+    "omnira:crystal_skirt",
+    "omnira:crystal_stocking_shoes"
+  ],
+  "links": [
+    {
+      "target": "crystal_plate_armor",
+      "label": "灵晶板甲"
+    }
+  ]
+}

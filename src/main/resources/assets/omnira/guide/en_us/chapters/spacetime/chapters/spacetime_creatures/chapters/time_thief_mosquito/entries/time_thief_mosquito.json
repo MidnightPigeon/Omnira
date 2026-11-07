@@ -1,0 +1,17 @@
+{
+  "id": "time_thief_mosquito",
+  "title": "Time-Thief Mosquito",
+  "item": "omnira:time_thief_mosquito_spawn_egg",
+  "recipes": false,
+  "text": [
+    "A small threat born of temporal shifts. These pale-green, monocled mosquitoes occasionally appear 3–5 blocks above the ground in time biomes.",
+    "A mosquito seeks a player and attaches for 5 seconds, then steals time from their equipment. Durability-bearing items in all four armor slots, both hands and the hotbar lose 10% of their maximum durability, rounded up. Each item is affected once; other inventory slots and accessory slots are unaffected.",
+    "After feeding, it gradually dissolves without dropping anything. Kill it before it succeeds to obtain 3–5 Time Warp Points."
+  ],
+  "links": [
+    {
+      "target": "time_thieving_monocle",
+      "label": "Time-Thieving Monocle"
+    }
+  ]
+}

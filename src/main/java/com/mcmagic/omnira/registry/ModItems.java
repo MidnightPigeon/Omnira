@@ -50,6 +50,11 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> MEMORY_CUBE=ITEMS.register("memory_cube",()->new com.mcmagic.omnira.item.MemoryCubeBlockItem(ModBlocks.MEMORY_CUBE.get(),new Item.Properties()));
     public static final DeferredItem<Item> PEACEFUL_MEMORY=ITEMS.register("peaceful_memory_cube",()->new com.mcmagic.omnira.item.MemoryCubeItem(new Item.Properties(),true));
     public static final DeferredItem<Item> CORRUPTED_MEMORY=ITEMS.register("corrupted_memory_cube",()->new com.mcmagic.omnira.item.MemoryCubeItem(new Item.Properties(),false));
+    public static final DeferredItem<Item> AGECOIL_SNAIL_EGG=ITEMS.register("agecoil_snail_spawn_egg",()->new net.neoforged.neoforge.common.DeferredSpawnEggItem(ModEntityTypes.AGECOIL_SNAIL,0xEBE5CB,0x86BD89,new Item.Properties()));
+    public static final DeferredItem<Item> RIFTSTEP_DEER_EGG=ITEMS.register("riftstep_deer_spawn_egg",()->new net.neoforged.neoforge.common.DeferredSpawnEggItem(ModEntityTypes.RIFTSTEP_DEER,0x70899E,0xD4F6F0,new Item.Properties()));
+    public static final DeferredItem<Item> RIFT_MANTIS_EGG=ITEMS.register("rift_mantis_spawn_egg",()->new net.neoforged.neoforge.common.DeferredSpawnEggItem(ModEntityTypes.RIFT_MANTIS,0x303963,0xBFB4F3,new Item.Properties()));
+    public static final DeferredItem<Item> RIFT_MOTH_EGG=ITEMS.register("rift_moth_spawn_egg",()->new net.neoforged.neoforge.common.DeferredSpawnEggItem(ModEntityTypes.RIFT_MOTH,0xE8E8E0,0x9CCDD2,new Item.Properties()));
+    public static final DeferredItem<Item> TIME_THIEF_MOSQUITO_EGG=ITEMS.register("time_thief_mosquito_spawn_egg",()->new net.neoforged.neoforge.common.DeferredSpawnEggItem(ModEntityTypes.TIME_THIEF_MOSQUITO,0x517D69,0xD6F4AA,new Item.Properties()));
     public static final DeferredItem<Item> TIME_WARP_POINT=ITEMS.registerSimpleItem("time_warp_point",new Item.Properties().stacksTo(16));
     public static final DeferredItem<BlockItem> GOLDEN_THRONE=ITEMS.registerSimpleBlockItem(ModBlocks.GOLDEN_THRONE);
     public static final DeferredItem<BlockItem> GOLDEN_TOILET=ITEMS.registerSimpleBlockItem(ModBlocks.GOLDEN_TOILET);
@@ -133,8 +138,14 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> ANALYSIS_ARTISAN_TABLE = ITEMS.registerSimpleBlockItem(ModBlocks.ANALYSIS_ARTISAN_TABLE);
 
     public static final DeferredItem<Item> SHADOW_MANUSCRIPT = ITEMS.registerSimpleItem("shadow_manuscript");
-    public static final DeferredItem<Item> TRAVELER_MANUSCRIPT = ITEMS.registerItem("traveler_manuscript",com.mcmagic.omnira.item.TravelerManuscriptItem::new,new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> TRAVELER_MANUSCRIPT = ITEMS.registerItem("traveler_manuscript",com.mcmagic.omnira.item.TravelerManuscriptItem::new,new Item.Properties().stacksTo(1).rarity(Rarity.RARE));
     public static final DeferredItem<Item> PSYKER_TALENT=fate("psyker_talent",com.mcmagic.omnira.item.FateCurioItem.Kind.PSYKER);
+    public static final DeferredItem<Item> TIME_THIEF_TALENT=fate("time_thief_talent",com.mcmagic.omnira.item.FateCurioItem.Kind.TIME_THIEF);
+    public static final DeferredItem<Item> AMON_GAZE=fate("amon_gaze",com.mcmagic.omnira.item.FateCurioItem.Kind.AMON_GAZE);
+    public static final DeferredItem<Item> APEX_PREDATOR=fate("apex_predator",com.mcmagic.omnira.item.FateCurioItem.Kind.APEX_PREDATOR);
+    public static final DeferredItem<Item> SPATIAL_OVERLOAD=fate("spatial_overload",com.mcmagic.omnira.item.FateCurioItem.Kind.SPATIAL_OVERLOAD);
+    public static final DeferredItem<Item> PLUNDER_SCYTHE=ITEMS.register("plunder_scythe",()->new com.mcmagic.omnira.fate.FatePairItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON),APEX_PREDATOR,SPATIAL_OVERLOAD));
+    public static final DeferredItem<Item> TIME_THIEVING_MONOCLE=ITEMS.register("time_thieving_monocle",()->new com.mcmagic.omnira.fate.TimeThievingMonocleItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final DeferredItem<Item> ARCANIST_TALENT=fate("arcanist_talent",com.mcmagic.omnira.item.FateCurioItem.Kind.ARCANIST);
     public static final DeferredItem<Item> STORM_CURSE=fate("storm_curse",com.mcmagic.omnira.item.FateCurioItem.Kind.STORM);
     public static final DeferredItem<Item> RAIN_SOAKED_SUITCASE=ITEMS.registerItem("rain_soaked_suitcase",com.mcmagic.omnira.fate.RainSoakedSuitcaseItem::new,new Item.Properties().stacksTo(1).rarity(Rarity.RARE));

@@ -1,0 +1,21 @@
+{
+  "id": "crystal_plate_armor",
+  "item": "omnira:crystal_chestplate",
+  "title": "灵晶板甲",
+  "text": [
+    "在工作台用注灵水晶制作板甲。每件都能提高法力上限；穿齐四件，还会提高法术强度和近战伤害，并减轻受到的伤害。",
+    "在魔动装配台可将每件板甲改塑为对应部位的裙装，也可改回。耐久和附魔会随装备保留。"
+  ],
+  "recipes": true,
+  "related_items": [
+    "omnira:crystal_helmet",
+    "omnira:crystal_leggings",
+    "omnira:crystal_boots"
+  ],
+  "links": [
+    {
+      "target": "crystal_dress",
+      "label": "灵晶裙装"
+    }
+  ]
+}

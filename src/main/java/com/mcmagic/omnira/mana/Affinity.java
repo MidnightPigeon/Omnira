@@ -5,8 +5,10 @@ import net.minecraft.world.item.ItemStack;
 
 public enum Affinity {
     NONE(0xFFFFFF,0,0,0,0), LIGHT(0xFFE5A3,200,.2,0,0),
-    DARK(0xB49CDE,0,0,.2,10), ELEMENTAL(0x9FE3D6,100,.1,.1,5), DREAM(0xAC9DEF,200,0,.3,10);
+    DARK(0xB49CDE,0,0,.2,10), ELEMENTAL(0x9FE3D6,100,.1,.1,5), DREAM(0xAC9DEF,200,0,.3,10),
+    ARCANE(0xC895FA,500,.5,-.2,0), SPACETIME(0x69D8CE,0,-.2,.2,0);
 
+    public static final java.util.List<Affinity> VISIBLE=java.util.List.of(LIGHT,DARK,ELEMENTAL,ARCANE,SPACETIME);
     public final int color;
     public final double capacity, regeneration, power, reduction;
     Affinity(int color,double capacity,double regeneration,double power,double reduction) {
@@ -14,6 +16,8 @@ public enum Affinity {
     }
     public static Affinity byId(int id) {return id>=0 && id<values().length?values()[id]:NONE;}
     public static Affinity offering(ItemStack stack) {
+        if(stack.is(ModItems.ENHANCED_RESONANCE_TERMINAL.get()))return ARCANE;
+        if(stack.is(ModItems.SPACETIME_SPELL_CORE.get()))return SPACETIME;
         if(stack.is(ModItems.DREAM_SPELL_CORE.get()))return DREAM;
         if(stack.is(ModItems.LIGHT_MICROCORE.get()))return LIGHT;
         if(stack.is(ModItems.DARK_MICROCORE.get()))return DARK;
@@ -23,10 +27,12 @@ public enum Affinity {
         return new ItemStack(switch(this) {
             case LIGHT -> ModItems.LIGHT_MICROCORE.get();
             case DARK -> ModItems.DARK_MICROCORE.get();
+            case ARCANE -> ModItems.ENHANCED_RESONANCE_TERMINAL.get();
+            case SPACETIME -> ModItems.SPACETIME_SPELL_CORE.get();
             case DREAM -> ModItems.DREAM_SPELL_CORE.get();
             default -> ModItems.ANALYSIS_CRYSTAL.get();
         });
     }
-    public int penaltyDuration() {return this==DARK?1200:2400;}
+    public int penaltyDuration() {return this==DARK||this==ARCANE?1200:2400;}
     public String key() {return "mana_affinity.omnira."+(this==NONE?"unattuned":name().toLowerCase(java.util.Locale.ROOT));}
 }

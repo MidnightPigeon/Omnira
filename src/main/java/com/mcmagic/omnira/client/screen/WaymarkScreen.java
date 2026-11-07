@@ -19,17 +19,25 @@ public final class WaymarkScreen extends ResponsiveContainerScreen<WaymarkMenu> 
     private final List<Button> deleteButtons=new ArrayList<>();
     private List<Integer> filtered=List.of();
     private Button previous,next;
-    private int page,rowCount;
-    public WaymarkScreen(WaymarkMenu menu,Inventory inventory,Component title) {super(menu,inventory,title);imageWidth=256;imageHeight=220;}
+    private int page,rowCount,removedCount;
+    private String[] labels,locations,searchTexts;
+    private double[] costs;
+    private Component[] rowTexts;
+    public WaymarkScreen(WaymarkMenu menu,Inventory inventory,Component title) {super(menu,inventory,title);imageWidth=280;imageHeight=220;}
     @Override protected void init() {
-        imageWidth=256;imageHeight=menu.editing?124:220;
+        imageWidth=280;imageHeight=menu.editing?124:220;
         super.init();rows.clear();deleteButtons.clear();
-        input=addRenderableWidget(new EditBox(font,leftPos+12,topPos+32,imageWidth-24,18,Component.translatable(menu.editing?"gui.omnira.waymark.name":"gui.omnira.waymark.search")));
+        labels=new String[menu.entries.size()];locations=new String[labels.length];searchTexts=new String[labels.length];costs=new double[labels.length];rowTexts=new Component[labels.length];
+        for(int i=0;i<labels.length;i++){labels[i]=uncachedLabel(i);locations[i]=location(menu.entries.get(i));searchTexts[i]=(labels[i]+" "+locations[i]).toLowerCase(Locale.ROOT);rowTexts[i]=Component.literal(labels[i]+"\n"+locations[i]);}
+        input=addRenderableWidget(new EditBox(font,leftPos+12,topPos+35,imageWidth-24,16,Component.translatable(menu.editing?"gui.omnira.waymark.name":"gui.omnira.waymark.search")));
         input.setMaxLength(32);
+        input.setBordered(false);
+        input.setTextColor(MachinePanelArt.LIGHT);
+        input.setTextColorUneditable(0xFF98AFB7);
         if(menu.editing) {
             input.setValue(menu.entries.getFirst().name());
-            addRenderableWidget(Button.builder(Component.translatable("gui.done"),b->PacketDistributor.sendToServer(new RenameWaymarkPayload(menu.containerId,input.getValue())))
-                    .bounds(leftPos+imageWidth-92,topPos+imageHeight-30,80,20).build());
+            addRenderableWidget(new CrystalActionButton(leftPos+imageWidth-92,topPos+imageHeight-30,80,20,Component.translatable("gui.done"),
+                    b->PacketDistributor.sendToServer(new RenameWaymarkPayload(menu.containerId,input.getValue()))));
             setInitialFocus(input);
         } else {
             input.setHint(Component.translatable("gui.omnira.waymark.search"));
@@ -43,47 +51,72 @@ public final class WaymarkScreen extends ResponsiveContainerScreen<WaymarkMenu> 
                     @Override protected void renderWidget(GuiGraphics g,int mx,int my,float partial) {
                         int index=page*rowCount+slot;if(index>=filtered.size()) return;
                         var entry=menu.entries.get(filtered.get(index));
-                        g.fill(getX(),getY(),getX()+getWidth(),getY()+getHeight(),isHoveredOrFocused()?0xFFACBAC0:0xFFB5B5B5);
-                        g.hLine(getX(),getX()+getWidth()-1,getY(),0xFFEAEAEA);
-                        g.hLine(getX(),getX()+getWidth()-1,getY()+getHeight()-1,0xFF777777);
+                        MachinePanelArt.frame(CrystalUi.pixels(g,getX(),getY()),0,0,getWidth(),getHeight(),
+                                isHoveredOrFocused()?0xFF486B7B:0xFF304D5D);
                         String cost="-"+(int)Math.ceil(cost(filtered.get(index)));
-                        g.drawString(font,font.plainSubstrByWidth(label(filtered.get(index)),getWidth()-font.width(cost)-18),getX()+5,getY()+4,0xFF222222,false);
-                        g.drawString(font,cost,getX()+getWidth()-font.width(cost)-5,getY()+4,active?0xFF334B53:0xFF92504B,false);
+                        g.drawString(font,font.plainSubstrByWidth(label(filtered.get(index)),getWidth()-font.width(cost)-18),getX()+5,getY()+4,MachinePanelArt.LIGHT,false);
+                        g.drawString(font,cost,getX()+getWidth()-font.width(cost)-5,getY()+4,active?MachinePanelArt.MINT:0xFFECAAA3,false);
                         g.pose().pushPose();g.pose().translate(getX()+5,getY()+15,0);g.pose().scale(.75F,.75F,1);
-                        String detail=dimensionName(entry.dimension());
-                        g.drawString(font,font.plainSubstrByWidth(detail,(int)((getWidth()-10)/.75F)),0,0,0xFF4A4A4A,false);
+                        String detail=locations[filtered.get(index)];
+                        g.drawString(font,font.plainSubstrByWidth(detail,(int)((getWidth()-10)/.75F)),0,0,0xFFBCD5DD,false);
                         g.pose().popPose();
                     }
                 }));
-                deleteButtons.add(addRenderableWidget(PixelButtons.builder(Component.literal("×"),b->{
+                var delete = new CrystalActionButton(leftPos+imageWidth-32,topPos+61+row*28,20,20,Component.literal("×"),b->{
                     int index=page*rowCount+slot;
-                    if(index<filtered.size()) PacketDistributor.sendToServer(new SelectWaymarkPayload(menu.containerId,-filtered.get(index)-1));
-                }).bounds(leftPos+imageWidth-32,topPos+61+row*28,20,20)
-                        .tooltip(Tooltip.create(Component.translatable("gui.omnira.waymark.delete"))).build()));
+                    if(index<filtered.size()) confirmDelete(filtered.get(index));
+                });
+                delete.setTooltip(Tooltip.create(Component.translatable("gui.omnira.waymark.delete")));
+                deleteButtons.add(addRenderableWidget(delete));
             }
-            previous=addRenderableWidget(PixelButtons.builder(Component.literal("<"),b->{page--;updateRows();}).bounds(leftPos+imageWidth-54,topPos+imageHeight-28,20,20).build());
-            next=addRenderableWidget(PixelButtons.builder(Component.literal(">"),b->{page++;updateRows();}).bounds(leftPos+imageWidth-30,topPos+imageHeight-28,20,20).build());
+            previous=addRenderableWidget(new CrystalActionButton(leftPos+imageWidth-54,topPos+imageHeight-28,20,20,Component.literal("<"),b->{page--;updateRows();}));
+            previous.setTooltip(Tooltip.create(Component.translatable("guide.omnira.previous")));
+            next=addRenderableWidget(new CrystalActionButton(leftPos+imageWidth-30,topPos+imageHeight-28,20,20,Component.literal(">"),b->{page++;updateRows();}));
+            next.setTooltip(Tooltip.create(Component.translatable("guide.omnira.next")));
             input.setResponder(value->{page=0;filter();});filter();
         }
     }
-    private String label(int index) {
+    private void confirmDelete(int index) {
+        String search = input.getValue();
+        int currentPage = page;
+        minecraft.setScreen(new WaymarkDeleteScreen(Component.literal(label(index)), accepted -> {
+            if (minecraft.player == null || minecraft.player.containerMenu != menu) {
+                minecraft.setScreen(null);
+                return;
+            }
+            minecraft.setScreen(this);
+            input.setValue(search);
+            page = currentPage;
+            updateRows();
+            if (accepted) PacketDistributor.sendToServer(new SelectWaymarkPayload(menu.containerId,-index-1));
+        }));
+    }
+
+    private String label(int index) {return labels[index];}
+    private String uncachedLabel(int index) {
         var name=menu.entries.get(index).name();
         if(name.equals(com.mcmagic.omnira.spacetime.AmberDirectory.MARK_NAME))return Component.translatable(name).getString();
         return name.isBlank()?Component.translatable("gui.omnira.waymark.unnamed").getString():name;
     }
     private static String dimensionName(net.minecraft.resources.ResourceLocation dimension) {
-        String key=dimension.toLanguageKey("dimension");
-        return net.minecraft.client.resources.language.I18n.exists(key)
-                ? Component.translatable(key).getString() : dimension.toString();
+        // Minecraft's language table already falls back to en_us before using the supplied ID path.
+        return Component.translatableWithFallback(dimension.toLanguageKey("dimension"),dimension.getPath()).getString();
     }
-    private double cost(int index) {
+    private static String location(com.mcmagic.omnira.travel.WaymarkDirectory.Entry entry) {
+        String dimension = dimensionName(entry.dimension());
+        if (entry.biome() == null || entry.biome().getPath().isBlank()) return dimension;
+        String biome = Component.translatableWithFallback(entry.biome().toLanguageKey("biome"),entry.biome().getPath()).getString();
+        return biome.isBlank() ? dimension : dimension + " · " + biome;
+    }
+    private double cost(int index) {return costs[index];}
+    private double calculateCost(int index) {
         if(minecraft.player.getItemInHand(menu.hand).getItem() instanceof RecallCrystalItem crystal)
             return com.mcmagic.omnira.mana.ManaCosts.cost(minecraft.player,crystal.baseCost(!menu.entries.get(index).dimension().equals(minecraft.level.dimension().location())));
         return 0;
     }
     private void filter() {
         String query=input.getValue().toLowerCase(Locale.ROOT);
-        filtered=java.util.stream.IntStream.range(0,menu.entries.size()).filter(i->(label(i)+" "+dimensionName(menu.entries.get(i).dimension())).toLowerCase(Locale.ROOT).contains(query)).boxed().toList();
+        filtered=java.util.stream.IntStream.range(0,menu.entries.size()).filter(i->!menu.removedEntries.contains(i) && searchTexts[i].contains(query)).boxed().toList();
         updateRows();
     }
     private void updateRows() {
@@ -91,10 +124,17 @@ public final class WaymarkScreen extends ResponsiveContainerScreen<WaymarkMenu> 
         previous.active=page>0;next.active=page<pages-1;
         for(int i=0;i<rows.size();i++) {
             int index=page*rowCount+i;var row=rows.get(i);row.visible=index<filtered.size();
+            if(row.visible)costs[filtered.get(index)]=calculateCost(filtered.get(index));
             deleteButtons.get(i).visible=row.visible;
             deleteButtons.get(i).active=row.visible && !menu.entries.get(filtered.get(index)).name().equals(com.mcmagic.omnira.spacetime.AmberDirectory.MARK_NAME);
             row.active=row.visible && minecraft.player.getData(ModAttachments.MANA).canSpend(cost(filtered.get(index)));
-            if(row.visible) row.setMessage(Component.literal(label(filtered.get(index))));
+            if(row.visible) {
+                var text=rowTexts[filtered.get(index)];
+                if(!row.getMessage().equals(text)){
+                    row.setMessage(text);
+                    row.setTooltip(Tooltip.create(text));
+                }
+            }
         }
     }
     @Override public void resize(net.minecraft.client.Minecraft mc,int width,int height){
@@ -102,19 +142,25 @@ public final class WaymarkScreen extends ResponsiveContainerScreen<WaymarkMenu> 
         super.resize(mc,width,height);
         if(value!=null){input.setValue(value);page=previousPage;if(!menu.editing)updateRows();if(focused)setFocused(input);}
     }
-    @Override protected void containerTick() {super.containerTick();if(!menu.editing) updateRows();}
+    @Override protected void containerTick() {super.containerTick();if(!menu.editing) {
+        if(removedCount!=menu.removedEntries.size()){removedCount=menu.removedEntries.size();filter();}else updateRows();
+    }}
     @Override protected void renderBg(GuiGraphics g,float partial,int mx,int my) {
-        g.fill(leftPos,topPos,leftPos+imageWidth,topPos+imageHeight,0xFFC6C6C6);
-        CrystalProcessingTableScreen.renderVanillaFrame(g,leftPos,topPos,imageWidth,imageHeight);
+        var pixels=CrystalUi.pixels(g,leftPos,topPos);
+        MachinePanelArt.frame(pixels,0,0,imageWidth,imageHeight,0xF02A4355);
+        pixels.fill(12,25,imageWidth-12,26,MachinePanelArt.RIM);
+        MachinePanelArt.frame(pixels,9,29,imageWidth-18,23,MachinePanelArt.DARK);
+        pixels.fill(14,25,30,26,MachinePanelArt.LILAC);
+        pixels.fill(imageWidth-30,25,imageWidth-14,26,MachinePanelArt.LILAC);
     }
     @Override protected void renderLabels(GuiGraphics g,int mx,int my) {
-        CrystalUi.label(g,font,title,12,12,imageWidth-24,1,0xFF303030);
+        CrystalUi.label(g,font,title,12,12,imageWidth-24,1,MachinePanelArt.LIGHT);
         if(menu.editing) {
             var entry=menu.entries.getFirst();
-            g.drawString(font,font.plainSubstrByWidth(dimensionName(entry.dimension()),imageWidth-24),12,60,0xFF555555,false);
+            CrystalUi.label(g,font,Component.literal(location(entry)),12,62,imageWidth-24,1,0xFFBCD5DD);
         } else {
             ManaBar.render(g,font,minecraft.player.getData(ModAttachments.MANA),10,imageHeight-23,100);
-            if(filtered.isEmpty()) g.drawString(font,Component.translatable("gui.omnira.waymark.empty"),12,64,0xFF555555,false);
+            if(filtered.isEmpty()) g.drawString(font,Component.translatable("gui.omnira.waymark.empty"),12,64,0xFFBCD5DD,false);
         }
     }
     @Override public boolean keyPressed(int key,int scan,int modifiers) {

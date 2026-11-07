@@ -7,14 +7,15 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 @Mixin(AbstractContainerMenu.class)
 abstract class BottleMenuMixin {
     // Covers clicks, hotbar swaps, drag placement and shift transfers, including custom Slot subclasses.
-    @Redirect(method={"doClick", "moveItemStackTo"}, at=@At(value="INVOKE",
+    @WrapOperation(method={"doClick", "moveItemStackTo"}, at=@At(value="INVOKE",
             target="Lnet/minecraft/world/inventory/Slot;mayPlace(Lnet/minecraft/world/item/ItemStack;)Z"))
-    private boolean omnira$allowPlacement(Slot slot,ItemStack stack) {
-        return com.mcmagic.omnira.item.PortableStorageRules.mayPlace(slot.container,stack) && slot.mayPlace(stack);
+    private boolean omnira$allowPlacement(Slot slot,ItemStack stack,Operation<Boolean> original) {
+        return com.mcmagic.omnira.item.PortableStorageRules.mayPlace(slot.container,stack) && original.call(slot,stack);
     }
 }

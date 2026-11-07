@@ -13,7 +13,10 @@ public final class ManaOverlay {
 
     public static void render(GuiGraphics graphics, DeltaTracker delta) {
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.player == null || minecraft.options.hideGui || minecraft.player.isSpectator()
+        if (minecraft.screen instanceof com.mcmagic.omnira.client.screen.AnalysisArtisanTableScreen
+                || minecraft.screen instanceof com.mcmagic.omnira.client.screen.ArcaneAssemblyTableScreen
+                || minecraft.screen instanceof com.mcmagic.omnira.client.screen.CrystalProcessingTableScreen
+                || minecraft.screen instanceof com.mcmagic.omnira.client.screen.WaymarkScreen || minecraft.screen instanceof com.mcmagic.omnira.client.screen.WaymarkDeleteScreen || minecraft.player == null || minecraft.options.hideGui || minecraft.player.isSpectator()
                 || !minecraft.player.isAlive()) {
             return;
         }

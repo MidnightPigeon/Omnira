@@ -65,6 +65,8 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void additionalModels(net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional event) {
+        event.register(com.mcmagic.omnira.client.renderer.TimeThievingMonocleRenderer.FRAME);
+        event.register(com.mcmagic.omnira.client.renderer.TimeThievingMonocleRenderer.LENS);
         event.register(net.minecraft.client.resources.model.ModelResourceLocation.standalone(ResourceLocation.parse("omnira:item/starlight_float")));
         event.register(com.mcmagic.omnira.client.renderer.SpeedUpgradeRenderer.MODEL);
         if(com.mcmagic.omnira.item.IndustrialWheelItem.available()){
@@ -186,6 +188,12 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void itemRenderers(net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent event) {
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
+            private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
+            @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
+                if(renderer==null)renderer=new com.mcmagic.omnira.client.renderer.TimeThievingMonocleRenderer();return renderer;
+            }
+        },com.mcmagic.omnira.registry.ModItems.TIME_THIEVING_MONOCLE.get());
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions(){
             private com.mcmagic.omnira.client.renderer.SpeedUpgradeRenderer renderer;
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer(){
@@ -398,6 +406,7 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerHud(RegisterGuiLayersEvent event) {
+        event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"transit_view"), com.mcmagic.omnira.client.hud.TransitView::render);
         event.registerAbove(VanillaGuiLayers.HOTBAR,ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"recall"),com.mcmagic.omnira.client.hud.RecallOverlay::render);
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL,
                 ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID, "mana"), ManaOverlay::render);
@@ -424,6 +433,12 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(com.mcmagic.omnira.registry.ModEntityTypes.TIME_THIEF_MOSQUITO.get(),com.mcmagic.omnira.client.renderer.TimeThiefMosquitoRenderer::new);
+        event.registerEntityRenderer(com.mcmagic.omnira.registry.ModEntityTypes.AGECOIL_SNAIL.get(),ctx->new com.mcmagic.omnira.client.renderer.SpacetimeFaunaRenderer<>(ctx,"agecoil_snail",.3F));
+        event.registerEntityRenderer(com.mcmagic.omnira.registry.ModEntityTypes.RIFTSTEP_DEER.get(),ctx->new com.mcmagic.omnira.client.renderer.SpacetimeFaunaRenderer<>(ctx,"riftstep_deer",.45F));
+        event.registerEntityRenderer(com.mcmagic.omnira.registry.ModEntityTypes.RIFT_MANTIS.get(),ctx->new com.mcmagic.omnira.client.renderer.SpacetimeFaunaRenderer<>(ctx,"rift_mantis",.45F));
+        event.registerEntityRenderer(com.mcmagic.omnira.registry.ModEntityTypes.RIFT_MOTH.get(),ctx->new com.mcmagic.omnira.client.renderer.SpacetimeFaunaRenderer<>(ctx,"rift_moth",.12F));
+
         event.registerBlockEntityRenderer(com.mcmagic.omnira.guidance.GuidanceContent.ENTITY.get(),com.mcmagic.omnira.client.renderer.GuidanceOrbRenderer::new);
         event.registerEntityRenderer(com.mcmagic.omnira.paradox.ParadoxContent.ANVIL.get(),com.mcmagic.omnira.client.renderer.VoidAnvilRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.WONDERLAND_POKER_STAND.get(),com.mcmagic.omnira.client.renderer.WonderlandPokerStandRenderer::new);

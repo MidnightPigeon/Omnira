@@ -1,0 +1,18 @@
+{
+  "id": "spacetime_creatures",
+  "title": "Spacetime Creatures",
+  "icon": "omnira:time_thief_mosquito_spawn_egg",
+  "chapters": [
+    "chapters/timeflow_eel/chapter.json",
+    "chapters/chronal_blindfish/chapter.json",
+    "chapters/agecoil_snail/chapter.json",
+    "chapters/time_thief_mosquito/chapter.json",
+    "chapters/star_jellyfish/chapter.json",
+    "chapters/void_manta/chapter.json",
+    "chapters/riftstep_deer/chapter.json",
+    "chapters/rift_mantis/chapter.json",
+    "chapters/rift_moth/chapter.json"
+  ],
+  "entries": [],
+  "introduction": "introduction.json"
+}

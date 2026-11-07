@@ -1,0 +1,9 @@
+{
+  "id": "spatial_overload",
+  "title": "Spatial Overload",
+  "item": "omnira:spatial_overload",
+  "recipes": false,
+  "text": [
+    "Movement speed is reduced by 20%, and damage taken increases by 50%. Being hurt triggers an attempted random teleport to a nearby safe position."
+  ]
+}

@@ -56,7 +56,7 @@ public final class IndustrialWheelItem extends Item {
         return new StaffAssembly.Stats(STATS.power()+rune.power(),STATS.reduction()+rune.reduction(),
                 STATS.shots(),STATS.cooldownTicks(),1+rune.speed(),1+rune.range(),rune.cooldownReduction(),0);
     }
-    private static StaffCastContext context(Player p,ItemStack stack){
+    public static StaffCastContext context(Player p,ItemStack stack){
         var stats=stats(stack);
         return new StaffCastContext(stats,CastAttributes.power(p,stats.power()),CastAttributes.reduction(p,stats.reduction()),
                 CastAttributes.cooldownReduction(p,stats.cooldownReduction()),List.of());

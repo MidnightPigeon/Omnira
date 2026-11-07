@@ -13,6 +13,13 @@ public final class SpellDamageSource extends DamageSource {
     public SpellDamageSource(Holder<DamageType> type,Entity source,Entity owner,String message) {
         super(type,source,owner);this.message=message;
     }
+    public static boolean direct(Entity hit,SpellDamageSource source,float amount){
+        var target=SpellCasting.livingTarget(hit);
+        if(target!=null && source.getEntity() instanceof net.minecraft.server.level.ServerPlayer player
+                && player.getData(com.mcmagic.omnira.registry.ModAttachments.AFFINITY).active()==com.mcmagic.omnira.mana.Affinity.SPACETIME)
+            return com.mcmagic.omnira.combat.OmniraDamage.trueDamage(target,amount,source);
+        return hit.hurt(source,amount);
+    }
     public static SpellDamageSource of(LivingEntity target,ResourceKey<DamageType> type,Entity source,Entity owner,String message) {
         return new SpellDamageSource(target.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(type),source,owner,message);
     }

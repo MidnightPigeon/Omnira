@@ -1,0 +1,9 @@
+{
+  "id": "plunder_scythe",
+  "title": "Scythe of Plunder",
+  "item": "omnira:plunder_scythe",
+  "recipes": false,
+  "text": [
+    "A rare drop from Rift Mantis: 5% chance, plus 5 percentage points per Looting level. Consumed on use to grant Apex Predator and Spatial Overload. Cannot awaken while another talent or curse is present."
+  ]
+}

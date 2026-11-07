@@ -88,11 +88,11 @@ public final class FulfillmentStarGameTests {
         p.setHealth(4);h.assertTrue(consume(p).getCount()==1&&p.getHealth()==4,"Repeat use provided free restoration");h.succeed();
     }
     @GameTest(template="spell_arena") public static void affinityBonusesAndFlight(GameTestHelper h) throws Exception {
-        for(var affinity:new Affinity[]{Affinity.LIGHT,Affinity.DARK,Affinity.ELEMENTAL,Affinity.DREAM}){
+        for(var affinity:new Affinity[]{Affinity.LIGHT,Affinity.DARK,Affinity.ELEMENTAL,Affinity.DREAM,Affinity.ARCANE,Affinity.SPACETIME}){
             var p=player(h);p.setData(ModAttachments.AFFINITY,new AffinityState(affinity.ordinal(),0));consume(p);
             AffinityEffects.refresh(p);AffinityEffects.refresh(p);
             h.assertTrue(Math.abs(p.getAttributeValue(ModAttributes.MAX_MANA)-(200+affinity.capacity))<.001,"Mana bonus stacked or missing");
-            h.assertTrue(Math.abs(p.getAttributeValue(ModAttributes.SPELL_POWER)-(1.1+affinity.power))<.001,"Spell power incorrect");
+            h.assertTrue(Math.abs(p.getAttributeValue(ModAttributes.SPELL_POWER)-(1.1+Math.max(0,affinity.power)))<.001,"Spell power incorrect");
             h.assertTrue(Math.abs(p.getAttributeValue(ModAttributes.LIFESTEAL)-.1)<.001,"Life steal incorrect");
             h.assertTrue(Math.abs(p.getAttributeValue(ModAttributes.DAMAGE_TAKEN)-.9)<.001,"Vulnerability retained or reduction missing");
             if(affinity==Affinity.DREAM){

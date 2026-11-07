@@ -17,8 +17,14 @@ public final class AdvancedForgeGameTests {
     @GameTest(template="spell_arena") public static void correctedRegistryIdsAndSaveAliases(GameTestHelper h){
         var blocks=net.minecraft.core.registries.BuiltInRegistries.BLOCK;
         var items=net.minecraft.core.registries.BuiltInRegistries.ITEM;
-        h.assertTrue(blocks.get(id("advanced_forge"))==ModBlocks.ADVANCED_FORGE.get(),"Old assembly block ID not aliased");
-        h.assertTrue(items.get(id("advanced_forge"))==ModItems.ADVANCED_FORGE.get(),"Old assembly item ID not aliased");
+        for(var registry:List.of(blocks,items,net.minecraft.core.registries.BuiltInRegistries.BLOCK_ENTITY_TYPE,
+                net.minecraft.core.registries.BuiltInRegistries.MENU,net.minecraft.core.registries.BuiltInRegistries.RECIPE_TYPE,
+                net.minecraft.core.registries.BuiltInRegistries.RECIPE_SERIALIZER)){
+            h.assertTrue(registry.getOptional(id("advanced_forge")).isEmpty(),"Deprecated assembly alias still resolves");
+            h.assertTrue(registry.getOptional(id("advanced_assembly_table")).isPresent(),"Current assembly registration missing");
+        }
+        h.assertTrue(blocks.get(id("advanced_assembly_table"))==ModBlocks.ADVANCED_FORGE.get(),"Current assembly block ID missing");
+        h.assertTrue(items.get(id("advanced_assembly_table"))==ModItems.ADVANCED_FORGE.get(),"Current assembly item ID missing");
         h.assertTrue(blocks.get(id("test_spell_core"))==ModBlocks.TEST_SPELL_CORE.get(),"Old core block ID not aliased");
         h.assertTrue(items.get(id("test_spell_core"))==ModItems.TEST_SPELL_CORE.get(),"Old core item ID not aliased");
         h.assertTrue(items.get(id("crystallized_nail"))==ModItems.CRYSTALLIZED_NAIL.get(),"Old nail ID not aliased");

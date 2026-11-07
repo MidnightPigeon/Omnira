@@ -2,6 +2,7 @@ package com.mcmagic.omnira.spacetime;
 
 import com.mcmagic.omnira.entity.DreamMirror;
 import com.mcmagic.omnira.registry.*;
+import com.mcmagic.omnira.network.TransitViewPayload;
 import com.mcmagic.omnira.world.dimension.*;
 import net.minecraft.core.*;
 import net.minecraft.core.particles.*;
@@ -20,8 +21,19 @@ import org.joml.Vector3f;
 import java.util.UUID;
 
 public final class CorridorGatewayBlockEntity extends BlockEntity {
-    public static final int TRANSIT_TICKS=24;
+    public static final int TRANSIT_TICKS=TransitViewPayload.PORTAL_TICKS;
     private final java.util.Map<UUID,Integer> entering=new java.util.HashMap<>();
+    private final java.util.Set<UUID> viewers=new java.util.HashSet<>();
+    private void cancelViewers(java.util.Set<UUID> retained) {
+        if(!(level instanceof ServerLevel server))return;
+        viewers.removeIf(id->{
+            if(retained.contains(id))return false;
+            var player=server.getServer().getPlayerList().getPlayer(id);
+            if(player!=null)TransitViewPayload.cancel(player);
+            return true;
+        });
+    }
+    @Override public void setRemoved(){cancelViewers(java.util.Set.of());super.setRemoved();}
     private long started=-1,opened=-1;
     private float yaw;
     private UUID mirrorId;
@@ -47,7 +59,7 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
     public void tick(){
         if(!(level instanceof ServerLevel server) || started<0 || released)return;
         long now=level.getGameTime();
-        for(var a:DreamRitual.ANCHORS)if(!server.hasChunkAt(worldPosition.offset(a[0],-1,a[1])))return;
+        for(var a:DreamRitual.ANCHORS)if(!server.hasChunkAt(worldPosition.offset(a[0],-1,a[1]))){cancelViewers(java.util.Set.of());entering.clear();return;}
         var pedestals=CorridorRitual.pedestals(server,worldPosition.below());
         if(!server.getBlockState(worldPosition.below()).is(ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get()) || pedestals.size()!=8){
             server.removeBlock(worldPosition,false);return;
@@ -83,18 +95,33 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
         var center=Vec3.atBottomCenterOf(worldPosition).add(0,.9,0);
         var seen=new java.util.HashSet<UUID>();
         var touching=new java.util.HashSet<UUID>();
+        var currentViewers=new java.util.HashSet<UUID>();
         for(var entity:source.getEntities((Entity)null,new AABB(worldPosition).inflate(1,.9,1),Entity::isAlive)){
             var root=entity.getRootVehicle();if(!seen.add(root.getUUID()) || !DreamTransitRules.allowed(root))continue;
             var box=root.getBoundingBox();var delta=box.getCenter().subtract(center);
             double radius=Math.max(box.getXsize(),box.getZsize())*.5;
             if(Math.hypot(delta.x,delta.z)>.43+radius
                     || box.maxY<worldPosition.getY()+.1 || box.minY>worldPosition.getY()+1.7)continue;
+            if (root.getPersistentData().getLong("OmniraCorridorCooldown") > source.getGameTime()) continue;
             touching.add(root.getUUID());
+            var passengers=root.getSelfAndPassengers().filter(e->e instanceof net.minecraft.server.level.ServerPlayer).map(Entity::getUUID).toList();
+            currentViewers.addAll(passengers);viewers.addAll(passengers);
             int ticks=entering.merge(root.getUUID(),1,Integer::sum);
+            TransitViewPayload.charging(root, TransitViewPayload.Style.INTERSTICE, ticks);
             if(ticks%4==0)transitionRing(source,root,ticks);
-            if(ticks>=TRANSIT_TICKS){entering.remove(root.getUUID());transfer(source,root);}
+            if(ticks>=TRANSIT_TICKS){
+                entering.remove(root.getUUID());
+                if (!transfer(source,root)) TransitViewPayload.cancel(root);
+                viewers.removeAll(passengers);
+            }
         }
-        entering.keySet().retainAll(touching);
+        cancelViewers(currentViewers);
+        entering.keySet().removeIf(id -> {
+            if (touching.contains(id)) return false;
+            var root = source.getEntity(id);
+            if (root != null) TransitViewPayload.cancel(root);
+            return true;
+        });
     }
     private static void transitionRing(ServerLevel level,Entity root,int ticks){
         double progress=ticks/(double)TRANSIT_TICKS;
@@ -173,6 +200,12 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
     public void release(){
         if(!(level instanceof ServerLevel server) || released || started<0)return;
         released=true;
+        cancelViewers(java.util.Set.of());
+        for (var id : entering.keySet()) {
+            var root = server.getEntity(id);
+            if (root != null) TransitViewPayload.cancel(root);
+        }
+        entering.clear();
         if(!aggregate.isEmpty()){
             var dropped=new net.minecraft.world.entity.item.ItemEntity(server,worldPosition.getX()+.5,worldPosition.getY()+.1,worldPosition.getZ()+.5,aggregate);
             dropped.setDeltaMovement(0,.2,0);server.addFreshEntity(dropped);aggregate=ItemStack.EMPTY;

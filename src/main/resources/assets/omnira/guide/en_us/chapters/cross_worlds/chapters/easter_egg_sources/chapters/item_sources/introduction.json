@@ -105,6 +105,11 @@
       "icon": "omnira:rain_soaked_suitcase",
       "name": "Rain-soaked Suitcase, Arcanist and The Storm",
       "origin": "Reverse: 1999"
+    },
+    {
+      "icon": "omnira:time_thieving_monocle",
+      "name": "Time-Thieving Monocle, Time Thief and Amon’s Gaze",
+      "origin": "Lord of Mysteries"
     }
   ]
 }

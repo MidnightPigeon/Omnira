@@ -11,6 +11,16 @@ import net.neoforged.neoforge.gametest.*;
 
 @GameTestHolder("omnira_port_automation") @PrefixGameTestTemplate(false)
 public final class PortAutomationGameTests {
+    @GameTest(template="spell_arena")
+    public static void ordinaryPipeRetainsForeignFace(GameTestHelper h){
+        if(!net.neoforged.fml.ModList.get().isLoaded("create")){h.succeed();return;}
+        PortCreateAutomationChecks.foreignFace(h);
+    }
+    @GameTest(template="spell_arena",timeoutTicks=240)
+    public static void ordinaryCreatePumpStillTransfers(GameTestHelper h){
+        if(!net.neoforged.fml.ModList.get().isLoaded("create")){h.succeed();return;}
+        PortCreateAutomationChecks.ordinaryPipes(h);
+    }
     @GameTest(template="spell_arena",timeoutTicks=520)
     public static void remoteHopperWakesIdleCrystalFurnace(GameTestHelper h){
         var level=h.getLevel();var a=h.absolutePos(new BlockPos(2,4,2));var b=h.absolutePos(new BlockPos(8,4,8));

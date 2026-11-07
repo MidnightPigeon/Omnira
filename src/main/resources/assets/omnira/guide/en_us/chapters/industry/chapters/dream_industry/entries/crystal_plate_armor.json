@@ -1,0 +1,21 @@
+{
+  "id": "crystal_plate_armor",
+  "item": "omnira:crystal_chestplate",
+  "title": "Crystal Plate Armor",
+  "text": [
+    "Craft plate armor from infused crystals at a crafting table. Each piece raises maximum mana. Wearing all four also increases spell strength and melee damage and reduces incoming damage.",
+    "Use the Arcane Assembly Table to reshape a piece into its dress counterpart or back again. Durability and enchantments carry over."
+  ],
+  "recipes": true,
+  "related_items": [
+    "omnira:crystal_helmet",
+    "omnira:crystal_leggings",
+    "omnira:crystal_boots"
+  ],
+  "links": [
+    {
+      "target": "crystal_dress",
+      "label": "Crystal Dress"
+    }
+  ]
+}

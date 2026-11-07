@@ -50,6 +50,7 @@ public final class AffinityRitual {
         }
         return missing.isEmpty()?result:java.util.List.of();
     }
+    public static boolean matchesOfferings(ServerPlayer player,BlockPos pos){return pedestals(player,pos).size()==8;}
     public static boolean inside(ServerPlayer player,BlockPos pos) {
         double dx=player.getX()-pos.getX()-.5,dz=player.getZ()-pos.getZ()-.5;
         return dx*dx+dz*dz<9 && player.getY()>=pos.getY()-.5 && player.getY()<=pos.getY()+3;
@@ -107,12 +108,21 @@ public final class AffinityRitual {
         ACTIVE.remove(player.getUUID());
         player.getItemInHand(session.hand).shrink(1);
         boolean removing=session.removing();
-        player.setData(ModAttachments.AFFINITY,removing && (session.selected==Affinity.DREAM||session.before.perfected())?AffinityState.NONE:
+        boolean immediate=removing && (session.selected==Affinity.DREAM || session.selected==Affinity.SPACETIME || session.before.perfected());
+        player.setData(ModAttachments.AFFINITY,immediate?AffinityState.NONE:
                 new AffinityState(session.selected.ordinal(),removing?session.selected.penaltyDuration():0));
         player.setData(ModAttachments.DREAM_SOLIDIFY,0F);
         AffinityEffects.refresh(player);
+        if(removing && !session.before.perfected()){
+            if(session.selected==Affinity.ARCANE)
+                com.mcmagic.omnira.spell.ConstructionLock.confine(player,session.selected.penaltyDuration());
+            if(session.selected==Affinity.SPACETIME){
+                com.mcmagic.omnira.fate.ManuscriptReward.destroyTalent(player);
+                com.mcmagic.omnira.combat.OmniraDamage.trueDamage(player,2*player.getMaxHealth(),player.damageSources().generic());
+            }
+        }
         if(!removing&&session.selected!=Affinity.DREAM)com.mcmagic.omnira.progression.BranchProgress.record(player,"elemental_pact");
-        player.displayClientMessage(Component.translatable(removing && (session.selected==Affinity.DREAM||session.before.perfected())?"message.omnira.affinity.cleared":
+        player.displayClientMessage(Component.translatable(immediate?"message.omnira.affinity.cleared":
                 removing?"message.omnira.affinity.removing":"message.omnira.affinity.bound",Component.translatable(session.selected.key())),true);
     }
     public static void cancel(ServerPlayer player){ACTIVE.remove(player.getUUID());player.setData(ModAttachments.DREAM_SOLIDIFY,0F);message(player,"cancelled");}

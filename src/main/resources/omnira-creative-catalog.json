@@ -164,7 +164,9 @@
         "arcanist_talent",
         "land_king",
         "sea_king",
-        "sky_king"
+        "sky_king",
+        "time_thief_talent",
+        "apex_predator"
       ]
     },
     {
@@ -175,7 +177,9 @@
         "nurgle_blessing",
         "slaanesh_blessing",
         "time_distortion",
-        "storm_curse"
+        "storm_curse",
+        "amon_gaze",
+        "spatial_overload"
       ]
     }
   ],
@@ -579,7 +583,9 @@
         "damaged_research_facility",
         "repaired_mechanical_component",
         "inactive_t_virus_solution",
-        "distorted_psychic_talent_solution"
+        "distorted_psychic_talent_solution",
+        "time_thieving_monocle",
+        "plunder_scythe"
       ]
     },
     {
@@ -688,7 +694,12 @@
         "timeflow_eel_spawn_egg",
         "chronal_blindfish_spawn_egg",
         "star_jellyfish_spawn_egg",
-        "void_manta_spawn_egg"
+        "void_manta_spawn_egg",
+        "time_thief_mosquito_spawn_egg",
+        "agecoil_snail_spawn_egg",
+        "riftstep_deer_spawn_egg",
+        "rift_mantis_spawn_egg",
+        "rift_moth_spawn_egg"
       ]
     }
   ]

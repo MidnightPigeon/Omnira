@@ -261,8 +261,7 @@ public final class OmniraJeiPlugin implements IModPlugin {
         rituals.add(new RitualJei.Entry(new RitualJei.Corridor(true)));
         rituals.add(new RitualJei.Entry(new RitualJei.Resonance()));
         rituals.add(new RitualJei.Entry(new RitualJei.Cleansing()));
-        for(var affinity:List.of(com.mcmagic.omnira.mana.Affinity.LIGHT,com.mcmagic.omnira.mana.Affinity.DARK,
-                com.mcmagic.omnira.mana.Affinity.ELEMENTAL))rituals.add(new RitualJei.Entry(new RitualJei.Affinity(affinity)));
+        for(var affinity:com.mcmagic.omnira.mana.Affinity.VISIBLE)rituals.add(new RitualJei.Entry(new RitualJei.Affinity(affinity)));
         recipes.getAllRecipesFor(ModRecipes.SWORD_SHAPING_TYPE.get()).forEach(holder->rituals.add(new RitualJei.Entry(holder.value())));
         recipes.getAllRecipesFor(ModRecipes.VESSEL_CONVERSION_TYPE.get()).forEach(holder->rituals.add(new RitualJei.Entry(holder.value())));
         registration.addRecipes(RitualJei.TYPE,rituals);

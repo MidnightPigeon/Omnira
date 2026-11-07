@@ -1,10 +1,10 @@
 {
   "id": "visit_dream",
   "item": "omnira:ritual_energy_core",
-  "title": "Entering the Dream Realm",
+  "title": "Entering Dream’s Far Shore",
   "recipes": false,
   "text": [
-    "Use the Ritual of Dreamseeking to open a portal into the dream realm.",
+    "Use the Ritual of Dreamseeking to open a portal into Dream’s Far Shore.",
     "Dawn Crystal Fields float high above Shadow Woodland, with the rare Mirror Dream Border between them. The arrival portal returns you near the original ritual even if that entrance has disappeared.",
     "Seek the origins of light and darkness, unravel the mysteries of dreams, and delve further into how the world works."
   ],
@@ -15,7 +15,7 @@
     },
     {
       "target": "explore_dream",
-      "label": "Exploring the Dream Realm"
+      "label": "Exploring Dream’s Far Shore"
     }
   ]
 }

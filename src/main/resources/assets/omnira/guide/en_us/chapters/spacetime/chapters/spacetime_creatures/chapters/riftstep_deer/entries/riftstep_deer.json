@@ -1,0 +1,11 @@
+{
+  "id": "riftstep_deer",
+  "title": "Riftstep Deer",
+  "item": "omnira:riftstep_deer_spawn_egg",
+  "recipes": false,
+  "text": [
+    "A relatively common neutral inhabitant of space biomes. Riftstep Deer teleport across elevation changes of one block or more, preferring higher platforms within 16 blocks; half-block steps are crossed normally. They can swim at the surface, but try to avoid liquids.",
+    "An attacked deer pursues its aggressor faster than a sprinting player. At distances of at least 8 blocks, it approaches in 8–16-block teleports; shorter hops remain possible at close range. Each antler charge deals 10 true damage and knocks the target back.",
+    "Anger lasts one minute or until the target leaves its 32-block range. Losing sight alone does not end pursuit. Drops 3–5 Space Warp Points when killed."
+  ]
+}

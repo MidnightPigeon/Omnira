@@ -1,0 +1,842 @@
+{
+  "width": 256,
+  "height": 256,
+  "parts": [
+    {
+      "name": "body",
+      "parent": "root",
+      "pivot": [
+        0,
+        10,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -4,
+          -3,
+          -6,
+          8,
+          7,
+          13,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "shoulders",
+      "parent": "body",
+      "pivot": [
+        0,
+        -1.5,
+        -4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": false,
+      "cubes": []
+    },
+    {
+      "name": "neck",
+      "parent": "shoulders",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0.25,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -1.5,
+          -6.5,
+          -1.5,
+          3,
+          8,
+          3,
+          45,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "shoulders",
+      "pivot": [
+        0,
+        -6,
+        -1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -2,
+          -3,
+          -3,
+          4,
+          4,
+          6,
+          59,
+          1
+        ],
+        [
+          -1.5,
+          -1,
+          -5,
+          3,
+          2,
+          2,
+          81,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "ear-1",
+      "parent": "head",
+      "pivot": [
+        -2,
+        -2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.65
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -1,
+          -3,
+          -0.5,
+          2,
+          4,
+          1,
+          93,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "eye-1",
+      "parent": "head",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": false,
+      "cubes": [
+        [
+          -2.5,
+          -2,
+          -2.5,
+          1,
+          1,
+          1,
+          101,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "antler-1",
+      "parent": "head",
+      "pivot": [
+        -1.5,
+        -3,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.25
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -7,
+          -0.5,
+          1,
+          7,
+          1,
+          107,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "branch-1",
+      "parent": "antler-1",
+      "pivot": [
+        0,
+        -4,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.6
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -4,
+          -0.5,
+          1,
+          4,
+          1,
+          113,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "tine-1",
+      "parent": "antler-1",
+      "pivot": [
+        0,
+        -6,
+        0
+      ],
+      "rotation": [
+        -0.6,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -3,
+          -0.5,
+          1,
+          3,
+          1,
+          119,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "ear1",
+      "parent": "head",
+      "pivot": [
+        2,
+        -2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.65
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -1,
+          -3,
+          -0.5,
+          2,
+          4,
+          1,
+          125,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "eye1",
+      "parent": "head",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": false,
+      "cubes": [
+        [
+          1.5,
+          -2,
+          -2.5,
+          1,
+          1,
+          1,
+          133,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "antler1",
+      "parent": "head",
+      "pivot": [
+        1.5,
+        -3,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.25
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -7,
+          -0.5,
+          1,
+          7,
+          1,
+          139,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "branch1",
+      "parent": "antler1",
+      "pivot": [
+        0,
+        -4,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.6
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -4,
+          -0.5,
+          1,
+          4,
+          1,
+          145,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "tine1",
+      "parent": "antler1",
+      "pivot": [
+        0,
+        -6,
+        0
+      ],
+      "rotation": [
+        -0.6,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -3,
+          -0.5,
+          1,
+          3,
+          1,
+          151,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "leg0",
+      "parent": "body",
+      "pivot": [
+        -2.5,
+        3,
+        -4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -1,
+          0,
+          -1,
+          2,
+          9,
+          2,
+          157,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "hoof0",
+      "parent": "leg0",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": false,
+      "cubes": [
+        [
+          -1,
+          9,
+          -1.5,
+          2,
+          2,
+          3,
+          167,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "leg1",
+      "parent": "body",
+      "pivot": [
+        2.5,
+        3,
+        -4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -1,
+          0,
+          -1,
+          2,
+          9,
+          2,
+          179,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "hoof1",
+      "parent": "leg1",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": false,
+      "cubes": [
+        [
+          -1,
+          9,
+          -1.5,
+          2,
+          2,
+          3,
+          189,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "leg2",
+      "parent": "body",
+      "pivot": [
+        -2.5,
+        3,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -1,
+          0,
+          -1,
+          2,
+          9,
+          2,
+          201,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "hoof2",
+      "parent": "leg2",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": false,
+      "cubes": [
+        [
+          -1,
+          9,
+          -1.5,
+          2,
+          2,
+          3,
+          211,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "leg3",
+      "parent": "body",
+      "pivot": [
+        2.5,
+        3,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -1,
+          0,
+          -1,
+          2,
+          9,
+          2,
+          223,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "hoof3",
+      "parent": "leg3",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": false,
+      "cubes": [
+        [
+          -1,
+          9,
+          -1.5,
+          2,
+          2,
+          3,
+          233,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "mote0",
+      "parent": "body",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -0.5,
+          -0.5,
+          1,
+          1,
+          1,
+          245,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "mote1",
+      "parent": "body",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -0.5,
+          -0.5,
+          1,
+          1,
+          1,
+          1,
+          23
+        ]
+      ]
+    },
+    {
+      "name": "mote2",
+      "parent": "body",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -0.5,
+          -0.5,
+          1,
+          1,
+          1,
+          7,
+          23
+        ]
+      ]
+    },
+    {
+      "name": "mote3",
+      "parent": "body",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -0.5,
+          -0.5,
+          1,
+          1,
+          1,
+          13,
+          23
+        ]
+      ]
+    },
+    {
+      "name": "mote4",
+      "parent": "body",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -0.5,
+          -0.5,
+          1,
+          1,
+          1,
+          19,
+          23
+        ]
+      ]
+    },
+    {
+      "name": "mote5",
+      "parent": "body",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -0.5,
+          -0.5,
+          1,
+          1,
+          1,
+          25,
+          23
+        ]
+      ]
+    },
+    {
+      "name": "mote6",
+      "parent": "body",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -0.5,
+          -0.5,
+          1,
+          1,
+          1,
+          31,
+          23
+        ]
+      ]
+    },
+    {
+      "name": "mote7",
+      "parent": "body",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -0.5,
+          -0.5,
+          -0.5,
+          1,
+          1,
+          1,
+          37,
+          23
+        ]
+      ]
+    },
+    {
+      "name": "tail",
+      "parent": "body",
+      "pivot": [
+        0,
+        0,
+        6
+      ],
+      "rotation": [
+        0.3,
+        0,
+        0
+      ],
+      "glass": true,
+      "cubes": [
+        [
+          -1,
+          0,
+          0,
+          2,
+          4,
+          2,
+          43,
+          23
+        ]
+      ]
+    }
+  ]
+}

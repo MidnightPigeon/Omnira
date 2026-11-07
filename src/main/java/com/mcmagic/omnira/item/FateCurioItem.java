@@ -18,11 +18,11 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 public final class FateCurioItem extends Item implements ICurioItem {
-    public enum Kind { PSYKER, KHORNE, TZEENTCH, NURGLE, SLAANESH, LAND_KING, SEA_KING, SKY_KING, TIME_DISTORTION, ARCANIST, STORM;
-        public boolean talent(){return this==PSYKER||this==LAND_KING||this==SEA_KING||this==SKY_KING||this==ARCANIST;}
+    public enum Kind { PSYKER, KHORNE, TZEENTCH, NURGLE, SLAANESH, LAND_KING, SEA_KING, SKY_KING, TIME_DISTORTION, ARCANIST, STORM, TIME_THIEF, AMON_GAZE, APEX_PREDATOR, SPATIAL_OVERLOAD;
+        public boolean talent(){return this==PSYKER||this==LAND_KING||this==SEA_KING||this==SKY_KING||this==ARCANIST||this==TIME_THIEF||this==APEX_PREDATOR;}
     }
     private final Kind kind;
-    public FateCurioItem(Properties properties,Kind kind) {super(properties.stacksTo(1));this.kind=kind;}
+    public FateCurioItem(Properties properties,Kind kind) {super(properties.stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE));this.kind=kind;}
     public Kind kind() {return kind;}
     @Override public void appendHoverText(ItemStack stack,TooltipContext context,List<Component> lines,TooltipFlag flag) {
         super.appendHoverText(stack,context,lines,flag);
@@ -44,6 +44,7 @@ public final class FateCurioItem extends Item implements ICurioItem {
             SlotContext context,ResourceLocation id,ItemStack stack) {
         var modifiers=LinkedHashMultimap.<Holder<Attribute>,AttributeModifier>create();
         if(context.identifier().equals("talent")) {
+            if(kind==Kind.TIME_THIEF)modifiers.put(ModAttributes.LIFESTEAL,new AttributeModifier(id,.2,AttributeModifier.Operation.ADD_VALUE));
             if(kind==Kind.ARCANIST)modifiers.put(ModAttributes.MANA_REGEN,new AttributeModifier(id,.3,AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
             if(kind==Kind.LAND_KING)modifiers.put(ModAttributes.DAMAGE_DEALT,new AttributeModifier(id,.1,AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
             if(kind==Kind.SEA_KING){
@@ -60,6 +61,10 @@ public final class FateCurioItem extends Item implements ICurioItem {
         }
         if(kind==Kind.KHORNE && context.identifier().equals("curse")) {
             modifiers.put(ModAttributes.DAMAGE_DEALT,new AttributeModifier(id,.2,AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+            modifiers.put(ModAttributes.DAMAGE_TAKEN,new AttributeModifier(id,.5,AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        }
+        if(kind==Kind.SPATIAL_OVERLOAD&&context.identifier().equals("curse")){
+            modifiers.put(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED,new AttributeModifier(id,-.2,AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
             modifiers.put(ModAttributes.DAMAGE_TAKEN,new AttributeModifier(id,.5,AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         }
         return modifiers;

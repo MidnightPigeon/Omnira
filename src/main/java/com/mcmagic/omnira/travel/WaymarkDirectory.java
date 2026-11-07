@@ -9,7 +9,27 @@ import java.util.*;
 
 /** Keeps destinations discoverable while their chunks are unloaded. */
 public final class WaymarkDirectory extends SavedData {
-    public record Entry(UUID id,ResourceLocation dimension,BlockPos pos,String name) {}
+    public record Entry(UUID id,ResourceLocation dimension,BlockPos pos,String name,ResourceLocation biome) {
+        public Entry(UUID id,ResourceLocation dimension,BlockPos pos,String name) { this(id,dimension,pos,name,null); }
+    }
+
+    public static ResourceLocation biomeAt(ServerLevel level, BlockPos pos) {
+        var chunk = level.getChunk(pos.getX() >> 4, pos.getZ() >> 4,
+                net.minecraft.world.level.chunk.status.ChunkStatus.BIOMES);
+        return chunk.getNoiseBiome(QuartPos.fromBlock(pos.getX()), QuartPos.fromBlock(pos.getY()), QuartPos.fromBlock(pos.getZ()))
+                .unwrapKey().map(key -> key.location()).orElse(null);
+    }
+
+    public Entry withLocation(ServerLevel source, Entry entry) {
+        var level = source.getServer().getLevel(net.minecraft.resources.ResourceKey.create(
+                net.minecraft.core.registries.Registries.DIMENSION, entry.dimension()));
+        if (level == null) return entry;
+        // Opening a list must never load remote chunks, including legacy bookmarks.
+        if (!level.hasChunkAt(entry.pos())) return entry;
+        var updated = new Entry(entry.id(),entry.dimension(),entry.pos(),entry.name(),biomeAt(level,entry.pos()));
+        put(updated);
+        return updated;
+    }
     private final Map<UUID,Entry> entries=new HashMap<>();
     private final Map<UUID,Set<UUID>> discovered=new HashMap<>();
     public static WaymarkDirectory get(ServerLevel level) {
@@ -42,7 +62,7 @@ public final class WaymarkDirectory extends SavedData {
         for(var value:tag.getList("Waymarks",Tag.TAG_COMPOUND)) {
             var n=(CompoundTag)value;var dim=ResourceLocation.tryParse(n.getString("Dimension"));
             if(dim!=null && n.hasUUID("Id")) {
-                var entry=new Entry(n.getUUID("Id"),dim,BlockPos.of(n.getLong("Position")),n.getString("Name"));
+                var entry=new Entry(n.getUUID("Id"),dim,BlockPos.of(n.getLong("Position")),n.getString("Name"),n.getString("Biome").isBlank()?null:ResourceLocation.tryParse(n.getString("Biome")));
                 result.entries.put(entry.id(),entry);
             }
         }
@@ -62,6 +82,7 @@ public final class WaymarkDirectory extends SavedData {
         var list=new ListTag();
         for(var entry:entries.values()) {
             var n=new CompoundTag();n.putUUID("Id",entry.id());n.putString("Dimension",entry.dimension().toString());
+            if(entry.biome()!=null)n.putString("Biome",entry.biome().toString());
             n.putLong("Position",entry.pos().asLong());n.putString("Name",entry.name());list.add(n);
         }
         tag.put("Waymarks",list);

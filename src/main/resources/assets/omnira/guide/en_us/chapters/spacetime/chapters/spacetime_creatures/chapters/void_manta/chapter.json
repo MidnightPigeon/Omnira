@@ -1,0 +1,9 @@
+{
+  "id": "void_manta_creature",
+  "title": "Void Manta",
+  "icon": "omnira:void_manta_spawn_egg",
+  "entries": [
+    "entries/void_manta_guide.json"
+  ],
+  "introduction": "introduction.json"
+}
