@@ -36,7 +36,11 @@ public final class WeaverSpirit extends PathfinderMob implements Enemy {
     private int exitTicks,returned;
     private CompoundTag pendingDeathLoot=new CompoundTag();
     private net.minecraft.world.item.ItemStack offeredCloud=net.minecraft.world.item.ItemStack.EMPTY;
-    private final ServerBossEvent bossEvent=new ServerBossEvent(getDisplayName(),BossEvent.BossBarColor.PURPLE,BossEvent.BossBarOverlay.PROGRESS);
+    public static final String BOSS_TITLE = "bossbar.omnira.weaver_spirit";
+    private net.minecraft.network.chat.Component barTitle(){
+        return net.minecraft.network.chat.Component.translatableWithFallback(BOSS_TITLE, "%s", getDisplayName());
+    }
+    private final ServerBossEvent bossEvent=new ServerBossEvent(barTitle(),BossEvent.BossBarColor.PURPLE,BossEvent.BossBarOverlay.PROGRESS);
     private final Set<UUID> opponents=new LinkedHashSet<>();
     private boolean reloaded;
     private int attackClock=60,normals,normalSinceRay,phaseClock=-1;
@@ -53,6 +57,10 @@ public final class WeaverSpirit extends PathfinderMob implements Enemy {
     public boolean active(){return entityData.get(ACTIVE);}
     public boolean phasing(){return entityData.get(PHASING);}
     private void phasing(boolean value){entityData.set(PHASING,value);noPhysics=value;}
+    private void setReloaded(boolean spent){
+        reloaded=spent;
+        bossEvent.setColor(spent ? BossEvent.BossBarColor.RED : BossEvent.BossBarColor.PURPLE);
+    }
     public boolean redCore(){return entityData.get(RED);}
     public int strength(){return entityData.get(TIERS);}
     public int normalAttacks(){return normals;}
@@ -183,11 +191,11 @@ public final class WeaverSpirit extends PathfinderMob implements Enemy {
         if(opponents().isEmpty())return;
         active(true);
         if(!WeaverCombat.reacting())WeaverCombat.bend(this,random.nextBoolean());
-        if(!reloaded&&getHealth()<=512){reloaded=true;phaseClock=0;}
+        if(!reloaded&&getHealth()<=512){setReloaded(true);phaseClock=0;}
     }
     @Override protected void customServerAiStep(){
         if(departure()!=0)return;
-        super.customServerAiStep();bossEvent.setName(getDisplayName());bossEvent.setProgress(getHealth()/getMaxHealth());
+        super.customServerAiStep();bossEvent.setName(barTitle());bossEvent.setProgress(getHealth()/getMaxHealth());
         var targets=opponents();boolean engaged=!targets.isEmpty();
         active(engaged);setNoGravity(engaged||phasing());moveControl=engaged?flightControl:idleControl;
         if(!engaged){
@@ -195,7 +203,7 @@ public final class WeaverSpirit extends PathfinderMob implements Enemy {
             // Do not carry flight steering into gravity or terrain-exit movement.
             setXxa(0);setYya(0);setZza(0);setSpeed(0);
             setDeltaMovement(getDeltaMovement().multiply(0,1,0));attackClock=60;
-            reloaded=false;phaseClock=-1;entityData.set(RED,false);
+            setReloaded(false);phaseClock=-1;entityData.set(RED,false);
             if(phasing()){
                 if(com.mcmagic.omnira.weaver.WeaverPhasing.clear(this,position())){phasing(false);setNoGravity(false);escapePoint=null;}
                 else{
@@ -248,7 +256,7 @@ public final class WeaverSpirit extends PathfinderMob implements Enemy {
         var list=new ListTag();opponents.forEach(id->list.add(StringTag.valueOf(id.toString())));tag.put("WeaverOpponents",list);
     }
     @Override public void readAdditionalSaveData(CompoundTag tag){
-        super.readAdditionalSaveData(tag);reloaded=tag.getBoolean("WeaverReloaded");entityData.set(RED,tag.getBoolean("WeaverRed"));entityData.set(TIERS,Math.clamp(tag.getInt("WeaverStrength"),0,3));
+        super.readAdditionalSaveData(tag);setReloaded(tag.getBoolean("WeaverReloaded"));entityData.set(RED,tag.getBoolean("WeaverRed"));entityData.set(TIERS,Math.clamp(tag.getInt("WeaverStrength"),0,3));
         attackClock=tag.contains("WeaverAttackClock")?Math.clamp(tag.getInt("WeaverAttackClock"),1,60):60;
         normals=Math.max(0,tag.getInt("WeaverNormals"));normalSinceRay=Math.clamp(tag.getInt("WeaverSinceRay"),0,5);
         phaseClock=tag.contains("WeaverPhaseClock")?Math.clamp(tag.getInt("WeaverPhaseClock"),-1,50):-1;

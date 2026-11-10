@@ -87,7 +87,7 @@ FE 按输入速率折算 MPU，遵守接收限额与持续供能规则。时空�
 ## 回归入口
 
 ```powershell
-./scripts/gradle-local.ps1 runGameTestServer -PdreamTestData -PkubejsRecipeTest '-PgameTestNamespaces=omnira_recipe_integration,omnira_kubejs_recipes,omnira_recipe_audit'
+./gradlew.bat runGameTestServer -PdreamTestData -PkubejsRecipeTest '-PgameTestNamespaces=omnira_recipe_integration,omnira_kubejs_recipes,omnira_recipe_audit'
 ```
 
 测试仅使用无界面开发实例，不修改玩家整合包或打包测试数据。最小依赖测试可使用 `omnira_recipe_integration`，加上 `-PwithoutExternalMods -PwithoutCreate -PwithoutSable -PwithoutJei`，不启用 KubeJS 夹具。

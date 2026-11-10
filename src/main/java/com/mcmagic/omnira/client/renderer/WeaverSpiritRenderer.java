@@ -39,11 +39,14 @@ public final class WeaverSpiritRenderer extends EntityRenderer<WeaverSpirit> {
                 }
                 for(var face:WeaverSpiritGeometry.FACES){
                     boolean spirit=face.material()==1;
-                    if(face.group()!=group||spirit!=(pass==1))continue;
+                    boolean fitting=group==0 && face.material()==3;
+                    if(face.group()!=group||(spirit||fitting)!=(pass==1))continue;
                     var center=face.vertices();
                     if(!com.mcmagic.omnira.weaver.WeaverDeparture.showFace(exit,age,group,(center[0]+center[6])/2,(center[1]+center[7])/2,(center[2]+center[8])/2))continue;
                     int color=group==2&&entity.cloudNear()?0xFFC48AFF:group==2&&entity.redCore()?0xFFFF6878:group==7?0xFF8B969F:group==6?0xFF596970:0xFFFFFFFF;
-                    if(entity.phasing())color=(color&0xFFFFFF)|0xCC000000;
+                    if(fitting)color=0x8099DEE5;
+                    else if(face.material()==3)color=0xFFFFFFFF;
+                    if(entity.phasing()&&!fitting)color=(color&0xFFFFFF)|0xCC000000;
                     int brightness=face.material()==2?LightTexture.FULL_BRIGHT:light;
                     float[] vertices=face.vertices(),uv=face.uv();
                     for(int i=0;i<4;i++)out.addVertex(pose.last(),vertices[i*3]/16,vertices[i*3+1]/16,vertices[i*3+2]/16)
@@ -55,6 +58,8 @@ public final class WeaverSpiritRenderer extends EntityRenderer<WeaverSpirit> {
             }
         }
         var particles=buffers.getBuffer(CrystalGlassLayer.COLOR);
+        if(exit==0 || com.mcmagic.omnira.weaver.WeaverDeparture.showFace(exit,age,1,19,-5,0))
+            driveLinkage(time,pose,particles);
         pose.pushPose();pose.mulPose(Axis.XP.rotationDegrees(ambient*WeaverSpiritGeometry.SEAM_SPEED));
         for(var mote:WeaverSpiritGeometry.SEAM_MOTES){
             if(exit!=0&&age>80)continue;
@@ -78,6 +83,36 @@ public final class WeaverSpiritRenderer extends EntityRenderer<WeaverSpirit> {
         }
         if(exit==2)com.mcmagic.omnira.client.renderer.WeaverDepartureVisuals.draw(age,yaw,pose,buffers,light);
         pose.popPose();super.render(entity,yaw,partial,pose,buffers,light);
+    }
+    // The eccentric shares the main wheel angle. The far pin slides along Z inside the fork.
+    private static void driveLinkage(float time,PoseStack pose,com.mojang.blaze3d.vertex.VertexConsumer out){
+        double angle=Math.toRadians(time*WeaverSpiritGeometry.GEARS.getFirst().speed()*2);
+        double dy=2.5*Math.cos(angle), crankZ=2.5*Math.sin(angle);
+        double reach=Math.sqrt(100-dy*dy);
+        pose.pushPose();
+        pose.scale(1f/16,1f/16,1f/16);
+        pixelPart(pose,out,19,-5+dy,crankZ,2.2f,2,2,0,0xFFD1F6FF);
+        float tilt=(float)Math.toDegrees(Math.atan2(dy,reach));
+        pixelPart(pose,out,18.8,-5+dy/2,crankZ+reach/2,1.2f,1.4f,10,tilt,0xFFA3BCCA);
+        pixelPart(pose,out,18.8,-5,crankZ+reach+2,1.6f,1.6f,5,0,0xFFA4D7DF);
+        for(int i=0;i<2;i++){
+            double travel=(time*.022+i*.5)%1;
+            pixelPart(pose,out,8,-4.7,-11-6*travel,.8f,.8f,1.5f,0,0xC0ADF9FF);
+            pixelPart(pose,out,8,6.3,11+6*travel,.8f,.8f,1.5f,0,0xC0ADF9FF);
+        }
+        pose.popPose();
+    }
+    private static void pixelPart(PoseStack pose,com.mojang.blaze3d.vertex.VertexConsumer out,
+                                  double x,double y,double z,float w,float h,float d,float tilt,int color){
+        pose.pushPose();
+        pose.translate(x,y,z);
+        pose.mulPose(Axis.XP.rotationDegrees(tilt));
+        pose.scale(w,h,d);
+        for(var face:WeaverSpiritGeometry.SEAM_PIXEL){
+            var v=face.vertices();
+            for(int i=0;i<4;i++)out.addVertex(pose.last().pose(),v[i*3],v[i*3+1],v[i*3+2]).setColor(color);
+        }
+        pose.popPose();
     }
     @Override public ResourceLocation getTextureLocation(WeaverSpirit entity){return TEXTURE;}
 }

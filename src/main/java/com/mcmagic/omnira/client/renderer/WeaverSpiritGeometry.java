@@ -93,11 +93,11 @@ public final class WeaverSpiritGeometry {
     private static void appendMechanism(List<Face> faces){
         var pixels=new HashMap<Pixel,Integer>();
         // Open load-bearing frame, short bearing forks and only two small protective plates.
-        for(int[] b:new int[][]{{0,-18,-3,4,36,6},{3,-16,-14,3,32,3},{4,-14,12,3,30,3},
+        for(int[] b:new int[][]{{0,-18,-3,2,36,2},{0,-18,1,2,36,2},{3,-16,-14,3,32,3},{4,-14,12,3,30,3},
                 {4,15,-13,12,3,3},{4,-16,-13,12,3,3},{5,13,12,11,3,3},{5,-14,12,11,3,3},
                 {15,-13,-7,3,29,2},{15,-13,5,3,29,2},{3,18,-4,5,4,8},{3,-22,-4,5,4,8},
                 {15,-9,-5,3,2,10},{15,-3,-5,3,2,10},{15,6,-5,3,2,10},{15,12,-5,3,2,10},
-                {8,15,-4,6,3,8},{8,-19,-4,6,3,8},{13,11,-3,3,4,6},{13,-15,-3,3,4,6},
+                {8,15,-4,6,3,2},{8,15,2,6,3,2},{8,-19,-4,6,3,2},{8,-19,2,6,3,2},{13,11,-3,3,4,6},{13,-15,-3,3,4,6},
                 {3,10,-9,2,5,7},{3,-15,3,2,5,7}})fill(pixels,0,0,b);
         // Continuous shafts terminate behind the exposed gear faces, never in front of the teeth.
         for(int[] b:new int[][]{{3,-6,-1,18,2,2},{3,9,-1,18,2,2},
@@ -106,6 +106,10 @@ public final class WeaverSpiritGeometry {
                 {7,-8,-12,2,20,2},{7,-8,10,2,20,2}})fill(pixels,0,6,b);
         collar(pixels,0,17,-5,0);collar(pixels,0,17,10,0);
         collar(pixels,2,8,-6,-14);collar(pixels,2,8,5,14);
+        // Slotted guide spanning the outer bearing and the back crossmember.
+        fill(pixels,0,0,new int[]{15,-8,11,5,2,5});
+        fill(pixels,0,0,new int[]{15,-4,11,5,2,5});
+        fill(pixels,0,0,new int[]{14,-8,13,2,7,2});
         // A slender piston and its two clevises read as a component, not another full housing.
         fill(pixels,0,0,new int[]{10,-15,8,4,7,4});
         fill(pixels,3,0,new int[]{11,-8,9,2,16,2});

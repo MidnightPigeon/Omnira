@@ -65,9 +65,8 @@ repo/
 !.env.example
 
 # Keep source/runtime resources, Gradle Wrapper and required build inputs versioned.
-# Only the local Gradle launcher and required test fixture are build inputs.
+# Keep the fixtures used by the public GameTest tasks.
 /scripts/*
-!/scripts/gradle-local.ps1
 !/scripts/tests/
 /scripts/tests/*
 !/scripts/tests/spell_arena.snbt
@@ -100,3 +99,9 @@ replay_pid*.log
 
 # Public README banner.
 !/banner.png
+
+# Workstation-only visual checks and obsolete directory placeholders.
+/src/main/java/com/mcmagic/omnira/client/ArmorPreview.java
+/src/main/java/com/mcmagic/omnira/client/SpacetimeSkyPreview.java
+/src/main/java/com/mcmagic/omnira/client/codex/CodexOfflinePreview.java
+/src/**/.gitkeep
