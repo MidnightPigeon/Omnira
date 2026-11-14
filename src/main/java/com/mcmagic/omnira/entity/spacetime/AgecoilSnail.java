@@ -10,7 +10,7 @@ import com.mcmagic.omnira.weaver.WeaverCombat;
 
 public final class AgecoilSnail extends PathfinderMob {
     private static final EntityDataAccessor<Integer> SHELTER=SynchedEntityData.defineId(AgecoilSnail.class,EntityDataSerializers.INT);
-    private LivingEntity aggressor;
+    private java.util.UUID aggressor;
     public AgecoilSnail(EntityType<? extends AgecoilSnail> type,Level level){super(type,level);}
     public static AttributeSupplier.Builder attributes(){return Mob.createMobAttributes().add(Attributes.MAX_HEALTH,16).add(Attributes.MOVEMENT_SPEED,.12).add(Attributes.FOLLOW_RANGE,24);}
     @Override protected void defineSynchedData(SynchedEntityData.Builder b){super.defineSynchedData(b);b.define(SHELTER,0);}
@@ -24,9 +24,21 @@ public final class AgecoilSnail extends PathfinderMob {
         boolean hit=super.hurt(source,amount);
         if(hit&&!level().isClientSide&&isAlive()&&source.getEntity() instanceof LivingEntity living&&living!=this){
             // More hits during this shelter do not restart its timer or queue extra shots.
-            if(shelterTicks()==0){aggressor=living;entityData.set(SHELTER,20);}
+            if(shelterTicks()==0){aggressor=living.getUUID();entityData.set(SHELTER,20);}
         }
         return hit;
+    }
+    @Override public void addAdditionalSaveData(net.minecraft.nbt.CompoundTag tag){
+        super.addAdditionalSaveData(tag);
+        if(shelterTicks()>0){
+            tag.putInt("ShelterTicks",shelterTicks());
+            if(aggressor!=null)tag.putUUID("ShelterAttacker",aggressor);
+        }
+    }
+    @Override public void readAdditionalSaveData(net.minecraft.nbt.CompoundTag tag){
+        super.readAdditionalSaveData(tag);
+        entityData.set(SHELTER,Math.clamp(tag.getInt("ShelterTicks"),0,20));
+        aggressor=shelterTicks()>0 && tag.hasUUID("ShelterAttacker")?tag.getUUID("ShelterAttacker"):null;
     }
     @Override public void tick(){
         super.tick();
@@ -39,8 +51,9 @@ public final class AgecoilSnail extends PathfinderMob {
         int remaining=shelterTicks();
         if(remaining>0){getNavigation().stop();setDeltaMovement(getDeltaMovement().multiply(0,1,0));entityData.set(SHELTER,remaining-1);
             if(remaining==1){
-                if(aggressor!=null&&aggressor.isAlive()&&aggressor.level()==level()&&distanceToSqr(aggressor)<=64*64)
-                    WeaverCombat.lockedRay(this,aggressor,1,.05F);
+                if(aggressor!=null && ((net.minecraft.server.level.ServerLevel)level()).getEntity(aggressor) instanceof LivingEntity target
+                        && target.isAlive() && distanceToSqr(target)<=64*64)
+                    WeaverCombat.lockedRay(this,target,1,.05F);
                 aggressor=null;setTarget(null);setLastHurtByMob(null);
             }
         }else if(tickCount%20==0)getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(tickCount%240<40?.24:.12);

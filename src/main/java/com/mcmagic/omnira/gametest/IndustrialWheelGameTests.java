@@ -26,30 +26,35 @@ public class IndustrialWheelGameTests {
     private static void ticks(FakePlayer p,int n){for(int i=0;i<n;i++){p.tickCount++;p.getCooldowns().tick();IndustrialWheelItem.tick(new PlayerTickEvent.Post(p));}}
     @GameTest(template="spell_arena") public static void deployOneRune(GameTestHelper h){
         if(!IndustrialWheelItem.available()){h.succeed();return;}
-        var wheel=new ItemStack(ModItems.INDUSTRIAL_WHEEL.get());
-        wheel.set(DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal("Workshop wheel"));
-        var pos=h.absolutePos(new net.minecraft.core.BlockPos(3,3,3));
-        h.getLevel().setBlockAndUpdate(pos,com.simibubi.create.AllBlocks.DEPLOYER.getDefaultState());
-        var deployer=(com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity)h.getLevel().getBlockEntity(pos);
-        var inputs=new net.neoforged.neoforge.items.ItemStackHandler(2);
-        inputs.setStackInSlot(0,wheel);
-        for(var rune:List.of(ModItems.SWIFTNESS_RUNE,ModItems.WIDE_AREA_RUNE,ModItems.AMPLIFICATION_RUNE)){
-            inputs.setStackInSlot(1,new ItemStack(rune.get()));
-            var event=new com.simibubi.create.content.kinetics.deployer.DeployerRecipeSearchEvent(deployer,new net.neoforged.neoforge.items.wrapper.RecipeWrapper(inputs));
-            net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(event);
-            var recipe=(com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe)event.getRecipe().value();
-            var result=recipe.rollResults(h.getLevel().random).getFirst();
-            var stats=IndustrialWheelItem.stats(result);
-            h.assertTrue(!recipe.shouldKeepHeldItem() && result.getHoverName().equals(wheel.getHoverName()) && IndustrialWheelItem.rune(result).is(rune.get()),"Rune or wheel data lost");
-            h.assertTrue(com.mcmagic.omnira.compat.WheelRuneDeploying.recipe(result,inputs.getStackInSlot(1)).isEmpty(),"Occupied slot accepted another rune");
-            h.assertTrue(switch(rune.getId().getPath()){
-                case "swiftness_rune" -> stats.speedMultiplier()==1.5 && stats.cooldownReduction()==.2;
-                case "wide_area_rune" -> stats.rangeMultiplier()==1.5;
-                default -> Math.abs(stats.power()-.7)<.00001;
-            },"Rune did not affect casting stats");
+        CreateChecks.deployOneRune(h);
+    }
+    private static final class CreateChecks {
+        static void deployOneRune(GameTestHelper h) {
+            var wheel=new ItemStack(ModItems.INDUSTRIAL_WHEEL.get());
+            wheel.set(DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal("Workshop wheel"));
+            var pos=h.absolutePos(new net.minecraft.core.BlockPos(3,3,3));
+            h.getLevel().setBlockAndUpdate(pos,com.simibubi.create.AllBlocks.DEPLOYER.getDefaultState());
+            var deployer=(com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity)h.getLevel().getBlockEntity(pos);
+            var inputs=new net.neoforged.neoforge.items.ItemStackHandler(2);
+            inputs.setStackInSlot(0,wheel);
+            for(var rune:List.of(ModItems.SWIFTNESS_RUNE,ModItems.WIDE_AREA_RUNE,ModItems.AMPLIFICATION_RUNE)){
+                inputs.setStackInSlot(1,new ItemStack(rune.get()));
+                var event=new com.simibubi.create.content.kinetics.deployer.DeployerRecipeSearchEvent(deployer,new net.neoforged.neoforge.items.wrapper.RecipeWrapper(inputs));
+                net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(event);
+                var recipe=(com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe)event.getRecipe().value();
+                var result=recipe.rollResults(h.getLevel().random).getFirst();
+                var stats=IndustrialWheelItem.stats(result);
+                h.assertTrue(!recipe.shouldKeepHeldItem() && result.getHoverName().equals(wheel.getHoverName()) && IndustrialWheelItem.rune(result).is(rune.get()),"Rune or wheel data lost");
+                h.assertTrue(com.mcmagic.omnira.compat.WheelRuneDeploying.recipe(result,inputs.getStackInSlot(1)).isEmpty(),"Occupied slot accepted another rune");
+                h.assertTrue(switch(rune.getId().getPath()){
+                    case "swiftness_rune" -> stats.speedMultiplier()==1.5 && stats.cooldownReduction()==.2;
+                    case "wide_area_rune" -> stats.rangeMultiplier()==1.5;
+                    default -> Math.abs(stats.power()-.7)<.00001;
+                },"Rune did not affect casting stats");
+            }
+            h.assertTrue(com.mcmagic.omnira.compat.WheelRuneDeploying.recipe(wheel,new ItemStack(Items.DIAMOND)).isEmpty(),"Non-rune accepted");
+            h.succeed();
         }
-        h.assertTrue(com.mcmagic.omnira.compat.WheelRuneDeploying.recipe(wheel,new ItemStack(Items.DIAMOND)).isEmpty(),"Non-rune accepted");
-        h.succeed();
     }
     @GameTest(template="spell_arena") public static void continuousWrapAndImmediateStop(GameTestHelper h){
         if(!IndustrialWheelItem.available()){h.succeed();return;}

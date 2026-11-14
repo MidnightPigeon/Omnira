@@ -1,5 +1,6 @@
 package com.mcmagic.omnira.block.entity;
 
+import com.mcmagic.omnira.util.PhaseAge;
 import com.mcmagic.omnira.block.NightHeronStatueBlock;
 import com.mcmagic.omnira.registry.*;
 import net.minecraft.core.*;
@@ -14,7 +15,9 @@ import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 public final class NightHeronStatueBlockEntity extends BlockEntity {
     private int color;
-    private long stretchStart=-1000,nextStretch;
+    private final PhaseAge pose=new PhaseAge("StretchAge","StretchStart",60);
+    private int nextStretch;
+    private long legacyNext;
     private boolean milkPending;
     private boolean autoMilk=true;
     public boolean autoMilk(){return autoMilk;}
@@ -26,8 +29,8 @@ public final class NightHeronStatueBlockEntity extends BlockEntity {
     public NightHeronStatueBlockEntity(BlockPos p,BlockState s){super(ModBlockEntityTypes.NIGHT_HERON_STATUE.get(),p,s);}
     public int color(){return color;}
     public float stretch(float partialTick) {
-        if(level==null)return 0;
-        double elapsed=level.getGameTime()+partialTick-stretchStart;
+        if(level==null || !pose.active())return 0;
+        double elapsed=pose.ticks(level)+partialTick;
         if(elapsed<0 || elapsed>60)return 0;
         return (float)Math.min(1,Math.min(elapsed/8,(60-elapsed)/14));
     }
@@ -36,11 +39,18 @@ public final class NightHeronStatueBlockEntity extends BlockEntity {
         level.playSound(null,worldPosition,net.minecraft.sounds.SoundEvents.STONE_BUTTON_CLICK_ON,net.minecraft.sounds.SoundSource.BLOCKS,.5F,1.1F);
     }
     public void tick() {
-        if(level==null || level.isClientSide)return;
-        long now=level.getGameTime();
-        if(milkPending && now-stretchStart>=60){milkPending=false;setChanged();if(autoMilk)ejectMilk();}
-        if(nextStretch==0){nextStretch=now+200+level.random.nextInt(500);setChanged();}
-        if(now>=nextStretch){stretchStart=now;milkPending=true;nextStretch=now+300+level.random.nextInt(500);sync();}
+        if(level==null)return;
+        pose.advanceAnimated(level,worldPosition);
+        if(level.isClientSide)return;
+        if(legacyNext!=0){
+            nextStretch=(int)Math.clamp(legacyNext-level.getGameTime(),1,799);
+            legacyNext=0;
+        }
+        if(milkPending && pose.ticks(level)>=60){milkPending=false;setChanged();if(autoMilk)ejectMilk();}
+        if(nextStretch==0)nextStretch=200+level.random.nextInt(500);
+        if(--nextStretch==0){
+            pose.start();milkPending=true;nextStretch=300+level.random.nextInt(500);sync();
+        }else if(nextStretch%100==0)setChanged();
     }
     public void call() {
         if(level!=null && !level.isClientSide)level.playSound(null,worldPosition,ModSounds.NIGHT_HERON_CALL.get(),net.minecraft.sounds.SoundSource.BLOCKS,.7F,1F);
@@ -49,10 +59,11 @@ public final class NightHeronStatueBlockEntity extends BlockEntity {
         if(level==null || level.isClientSide)return;
         var right=NightHeronStatueBlock.viewerRight(getBlockState().getValue(NightHeronStatueBlock.FACING));
         var destination=worldPosition.relative(right);
-        if(level.hasChunkAt(destination) && level.getBlockEntity(destination) instanceof LiquidCrystalBallBlockEntity ball) {
+        if(level.hasChunkAt(destination) && level.getBlockEntity(destination) instanceof LiquidCrystalBallBlockEntity) {
             var fluid=new net.neoforged.neoforge.fluids.FluidStack(net.neoforged.neoforge.common.NeoForgeMod.MILK.get(),1000);
-            if(ball.tank.fill(fluid,net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE)==1000) {
-                ball.tank.fill(fluid,net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);return;
+            var tank=level.getCapability(Capabilities.FluidHandler.BLOCK,destination,right.getOpposite());
+            if(tank!=null && tank.fill(fluid,net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE)==1000) {
+                tank.fill(fluid,net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);return;
             }
         }
         ItemStack milk=new ItemStack(ModItems.MILK_SUSPENSION.get());
@@ -66,8 +77,8 @@ public final class NightHeronStatueBlockEntity extends BlockEntity {
         }
     }
     private void sync(){setChanged();if(level!=null)level.sendBlockUpdated(worldPosition,getBlockState(),getBlockState(),3);}
-    @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries){super.saveAdditional(tag,registries);tag.putInt("Color",color);tag.putLong("StretchStart",stretchStart);tag.putLong("NextStretch",nextStretch);tag.putBoolean("MilkPending",milkPending);tag.putBoolean("AutoMilk",autoMilk);}
-    @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries){super.loadAdditional(tag,registries);color=Math.clamp(tag.getInt("Color"),0,2);stretchStart=tag.contains("StretchStart")?tag.getLong("StretchStart"):-1000;nextStretch=tag.getLong("NextStretch");milkPending=tag.getBoolean("MilkPending");autoMilk=!tag.contains("AutoMilk") || tag.getBoolean("AutoMilk");}
+    @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries){super.saveAdditional(tag,registries);tag.putInt("Color",color);pose.save(tag);if(legacyNext!=0)tag.putLong("NextStretch",legacyNext);else tag.putInt("StretchDelay",nextStretch);tag.putBoolean("MilkPending",milkPending);tag.putBoolean("AutoMilk",autoMilk);}
+    @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries){super.loadAdditional(tag,registries);color=Math.clamp(tag.getInt("Color"),0,2);pose.load(tag);legacyNext=tag.getLong("NextStretch");nextStretch=Math.clamp(tag.getInt("StretchDelay"),0,799);milkPending=tag.getBoolean("MilkPending");autoMilk=!tag.contains("AutoMilk") || tag.getBoolean("AutoMilk");}
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries){return saveWithoutMetadata(registries);}
     @Override public ClientboundBlockEntityDataPacket getUpdatePacket(){return ClientboundBlockEntityDataPacket.create(this);}
 }

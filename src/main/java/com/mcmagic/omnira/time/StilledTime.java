@@ -33,6 +33,11 @@ public final class StilledTime {
         if(net.neoforged.fml.ModList.get().isLoaded("create")&&com.mcmagic.omnira.compat.CreateLocalTime.assembled(entity))return false;
         return stopped(entity.level(),entity.blockPosition());
     }
+    /** Spell recovery runs every second player tick; projectile simulation has its own rate. */
+    public static boolean pauseSpellCooldown(net.minecraft.world.entity.player.Player player) {
+        return (player.tickCount & 1) != 0 && stopped(player.level(), player.blockPosition());
+    }
+
     private static boolean slowedType(Entity entity){
         return entity instanceof net.minecraft.world.entity.item.ItemEntity
                 || entity instanceof net.minecraft.world.entity.projectile.Projectile
@@ -43,7 +48,7 @@ public final class StilledTime {
     public static boolean skipTick(Entity entity){
         if(stopped(entity))return true;
         double factor=com.mcmagic.omnira.spacetime.TimeWarpEffects.tickFactor(entity);
-        if(slowedType(entity)&&stopped(entity.level(),entity.blockPosition()))factor*=.05;
+        if(slowedType(entity)&&stopped(entity.level(),entity.blockPosition()))factor*=.1;
         if(factor>=1)return false;
         int steps=(int)Math.round(factor*200);
         if(Math.floorMod((entity.level().getGameTime()+entity.getId())*steps,200)<steps)return false;

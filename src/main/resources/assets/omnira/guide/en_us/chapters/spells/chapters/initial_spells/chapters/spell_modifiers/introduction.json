@@ -3,11 +3,5 @@
   "caption": "Through careful refinement, a work takes shape.",
   "text": [
     "Use the two left-hand slots for modifiers; each adds 10 base mana. Modifiers change elements, not replace them. Repeats are allowed, with effects depending on the element."
-  ],
-  "links": [
-    {
-      "target": "dream_spell_modifiers",
-      "label": "Dream-stage Modifiers"
-    }
   ]
 }

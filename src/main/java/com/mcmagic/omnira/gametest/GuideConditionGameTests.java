@@ -15,7 +15,10 @@ public class GuideConditionGameTests {
             var root=GuideResourceTree.load(path->{
                 try(var in=GuideConditionGameTests.class.getResourceAsStream("/assets/omnira/guide/"+locale+"/"+path)) {
                     if(in==null)throw new IOException(path);
-                    return JsonParser.parseReader(new InputStreamReader(in,StandardCharsets.UTF_8)).getAsJsonObject();
+                    var data=JsonParser.parseReader(new InputStreamReader(in,StandardCharsets.UTF_8)).getAsJsonObject();
+                    if(path.endsWith("introduction.json"))
+                        h.assertFalse(data.has("links"),"Internal links cannot be rendered on an introduction: "+path);
+                    return data;
                 }
             });
             var absent=GuideContents.fromJson(root,id->false);
@@ -35,7 +38,11 @@ public class GuideConditionGameTests {
             h.assertTrue(dest.path().size()==2&&dest.path().getFirst().id().equals("cross_worlds")&&dest.chapter().entries().size()==8,"Wrong hierarchy or missing parts");
             h.assertTrue(present.parentDirectory("cataclysm_staff_tips").chapter().id().equals("cataclysm_power"),"Entry back navigation not migrated");
             h.assertTrue(new GuideReferenceIndex(present).item(new ItemStack(ModItems.STORM_TIP.get())).orElseThrow().equals("cataclysm_staff_tips"),"Item lookup lost stable ID");
-            h.assertTrue(present.destination("mod_integrations").orElseThrow().chapter().entries().size()==2,"Detailed items remained in integration list");
+            var summaries=absent.destination("mod_integrations").orElseThrow().chapter().entries();
+            h.assertTrue(summaries.stream().map(GuideContents.Entry::id).toList().equals(java.util.List.of(
+                    "create_integration","aeronautics_integration","lootr_integration","cataclysm_integration")),"Missing integration summary");
+            h.assertTrue(absent.destination("cataclysm_integration").orElseThrow().entry().links().isEmpty()
+                    &&present.destination("cataclysm_integration").orElseThrow().entry().links().stream().anyMatch(l->l.target().equals("cataclysm_power")),"Incorrect Cataclysm detail link");
         }h.succeed();
     }
     @GameTest(template="spell_arena") public static void mixedDirectoryRemovesOnlyHiddenPriority(GameTestHelper h){

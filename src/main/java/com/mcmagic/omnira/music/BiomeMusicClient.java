@@ -14,6 +14,7 @@ public final class BiomeMusicClient {
     @SubscribeEvent public static void select(SelectMusicEvent event){
         var minecraft=Minecraft.getInstance();
         if(minecraft.player==null||minecraft.level==null)return;
+        if(WeaverBattleMusic.occupiesMusicChannel()){event.overrideMusic(null);return;}
         var authored=minecraft.level.getBiome(minecraft.player.blockPosition()).value().getBackgroundMusic()
                 .filter(music->music.getEvent().value().getLocation().getNamespace().equals("omnira"));
         var dimension=minecraft.level.dimension();

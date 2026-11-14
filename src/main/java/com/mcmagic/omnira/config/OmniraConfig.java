@@ -8,6 +8,7 @@ public final class OmniraConfig {
     public static final ModConfigSpec.IntValue CRYSTAL_BALL_DISPLAY_MODE;
     public static final ModConfigSpec.ConfigValue<java.util.List<? extends String>> RELOAD_BLOCK_BLACKLIST;
     public static final ModConfigSpec.ConfigValue<java.util.List<? extends String>> RELOAD_ENTITY_BLACKLIST;
+    private static final ModConfigSpec.BooleanValue VANILLA_BOSS_DEFAULT_UPDATED;
     static {
         var builder=new ModConfigSpec.Builder();
         builder.push("guide");
@@ -25,8 +26,17 @@ public final class OmniraConfig {
                         "create:wooden_bracket","create:copycat_base","create:metal_bracket","create:water_wheel_structure",
                         "create:copycat_bars","minecraft:frosted_ice","omnira:permanent_reinforced_void_crystal"),OmniraConfig::registryId);
         RELOAD_ENTITY_BLACKLIST=builder.comment("Entity type IDs excluded as both reload targets and random results. Does not affect World Rotation.")
-                .defineListAllowEmpty("entityBlacklist",java.util.List.of("minecraft:ender_dragon"),OmniraConfig::registryId);
+                .defineListAllowEmpty("entityBlacklist",java.util.List.<String>of(),OmniraConfig::registryId);
+        VANILLA_BOSS_DEFAULT_UPDATED=builder.comment("Tracks the one-time update of the old default entity blacklist.")
+                .define("vanillaBossDefaultUpdated",false);
         builder.pop(2);SPEC=builder.build();
+    }
+    public static void migrateReloadDefaults(net.neoforged.fml.event.config.ModConfigEvent.Loading event){
+        if(event.getConfig().getSpec()!=SPEC || VANILLA_BOSS_DEFAULT_UPDATED.get())return;
+        if(RELOAD_ENTITY_BLACKLIST.get().equals(java.util.List.of("minecraft:ender_dragon")))
+            RELOAD_ENTITY_BLACKLIST.set(java.util.List.of());
+        VANILLA_BOSS_DEFAULT_UPDATED.set(true);
+        SPEC.save();
     }
     private static boolean registryId(Object value){return value instanceof String id&&id.contains(":")&&net.minecraft.resources.ResourceLocation.tryParse(id)!=null;}
     private OmniraConfig() {}

@@ -1,5 +1,6 @@
 package com.mcmagic.omnira.space;
 
+import com.mcmagic.omnira.util.GameTimeCooldown;
 import com.mcmagic.omnira.registry.ModBlockEntityTypes;
 import net.minecraft.core.*;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -60,7 +61,7 @@ public final class FoldGateBlockEntity extends BlockEntity {
         for(var e:l.getEntities((net.minecraft.world.entity.Entity)null,area,e->e.isAlive()&&!e.isSpectator())){
             if(!stable&&!(e instanceof net.minecraft.server.level.ServerPlayer))continue;
             var root=e.getRootVehicle();
-            if(!seen.add(root.getUUID())||!com.mcmagic.omnira.world.dimension.DreamTransitRules.allowed(root)||root.getPersistentData().getLong("OmniraFoldGateCooldown")>l.getServer().overworld().getGameTime())continue;
+            if(!seen.add(root.getUUID())||!com.mcmagic.omnira.world.dimension.DreamTransitRules.allowed(root)||GameTimeCooldown.active(root, "OmniraFoldGateCooldown", l.getServer().overworld().getGameTime(), 60))continue;
             int ticks=touching.merge(root.getUUID(),1,Integer::sum);
             if(ticks>=20){touching.remove(root.getUUID());FoldGateTransit.transfer(this,root,stable);}
         }

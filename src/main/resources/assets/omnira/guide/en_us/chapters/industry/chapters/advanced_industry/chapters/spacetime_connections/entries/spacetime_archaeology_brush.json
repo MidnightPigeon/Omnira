@@ -3,7 +3,7 @@
   "title": "Spacetime Archaeology Brush",
   "item": "omnira:spacetime_archaeology_brush",
   "text": [
-    "Brushes twice as fast and recovers 64 durability every five minutes.",
+    "Brushes twice as fast. While damaged, it recovers 64 durability for every five minutes you carry it.",
     "Continuously brush one entity to hold it still, using one durability per second. After a minute it is erased without drops. Releasing, changing targets or moving out of reach cancels progress. Players, bosses and interactive decorations are excluded; existing interactions take priority."
   ],
   "recipes": true

@@ -25,6 +25,10 @@ public final class ModSounds {
             ()->SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("omnira","music_disc.mi_meng_ye")));
     public static final java.util.function.Supplier<SoundEvent> NIGHT_HERON_CALL=TYPES.register("night_heron_call",
             ()->SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("omnira","night_heron_call")));
+    public static final java.util.function.Supplier<SoundEvent> WEAVER_BATTLE=TYPES.register("music.weaver_spirit",
+            ()->SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("omnira","music.weaver_spirit")));
+    public static final java.util.function.Supplier<SoundEvent> WEAVER_DISC=TYPES.register("music_disc.weaver_spirit",
+            ()->SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("omnira","music_disc.weaver_spirit")));
     private ModSounds() {}
     public static final java.util.function.Supplier<SoundEvent> VIOLIN_ALLEMANDA=TYPES.register("violin_allemanda",
             ()->SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("omnira","violin_allemanda")));

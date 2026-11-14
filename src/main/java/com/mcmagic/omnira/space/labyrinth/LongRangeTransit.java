@@ -1,5 +1,6 @@
 package com.mcmagic.omnira.space.labyrinth;
 
+import com.mcmagic.omnira.util.GameTimeCooldown;
 import com.mcmagic.omnira.spacetime.CorridorLayout;
 import java.util.*;
 import net.minecraft.core.*;
@@ -43,7 +44,7 @@ public final class LongRangeTransit {
         var point=landing(level,root,source.getY()<CorridorLayout.SEPARATOR_BOTTOM);if(point==null)return false;
         var contact=LabyrinthTransit.contact(level,root.getBoundingBox().move(point.subtract(root.position())));
         root.getSelfAndPassengers().forEach(e->{
-            var data=e.getPersistentData();data.putLong("OmniraVoidPortalCooldown",level.getGameTime()+20);
+            var data=e.getPersistentData();GameTimeCooldown.start(e, "OmniraVoidPortalCooldown", level.getGameTime(), 20);
             data.putBoolean("OmniraVoidPortalAtExit",contact!=null);
             if(contact!=null)data.putLong("OmniraVoidPortalExit",contact.pos().asLong());
         });

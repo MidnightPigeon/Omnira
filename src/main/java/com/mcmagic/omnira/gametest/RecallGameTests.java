@@ -62,10 +62,9 @@ public final class RecallGameTests {
         var mark=mark(h);mark.discover(player);
         var entry=mark.entry();
         var buffer=new net.minecraft.network.RegistryFriendlyByteBuf(io.netty.buffer.Unpooled.buffer(),h.getLevel().registryAccess());
-        buffer.writeBoolean(false);buffer.writeEnum(InteractionHand.MAIN_HAND);buffer.writeVarInt(1);
-        buffer.writeUUID(entry.id());buffer.writeResourceLocation(entry.dimension());buffer.writeBlockPos(entry.pos());buffer.writeUtf(entry.name(),32);
-        buffer.writeNullable(entry.biome(),net.minecraft.network.FriendlyByteBuf::writeResourceLocation);
+        com.mcmagic.omnira.menu.WaymarkMenu.writeOpenData(buffer,false,InteractionHand.MAIN_HAND,java.util.List.of(entry),null);
         var menu=new com.mcmagic.omnira.menu.WaymarkMenu(7,player.getInventory(),buffer);buffer.release();
+        h.assertTrue(menu.entries.getFirst().lostNumber()==1 && menu.amber==null,"Lost the ordinary marker identity");
         player.containerMenu=menu;
         h.assertTrue(menu.clickMenuButton(player,-1),"Deletion was rejected");
         h.assertTrue(player.containerMenu==menu && menu.removedEntries.contains(0),"Deletion replaced menu or missed acknowledgment state");

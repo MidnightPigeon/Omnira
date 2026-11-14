@@ -1,6 +1,5 @@
 {
   "text": [
-    "Choose upgrades for the container and task; hold Shift to view compatible devices. Intake and Output plates each retain their own directions and filters.",
-    "Capacity upgrades of the same family cannot stack; Basic and Infused Stacking share one family. Unstackable items remain limited to one. Capacity upgrades cannot be removed while contents exceed the remaining capacity."
+    "Upgrades can expand storage, change transfer rates, or alter how a device works. Hover over an upgrade and hold Shift to see which devices accept it."
   ]
 }

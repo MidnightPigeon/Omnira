@@ -1,5 +1,6 @@
 package com.mcmagic.omnira.space.labyrinth;
 
+import com.mcmagic.omnira.util.GameTimeCooldown;
 import java.util.*;
 import net.minecraft.core.*;
 import net.minecraft.server.level.ServerLevel;
@@ -80,7 +81,7 @@ public final class LabyrinthTransit {
             var exit=outward.getOpposite();var door=LabyrinthTerrain.plan(room).doors().get(exit);level.getChunkAt(door);
             if(!level.getBlockState(door).is(LabyrinthContent.PORTAL.get())||level.getBlockState(door).getValue(VoidPortalBlock.FACING)!=exit)continue;
             var point=arrival(level,root,room,exit);if(point==null)continue;
-            root.getSelfAndPassengers().forEach(e->{var tag=e.getPersistentData();tag.putLong("OmniraVoidPortalCooldown",level.getGameTime()+20);tag.putLong("OmniraVoidPortalExit",door.asLong());tag.putBoolean("OmniraVoidPortalAtExit",true);});
+            root.getSelfAndPassengers().forEach(e->{var tag=e.getPersistentData();GameTimeCooldown.start(e, "OmniraVoidPortalCooldown", level.getGameTime(), 20);tag.putLong("OmniraVoidPortalExit",door.asLong());tag.putBoolean("OmniraVoidPortalAtExit",true);});
             return com.mcmagic.omnira.space.anchor.StabilityField.portalTravel(root,new net.minecraft.world.level.portal.DimensionTransition(level,point,Vec3.ZERO,exit.getAxis()==Direction.Axis.Y?root.getYRot():exit.getOpposite().toYRot(),root.getXRot(),moved->moved.getSelfAndPassengers().forEach(e->e.fallDistance=0)))!=null;
         }
         return false;
@@ -88,17 +89,17 @@ public final class LabyrinthTransit {
     @SubscribeEvent public static void tick(EntityTickEvent.Post event){
         var entity=event.getEntity();if(!(entity.level() instanceof ServerLevel level)||entity.isPassenger()||!entity.isAlive()||entity.isSpectator())return;
         var data=entity.getPersistentData();long now=level.getGameTime();
-        if(data.getLong("OmniraVoidPortalCooldown")>now)return;
+        if(GameTimeCooldown.active(entity, "OmniraVoidPortalCooldown", now, 20))return;
         var contact=contact(level,entity.getBoundingBox());
         if(contact==null){data.putBoolean("OmniraVoidPortalAtExit",false);return;}
         if(level.getBlockState(contact.pos()).is(LabyrinthContent.LONG_RANGE_PORTAL.get())){
             if(!data.getBoolean("OmniraVoidPortalAtExit")||data.getLong("OmniraVoidPortalExit")!=contact.pos().asLong())
-                if(!LongRangeTransit.transfer(level,entity,contact.pos()))data.putLong("OmniraVoidPortalCooldown",now+10);
+                if(!LongRangeTransit.transfer(level,entity,contact.pos()))GameTimeCooldown.start(entity, "OmniraVoidPortalCooldown", now, 10);
             return;
         }
         var outward=contact.outward();var room=LabyrinthTerrain.room(contact.pos().relative(outward.getOpposite()));var canonical=LabyrinthTerrain.plan(room).doors().get(outward);
         if(canonical==null||data.getBoolean("OmniraVoidPortalAtExit")&&data.getLong("OmniraVoidPortalExit")==canonical.asLong())return;
-        if(!transfer(level,entity,canonical,outward))data.putLong("OmniraVoidPortalCooldown",now+10);
+        if(!transfer(level,entity,canonical,outward))GameTimeCooldown.start(entity, "OmniraVoidPortalCooldown", now, 10);
     }
     private LabyrinthTransit(){}
 }

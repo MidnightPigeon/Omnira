@@ -9,7 +9,8 @@ import java.util.*;
 
 /** Keeps destinations discoverable while their chunks are unloaded. */
 public final class WaymarkDirectory extends SavedData {
-    public record Entry(UUID id,ResourceLocation dimension,BlockPos pos,String name,ResourceLocation biome) {
+    public record Entry(UUID id,ResourceLocation dimension,BlockPos pos,String name,ResourceLocation biome,int lostNumber) {
+        public Entry(UUID id,ResourceLocation dimension,BlockPos pos,String name,ResourceLocation biome) { this(id,dimension,pos,name,biome,0); }
         public Entry(UUID id,ResourceLocation dimension,BlockPos pos,String name) { this(id,dimension,pos,name,null); }
     }
 
@@ -26,7 +27,7 @@ public final class WaymarkDirectory extends SavedData {
         if (level == null) return entry;
         // Opening a list must never load remote chunks, including legacy bookmarks.
         if (!level.hasChunkAt(entry.pos())) return entry;
-        var updated = new Entry(entry.id(),entry.dimension(),entry.pos(),entry.name(),biomeAt(level,entry.pos()));
+        var updated = new Entry(entry.id(),entry.dimension(),entry.pos(),entry.name(),biomeAt(level,entry.pos()),entry.lostNumber());
         put(updated);
         return updated;
     }
@@ -46,10 +47,11 @@ public final class WaymarkDirectory extends SavedData {
         var known=discovered.get(player);
         if(known!=null && known.remove(id)) setDirty();
     }
-    public String nextLostName(UUID player) {
+    public String nextLostName(UUID player) {return "失落点位"+nextLostNumber(player);}
+    public int nextLostNumber(UUID player) {
         var names=new HashSet<String>();
         for(var entry:list(player)) names.add(entry.name());
-        for(int i=1;;i++) if(!names.contains("失落点位"+i)) return "失落点位"+i;
+        for(int i=1;;i++) if(!names.contains("失落点位"+i)) return i;
     }
     public List<Entry> list() {return entries.values().stream().sorted(Comparator.comparing(Entry::name).thenComparing(e->e.id().toString())).toList();}
     public void put(Entry entry) {if(!entry.equals(entries.put(entry.id(),entry))) setDirty();}
@@ -62,7 +64,7 @@ public final class WaymarkDirectory extends SavedData {
         for(var value:tag.getList("Waymarks",Tag.TAG_COMPOUND)) {
             var n=(CompoundTag)value;var dim=ResourceLocation.tryParse(n.getString("Dimension"));
             if(dim!=null && n.hasUUID("Id")) {
-                var entry=new Entry(n.getUUID("Id"),dim,BlockPos.of(n.getLong("Position")),n.getString("Name"),n.getString("Biome").isBlank()?null:ResourceLocation.tryParse(n.getString("Biome")));
+                var entry=new Entry(n.getUUID("Id"),dim,BlockPos.of(n.getLong("Position")),n.getString("Name"),n.getString("Biome").isBlank()?null:ResourceLocation.tryParse(n.getString("Biome")),n.getInt("LostNumber"));
                 result.entries.put(entry.id(),entry);
             }
         }
@@ -83,7 +85,7 @@ public final class WaymarkDirectory extends SavedData {
         for(var entry:entries.values()) {
             var n=new CompoundTag();n.putUUID("Id",entry.id());n.putString("Dimension",entry.dimension().toString());
             if(entry.biome()!=null)n.putString("Biome",entry.biome().toString());
-            n.putLong("Position",entry.pos().asLong());n.putString("Name",entry.name());list.add(n);
+            n.putLong("Position",entry.pos().asLong());n.putString("Name",entry.name());n.putInt("LostNumber",entry.lostNumber());list.add(n);
         }
         tag.put("Waymarks",list);
         var players=new ListTag();

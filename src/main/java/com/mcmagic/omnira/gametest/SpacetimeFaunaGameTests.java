@@ -24,7 +24,13 @@ public final class SpacetimeFaunaGameTests {
         var attacker=victim(h,6,4);var bystander=victim(h,5,5);var helmet=new ItemStack(Items.IRON_HELMET);attacker.setItemSlot(EquipmentSlot.HEAD,helmet);
         snail.hurt(snail.damageSources().mobAttack(attacker),1);
         h.assertTrue(!snail.isPickable()&&!snail.isAttackable()&&!snail.hurt(snail.damageSources().generic(),1000),"Sheltered snail was selectable or vulnerable");
-        for(int i=0;i<19;i++)snail.tick();h.assertTrue(attacker.getHealth()==100,"Ray fired before one second");
+        for(int i=0;i<7;i++)snail.tick();
+        var saved=snail.saveWithoutId(new CompoundTag());
+        snail.discard();
+        snail=ModEntityTypes.AGECOIL_SNAIL.get().create(h.getLevel());
+        snail.load(saved);
+        h.assertTrue(snail.shelterTicks()==13,"Reload lost remaining shelter time");
+        for(int i=0;i<12;i++)snail.tick();h.assertTrue(attacker.getHealth()==100,"Ray fired before one second");
         snail.tick();h.assertTrue(snail.isPickable()&&snail.isAttackable(),"Snail stayed untargetable");
         for(int i=0;i<60;i++)snail.tick();
         h.assertTrue(attacker.getHealth()==99&&bystander.getHealth()==100,"Ray damage or target isolation incorrect");
@@ -115,6 +121,11 @@ public final class SpacetimeFaunaGameTests {
     @GameTest(template="spell_arena") public static void mothFlockAndHabitatData(GameTestHelper h){
         var m=h.spawn(ModEntityTypes.RIFT_MOTH.get(),4,4,4);var id=java.util.UUID.randomUUID();m.setFlock(id);var tag=new CompoundTag();m.addAdditionalSaveData(tag);
         var other=h.spawn(ModEntityTypes.RIFT_MOTH.get(),5,4,4);other.readAdditionalSaveData(tag);h.assertTrue(id.equals(other.flock()),"Flock lost on reload");
+        var attacker=victim(h,2,4);
+        double initialDistance=other.distanceTo(attacker);
+        m.hurt(m.damageSources().mobAttack(attacker),1);
+        for(int i=0;i<28;i++)h.getLevel().tickNonPassenger(other);
+        h.assertTrue(other.distanceTo(attacker)>initialDistance+1,"Unhurt flock member did not flee");
         var registry=h.getLevel().registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.BIOME);
         var time=registry.getHolderOrThrow(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.BIOME,net.minecraft.resources.ResourceLocation.parse("omnira:temporal_continent")));
         var space=registry.getHolderOrThrow(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.BIOME,net.minecraft.resources.ResourceLocation.parse("omnira:folded_caverns")));

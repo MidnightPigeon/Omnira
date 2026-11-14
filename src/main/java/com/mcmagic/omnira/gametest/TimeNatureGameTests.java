@@ -71,7 +71,7 @@ public final class TimeNatureGameTests {
         var center=new net.minecraft.world.level.ChunkPos(pos);
         for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++){
             var chunk=level.getChunk(center.x+x,center.z+z);
-            chunk.fillBiomesFromNoise((qx,qy,qz,sampler)->holder,level.getChunkSource().randomState().sampler());chunk.setUnsaved(true);
+            chunk.fillBiomesFromNoise((qx,qy,qz,sampler)->qy>=48 ? holder : chunk.getNoiseBiome(qx,qy,qz),level.getChunkSource().randomState().sampler());chunk.setUnsaved(true);
         }
         return level;
     }

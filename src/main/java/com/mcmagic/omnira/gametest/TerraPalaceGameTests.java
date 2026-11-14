@@ -88,10 +88,10 @@ public final class TerraPalaceGameTests {
         h.assertTrue(GoldenThrone.empowered(attacker),"Throne did not seat player; lower="+level.getBlockState(base)
                 +", vehicle="+attacker.getVehicle()+", lock="+attacker.getPersistentData().getCompound("OmniraGoldenThrone"));
         var dismount=new EntityMountEvent(attacker,attacker.getVehicle(),level,false);
-        GoldenThrone.mount(dismount);h.assertTrue(dismount.isCanceled(),"Ten-minute lock did not prevent dismount");
+        GoldenThrone.mount(dismount);h.assertTrue(dismount.isCanceled(),"Seating lock did not prevent dismount");
         var otherSeat=com.mcmagic.omnira.registry.ModEntityTypes.GOLDEN_THRONE_SEAT.get().create(level);
         var switchMount=new EntityMountEvent(attacker,otherSeat,level,true);
-        GoldenThrone.mount(switchMount);h.assertTrue(switchMount.isCanceled(),"Ten-minute lock did not prevent switching vehicles");
+        GoldenThrone.mount(switchMount);h.assertTrue(switchMount.isCanceled(),"Seating lock did not prevent switching vehicles");
         attacker.setHealth(0);
         var deathDismount=new EntityMountEvent(attacker,attacker.getVehicle(),level,false);
         GoldenThrone.mount(deathDismount);h.assertTrue(!deathDismount.isCanceled(),"Death must release the throne");
@@ -136,6 +136,44 @@ public final class TerraPalaceGameTests {
             h.succeed();
         });
     }
+    @GameTest(template="spell_arena") public static void seatedClockFollowsBiome(GameTestHelper h){
+        var level=h.getLevel();
+        var origin=h.absolutePos(new BlockPos(4,4,4));
+        var pos=new BlockPos((origin.getX() & ~15)+8,200,(origin.getZ() & ~15)+8);
+        level.setBlockAndUpdate(pos.below(),Blocks.STONE.defaultBlockState());
+        var lower=ModBlocks.GOLDEN_THRONE.get().defaultBlockState();
+        level.setBlock(pos,lower,3);
+        level.setBlock(pos.above(),lower.setValue(GoldenThroneBlock.HALF,DoubleBlockHalf.UPPER),3);
+        var profile=new GameProfile(UUID.randomUUID(),"seated-time");
+        var player=new net.minecraft.server.level.ServerPlayer(level.getServer(),level,profile,
+                net.minecraft.server.level.ClientInformation.createDefault());
+        player.connection=new net.neoforged.neoforge.common.util.FakePlayer(level,profile).connection;
+        player.setPos(pos.getCenter());
+        GoldenThrone.sit(player,pos);
+        var chunk=level.getChunkAt(pos);
+        var registry=level.registryAccess().registryOrThrow(Registries.BIOME);
+        var area=new java.util.HashMap<BlockPos,net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>>();
+        var center=new BlockPos(pos.getX()>>2,pos.getY()>>2,pos.getZ()>>2);
+        for(var q:BlockPos.betweenClosed(center.offset(-1,-1,-1),center.offset(1,1,1)))
+            area.put(q.immutable(),chunk.getNoiseBiome(q.getX(),q.getY(),q.getZ()));
+        try{
+            var lock=player.getPersistentData().getCompound("OmniraGoldenThrone");
+            for(var key:java.util.List.of(com.mcmagic.omnira.time.FleetingTime.BIOME,com.mcmagic.omnira.time.StilledTime.BIOME)){
+                var biome=registry.getHolderOrThrow(key);
+                // Replace just the quart cell occupied by the seat, plus the noise neighbours sampled by getBiome.
+                chunk.fillBiomesFromNoise((x,y,z,sampler)->area.containsKey(new BlockPos(x,y,z))?biome:chunk.getNoiseBiome(x,y,z),level.getChunkSource().randomState().sampler());
+                int before=lock.getInt("Remaining");
+                for(int tick=0;tick<2;tick++){player.tickCount++;player.doTick();}
+                int expected=key.equals(com.mcmagic.omnira.time.FleetingTime.BIOME)?4:1;
+                h.assertTrue(before-lock.getInt("Remaining")==expected,"Incorrect seated clock in "+key.location());
+            }
+        }finally{
+            chunk.fillBiomesFromNoise((x,y,z,sampler)->area.getOrDefault(new BlockPos(x,y,z),chunk.getNoiseBiome(x,y,z)),level.getChunkSource().randomState().sampler());
+            GoldenThrone.release(player);
+            level.removeBlock(pos.above(),false);level.removeBlock(pos,false);level.removeBlock(pos.below(),false);
+        }
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void expiryCollapsesThrone(GameTestHelper h){
         var level=h.getLevel();var pos=h.absolutePos(new BlockPos(2,1,2));
         var lower=ModBlocks.GOLDEN_THRONE.get().defaultBlockState();
@@ -147,7 +185,14 @@ public final class TerraPalaceGameTests {
         player.connection=new net.neoforged.neoforge.common.util.FakePlayer(level,profile).connection;
         player.setPos(pos.getX()+.5,pos.getY()+1,pos.getZ()+.5);
         GoldenThrone.sit(player,pos);
-        player.getPersistentData().getCompound("OmniraGoldenThrone").putLong("until",level.getGameTime());
+        var lock=player.getPersistentData().getCompound("OmniraGoldenThrone");
+        h.assertTrue(lock.getInt("Remaining")==6000,"New throne must start at five minutes");
+        GoldenThrone.logout(new net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent(player));
+        h.assertTrue(!player.isPassenger() && lock.getInt("Remaining")==6000,"Logging out consumed sitting time");
+        GoldenThrone.tick(new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(player));
+        h.assertTrue(player.isPassenger() && lock.getInt("Remaining")==5999,"First online tick did not resume sitting");
+        lock.remove("Remaining");
+        lock.putLong("until",level.getGameTime()+6001);
         GoldenThrone.tick(new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(player));
         h.assertTrue(!player.isPassenger(),"Expired throne kept its rider");
         h.runAfterDelay(2,()->{

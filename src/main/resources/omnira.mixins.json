@@ -3,6 +3,8 @@
   "package": "com.mcmagic.omnira.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "EndDragonFightAccessor",
+    "ReloadDragonFightMixin",
     "CompoundContainerAccessor",
     "MilkCraftingReloadMixin",
     "FounderDamageSourceMixin",
@@ -40,6 +42,8 @@
     "SpacetimeBrushCooldownMixin",
     "StilledServerLevelMixin",
     "StilledItemAccessor",
+    "ItemCooldownMapAccessor",
+    "ItemCooldownWindowAccessor",
     "MarisaMerchantMenuMixin",
     "SpacetimeSkyLightMixin",
     "SpacetimeChunkLightMixin",

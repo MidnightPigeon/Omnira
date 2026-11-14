@@ -18,7 +18,7 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 public final class ConstructionLock {
     static final String KEY="OmniraConstructionLock";
     public static boolean locked(LivingEntity entity) {
-        return entity.hasEffect(ModEffects.CONSTRUCTION_LOCK) && entity.getPersistentData().getCompound(KEY).getLong("until")>entity.level().getGameTime();
+        return entity.getPersistentData().contains(KEY) && entity.hasEffect(ModEffects.CONSTRUCTION_LOCK);
     }
     public static void apply(LivingEntity target,SpellEffect effect) {
         apply(target,effect,null);
@@ -30,10 +30,18 @@ public final class ConstructionLock {
         apply(player,null,ticks,false,0);
     }
     private static void apply(LivingEntity target,ServerPlayer caster,int duration,boolean mineable,int crush){
-        if(target.level().isClientSide||!target.isAlive()||ConstructionPrison.boss(target))return;
+        if(target.level().isClientSide||!target.isAlive())return;
+        boolean boss=com.mcmagic.omnira.spell.world.WorldEntityKinds.boss(target);
+        if(!boss && ConstructionPrison.boss(target))return;
         if(!locked(target) && target.getPersistentData().contains(KEY)) tick(target);
+        boolean alreadyLocked=locked(target);
+        if(boss) {
+            if((!mineable && crush==0) || !target.isAffectedByPotions())return;
+            if(!mineable || crush==0)duration/=2;
+            if(!target.addEffect(new MobEffectInstance(ModEffects.CONSTRUCTION_LOCK,duration,0,false,true,true),caster))return;
+        }
         var tag=target.getPersistentData().getCompound(KEY);
-        if(!locked(target)) {
+        if(!alreadyLocked) {
             tag=new net.minecraft.nbt.CompoundTag();
             tag.putDouble("x",target.getX());tag.putDouble("y",target.getY());tag.putDouble("z",target.getZ());
             tag.putString("dimension",target.level().dimension().location().toString());
@@ -41,17 +49,18 @@ public final class ConstructionLock {
             if(target instanceof Mob mob) tag.putBoolean("no_ai",mob.isNoAi());
             target.stopRiding();
         }
-        long until=Math.max(tag.getLong("until"),target.level().getGameTime()+duration);
-        tag.putLong("until",until);
-        tag.putBoolean("mineable",tag.getBoolean("mineable") || mineable);
-        tag.putInt("crush",Math.max(tag.getInt("crush"),crush));
+        var current=target.getEffect(ModEffects.CONSTRUCTION_LOCK);
+        int ticks=Math.max(duration,current==null?0:current.getDuration());
+        tag.remove("until");
+        tag.putBoolean("mineable",!boss && (tag.getBoolean("mineable") || mineable));
+        tag.putInt("crush",boss?0:Math.max(tag.getInt("crush"),crush));
         if(tag.getBoolean("mineable")) {
-            int ticks=(int)(until-target.level().getGameTime());
             if(tag.hasUUID("seal"))ConstructionPrison.refresh(target,tag,ticks);
             else if(!ConstructionPrison.create(target,caster,tag,ticks))tag.putBoolean("mineable",false);
         }
+
         target.getPersistentData().put(KEY,tag);
-        target.addEffect(new MobEffectInstance(ModEffects.CONSTRUCTION_LOCK,(int)(until-target.level().getGameTime()),tag.getBoolean("mineable")?1:0,false,true,true));
+        if(!boss)target.addEffect(new MobEffectInstance(ModEffects.CONSTRUCTION_LOCK,ticks,tag.getBoolean("mineable")?1:0,false,true,true));
         target.setNoGravity(true);
         if(target instanceof Mob mob) {mob.setNoAi(true);mob.getNavigation().stop();}
         if(target instanceof ServerPlayer player) player.closeContainer();
@@ -62,7 +71,7 @@ public final class ConstructionLock {
         if(entity.level().isClientSide || !entity.getPersistentData().contains(KEY)) return false;
         var tag=entity.getPersistentData().getCompound(KEY);
         long now=entity.level().getGameTime();
-        if(!tag.getString("dimension").equals(entity.level().dimension().location().toString()) || now>=tag.getLong("until") || !entity.hasEffect(ModEffects.CONSTRUCTION_LOCK) || !entity.isAlive()) {
+        if(!tag.getString("dimension").equals(entity.level().dimension().location().toString()) || !locked(entity) || !entity.isAlive()) {
             release(entity);return false;
         }
         Vec3 anchor=new Vec3(tag.getDouble("x"),tag.getDouble("y"),tag.getDouble("z"));

@@ -107,6 +107,7 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     public static final int REPAIR_DELAY=200;
     private int impacts;
     private long repairAt;
+    private int savedRepairDelay=-1;
     public int crackStage() {return impacts/3;}
     public int impactCount() {return impacts;}
     public void landedOn(net.minecraft.world.entity.LivingEntity entity) {
@@ -132,6 +133,7 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     public void repairCracks() {
         if(level==null || level.isClientSide || impacts==0) return;
         long now=level.getGameTime();
+        if(repairAt>now+REPAIR_DELAY)repairAt=now+REPAIR_DELAY;
         if(now>=repairAt) {impacts--;repairAt=now+REPAIR_DELAY;setChanged();}
         if(impacts>0) level.scheduleTick(worldPosition,getBlockState().getBlock(),(int)Math.clamp(repairAt-now,1,REPAIR_DELAY));
     }
@@ -139,8 +141,15 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
         super.onLoad();
         if(resonant() && level instanceof net.minecraft.server.level.ServerLevel server)
             com.mcmagic.omnira.storage.CrystalStorageNetworks.get(server).register(this);
-        if(level!=null && !level.isClientSide && impacts>0)
-            level.scheduleTick(worldPosition,getBlockState().getBlock(),(int)Math.clamp(repairAt-level.getGameTime(),1,REPAIR_DELAY));
+        scheduleCrackRepair();
+    }
+    private void scheduleCrackRepair(){
+        if(level==null || level.isClientSide || impacts==0)return;
+        long now=level.getGameTime();
+        int delay=savedRepairDelay>=0?savedRepairDelay:(int)Math.clamp(repairAt-now,1,REPAIR_DELAY);
+        savedRepairDelay=-1;
+        repairAt=now+delay;
+        level.scheduleTick(worldPosition,getBlockState().getBlock(),delay);
     }
     public boolean hasPendingLoot() {return lootTable!=null || pendingLootDisplay;}
     public final net.neoforged.neoforge.items.IItemHandler itemHandler=new OrbItemHandler(this);
@@ -186,7 +195,11 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
         tag.putBoolean("LootContainer",lootContainer || lootTable!=null);
         tag.putBoolean("LootrManaged",lootrManaged);
         tag.putBoolean("LootrPersonalView",lootrPersonalView);
-        tag.putInt("Impacts",impacts);tag.putLong("RepairAt",repairAt);
+        tag.putInt("Impacts",impacts);if(impacts>0){
+            if(savedRepairDelay>=0)tag.putInt("RepairDelay",savedRepairDelay);
+            else if(level!=null)tag.putInt("RepairDelay",(int)Math.clamp(repairAt-level.getGameTime(),1,REPAIR_DELAY));
+            else tag.putLong("RepairAt",repairAt);
+        }
         tag.put("Upgrades",upgrades.serializeLocal(registries));
         saveFrequency(tag,registries);
         if(!trySaveLootTable(tag))saveItems(tag,registries);
@@ -207,6 +220,7 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
         for(int i=0;i<2;i++)frequency[i]=ItemStack.parseOptional(registries,tag.getCompound("Frequency"+i));
         pendingLootDisplay=tag.getBoolean("PendingLoot");
         impacts=Math.clamp(tag.getInt("Impacts"),0,8);repairAt=tag.getLong("RepairAt");
+        savedRepairDelay=tag.contains("RepairDelay")?Math.clamp(tag.getInt("RepairDelay"),1,REPAIR_DELAY):-1;
         upgrades.deserializeNBT(registries,tag.getCompound("Upgrades"));
         if(!tryLoadLootTable(tag)) ContainerHelper.loadAllItems(tag,items,registries);
         lootContainer=tag.getBoolean("LootContainer") || lootTable!=null;
@@ -228,7 +242,7 @@ public class CrystalBallBlockEntity extends RandomizableContainerBlockEntity {
     public CompoundTag exportLocal(){return saveWithoutMetadata(level.registryAccess());}
     public void importLocal(CompoundTag tag){
         var id=storageIdentity;var first=frequency[0];var second=frequency[1];
-        loadAdditional(tag,level.registryAccess());storageIdentity=id;frequency[0]=first;frequency[1]=second;
+        loadAdditional(tag,level.registryAccess());scheduleCrackRepair();storageIdentity=id;frequency[0]=first;frequency[1]=second;
     }
     public void clearLocal(){
         items=NonNullList.withSize(SIZE,ItemStack.EMPTY);

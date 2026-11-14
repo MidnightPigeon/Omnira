@@ -12,6 +12,10 @@
     {
       "target": "healing_dew_crafting",
       "label": "Analysis Recipe"
+    },
+    {
+      "target": "dark_breath",
+      "label": "Dream Element: Life-Drain Origin"
     }
   ]
 }

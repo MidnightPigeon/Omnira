@@ -87,10 +87,7 @@ public final class WeaverSpiritGameTests {
             h.assertTrue(ReloadEffect.blocked(block)&&!ReloadEffect.block(SpellEffect.utility("reload",1,0,1),p,h.absolutePos(at))
                     &&h.getBlockState(at).is(block),"Default blacklisted block transformed");
         }
-        var dragon=EntityType.ENDER_DRAGON.create(h.getLevel());
-        h.assertTrue(ReloadEffect.blocked(EntityType.ENDER_DRAGON)&&ReloadEffect.livingCandidates(SpellEffect.utility("reload",1,0,1),dragon).isEmpty()
-                &&!ReloadEffect.living(SpellEffect.utility("reload",1,0,1),dragon)&&!dragon.isRemoved(),"Blacklisted dragon transformed");
-        dragon.discard();h.succeed();
+        h.succeed();
     }
     @GameTest(template="spell_arena") public static void createInternalBlocksAreExcludedInBothDirections(GameTestHelper h){
         var old=OmniraConfig.RELOAD_BLOCK_BLACKLIST.get();var defaults=OmniraConfig.RELOAD_BLOCK_BLACKLIST.getDefault();
@@ -120,7 +117,7 @@ public final class WeaverSpiritGameTests {
         var enhanced=ReloadEffect.livingCandidates(SpellEffect.utility("reload",1,0,0),wither);
         var infused=ReloadEffect.livingCandidates(SpellEffect.utility("reload",1,0,1),wither);
         h.assertTrue(plain.isEmpty()&&!enhanced.contains(ModEntityTypes.WEAVER_SPIRIT.get())&&infused.contains(ModEntityTypes.WEAVER_SPIRIT.get()),"Boss bypasses enhancement or infusion rules");
-        h.assertTrue(!infused.contains(EntityType.ENDER_DRAGON),"Blacklisted dragon remains a random result");
+        h.assertTrue(enhanced.contains(EntityType.ENDER_DRAGON)&&infused.contains(EntityType.ENDER_DRAGON),"Dragon missing from enhanced boss pools");
         wither.discard();h.succeed();
     }
     @GameTest(template="spell_arena") public static void configChangesFilterCachedPoolsAndConversionWorks(GameTestHelper h){
@@ -135,7 +132,7 @@ public final class WeaverSpiritGameTests {
             h.assertTrue(ReloadEffect.living(effect,wither)&&wither.isRemoved(),"Boss was not reachable through the actual reload conversion");
             var bosses=h.getLevel().getEntitiesOfClass(com.mcmagic.omnira.entity.WeaverSpirit.class,
                     new net.minecraft.world.phys.AABB(h.absolutePos(new BlockPos(2,2,2)).getCenter(),h.absolutePos(new BlockPos(9,9,9)).getCenter()));
-            h.assertTrue(bosses.size()==1&&bosses.getFirst().getHealth()==512,"Conversion did not preserve health fraction");
+            h.assertTrue(bosses.size()==1&&bosses.getFirst().getHealth()==1024,"Replacement Weaver Spirit did not spawn at full health");
             OmniraConfig.RELOAD_ENTITY_BLACKLIST.set(List.of("omnira:weaver_spirit"));
             h.assertTrue(!ReloadEffect.living(effect,bosses.getFirst())&&!bosses.getFirst().isRemoved(),"Custom source blacklist ignored");
             bosses.forEach(Entity::discard);

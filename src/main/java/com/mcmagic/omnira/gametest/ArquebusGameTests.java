@@ -31,10 +31,12 @@ public final class ArquebusGameTests {
         player.setData(ModAttachments.MANA,new com.mcmagic.omnira.mana.ManaState(29,100));
         com.mcmagic.omnira.item.ArquebusEvents.concealTick(player);
         h.runAfterDelay(59,()->{
+            player.tickCount = 59;
             com.mcmagic.omnira.item.ArquebusEvents.concealTick(player);
             h.assertTrue(player.getData(ModAttachments.MANA).current()==29 && !player.hasEffect(net.minecraft.world.effect.MobEffects.INVISIBILITY),"Concealment triggered too early");
         });
         h.runAfterDelay(60,()->{
+            player.tickCount = 60;
             com.mcmagic.omnira.item.ArquebusEvents.concealTick(player);
             com.mcmagic.omnira.item.ArquebusEvents.concealTick(player);
             h.assertTrue(player.getData(ModAttachments.MANA).current()==19,"Concealment was discounted or charged twice");
@@ -42,11 +44,13 @@ public final class ArquebusGameTests {
             player.removeEffect(net.minecraft.world.effect.MobEffects.INVISIBILITY);
         });
         h.runAfterDelay(120,()->{
+            player.tickCount = 120;
             com.mcmagic.omnira.item.ArquebusEvents.concealTick(player);
             h.assertTrue(player.getData(ModAttachments.MANA).current()==9 && player.hasEffect(net.minecraft.world.effect.MobEffects.INVISIBILITY),"Concealment not renewed at 3 seconds");
             player.removeEffect(net.minecraft.world.effect.MobEffects.INVISIBILITY);
         });
         h.runAfterDelay(180,()->{
+            player.tickCount = 180;
             com.mcmagic.omnira.item.ArquebusEvents.concealTick(player);
             h.assertTrue(player.getData(ModAttachments.MANA).current()==9 && !player.hasEffect(net.minecraft.world.effect.MobEffects.INVISIBILITY),"Insufficient mana granted concealment");
             player.setItemInHand(InteractionHand.MAIN_HAND,ItemStack.EMPTY);player.setItemInHand(InteractionHand.OFF_HAND,gun);
@@ -81,6 +85,7 @@ public final class ArquebusGameTests {
         h.assertTrue(ArcaneArquebusItem.castLoaded(player,gun),"First shot failed");
         player.setItemInHand(InteractionHand.MAIN_HAND,gun.copy());
         h.runAfterDelay(6,()->{
+            player.tickCount = 6;
             com.mcmagic.omnira.item.ArquebusEvents.tick(new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(player));
             h.assertTrue(player.getData(ModAttachments.MANA).current()==955,"Swapping guns failed to cancel second charge");h.succeed();
         });
@@ -114,10 +119,12 @@ public final class ArquebusGameTests {
         h.assertTrue(ArcaneArquebusItem.castLoaded(player,gun),"Ghost shot failed");
         h.assertTrue(player.getData(ModAttachments.MANA).current()==960,"Ghost first cost must be 30*1.5-5");
         h.runAfterDelay(5,()->{
+            player.tickCount = 5;
             com.mcmagic.omnira.item.ArquebusEvents.tick(new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(player));
             h.assertTrue(player.getData(ModAttachments.MANA).current()==960,"Second shot too early");
         });
         h.runAfterDelay(6,()->{
+            player.tickCount = 6;
             com.mcmagic.omnira.item.ArquebusEvents.tick(new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(player));
             h.assertTrue(player.getData(ModAttachments.MANA).current()==920,"Second shot not charged once");
             var shots=h.getLevel().getEntitiesOfClass(SpellEntity.class,player.getBoundingBox().inflate(10),e->e.ownedBy(player));
@@ -150,15 +157,18 @@ public final class ArquebusGameTests {
         player.setData(ModAttachments.MANA,new com.mcmagic.omnira.mana.ManaState(99,100));
         com.mcmagic.omnira.item.ArquebusEvents.senseTick(player);
         h.runAfterDelay(99,()->{
+            player.tickCount = 99;
             com.mcmagic.omnira.item.ArquebusEvents.senseTick(player);
             h.assertTrue(player.getData(ModAttachments.MANA).current()==99,"Perception fired before 5 seconds");
         });
         h.runAfterDelay(100,()->{
+            player.tickCount = 100;
             com.mcmagic.omnira.item.ArquebusEvents.senseTick(player);
             com.mcmagic.omnira.item.ArquebusEvents.senseTick(player);
             h.assertTrue(player.getData(ModAttachments.MANA).current()==49,"Perception cost discounted or charged twice");
         });
         h.runAfterDelay(200,()->{
+            player.tickCount = 200;
             com.mcmagic.omnira.item.ArquebusEvents.senseTick(player);
             h.assertTrue(player.getData(ModAttachments.MANA).current()==49,"Insufficient perception mana spent");h.succeed();
         });
@@ -252,8 +262,12 @@ public final class ArquebusGameTests {
                 && power.modifier().operation()==net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE,"Power must be additive and mainhand only");
         h.assertTrue(!IndependentSpellCooldown.ready(player,gun),"Initial gun cooldown missing");
         h.assertTrue(IndependentSpellCooldown.ready(player,new ItemStack(gun.getItem())),"A second gun inherited the first one's cooldown");
-        h.runAfterDelay(59,()->h.assertTrue(!IndependentSpellCooldown.ready(player,gun),"Ancestor cooldown ended before 3 seconds"));
+        h.runAfterDelay(59,()->{
+            for(int i=0;i<59;i++) com.mcmagic.omnira.spell.WeaponCooldowns.tick(new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(player));
+            h.assertTrue(!IndependentSpellCooldown.ready(player,gun),"Ancestor cooldown ended before 3 seconds");
+        });
         h.runAfterDelay(60,()->{
+            com.mcmagic.omnira.spell.WeaponCooldowns.tick(new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(player));
             h.assertTrue(IndependentSpellCooldown.ready(player,gun),"Ancestor cooldown longer than 3 seconds");
             player.setData(ModAttachments.MANA,new com.mcmagic.omnira.mana.ManaState(54,1000));
             h.assertTrue(!ArcaneArquebusItem.castLoaded(player,gun) && player.getData(ModAttachments.MANA).current()==54,"Insufficient mana spent or fired");

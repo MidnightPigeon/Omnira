@@ -69,10 +69,10 @@ public final class CompositeSpellGameTests {
     @GameTest(template="spell_arena")
     public static void reverseFlowAndEnhancement(GameTestHelper h){
         var p=player(h);var center=p.getBoundingBox().getCenter();
-        var target=EntityType.PIG.create(h.getLevel());target.setNoAi(true);target.setPos(center.add(3,0,0));h.getLevel().addFreshEntity(target);
+        var target=EntityType.PIG.create(h.getLevel());target.setNoAi(true);target.setPos(center.add(6,0,0));h.getLevel().addFreshEntity(target);
         CompositeSpellMotion.cast(p,new SpellPattern(ElementType.TIME,null),payload("enhancement"),9,new SpellCasting.Modifiers(1,1));
         var spell=h.getLevel().getEntitiesOfClass(SpellEntity.class,p.getBoundingBox().inflate(6),e->e.ownedBy(p)).getFirst();
-        h.assertTrue(spell.burstRadius()==4.5,"Spell power changed radius");
+        h.assertTrue(spell.burstRadius()==7.5,"Spell power changed radius");
         h.assertTrue(p.getEffect(ModEffects.TEMPORAL_DISLOCATION).getDuration()==200&&p.getEffect(ModEffects.TEMPORAL_DISLOCATION).getAmplifier()==1,"Wrong dislocation effect");
         for(int i=0;i<10;i++)spell.tick();
         h.assertTrue(target.getEffect(net.minecraft.world.effect.MobEffects.WITHER).getAmplifier()==2,"Enhanced wither missing");

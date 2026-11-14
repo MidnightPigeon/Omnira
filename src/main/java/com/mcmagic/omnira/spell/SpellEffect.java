@@ -82,7 +82,7 @@ public record SpellEffect(boolean healing,int amplifier,int duration,boolean inf
         if(duration==0&&healing==target.isInvertedHealAndHarm()) {
             // Vanilla instant-effect amount and undead inversion, with a spell-specific death message.
             int amount=instantAmount(6,amplifier,power);
-            SpellDamageSource.direct(target,SpellDamageSource.of(target,source==null?net.minecraft.world.damagesource.DamageTypes.MAGIC:net.minecraft.world.damagesource.DamageTypes.INDIRECT_MAGIC,source,owner,"spell"),amount);
+            SpellDamageSource.direct(hit,SpellDamageSource.of(target,source==null?net.minecraft.world.damagesource.DamageTypes.MAGIC:net.minecraft.world.damagesource.DamageTypes.INDIRECT_MAGIC,source,owner,"spell"),amount);
         }
         else if(duration==0) target.heal(holy?(float)Math.ceil(Math.scalb(4D,amplifier)*power):instantAmount(4,amplifier,power));
         else target.addEffect(new MobEffectInstance(type(),duration,sustainedAmplifier(power)),owner);

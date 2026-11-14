@@ -1,7 +1,7 @@
 {
   "id": "elemental_cycle",
   "title": "元素循环",
-  "icon": "omnira:fulfillment_star",
+  "icon": "omnira:miniature_world",
   "introduction": "introduction.json",
   "entries": [],
   "chapters": []

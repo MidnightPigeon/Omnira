@@ -27,7 +27,7 @@ public final class CompositeSpellMotion {
         var level=(ServerLevel)caster.level();
         if(pattern.targetElement()==ElementType.TIME){
             var spell=create(level,caster,payload,power,modifiers,SpellEntity.Kind.REVERSE_FLOW,0);
-            spell.burstRadius(SpellCasting.BURST_RADIUS*1.5*modifiers.range());
+            spell.burstRadius(7.5*modifiers.range());
             spell.composite(new CompositeSpellMotion(caster,payload,Vec3.ZERO),CONTRACTION_TICKS+1,0);
             caster.addEffect(new MobEffectInstance(ModEffects.TEMPORAL_DISLOCATION,200,enhanced(payload)?1:0));
         }else{

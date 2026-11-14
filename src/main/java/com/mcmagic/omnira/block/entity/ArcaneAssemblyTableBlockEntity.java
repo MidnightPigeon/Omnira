@@ -1,5 +1,6 @@
 package com.mcmagic.omnira.block.entity;
 
+import com.mcmagic.omnira.util.PhaseAge;
 import com.mcmagic.omnira.recipe.AssemblyRecipe;
 import com.mcmagic.omnira.registry.*;
 import com.mcmagic.omnira.mana.*;
@@ -40,6 +41,7 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
     }
     public void tickPower(boolean mechanical,float rpm) {
         if(level==null||level.isClientSide)return;
+        if(strike.advance(level)){super.setChanged();if(host!=null)host.setChanged();}
         var pulse=com.mcmagic.omnira.pulse.PulseNetworks.power(level,worldPosition);
         boolean previousPulse=pulsePowered,previousConnection=pulseConnected;
         pulseConnected=pulse.connected();pulsePowered=pulse.connected()&&pulse.running();pulseFactor=pulse.factor(256);
@@ -73,7 +75,8 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
     private int progress;
     private boolean finished;
     private String activeRecipe="";
-    private long lastStrike=-20;
+    private final PhaseAge strike=new PhaseAge("StrikeAge","AssemblyLastStrike",STRIKE_COOLDOWN);
+    private long visualStrike=-20;
     public ArcaneAssemblyTableBlockEntity(BlockPos pos,BlockState state) {super(ModBlockEntityTypes.ARCANE_ASSEMBLY_TABLE.get(),pos,state,7);}
     @Override public int getContainerSize() {return 7;}
     @Override public int getMaxStackSize() {return 1;}
@@ -84,9 +87,9 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
         if(host!=null) host.setChanged();
     }
     public int cooldown() {
-        return level==null?0:(int)Math.clamp(STRIKE_COOLDOWN-(level.getGameTime()-lastStrike),0,STRIKE_COOLDOWN);
+        return strike.active()?STRIKE_COOLDOWN-strike.ticks(level):0;
     }
-    public long lastStrike() {return lastStrike;}
+    public long lastStrike() {return visualStrike;}
     public int progress() {return progress;}
     public void worldRotation(){
         energy=5120;var recipe=work();
@@ -143,7 +146,7 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
     private boolean completeStrike(com.mcmagic.omnira.recipe.AssemblyWork recipe) {
         String id=recipe.id();
         if(!activeRecipe.equals(id)) progress=0;
-        activeRecipe=id;lastStrike=level.getGameTime();
+        activeRecipe=id;strike.start();visualStrike=level.getGameTime();
         progress=Math.min(100,progress+(level.random.nextBoolean()?5:10));
         if(progress==100) {
             recipeGate.invalidate();
@@ -179,13 +182,13 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
     @Override protected AbstractContainerMenu createMenu(int id,Inventory inventory) {
         return new com.mcmagic.omnira.menu.ArcaneAssemblyTableMenu(id,inventory,this);
     }
-    private void saveWork(CompoundTag tag) {tag.putBoolean("PulsePowered",pulsePowered);tag.putBoolean("PulseConnected",pulseConnected);tag.putDouble("PulseCharge",pulseCharge);tag.putBoolean("AssemblyPowered",mechanicalPowered);tag.putBoolean("AssemblyElectrical",electricalPowered);tag.putInt("AssemblyEnergy",energy);tag.putInt("AssemblyEnergyRemainder",energyRemainder);tag.putLong("AssemblyLastStrike",lastStrike);tag.putInt("AssemblyProgress",progress);tag.putBoolean("AssemblyFinished",finished);tag.putString("AssemblyRecipe",activeRecipe);}
+    private void saveWork(CompoundTag tag) {tag.putBoolean("PulsePowered",pulsePowered);tag.putBoolean("PulseConnected",pulseConnected);tag.putDouble("PulseCharge",pulseCharge);tag.putBoolean("AssemblyPowered",mechanicalPowered);tag.putBoolean("AssemblyElectrical",electricalPowered);tag.putInt("AssemblyEnergy",energy);tag.putInt("AssemblyEnergyRemainder",energyRemainder);strike.save(tag);tag.putInt("AssemblyProgress",progress);tag.putBoolean("AssemblyFinished",finished);tag.putString("AssemblyRecipe",activeRecipe);}
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries) {super.saveAdditional(tag,registries);saveWork(tag);}
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries) {var tag=super.getUpdateTag(registries);saveWork(tag);return tag;}
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries) {
         energyInput.reset();
         pulsePowered=tag.getBoolean("PulsePowered");pulseConnected=tag.getBoolean("PulseConnected");pulseCharge=Math.clamp(tag.getDouble("PulseCharge"),0,STRIKE_COOLDOWN);
-        super.loadAdditional(tag,registries);mechanicalPowered=tag.getBoolean("AssemblyPowered");electricalPowered=tag.getBoolean("AssemblyElectrical");energy=Math.clamp(tag.getInt("AssemblyEnergy"),0,5120);energyRemainder=Math.clamp(tag.getInt("AssemblyEnergyRemainder"),0,19);lastStrike=tag.contains("AssemblyLastStrike")?tag.getLong("AssemblyLastStrike"):-20;progress=Math.clamp(tag.getInt("AssemblyProgress"),0,100);
+        super.loadAdditional(tag,registries);mechanicalPowered=tag.getBoolean("AssemblyPowered");electricalPowered=tag.getBoolean("AssemblyElectrical");energy=Math.clamp(tag.getInt("AssemblyEnergy"),0,5120);energyRemainder=Math.clamp(tag.getInt("AssemblyEnergyRemainder"),0,19);strike.load(tag);if(level!=null)visualStrike=level.getGameTime()-(strike.active()?strike.ticks(level):20);progress=Math.clamp(tag.getInt("AssemblyProgress"),0,100);
         finished=tag.getBoolean("AssemblyFinished") && getItems().stream().anyMatch(s->!s.isEmpty());activeRecipe=tag.getString("AssemblyRecipe");
     }
 }

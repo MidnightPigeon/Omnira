@@ -44,9 +44,6 @@ public final class VoidCrystalBlock extends BaseEntityBlock {
         return super.playerWillDestroy(level,pos,state,player);
     }
     @Override protected RenderShape getRenderShape(BlockState state) {return RenderShape.MODEL;}
-    @Override protected void tick(BlockState state,ServerLevel level,BlockPos pos,RandomSource random) {
-        if(level.getBlockEntity(pos) instanceof VoidCrystalBlockEntity crystal) crystal.advance();
-    }
     @Override protected boolean skipRendering(BlockState state,BlockState neighbor,Direction face) {
         return neighbor.getBlock() instanceof VoidCrystalBlock || neighbor.getBlock() instanceof PermanentVoidCrystalBlock || super.skipRendering(state,neighbor,face);
     }

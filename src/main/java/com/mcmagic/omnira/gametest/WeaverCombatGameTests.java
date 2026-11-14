@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.gametest.*;
 import java.util.*;
@@ -285,6 +286,30 @@ public final class WeaverCombatGameTests {
             h.runAfterDelay(5,()->{try{h.assertTrue(!b.active()&&b.motionClock(.5F)==frozen,"Idle animation did not freeze");}finally{replica.discard();cleanup(h,b,p);}h.succeed();});
         });
     }
+    @GameTest(template="spell_arena") public static void restoredClockAllowsAllThreeAirCasts(GameTestHelper h){
+        var p=player(h,2,2);
+        try{
+            p.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(ModItems.FOUNDER_APPROVAL.get()));
+            p.setXRot(-90);
+            var stale=new net.minecraft.nbt.CompoundTag();
+            for(var action:FounderApprovalItem.Action.values())stale.putLong(action.name(),h.getLevel().getGameTime()+500000);
+            p.getPersistentData().put("OmniraFounderCooldowns",stale);
+            var item=ModItems.FOUNDER_APPROVAL.get();
+            Vec3 start=p.getEyePosition();
+            item.use(h.getLevel(),p,InteractionHand.MAIN_HAND);
+            var bolts=h.getLevel().getEntitiesOfClass(WeaverBolt.class,new AABB(start,start).inflate(1),shot->shot.getOwner()==p);
+            h.assertTrue(bolts.size()==1,"Air use failed to launch a bolt after a clock rollback");
+            var shot=bolts.getFirst();
+            for(int i=0;i<160&&!shot.isRemoved();i++)shot.tick();
+            h.assertTrue(shot.position().distanceTo(start.add(p.getLookAngle().scale(128)))<.001,"Untracked bolt missed the 128-block endpoint");
+            shot.tick();
+            h.assertTrue(shot.isRemoved(),"Untracked bolt continued beyond its range");
+            p.setShiftKeyDown(true);item.use(h.getLevel(),p,InteractionHand.MAIN_HAND);
+            h.assertTrue(!FounderApprovalItem.ready(p,FounderApprovalItem.Action.RAY),"Air use failed to cast the ray");
+            h.assertTrue(FounderApprovalItem.cast(p,FounderApprovalItem.Action.BEND),"Targetless bend rejected after a clock rollback");
+            h.assertTrue(!FounderApprovalItem.cast(p,FounderApprovalItem.Action.BEND),"Bend bypassed its new cooldown");
+        }finally{p.discard();}h.succeed();
+    }
     @GameTest(template="spell_arena") public static void threeActionCooldownsAreIndependentAndSharedAcrossCopies(GameTestHelper h){
         var b=boss(h);var p=player(h,2,2);
         try{
@@ -292,8 +317,8 @@ public final class WeaverCombatGameTests {
             for(var action:FounderApprovalItem.Action.values())h.assertTrue(FounderApprovalItem.cast(p,action),"Independent ability cooldown was blocked by another ability");
             p.setItemInHand(InteractionHand.MAIN_HAND,ItemStack.EMPTY);p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(ModItems.FOUNDER_APPROVAL.get()));
             for(var action:FounderApprovalItem.Action.values())h.assertTrue(!FounderApprovalItem.cast(p,action),"Changing hand or copy bypassed cooldown");
-            var clocks=p.getPersistentData().getCompound("OmniraFounderCooldowns");long now=h.getLevel().getGameTime();
-            h.assertTrue(clocks.getLong("BOLT")==now+20&&clocks.getLong("RAY")==now+200&&clocks.getLong("BEND")==now+200,"Authored cooldown durations incorrect");
+            var clocks=p.getPersistentData().getCompound(FounderApprovalItem.TIMERS);
+            h.assertTrue(clocks.getLong("BOLT")==20&&clocks.getLong("RAY")==200&&clocks.getLong("BEND")==200,"Authored cooldown durations incorrect");
         }finally{cleanup(h,b,p);}h.succeed();
     }
     @GameTest(template="spell_arena") public static void deathAlwaysDropsExactlyOneApproval(GameTestHelper h){

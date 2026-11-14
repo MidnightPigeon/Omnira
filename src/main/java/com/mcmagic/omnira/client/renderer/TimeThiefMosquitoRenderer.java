@@ -43,13 +43,26 @@ public final class TimeThiefMosquitoRenderer extends MobRenderer<TimeThiefMosqui
             float partial=age-entity.tickCount;opacity=entity.opacity(partial);
             float flap=(float)Math.sin(age*2.2F)*(entity.attached()?.12F:.55F);
             body.getChild("wing_left").zRot+=flap;body.getChild("wing_right").zRot-=flap;
-            if(!entity.attached())body.y+=(float)Math.sin(age*.14F)*.45F;
-            else {
-                body.xRot=-.35F;
-                // Leave the proboscis in contact while keeping the face and monocle outside the host.
-                body.z+=8;
+            if(entity.attached()){
+                body.xRot=-(float)Math.PI/2;
+                body.y=19.5F;
+                var proboscis=body.getChild("head").getChild("proboscis");
+                proboscis.xRot=2.07F;
+                proboscis.y=1.4F;
+                // Three pairs brace against one vertical plane; the bent feet return toward the cheeks.
+                for(int i=0;i<6;i++){
+                    int side=i<3?1:-1;
+                    var leg=body.getChild("leg"+i);
+                    leg.xRot=0;
+                    leg.zRot=side*1.25F;
+                    var foot=leg.getChild("foot"+i);
+                    foot.xRot=0;
+                    foot.zRot=-side*1.98F;
+                }
+            }else{
+                body.y+=(float)Math.sin(age*.14F)*.45F;
+                for(int i=0;i<6;i++)body.getChild("leg"+i).xRot+=(float)Math.sin(age*.17F+i)*.08F;
             }
-            for(int i=0;i<6;i++)body.getChild("leg"+i).xRot+=(float)Math.sin(age*.17F+i)*.08F;
         }
         @Override public void renderToBuffer(PoseStack pose,VertexConsumer consumer,int light,int overlay,int color){
             int alpha=(int)((color>>>24)*opacity);root.render(pose,consumer,light,overlay,(color&0xFFFFFF)|(alpha<<24));

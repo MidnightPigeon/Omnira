@@ -6,7 +6,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 public final class VoidCrystalBlockEntity extends BlockEntity {
-    private long expires=-1;
+    private int remaining=400;
+    private long legacyExpiry=-1;
+    private boolean permanent;
     private int lifetime=400;
     private java.util.UUID prisoner,seal;
     private float hardness=3;
@@ -18,43 +20,48 @@ public final class VoidCrystalBlockEntity extends BlockEntity {
         level.sendBlockUpdated(worldPosition,getBlockState(),getBlockState(),3);
     }
     public static void tick(net.minecraft.world.level.Level level,BlockPos pos,BlockState state,VoidCrystalBlockEntity be) {
-        if(!level.isClientSide&&(be.expires<=level.getGameTime()||level.getGameTime()%10==0))be.advance();
+        if (!level.isClientSide) be.advance();
     }
     public VoidCrystalBlockEntity(BlockPos pos,BlockState state) {super(ModBlockEntityTypes.VOID_CRYSTAL.get(),pos,state);}
-    @Override public void onLoad() {
-        super.onLoad();
-        if(level!=null && !level.isClientSide) {
-            if(expires<0) expires=level.getGameTime()+lifetime;
-            level.scheduleTick(worldPosition,getBlockState().getBlock(),1);
-        }
-    }
     public void configure(int ticks,boolean permanent) {
-        lifetime=Math.max(1,ticks);expires=permanent?0:level.getGameTime()+lifetime;setChanged();
-        level.scheduleTick(worldPosition,getBlockState().getBlock(),1);
+        lifetime=Math.max(1,ticks);remaining=lifetime;this.permanent=permanent;legacyExpiry=-1;setChanged();
     }
-    public void advance() {
-        if(level==null || level.isClientSide) return;
-        if(expires<0){expires=level.getGameTime()+lifetime;setChanged();}
+    private void advance() {
+        if (legacyExpiry>=0) {
+            permanent=legacyExpiry==0;
+            remaining=(int)Math.clamp(legacyExpiry-level.getGameTime(),0L,(long)lifetime);
+            legacyExpiry=-1;
+        }
         // Upgrade legacy permanent spell blocks once, without retaining per-block NBT.
-        if(expires==0) {
+        if(permanent) {
             var blocks=getBlockState().is(com.mcmagic.omnira.registry.ModBlocks.REINFORCED_VOID_CRYSTAL.get())
                     ? com.mcmagic.omnira.registry.ModBlocks.PERMANENT_REINFORCED_VOID_CRYSTAL
                     : com.mcmagic.omnira.registry.ModBlocks.PERMANENT_VOID_CRYSTAL;
             level.setBlockAndUpdate(worldPosition,blocks.get().defaultBlockState());
             return;
         }
-        if(level.getGameTime()>=expires) {level.removeBlock(worldPosition,false);return;}
-        int fade=(int)Math.clamp((lifetime-expires+level.getGameTime())*8/lifetime,0,7);
+        remaining--;
+        if(remaining<=0 && prisoner!=null && level instanceof net.minecraft.server.level.ServerLevel server
+                && server.getEntity(prisoner) instanceof net.minecraft.world.entity.LivingEntity captive){
+            var lock=captive.getPersistentData().getCompound("OmniraConstructionLock");
+            var effect=captive.getEffect(com.mcmagic.omnira.registry.ModEffects.CONSTRUCTION_LOCK);
+            if(effect!=null && lock.hasUUID("seal") && lock.getUUID("seal").equals(seal))
+                remaining=Math.max(1,effect.getDuration());
+        }
+        level.getChunkAt(worldPosition).setUnsaved(true);
+        if(remaining<=0) {level.removeBlock(worldPosition,false);return;}
+        int fade=(int)Math.clamp((long)(lifetime-remaining)*8/lifetime,0,7);
         if(getBlockState().getValue(VoidCrystalBlock.FADE)!=fade)
             level.setBlock(worldPosition,getBlockState().setValue(VoidCrystalBlock.FADE,fade),3);
-        level.scheduleTick(worldPosition,getBlockState().getBlock(),10);
+
     }
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries) {
-        super.saveAdditional(tag,registries);tag.putLong("Expires",expires);tag.putInt("Lifetime",lifetime);
+        super.saveAdditional(tag,registries);if(legacyExpiry>=0)tag.putLong("Expires",legacyExpiry);else tag.putInt("Remaining",remaining);tag.putBoolean("Permanent",permanent);tag.putInt("Lifetime",lifetime);
         if(prisoner!=null){tag.putUUID("Prisoner",prisoner);tag.putUUID("Seal",seal);tag.putFloat("Hardness",hardness);}
     }
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries) {
-        super.loadAdditional(tag,registries);expires=tag.contains("Expires")?tag.getLong("Expires"):-1;lifetime=tag.contains("Lifetime")?Math.max(1,tag.getInt("Lifetime")):400;
+        super.loadAdditional(tag,registries);legacyExpiry=tag.contains("Expires")?tag.getLong("Expires"):-1;permanent=tag.getBoolean("Permanent");lifetime=tag.contains("Lifetime")?Math.max(1,tag.getInt("Lifetime")):400;
+        remaining=tag.contains("Remaining")?Math.clamp(tag.getInt("Remaining"),0,lifetime):lifetime;
         prisoner=tag.hasUUID("Prisoner")?tag.getUUID("Prisoner"):null;seal=tag.hasUUID("Seal")?tag.getUUID("Seal"):null;hardness=Math.max(1,tag.getFloat("Hardness"));
     }
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries) {return saveWithoutMetadata(registries);}

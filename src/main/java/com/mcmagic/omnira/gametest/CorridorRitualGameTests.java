@@ -66,23 +66,26 @@ public final class CorridorRitualGameTests {
         var saved=gateway.saveWithFullMetadata(level.registryAccess());
         h.assertTrue(ItemStack.parseOptional(level.registryAccess(),saved.getCompound("Aggregate")).getDamageValue()==127,"Accepted aggregate decayed");
         // Use a positive clock even when the test world has only just started.
-        saved.putLong("Started",0);gateway.loadWithComponents(saved,level.registryAccess());
+        saved.putInt("FormAge",CorridorRitual.FORM_TICKS-1);gateway.loadWithComponents(saved,level.registryAccess());
         long previous=level.getGameTime();
         try {
         clock(h,Math.max(previous,240));gateway.tick();
         h.assertTrue(gateway.open() && CorridorRitual.pedestals(level,core).size()==8,"Completion consumed pedestal offerings");
         var openSave=gateway.saveWithFullMetadata(level.registryAccess());gateway.loadWithComponents(openSave,level.registryAccess());
         h.assertTrue(gateway.open() && !openSave.contains("Aggregate"),"Open portal reload restored consumed aggregate");
-        long opened=openSave.getLong("Opened");clock(h,opened+CorridorRitual.OPEN_TICKS-1);gateway.tick();
+        openSave.putInt("OpenAge",CorridorRitual.OPEN_TICKS-2);gateway.loadWithComponents(openSave,level.registryAccess());gateway.tick();
         h.assertTrue(level.getBlockEntity(core.above())==gateway,"Gateway expired early");
-        clock(h,opened+CorridorRitual.OPEN_TICKS);gateway.tick();
+        gateway.tick();
         h.assertTrue(level.isEmptyBlock(core.above()) && level.getEntity(id) instanceof com.mcmagic.omnira.entity.DreamMirror,"Expiry did not restore mirror");
         h.assertTrue(level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,new AABB(core).inflate(3)).isEmpty(),"Successful ritual ejected aggregate");
         } finally {clock(h,previous);}
         h.succeed();
     }
     @GameTest(template="spell_arena") public static void spacetimeCoreOpensPermanentGateway(GameTestHelper h){
-        var core=setup(h);mirror(h,core);var player=player(h,core);var level=h.getLevel();
+        var core=setup(h);mirror(h,core);var level=h.getLevel();
+        var player=new net.neoforged.neoforge.common.util.FakePlayer(level,
+                new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"gateway-test"));
+        player.setPos(Vec3.atBottomCenterOf(core).add(0,0,3));
         player.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(ModItems.SPACETIME_SPELL_CORE.get()));
         player.setShiftKeyDown(true);
         level.getBlockState(core).useItemOn(player.getMainHandItem(),level,player,InteractionHand.MAIN_HAND,
@@ -94,7 +97,7 @@ public final class CorridorRitualGameTests {
                 new net.minecraft.world.phys.BlockHitResult(Vec3.atCenterOf(core),net.minecraft.core.Direction.UP,core,false));
         h.assertTrue(level.getBlockEntity(core.above()) instanceof CorridorGatewayBlockEntity,"Core right-click did not open ritual gateway");
         var gateway=(CorridorGatewayBlockEntity)level.getBlockEntity(core.above());
-        var saved=gateway.saveWithFullMetadata(level.registryAccess());saved.putLong("Started",0);
+        var saved=gateway.saveWithFullMetadata(level.registryAccess());saved.putInt("FormAge",CorridorRitual.FORM_TICKS-1);
         gateway.loadWithComponents(saved,level.registryAccess());
         long previous=level.getGameTime();
         try{
@@ -117,7 +120,7 @@ public final class CorridorRitualGameTests {
                 if(permanent)player.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(ModItems.SPACETIME_SPELL_CORE.get()));
                 h.assertTrue(CorridorRitual.activate(level,core,player,InteractionHand.MAIN_HAND),"Gateway activation failed");
                 var gateway=(CorridorGatewayBlockEntity)level.getBlockEntity(core.above());
-                var saved=gateway.saveWithFullMetadata(level.registryAccess());saved.putLong("Started",0);
+                var saved=gateway.saveWithFullMetadata(level.registryAccess());saved.putInt("FormAge",CorridorRitual.FORM_TICKS-1);
                 gateway.loadWithComponents(saved,level.registryAccess());clock(h,Math.max(previous,240));gateway.tick();
                 h.assertTrue(gateway.open() && gateway.permanent()==permanent,"Wrong opened gateway state");
                 var offset=DreamRitual.ANCHORS[0];var pedestal=core.offset(offset[0],0,offset[1]);

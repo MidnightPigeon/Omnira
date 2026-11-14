@@ -269,9 +269,8 @@ public final class SpellCasting {
                     Math.pow(hit instanceof EntityHitResult?entityRange:blockRange,2))return false;
         }
         if(target==SpellTargetKeyword.AIM) {
-            var candidates=directRayTargets(caster,level,payload,blockRange,entityRange);
-            if(candidates.isEmpty())return false;
-            hit=candidates.get(level.random.nextInt(candidates.size()));
+            hit=firstDirectRayTarget(caster,level,payload,blockRange,entityRange);
+            if(hit==null)return false;
         }
         power=com.mcmagic.omnira.fate.FateEffects.spellPower(caster,power);
         SpellEntity effect=SpellEntity.spawn(level,caster,SpellEntity.Kind.BURST,caster.position());
@@ -329,32 +328,37 @@ public final class SpellCasting {
             HolyMagic.cloud((ServerLevel)caster.level(),caster,payload,power,range,Vec3.atCenterOf(block));
     }
 
-    private static List<HitResult> directRayTargets(Player caster,ServerLevel level,SpellPayload payload,
+    private static HitResult firstDirectRayTarget(Player caster,ServerLevel level,SpellPayload payload,
                                                      double blockRange,double entityRange) {
         Vec3 start=caster.getEyePosition(),direction=caster.getLookAngle();
-        var hits=new ArrayList<HitResult>();
+        HitResult nearest=null;
         boolean affectsBlocks=payload.effects().isEmpty() || payload.effects().stream().anyMatch(e->e.utility() || e.darkness());
         boolean affectsLiving=payload.effects().isEmpty() || payload.damage()>0
-                || payload.effects().stream().anyMatch(e->!e.utility());
+                || payload.effects().stream().anyMatch(e->!e.utility() || e.operation().equals("construction"));
         if(affectsBlocks) {
-            var visited=new java.util.HashSet<BlockPos>();
-            for(double distance=0;distance<=blockRange;distance+=.125) {
-                Vec3 point=start.add(direction.scale(distance));
-                BlockPos pos=BlockPos.containing(point);
-                if(!visited.add(pos) || !level.hasChunkAt(pos))continue;
-                if(!level.getBlockState(pos).isAir())hits.add(new BlockHitResult(point,
-                        Direction.getNearest(direction.x,direction.y,direction.z).getOpposite(),pos,false));
-            }
+            Vec3 end=start.add(direction.scale(blockRange));
+            nearest=net.minecraft.world.level.BlockGetter.traverseBlocks(start,end,level,(world,pos)->{
+                if(!world.hasChunkAt(pos)||world.getBlockState(pos).isAir())return null;
+                if(pos.equals(BlockPos.containing(start)))
+                    return new BlockHitResult(start,Direction.getNearest(-direction.x,-direction.y,-direction.z),pos.immutable(),true);
+                return net.minecraft.world.phys.shapes.Shapes.block().clip(start,end,pos.immutable());
+            },world->null);
         }
         if(affectsLiving) {
             Vec3 end=start.add(direction.scale(entityRange));
+
             for(Entity entity:level.getEntities(caster,new AABB(start,end).inflate(1),
                     e->e!=caster && validTarget(e))) {
-                var crossing=entity.getBoundingBox().inflate(.2).clip(start,end);
-                crossing.ifPresent(point->hits.add(new EntityHitResult(entity,point)));
+                if(entity.isMultipartEntity())continue;
+                var box=entity.getBoundingBox().inflate(.2);
+                var point=box.contains(start)?start:box.clip(start,end).orElse(null);
+                if(point==null)continue;
+                if(nearest==null || start.distanceToSqr(point)<start.distanceToSqr(nearest.getLocation()))
+                    nearest=new EntityHitResult(entity,point);
             }
+
         }
-        return hits;
+        return nearest;
     }
 
     public static void burst(ServerLevel level, Entity caster, Vec3 center, boolean excludeCaster) {

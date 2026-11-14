@@ -31,12 +31,21 @@ public final class DeflectionFieldEvents {
     public static void nonplayerReduction(LivingDamageEvent.Pre event){
         if(!com.mcmagic.omnira.combat.OmniraDamage.isTrue(event.getSource())&&!(event.getEntity() instanceof net.minecraft.world.entity.player.Player)&&raised(event.getEntity()))event.setNewDamage(event.getNewDamage()*.75F);
     }
+    public static boolean recentReflection(Entity shot,String ticksKey,String oldKey){
+        var data=shot.getPersistentData();
+        if(data.contains(oldKey)){
+            long age=shot.level().getGameTime()-data.getLong(oldKey);
+            data.remove(oldKey);
+            if(age>=0 && age<8)data.putInt(ticksKey,8-(int)age);
+        }
+        return data.getInt(ticksKey)>0;
+    }
     public static boolean redirect(Entity shot,LivingEntity holder,Vec3 hit){
         var stack=held(holder);var velocity=shot.getDeltaMovement();
         if(stack.isEmpty()||!(shot.level() instanceof ServerLevel server)||velocity.lengthSqr()<1e-8)return false;
         var data=shot.getPersistentData();
         if(data.hasUUID("DeflectionHolder")&&data.getUUID("DeflectionHolder").equals(holder.getUUID())
-                &&server.getGameTime()-data.getLong("DeflectionTick")<8)return false;
+                &&recentReflection(shot,"DeflectionTicks","DeflectionTick"))return false;
         Vec3 outgoing=raised(holder)?velocity.scale(-1):velocity.yRot((holder.getRandom().nextBoolean()?1:-1)
                 *(float)Math.toRadians(35+holder.getRandom().nextInt(46))).xRot((float)Math.toRadians(holder.getRandom().nextInt(31)-15))
                 .normalize().scale(velocity.length());
@@ -51,10 +60,22 @@ public final class DeflectionFieldEvents {
         }else return false;
         // Vanilla arrows damp their velocity after deflect(); this field changes direction only.
         shot.setDeltaMovement(outgoing);shot.setPos(hit.add(outgoing.normalize().scale(.6)));shot.hasImpulse=true;shot.hurtMarked=true;
-        data.putUUID("DeflectionHolder",holder.getUUID());data.putLong("DeflectionTick",server.getGameTime());
+        data.putUUID("DeflectionHolder",holder.getUUID());data.remove("DeflectionTick");data.putInt("DeflectionTicks",8);
         DeflectionFieldItem.wear(holder,stack);
         server.sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD,hit.x,hit.y,hit.z,6,.15,.15,.15,.02);
         return true;
+    }
+    @SubscribeEvent public static void ageReflection(EntityTickEvent.Post event){
+        Entity shot=event.getEntity();
+        if(!(shot instanceof Projectile || shot instanceof SpellEntity) || shot.level().isClientSide)return;
+        var data=shot.getPersistentData();
+        advanceGrace(data,"MirrorBounceTicks","MirrorBounce");
+        advanceGrace(data,"DeflectionTicks","DeflectionHolder");
+    }
+    private static void advanceGrace(net.minecraft.nbt.CompoundTag data,String ticks,String holder){
+        int left=data.getInt(ticks);
+        if(left>1)data.putInt(ticks,left-1);
+        else if(left==1){data.remove(ticks);data.remove(holder);}
     }
     @SubscribeEvent public static void intercept(EntityTickEvent.Pre event){
         Entity shot=event.getEntity();if(!(shot.level() instanceof ServerLevel server))return;

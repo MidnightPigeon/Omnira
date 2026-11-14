@@ -1,0 +1,11 @@
+{
+  "id": "lootr_integration",
+  "title": "Lootr",
+  "item": "minecraft:air",
+  "recipes": false,
+  "text": [
+    "Treasure crystal balls and liquid crystal balls keep separate item or fluid loot for each player."
+  ],
+  "links": [],
+  "icon": "omnira:crystal_ball"
+}

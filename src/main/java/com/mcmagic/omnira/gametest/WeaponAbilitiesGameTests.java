@@ -37,8 +37,13 @@ public final class WeaponAbilitiesGameTests {
             h.assertTrue(mob.getHealth()==health && player.getData(ModAttachments.MANA).current()==90,"Spell cooldown failed to suppress repeat hit");
             h.assertTrue(!player.getCooldowns().isOnCooldown(item),"Spell cooldown blocked the whole weapon");
             h.assertTrue(SwordSpellCooldowns.ready(player,new ItemStack(item)),"Another weapon inherited the first one's cooldown");
-            h.runAfterDelay(39,()->h.assertTrue(!SwordSpellCooldowns.ready(player,player.getMainHandItem()),"Spell cooldown shorter than two seconds"));
+            var tick = new net.neoforged.neoforge.event.tick.PlayerTickEvent.Post(player);
+            h.runAfterDelay(39,()->{
+                for(int i=0;i<39;i++) com.mcmagic.omnira.spell.WeaponCooldowns.tick(tick);
+                h.assertTrue(!SwordSpellCooldowns.ready(player,player.getMainHandItem()),"Spell cooldown shorter than two seconds");
+            });
             h.runAfterDelay(40,()->{
+                com.mcmagic.omnira.spell.WeaponCooldowns.tick(tick);
                 h.assertTrue(SwordSpellCooldowns.ready(player,player.getMainHandItem()),"Spell cooldown longer than two seconds");
                 RitualSwordItem.contact(player,mob,true);
                 h.assertTrue(player.getData(ModAttachments.MANA).current()==80,"Spell did not resume after cooldown");
@@ -82,6 +87,7 @@ public final class WeaponAbilitiesGameTests {
         var needle=player(h,ModItems.ARCANE_NEEDLE.get());needle.setPos(needle.position().add(10,0,0));
         SwordActions.input(nail,0);SwordActions.input(needle,0);
         h.runAfterDelay(25,()->{
+            nail.tickCount+=25;needle.tickCount+=25;
             // Fresh ServerPlayers have 60 ticks of spawn protection; bypass it in this fixture.
             h.assertTrue(nail.hurt(nail.damageSources().genericKill(),1),"Test hit rejected");
             needle.setAbsorptionAmount(4);
@@ -144,8 +150,8 @@ public final class WeaponAbilitiesGameTests {
         var wall=BlockPos.containing(p.getEyePosition().add(0,0,2));h.getLevel().setBlockAndUpdate(wall,Blocks.STONE.defaultBlockState());
         h.assertTrue(SwordActions.pick(p,6)==null,"Charged slash can select through walls");h.getLevel().removeBlock(wall,false);
         SwordActions.input(p,1);h.assertTrue(mob.getHealth()==100,"Release without a start attacked");SwordActions.input(p,0);
-        h.runAfterDelay(19,()->{SwordActions.input(p,1);h.assertTrue(mob.getHealth()==100,"Sub-second charge gained extended reach");SwordActions.input(p,0);});
-        h.runAfterDelay(39,()->{SwordActions.input(p,1);h.assertTrue(mob.getHealth()<100,"One-second charge failed");float health=mob.getHealth();SwordActions.input(p,1);h.assertTrue(mob.getHealth()==health,"Repeated release attacked twice");h.succeed();});
+        h.runAfterDelay(19,()->{p.tickCount+=19;SwordActions.input(p,1);h.assertTrue(mob.getHealth()==100,"Sub-second charge gained extended reach");SwordActions.input(p,0);});
+        h.runAfterDelay(39,()->{p.tickCount+=20;SwordActions.input(p,1);h.assertTrue(mob.getHealth()<100,"One-second charge failed");float health=mob.getHealth();SwordActions.input(p,1);h.assertTrue(mob.getHealth()==health,"Repeated release attacked twice");h.succeed();});
     }
     @GameTest(template="spell_arena") public static void flyingNeedleReturnsAtTenBlocks(GameTestHelper h) {
         var p=player(h,ModItems.ARCANE_NEEDLE.get());var needle=ModEntityTypes.FLYING_NEEDLE.get().create(h.getLevel());needle.launch(p,p.getMainHandItem());h.getLevel().addFreshEntity(needle);

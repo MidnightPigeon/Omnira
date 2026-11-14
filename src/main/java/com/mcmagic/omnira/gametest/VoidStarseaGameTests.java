@@ -20,7 +20,9 @@ public final class VoidStarseaGameTests {
         level.setBlockAndUpdate(p,VoidSeaContent.LIQUID.get().defaultBlockState());
         var item=h.spawnItem(Items.DIAMOND,6,4,6);
         item.setPos(p.getCenter());item.setDeltaMovement(Vec3.ZERO);
+        item.getPersistentData().putLong("OmniraStarflowHit",level.getGameTime()+80000);
         level.tickNonPassenger(item);
+        h.assertTrue(item.getPersistentData().getLong("OmniraStarflowHit")==level.getGameTime(),"Future damage timestamp blocked starflow");
         h.assertTrue(item.getPersistentData().contains("OmniraStarflowHit")&&!item.getPersistentData().contains("OmniraStarflowTeleportUntil")&&!item.isRemoved(),"Item did not stay in starflow");
         var boat=EntityType.BOAT.create(level);boat.setPos(p.getCenter());
         var cow=EntityType.COW.create(level);cow.startRiding(boat,true);
@@ -173,9 +175,79 @@ public final class VoidStarseaGameTests {
         l.getBlockState(pos).entityInside(l,pos,manta);
         h.runAfterDelay(4,()->{h.assertTrue(manta.getHealth()==40&&p.getHealth()==9,"Mount contact shielded rider: "+p.getHealth());p.stopRiding();manta.discard();h.succeed();});
     }
-    @GameTest(template="spell_arena",timeoutTicks=60) public static void jellyfishPursuitMovesHorizontallyAndVertically(GameTestHelper h){
-        var l=h.getLevel();var jelly=VoidSeaContent.JELLYFISH.get().create(l);var cow=EntityType.COW.create(l);
-        Vec3 start=h.absoluteVec(new Vec3(3,4,3));jelly.moveTo(start);cow.setNoAi(true);cow.setNoGravity(true);cow.moveTo(start.add(5,3,5));l.addFreshEntity(jelly);l.addFreshEntity(cow);jelly.setTarget(cow);
-        h.runAfterDelay(16,()->{h.assertTrue(jelly.getY()>start.y+.1&&jelly.getX()>start.x+.1&&jelly.isNoGravity(),"Flying pursuit did not move on both axes");jelly.discard();cow.discard();h.succeed();});
+    @GameTest(template="spell_arena")
+    public static void jellyfishPursuitMovesHorizontallyAndVertically(GameTestHelper h){
+        var level=h.getLevel();
+        Vec3 start=h.absoluteVec(new Vec3(3.5,4,3.5));
+        var jelly=h.spawn(VoidSeaContent.JELLYFISH.get(),3,4,3);
+        jelly.moveTo(start);
+        var cow=h.spawn(EntityType.COW,8,7,8);
+        cow.setNoAi(true);
+        cow.setNoGravity(true);
+        jelly.setTarget(cow);
+
+        // The test clock can advance before this chunk starts ticking entities.
+        for(int i=0;i<16;i++)level.tickNonPassenger(jelly);
+        h.assertTrue(jelly.getTarget()==cow && jelly.isNoGravity()
+                && jelly.getY()>start.y+.1 && jelly.getX()>start.x+.1
+                && jelly.distanceTo(cow)<start.distanceTo(cow.position()),
+                "No airborne pursuit after 16 entity ticks: "+jelly.position().subtract(start));
+        h.succeed();
+    }
+
+    @GameTest(template="spell_arena")
+    public static void jellyfishFliesOverStone(GameTestHelper h){
+        checkDetour(h,false,false);
+    }
+    @GameTest(template="spell_arena")
+    public static void jellyfishFliesBesideStoneUnderCeiling(GameTestHelper h){
+        checkDetour(h,true,false);
+    }
+    @GameTest(template="spell_arena")
+    public static void jellyfishUsesRemainingSide(GameTestHelper h){
+        checkDetour(h,true,true);
+    }
+    @GameTest(template="spell_arena") public static void mantaClearsStone(GameTestHelper h){
+        checkDetour(h,false,false,true);
+    }
+    @GameTest(template="spell_arena") public static void mantaClearsStoneWithCeiling(GameTestHelper h){
+        checkDetour(h,true,false,true);
+    }
+    private static void checkDetour(GameTestHelper h,boolean ceiling,boolean blockFirstSide){
+        checkDetour(h,ceiling,blockFirstSide,false);
+    }
+    private static void checkDetour(GameTestHelper h,boolean ceiling,boolean blockFirstSide,boolean manta){
+        var level=h.getLevel();
+        var stone=h.absolutePos(new BlockPos(7,6,6));
+        level.setBlockAndUpdate(stone,Blocks.STONE.defaultBlockState());
+        if(ceiling){
+            for(var pos:BlockPos.betweenClosed(stone.offset(-3,2,-2),stone.offset(3,2,2)))
+                level.setBlockAndUpdate(pos,Blocks.STONE.defaultBlockState());
+        }
+        StarSeaCreature creature=manta?h.spawn(VoidSeaContent.MANTA.get(),5,6,6):h.spawn(VoidSeaContent.JELLYFISH.get(),5,6,6);
+        var cow=h.spawn(EntityType.COW,14,6,6);
+        cow.setNoAi(true);
+        cow.setNoGravity(true);
+        creature.setTarget(cow);
+        if(blockFirstSide){
+            for(var pos:BlockPos.betweenClosed(stone.offset(-2,0,1),stone.offset(1,1,1)))
+                level.setBlockAndUpdate(pos,Blocks.STONE.defaultBlockState());
+        }
+        var blocked=new net.minecraft.world.phys.AABB(stone);
+        double startZ=creature.getZ();
+        boolean passed=false;
+        for(int i=0;i<160;i++){
+            level.tickNonPassenger(creature);
+            h.assertTrue(!creature.getBoundingBox().intersects(blocked),"Pursuit passed through stone");
+            if(creature.getX()>=stone.getX() && creature.getX()<=stone.getX()+1){
+                if(blockFirstSide)h.assertTrue(creature.getZ()<startZ-.85,"Did not choose the remaining side");
+                else if(ceiling)h.assertTrue(Math.abs(creature.getZ()-startZ)>.85,"Failed to go around the side");
+                else h.assertTrue(creature.getY()>=stone.getY()+1 && Math.abs(creature.getZ()-startZ)<.1,"Did not prefer the open upper route");
+            }
+            if(creature.getX()>stone.getX()+1 && creature.distanceTo(cow)<4){passed=true;break;}
+        }
+        h.assertTrue(passed && creature.getTarget()==cow && level.getBlockState(stone).is(Blocks.STONE),
+                "Did not continue pursuit past intact obstacle: "+creature.position().subtract(Vec3.atBottomCenterOf(stone)));
+        h.succeed();
     }
 }

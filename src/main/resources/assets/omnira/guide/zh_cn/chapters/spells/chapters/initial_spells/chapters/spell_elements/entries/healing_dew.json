@@ -12,6 +12,10 @@
     {
       "target": "healing_dew_crafting",
       "label": "解析配方"
+    },
+    {
+      "target": "dark_breath",
+      "label": "梦境要素：汲命原点"
     }
   ]
 }

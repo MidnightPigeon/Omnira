@@ -36,10 +36,13 @@ public final class TimeThiefMosquito extends Monster {
         targetSelector.addGoal(1,new NearestAttackableTargetGoal<>(this,Player.class,true));
         goalSelector.addGoal(1,new Goal(){
             {setFlags(EnumSet.of(Flag.MOVE,Flag.LOOK));}
+            private int repathTicks;
+            @Override public void start(){repathTicks=0;}
+            @Override public boolean requiresUpdateEveryTick(){return true;}
             public boolean canUse(){return host==null&&!spent&&getTarget()!=null;}
             public void tick(){var target=getTarget();if(target==null)return;getLookControl().setLookAt(target,30,30);
                 if(distanceToSqr(target)<2.25&&hasLineOfSight(target)&&target instanceof Player p)attach(p);
-                else if(tickCount%10==0)navigation.moveTo(target.getX(),target.getY()+1,target.getZ(),1);
+                else if(--repathTicks<=0){navigation.moveTo(target.getX(),target.getY()+1,target.getZ(),1);repathTicks=10;}
             }
             public void stop(){navigation.stop();}
         });
@@ -60,8 +63,13 @@ public final class TimeThiefMosquito extends Monster {
         var player=((ServerLevel)level()).getPlayerByUUID(host);
         if(player==null||!player.isAlive()||player.isCreative()||player.isSpectator()){host=null;feeding=0;entityData.set(HOST,-1);setTarget(null);return;}
         entityData.set(HOST,player.getId());navigation.stop();setDeltaMovement(Vec3.ZERO);
-        double angle=Math.toRadians(player.yBodyRot);setPos(player.getX()+Math.cos(angle)*.46,player.getY()+player.getBbHeight()*.64,player.getZ()+Math.sin(angle)*.46);
-        setYRot(player.yBodyRot+90);yBodyRot=yHeadRot=getYRot();
+        // Keep the actual attackable entity in front of the upper torso, including while crouching.
+        float facing=player.yBodyRot;
+        double angle=Math.toRadians(facing);
+        double reach=(1.875*player.getScale()+7.05)/16;
+        setPos(player.getX()-Math.sin(angle)*reach,Math.max(player.getY()+player.getBbHeight()*.2,player.getEyeY()-.85*player.getScale()),player.getZ()+Math.cos(angle)*reach);
+        setYRot(facing+180);
+        yBodyRot=yHeadRot=getYRot();
         if(++feeding>=FEED_TICKS){erodeEquipment(player);spent=true;host=null;entityData.set(HOST,-1);entityData.set(FADE,1);setTarget(null);}
     }
     public static void erodeEquipment(Player player){

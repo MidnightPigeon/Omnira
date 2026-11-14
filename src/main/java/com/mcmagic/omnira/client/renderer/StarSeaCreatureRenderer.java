@@ -57,6 +57,9 @@ public final class StarSeaCreatureRenderer<T extends StarSeaCreature> extends Mo
             root.getAllParts().forEach(ModelPart::resetPose);var body=root.getChild("body");
             float pulse=Mth.sin(age*.16F);
             body.xScale=body.zScale=1+pulse*.055F-charge*.12F;body.yScale=1-pulse*.045F;
+            float spacing=2.6F+pulse*.55F-charge*.05F;
+            body.getChild("gland0").x=spacing; body.getChild("gland1").x=-spacing;
+            body.getChild("gland2").z=spacing; body.getChild("gland3").z=-spacing;
             for(int i=0;i<8;i++){var tentacle=body.getChild("tentacle"+i);tentacle.xRot=Mth.sin(age*.12F+i*.8F)*.19F;tentacle.zRot=Mth.cos(age*.12F+i*.8F)*.19F;}
         }
         @Override public void renderToBuffer(PoseStack p,VertexConsumer c,int light,int overlay,int color){root.render(p,c,light,overlay,color);}

@@ -19,7 +19,7 @@ public final class MirrorProjectileEvents {
     private static boolean recent(Projectile projectile,DreamMirror mirror) {
         var data=projectile.getPersistentData();
         return data.hasUUID("MirrorBounce") && data.getUUID("MirrorBounce").equals(mirror.getUUID())
-                && projectile.level().getGameTime()-data.getLong("MirrorBounceTime")<8;
+                && com.mcmagic.omnira.space.sea.DeflectionFieldEvents.recentReflection(projectile,"MirrorBounceTicks","MirrorBounceTime");
     }
     public static boolean bounce(Projectile projectile,DreamMirror mirror,Vec3 hit) {
         if(projectile.level().isClientSide || recent(projectile,mirror)) return false;
@@ -62,7 +62,7 @@ public final class MirrorProjectileEvents {
         }
         projectile.hasImpulse=true;projectile.hurtMarked=true;
         var data=projectile.getPersistentData();
-        data.putUUID("MirrorBounce",mirror.getUUID());data.putLong("MirrorBounceTime",projectile.level().getGameTime());
+        data.putUUID("MirrorBounce",mirror.getUUID());data.remove("MirrorBounceTime");data.putInt("MirrorBounceTicks",8);
         applyNonphysicalEffects(incoming,mirror,owner);
         if(source.is(DreamMirror.PHYSICAL)) mirror.returnPhysicalDamage(owner,source,amount);
         return true;

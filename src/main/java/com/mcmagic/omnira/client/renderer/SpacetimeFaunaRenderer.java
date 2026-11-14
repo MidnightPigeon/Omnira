@@ -61,12 +61,21 @@ public final class SpacetimeFaunaRenderer<T extends PathfinderMob> extends MobRe
         @Override public void setupAnim(T entity,float walk,float amount,float age,float yaw,float pitch){
             root.getAllParts().forEach(ModelPart::resetPose);wingColor=-1;glowingAntlers=false;
             if(entity instanceof AgecoilSnail snail){
-                var head=parts.get("head");
-                boolean tucked=snail.shelterTicks()>0;
-                head.xScale=head.yScale=head.zScale=tucked?.45F:1F;
-                if(tucked){
-                    head.z+=7;
-                    head.y-=4;
+                int ticks=snail.shelterTicks();
+                if(ticks>0){
+                    float remaining=ticks-Math.clamp(age-entity.tickCount,0F,1F);
+                    float tuck=Math.clamp(Math.min(20F-remaining,remaining)/3F,0F,1F);
+                    tuck=tuck*tuck*(3F-2F*tuck);
+                    var head=parts.get("head");
+                    head.xScale=head.yScale=head.zScale=1F-.55F*tuck;
+                    head.z+=7F*tuck;
+                    head.y-=4F*tuck;
+                    var foot=parts.get("foot");
+                    foot.xScale=1F-.55F*tuck;
+                    foot.zScale=1F-.65F*tuck;
+                    foot.y-=4F*tuck;
+                    foot.z+=tuck;
+                    parts.get("body").y+=2F*tuck;
                 }
                 for(int sign=-1;sign<=1;sign+=2){
                     parts.get("clock_minute"+sign).xRot+=sign*age*(float)(Math.PI*2/1200);
@@ -76,11 +85,16 @@ public final class SpacetimeFaunaRenderer<T extends PathfinderMob> extends MobRe
             }else if(entity instanceof RiftstepDeer deer){
                 glowingAntlers=deer.angry();
                 for(int i=0;i<8;i++){
-                    var mote=parts.get("mote"+i);float phase=age*(.016F+i*.0015F)+i*2.39996F;
-                    mote.x=(float)Math.sin(phase)*2F;
-                    mote.y=.5F+(float)Math.sin(phase*.73F+i)*1.6F;
-                    mote.z=.5F+(float)Math.cos(phase*.87F+i)*3.8F;
-                    mote.xRot=phase*.4F;mote.yRot=phase*.6F;
+                    var mote=parts.get("mote"+i);
+                    // Stagger the drifting centers along the torso so the whole cloud never converges.
+                    double time=age+entity.getId()*13.0;
+                    double phase=i*2.39996;
+                    mote.z=-4.2F+i*1.34F+(float)Math.sin(time*(.023+i*.001)+phase)*.55F;
+                    mote.x=(float)(1.55*Math.sin(phase)+.85*Math.sin(time*(.031+i*.002)+phase*2));
+                    mote.y=.45F+(float)(.95*Math.cos(phase)+.85*Math.sin(time*(.019+i*.003)+phase));
+                    float size=.52F+(i*3%7)*.055F;
+                    mote.xScale=mote.yScale=mote.zScale=size;
+                    mote.yRot=(float)(phase+time*.023);
                 }
                 float lower=deer.headLowering(age-entity.tickCount);
                 parts.get("shoulders").xRot=.85F*lower;
@@ -96,6 +110,7 @@ public final class SpacetimeFaunaRenderer<T extends PathfinderMob> extends MobRe
             }else if(entity instanceof RiftMantis mantis){
                 for(int i=0;i<4;i++)parts.get("leg"+i).xRot+=(float)Math.cos(walk*.8+i*Math.PI)*amount*.3F;
                 float raise=mantis.windup()>0?.7F:0;parts.get("scythe_left").xRot-=raise;parts.get("scythe_right").xRot-=raise;
+                parts.get("scythe_left").yRot-=raise*.42F; parts.get("scythe_right").yRot+=raise*.42F;
                 parts.get("head").yRot=yaw*.01F;
             }else if(entity instanceof RiftMoth moth){
                 float flap=(float)Math.sin(age*.65F)*.55F;parts.get("wing_left").zRot+=flap;parts.get("wing_right").zRot-=flap;

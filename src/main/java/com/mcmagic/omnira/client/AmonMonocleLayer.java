@@ -26,12 +26,13 @@ public final class AmonMonocleLayer extends RenderLayer<AbstractClientPlayer,Pla
         super(renderer);var mesh=new MeshDefinition();
         // The worn centre is completely clear: only the frame and chain have geometry.
         var cubes=CubeListBuilder.create().texOffs(0,0)
-                .addBox(.5F,-5.5F,-4.85F,3, .5F,.5F).addBox(.5F,-3F,-4.85F,3,.5F,.5F)
-                .addBox(0,-5F,-4.85F,.5F,2,.5F).addBox(3.5F,-5F,-4.85F,.5F,2,.5F)
-                .addBox(0,-5.5F,-4.85F,.5F,.5F,.5F).addBox(3.5F,-5.5F,-4.85F,.5F,.5F,.5F)
-                .addBox(0,-3F,-4.85F,.5F,.5F,.5F).addBox(3.5F,-3F,-4.85F,.5F,.5F,.5F)
-                .addBox(3.75F,-3,-4.75F,.25F,5,.25F);
-        mesh.getRoot().addOrReplaceChild("monocle",cubes,PartPose.ZERO);ring=LayerDefinition.create(mesh,16,16).bakeRoot();
+                .addBox(1,-6,-4.85F,2,.5F,.5F)
+                .addBox(.5F,-5.5F,-4.85F,.5F,.5F,.5F).addBox(3,-5.5F,-4.85F,.5F,.5F,.5F)
+                .addBox(0,-5,-4.85F,.5F,2,.5F).addBox(3.5F,-5,-4.85F,.5F,2,.5F)
+                .addBox(.5F,-3,-4.85F,.5F,.5F,.5F).addBox(3,-3,-4.85F,.5F,.5F,.5F)
+                .addBox(1,-2.5F,-4.85F,2,.5F,.5F)
+                .addBox(3.5F,-3,-4.75F,.25F,5,.25F);
+        mesh.getRoot().addOrReplaceChild("monocle",cubes,PartPose.offset(0,1.5F,0));ring=LayerDefinition.create(mesh,16,16).bakeRoot();
     }
     @SubscribeEvent public static void layers(EntityRenderersEvent.AddLayers event){
         for(var skin:event.getSkins()){PlayerRenderer renderer=event.getSkin(skin);if(renderer!=null)renderer.addLayer(new AmonMonocleLayer(renderer));}

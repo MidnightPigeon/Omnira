@@ -1,10 +1,30 @@
 {
-  "id": "world_forming_ritual", "title": "Ritual of World Formation", "item": "omnira:active_world_seed",
-  "scene": "world_forming_ritual", "recipes": false,
+  "id": "world_forming_ritual",
+  "title": "Ritual of World Formation",
+  "item": "omnira:active_world_seed",
+  "scene": "world_forming_ritual",
+  "recipes": false,
   "text": [
     "Requires one Advanced Ritual Energy Core, eight Crystal Pedestals, and one of each world component in any order. Use an Active World Seed on the core to begin.",
     "Strata, waterways, sky, heat, life, ages, boundaries and possibilities appear in sequence. Each component leaves its pedestal after its absorption animation. Completion forms one Miniature World Framework, consuming the seed and all eight components.",
     "Removing an unabsorbed component or disrupting the ritual returns the seed and absorbed components. If their original pedestals cannot hold them, the components drop beside the core."
   ],
-  "links": [{"target": "world_seed", "label": "World Seeds"}, {"target": "world_components", "label": "Eight World Components"}, {"target": "miniature_world_framework", "label": "Miniature World Framework"}]
+  "links": [
+    {
+      "target": "world_seed",
+      "label": "World Seeds"
+    },
+    {
+      "target": "world_components",
+      "label": "Eight World Components"
+    },
+    {
+      "target": "miniature_world_framework",
+      "label": "Miniature World Framework"
+    },
+    {
+      "target": "capturing_inspiration",
+      "label": "Genesis Particles"
+    }
+  ]
 }

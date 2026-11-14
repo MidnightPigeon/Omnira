@@ -1,0 +1,8 @@
+{
+  "sound_event": "omnira:music_disc.weaver_spirit",
+  "description": {
+    "translate": "jukebox_song.omnira.weaver_spirit"
+  },
+  "length_in_seconds": 77.590,
+  "comparator_output": 4
+}

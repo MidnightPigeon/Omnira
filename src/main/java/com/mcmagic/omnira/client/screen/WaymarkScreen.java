@@ -35,9 +35,10 @@ public final class WaymarkScreen extends ResponsiveContainerScreen<WaymarkMenu> 
         input.setTextColor(MachinePanelArt.LIGHT);
         input.setTextColorUneditable(0xFF98AFB7);
         if(menu.editing) {
-            input.setValue(menu.entries.getFirst().name());
+            input.setValue(menu.entries.getFirst().lostNumber()>0?label(0):menu.entries.getFirst().name());
             addRenderableWidget(new CrystalActionButton(leftPos+imageWidth-92,topPos+imageHeight-30,80,20,Component.translatable("gui.done"),
-                    b->PacketDistributor.sendToServer(new RenameWaymarkPayload(menu.containerId,input.getValue()))));
+                    b->{if(menu.entries.getFirst().lostNumber()>0 && input.getValue().equals(label(0)))onClose();
+                        else PacketDistributor.sendToServer(new RenameWaymarkPayload(menu.containerId,input.getValue()));}));
             setInitialFocus(input);
         } else {
             input.setHint(Component.translatable("gui.omnira.waymark.search"));
@@ -94,8 +95,10 @@ public final class WaymarkScreen extends ResponsiveContainerScreen<WaymarkMenu> 
 
     private String label(int index) {return labels[index];}
     private String uncachedLabel(int index) {
-        var name=menu.entries.get(index).name();
-        if(name.equals(com.mcmagic.omnira.spacetime.AmberDirectory.MARK_NAME))return Component.translatable(name).getString();
+        var entry=menu.entries.get(index);
+        if(entry.lostNumber()>0)return Component.translatable("gui.omnira.waymark.lost",entry.lostNumber()).getString();
+        var name=entry.name();
+        if(entry.id().equals(menu.amber))return Component.translatable(com.mcmagic.omnira.spacetime.AmberDirectory.MARK_NAME).getString();
         return name.isBlank()?Component.translatable("gui.omnira.waymark.unnamed").getString():name;
     }
     private static String dimensionName(net.minecraft.resources.ResourceLocation dimension) {
@@ -126,7 +129,7 @@ public final class WaymarkScreen extends ResponsiveContainerScreen<WaymarkMenu> 
             int index=page*rowCount+i;var row=rows.get(i);row.visible=index<filtered.size();
             if(row.visible)costs[filtered.get(index)]=calculateCost(filtered.get(index));
             deleteButtons.get(i).visible=row.visible;
-            deleteButtons.get(i).active=row.visible && !menu.entries.get(filtered.get(index)).name().equals(com.mcmagic.omnira.spacetime.AmberDirectory.MARK_NAME);
+            deleteButtons.get(i).active=row.visible && !menu.entries.get(filtered.get(index)).id().equals(menu.amber);
             row.active=row.visible && minecraft.player.getData(ModAttachments.MANA).canSpend(cost(filtered.get(index)));
             if(row.visible) {
                 var text=rowTexts[filtered.get(index)];

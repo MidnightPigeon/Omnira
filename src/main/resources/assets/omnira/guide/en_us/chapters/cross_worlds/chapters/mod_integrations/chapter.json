@@ -5,7 +5,9 @@
   "introduction": "introduction.json",
   "entries": [
     "entries/create_integration.json",
-    "entries/aeronautics_integration.json"
+    "entries/aeronautics_integration.json",
+    "entries/lootr_integration.json",
+    "entries/cataclysm_integration.json"
   ],
   "chapters": []
 }

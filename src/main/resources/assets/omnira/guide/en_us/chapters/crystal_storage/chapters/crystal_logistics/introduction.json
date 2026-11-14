@@ -1,25 +1,6 @@
 {
   "text": [
     "Link containers and machines with resonance nodes to collect, transfer and distribute items and fluids.",
-    "Omnira logistics start at 4 items/s and 2000 mB/s; bucket exchange takes 0.5 seconds. Speed Upgrades multiply these rates. Intake, Output and resonance work at their own limits; external extraction also depends on the extracting device and cannot exceed the container limit.",
-    "Each transfer method has its own allowance. Resonance uses the sender limit, Intake its host limit; ordinary receiving is unthrottled. Spacetime Ports only extend adjacent faces, without active transfer or extra limits."
-  ],
-  "links": [
-    {
-      "target": "spacetime_waymark",
-      "label": "Spacetime Waymark"
-    },
-    {
-      "target": "recall_crystal",
-      "label": "Recall Crystal"
-    },
-    {
-      "target": "enhanced_recall_crystal",
-      "label": "Enhanced Recall Crystal"
-    },
-    {
-      "target": "fold_gate_guide",
-      "label": "Fold Gates"
-    }
+    "The base rate is 4 items or 2000 mB per second. Exchanging a bucket takes 0.5 seconds. A Speed Upgrade raises these rates. Intake, output and resonance transfers have separate limits. External extraction is also limited by the device doing the pulling."
   ]
 }

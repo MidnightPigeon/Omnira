@@ -55,6 +55,8 @@
       }
     ]
   },
+  "music.weaver_spirit": {"sounds": [{"name": "omnira:music/boss/weaver_spirit", "stream": true}]},
+  "music_disc.weaver_spirit": {"sounds": [{"name": "omnira:records/weaver_spirit", "stream": true}]},
   "music_disc.liu_nian": {
     "sounds": [
       {

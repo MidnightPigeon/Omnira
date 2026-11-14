@@ -3,11 +3,5 @@
   "caption": "Shape gives magic form; essence gives it purpose.",
   "text": [
     "Use the two right-hand slots for elements, or leave them empty. Different elements apply together; duplicates do not stack. Every inserted material adds to the mana cost."
-  ],
-  "links": [
-    {
-      "target": "dark_breath",
-      "label": "Dream Element: Life-Drain Origin"
-    }
   ]
 }

@@ -17,6 +17,21 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_archaeology_refinement")
 @PrefixGameTestTemplate(false)
 public final class ArchaeologyRefinementGameTests {
+    @GameTest(template="spell_arena") public static void brushRepairsOnlyWhileCarried(GameTestHelper h){
+        var level=h.getLevel();
+        var player=h.makeMockPlayer(GameType.SURVIVAL);
+        var stack=new ItemStack(ArchaeologyContent.BRUSH.get());
+        stack.setDamageValue(100);
+        var drop=new net.minecraft.world.entity.item.ItemEntity(level,0,0,0,stack);
+        var brush=stack.getItem();
+        for(int i=0;i<5999;i++)brush.inventoryTick(stack,level,player,9,false);
+        brush.inventoryTick(stack,level,drop,0,false);
+        h.assertTrue(stack.getDamageValue()==100,"Brush repaired outside the player's inventory");
+        var restored=stack.copy();
+        brush.inventoryTick(restored,level,player,9,false);
+        h.assertTrue(restored.getDamageValue()==36,"Remaining carried time did not survive a stack copy");
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void aggregates(GameTestHelper h){
         var level=h.getLevel();var p=h.absolutePos(new BlockPos(3,3,3));var player=h.makeMockPlayer(GameType.SURVIVAL);
         level.setBlock(p.below(),Blocks.STONE.defaultBlockState(),2);

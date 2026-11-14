@@ -1,5 +1,6 @@
 package com.mcmagic.omnira.space;
 
+import com.mcmagic.omnira.util.GameTimeCooldown;
 import net.minecraft.core.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -17,9 +18,9 @@ public final class SpaceWarpBlockEntity extends BlockEntity {
         for(var entity:server.getEntities((Entity)null,new AABB(worldPosition).inflate(7),e->e.isAlive()&&!e.isSpectator())){
             var root=entity.getRootVehicle();if(!seen.add(root.getUUID())||!com.mcmagic.omnira.world.dimension.DreamTransitRules.allowed(root))continue;
             if(root.getSelfAndPassengers().noneMatch(e->touches(e.getBoundingBox(),Vec3.atCenterOf(worldPosition))))continue;
-            var data=root.getPersistentData();if(data.getLong("OmniraFoldCooldown")>now)continue;
+            var data=root.getPersistentData();if(GameTimeCooldown.active(root, "OmniraFoldCooldown", now, 100))continue;
             String dimension=server.dimension().location().toString();
-            boolean ongoing=data.contains("OmniraFoldStart")&&dimension.equals(data.getString("OmniraFoldDimension"))&&now-data.getLong("OmniraFoldTouch")<=1;
+            boolean ongoing=data.contains("OmniraFoldStart")&&data.getLong("OmniraFoldStart")<=now&&dimension.equals(data.getString("OmniraFoldDimension"))&&now-data.getLong("OmniraFoldTouch")<=1;
             if(ongoing&&data.getLong("OmniraFoldSource")!=worldPosition.asLong())continue;
             if(!ongoing){data.putLong("OmniraFoldStart",now);data.putLong("OmniraFoldSource",worldPosition.asLong());data.putString("OmniraFoldDimension",dimension);}
             data.putLong("OmniraFoldTouch",now);
@@ -38,7 +39,7 @@ public final class SpaceWarpBlockEntity extends BlockEntity {
             level.getChunkAt(target);
             if(!level.getBlockState(target).is(com.mcmagic.omnira.registry.ModBlocks.SPACE_WARP_POINT.get())){SpaceWarpIndex.get(level).remove(target);continue;}
             Vec3 landing=landing(level,root,target);if(landing==null)continue;
-            for(var member:root.getSelfAndPassengers().toList())member.getPersistentData().putLong("OmniraFoldCooldown",level.getGameTime()+100);
+            for(var member:root.getSelfAndPassengers().toList())GameTimeCooldown.start(member, "OmniraFoldCooldown", level.getGameTime(), 100);
             root.changeDimension(new net.minecraft.world.level.portal.DimensionTransition(level,landing,Vec3.ZERO,root.getYRot(),root.getXRot(),e->{e.fallDistance=0;e.setDeltaMovement(Vec3.ZERO);}));
             return true;
         }

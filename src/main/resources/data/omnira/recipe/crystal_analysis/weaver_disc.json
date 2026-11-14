@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"tag": "omnira:analysis_tools"},
+    {"item": "omnira:music_disc_weaver_spirit"}
+  ],
+  "result": {"id": "omnira:world_generation_probability_cloud", "count": 1}
+}

@@ -90,10 +90,16 @@ public final class BiomeMusicGameTests {
         checkDisc(h,ModItems.MUSIC_DISC_MI_MENG_YE.get(),"mi_meng_ye",924,2);h.succeed();
     }
     private static void checkDisc(GameTestHelper h,Item item,String id,int duration,int comparator){
+        checkDiscSound(h,item,"omnira:music_disc."+id,duration,comparator);
+    }
+    @GameTest(template="spell_arena") public static void weaverDiscUsesNativePlayback(GameTestHelper h){
+        checkDisc(h,ModItems.MUSIC_DISC_WEAVER_SPIRIT.get(),"weaver_spirit",1552,4);h.succeed();
+    }
+    private static void checkDiscSound(GameTestHelper h,Item item,String sound,int duration,int comparator){
         var level=h.getLevel();var stack=new ItemStack(item);
         h.assertTrue(stack.getMaxStackSize()==1&&stack.has(DataComponents.JUKEBOX_PLAYABLE)&&stack.is(net.neoforged.neoforge.common.Tags.Items.MUSIC_DISCS),"Disc lacks native playback or compatibility tag");
         var song=JukeboxSong.fromStack(level.registryAccess(),stack).orElseThrow().value();
-        h.assertTrue(song.soundEvent().value().getLocation().toString().equals("omnira:music_disc."+id)&&song.lengthInTicks()==duration&&song.comparatorOutput()==comparator,"Disc registry or authored duration incorrect");
+        h.assertTrue(song.soundEvent().value().getLocation().toString().equals(sound)&&song.lengthInTicks()==duration&&song.comparatorOutput()==comparator,"Disc registry or authored duration incorrect");
         var pos=h.absolutePos(new BlockPos(5,3,5));level.setBlockAndUpdate(pos,Blocks.JUKEBOX.defaultBlockState());
         var box=(JukeboxBlockEntity)level.getBlockEntity(pos);
         try{
@@ -106,6 +112,28 @@ public final class BiomeMusicGameTests {
             h.assertTrue(!box.getSongPlayer().isPlaying()&&box.getTheItem().is(item),"Disc failed to finish cleanly or was consumed");
             h.assertTrue(box.splitTheItem(1).is(item)&&box.getTheItem().isEmpty(),"Disc could not be removed");
         }finally{level.removeBlock(pos,false);}
+    }
+    @GameTest(template="spell_arena") public static void weaverDiscRoundTrip(GameTestHelper h){
+        var level=h.getLevel();
+        var recipes=level.getRecipeManager();
+        var disc=ModItems.MUSIC_DISC_WEAVER_SPIRIT.get().getDefaultInstance();
+        var input=new net.minecraft.world.item.crafting.SingleRecipeInput(disc);
+        var analysis=recipes.getRecipeFor(com.mcmagic.omnira.registry.ModRecipes.ANALYSIS_TYPE.get(),input,level).orElseThrow().value();
+        var cloud=analysis.assemble(input,level.registryAccess());
+        h.assertTrue(cloud.getCount()==1 && net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(cloud.getItem()).equals(ResourceLocation.parse("omnira:world_generation_probability_cloud")),"Wrong analysis output");
+        for(var tool:List.of(ModItems.ANALYSIS_CRYSTAL.get(),ModItems.PHILOSOPHERS_STONE.get())){
+            var grid=net.minecraft.world.item.crafting.CraftingInput.of(2,1,List.of(disc.copy(),tool.getDefaultInstance()));
+            var craft=recipes.getRecipeFor(net.minecraft.world.item.crafting.RecipeType.CRAFTING,grid,level).orElseThrow().value();
+            h.assertTrue(ItemStack.matches(cloud,craft.assemble(grid,level.registryAccess())),"Wrong tool conversion");
+            var rest=craft.getRemainingItems(grid);
+            h.assertTrue(rest.get(0).isEmpty() && rest.get(1).is(tool) && rest.get(1).getDamageValue()==(tool==ModItems.ANALYSIS_CRYSTAL.get()?1:0),"Wrong analysis tool wear");
+        }
+        var slots=new net.minecraft.world.SimpleContainer(7);
+        slots.setItem(6,cloud);
+        var assembly=new com.mcmagic.omnira.recipe.AssemblyRecipe.Input(slots);
+        var reverse=recipes.getRecipeFor(com.mcmagic.omnira.registry.ModRecipes.ASSEMBLY_TYPE.get(),assembly,level).orElseThrow().value();
+        h.assertTrue(ItemStack.matches(disc,reverse.assemble(assembly,level.registryAccess())),"Core assembly did not restore playable disc");
+        h.succeed();
     }
     private BiomeMusicGameTests(){}
 }

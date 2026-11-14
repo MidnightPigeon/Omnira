@@ -1,0 +1,7 @@
+{
+  "type": "omnira:assembly",
+  "operation": "fixed",
+  "outer_shapeless": true,
+  "slots": [[], [], [], [], [], [], {"item": "omnira:world_generation_probability_cloud"}],
+  "result": {"id": "omnira:music_disc_weaver_spirit", "count": 1}
+}

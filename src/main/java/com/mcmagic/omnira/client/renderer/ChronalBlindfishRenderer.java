@@ -20,13 +20,15 @@ public final class ChronalBlindfishRenderer extends MobRenderer<ChronalBlindfish
     }
     public static final class Model extends EntityModel<ChronalBlindfish> {
         public static final float[][] BOXES={{-2,-2,-5,4,4,8,0,0},{-1.5F,-1.5F,-7,3,3,2,24,0},
-                {-1,-1,0,2,2,4,24,6},{-.5F,-3,3,1,6,2,36,0},{-.5F,-3.5F,-2,1,2,4,40,10}};
+                {-1,-1,0,2,2,4,24,6},{-.5F,-3,3,1,6,2,36,0},{-.5F,-3.5F,-2,1,2,4,40,10},{-1.5F,0,-9,1,1,2,48,0},{.5F,0,-9,1,1,2,55,0}};
         private final ModelPart root,tail;
         private static CubeListBuilder cube(int i){var b=BOXES[i];return CubeListBuilder.create().texOffs((int)b[6],(int)b[7]).addBox(b[0],b[1],b[2],b[3],b[4],b[5]);}
         public Model(){
             var mesh=new MeshDefinition();var body=mesh.getRoot().addOrReplaceChild("body",cube(0),PartPose.offset(0,22,0));
             body.addOrReplaceChild("head",cube(1),PartPose.ZERO);
             body.addOrReplaceChild("tail",cube(2),PartPose.offset(0,0,3)).addOrReplaceChild("fin",cube(3),PartPose.ZERO);
+            body.addOrReplaceChild("barbelL",cube(5),PartPose.ZERO);
+            body.addOrReplaceChild("barbelR",cube(6),PartPose.ZERO);
             body.addOrReplaceChild("crest",cube(4),PartPose.ZERO);
             root=LayerDefinition.create(mesh,64,32).bakeRoot();tail=root.getChild("body").getChild("tail");
         }

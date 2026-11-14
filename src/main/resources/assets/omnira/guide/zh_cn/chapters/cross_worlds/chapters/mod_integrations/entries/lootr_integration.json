@@ -1,0 +1,11 @@
+{
+  "id": "lootr_integration",
+  "title": "Lootr",
+  "item": "minecraft:air",
+  "recipes": false,
+  "text": [
+    "战利品水晶球与液晶球会为每位玩家分别保存物品或液体。"
+  ],
+  "links": [],
+  "icon": "omnira:crystal_ball"
+}

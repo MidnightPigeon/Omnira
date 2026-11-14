@@ -26,6 +26,10 @@ public final class ModDataComponents {
             DATA_COMPONENTS.registerComponentType("aggregate_ticks",b->b.persistent(com.mojang.serialization.Codec.intRange(0,9)));
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Long>> AGGREGATE_REPAIRED_AT=
             DATA_COMPONENTS.registerComponentType("aggregate_repaired_at",b->b.persistent(com.mojang.serialization.Codec.LONG));
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<Integer>> SPELL_COOLDOWN_DURATION=
+            DATA_COMPONENTS.registerComponentType("spell_cooldown_duration",b->b.persistent(com.mojang.serialization.Codec.intRange(1,72000)));
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<java.util.UUID>> SPELL_COOLDOWN_ID=
+            DATA_COMPONENTS.registerComponentType("spell_cooldown_id",b->b.persistent(net.minecraft.core.UUIDUtil.CODEC));
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Long>> SPELL_READY_AT=
             DATA_COMPONENTS.registerComponentType("spell_ready_at",b->b.persistent(com.mojang.serialization.Codec.LONG));
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Boolean>> ANCESTOR_LAUNCHER=

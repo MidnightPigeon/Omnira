@@ -17,6 +17,9 @@ public final class ModItems {
     public static final DeferredItem<Item> MUSIC_DISC_LIU_NIAN=ITEMS.registerSimpleItem("music_disc_liu_nian",new Item.Properties().stacksTo(1).rarity(Rarity.RARE)
             .jukeboxPlayable(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.JUKEBOX_SONG,
                     net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","liu_nian"))));
+    public static final DeferredItem<Item> MUSIC_DISC_WEAVER_SPIRIT=ITEMS.registerSimpleItem("music_disc_weaver_spirit",new Item.Properties().stacksTo(1).rarity(Rarity.RARE)
+            .jukeboxPlayable(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.JUKEBOX_SONG,
+                    net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","weaver_spirit"))));
     public static final DeferredItem<Item> MUSIC_DISC_MI_MENG_YE=ITEMS.registerSimpleItem("music_disc_mi_meng_ye",new Item.Properties().stacksTo(1).rarity(Rarity.RARE)
             .jukeboxPlayable(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.JUKEBOX_SONG,
                     net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","mi_meng_ye"))));

@@ -1,0 +1,17 @@
+{
+  "id": "cataclysm_integration",
+  "title": "Cataclysm",
+  "item": "minecraft:air",
+  "recipes": false,
+  "text": [
+    "Use the Arcane Assembly Bench to turn Cataclysm boss trophies into tips, shafts, or reinforcements for modular staves."
+  ],
+  "links": [
+    {
+      "required_mod": "cataclysm",
+      "target": "cataclysm_power",
+      "label": "Power of Cataclysm"
+    }
+  ],
+  "icon": "minecraft:nether_star"
+}

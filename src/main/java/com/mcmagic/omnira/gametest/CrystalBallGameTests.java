@@ -120,6 +120,19 @@ public final class CrystalBallGameTests {
             h.assertTrue(ball.impactCount()==6,"Quiet globe did not recover one impact");h.succeed();
         });
     }
+    @GameTest(template="spell_arena")
+    public static void importedCracksResumeRemainingDelay(GameTestHelper h) {
+        var ball=ball(h);
+        var data=ball.exportLocal();
+        data.putInt("Impacts",3);
+        data.putInt("RepairDelay",5);
+        ball.importLocal(data);
+        h.runAfterDelay(3,()->h.assertTrue(ball.impactCount()==3,"Imported crack healed early"));
+        h.runAfterDelay(7,()->{
+            h.assertTrue(ball.impactCount()==2,"Imported crack did not resume its saved delay");
+            h.succeed();
+        });
+    }
     @GameTest(template="spell_arena",timeoutTicks=80)
     public static void livingMobLandingCountsOnce(GameTestHelper h) {
         var ball=ball(h);

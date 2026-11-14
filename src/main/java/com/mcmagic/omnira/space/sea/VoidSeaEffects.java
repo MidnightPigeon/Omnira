@@ -1,5 +1,6 @@
 package com.mcmagic.omnira.space.sea;
 
+import com.mcmagic.omnira.util.GameTimeCooldown;
 import com.mcmagic.omnira.world.dimension.DreamTransitRules;
 import net.minecraft.core.*;
 import net.minecraft.core.particles.ParticleTypes;
@@ -19,16 +20,17 @@ public final class VoidSeaEffects {
     }
     @SubscribeEvent public static void tick(EntityTickEvent.Post event){
         Entity e=event.getEntity();
-        if(!(e.level() instanceof ServerLevel level)||!e.isAlive()||SpatialImmunity.starflow(e)||!e.isInFluidType(VoidSeaContent.TYPE.get()))return;
+        if(!(e.level() instanceof ServerLevel level)||!e.isAlive()||!e.isInFluidType(VoidSeaContent.TYPE.get())||SpatialImmunity.starflow(e))return;
         var data=e.getPersistentData();long now=level.getGameTime();
-        if(data.contains("OmniraStarflowHit")&&now-data.getLong("OmniraStarflowHit")<20)return;
+        long previous=data.getLong("OmniraStarflowHit");
+        if(data.contains("OmniraStarflowHit") && previous<=now && now-previous<20)return;
         data.putLong("OmniraStarflowHit",now);
         if(e instanceof LivingEntity living)trueDamage(living,1,living.damageSources().genericKill());
         else e.hurt(com.mcmagic.omnira.combat.OmniraDamage.source(e,"true_damage"),1);
         if(!e.isAlive()||!isCreature(e))return;
         Entity root=e.getRootVehicle();
-        if(root.getPersistentData().getLong("OmniraStarflowTeleportUntil")>now||!DreamTransitRules.allowed(root))return;
-        root.getPersistentData().putLong("OmniraStarflowTeleportUntil",now+20);
+        if(GameTimeCooldown.active(root, "OmniraStarflowTeleportUntil", now, 20)||!DreamTransitRules.allowed(root))return;
+        GameTimeCooldown.start(root, "OmniraStarflowTeleportUntil", now, 20);
         teleport(level,root);
     }
     private static boolean isCreature(Entity entity){return entity instanceof Player || entity instanceof Mob;}

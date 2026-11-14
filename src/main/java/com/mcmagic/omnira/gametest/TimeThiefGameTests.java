@@ -18,6 +18,23 @@ public final class TimeThiefGameTests {
         p.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);
         p.setPos(h.absoluteVec(new net.minecraft.world.phys.Vec3(5,3,5)));return p;
     }
+    @GameTest(template="spell_arena") public static void bothMosquitoParitiesPursue(GameTestHelper h){
+        var host=player(h);
+        host.setPos(h.absoluteVec(new net.minecraft.world.phys.Vec3(14,6,8)));
+        h.getLevel().addNewPlayer(host);
+        var first=h.spawn(ModEntityTypes.TIME_THIEF_MOSQUITO.get(),4,6,8);
+        var second=h.spawn(ModEntityTypes.TIME_THIEF_MOSQUITO.get(),4,6,9);
+        try{
+            h.assertTrue(((first.getId()^second.getId())&1)!=0,"Test requires both AI tick parities");
+            for(var mosquito:java.util.List.of(first,second)){
+                mosquito.setTarget(host);
+                for(int i=0;i<100&&!mosquito.attached();i++)h.getLevel().tickNonPassenger(mosquito);
+                h.assertTrue(mosquito.attached(),"Mosquito failed to pursue and attach: "+mosquito.getId());
+                mosquito.discard();
+            }
+        }finally{first.discard();second.discard();host.discard();}
+        h.succeed();
+    }
     private static FakePlayer awakened(GameTestHelper h){
         var p=player(h);p.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(ModItems.TIME_THIEVING_MONOCLE.get()));
         ModItems.TIME_THIEVING_MONOCLE.get().use(h.getLevel(),p,InteractionHand.MAIN_HAND);return p;
@@ -84,6 +101,34 @@ public final class TimeThiefGameTests {
         h.getLevel().addFreshEntity(mosquito);h.assertTrue(!mosquito.attach(player(h)),"Spent mosquito reattached");
         for(int i=0;i<TimeThiefMosquito.FADE_TICKS;i++)mosquito.tick();
         h.assertTrue(mosquito.isRemoved(),"Spent mosquito did not dissolve");h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void hostCanTargetAndStrikeFeedingMosquito(GameTestHelper h){
+        var host=player(h);
+        h.getLevel().addNewPlayer(host);
+        var mosquito=h.spawn(ModEntityTypes.TIME_THIEF_MOSQUITO.get(),5,3,5);
+        mosquito.setNoAi(true);
+        try {
+            host.yBodyRot=90;host.setYRot(90);host.setYHeadRot(90);host.setXRot(40);
+            host.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(Items.IRON_SWORD));
+            h.assertTrue(mosquito.attach(host),"Attachment failed");
+            mosquito.tick();
+            var eye=host.getEyePosition();
+            var ray=host.getLookAngle().scale(host.entityInteractionRange());
+            var target=net.minecraft.world.entity.projectile.ProjectileUtil.getEntityHitResult(host,eye,eye.add(ray),
+                    host.getBoundingBox().expandTowards(ray).inflate(1),e->e.isPickable()&&!e.isSpectator(),ray.lengthSqr());
+            h.assertTrue(target!=null&&target.getEntity()==mosquito,"Host cannot target the attached mosquito");
+            var attached=mosquito.position();
+            host.setYHeadRot(0);
+            mosquito.tick();
+            h.assertTrue(mosquito.position().distanceToSqr(attached)<.0001,"Looking sideways moved the chest anchor");
+            host.setPose(net.minecraft.world.entity.Pose.SWIMMING);
+            mosquito.tick();
+            h.assertTrue(mosquito.getY()>=host.getY(),"Low pose put the mosquito below its host");
+            float health=mosquito.getHealth();
+            host.attack(target.getEntity());
+            h.assertTrue(mosquito.getHealth()<health,"Sword failed to damage attached mosquito");
+        }finally{mosquito.discard();host.discard();}
+        h.succeed();
     }
     @GameTest(template="spell_arena") public static void feedingWaitsFiveSecondsAndOnlySettlesOnce(GameTestHelper h){
         var p=player(h);h.getLevel().addNewPlayer(p);

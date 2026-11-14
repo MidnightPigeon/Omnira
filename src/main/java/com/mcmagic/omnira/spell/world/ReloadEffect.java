@@ -6,7 +6,6 @@ import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import java.util.*;
 
@@ -66,15 +65,8 @@ public final class ReloadEffect {
             replacement.moveTo(target.getX(),target.getY(),target.getZ(),target.getYRot(),target.getXRot());
             if(!replacementFits(level,target,replacement)){replacement.discard();continue;}
             replacement.finalizeSpawn(level,level.getCurrentDifficultyAt(target.blockPosition()),MobSpawnType.CONVERSION,null);
-            replacement.setHealth(replacement.getMaxHealth()*Math.clamp(target.getHealth()/target.getMaxHealth(),.01F,1F));
-            replacement.setCustomName(target.getCustomName());replacement.setCustomNameVisible(target.isCustomNameVisible());
-            if(target instanceof AgeableMob old&&replacement instanceof AgeableMob ageable)ageable.setAge(old.getAge());
-            if(target instanceof TamableAnimal old&&replacement instanceof TamableAnimal tame){tame.setOwnerUUID(old.getOwnerUUID());tame.setTame(old.isTame(),true);}
-            if(target instanceof Mob old&&old.isPersistenceRequired())replacement.setPersistenceRequired();
             if(!level.addFreshEntity(replacement)){replacement.discard();continue;}
-            var vehicle=target.getVehicle();var passengers=List.copyOf(target.getPassengers());
-            target.stopRiding();if(vehicle!=null)replacement.startRiding(vehicle,true);
-            for(var passenger:passengers){passenger.stopRiding();passenger.startRiding(replacement,true);}
+            ReloadDragonEncounter.transfer(level,target,replacement);
             target.discard();return replacement;
         }
         return null;
@@ -83,7 +75,9 @@ public final class ReloadEffect {
     /** Vanilla collision rules, excluding only the body and multipart children being replaced. */
     public static boolean replacementFits(ServerLevel level,LivingEntity target,Mob replacement){
         var box=replacement.getBoundingBox();
-        for(var shape:level.getBlockCollisions(replacement,box))if(!shape.isEmpty())return false;
+        // Dragons fly through terrain using their native multipart movement.
+        if (!(replacement instanceof net.minecraft.world.entity.boss.enderdragon.EnderDragon))
+            for(var shape:level.getBlockCollisions(replacement,box))if(!shape.isEmpty())return false;
         if(!level.getEntities(target,box.inflate(1.0E-7),entity->!entity.isSpectator()
                 &&!(entity instanceof net.neoforged.neoforge.entity.PartEntity<?> part && part.getParent()==target)
                 &&replacement.canCollideWith(entity)).isEmpty())return false;

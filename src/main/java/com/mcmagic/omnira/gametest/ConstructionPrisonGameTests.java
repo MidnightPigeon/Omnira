@@ -32,7 +32,18 @@ public final class ConstructionPrisonGameTests {
         for(var pos:BlockPos.betweenClosed(BlockPos.containing(box.minX,box.minY,box.minZ),BlockPos.containing(box.maxX-.001,box.maxY-.001,box.maxZ-.001)))
             h.assertTrue(h.getLevel().getBlockEntity(pos) instanceof VoidCrystalBlockEntity be&&golem.getUUID().equals(be.prisoner()),"Large model not fully enclosed");
         var wither=EntityType.WITHER.create(h.getLevel());wither.setPos(h.absoluteVec(new net.minecraft.world.phys.Vec3(15,4,15)));
-        ConstructionLock.apply(wither,SpellEffect.utility("construction",0,0,1));h.assertTrue(!ConstructionLock.locked(wither),"Boss was locked");
+        ConstructionLock.apply(wither,SpellEffect.utility("construction",1,0,1));
+        h.assertTrue(!ConstructionLock.locked(wither),"Wither bypassed effect immunity");
+        var boss=ModEntityTypes.WEAVER_SPIRIT.get().create(h.getLevel());
+        for(int enhancement=0;enhancement<=1;enhancement++)for(int infusion=0;infusion<=1;infusion++){
+            ConstructionLock.apply(boss,SpellEffect.utility("construction",enhancement,1,infusion));
+            var effect=boss.getEffect(ModEffects.CONSTRUCTION_LOCK);
+            int expected=100*(enhancement+infusion);
+            h.assertTrue((effect==null?0:effect.getDuration())==expected,"Incorrect boss lock duration");
+            var lock=boss.getPersistentData().getCompound("OmniraConstructionLock");
+            h.assertTrue(!lock.getBoolean("mineable")&&lock.getInt("crush")==0&&!lock.contains("seal"),"Boss received secondary effects");
+            ConstructionLock.release(boss);
+        }
         h.runAtTickTime(50,()->{h.assertTrue(cow.getHealth()==health,"Prison suffocates target");h.assertTrue(h.getLevel().getBlockState(p).getValue(com.mcmagic.omnira.block.VoidCrystalBlock.FADE)>0,"Crystal does not fade");});
         h.runAtTickTime(115,()->{h.assertTrue(!ConstructionLock.locked(cow)&&cow.isNoAi()&&cow.isAlive(),"Expiry changed original AI or killed target");h.assertTrue(h.getLevel().getBlockState(p).isAir(),"Prison outlived lock");h.succeed();});
     }

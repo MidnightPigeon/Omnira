@@ -3,7 +3,7 @@
   "title": "Stilled Wastes",
   "item": "omnira:solidified_light_crystal_core",
   "text": [
-    "Machines, growth and fluid flow stop here. Dropped items and projectiles move and age at 5% of their normal rate; items remain collectible. However, living creatures and their own timers continue normally. Assembled contraptions and flying structures remain mobile.",
+    "Machines, growth and fluid flow stop here. Dropped items and projectiles move and age at 10% of their normal rate; items remain collectible. Living creatures move normally. Spells and spell chains take twice as long to cool down. Assembled contraptions and flying structures remain mobile.",
     "The Frozen Terra Palace sometimes appears among the highlands. Time Warp Points can still slow creatures within their reach."
   ],
   "recipes": false,

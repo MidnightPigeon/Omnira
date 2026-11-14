@@ -72,12 +72,18 @@ public final class SpacetimeBrushItem extends BrushItem {
             if(net.neoforged.fml.ModList.get().isLoaded("sable"))com.mcmagic.omnira.compat.SableBrushStasis.release(player);}
     }
     @Override public void inventoryTick(ItemStack stack,Level level,Entity entity,int slot,boolean selected){
-        if(level.isClientSide)return;
+        if(level.isClientSide || !(entity instanceof net.minecraft.world.entity.player.Player) || !stack.isDamaged()) return;
         var data=stack.getOrDefault(DataComponents.CUSTOM_DATA,CustomData.EMPTY).copyTag();
-        long now=level.getGameTime();
-        if(!data.contains("BrushRepairAt"))data.putLong("BrushRepairAt",now+6000);
-        long next=data.getLong("BrushRepairAt");
-        if(now>=next){stack.setDamageValue(Math.max(0,stack.getDamageValue()-(int)Math.min(2,1+(now-next)/6000)*64));data.putLong("BrushRepairAt",now+6000);}
+        int remaining = data.contains("BrushRepairTicks") ? data.getInt("BrushRepairTicks") : 6000;
+        if(data.contains("BrushRepairAt")) {
+            remaining = (int)Math.clamp(data.getLong("BrushRepairAt") - level.getGameTime(), 1L, 6000L);
+            data.remove("BrushRepairAt");
+        }
+        if (--remaining <= 0) {
+            stack.setDamageValue(Math.max(0,stack.getDamageValue()-64));
+            remaining=6000;
+        }
+        data.putInt("BrushRepairTicks", remaining);
         stack.set(DataComponents.CUSTOM_DATA,CustomData.of(data));
     }
 }

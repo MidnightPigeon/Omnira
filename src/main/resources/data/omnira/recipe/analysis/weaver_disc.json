@@ -1,0 +1,6 @@
+{
+  "type": "omnira:analysis",
+  "ingredient": {"item": "omnira:music_disc_weaver_spirit"},
+  "count": 1,
+  "result": {"id": "omnira:world_generation_probability_cloud", "count": 1}
+}

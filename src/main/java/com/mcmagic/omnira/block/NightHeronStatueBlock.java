@@ -33,7 +33,7 @@ public final class NightHeronStatueBlock extends BaseEntityBlock {
     @Override protected RenderShape getRenderShape(BlockState s){return RenderShape.MODEL;}
     @Override public BlockEntity newBlockEntity(BlockPos p,BlockState s){return s.getValue(HALF)==DoubleBlockHalf.LOWER?new NightHeronStatueBlockEntity(p,s):null;}
     @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level l,BlockState s,BlockEntityType<T> t) {
-        return l.isClientSide?null:createTickerHelper(t,ModBlockEntityTypes.NIGHT_HERON_STATUE.get(),(level,pos,state,statue)->statue.tick());
+        return createTickerHelper(t,ModBlockEntityTypes.NIGHT_HERON_STATUE.get(),(level,pos,state,statue)->statue.tick());
     }
     @Override protected VoxelShape getShape(BlockState s,BlockGetter l,BlockPos p,CollisionContext c) {
         return s.getValue(HALF)==DoubleBlockHalf.UPPER?box(2,0,3,14,8,13):Shapes.or(box(0,0,0,16,8,16),box(3,8,3,13,16,13));

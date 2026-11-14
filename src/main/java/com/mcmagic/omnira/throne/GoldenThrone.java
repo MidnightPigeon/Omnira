@@ -20,7 +20,8 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 @EventBusSubscriber(modid=Omnira.MOD_ID)
 public final class GoldenThrone {
     private static final String KEY="OmniraGoldenThrone";
-    public static final int LOCK_TICKS=12000;
+    public static final int LOCK_TICKS=5*60*20;
+    private static final int LEGACY_LOCK_TICKS=10*60*20;
     private static final ThreadLocal<Boolean> RELEASING=ThreadLocal.withInitial(()->false);
     private GoldenThrone(){}
 
@@ -34,14 +35,19 @@ public final class GoldenThrone {
         if(!server.startRiding(seat,true)){seat.discard();return;}
         server.setPos(seat.getX(),seat.getY()+.05,seat.getZ());
         CompoundTag lock=new CompoundTag();
-        lock.putLong("until",server.level().getGameTime()+LOCK_TICKS);
+        lock.putInt("Remaining",LOCK_TICKS);
         lock.putLong("pos",pos.asLong());lock.putString("dimension",server.level().dimension().location().toString());
         server.getPersistentData().put(KEY,lock);
     }
 
     private static boolean active(ServerPlayer player){
         CompoundTag lock=player.getPersistentData().getCompound(KEY);
-        return lock.contains("until") && lock.getLong("until")>player.level().getGameTime()
+        if (!lock.contains("Remaining") && lock.contains("until")) {
+            long left = Math.clamp(lock.getLong("until") - player.level().getGameTime(), 0L, LEGACY_LOCK_TICKS);
+            lock.putInt("Remaining", Math.max(0, LOCK_TICKS - (LEGACY_LOCK_TICKS - (int)left)));
+            lock.remove("until");
+        }
+        return lock.getInt("Remaining") > 0
                 && lock.getString("dimension").equals(player.level().dimension().location().toString())
                 && player.level().getBlockState(BlockPos.of(lock.getLong("pos"))).is(ModBlocks.GOLDEN_THRONE.get());
     }
@@ -78,10 +84,12 @@ public final class GoldenThrone {
     @SubscribeEvent(priority=EventPriority.LOWEST) public static void tick(PlayerTickEvent.Post event){
         if(!(event.getEntity() instanceof ServerPlayer player) || !player.getPersistentData().contains(KEY))return;
         CompoundTag lock=player.getPersistentData().getCompound(KEY);
-        if(lock.contains("until") && lock.getLong("until")<=player.level().getGameTime()
-                && lock.getString("dimension").equals(player.level().dimension().location().toString()))
-            GoldenThroneCollapse.queue(player.serverLevel(),BlockPos.of(lock.getLong("pos")));
-        if(!player.isAlive() || !active(player)){
+        boolean seatedSession = active(player);
+        if (!player.isAlive() || !seatedSession) {
+            if (player.isAlive() && lock.contains("Remaining") && lock.getInt("Remaining")==0
+                    && player.level().getBlockState(BlockPos.of(lock.getLong("pos"))).is(ModBlocks.GOLDEN_THRONE.get())
+                    && lock.getString("dimension").equals(player.level().dimension().location().toString()))
+                GoldenThroneCollapse.queue(player.serverLevel(),BlockPos.of(lock.getLong("pos")));
             release(player);
             return;
         }
@@ -90,12 +98,22 @@ public final class GoldenThrone {
             release(player);
             return;
         }
-        if(!empowered(player)){
+        if(!(player.getVehicle() instanceof GoldenThroneSeat)){
             BlockPos pos=BlockPos.of(player.getPersistentData().getCompound(KEY).getLong("pos"));
             if(player.blockPosition().distSqr(pos)>4){release(player);return;}
             sitExisting(player,pos);
         }
-        if(empowered(player) && player.tickCount%20==0){
+        if(!(player.getVehicle() instanceof GoldenThroneSeat))return;
+        if (!com.mcmagic.omnira.time.StilledTime.pauseSpellCooldown(player)) {
+            int left = lock.getInt("Remaining") - 1;
+            lock.putInt("Remaining", left);
+            if (left == 0) {
+                GoldenThroneCollapse.queue(player.serverLevel(), BlockPos.of(lock.getLong("pos")));
+                release(player);
+                return;
+            }
+        }
+        if(player.tickCount%20==0){
             player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE,21,4,true,false));
             player.addEffect(new MobEffectInstance(MobEffects.REGENERATION,21,4,true,false));
             player.addEffect(new MobEffectInstance(MobEffects.SATURATION,21,0,true,false));

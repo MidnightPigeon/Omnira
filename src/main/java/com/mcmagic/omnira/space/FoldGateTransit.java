@@ -1,5 +1,6 @@
 package com.mcmagic.omnira.space;
 
+import com.mcmagic.omnira.util.GameTimeCooldown;
 import net.minecraft.core.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.Entity;
@@ -62,8 +63,8 @@ public final class FoldGateTransit {
             }
         }
         if(arrival==null)return false;
-        long cooldown=source.getServer().overworld().getGameTime()+60;
-        root.getSelfAndPassengers().forEach(e->e.getPersistentData().putLong("OmniraFoldGateCooldown",cooldown));
+        long now=source.getServer().overworld().getGameTime();
+        root.getSelfAndPassengers().forEach(e->GameTimeCooldown.start(e, "OmniraFoldGateCooldown", now, 60));
         return com.mcmagic.omnira.space.anchor.StabilityField.portalTravel(root,new DimensionTransition(destination,arrival,Vec3.ZERO,yaw,root.getXRot(),
                 DimensionTransition.PLACE_PORTAL_TICKET.then(e->e.fallDistance=0)))!=null;
     }

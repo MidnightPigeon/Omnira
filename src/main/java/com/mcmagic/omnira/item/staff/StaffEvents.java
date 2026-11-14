@@ -22,7 +22,7 @@ public final class StaffEvents {
     public static final int SHOT_INTERVAL=6;
     private static final Map<UUID,Burst> BURSTS=new HashMap<>();
     private record Burst(ItemStack staff,ItemStack snapshot,ItemStack grid,net.minecraft.world.InteractionHand hand,
-                         net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> dimension,long due,int remaining,int cooldown) {}
+                         net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> dimension,int due,int remaining,int cooldown) {}
     private StaffEvents() {}
     @SubscribeEvent public static void attributes(ItemAttributeModifierEvent event) {
         if(event.getItemStack().getItem() instanceof com.mcmagic.omnira.item.ArcaneArquebusItem) {
@@ -57,22 +57,18 @@ public final class StaffEvents {
     public static void queue(ServerPlayer player,ItemStack staff,int remaining,int cooldown) {
         BURSTS.remove(player.getUUID());
         if(remaining>0) BURSTS.put(player.getUUID(),new Burst(staff,staff.copy(),CrystalGridMenu.locate(player,-2),player.getOffhandItem()==staff?net.minecraft.world.InteractionHand.OFF_HAND:net.minecraft.world.InteractionHand.MAIN_HAND,
-                player.level().dimension(),player.level().getGameTime()+SHOT_INTERVAL,remaining,cooldown));
+                player.level().dimension(),player.tickCount+SHOT_INTERVAL,remaining,cooldown));
     }
     @SubscribeEvent public static void tick(PlayerTickEvent.Post event) {
         if(!(event.getEntity() instanceof ServerPlayer player)) return;
         var burst=BURSTS.get(player.getUUID());if(burst==null) return;
-        if(com.mcmagic.omnira.time.FleetingTime.bonus(player)){
-            burst=new Burst(burst.staff,burst.snapshot,burst.grid,burst.hand,burst.dimension,burst.due-1,burst.remaining,burst.cooldown);
-            BURSTS.put(player.getUUID(),burst);
-        }
         // A queued shot must not borrow bonuses from a replacement staff or survive dimension changes.
         if(!player.isAlive() || player.isSpectator() || player.getItemInHand(burst.hand)!=burst.staff
                 || !sameStaff(burst.snapshot,burst.staff) || !player.level().dimension().equals(burst.dimension)
                 || player.containerMenu instanceof CrystalGridMenu || CrystalGridMenu.locate(player,-2)!=burst.grid) {
             BURSTS.remove(player.getUUID());return;
         }
-        if(player.level().getGameTime()<burst.due) return;
+        if(player.tickCount - burst.due < 0) return;
         BURSTS.remove(player.getUUID());
         int fixed=com.mcmagic.omnira.item.StaffItem.nextSpellCooldown(player);
         if(fixed>0){
@@ -82,7 +78,7 @@ public final class StaffEvents {
         }
         if(StaffItem.castSequence(player,burst.staff,1)>0 && burst.remaining>1)
             BURSTS.put(player.getUUID(),new Burst(burst.staff,burst.snapshot,burst.grid,burst.hand,burst.dimension,
-                    player.level().getGameTime()+SHOT_INTERVAL,burst.remaining-1,burst.cooldown));
+                    player.tickCount+SHOT_INTERVAL,burst.remaining-1,burst.cooldown));
         else player.getCooldowns().addCooldown(burst.staff.getItem(),burst.cooldown);
     }
     @SubscribeEvent public static void logout(PlayerEvent.PlayerLoggedOutEvent event) {BURSTS.remove(event.getEntity().getUUID());}

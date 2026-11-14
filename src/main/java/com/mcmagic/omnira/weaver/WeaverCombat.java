@@ -23,7 +23,7 @@ public final class WeaverCombat {
     }
     public static DamageSource source(LivingEntity target,ResourceKey<DamageType> kind,Entity direct,Entity owner,boolean projectile,boolean explosion){
         return new DamageSource(target.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(kind),direct,owner){
-            @Override public boolean is(TagKey<DamageType> tag){return tag==DamageTypeTags.BYPASSES_COOLDOWN||projectile&&tag==DamageTypeTags.IS_PROJECTILE||explosion&&tag==DamageTypeTags.IS_EXPLOSION||super.is(tag);}
+            @Override public boolean is(TagKey<DamageType> tag){return (tag==DamageTypeTags.ALWAYS_HURTS_ENDER_DRAGONS && direct instanceof WeaverBolt && owner instanceof WeaverSpirit)||tag==DamageTypeTags.BYPASSES_COOLDOWN||projectile&&tag==DamageTypeTags.IS_PROJECTILE||explosion&&tag==DamageTypeTags.IS_EXPLOSION||super.is(tag);}
         };
     }
     public static WeaverBolt bolt(LivingEntity owner,LivingEntity target,Vec3 origin,Vec3 direction){
@@ -54,8 +54,18 @@ public final class WeaverCombat {
     public static void ray(LivingEntity owner,Vec3 direction){
         if(!(owner.level() instanceof ServerLevel level))return;
         Vec3 start=owner.getEyePosition(),end=start.add(direction.normalize().scale(64));visual(level,2,start,end,0);
-        for(var target:level.getEntitiesOfClass(LivingEntity.class,new AABB(start,end).inflate(1),t->trueTarget(t,owner)))
-            if(target.getBoundingBox().inflate(.15).contains(start)||target.getBoundingBox().inflate(.15).clip(start,end).isPresent())rayHit(owner,target);
+        for(var contact:level.getEntities(owner,new AABB(start,end).inflate(1),e->!(e instanceof net.minecraft.world.entity.boss.enderdragon.EnderDragon))){
+            var target=com.mcmagic.omnira.spell.SpellCasting.livingTarget(contact);
+            if(target==null || !trueTarget(target,owner) || contact!=target && !contact.isPickable())continue;
+            // Multipart parents have a broad envelope; only their actual hitboxes count.
+            if(contact==target && target.isMultipartEntity())continue;
+            var box=contact.getBoundingBox().inflate(.15);
+            if(!box.contains(start) && box.clip(start,end).isEmpty())continue;
+            if(contact instanceof net.minecraft.world.entity.boss.EnderDragonPart part){
+                // Let the dragon phase and struck part scale the hit before living damage bonuses.
+                part.hurt(source(target,OmniraDamage.TRUE_DAMAGE,owner,owner,false,false),damage(owner,3));
+            }else rayHit(owner,target);
+        }
     }
     public static void lockedRay(LivingEntity owner,LivingEntity target,float damage,float wearFraction){
         if(!(owner.level() instanceof ServerLevel level)||!trueTarget(target,owner))return;

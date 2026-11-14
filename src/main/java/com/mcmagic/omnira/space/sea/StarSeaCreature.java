@@ -36,11 +36,12 @@ public abstract class StarSeaCreature extends TamableAnimal {
         if(attackTicks>0)attackTicks--;
         LivingEntity target=getTarget();
         if(target!=null&&(!target.isAlive()||!canAttack(target)||distanceToSqr(target)>48*48)){setTarget(null);target=null;}
+        if(target==null||isVehicle())detourCorner=detourEnd=null;
         if(isVehicle()){if(target!=null)combat(target);return;}
         Vec3 lure=target==null&&!isOrderedToSit()?attraction():null;
         if(attracted&&lure==null){destination=null;wanderTicks=0;}
         attracted=lure!=null;
-        if(target!=null){destination=target.position().add(0,target.getBbHeight()*.35,0);combat(target);}
+        if(target!=null){destination=pursuitDestination(target);combat(target);}
         else if(isOrderedToSit()){setDeltaMovement(getDeltaMovement().scale(.6));return;}
         else if(lure!=null)destination=lure;
         else if(isTame()&&getOwner()!=null&&distanceToSqr(getOwner())>36)destination=getOwner().position().add(0,1,0);
@@ -53,10 +54,45 @@ public abstract class StarSeaCreature extends TamableAnimal {
             double speed=target!=null?.19:.1;
             Vec3 desired=delta.lengthSqr()<1?delta.scale(speed):delta.normalize().scale(speed);
             Vec3 motion=getDeltaMovement().scale(.8).add(desired.scale(.2));
-            if(!safePath(motion)){motion=Vec3.ZERO;destination=null;wanderTicks=0;}
+            if(!safePath(motion)){
+                motion=target==null?Vec3.ZERO:blockedPursuit(target,speed);
+                destination=null;wanderTicks=0;
+            }
             setDeltaMovement(motion);
             if(delta.horizontalDistanceSqr()>.02){float yaw=(float)(Math.atan2(-delta.x,delta.z)*180/Math.PI);setYRot(net.minecraft.util.Mth.rotLerp(.12F,getYRot(),yaw));yBodyRot=yHeadRot=getYRot();}
         }
+    }
+    // Two short legs keep steering from turning back into the same corner halfway past it.
+    private Vec3 detourCorner,detourEnd;
+    private int detourTarget=-1;
+    private int nextProbeTick;
+
+    private Vec3 pursuitDestination(LivingEntity target){
+        if(detourTarget==target.getId() && detourEnd!=null){
+            if(detourCorner!=null && position().distanceToSqr(detourCorner)>.12*.12)return detourCorner;
+            detourCorner=null;
+            if(position().distanceToSqr(detourEnd)>.22*.22)return detourEnd;
+        }
+        detourCorner=detourEnd=null;
+        return target.position().add(0,target.getBbHeight()*.35,0);
+    }
+    private Vec3 blockedPursuit(LivingEntity target,double speed){
+        detourCorner=detourEnd=null;
+        if(tickCount<nextProbeTick)return Vec3.ZERO;
+        nextProbeTick=tickCount+6;
+        Vec3 direction=target.position().add(0,target.getBbHeight()*.35,0).subtract(position()).normalize();
+        Vec3 forward=direction.scale(Math.max(2,getBbWidth()+1.3));
+        Vec3 side=new Vec3(-direction.z,0,direction.x);
+        side=side.lengthSqr()<1.0e-6?new Vec3(1,0,0):side.normalize();
+        double lateral=Math.max(1.65,getBbWidth()*.5+1.1);
+        for(Vec3 offset:new Vec3[]{new Vec3(0,1.65,0),side.scale(lateral),side.scale(-lateral)}){
+            if(!safePath(offset) || !safePath(offset,forward))continue;
+            detourTarget=target.getId();
+            detourCorner=position().add(offset);
+            detourEnd=detourCorner.add(forward);
+            return offset.normalize().scale(speed*.2);
+        }
+        return Vec3.ZERO;
     }
     protected void combat(LivingEntity target){}
     protected Vec3 attraction(){return null;}
@@ -130,11 +166,13 @@ public abstract class StarSeaCreature extends TamableAnimal {
         }
         return true;
     }
-    protected boolean safePath(Vec3 delta){
+    protected boolean safePath(Vec3 delta){return safePath(Vec3.ZERO,delta);}
+    protected boolean safePath(Vec3 offset,Vec3 delta){
         boolean escaped=!isInFluidType(com.mcmagic.omnira.mire.MireContent.TYPE.get());
         int steps=Math.max(1,(int)Math.ceil(delta.length()*2));
         for(int step=1;step<=steps;step++){
-            var box=getBoundingBox().move(delta.scale((double)step/steps));
+            double t=(double)step/steps;
+            var box=getBoundingBox().move(offset.x+t*delta.x,offset.y+t*delta.y,offset.z+t*delta.z);
             if(!level().hasChunksAt(BlockPos.containing(box.minX,box.minY,box.minZ),BlockPos.containing(box.maxX,box.maxY,box.maxZ))||!level().noCollision(this,box))return false;
             boolean mire=BlockPos.betweenClosedStream(box).anyMatch(p->com.mcmagic.omnira.mire.MireContent.fluid(level().getFluidState(p)));
             if(mire&&escaped)return false;if(!mire)escaped=true;

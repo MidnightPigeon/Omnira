@@ -1,0 +1,17 @@
+{
+  "id": "cataclysm_integration",
+  "title": "灾变",
+  "item": "minecraft:air",
+  "recipes": false,
+  "text": [
+    "灾变首领的战利品可在普通装配台加工为模块化法杖的杖端、杖体或加固部件。"
+  ],
+  "links": [
+    {
+      "required_mod": "cataclysm",
+      "target": "cataclysm_power",
+      "label": "灾变之力"
+    }
+  ],
+  "icon": "minecraft:nether_star"
+}

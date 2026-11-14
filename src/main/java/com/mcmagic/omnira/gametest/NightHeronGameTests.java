@@ -36,11 +36,11 @@ public final class NightHeronGameTests {
             h.assertTrue(chest.countItem(ModItems.MILK_SUSPENSION.get())==0 && h.getLevel().getBlockState(p).getValue(NightHeronStatueBlock.STANDING),"Second edge failed");
             var statue=(NightHeronStatueBlockEntity)h.getLevel().getBlockEntity(p);
             var tag=statue.saveWithFullMetadata(h.getLevel().registryAccess());
-            tag.putBoolean("MilkPending",true);tag.putLong("StretchStart",h.getLevel().getGameTime()-59);
+            tag.putBoolean("MilkPending",true);tag.putInt("StretchAge",58);
             tag.putLong("NextStretch",h.getLevel().getGameTime()+500);
             statue.loadWithComponents(tag,h.getLevel().registryAccess());statue.tick();
             h.assertTrue(chest.countItem(ModItems.MILK_SUSPENSION.get())==0,"Milk arrived before neck retracted");
-            tag.putLong("StretchStart",h.getLevel().getGameTime()-60);
+            tag.putInt("StretchAge",59);
             statue.loadWithComponents(tag,h.getLevel().registryAccess());statue.tick();statue.tick();
             h.assertTrue(chest.countItem(ModItems.MILK_SUSPENSION.get())==1,"Retraction must produce exactly one milk");
             var completed=statue.saveWithFullMetadata(h.getLevel().registryAccess());
@@ -63,13 +63,30 @@ public final class NightHeronGameTests {
         var drops=h.getLevel().getEntitiesOfClass(ItemEntity.class,new AABB(p).inflate(2));
         h.assertTrue(drops.stream().filter(e->e.getItem().is(ModItems.MILK_SUSPENSION.get())).mapToInt(e->e.getItem().getCount()).sum()==1,"Full container lost or duplicated milk");h.succeed();
     }
+    @GameTest(template="spell_arena") public static void liquidOrbRespectsTreasureSeal(GameTestHelper h) {
+        var level=h.getLevel();
+        var p=place(h,Direction.NORTH);
+        var statue=(NightHeronStatueBlockEntity)level.getBlockEntity(p);
+        var output=p.relative(NightHeronStatueBlock.viewerRight(Direction.NORTH));
+        level.setBlockAndUpdate(output,ModBlocks.LIQUID_CRYSTAL_BALL.get().defaultBlockState());
+        var orb=(com.mcmagic.omnira.block.entity.LiquidCrystalBallBlockEntity)level.getBlockEntity(output);
+        statue.ejectMilk();
+        h.assertTrue(orb.tank.getFluidAmount()==1000,"Ordinary orb did not receive one bucket");
+        orb.tank.setFluid(net.neoforged.neoforge.fluids.FluidStack.EMPTY);
+        orb.markFluidTreasure();
+        statue.ejectMilk();
+        h.assertTrue(orb.hasPendingLoot() && orb.tank.isEmpty(),"Statue wrote into sealed loot");
+        h.assertTrue(level.getEntitiesOfClass(ItemEntity.class,new AABB(output).inflate(1)).stream()
+                .anyMatch(drop->drop.getItem().is(ModItems.MILK_SUSPENSION.get())),"Rejected milk was lost");
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void colorPersistenceAndNeckTiming(GameTestHelper h) {
         var p=place(h,Direction.NORTH);var statue=(NightHeronStatueBlockEntity)h.getLevel().getBlockEntity(p);
         h.assertTrue(statue.color()==0,"Adult color must be default");statue.cycleColor();h.assertTrue(statue.color()==1,"Immature color missing");statue.cycleColor();
-        var registries=h.getLevel().registryAccess();var tag=statue.saveWithFullMetadata(registries);tag.putLong("StretchStart",h.getLevel().getGameTime()-12);
+        var registries=h.getLevel().registryAccess();var tag=statue.saveWithFullMetadata(registries);tag.putInt("StretchAge",12);
         var restored=new NightHeronStatueBlockEntity(p,statue.getBlockState());restored.setLevel(h.getLevel());restored.loadWithComponents(tag,registries);
         h.assertTrue(restored.color()==2 && restored.stretch(0)==1,"Crystal color or stretch not saved");
-        tag.putLong("StretchStart",h.getLevel().getGameTime()-65);restored.loadWithComponents(tag,registries);
+        tag.putInt("StretchAge",60);restored.loadWithComponents(tag,registries);
         h.assertTrue(restored.stretch(0)==0,"Neck did not retract");restored.cycleColor();h.assertTrue(restored.color()==0,"Palette does not cycle");h.succeed();
     }
     @GameTest(template="spell_arena") public static void upperHalfBreakDropsOneStatue(GameTestHelper h) {

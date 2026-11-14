@@ -3,7 +3,8 @@
   "item": "omnira:basic_stacking_upgrade",
   "title": "Basic Stacking Upgrade",
   "text": [
-    "Doubles stackable-item slot limits or Liquid Crystal Ball capacity."
+    "Doubles stackable-item slot limits or Liquid Crystal Ball capacity.",
+    "Capacity upgrades of the same family cannot stack; Basic and Infused Stacking share one family. Unstackable items remain limited to one. Capacity upgrades cannot be removed while contents exceed the remaining capacity."
   ],
   "recipes": true,
   "links": [

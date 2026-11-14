@@ -21,6 +21,7 @@ public final class StilledItemsGameTests {
         // Cover neighbouring chunks too, so the test remains independent of template placement.
         for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++)
             level.getChunkAt(p.offset(x*16,0,z*16)).fillBiomesFromNoise((a,b,c,s)->biome,level.getChunkSource().randomState().sampler());
+        verifySpellRecovery(h, p);
         var item=new ItemEntity(level,p.getX()+.5,p.getY(),p.getZ()+.5,new ItemStack(Items.GOLD_INGOT));
         item.setNoGravity(true);item.setDeltaMovement(.2,0,0);item.setDefaultPickUpDelay();level.addFreshEntity(item);
         var shot=EntityType.SNOWBALL.create(level);shot.moveTo(p.getCenter().add(0,2,0));
@@ -39,9 +40,9 @@ public final class StilledItemsGameTests {
             h.assertTrue(item.isRemoved()&&player.getInventory().contains(new ItemStack(Items.GOLD_INGOT)),"Slow item cannot be collected");
         });
         h.runAfterDelay(40,()->{
-            h.assertTrue(shot.tickCount-ticks==2,"Projectile must advance exactly 5% of world ticks");
-            h.assertTrue(shot.getX()>start&&shot.getX()<start+.5,"Projectile movement must continue at 5%");
-            h.assertTrue(magic.tickCount==2&&magic.getX()>magicStart&&magic.getX()<magicStart+.5,"Custom spell projectile remained frozen or moved at full speed");
+            h.assertTrue(shot.tickCount-ticks==4,"Projectile must advance exactly 10% of world ticks");
+            h.assertTrue(shot.getX()>start&&shot.getX()<start+1,"Projectile movement must continue at 10%");
+            h.assertTrue(magic.tickCount==4&&magic.getX()>magicStart&&magic.getX()<magicStart+1,"Custom spell projectile remained frozen or moved at full speed");
             h.assertTrue(expiring.isRemoved(),"Slow item must still expire");
             // Leaving the biome must restore normal ticking without resetting its saved velocity.
             var plains=level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(net.minecraft.world.level.biome.Biomes.PLAINS);
@@ -51,4 +52,34 @@ public final class StilledItemsGameTests {
             h.runAfterDelay(4,()->{h.assertTrue(shot.tickCount-before==4,"Projectile did not resume outside biome");h.succeed();});
         });
     }
+    private static void verifySpellRecovery(GameTestHelper h, BlockPos pos) {
+        var level = h.getLevel();
+        var profile = new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), "spell-clock");
+        var player = new net.minecraft.server.level.ServerPlayer(level.getServer(), level, profile,
+                net.minecraft.server.level.ClientInformation.createDefault());
+        player.connection = new net.neoforged.neoforge.common.util.FakePlayer(level, profile).connection;
+        player.setPos(pos.getCenter());
+        player.setNoGravity(true);
+        var staff = com.mcmagic.omnira.registry.ModItems.MODULAR_STAFF.get();
+        var crystal = com.mcmagic.omnira.registry.ModItems.LOW_TIER_MAGIC_CRYSTAL.get();
+        var weapon = new ItemStack(Items.IRON_SWORD);
+        var cooldowns = player.getCooldowns();
+        cooldowns.addCooldown(staff, 80);
+        cooldowns.addCooldown(crystal, 20);
+        cooldowns.addCooldown(Items.STICK, 20);
+        com.mcmagic.omnira.spell.IndependentSpellCooldown.start(player, weapon, 20);
+        try {
+            for (int i=1; i<=40; i++) {
+                player.tickCount++;
+                player.doTick();
+                h.assertTrue(!com.mcmagic.omnira.spell.IndependentSpellCooldown.ready(player, weapon) == (i<40),
+                        "Independent spell did not recover in 40 ticks");
+            }
+            h.assertTrue(cooldowns.getCooldownPercent(staff, 0)==.75f, "Chain cooldown did not run at half speed");
+            h.assertTrue(!cooldowns.isOnCooldown(crystal) && !cooldowns.isOnCooldown(Items.STICK), "Item cooldown failed to expire");
+        } finally {
+            player.discard();
+        }
+    }
+
 }

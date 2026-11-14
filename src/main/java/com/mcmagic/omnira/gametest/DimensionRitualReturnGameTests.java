@@ -74,7 +74,7 @@ public final class DimensionRitualReturnGameTests {
         h.assertTrue(data.getLong("Paired")==core.above().asLong() && data.getBoolean("DreamExit"),"Missing reverse link");
         portal.loadWithComponents(saved,source.registryAccess());
         h.assertTrue(portal.saveWithFullMetadata(source.registryAccess()).getLong("Paired")==counterpart.asLong(),"Reload lost pair");
-        saved.putLong("OpenedAt",-1);portal.loadWithComponents(saved,source.registryAccess());
+        saved.putInt("OpeningAge",-1);portal.loadWithComponents(saved,source.registryAccess());
         var cow=net.minecraft.world.entity.EntityType.COW.create(source);
         cow.setNoAi(true);cow.setNoGravity(true);cow.setPos(Vec3.atBottomCenterOf(core.above()));source.addFreshEntity(cow);
         h.assertTrue(DreamRitual.anchorsIntact(source,core.above()),"Source anchors invalid before travel");
@@ -84,7 +84,7 @@ public final class DimensionRitualReturnGameTests {
         h.assertTrue(cow.isRemoved(),"Source entity was not transferred");
         h.assertTrue(arrived!=null && arrived.level()==world && arrived.getUUID().equals(id) && !arrived.isRemoved(),"Transfer produced no matching destination entity");
         // Remote entities need not be in the visible-entity lookup without a nearby player.
-        data.putLong("OpenedAt",-1);other.loadWithComponents(data,world.registryAccess());
+        data.putInt("OpeningAge",-1);other.loadWithComponents(data,world.registryAccess());
         arrived.getPersistentData().remove("OmniraDreamCooldown");arrived.setPos(Vec3.atBottomCenterOf(counterpart));
         var returned=(net.minecraft.world.entity.Entity)transfer.invoke(other,arrived);
         h.assertTrue(returned!=null && returned.level()==source && returned.getUUID().equals(id)
@@ -104,9 +104,9 @@ public final class DimensionRitualReturnGameTests {
             }
             world.setBlockAndUpdate(pos,ModBlocks.CORRIDOR_GATEWAY.get().defaultBlockState());
             var gate=(CorridorGatewayBlockEntity)world.getBlockEntity(pos);var tag=gate.saveWithFullMetadata(world.registryAccess());
-            tag.putLong("Started",now-240);tag.putLong("Opened",now);tag.putBoolean("Permanent",permanent);gate.loadWithComponents(tag,world.registryAccess());gate.tick();
+            tag.putInt("FormAge",240);tag.putInt("OpenAge",0);tag.putBoolean("Permanent",permanent);gate.loadWithComponents(tag,world.registryAccess());gate.tick();
             h.assertTrue(world.getBlockEntity(pos)==gate && gate.open(),"Returning gate vanished immediately");
-            tag.putLong("Opened",now-CorridorRitual.OPEN_TICKS);gate.loadWithComponents(tag,world.registryAccess());gate.tick();
+            tag.putInt("OpenAge",CorridorRitual.OPEN_TICKS);gate.loadWithComponents(tag,world.registryAccess());gate.tick();
             h.assertTrue(permanent?world.getBlockEntity(pos)==gate:world.isEmptyBlock(pos),"Returning gate lifetime changed");world.removeBlock(pos,false);
         }
         }finally{clock.setGameTime(previous);world.removeBlock(pos,false);world.removeBlock(pos.below(),false);

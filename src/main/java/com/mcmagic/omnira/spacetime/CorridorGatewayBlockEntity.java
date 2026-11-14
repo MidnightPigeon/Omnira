@@ -1,5 +1,7 @@
 package com.mcmagic.omnira.spacetime;
 
+import com.mcmagic.omnira.util.PhaseAge;
+import com.mcmagic.omnira.util.GameTimeCooldown;
 import com.mcmagic.omnira.entity.DreamMirror;
 import com.mcmagic.omnira.registry.*;
 import com.mcmagic.omnira.network.TransitViewPayload;
@@ -34,7 +36,8 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
         });
     }
     @Override public void setRemoved(){cancelViewers(java.util.Set.of());super.setRemoved();}
-    private long started=-1,opened=-1;
+    private final PhaseAge forming=new PhaseAge("FormAge","Started",CorridorRitual.FORM_TICKS);
+    private final PhaseAge opened=new PhaseAge("OpenAge","Opened",CorridorRitual.OPEN_TICKS);
     private float yaw;
     private UUID mirrorId;
     private ItemStack aggregate=ItemStack.EMPTY;
@@ -48,28 +51,32 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
         mirror.saveWithoutId(mirrorData);
         var delta=player.position().subtract(Vec3.atCenterOf(worldPosition));
         yaw=(float)Math.toDegrees(Math.atan2(-delta.x,delta.z));
-        started=level.getGameTime();mirror.discard();sync();
+        forming.start();mirror.discard();sync();
     }
     public float yaw(){return yaw;}
     public UUID mirrorId(){return mirrorId;}
-    public float progress(float partial){return started<0?0:(float)Math.clamp((level.getGameTime()+partial-started)/CorridorRitual.FORM_TICKS,0,1);}
-    public boolean open(){return opened>=0;}
+    public float progress(float partial){return !forming.active()?0:(float)Math.clamp((forming.ticks(level)+partial)/CorridorRitual.FORM_TICKS,0,1);}
+    public boolean open(){return opened.active();}
     public boolean permanent(){return permanent;}
     private void sync(){setChanged();level.sendBlockUpdated(worldPosition,getBlockState(),getBlockState(),3);}
     public void tick(){
-        if(!(level instanceof ServerLevel server) || started<0 || released)return;
+        if(level==null || !forming.active() || released)return;
+        boolean changed=forming.advanceAnimated(level,worldPosition);
+        if(!permanent)changed |= opened.advanceAnimated(level,worldPosition);
+        if(!(level instanceof ServerLevel server))return;
+        if(changed)setChanged();
         long now=level.getGameTime();
         for(var a:DreamRitual.ANCHORS)if(!server.hasChunkAt(worldPosition.offset(a[0],-1,a[1]))){cancelViewers(java.util.Set.of());entering.clear();return;}
         var pedestals=CorridorRitual.pedestals(server,worldPosition.below());
         if(!server.getBlockState(worldPosition.below()).is(ModBlocks.ADVANCED_RITUAL_ENERGY_CORE.get()) || pedestals.size()!=8){
             server.removeBlock(worldPosition,false);return;
         }
-        if(opened>=0){
-            if(!permanent && now-opened>=CorridorRitual.OPEN_TICKS){server.removeBlock(worldPosition,false);return;}
+        if(opened.active()){
+            if(!permanent && opened.ticks(level)>=CorridorRitual.OPEN_TICKS){server.removeBlock(worldPosition,false);return;}
             transferTouching(server);
         }else{
-            if(now-started>=CorridorRitual.FORM_TICKS){
-                aggregate=ItemStack.EMPTY;opened=now;sync();
+            if(forming.ticks(level)>=CorridorRitual.FORM_TICKS){
+                aggregate=ItemStack.EMPTY;opened.start();sync();
                 server.playSound(null,worldPosition,net.minecraft.sounds.SoundEvents.PORTAL_TRIGGER,net.minecraft.sounds.SoundSource.BLOCKS,.5F,1.4F);
             }
         }
@@ -102,7 +109,7 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
             double radius=Math.max(box.getXsize(),box.getZsize())*.5;
             if(Math.hypot(delta.x,delta.z)>.43+radius
                     || box.maxY<worldPosition.getY()+.1 || box.minY>worldPosition.getY()+1.7)continue;
-            if (root.getPersistentData().getLong("OmniraCorridorCooldown") > source.getGameTime()) continue;
+            if (GameTimeCooldown.active(root, "OmniraCorridorCooldown", source.getGameTime(), 60)) continue;
             touching.add(root.getUUID());
             var passengers=root.getSelfAndPassengers().filter(e->e instanceof net.minecraft.server.level.ServerPlayer).map(Entity::getUUID).toList();
             currentViewers.addAll(passengers);viewers.addAll(passengers);
@@ -136,7 +143,7 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
     }
     public static boolean transfer(ServerLevel source,Entity root){
         if(root.isPassenger() || !DreamTransitRules.allowed(root)
-                || root.getPersistentData().getLong("OmniraCorridorCooldown")>source.getGameTime())return false;
+                || GameTimeCooldown.active(root, "OmniraCorridorCooldown", source.getGameTime(), 60))return false;
         boolean returning=source.dimension()==ModDimensions.SPACETIME_CORRIDOR;
         var destination=returning?source.getServer().overworld():source.getServer().getLevel(ModDimensions.SPACETIME_CORRIDOR);
         if(destination==null)return false;
@@ -160,8 +167,8 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
             }
             if(clear && destination.getBlockState(pos.below()).isFaceSturdy(destination,pos.below(),Direction.UP)){landing=point;break;}
         }
-        if(landing==null){root.getPersistentData().putLong("OmniraCorridorCooldown",source.getGameTime()+40);return false;}
-        for(var member:members)member.getPersistentData().putLong("OmniraCorridorCooldown",destination.getGameTime()+60);
+        if(landing==null){GameTimeCooldown.start(root, "OmniraCorridorCooldown", source.getGameTime(), 40);return false;}
+        for(var member:members)GameTimeCooldown.start(member, "OmniraCorridorCooldown", destination.getGameTime(), 60);
         if(root instanceof com.mcmagic.omnira.vehicle.CruiseOrbEntity orb)orb.stop();
         return com.mcmagic.omnira.space.anchor.StabilityField.portalTravel(root,new DimensionTransition(destination,landing,Vec3.ZERO,root.getYRot(),root.getXRot(),e->{
             e.fallDistance=0;e.placePortalTicket(e.blockPosition());TransitionParticles.arrive(e);
@@ -198,7 +205,7 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
         return world.getBlockState(pos.below()).isFaceSturdy(world,pos.below(),Direction.UP);
     }
     public void release(){
-        if(!(level instanceof ServerLevel server) || released || started<0)return;
+        if(!(level instanceof ServerLevel server) || released || !forming.active())return;
         released=true;
         cancelViewers(java.util.Set.of());
         for (var id : entering.keySet()) {
@@ -222,10 +229,10 @@ public final class CorridorGatewayBlockEntity extends BlockEntity {
         super.saveAdditional(tag,registries);writeVisual(tag);tag.putBoolean("Released",released);tag.put("Mirror",mirrorData);
         if(!aggregate.isEmpty())tag.put("Aggregate",aggregate.save(registries));
     }
-    private void writeVisual(CompoundTag tag){tag.putLong("Started",started);tag.putLong("Opened",opened);tag.putFloat("Yaw",yaw);tag.putBoolean("Permanent",permanent);if(mirrorId!=null)tag.putUUID("MirrorId",mirrorId);}
+    private void writeVisual(CompoundTag tag){forming.save(tag);opened.save(tag);tag.putFloat("Yaw",yaw);tag.putBoolean("Permanent",permanent);if(mirrorId!=null)tag.putUUID("MirrorId",mirrorId);}
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries){
-        super.loadAdditional(tag,registries);started=tag.contains("Started")?tag.getLong("Started"):-1;
-        opened=tag.contains("Opened")?tag.getLong("Opened"):-1;yaw=tag.getFloat("Yaw");released=tag.getBoolean("Released");permanent=tag.getBoolean("Permanent");
+        super.loadAdditional(tag,registries);forming.load(tag);
+        opened.load(tag);yaw=tag.getFloat("Yaw");released=tag.getBoolean("Released");permanent=tag.getBoolean("Permanent");
         mirrorId=tag.hasUUID("MirrorId")?tag.getUUID("MirrorId"):null;mirrorData=tag.getCompound("Mirror");
         aggregate=ItemStack.parseOptional(registries,tag.getCompound("Aggregate"));
     }

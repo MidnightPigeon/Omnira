@@ -12,12 +12,13 @@ import java.util.UUID;
 
 public final class WaymarkBlockEntity extends BlockEntity {
     private UUID id=UUID.randomUUID();
+    private int lostNumber;
     private String name="";
     private boolean unclaimed=true;
     public WaymarkBlockEntity(BlockPos pos,BlockState state) {super(ModBlockEntityTypes.WAYMARK.get(),pos,state);}
     public UUID id() {return id;}
     public String name() {return name;}
-    public WaymarkDirectory.Entry entry() {return new WaymarkDirectory.Entry(id,level.dimension().location(),worldPosition,name,level instanceof ServerLevel server ? WaymarkDirectory.biomeAt(server,worldPosition) : null);}
+    public WaymarkDirectory.Entry entry() {return new WaymarkDirectory.Entry(id,level.dimension().location(),worldPosition,name,level instanceof ServerLevel server ? WaymarkDirectory.biomeAt(server,worldPosition) : null,lostNumber);}
     public void register() {if(level instanceof ServerLevel server) WaymarkDirectory.get(server).put(entry());}
     public void placedByPlayer() {unclaimed=false;setChanged();}
     public void discover(net.minecraft.server.level.ServerPlayer player) {
@@ -25,12 +26,15 @@ public final class WaymarkBlockEntity extends BlockEntity {
             var directory=WaymarkDirectory.get(server);
             if(unclaimed) {
                 unclaimed=false;
-                rename(directory.nextLostName(player.getUUID()));
+                lostNumber=directory.nextLostNumber(player.getUUID());
+                name="失落点位"+lostNumber;
+                setChanged();
             }
             register();directory.discover(player.getUUID(),id);
         }
     }
     public void rename(String value) {
+        lostNumber=0;
         name=value.codePoints().filter(c->!Character.isISOControl(c) && c!=0x00a7).limit(32)
                 .collect(StringBuilder::new,StringBuilder::appendCodePoint,StringBuilder::append).toString().strip();
         setChanged();register();
@@ -38,10 +42,10 @@ public final class WaymarkBlockEntity extends BlockEntity {
     }
     @Override public void onLoad() {super.onLoad();register();}
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries) {
-        super.saveAdditional(tag,registries);tag.putUUID("Id",id);tag.putString("Name",name);tag.putBoolean("Unclaimed",unclaimed);
+        super.saveAdditional(tag,registries);tag.putUUID("Id",id);tag.putString("Name",name);tag.putInt("LostNumber",lostNumber);tag.putBoolean("Unclaimed",unclaimed);
     }
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries) {
-        super.loadAdditional(tag,registries);if(tag.hasUUID("Id")) id=tag.getUUID("Id");name=tag.getString("Name");
+        super.loadAdditional(tag,registries);if(tag.hasUUID("Id")) id=tag.getUUID("Id");name=tag.getString("Name");lostNumber=tag.getInt("LostNumber");
         unclaimed=tag.contains("Unclaimed")?tag.getBoolean("Unclaimed"):name.isBlank();
     }
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries) {return saveWithoutMetadata(registries);}

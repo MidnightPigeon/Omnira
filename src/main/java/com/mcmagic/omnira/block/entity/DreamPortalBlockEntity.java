@@ -1,5 +1,7 @@
 package com.mcmagic.omnira.block.entity;
 
+import com.mcmagic.omnira.util.PhaseAge;
+import com.mcmagic.omnira.util.GameTimeCooldown;
 import com.mcmagic.omnira.registry.*;
 import com.mcmagic.omnira.network.TransitViewPayload;
 import com.mcmagic.omnira.world.dimension.*;
@@ -22,13 +24,13 @@ public final class DreamPortalBlockEntity extends BlockEntity {
     public static final int COLLAPSE_TICKS=60;
     private boolean exit;
     private BlockPos paired;
-    private long collapseAt=-1;
+    private final PhaseAge collapse=new PhaseAge("CollapseAge","CollapseAt",COLLAPSE_TICKS);
     public static final int OPEN_TICKS=40;
-    private long openedAt=-1;
+    private final PhaseAge openingPhase=new PhaseAge("OpeningAge","OpenedAt",OPEN_TICKS);
     private final java.util.Map<java.util.UUID,Integer> entering=new java.util.HashMap<>();
     public static final int TRANSIT_TICKS=TransitViewPayload.PORTAL_TICKS;
     public DreamPortalBlockEntity(BlockPos pos,BlockState state) {super(ModBlockEntityTypes.DREAM_PORTAL.get(),pos,state);}
-    public void initialize(boolean exit) {this.exit=exit;collapseAt=-1;openedAt=level==null?-1:level.getGameTime();sync();}
+    public void initialize(boolean exit) {this.exit=exit;collapse.stop();openingPhase.start();sync();}
     public static BlockPos mappedReturn(ServerLevel source,BlockPos origin){
         var world=source.getServer().overworld();
         for(int r=0;r<=6;r++)for(int dx=-r;dx<=r;dx++)for(int dz=-r;dz<=r;dz++){
@@ -47,9 +49,9 @@ public final class DreamPortalBlockEntity extends BlockEntity {
     public void pairWith(BlockPos target){paired=target.immutable();sync();}
     public float scale(float partial) {
         if(level==null) return 1;
-        float opening=openedAt<0?1:Math.clamp((level.getGameTime()+partial-openedAt)/OPEN_TICKS,0,1);
+        float opening=!openingPhase.active()?1:Math.clamp((openingPhase.ticks(level)+partial)/OPEN_TICKS,0,1);
         opening=opening*opening*(3-2*opening);
-        return opening*(collapseAt<0?1:Math.clamp(1-(level.getGameTime()+partial-collapseAt)/COLLAPSE_TICKS,0,1));
+        return opening*(!collapse.active()?1:Math.clamp(1-(collapse.ticks(level)+partial)/COLLAPSE_TICKS,0,1));
     }
     private void sync() {
         setChanged();
@@ -57,18 +59,21 @@ public final class DreamPortalBlockEntity extends BlockEntity {
     }
     public void tick() {
         if(level==null) return;
+        boolean changed=openingPhase.advanceAnimated(level,worldPosition);
+        changed |= collapse.advanceAnimated(level,worldPosition);
+        if(changed && !level.isClientSide)setChanged();
         long time=level.getGameTime();
         if(!level.isClientSide) {
-            if(exit && paired!=null && collapseAt<0 && time%10==0){
+            if(exit && paired!=null && !collapse.active() && time%10==0){
                 var other=((ServerLevel)level).getServer().getLevel(ModDimensions.DREAM_REALM);
                 if(other!=null && other.hasChunkAt(paired) && (!(other.getBlockEntity(paired) instanceof DreamPortalBlockEntity portal)
-                        || !worldPosition.equals(portal.paired) || !DreamRitual.anchorsIntact(other,paired))){collapseAt=time;sync();}
+                        || !worldPosition.equals(portal.paired) || !DreamRitual.anchorsIntact(other,paired))){collapse.start();sync();}
             }
-            if(!exit && collapseAt<0 && time%10==0 && !DreamRitual.anchorsIntact(level,worldPosition)) {
-                collapseAt=time;sync();
+            if(!exit && !collapse.active() && time%10==0 && !DreamRitual.anchorsIntact(level,worldPosition)) {
+                collapse.start();sync();
             }
-            if(collapseAt>=0 && time-collapseAt>=COLLAPSE_TICKS) level.removeBlock(worldPosition,false);
-            if(collapseAt<0 && (openedAt<0 || time-openedAt>=OPEN_TICKS)){
+            if(collapse.active() && collapse.ticks(level)>=COLLAPSE_TICKS) level.removeBlock(worldPosition,false);
+            if(!collapse.active() && (!openingPhase.active() || openingPhase.ticks(level)>=OPEN_TICKS)){
                 var source=(ServerLevel)level;
                 var area=new AABB(worldPosition).inflate(.15,.5,.15);
                 var touching=new java.util.HashSet<java.util.UUID>();
@@ -91,7 +96,7 @@ public final class DreamPortalBlockEntity extends BlockEntity {
         float size=scale(0);
         level.addParticle(dust,worldPosition.getX()+.5+(level.random.nextDouble()-.5)*size,
                 worldPosition.getY()+.5+level.random.nextDouble()*size,worldPosition.getZ()+.5,0,.015,0);
-        if(exit || collapseAt>=0) return;
+        if(exit || collapse.active()) return;
         // Two moving points per tether, refreshed only every eight ticks.
         for(int i=0;i<DreamRitual.ANCHORS.length;i++) {
             int[] offset=DreamRitual.ANCHORS[i];
@@ -106,23 +111,23 @@ public final class DreamPortalBlockEntity extends BlockEntity {
     }
     public void enter(Entity entity) {
         var root=entity.getRootVehicle();
-        if(level==null || collapseAt>=0 || openedAt>=0 && level.getGameTime()-openedAt<OPEN_TICKS)return;
+        if(level==null || collapse.active() || openingPhase.active() && openingPhase.ticks(level)<OPEN_TICKS)return;
         if(level instanceof ServerLevel && root.isAlive() && !root.isSpectator() && !root.isRemoved()
                 && DreamTransitRules.allowed(root)
-                && root.getPersistentData().getLong("OmniraDreamCooldown")<=level.getGameTime()){
+                && !GameTimeCooldown.active(root, "OmniraDreamCooldown", level.getGameTime(), 100)){
             if(entering.putIfAbsent(root.getUUID(),0)==null && root instanceof com.mcmagic.omnira.vehicle.CruiseOrbEntity orb){
                 orb.stop();orb.setDeltaMovement(Vec3.ZERO);
             }
         }
     }
     private Entity transfer(Entity player) {
-        if(!(level instanceof ServerLevel source) || collapseAt>=0 || (openedAt>=0 && level.getGameTime()-openedAt<OPEN_TICKS) || player.isSpectator()
+        if(!(level instanceof ServerLevel source) || collapse.active() || (openingPhase.active() && openingPhase.ticks(level)<OPEN_TICKS) || player.isSpectator()
                 || player.isPassenger() || !player.isAlive() || !DreamTransitRules.allowed(player)) return null;
         if(!exit && !DreamRitual.anchorsIntact(source,worldPosition)) return null;
         var data=player.getPersistentData();
         long now=source.getGameTime();
-        if(data.getLong("OmniraDreamCooldown")>now) return null;
-        data.putLong("OmniraDreamCooldown",now+60);
+        if(GameTimeCooldown.active(player, "OmniraDreamCooldown", now, 100)) return null;
+        GameTimeCooldown.start(player, "OmniraDreamCooldown", now, 60);
         ServerLevel destination;
         Vec3 landing;
         if(paired!=null){
@@ -131,7 +136,7 @@ public final class DreamPortalBlockEntity extends BlockEntity {
             if(destination!=null){
                 destination.getChunkAt(paired);
                 if(destination.getBlockEntity(paired) instanceof DreamPortalBlockEntity portal && worldPosition.equals(portal.paired)
-                        && portal.collapseAt<0)landing=findLanding(destination,paired,player);
+                        && !portal.collapse.active())landing=findLanding(destination,paired,player);
             }
         }else if(source.dimension()!=ModDimensions.DREAM_REALM) {
             destination=source.getServer().getLevel(ModDimensions.DREAM_REALM);
@@ -160,7 +165,7 @@ public final class DreamPortalBlockEntity extends BlockEntity {
                 || !net.neoforged.neoforge.common.CommonHooks.onTravelToDimension(member,destination.dimension()))return null;
         for(var member:group){
             var memberData=member.getPersistentData();
-            memberData.putLong("OmniraDreamCooldown",destination.getGameTime()+100);
+            GameTimeCooldown.start(member, "OmniraDreamCooldown", destination.getGameTime(), 100);
             if(source.dimension()!=ModDimensions.DREAM_REALM){
                 memberData.putString("OmniraDreamOriginDimension",source.dimension().location().toString());
                 memberData.putLong("OmniraDreamOrigin",worldPosition.asLong());
@@ -213,11 +218,11 @@ public final class DreamPortalBlockEntity extends BlockEntity {
         return null;
     }
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries) {
-        super.saveAdditional(tag,registries);tag.putBoolean("DreamExit",exit);tag.putLong("CollapseAt",collapseAt);tag.putLong("OpenedAt",openedAt);
+        super.saveAdditional(tag,registries);tag.putBoolean("DreamExit",exit);collapse.save(tag);openingPhase.save(tag);
         if(paired!=null)tag.putLong("Paired",paired.asLong());
     }
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries) {
-        super.loadAdditional(tag,registries);exit=tag.getBoolean("DreamExit");collapseAt=tag.contains("CollapseAt")?tag.getLong("CollapseAt"):-1;openedAt=tag.contains("OpenedAt")?tag.getLong("OpenedAt"):-1;
+        super.loadAdditional(tag,registries);exit=tag.getBoolean("DreamExit");collapse.load(tag);openingPhase.load(tag);
         paired=tag.contains("Paired")?BlockPos.of(tag.getLong("Paired")):null;
     }
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries) {

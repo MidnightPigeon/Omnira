@@ -26,6 +26,7 @@ public final class Omnira {
         modEventBus.addListener(this::commonSetup);
         if(net.neoforged.fml.ModList.get().isLoaded("create"))
             com.mcmagic.omnira.compat.CrystalEncasing.register(modEventBus);
+        modEventBus.addListener(com.mcmagic.omnira.config.OmniraConfig::migrateReloadDefaults);
         modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.COMMON,com.mcmagic.omnira.config.OmniraConfig.SPEC,"omnira-common.toml");
 
         com.mcmagic.omnira.registry.ModAttributes.TYPES.register(modEventBus);

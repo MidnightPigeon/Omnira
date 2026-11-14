@@ -16,16 +16,16 @@ import java.util.*;
 @EventBusSubscriber(modid=Omnira.MOD_ID)
 public final class ArquebusEvents {
     public static final int SHOT_INTERVAL=6;
-    private record FollowUp(ItemStack gun,ItemStack snapshot,ResourceKey<Level> dimension,long due) {}
+    private record FollowUp(ItemStack gun,ItemStack snapshot,ResourceKey<Level> dimension,int due) {}
     private static final Map<UUID,FollowUp> SHOTS=new HashMap<>();
-    private static final Map<UUID,Long> SENSE=new HashMap<>();
-    private static final Map<UUID,Long> CONCEAL=new HashMap<>();
+    private static final Map<UUID,Integer> SENSE=new HashMap<>();
+    private static final Map<UUID,Integer> CONCEAL=new HashMap<>();
     public static final double SENSE_RADIUS=36;
     private ArquebusEvents() {}
     public static void queue(ServerPlayer player,ItemStack gun) {
         SHOTS.remove(player.getUUID());
         if(ArquebusPlugin.of(gun).shots==2) SHOTS.put(player.getUUID(),new FollowUp(gun,gun.copy(),
-                player.level().dimension(),player.level().getGameTime()+SHOT_INTERVAL));
+                player.level().dimension(),player.tickCount+SHOT_INTERVAL));
     }
     @SubscribeEvent public static void tick(PlayerTickEvent.Post event) {
         if(!(event.getEntity() instanceof ServerPlayer player)) return;
@@ -35,7 +35,7 @@ public final class ArquebusEvents {
         if(!player.isAlive() || player.isSpectator() || player.getMainHandItem()!=shot.gun
                 || !ItemStack.matches(shot.snapshot,shot.gun) || player.containerMenu instanceof ArquebusMenu
                 || !player.level().dimension().equals(shot.dimension)) {SHOTS.remove(player.getUUID());return;}
-        if(player.level().getGameTime()<shot.due)return;
+        if(player.tickCount - shot.due < 0)return;
         SHOTS.remove(player.getUUID());
         ArcaneArquebusItem.fire(player,shot.gun);
     }
@@ -43,9 +43,9 @@ public final class ArquebusEvents {
         var gun=player.getMainHandItem();
         if(!player.isAlive() || player.isSpectator() || !(gun.getItem() instanceof ArcaneArquebusItem)
                 || ArquebusPlugin.of(gun)!=ArquebusPlugin.KINGS_NEW_CLOTHES) {SENSE.remove(player.getUUID());return;}
-        long now=player.level().getGameTime();
-        long due=SENSE.computeIfAbsent(player.getUUID(),id->now+100);
-        if(now<due)return;
+        int now=player.tickCount;
+        int due=SENSE.computeIfAbsent(player.getUUID(),id->now+100);
+        if(now - due < 0)return;
         SENSE.put(player.getUUID(),now+100);
         var mana=player.getData(com.mcmagic.omnira.registry.ModAttachments.MANA);
         if(!mana.canSpend(50))return;
@@ -59,9 +59,9 @@ public final class ArquebusEvents {
         var gun=player.getMainHandItem();
         if(!player.isAlive() || player.isSpectator() || !(gun.getItem() instanceof ArcaneArquebusItem)
                 || ArquebusPlugin.of(gun)!=ArquebusPlugin.ANCESTOR_LAUNCHER) {CONCEAL.remove(player.getUUID());return;}
-        long now=player.level().getGameTime();
-        long due=CONCEAL.computeIfAbsent(player.getUUID(),id->now+60);
-        if(now<due)return;
+        int now=player.tickCount;
+        int due=CONCEAL.computeIfAbsent(player.getUUID(),id->now+60);
+        if(now - due < 0)return;
         CONCEAL.put(player.getUUID(),now+60);
         var mana=player.getData(com.mcmagic.omnira.registry.ModAttachments.MANA);
         if(!mana.canSpend(10))return;

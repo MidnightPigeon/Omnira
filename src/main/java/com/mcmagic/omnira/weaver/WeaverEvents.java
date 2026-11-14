@@ -14,7 +14,11 @@ public final class WeaverEvents {
         if(event.getSource().getEntity() instanceof WeaverSpirit boss&&boss.isAlive()&&boss.redCore()&&boss!=event.getEntity())boss.heal((float)Math.ceil(event.getNewDamage()*.1));
     }
     @SubscribeEvent public static void clone(PlayerEvent.Clone event){
-        var old=event.getOriginal().getPersistentData();if(old.contains("OmniraFounderCooldowns"))event.getEntity().getPersistentData().put("OmniraFounderCooldowns",old.getCompound("OmniraFounderCooldowns").copy());
+        var old = event.getOriginal().getPersistentData();
+        var data = event.getEntity().getPersistentData();
+        for (String key : java.util.List.of(FounderApprovalItem.TIMERS, "OmniraFounderCooldowns")) {
+            if (old.contains(key)) data.put(key, old.getCompound(key).copy());
+        }
     }
     private WeaverEvents(){}
 }

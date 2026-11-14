@@ -19,7 +19,7 @@ import java.util.*;
 
 @EventBusSubscriber(modid="omnira")
 public final class SwordActions {
-    private record Charge(ItemStack weapon,long start) {}
+    private record Charge(ItemStack weapon,int start) {}
     private static final Map<ServerPlayer,Charge> CHARGES=new WeakHashMap<>();
     private static final ThreadLocal<ServerPlayer> POWER_STRIKE=new ThreadLocal<>();
     private static final ThreadLocal<ServerPlayer> SCRIPTED_STRIKE=new ThreadLocal<>();
@@ -41,12 +41,12 @@ public final class SwordActions {
             && !weaponUnavailable(p) && p.containerMenu==p.inventoryMenu && p.getMainHandItem().getItem() instanceof RitualSwordItem;}
     public static void input(ServerPlayer p,int action) {
         if(action==0) {
-            if(eligible(p))CHARGES.putIfAbsent(p,new Charge(p.getMainHandItem(),p.serverLevel().getGameTime()));
+            if(eligible(p))CHARGES.putIfAbsent(p,new Charge(p.getMainHandItem(),p.tickCount));
             return;
         }
         Charge charge=CHARGES.remove(p);
         if(action!=1 || charge==null || !eligible(p) || charge.weapon!=p.getMainHandItem())return;
-        boolean ready=p.serverLevel().getGameTime()-charge.start>=20;
+        boolean ready=p.tickCount-charge.start>=20;
         // The initial press already performs the vanilla attack; a short release is not another hit.
         if(!ready)return;
         var sword=(RitualSwordItem)charge.weapon.getItem();
@@ -99,15 +99,15 @@ public final class SwordActions {
         if(event.getEntity() instanceof ServerPlayer p) {
             if(p.getMainHandItem().getItem() instanceof RitualSwordItem)contactDamage(p);
             var charge=CHARGES.get(p);
-            if(charge!=null && (!eligible(p) || p.getMainHandItem()!=charge.weapon || p.serverLevel().getGameTime()-charge.start>1200))CHARGES.remove(p);
+            if(charge!=null && (!eligible(p) || p.getMainHandItem()!=charge.weapon || p.tickCount-charge.start>1200))CHARGES.remove(p);
         }
     }
-    private static final Map<ServerPlayer,Long> LAST_CONTACT=new WeakHashMap<>();
+    private static final Map<ServerPlayer,Integer> LAST_CONTACT=new WeakHashMap<>();
     static void contactDamage(ServerPlayer player){
         if(!player.isAlive())return;
-        long now=player.serverLevel().getGameTime();
+        int now=player.tickCount;
         var last=LAST_CONTACT.get(player);
-        if(last!=null&&now>=last&&now-last<10)return;
+        if(last!=null&&now-last>=0&&now-last<10)return;
         int damage=0;
         for(var entity:player.level().getEntities(player,player.getBoundingBox())){
             var owner=entity instanceof net.neoforged.neoforge.entity.PartEntity<?> part?part.getParent():entity;

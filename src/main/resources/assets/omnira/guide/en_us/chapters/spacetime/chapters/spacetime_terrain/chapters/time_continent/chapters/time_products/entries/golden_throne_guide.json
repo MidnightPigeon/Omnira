@@ -3,7 +3,7 @@
   "title": "Golden Throne and Golden Toilet",
   "item": "omnira:golden_toilet",
   "text": [
-    "The Golden Throne grants 100% bonus damage, Resistance V, Regeneration V and Saturation. Voluntary dismount is locked for ten minutes; teleporting away ends the benefits. Mining it or sitting for ten minutes leaves a Golden Toilet and a misty treasure orb.",
+    "The Golden Throne grants 100% bonus damage, Resistance V, Regeneration V and Saturation. You cannot dismount voluntarily; teleporting away ends the benefits. Mining it or sitting for five online minutes (ten in the Stilled Wastes or two and a half in the Fleeting Woods) leaves a Golden Toilet and a misty treasure orb.",
     "The toilet permits free dismount and grants 20% bonus damage, Regeneration II and Saturation while seated."
   ],
   "recipes": false,
