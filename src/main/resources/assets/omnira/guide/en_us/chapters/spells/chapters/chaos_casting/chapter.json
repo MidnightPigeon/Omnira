@@ -1,0 +1,12 @@
+{
+  "id": "chaos_casting",
+  "title": "Chaos Casting",
+  "icon": "omnira:unordered_element_cluster",
+  "introduction": "introduction.json",
+  "entries": [],
+  "chapters": [
+    "chapters/unordered_construction/chapter.json",
+    "chapters/chaos_editing/chapter.json",
+    "chapters/error_element/chapter.json"
+  ]
+}

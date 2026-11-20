@@ -199,9 +199,9 @@ public final class WeaverCombatGameTests {
         try{
             p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(ModItems.FOUNDER_APPROVAL.get()));p.setHealth(5);
             cow.invulnerableTime=100;cow.hurt(cow.damageSources().playerAttack(p),2);cow.hurt(cow.damageSources().playerAttack(p),2);
-            h.assertTrue(cow.getHealth()==92&&p.getHealth()==7,"Offhand flat bonus, i-frame bypass or ceil lifesteal incorrect");
+            h.assertTrue(cow.getHealth()==86&&p.getHealth()==9,"Offhand flat bonus, i-frame bypass or ceil lifesteal incorrect");
             p.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(ModItems.FOUNDER_APPROVAL.get()));OmniraDamage.trueDamage(cow,3,cow.damageSources().playerAttack(p));
-            h.assertTrue(cow.getHealth()==87&&p.getHealth()==9,"Dual wield stacked, true damage missed the bonus or lifesteal was fractional");
+            h.assertTrue(cow.getHealth()==78&&p.getHealth()==11,"Dual wield stacked, true damage missed the bonus or lifesteal was fractional");
         }finally{cow.discard();cleanup(h,b,p);}h.succeed();
     }
     @GameTest(template="spell_arena") public static void splitBoltAddsEachChannelAndMultipliesEachChannel(GameTestHelper h){
@@ -212,11 +212,11 @@ public final class WeaverCombatGameTests {
         try{
             p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(ModItems.FOUNDER_APPROVAL.get()));cow.setHealth(100);cow.invulnerableTime=100;
             WeaverCombat.bolt(p,cow,p.getEyePosition(),cow.position().subtract(p.position())).impact(cow);
-            h.assertTrue(cow.getHealth()==90,"Flat +2 was not applied separately to physical and magic damage: health="+cow.getHealth()+", flat="+p.getAttributeValue(ModAttributes.DAMAGE_BONUS)+", scale="+p.getAttributeValue(ModAttributes.DAMAGE_DEALT)+", channels="+channels);
-            h.assertTrue(channels.equals(List.of("mob:5.0","indirectMagic:5.0")),"Two final damage channels were merged or lost");
+            h.assertTrue(cow.getHealth()==80,"Flat +5 was not applied separately to physical and magic damage: health="+cow.getHealth()+", flat="+p.getAttributeValue(ModAttributes.DAMAGE_BONUS)+", scale="+p.getAttributeValue(ModAttributes.DAMAGE_DEALT)+", channels="+channels);
+            h.assertTrue(channels.equals(List.of("mob:10.0","indirectMagic:10.0")),"Two final damage channels were merged or lost");
             p.getAttribute(ModAttributes.DAMAGE_DEALT).setBaseValue(1.5);cow.setHealth(100);cow.invulnerableTime=100;
             WeaverCombat.bolt(p,cow,p.getEyePosition(),cow.position().subtract(p.position())).impact(cow);
-            h.assertTrue(cow.getHealth()==85,"Percentage damage did not scale both enhanced channels");
+            h.assertTrue(cow.getHealth()==70,"Percentage damage did not scale both enhanced channels");
             var tag=b.saveWithoutId(new net.minecraft.nbt.CompoundTag());tag.putInt("WeaverStrength",2);b.load(tag);cow.setHealth(100);cow.invulnerableTime=100;
             WeaverCombat.bolt(b,cow,b.getEyePosition(),cow.position().subtract(b.position())).impact(cow);
             h.assertTrue(cow.getHealth()==86,"Boss strength did not add +4 to each channel");
@@ -229,17 +229,17 @@ public final class WeaverCombatGameTests {
             p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(ModItems.FOUNDER_APPROVAL.get()));
             p.getAttribute(ModAttributes.SPELL_POWER).setBaseValue(2);
             WeaverCombat.bolt(p,cow,p.getEyePosition(),cow.position().subtract(p.position())).impact(cow);
-            h.assertTrue(cow.getHealth()==84,"Bolt must deal (3*2+2) in each channel, not (3+2)*2");
+            h.assertTrue(cow.getHealth()==70,"Bolt must deal 5*2+5 in each channel");
             cow.setHealth(100);cow.invulnerableTime=100;WeaverCombat.rayHit(p,cow);
-            h.assertTrue(cow.getHealth()==92,"Ray must multiply its base before adding flat damage");
+            h.assertTrue(cow.getHealth()==85,"Ray must multiply its base before adding flat damage");
             b.discard();
             cow.setHealth(100);WeaverCombat.bend(p,true);
-            h.assertTrue(cow.getHealth()==88,"Outward bend must deal 5*2+2");
+            h.assertTrue(cow.getHealth()==85,"Outward bend must deal 5*2+5");
             cow.setHealth(100);cow.invulnerableTime=100;WeaverCombat.bend(p,false);
-            h.assertTrue(cow.getHealth()==82,"Inward bend must deal 8*2+2");
+            h.assertTrue(cow.getHealth()==79,"Inward bend must deal 8*2+5");
             cow.setHealth(100);cow.invulnerableTime=100;
             var spell=com.mcmagic.omnira.spell.entity.SpellEntity.spawn(h.getLevel(),p,com.mcmagic.omnira.spell.entity.SpellEntity.Kind.PROJECTILE,p.getEyePosition());
-            try{spell.configure(2,3);spell.applyEffects(cow);h.assertTrue(cow.getHealth()==92,"Existing spell did not preserve power-before-flat order");}finally{spell.discard();}
+            try{spell.configure(2,3);spell.applyEffects(cow);h.assertTrue(cow.getHealth()==89,"Existing spell did not preserve power-before-flat order");}finally{spell.discard();}
             h.assertTrue(WeaverCombat.damage(b,3)==3,"Player spell power changed boss attack scaling");
             var lines=new ArrayList<net.minecraft.network.chat.Component>();
             ModItems.FOUNDER_APPROVAL.get().appendHoverText(new ItemStack(ModItems.FOUNDER_APPROVAL.get()),Item.TooltipContext.EMPTY,lines,TooltipFlag.NORMAL);
@@ -251,14 +251,14 @@ public final class WeaverCombatGameTests {
         var p=player(h,2,2);var b=boss(h);
         try{
             var stack=new ItemStack(ModItems.FOUNDER_APPROVAL.get());var modifiers=stack.get(net.minecraft.core.component.DataComponents.ATTRIBUTE_MODIFIERS).modifiers();
-            h.assertTrue(modifiers.stream().anyMatch(e->e.attribute().equals(ModAttributes.DAMAGE_BONUS)&&e.modifier().amount()==2)
+            h.assertTrue(modifiers.stream().anyMatch(e->e.attribute().equals(ModAttributes.DAMAGE_BONUS)&&e.modifier().amount()==5)
                     &&modifiers.stream().anyMatch(e->e.attribute().equals(ModAttributes.LIFESTEAL)&&e.modifier().amount()==.25),"Book lacks native attribute tooltip components");
             p.setItemInHand(InteractionHand.MAIN_HAND,stack);p.setItemInHand(InteractionHand.OFF_HAND,stack.copy());
             p.doTick();
             com.mcmagic.omnira.combat.HeldCombatAttributes.refresh(p);
-            h.assertTrue(p.getAttributeValue(ModAttributes.DAMAGE_BONUS)==2&&p.getAttributeValue(ModAttributes.LIFESTEAL)==.25,"Dual wield stacked attributes");
+            h.assertTrue(p.getAttributeValue(ModAttributes.DAMAGE_BONUS)==5&&p.getAttributeValue(ModAttributes.LIFESTEAL)==.25,"Dual wield stacked attributes");
             p.setItemInHand(InteractionHand.MAIN_HAND,ItemStack.EMPTY);p.doTick();com.mcmagic.omnira.combat.HeldCombatAttributes.refresh(p);
-            h.assertTrue(p.getAttributeValue(ModAttributes.DAMAGE_BONUS)==2&&p.getAttributeValue(ModAttributes.LIFESTEAL)==.25,"Removing one book disabled the other hand");
+            h.assertTrue(p.getAttributeValue(ModAttributes.DAMAGE_BONUS)==5&&p.getAttributeValue(ModAttributes.LIFESTEAL)==.25,"Removing one book disabled the other hand");
             p.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(ModItems.CORRUPTED_GRIMOIRE.get()));p.getAttribute(ModAttributes.LIFESTEAL).setBaseValue(.25);
             h.assertTrue(com.mcmagic.omnira.combat.HeldCombatAttributes.lifeSteal(p,p.damageSources().playerAttack(p))==1,"Grimoire, ring-equivalent and founder rates did not add");
             h.assertTrue(com.mcmagic.omnira.combat.HeldCombatAttributes.lifeSteal(p,p.damageSources().magic())==.5,"Corrupted grimoire expanded to unrelated damage");
@@ -359,7 +359,7 @@ public final class WeaverCombatGameTests {
         try{
             for(int y=2;y<=7;y++)h.setBlock(new BlockPos(2,y,5),Blocks.STONE);
             WeaverCombat.ray(p,p.getLookAngle());
-            h.assertTrue(near.getHealth()==35&&far.getHealth()==40,"Ray was blocked by terrain, exceeded 64 blocks or missed the book's flat bonus");
+            h.assertTrue(near.getHealth()==30&&far.getHealth()==40,"Ray was blocked by terrain, exceeded 64 blocks or missed the book's flat bonus");
         }finally{near.discard();far.discard();cleanup(h,b,p);}h.succeed();
     }
 }

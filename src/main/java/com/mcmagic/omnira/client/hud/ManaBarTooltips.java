@@ -30,22 +30,23 @@ public final class ManaBarTooltips {
     @SubscribeEvent public static void before(ScreenEvent.Render.Pre event){AREAS.clear();collecting=true;}
     @SubscribeEvent public static void after(ScreenEvent.Render.Post event) {
         var mc=Minecraft.getInstance();var g=event.getGuiGraphics();
-        if(mc.player!=null && event.getScreen() instanceof AbstractContainerScreen<?> && !mc.player.isSpectator()) {
+        if(mc.player!=null && event.getScreen() instanceof AbstractContainerScreen<?> && AREAS.isEmpty() && !mc.player.isSpectator()) {
             // Keep the inventory itself unchanged; redraw the HUD above the screen background.
-            int x=Math.max(2,g.guiWidth()/2-202),y=g.guiHeight()-18;
-            ManaBar.render(g,mc.font,mc.player.getData(ModAttachments.MANA),x,y,81);
+            var pos=ManaHudPosition.position(g.guiWidth(),g.guiHeight());
+            ManaBar.render(g,mc.font,mc.player.getData(ModAttachments.MANA),pos.x(),pos.y(),ManaHudPosition.WIDTH);
         }
         collecting=false;
+        if(ManaHudPosition.holding()){AREAS.clear();return;}
         for(int i=AREAS.size()-1;i>=0;i--) {
             var area=AREAS.get(i);
             if(!area.contains(event.getMouseX(),event.getMouseY()))continue;
             var text=new java.util.ArrayList<Component>();
             text.add(Component.literal(area.current+" / "+area.maximum));
             text.add(Component.translatable(area.affinity.key()).withStyle(style->style.withColor(area.affinity.color)));
-            int lines=switch(area.affinity){case NONE -> 1;case DREAM -> 4;default -> 2;};
+            int lines=switch(area.affinity){case NONE -> 1;case DREAM -> 4;case CHAOS -> 3;default -> 2;};
             boolean perfected=mc.player!=null&&mc.player.getData(ModAttachments.PERFECTED_AFFINITY)&&area.affinity!=Affinity.NONE;
             for(int line=1;line<=lines;line++) {
-                if(perfected && area.affinity==Affinity.ARCANE && line==2)continue;
+                if(perfected && (area.affinity==Affinity.ARCANE && line==2 || area.affinity==Affinity.CHAOS && line==3))continue;
                 String key="tooltip.omnira.affinity."+area.affinity.name().toLowerCase(java.util.Locale.ROOT)+"."+line;
                 if(perfected&&(area.affinity==Affinity.ARCANE||area.affinity==Affinity.SPACETIME)&&line==1)key+=".perfected";
                 if(perfected&&area.affinity==Affinity.DREAM&&(line==2||line==3))key+=".perfected";

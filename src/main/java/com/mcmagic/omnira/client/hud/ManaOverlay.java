@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 
 public final class ManaOverlay {
-    private static final int WIDTH = 81;
 
     private ManaOverlay() {}
 
@@ -21,16 +20,8 @@ public final class ManaOverlay {
             return;
         }
         ManaState mana = minecraft.player.getData(ModAttachments.MANA);
-        int hotbarLeft=graphics.guiWidth()/2-91;
-        int width=Math.min(WIDTH,hotbarLeft-38);
-        int x=hotbarLeft-30-width; // Leave room for the offhand slot.
-        int y=graphics.guiHeight()-18;
-        if(width<58) {
-            width=WIDTH;
-            x=Math.max(2,hotbarLeft);
-            y=Math.max(2,graphics.guiHeight()-minecraft.gui.leftHeight-20);
-            minecraft.gui.leftHeight+=18;
-        }
-        ManaBar.render(graphics,minecraft.font,mana,x,y,width);
+        if(minecraft.screen instanceof net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<?>)return;
+        var pos=ManaHudPosition.position(graphics.guiWidth(),graphics.guiHeight());
+        ManaBar.render(graphics,minecraft.font,mana,pos.x(),pos.y(),ManaHudPosition.WIDTH);
     }
 }

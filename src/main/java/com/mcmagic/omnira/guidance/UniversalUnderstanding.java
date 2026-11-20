@@ -22,12 +22,16 @@ public final class UniversalUnderstanding {
         result.add(new ItemStack(advanced?ModItems.INFUSED_SPIRITUAL_CRYSTAL.get():ModItems.SPIRITUAL_CRYSTAL.get()));
         var pattern=stack.get(ModDataComponents.SPELL_PATTERN);
         if (pattern==null) return result;
-        result.add(new ItemStack(pattern.targetElement().microcoreItem().get()));
+        if(pattern.chaosTheory() || pattern.unordered())
+            result.add(new ItemStack(ModItems.UNORDERED_ELEMENT_CLUSTER.get(),pattern.chaosTheory()?2:1));
+        else result.add(new ItemStack(pattern.targetElement().microcoreItem().get()));
         if (pattern.shapeElement()!=null) result.add(new ItemStack(pattern.shapeElement().microcoreItem().get()));
         if (pattern.worldRotation()) return result;
         // Element keywords are unique, while repeated modifier keywords encode their multiplicity.
         var seen=new HashSet<String>();
-        for (var keyword:keywords(SpellPayload.of(stack))) {
+        var written=new ArrayList<>(keywords(SpellPayload.of(stack)));
+        if(pattern.unordered())written.remove("enhancement"); // Innate, never paid as a material.
+        for (var keyword:written) {
             Item item=switch(keyword) {
                 case "harm" -> ModItems.SHARP_BREATH.get();
                 case "healing" -> ModItems.HEALING_DEW.get();

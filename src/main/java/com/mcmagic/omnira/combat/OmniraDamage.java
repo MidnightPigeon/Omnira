@@ -41,6 +41,10 @@ public final class OmniraDamage {
     public static DamageSource source(Entity target,DamageSource original){
         return isTrue(original)||isOverdraw(original)?original:new Source(target,original,"true_damage",false);
     }
+    public static DamageSource original(DamageSource source){
+        while(source instanceof Source s && s.original!=null)source=s.original;
+        return source;
+    }
     public static boolean isTrue(DamageSource source){return source.is(TRUE_DAMAGE);}
     public static boolean isPayment(DamageSource source){return source instanceof Source s&&s.payment;}
     public static boolean isOverdraw(DamageSource source){return source.is(OVERDRAW);}

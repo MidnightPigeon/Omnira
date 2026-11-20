@@ -7,12 +7,14 @@
     "entries/guidance_orb.json"
   ],
   "chapters": [
+    "chapters/self_mastery/chapter.json",
     "chapters/initial_crafting/chapter.json",
     "chapters/overworld_ruins/chapter.json",
     "chapters/building/chapter.json"
   ],
   "directory_order": [
     "guidance_orb",
+    "self_mastery",
     "initial_crafting",
     "overworld_ruins",
     "building"

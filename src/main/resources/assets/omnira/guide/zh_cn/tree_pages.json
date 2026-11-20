@@ -1,6 +1,17 @@
 {
   "pages": [
     {
+      "id": "map:the_beginning",
+      "title": "一切的开端",
+      "icon": "omnira:guide_book",
+      "text": [
+        "从简易凝聚台取得第一枚灵性水晶。翻开入门章节，开始你的研究。"
+      ],
+      "links": [
+        "beginning"
+      ]
+    },
+    {
       "id": "map:construction",
       "title": "基础构件",
       "icon": "omnira:spiritual_crystal",
@@ -444,5 +455,8 @@
         "starlight_fishing_rod"
       ]
     }
-  ]
+  ],
+  "node_titles": {
+    "unbound_mana_core": "无羁魔力"
+  }
 }

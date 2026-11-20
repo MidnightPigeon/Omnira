@@ -1,0 +1,17 @@
+{
+  "id": "unbound_mana_core",
+  "title": "Unbound Mana Core",
+  "item": "omnira:unbound_mana_core",
+  "text": [
+    "Unruly mana slips its bonds, flowing through tangled strands of grey light. Made at the ordinary Assembly Table, this core invokes Chaos Affinity. Perhaps it is better suited to supplying power than being worn.",
+    "In machines, it supplies the same mana pulse output as a Spacetime Spell Core. Equipped in your spell core slot, it grants +50% spell power and +25% mana regeneration, but disables lifesteal.",
+    "Each time your spells deal damage, you take 25% of that damage as true damage, rounded up."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "affinity_ritual",
+      "label": "Elemental Affinity Ritual"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "unordered_combination",
+  "item": "omnira:unordered_element_cluster",
+  "title": "无序组合",
+  "text": [
+    "每次施放时，分别从地、水、火、风中抽取目标与形态，两次可以抽中同一种微核。法术按抽中的组合选取目标，并施加你写入的要素。",
+    "无序组合天生带有一级强化，可与写入的强化叠加。"
+  ],
+  "recipes": false
+}

@@ -1,0 +1,10 @@
+{
+  "id": "unordered_element_cluster",
+  "item": "omnira:unordered_element_cluster",
+  "title": "无序元素团",
+  "text": [
+    "在简易凝聚台上凝聚微核时，当心最后一刻的爆炸：以台面上方为中心，半径5格内会受到10点魔法伤害。",
+    "手持元素团右键可将其沿准星直线掷出。击中方块或实体时，半径5格内的生物和玩家都会受到20点魔法伤害，包括离得太近的投掷者。"
+  ],
+  "recipes": true
+}

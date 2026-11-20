@@ -35,7 +35,7 @@ public class SimpleCondensationTableBlockEntity extends CrystalProcessingTableBl
     public SimpleCondensationTableBlockEntity(BlockPos pos,BlockState state) {super(ModBlockEntityTypes.SIMPLE_CONDENSATION_TABLE.get(),pos,state,1);}
     protected SimpleCondensationTableBlockEntity(net.minecraft.world.level.block.entity.BlockEntityType<?> type,BlockPos pos,BlockState state) {super(type,pos,state,1);}
     @Override public int getContainerSize() {return 1;}
-    @Override public boolean canPlaceItem(int slot,ItemStack stack) {return false;}
+    @Override public boolean canPlaceItem(int slot,ItemStack stack) {return slot==0 && level!=null && level.getRecipeManager().getAllRecipesFor(com.mcmagic.omnira.registry.ModRecipes.CONDENSATION_TYPE.get()).stream().anyMatch(h->h.value().simpleInput() && h.value().ingredient().test(stack));}
     @Override protected Component getDefaultName() {return Component.translatable("container.omnira.simple_condensation_table");}
     @Override protected AbstractContainerMenu createMenu(int id,Inventory inventory) {return null;}
 }

@@ -70,7 +70,6 @@ public final class WaymarkBlock extends BaseEntityBlock {
     @Override protected InteractionResult useWithoutItem(BlockState state,Level level,BlockPos pos,Player player,BlockHitResult hit) {
         var base=state.getValue(HALF)==DoubleBlockHalf.UPPER?pos.below():pos;
         if(player instanceof ServerPlayer server && !player.isSpectator() && level.getBlockEntity(base) instanceof WaymarkBlockEntity mark) {
-            mark.discover(server);
             WaymarkMenu.openEdit(server,mark);
         }
         return InteractionResult.sidedSuccess(level.isClientSide);

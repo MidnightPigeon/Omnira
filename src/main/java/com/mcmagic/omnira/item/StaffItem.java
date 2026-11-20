@@ -36,12 +36,12 @@ public final class StaffItem extends Item {
         boolean independent=com.mcmagic.omnira.item.staff.StaffPart.of(com.mcmagic.omnira.item.staff.StaffAssembly.of(held).tip()).independentCooldown();
         int baseCooldown=independent?stats.cooldownTicks():sequenceCooldown(CrystalGridMenu.locate(player,-2),stats.shots(),stats.cooldownTicks());
         int spellCooldown=nextSpellCooldown(player);
-        int successes=castSequenceContents(player,context,1);
+        int successes=castSequenceContents(player,context,1,held);
         if(successes==0) return InteractionResultHolder.fail(held);
         held.set(ModDataComponents.STAFF_CAST_AT,player.level().getGameTime());
         int cooldown=Math.max(spellCooldown,SpellCooldowns.ticks(baseCooldown,context.cooldownReduction(),1));
         player.getCooldowns().addCooldown(this,cooldown+(spellCooldown>0?0:(stats.shots()-1)*com.mcmagic.omnira.item.staff.StaffEvents.SHOT_INTERVAL));
-        com.mcmagic.omnira.item.staff.StaffEvents.queue(player,held,spellCooldown>0?0:stats.shots()-1,cooldown);
+        com.mcmagic.omnira.item.staff.StaffEvents.queue(player,held,spellCooldown>0 || ChaosBeam.active(player)?0:stats.shots()-1,cooldown);
         return InteractionResultHolder.success(held);
     }
     public static int sequenceCooldown(ItemStack grid,int shots,int staffCooldown) {
@@ -60,15 +60,16 @@ public final class StaffItem extends Item {
         var grid=CrystalGridMenu.locate(player,-2);if(!(grid.getItem() instanceof CrystalGridItem item))return 0;
         int slot=CrystalGridMenu.next(grid,item.capacity);if(slot<0)return 0;
         var list=NonNullList.withSize(item.capacity,ItemStack.EMPTY);grid.getOrDefault(DataComponents.CONTAINER,ItemContainerContents.EMPTY).copyInto(list);
-        var pattern=list.get(slot).get(ModDataComponents.SPELL_PATTERN);return pattern!=null&&pattern.worldRotation()?1200:0;
+        var pattern=list.get(slot).get(ModDataComponents.SPELL_PATTERN);return pattern!=null&&pattern.worldRotation()?com.mcmagic.omnira.spell.world.WorldRotation.cooldown(player):0;
     }
     public static int castSequence(ServerPlayer player,ItemStack staff,int count) {
         if(!(staff.getItem() instanceof StaffItem)) return 0;
-        int successes=castSequenceContents(player,StaffCastContext.capture(player,staff),count);
+        int successes=castSequenceContents(player,StaffCastContext.capture(player,staff),count,staff);
         if(successes>0)staff.set(ModDataComponents.STAFF_CAST_AT,player.level().getGameTime());
         return successes;
     }
-    public static int castSequenceContents(ServerPlayer player,StaffCastContext context,int count) {
+    public static int castSequenceContents(ServerPlayer player,StaffCastContext context,int count,ItemStack carrier) {
+        if(ChaosBeam.active(player))return 0;
         ItemStack grid=CrystalGridMenu.locate(player,-2);
         if(!(grid.getItem() instanceof CrystalGridItem item)) {
             player.displayClientMessage(Component.translatable("message.omnira.grid.missing"),true);return 0;
@@ -92,14 +93,20 @@ public final class StaffItem extends Item {
             if(!player.getData(ModAttachments.MANA).canSpend(cost)) {
                 player.displayClientMessage(Component.translatable("message.omnira.mana.insufficient"),true);break;
             }
-            if(!SpellCasting.castFrom(player,grid,crystal.get(ModDataComponents.SPELL_PATTERN),payload,context.power(),
-                    new SpellCasting.Modifiers(context.stats().speedMultiplier(),context.stats().rangeMultiplier(),context.stats().selectionBonus()))) {
-                player.displayClientMessage(Component.translatable("message.omnira.crystal.invalid_target"),true);break;
+            if(pattern!=null && pattern.chaosTheory()){
+                if(carrier.isEmpty() || !ChaosBeam.start(player,carrier==player.getOffhandItem()?InteractionHand.OFF_HAND:InteractionHand.MAIN_HAND,
+                        grid,payload,context.power(),cost,context.stats().rangeMultiplier()))break;
+            } else {
+                if(!SpellCasting.castFrom(player,grid,pattern,payload,context.power(),
+                        new SpellCasting.Modifiers(context.stats().speedMultiplier(),context.stats().rangeMultiplier(),context.stats().selectionBonus()))) {
+                    player.displayClientMessage(Component.translatable("message.omnira.crystal.invalid_target"),true);break;
+                }
+                player.setData(ModAttachments.MANA,player.getData(ModAttachments.MANA).spend(cost));
             }
-            player.setData(ModAttachments.MANA,player.getData(ModAttachments.MANA).spend(cost));
             grid.set(ModDataComponents.GRID_CURSOR,(slot+1)%item.capacity);
             com.mcmagic.omnira.progression.BranchProgress.spell(player,grid,slot,CrystalGridMenu.next(grid,item.capacity));
             successes++;
+            if(ChaosBeam.active(player))break;
         }
         return successes;
     }

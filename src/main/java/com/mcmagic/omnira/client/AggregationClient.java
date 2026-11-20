@@ -101,7 +101,7 @@ public final class AggregationClient {
             var quads=ParticleModelQuads.collect(Minecraft.getInstance().getModelManager().getModel(model("mote")));
             var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
             for(int i=0;i<(ultimate?8:4);i++){
-                int color=ultimate?net.minecraft.util.Mth.hsvToRgb((float)((i/8.0+t*.003)%1),.4F,1):pattern==null?0xADF0DE:(i%2==1&&pattern.shapeElement()!=null?pattern.shapeElement():pattern.targetElement()).tooltipColor();
+                int color=ultimate?net.minecraft.util.Mth.hsvToRgb((float)((i/8.0+t*.003)%1),.4F,1):pattern==null?0xADF0DE:(i%2==1&&pattern.shapeElement()!=null?pattern.shapeElement().tooltipColor():pattern.tooltipColor());
                 double a=t*.04+i*Math.PI*2/(ultimate?8:4);
                 pose.pushPose();pose.translate(Math.cos(a)*.36,Math.sin(a*1.5)*.28,Math.sin(a)*.3);
                 ParticleModelQuads.tinted(quads,pose,out,LightTexture.FULL_BRIGHT,overlay,color,.9F);pose.popPose();

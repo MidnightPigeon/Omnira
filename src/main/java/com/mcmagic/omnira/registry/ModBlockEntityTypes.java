@@ -62,7 +62,7 @@ public final class ModBlockEntityTypes {
             BLOCK_ENTITY_TYPES.register("liquid_crystal_ball",()->BlockEntityType.Builder.of(com.mcmagic.omnira.block.entity.LiquidCrystalBallBlockEntity::new,ModBlocks.LIQUID_CRYSTAL_BALL.get(),com.mcmagic.omnira.storage.CrystalStorageContent.FLUID_ORB.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.block.entity.SpellCoreBlockEntity>> SPELL_CORE=
             BLOCK_ENTITY_TYPES.register("spell_core",()->BlockEntityType.Builder.of(com.mcmagic.omnira.block.entity.SpellCoreBlockEntity::new,
-                    ModBlocks.TEST_SPELL_CORE.get(),ModBlocks.DREAM_SPELL_CORE.get(),ModBlocks.LIGHT_DARK_SPELL_CORE.get(),ModBlocks.SPACETIME_SPELL_CORE.get()).build(null));
+                    ModBlocks.TEST_SPELL_CORE.get(),ModBlocks.DREAM_SPELL_CORE.get(),ModBlocks.LIGHT_DARK_SPELL_CORE.get(),ModBlocks.SPACETIME_SPELL_CORE.get(),ModBlocks.UNBOUND_MANA_CORE.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.block.entity.NightHeronStatueBlockEntity>> NIGHT_HERON_STATUE=
             BLOCK_ENTITY_TYPES.register("night_heron_statue",()->BlockEntityType.Builder.of(com.mcmagic.omnira.block.entity.NightHeronStatueBlockEntity::new,ModBlocks.NIGHT_HERON_STATUE.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.mcmagic.omnira.block.entity.PureVesselBlockEntity>> PURE_VESSEL=

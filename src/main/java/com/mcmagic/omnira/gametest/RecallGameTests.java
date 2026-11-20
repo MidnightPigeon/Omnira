@@ -23,6 +23,33 @@ import java.util.UUID;
 @PrefixGameTestTemplate(false)
 public final class RecallGameTests {
     @GameTest(template="spell_arena")
+    public static void placeOpenAndEditBookmark(GameTestHelper h) {
+        var mark=mark(h);
+        var first=player(h,Items.STICK);
+        var second=player(h,Items.STICK);
+        var level=h.getLevel();
+        var directory=WaymarkDirectory.get(level);
+        var pos=mark.getBlockPos();
+        first.setPos(pos.getCenter());
+        second.setPos(pos.getCenter());
+        var state=level.getBlockState(pos);
+        state.getBlock().setPlacedBy(level,pos,state,first,ItemStack.EMPTY);
+        h.assertTrue(directory.knows(first.getUUID(),mark.id()) && !directory.knows(second.getUUID(),mark.id()),"Placement failed personal discovery");
+        var upper=pos.above();
+        var hit=new net.minecraft.world.phys.BlockHitResult(upper.getCenter(),Direction.UP,upper,false);
+        level.getBlockState(upper).useWithoutItem(level,second,hit);
+        level.getBlockState(upper).useWithoutItem(level,second,hit);
+        h.assertTrue(directory.list(second.getUUID()).size()==1,"Opening an existing waymark must record exactly once");
+        var buf=new net.minecraft.network.RegistryFriendlyByteBuf(io.netty.buffer.Unpooled.buffer(),level.registryAccess());
+        com.mcmagic.omnira.menu.WaymarkMenu.writeOpenData(buf,true,InteractionHand.MAIN_HAND,java.util.List.of(mark.entry()),null);
+        var menu=new com.mcmagic.omnira.menu.WaymarkMenu(7,second.getInventory(),buf);
+        buf.release();
+        menu.rename(second,"Renamed");
+        h.assertTrue(directory.list(first.getUUID()).getFirst().name().equals("Renamed")
+                && directory.list(second.getUUID()).getFirst().name().equals("Renamed"),"Rename did not update personal lists");
+        h.succeed();
+    }
+    @GameTest(template="spell_arena")
     public static void locationNamesPersistAndMigrate(GameTestHelper h) {
         var mark=mark(h);
         var level=h.getLevel();

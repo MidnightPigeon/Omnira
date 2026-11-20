@@ -1,1 +1,10 @@
-{"replace":false,"values":["omnira:primordial_spell_core","omnira:dream_spell_core","omnira:light_dark_spell_core","omnira:spacetime_spell_core"]}
+{
+  "replace": false,
+  "values": [
+    "omnira:primordial_spell_core",
+    "omnira:dream_spell_core",
+    "omnira:light_dark_spell_core",
+    "omnira:spacetime_spell_core",
+    "omnira:unbound_mana_core"
+  ]
+}

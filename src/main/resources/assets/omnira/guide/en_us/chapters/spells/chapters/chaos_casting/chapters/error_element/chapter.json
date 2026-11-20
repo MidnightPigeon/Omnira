@@ -1,0 +1,9 @@
+{
+  "id": "error_element",
+  "title": "The Error Effect",
+  "icon": "omnira:textures/gui/guide/icons/error.png",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/chaos_error.json"
+  ]
+}

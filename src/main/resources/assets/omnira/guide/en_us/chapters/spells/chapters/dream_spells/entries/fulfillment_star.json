@@ -4,7 +4,7 @@
   "title": "Star of Fulfillment",
   "text": [
     "This is an unstackable consumable, not a spell ingredient.",
-    "Right-click to lift the star above your head. It shatters and showers light before taking effect and consuming one star, after about 3.2 seconds. Switching the held item, dying or changing dimension cancels without consumption. Affinity and curse eligibility are each checked once when activated; either or both can take effect.",
+    "Right-click to lift the star above your head. It shatters and showers light before taking effect and consuming one star, after about 3.2 seconds. Switching the held item, dying or changing dimension cancels without consumption. Eligibility is checked when you activate the star.",
     "With an affinity, activate it to remove that affinity’s drawbacks and gain an additional 100 maximum mana, 10% spell power, 10% life steal and 10% damage reduction. Mana costs of affinity abilities remain. These bonuses do not stack and last with the current affinity.",
     "With a curse, activate it to remove the curse while retaining your talent. Both effects can apply together. The existing talent still prevents obtaining another; the Cleansing Ritual can still remove it.",
     "Completion restores full health and hunger, and repairs held items, armor and equipped curios. Inventory equipment is not repaired. With neither an affinity to perfect nor a curse to remove, it cannot be activated."

@@ -17,16 +17,17 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 /** Native item attributes with one shared modifier per held benefit, including hand swaps. */
 @EventBusSubscriber(modid="omnira")
 public final class HeldCombatAttributes {
+    private static final int FOUNDER_DAMAGE_BONUS = 5;
     public static final ResourceLocation FOUNDER_DAMAGE=ResourceLocation.parse("omnira:founder_damage"),
             FOUNDER_LEECH=ResourceLocation.parse("omnira:founder_leech"),GRIMOIRE_LEECH=ResourceLocation.parse("omnira:grimoire_leech");
     public static ItemAttributeModifiers founder(){return ItemAttributeModifiers.builder()
-            .add(ModAttributes.DAMAGE_BONUS,new AttributeModifier(FOUNDER_DAMAGE,2,AttributeModifier.Operation.ADD_VALUE),EquipmentSlotGroup.HAND)
+            .add(ModAttributes.DAMAGE_BONUS,new AttributeModifier(FOUNDER_DAMAGE,FOUNDER_DAMAGE_BONUS,AttributeModifier.Operation.ADD_VALUE),EquipmentSlotGroup.HAND)
             .add(ModAttributes.LIFESTEAL,new AttributeModifier(FOUNDER_LEECH,.25,AttributeModifier.Operation.ADD_VALUE),EquipmentSlotGroup.HAND).build();}
     public static boolean corrupted(Player player){return player.getMainHandItem().getItem() instanceof InfusedGrimoireItem book&&book.kind()==InfusedGrimoireItem.Kind.CORRUPTED;}
     public static void refresh(Player player){
         com.mcmagic.omnira.item.staff.BossStaffParts.refresh(player);
         boolean founder=FounderApprovalItem.held(player);
-        set(player,ModAttributes.DAMAGE_BONUS,FOUNDER_DAMAGE,founder?2:0);
+        set(player,ModAttributes.DAMAGE_BONUS,FOUNDER_DAMAGE,founder?FOUNDER_DAMAGE_BONUS:0);
         set(player,ModAttributes.LIFESTEAL,FOUNDER_LEECH,founder?.25:0);
         set(player,ModAttributes.LIFESTEAL,GRIMOIRE_LEECH,corrupted(player)?.5:0);
     }
@@ -41,6 +42,7 @@ public final class HeldCombatAttributes {
         return attribute==null?0:(float)attribute.getValue();
     }
     public static double lifeSteal(Player player,DamageSource source){
+        if(com.mcmagic.omnira.item.UnboundCoreEffects.equipped(player))return 0;
         refresh(player);double rate=player.getAttributeValue(ModAttributes.LIFESTEAL);
         boolean shot=source.getDirectEntity() instanceof com.mcmagic.omnira.spell.entity.SpellEntity spell&&spell.knowledgeLeech();
         // The corrupted grimoire retains its original melee/own-projectile scope and projectile snapshot.

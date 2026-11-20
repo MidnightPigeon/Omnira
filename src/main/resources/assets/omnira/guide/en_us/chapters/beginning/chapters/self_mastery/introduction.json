@@ -1,0 +1,6 @@
+{
+  "text": [
+    "Open your inventory (E by default). Hold the left mouse button on the mana bar for about half a second, drag it into place, then release. The position is saved locally for your player profile.",
+    "Modpacks can set offsetX and offsetY under [manaBar] in config/omnira-client.toml. Offsets are measured in GUI pixels from the upper-left corner of the hotbar, positive to the right and down. The defaults are −111 and 4. A personal position takes precedence."
+  ]
+}

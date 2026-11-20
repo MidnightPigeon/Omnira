@@ -32,6 +32,13 @@ public final class ManaBar {
                 }
             }
         }
+        boolean spacetime=mana.affinity()==com.mcmagic.omnira.mana.Affinity.SPACETIME.ordinal();
+        boolean chaos=mana.affinity()==com.mcmagic.omnira.mana.Affinity.CHAOS.ordinal();
+        if(fill>0 && (spacetime||chaos)){
+            double time=net.minecraft.Util.getMillis()/1000.0;
+            for(int i=0;i<fill;i++)for(int row=0;row<6;row++)
+                g.fill(left+2+i,y+3+row,left+3+i,y+4+row,ManaBandStyle.pixel(chaos,i,row,time));
+        }
         for(int tip : new int[]{x+2,x+width-3}) {
             g.fill(tip,y,tip+1,y+13,0xFF343139);
             g.fill(tip-1,y+2,tip+2,y+11,0xFF343139);
@@ -69,6 +76,14 @@ public final class ManaBar {
                         g.fill(tip-2+d,y+9-d,tip+3-d,y+10-d,0xFF9AC9FF);
                     }
                     g.fill(tip,y+6,tip+1,y+7,0xFFF3FFFF);
+                }
+                case CHAOS -> {
+                    g.fill(tip-2,y+2,tip+1,y+4,0xFF9EE8E0);
+                    g.fill(tip-3,y+4,tip-1,y+7,0xFF9EE8E0);
+                    g.fill(tip+1,y+6,tip+3,y+9,0xFFF5AEDC);
+                    g.fill(tip,y+9,tip+3,y+11,0xFFF5AEDC);
+                    g.fill(tip-1,y+5,tip+2,y+8,0xFF343139);
+                    g.fill(tip,y+6,tip+1,y+7,0xFFF9F1FF);
                 }
                 case DREAM -> {
                     g.fill(tip-2,y+3,tip+2,y+5,0xFF88B5FF);

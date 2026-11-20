@@ -1,0 +1,11 @@
+{
+  "id": "chaos_theory",
+  "item": "omnira:low_tier_magic_crystal",
+  "title": "Chaos Theory",
+  "text": [
+    "Error is the fixed effect. Only modifiers can be added. Hold use to channel the beam and release to stop. Taking damage does not interrupt it.",
+    "The beam reaches 32 blocks, plus 32 per level of Delay. Once per second it sends a pulse that acts on the first creature or block in its path when it arrives. Each level of Infusion adds one block to the impact radius, increasing its diameter from 1 to 3, 5, then 7 blocks.",
+    "Base mana cost per second is 10 times the number of components written into the crystal. Aiming into empty space still costs mana. Channeling stops if you cannot pay for the next pulse."
+  ],
+  "recipes": false
+}

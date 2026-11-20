@@ -29,13 +29,16 @@ public final class WorldRotation {
         final Set<BlockPos> machines=new HashSet<>();int cursor;double radius;
         Wave(ServerPlayer player){level=player.serverLevel();caster=player.getUUID();center=player.position();origin=BlockPos.containing(center);}
     }
+    public static int cooldown(ServerPlayer player){
+        return (int)Math.round(COOLDOWN*(com.mcmagic.omnira.mana.ChaosAffinity.active(player)&&!player.getData(ModAttachments.AFFINITY).perfected()?1.25:1));
+    }
     public static boolean cast(ServerPlayer player){
         var mana=player.getData(ModAttachments.MANA);long now=player.server.overworld().getGameTime();
         if(!player.isAlive()||player.isSpectator())return false;
         long ready=player.getData(ModAttachments.WORLD_ROTATION_READY);
         // A saved deadline cannot be more than one cooldown ahead of this world clock.
         // Rebuilt worlds may retain player attachments from the old timeline.
-        if(ready>now && ready-now>COOLDOWN){
+        if(ready>now && ready-now>COOLDOWN*1.25){
             player.setData(ModAttachments.WORLD_ROTATION_READY,0L);ready=0;
         }
         if(now<ready){
@@ -44,12 +47,17 @@ public final class WorldRotation {
         if(mana.current()<=0){
             player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.omnira.mana.insufficient"),true);return false;
         }
-        player.setData(ModAttachments.WORLD_ROTATION_READY,now+COOLDOWN);
-        player.setData(ModAttachments.MANA,mana.withCurrent(0));player.removeAllEffects();player.setHealth(player.getMaxHealth());
+        player.setData(ModAttachments.WORLD_ROTATION_READY,now+cooldown(player));
+        player.setData(ModAttachments.MANA,mana.withCurrent(0));
+        effect(player);
+        com.mcmagic.omnira.mana.ChaosAffinity.echo(player,WorldRotation::effect);
+        return true;
+    }
+    private static void effect(ServerPlayer player){
+        player.removeAllEffects();player.setHealth(player.getMaxHealth());
         player.getFoodData().setFoodLevel(20);player.getFoodData().setSaturation(20);repairCarried(player);
         WAVES.add(new Wave(player));player.serverLevel().playSound(null,player.blockPosition(),net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE,net.minecraft.sounds.SoundSource.PLAYERS,1,1);
         com.mcmagic.omnira.progression.BranchProgress.record(player,"fleeting_world");
-        return true;
     }
     private static void repairCarried(ServerPlayer player){
         var seen=Collections.newSetFromMap(new IdentityHashMap<ItemStack,Boolean>());

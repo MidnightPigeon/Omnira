@@ -35,6 +35,14 @@ public final class ModularStaffRenderer extends BlockEntityWithoutLevelRenderer 
         double time = mc.level == null ? 0 : mc.level.getGameTime()
                 + mc.getTimer().getGameTimeDeltaPartialTick(false);
         pose.pushPose();StaffCastMotion.apply(stack,context,pose,time);
+        var tip=StaffAssembly.of(stack).tip();
+        float tipHeight=23;
+        if(BossStaffTipRenderer.supports(tip)){
+            boolean storm=tip.is(com.mcmagic.omnira.registry.ModItems.STORM_TIP.get());
+            double top=storm?22.5+BossStaffTipRenderer.STORM_CENTER-20:24;
+            tipHeight=(float)(13+(top-12)*BossStaffTipRenderer.MOUNT_HEIGHT);
+        }
+        com.mcmagic.omnira.client.ChaosBeamVisuals.captureTip(stack,context,pose,7.5F/16,(tipHeight+.4F)/16,7.5F/16);
         int runeIndex = 0;
         // ItemRenderer already applied the staff's display transform and origin offset.
         for (var partStack : components) {

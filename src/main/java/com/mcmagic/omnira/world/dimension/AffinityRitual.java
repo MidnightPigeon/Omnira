@@ -130,6 +130,7 @@ public final class AffinityRitual {
         int[] colors=switch(affinity) {
             case ELEMENTAL -> new int[]{0xE5B76B,0x6CBCEC,0xF28D81,0xACDFB4};
             case DREAM -> new int[]{0x85ADFF,0xC093F5};
+            case CHAOS -> new int[]{0x61E2DF,0xF784AF,0xB79AEA};
             default -> new int[]{affinity.color};
         };
         for(int i=0;i<6;i++) {

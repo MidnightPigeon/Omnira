@@ -25,6 +25,7 @@
         "dream_spell_core",
         "light_dark_spell_core",
         "spacetime_spell_core",
+        "unbound_mana_core",
         "low_tier_magic_crystal",
         "high_tier_magic_crystal",
         "world_rotation_crystal"
@@ -517,7 +518,8 @@
         "dark_microcore",
         "time_microcore",
         "space_microcore",
-        "omni_microcore"
+        "omni_microcore",
+        "unordered_element_cluster"
       ]
     },
     {

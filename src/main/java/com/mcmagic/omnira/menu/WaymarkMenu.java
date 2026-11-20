@@ -51,7 +51,10 @@ public final class WaymarkMenu extends AbstractContainerMenu {
     public static void openRecall(ServerPlayer player,InteractionHand hand) {
         open(player,false,hand,WaymarkDirectory.get(player.serverLevel()).list(player.getUUID()).stream().limit(1024).toList());
     }
-    public static void openEdit(ServerPlayer player,WaymarkBlockEntity mark) {open(player,true,InteractionHand.MAIN_HAND,List.of(mark.entry()));}
+    public static void openEdit(ServerPlayer player,WaymarkBlockEntity mark) {
+        mark.discover(player);
+        open(player,true,InteractionHand.MAIN_HAND,List.of(mark.entry()));
+    }
     @Override public boolean stillValid(Player player) {
         if(player!=owner || !player.isAlive() || player.isSpectator()) return false;
         if(player.level().isClientSide) return true;
@@ -63,7 +66,9 @@ public final class WaymarkMenu extends AbstractContainerMenu {
     }
     public void rename(ServerPlayer player,String name) {
         if(editing && player.mayBuild() && stillValid(player) && player.level().getBlockEntity(entries.getFirst().pos()) instanceof WaymarkBlockEntity mark) {
-            mark.rename(name);player.closeContainer();
+            mark.rename(name);
+            WaymarkDirectory.get(player.serverLevel()).discover(player.getUUID(),mark.id());
+            player.closeContainer();
         }
     }
     @Override public boolean clickMenuButton(Player player,int index) {

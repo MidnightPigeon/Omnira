@@ -88,6 +88,8 @@ public final class ModBlocks {
             BlockBehaviour.Properties.of().strength(1.5F).sound(SoundType.AMETHYST).lightLevel(s->10).noOcclusion()));
     public static final DeferredBlock<Block> SPACETIME_SPELL_CORE=BLOCKS.register("spacetime_spell_core",()->new com.mcmagic.omnira.block.SpellCoreBlock(
             BlockBehaviour.Properties.of().strength(1.5F).sound(SoundType.AMETHYST).lightLevel(s->12).noOcclusion()));
+    public static final DeferredBlock<Block> UNBOUND_MANA_CORE=BLOCKS.register("unbound_mana_core",()->new com.mcmagic.omnira.block.SpellCoreBlock(
+            BlockBehaviour.Properties.of().strength(1.5F).sound(SoundType.AMETHYST).lightLevel(s->12).noOcclusion()));
     public static final DeferredBlock<Block> NIGHT_HERON_STATUE=BLOCKS.register("night_heron_statue",()->new com.mcmagic.omnira.block.NightHeronStatueBlock(
             BlockBehaviour.Properties.of().strength(3).requiresCorrectToolForDrops().sound(SoundType.AMETHYST).lightLevel(s->10).noOcclusion()));
     public static final DeferredBlock<Block> PURE_VESSEL=BLOCKS.register("pure_vessel",()->new com.mcmagic.omnira.block.PureVesselBlock(

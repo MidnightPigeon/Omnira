@@ -1,0 +1,10 @@
+{
+  "id": "unordered_construction",
+  "title": "无序构建",
+  "icon": "omnira:unordered_element_cluster",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/unordered_element_cluster.json",
+    "entries/unbound_mana_core.json"
+  ]
+}

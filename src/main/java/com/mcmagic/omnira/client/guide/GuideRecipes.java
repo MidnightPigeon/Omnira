@@ -77,10 +77,10 @@ public final class GuideRecipes {
         }
         for(var holder:manager.getAllRecipesFor(ModRecipes.CONDENSATION_TYPE.get())) {
             var recipe=holder.value();
-            if(recipe.result().is(item)) result.add(recipe.advanced()
-                    ?new Diagram(ModItems.ADVANCED_CONDENSATION_TABLE.get().getDescription(),
+            if(recipe.result().is(item)) result.add(!recipe.ingredient().isEmpty()
+                    ?new Diagram((recipe.advanced()?ModItems.ADVANCED_CONDENSATION_TABLE:ModItems.SIMPLE_CONDENSATION_TABLE).get().getDescription(),
                             List.of(ingredient(24,88,recipe.ingredient(),recipe.inputCount()),slot(104,88,recipe.result(),true)),
-                            List.of(mana(recipe.manaCost()),Component.translatable("jei.omnira.advanced_condensation_time")),recipe)
+                            List.of(mana(recipe.manaCost()),Component.translatable(recipe.advanced()?"jei.omnira.advanced_condensation_time":"jei.omnira.condensation_time")),recipe)
                     :new Diagram(ModItems.SIMPLE_CONDENSATION_TABLE.get().getDescription(),
                             List.of(slot(64,88,recipe.result(),true)),List.of(mana(recipe.manaCost()),Component.translatable("guide.omnira.no_input")),recipe));
         }

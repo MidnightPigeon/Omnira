@@ -1,0 +1,18 @@
+{
+  "id": "chaos_error",
+  "item": "",
+  "title": "Destruction and Backlash",
+  "text": [
+    "Error deals 5 base true damage to creatures and tries to break blocks with iron-tier mining capability. Each level of Enhancement adds 3 base damage and one mining tier. Spell power scales the damage, and every additional 25% spell power grants another mining tier.",
+    "Each creature left alive and each block left intact causes a separate backlash. You take 2 true damage and lose 10% of your current mana, with a minimum loss of 10 mana. When Infusion catches several targets, each backlash uses the remaining balance. If a backlash costs more mana than you have left, you die immediately.",
+    "Chaos Affinity prevents Error backlash damage, but still loses mana and dies from overdraw."
+  ],
+  "recipes": false,
+  "icon": "omnira:textures/gui/guide/icons/error.png",
+  "links": [
+    {
+      "target": "affinity_ritual",
+      "label": "Elemental Affinity Ritual"
+    }
+  ]
+}

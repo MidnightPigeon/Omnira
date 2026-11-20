@@ -18,7 +18,8 @@ public final class SpellCoreItem extends net.minecraft.world.item.BlockItem impl
         TEST("primordial_spell_core",com.mcmagic.omnira.registry.ModBlocks.TEST_SPELL_CORE,200,.15,.2,0,512),
         DREAM("dream_spell_core",com.mcmagic.omnira.registry.ModBlocks.DREAM_SPELL_CORE,400,.2,.3,10,1024),
         LIGHT_DARK("light_dark_spell_core",com.mcmagic.omnira.registry.ModBlocks.LIGHT_DARK_SPELL_CORE,400,.2,.3,0,1024),
-        SPACETIME("spacetime_spell_core",com.mcmagic.omnira.registry.ModBlocks.SPACETIME_SPELL_CORE,600,.3,.3,10,1024);
+        SPACETIME("spacetime_spell_core",com.mcmagic.omnira.registry.ModBlocks.SPACETIME_SPELL_CORE,600,.3,.3,10,2048),
+        UNBOUND("unbound_mana_core",com.mcmagic.omnira.registry.ModBlocks.UNBOUND_MANA_CORE,0,.5,.25,0,2048);
 
         private final String id;
         private final java.util.function.Supplier<? extends net.minecraft.world.level.block.Block> block;
@@ -50,6 +51,10 @@ public final class SpellCoreItem extends net.minecraft.world.item.BlockItem impl
     public Kind kind() {return kind;}
     @Override public void appendHoverText(ItemStack stack,TooltipContext context,java.util.List<net.minecraft.network.chat.Component> tooltip,net.minecraft.world.item.TooltipFlag flag) {
         super.appendHoverText(stack,context,tooltip,flag);
+        if(kind==Kind.UNBOUND){
+            tooltip.add(net.minecraft.network.chat.Component.translatable("tooltip.omnira.unbound_core.no_leech").withStyle(net.minecraft.ChatFormatting.RED));
+            tooltip.add(net.minecraft.network.chat.Component.translatable("tooltip.omnira.unbound_core.recoil").withStyle(net.minecraft.ChatFormatting.RED));
+        }
         if(kind==Kind.DREAM)tooltip.add(com.mcmagic.omnira.mana.DreamText.colored(net.minecraft.network.chat.Component.translatable("tooltip.omnira.dream_core_resonance").getString()));
     }
     @Override public String getDescriptionId() {return "item.omnira."+kind.id;}
@@ -59,7 +64,7 @@ public final class SpellCoreItem extends net.minecraft.world.item.BlockItem impl
         Multimap<Holder<Attribute>,AttributeModifier> modifiers=LinkedHashMultimap.create();
         if(!context.identifier().equals("spell_core") || !PrimarySpellAccessory.primary(context)) return modifiers;
         id=PrimarySpellAccessory.modifierId("spell_core");
-        modifiers.put(ModAttributes.MAX_MANA,new AttributeModifier(id,kind.mana,AttributeModifier.Operation.ADD_VALUE));
+        if(kind.mana!=0)modifiers.put(ModAttributes.MAX_MANA,new AttributeModifier(id,kind.mana,AttributeModifier.Operation.ADD_VALUE));
         modifiers.put(ModAttributes.SPELL_POWER,new AttributeModifier(id,kind.bonus,AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         modifiers.put(ModAttributes.MANA_REGEN,new AttributeModifier(id,kind.regen,AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         if(kind.costReduction!=0)modifiers.put(ModAttributes.COST_REDUCTION,new AttributeModifier(id,kind.costReduction,AttributeModifier.Operation.ADD_VALUE));

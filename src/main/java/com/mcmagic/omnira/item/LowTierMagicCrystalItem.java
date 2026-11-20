@@ -31,6 +31,15 @@ public class LowTierMagicCrystalItem extends Item {
             }
             return InteractionResultHolder.fail(stack);
         }
+        if(stack.get(ModDataComponents.SPELL_PATTERN).chaosTheory()){
+            if(player instanceof net.minecraft.server.level.ServerPlayer p){
+                var payload=com.mcmagic.omnira.spell.SpellPayload.of(stack);
+                if(!com.mcmagic.omnira.spell.ChaosBeam.start(p,hand,ItemStack.EMPTY,payload,p.getAttributeValue(com.mcmagic.omnira.registry.ModAttributes.SPELL_POWER),
+                        com.mcmagic.omnira.mana.ManaCosts.cost(p,payload.baseCost())))return InteractionResultHolder.fail(stack);
+                player.awardStat(Stats.ITEM_USED.get(this));
+            }
+            return InteractionResultHolder.sidedSuccess(stack,level.isClientSide);
+        }
         if (!level.isClientSide) {
             if (!SpellCasting.castFrom(player,stack, stack.get(ModDataComponents.SPELL_PATTERN.get()), com.mcmagic.omnira.spell.SpellPayload.of(stack), player.getAttributeValue(com.mcmagic.omnira.registry.ModAttributes.SPELL_POWER),SpellCasting.Modifiers.NONE)) {
                 player.displayClientMessage(Component.translatable("message.omnira.crystal.invalid_target"), true);
@@ -43,6 +52,11 @@ public class LowTierMagicCrystalItem extends Item {
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
     }
 
+    @Override public boolean onDroppedByPlayer(ItemStack stack, Player player) {
+        if(player instanceof net.minecraft.server.level.ServerPlayer p)com.mcmagic.omnira.spell.ChaosBeam.beforeDrop(p,stack);
+        return !stack.isEmpty() && super.onDroppedByPlayer(stack,player);
+    }
+
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         SpellPattern pattern = stack.get(ModDataComponents.SPELL_PATTERN.get());
@@ -53,7 +67,7 @@ public class LowTierMagicCrystalItem extends Item {
         }
 
         var payload=com.mcmagic.omnira.spell.SpellPayload.of(stack);
-        var form=pattern.composite()?keyword("spell_composite",pattern.compositeName(),pattern.targetElement()):
+        var form=pattern.composite()?Component.translatable("spell_composite.omnira."+pattern.compositeName()).withStyle(s->s.withColor(pattern.tooltipColor())):
                 keyword("spell_target_keyword",pattern.targetKeyword().getSerializedName(),pattern.targetElement());
         if(pattern.shapeElement()!=null)form.append(Component.literal(", ").withStyle(ChatFormatting.GRAY))
                 .append(keyword("spell_shape_keyword",pattern.shapeKeyword().getSerializedName(),pattern.shapeElement()));

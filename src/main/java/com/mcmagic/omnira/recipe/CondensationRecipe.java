@@ -12,19 +12,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-public record CondensationRecipe(int manaCost,ItemStack result,Ingredient ingredient,int inputCount) implements Recipe<SingleRecipeInput> {
+public record CondensationRecipe(int manaCost,ItemStack result,Ingredient ingredient,int inputCount,boolean simpleInput) implements Recipe<SingleRecipeInput> {
     public CondensationRecipe { result=result.copy(); }
     public CondensationRecipe(int manaCost,ItemStack result,Ingredient ingredient){this(manaCost,result,ingredient,1);}
     public CondensationRecipe(int manaCost,ItemStack result) {this(manaCost,result,Ingredient.EMPTY);}
-    public boolean advanced() {return !ingredient.isEmpty();}
+    public CondensationRecipe(int manaCost,ItemStack result,Ingredient ingredient,int count){this(manaCost,result,ingredient,count,false);}
+    public boolean advanced() {return !ingredient.isEmpty() && !simpleInput;}
     public static final MapCodec<CondensationRecipe> CODEC=RecordCodecBuilder.mapCodec(i->i.group(
             Codec.intRange(0,Integer.MAX_VALUE).fieldOf("mana_cost").forGetter(CondensationRecipe::manaCost),
             ItemStack.STRICT_CODEC.fieldOf("result").forGetter(CondensationRecipe::result),
             Ingredient.CODEC.optionalFieldOf("ingredient",Ingredient.EMPTY).forGetter(CondensationRecipe::ingredient),
-            Codec.intRange(1,64).optionalFieldOf("count",1).forGetter(CondensationRecipe::inputCount)).apply(i,CondensationRecipe::new));
+            Codec.intRange(1,64).optionalFieldOf("count",1).forGetter(CondensationRecipe::inputCount),
+            Codec.BOOL.optionalFieldOf("simple_input",false).forGetter(CondensationRecipe::simpleInput)).apply(i,CondensationRecipe::new));
     public static final StreamCodec<RegistryFriendlyByteBuf,CondensationRecipe> STREAM_CODEC=StreamCodec.composite(
-            ByteBufCodecs.VAR_INT,CondensationRecipe::manaCost,ItemStack.STREAM_CODEC,CondensationRecipe::result,Ingredient.CONTENTS_STREAM_CODEC,CondensationRecipe::ingredient,ByteBufCodecs.VAR_INT,CondensationRecipe::inputCount,CondensationRecipe::new);
-    @Override public boolean matches(SingleRecipeInput input,Level level) {return advanced()?ingredient.test(input.item())&&input.item().getCount()==inputCount&&RecipeInputSafety.empty(input.item()):input.item().isEmpty();}
+            ByteBufCodecs.VAR_INT,CondensationRecipe::manaCost,ItemStack.STREAM_CODEC,CondensationRecipe::result,Ingredient.CONTENTS_STREAM_CODEC,CondensationRecipe::ingredient,ByteBufCodecs.VAR_INT,CondensationRecipe::inputCount,ByteBufCodecs.BOOL,CondensationRecipe::simpleInput,CondensationRecipe::new);
+    @Override public boolean matches(SingleRecipeInput input,Level level) {return !ingredient.isEmpty()?ingredient.test(input.item())&&input.item().getCount()==inputCount&&RecipeInputSafety.empty(input.item()):input.item().isEmpty();}
     @Override public ItemStack assemble(SingleRecipeInput input,HolderLookup.Provider registries) {
         if(result.is(com.mcmagic.omnira.registry.ModItems.ENHANCED_RESONANCE_TERMINAL.get())
                 &&input.item().is(com.mcmagic.omnira.registry.ModItems.RESONANCE_TERMINAL.get()))

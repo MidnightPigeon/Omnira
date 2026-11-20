@@ -186,11 +186,12 @@ public final class OmniraJeiPlugin implements IModPlugin {
             },
             new Category<CondensationRecipe>(CONDENSATION,ModItems.SIMPLE_CONDENSATION_TABLE.get(),gui) {
                 @Override public void setRecipe(IRecipeLayoutBuilder b,CondensationRecipe r,IFocusGroup focus) {
-                    slot(b,RecipeIngredientRole.OUTPUT,88,65).addItemStack(r.result());
+                    if(r.simpleInput())slot(b,RecipeIngredientRole.INPUT,52,65).addItemStacks(java.util.Arrays.stream(r.ingredient().getItems()).map(stack->stack.copyWithCount(r.inputCount())).toList());
+                    slot(b,RecipeIngredientRole.OUTPUT,r.simpleInput()?124:88,65).addItemStack(r.result());
                 }
                 @Override public void draw(CondensationRecipe r,IRecipeSlotsView slots,GuiGraphics g,double x,double y) {
                     ring(g,new int[][]{{88,30},{120,48},{120,82},{88,100},{56,82},{56,48}});
-                    mana(g,r.manaCost(),"jei.omnira.condensation_time");
+                    mana(g,r.manaCost(),r.ingredient().isEmpty() ? "jei.omnira.condensation_time_no_input" : "jei.omnira.condensation_time");
                 }
             },
             new Category<CondensationRecipe>(ADVANCED_CONDENSATION,ModItems.ADVANCED_CONDENSATION_TABLE.get(),gui) {
@@ -234,13 +235,13 @@ public final class OmniraJeiPlugin implements IModPlugin {
                 }
                 @Override public void draw(Writing r,IRecipeSlotsView slots,GuiGraphics g,double x,double y) {
                     ring(g,new int[][]{points[0],points[1],points[5],points[4],points[3],points[2]});
-                    for(int i=2;i<6;i++)WritingSymbols.draw(g,points[i][0]-8,compactY(points[i][1])-8,i>=4,i);
+                    for(int i=2;i<(r.inputs().getFirst().is(ModItems.UNORDERED_ELEMENT_CLUSTER.get())?4:6);i++)WritingSymbols.draw(g,points[i][0]-8,compactY(points[i][1])-8,i>=4,i);
                     if(com.mcmagic.omnira.spell.SpellPattern.composite(r.inputs().getFirst()))
                         com.mcmagic.omnira.client.screen.CompositeSlotGhost.render(g,r.inputs().getFirst(),points[1][0]-8,compactY(points[1][1])-8);
                     mana(g,SpellPayload.of(r.output()).baseCost(),"jei.omnira.writing_time");
                 }
                 @Override public void getTooltip(mezz.jei.api.gui.builder.ITooltipBuilder tooltip,Writing r,IRecipeSlotsView slots,double x,double y){
-                    for(int i=2;i<6;i++)if(Math.abs(x-points[i][0])<9&&Math.abs(y-compactY(points[i][1]))<9){tooltip.addAll(WritingSymbols.tooltip(i>=4));return;}
+                    for(int i=2;i<(r.inputs().getFirst().is(ModItems.UNORDERED_ELEMENT_CLUSTER.get())?4:6);i++)if(Math.abs(x-points[i][0])<9&&Math.abs(y-compactY(points[i][1]))<9){tooltip.addAll(WritingSymbols.tooltip(i>=4));return;}
                 }
             }
         );
@@ -278,8 +279,15 @@ public final class OmniraJeiPlugin implements IModPlugin {
     private static List<Writing> writingRecipes() {
         var result=new ArrayList<Writing>();
         var cores=List.of(ModItems.EARTH_MICROCORE.get(),ModItems.WATER_MICROCORE.get(),ModItems.FIRE_MICROCORE.get(),ModItems.AIR_MICROCORE.get());
-        for(int kind=0;kind<3;kind++) {
-            var inputs=List.of(new ItemStack(kind==2?ModItems.TIME_MICROCORE.get():cores.getFirst()),kind==0?new ItemStack(cores.get(1)):ItemStack.EMPTY,
+        for(int kind=0;kind<5;kind++) {
+            var target=switch(kind){
+                case 2 -> new ItemStack(ModItems.TIME_MICROCORE.get());
+                case 3 -> ItemStack.EMPTY;
+                case 4 -> new ItemStack(ModItems.UNORDERED_ELEMENT_CLUSTER.get());
+                default -> new ItemStack(cores.getFirst());
+            };
+            var shape=kind>=3?new ItemStack(ModItems.UNORDERED_ELEMENT_CLUSTER.get()):kind==0?new ItemStack(cores.get(1)):ItemStack.EMPTY;
+            var inputs=List.of(target,shape,
                     ItemStack.EMPTY,ItemStack.EMPTY,ItemStack.EMPTY,ItemStack.EMPTY,
                     new ItemStack(ModItems.SPELL_INK.get()),new ItemStack(ModItems.SPIRITUAL_CRYSTAL.get()));
             var container=new SimpleContainer(9);

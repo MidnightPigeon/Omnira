@@ -13,7 +13,10 @@
     "An Enhanced Resonance Terminal grants Arcane Affinity: +500 maximum mana, +50% mana regeneration and −20% spell strength. Renouncing it confines you for one minute.",
     "A Spacetime Spell Core grants Spacetime Affinity: +20% spell strength and −20% mana regeneration. Direct spell hits deal true damage with or without Infusion. Left-click with a staff in your main hand to blink up to 24 blocks along your line of sight. Aim at the side of a block to land on top if there is room. The blink costs 50 base mana and shares the staff cooldown. The hourglass at the center of the lattice display shows its cooldown, even without a lattice equipped.",
     "Renouncing Spacetime Affinity destroys your talent and deals true damage equal to twice your maximum health.",
-    "Affinities are exclusive and survive death. Repeat the matching ritual to renounce yours. You cannot gain another affinity until the penalty ends or you die.",
+    "Invoke Chaos Affinity with an Unbound Mana Core: +10% spell power and immunity to Chaos Theory backlash damage (mana loss still applies), but -25% maximum mana and +25% spell cooldown.",
+    "Each successful spell has a 25% chance to repeat for free after 0.2 seconds. Multi-shot staves roll separately for each spell. Chaos Theory repeats the pulse effect instead. Echoes cannot trigger further echoes.",
+    "Renouncing Chaos Affinity draws a disintegration ray from a random point three blocks away every second for one minute, also striking creatures along its path. Death pauses the countdown; it resumes when you respawn.",
+    "Affinities are mutually exclusive and persist through death. Repeat the same ritual to renounce one. You cannot gain another affinity while a renunciation penalty remains. Death ends ongoing penalties except that of Chaos Affinity.",
     "Renouncing Light burns you for two minutes and deals one suffocation damage every half-second. Renouncing Dark applies Poison II for one minute and creates a self-harming, twenty-second mist every five seconds; death stops new mist.",
     "Renouncing Fourfold applies Slowness III, Mining Fatigue III and Darkness for two minutes, with one base magic damage every half-second. Logging out pauses rather than removes the penalty.",
     "Hover over the mana bar to view your affinity bonuses.",
@@ -32,6 +35,14 @@
     {
       "target": "fulfillment_star",
       "label": "Star of Fulfillment"
+    },
+    {
+      "target": "chaos_casting",
+      "label": "Chaos Casting"
+    },
+    {
+      "target": "unbound_mana_core",
+      "label": "Unbound Mana Core"
     }
   ],
   "figures": [

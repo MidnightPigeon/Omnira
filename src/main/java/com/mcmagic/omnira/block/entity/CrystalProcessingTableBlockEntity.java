@@ -53,7 +53,7 @@ public class CrystalProcessingTableBlockEntity extends BaseContainerBlockEntity 
 
     @Override
     public boolean canPlaceItem(int slot,ItemStack stack) {
-        return CrystalProcessingTableMenu.mayPlace(slot,stack)&&com.mcmagic.omnira.spell.SpellPattern.compatibleSlots(this,slot,stack);
+        return CrystalProcessingTableMenu.validChaosSlot(this,slot,stack)&&CrystalProcessingTableMenu.mayPlace(slot,stack)&&com.mcmagic.omnira.spell.SpellPattern.compatibleSlots(this,slot,stack);
     }
 
     @Override

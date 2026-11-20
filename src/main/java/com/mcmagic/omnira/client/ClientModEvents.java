@@ -57,7 +57,7 @@ public final class ClientModEvents {
                     com.mcmagic.omnira.registry.ModItems.TEST_SPELL_CORE.get(),
                     com.mcmagic.omnira.registry.ModItems.DREAM_SPELL_CORE.get(),
                     com.mcmagic.omnira.registry.ModItems.LIGHT_DARK_SPELL_CORE.get(),
-                    com.mcmagic.omnira.registry.ModItems.SPACETIME_SPELL_CORE.get()})
+                    com.mcmagic.omnira.registry.ModItems.SPACETIME_SPELL_CORE.get(),com.mcmagic.omnira.registry.ModItems.UNBOUND_MANA_CORE.get()})
                 top.theillusivec4.curios.api.client.CuriosRendererRegistry.register(item,
                         com.mcmagic.omnira.client.renderer.EquippedCrystalRenderer::new);
         });
@@ -382,7 +382,7 @@ public final class ClientModEvents {
                 if(renderer==null) renderer=new com.mcmagic.omnira.client.renderer.SpellCoreRenderer();
                 return renderer;
             }
-        },com.mcmagic.omnira.registry.ModItems.TEST_SPELL_CORE.get(),com.mcmagic.omnira.registry.ModItems.DREAM_SPELL_CORE.get(),com.mcmagic.omnira.registry.ModItems.LIGHT_DARK_SPELL_CORE.get(),com.mcmagic.omnira.registry.ModItems.SPACETIME_SPELL_CORE.get());
+        },com.mcmagic.omnira.registry.ModItems.TEST_SPELL_CORE.get(),com.mcmagic.omnira.registry.ModItems.DREAM_SPELL_CORE.get(),com.mcmagic.omnira.registry.ModItems.LIGHT_DARK_SPELL_CORE.get(),com.mcmagic.omnira.registry.ModItems.SPACETIME_SPELL_CORE.get(),com.mcmagic.omnira.registry.ModItems.UNBOUND_MANA_CORE.get());
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
             private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
             @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
@@ -465,6 +465,7 @@ public final class ClientModEvents {
         event.registerEntityRenderer(ModEntityTypes.VELOCIRAPTOR.get(),context->new com.mcmagic.omnira.client.renderer.AncientCompanionRenderer<>(context,false));
         event.registerBlockEntityRenderer(ModBlockEntityTypes.WAYMARK.get(),com.mcmagic.omnira.client.renderer.WaymarkRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.POCKET_BOTTLE.get(),net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.THROWN_UNORDERED_CLUSTER.get(),net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.UNSTABLE_AGGREGATE.get(),net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.TEMPORAL_AMBER.get(),com.mcmagic.omnira.client.renderer.TemporalAmberRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.RITUAL_ENERGY_CORE.get(),com.mcmagic.omnira.client.renderer.RitualEnergyCoreRenderer::new);

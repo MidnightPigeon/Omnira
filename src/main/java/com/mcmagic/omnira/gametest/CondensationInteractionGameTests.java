@@ -21,6 +21,58 @@ public final class CondensationInteractionGameTests {
         var p=new FakePlayer(h.getLevel(),new GameProfile(java.util.UUID.randomUUID(),"condense"));
         p.setPos(table.getBlockPos().getCenter().add(0,1,0));p.setXRot(90);p.setData(ModAttachments.MANA,new ManaState(500,500));return p;
     }
+    @GameTest(template="spell_arena") public static void thrownClusterImpacts(GameTestHelper h) {
+        var table = table(h,false);
+        var player = player(h,table);
+        var level = h.getLevel();
+        var item = ModItems.UNORDERED_ELEMENT_CLUSTER.get();
+        var hand = net.minecraft.world.InteractionHand.MAIN_HAND;
+        var origin = table.getBlockPos().getCenter().add(0,4,0);
+        player.setPos(origin);
+        player.setXRot(0);
+        player.setYRot(0);
+        player.setItemInHand(hand,new ItemStack(item,3));
+        for (boolean blockImpact : new boolean[]{false,true}) {
+            var target = h.spawn(net.minecraft.world.entity.EntityType.IRON_GOLEM,5,7,8);
+            target.setPos(origin.add(blockImpact ? 2 : 0,0,3.8));
+            if (blockImpact) level.setBlockAndUpdate(BlockPos.containing(player.getEyePosition().add(0,0,3)),
+                    net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+            item.use(level,player,hand);
+            var shot = level.getEntitiesOfClass(com.mcmagic.omnira.item.ThrownUnorderedCluster.class,
+                    player.getBoundingBox().inflate(2)).getFirst();
+            var velocity = shot.getDeltaMovement();
+            shot.tick();
+            h.assertTrue(!shot.isRemoved() && Math.abs(velocity.y)<.00001 && velocity.distanceToSqr(shot.getDeltaMovement())<.000001,
+                    "Cluster did not travel straight at launch speed");
+            for (int step=0;step<4 && !shot.isRemoved();step++) shot.tick();
+            h.assertTrue(shot.isRemoved() && target.getHealth()==target.getMaxHealth()-20,
+                    "Wrong impact damage, block impact="+blockImpact);
+            target.discard();
+        }
+        h.assertTrue(player.getItemInHand(hand).getCount()==1,"Wrong number of clusters consumed");
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void unorderedCluster(GameTestHelper h){
+        var t=table(h,false);var p=player(h,t);
+        var level=h.getLevel();
+        var core=ModItems.OMNI_MICROCORE.get();
+        var item=ModItems.UNORDERED_ELEMENT_CLUSTER.get();
+        var craft=net.minecraft.world.item.crafting.CraftingInput.of(3,1,java.util.List.of(new ItemStack(core),new ItemStack(core),new ItemStack(ModItems.FIRE_MICROCORE.get())));
+        var recipe=level.getRecipeManager().getRecipeFor(net.minecraft.world.item.crafting.RecipeType.CRAFTING,craft,level).orElseThrow();
+        h.assertTrue(recipe.value().assemble(craft,level.registryAccess()).is(item),"Mixed microcores did not craft cluster");
+        p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new ItemStack(core,2));
+        CondensationChannel.shortClick(p,t);
+        var center=net.minecraft.world.phys.Vec3.atBottomCenterOf(t.getBlockPos().above());
+        var near=h.spawn(net.minecraft.world.entity.EntityType.COW,5,3,5);
+        var far=h.spawn(net.minecraft.world.entity.EntityType.COW,12,3,5);
+        near.setPos(center.add(4,0,0));far.setPos(center.add(6,0,0));
+        float outside=far.getHealth();
+        h.assertTrue(p.getMainHandItem().getCount()==1 && t.work.start(p,level.getGameTime()-100),"Single manual input failed");
+        t.work.tick();
+        h.assertTrue(t.getItem(0).is(item)&&t.getItem(0).getCount()==1 && p.getData(ModAttachments.MANA).current()==400,"Wrong condensation output or cost");
+        h.assertTrue(near.getHealth()==0 && far.getHealth()==outside && !t.work.start(p),"Wrong blast bounds or output restarted");
+        h.succeed();
+    }
     @GameTest(template="spell_arena",timeoutTicks=240) public static void exactDurationDebitAndConcurrentLock(GameTestHelper h){
         var t=table(h,true);var p=player(h,t);var q=player(h,t);
         t.setItem(0,new ItemStack(ModItems.SPACETIME_KNOT.get()));

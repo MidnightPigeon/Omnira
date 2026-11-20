@@ -94,7 +94,7 @@ public final class AffinityGameTests {
         var p=player(h);
         for(var affinity:Affinity.values()) {
             state(p,affinity);AffinityEffects.refresh(p);
-            h.assertTrue(p.getAttributeValue(ModAttributes.MAX_MANA)==100+affinity.capacity,"Mana bonus duplicated or missing");
+            h.assertTrue(p.getAttributeValue(ModAttributes.MAX_MANA)==(100+affinity.capacity)*(affinity==Affinity.CHAOS?.75:1),"Mana bonus duplicated or missing");
             h.assertTrue(Math.abs(p.getAttributeValue(ModAttributes.MANA_REGEN)-1-affinity.regeneration)<.00001,"Regeneration bonus");
             h.assertTrue(Math.abs(p.getAttributeValue(ModAttributes.SPELL_POWER)-1-affinity.power)<.00001,"Power bonus");
             h.assertTrue(p.getAttributeValue(ModAttributes.COST_REDUCTION)==affinity.reduction,"Cost reduction");
@@ -115,7 +115,7 @@ public final class AffinityGameTests {
             var pedestal=(com.mcmagic.omnira.block.entity.CrystalPedestalBlockEntity)level.getBlockEntity(pos);
             pedestal.setItem(0,new ItemStack(DreamContent.DREAM_CRYSTAL_BEDROCK.get()));pedestals.add(pedestal);
         }
-        for(var affinity:new Affinity[]{Affinity.LIGHT,Affinity.DARK,Affinity.ELEMENTAL,Affinity.DREAM,Affinity.ARCANE,Affinity.SPACETIME}) {
+        for(var affinity:new Affinity[]{Affinity.LIGHT,Affinity.DARK,Affinity.ELEMENTAL,Affinity.DREAM,Affinity.ARCANE,Affinity.SPACETIME,Affinity.CHAOS}) {
             state(p,Affinity.NONE);
             p.setPos(center.getX()+1.5,center.getY(),center.getZ()+.5);
             fill(pedestals,affinity.ordinal());

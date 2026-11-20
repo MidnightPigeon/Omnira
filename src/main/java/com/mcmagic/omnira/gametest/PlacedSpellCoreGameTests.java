@@ -19,7 +19,7 @@ public final class PlacedSpellCoreGameTests {
         var level=h.getLevel();var player=h.makeMockPlayer(GameType.SURVIVAL);
         var p=h.absolutePos(new BlockPos(4,2,4));
         level.setBlockAndUpdate(p.below(),Blocks.STONE.defaultBlockState());
-        for(var item:java.util.List.of(ModItems.TEST_SPELL_CORE.get(),ModItems.DREAM_SPELL_CORE.get(),ModItems.LIGHT_DARK_SPELL_CORE.get(),ModItems.SPACETIME_SPELL_CORE.get())) {
+        for(var item:java.util.List.of(ModItems.TEST_SPELL_CORE.get(),ModItems.DREAM_SPELL_CORE.get(),ModItems.LIGHT_DARK_SPELL_CORE.get(),ModItems.SPACETIME_SPELL_CORE.get(),ModItems.UNBOUND_MANA_CORE.get())) {
             var state=((BlockItem)item).getBlock().defaultBlockState();
             level.setBlockAndUpdate(p,state);
             var hit=new BlockHitResult(Vec3.atCenterOf(p),Direction.UP,p,false);
@@ -49,7 +49,7 @@ public final class PlacedSpellCoreGameTests {
     @GameTest(template="spell_arena") public static void placeDropAndCurioAttributes(GameTestHelper h) {
         var level=h.getLevel();var player=h.makeMockPlayer(GameType.SURVIVAL);
         int index=0;
-        for(var item:java.util.List.of(ModItems.TEST_SPELL_CORE.get(),ModItems.DREAM_SPELL_CORE.get(),ModItems.LIGHT_DARK_SPELL_CORE.get(),ModItems.SPACETIME_SPELL_CORE.get())) {
+        for(var item:java.util.List.of(ModItems.TEST_SPELL_CORE.get(),ModItems.DREAM_SPELL_CORE.get(),ModItems.LIGHT_DARK_SPELL_CORE.get(),ModItems.SPACETIME_SPELL_CORE.get(),ModItems.UNBOUND_MANA_CORE.get())) {
             var p=h.absolutePos(new BlockPos(4+index*3,2,4));level.setBlockAndUpdate(p.below(),Blocks.STONE.defaultBlockState());
             var stack=new ItemStack(item);player.setItemInHand(InteractionHand.MAIN_HAND,stack);
             var hit=new BlockHitResult(Vec3.atBottomCenterOf(p),Direction.UP,p.below(),false);
@@ -63,7 +63,7 @@ public final class PlacedSpellCoreGameTests {
             h.assertTrue(drops.size()==1 && drops.getFirst().is(item) && drops.getFirst().getCount()==1,"Wrong core drop");
             var mods=((SpellCoreItem)item).getAttributeModifiers(new top.theillusivec4.curios.api.SlotContext("spell_core",player,0,false,true),
                     net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","placed_core_test"),new ItemStack(item));
-            h.assertTrue(mods.get(ModAttributes.MAX_MANA).iterator().next().amount()>0,"Placed core lost mana capacity");
+            h.assertTrue(item==ModItems.UNBOUND_MANA_CORE.get()?mods.get(ModAttributes.MAX_MANA).isEmpty():mods.get(ModAttributes.MAX_MANA).iterator().next().amount()>0,"Placed core has incorrect mana capacity");
             var power=mods.get(ModAttributes.SPELL_POWER).iterator().next();
             h.assertTrue(power.amount()>0 && power.operation()==net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                     "Placed core lost additive spell power");

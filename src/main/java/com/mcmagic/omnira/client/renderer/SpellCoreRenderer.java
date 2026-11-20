@@ -15,6 +15,7 @@ public final class SpellCoreRenderer extends BlockEntityWithoutLevelRenderer {
             case DREAM -> ((int)(120+55*phase)<<16)|((int)(175-55*phase)<<8)|255;
             case LIGHT_DARK -> {int shade=(int)(96+159*phase);yield shade<<16|shade<<8|shade;}
             case SPACETIME -> {int green=(int)(190+48*phase),blue=(int)(225+30*(1-phase));yield 0x85<<16|green<<8|blue;}
+            case UNBOUND -> {int shade=(int)(160+56*phase);yield shade<<16|shade<<8|shade;}
             default -> 0xBBD8EC;
         };
     }
@@ -42,6 +43,9 @@ public final class SpellCoreRenderer extends BlockEntityWithoutLevelRenderer {
         renderCore(stack,pose,buffers,light,overlay,time);
     }
     public static void renderCore(ItemStack stack,PoseStack pose,MultiBufferSource buffers,int light,int overlay,double time) {
+        if(stack.is(com.mcmagic.omnira.registry.ModItems.UNBOUND_MANA_CORE.get())){
+            UnboundCoreRenderer.render(stack,pose,buffers,overlay,time);return;
+        }
         var mc=Minecraft.getInstance();var out=buffers.getBuffer(CrystalGlassLayer.ATLAS);
         boolean dream=stack.is(com.mcmagic.omnira.registry.ModItems.DREAM_SPELL_CORE.get());
         boolean spacetime=stack.is(com.mcmagic.omnira.registry.ModItems.SPACETIME_SPELL_CORE.get());

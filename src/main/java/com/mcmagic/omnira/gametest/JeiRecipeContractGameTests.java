@@ -66,10 +66,10 @@ public final class JeiRecipeContractGameTests {
         int examples=0,recipes=0;
         for(var holder:h.getLevel().getRecipeManager().getAllRecipesFor(ModRecipes.CONDENSATION_TYPE.get())){
             var recipe=holder.value();recipes++;
-            var choices=recipe.advanced()?recipe.ingredient().getItems():new ItemStack[]{ItemStack.EMPTY};
+            var choices=!recipe.ingredient().isEmpty()?recipe.ingredient().getItems():new ItemStack[]{ItemStack.EMPTY};
             h.assertTrue(choices.length>0,"Empty condensation display ingredient: "+holder.id());
             for(var choice:choices){
-                var stack=choice.copyWithCount(recipe.advanced()?recipe.inputCount():0);examples++;
+                var stack=choice.copyWithCount(!recipe.ingredient().isEmpty()?recipe.inputCount():0);examples++;
                 h.assertTrue(recipe.matches(new SingleRecipeInput(stack),h.getLevel()),"Condensation display count rejected: "+holder.id());
             }
         }

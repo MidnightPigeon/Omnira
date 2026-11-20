@@ -29,7 +29,7 @@ public final class WeaverVisuals {
         for(var effect:EFFECTS){
             float progress=(mc.level.getGameTime()-effect.born()+event.getPartialTick().getGameTimeDeltaPartialTick(false))/12F;
             var data=effect.data();pose.pushPose();pose.translate(data.from().x-camera.x,data.from().y-camera.y,data.from().z-camera.z);
-            if(data.kind()==2)beam(out,pose,data.to().subtract(data.from()),1-progress);
+            if(data.kind()==2)beam(out,pose,data.to().subtract(data.from()),1-progress,0xFFFFFF);
             else{
                 float radius=Math.max(.01F,(data.kind()==0?progress:1-progress)*data.radius());
                 if(data.kind()==3)radius=Math.max(.01F,progress*data.radius());
@@ -46,12 +46,12 @@ public final class WeaverVisuals {
     public static void volume(VertexConsumer out,PoseStack pose,List<SpellVolumeGeometry.Quad> mesh,float radius,int color,float alpha){
         for(var q:mesh)for(var v:q.vertices())out.addVertex(pose.last().pose(),v[0]*radius,v[1]*radius,v[2]*radius).setColor(color>>16&255,color>>8&255,color&255,(int)(255*alpha));
     }
-    private static void beam(VertexConsumer out,PoseStack pose,Vec3 end,float alpha){
+    static void beam(VertexConsumer out,PoseStack pose,Vec3 end,float alpha,int color){
         var forward=end.normalize();var right=forward.cross(Math.abs(forward.y)>.95?new Vec3(1,0,0):new Vec3(0,1,0)).normalize().scale(.045);
         var up=right.cross(forward).normalize().scale(.045);
         Vec3[] corners={right.add(up),right.subtract(up),right.scale(-1).subtract(up),right.scale(-1).add(up)};
         for(int i=0;i<4;i++)for(var v:List.of(corners[i],corners[(i+1)%4],corners[(i+1)%4].add(end),corners[i].add(end)))
-            out.addVertex(pose.last().pose(),(float)v.x,(float)v.y,(float)v.z).setColor(255,255,255,(int)(alpha*230));
+            out.addVertex(pose.last().pose(),(float)v.x,(float)v.y,(float)v.z).setColor(color>>16&255,color>>8&255,color&255,(int)(alpha*230));
     }
     private WeaverVisuals(){}
 }

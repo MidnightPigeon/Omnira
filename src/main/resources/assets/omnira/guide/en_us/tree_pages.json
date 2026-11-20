@@ -1,6 +1,17 @@
 {
   "pages": [
     {
+      "id": "map:the_beginning",
+      "title": "Where It All Begins",
+      "icon": "omnira:guide_book",
+      "text": [
+        "Condense your first Spiritual Crystal, then open the introductory chapter to begin your research."
+      ],
+      "links": [
+        "beginning"
+      ]
+    },
+    {
       "id": "map:construction",
       "title": "Basic Components",
       "icon": "omnira:spiritual_crystal",
@@ -444,5 +455,8 @@
         "starlight_fishing_rod"
       ]
     }
-  ]
+  ],
+  "node_titles": {
+    "unbound_mana_core": "Unbound Mana"
+  }
 }

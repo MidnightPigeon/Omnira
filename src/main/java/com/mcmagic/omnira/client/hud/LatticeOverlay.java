@@ -124,7 +124,7 @@ public final class LatticeOverlay {
     private static void glyph(GuiGraphics g,int x,int y,SpellPattern pattern,int alpha) {
         if(pattern.shapeKeyword()==null) {
             g.fill(x-1,y-1,x+8,y+8,0x80202228);
-            int color=(alpha<<24)|pattern.targetElement().tooltipColor();
+            int color=(alpha<<24)|pattern.tooltipColor();
             g.fill(x+3,y+1,x+4,y+6,color);g.fill(x+1,y+3,x+6,y+4,color);
             return;
         }
@@ -135,7 +135,7 @@ public final class LatticeOverlay {
             case PROJECTILE->new String[]{"0000100","0001110","0011111","0001110","0010100","0100000","1000000"};
         };
         g.fill(x-1,y-1,x+8,y+8,0x80202228);
-        int target=(alpha<<24)|pattern.targetElement().tooltipColor();
+        int target=(alpha<<24)|pattern.tooltipColor();
         g.fill(x-1,y+7,x+8,y+8,target);
         int color=(alpha<<24)|(pattern.composite()?pattern.targetElement():pattern.shapeElement()).tooltipColor();
         for(int row=0;row<7;row++) for(int col=0;col<7;col++)
@@ -143,9 +143,9 @@ public final class LatticeOverlay {
     }
     private static Component patternLabel(SpellPattern pattern) {
         if(pattern.composite())return Component.translatable("spell_composite.omnira."+pattern.compositeName())
-                .withStyle(s->s.withColor(pattern.targetElement().tooltipColor()));
+                .withStyle(s->s.withColor(pattern.tooltipColor()));
         var label=Component.translatable("spell_target_keyword.omnira."+pattern.targetKeyword().getSerializedName())
-                .withStyle(s->s.withColor(pattern.targetElement().tooltipColor()));
+                .withStyle(s->s.withColor(pattern.tooltipColor()));
         if(pattern.shapeElement()!=null)label.append(Component.literal(" · "))
                 .append(Component.translatable("spell_shape_keyword.omnira."+pattern.shapeKeyword().getSerializedName())
                         .withStyle(s->s.withColor(pattern.shapeElement().tooltipColor())));

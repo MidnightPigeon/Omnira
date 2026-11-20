@@ -120,7 +120,8 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu implements
                     return ItemStack.EMPTY;
                 }
             } else if (isTargetMicrocore(stack)) {
-                if (!moveItemStackTo(stack, TARGET_CORE_SLOT, SHAPE_CORE_SLOT + 1, false)) {
+                boolean shapeFirst=SpellPattern.cluster(stack) && !getSlot(SHAPE_CORE_SLOT).hasItem();
+                if (!moveItemStackTo(stack, TARGET_CORE_SLOT, SHAPE_CORE_SLOT + 1, shapeFirst)) {
                     return ItemStack.EMPTY;
                 }
             } else if (isInk(stack)) {
@@ -156,13 +157,26 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu implements
     public static boolean isPrimaryMicrocore(ItemStack stack) {
         return ElementType.byMicrocore(stack).filter(ElementType::isPrimary).isPresent();
     }
-    public static boolean isTargetMicrocore(ItemStack stack){return isPrimaryMicrocore(stack)||SpellPattern.composite(stack);}
+    public static boolean isTargetMicrocore(ItemStack stack){return SpellPattern.cluster(stack)||isPrimaryMicrocore(stack)||SpellPattern.composite(stack);}
 
+    public static boolean isShapeMaterial(ItemStack stack){return isPrimaryMicrocore(stack)||SpellPattern.cluster(stack);}
+    public static boolean chaosSlots(Container inv,int slot,ItemStack stack,int elementStart,int elementEnd,int modStart,int modEnd){
+        boolean theoryTarget=SpellPattern.cluster(slot==0?stack:inv.getItem(0));
+        if(!theoryTarget)return true;
+        for(int i=elementStart;i<elementEnd;i++)if(!(i==slot?stack:inv.getItem(i)).isEmpty())return false;
+        for(int i=modStart;i<modEnd;i++){
+            var m=i==slot?stack:inv.getItem(i);
+            if(!m.isEmpty() && !m.is(ModItems.LINGERING_THREAD.get()) && !m.is(ModItems.INFUSION_BUD.get())
+                    && !m.is(ModItems.AMPLIFICATION_STAR.get()) && !m.is(ModItems.HOLY_HALO.get()))return false;
+        }
+        return true;
+    }
+    public static boolean validChaosSlot(Container inv,int slot,ItemStack stack){return chaosSlots(inv,slot,stack,4,6,2,4);}
     public static boolean isElement(ItemStack stack) {return stack.is(com.mcmagic.omnira.registry.ModItemTags.SPELL_ELEMENTS);}
     public static boolean mayPlace(int slot,ItemStack stack) {
         return switch(slot) {
             case 0 -> isTargetMicrocore(stack);
-            case 1 -> isPrimaryMicrocore(stack);
+            case 1 -> isShapeMaterial(stack);
             case 2,3 -> true;
             case 4,5 -> isElement(stack);
             case 6 -> isInk(stack);
@@ -185,7 +199,7 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu implements
     public boolean canProcessCrystal() {
         for(int i=ELEMENT_SLOT_START;i<ELEMENT_SLOT_END;i++)
             if(!container.getItem(i).isEmpty() && !isElement(container.getItem(i))) return false;
-        return (worldCompleting||com.mcmagic.omnira.mana.ManaCosts.canSpend(owner,baseManaCost()))
+        return validChaosSlot(container,0,container.getItem(0)) && (worldCompleting||com.mcmagic.omnira.mana.ManaCosts.canSpend(owner,baseManaCost()))
                 && SpellPattern.fromMicrocores(container.getItem(TARGET_CORE_SLOT),container.getItem(SHAPE_CORE_SLOT)).isPresent()
                 && isInk(container.getItem(INK_SLOT))
                 && container.getItem(SUBSTRATE_SLOT).is(ModItems.SPIRITUAL_CRYSTAL.get())
@@ -193,13 +207,13 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu implements
     }
 
     private void addTableSlots(Container container) {
-        addSlot(new FilteredSlot(container, TARGET_CORE_SLOT, 52, 32, s->isTargetMicrocore(s)&&SpellPattern.compatibleSlots(container,0,s)));
-        addSlot(new FilteredSlot(container, SHAPE_CORE_SLOT, 108, 32, s->isPrimaryMicrocore(s)&&SpellPattern.compatibleSlots(container,1,s)));
+        addSlot(new FilteredSlot(container, TARGET_CORE_SLOT, 52, 32, s->validChaosSlot(container,0,s)&&isTargetMicrocore(s)&&SpellPattern.compatibleSlots(container,0,s)));
+        addSlot(new FilteredSlot(container, SHAPE_CORE_SLOT, 108, 32, s->isShapeMaterial(s)&&SpellPattern.compatibleSlots(container,1,s)));
 
-        addSlot(new Slot(container, 2, 24, 68));
-        addSlot(new Slot(container, 3, 52, 104));
-        addSlot(new FilteredSlot(container, 4, 108, 104, CrystalProcessingTableMenu::isElement));
-        addSlot(new FilteredSlot(container, 5, 136, 68, CrystalProcessingTableMenu::isElement));
+        addSlot(new FilteredSlot(container, 2, 24, 68,s->validChaosSlot(container,2,s)));
+        addSlot(new FilteredSlot(container, 3, 52, 104,s->validChaosSlot(container,3,s)));
+        addSlot(new FilteredSlot(container, 4, 108, 104, s->isElement(s)&&validChaosSlot(container,4,s)));
+        addSlot(new FilteredSlot(container, 5, 136, 68, s->isElement(s)&&validChaosSlot(container,5,s)));
 
         addSlot(new FilteredSlot(container, INK_SLOT, 66, 64, CrystalProcessingTableMenu::isInk));
         addSlot(new FilteredSlot(container, SUBSTRATE_SLOT, 94, 64, stack -> stack.is(ModItems.SPIRITUAL_CRYSTAL.get())));
@@ -230,7 +244,7 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu implements
         return composeEffects(container,MODIFIER_SLOT_START,MODIFIER_SLOT_END,ELEMENT_SLOT_START,ELEMENT_SLOT_END);
     }
     public static java.util.List<com.mcmagic.omnira.spell.SpellEffect> composeEffects(Container container,int modifierStart,int modifierEnd,int elementStart,int elementEnd) {
-        int clocks=0,iron=0,infusions=0;
+        int clocks=0,iron=SpellPattern.cluster(container.getItem(1)) && container.getItem(0).isEmpty()?1:0,infusions=0;
         boolean infused=false;
         for(int i=modifierStart;i<modifierEnd;i++) {
             if(container.getItem(i).is(ModItems.LINGERING_THREAD.get())) clocks++;
@@ -267,6 +281,8 @@ public class CrystalProcessingTableMenu extends AbstractContainerMenu implements
         int baseCost=com.mcmagic.omnira.spell.SpellPayload.componentCost(components);
         var effects=composeEffects(container,modifierStart,modifierEnd,elementStart,elementEnd);
         var keywords=new java.util.ArrayList<String>();
+        if(pattern.unordered())keywords.add("enhancement");
+        if(pattern.chaosTheory())keywords.add("error");
         var seenKeywords=new java.util.HashSet<net.minecraft.world.item.Item>();
         for(int i=elementStart;i<elementEnd;i++) {
             var stack=container.getItem(i);

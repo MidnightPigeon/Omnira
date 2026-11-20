@@ -56,9 +56,9 @@ public final class GuideRecipeContractGameTests {
             var input=new SmithingRecipeInput(shown(d,17,90),shown(d,35,90),shown(d,53,90));
             h.assertTrue(recipe.matches(input,level),"Guide smithing inputs rejected");output(h,d,108,90,recipe.assemble(input,registries));
         }else if(source instanceof CondensationRecipe recipe){
-            var stack=recipe.advanced()?shown(d,24,88):ItemStack.EMPTY;
+            var stack=!recipe.ingredient().isEmpty()?shown(d,24,88):ItemStack.EMPTY;
             h.assertTrue(recipe.matches(new SingleRecipeInput(stack),level),"Guide condensation amount rejected");
-            output(h,d,recipe.advanced()?104:64,88,recipe.assemble(new SingleRecipeInput(stack),registries));
+            output(h,d,!recipe.ingredient().isEmpty()?104:64,88,recipe.assemble(new SingleRecipeInput(stack),registries));
         }else if(source instanceof AnalysisRecipe recipe){
             var slot=at(d,24,87);
             for(int tick=0;tick<slot.items().size();tick++){

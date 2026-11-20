@@ -124,6 +124,7 @@
     "omnira:spatial_stability_anchor",
     "omnira:dormant_spatial_stability_anchor",
     "omnira:phase_crystal_block",
-    "omnira:phase_crystal_cluster"
+    "omnira:phase_crystal_cluster",
+    "omnira:unbound_mana_core"
   ]
 }

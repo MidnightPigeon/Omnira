@@ -35,7 +35,7 @@ public final class GuideTreeScreen extends ResponsiveScreen {
     private final GuideTree tree;
     private static final GuideTreeView view=new GuideTreeView();
     private final Map<String,GuideTree.Node> nodes=new HashMap<>();
-    private final Map<String,ItemStack> icons=new HashMap<>();
+    private final Map<String,GuideIcon> icons=new HashMap<>();
     private final List<Edge> edges=new ArrayList<>();
     private final List<double[]> circle=new ArrayList<>();
     private record Edge(GuideTree.Node from,GuideTree.Node to,boolean extra,boolean association,List<double[]> points){}
@@ -51,7 +51,7 @@ public final class GuideTreeScreen extends ResponsiveScreen {
     private static final int INK=0xFFE6DDBA,GOLD=0xFFC9AD6D,LINE=0xFF557982,PAPER=0xFF152C36;
     public GuideTreeScreen(GuideBookScreen book,GuideContents contents){
         super(Component.translatable("guide.omnira.tree"));this.book=book;this.contents=contents;tree=GuideTree.load(contents);
-        for(var n:tree.nodes()){nodes.put(n.id(),n);icons.put(n.id(),GuideContents.icon(n.icon()));}
+        for(var n:tree.nodes()){nodes.put(n.id(),n);icons.put(n.id(),GuideIcon.resolve(n.icon()));}
         for(var n:tree.nodes()){
             for(int i=0;i<n.parents().size();i++){
                 var parent=nodes.get(n.parents().get(i));
@@ -120,7 +120,7 @@ public final class GuideTreeScreen extends ResponsiveScreen {
     public void returnBook(){preferred=false;minecraft.setScreen(book);}
     public void homeBook(){returnBook();book.treeHome();}
     @Override public void onClose(){book.closeGuide();}
-    private void open(GuideTree.Node node){selected=node.id();minecraft.setScreen(GuideBookScreen.fromTree(contents,this,node));}
+    private void open(GuideTree.Node node){selected=node.id();if(node.mapPage()!=null && node.mapPage().links().isEmpty() && node.mapPage().text().isEmpty())return;minecraft.setScreen(GuideBookScreen.fromTree(contents,this,node));}
     @Override public void renderBackground(GuiGraphics g,int x,int y,float partial){}
     @Override protected void renderContent(GuiGraphics g,int mx,int my,float partial){
         g.fill(0,0,width,height,0xEB101F29);g.fill(mapX-1,mapY-1,mapX+mapW+1,mapY+mapH+1,LINE);g.fill(mapX,mapY,mapX+mapW,mapY+mapH,0xFF0C1424);
@@ -167,7 +167,7 @@ public final class GuideTreeScreen extends ResponsiveScreen {
             int x=sx(n.x()),y=sy(n.y());if(x<mapX-50||x>mapX+mapW+50||y<mapY-35||y>mapY+mapH+35)continue;
             boolean detail=view.zoom()>=.55,focused=n.id().equals(active)||highlighted.contains(n.id());int r=detail?10:3,color=focused?0xFFFFE6A1:n.kind().equals("main")?GOLD:n.ring()?0xFFB59ECD:0xFF8EBCC6;
             g.fill(x-r,y-r,x+r+1,y+r+1,color);g.fill(x-r+1,y-r+1,x+r,y+r,PAPER);
-            if(detail){var icon=icons.get(n.id());if(!icon.isEmpty())g.renderItem(icon,x-8,y-8);else g.fill(x-2,y-2,x+3,y+3,color);}
+            if(detail){var icon=icons.get(n.id());if(!icon.isEmpty())icon.draw(g,x-8,y-8);else g.fill(x-2,y-2,x+3,y+3,color);}
             if(view.zoom()>=.9||view.zoom()>=.35&&n.overview()){
                 String name=font.plainSubstrByWidth(n.title(),view.zoom()>=.9?90:70);if(!name.equals(n.title()))name=font.plainSubstrByWidth(name,view.zoom()>=.9?82:62)+"…";
                 int half=font.width(name)/2;g.fill(x-half-2,y+r+2,x+half+3,y+r+13,0xE6152C36);g.drawString(font,name,x-half,y+r+3,INK,false);

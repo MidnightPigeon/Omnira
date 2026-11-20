@@ -59,7 +59,7 @@ public final class WeaverBolt extends Projectile {
         if(target.getUUID().equals(immuneBoss))return false;
         if(!(getOwner() instanceof LivingEntity owner)){discard();return false;}
         var physical=WeaverCombat.source(target,DamageTypes.MOB_PROJECTILE,this,owner,true,false);
-        float amount=WeaverCombat.damage(owner,3);
+        float amount=WeaverCombat.boltAndRayDamage(owner);
         // The shield receives both channels together; the shared hurt entry adds the other flat bonus.
         if(target.isDamageSourceBlocked(physical))target.hurt(physical,amount*2+com.mcmagic.omnira.combat.HeldCombatAttributes.flatBonus(owner));
         else{

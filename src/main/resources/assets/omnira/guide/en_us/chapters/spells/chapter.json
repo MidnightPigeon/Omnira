@@ -7,6 +7,7 @@
   "chapters": [
     "chapters/initial_spells/chapter.json",
     "chapters/dream_spells/chapter.json",
-    "chapters/advanced_spells/chapter.json"
+    "chapters/advanced_spells/chapter.json",
+    "chapters/chaos_casting/chapter.json"
   ]
 }

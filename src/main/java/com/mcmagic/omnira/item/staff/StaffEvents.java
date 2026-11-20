@@ -76,7 +76,7 @@ public final class StaffEvents {
             else player.getCooldowns().addCooldown(burst.staff.getItem(),burst.cooldown);
             return;
         }
-        if(StaffItem.castSequence(player,burst.staff,1)>0 && burst.remaining>1)
+        if(StaffItem.castSequence(player,burst.staff,1)>0 && !com.mcmagic.omnira.spell.ChaosBeam.active(player) && burst.remaining>1)
             BURSTS.put(player.getUUID(),new Burst(burst.staff,burst.snapshot,burst.grid,burst.hand,burst.dimension,
                     player.tickCount+SHOT_INTERVAL,burst.remaining-1,burst.cooldown));
         else player.getCooldowns().addCooldown(burst.staff.getItem(),burst.cooldown);

@@ -21,7 +21,7 @@ public final class ArcaneArquebusItem extends Item {
     public static boolean accepts(ItemStack stack) {
         if(!CrystalGridMenu.isCrystal(stack)) return false;
         var pattern=stack.get(ModDataComponents.SPELL_PATTERN);
-        return pattern.shapeKeyword()==SpellShapeKeyword.PROJECTILE
+        return pattern.mode()==SpellPattern.Mode.STANDARD && pattern.shapeKeyword()==SpellShapeKeyword.PROJECTILE
                 && (pattern.targetKeyword()==SpellTargetKeyword.TARGET || pattern.targetKeyword()==SpellTargetKeyword.AIM);
     }
     public static ItemStack crystal(ItemStack gun) {

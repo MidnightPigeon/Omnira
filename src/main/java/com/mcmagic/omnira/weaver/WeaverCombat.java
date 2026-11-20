@@ -17,6 +17,9 @@ import java.util.*;
 public final class WeaverCombat {
     private static final ThreadLocal<Boolean> REACTING=ThreadLocal.withInitial(()->false);
     public static boolean reacting(){return REACTING.get();}
+    static float boltAndRayDamage(LivingEntity owner){
+        return damage(owner,owner instanceof net.minecraft.world.entity.player.Player ? 5 : 3);
+    }
     public static float damage(LivingEntity owner,float base){
         if(owner instanceof net.minecraft.world.entity.player.Player)return (float)(base*com.mcmagic.omnira.spell.CastAttributes.power(owner,0));
         return base+(owner instanceof WeaverSpirit boss?2*boss.strength():0);
@@ -47,6 +50,17 @@ public final class WeaverCombat {
     private static boolean trueTarget(LivingEntity target,LivingEntity owner){return target!=owner&&target.isAlive()&&!(target instanceof ArmorStand);}
     public static boolean eligible(LivingEntity target,LivingEntity owner){return trueTarget(target,owner)&&!target.isSpectator()
             &&(!(target instanceof net.minecraft.world.entity.player.Player p)||!p.isCreative());}
+    public static void retributionRay(ServerLevel level,Vec3 start,Vec3 direction){
+        Vec3 end=start.add(direction.normalize().scale(64));
+        visual(level,2,start,end,0);
+        var hit=new HashSet<LivingEntity>();
+        for(var contact:level.getEntities((Entity)null,new AABB(start,end).inflate(1))){
+            var target=com.mcmagic.omnira.spell.SpellCasting.livingTarget(contact);
+            if(target==null || !eligible(target,null) || contact==target && target.isMultipartEntity())continue;
+            var box=contact.getBoundingBox().inflate(.15);
+            if((box.contains(start)||box.clip(start,end).isPresent()) && hit.add(target))rayHit(null,target,3,.1F);
+        }
+    }
     public static void lockedRay(LivingEntity owner,LivingEntity target){
         if(!(owner.level() instanceof ServerLevel level)||!trueTarget(target,owner))return;
         visual(level,2,owner.getEyePosition(),target.getBoundingBox().getCenter(),0);rayHit(owner,target);
@@ -63,7 +77,7 @@ public final class WeaverCombat {
             if(!box.contains(start) && box.clip(start,end).isEmpty())continue;
             if(contact instanceof net.minecraft.world.entity.boss.EnderDragonPart part){
                 // Let the dragon phase and struck part scale the hit before living damage bonuses.
-                part.hurt(source(target,OmniraDamage.TRUE_DAMAGE,owner,owner,false,false),damage(owner,3));
+                part.hurt(source(target,OmniraDamage.TRUE_DAMAGE,owner,owner,false,false),boltAndRayDamage(owner));
             }else rayHit(owner,target);
         }
     }
@@ -71,7 +85,7 @@ public final class WeaverCombat {
         if(!(owner.level() instanceof ServerLevel level)||!trueTarget(target,owner))return;
         visual(level,2,owner.getEyePosition(),target.getBoundingBox().getCenter(),0);rayHit(owner,target,damage,wearFraction);
     }
-    public static void rayHit(LivingEntity owner,LivingEntity target){rayHit(owner,target,damage(owner,3),.1F);}
+    public static void rayHit(LivingEntity owner,LivingEntity target){rayHit(owner,target,boltAndRayDamage(owner),.1F);}
     private static void rayHit(LivingEntity owner,LivingEntity target,float amount,float wearFraction){
         if(!trueTarget(target,owner)||!OmniraDamage.trueDamage(target,amount,source(target,OmniraDamage.TRUE_DAMAGE,owner,owner,false,false)))return;
         boolean armorBroken=false;var seen=Collections.newSetFromMap(new IdentityHashMap<net.minecraft.world.item.ItemStack,Boolean>());
@@ -83,7 +97,7 @@ public final class WeaverCombat {
                 if(slot.getType()==EquipmentSlot.Type.HUMANOID_ARMOR)armorBroken=true;
             }else stack.setDamageValue((int)remaining);
         }
-        if(armorBroken)armorExplosion((ServerLevel)owner.level(),target.getBoundingBox().getCenter(),target);
+        if(armorBroken)armorExplosion((ServerLevel)target.level(),target.getBoundingBox().getCenter(),target);
     }
     public static void armorExplosion(ServerLevel level,Vec3 center,LivingEntity wearer){
         visual(level,0,center,center,3);

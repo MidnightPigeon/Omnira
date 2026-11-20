@@ -1,0 +1,31 @@
+{
+  "type": "omnira:assembly",
+  "slots": [
+    {
+      "item": "omnira:unordered_element_cluster"
+    },
+    {
+      "item": "omnira:unordered_element_cluster"
+    },
+    {
+      "item": "omnira:unordered_element_cluster"
+    },
+    {
+      "item": "omnira:unordered_element_cluster"
+    },
+    {
+      "item": "omnira:unordered_element_cluster"
+    },
+    {
+      "item": "omnira:unordered_element_cluster"
+    },
+    {
+      "item": "omnira:fulfillment_star"
+    }
+  ],
+  "result": {
+    "id": "omnira:unbound_mana_core",
+    "count": 1
+  },
+  "outer_shapeless": true
+}

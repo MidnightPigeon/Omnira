@@ -35,6 +35,8 @@ abstract class StarlightRodHandMixin {
     @Inject(method="render",at=@At(value="INVOKE",target="Lcom/mojang/blaze3d/vertex/PoseStack;translate(FFF)V",ordinal=0,shift=At.Shift.AFTER))
     private void omnira$eyelet(ItemStack stack,ItemDisplayContext context,boolean left,PoseStack pose,
                                MultiBufferSource buffers,int light,int overlay,BakedModel model,CallbackInfo ci){
+        if(stack.getItem() instanceof com.mcmagic.omnira.item.LowTierMagicCrystalItem)
+            com.mcmagic.omnira.client.ChaosBeamVisuals.captureTip(stack,context,pose,.5F,.86F,.5F);
         if(omnira$angler!=null && (context.firstPerson() || context==ItemDisplayContext.THIRD_PERSON_LEFT_HAND || context==ItemDisplayContext.THIRD_PERSON_RIGHT_HAND))
             StarlightRodLine.held(omnira$angler,stack,context,pose,buffers);
     }

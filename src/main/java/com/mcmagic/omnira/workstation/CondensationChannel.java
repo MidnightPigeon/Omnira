@@ -42,9 +42,9 @@ public final class CondensationChannel {
         if(!current.isEmpty()){
             table.setItem(0,ItemStack.EMPTY);if(!p.getInventory().add(current))p.drop(current,false);return;
         }
-        if(!(table instanceof AdvancedCondensationTableBlockEntity)||held.isEmpty()||!table.canPlaceItem(0,held))return;
+        if(held.isEmpty()||!table.canPlaceItem(0,held))return;
         int count=p.level().getRecipeManager().getAllRecipesFor(com.mcmagic.omnira.registry.ModRecipes.CONDENSATION_TYPE.get()).stream()
-                .map(h->h.value()).filter(r->r.advanced()&&r.ingredient().test(held)).mapToInt(r->r.inputCount()).max().orElse(1);
+                .map(h->h.value()).filter(r->r.advanced()==table.work.advanced()&&r.ingredient().test(held)).mapToInt(r->r.inputCount()).max().orElse(1);
         table.setItem(0,held.split(Math.min(count,held.getCount())));p.getInventory().setChanged();
     }
     public static void stop(ServerPlayer p){var s=SESSIONS.remove(p.getUUID());if(s!=null&&s.table.work.ownedBy(p))s.table.work.cancel();}

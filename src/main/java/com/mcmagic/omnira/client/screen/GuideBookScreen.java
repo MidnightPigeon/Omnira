@@ -129,12 +129,12 @@ public final class GuideBookScreen extends ResponsiveScreen {
         CrystalUi.label(g,font,Component.literal(text),x,y,maxWidth,1,color);
     }
     private Button row(String name,String item,int index,int pageX,Runnable action) {
-        var icon=GuideContents.icon(item);
+        var icon=GuideIcon.resolve(item);
         var button=addRenderableWidget(new Button(left+pageX-1,top+45+index*23,132,20,Component.literal(name),b->action.run(),supplier->supplier.get()) {
             @Override protected void renderWidget(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
                 if(isHoveredOrFocused()) graphics.fill(getX(),getY(),getX()+width,getY()+height,0x18745232);
                 graphics.fill(getX()+23,getY()+height-1,getX()+width-3,getY()+height,0x307F6E50);
-                graphics.renderItem(icon,getX()+3,getY()+2);
+                icon.draw(graphics,getX()+3,getY()+2);
                 fit(graphics,name,getX()+23,getY()+(getHeight()-font.lineHeight)/2,104,0xFF514333);
             }
         });
@@ -388,7 +388,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
     }
     private void renderEntryPage(GuiGraphics g,int page,int pageX,int mouseX,int mouseY){
             int left=this.left+pageX-175;
-            g.renderItem(GuideContents.icon(entry.icon()),left+(pageX==19?198:178),top+21);
+            GuideIcon.resolve(entry.icon()).draw(g,left+(pageX==19?198:178),top+21);
             boolean links=page>=linkStart(),figure=page>=figureStart()&&page<recipeStart();
             String title=links?Component.translatable("guide.omnira.related").getString():figure?entry.figures().get(page-figureStart()).title():page<figureStart()?entry.title():recipes.get(page-recipeStart()).title().getString();
             fit(g,title,left+198+(pageX==19?20:0),top+25,pageX==19?75:79,0xFF314A58);

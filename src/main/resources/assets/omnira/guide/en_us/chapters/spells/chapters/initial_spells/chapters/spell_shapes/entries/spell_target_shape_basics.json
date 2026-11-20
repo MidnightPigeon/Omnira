@@ -4,7 +4,7 @@
   "icon": "omnira:modular_staff",
   "title": "Choosing Targets and Shapes",
   "text": [
-    "The upper-left slot requires a target microcore. For the four basic elements, the optional upper-right shape slot may remain empty for direct effects. Time and Space are exceptions: the first core supplies both target and form, reserving the second slot as a ghost.",
+    "When writing with microcores, the upper-left slot sets the target. An Unordered Element Cluster in the upper-right slot alone rolls both target and shape on each cast. For the four basic elements, the optional upper-right shape slot may remain empty for direct effects. Time and Space are exceptions: the first core supplies both target and form, reserving the second slot as a ghost.",
     "Earth alone affects the eight nearby ground positions and creatures above them once; Construction places blocks above the ground. Water alone affects yourself once. Fire alone affects a block face or creature within normal interaction reach. Air alone affects the first valid block or creature along your crosshair ray, at the same reach.",
     "Water on the left and Air on the right produces Self-Projectile. Swapping them produces Crosshair-Orbit. The same type of microcore can occupy both slots.",
     "Element and modifier slots may also be left empty. Different elements work together; two copies of the same element apply only once."

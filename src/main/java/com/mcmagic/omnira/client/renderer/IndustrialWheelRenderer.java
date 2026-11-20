@@ -35,7 +35,9 @@ public final class IndustrialWheelRenderer extends BlockEntityWithoutLevelRender
             p.pushPose();p.translate(x/16,29.4/16,z/16);p.mulPose(Axis.YP.rotationDegrees(a));p.scale(.28F,.28F,.28F);p.translate(-.5,-.5,-.5);draw(gear(i==0),s,p,b,light,overlay,false);p.popPose();
             if(i>0){p.pushPose();p.translate(x/16,29.4/16,z/16);p.mulPose(Axis.YP.rotationDegrees(a));p.scale(.8F,.8F,.8F);p.translate(-.5,-.5,-.5);draw(model("vane"),s,p,b,light,overlay,false);p.popPose();}
         }
-        p.pushPose();p.translate(.5,30.2/16,.5);p.mulPose(Axis.YP.rotationDegrees((float)angle));p.scale(.72F,.72F,.72F);p.mulPose(Axis.XP.rotationDegrees(-90));p.translate(-.5,-.5,-12./16);draw(model("hand"),s,p,b,light,overlay,true);p.popPose();
+        p.pushPose();p.translate(.5,30.2/16,.5);p.mulPose(Axis.YP.rotationDegrees((float)angle));p.scale(.72F,.72F,.72F);p.mulPose(Axis.XP.rotationDegrees(-90));p.translate(-.5,-.5,-12./16);draw(model("hand"),s,p,b,light,overlay,true);
+        com.mcmagic.omnira.client.ChaosBeamVisuals.captureTip(s,c,p,9F/16,9F/16,25.4F/16);
+        p.popPose();
         var rune=com.mcmagic.omnira.item.IndustrialWheelItem.rune(s);
         var part=com.mcmagic.omnira.item.staff.StaffPart.of(rune);
         if(part!=null){

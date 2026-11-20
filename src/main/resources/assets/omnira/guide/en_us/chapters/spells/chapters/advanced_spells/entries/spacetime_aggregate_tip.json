@@ -5,7 +5,7 @@
   "recipes": false,
   "text": [
     "Provides 1 rune slot, one cast per cycle, a 2-second base cooldown, +20% spell power and +10% additive cooldown reduction.",
-    "Uses the staff's own cooldown even at lattice cycle boundaries (1.8 seconds without other modifiers). Normal lattice spell order and mana costs remain unchanged."
+    "Uses the staff's own cooldown even at lattice cycle boundaries (1.8 seconds without other modifiers)."
   ],
   "links": [
     {

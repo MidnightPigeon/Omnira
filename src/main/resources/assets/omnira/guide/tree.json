@@ -2,10 +2,10 @@
   "radius": 720,
   "nodes": [
     {
-      "id": "simple_condensation_table",
+      "id": "map:the_beginning",
       "stage": 0,
       "kind": "main",
-      "target": "simple_condensation_table",
+      "target": "map:the_beginning",
       "parent": null,
       "also": [],
       "overview": true,
@@ -17,7 +17,7 @@
       "stage": 0,
       "kind": "junction",
       "target": "map:construction",
-      "parent": "simple_condensation_table",
+      "parent": "map:the_beginning",
       "also": [],
       "overview": false,
       "column": 0,
@@ -28,7 +28,7 @@
       "stage": 0,
       "kind": "branch",
       "target": "analysis_artisan_table",
-      "parent": "simple_condensation_table",
+      "parent": "map:the_beginning",
       "also": [],
       "overview": false,
       "column": -1,
@@ -44,6 +44,15 @@
       "overview": false,
       "column": -1,
       "row": 11
+    },
+    {
+      "id": "map:unordered_element_cluster",
+      "stage": 0,
+      "kind": "branch",
+      "target": "chaos_casting",
+      "parent": "map:basic_materials",
+      "column": -2,
+      "row": 12
     },
     {
       "id": "analysis_crystal",
@@ -344,6 +353,19 @@
       ],
       "overview": true,
       "column": 1,
+      "row": 4
+    },
+    {
+      "id": "unbound_mana_core",
+      "stage": 1,
+      "kind": "branch",
+      "target": "unbound_mana_core",
+      "parent": "fulfillment_star",
+      "also": [
+        "map:unordered_element_cluster"
+      ],
+      "overview": false,
+      "column": 2,
       "row": 4
     },
     {

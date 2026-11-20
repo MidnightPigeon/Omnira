@@ -23,7 +23,7 @@ public record GuideTree(double radius,List<Node> nodes) {
             if(!id.startsWith("map:")||book.destination(id).isPresent()||pages.containsKey(id))throw new IllegalArgumentException("Invalid map-only page: "+id);
             var links=new ArrayList<GuideContents.Link>();
             for(var ref:p.getAsJsonArray("links"))book.destination(ref.getAsString()).ifPresent(d->links.add(new GuideContents.Link(ref.getAsString(),d.title())));
-            if(links.isEmpty())continue;
+            if(links.isEmpty() && !p.getAsJsonArray("links").isEmpty())continue;
             var text=p.getAsJsonArray("text").asList().stream().map(JsonElement::getAsString).toList();
             String icon=p.get("icon").getAsString();
             pages.put(id,new GuideContents.Entry(id,icon,icon,p.get("title").getAsString(),text,false,"",List.copyOf(links),List.of()));
@@ -43,6 +43,8 @@ public record GuideTree(double radius,List<Node> nodes) {
             // The book has already applied required_mod visibility to chapters, entries and links.
             if(mapPage==null&&formal.isEmpty())continue;
             String title=mapPage!=null?mapPage.title():formal.orElseThrow().title();
+            if(localized.has("node_titles")&&localized.getAsJsonObject("node_titles").has(id))
+                title=localized.getAsJsonObject("node_titles").get(id).getAsString();
             String icon=mapPage!=null?mapPage.icon():formal.orElseThrow().entry()!=null?formal.get().entry().icon():formal.get().chapter().icon();
             var parents=new ArrayList<String>();
             if(n.has("parent")&&!n.get("parent").isJsonNull()&&!n.get("parent").getAsString().isBlank())parents.add(n.get("parent").getAsString());

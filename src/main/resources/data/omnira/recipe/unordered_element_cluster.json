@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "omnira:microcores"
+    },
+    {
+      "tag": "omnira:microcores"
+    },
+    {
+      "tag": "omnira:microcores"
+    }
+  ],
+  "result": {
+    "id": "omnira:unordered_element_cluster",
+    "count": 1
+  }
+}

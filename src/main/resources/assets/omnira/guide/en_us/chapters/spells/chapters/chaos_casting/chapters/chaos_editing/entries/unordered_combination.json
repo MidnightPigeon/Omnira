@@ -1,0 +1,10 @@
+{
+  "id": "unordered_combination",
+  "item": "omnira:unordered_element_cluster",
+  "title": "Unordered Combination",
+  "text": [
+    "Each cast draws twice from Earth, Water, Fire and Air, once for targeting and once for form. Both draws can give the same microcore. The resulting combination determines how your chosen effects reach their targets.",
+    "Unordered Combination has one innate level of Enhancement, which stacks with any Enhancement you write into the spell."
+  ],
+  "recipes": false
+}

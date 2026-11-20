@@ -95,8 +95,10 @@ public final class SpellCasting {
 
     public static HitResult target(Player caster,double range,boolean entities) {return target(caster,range,entities,false);}
     public static HitResult target(Player caster, double range, boolean entities,boolean outline) {
-        Vec3 start = caster.getEyePosition();
-        Vec3 end = start.add(caster.getLookAngle().scale(range));
+        return target(caster,caster.getEyePosition(),caster.getLookAngle(),range,entities,outline);
+    }
+    public static HitResult target(Player caster,Vec3 start,Vec3 direction,double range,boolean entities,boolean outline){
+        Vec3 end=start.add(direction.scale(range));
         BlockHitResult block = caster.level().clip(new ClipContext(start, end, outline?ClipContext.Block.OUTLINE:ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, caster));
         if (entities) {
             EntityHitResult hit = ProjectileUtil.getEntityHitResult(caster, start, block.getLocation(),
@@ -149,10 +151,27 @@ public final class SpellCasting {
         return caster.level().clip(new ClipContext(start,end,ClipContext.Block.OUTLINE,ClipContext.Fluid.NONE,caster));
     }
 
+    private static final java.util.List<ElementType> PRIMARY_FORMS=List.of(ElementType.EARTH,ElementType.WATER,ElementType.FIRE,ElementType.AIR);
+    public static SpellPattern rollUnordered(net.minecraft.util.RandomSource random){
+        return new SpellPattern(PRIMARY_FORMS.get(random.nextInt(4)),PRIMARY_FORMS.get(random.nextInt(4)));
+    }
     private static boolean cast(Player caster,SpellPattern pattern,SpellPayload payload,double power,
                                 double selectionBonus,double speedBonus,boolean explosive,boolean ghost,Modifiers modifiers) {
+        if(pattern!=null && pattern.worldRotation())
+            return caster instanceof net.minecraft.server.level.ServerPlayer player && com.mcmagic.omnira.spell.world.WorldRotation.cast(player);
+        boolean success=castEffect(caster,pattern,payload,power,selectionBonus,speedBonus,explosive,ghost,modifiers);
+        if(success)com.mcmagic.omnira.mana.ChaosAffinity.echo(caster,
+                player->castEffect(player,pattern,payload,power,selectionBonus,speedBonus,explosive,ghost,modifiers));
+        return success;
+    }
+    private static boolean castEffect(Player caster,SpellPattern pattern,SpellPayload payload,double power,
+                                     double selectionBonus,double speedBonus,boolean explosive,boolean ghost,Modifiers modifiers) {
         if (pattern==null || !(caster.level() instanceof ServerLevel level) || !caster.isAlive() || caster.isSpectator()) return false;
-        if(pattern.worldRotation())return caster instanceof net.minecraft.server.level.ServerPlayer player&&com.mcmagic.omnira.spell.world.WorldRotation.cast(player);
+        if(pattern.chaosTheory())return false; // Continuous casts require a held or toggled carrier.
+        if(pattern.unordered()){
+            pattern=rollUnordered(level.random);
+        }
+
         if(pattern.composite())return com.mcmagic.omnira.spell.entity.CompositeSpellMotion.cast(caster,pattern,payload,
                 com.mcmagic.omnira.fate.FateEffects.spellPower(caster,power),modifiers);
         SpellShapeKeyword shape = pattern.shapeKeyword();

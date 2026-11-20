@@ -14,7 +14,7 @@ public final class SpeedUpgrade {
     }
     public static int bonus(ItemStack core){
         if(!(core.getItem() instanceof SpellCoreItem spell))return 0;
-        return switch(spell.kind()){case TEST->1;case DREAM,LIGHT_DARK->2;case SPACETIME->3;};
+        return switch(spell.kind()){case TEST->1;case DREAM,LIGHT_DARK->2;case SPACETIME,UNBOUND->3;};
     }
     public static void cores(ItemStack plate,java.util.List<ItemStack> cores){
         plate.set(DataComponents.CONTAINER,ItemContainerContents.fromItems(cores));

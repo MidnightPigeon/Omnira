@@ -21,13 +21,13 @@ public final class CondensationWork {
     public int duration(){return advanced()?200:100;}
     public CondensationRecipe recipe(){
         return table.getLevel().getRecipeManager().getAllRecipesFor(ModRecipes.CONDENSATION_TYPE.get()).stream()
-                .map(h->h.value()).filter(r->r.advanced()==advanced() && (!advanced()||r.matches(new SingleRecipeInput(table.getItem(0)),table.getLevel())))
+                .map(h->h.value()).filter(r->r.advanced()==advanced() && fits(r))
                 .findFirst().orElse(null);
     }
     private boolean fits(CondensationRecipe r){
         if(r==null)return false;
         var stack=table.getItem(0);
-        return advanced()?r.matches(new SingleRecipeInput(stack),table.getLevel()):
+        return !r.ingredient().isEmpty()?r.matches(new SingleRecipeInput(stack),table.getLevel()):
                 (stack.isEmpty()||ItemStack.isSameItemSameComponents(stack,r.result()))
                 &&stack.getCount()+r.result().getCount()<=Math.min(table.getMaxStackSize(),r.result().getMaxStackSize());
     }
@@ -64,9 +64,14 @@ public final class CondensationWork {
             }
         }
         var player=owner;cancel();
-        if(advanced()||table.getItem(0).isEmpty())table.setItem(0,r.assemble(new SingleRecipeInput(table.getItem(0)),player.registryAccess()));
+        if(!r.ingredient().isEmpty()||table.getItem(0).isEmpty())table.setItem(0,r.assemble(new SingleRecipeInput(table.getItem(0)),player.registryAccess()));
         else table.getItem(0).grow(r.result().getCount());
         table.setChanged();table.getLevel().playSound(null,table.getBlockPos(),net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_CHIME,net.minecraft.sounds.SoundSource.BLOCKS,.7F,.8F);
+        if(r.simpleInput() && r.result().is(com.mcmagic.omnira.registry.ModItems.UNORDERED_ELEMENT_CLUSTER.get())){
+            var level=player.serverLevel();
+            var center=net.minecraft.world.phys.Vec3.atBottomCenterOf(table.getBlockPos().above());
+            com.mcmagic.omnira.item.ThrownUnorderedCluster.burst(level, center, player, null, 10);
+        }
         return true;
     }
 }

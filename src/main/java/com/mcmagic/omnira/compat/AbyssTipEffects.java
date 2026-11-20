@@ -37,9 +37,13 @@ public final class AbyssTipEffects {
         else if(direct instanceof ShadowMist mist){
             if(mist.abyssCast()==null||!mistHits(target.level(),mist.abyssCast()).add(target.getUUID()))return;
         }else return;
+        apply(target,event.getSource().getEntity());
+    }
+    public static void apply(net.minecraft.world.entity.LivingEntity target,net.minecraft.world.entity.Entity caster){
+        if(target.level().isClientSide || !target.isAlive())return;
         boolean curse=target.getRandom().nextBoolean();
         BuiltInRegistries.MOB_EFFECT.getHolder(ResourceLocation.parse(curse?"cataclysm:abyssal_curse":"cataclysm:abyssal_fear"))
-                .ifPresent(effect->target.addEffect(new MobEffectInstance(effect,600,curse?1:0),event.getSource().getEntity()));
+                .ifPresent(effect->target.addEffect(new MobEffectInstance(effect,600,curse?1:0),caster));
     }
     @SubscribeEvent public static void tick(net.neoforged.neoforge.event.tick.ServerTickEvent.Post event){
         for(var entry:MISTS.entrySet())if(entry.getKey().getGameTime()%200==0)

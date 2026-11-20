@@ -14,6 +14,7 @@ public final class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Omnira.MOD_ID);
     public static final DeferredItem<com.mcmagic.omnira.item.IndustrialWheelItem> INDUSTRIAL_WHEEL=ITEMS.registerItem("industrial_wheel",com.mcmagic.omnira.item.IndustrialWheelItem::new);
     public static final DeferredItem<Item> INCOMPLETE_INDUSTRIAL_WHEEL=ITEMS.registerSimpleItem("incomplete_industrial_wheel",new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> UNORDERED_ELEMENT_CLUSTER=ITEMS.registerItem("unordered_element_cluster",com.mcmagic.omnira.item.UnorderedClusterItem::new);
     public static final DeferredItem<Item> MUSIC_DISC_LIU_NIAN=ITEMS.registerSimpleItem("music_disc_liu_nian",new Item.Properties().stacksTo(1).rarity(Rarity.RARE)
             .jukeboxPlayable(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.JUKEBOX_SONG,
                     net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("omnira","liu_nian"))));
@@ -187,6 +188,7 @@ public final class ModItems {
     public static final DeferredItem<Item> TEST_SPELL_CORE=ITEMS.registerItem("primordial_spell_core",com.mcmagic.omnira.item.SpellCoreItem::new,new Item.Properties());
     public static final DeferredItem<Item> DREAM_SPELL_CORE=ITEMS.registerItem("dream_spell_core",p->new com.mcmagic.omnira.item.SpellCoreItem(p,true),new Item.Properties().rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> LIGHT_DARK_SPELL_CORE=ITEMS.registerItem("light_dark_spell_core",p->new com.mcmagic.omnira.item.SpellCoreItem(p,com.mcmagic.omnira.item.SpellCoreItem.Kind.LIGHT_DARK),new Item.Properties().rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> UNBOUND_MANA_CORE=ITEMS.registerItem("unbound_mana_core",p->new com.mcmagic.omnira.item.SpellCoreItem(p,com.mcmagic.omnira.item.SpellCoreItem.Kind.UNBOUND),new Item.Properties().rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> SPACETIME_SPELL_CORE=ITEMS.registerItem("spacetime_spell_core",p->new com.mcmagic.omnira.item.SpellCoreItem(p,com.mcmagic.omnira.item.SpellCoreItem.Kind.SPACETIME),new Item.Properties().rarity(Rarity.EPIC));
     public static final DeferredItem<Item> SHARP_BREATH=ITEMS.registerSimpleItem("sharp_breath",new Item.Properties());
     public static final DeferredItem<Item> HEALING_DEW=ITEMS.registerSimpleItem("healing_dew",new Item.Properties());

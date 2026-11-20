@@ -1,0 +1,12 @@
+{
+  "type": "omnira:condensation",
+  "simple_input": true,
+  "mana_cost": 100,
+  "ingredient": {
+    "tag": "omnira:microcores"
+  },
+  "result": {
+    "id": "omnira:unordered_element_cluster",
+    "count": 1
+  }
+}

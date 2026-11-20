@@ -58,8 +58,9 @@ public final class EngineCoreGameTests {
     }
     @GameTest(template="spell_arena") public static void coresDriveBaseAndLatticeOutputs(GameTestHelper h) {
         var e=engine(h);
-        for(var item:java.util.List.of(ModItems.TEST_SPELL_CORE.get(),ModItems.DREAM_SPELL_CORE.get(),ModItems.LIGHT_DARK_SPELL_CORE.get(),ModItems.SPACETIME_SPELL_CORE.get())) {
-            int base=item==ModItems.TEST_SPELL_CORE.get()?512:1024;
+        for(var item:java.util.List.of(ModItems.TEST_SPELL_CORE.get(),ModItems.DREAM_SPELL_CORE.get(),ModItems.LIGHT_DARK_SPELL_CORE.get(),ModItems.SPACETIME_SPELL_CORE.get(),ModItems.UNBOUND_MANA_CORE.get())) {
+            int base=item==ModItems.TEST_SPELL_CORE.get()?512:
+                    (item==ModItems.SPACETIME_SPELL_CORE.get()||item==ModItems.UNBOUND_MANA_CORE.get()?2048:1024);
             for(int slot=1;slot<4;slot++)e.inventory.setItem(slot,ItemStack.EMPTY);
             var core=new ItemStack(item);h.assertTrue(ManaEngineState.accepts(0,core),"Core rejected");e.inventory.setItem(0,core);
             h.assertTrue(e.ratedCapacity()==base && e.ratedEnergy()==base && e.running(),"Wrong core base output");

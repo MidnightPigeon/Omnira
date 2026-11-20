@@ -20,6 +20,10 @@ public final class GuideTreeGameTests {
         for(String language:List.of("zh_cn","en_us")){
             var book=GuideContents.fromJson(GuideResourceTree.load(path->resource(language+"/"+path)),id->false);
             var index=new GuideTextSearch(book);var tree=GuideTree.read(resource("tree.json"),resource(language+"/tree_pages.json"),book);
+            var root=tree.nodes().stream().filter(n->n.id().equals("map:the_beginning")).findFirst().orElseThrow();
+            h.assertTrue(root.parents().isEmpty() && root.overview() && root.icon().equals("omnira:guide_book")
+                    && root.mapPage().links().getFirst().target().equals("beginning")
+                    && book.destination("self_mastery").isPresent(),"Introductory map link or HUD chapter missing");
             var ids=new HashSet<String>();int summaries=0,rings=0;
             var outside=tree.nodes().stream().filter(n->n.id().equals("cross_worlds")).findFirst().orElseThrow();
             h.assertTrue(outside.ring() && outside.x()==0 && outside.y()==tree.radius() && outside.overview()

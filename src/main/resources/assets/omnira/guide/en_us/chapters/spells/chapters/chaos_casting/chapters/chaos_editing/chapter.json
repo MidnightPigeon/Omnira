@@ -1,0 +1,10 @@
+{
+  "id": "chaos_editing",
+  "title": "Writing Chaos Spells",
+  "icon": "omnira:low_tier_magic_crystal",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/unordered_combination.json",
+    "entries/chaos_theory.json"
+  ]
+}

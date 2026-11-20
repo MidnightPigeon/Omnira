@@ -14,12 +14,15 @@ import net.neoforged.neoforge.event.entity.living.*;
 @EventBusSubscriber(modid=Omnira.MOD_ID)
 public final class AffinityEffects {
     private static final ResourceLocation BONUS=ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"affinity");
+    private static final ResourceLocation CHAOS_CAPACITY=ResourceLocation.fromNamespaceAndPath(Omnira.MOD_ID,"chaos_capacity");
     private AffinityEffects() {}
 
     public static void refresh(ServerPlayer player) {
         var affinity=player.getData(ModAttachments.AFFINITY).active();
         boolean perfect=affinity!=Affinity.NONE&&player.getData(ModAttachments.AFFINITY).perfected();
         attribute(player,ModAttributes.MAX_MANA,affinity.capacity+(perfect?100:0),AttributeModifier.Operation.ADD_VALUE);
+        attribute(player,ModAttributes.MAX_MANA,affinity==Affinity.CHAOS&&!perfect?-.25:0,AttributeModifier.Operation.ADD_MULTIPLIED_BASE,CHAOS_CAPACITY);
+        attribute(player,ModAttributes.COOLDOWN_REDUCTION,affinity==Affinity.CHAOS&&!perfect?-.25:0,AttributeModifier.Operation.ADD_VALUE);
         attribute(player,ModAttributes.MANA_REGEN,(perfect?Math.max(0,affinity.regeneration):affinity.regeneration),AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         attribute(player,ModAttributes.SPELL_POWER,(perfect?Math.max(0,affinity.power)+.1:affinity.power),AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         attribute(player,ModAttributes.COST_REDUCTION,affinity.reduction,AttributeModifier.Operation.ADD_VALUE);
@@ -36,12 +39,15 @@ public final class AffinityEffects {
         }
     }
     private static void attribute(ServerPlayer player,Holder<Attribute> type,double amount,AttributeModifier.Operation operation) {
+        attribute(player,type,amount,operation,BONUS);
+    }
+    private static void attribute(ServerPlayer player,Holder<Attribute> type,double amount,AttributeModifier.Operation operation,ResourceLocation id) {
         var attribute=player.getAttribute(type);
         if(attribute==null)return;
-        var old=attribute.getModifier(BONUS);
+        var old=attribute.getModifier(id);
         if(old!=null && old.amount()==amount && old.operation()==operation)return;
-        if(old!=null)attribute.removeModifier(BONUS);
-        if(amount!=0)attribute.addTransientModifier(new AttributeModifier(BONUS,amount,operation));
+        if(old!=null)attribute.removeModifier(id);
+        if(amount!=0)attribute.addTransientModifier(new AttributeModifier(id,amount,operation));
     }
     public static boolean spend(ServerPlayer player) {
         var mana=player.getData(ModAttachments.MANA);
@@ -63,18 +69,26 @@ public final class AffinityEffects {
             event.setNewDamage(Math.max(0,event.getNewDamage()-2));
     }
     @SubscribeEvent(priority=EventPriority.LOWEST) public static void died(LivingDeathEvent event) {
-        if(event.getEntity() instanceof ServerPlayer player && player.getData(ModAttachments.AFFINITY).penaltyTicks()>0) {
+        if(event.getEntity() instanceof ServerPlayer player && player.getData(ModAttachments.AFFINITY).penaltyTicks()>0
+                && player.getData(ModAttachments.AFFINITY).affinity()!=Affinity.CHAOS) {
             player.setData(ModAttachments.AFFINITY,AffinityState.NONE);
             refresh(player);
         }
     }
     public static void tick(ServerPlayer player) {
+        if(!player.isAlive()||player.isSpectator())return;
         refresh(player);
         var state=player.getData(ModAttachments.AFFINITY);
         int remaining=state.penaltyTicks();
         if(remaining==0)return;
         var affinity=state.affinity();
         int elapsed=affinity.penaltyDuration()-remaining+1;
+        if(affinity==Affinity.CHAOS){
+            // Save elapsed time before damage, including a lethal pulse copied on respawn.
+            player.setData(ModAttachments.AFFINITY,remaining==1?AffinityState.NONE:new AffinityState(state.kind(),remaining-1));
+            if(elapsed%20==0)ChaosAffinity.retribution(player);
+            return;
+        }
         // Short renewed effects survive reconnects without restarting the persisted penalty clock.
         if(affinity==Affinity.ARCANE){
             if(!com.mcmagic.omnira.spell.ConstructionLock.locked(player))

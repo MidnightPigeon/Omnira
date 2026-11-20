@@ -1,0 +1,7 @@
+{
+  "selector": "omnira:unbound_mana_core",
+  "properties": {
+    "sable:mass": 0,
+    "sable:volume": 1
+  }
+}

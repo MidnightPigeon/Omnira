@@ -9,8 +9,8 @@
     "Take and place the Heart of Myriad to select a center, then use the codex to configure it. Unfold requires a placed heart.",
     "Specimens must have empty inventories, tanks and inserted contents. Choose a mode and specimens, then Unfold: success recalls the heart, consumes specimens and closes the book without saving a formula. Interaction is blocked while edits spread outward from the center.",
     "Edits are permanent and need no continuing power. Overwritten machines, containers and even the source codex are erased without refunds. No mode can create a codex or temporary heart.",
-    "The codex can also transform a final-stage Guidance Orb into Universal Understanding without being consumed. See the related entry for mana restoration and dismantling.",
-    "Sneak-right-click the codex with an empty main hand to briefly reveal the heart’s 32-block placement range. This does not change the editing preview of a placed heart."
+    "The codex can also transform a final-stage Guidance Orb into Universal Understanding without being consumed.",
+    "Sneak-right-click the codex with an empty main hand to briefly reveal the heart’s 32-block placement range."
   ],
   "links": [
     {

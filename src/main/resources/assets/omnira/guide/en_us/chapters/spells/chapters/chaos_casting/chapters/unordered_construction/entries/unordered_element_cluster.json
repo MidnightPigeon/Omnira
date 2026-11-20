@@ -1,0 +1,10 @@
+{
+  "id": "unordered_element_cluster",
+  "item": "omnira:unordered_element_cluster",
+  "title": "Unordered Element Cluster",
+  "text": [
+    "Condensing a microcore releases a blast just above the table when the process finishes. It deals 10 magic damage within 5 blocks.",
+    "Use a cluster to throw it straight along your line of sight. On hitting a block or entity, it deals 20 magic damage to creatures and players within 5 blocks, including the thrower."
+  ],
+  "recipes": true
+}

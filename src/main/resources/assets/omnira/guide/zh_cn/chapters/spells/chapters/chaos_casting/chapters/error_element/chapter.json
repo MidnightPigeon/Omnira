@@ -1,0 +1,9 @@
+{
+  "id": "error_element",
+  "title": "错误要素",
+  "icon": "omnira:textures/gui/guide/icons/error.png",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/chaos_error.json"
+  ]
+}

@@ -29,6 +29,10 @@ public final class ModEntityTypes {
     public static final DeferredHolder<EntityType<?>,EntityType<com.mcmagic.omnira.spacetime.TemporalAmber>> TEMPORAL_AMBER=
             ENTITY_TYPES.register("temporal_amber",()->EntityType.Builder.<com.mcmagic.omnira.spacetime.TemporalAmber>of(
                     com.mcmagic.omnira.spacetime.TemporalAmber::new,MobCategory.MISC).sized(.75F,1).clientTrackingRange(8).fireImmune().build("omnira:temporal_amber"));
+    public static final DeferredHolder<EntityType<?>,EntityType<com.mcmagic.omnira.item.ThrownUnorderedCluster>> THROWN_UNORDERED_CLUSTER =
+            ENTITY_TYPES.register("thrown_unordered_cluster", () -> EntityType.Builder.<com.mcmagic.omnira.item.ThrownUnorderedCluster>of(
+                    com.mcmagic.omnira.item.ThrownUnorderedCluster::new, MobCategory.MISC).sized(.25F,.25F)
+                    .clientTrackingRange(8).updateInterval(1).build("omnira:thrown_unordered_cluster"));
     public static final DeferredHolder<EntityType<?>,EntityType<com.mcmagic.omnira.spacetime.ThrownAggregate>> UNSTABLE_AGGREGATE=
             ENTITY_TYPES.register("unstable_aggregate",()->EntityType.Builder.<com.mcmagic.omnira.spacetime.ThrownAggregate>of(
                     com.mcmagic.omnira.spacetime.ThrownAggregate::new,MobCategory.MISC).sized(.3F,.3F).clientTrackingRange(8).updateInterval(1).fireImmune().build("omnira:unstable_aggregate"));

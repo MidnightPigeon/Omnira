@@ -41,7 +41,7 @@ public final class AggregationRingMenu extends AbstractContainerMenu {
         var copy=stack.copy();boolean moved=false;
         if(index<AggregationLayout.SLOTS)moved=moveItemStackTo(stack,AggregationLayout.SLOTS,slots.size(),true);
         else if(progress()==0){
-            int[][] ranges=stack.is(com.mcmagic.omnira.registry.ModItems.OMNI_MICROCORE.get())?new int[][]{{0,1}}:com.mcmagic.omnira.menu.CrystalProcessingTableMenu.isTargetMicrocore(stack)?new int[][]{{0,2},{2,5},{5,8}}:
+            int[][] ranges=com.mcmagic.omnira.spell.SpellPattern.cluster(stack)?new int[][]{{1,2},{0,1}}:stack.is(com.mcmagic.omnira.registry.ModItems.OMNI_MICROCORE.get())?new int[][]{{0,1}}:com.mcmagic.omnira.menu.CrystalProcessingTableMenu.isTargetMicrocore(stack)?new int[][]{{0,2},{2,5},{5,8}}:
                     new int[][]{{8,11},{2,5},{5,8}};
             for(var range:ranges)if(moveItemStackTo(stack,range[0],range[1],false)){moved=true;break;}
         }

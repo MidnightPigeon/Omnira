@@ -39,6 +39,7 @@ public final class IndustrialWheelItem extends Item {
     }
     public static void stop(Player p){
         var session=ACTIVE.remove(p.getUUID());if(session==null)return;
+        if(p instanceof ServerPlayer server)ChaosBeam.stop(server);
         session.staff.set(ModDataComponents.WHEEL_PHASE,rotation(session.staff,p.level().getGameTime()));
         session.staff.remove(ModDataComponents.WHEEL_SPIN_START);
         // Inventory replacement may already have copied the transient visual component.
@@ -80,7 +81,7 @@ public final class IndustrialWheelItem extends Item {
     private static boolean cast(ServerPlayer p,ItemStack stack){
         int special=StaffItem.nextSpellCooldown(p);
         var context=context(p,stack);
-        if(StaffItem.castSequenceContents(p,context,STATS.shots())==0)return false;
+        if(StaffItem.castSequenceContents(p,context,STATS.shots(),stack)==0)return false;
         p.getCooldowns().addCooldown(stack.getItem(),Math.max(special,SpellCooldowns.ticks(STATS.cooldownTicks(),context.cooldownReduction(),1)));
         int step=(stack.getOrDefault(ModDataComponents.WHEEL_STEP,0)+1)%16;
         stack.set(ModDataComponents.WHEEL_STEP,step);
@@ -92,6 +93,7 @@ public final class IndustrialWheelItem extends Item {
         var s=ACTIVE.get(p.getUUID());if(s==null)return;
         if(!p.isAlive()||p.isSpectator()||p.getItemInHand(s.hand)!=s.staff||p.containerMenu!=p.inventoryMenu
                 ||CrystalGridMenu.locate(p,-2)!=s.grid||!p.level().dimension().equals(s.dimension)){stop(p);return;}
+        if(ChaosBeam.active(p))return;
         if(!p.getCooldowns().isOnCooldown(s.staff.getItem())&&!cast(p,s.staff))stop(p);
     }
     @SubscribeEvent public static void logout(net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent e){stop(e.getEntity());}

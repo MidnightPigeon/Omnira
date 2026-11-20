@@ -35,7 +35,7 @@ public final class AggregationRingBlockEntity extends CrystalProcessingTableBloc
     public boolean powered(){return getItem(AggregationLayout.CORE).getItem() instanceof SpellCoreItem;}
     public static boolean accepts(int slot,ItemStack stack){
         if(slot==0)return CrystalProcessingTableMenu.isTargetMicrocore(stack)||stack.is(ModItems.OMNI_MICROCORE.get());
-        if(slot==1)return CrystalProcessingTableMenu.isPrimaryMicrocore(stack);
+        if(slot==1)return CrystalProcessingTableMenu.isShapeMaterial(stack);
         if(slot<5)return CrystalProcessingTableMenu.isElement(stack);
         if(slot<8)return true;
         return slot==AggregationLayout.SUBSTRATE?stack.is(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()):
@@ -43,6 +43,7 @@ public final class AggregationRingBlockEntity extends CrystalProcessingTableBloc
                 slot==AggregationLayout.CORE&&stack.getItem() instanceof SpellCoreItem;
     }
     public static boolean compatible(net.minecraft.world.Container inventory,int slot,ItemStack stack){
+        if(!CrystalProcessingTableMenu.chaosSlots(inventory,slot,stack,2,5,5,8))return false;
         if(slot>=8)return true;
         if(slot==0&&stack.is(ModItems.OMNI_MICROCORE.get())){for(int i=1;i<8;i++)if(!inventory.getItem(i).isEmpty())return false;return true;}
         return !inventory.getItem(0).is(ModItems.OMNI_MICROCORE.get())||slot==0;
@@ -53,6 +54,7 @@ public final class AggregationRingBlockEntity extends CrystalProcessingTableBloc
         return recipeError().isEmpty();
     }
     public String recipeError(){
+        if(!CrystalProcessingTableMenu.chaosSlots(this,0,getItem(0),2,5,5,8))return "nodes";
         if(!powered())return "core";
         if(!getItem(AggregationLayout.OUTPUT).isEmpty())return "output";
         if(!getItem(AggregationLayout.SUBSTRATE).is(ModItems.INFUSED_SPIRITUAL_CRYSTAL.get()))return "substrate";

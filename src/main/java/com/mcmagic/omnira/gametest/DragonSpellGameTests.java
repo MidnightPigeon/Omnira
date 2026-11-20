@@ -60,7 +60,7 @@ public final class DragonSpellGameTests {
                     dragon.invulnerableTime=20;
                     var bolt=com.mcmagic.omnira.weaver.WeaverCombat.bolt(owner,null,start,new net.minecraft.world.phys.Vec3(1,0,0));
                     for(int i=0;i<4&&!bolt.isRemoved();i++)bolt.tick();
-                    float expected=part==dragon.head?194:196.5F;
+                    float expected=owner==caster ? (part==dragon.head?190:195.5F) : (part==dragon.head?194:196.5F);
                     h.assertTrue(bolt.isRemoved()&&Math.abs(dragon.getHealth()-expected)<.001,
                             "Wrong crystal bolt damage for "+owner.getType()+" / "+part.name+": "+dragon.getHealth());
                 }
@@ -97,7 +97,7 @@ public final class DragonSpellGameTests {
                     h.assertTrue(bolts.size()==1,"Expected one right-click projectile");
                     var bolt=bolts.getFirst();
                     for(int i=0;i<10&&!bolt.isRemoved();i++)bolt.tick();
-                    float expected=part==dragon.head?5:3.75F;
+                    float expected=part==dragon.head?10:7.25F;
                     h.assertTrue(hits.equals(List.of(expected,expected)) && dragon.getHealth()==200-2*expected,
                             "Held bonus on "+part.name+" with "+hand+": "+hits+" health="+dragon.getHealth());
                     for(int i=0;i<20;i++)com.mcmagic.omnira.weaver.FounderApprovalItem.advance(player);
@@ -126,7 +126,7 @@ public final class DragonSpellGameTests {
             player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new net.minecraft.world.item.ItemStack(book));
             player.setShiftKeyDown(true);
             book.use(h.getLevel(),player,net.minecraft.world.InteractionHand.MAIN_HAND);
-            h.assertTrue(dragon.getHealth()==187.5F,"Held ray should hit head for 5 and body and tail for 3.75 each: "+dragon.getHealth());
+            h.assertTrue(dragon.getHealth()==175.5F,"Held ray should hit head for 10 and body and tail for 7.25 each: "+dragon.getHealth());
             player.setShiftKeyDown(false);
             player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,net.minecraft.world.item.ItemStack.EMPTY);
             var pattern=new SpellPattern(ElementType.AIR,null);
