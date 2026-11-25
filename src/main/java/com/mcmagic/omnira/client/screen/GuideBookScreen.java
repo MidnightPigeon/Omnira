@@ -37,22 +37,23 @@ public final class GuideBookScreen extends ResponsiveScreen {
     private boolean rotatingScene;
     private boolean constructionScene=true;
     private record TextRow(GuideInlineText.Line line,double x,double y,float scale){
-        ItemStack iconAt(double mx,double my){return line.iconAt((mx-x)/scale,(my-y)/scale);}
+        GuideInlineText.Mention iconAt(double mx,double my){return line.iconAt((mx-x)/scale,(my-y)/scale);}
     }
     private final List<TextRow> visibleIconRows=new ArrayList<>();
-    private ItemStack inlineIconAt(double x,double y){
+    private GuideInlineText.Mention inlineIconAt(double x,double y){
         if(entry!=null && !search.results() && y>=top+21 && y<top+37){
             for(int side=0;side<2;side++){
                 int iconX=left+(side==0?42:178);
                 if(x>=iconX && x<iconX+16 && GuideSpread.leaf(page,side)<totalPages())
-                    return GuideIcon.resolve(entry.icon()).item();
+                    return new GuideInlineText.Mention(entry.icon().startsWith("omnira:entity/")?GuideContents.icon(entry.item()):entryIcon.item(),
+                            entry.id().equals("dream_mirror_spawn_egg")?entry.id():"");
             }
         }
         for(var row:visibleIconRows){
             var item=row.iconAt(x,y);
-            if(!item.isEmpty())return item;
+            if(item!=null)return item;
         }
-        return ItemStack.EMPTY;
+        return null;
     }
     private void drawProse(GuiGraphics g,GuideInlineText.Line line,int x,int y){
         line.draw(g,x,y,0xFF353F44);
@@ -60,6 +61,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
     }
     private ItemStack hovered=ItemStack.EMPTY;
     private Component recipeTooltip=Component.empty();
+    private GuideIcon entryIcon;
     private String figureTooltip="";
     private GuideContents.Introduction cachedSourceIntroduction;
     private final GuideFigureRenderer figureRenderer=new GuideFigureRenderer();
@@ -142,11 +144,13 @@ public final class GuideBookScreen extends ResponsiveScreen {
         if(pages.isEmpty())pages=List.of(List.of());
     }
     private void loadEntry(GuideContents.Entry next) {
-        entry=next;page=0;sceneYaw=0;scenePitch=0;rotatingScene=false;constructionScene=true;
+        entry=next;entryIcon=GuideIcon.resolve(next.icon());page=0;sceneYaw=0;scenePitch=0;rotatingScene=false;constructionScene=true;
         layoutEntryText();
         recipes=GuideEnergy.supports(entry.id())?GuideEnergy.pages(entry.id()):entry.recipes()?GuideRecipes.find(minecraft.level,GuideContents.icon(entry.item()).getItem()):List.of();
     }
+    private TreeReading mentionOrigin;
     private void jump(GuideContents.Destination target) {
+        mentionOrigin=null;
         rememberTreeReading();
         chapter=target.chapter();entry=null;introPage=0;page=0;
         if(target.entry()!=null) {
@@ -423,8 +427,9 @@ public final class GuideBookScreen extends ResponsiveScreen {
         }
         super.renderContent(g,mouseX,mouseY,partialTick);
         var inlineItem=inlineIconAt(mouseX,mouseY);
-        if(!inlineItem.isEmpty()){
-            g.renderTooltip(font,inlineItem,mouseX,mouseY);
+        if(inlineItem!=null && !inlineItem.item().isEmpty()){
+            if(inlineItem.page().isEmpty())g.renderTooltip(font,inlineItem.item(),mouseX,mouseY);
+            else contents.destination(inlineItem.page()).ifPresent(target->g.renderTooltip(font,Component.literal(target.title()),mouseX,mouseY));
         }else if(!hovered.isEmpty()) {
             var tooltip=new ArrayList<>(Screen.getTooltipFromItem(minecraft,hovered));
             if(entry!=null&&GuideEnergy.supports(entry.id()))tooltip.add(GuideEnergy.tooltip(entry.id(),hovered));
@@ -435,7 +440,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
     }
     private void renderEntryPage(GuiGraphics g,int page,int pageX,int mouseX,int mouseY){
             int left=this.left+pageX-175;
-            GuideIcon.resolve(entry.icon()).draw(g,left+(pageX==19?198:178),top+21);
+            entryIcon.draw(g,left+(pageX==19?198:178),top+21);
             boolean links=page>=linkStart(),figure=page>=figureStart()&&page<recipeStart();
             String title=links?Component.translatable("guide.omnira.related").getString():figure?entry.figures().get(page-figureStart()).title():page<figureStart()?entry.title():recipes.get(page-recipeStart()).title().getString();
             fit(g,title,left+198+(pageX==19?20:0),top+25,pageX==19?75:79,0xFF314A58);
@@ -484,9 +489,20 @@ public final class GuideBookScreen extends ResponsiveScreen {
     }
     @Override protected boolean mouseClickedContent(double mouseX,double mouseY,int button) {
         if(search.results())return super.mouseClickedContent(mouseX,mouseY,button);
-        if(button==0 && net.neoforged.fml.ModList.get().isLoaded("jei")){
+        if(button==0){
             var item=inlineIconAt(mouseX,mouseY);
-            if(!item.isEmpty() && com.mcmagic.omnira.compat.jei.OmniraJeiPlugin.openCrafting(item))return true;
+            if(item!=null && !item.page().isEmpty()){
+                if(!item.page().equals(destination())){
+                    var origin=new TreeReading(chapter,entry,introPage,page);
+                    contents.destination(item.page()).ifPresent(target->{
+                        jump(target);
+                        if(treeOrigin==null || search.active())mentionOrigin=origin;
+                    });
+                }
+                return true;
+            }
+            if(item!=null && !item.item().isEmpty() && net.neoforged.fml.ModList.get().isLoaded("jei")
+                    && com.mcmagic.omnira.compat.jei.OmniraJeiPlugin.openCrafting(item.item()))return true;
         }
         if(button==0&&scenePages()>0)for(int side=0;side<2;side++){
             if(GuideSpread.leaf(page,side)!=pages.size())continue;
@@ -523,6 +539,12 @@ public final class GuideBookScreen extends ResponsiveScreen {
         return super.mouseReleasedContent(x,y,button);
     }
     private void back() {
+        if(mentionOrigin!=null && !search.results() && destination().equals("dream_mirror_spawn_egg")){
+            var origin=mentionOrigin;mentionOrigin=null;
+            chapter=origin.chapter();entry=null;
+            if(origin.entry()!=null)loadEntry(origin.entry());
+            introPage=origin.introPage();page=origin.page();buttons();return;
+        }
         if(search.back(destination())){rotatingScene=false;buttons();return;}
         if(treeOrigin!=null&&!search.active()){
             if(treeHistory.isEmpty()){minecraft.setScreen(treeOrigin);return;}
@@ -538,6 +560,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
         buttons();
     }
     private void home() {
+        mentionOrigin=null;
         if(treeOrigin!=null){treeOrigin.homeBook();return;}
         search.stop();searchBox.setValue("");
         chapter=null;entry=null;page=0;introPage=0;rotatingScene=false;

@@ -50,6 +50,7 @@ final class GuideItemCatalog {
             alias(names,"unbound_mana_core","无羁核心","Unbound Core","Unbound Cores");
             alias(names,"infused_spiritual_crystal","Infused Crystal","Infused Crystals");
             alias(names,"arcane_assembly_table","Assembly Table","普通装配台","装配台");
+            alias(names,"dream_mirror_spawn_egg","梦之镜","Dream Mirror","Dream Mirrors");
             cached=new GuideItemNames(names);
             for(var rule:rules.getAsJsonObject("contexts").entrySet()){
                 BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(rule.getKey())).ifPresent(item->

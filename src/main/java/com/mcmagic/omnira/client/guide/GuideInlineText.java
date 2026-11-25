@@ -14,7 +14,9 @@ public final class GuideInlineText {
         this.font=font;
         layout=new GuideMentionLayout(GuideItemCatalog.current(),font::width);
     }
-    private record Icon(int index,int x,ItemStack item){}
+    public record Mention(ItemStack item,String page){}
+    private final GuideIcon mirror=GuideIcon.resolve("omnira:entity/dream_mirror");
+    private record Icon(int index,int x,Mention mention){}
     public final class Line {
         private final FormattedCharSequence glyphs;
         private final String plain;
@@ -26,7 +28,11 @@ public final class GuideInlineText {
             float[] advance={0};
             marked.accept((i,s,cp)->{
                 var t=layout.token(cp);
-                if(t!=null)icons.add(new Icon(text.length(),Math.round(advance[0]),new ItemStack(t.item())));
+                if(t!=null){
+                    boolean creature=t.item()==com.mcmagic.omnira.registry.ModItems.DREAM_MIRROR_SPAWN_EGG.get()
+                            && (t.spelling().equals("梦之镜") || t.spelling().equalsIgnoreCase("Dream Mirror") || t.spelling().equalsIgnoreCase("Dream Mirrors"));
+                    icons.add(new Icon(text.length(),Math.round(advance[0]),new Mention(new ItemStack(t.item()),creature?"dream_mirror_spawn_egg":"")));
+                }
                 else text.appendCodePoint(cp);
                 advance[0]+=font.getSplitter().stringWidth(FormattedCharSequence.forward(t!=null?"  ":Character.toString(cp),s));
                 return true;
@@ -54,10 +60,10 @@ public final class GuideInlineText {
             });
             return Math.round(x[0]);
         }
-        public ItemStack iconAt(double localX,double localY){
+        public Mention iconAt(double localX,double localY){
             if(localY>=1 && localY<8)for(var icon:icons)
-                if(localX>=icon.x && localX<icon.x+7)return icon.item;
-            return ItemStack.EMPTY;
+                if(localX>=icon.x && localX<icon.x+7)return icon.mention;
+            return null;
         }
         public boolean hasIcons(){return !icons.isEmpty();}
         public void draw(GuiGraphics g,int x,int y,int color){
@@ -66,7 +72,8 @@ public final class GuideInlineText {
                 g.pose().pushPose();
                 g.pose().translate(x+icon.x,y+1,0);
                 g.pose().scale(7.0F/16,7.0F/16,1);
-                g.renderItem(icon.item,0,0);
+                if(icon.mention.page().isEmpty())g.renderItem(icon.mention.item(),0,0);
+                else mirror.draw(g,0,0);
                 g.pose().popPose();
             }
         }

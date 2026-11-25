@@ -1,5 +1,6 @@
 package com.mcmagic.omnira.client.renderer;
 
+import com.mcmagic.omnira.client.guide.GuideIcon;
 import com.mcmagic.omnira.mire.TimeflowEel;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
@@ -15,7 +16,7 @@ public final class TimeflowEelRenderer extends MobRenderer<TimeflowEel,TimeflowE
     @Override public ResourceLocation getTextureLocation(TimeflowEel eel){return TEXTURE;}
     @Override protected void setupRotations(TimeflowEel eel,PoseStack pose,float age,float yaw,float partial,float scale){
         super.setupRotations(eel,pose,age,yaw,partial,scale);
-        if(!eel.isInWater()){pose.translate(.1,.1,0);pose.mulPose(Axis.ZP.rotationDegrees(90));}
+        if(!GuideIcon.aquaticPose(eel)){pose.translate(.1,.1,0);pose.mulPose(Axis.ZP.rotationDegrees(90));}
     }
     public static final class Model extends EntityModel<TimeflowEel> {
         // x/y/z, width/height/depth, atlas u/v; shared with the offline model preview.
@@ -29,7 +30,7 @@ public final class TimeflowEelRenderer extends MobRenderer<TimeflowEel,TimeflowE
             root=LayerDefinition.create(mesh,64,32).bakeRoot();tail=root.getChild("body").getChild("tail");
         }
         private static CubeListBuilder cube(int index){var b=BOXES[index];return CubeListBuilder.create().texOffs((int)b[6],(int)b[7]).addBox(b[0],b[1],b[2],b[3],b[4],b[5]);}
-        @Override public void setupAnim(TimeflowEel eel,float swing,float amount,float age,float yaw,float pitch){tail.yRot=(float)Math.sin(age*.35F)*(eel.isInWater()?.35F:.6F);}
+        @Override public void setupAnim(TimeflowEel eel,float swing,float amount,float age,float yaw,float pitch){tail.yRot=(float)Math.sin(age*.35F)*(GuideIcon.aquaticPose(eel)?.35F:.6F);}
         @Override public void renderToBuffer(PoseStack pose,VertexConsumer consumer,int light,int overlay,int color){root.render(pose,consumer,light,overlay,color);}
     }
 }

@@ -15,6 +15,15 @@ public final class GuideIcon {
     private final ItemStack item;
     private final ResourceLocation texture, creature;
     private LivingEntity preview;
+    private long animationStart;
+    private static LivingEntity renderingPreview;
+
+    public static boolean previewing(LivingEntity entity){return entity==renderingPreview;}
+
+    /** The detached display entity has no water block to sample. */
+    public static boolean aquaticPose(LivingEntity entity){
+        return previewing(entity) || entity.isInWater();
+    }
 
     private GuideIcon(ItemStack item, ResourceLocation texture, ResourceLocation creature) {
         this.item=item;
@@ -43,8 +52,9 @@ public final class GuideIcon {
             var type=BuiltInRegistries.ENTITY_TYPE.getOptional(creature);
             if(type.isEmpty() || !(type.get().create(level) instanceof LivingEntity entity))return;
             preview=entity;
-            preview.yBodyRot=preview.yBodyRotO=0;
-            preview.yHeadRot=preview.yHeadRotO=0;
+            animationStart=net.minecraft.Util.getMillis();
+            preview.yBodyRot=preview.yBodyRotO=180;
+            preview.yHeadRot=preview.yHeadRotO=180;
         }
         // The long fish and winged fauna extend beyond their collision boxes.
         float span=switch(creature.getPath()){
@@ -52,11 +62,19 @@ public final class GuideIcon {
             case "chronal_blindfish","rift_moth","time_thief_mosquito" -> 1F;
             default -> Math.max(preview.getBbWidth(),preview.getBbHeight())*1.15F;
         };
-        var view=new Quaternionf().rotationZ((float)Math.PI).rotateX(-.18F).rotateY(.96F);
+        // Book screens can pause the world. Advance only pose inputs, never the entity simulation.
+        int tick=(int)((net.minecraft.Util.getMillis()-animationStart)/50L);
+        int steps=Math.min(4,tick-preview.tickCount);
+        for(int i=0;i<steps;i++)preview.walkAnimation.update(.24F,1);
+        preview.tickCount=tick;
+        float pitch=creature.getPath().equals("void_manta")?-.48F:-.23F;
+        var view=new Quaternionf().rotationZ((float)Math.PI).rotateX(pitch).rotateY(.68F);
         UiScissor.enable(graphics,x,y,x+16,y+16);
+        var previous=renderingPreview;
+        renderingPreview=preview;
         try{
             InventoryScreen.renderEntityInInventory(graphics,x+8,y+8,14/span,
                     new Vector3f(0,preview.getBbHeight()*.5F,0),view,null,preview);
-        }finally{graphics.disableScissor();}
+        }finally{renderingPreview=previous;graphics.disableScissor();}
     }
 }

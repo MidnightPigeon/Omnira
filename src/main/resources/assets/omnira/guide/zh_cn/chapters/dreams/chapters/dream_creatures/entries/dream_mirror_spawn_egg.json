@@ -1,5 +1,6 @@
 {
   "id": "dream_mirror_spawn_egg",
+  "icon": "omnira:entity/dream_mirror",
   "item": "omnira:dream_mirror_spawn_egg",
   "title": "梦之镜",
   "recipes": false,

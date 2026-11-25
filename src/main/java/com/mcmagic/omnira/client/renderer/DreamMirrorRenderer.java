@@ -54,7 +54,7 @@ public final class DreamMirrorRenderer extends EntityRenderer<DreamMirror> {
     }
     @Override public void render(DreamMirror entity,float yaw,float partial,PoseStack pose,MultiBufferSource buffers,int light) {
         // In another mirror, draw the body and plain glass only, never its live texture.
-        var reflected=MirrorScene.rendering()?null:MirrorScene.texture(entity,partial,buffers);
+        var reflected=MirrorScene.rendering() || com.mcmagic.omnira.client.guide.GuideIcon.previewing(entity)?null:MirrorScene.texture(entity,partial,buffers);
         pose.pushPose();pose.mulPose(Axis.YP.rotationDegrees(180-yaw));
         pose.pushPose();pose.scale(1,1,.65F);
         frame.render(pose,buffers.getBuffer(RenderType.entityCutoutNoCull(FRAME)),light,OverlayTexture.NO_OVERLAY);

@@ -1,5 +1,6 @@
 {
   "id": "shadow_ghost_spawn_egg",
+  "icon": "omnira:entity/shadow_ghost",
   "item": "omnira:shadow_ghost_spawn_egg",
   "title": "Shadow Ghost",
   "text": [

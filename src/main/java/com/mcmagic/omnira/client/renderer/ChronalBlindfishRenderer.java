@@ -1,5 +1,6 @@
 package com.mcmagic.omnira.client.renderer;
 
+import com.mcmagic.omnira.client.guide.GuideIcon;
 import com.mcmagic.omnira.archaeology.ChronalBlindfish;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
@@ -16,7 +17,7 @@ public final class ChronalBlindfishRenderer extends MobRenderer<ChronalBlindfish
     @Override protected int getBlockLightLevel(ChronalBlindfish fish,BlockPos pos){return Math.max(10,super.getBlockLightLevel(fish,pos));}
     @Override protected void setupRotations(ChronalBlindfish fish,PoseStack pose,float age,float yaw,float partial,float scale){
         super.setupRotations(fish,pose,age,yaw,partial,scale);
-        if(!fish.isInWater()){pose.translate(.1,.1,0);pose.mulPose(Axis.ZP.rotationDegrees(90));}
+        if(!GuideIcon.aquaticPose(fish)){pose.translate(.1,.1,0);pose.mulPose(Axis.ZP.rotationDegrees(90));}
     }
     public static final class Model extends EntityModel<ChronalBlindfish> {
         public static final float[][] BOXES={{-2,-2,-5,4,4,8,0,0},{-1.5F,-1.5F,-7,3,3,2,24,0},

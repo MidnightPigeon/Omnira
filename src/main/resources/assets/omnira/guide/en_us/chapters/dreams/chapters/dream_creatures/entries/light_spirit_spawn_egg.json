@@ -1,5 +1,6 @@
 {
   "id": "light_spirit_spawn_egg",
+  "icon": "omnira:entity/light_spirit",
   "item": "omnira:light_spirit_spawn_egg",
   "title": "Light Spirit",
   "text": [

@@ -1,7 +1,7 @@
 {
   "id": "dream_creatures",
   "title": "Dream Creatures",
-  "icon": "omnira:light_spirit_spawn_egg",
+  "icon": "omnira:dream_portal",
   "introduction": "introduction.json",
   "entries": [
     "entries/light_spirit_spawn_egg.json",

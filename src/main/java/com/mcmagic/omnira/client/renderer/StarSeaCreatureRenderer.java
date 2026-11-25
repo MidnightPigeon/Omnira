@@ -1,5 +1,6 @@
 package com.mcmagic.omnira.client.renderer;
 
+import com.mcmagic.omnira.client.guide.GuideIcon;
 import com.google.gson.*;
 import com.mcmagic.omnira.space.sea.*;
 import com.mojang.blaze3d.vertex.*;
@@ -47,7 +48,7 @@ public final class StarSeaCreatureRenderer<T extends StarSeaCreature> extends Mo
                 animateJellyfish(age,((StarJellyfish)entity).charge()/20F);
                 body.xRot=(float)Math.clamp(horizontal*2-vy*.8,-.45,.65);
             }else{
-                float flap=Mth.sin(age*(entity.isInWater()?.12F:.19F))*.24F;
+                float flap=Mth.sin(age*(GuideIcon.aquaticPose(entity)?.12F:.19F))*.24F;
                 body.getChild("left_wing").zRot=flap;body.getChild("right_wing").zRot=-flap;
                 body.getChild("tail").yRot=Mth.sin(age*.08F)*.12F;
                 body.y+=Mth.sin(age*.12F)*.3F;
