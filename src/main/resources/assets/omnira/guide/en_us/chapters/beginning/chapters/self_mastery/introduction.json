@@ -1,6 +1,6 @@
 {
   "text": [
-    "Open your inventory (E by default). Hold the left mouse button on the mana bar or the center of the grid, drag, then release to save. To move the grid, wear it and hold a staff in either hand.",
+    "Open your inventory (E by default). Hold the left mouse button on the mana bar or the center of the grid, drag, then release to save. To move the grid, wear it and hold a staff in either hand. With Spacetime Affinity and a staff in your main hand, you can drag the blink icon to set the same position even without a grid.",
     "Default positions are relative to the hotbar and can be set in config/omnira-client.toml."
   ]
 }

@@ -1,7 +1,8 @@
 package com.mcmagic.omnira.client.hud;
 
 import com.mcmagic.omnira.item.CrystalGridItem;
-import com.mcmagic.omnira.item.StaffItem;
+import com.mcmagic.omnira.mana.SpacetimeBlink;
+import com.mcmagic.omnira.mana.Affinity;
 import com.mcmagic.omnira.menu.CrystalGridMenu;
 import com.mcmagic.omnira.mana.ManaCosts;
 import com.mcmagic.omnira.registry.*;
@@ -18,14 +19,17 @@ import net.minecraft.world.item.component.ItemContainerContents;
 /** Quiet spell-chain HUD: shape glyphs replace indistinguishable crystal item icons. */
 public final class LatticeOverlay {
     private LatticeOverlay() {}
-    private static boolean staff(ItemStack stack){
-        return stack.getItem() instanceof StaffItem || stack.getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem;
+    private static boolean blinkVisible(net.minecraft.world.entity.player.Player player){
+        return SpacetimeBlink.staff(player.getMainHandItem())
+                && player.getData(ModAttachments.MANA).affinity()==Affinity.SPACETIME.ordinal();
     }
-    static boolean gridVisible(){
+    static boolean dragHandleContains(double dx,double dy,float scale){
         var mc=Minecraft.getInstance();
         var player=mc.player;
-        return player!=null && !mc.options.hideGui && player.isAlive() && !player.isSpectator()
-                && (staff(player.getMainHandItem()) || staff(player.getOffhandItem()))
+        if(player==null || mc.options.hideGui || !player.isAlive() || player.isSpectator())return false;
+        if(blinkVisible(player) && Math.max(Math.abs(dx),Math.abs(dy))<=7*scale)return true;
+        return Math.hypot(dx,dy)<=38*scale
+                && (SpacetimeBlink.staff(player.getMainHandItem()) || SpacetimeBlink.staff(player.getOffhandItem()))
                 && CrystalGridMenu.locate(player,-2).getItem() instanceof CrystalGridItem;
     }
     public static void render(GuiGraphics g,DeltaTracker delta) {
@@ -35,8 +39,11 @@ public final class LatticeOverlay {
         var mc=Minecraft.getInstance();
         var player=mc.player;
         if(player==null || mc.options.hideGui || !player.isAlive() || player.isSpectator()) return;
-        ItemStack staff=staff(player.getMainHandItem())?player.getMainHandItem():player.getOffhandItem();
-        if(!staff(staff))return;
+        ItemStack staff=SpacetimeBlink.staff(player.getMainHandItem())?player.getMainHandItem():player.getOffhandItem();
+        if(!SpacetimeBlink.staff(staff))return;
+        boolean blink=blinkVisible(player);
+        ItemStack grid=CrystalGridMenu.locate(player,-2);
+        if(!blink && !(grid.getItem() instanceof CrystalGridItem))return;
         var stats=staff.getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem?com.mcmagic.omnira.item.IndustrialWheelItem.stats(staff):com.mcmagic.omnira.item.staff.StaffAssembly.of(staff).stats();
         var center=ManaHudPosition.gridCenter(g.guiWidth(),g.guiHeight());
         float scale=ManaHudPosition.gridScale(g.guiWidth(),g.guiHeight());
@@ -45,12 +52,10 @@ public final class LatticeOverlay {
         g.pose().translate(center.x(),center.y(),0);
         g.pose().scale(scale,scale,1);
         int cx=0,cy=0,radius=32;
-        if(com.mcmagic.omnira.mana.SpacetimeBlink.staff(player.getMainHandItem())
-                && player.getData(ModAttachments.MANA).affinity()==com.mcmagic.omnira.mana.Affinity.SPACETIME.ordinal()){
+        if(blink){
             float cooldown=player.getCooldowns().getCooldownPercent(staff.getItem(),delta.getGameTimeDeltaPartialTick(false));
             blinkGlyph(g,cx,cy,cooldown,player.getData(ModAttachments.MANA).canSpend(com.mcmagic.omnira.mana.SpacetimeBlink.manaCost(CastAttributes.reduction(player,stats.reduction()))));
         }
-        ItemStack grid=CrystalGridMenu.locate(player,-2);
         if(!(grid.getItem() instanceof CrystalGridItem item)) return;
         NonNullList<ItemStack> stacks=NonNullList.withSize(item.capacity,ItemStack.EMPTY);
         grid.getOrDefault(DataComponents.CONTAINER,ItemContainerContents.EMPTY).copyInto(stacks);

@@ -83,14 +83,12 @@ public final class ManaHudPosition {
         if(event.getButton()!=0 || !editable(screen) || player==null || player.isSpectator()
                 || !player.containerMenu.getCarried().isEmpty())return;
         var p=position(screen.width,screen.height);
-        grabX=event.getMouseX()-p.x;grabY=event.getMouseY()-p.y;
-        draggingGrid=false;
-        if(grabX< -1 || grabX>WIDTH || grabY< -1 || grabY>14){
-            if(!LatticeOverlay.gridVisible())return;
-            var center=gridCenter(screen.width,screen.height);
-            grabX=event.getMouseX()-center.x;grabY=event.getMouseY()-center.y;
-            if(Math.hypot(grabX,grabY)>38*gridScale(screen.width,screen.height))return;
-            draggingGrid=true;
+        var center=gridCenter(screen.width,screen.height);
+        grabX=event.getMouseX()-center.x;grabY=event.getMouseY()-center.y;
+        draggingGrid=LatticeOverlay.dragHandleContains(grabX,grabY,gridScale(screen.width,screen.height));
+        if(!draggingGrid){
+            grabX=event.getMouseX()-p.x;grabY=event.getMouseY()-p.y;
+            if(grabX< -1 || grabX>WIDTH || grabY< -1 || grabY>14)return;
         }
         pressX=event.getMouseX();pressY=event.getMouseY();
         pressed=screen;pressedAt=Util.getMillis();

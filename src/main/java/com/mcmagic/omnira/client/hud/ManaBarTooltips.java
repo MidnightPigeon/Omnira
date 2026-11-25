@@ -35,7 +35,7 @@ public final class ManaBarTooltips {
             var pos=ManaHudPosition.position(g.guiWidth(),g.guiHeight());
             ManaBar.render(g,mc.font,mc.player.getData(ModAttachments.MANA),pos.x(),pos.y(),ManaHudPosition.WIDTH);
         }
-        if(ManaHudPosition.editable(event.getScreen()) && LatticeOverlay.gridVisible())
+        if(ManaHudPosition.editable(event.getScreen()))
             LatticeOverlay.draw(g,mc.getTimer());
         collecting=false;
         if(ManaHudPosition.holding()){AREAS.clear();return;}
