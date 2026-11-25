@@ -31,7 +31,7 @@ public final class GuideSpreadGameTests {
     @GameTest(template="spell_arena") public static void inlineItemNamesKeepSpellingAndWidth(GameTestHelper h){
         var item=net.minecraft.world.item.Items.IRON_INGOT;
         var names=new com.mcmagic.omnira.client.guide.GuideItemNames(java.util.Map.of(
-                "iron",item,"iron ingots",item,"铁锭",item));
+                "iron",item,"iron ingots",item,"铁锭",item,"高阶装配台",item));
         var layout=new com.mcmagic.omnira.client.guide.GuideMentionLayout(names,String::length);
         for(String source:java.util.List.of("Use IRON INGOTS.","需要铁锭。","{dream}需要铁锭。")){
             String encoded=layout.encode(source,24);
@@ -39,6 +39,14 @@ public final class GuideSpreadGameTests {
             h.assertTrue(layout.measure(encoded)==source.length()+2,"Expected one icon before the longest name");
         }
         h.assertTrue(layout.encode("ironic",24).equals("ironic"),"Partial English word annotated");
+        for(var example:java.util.List.of(
+                java.util.List.of("放入高阶装配台","放入高阶","装配台"),
+                java.util.List.of("Use iron ingots","Use iron","ingots"))){
+            int width=example.get(1).length()+2;
+            var lines=com.mcmagic.omnira.client.guide.GuideTextLayout.wrap(layout.encode(example.getFirst(),width),width,layout::measure);
+            h.assertTrue(lines.size()==2 && layout.plain(lines.getFirst()).equals(example.get(1))
+                    && lines.getLast().equals(example.get(2)),"Unexpected item-name wrap: "+example.getFirst());
+        }
         String narrow=layout.encode("Use iron ingots",8);
         for(var line:com.mcmagic.omnira.client.guide.GuideTextLayout.wrap(narrow,8,layout::measure))
             h.assertTrue(layout.measure(line)<=8,"Wrapped item exceeds column");

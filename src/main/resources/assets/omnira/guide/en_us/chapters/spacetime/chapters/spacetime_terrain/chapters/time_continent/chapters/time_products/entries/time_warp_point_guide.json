@@ -3,11 +3,13 @@
   "title": "Time Warp Point",
   "item": "omnira:time_warp_point",
   "text": [
-    "Reverse Time Flow and Spatial Blade also harvest Time Warp Points and Spatial Fold Points on contact. This depends only on the spell form, with no Construction or other element required.",
-    "Placed Time Warp Points and Temporal Motes reshape terrain within a five-block sphere at each five-minute time node. Stone becomes gravel, gravel becomes sand, and sand becomes Time Sand, advancing only one stage per node. Dirt becomes Temporal Silt, with equal chances of ordinary and living silt. Overlapping areas do not accelerate this process.",
-    "Analyze Warp Points or use a Spacetime Reverser to obtain Time Microcores.",
-    "Time Warp Points rarely appear in Stilled Wastes. Entities that touch their field slow gradually and recover after leaving. A spell containing the Construction element, or a Bone Nail or Arcane Needle strike, can harvest one; charged slashes and flying needles also work. The harvested Warp Point cannot be placed directly. The remaining Temporal Mote cannot be broken, but a Pocket Bottle can carry it to a chosen location. It reforms after five minutes. A stack of 16 Warp Points collapses into an Unstable Spacetime Aggregate in a backpack or ordinary container; stabilization protects crystal storage.",
+    "Time Warp Points occasionally appear in the Stilled Wastes. Nearby entities gradually slow down and recover after leaving.",
+    "Harvest a point with a Construction spell, Bone Nail or Arcane Needle. Charged slashes and flying needles also work. Reverse Time Flow and Spatial Blade can harvest points without any spell element.",
+    "Harvested points cannot be placed directly. An unbreakable Temporal Mote remains and reforms into a point after five minutes. Move the mote with a Pocket Magic Bottle.",
     "Advanced condensation turns Time Flowers or Reborn Rottenleaf Lilies into Warp Points, and Warp Points into placeable Temporal Motes. A Spacetime Reverser can also recover Warp Points from an Unstable Spacetime Aggregate.",
+    "Analyze Warp Points or use a Spacetime Reverser to obtain Time Microcores.",
+    "A stack of 16 Warp Points collapses into an Unstable Spacetime Aggregate in the main inventory or ordinary storage. The hotbar is safe, and a Spacetime Stabilization Upgrade protects stacks inside an orb.",
+    "Placed Time Warp Points and Temporal Motes reshape terrain within a five-block sphere at each five-minute time node. Stone becomes gravel, gravel becomes sand, and sand becomes Time Sand, advancing only one stage per node. Dirt becomes Temporal Silt, with equal chances of ordinary and living silt. Overlapping areas do not accelerate this process.",
     "Sneak-right-click a Time Warp Point with an empty main hand to preview its 5-block effect radius."
   ],
   "recipes": true,

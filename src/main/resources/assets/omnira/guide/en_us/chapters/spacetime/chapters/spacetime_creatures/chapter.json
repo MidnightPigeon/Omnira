@@ -1,7 +1,7 @@
 {
   "id": "spacetime_creatures",
   "title": "Spacetime Creatures",
-  "icon": "omnira:time_thief_mosquito_spawn_egg",
+  "icon": "omnira:spacetime_mirror",
   "chapters": [
     "chapters/timeflow_eel/chapter.json",
     "chapters/chronal_blindfish/chapter.json",

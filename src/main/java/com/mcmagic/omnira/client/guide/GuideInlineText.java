@@ -6,7 +6,7 @@ import net.minecraft.client.gui.*;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.*;
 
-/** Item mentions are atomic during wrapping and expand back to the author's spelling for display. */
+/** Draws inline icons at the measured start of each mention after wrapping. */
 public final class GuideInlineText {
     private final Font font;
     public final GuideMentionLayout layout;
@@ -30,7 +30,7 @@ public final class GuideInlineText {
                 var t=layout.token(cp);
                 if(t!=null){
                     boolean creature=t.item()==com.mcmagic.omnira.registry.ModItems.DREAM_MIRROR_SPAWN_EGG.get()
-                            && (t.spelling().equals("梦之镜") || t.spelling().equalsIgnoreCase("Dream Mirror") || t.spelling().equalsIgnoreCase("Dream Mirrors"));
+                            && (t.fullName().equals("梦之镜") || t.fullName().equalsIgnoreCase("Dream Mirror") || t.fullName().equalsIgnoreCase("Dream Mirrors"));
                     icons.add(new Icon(text.length(),Math.round(advance[0]),new Mention(new ItemStack(t.item()),creature?"dream_mirror_spawn_egg":"")));
                 }
                 else text.appendCodePoint(cp);

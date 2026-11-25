@@ -16,6 +16,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
     @Override protected int minimumHeight(){return GuideBookLayout.HEIGHT;}
     private static final int BUTTON_SIZE=20,LEFT_BUTTON=18,RIGHT_BUTTON=282,HEADER_BUTTON_Y=18,FOOTER_BUTTON_Y=190;
     private static final ResourceLocation BOOK=ResourceLocation.fromNamespaceAndPath("omnira","textures/gui/guide_book.png");
+    private static final ResourceLocation COMPASS=ResourceLocation.fromNamespaceAndPath("omnira","textures/gui/guide_celestial_compass.png");
     private static final ResourceLocation VANILLA=ResourceLocation.withDefaultNamespace("textures/gui/container/crafting_table.png");
     private final GuideContents contents;
     private final GuideSearchSession search;
@@ -186,7 +187,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
         clearWidgets();
         bookButton(left+RIGHT_BUTTON,top+HEADER_BUTTON_Y,"X","codex.omnira.close",this::onClose);
         bookButton(left+150,top+HEADER_BUTTON_Y,"home","guide.omnira.home",this::home);
-        bookButton(left+44,top+FOOTER_BUTTON_Y,"tree","guide.omnira.tree",this::openTree);
+        bookButton(left+44,top+FOOTER_BUTTON_Y,"compass","guide.omnira.tree",this::openTree);
         if(!search.results()&&(chapter!=null||treeOrigin!=null||search.returnsToResults(destination()))) {
             String backKey=search.returnsToResults(destination())?"guide.omnira.back_search":treeOrigin!=null&&!search.active()?(treeHistory.isEmpty()?"guide.omnira.tree_back":"guide.omnira.tree_previous"):"guide.omnira.back";
             bookButton(left+LEFT_BUTTON,top+HEADER_BUTTON_Y,"<",backKey,this::back);
@@ -282,11 +283,11 @@ public final class GuideBookScreen extends ResponsiveScreen {
         }
         if(page<pages.size()) inlineLinks(page,pageX);
         if(entry!=null && page==pages.size()-1) {
-            for(int i=0;i<Math.min(2,entry.links().size());i++) linkButton(entry.links().get(i),pageX,top+163+i*13,12);
+            for(int i=0;i<Math.min(GuideEntryPages.FOOTER_LINKS,entry.links().size());i++) linkButton(entry.links().get(i),pageX,top+163+i*13,12);
         }
         if(entry!=null && page>=linkStart()) {
-            int first=(page-linkStart())*6;
-            for(int i=first;i<Math.min(entry.links().size(),first+6);i++) {
+            int first=GuideEntryPages.firstExtraLink(page-linkStart());
+            for(int i=first;i<Math.min(entry.links().size(),first+GuideEntryPages.LINKS_PER_PAGE);i++) {
                 linkButton(entry.links().get(i),pageX,top+49+(i-first)*21,18);
             }
         }
@@ -337,7 +338,7 @@ public final class GuideBookScreen extends ResponsiveScreen {
             y+=11;
         }
     }
-    private int linkPages() {return entry==null || entry.links().size()<=2?0:(entry.links().size()+5)/6;}
+    private int linkPages() {return entry==null?0:GuideEntryPages.extraLinkPages(entry.links().size());}
     private void turnButton(boolean forward,boolean enabled) {
         var button=bookButton(left+(forward?RIGHT_BUTTON:LEFT_BUTTON),top+FOOTER_BUTTON_Y,forward?">":"<",
                 forward?"guide.omnira.next":"guide.omnira.previous",()->{
@@ -353,10 +354,15 @@ public final class GuideBookScreen extends ResponsiveScreen {
         return bookButton(x,y,BUTTON_SIZE,symbol,tooltip,action);
     }
     private Button bookButton(int x,int y,int buttonWidth,String symbol,String tooltip,Runnable action) {
-        var button=addRenderableWidget(new Button(x,y,buttonWidth,BUTTON_SIZE,symbol.equals("home")?Component.translatable(tooltip):Component.literal(symbol),b->action.run(),supplier->supplier.get()) {
+        var button=addRenderableWidget(new Button(x,y,buttonWidth,BUTTON_SIZE,(symbol.equals("home")||symbol.equals("compass"))?Component.translatable(tooltip):Component.literal(symbol),b->action.run(),supplier->supplier.get()) {
             @Override protected void renderWidget(GuiGraphics g,int mouseX,int mouseY,float partialTick) {
                 int x=getX(),y=getY();
                 boolean highlight=active && isHoveredOrFocused();
+                if(symbol.equals("compass")) {
+                    g.blit(COMPASS,x,y,0,0,BUTTON_SIZE,BUTTON_SIZE,BUTTON_SIZE,BUTTON_SIZE);
+                    if(highlight) g.renderOutline(x,y,BUTTON_SIZE,BUTTON_SIZE,0xFF8EBCC6);
+                    return;
+                }
                 int ink=active?0xFF62432A:0xFFA89978;
                 g.fill(x,y,x+getWidth(),y+getHeight(),active?0xFFAA8850:0xFFC5B58E);
                 g.fill(x+1,y+1,x+getWidth()-1,y+getHeight()-1,highlight?0xFFFFE4A6:0xFFF2DCA9);
