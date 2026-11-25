@@ -1,7 +1,7 @@
 {
   "id": "timeflow_eel_creature",
   "title": "Timeflow Eel",
-  "icon": "omnira:timeflow_eel",
+  "icon": "omnira:entity/timeflow_eel",
   "entries": [
     "entries/timeflow_eel_guide.json"
   ],

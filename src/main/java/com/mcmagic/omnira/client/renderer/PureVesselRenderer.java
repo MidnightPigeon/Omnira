@@ -13,15 +13,19 @@ import java.util.List;
 /** Break the existing one-pixel surface into drifting flakes, without changing its UV scale. */
 public final class PureVesselRenderer implements BlockEntityRenderer<PureVesselBlockEntity> {
     public PureVesselRenderer(BlockEntityRendererProvider.Context context) {}
+    public static void drawIntact(net.minecraft.world.level.block.state.BlockState state,PoseStack pose,MultiBufferSource buffers,int light,int overlay){
+        var model=Minecraft.getInstance().getBlockRenderer().getBlockModel(state);
+        StaticModelQuads.draw(model,pose,buffers.getBuffer(Sheets.cutoutBlockSheet()),light,overlay);
+    }
     @Override public void render(PureVesselBlockEntity vessel,float partial,PoseStack pose,MultiBufferSource buffers,int light,int overlay) {
         var mc=Minecraft.getInstance();
-        var model=mc.getBlockRenderer().getBlockModel(vessel.getBlockState());
-        var consumer=buffers.getBuffer(Sheets.cutoutBlockSheet());
         float progress=vessel.ritual.collapseProgress(partial);
         if(progress<=0) {
-            com.mcmagic.omnira.client.renderer.StaticModelQuads.draw(model,pose,consumer,light,overlay);
+            drawIntact(vessel.getBlockState(),pose,buffers,light,overlay);
             return;
         }
+        var model=mc.getBlockRenderer().getBlockModel(vessel.getBlockState());
+        var consumer=buffers.getBuffer(Sheets.cutoutBlockSheet());
         var random=RandomSource.create(42);
         int index=0;
         for(int side=0;side<7;side++) {

@@ -6,7 +6,8 @@
     "This guide explains how to make and use the things you discover.",
     "Carry the book in your hotbar or inventory, hover over an item in an inventory or container screen, and hold Ctrl for about one second to read its entry. Closing returns to the previous screen.",
     "With the book in your main hand, aim at a documented block, machine or creature to see a hint. Shift + right-click opens its introduction. Quick references neither consume the book nor overwrite its reading position.",
-    "Use the text field below the book to find matching chapters and entries. Stop Search or Return Home ends the search and clears the field."
+    "Use the text field below the book to find matching chapters and entries. Stop Search or Return Home ends the search and clears the field.",
+    "With JEI installed, click an item icon in the text to view its recipes."
   ],
   "recipes": true
 }

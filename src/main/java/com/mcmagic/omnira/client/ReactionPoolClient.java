@@ -114,7 +114,7 @@ public final class ReactionPoolClient {
         double age=time-pool.outputItemTick();var output=pool.outputItem();
         if(!output.isEmpty()&&age>0&&age<18){
             var p=TRANSFER_POINT;ReactionPoolGeometry.outputPoint(false,age/18,p);float visibility=transferVisibility(age/18);
-            MultiBufferSource fading=type->new FadeVertices(sorted.getBuffer(
+            MultiBufferSource fading=type->new com.mcmagic.omnira.client.renderer.FadeVertices(sorted.getBuffer(
                     type==Sheets.solidBlockSheet()||type==Sheets.cutoutBlockSheet()||type==Sheets.translucentItemSheet()
                             ?CrystalGlassLayer.ATLAS:type),visibility);
             item(output,p[0],p[1],p[2],age*12,.15F*visibility,pool,pose,fading,light,overlay,20);
@@ -168,14 +168,6 @@ public final class ReactionPoolClient {
     }
     private static float transferVisibility(double progress){return (float)Math.sin(Math.PI*Math.clamp(progress,0,1));}
     /** Preserve the item's tint and the shared glass sorting path while fading each vertex. */
-    private record FadeVertices(VertexConsumer target,float alpha) implements VertexConsumer {
-        public VertexConsumer addVertex(float x,float y,float z){target.addVertex(x,y,z);return this;}
-        public VertexConsumer setColor(int r,int g,int b,int a){target.setColor(r,g,b,Math.round(a*alpha));return this;}
-        public VertexConsumer setUv(float u,float v){target.setUv(u,v);return this;}
-        public VertexConsumer setUv1(int u,int v){target.setUv1(u,v);return this;}
-        public VertexConsumer setUv2(int u,int v){target.setUv2(u,v);return this;}
-        public VertexConsumer setNormal(float x,float y,float z){target.setNormal(x,y,z);return this;}
-    }
     private static void item(ItemStack stack,double x,double y,double z,double angle,float scale,ReactionPoolBlockEntity pool,PoseStack pose,MultiBufferSource buffers,int light,int overlay,int seed){
         pose.pushPose();pose.translate(x,y,z);pose.mulPose(Axis.YP.rotationDegrees((float)angle));pose.scale(scale,scale,scale);
         Minecraft.getInstance().getItemRenderer().renderStatic(stack,ItemDisplayContext.NONE,light,overlay,pose,buffers,pool.getLevel(),seed);pose.popPose();

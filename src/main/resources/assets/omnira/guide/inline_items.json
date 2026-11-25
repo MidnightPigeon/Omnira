@@ -1,0 +1,287 @@
+{
+  "named": [
+    "minecraft:armor_stand",
+    "minecraft:blaze_powder",
+    "minecraft:bone",
+    "minecraft:bookshelf",
+    "minecraft:brush",
+    "minecraft:cactus",
+    "minecraft:campfire",
+    "minecraft:coal",
+    "minecraft:crafting_table",
+    "minecraft:cracked_stone_bricks",
+    "minecraft:crying_obsidian",
+    "minecraft:deepslate",
+    "minecraft:egg",
+    "minecraft:emerald",
+    "minecraft:enchanted_book",
+    "minecraft:enchanting_table",
+    "minecraft:end_stone",
+    "minecraft:ender_pearl",
+    "minecraft:feather",
+    "minecraft:furnace",
+    "minecraft:glass_bottle",
+    "minecraft:glass_pane",
+    "minecraft:glistering_melon_slice",
+    "minecraft:glow_ink_sac",
+    "minecraft:grass_block",
+    "minecraft:grindstone",
+    "minecraft:honey_bottle",
+    "minecraft:hopper",
+    "minecraft:ink_sac",
+    "minecraft:iron_block",
+    "minecraft:iron_ingot",
+    "minecraft:iron_sword",
+    "minecraft:jukebox",
+    "minecraft:kelp",
+    "minecraft:lava_bucket",
+    "minecraft:melon",
+    "minecraft:melon_seeds",
+    "minecraft:melon_slice",
+    "minecraft:milk_bucket",
+    "minecraft:obsidian",
+    "minecraft:piston",
+    "minecraft:pumpkin",
+    "minecraft:raw_gold_block",
+    "minecraft:rotten_flesh",
+    "minecraft:sand",
+    "minecraft:shears",
+    "minecraft:stone_bricks",
+    "minecraft:stonecutter",
+    "minecraft:sugar_cane",
+    "minecraft:sweet_berries",
+    "minecraft:totem_of_undying",
+    "minecraft:wind_charge",
+    "minecraft:gravel",
+    "minecraft:cod",
+    "cataclysm:cursium_ingot",
+    "cataclysm:essence_of_the_storm",
+    "cataclysm:gauntlet_of_guard",
+    "cataclysm:ignitium_ingot",
+    "cataclysm:monstrous_horn",
+    "cataclysm:remnant_skull",
+    "cataclysm:tidal_claws",
+    "cataclysm:witherite_ingot",
+    "create:large_cogwheel",
+    "create:fluid_pipe",
+    "create:depot",
+    "create:sequenced_gearshift",
+    "create:brass_casing"
+  ],
+  "contexts": {
+    "minecraft:book": [
+      "三本[书]",
+      "是[书]与纸",
+      "three [books]",
+      "with [books], paper"
+    ],
+    "minecraft:paper": [
+      "书与[纸]",
+      "找到[纸张]",
+      "such as [paper]",
+      "books, [paper]"
+    ],
+    "minecraft:lead": [
+      "解开[拴绳]",
+      "and [leads] must be removed"
+    ],
+    "minecraft:clock": [
+      "一个[时钟]",
+      "a [clock]",
+      "one [clock]"
+    ],
+    "minecraft:glass": [
+      "一块[玻璃]",
+      "one [glass] block"
+    ],
+    "minecraft:stick": [
+      "一根[木棍]",
+      "a [stick]"
+    ],
+    "minecraft:potion": [
+      "[药水]瓶",
+      "[potion] bottles",
+      "[potion] bottle"
+    ],
+    "minecraft:dirt": [
+      "转为[泥土]",
+      "[泥土]变为",
+      "在[泥土]与末地石",
+      "on [dirt] or end stone",
+      "into [dirt]",
+      "拆解为[泥土]",
+      "yields [dirt]",
+      "→ [泥土]",
+      "→ [Dirt]"
+    ],
+    "minecraft:spawner": [
+      "搬运[刷怪笼]",
+      "move a monster [spawner]"
+    ],
+    "create:deployer": [
+      "让[机械手]持",
+      "a [deployer]"
+    ],
+    "create:wrench": [
+      "用[扳手]",
+      "A [wrench]",
+      "a [wrench]"
+    ],
+    "create:shaft": [
+      "动力的[转轴]",
+      "动力[转轴]",
+      "Create [shaft]"
+    ],
+    "create:cogwheel": [
+      "[小齿轮]",
+      "either [cogwheel] size"
+    ],
+    "omnira:guide_book": [
+      "ending with a [Guide Book]",
+      "投入[引导书]",
+      "[指导书]经高阶凝聚",
+      "turns the [guidebook] into"
+    ],
+    "minecraft:bucket": [
+      "[空桶]",
+      "持[桶]或",
+      "用[桶]或",
+      "交换[桶]和",
+      "[buckets] or fluid containers",
+      "a [bucket] or fluid container",
+      "exchanges [buckets] and",
+      "empty [buckets]",
+      "empty [bucket]",
+      "in a [bucket]",
+      "[buckets] are returned",
+      "return [buckets]"
+    ],
+    "create:belt_connector": [
+      "在置物台或[传送带]上",
+      "on a depot or [belt]"
+    ],
+    "minecraft:cod": [
+      "→ [鳕鱼]",
+      "→ [Cod]",
+      "yields [cod]"
+    ],
+    "omnira:intake_upgrade": [
+      "[汲取]与弹出升级",
+      "[汲取]或弹出升级",
+      "[汲取]与速度升级",
+      "[Intake] and Output Upgrades",
+      "[Intake] and one Speed Upgrade",
+      "[Intake] and Output filters",
+      "[汲取]、弹出、配方控制或速度升级",
+      "[Intake], Output, Recipe Control or Speed Upgrades"
+    ],
+    "omnira:output_upgrade": [
+      "Intake and [Output] filters",
+      "汲取、[弹出]、配方控制或速度升级",
+      "Intake, [Output], Recipe Control or Speed Upgrades"
+    ],
+    "omnira:recipe_control_upgrade": [
+      "汲取、弹出、[配方控制]或速度升级",
+      "Intake, Output, [Recipe Control] or Speed Upgrades",
+      "[配方控制]、时空固化与速度升级",
+      "[Recipe Control], Spacetime Stabilization and Speed Upgrade"
+    ],
+    "omnira:spacetime_stabilization_upgrade": [
+      "配方控制、[时空固化]与速度升级",
+      "Recipe Control, [Spacetime Stabilization] and Speed Upgrade"
+    ],
+    "omnira:basic_stacking_upgrade": [
+      "[基础]与注能堆叠属于同类",
+      "[Basic] and Infused Stacking share",
+      "[Stacking] or Infused Stacking",
+      "[堆叠]或注能堆叠升级"
+    ],
+    "omnira:infused_stacking_upgrade": [
+      "基础与[注能堆叠]属于同类",
+      "Basic and [Infused Stacking] share",
+      "Stacking or [Infused Stacking]"
+    ],
+    "omnira:dream_spell_core": [
+      "[梦境]或光暗核心",
+      "[Dream] or Light/Dark cores"
+    ],
+    "omnira:spacetime_spell_core": [
+      "[时空]或无羁核心",
+      "[Spacetime] or Unbound cores"
+    ],
+    "omnira:earth_microcore": [
+      "[地]、水、火、风微核",
+      "[地]、水、火、风四系微核",
+      "[地]、水、火或风微核",
+      "[地]、水、火、风、光、暗、时间、空间微核",
+      "[地]、水、火、风、光、暗、时间与空间八种微核",
+      "[Earth], Water, Fire and Air Microcores",
+      "[earth], water, fire or air microcore",
+      "With [Earth], Water, Fire or Air on the left",
+      "[Earth], Water, Fire, Air, Light and Dark Microcores",
+      "[Earth], Water, Fire, Air, Light, Dark, Time and Space Microcores"
+    ],
+    "omnira:water_microcore": [
+      "地、[水]、火、风微核",
+      "地、[水]、火、风四系微核",
+      "地、[水]、火或风微核",
+      "地、[水]、火、风、光、暗、时间、空间微核",
+      "地、[水]、火、风、光、暗、时间与空间八种微核",
+      "Earth, [Water], Fire and Air Microcores",
+      "earth, [water], fire or air microcore",
+      "With Earth, [Water], Fire or Air on the left",
+      "Earth, [Water], Fire, Air, Light and Dark Microcores",
+      "Earth, [Water], Fire, Air, Light, Dark, Time and Space Microcores"
+    ],
+    "omnira:fire_microcore": [
+      "地、水、[火]、风微核",
+      "地、水、[火]、风四系微核",
+      "地、水、[火]或风微核",
+      "地、水、[火]、风、光、暗、时间、空间微核",
+      "地、水、[火]、风、光、暗、时间与空间八种微核",
+      "Earth, Water, [Fire] and Air Microcores",
+      "earth, water, [fire] or air microcore",
+      "With Earth, Water, [Fire] or Air on the left",
+      "Earth, Water, [Fire], Air, Light and Dark Microcores",
+      "Earth, Water, [Fire], Air, Light, Dark, Time and Space Microcores"
+    ],
+    "omnira:air_microcore": [
+      "地、水、火、[风]微核",
+      "地、水、火、[风]四系微核",
+      "地、水、火或[风]微核",
+      "地、水、火、[风]、光、暗、时间、空间微核",
+      "地、水、火、[风]、光、暗、时间与空间八种微核",
+      "With Earth, Water, Fire or [Air] on the left",
+      "Earth, Water, Fire, [Air], Light and Dark Microcores",
+      "Earth, Water, Fire, [Air], Light, Dark, Time and Space Microcores"
+    ],
+    "omnira:light_microcore": [
+      "[光]、暗微核",
+      "地、水、火、风、[光]、暗、时间、空间微核",
+      "地、水、火、风、[光]、暗、时间与空间八种微核",
+      "[Light] and Dark Microcores",
+      "Earth, Water, Fire, Air, [Light] and Dark Microcores",
+      "Earth, Water, Fire, Air, [Light], Dark, Time and Space Microcores"
+    ],
+    "omnira:dark_microcore": [
+      "光、[暗]微核",
+      "地、水、火、风、光、[暗]、时间、空间微核",
+      "地、水、火、风、光、[暗]、时间与空间八种微核",
+      "Earth, Water, Fire, Air, Light, [Dark], Time and Space Microcores"
+    ],
+    "omnira:time_microcore": [
+      "[时间]或空间微核",
+      "[时间]与空间微核",
+      "地、水、火、风、光、暗、[时间]、空间微核",
+      "地、水、火、风、光、暗、[时间]与空间八种微核",
+      "[Time] or Space microcore",
+      "Earth, Water, Fire, Air, Light, Dark, [Time] and Space Microcores"
+    ],
+    "omnira:space_microcore": [
+      "时间或[空间]微核",
+      "时间与[空间]微核",
+      "地、水、火、风、光、暗、时间、[空间]微核",
+      "地、水、火、风、光、暗、时间与[空间]八种微核"
+    ]
+  }
+}

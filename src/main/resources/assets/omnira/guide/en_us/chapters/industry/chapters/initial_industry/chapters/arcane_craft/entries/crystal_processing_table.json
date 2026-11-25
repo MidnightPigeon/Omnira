@@ -12,6 +12,10 @@
     {
       "target": "spell_target_shape_basics",
       "label": "Choosing Targets and Shapes"
+    },
+    {
+      "target": "portable_crystal_processing_table",
+      "label": "Portable Crystal Processing Table"
     }
   ]
 }

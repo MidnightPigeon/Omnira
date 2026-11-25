@@ -542,6 +542,11 @@ public class SpellEntity extends Entity {
         return true;
     }
     @Override public boolean shouldRiderSit() { return false; }
+    @Override
+    public boolean causeFallDamage(float distance, float multiplier, DamageSource source) {
+        // Entity forwards a vehicle's landing damage to its passengers during move(), before dismount.
+        return kind() != Kind.SELF_FLIGHT && super.causeFallDamage(distance, multiplier, source);
+    }
     @Override protected void addPassenger(Entity passenger) {
         super.addPassenger(passenger);
         if(kind()==Kind.SELF_FLIGHT) {
@@ -550,9 +555,16 @@ public class SpellEntity extends Entity {
     }
     @Override protected void removePassenger(Entity passenger) {
         super.removePassenger(passenger);
-        if(!level().isClientSide&&kind()==Kind.SELF_FLIGHT&&passenger instanceof ServerPlayer player&&player.isAlive()) {
-            player.fallDistance=0;
-            player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.SLOW_FALLING,40,0));
+        if (kind() == Kind.SELF_FLIGHT && passenger instanceof Player player && player.isAlive()) {
+            player.resetFallDistance();
+            Vec3 velocity = player.getDeltaMovement();
+            if (velocity.y < 0) {
+                player.setDeltaMovement(velocity.x, 0, velocity.z);
+                player.hurtMarked = true;
+            }
+            if (player instanceof ServerPlayer) {
+                player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.SLOW_FALLING,40,0));
+            }
         }
         if(passenger.getUUID().equals(flightRider)) {flightRider=null;flightAwarded=false;}
     }

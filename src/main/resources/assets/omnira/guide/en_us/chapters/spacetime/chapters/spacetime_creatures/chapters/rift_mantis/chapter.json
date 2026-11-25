@@ -1,7 +1,7 @@
 {
   "id": "rift_mantis_chapter",
   "title": "Rift Mantis",
-  "icon": "omnira:rift_mantis_spawn_egg",
+  "icon": "omnira:entity/rift_mantis",
   "introduction": "introduction.json",
   "entries": [
     "entries/rift_mantis.json",

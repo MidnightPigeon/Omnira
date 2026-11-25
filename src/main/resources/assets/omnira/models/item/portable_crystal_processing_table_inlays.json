@@ -1,0 +1,322 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "gem": "omnira:item/infused_crystal_white",
+    "particle": "omnira:item/spiritual_crystal_facets",
+    "roles": "omnira:item/portable_table_sockets"
+  },
+  "elements": [
+    {
+      "from": [
+        4,
+        8.75,
+        4
+      ],
+      "to": [
+        6,
+        9.5,
+        6
+      ],
+      "rotation": {
+        "origin": [
+          8,
+          8,
+          8
+        ],
+        "axis": "y",
+        "angle": 45
+      },
+      "faces": {
+        "up": {
+          "texture": "#roles",
+          "uv": [
+            1,
+            1,
+            7,
+            7
+          ]
+        },
+        "north": {
+          "texture": "#roles",
+          "uv": [
+            1,
+            1,
+            7,
+            7
+          ]
+        },
+        "south": {
+          "texture": "#roles",
+          "uv": [
+            1,
+            1,
+            7,
+            7
+          ]
+        },
+        "east": {
+          "texture": "#roles",
+          "uv": [
+            1,
+            1,
+            7,
+            7
+          ]
+        },
+        "west": {
+          "texture": "#roles",
+          "uv": [
+            1,
+            1,
+            7,
+            7
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        10,
+        8.75,
+        4
+      ],
+      "to": [
+        12,
+        9.5,
+        6
+      ],
+      "rotation": {
+        "origin": [
+          8,
+          8,
+          8
+        ],
+        "axis": "y",
+        "angle": 45
+      },
+      "faces": {
+        "up": {
+          "texture": "#roles",
+          "uv": [
+            9,
+            1,
+            15,
+            7
+          ]
+        },
+        "north": {
+          "texture": "#roles",
+          "uv": [
+            9,
+            1,
+            15,
+            7
+          ]
+        },
+        "south": {
+          "texture": "#roles",
+          "uv": [
+            9,
+            1,
+            15,
+            7
+          ]
+        },
+        "east": {
+          "texture": "#roles",
+          "uv": [
+            9,
+            1,
+            15,
+            7
+          ]
+        },
+        "west": {
+          "texture": "#roles",
+          "uv": [
+            9,
+            1,
+            15,
+            7
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        8.75,
+        10
+      ],
+      "to": [
+        6,
+        9.5,
+        12
+      ],
+      "rotation": {
+        "origin": [
+          8,
+          8,
+          8
+        ],
+        "axis": "y",
+        "angle": 45
+      },
+      "faces": {
+        "up": {
+          "texture": "#roles",
+          "uv": [
+            1,
+            9,
+            7,
+            15
+          ]
+        },
+        "north": {
+          "texture": "#roles",
+          "uv": [
+            1,
+            9,
+            7,
+            15
+          ]
+        },
+        "south": {
+          "texture": "#roles",
+          "uv": [
+            1,
+            9,
+            7,
+            15
+          ]
+        },
+        "east": {
+          "texture": "#roles",
+          "uv": [
+            1,
+            9,
+            7,
+            15
+          ]
+        },
+        "west": {
+          "texture": "#roles",
+          "uv": [
+            1,
+            9,
+            7,
+            15
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        10,
+        8.75,
+        10
+      ],
+      "to": [
+        12,
+        9.5,
+        12
+      ],
+      "rotation": {
+        "origin": [
+          8,
+          8,
+          8
+        ],
+        "axis": "y",
+        "angle": 45
+      },
+      "faces": {
+        "up": {
+          "texture": "#roles",
+          "uv": [
+            9,
+            9,
+            15,
+            15
+          ]
+        },
+        "north": {
+          "texture": "#roles",
+          "uv": [
+            9,
+            9,
+            15,
+            15
+          ]
+        },
+        "south": {
+          "texture": "#roles",
+          "uv": [
+            9,
+            9,
+            15,
+            15
+          ]
+        },
+        "east": {
+          "texture": "#roles",
+          "uv": [
+            9,
+            9,
+            15,
+            15
+          ]
+        },
+        "west": {
+          "texture": "#roles",
+          "uv": [
+            9,
+            9,
+            15,
+            15
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        8.75,
+        6.5
+      ],
+      "to": [
+        9.5,
+        9.75,
+        9.5
+      ],
+      "rotation": {
+        "origin": [
+          8,
+          8,
+          8
+        ],
+        "axis": "y",
+        "angle": 45
+      },
+      "faces": {
+        "up": {
+          "texture": "#gem"
+        },
+        "north": {
+          "texture": "#gem"
+        },
+        "south": {
+          "texture": "#gem"
+        },
+        "east": {
+          "texture": "#gem"
+        },
+        "west": {
+          "texture": "#gem"
+        }
+      }
+    }
+  ],
+  "render_type": "minecraft:translucent",
+  "ambientocclusion": false
+}

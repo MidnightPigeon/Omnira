@@ -3,9 +3,8 @@
   "item": "omnira:arcane_arquebus",
   "title": "Arcane Arquebus",
   "text": [
-    "Sneak-right-click to open its single crystal slot. Only Target-Projectile and Crosshair-Projectile spells fit. In the main hand, right-click fires only the loaded spell, never the grid sequence. The crystal is not consumed.",
-    "Without an upgrade kit, selection distance is quadrupled: 48 blocks for Target and 64 for Crosshair. Spell power gains an additive 30%, and projectile speed doubles. The base firing cooldown is 2 seconds. Base mana cost is doubled before subtracting cost reductions. Offhand holding grants no bonus.",
-    "Each arquebus accepts one upgrade kit. The Ancestor Launcher grants concealment and impact explosions; the King's New Clothes grants perception and wall-piercing ghost shots. The kits are mutually exclusive, and installing one preserves the loaded spell crystal."
+    "Sneak-right-click to load one Target-Projectile or Crosshair-Projectile crystal. Right-click with the gun in your main hand to cast the loaded spell. This bypasses the grid sequence and preserves the crystal.",
+    "Range, spell power and projectile speed bonuses require the main hand. Each shot multiplies base mana cost before applying reductions. One kit fits each gun. Installation preserves the loaded crystal. The table gives selection range in blocks and base mana multiplier per shot."
   ],
   "links": [
     {
@@ -21,5 +20,349 @@
       "label": "Forging Recipe"
     }
   ],
-  "recipes": false
+  "recipes": false,
+  "figures": [
+    {
+      "id": "gun_stats",
+      "title": "Shot Profiles",
+      "labels": [
+        {
+          "text": "Target",
+          "x": 0,
+          "y": 20,
+          "width": 48,
+          "height": 12
+        },
+        {
+          "text": "48",
+          "x": 49,
+          "y": 20,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "48",
+          "x": 75,
+          "y": 20,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "36",
+          "x": 100,
+          "y": 20,
+          "width": 23,
+          "height": 12
+        },
+        {
+          "text": "Aim",
+          "x": 0,
+          "y": 35,
+          "width": 48,
+          "height": 12
+        },
+        {
+          "text": "64",
+          "x": 49,
+          "y": 35,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "64",
+          "x": 75,
+          "y": 35,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "48",
+          "x": 100,
+          "y": 35,
+          "width": 23,
+          "height": 12
+        },
+        {
+          "text": "Shots",
+          "x": 0,
+          "y": 50,
+          "width": 48,
+          "height": 12
+        },
+        {
+          "text": "1",
+          "x": 49,
+          "y": 50,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "1",
+          "x": 75,
+          "y": 50,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "2",
+          "x": 100,
+          "y": 50,
+          "width": 23,
+          "height": 12
+        },
+        {
+          "text": "Mana",
+          "x": 0,
+          "y": 65,
+          "width": 48,
+          "height": 12
+        },
+        {
+          "text": "×2",
+          "x": 49,
+          "y": 65,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "×2",
+          "x": 75,
+          "y": 65,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "×1.5",
+          "x": 100,
+          "y": 65,
+          "width": 24,
+          "height": 12
+        },
+        {
+          "text": "CD (s)",
+          "x": 0,
+          "y": 80,
+          "width": 48,
+          "height": 12
+        },
+        {
+          "text": "2",
+          "x": 49,
+          "y": 80,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "3",
+          "x": 75,
+          "y": 80,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "2",
+          "x": 100,
+          "y": 80,
+          "width": 23,
+          "height": 12
+        },
+        {
+          "text": "Power",
+          "x": 0,
+          "y": 95,
+          "width": 48,
+          "height": 12
+        },
+        {
+          "text": "+30%",
+          "x": 49,
+          "y": 95,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "+50%",
+          "x": 75,
+          "y": 95,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "+30%",
+          "x": 100,
+          "y": 95,
+          "width": 24,
+          "height": 12
+        },
+        {
+          "text": "Speed",
+          "x": 0,
+          "y": 110,
+          "width": 48,
+          "height": 12
+        },
+        {
+          "text": "×2",
+          "x": 49,
+          "y": 110,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "×2",
+          "x": 75,
+          "y": 110,
+          "width": 25,
+          "height": 12
+        },
+        {
+          "text": "×1.5",
+          "x": 100,
+          "y": 110,
+          "width": 24,
+          "height": 12
+        }
+      ],
+      "icons": [
+        {
+          "item": "omnira:arcane_arquebus",
+          "x": 49,
+          "y": 0,
+          "count": 1
+        },
+        {
+          "item": "omnira:ancestor_launcher",
+          "x": 75,
+          "y": 0,
+          "count": 1
+        },
+        {
+          "item": "omnira:kings_new_clothes",
+          "x": 101,
+          "y": 0,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 18,
+          "x2": 123,
+          "y2": 18,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 33,
+          "x2": 123,
+          "y2": 33,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 48,
+          "x2": 123,
+          "y2": 48,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 63,
+          "x2": 123,
+          "y2": 63,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 78,
+          "x2": 123,
+          "y2": 78,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 93,
+          "x2": 123,
+          "y2": 93,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 108,
+          "x2": 123,
+          "y2": 108,
+          "color": "#B9AD91"
+        }
+      ]
+    },
+    {
+      "id": "gun_ballistics",
+      "title": "Projectiles",
+      "labels": [
+        {
+          "text": "Arcane Arquebus",
+          "x": 19,
+          "y": 0,
+          "width": 105,
+          "height": 22
+        },
+        {
+          "text": "Standard projectile.",
+          "x": 0,
+          "y": 23,
+          "width": 124,
+          "height": 11
+        },
+        {
+          "text": "Ancestor Launcher",
+          "x": 19,
+          "y": 35,
+          "width": 105,
+          "height": 22
+        },
+        {
+          "text": "Bursts on impact.",
+          "x": 0,
+          "y": 58,
+          "width": 124,
+          "height": 11
+        },
+        {
+          "text": "King’s New Clothes",
+          "x": 19,
+          "y": 71,
+          "width": 105,
+          "height": 22
+        },
+        {
+          "text": "Ghost shots pass through untargeted blocks.",
+          "x": 0,
+          "y": 94,
+          "width": 124,
+          "height": 35
+        }
+      ],
+      "icons": [
+        {
+          "item": "omnira:arcane_arquebus",
+          "x": 0,
+          "y": 0,
+          "count": 1
+        },
+        {
+          "item": "omnira:ancestor_launcher",
+          "x": 0,
+          "y": 35,
+          "count": 1
+        },
+        {
+          "item": "omnira:kings_new_clothes",
+          "x": 0,
+          "y": 71,
+          "count": 1
+        }
+      ],
+      "strokes": []
+    }
+  ]
 }

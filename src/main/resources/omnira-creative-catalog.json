@@ -192,6 +192,7 @@
         "advanced_condensation_table",
         "analysis_artisan_table",
         "crystal_processing_table",
+        "portable_crystal_processing_table",
         "advanced_crystal_aggregation_ring",
         "arcane_assembly_table",
         "crystal_furnace",

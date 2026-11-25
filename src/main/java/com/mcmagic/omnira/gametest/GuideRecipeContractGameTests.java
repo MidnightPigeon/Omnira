@@ -44,15 +44,8 @@ public final class GuideRecipeContractGameTests {
     private static void verify(GameTestHelper h,Diagram d){
         var level=h.getLevel();var source=d.source();var registries=level.registryAccess();
         for(var slot:d.slots())h.assertTrue(slot.x()-8>=0&&slot.x()+8<=124&&slot.y()-8>=36&&slot.y()+8<=146,"Guide recipe slot leaves its existing page: "+d.title().getString());
-        if(source instanceof CraftingRecipe recipe){
-            int width=recipe instanceof ShapedRecipe shaped?shaped.getWidth():recipe instanceof WrappedShapedRecipe wrapped?wrapped.shaped().getWidth():3;
-            int height=(recipe.getIngredients().size()+width-1)/width;
-            var inputs=new ArrayList<ItemStack>();
-            for(int i=0;i<width*height;i++)inputs.add(i<recipe.getIngredients().size()?shown(d,17+i%width*18,72+i/width*18):ItemStack.EMPTY);
-            var input=CraftingInput.of(width,height,inputs);
-            h.assertTrue(recipe.matches(input,level),"Guide crafting grid rejected: "+d.title().getString());
-            output(h,d,108,90,recipe.assemble(input,registries));
-        }else if(source instanceof SmithingRecipe recipe){
+        h.assertTrue(!(source instanceof CraftingRecipe),"Workbench recipe duplicated in the guide");
+        if(source instanceof SmithingRecipe recipe){
             var input=new SmithingRecipeInput(shown(d,17,90),shown(d,35,90),shown(d,53,90));
             h.assertTrue(recipe.matches(input,level),"Guide smithing inputs rejected");output(h,d,108,90,recipe.assemble(input,registries));
         }else if(source instanceof CondensationRecipe recipe){

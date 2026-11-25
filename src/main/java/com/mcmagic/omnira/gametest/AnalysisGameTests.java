@@ -72,7 +72,7 @@ public final class AnalysisGameTests {
             h.runAtTickTime(1+i*50,() -> {
             s.table.clearContent();
             s.player.setData(ModAttachments.MANA,ManaState.initial());
-            s.table.setItem(0,new ItemStack(inputs[i],i==1?1:64));
+            s.table.setItem(0,new ItemStack(inputs[i],i==1?1:i==3?16:64));
             h.assertTrue(s.menu.clickMenuButton(s.player,0),"Analysis failed for "+inputs[i]);
             });
             h.runAtTickTime(43+i*50,() -> {

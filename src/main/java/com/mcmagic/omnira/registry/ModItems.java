@@ -114,6 +114,7 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> ADVANCED_RITUAL_ENERGY_CORE=ITEMS.registerSimpleBlockItem(ModBlocks.ADVANCED_RITUAL_ENERGY_CORE,new Item.Properties().rarity(Rarity.UNCOMMON));
     // Display-only ritual results; neither item is obtainable or listed in a creative tab.
     public static final DeferredItem<BlockItem> DREAM_PORTAL=ITEMS.registerSimpleBlockItem(ModBlocks.DREAM_PORTAL);
+    public static final DeferredItem<Item> SPACETIME_MIRROR=ITEMS.registerSimpleItem("spacetime_mirror",new Item.Properties());
     public static final DeferredItem<BlockItem> CORRIDOR_GATEWAY=ITEMS.registerSimpleBlockItem(ModBlocks.CORRIDOR_GATEWAY);
     public static final DeferredItem<com.mcmagic.omnira.item.GuideBookItem> GUIDE_BOOK=
             ITEMS.registerItem("guide_book",com.mcmagic.omnira.item.GuideBookItem::new,new Item.Properties().stacksTo(1));
@@ -137,6 +138,8 @@ public final class ModItems {
     public static final DeferredItem<Item> ARCANE_DUST =
             ITEMS.registerItem("arcane_dust",com.mcmagic.omnira.item.ArcaneDustItem::new,new Item.Properties());
 
+    public static final DeferredItem<com.mcmagic.omnira.item.PortableTableItem> PORTABLE_TABLE =
+            ITEMS.register("portable_crystal_processing_table", () -> new com.mcmagic.omnira.item.PortableTableItem(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<BlockItem> CRYSTAL_PROCESSING_TABLE =
             ITEMS.registerSimpleBlockItem(ModBlocks.CRYSTAL_PROCESSING_TABLE);
     public static final DeferredItem<BlockItem> ANALYSIS_ARTISAN_TABLE = ITEMS.registerSimpleBlockItem(ModBlocks.ANALYSIS_ARTISAN_TABLE);

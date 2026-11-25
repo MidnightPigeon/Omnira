@@ -22,10 +22,15 @@ public final class GuideIconGameTests {
         var seen=new HashSet<String>();
         for(var row:chapter.directory()){
             var id=ResourceLocation.parse(row.icon());
-            h.assertTrue(BuiltInRegistries.ITEM.containsKey(id)&&BuiltInRegistries.ITEM.get(id)!=Items.AIR,"Missing directory icon: "+row.title()+" / "+id);
+            if(id.getPath().startsWith("entity/")){
+                var creature=id.withPath(id.getPath().substring(7));
+                h.assertTrue(BuiltInRegistries.ENTITY_TYPE.containsKey(creature),"Missing guide creature: "+creature);
+            }else if(id.getPath().endsWith(".png")){
+                h.assertTrue(GuideIconGameTests.class.getResource("/assets/"+id.getNamespace()+"/"+id.getPath())!=null,"Missing icon texture: "+id);
+            }else h.assertTrue(BuiltInRegistries.ITEM.containsKey(id)&&BuiltInRegistries.ITEM.get(id)!=Items.AIR,"Missing directory icon: "+row.title()+" / "+id);
             h.assertTrue(seen.add(row.icon()),"Duplicate sibling icon in "+chapter.id()+": "+row.icon());
             if(row.entry()!=null){
-                h.assertTrue(BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(row.entry().item())),"Missing item binding: "+row.entry().id());
+                if(!row.entry().item().isEmpty())h.assertTrue(BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(row.entry().item())),"Missing item binding: "+row.entry().id());
                 h.assertTrue(row.icon().equals(row.entry().icon()),"Directory ignored entry override");
             }else registered(h,row.chapter());
         }

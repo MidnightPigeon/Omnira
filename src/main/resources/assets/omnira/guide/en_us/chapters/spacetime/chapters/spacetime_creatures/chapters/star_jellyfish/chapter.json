@@ -1,7 +1,7 @@
 {
   "id": "star_jellyfish_creature",
   "title": "Star Jellyfish",
-  "icon": "omnira:star_jellyfish",
+  "icon": "omnira:entity/star_jellyfish",
   "entries": [
     "entries/star_jellyfish_guide.json"
   ],

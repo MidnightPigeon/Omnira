@@ -380,6 +380,19 @@
       "row": 4
     },
     {
+      "id": "portable_crystal_processing_table",
+      "stage": 1,
+      "kind": "branch",
+      "target": "portable_crystal_processing_table",
+      "parent": "map:infused",
+      "related": [
+        "crystal_processing_table",
+        "arcane_assembly_table"
+      ],
+      "column": 1,
+      "row": 5
+    },
+    {
       "id": "advanced_assembly_table",
       "stage": 1,
       "kind": "main",

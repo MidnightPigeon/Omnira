@@ -1,7 +1,7 @@
 {
   "id": "chronal_blindfish_creature",
   "title": "Chronal Blindfish",
-  "icon": "omnira:chronal_blindfish",
+  "icon": "omnira:entity/chronal_blindfish",
   "entries": [
     "entries/chronal_blindfish_guide.json"
   ],

@@ -64,6 +64,32 @@ public final class VehicleSafetyGameTests {
         NeoForge.EVENT_BUS.post(damage);h.assertTrue(!damage.isCanceled(),"Broom protects passenger");
         pilot.stopRiding();broom.discard();h.succeed();
     }
+    @GameTest(template="spell_arena") public static void broomLandingProtectsOnlyWhileRiding(GameTestHelper h){
+        var ground = h.absolutePos(new net.minecraft.core.BlockPos(8, 8, 8));
+        h.getLevel().setBlockAndUpdate(ground, net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+        Vec3 landing = Vec3.atBottomCenterOf(ground.above());
+        var broom = ModEntityTypes.CRYSTAL_BROOM.get().create(h.getLevel());
+        broom.setPos(landing.add(0, 8, 0));
+        var pilot = rider(h, broom);
+        for (int i = 0; i < 60; i++) pilot.tick(); // Expire login protection on the standalone test player.
+        float health = pilot.getHealth();
+        for (int i = 0; i < 180 && !broom.onGround(); i++) {
+            broom.tick();
+            broom.positionRider(pilot);
+        }
+        h.assertTrue(broom.onGround() && Math.abs(broom.getY() - landing.y) < .001, "Broom did not descend onto the test floor");
+        h.assertTrue(pilot.getVehicle() == broom && pilot.getHealth() == health, "Broom landing damaged or ejected the pilot");
+        broom.setPos(landing.add(0, 8, 0));
+        broom.positionRider(pilot);
+        broom.input(pilot, 32);
+        h.assertTrue(!pilot.isPassenger(), "Airborne dismount failed");
+        pilot.setPos(landing);
+        pilot.doCheckFallDamage(0, -8, 0, false);
+        pilot.doCheckFallDamage(0, 0, 0, true);
+        h.assertTrue(pilot.getHealth() < health, "Airborne dismount gave the pilot fall immunity");
+        broom.discard();
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void broomMotionRecipeAndDismount(GameTestHelper h){
         h.assertTrue(Math.abs(CrystalBroomEntity.velocity(1,0,0,false,1,0).z+.05)<1e-8,"Starting speed not one metre per second");
         h.assertTrue(CrystalBroomEntity.velocity(0,0,0,false,0,0).y<0,"Broom hovers without lift");

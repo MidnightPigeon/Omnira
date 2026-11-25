@@ -1,7 +1,7 @@
 {
   "id": "time_thief_mosquito_creature",
   "title": "Time-Thief Mosquito",
-  "icon": "omnira:time_thief_mosquito_spawn_egg",
+  "icon": "omnira:entity/time_thief_mosquito",
   "entries": [
     "entries/time_thief_mosquito.json",
     "entries/time_thieving_monocle.json",

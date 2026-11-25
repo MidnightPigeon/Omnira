@@ -5,23 +5,12 @@
   "scene": "affinity_ritual",
   "recipes": false,
   "text": [
-    "Use an Advanced Ritual Energy Core and eight pedestals. Offer earth, water, fire, air, light and dark microcores, Paradox Dust and Dream Crystal Budding Rock in any order. Activate with a light microcore, dark microcore or analysis crystal for Light, Dark or Fourfold affinity.",
-    "Stay inside for six seconds. Acquisition lifts you; renunciation allows movement. Completion consumes one activator, including the whole analysis crystal; interruption consumes nothing. Offerings are not consumed and may be removed after activation without affecting affinity.",
-    "Light: your damage spends 20 mana to burn its target for ten seconds, including melee and spells.",
-    "Dark: your damage spends 20 mana to apply Poison II for five seconds.",
-    "Fourfold: taking damage spends 20 mana to reduce that damage by two points. All three abilities require sufficient mana and ignore cost reductions.",
-    "An Enhanced Resonance Terminal grants Arcane Affinity: +500 maximum mana, +50% mana regeneration and −20% spell strength. Renouncing it confines you for one minute.",
-    "A Spacetime Spell Core grants Spacetime Affinity: +20% spell strength and −20% mana regeneration. Direct spell hits deal true damage with or without Infusion. Left-click with a staff in your main hand to blink up to 24 blocks along your line of sight. Aim at the side of a block to land on top if there is room. The blink costs 50 base mana and shares the staff cooldown. The hourglass at the center of the lattice display shows its cooldown, even without a lattice equipped.",
-    "Renouncing Spacetime Affinity destroys your talent and deals true damage equal to twice your maximum health.",
-    "Invoke Chaos Affinity with an Unbound Mana Core: +10% spell power and immunity to Chaos Theory backlash damage (mana loss still applies), but -25% maximum mana and +25% spell cooldown.",
-    "Each successful spell has a 25% chance to repeat for free after 0.2 seconds. Multi-shot staves roll separately for each spell. Chaos Theory repeats the pulse effect instead. Echoes cannot trigger further echoes.",
-    "Renouncing Chaos Affinity draws a disintegration ray from a random point three blocks away every second for one minute, also striking creatures along its path. Death pauses the countdown; it resumes when you respawn.",
-    "Affinities are mutually exclusive and persist through death. Repeat the same ritual to renounce one. You cannot gain another affinity while a renunciation penalty remains. Death ends ongoing penalties except that of Chaos Affinity.",
-    "Renouncing Light burns you for two minutes and deals one suffocation damage every half-second. Renouncing Dark applies Poison II for one minute and creates a self-harming, twenty-second mist every five seconds; death stops new mist.",
-    "Renouncing Fourfold applies Slowness III, Mining Fatigue III and Darkness for two minutes, with one base magic damage every half-second. Logging out pauses rather than removes the penalty.",
-    "Hover over the mana bar to view your affinity bonuses.",
-    "{dream}Rumor speaks of a powerful and dangerous Dream Affinity...",
-    "The Star of Fulfillment perfects the current affinity and removes the abandonment penalties above. Active abilities still cost mana."
+    "Place an Advanced Ritual Energy Core in the center. On eight Crystal Pedestals, place one each of the Earth, Water, Fire, Air, Light and Dark Microcores, Paradox Dust and Dream Crystal Budding Rock, in any order.",
+    "Choose an activator from the affinity tables. Use it on the core and stay inside the circle for six seconds. Forming a bond lifts you into the air. To renounce it, repeat the ritual with the same activator. You may move within the circle during renunciation.",
+    "Completion consumes one activator, including the entire Analysis Crystal. An interrupted ritual consumes nothing. The pedestal offerings can be retrieved once the ritual starts.",
+    "You can hold one affinity at a time, and it persists through death. A new bond can form once the renunciation penalty ends. Logging out pauses the timer. Death ends ongoing penalties except for Chaos.",
+    "Light, Dark and Fourfold trigger only with sufficient mana. Their costs are fixed. A Star of Fulfillment waives the current affinity’s renunciation penalty. Its triggered abilities still cost mana.",
+    "{dream}Rumor speaks of a powerful and dangerous Dream Affinity..."
   ],
   "links": [
     {
@@ -47,137 +36,679 @@
   ],
   "figures": [
     {
-      "id": "affinity_choice",
-      "title": "Affinity Activators",
+      "id": "affinity_overview",
+      "title": "Affinity Index",
       "icons": [
         {
           "item": "omnira:light_microcore",
           "x": 0,
-          "y": 5,
-          "count": 1
+          "y": 16
         },
         {
           "item": "omnira:dark_microcore",
           "x": 0,
-          "y": 39,
-          "count": 1
+          "y": 35
         },
         {
           "item": "omnira:analysis_crystal",
           "x": 0,
-          "y": 73,
-          "count": 1
-        }
-      ],
-      "strokes": [
-        {
-          "x1": 24,
-          "y1": 13,
-          "x2": 44,
-          "y2": 13,
-          "color": "#597E8A",
-          "arrow": true
+          "y": 54
         },
         {
-          "x1": 24,
-          "y1": 47,
-          "x2": 44,
-          "y2": 47,
-          "color": "#597E8A",
-          "arrow": true
+          "item": "omnira:enhanced_resonance_terminal",
+          "x": 0,
+          "y": 73
         },
         {
-          "x1": 24,
-          "y1": 81,
-          "x2": 44,
-          "y2": 81,
-          "color": "#597E8A",
-          "arrow": true
+          "item": "omnira:spacetime_spell_core",
+          "x": 0,
+          "y": 92
+        },
+        {
+          "item": "omnira:unbound_mana_core",
+          "x": 0,
+          "y": 111
         }
       ],
-      "areas": [],
       "labels": [
         {
+          "text": "Key",
+          "x": 0,
+          "y": 0,
+          "width": 20,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Affinity",
+          "x": 21,
+          "y": 0,
+          "width": 49,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Effect",
+          "x": 73,
+          "y": 0,
+          "width": 51,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
           "text": "Light",
-          "x": 52,
-          "y": 7,
-          "width": 72,
-          "height": 22,
+          "x": 21,
+          "y": 19,
+          "width": 54,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Burn",
+          "x": 79,
+          "y": 19,
+          "width": 45,
+          "height": 11,
           "color": "#405462"
         },
         {
           "text": "Dark",
-          "x": 52,
-          "y": 41,
-          "width": 72,
-          "height": 22,
+          "x": 21,
+          "y": 38,
+          "width": 54,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Poison",
+          "x": 79,
+          "y": 38,
+          "width": 45,
+          "height": 11,
           "color": "#405462"
         },
         {
           "text": "Fourfold",
-          "x": 52,
-          "y": 75,
-          "width": 72,
-          "height": 22,
+          "x": 21,
+          "y": 57,
+          "width": 54,
+          "height": 11,
           "color": "#405462"
         },
         {
-          "text": "Activator consumed; offerings remain.",
+          "text": "Guard",
+          "x": 79,
+          "y": 57,
+          "width": 45,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Arcane",
+          "x": 21,
+          "y": 76,
+          "width": 54,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Regen",
+          "x": 79,
+          "y": 76,
+          "width": 45,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Spacetime",
+          "x": 21,
+          "y": 95,
+          "width": 54,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Blink",
+          "x": 79,
+          "y": 95,
+          "width": 45,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Chaos",
+          "x": 21,
+          "y": 114,
+          "width": 54,
+          "height": 11,
+          "color": "#405462"
+        },
+        {
+          "text": "Echo",
+          "x": 79,
+          "y": 114,
+          "width": 45,
+          "height": 11,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 13,
+          "x2": 123,
+          "y2": 13,
+          "color": "#B9AD91"
+        }
+      ]
+    },
+    {
+      "id": "affinity_light",
+      "title": "Light Affinity",
+      "icons": [
+        {
+          "item": "omnira:light_microcore",
           "x": 0,
-          "y": 110,
-          "width": 124,
-          "height": 22,
+          "y": 2
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 32,
+          "x2": 123,
+          "y2": 32,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 70,
+          "x2": 123,
+          "y2": 70,
+          "color": "#B9AD91"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Light Microcore",
+          "x": 20,
+          "y": 1,
+          "width": 104,
+          "height": 31,
+          "color": "#386677"
+        },
+        {
+          "text": "Max mana +200\nMana regen +20%",
+          "x": 1,
+          "y": 35,
+          "width": 123,
+          "height": 34,
+          "color": "#405462"
+        },
+        {
+          "text": "Dealing damage spends 20 mana to burn the target for 10s. Melee and spells both qualify.",
+          "x": 1,
+          "y": 74,
+          "width": 123,
+          "height": 58,
           "color": "#405462"
         }
       ]
     },
     {
-      "id": "affinity_bonuses",
-      "title": "Affinity Bonuses",
-      "icons": [],
-      "areas": [],
+      "id": "affinity_dark",
+      "title": "Dark Affinity",
+      "icons": [
+        {
+          "item": "omnira:dark_microcore",
+          "x": 0,
+          "y": 2
+        }
+      ],
       "strokes": [
         {
           "x1": 0,
-          "y1": 42,
+          "y1": 32,
           "x2": 123,
-          "y2": 42,
-          "color": "#9FAF9F",
-          "arrow": false
+          "y2": 32,
+          "color": "#B9AD91"
         },
         {
           "x1": 0,
-          "y1": 86,
+          "y1": 70,
           "x2": 123,
-          "y2": 86,
-          "color": "#9FAF9F",
-          "arrow": false
+          "y2": 70,
+          "color": "#B9AD91"
         }
       ],
       "labels": [
         {
-          "text": "Light\nRegen +20%, mana +200",
+          "text": "Dark Microcore",
+          "x": 20,
+          "y": 1,
+          "width": 104,
+          "height": 31,
+          "color": "#386677"
+        },
+        {
+          "text": "Spell power +20%\nMana cost −10",
+          "x": 1,
+          "y": 35,
+          "width": 123,
+          "height": 34,
+          "color": "#405462"
+        },
+        {
+          "text": "Dealing damage spends 20 mana to inflict Poison II for 5s.",
+          "x": 1,
+          "y": 74,
+          "width": 123,
+          "height": 58,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "affinity_fourfold",
+      "title": "Fourfold Affinity",
+      "icons": [
+        {
+          "item": "omnira:analysis_crystal",
+          "x": 0,
+          "y": 2
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 32,
+          "x2": 123,
+          "y2": 32,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 70,
+          "x2": 123,
+          "y2": 70,
+          "color": "#B9AD91"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Analysis Crystal",
+          "x": 20,
+          "y": 1,
+          "width": 104,
+          "height": 31,
+          "color": "#386677"
+        },
+        {
+          "text": "Max mana +100\nRegen and power +10%\nMana cost −5",
+          "x": 1,
+          "y": 35,
+          "width": 123,
+          "height": 34,
+          "color": "#405462"
+        },
+        {
+          "text": "When hit, spend 20 mana to prevent 2 damage. True damage bypasses this effect.",
+          "x": 1,
+          "y": 74,
+          "width": 123,
+          "height": 58,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "affinity_arcane",
+      "title": "Arcane Affinity",
+      "icons": [
+        {
+          "item": "omnira:enhanced_resonance_terminal",
+          "x": 0,
+          "y": 2
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 32,
+          "x2": 123,
+          "y2": 32,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 70,
+          "x2": 123,
+          "y2": 70,
+          "color": "#B9AD91"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Enhanced Resonance Terminal",
+          "x": 20,
+          "y": 1,
+          "width": 104,
+          "height": 31,
+          "color": "#386677"
+        },
+        {
+          "text": "Max mana +500\nMana regen +50%\nSpell power −20%",
+          "x": 1,
+          "y": 35,
+          "width": 123,
+          "height": 34,
+          "color": "#405462"
+        },
+        {
+          "text": "Renouncing this bond confines you for 60s.",
+          "x": 1,
+          "y": 74,
+          "width": 123,
+          "height": 58,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "affinity_spacetime",
+      "title": "Spacetime Affinity",
+      "icons": [
+        {
+          "item": "omnira:spacetime_spell_core",
+          "x": 0,
+          "y": 2
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 32,
+          "x2": 123,
+          "y2": 32,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 61,
+          "x2": 123,
+          "y2": 61,
+          "color": "#B9AD91"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Spacetime Spell Core",
+          "x": 20,
+          "y": 1,
+          "width": 104,
+          "height": 31,
+          "color": "#386677"
+        },
+        {
+          "text": "Spell power +20%\nMana regen −20%",
+          "x": 1,
+          "y": 35,
+          "width": 123,
+          "height": 25,
+          "color": "#405462"
+        },
+        {
+          "text": "Direct spell hits deal true damage. Left-click with a main-hand staff to blink up to 24 blocks.",
+          "x": 1,
+          "y": 65,
+          "width": 123,
+          "height": 67,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "affinity_blink",
+      "title": "Spacetime Blink",
+      "icons": [],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 84,
+          "x2": 123,
+          "y2": 84,
+          "color": "#B9AD91"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Aim and cost",
           "x": 0,
           "y": 0,
           "width": 124,
-          "height": 40,
-          "color": "#705921"
+          "height": 10,
+          "color": "#386677"
         },
         {
-          "text": "Dark\nPower +20%, cost reduction +10",
+          "text": "Costs 50 base mana and shares the main-hand staff’s cooldown. Aim at the side of a block to land on top if there is room.",
           "x": 0,
-          "y": 44,
+          "y": 12,
           "width": 124,
-          "height": 40,
-          "color": "#634478"
+          "height": 72,
+          "color": "#405462"
         },
         {
-          "text": "Fourfold\nRegen/power +10%\nMana +100, cost reduction +5",
+          "text": "Cooldown indicator",
           "x": 0,
-          "y": 88,
+          "y": 87,
           "width": 124,
-          "height": 44,
-          "color": "#305E5B"
+          "height": 10,
+          "color": "#386677"
+        },
+        {
+          "text": "Hourglass visible even without a lattice.",
+          "x": 0,
+          "y": 99,
+          "width": 124,
+          "height": 33,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "affinity_chaos",
+      "title": "Chaos Affinity",
+      "icons": [
+        {
+          "item": "omnira:unbound_mana_core",
+          "x": 0,
+          "y": 2
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 32,
+          "x2": 123,
+          "y2": 32,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 70,
+          "x2": 123,
+          "y2": 70,
+          "color": "#B9AD91"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Unbound Mana Core",
+          "x": 20,
+          "y": 1,
+          "width": 104,
+          "height": 31,
+          "color": "#386677"
+        },
+        {
+          "text": "Spell power +10%\nMax mana −25%\nSpell cooldown +25%",
+          "x": 1,
+          "y": 35,
+          "width": 123,
+          "height": 34,
+          "color": "#405462"
+        },
+        {
+          "text": "25% chance of a free spell echo. Chaos Theory backlash drains mana but deals no damage.",
+          "x": 1,
+          "y": 74,
+          "width": 123,
+          "height": 58,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "affinity_renounce_chaos",
+      "title": "Echo and Renunciation",
+      "icons": [],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 65,
+          "y2": 65,
+          "color": "#B9AD91"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Echo",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 10,
+          "color": "#386677"
+        },
+        {
+          "text": "0.2s delay. Roll per cast. Chaos Theory repeats its pulse. Echoes cannot echo.",
+          "x": 0,
+          "y": 12,
+          "width": 124,
+          "height": 53,
+          "color": "#405462"
+        },
+        {
+          "text": "Disintegration rays",
+          "x": 0,
+          "y": 66,
+          "width": 124,
+          "height": 10,
+          "color": "#386677"
+        },
+        {
+          "text": "Random rays from 3 blocks away hit all in their path. One per second for 60s alive.",
+          "x": 0,
+          "y": 78,
+          "width": 124,
+          "height": 54,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "affinity_renounce_light_dark",
+      "title": "Light / Dark",
+      "icons": [],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 60,
+          "x2": 123,
+          "y2": 60,
+          "color": "#B9AD91"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Renouncing Light",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 10,
+          "color": "#386677"
+        },
+        {
+          "text": "Burn for 2 min. Take 1 suffocation damage every half-second.",
+          "x": 0,
+          "y": 12,
+          "width": 124,
+          "height": 46,
+          "color": "#405462"
+        },
+        {
+          "text": "Renouncing Dark",
+          "x": 0,
+          "y": 63,
+          "width": 124,
+          "height": 10,
+          "color": "#386677"
+        },
+        {
+          "text": "Poison II for 1 min. Every 5s, a mist forms for 20s and can hurt you.",
+          "x": 0,
+          "y": 75,
+          "width": 124,
+          "height": 57,
+          "color": "#405462"
+        }
+      ]
+    },
+    {
+      "id": "affinity_renounce_fourfold_spacetime",
+      "title": "Fourfold / Spacetime",
+      "icons": [],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 70,
+          "x2": 123,
+          "y2": 70,
+          "color": "#B9AD91"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Renouncing Fourfold",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 10,
+          "color": "#386677"
+        },
+        {
+          "text": "Slowness III, Mining Fatigue III and Darkness for 2 min. Take 1 magic damage every half-second.",
+          "x": 0,
+          "y": 12,
+          "width": 124,
+          "height": 57,
+          "color": "#405462"
+        },
+        {
+          "text": "Renouncing Spacetime",
+          "x": 0,
+          "y": 74,
+          "width": 124,
+          "height": 10,
+          "color": "#386677"
+        },
+        {
+          "text": "Lose your talent and take true damage equal to twice your maximum health.",
+          "x": 0,
+          "y": 86,
+          "width": 124,
+          "height": 46,
+          "color": "#405462"
         }
       ]
     }

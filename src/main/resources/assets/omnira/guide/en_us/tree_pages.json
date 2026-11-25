@@ -457,6 +457,7 @@
     }
   ],
   "node_titles": {
-    "unbound_mana_core": "Unbound Mana"
+    "unbound_mana_core": "Unbound Mana",
+    "portable_crystal_processing_table": "Quick Carving"
   }
 }

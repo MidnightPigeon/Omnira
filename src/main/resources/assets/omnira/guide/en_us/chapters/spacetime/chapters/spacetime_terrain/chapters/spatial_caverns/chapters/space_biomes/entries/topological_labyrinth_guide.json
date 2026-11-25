@@ -4,8 +4,8 @@
   "item": "omnira:void_portal",
   "recipes": false,
   "text": [
-    "Two labyrinth floors lie beneath the level cave surface. A few rooms have diggable excited spatial crystal roofs; pure solidified spacetime seals the others. Light Crystal Torches mark the room corners.",
-    "Touch a Void Portal vortex to travel immediately to a nearby room through the opposite-facing exit. A new destination is chosen each time, so returning through an exit need not lead back. Liquids do not obstruct the portals.",
+    "Two labyrinth floors lie beneath the cave. Dig through Excited Rough Spatial Crystal in the roofs of a few rooms to enter. Pure Solidified Spacetime seals the remaining walls and roofs.",
+    "Void Portals can appear on any face of a room, even under liquid. Each crossing leads to an opposite-facing exit in a random nearby room. Going back through may take you somewhere new.",
     "Sealed upper rooms have pale-blue Long-Range Portals in their ceilings. Touch one to reach the Time Continent directly above, or a nearby landing if blocked. Neither portal type can be broken.",
     "Rooms may be empty or contain treasure orbs, relics, crystal matrices and suspicious Time Sand. Some floors are covered in Void Starflow or Decayed Timeflow."
   ],

@@ -1,0 +1,390 @@
+{
+  "id": "myriad_ecology",
+  "title": "Building Ecology",
+  "item": "omnira:crystal_ball",
+  "text": [
+    "Select Ecology and insert one microcore. Construction clears every block inside the sphere, including unbreakable blocks.",
+    "One biome is drawn uniformly from the microcore’s pool. All pools exclude the Spacetime Mirror Corridor.",
+    "Ground or liquid fills the lower third of the sphere. A treasure orb appears at the center, enclosed with the landscape in a single layer of Spiritual Crystal. The surrounding biome stays the same.",
+    "Landscapes are built from biome blocks, liquids and suitable decorations rather than copied buildings or inventories. Treasure uses the related biome/dimension loot table. Pure Solidified Spacetime is replaced with Excited Rough Spatial Crystal in these landscapes."
+  ],
+  "scene": "codex_ecology",
+  "recipes": false,
+  "links": [
+    {
+      "target": "myriad_codex",
+      "label": "Myriad Codex"
+    },
+    {
+      "target": "myriad_heart",
+      "label": "Heart of Myriad"
+    }
+  ],
+  "figures": [
+    {
+      "id": "ecology_pools_1",
+      "title": "Biome Pools 1/4",
+      "icons": [
+        {
+          "item": "omnira:earth_microcore",
+          "x": 0,
+          "y": 15,
+          "count": 1
+        },
+        {
+          "item": "omnira:water_microcore",
+          "x": 0,
+          "y": 94,
+          "count": 1
+        }
+      ],
+      "labels": [
+        {
+          "text": "Core",
+          "x": 18,
+          "y": 0,
+          "width": 30,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "Biomes",
+          "x": 49,
+          "y": 0,
+          "width": 74,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "Earth",
+          "x": 18,
+          "y": 15,
+          "width": 30,
+          "height": 77,
+          "color": "#405462"
+        },
+        {
+          "text": "Temperate vanilla Overworld, Deep Dark, Lush Caves, Dripstone Caves",
+          "x": 49,
+          "y": 15,
+          "width": 74,
+          "height": 77,
+          "color": "#405462"
+        },
+        {
+          "text": "Water",
+          "x": 18,
+          "y": 94,
+          "width": 30,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Oceans and cold biomes",
+          "x": 49,
+          "y": 94,
+          "width": 74,
+          "height": 22,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 13,
+          "y2": 13,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 92,
+          "y2": 92,
+          "color": "#B9AD91"
+        }
+      ]
+    },
+    {
+      "id": "ecology_pools_2",
+      "title": "Biome Pools 2/4",
+      "icons": [
+        {
+          "item": "omnira:fire_microcore",
+          "x": 0,
+          "y": 15,
+          "count": 1
+        },
+        {
+          "item": "omnira:air_microcore",
+          "x": 0,
+          "y": 72,
+          "count": 1
+        }
+      ],
+      "labels": [
+        {
+          "text": "Core",
+          "x": 18,
+          "y": 0,
+          "width": 30,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "Biomes",
+          "x": 49,
+          "y": 0,
+          "width": 74,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "Fire",
+          "x": 18,
+          "y": 15,
+          "width": 30,
+          "height": 55,
+          "color": "#405462"
+        },
+        {
+          "text": "Hot biomes and the Nether except Soul Sand Valley",
+          "x": 49,
+          "y": 15,
+          "width": 74,
+          "height": 55,
+          "color": "#405462"
+        },
+        {
+          "text": "Air",
+          "x": 18,
+          "y": 72,
+          "width": 30,
+          "height": 33,
+          "color": "#405462"
+        },
+        {
+          "text": "End biomes and Mirror Dream Border",
+          "x": 49,
+          "y": 72,
+          "width": 74,
+          "height": 33,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 13,
+          "y2": 13,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 70,
+          "y2": 70,
+          "color": "#B9AD91"
+        }
+      ]
+    },
+    {
+      "id": "ecology_pools_3",
+      "title": "Biome Pools 3/4",
+      "icons": [
+        {
+          "item": "omnira:light_microcore",
+          "x": 0,
+          "y": 15,
+          "count": 1
+        },
+        {
+          "item": "omnira:dark_microcore",
+          "x": 0,
+          "y": 50,
+          "count": 1
+        },
+        {
+          "item": "omnira:time_microcore",
+          "x": 0,
+          "y": 96,
+          "count": 1
+        }
+      ],
+      "labels": [
+        {
+          "text": "Core",
+          "x": 18,
+          "y": 0,
+          "width": 30,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "Biomes",
+          "x": 49,
+          "y": 0,
+          "width": 74,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "Light",
+          "x": 18,
+          "y": 15,
+          "width": 30,
+          "height": 33,
+          "color": "#405462"
+        },
+        {
+          "text": "Light layer and Void Starsea",
+          "x": 49,
+          "y": 15,
+          "width": 74,
+          "height": 33,
+          "color": "#405462"
+        },
+        {
+          "text": "Dark",
+          "x": 18,
+          "y": 50,
+          "width": 30,
+          "height": 44,
+          "color": "#405462"
+        },
+        {
+          "text": "Dark layer and Reversion Mire",
+          "x": 49,
+          "y": 50,
+          "width": 74,
+          "height": 44,
+          "color": "#405462"
+        },
+        {
+          "text": "Time",
+          "x": 18,
+          "y": 96,
+          "width": 30,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Remaining time biomes",
+          "x": 49,
+          "y": 96,
+          "width": 74,
+          "height": 22,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 13,
+          "y2": 13,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 48,
+          "y2": 48,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 94,
+          "y2": 94,
+          "color": "#B9AD91"
+        }
+      ]
+    },
+    {
+      "id": "ecology_pools_4",
+      "title": "Biome Pools 4/4",
+      "icons": [
+        {
+          "item": "omnira:space_microcore",
+          "x": 0,
+          "y": 15,
+          "count": 1
+        },
+        {
+          "item": "omnira:omni_microcore",
+          "x": 0,
+          "y": 39,
+          "count": 1
+        }
+      ],
+      "labels": [
+        {
+          "text": "Core",
+          "x": 18,
+          "y": 0,
+          "width": 30,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "Biomes",
+          "x": 49,
+          "y": 0,
+          "width": 74,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "Space",
+          "x": 18,
+          "y": 15,
+          "width": 30,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Remaining space biomes",
+          "x": 49,
+          "y": 15,
+          "width": 74,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Omni",
+          "x": 18,
+          "y": 39,
+          "width": 30,
+          "height": 55,
+          "color": "#405462"
+        },
+        {
+          "text": "All registered biomes, including other mods",
+          "x": 49,
+          "y": 39,
+          "width": 74,
+          "height": 55,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 13,
+          "y2": 13,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 37,
+          "y2": 37,
+          "color": "#B9AD91"
+        }
+      ]
+    }
+  ]
+}

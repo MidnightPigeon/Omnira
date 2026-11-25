@@ -74,7 +74,8 @@ final class RitualJei {
                 slot(b,RecipeIngredientRole.CATALYST,60,60,"jei.omnira.ritual.advanced_core").addItemStack(new ItemStack(ModItems.ADVANCED_RITUAL_ENERGY_CORE.get()));
                 slot(b,RecipeIngredientRole.INPUT,162,28,"jei.omnira.ritual.hand").addItemStack(new ItemStack(com.mcmagic.omnira.spacetime.CorridorRitual.activator(r.permanent())));
                 slot(b,RecipeIngredientRole.CATALYST,150,98,"jei.omnira.ritual.pedestals").addItemStack(new ItemStack(ModItems.CRYSTAL_PEDESTAL.get(),8));
-                slot(b,RecipeIngredientRole.OUTPUT,193,76,"jei.omnira.ritual.portal_result").addItemStack(new ItemStack(ModItems.CORRIDOR_GATEWAY.get()));
+                slot(b,RecipeIngredientRole.OUTPUT,193,76,"jei.omnira.ritual.portal_result").addItemStack(new ItemStack(ModItems.SPACETIME_MIRROR.get()));
+                b.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(new ItemStack(ModItems.CORRIDOR_GATEWAY.get()));
             }
             public void draw(Corridor r,IRecipeSlotsView slots,GuiGraphics g,double x,double y) {
                 grid(g,7,16,60);arrow(g,132,76,177);note(g,r.permanent()?"jei.omnira.ritual.corridor_permanent_steps":"jei.omnira.ritual.corridor_steps");

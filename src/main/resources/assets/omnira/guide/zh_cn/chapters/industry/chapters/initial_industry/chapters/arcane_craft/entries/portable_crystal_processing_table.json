@@ -1,0 +1,21 @@
+{
+  "id": "portable_crystal_processing_table",
+  "item": "omnira:portable_crystal_processing_table",
+  "title": "便携水晶加工台",
+  "text": [
+    "右键打开加工台。左槽决定目标，右槽决定形态，上槽放要素，下槽放修饰，中央放灵性水晶。",
+    "主手持台，潜行时右键一次即可开始雕琢。保持手持约3秒，材料汇合后，低阶法术水晶便从台面掉出。中途换手会中断组装并保留材料。",
+    "每个法术组件消耗20点基础法力，在完成时扣除。成品的施法消耗与普通水晶加工台相同。"
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "crystal_processing_table",
+      "label": "水晶加工台"
+    },
+    {
+      "target": "spell_target_shape_basics",
+      "label": "目标与形态的选择"
+    }
+  ]
+}

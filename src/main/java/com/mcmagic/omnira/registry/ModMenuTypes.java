@@ -32,6 +32,8 @@ public final class ModMenuTypes {
     public static final DeferredHolder<MenuType<?>,MenuType<com.mcmagic.omnira.menu.WaymarkMenu>> WAYMARK=
             MENU_TYPES.register("waymark",()->IMenuTypeExtension.create(com.mcmagic.omnira.menu.WaymarkMenu::new));
 
+    public static final DeferredHolder<MenuType<?>,MenuType<com.mcmagic.omnira.menu.PortableTableMenu>> PORTABLE_TABLE =
+            MENU_TYPES.register("portable_crystal_processing_table", () -> IMenuTypeExtension.create(com.mcmagic.omnira.menu.PortableTableMenu::new));
     public static final DeferredHolder<MenuType<?>, MenuType<CrystalProcessingTableMenu>> CRYSTAL_PROCESSING_TABLE =
             MENU_TYPES.register("crystal_processing_table", () -> IMenuTypeExtension.create(CrystalProcessingTableMenu::new));
 

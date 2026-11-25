@@ -64,6 +64,9 @@ public final class EngineCoreGameTests {
             for(int slot=1;slot<4;slot++)e.inventory.setItem(slot,ItemStack.EMPTY);
             var core=new ItemStack(item);h.assertTrue(ManaEngineState.accepts(0,core),"Core rejected");e.inventory.setItem(0,core);
             h.assertTrue(e.ratedCapacity()==base && e.ratedEnergy()==base && e.running(),"Wrong core base output");
+            int workBonus=base==512?1:base==1024?2:3;
+            h.assertTrue(com.mcmagic.omnira.item.SpeedUpgrade.bonus(core)==workBonus,"Incorrect logistics core bonus");
+            h.assertTrue(com.mcmagic.omnira.forging.AdvancedForgeBlockEntity.duration(core)==1200*512/base,"Incorrect assembly time");
             for(int slot=1;slot<4;slot++)e.inventory.setItem(slot,new ItemStack(ModItems.OMNI_CRYSTAL_GRID.get()));
             h.assertTrue(e.ratedCapacity()==base*64 && e.ratedEnergy()==base*64,"Lattice multipliers use wrong core base");
             if(net.neoforged.fml.ModList.get().isLoaded("create"))EngineCoreCreateChecks.ratedCapacity(h,e,base*64);

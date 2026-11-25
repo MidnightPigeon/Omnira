@@ -18,18 +18,33 @@ import net.minecraft.world.item.component.ItemContainerContents;
 /** Quiet spell-chain HUD: shape glyphs replace indistinguishable crystal item icons. */
 public final class LatticeOverlay {
     private LatticeOverlay() {}
-    public static void render(GuiGraphics g,DeltaTracker delta) {
+    private static boolean staff(ItemStack stack){
+        return stack.getItem() instanceof StaffItem || stack.getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem;
+    }
+    static boolean gridVisible(){
         var mc=Minecraft.getInstance();
         var player=mc.player;
-        if(player==null || mc.screen!=null || mc.options.hideGui || !player.isAlive() || player.isSpectator()) return;
-        ItemStack staff=(player.getMainHandItem().getItem() instanceof StaffItem||player.getMainHandItem().getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem)?player.getMainHandItem():player.getOffhandItem();
-        if(!(staff.getItem() instanceof StaffItem)&&!(staff.getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem))return;
+        return player!=null && !mc.options.hideGui && player.isAlive() && !player.isSpectator()
+                && (staff(player.getMainHandItem()) || staff(player.getOffhandItem()))
+                && CrystalGridMenu.locate(player,-2).getItem() instanceof CrystalGridItem;
+    }
+    public static void render(GuiGraphics g,DeltaTracker delta) {
+        if(Minecraft.getInstance().screen==null)draw(g,delta);
+    }
+    static void draw(GuiGraphics g,DeltaTracker delta){
+        var mc=Minecraft.getInstance();
+        var player=mc.player;
+        if(player==null || mc.options.hideGui || !player.isAlive() || player.isSpectator()) return;
+        ItemStack staff=staff(player.getMainHandItem())?player.getMainHandItem():player.getOffhandItem();
+        if(!staff(staff))return;
         var stats=staff.getItem() instanceof com.mcmagic.omnira.item.IndustrialWheelItem?com.mcmagic.omnira.item.IndustrialWheelItem.stats(staff):com.mcmagic.omnira.item.staff.StaffAssembly.of(staff).stats();
-        var viewport=com.mcmagic.omnira.client.screen.UiViewport.spellHud(g.guiWidth(),g.guiHeight(),mc.gui.leftHeight);
+        var center=ManaHudPosition.gridCenter(g.guiWidth(),g.guiHeight());
+        float scale=ManaHudPosition.gridScale(g.guiWidth(),g.guiHeight());
         g.pose().pushPose();
         try{
-        g.pose().scale(viewport.scale(),viewport.scale(),1);
-        int cx=viewport.x(),cy=viewport.y(),radius=32;
+        g.pose().translate(center.x(),center.y(),0);
+        g.pose().scale(scale,scale,1);
+        int cx=0,cy=0,radius=32;
         if(com.mcmagic.omnira.mana.SpacetimeBlink.staff(player.getMainHandItem())
                 && player.getData(ModAttachments.MANA).affinity()==com.mcmagic.omnira.mana.Affinity.SPACETIME.ordinal()){
             float cooldown=player.getCooldowns().getCooldownPercent(staff.getItem(),delta.getGameTimeDeltaPartialTick(false));

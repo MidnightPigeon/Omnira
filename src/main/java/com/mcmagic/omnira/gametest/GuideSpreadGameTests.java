@@ -7,6 +7,43 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_guide_spread")
 @PrefixGameTestTemplate(false)
 public final class GuideSpreadGameTests {
+    @GameTest(template="spell_arena") public static void contextualGuideItemMentions(GameTestHelper h)throws Exception{
+        var names=new com.mcmagic.omnira.client.guide.GuideItemNames(java.util.Map.of());
+        try(var stream=GuideSpreadGameTests.class.getResourceAsStream("/assets/omnira/guide/inline_items.json");
+            var reader=new java.io.InputStreamReader(java.util.Objects.requireNonNull(stream),java.nio.charset.StandardCharsets.UTF_8)){
+            var rules=com.google.gson.JsonParser.parseReader(reader).getAsJsonObject();
+            for(var rule:rules.getAsJsonObject("contexts").entrySet()){
+                var id=net.minecraft.resources.ResourceLocation.parse(rule.getKey());
+                var item=net.minecraft.core.registries.BuiltInRegistries.ITEM.getOptional(id);
+                if(item.isPresent())for(var context:rule.getValue().getAsJsonArray())
+                    names.addContext(context.getAsString(),item.get());
+            }
+        }
+        var layout=new com.mcmagic.omnira.client.guide.GuideMentionLayout(names,String::length);
+        for(String prose:java.util.List.of("本书","书本下方","主手持书","不消耗书本","藏书室","the book","rifts lead to the caverns","主手持弓、副手持琴"))
+            h.assertTrue(layout.encode(prose,124).equals(prose),"Unexpected icon in "+prose);
+        for(String prose:java.util.List.of("中间放三本书。","主要是书与纸","Craft with three books.","with books, paper and occasional enchanted books")){
+            String encoded=layout.encode(prose,124);
+            h.assertTrue(!encoded.equals(prose)&&layout.plain(encoded).equals(prose),"Lost actual material mention: "+prose);
+        }
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void inlineItemNamesKeepSpellingAndWidth(GameTestHelper h){
+        var item=net.minecraft.world.item.Items.IRON_INGOT;
+        var names=new com.mcmagic.omnira.client.guide.GuideItemNames(java.util.Map.of(
+                "iron",item,"iron ingots",item,"铁锭",item));
+        var layout=new com.mcmagic.omnira.client.guide.GuideMentionLayout(names,String::length);
+        for(String source:java.util.List.of("Use IRON INGOTS.","需要铁锭。","{dream}需要铁锭。")){
+            String encoded=layout.encode(source,24);
+            h.assertTrue(layout.plain(encoded).equals(source),"Item annotation changed prose");
+            h.assertTrue(layout.measure(encoded)==source.length()+2,"Expected one icon before the longest name");
+        }
+        h.assertTrue(layout.encode("ironic",24).equals("ironic"),"Partial English word annotated");
+        String narrow=layout.encode("Use iron ingots",8);
+        for(var line:com.mcmagic.omnira.client.guide.GuideTextLayout.wrap(narrow,8,layout::measure))
+            h.assertTrue(layout.measure(line)<=8,"Wrapped item exceeds column");
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void backAlwaysUsesDirectoryHierarchy(GameTestHelper h)throws Exception {
         for(var language:java.util.List.of("zh_cn","en_us")) {
             var book=com.mcmagic.omnira.client.guide.GuideContents.fromJson(GuidanceGameTests.guide(language));

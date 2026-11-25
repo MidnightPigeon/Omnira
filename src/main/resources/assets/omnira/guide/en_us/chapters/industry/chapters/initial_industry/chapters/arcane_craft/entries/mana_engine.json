@@ -4,7 +4,7 @@
   "title": "Mana Engine",
   "text": [
     "Forge at the Assembly Table using the fixed recipe. The spell crystal's keywords do not affect the result.",
-    "Insert a spell core: Primordial cores provide 512 MPU, Dream cores 1024 MPU, multiplied by the three grids. Native output emits pulses with a stationary shaft.",
+    "Insert a spell core: Primordial cores provide 512 MPU, Dream or Light/Dark cores 1024 MPU, and Spacetime or Unbound cores 2048 MPU, multiplied by the three grids. Native output emits pulses with a stationary shaft.",
     "Output is on by default and ignores redstone. Toggle it in the UI or with the rear physical button. Stress conversion is clockwise at 16 rpm; use Create mechanisms to reverse it. A wrench changes horizontal facing. Hold W over the item to ponder its operation.",
     "Basic, Elemental, Arcane and Omni grids provide multipliers of 1.2, 1.5, 2 and 4. The three slots multiply together; output is rounded to the nearest integer only after all multipliers. Empty slots do not reduce output, and inserted spells are unnecessary.",
     "See Magic Pulses for connection and external conversion rules."

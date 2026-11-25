@@ -4,9 +4,7 @@
   "item": "omnira:suspicious_time_sand",
   "icon": "omnira:phantom_calling_card",
   "text": [
-    "不同地层的可疑时之沙埋藏着不同年代的遗物。怪盗预告函是护符，额外提供时运与抢夺各一级、移动速度增加10%；强化后两种战利品加成升为二级，速度增加15%。",
-    "D级人员凭证提供10%伤害减免。升级到C级再增加10%法术强度；B级将减伤提高至20%，并增加10点法力减耗；A级还会持续恢复生命并定时获得饱和。SCP-714属于戒指，持续提供伤害吸收II，却使移动速度降低20%。",
-    "色欲戒指增加25%近战伤害和25%吸血；贪欲戒指增加20%法术强度。欲望结晶可用于相关强化。"
+    "不同地层的可疑时之沙埋藏着不同年代的遗物。怪盗预告函与人员凭证佩戴在护符槽，戒指佩戴在戒指槽。欲望结晶可用于相关强化。"
   ],
   "recipes": false,
   "links": [
@@ -26,5 +24,413 @@
     "omnira:ring_of_lust",
     "omnira:ring_of_greed",
     "omnira:desire_crystal"
+  ],
+  "figures": [
+    {
+      "id": "credentials",
+      "title": "人员凭证",
+      "labels": [
+        {
+          "text": "级",
+          "x": 0,
+          "y": 1,
+          "width": 25,
+          "height": 11
+        },
+        {
+          "text": "减伤",
+          "x": 27,
+          "y": 1,
+          "width": 31,
+          "height": 11
+        },
+        {
+          "text": "法强",
+          "x": 60,
+          "y": 1,
+          "width": 32,
+          "height": 11
+        },
+        {
+          "text": "减耗",
+          "x": 95,
+          "y": 1,
+          "width": 29,
+          "height": 11
+        },
+        {
+          "text": "D",
+          "x": 17,
+          "y": 19,
+          "width": 10,
+          "height": 11
+        },
+        {
+          "text": "10%",
+          "x": 27,
+          "y": 19,
+          "width": 31,
+          "height": 11
+        },
+        {
+          "text": "—",
+          "x": 60,
+          "y": 19,
+          "width": 32,
+          "height": 11
+        },
+        {
+          "text": "—",
+          "x": 95,
+          "y": 19,
+          "width": 29,
+          "height": 11
+        },
+        {
+          "text": "C",
+          "x": 17,
+          "y": 37,
+          "width": 10,
+          "height": 11
+        },
+        {
+          "text": "10%",
+          "x": 27,
+          "y": 37,
+          "width": 31,
+          "height": 11
+        },
+        {
+          "text": "+10%",
+          "x": 60,
+          "y": 37,
+          "width": 32,
+          "height": 11
+        },
+        {
+          "text": "—",
+          "x": 95,
+          "y": 37,
+          "width": 29,
+          "height": 11
+        },
+        {
+          "text": "B",
+          "x": 17,
+          "y": 55,
+          "width": 10,
+          "height": 11
+        },
+        {
+          "text": "20%",
+          "x": 27,
+          "y": 55,
+          "width": 31,
+          "height": 11
+        },
+        {
+          "text": "+10%",
+          "x": 60,
+          "y": 55,
+          "width": 32,
+          "height": 11
+        },
+        {
+          "text": "−10",
+          "x": 95,
+          "y": 55,
+          "width": 29,
+          "height": 11
+        },
+        {
+          "text": "A",
+          "x": 17,
+          "y": 73,
+          "width": 10,
+          "height": 11
+        },
+        {
+          "text": "20%",
+          "x": 27,
+          "y": 73,
+          "width": 31,
+          "height": 11
+        },
+        {
+          "text": "+10%",
+          "x": 60,
+          "y": 73,
+          "width": 32,
+          "height": 11
+        },
+        {
+          "text": "−10",
+          "x": 95,
+          "y": 73,
+          "width": 29,
+          "height": 11
+        },
+        {
+          "text": "A级另有生命恢复II，每30秒获得饱和。",
+          "x": 0,
+          "y": 92,
+          "width": 124,
+          "height": 40
+        }
+      ],
+      "icons": [
+        {
+          "item": "omnira:d_class_credentials",
+          "x": 0,
+          "y": 16,
+          "count": 1
+        },
+        {
+          "item": "omnira:c_class_credentials",
+          "x": 0,
+          "y": 34,
+          "count": 1
+        },
+        {
+          "item": "omnira:b_class_credentials",
+          "x": 0,
+          "y": 52,
+          "count": 1
+        },
+        {
+          "item": "omnira:a_class_credentials",
+          "x": 0,
+          "y": 70,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 14,
+          "x2": 123,
+          "y2": 14,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 32,
+          "x2": 123,
+          "y2": 32,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 50,
+          "x2": 123,
+          "y2": 50,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "y1": 68,
+          "x2": 123,
+          "y2": 68,
+          "color": "#B9AD91"
+        }
+      ]
+    },
+    {
+      "id": "calling_cards_1",
+      "title": "怪盗预告函",
+      "icons": [
+        {
+          "item": "omnira:phantom_calling_card",
+          "x": 0,
+          "y": 15,
+          "count": 1
+        },
+        {
+          "item": "omnira:enhanced_phantom_calling_card",
+          "x": 0,
+          "y": 72,
+          "count": 1
+        }
+      ],
+      "labels": [
+        {
+          "text": "护符",
+          "x": 18,
+          "y": 0,
+          "width": 39,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "佩戴效果",
+          "x": 58,
+          "y": 0,
+          "width": 65,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "普通",
+          "x": 18,
+          "y": 15,
+          "width": 39,
+          "height": 55,
+          "color": "#405462"
+        },
+        {
+          "text": "时运、抢夺各+I；移速+10%",
+          "x": 58,
+          "y": 15,
+          "width": 65,
+          "height": 55,
+          "color": "#405462"
+        },
+        {
+          "text": "强化",
+          "x": 18,
+          "y": 72,
+          "width": 39,
+          "height": 55,
+          "color": "#405462"
+        },
+        {
+          "text": "时运、抢夺各+II；移速+15%",
+          "x": 58,
+          "y": 72,
+          "width": 65,
+          "height": 55,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 13,
+          "y2": 13,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 70,
+          "y2": 70,
+          "color": "#B9AD91"
+        }
+      ]
+    },
+    {
+      "id": "era_rings_1",
+      "title": "戒指",
+      "icons": [
+        {
+          "item": "omnira:scp_714",
+          "x": 0,
+          "y": 15,
+          "count": 1
+        },
+        {
+          "item": "omnira:ring_of_lust",
+          "x": 0,
+          "y": 50,
+          "count": 1
+        },
+        {
+          "item": "omnira:ring_of_greed",
+          "x": 0,
+          "y": 96,
+          "count": 1
+        }
+      ],
+      "labels": [
+        {
+          "text": "戒指",
+          "x": 18,
+          "y": 0,
+          "width": 40,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "佩戴效果",
+          "x": 59,
+          "y": 0,
+          "width": 64,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "SCP-714",
+          "x": 18,
+          "y": 15,
+          "width": 40,
+          "height": 33,
+          "color": "#405462"
+        },
+        {
+          "text": "伤害吸收II，移速−20%",
+          "x": 59,
+          "y": 15,
+          "width": 64,
+          "height": 33,
+          "color": "#405462"
+        },
+        {
+          "text": "色欲",
+          "x": 18,
+          "y": 50,
+          "width": 40,
+          "height": 44,
+          "color": "#405462"
+        },
+        {
+          "text": "近战伤害、吸血各+25%",
+          "x": 59,
+          "y": 50,
+          "width": 64,
+          "height": 44,
+          "color": "#405462"
+        },
+        {
+          "text": "贪欲",
+          "x": 18,
+          "y": 96,
+          "width": 40,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "法强+20%",
+          "x": 59,
+          "y": 96,
+          "width": 64,
+          "height": 22,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 13,
+          "y2": 13,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 48,
+          "y2": 48,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 94,
+          "y2": 94,
+          "color": "#B9AD91"
+        }
+      ]
+    }
   ]
 }

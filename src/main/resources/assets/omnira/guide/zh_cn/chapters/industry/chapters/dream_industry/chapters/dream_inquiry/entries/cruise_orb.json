@@ -9,5 +9,43 @@
     "乘坐时舱内供氧，抵挡熔岩、火焰、窒息及外来攻击，并改善水下和熔岩视野。攻击乘员或外壳都会计入碰撞损伤，多次撞击后碎裂；时空固化升级使乘坐中的晶球免疫攻击和碰撞碎裂。无人乘坐时，玩家攻击用于收起晶球；只有时空固化能让载具物品保留内容。",
     "可从舱内向外施法。未固化时，自身—爆炸会直接摧毁晶球；外部爆炸波及外壳则计为一次碰撞。"
   ],
+  "figures": [{
+    "id": "cruise_orb_speed",
+    "title": "航速（格/秒）",
+    "icons": [
+        {"item": "omnira:primordial_spell_core", "x": 0, "y": 32},
+        {"item": "omnira:dream_spell_core", "x": 0, "y": 49},
+        {"item": "omnira:light_dark_spell_core", "x": 0, "y": 66},
+        {"item": "omnira:spacetime_spell_core", "x": 0, "y": 83},
+        {"item": "omnira:unbound_mana_core", "x": 0, "y": 100}
+    ],
+    "strokes": [
+        {"x1": 0, "y1": 13, "x2": 123, "y2": 13, "color": "#B9AD91"}
+    ],
+    "labels": [
+        {"text": "核心", "x": 2, "y": 2, "width": 65, "height": 10},
+        {"text": "基础", "x": 72, "y": 2, "width": 23, "height": 10},
+        {"text": "升级后", "x": 96, "y": 2, "width": 28, "height": 10},
+        {"text": "空槽", "x": 17, "y": 18, "width": 54, "height": 10},
+        {"text": "1", "x": 78, "y": 18, "width": 12, "height": 10},
+        {"text": "2", "x": 105, "y": 18, "width": 12, "height": 10},
+        {"text": "原始法术核心", "x": 17, "y": 35, "width": 54, "height": 10},
+        {"text": "2", "x": 78, "y": 35, "width": 12, "height": 10},
+        {"text": "4", "x": 105, "y": 35, "width": 12, "height": 10},
+        {"text": "梦境法术核心", "x": 17, "y": 52, "width": 54, "height": 10},
+        {"text": "3", "x": 78, "y": 52, "width": 12, "height": 10},
+        {"text": "6", "x": 105, "y": 52, "width": 12, "height": 10},
+        {"text": "光暗法术核心", "x": 17, "y": 69, "width": 54, "height": 10},
+        {"text": "3", "x": 78, "y": 69, "width": 12, "height": 10},
+        {"text": "6", "x": 105, "y": 69, "width": 12, "height": 10},
+        {"text": "时空法术核心", "x": 17, "y": 86, "width": 54, "height": 10},
+        {"text": "4", "x": 78, "y": 86, "width": 12, "height": 10},
+        {"text": "8", "x": 105, "y": 86, "width": 12, "height": 10},
+        {"text": "无羁魔能核心", "x": 17, "y": 103, "width": 54, "height": 10},
+        {"text": "4", "x": 78, "y": 103, "width": 12, "height": 10},
+        {"text": "8", "x": 105, "y": 103, "width": 12, "height": 10},
+        {"text": "升级后含速度升级", "x": 0, "y": 121, "width": 124, "height": 10}
+    ]
+  }],
   "recipes": true
 }

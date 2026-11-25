@@ -1,5 +1,6 @@
 {
   "id": "corridor_ritual",
+  "related_items": ["omnira:spacetime_mirror"],
   "scene": "corridor_ritual",
   "item": "omnira:unstable_spacetime_aggregate",
   "title": "Ritual of Time's Threshold",

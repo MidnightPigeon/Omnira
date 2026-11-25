@@ -3,7 +3,7 @@
   "item": "omnira:analysis_crystal",
   "title": "Analysis Crystal",
   "text": [
-    "An Analysis Crystal lasts for eight conversions between materials and microcores. Each microcore returns a fixed material. For example, a Water Microcore made with fish always yields cod.",
+    "An Analysis Crystal can form and split microcores. Each conversion uses one of its eight durability points.",
     "Forging a Primordial Spell Core or an Elemental Fusion Tip consumes the entire crystal."
   ],
   "recipes": true,

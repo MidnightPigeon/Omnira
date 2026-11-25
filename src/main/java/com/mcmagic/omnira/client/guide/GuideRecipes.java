@@ -54,17 +54,6 @@ public final class GuideRecipes {
             slots.add(slot(114,136,recipe.result(),true));
             result.add(new Diagram(Component.translatable("guide.omnira.sword_shaping"),slots,List.of(Component.translatable("guide.omnira.sword_shaping_layout")),recipe));
         }
-        for(var holder:manager.getAllRecipesFor(RecipeType.CRAFTING)) {
-            var recipe=holder.value();var output=recipe.getResultItem(level.registryAccess());
-            boolean crystalConversion=item==ModItems.ANALYSIS_CRYSTAL.get()
-                    && recipe.getIngredients().stream().anyMatch(ingredient->ingredient.test(new ItemStack(item)));
-            if(!output.is(item) && !crystalConversion) continue;
-            var slots=new ArrayList<Slot>();var ingredients=recipe.getIngredients();
-            int width=recipe instanceof ShapedRecipe shaped?shaped.getWidth():recipe instanceof com.mcmagic.omnira.recipe.WrappedShapedRecipe wrapped?wrapped.shaped().getWidth():3;
-            for(int i=0;i<ingredients.size();i++) slots.add(ingredient(17+(i%width)*18,72+(i/width)*18,ingredients.get(i),1));
-            slots.add(slot(108,90,output,true));
-            result.add(new Diagram(Component.translatable("container.crafting"),slots,List.of(),recipe));
-        }
         for(var holder:manager.getAllRecipesFor(RecipeType.SMITHING)) {
             var recipe=holder.value();var output=recipe.getResultItem(level.registryAccess());
             if(!output.is(item)) continue;

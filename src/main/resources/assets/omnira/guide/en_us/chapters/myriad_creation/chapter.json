@@ -12,15 +12,12 @@
     "entries/omni_crystal_grid.json",
     "entries/world_rotation.json",
     "entries/world_generation_probability_cloud.json",
-    "entries/myriad_codex.json",
     "entries/universal_understanding.json",
-    "entries/myriad_heart.json",
-    "entries/myriad_matter.json",
-    "entries/myriad_form.json",
-    "entries/myriad_ecology.json"
+    "entries/myriad_heart.json"
   ],
   "chapters": [
-    "chapters/genesis_particles/chapter.json"
+    "chapters/genesis_particles/chapter.json",
+    "chapters/myriad_codex/chapter.json"
   ],
   "directory_order": [
     "genesis_particles",
@@ -32,11 +29,8 @@
     "omni_crystal_grid",
     "world_rotation",
     "world_generation_probability_cloud",
-    "myriad_codex",
+    "myriad_codex_chapter",
     "universal_understanding",
-    "myriad_heart",
-    "myriad_matter",
-    "myriad_form",
-    "myriad_ecology"
+    "myriad_heart"
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "id": "myriad_codex_chapter",
+  "title": "万象原典",
+  "icon": "omnira:myriad_codex",
+  "introduction": "introduction.json",
+  "entries": [
+    "entries/myriad_codex.json",
+    "entries/myriad_matter.json",
+    "entries/myriad_form.json",
+    "entries/myriad_ecology.json"
+  ],
+  "chapters": []
+}

@@ -4,7 +4,7 @@
   "title": "The King's New Clothes",
   "text": [
     "Upgrade the arquebus at an Arcane Assembly Bench to give it spectral twin barrels that glow blue. It keeps its loaded spell crystal. Each gun accepts only one kit, so it cannot also carry the Ancestor Launcher.",
-    "Start a double shot with a 2-second base cooldown, firing two ghost projectiles 0.3 seconds apart. Each shot costs 1.5 times the base mana cost before reductions. Spell power remains +30%, selection range becomes +200% (36 blocks for Target, 48 for Crosshair), and projectile speed becomes +50%. These bonuses require the main hand.",
+    "The two ghost shots fire 0.3s apart. Each spends its own mana.",
     "Keep holding the gun during the double shot. Switching guns, opening the loading screen or changing dimensions cancels the second projectile. Insufficient mana also prevents the second shot.",
     "Target spells can select entities through walls, falling back to blocks when no entity is selected. Ghost shots pass through unselected blocks, but entities along the path and the selected block stop them.",
     "While held in the main hand, magical perception spends a fixed 50 mana every 5 seconds to reveal entity outlines within 36 blocks for 2 seconds, visible only to the holder. Insufficient mana prevents the pulse."
@@ -14,6 +14,10 @@
     {
       "target": "kings_new_clothes_crafting",
       "label": "Forging Recipe"
+    },
+    {
+      "target": "arcane_arquebus",
+      "label": "Arcane Arquebus"
     }
   ]
 }

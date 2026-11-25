@@ -15,6 +15,29 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_guide_revision")
 @PrefixGameTestTemplate(false)
 public final class GuideRevisionGameTests {
+    @GameTest(template="spell_arena")
+    public static void constructionProjectionsUseFormationComponents(GameTestHelper h) {
+        var counts=java.util.Map.of("advanced_assembly_table",16,"large_alchemical_reaction_pool",18,
+                "spacetime_engine",10,"alchemical_catalysis_chamber",3,"advanced_crystal_aggregation_ring",9);
+        for(var entry:counts.entrySet()){
+            var cells=com.mcmagic.omnira.guidance.ConstructionPattern.of(entry.getKey()).cells();
+            h.assertTrue(cells.size()==entry.getValue(),"Wrong component count for "+entry.getKey());
+            var positions=new java.util.HashSet<net.minecraft.core.BlockPos>();
+            for(var cell:cells){
+                h.assertTrue(cell.offset().getY()>=0 && positions.add(cell.offset()),"Overlapping or buried component");
+                h.assertTrue(cell.matches(cell.display(0)) && cell.matches(cell.display(80)),"Displayed block rejected");
+                h.assertTrue(!cell.matches(net.minecraft.world.level.block.Blocks.AIR.defaultBlockState()),"Empty position hides ghost");
+            }
+            h.assertTrue(positions.contains(net.minecraft.core.BlockPos.ZERO),"No bottom-center anchor");
+        }
+        var ring=com.mcmagic.omnira.guidance.ConstructionPattern.of("advanced_crystal_aggregation_ring");
+        for(int i=0;i<9;i++){
+            var cell=ring.cells().get(i);
+            h.assertTrue(com.mcmagic.omnira.aggregation.AggregationStructure.required(i,cell.display(0))
+                    && com.mcmagic.omnira.aggregation.AggregationStructure.required(i,cell.display(80)),"Ring variant rejected by assembly");
+        }
+        h.succeed();
+    }
     private static ResourceLocation id(String path) {return ResourceLocation.fromNamespaceAndPath("omnira",path);}
     @GameTest(template="spell_arena")
     public static void engineAcceptsUnorderedMaterials(GameTestHelper h) {

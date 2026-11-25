@@ -32,6 +32,7 @@ public final class ChaosBeamHold {
     }
     @SubscribeEvent public static void tick(ClientTickEvent.Post e){check();}
     @SubscribeEvent(priority=EventPriority.HIGHEST) public static void repeat(InputEvent.InteractionKeyMappingTriggered e){
+        if(com.mcmagic.omnira.client.guide.GuideProjection.controlsHand())return;
         if(held!=null && e.isUseItem()){e.setCanceled(true);e.setSwingHand(false);}
     }
     @SubscribeEvent public static void disconnect(ClientPlayerNetworkEvent.LoggingOut e){held=null;}

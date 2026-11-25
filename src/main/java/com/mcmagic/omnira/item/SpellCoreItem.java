@@ -14,20 +14,26 @@ public final class SpellCoreItem extends net.minecraft.world.item.BlockItem impl
     public static java.util.List<ItemStack> examples(){
         return net.minecraft.core.registries.BuiltInRegistries.ITEM.stream().filter(item->item instanceof SpellCoreItem).map(ItemStack::new).toList();
     }
+    private enum WorkTier {
+        BASIC(1,512), ADVANCED(2,1024), SUPERIOR(3,2048);
+        final int bonus,output;
+        WorkTier(int bonus,int output){this.bonus=bonus;this.output=output;}
+    }
+    public int workBonus(){return kind.tier.bonus;}
     public enum Kind {
-        TEST("primordial_spell_core",com.mcmagic.omnira.registry.ModBlocks.TEST_SPELL_CORE,200,.15,.2,0,512),
-        DREAM("dream_spell_core",com.mcmagic.omnira.registry.ModBlocks.DREAM_SPELL_CORE,400,.2,.3,10,1024),
-        LIGHT_DARK("light_dark_spell_core",com.mcmagic.omnira.registry.ModBlocks.LIGHT_DARK_SPELL_CORE,400,.2,.3,0,1024),
-        SPACETIME("spacetime_spell_core",com.mcmagic.omnira.registry.ModBlocks.SPACETIME_SPELL_CORE,600,.3,.3,10,2048),
-        UNBOUND("unbound_mana_core",com.mcmagic.omnira.registry.ModBlocks.UNBOUND_MANA_CORE,0,.5,.25,0,2048);
+        TEST("primordial_spell_core",com.mcmagic.omnira.registry.ModBlocks.TEST_SPELL_CORE,200,.15,.2,0,WorkTier.BASIC),
+        DREAM("dream_spell_core",com.mcmagic.omnira.registry.ModBlocks.DREAM_SPELL_CORE,400,.2,.3,10,WorkTier.ADVANCED),
+        LIGHT_DARK("light_dark_spell_core",com.mcmagic.omnira.registry.ModBlocks.LIGHT_DARK_SPELL_CORE,400,.2,.3,0,WorkTier.ADVANCED),
+        SPACETIME("spacetime_spell_core",com.mcmagic.omnira.registry.ModBlocks.SPACETIME_SPELL_CORE,600,.3,.3,10,WorkTier.SUPERIOR),
+        UNBOUND("unbound_mana_core",com.mcmagic.omnira.registry.ModBlocks.UNBOUND_MANA_CORE,0,.5,.25,0,WorkTier.SUPERIOR);
 
         private final String id;
         private final java.util.function.Supplier<? extends net.minecraft.world.level.block.Block> block;
         private final double mana,bonus,regen,costReduction;
-        private final int output;
+        private final WorkTier tier;
         Kind(String id,java.util.function.Supplier<? extends net.minecraft.world.level.block.Block> block,
-             double mana,double bonus,double regen,double costReduction,int output) {
-            this.id=id;this.block=block;this.mana=mana;this.bonus=bonus;this.regen=regen;this.costReduction=costReduction;this.output=output;
+             double mana,double bonus,double regen,double costReduction,WorkTier tier) {
+            this.id=id;this.block=block;this.mana=mana;this.bonus=bonus;this.regen=regen;this.costReduction=costReduction;this.tier=tier;
         }
     }
     private final Kind kind;
@@ -40,7 +46,7 @@ public final class SpellCoreItem extends net.minecraft.world.item.BlockItem impl
         this(properties,dream?Kind.DREAM:Kind.TEST,output);
     }
     public SpellCoreItem(Properties properties,Kind kind) {
-        this(properties,kind,new Output(kind.output,kind.output));
+        this(properties,kind,new Output(kind.tier.output,kind.tier.output));
     }
     public SpellCoreItem(Properties properties,Kind kind,Output output) {
         super(kind.block.get(),properties.stacksTo(1));

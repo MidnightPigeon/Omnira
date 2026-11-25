@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -420,7 +419,6 @@ public final class SpellCasting {
             if(dx*dx+dy*dy+dz*dz<=radius*radius)orb.impact();
         }
         burst.burstRadius(radius);
-        if(authoredBurst)level.sendParticles(ParticleTypes.EXPLOSION, center.x, center.y, center.z, 1, 0, 0, 0, 0);
         level.playSound(null, center.x, center.y, center.z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, .7F, 1.3F);
         var affectedEntities=new java.util.HashSet<java.util.UUID>();
         for (Entity entity : level.getEntities(caster, new AABB(center, center).inflate(radius),

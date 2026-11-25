@@ -1,7 +1,7 @@
 {
   "id": "rift_moth_chapter",
   "title": "巡隙蛾",
-  "icon": "omnira:rift_moth_spawn_egg",
+  "icon": "omnira:entity/rift_moth",
   "introduction": "introduction.json",
   "entries": [
     "entries/rift_moth.json"

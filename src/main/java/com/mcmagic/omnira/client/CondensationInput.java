@@ -31,6 +31,7 @@ public final class CondensationInput {
                 &&mc.level.getBlockEntity(target.getBlockPos()) instanceof com.mcmagic.omnira.block.entity.SimpleCondensationTableBlockEntity;
     }
     @SubscribeEvent(priority=EventPriority.HIGHEST) public static void use(InputEvent.InteractionKeyMappingTriggered event){
+        if(com.mcmagic.omnira.client.guide.GuideProjection.controlsHand())return;
         if(!event.isUseItem())return;
         var mc=Minecraft.getInstance();
         if(target!=null||waitRelease){event.setCanceled(true);event.setSwingHand(false);return;}

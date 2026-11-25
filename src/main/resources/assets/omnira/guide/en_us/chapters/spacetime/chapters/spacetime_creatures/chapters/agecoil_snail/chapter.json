@@ -1,7 +1,7 @@
 {
   "id": "agecoil_snail_chapter",
   "title": "Agecoil Snail",
-  "icon": "omnira:agecoil_snail_spawn_egg",
+  "icon": "omnira:entity/agecoil_snail",
   "introduction": "introduction.json",
   "entries": [
     "entries/agecoil_snail.json"

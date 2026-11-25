@@ -3,8 +3,8 @@
   "title": "Memory Cube",
   "item": "omnira:memory_cube",
   "text": [
-    "Each game day, you can extract one memory from a peaceful cube and one from a corrupted cube. Extraction does not consume the placed cube.",
-    "Opening a Peaceful Memory drains all mana and drops six random time or light materials. Opening it below half your maximum mana kills you. A Corrupted Memory inflicts ten seconds of Wither III, removes half your maximum health and drops six random space or shadow materials. Opening it below half your maximum health also kills you. Even a fatal opening consumes the memory and drops its rewards."
+    "Each game day, extract one memory from a peaceful cube and one from a corrupted cube. Both cubes remain in place.",
+    "Opening a memory consumes it and drops six materials. Costs scale with maximum mana or health. Corrupted Memory rounds its health cost up, so opening it at half health can kill you. The materials still drop."
   ],
   "recipes": false,
   "links": [
@@ -23,6 +23,128 @@
     {
       "target": "spacetime_reverser",
       "label": "Spacetime Reverser"
+    }
+  ],
+  "figures": [
+    {
+      "id": "memory_comparison",
+      "title": "Opening Memories",
+      "labels": [
+        {
+          "text": "Peaceful",
+          "x": 0,
+          "y": 17,
+          "width": 61,
+          "height": 10
+        },
+        {
+          "text": "Corrupted",
+          "x": 63,
+          "y": 17,
+          "width": 61,
+          "height": 10
+        },
+        {
+          "text": "Fatal if",
+          "x": 0,
+          "y": 30,
+          "width": 124,
+          "height": 10
+        },
+        {
+          "text": "Mana <50%",
+          "x": 0,
+          "y": 42,
+          "width": 61,
+          "height": 13
+        },
+        {
+          "text": "HP <50%",
+          "x": 63,
+          "y": 42,
+          "width": 61,
+          "height": 13
+        },
+        {
+          "text": "Cost",
+          "x": 0,
+          "y": 56,
+          "width": 124,
+          "height": 10
+        },
+        {
+          "text": "All mana",
+          "x": 0,
+          "y": 68,
+          "width": 61,
+          "height": 33
+        },
+        {
+          "text": "½ max HP\nWither III\n10s",
+          "x": 63,
+          "y": 68,
+          "width": 61,
+          "height": 33
+        },
+        {
+          "text": "Loot",
+          "x": 0,
+          "y": 102,
+          "width": 124,
+          "height": 10
+        },
+        {
+          "text": "Time/light",
+          "x": 0,
+          "y": 114,
+          "width": 61,
+          "height": 16
+        },
+        {
+          "text": "Space/dark",
+          "x": 63,
+          "y": 114,
+          "width": 61,
+          "height": 16
+        }
+      ],
+      "icons": [
+        {
+          "item": "omnira:peaceful_memory_cube",
+          "x": 0,
+          "y": 0,
+          "count": 1
+        },
+        {
+          "item": "omnira:corrupted_memory_cube",
+          "x": 63,
+          "y": 0,
+          "count": 1
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 28,
+          "y2": 28,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 54,
+          "y2": 54,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 100,
+          "y2": 100,
+          "color": "#B9AD91"
+        }
+      ]
     }
   ]
 }

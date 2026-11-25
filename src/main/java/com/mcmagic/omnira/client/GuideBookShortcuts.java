@@ -58,6 +58,7 @@ public final class GuideBookShortcuts {
         return index().target(mc.level,mc.player,mc.hitResult);
     }
     @SubscribeEvent(priority=EventPriority.HIGHEST) public static void use(InputEvent.InteractionKeyMappingTriggered event){
+        if(com.mcmagic.omnira.client.guide.GuideProjection.controlsHand())return;
         if(!event.isUseItem()||Minecraft.getInstance().player==null||!Minecraft.getInstance().player.isShiftKeyDown())return;
         var target=aimed();if(target.isEmpty())return;
         event.setCanceled(true);event.setSwingHand(false);GuideBookClient.openReference(target.get(),null);

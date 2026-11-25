@@ -12,6 +12,7 @@ import org.lwjgl.glfw.GLFW;
 public final class IndustrialWheelInput {
     private static final StaffUseClick CLICK=new StaffUseClick();
     @SubscribeEvent(priority=EventPriority.HIGHEST) public static void use(InputEvent.InteractionKeyMappingTriggered e){
+        if(com.mcmagic.omnira.client.guide.GuideProjection.controlsHand())return;
         var mc=Minecraft.getInstance();
         if(!e.isUseItem()||mc.player==null||mc.screen!=null||!IndustrialWheelItem.available())return;
         if(!(mc.player.getMainHandItem().getItem() instanceof IndustrialWheelItem)&&!(mc.player.getOffhandItem().getItem() instanceof IndustrialWheelItem))return;

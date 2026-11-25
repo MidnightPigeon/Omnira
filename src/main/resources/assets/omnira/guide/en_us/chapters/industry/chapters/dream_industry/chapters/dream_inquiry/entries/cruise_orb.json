@@ -9,5 +9,43 @@
     "The occupied cabin supplies air, shields its rider from lava, fire, suffocation and incoming attacks, and improves underwater and lava visibility. Attacks on the rider or shell count as collisions. Repeated impacts shatter it; stabilization protects the occupied craft against attacks and collisions. Attack an empty craft to collect it; only stabilization preserves its contents in the dropped item.",
     "Cast outward from the cabin. Self—Burst instantly shatters an unstabilized orb; an external blast striking its shell counts as one collision."
   ],
+  "figures": [{
+    "id": "cruise_orb_speed",
+    "title": "Flight Speed (blocks/s)",
+    "icons": [
+        {"item": "omnira:primordial_spell_core", "x": 0, "y": 32},
+        {"item": "omnira:dream_spell_core", "x": 0, "y": 49},
+        {"item": "omnira:light_dark_spell_core", "x": 0, "y": 66},
+        {"item": "omnira:spacetime_spell_core", "x": 0, "y": 83},
+        {"item": "omnira:unbound_mana_core", "x": 0, "y": 100}
+    ],
+    "strokes": [
+        {"x1": 0, "y1": 13, "x2": 123, "y2": 13, "color": "#B9AD91"}
+    ],
+    "labels": [
+        {"text": "Core", "x": 2, "y": 2, "width": 65, "height": 10},
+        {"text": "Base", "x": 69, "y": 2, "width": 24, "height": 10},
+        {"text": "Boost", "x": 94, "y": 2, "width": 30, "height": 10},
+        {"text": "Empty", "x": 17, "y": 18, "width": 60, "height": 10},
+        {"text": "1", "x": 78, "y": 18, "width": 12, "height": 10},
+        {"text": "2", "x": 105, "y": 18, "width": 12, "height": 10},
+        {"text": "Primordial", "x": 17, "y": 35, "width": 60, "height": 10},
+        {"text": "2", "x": 78, "y": 35, "width": 12, "height": 10},
+        {"text": "4", "x": 105, "y": 35, "width": 12, "height": 10},
+        {"text": "Dream", "x": 17, "y": 52, "width": 60, "height": 10},
+        {"text": "3", "x": 78, "y": 52, "width": 12, "height": 10},
+        {"text": "6", "x": 105, "y": 52, "width": 12, "height": 10},
+        {"text": "Light/Dark", "x": 17, "y": 69, "width": 60, "height": 10},
+        {"text": "3", "x": 78, "y": 69, "width": 12, "height": 10},
+        {"text": "6", "x": 105, "y": 69, "width": 12, "height": 10},
+        {"text": "Spacetime", "x": 17, "y": 86, "width": 60, "height": 10},
+        {"text": "4", "x": 78, "y": 86, "width": 12, "height": 10},
+        {"text": "8", "x": 105, "y": 86, "width": 12, "height": 10},
+        {"text": "Unbound", "x": 17, "y": 103, "width": 60, "height": 10},
+        {"text": "4", "x": 78, "y": 103, "width": 12, "height": 10},
+        {"text": "8", "x": 105, "y": 103, "width": 12, "height": 10},
+        {"text": "Boost = Speed Upgrade", "x": 0, "y": 121, "width": 124, "height": 10}
+    ]
+  }],
   "recipes": true
 }

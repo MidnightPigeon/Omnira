@@ -33,6 +33,13 @@ public final class CruiseOrbGameTests {
         h.assertTrue(orb.storage.tank.isEmpty(),"Vehicle bucket transferred before five ticks");
         orb.storage.tick();h.assertTrue(orb.storage.tank.getFluidAmount()==1000 && orb.storage.port.getStackInSlot(0).is(Items.BUCKET),"Vehicle accelerated bucket did not transfer in five ticks");
         orb.storage.upgrades.extractItem(0,1,false);h.assertTrue(orb.speed()==3,"Removed upgrade still boosts speed");
+        for(var core:java.util.List.of(ModItems.SPACETIME_SPELL_CORE.get(),ModItems.UNBOUND_MANA_CORE.get())){
+            orb.setCore(new ItemStack(core));
+            h.assertTrue(orb.speed()==4,"Advanced core should fly at four blocks per second");
+            orb.storage.upgrades.insertItem(0,new ItemStack(ModItems.SPEED_UPGRADE.get()),false);
+            h.assertTrue(orb.speed()==8,"Speed upgrade should double advanced core flight speed");
+            orb.storage.upgrades.extractItem(0,1,false);
+        }
         orb.discard();h.succeed();
     }
     @GameTest(template="spell_arena") public static void trashReplacementAndRetrieval(GameTestHelper h){

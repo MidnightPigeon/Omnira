@@ -4,14 +4,142 @@
   "title": "Speed Upgrade",
   "recipes": true,
   "text": [
-    "Right-click while holding to open the two core slots. Base multiplier: 2; each primordial core adds 1, dream or light-dark adds 2, and spacetime adds 3. Bonuses add, up to 8x. Cores are recoverable and appear below the arrows.",
+    "Right-click while holding to open both core slots. Installed cores appear beneath the arrows and can be retrieved. Logistics multiplier = 2 + left bonus + right bonus. Empty slots add zero. Maximum: ×8.",
+    "A Cruise Orb always moves twice as fast with this upgrade, regardless of the cores inside it.",
     "Install at most one per device to multiply logistics limits and speed up bucket exchange. Each transfer method retains its own allowance.",
-    "Adds no automatic transfer and does not speed up processing or lava generation. Cruise orbs still reject Intake/Output Upgrades. Their movement bonus remains 2x, regardless of the cores inside this upgrade."
+    "The upgrade adds no automatic transfer and does not speed processing or lava generation. Cruise Orbs still reject Intake and Output Upgrades."
   ],
   "links": [
     {
       "target": "crystal_logistics",
       "label": "Logistics"
+    }
+  ],
+  "figures": [
+    {
+      "id": "speed_core_bonus_1",
+      "title": "Core Bonuses",
+      "icons": [
+        {
+          "item": "omnira:primordial_spell_core",
+          "x": 0,
+          "y": 15,
+          "count": 1
+        },
+        {
+          "item": "omnira:dream_spell_core",
+          "x": 0,
+          "y": 35,
+          "count": 1
+        },
+        {
+          "item": "omnira:spacetime_spell_core",
+          "x": 0,
+          "y": 59,
+          "count": 1
+        },
+        {
+          "item": "omnira:light_dark_spell_core",
+          "x": 17,
+          "y": 35,
+          "count": 1
+        },
+        {
+          "item": "omnira:unbound_mana_core",
+          "x": 17,
+          "y": 59,
+          "count": 1
+        }
+      ],
+      "labels": [
+        {
+          "text": "Core",
+          "x": 36,
+          "y": 0,
+          "width": 63,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "Add",
+          "x": 102,
+          "y": 0,
+          "width": 22,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "Primordial",
+          "x": 36,
+          "y": 15,
+          "width": 63,
+          "height": 18,
+          "color": "#405462"
+        },
+        {
+          "text": "+1",
+          "x": 102,
+          "y": 15,
+          "width": 22,
+          "height": 18,
+          "color": "#405462"
+        },
+        {
+          "text": "Dream, Light/Dark",
+          "x": 36,
+          "y": 35,
+          "width": 63,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "+2",
+          "x": 102,
+          "y": 35,
+          "width": 22,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "Spacetime, Unbound",
+          "x": 36,
+          "y": 59,
+          "width": 63,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "+3",
+          "x": 102,
+          "y": 59,
+          "width": 22,
+          "height": 22,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 13,
+          "y2": 13,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 33,
+          "y2": 33,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 57,
+          "y2": 57,
+          "color": "#B9AD91"
+        }
+      ]
     }
   ]
 }

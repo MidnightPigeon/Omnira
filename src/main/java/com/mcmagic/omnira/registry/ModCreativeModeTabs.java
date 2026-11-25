@@ -53,7 +53,7 @@ public final class ModCreativeModeTabs {
                 ||item==ModItems.PERMANENT_VOID_CRYSTAL.get()
                 ||item==com.mcmagic.omnira.codex.MyriadCodexContent.HEART_ITEM.get()
                 ||item==DreamContent.CRYSTAL_COLUMN_CAPITAL.get().asItem()
-                ||item==ModItems.DREAM_PORTAL.get()||item==ModItems.CORRIDOR_GATEWAY.get();
+                ||item==ModItems.DREAM_PORTAL.get()||item==ModItems.CORRIDOR_GATEWAY.get()||item==ModItems.SPACETIME_MIRROR.get();
     }
     public static List<String> declaredIds(Category category){
         var ids=new ArrayList<String>();

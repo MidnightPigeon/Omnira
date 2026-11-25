@@ -457,6 +457,7 @@
     }
   ],
   "node_titles": {
-    "unbound_mana_core": "无羁魔力"
+    "unbound_mana_core": "无羁魔力",
+    "portable_crystal_processing_table": "快速雕琢"
   }
 }

@@ -40,6 +40,43 @@ public final class FlightLifetimeGameTests {
         h.succeed();
     }
     @GameTest(template="spell_arena",timeoutTicks=430)
+    public static void downwardFlightProtectsOnImpactAndOnExpiry(GameTestHelper h) {
+        var ground = h.absolutePos(new BlockPos(4, 5, 4));
+        h.getLevel().setBlockAndUpdate(ground, net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+        Vec3 low = Vec3.atBottomCenterOf(ground.above()).add(0, .5, 0);
+        var rider = player(h, 4);
+        // Standalone GameTest players do not receive normal player ticks. Expire vanilla login protection.
+        for (int tick = 0; tick < 60; tick++) rider.tick();
+        rider.setPos(low.add(0, 12, 0));
+        var descending = flight(h, rider, List.of());
+        descending.setDeltaMovement(0, -1, 0);
+        float health = rider.getHealth();
+        h.runAtTickTime(20, () -> {
+            h.assertTrue(descending.isRemoved() && rider.getHealth() == health, "Vehicle landing hurt its rider");
+            rider.causeFallDamage(12, 1, rider.damageSources().fall());
+            h.assertTrue(rider.getHealth() < health, "Control fall did not damage the test player");
+        });
+
+        h.getLevel().setBlockAndUpdate(ground.east(4), net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+        Vec3 release = low.add(4, 0, 0);
+        var expiringRider = player(h, 8);
+        for (int tick = 0; tick < 60; tick++) expiringRider.tick();
+        expiringRider.setPos(release);
+        var expiring = flight(h, expiringRider, List.of());
+        h.runAtTickTime(399, () -> {
+            expiringRider.fallDistance = 24;
+            expiringRider.setDeltaMovement(0, -1, 0);
+        });
+        h.runAtTickTime(405, () -> {
+            h.assertTrue(expiring.isRemoved() && !expiringRider.isPassenger(), "Natural expiry did not dismount");
+            h.assertTrue(expiringRider.getDeltaMovement().y >= 0 && expiringRider.fallDistance == 0, "Dismount retained the descent");
+            expiringRider.setPos(release.add(0, -.5, 0));
+            expiringRider.doCheckFallDamage(0, -.5, 0, true);
+            h.assertTrue(expiringRider.getHealth() == health, "First landing after natural expiry hurt the rider");
+            h.succeed();
+        });
+    }
+    @GameTest(template="spell_arena",timeoutTicks=430)
     public static void durationFadeInfusionAndLandingProtection(GameTestHelper h) {
         var normalPlayer=player(h,3);var normal=flight(h,normalPlayer,List.of("enhancement","enhancement"));
         var delayPlayer=player(h,7);var delayed=flight(h,delayPlayer,List.of("delay","delay"));

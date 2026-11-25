@@ -53,6 +53,9 @@ public final class ModDataComponents {
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Integer>> GRID_CURSOR =
             DATA_COMPONENTS.registerComponentType("grid_cursor",b->b.persistent(com.mojang.serialization.Codec.intRange(0,11)));
 
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<Integer>> PORTABLE_WORK =
+            DATA_COMPONENTS.registerComponentType("portable_work", b -> b.persistent(com.mojang.serialization.Codec.intRange(1,60)));
+
     private ModDataComponents() {
     }
 

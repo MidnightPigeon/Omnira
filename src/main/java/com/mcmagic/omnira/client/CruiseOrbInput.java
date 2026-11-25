@@ -21,6 +21,7 @@ public final class CruiseOrbInput {
         }
     }
     @SubscribeEvent(priority=EventPriority.HIGHEST) public static void panel(InputEvent.InteractionKeyMappingTriggered event){
+        if(com.mcmagic.omnira.client.guide.GuideProjection.controlsHand())return;
         var mc=Minecraft.getInstance();
         if(!event.isUseItem() || mc.player==null || !(mc.player.getVehicle() instanceof CruiseOrbEntity orb))return;
         int button=orb.pointedButton(mc.player);if(button<0)return;

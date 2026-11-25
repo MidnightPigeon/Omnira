@@ -29,12 +29,35 @@ public final class GuideBookScreen extends ResponsiveScreen {
     private String searchText="";
     private GuideContents.Chapter chapter;
     private GuideContents.Entry entry;
-    private List<List<FormattedCharSequence>> pages=List.of();
+    private GuideInlineText inlineText;
+    private List<List<GuideInlineText.Line>> pages=List.of();
     private List<GuideRecipes.Diagram> recipes=List.of();
     private int left,top,introPage,page,ticks;
     private float sceneYaw,scenePitch;
     private boolean rotatingScene;
     private boolean constructionScene=true;
+    private record TextRow(GuideInlineText.Line line,double x,double y,float scale){
+        ItemStack iconAt(double mx,double my){return line.iconAt((mx-x)/scale,(my-y)/scale);}
+    }
+    private final List<TextRow> visibleIconRows=new ArrayList<>();
+    private ItemStack inlineIconAt(double x,double y){
+        if(entry!=null && !search.results() && y>=top+21 && y<top+37){
+            for(int side=0;side<2;side++){
+                int iconX=left+(side==0?42:178);
+                if(x>=iconX && x<iconX+16 && GuideSpread.leaf(page,side)<totalPages())
+                    return GuideIcon.resolve(entry.icon()).item();
+            }
+        }
+        for(var row:visibleIconRows){
+            var item=row.iconAt(x,y);
+            if(!item.isEmpty())return item;
+        }
+        return ItemStack.EMPTY;
+    }
+    private void drawProse(GuiGraphics g,GuideInlineText.Line line,int x,int y){
+        line.draw(g,x,y,0xFF353F44);
+        if(line.hasIcons())visibleIconRows.add(new TextRow(line,x,y,1));
+    }
     private ItemStack hovered=ItemStack.EMPTY;
     private Component recipeTooltip=Component.empty();
     private String figureTooltip="";
@@ -87,6 +110,9 @@ public final class GuideBookScreen extends ResponsiveScreen {
     }
     @Override protected void init() {
         super.init();
+        inlineText=new GuideInlineText(font);
+        if(entry!=null)layoutEntryText();
+        cachedIntro=null;
         cachedSourceIntroduction=null;
         figureRenderer.clear();
         var layout=GuideBookLayout.centered(width,height);left=layout.left();top=layout.top();
@@ -111,10 +137,13 @@ public final class GuideBookScreen extends ResponsiveScreen {
         loadEntry(next);
         buttons();
     }
+    private void layoutEntryText(){
+        pages=textPages(entry.text(),entry.links().isEmpty()?12:10);
+        if(pages.isEmpty())pages=List.of(List.of());
+    }
     private void loadEntry(GuideContents.Entry next) {
         entry=next;page=0;sceneYaw=0;scenePitch=0;rotatingScene=false;constructionScene=true;
-        pages=textPages(entry.text(),entry.links().isEmpty()?12:10);
-        if(pages.isEmpty()) pages=List.of(List.of());
+        layoutEntryText();
         recipes=GuideEnergy.supports(entry.id())?GuideEnergy.pages(entry.id()):entry.recipes()?GuideRecipes.find(minecraft.level,GuideContents.icon(entry.item()).getItem()):List.of();
     }
     private void jump(GuideContents.Destination target) {
@@ -146,8 +175,10 @@ public final class GuideBookScreen extends ResponsiveScreen {
         rememberTreeReading();
         chapter=target;entry=null;introPage=0;page=0;buttons();
     }
-    private int scenePages() {return entry!=null && (CodexExampleScene.supports(entry.scene()) || MachineConstructionScene.supports(entry.scene()) || entry.scene().equals("world_forming_ritual") || entry.scene().equals("genesis_ritual") || entry.scene().equals("dream_ritual") || entry.scene().equals("resonance_ritual") || entry.scene().equals("affinity_ritual") || entry.scene().equals("corridor_ritual") || entry.scene().equals("cleansing_ritual") || entry.scene().equals("sword_shaping") || entry.scene().equals("advanced_assembly_table"))?1:0;}
+    private int scenePages() {return entry!=null && (CodexExampleScene.supports(entry.scene()) || MachineConstructionScene.supports(entry.scene()) || RitualLayout.supports(entry.scene()) || entry.scene().equals("advanced_assembly_table"))?1:0;}
     private void buttons() {
+        projectionWasPlaced=entry!=null && GuideProjection.isPlaced(entry.scene());
+        visibleIconRows.clear();
         clearWidgets();
         bookButton(left+RIGHT_BUTTON,top+HEADER_BUTTON_Y,"X","codex.omnira.close",this::onClose);
         bookButton(left+150,top+HEADER_BUTTON_Y,"home","guide.omnira.home",this::home);
@@ -231,10 +262,19 @@ public final class GuideBookScreen extends ResponsiveScreen {
     }
     private void entryButtons(int page,int pageX){
         if(page>=totalPages())return;
-        if(page==pages.size()&&entry!=null&&(MachineConstructionScene.supports(entry.scene())||entry.scene().equals("advanced_assembly_table"))){
-            bookButton(left+pageX+52,top+180,"\u21c4",constructionScene?"guide.omnira.show_finished":"guide.omnira.show_construction",()->{
+        if(page==pages.size()&&entry!=null&&(MachineConstructionScene.supports(entry.scene())||entry.scene().equals("advanced_assembly_table")||RitualLayout.supports(entry.scene()))){
+            if(!RitualLayout.supports(entry.scene()))bookButton(left+pageX+4,top+169,"\u21c4",constructionScene?"guide.omnira.show_finished":"guide.omnira.show_construction",()->{
                 constructionScene=!constructionScene;rotatingScene=false;buttons();
             });
+            String scene=entry.scene();
+            boolean placed=GuideProjection.isPlaced(scene);
+            String label=placed?"guide.omnira.cancel_projection":"guide.omnira.world_projection";
+            int projectionX=RitualLayout.supports(scene)?(124-90)/2:28;
+            bookButton(left+pageX+projectionX,top+169,90,Component.translatable(label).getString(),
+                    placed?label:"guide.omnira.world_projection_hint",()->{
+                        if(GuideProjection.isPlaced(scene)){GuideProjection.cancel(scene);buttons();}
+                        else GuideProjection.begin(this,scene);
+                    });
         }
         if(page<pages.size()) inlineLinks(page,pageX);
         if(entry!=null && page==pages.size()-1) {
@@ -274,18 +314,17 @@ public final class GuideBookScreen extends ResponsiveScreen {
     private void inlineLinks(int page,int pageX) {
         int y=top+47;
         for(var line:pages.get(page)) {
-            var plain=new StringBuilder();
-            line.accept((index,style,codePoint)->{plain.appendCodePoint(codePoint);return true;});
-            String text=plain.toString();
+            String text=line.plain();
             for(var link:entry.links()) {
                 var target=contents.destination(link.target());
                 if(target.isEmpty() || link.label().isEmpty()) continue;
                 for(int start=text.indexOf(link.label());start>=0;start=text.indexOf(link.label(),start+link.label().length())) {
-                    int x=left+pageX+4+font.width(text.substring(0,start));
-                    addRenderableWidget(new Button(x,y,font.width(link.label()),font.lineHeight,
+                    int x=left+pageX+4+line.offset(line.segment(0,start).length());
+                    String display=line.segment(start,start+link.label().length());
+                    addRenderableWidget(new Button(x,y,font.width(display),font.lineHeight,
                             Component.literal(link.label()),b->jump(target.get()),supplier->supplier.get()) {
                         @Override protected void renderWidget(GuiGraphics g,int mx,int my,float pt) {
-                            g.drawString(font,getMessage(),getX(),getY(),isHoveredOrFocused()?0xFF345D85:0xFF467889,false);
+                            g.drawString(font,display,getX(),getY(),isHoveredOrFocused()?0xFF345D85:0xFF467889,false);
                             g.fill(getX(),getY()+font.lineHeight-1,getX()+getWidth(),getY()+font.lineHeight,0xFF467889);
                         }
                     });
@@ -342,11 +381,16 @@ public final class GuideBookScreen extends ResponsiveScreen {
         button.setTooltip(Tooltip.create(Component.translatable(tooltip)));
         return button;
     }
-    @Override public void tick() {ticks++;}
+    private boolean projectionWasPlaced;
+    @Override public void tick() {
+        ticks++;
+        if(entry!=null && GuideProjection.isPlaced(entry.scene())!=projectionWasPlaced)buttons();
+    }
     // This screen paints its own background; Screen.render must not blur the finished content.
     @Override public void renderBackground(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {}
 
     @Override protected void renderContent(GuiGraphics g,int mouseX,int mouseY,float partialTick) {
+        visibleIconRows.clear();
         hovered=ItemStack.EMPTY;
         recipeTooltip=Component.empty();
         figureTooltip="";
@@ -378,7 +422,10 @@ public final class GuideBookScreen extends ResponsiveScreen {
         }else renderEntryPage(g,leaf,pageX,mouseX,mouseY);
         }
         super.renderContent(g,mouseX,mouseY,partialTick);
-        if(!hovered.isEmpty()) {
+        var inlineItem=inlineIconAt(mouseX,mouseY);
+        if(!inlineItem.isEmpty()){
+            g.renderTooltip(font,inlineItem,mouseX,mouseY);
+        }else if(!hovered.isEmpty()) {
             var tooltip=new ArrayList<>(Screen.getTooltipFromItem(minecraft,hovered));
             if(entry!=null&&GuideEnergy.supports(entry.id()))tooltip.add(GuideEnergy.tooltip(entry.id(),hovered));
             if(!recipeTooltip.getString().isEmpty())tooltip.add(recipeTooltip);
@@ -394,13 +441,15 @@ public final class GuideBookScreen extends ResponsiveScreen {
             fit(g,title,left+198+(pageX==19?20:0),top+25,pageX==19?75:79,0xFF314A58);
             if(page<pages.size()) {
                 int y=top+47;
-                for(var line:pages.get(page)) {g.drawString(font,line,left+179,y,0xFF353F44,false);y+=11;}
+                for(var line:pages.get(page)) {drawProse(g,line,left+179,y);y+=11;}
             } else if(scenePages()>0 && page==pages.size()) {
                 if(CodexExampleScene.supports(entry.scene()))CodexExampleScene.render(g,left+175,top+44,ticks,entry.scene(),sceneYaw,scenePitch);
+                else if(constructionScene && (MachineConstructionScene.supports(entry.scene()) || entry.scene().equals("advanced_assembly_table")))
+                    figureTooltip=ConstructionPreview.draw(g,left+175,top+44,ticks,entry.scene(),sceneYaw,scenePitch,getChildAt(mouseX,mouseY).isPresent()?-1:mouseX,mouseY);
                 else if(MachineConstructionScene.supports(entry.scene()))MachineConstructionScene.render(g,left+175,top+44,ticks,entry.scene(),sceneYaw,scenePitch,constructionScene);
-                else if(entry.scene().equals("sword_shaping"))SwordShapingScene.render(g,left+175,top+44,ticks,sceneYaw,scenePitch);
+                else if(entry.scene().equals("sword_shaping"))figureTooltip=SwordShapingScene.render(g,left+175,top+44,ticks,sceneYaw,scenePitch,getChildAt(mouseX,mouseY).isPresent()?-1:mouseX,mouseY);
                 else if(entry.scene().equals("advanced_assembly_table"))AdvancedForgeScene.render(g,left+175,top+44,ticks,sceneYaw,scenePitch,constructionScene);
-                else DreamRitualScene.render(g,left+175,top+44,ticks,entry.scene().equals("resonance_ritual"),entry.scene().equals("affinity_ritual"),entry.scene().equals("corridor_ritual"),entry.scene().equals("cleansing_ritual"),entry.scene().equals("genesis_ritual"),entry.scene().equals("world_forming_ritual"),sceneYaw,scenePitch);
+                else figureTooltip=DreamRitualScene.render(g,left+175,top+44,ticks,entry.scene(),sceneYaw,scenePitch,getChildAt(mouseX,mouseY).isPresent()?-1:mouseX,mouseY);
             } else if(figure) {
                 var hover=figureRenderer.render(g,font,entry.figures().get(page-figureStart()),left+179,top+47,mouseX,mouseY);
                 if(!hover.item().isEmpty())hovered=hover.item();
@@ -435,10 +484,14 @@ public final class GuideBookScreen extends ResponsiveScreen {
     }
     @Override protected boolean mouseClickedContent(double mouseX,double mouseY,int button) {
         if(search.results())return super.mouseClickedContent(mouseX,mouseY,button);
+        if(button==0 && net.neoforged.fml.ModList.get().isLoaded("jei")){
+            var item=inlineIconAt(mouseX,mouseY);
+            if(!item.isEmpty() && com.mcmagic.omnira.compat.jei.OmniraJeiPlugin.openCrafting(item))return true;
+        }
         if(button==0&&scenePages()>0)for(int side=0;side<2;side++){
             if(GuideSpread.leaf(page,side)!=pages.size())continue;
             int x=left+(side==0?19:175);
-            if(mouseX>=x&&mouseX<x+124&&mouseY>=top+44&&mouseY<top+178){rotatingScene=true;return true;}
+            if(mouseX>=x&&mouseX<x+124&&mouseY>=top+44&&mouseY<top+178 && getChildAt(mouseX,mouseY).isEmpty()){rotatingScene=true;return true;}
         }
         if(button==0 && hasShiftDown() && entry!=null)for(int side=0;side<2;side++) {
             int leaf=GuideSpread.leaf(page,side),figure=leaf-figureStart();
@@ -491,16 +544,31 @@ public final class GuideBookScreen extends ResponsiveScreen {
         buttons();
     }
     private GuideContents.Introduction introduction() {return chapter==null?contents.introduction():chapter.introduction();}
-    private List<List<FormattedCharSequence>> introductionPages() {
-        var intro=introduction();var pages=textPages(intro.paragraphs(),intro.linesPerPage());
-        return pages.isEmpty()&&!intro.externalLinks().isEmpty()?List.of(List.of()):pages;
+    private GuideContents.Introduction cachedIntro;
+    private List<List<GuideInlineText.Line>> introPages=List.of();
+    private List<GuideInlineText.Line> captionLines=List.of();
+    private float captionScale;
+    private List<List<GuideInlineText.Line>> introductionPages() {
+        var intro=introduction();
+        if(cachedIntro!=intro){
+            cachedIntro=intro;
+            introPages=textPages(intro.paragraphs(),intro.linesPerPage());
+            if(introPages.isEmpty()&&!intro.externalLinks().isEmpty())introPages=List.of(List.of());
+            captionScale=1;
+            var caption=inlineText.layout.encode(intro.caption(),124);
+            var lines=GuideTextLayout.wrap(caption,124,inlineText.layout::measure);
+            while(lines.size()*11*captionScale>42 && captionScale>.5F){
+                captionScale-=.05F;
+                lines=GuideTextLayout.wrap(caption,(int)(124/captionScale),inlineText.layout::measure);
+            }
+            captionLines=lines.stream().map(l->inlineText.line(l,this::bookLine)).toList();
+        }
+        return introPages;
     }
-    private List<List<FormattedCharSequence>> textPages(List<String> paragraphs) {
-        return textPages(paragraphs,12);
-    }
-    private List<List<FormattedCharSequence>> textPages(List<String> paragraphs,int linesPerPage) {
-        return GuideTextLayout.paginate(paragraphs,124,linesPerPage,font::width).stream()
-                .map(lines->lines.stream().map(this::bookLine).toList()).toList();
+    private List<List<GuideInlineText.Line>> textPages(List<String> paragraphs,int linesPerPage) {
+        var encoded=paragraphs.stream().map(text->inlineText.layout.encode(text,124)).toList();
+        return GuideTextLayout.paginate(encoded,124,linesPerPage,inlineText.layout::measure).stream()
+                .map(lines->lines.stream().map(line->inlineText.line(line,this::bookLine)).toList()).toList();
     }
 
     private FormattedCharSequence bookLine(String line) {
@@ -540,17 +608,17 @@ public final class GuideBookScreen extends ResponsiveScreen {
                 g.blit(image,0,0,0,0,intro.imageWidth(),intro.imageHeight(),intro.imageWidth(),intro.imageHeight());
                 g.pose().popPose();
             }
-            float scale=1;
-            var lines=GuideTextLayout.wrap(intro.caption(),124,font::width);
-            while(lines.size()*11*scale>42 && scale>.5F) {
-                scale-=.05F;lines=GuideTextLayout.wrap(intro.caption(),(int)(124/scale),font::width);
+            g.pose().pushPose();g.pose().translate(left+pageX+63,top+150,0);g.pose().scale(captionScale,captionScale,1);
+            for(int i=0;i<captionLines.size();i++){
+                var line=captionLines.get(i);
+                int captionX=-line.width/2;
+                line.draw(g,captionX,i*11,0xFF405462);
+                if(line.hasIcons())visibleIconRows.add(new TextRow(line,left+pageX+63+captionX*captionScale,top+150+i*11*captionScale,captionScale));
             }
-            g.pose().pushPose();g.pose().translate(left+pageX+63,top+150,0);g.pose().scale(scale,scale,1);
-            for(int i=0;i<lines.size();i++) g.drawString(font,lines.get(i),-font.width(lines.get(i))/2,i*11,0xFF405462,false);
             g.pose().popPose();
         } else if(visibleIntro-1<extra.size()) {
             int y=top+47;
-            for(var line:extra.get(visibleIntro-1)) {g.drawString(font,line,left+pageX+4,y,0xFF353F44,false);y+=11;}
+            for(var line:extra.get(visibleIntro-1)) {drawProse(g,line,left+pageX+4,y);y+=11;}
         } else {
             int y=top+47,x=left+pageX+4;
             for(var row:sourcePages().get(visibleIntro-1-extra.size())) {

@@ -3,8 +3,7 @@
   "title": "Wonderland Poker Stand",
   "item": "omnira:wonderland_poker_stand",
   "text": [
-    "The stand illuminates its surroundings and keeps its chunk loaded. It cycles through hearts, spades, diamonds and clubs, benefiting players within that chunk.",
-    "Every 30 seconds, hearts grant Instant Health II and Saturation; spades grant one minute of Haste II and Speed II; diamonds grant one minute of Resistance II. Clubs grant an extra level of Looting and Fortune. Players still in the chunk when clubs end receive a random consumable memory cube.",
+    "The stand gives off light and keeps its chunk loaded. Suits cycle in the order shown and affect players in that chunk.",
     "Suits normally change every five minutes. Fleeting Woods doubles the pace; Stilled Wastes stops it; Recurrence Garden advances it at biome nodes. During a mire reversal, the previous suit briefly returns while the normal timer continues.",
     "Sneak-right-click with an empty main hand to reveal the enclosing chunk’s corner edges and walls. The display expands outward at 3 blocks per second, holds at the chunk boundary for 5 seconds, then fades. It is only a marker and does not block movement. The walls and corner edges fade gradually toward the top."
   ],
@@ -17,6 +16,104 @@
     {
       "target": "wonderland_poker_stand_relic",
       "label": "Wonderland Poker Stand"
+    }
+  ],
+  "figures": [
+    {
+      "id": "suit_effects_1",
+      "title": "Suit Cycle 1/3",
+      "icons": [],
+      "labels": [
+        {
+          "text": "Hearts",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 21,
+          "color": "#355E68"
+        },
+        {
+          "text": "Every 30s: Instant Health II and Saturation",
+          "x": 0,
+          "y": 22,
+          "width": 124,
+          "height": 34,
+          "color": "#405462"
+        },
+        {
+          "text": "Spades",
+          "x": 0,
+          "y": 58,
+          "width": 124,
+          "height": 21,
+          "color": "#355E68"
+        },
+        {
+          "text": "Every 30s: Haste II and Speed II for 1 min",
+          "x": 0,
+          "y": 80,
+          "width": 124,
+          "height": 34,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "y1": 56,
+          "x2": 123,
+          "y2": 56,
+          "color": "#B9AD91"
+        }
+      ]
+    },
+    {
+      "id": "suit_effects_2",
+      "title": "Suit Cycle 2/3",
+      "icons": [],
+      "labels": [
+        {
+          "text": "Diamonds",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 21,
+          "color": "#355E68"
+        },
+        {
+          "text": "Every 30s: Resistance II for 1 min",
+          "x": 0,
+          "y": 22,
+          "width": 124,
+          "height": 34,
+          "color": "#405462"
+        }
+      ],
+      "strokes": []
+    },
+    {
+      "id": "suit_effects_3",
+      "title": "Suit Cycle 3/3",
+      "icons": [],
+      "labels": [
+        {
+          "text": "Clubs",
+          "x": 0,
+          "y": 0,
+          "width": 124,
+          "height": 21,
+          "color": "#355E68"
+        },
+        {
+          "text": "While active: Looting and Fortune +1. When clubs end: players still in the chunk get a random consumable memory cube.",
+          "x": 0,
+          "y": 22,
+          "width": 124,
+          "height": 78,
+          "color": "#405462"
+        }
+      ],
+      "strokes": []
     }
   ]
 }

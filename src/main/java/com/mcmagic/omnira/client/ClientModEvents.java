@@ -428,6 +428,7 @@ public final class ClientModEvents {
         event.register(ModMenuTypes.ARCANE_ASSEMBLY_TABLE.get(),com.mcmagic.omnira.client.screen.ArcaneAssemblyTableScreen::new);
         event.register(ModMenuTypes.CRYSTAL_GRID.get(),com.mcmagic.omnira.client.screen.CrystalGridScreen::new);
         event.register(ModMenuTypes.ANALYSIS_ARTISAN_TABLE.get(), AnalysisArtisanTableScreen::new);
+        event.register(ModMenuTypes.PORTABLE_TABLE.get(), com.mcmagic.omnira.client.screen.PortableTableScreen::new);
         event.register(ModMenuTypes.CRYSTAL_PROCESSING_TABLE.get(), CrystalProcessingTableScreen::new);
     }
 

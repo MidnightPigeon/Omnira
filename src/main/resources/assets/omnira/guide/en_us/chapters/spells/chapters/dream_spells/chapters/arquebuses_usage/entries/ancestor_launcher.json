@@ -4,7 +4,7 @@
   "title": "Ancestor Launcher",
   "text": [
     "Fit the kit to an Arcane Arquebus at an Arcane Assembly Bench. Each gun accepts one kit and keeps its loaded spell crystal. Black and red markings appear along the barrel.",
-    "Spell power becomes an additive +50% of base power, and the base firing interval becomes 3 seconds. While held in the main hand, every 3 seconds it spends a fixed 10 mana to grant 5 seconds of invisibility. Insufficient mana stops renewal; putting the gun away lets the remaining invisibility expire naturally.",
+    "While held in the main hand, the gun spends a fixed 10 mana every 3s for 5s of invisibility. Low mana stops renewal. Putting it away lets the remaining invisibility expire.",
     "Projectiles burst on impact within 1.7 blocks, spreading their carried spell effects. Spell power increases damage, not this added radius. Allies and the shooter are not exempt; the direct target is not affected twice. Reflected projectiles retain the effect."
   ],
   "recipes": false,
@@ -12,6 +12,10 @@
     {
       "target": "ancestor_launcher_crafting",
       "label": "Forging Recipe"
+    },
+    {
+      "target": "arcane_arquebus",
+      "label": "Arcane Arquebus"
     }
   ]
 }

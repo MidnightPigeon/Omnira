@@ -1,0 +1,390 @@
+{
+  "id": "myriad_ecology",
+  "title": "生态构筑",
+  "item": "omnira:crystal_ball",
+  "text": [
+    "选择“生态”并投入一枚微核。开始构筑会清空球内所有方块，包括不可破坏方块。",
+    "从该微核对应的群系中等概率抽取一种。所有微核均跳过时空回廊。",
+    "球体下三分之一为平地或液面，中央生成宝藏水晶球，外壳为一层灵性水晶。原处群系保持不变。",
+    "景观按群系方块、液体与合适装饰构筑，不复制真实建筑或容器库存。宝藏来自关联群系/维度的战利品表。纯粹固化时空在景观中替换为激发态粗糙空间晶块。"
+  ],
+  "scene": "codex_ecology",
+  "recipes": false,
+  "links": [
+    {
+      "target": "myriad_codex",
+      "label": "万象原典"
+    },
+    {
+      "target": "myriad_heart",
+      "label": "万象之心"
+    }
+  ],
+  "figures": [
+    {
+      "id": "ecology_pools_1",
+      "title": "微核与群系 1/4",
+      "icons": [
+        {
+          "item": "omnira:earth_microcore",
+          "x": 0,
+          "y": 15,
+          "count": 1
+        },
+        {
+          "item": "omnira:water_microcore",
+          "x": 0,
+          "y": 94,
+          "count": 1
+        }
+      ],
+      "labels": [
+        {
+          "text": "微核",
+          "x": 18,
+          "y": 0,
+          "width": 30,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "候选群系",
+          "x": 49,
+          "y": 0,
+          "width": 74,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "地",
+          "x": 18,
+          "y": 15,
+          "width": 30,
+          "height": 77,
+          "color": "#405462"
+        },
+        {
+          "text": "温和主世界群系、深暗之域、溶洞、钟乳石洞穴",
+          "x": 49,
+          "y": 15,
+          "width": 74,
+          "height": 77,
+          "color": "#405462"
+        },
+        {
+          "text": "水",
+          "x": 18,
+          "y": 94,
+          "width": 30,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "海洋、寒冷群系",
+          "x": 49,
+          "y": 94,
+          "width": 74,
+          "height": 22,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 13,
+          "y2": 13,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 92,
+          "y2": 92,
+          "color": "#B9AD91"
+        }
+      ]
+    },
+    {
+      "id": "ecology_pools_2",
+      "title": "微核与群系 2/4",
+      "icons": [
+        {
+          "item": "omnira:fire_microcore",
+          "x": 0,
+          "y": 15,
+          "count": 1
+        },
+        {
+          "item": "omnira:air_microcore",
+          "x": 0,
+          "y": 72,
+          "count": 1
+        }
+      ],
+      "labels": [
+        {
+          "text": "微核",
+          "x": 18,
+          "y": 0,
+          "width": 30,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "候选群系",
+          "x": 49,
+          "y": 0,
+          "width": 74,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "火",
+          "x": 18,
+          "y": 15,
+          "width": 30,
+          "height": 55,
+          "color": "#405462"
+        },
+        {
+          "text": "炎热群系、除灵魂沙峡谷外的下界",
+          "x": 49,
+          "y": 15,
+          "width": 74,
+          "height": 55,
+          "color": "#405462"
+        },
+        {
+          "text": "风",
+          "x": 18,
+          "y": 72,
+          "width": 30,
+          "height": 33,
+          "color": "#405462"
+        },
+        {
+          "text": "末地群系、镜梦交界",
+          "x": 49,
+          "y": 72,
+          "width": 74,
+          "height": 33,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 13,
+          "y2": 13,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 70,
+          "y2": 70,
+          "color": "#B9AD91"
+        }
+      ]
+    },
+    {
+      "id": "ecology_pools_3",
+      "title": "微核与群系 3/4",
+      "icons": [
+        {
+          "item": "omnira:light_microcore",
+          "x": 0,
+          "y": 15,
+          "count": 1
+        },
+        {
+          "item": "omnira:dark_microcore",
+          "x": 0,
+          "y": 50,
+          "count": 1
+        },
+        {
+          "item": "omnira:time_microcore",
+          "x": 0,
+          "y": 96,
+          "count": 1
+        }
+      ],
+      "labels": [
+        {
+          "text": "微核",
+          "x": 18,
+          "y": 0,
+          "width": 30,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "候选群系",
+          "x": 49,
+          "y": 0,
+          "width": 74,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "光",
+          "x": 18,
+          "y": 15,
+          "width": 30,
+          "height": 33,
+          "color": "#405462"
+        },
+        {
+          "text": "光层、虚无星海",
+          "x": 49,
+          "y": 15,
+          "width": 74,
+          "height": 33,
+          "color": "#405462"
+        },
+        {
+          "text": "暗",
+          "x": 18,
+          "y": 50,
+          "width": 30,
+          "height": 44,
+          "color": "#405462"
+        },
+        {
+          "text": "暗层、回溯湿地",
+          "x": 49,
+          "y": 50,
+          "width": 74,
+          "height": 44,
+          "color": "#405462"
+        },
+        {
+          "text": "时间",
+          "x": 18,
+          "y": 96,
+          "width": 30,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "其余时间群系",
+          "x": 49,
+          "y": 96,
+          "width": 74,
+          "height": 22,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 13,
+          "y2": 13,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 48,
+          "y2": 48,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 94,
+          "y2": 94,
+          "color": "#B9AD91"
+        }
+      ]
+    },
+    {
+      "id": "ecology_pools_4",
+      "title": "微核与群系 4/4",
+      "icons": [
+        {
+          "item": "omnira:space_microcore",
+          "x": 0,
+          "y": 15,
+          "count": 1
+        },
+        {
+          "item": "omnira:omni_microcore",
+          "x": 0,
+          "y": 39,
+          "count": 1
+        }
+      ],
+      "labels": [
+        {
+          "text": "微核",
+          "x": 18,
+          "y": 0,
+          "width": 30,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "候选群系",
+          "x": 49,
+          "y": 0,
+          "width": 74,
+          "height": 11,
+          "color": "#355E68"
+        },
+        {
+          "text": "空间",
+          "x": 18,
+          "y": 15,
+          "width": 30,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "其余空间群系",
+          "x": 49,
+          "y": 15,
+          "width": 74,
+          "height": 22,
+          "color": "#405462"
+        },
+        {
+          "text": "万象",
+          "x": 18,
+          "y": 39,
+          "width": 30,
+          "height": 55,
+          "color": "#405462"
+        },
+        {
+          "text": "所有已注册群系，含其他模组",
+          "x": 49,
+          "y": 39,
+          "width": 74,
+          "height": 55,
+          "color": "#405462"
+        }
+      ],
+      "strokes": [
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 13,
+          "y2": 13,
+          "color": "#B9AD91"
+        },
+        {
+          "x1": 0,
+          "x2": 123,
+          "y1": 37,
+          "y2": 37,
+          "color": "#B9AD91"
+        }
+      ]
+    }
+  ]
+}

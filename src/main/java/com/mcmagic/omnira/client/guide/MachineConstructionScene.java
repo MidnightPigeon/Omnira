@@ -1,19 +1,20 @@
 package com.mcmagic.omnira.client.guide;
 
-import com.mcmagic.omnira.alchemy.ReactionPoolStructure;
-import com.mcmagic.omnira.registry.*;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.world.level.block.Blocks;
 
 /** Construction blocks come from formation rules, never from an independently authored picture. */
 public final class MachineConstructionScene {
     public static boolean supports(String scene){return scene.equals("advanced_crystal_aggregation_ring")||scene.equals("large_alchemical_reaction_pool")||scene.equals("alchemical_catalysis_chamber")||scene.equals("spacetime_engine");}
     public static void render(GuiGraphics g,int x,int y,int ticks,String scene,float yaw,float pitch,boolean construction){
+        if(construction){
+            ConstructionPreview.draw(g,x,y,ticks,scene,yaw,pitch,-1,-1);
+            return;
+        }
         var mc=Minecraft.getInstance();var buffers=mc.renderBuffers().bufferSource();var pose=g.pose();
         net.minecraft.client.renderer.MultiBufferSource layers=type->buffers.getBuffer(
             type==net.minecraft.client.renderer.Sheets.translucentCullBlockSheet()||type==net.minecraft.client.renderer.Sheets.translucentItemSheet()
@@ -25,38 +26,16 @@ public final class MachineConstructionScene {
         boolean chamber=scene.equals("alchemical_catalysis_chamber");
         boolean engine=scene.equals("spacetime_engine");
         if(chamber)pose.translate(0,-.4,0);
-        if(!construction){
-            pose.pushPose();pose.translate(-.5,pool||chamber||engine?0:-.5,-.5);
-            if(engine)com.mcmagic.omnira.client.SpacetimeEngineClient.draw(null,ticks,pose,layers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
-            else if(chamber)com.mcmagic.omnira.client.CatalysisClient.draw(null,ticks,pose,layers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
-            else if(pool)com.mcmagic.omnira.client.ReactionPoolClient.renderPreview(ticks,pose,layers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
-            else com.mcmagic.omnira.client.AggregationClient.render(null,pose,layers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
-            pose.popPose();buffers.endBatch();pose.popPose();RenderSystem.disableDepthTest();return;
-        }
-        int count=engine?10:chamber?3:pool?18:9;
-        for(int part=0;part<count;part++){
-            var block=engine?com.mcmagic.omnira.engine.SpacetimeEngineStructure.required(part):chamber?com.mcmagic.omnira.alchemy.catalysis.CatalysisStructure.required(part):pool?ReactionPoolStructure.required(part):ringBlock(part,ticks);
-            if(block==Blocks.AIR)continue;
-            // SOUTH leaves the authored local model unrotated, for both raw and formed views.
-            var offset=engine?com.mcmagic.omnira.engine.SpacetimeEngineBlock.offset(part)
-                    :chamber?new net.minecraft.core.BlockPos(0,part,0)
-                    :pool?com.mcmagic.omnira.alchemy.ReactionPoolBlock.offset(net.minecraft.core.Direction.SOUTH,part)
-                    :com.mcmagic.omnira.aggregation.AggregationLayout.part(net.minecraft.core.BlockPos.ZERO,net.minecraft.core.Direction.SOUTH,part);
-            var state=block.defaultBlockState();
-            if(engine){
-                int side=com.mcmagic.omnira.engine.SpacetimeEngineBlock.side(part);
-                if(side>=0)state=state.setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING,com.mcmagic.omnira.engine.SpacetimeEngineBlock.OUTPUTS[side]);}
-            pose.pushPose();pose.translate(offset.getX()-.5,offset.getY(),offset.getZ()-.5);
-            mc.getBlockRenderer().renderSingleBlock(state,pose,layers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
-            pose.popPose();
-        }
-        buffers.endBatch();pose.popPose();RenderSystem.disableDepthTest();
+        pose.pushPose();pose.translate(-.5,pool||chamber||engine?0:-.5,-.5);
+        drawAssembled(scene,ticks,pose,layers);
+        pose.popPose();buffers.endBatch();pose.popPose();RenderSystem.disableDepthTest();
     }
-    private static net.minecraft.world.level.block.Block ringBlock(int part,int ticks){
-        if(part==4)return ModBlocks.CRYSTAL_PROCESSING_TABLE.get();
-        if(part==1||part==7)return ticks/80%2==0?DreamContent.EXCITED_SPATIAL_CRYSTAL.get():com.mcmagic.omnira.aggregation.AggregationContent.SPATIAL_BLOCK.get();
-        if(part==3||part==5)return ticks/80%2==0?DreamContent.LIVING_TEMPORAL_SILT.get():TimeNatureContent.LIVING_SILT.get();
-        return ModBlocks.INFUSED_CRYSTAL_CASING.get();
+    static void drawAssembled(String scene,double ticks,com.mojang.blaze3d.vertex.PoseStack pose,net.minecraft.client.renderer.MultiBufferSource layers){
+        if(scene.equals("advanced_assembly_table"))com.mcmagic.omnira.client.renderer.AdvancedForgeRenderer.renderLocal(null,0,ticks,pose,layers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+        else if(scene.equals("spacetime_engine"))com.mcmagic.omnira.client.SpacetimeEngineClient.draw(null,ticks,pose,layers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+        else if(scene.equals("alchemical_catalysis_chamber"))com.mcmagic.omnira.client.CatalysisClient.draw(null,ticks,pose,layers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+        else if(scene.equals("large_alchemical_reaction_pool"))com.mcmagic.omnira.client.ReactionPoolClient.renderPreview(ticks,pose,layers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
+        else com.mcmagic.omnira.client.AggregationClient.render(null,pose,layers,LightTexture.FULL_BRIGHT,OverlayTexture.NO_OVERLAY);
     }
     private MachineConstructionScene(){}
 }

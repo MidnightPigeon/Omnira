@@ -1,0 +1,27 @@
+{
+  "type": "omnira:assembly",
+  "slots": [
+    {
+      "item": "omnira:infused_spiritual_crystal"
+    },
+    {
+      "item": "omnira:infused_spiritual_crystal"
+    },
+    {
+      "item": "omnira:infused_spiritual_crystal"
+    },
+    {
+      "item": "omnira:infused_spiritual_crystal"
+    },
+    [],
+    [],
+    {
+      "item": "omnira:crystal_processing_table"
+    }
+  ],
+  "result": {
+    "id": "omnira:portable_crystal_processing_table",
+    "count": 1
+  },
+  "outer_shapeless": true
+}

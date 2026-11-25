@@ -76,17 +76,18 @@ public class CrystalProcessingTableScreen extends ResponsiveContainerScreen<Crys
 
     @Override
     protected List<Component> getTooltipFromContainerItem(ItemStack stack) {
-        List<Component> lines = new ArrayList<>(super.getTooltipFromContainerItem(stack));
-        if (stack.getItem() instanceof PrimaryMicrocoreItem && this.hoveredSlot != null) {
-            String hiddenKey = this.hoveredSlot == this.menu.getSlot(CrystalProcessingTableMenu.TARGET_CORE_SLOT)
-                    ? PrimaryMicrocoreItem.SHAPE_TOOLTIP
-                    : this.hoveredSlot == this.menu.getSlot(CrystalProcessingTableMenu.SHAPE_CORE_SLOT)
-                    ? PrimaryMicrocoreItem.TARGET_TOOLTIP : null;
-            if (hiddenKey != null) {
-                lines.removeIf(line -> line.getContents() instanceof TranslatableContents text
-                        && text.getKey().equals(hiddenKey));
-            }
-        }
+        return roleTooltip(super.getTooltipFromContainerItem(stack), stack, hoveredSlot, menu);
+    }
+
+    static List<Component> roleTooltip(List<Component> original, ItemStack stack,
+            net.minecraft.world.inventory.Slot hovered, net.minecraft.world.inventory.AbstractContainerMenu menu) {
+        if (!(stack.getItem() instanceof PrimaryMicrocoreItem)) return original;
+        String hiddenKey;
+        if (hovered == menu.getSlot(0)) hiddenKey = PrimaryMicrocoreItem.SHAPE_TOOLTIP;
+        else if (hovered == menu.getSlot(1)) hiddenKey = PrimaryMicrocoreItem.TARGET_TOOLTIP;
+        else return original;
+        List<Component> lines = new ArrayList<>(original);
+        lines.removeIf(line -> line.getContents() instanceof TranslatableContents text && text.getKey().equals(hiddenKey));
         return lines;
     }
 

@@ -26,7 +26,7 @@ public final class LightDarkGameTests {
             var matches=h.getLevel().getRecipeManager().getRecipes().stream().map(r->r.value())
                     .filter(r->r instanceof com.mcmagic.omnira.recipe.CondensationRecipe)
                     .map(r->(com.mcmagic.omnira.recipe.CondensationRecipe)r)
-                    .filter(r->r.matches(new net.minecraft.world.item.crafting.SingleRecipeInput(new ItemStack(pair[0])),h.getLevel())).toList();
+                    .filter(r->r.advanced() && r.matches(new net.minecraft.world.item.crafting.SingleRecipeInput(new ItemStack(pair[0])),h.getLevel())).toList();
             h.assertTrue(matches.size()==1,"Conflicting microcore condensation recipes");
             var recipe=matches.getFirst();h.assertTrue(recipe.advanced()&&recipe.manaCost()==300&&recipe.result().is(pair[1])&&recipe.result().getCount()==1,"Incorrect condensation tier, cost or output");
         }

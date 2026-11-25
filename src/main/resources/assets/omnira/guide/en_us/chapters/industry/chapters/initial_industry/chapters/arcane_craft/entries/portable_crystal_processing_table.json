@@ -1,0 +1,21 @@
+{
+  "id": "portable_crystal_processing_table",
+  "item": "omnira:portable_crystal_processing_table",
+  "title": "Portable Crystal Processing Table",
+  "text": [
+    "Use the table to open it. The left slot sets the target and the right slot sets the shape. Place an element above, a modifier below, and a Spiritual Crystal in the center.",
+    "With the table in your main hand, sneak and use it once. Keep holding it for three seconds as the components converge. The finished low-tier spell crystal drops from the table. Switching away interrupts assembly and keeps the materials.",
+    "Assembly costs 20 base mana per spell component, paid on completion. The finished crystal costs the same to cast as one written at a regular Crystal Processing Table."
+  ],
+  "recipes": true,
+  "links": [
+    {
+      "target": "crystal_processing_table",
+      "label": "Crystal Processing Table"
+    },
+    {
+      "target": "spell_target_shape_basics",
+      "label": "Choosing Targets and Shapes"
+    }
+  ]
+}

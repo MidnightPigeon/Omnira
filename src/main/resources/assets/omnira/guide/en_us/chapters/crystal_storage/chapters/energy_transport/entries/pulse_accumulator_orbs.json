@@ -5,10 +5,10 @@
   "icon": "omnira:resonance_core",
   "recipes": false,
   "text": [
-    "Both orbs have a white base and support all six mounting directions. They distribute potential, not stored fuel: 8192 MPU throughput, with one slot for Stacking or Infused Stacking.",
+    "Accumulator Orbs mount in any direction and distribute power without storing it. Base throughput is 8192 MPU. The single upgrade slot accepts Stacking or Infused Stacking.",
     "The base only accepts pulses, stress or FE. Other faces accept only pulses and output all three. FE converts at its actual rate per second. Shaft inputs require at least 16 rpm; outputs are fixed at 16 rpm. Shafts must be perpendicular; unloaded spinning costs nothing. All outputs share one MPU budget, shown in gold. Spacetime Ports extend these faces. Orbs do not charge nearby players.",
     "Set a Resonant Accumulator Orb's frequency with two item markers. Same-frequency orbs in one dimension are one node, sharing potential and one upgrade slot accessible from any orb. Merging retains the strongest capacity upgrade and returns extras. Stabilization shares the group across dimensions without adding or reducing throughput capacity.",
-    "Cyan is this node's unused quota; gold is working potential passing through it. The bar limit is throughput capacity. Idle branches share quotas; active loads can borrow idle shares. Serial nodes may carry the same working flow: summing their gold readings does not measure total network consumption."
+    "Cyan shows available capacity, gold shows power in use, and the full bar marks the throughput limit. Idle branches split the available capacity evenly. Active branches can borrow unused capacity. The same flow passes through each node in series, so adding their gold readings counts it more than once."
   ],
   "links": [
     {

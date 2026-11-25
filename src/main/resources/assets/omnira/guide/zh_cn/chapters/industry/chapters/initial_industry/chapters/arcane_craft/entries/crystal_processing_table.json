@@ -12,6 +12,10 @@
     {
       "target": "spell_target_shape_basics",
       "label": "目标与形态的选择"
+    },
+    {
+      "target": "portable_crystal_processing_table",
+      "label": "便携水晶加工台"
     }
   ]
 }
