@@ -14,6 +14,8 @@ public final class ResonanceCoreBlockEntity extends BlockEntity {
     public BlockPos peer;
     public java.util.UUID peerIdentity;
     public boolean output;
+    public net.neoforged.neoforge.fluids.FluidStack pendingDelivery=net.neoforged.neoforge.fluids.FluidStack.EMPTY;
+    public void retainDelivery(net.neoforged.neoforge.fluids.FluidStack fluid){pendingDelivery=fluid;setChanged();}
     public long selectedUntil;
     private boolean relocated;
     public ResonanceCoreBlockEntity(BlockPos pos,BlockState state){super(ModBlockEntityTypes.RESONANCE_CORE.get(),pos,state);}
@@ -32,11 +34,70 @@ public final class ResonanceCoreBlockEntity extends BlockEntity {
         if(chamber!=null)return chamber.complete()?chamber.nodeFluids:null;
         return level.getCapability(Capabilities.FluidHandler.BLOCK,worldPosition.below(),Direction.UP);
     }
-    public int kind(){return level!=null && level.getBlockEntity(worldPosition.below()) instanceof VoidCrystalBallBlockEntity?5:level!=null && level.getBlockEntity(worldPosition.below()) instanceof com.mcmagic.omnira.shop.MarisaOrbBlockEntity?4:fluids()!=null?3:items()!=null?2:0;}
+    public static final int MIXED=6;
+    private static final Direction[] FACES={Direction.UP,null,Direction.DOWN,Direction.NORTH,Direction.SOUTH,Direction.WEST,Direction.EAST};
+    public BlockPos menuPosition(){
+        return com.mcmagic.omnira.storage.StorageContainerIdentity.menuPosition(level,worldPosition.below());
+    }
+    public int kind(){
+        if(level==null || !level.hasChunkAt(worldPosition.below()))return 0;
+        var pos=menuPosition();
+        var target=level.getBlockEntity(pos);
+        if(target==null || com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(target))return 0;
+        if(target instanceof VoidCrystalBallBlockEntity)return 5;
+        if(target instanceof com.mcmagic.omnira.shop.MarisaOrbBlockEntity)return 4;
+        if(target instanceof LiquidCrystalBallBlockEntity)return 3;
+        com.mcmagic.omnira.compat.SophisticatedBackpackMenus.prepare(target);
+        boolean item=hasItemCapacity(items());
+        if(!item && target instanceof net.minecraft.world.Container container)item=hasInventorySpace(container);
+        if(!item && target instanceof AssemblyAccess assembly)item=hasInventorySpace(assembly.assembly());
+        if(!item && target instanceof ManaEngineAccess engine)item=hasInventorySpace(engine.engineState().inventory);
+        boolean fluid=hasFluidCapacity(fluids());
+        if(target instanceof com.mcmagic.omnira.alchemy.ReactionPoolBlockEntity pool){
+            item|=hasItemCapacity(pool.nodeItems);
+            fluid|=hasFluidCapacity(pool.nodeFluids);
+        }
+        boolean energy=false;
+        var state=target.getBlockState();
+        for(var face:FACES){
+            if(item && fluid)return MIXED;
+            if(!item)item=hasItemCapacity(Capabilities.ItemHandler.BLOCK.getCapability(level,pos,state,target,face));
+            if(!fluid)fluid=hasFluidCapacity(Capabilities.FluidHandler.BLOCK.getCapability(level,pos,state,target,face));
+            if(!energy){
+                var handler=Capabilities.EnergyStorage.BLOCK.getCapability(level,pos,state,target,face);
+                energy=handler!=null && handler.getMaxEnergyStored()>0;
+            }
+            if((item && fluid) || (energy && (item || fluid)))return MIXED;
+        }
+        if(fluid)return 3;
+        if(item)return 2;
+        return energy || com.mcmagic.omnira.storage.RemoteContainerAccess.provider(level,pos)!=null?7:0;
+    }
+    private static boolean hasInventorySpace(net.minecraft.world.Container inventory){
+        return inventory!=null && inventory.getContainerSize()>0 && inventory.getMaxStackSize()>0;
+    }
+    private static boolean hasItemCapacity(IItemHandler handler){
+        if(handler==null)return false;
+        for(int slot=0,slots=handler.getSlots();slot<slots;slot++){
+            if(handler.getSlotLimit(slot)>0)return true;
+        }
+        return false;
+    }
+    private static boolean hasFluidCapacity(IFluidHandler handler){
+        if(handler==null)return false;
+        for(int tank=0,tanks=handler.getTanks();tank<tanks;tank++){
+            if(handler.getTankCapacity(tank)>0)return true;
+        }
+        return false;
+    }
     public boolean permits(net.minecraft.world.entity.player.Player player) {
-        return level!=null && !com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(level.getBlockEntity(worldPosition.below())) && player.getUUID().equals(owner) && level.mayInteract(player,worldPosition)
+        if(level==null)return false;
+        var pos=menuPosition();var target=level.getBlockEntity(pos);
+        return !com.mcmagic.omnira.compat.LootrOrbs.blocksAutomation(target) && player.getUUID().equals(owner) && level.mayInteract(player,worldPosition)
                 && level.mayInteract(player,worldPosition.below())
-                && (!(level.getBlockEntity(worldPosition.below()) instanceof net.minecraft.world.level.block.entity.BaseContainerBlockEntity container) || container.canOpen(player));
+                && (pos.equals(worldPosition.below())||level.mayInteract(player,pos))
+                && com.mcmagic.omnira.compat.MekanismRemoteMenus.permits(player,target)
+                && (!(target instanceof net.minecraft.world.level.block.entity.BaseContainerBlockEntity container) || container.canOpen(player));
     }
     public void refresh() {
         if(level==null || level.isClientSide)return;
@@ -59,11 +120,13 @@ public final class ResonanceCoreBlockEntity extends BlockEntity {
     }
     @Override protected void saveAdditional(CompoundTag tag,HolderLookup.Provider registries) {
         super.saveAdditional(tag,registries);tag.putUUID("Identity",identity);tag.putLong("NodeAnchor",worldPosition.asLong());
+        com.mcmagic.omnira.storage.FluidDelivery.write(tag,registries,pendingDelivery);
         if(owner!=null)tag.putUUID("Owner",owner);if(terminal!=null)tag.putUUID("Terminal",terminal);
         if(peer!=null&&peerIdentity!=null){tag.putLong("Peer",peer.asLong());tag.putUUID("PeerIdentity",peerIdentity);tag.putBoolean("Output",output);}
     }
     @Override protected void loadAdditional(CompoundTag tag,HolderLookup.Provider registries) {
         selectedUntil=tag.getLong("SelectedUntil");
+        pendingDelivery=com.mcmagic.omnira.storage.FluidDelivery.read(tag,registries);
         super.loadAdditional(tag,registries);identity=tag.hasUUID("Identity")?tag.getUUID("Identity"):java.util.UUID.randomUUID();
         owner=tag.hasUUID("Owner")?tag.getUUID("Owner"):null;terminal=tag.hasUUID("Terminal")?tag.getUUID("Terminal"):null;
         peer=tag.hasUUID("PeerIdentity")?BlockPos.of(tag.getLong("Peer")):null;

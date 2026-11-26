@@ -48,18 +48,18 @@ public final class PreparedSpellLoot extends LootModifier {
     }
 
     @Override protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> loot, LootContext context) {
-        replace(loot, context.getQueriedLootTableId(), context.getRandom());
+        replace(loot, context.getQueriedLootTableId(), context.getRandom(), FillerLootSource.take(context));
         return loot;
     }
 
-    public void replace(List<ItemStack> loot, ResourceLocation table, RandomSource random) {
+    public void replace(List<ItemStack> loot, ResourceLocation table, RandomSource random, Set<ItemStack> filler) {
         var allowed = candidates.get(table);
         if (allowed == null || allowed.isEmpty()) return;
         var slots = new java.util.ArrayList<Integer>();
         for (int i = 0; i < loot.size(); i++) {
             var stack = loot.get(i);
             // Never replace enchanted, named or otherwise customized rewards with the same item ID.
-            if (!stack.isEmpty() && stack.getComponentsPatch().isEmpty()
+            if (filler.contains(stack) && !stack.isEmpty() && stack.getComponentsPatch().isEmpty()
                     && allowed.contains(BuiltInRegistries.ITEM.getKey(stack.getItem()))) slots.add(i);
         }
         // No fallback insertion: a treasure with no ordinary filler retains all of its rewards.

@@ -12,6 +12,38 @@ import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("omnira_tuning_container")
 @PrefixGameTestTemplate(false)
 public final class TuningContainerGameTests {
+    @GameTest(template="spell_arena") public static void mixedNodesSendEachAcceptedResource(GameTestHelper h){
+        var level=h.getLevel();
+        var a=new BlockPos(3,3,4);var b=a.east(5);
+        for(var center:java.util.List.of(a,b)){
+            h.assertTrue(com.mcmagic.omnira.alchemy.ReactionPoolBlock.place(level,h.absolutePos(center),Direction.NORTH),"Pool placement failed");
+        }
+        var from=node(h,a.above(2));var to=node(h,b.above(2));
+        var source=com.mcmagic.omnira.alchemy.ReactionPoolBlock.controller(level,h.absolutePos(a));
+        var target=com.mcmagic.omnira.alchemy.ReactionPoolBlock.controller(level,h.absolutePos(b));
+        source.items.setStackInSlot(0,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.IRON_INGOT,4));
+        source.fluids.fill(new net.neoforged.neoforge.fluids.FluidStack(net.minecraft.world.level.material.Fluids.WATER,2000),
+                net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+        h.assertTrue(NodeTransport.pair(from,to),"Mixed pair rejected");
+        NodeTransport.tick(from);
+        h.assertTrue(target.items.getStackInSlot(0).getCount()==1&&target.fluids.total()==500,"Mixed receiver must accept both in one cycle");
+        NodeTransport.unpair(from);
+        var c=b.south(5);
+        h.setBlock(c,Blocks.BARREL);
+        var itemOnly=node(h,c.above());
+        h.assertTrue(NodeTransport.pair(from,itemOnly),"Barrel pair rejected");
+        NodeTransport.tick(from);
+        h.assertTrue(((net.minecraft.world.Container)h.getBlockEntity(c)).getItem(0).getCount()==1&&source.fluids.total()==1500,"Barrel should receive only items");
+        NodeTransport.unpair(from);
+        var d=a.south(5);
+        h.setBlock(d,ModBlocks.LIQUID_CRYSTAL_BALL.get());
+        var liquidOnly=node(h,d.above());
+        h.assertTrue(NodeTransport.pair(from,liquidOnly),"Liquid pair rejected");
+        NodeTransport.tick(from);
+        h.assertTrue(source.items.getStackInSlot(0).getCount()==2&&source.fluids.total()==1000
+                &&((com.mcmagic.omnira.block.entity.LiquidCrystalBallBlockEntity)h.getBlockEntity(d)).tank.getFluidAmount()==500,"Liquid receiver should receive only fluid");
+        NodeTransport.unpair(from);h.succeed();
+    }
     @GameTest(template="spell_arena") public static void tuningItemsIgnoreNearbyUpgradeFilters(GameTestHelper h){
         var a=new BlockPos(3,3,4);var b=a.east(3);
         h.setBlock(a.below(),CrystalStorageContent.ITEM_ORB.get());h.setBlock(b.below(),CrystalStorageContent.ITEM_ORB.get());
@@ -22,9 +54,10 @@ public final class TuningContainerGameTests {
         target.upgrades.setStackInSlot(0,new net.minecraft.world.item.ItemStack(com.mcmagic.omnira.registry.ModItems.INTAKE_UPGRADE.get()));
         var settings=new net.minecraft.nbt.CompoundTag();settings.putBoolean("Whitelist",true);settings.putInt("Directions",0);
         source.upgrades.update(0,settings.copy());target.upgrades.update(0,settings.copy());
+        target.setItem(2,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.DIAMOND,63));
         source.setItem(0,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.DIAMOND,2));
         NodeTransport.pair(first,second);NodeTransport.tick(first);
-        h.assertTrue(source.getItem(0).getCount()==1&&target.getItem(0).getCount()==1,"Nearby upgrade settings filtered tuning items");
+        h.assertTrue(source.getItem(0).getCount()==1&&target.getItem(2).getCount()==64&&target.getItem(0).isEmpty(),"Expected tuning input to stack in the reserved slot");
         NodeTransport.unpair(first);h.succeed();
     }
     @GameTest(template="spell_arena") public static void transportSkipsBlockedItemsAndIgnoresUpgradeFilters(GameTestHelper h){

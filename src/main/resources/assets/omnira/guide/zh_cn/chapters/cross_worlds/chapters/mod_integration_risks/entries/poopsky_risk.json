@@ -1,0 +1,10 @@
+{
+  "id": "poopsky_risk",
+  "title": "空中厕所（PoopSky）",
+  "item": "omnira:liquid_crystal_ball",
+  "recipes": false,
+  "text": [
+    "同时安装空中厕所后，战利品液晶球里可能会出现一些难以直视的液体。由此造成的精神打击，后果自负。"
+  ],
+  "links": []
+}

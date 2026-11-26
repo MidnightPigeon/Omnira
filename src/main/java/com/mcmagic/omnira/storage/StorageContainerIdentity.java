@@ -26,13 +26,18 @@ public final class StorageContainerIdentity {
         var fluids=a.fluids();return fluids!=null&&fluids==b.fluids();
     }
     public static String key(ResonanceCoreBlockEntity node){return key(node.getLevel(),node.getBlockPos().below());}
+    /** The native menu and storage identity of an assembled machine belong to its controller. */
+    public static BlockPos menuPosition(Level level,BlockPos pos){
+        var state=level.getBlockState(pos);
+        if(!(state.getBlock() instanceof MenuControllerPart machine))return pos;
+        var root=machine.menuController(pos,state);
+        return level.hasChunkAt(root)&&level.getBlockState(root).is(state.getBlock())?root:pos;
+    }
     public static String key(Level level,BlockPos pos){
         if(level==null||!level.hasChunkAt(pos))return null;
         var state=level.getBlockState(pos);var anchor=pos;
-        if(state.getBlock() instanceof com.mcmagic.omnira.alchemy.catalysis.CatalysisBlock)
-            return level.dimension().location()+"@"+com.mcmagic.omnira.alchemy.catalysis.CatalysisBlock.master(pos,state).asLong();
-        if(state.getBlock() instanceof com.mcmagic.omnira.alchemy.ReactionPoolBlock){
-            anchor=com.mcmagic.omnira.alchemy.ReactionPoolBlock.master(pos,state);
+        if(state.getBlock() instanceof MenuControllerPart){
+            anchor=menuPosition(level,pos);
         }else if(state.getBlock() instanceof ChestBlock&&state.getValue(ChestBlock.TYPE)!=ChestType.SINGLE){
             var other=pos.relative(ChestBlock.getConnectedDirection(state));
             if(level.hasChunkAt(other)){

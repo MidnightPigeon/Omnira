@@ -14,7 +14,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 public final class DeflectionMotion {
     @SubscribeEvent public static void tick(EntityTickEvent.Post event){sample(event.getEntity());}
     public static void sample(Entity entity){
-        if(!(entity.level() instanceof ServerLevel level)||!entity.isAlive()||entity.isSpectator())return;
+        if(com.mcmagic.omnira.space.sea.SpatialImmunity.riftNative(entity)||!(entity.level() instanceof ServerLevel level)||!entity.isAlive()||entity.isSpectator())return;
         var data=entity.getPersistentData();
         int count=DeflectionSources.coverage(level,entity);
         boolean pending=data.getFloat("DeflectionPending")!=0;
@@ -67,10 +67,10 @@ public final class DeflectionMotion {
         data.remove("DeflectionInside");data.remove("DeflectionCurveSign");data.remove("DeflectionRemainder");
     }
     public static int coverage(ServerLevel level,Entity entity){
-        return com.mcmagic.omnira.space.anchor.StabilityField.contains(entity)?0:DeflectionSources.coverage(level,entity);
+        return com.mcmagic.omnira.space.sea.SpatialImmunity.riftNative(entity)||com.mcmagic.omnira.space.anchor.StabilityField.contains(entity)?0:DeflectionSources.coverage(level,entity);
     }
     public static void turn(Entity entity,float degrees){
-        if(com.mcmagic.omnira.space.anchor.StabilityField.contains(entity))return;
+        if(com.mcmagic.omnira.space.sea.SpatialImmunity.riftNative(entity)||com.mcmagic.omnira.space.anchor.StabilityField.contains(entity))return;
         var data=entity.getPersistentData();
         // A floor contact can occur before this tick's post-movement event, outside every cluster.
         // Preserve movement on the contact tick without sampling the approach in empty space.
@@ -89,7 +89,7 @@ public final class DeflectionMotion {
         float step=Math.clamp(pending,-1,1);data.putFloat("DeflectionPending",pending-step);apply(entity,step);
     }
     private static void apply(Entity entity,float degrees){
-        if(com.mcmagic.omnira.space.anchor.StabilityField.contains(entity))return;
+        if(com.mcmagic.omnira.space.sea.SpatialImmunity.riftNative(entity)||com.mcmagic.omnira.space.anchor.StabilityField.contains(entity))return;
         entity.setYRot(entity.getYRot()+degrees);
         if(entity instanceof LivingEntity living){living.setYHeadRot(living.getYHeadRot()+degrees);living.yBodyRot+=degrees;}
         if(entity instanceof ServerPlayer player)net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(player,new DeflectionPayload(degrees));

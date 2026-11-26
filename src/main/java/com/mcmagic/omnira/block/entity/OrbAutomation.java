@@ -2,6 +2,7 @@ package com.mcmagic.omnira.block.entity;
 
 import com.mcmagic.omnira.item.OrbUpgradeItem.Kind;
 import com.mcmagic.omnira.storage.LogisticsRates;
+import com.mcmagic.omnira.storage.FluidDelivery;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
@@ -70,14 +71,19 @@ public final class OrbAutomation {
                 var other=ball.getLevel().getCapability(Capabilities.FluidHandler.BLOCK,pos,direction.getOpposite());
                 if(other==null)continue;
                 var source=input?other:liquid.transportFluids;var target=input?liquid.transportFluids:other;
-                for(int tank=0;tank<source.getTanks();tank++) {
+                var registries=ball.getLevel().registryAccess();
+                var pending=FluidDelivery.read(tag,registries);
+                java.util.function.Consumer<FluidStack> retain=f->{
+                    FluidDelivery.write(tag,registries,f);
+                    ball.upgrades.update(slot,tag);
+                };
+                if(!pending.isEmpty()){
+                    if(!ball.upgrades.matches(slot,ItemStack.EMPTY,pending))return 0;
+                    transferred=FluidDelivery.retry(target,pending,remaining,retain);
+                }else for(int tank=0;tank<source.getTanks();tank++) {
                     var fluid=source.getFluidInTank(tank);if(fluid.isEmpty() || !ball.upgrades.matches(slot,ItemStack.EMPTY,fluid))continue;
-                    var offered=source.drain(fluid.copyWithAmount(remaining),FluidAction.SIMULATE);
-                    int accepted=target.fill(offered,FluidAction.SIMULATE);if(accepted<=0)continue;
-                    var taken=source.drain(offered.copyWithAmount(accepted),FluidAction.EXECUTE);
-                    int filled=target.fill(taken,FluidAction.EXECUTE);
-                    if(filled<taken.getAmount())source.fill(taken.copyWithAmount(taken.getAmount()-filled),FluidAction.EXECUTE);
-                    transferred=filled;break;
+                    transferred=FluidDelivery.move(source,target,fluid.copyWithAmount(remaining),retain);
+                    if(transferred>0||FluidDelivery.hasPending(tag))break;
                 }
             } else {
                 var other=ball.getLevel().getCapability(Capabilities.ItemHandler.BLOCK,pos,direction.getOpposite());if(other==null)continue;

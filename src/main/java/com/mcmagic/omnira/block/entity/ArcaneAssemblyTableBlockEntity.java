@@ -62,8 +62,7 @@ public final class ArcaneAssemblyTableBlockEntity extends CrystalProcessingTable
     }
     @Override public boolean stillValid(net.minecraft.world.entity.player.Player player) {
         if(host==null) return super.stillValid(player);
-        return level!=null && level.getBlockEntity(worldPosition)==host && !host.isRemoved()
-                && player.distanceToSqr(worldPosition.getCenter())<=64;
+        return !host.isRemoved() && net.minecraft.world.Container.stillValidBlockEntity(host,player);
     }
     public void writeWork(CompoundTag tag,HolderLookup.Provider registries) {saveAdditional(tag,registries);}
     public void readWork(CompoundTag tag,HolderLookup.Provider registries) {loadAdditional(tag,registries);}

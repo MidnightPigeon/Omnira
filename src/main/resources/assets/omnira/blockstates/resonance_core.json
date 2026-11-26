@@ -15,6 +15,12 @@
     "mode=4": {
       "model": "omnira:block/resonance_core_4"
     },
+    "mode=7": {
+      "model": "omnira:block/resonance_core_6"
+    },
+    "mode=6": {
+      "model": "omnira:block/resonance_core_6"
+    },
     "mode=5": {
       "model": "omnira:block/resonance_core_5"
     }

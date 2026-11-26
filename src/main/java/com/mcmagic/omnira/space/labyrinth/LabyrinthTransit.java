@@ -87,7 +87,7 @@ public final class LabyrinthTransit {
         return false;
     }
     @SubscribeEvent public static void tick(EntityTickEvent.Post event){
-        var entity=event.getEntity();if(!(entity.level() instanceof ServerLevel level)||entity.isPassenger()||!entity.isAlive()||entity.isSpectator())return;
+        var entity=event.getEntity();if(com.mcmagic.omnira.space.sea.SpatialImmunity.riftNative(entity)||!(entity.level() instanceof ServerLevel level)||entity.isPassenger()||!entity.isAlive()||entity.isSpectator())return;
         var data=entity.getPersistentData();long now=level.getGameTime();
         if(GameTimeCooldown.active(entity, "OmniraVoidPortalCooldown", now, 20))return;
         var contact=contact(level,entity.getBoundingBox());

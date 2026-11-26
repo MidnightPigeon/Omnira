@@ -330,18 +330,28 @@ public final class ReactionPoolBlockEntity extends BlockEntity implements MenuPr
                 for(int slot=0;slot<9;slot++){
                     var sample=allowed(OrbUpgradeItem.Kind.OUTPUT,items.getStackInSlot(slot),null)?items.extractItem(slot,activeItems,true):ItemStack.EMPTY;if(sample.isEmpty())continue;
                     var rest=ItemHandlerHelper.insertItemStacked(target,sample,true);
-                    if(rest.isEmpty()){var extracted=items.extractItem(slot,sample.getCount(),false);var rejected=ItemHandlerHelper.insertItemStacked(target,extracted,false);
+                    int accepted=sample.getCount()-rest.getCount();
+                    if(accepted>0){var extracted=items.extractItem(slot,accepted,false);var rejected=ItemHandlerHelper.insertItemStacked(target,extracted,false);
                         activeItems-=extracted.getCount()-rejected.getCount();if(extracted.getCount()>rejected.getCount()){lastOutputItem=extracted.copyWithCount(1);lastItemTick=level.getGameTime();changed();}
                         com.mcmagic.omnira.progression.BranchProgress.automated(this,extracted.getCount()-rejected.getCount());
                         if(!rejected.isEmpty()){internal=true;try{items.insertItem(slot,rejected,false);}finally{internal=false;}}}
                 }
             }else{
                 var target=level.getCapability(Capabilities.FluidHandler.BLOCK,at,direction.getOpposite());if(target==null)continue;
-                var sample=FluidStack.EMPTY;
-                var stored=fluids.snapshot();for(int i=stored.size()-1;i>=0;i--){var fluid=stored.get(i);if(allowed(OrbUpgradeItem.Kind.OUTPUT,ItemStack.EMPTY,fluid)){sample=fluids.drain(fluid.copyWithAmount(activeFluid),IFluidHandler.FluidAction.SIMULATE);if(!sample.isEmpty())break;}}
-                if(sample.isEmpty())continue;int accepted=target.fill(sample,IFluidHandler.FluidAction.SIMULATE);
-                if(accepted>0){var extracted=fluids.drain(sample.copyWithAmount(accepted),IFluidHandler.FluidAction.EXECUTE);
-                    int filled=target.fill(extracted,IFluidHandler.FluidAction.EXECUTE);activeFluid-=filled;if(filled>0){lastOutputFluid=extracted.copyWithAmount(filled);lastFluidTick=level.getGameTime();changed();}com.mcmagic.omnira.progression.BranchProgress.automated(this,filled);if(filled<extracted.getAmount())fluids.fill(extracted.copyWithAmount(extracted.getAmount()-filled),IFluidHandler.FluidAction.EXECUTE);}
+                if(activeFluid<=0)continue;
+                for(var fluid:fluids.snapshot().reversed()){
+                    if(!allowed(OrbUpgradeItem.Kind.OUTPUT,ItemStack.EMPTY,fluid))continue;
+                    var offered=fluid.copyWithAmount(Math.min(activeFluid,fluid.getAmount()));
+                    int accepted=target.fill(offered,IFluidHandler.FluidAction.SIMULATE);
+                    if(accepted<=0)continue;
+                    // Debit the actual fill from this pool, retaining the order of every remaining layer.
+                    int filled=target.fill(offered.copyWithAmount(accepted),IFluidHandler.FluidAction.EXECUTE);
+                    if(filled<=0)continue;
+                    lastOutputFluid=fluids.drain(fluid.copyWithAmount(filled),IFluidHandler.FluidAction.EXECUTE);
+                    activeFluid-=filled;lastFluidTick=level.getGameTime();changed();
+                    com.mcmagic.omnira.progression.BranchProgress.automated(this,filled);
+                    break;
+                }
             }
         }
     }

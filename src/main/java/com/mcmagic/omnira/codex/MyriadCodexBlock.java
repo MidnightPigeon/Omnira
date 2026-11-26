@@ -30,6 +30,10 @@ public class MyriadCodexBlock extends BaseEntityBlock {
     @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level l,BlockState s,BlockEntityType<T> type){return createTickerHelper(type,MyriadCodexContent.ENTITY.get(),(w,p,b,e)->{
         if(net.neoforged.fml.ModList.get().isLoaded("create"))com.mcmagic.omnira.compat.create.CodexKinetics.tick(e);else if(!w.isClientSide)MyriadCodexEntity.from(e).tick();
     });}
+    @Override protected net.minecraft.world.MenuProvider getMenuProvider(BlockState state,Level level,BlockPos pos){
+        var machine=MyriadCodexEntity.from(level.getBlockEntity(pos));
+        return machine!=null && !machine.busy()?machine:null;
+    }
     @Override protected InteractionResult useWithoutItem(BlockState s,Level l,BlockPos p,Player player,BlockHitResult hit){
         if(player.isSpectator())return InteractionResult.PASS;
         var codex=MyriadCodexEntity.from(l.getBlockEntity(p));if(codex!=null){

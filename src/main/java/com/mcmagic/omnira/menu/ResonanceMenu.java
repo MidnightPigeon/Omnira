@@ -33,15 +33,7 @@ public final class ResonanceMenu extends AbstractContainerMenu {
         super(ModMenuTypes.RESONANCE.get(),id);owner=inventory.player;this.source=source;terminal=inventory.getItem(source);selected.set(-1);
         if(capacity!=4&&capacity!=6)throw new IllegalArgumentException("Invalid resonance capacity");
         statuses=new DataSlot[capacity];java.util.Arrays.setAll(statuses,i->DataSlot.standalone());
-        for(int row=0;row<3;row++)for(int col=0;col<9;col++)inventorySlot(inventory,9+row*9+col,8+col*18,157+row*18);
-        for(int col=0;col<9;col++)inventorySlot(inventory,col,8+col*18,215);
         addDataSlot(selected);addDataSlot(kind);for(var status:statuses)addDataSlot(status);
-    }
-    private void inventorySlot(Inventory inventory,int index,int x,int y){
-        addSlot(new Slot(inventory,index,x,y){
-            @Override public boolean mayPickup(Player p){return index!=source;}
-            @Override public boolean mayPlace(ItemStack s){return index!=source;}
-        });
     }
     public int kind(){return kind.get();}
     public int capacity(){return statuses.length;}
@@ -62,11 +54,11 @@ public final class ResonanceMenu extends AbstractContainerMenu {
         var tag=ResonanceTerminalItem.data(terminal);
         if(!(remote.getBlockEntity(position) instanceof ResonanceCoreBlockEntity core)||!core.identity.equals(identity)
                 ||!tag.hasUUID("Terminal")||!tag.getUUID("Terminal").equals(core.terminal)||!core.permits(owner))return null;
-        return destination!=null&&remote.getBlockEntity(position.below())!=destination?null:core;
+        return destination!=null&&remote.getBlockEntity(core.menuPosition())!=destination?null:core;
     }
     private int viewKind(ResonanceCoreBlockEntity core){
         if(core.kind()==4)return 4;
-        var pos=core.getBlockPos().below();return remote.getBlockState(pos).getMenuProvider(remote,pos)!=null?6:0;
+        var pos=core.menuPosition();return com.mcmagic.omnira.storage.RemoteContainerAccess.provider(remote,pos)!=null?6:0;
     }
     @Override public boolean clickMenuButton(Player player,int id){
         if(player.level().isClientSide||!stillValid(player))return false;
@@ -109,12 +101,10 @@ public final class ResonanceMenu extends AbstractContainerMenu {
         if(!remote.getWorldBorder().isWithinBounds(position)||remote.isOutsideBuildHeight(position)){release();return false;}
         remote.getChunkSource().addRegionTicket(TICKET,new ChunkPos(position),2,ticket);remote.getChunk(position.getX()>>4,position.getZ()>>4);
         var core=core();if(core==null||core.kind()==0){release();return false;}
-        destination=remote.getBlockEntity(position.below());kind.set(viewKind(core));broadcastChanges();return true;
+        destination=remote.getBlockEntity(core.menuPosition());kind.set(viewKind(core));broadcastChanges();return true;
     }
     @Override public void clicked(int index,int button,ClickType type,Player player){
-        if(!stillValid(player)||type==ClickType.SWAP&&button==source)return;
-        if(index>=0&&index<slots.size()&&slots.get(index).getContainerSlot()==source)return;
-        super.clicked(index,button,type,player);
+        // The selector has buttons only. Item clicks belong to the native destination menu.
     }
     @Override public ItemStack quickMoveStack(Player player,int index){return ItemStack.EMPTY;}
     @Override public void broadcastChanges(){

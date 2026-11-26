@@ -60,7 +60,7 @@ final class EcologyRequest {
 
     static EcologyRequest load(CompoundTag tag, ServerLevel level) {
         var request=new EcologyRequest(tag.getUUID("Id"),BlockPos.of(tag.getLong("Center")),tag.getInt("Diameter"),
-                ResourceLocation.parse(tag.getString("Biome")),tag.hasUUID("Owner")?tag.getUUID("Owner"):null,tag.getLong("Seed"));
+                com.mcmagic.omnira.spacetime.LegacyTimeBiome.migrate(ResourceLocation.parse(tag.getString("Biome"))),tag.hasUUID("Owner")?tag.getUUID("Owner"):null,tag.getLong("Seed"));
         request.checks=tag.getLong("Checks"); request.notice=tag.getString("Notice"); request.error=tag.getString("Error");
         if (tag.contains("Sample")) {
             var source=level.getServer().getLevel(ResourceKey.create(Registries.DIMENSION,ResourceLocation.parse(tag.getString("SampleDimension"))));

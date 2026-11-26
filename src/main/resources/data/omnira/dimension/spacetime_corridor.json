@@ -5,7 +5,6 @@
     "biome_source": {
       "type": "omnira:spacetime_strata",
       "time_biome": "omnira:stilled_wastes",
-      "plain_biome": "omnira:temporal_continent",
       "corridor_biome": "omnira:spacetime_corridor",
       "forest_biome": "omnira:fleeting_woods",
       "mire_biome": "omnira:reversion_mire",

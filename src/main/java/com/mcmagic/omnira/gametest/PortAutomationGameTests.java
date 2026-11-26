@@ -35,7 +35,7 @@ public final class PortAutomationGameTests {
             hopper.setItem(0,new ItemStack(Items.IRON_ORE,4));
         });
         h.runAfterDelay(480,()->{
-            h.assertTrue(hopper.isEmpty()&&work.getItem(0).isEmpty(),"Remote input failed to arrive or process");
+            h.assertTrue(hopper.isEmpty()&&work.getItem(0).isEmpty(),"Remote furnace: source="+level.getBlockState(a)+" target="+level.getBlockState(b)+" ticking="+level.shouldTickBlocksAt(a.asLong())+" sourceCount="+hopper.getItem(0).getCount()+" remainingOre="+work.getItem(0).getCount());
             h.assertTrue(work.getItem(2).is(Items.IRON_INGOT)&&work.getItem(2).getCount()==4,"Idle furnace did not process all remote inputs");h.succeed();
         });
     }
@@ -51,7 +51,7 @@ public final class PortAutomationGameTests {
         var hopper=(HopperBlockEntity)level.getBlockEntity(a);var chest=(ChestBlockEntity)level.getBlockEntity(b);
         h.assertTrue(SpacetimePortState.pair(port(h,a,Direction.DOWN),port(h,b,Direction.EAST)),"Pair failed");
         hopper.setItem(0,new ItemStack(Items.DIAMOND,4));
-        h.runAfterDelay(50,()->{h.assertTrue(hopper.isEmpty()&&chest.getItem(0).getCount()==4,"Hopper did not use native output cadence");h.succeed();});
+        h.runAfterDelay(50,()->{h.assertTrue(hopper.isEmpty()&&chest.getItem(0).getCount()==4,"Hopper cadence: source="+level.getBlockState(a)+" target="+level.getBlockState(b)+" ticking="+level.shouldTickBlocksAt(a.asLong())+" loadedSource="+(level.getBlockEntity(a)==hopper)+" sourceCount="+hopper.getItem(0).getCount());h.succeed();});
     }
     @GameTest(template="spell_arena",timeoutTicks=160)
     public static void createFunnelOutputsToRemoteContainer(GameTestHelper h){

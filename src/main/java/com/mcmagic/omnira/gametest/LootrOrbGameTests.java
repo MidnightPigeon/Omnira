@@ -21,11 +21,11 @@ public final class LootrOrbGameTests {
         if(!net.neoforged.fml.ModList.get().isLoaded("lootr")){h.succeed();return;}
         LootrOrbTestCases.nativeConversionAndNoOrbDrops(h);
     }
-    @GameTest(template="spell_arena",timeoutTicks=300) public static void actualStructoryTemplateConvertsAndGeneratesLoot(GameTestHelper h){
+    @GameTest(template="spell_arena",timeoutTicks=300,batch="lootr_actualStructoryTemplateConvertsAndGeneratesLoot") public static void actualStructoryTemplateConvertsAndGeneratesLoot(GameTestHelper h){
         if(!net.neoforged.fml.ModList.get().isLoaded("lootr")){h.succeed();return;}
         LootrOrbTestCases.actualStructoryTemplateConvertsAndGeneratesLoot(h);
     }
-    @GameTest(template="spell_arena",timeoutTicks=300) public static void actualStructoryChestConvertsAndGeneratesLoot(GameTestHelper h){
+    @GameTest(template="spell_arena",timeoutTicks=300,batch="lootr_actualStructoryChestConvertsAndGeneratesLoot") public static void actualStructoryChestConvertsAndGeneratesLoot(GameTestHelper h){
         if(!net.neoforged.fml.ModList.get().isLoaded("lootr")){h.succeed();return;}
         LootrOrbTestCases.actualStructoryChestConvertsAndGeneratesLoot(h);
     }
@@ -37,13 +37,13 @@ public final class LootrOrbGameTests {
         if(!net.neoforged.fml.ModList.get().isLoaded("lootr")){h.succeed();return;}
         LootrOrbTestCases.sameLootrOwnerUsesOneLiveView(h);
     }
-    @GameTest(template="spell_arena",timeoutTicks=400) public static void cataclysmTreasureConverts(GameTestHelper h){
+    @GameTest(template="spell_arena",timeoutTicks=400,batch="lootr_cataclysmTreasureConverts") public static void cataclysmTreasureConverts(GameTestHelper h){
         if(!net.neoforged.fml.ModList.get().isLoaded("lootr")||!net.neoforged.fml.ModList.get().isLoaded("cataclysm")){h.succeed();return;}LootrOrbTestCases.cataclysmTreasureConverts(h);
     }
     @GameTest(template="spell_arena",timeoutTicks=100) public static void blockedAutomationShatteringAndPersonalBucket(GameTestHelper h){
         if(!net.neoforged.fml.ModList.get().isLoaded("lootr")){h.succeed();return;}LootrOrbTestCases.blockedAutomationShatteringAndPersonalBucket(h);
     }
-    @GameTest(template="spell_arena",timeoutTicks=400) public static void cataclysmChestConverts(GameTestHelper h){
+    @GameTest(template="spell_arena",timeoutTicks=400,batch="lootr_cataclysmChestConverts") public static void cataclysmChestConverts(GameTestHelper h){
         if(!net.neoforged.fml.ModList.get().isLoaded("lootr")||!net.neoforged.fml.ModList.get().isLoaded("cataclysm")){h.succeed();return;}LootrOrbTestCases.cataclysmChestConverts(h);
     }
 }

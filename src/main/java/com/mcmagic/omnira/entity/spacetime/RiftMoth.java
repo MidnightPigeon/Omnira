@@ -54,7 +54,16 @@ public final class RiftMoth extends PathfinderMob {
         }
         @Override public void stop(){navigation.stop();}
     }
-    public void setFlock(UUID id){flock=id;} public UUID flock(){return flock;} public int region(){return entityData.get(REGION);}
+    private record FlockData(UUID id) implements SpawnGroupData {}
+    @Override public SpawnGroupData finalizeSpawn(net.minecraft.world.level.ServerLevelAccessor level, net.minecraft.world.DifficultyInstance difficulty,
+                                                   MobSpawnType reason, SpawnGroupData data){
+        super.finalizeSpawn(level,difficulty,reason,data);
+        var group=data instanceof FlockData shared?shared:new FlockData(UUID.randomUUID());
+        flock=group.id();
+        return group;
+    }
+    @Override public int getMaxSpawnClusterSize(){return 5;}
+    public UUID flock(){return flock;} public int region(){return entityData.get(REGION);}
     @Override public void tick(){
         super.tick();setNoGravity(true);fallDistance=0;
         if(level().isClientSide){

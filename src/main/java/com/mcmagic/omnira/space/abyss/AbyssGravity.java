@@ -15,7 +15,7 @@ public final class AbyssGravity {
     private record Column(long tick,int low,int high){double middle(){return (low+high+4)/2.0;}}
     private static final Map<Level,Map<Long,Column>> COLUMNS=java.util.Collections.synchronizedMap(new WeakHashMap<>());
     public static int band(double height,double middle){return height<middle-2.5?1:height>=middle+2.5?-1:0;}
-    public static int direction(Entity entity){return direction(entity.level(),entity.getBoundingBox().getCenter());}
+    public static int direction(Entity entity){return com.mcmagic.omnira.space.sea.SpatialImmunity.riftNative(entity)?1:direction(entity.level(),entity.getBoundingBox().getCenter());}
     public static int direction(Level level,Vec3 position){
         var p=BlockPos.containing(position);
         if(!level.hasChunkAt(p)||!level.getBiome(p).is(AbyssContent.BIOME))return 1;

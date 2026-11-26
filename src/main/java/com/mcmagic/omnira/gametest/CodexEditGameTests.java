@@ -19,8 +19,6 @@ public final class CodexEditGameTests {
     @GameTest(template="spell_arena") public static void everyNativeEcologyBiomeUsesNativeTreasure(GameTestHelper h){
         var level=h.getLevel();var registry=level.registryAccess().registryOrThrow(Registries.BIOME);
         var regional=Map.of(
-                "temporal_continent",Set.of("golden_throne_tower","kirisame_workshop","rusty_lake_mill_cellar",
-                        "drilling_platform","looking_glass_garden_rabbit","doomsday_rite"),
                 "dream_islands",Set.of("radiant_courtyard"));
         int count=0;
         for(var biome:registry.holders().toList()){
@@ -37,7 +35,7 @@ public final class CodexEditGameTests {
             }
             if(regional.containsKey(id.getPath()))h.assertTrue(seen.equals(regional.get(id.getPath())),"Regional treasure pool incomplete: "+id);
         }
-        h.assertTrue(count==17,"Native ecology coverage changed; review treasure mappings");h.succeed();
+        h.assertTrue(count==16,"Native ecology coverage changed; review treasure mappings");h.succeed();
     }
 
     @GameTest(template="spell_arena") public static void ecologyShellIsOnlyTheClosedExteriorBoundary(GameTestHelper h){

@@ -15,6 +15,27 @@ import net.neoforged.neoforge.gametest.*;
 
 @GameTestHolder("omnira_phase") @PrefixGameTestTemplate(false)
 public final class PhaseGroveGameTests {
+    @GameTest(template="spell_arena") public static void retiredTimeBiomeMigratesWithoutChangingPaletteIndices(GameTestHelper h){
+        var registry=h.getLevel().registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.BIOME);
+        var legacy=net.minecraft.resources.ResourceLocation.parse("omnira:temporal_continent");
+        h.assertTrue(!registry.containsKey(legacy),"Retired biome is still registered");
+        var root=new net.minecraft.nbt.CompoundTag();
+        var section=new net.minecraft.nbt.CompoundTag();
+        var biomes=new net.minecraft.nbt.CompoundTag();
+        var palette=new net.minecraft.nbt.ListTag();
+        palette.add(net.minecraft.nbt.StringTag.valueOf("minecraft:plains"));
+        palette.add(net.minecraft.nbt.StringTag.valueOf(legacy.toString()));
+        biomes.put("palette",palette);
+        biomes.putLongArray("data",new long[]{5L});
+        section.put("biomes",biomes);
+        var sections=new net.minecraft.nbt.ListTag();
+        sections.add(section);
+        root.put("sections",sections);
+        com.mcmagic.omnira.spacetime.LegacyTimeBiome.migrateChunk(root);
+        h.assertTrue(palette.size()==2&&palette.getString(0).equals("minecraft:plains")&&palette.getString(1).equals("omnira:eventide_ruins")
+                &&biomes.getLongArray("data")[0]==5L,"Legacy palette migration damaged biome data");
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void physicalMotesStayBounded(GameTestHelper h){
         h.assertTrue(PhaseMoteLayout.CACHE_LIMIT==512&&PhaseMoteLayout.VISIBLE_LIMIT==128&&PhaseMoteLayout.RANGE==32,"Decoration has no fixed budget");
         for(int tick=0;tick<400;tick++)for(int i=0;i<3;i++){
@@ -143,7 +164,7 @@ public final class PhaseGroveGameTests {
         h.assertTrue(small>10&&large>10,"Natural distribution missing a cluster form");
         for(var a:centers)for(var b:centers)if(a!=b)h.assertTrue(Math.max(Math.abs(a.getX()-b.getX()),Math.abs(a.getZ()-b.getZ()))>=17,"Natural clusters can connect");
         var ops=h.getLevel().registryAccess().createSerializationContext(com.mojang.serialization.JsonOps.INSTANCE);
-        var data=new com.google.gson.JsonObject();data.addProperty("time_biome","omnira:temporal_continent");data.addProperty("plain_biome","omnira:stilled_wastes");data.addProperty("corridor_biome","omnira:spacetime_corridor");
+        var data=new com.google.gson.JsonObject();data.addProperty("time_biome","omnira:stilled_wastes");data.addProperty("plain_biome","omnira:temporal_continent");data.addProperty("corridor_biome","omnira:spacetime_corridor");
         var source=StrataBiomeSource.CODEC.codec().parse(ops,data).getOrThrow();var p=centers.getFirst();
         h.assertTrue(source.getNoiseBiome(p.getX()>>2,10,p.getZ()>>2,h.getLevel().getChunkSource().randomState().sampler()).is(PhaseContent.BIOME),"Old source does not expose phase biome");h.succeed();
     }

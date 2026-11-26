@@ -19,6 +19,7 @@ public abstract class SpacetimeChunkLightMixin {
     @Inject(method = "read", at = @At("HEAD"))
     private static void omnira$relightLegacyChunks(ServerLevel level, PoiManager poi, RegionStorageInfo info,
                                                    ChunkPos pos, CompoundTag tag, CallbackInfoReturnable<ProtoChunk> ci) {
+        com.mcmagic.omnira.spacetime.LegacyTimeBiome.migrateChunk(tag);
         if (SpacetimeSky.applies(level)) SpacetimeSky.prepareChunkLighting(tag);
     }
 

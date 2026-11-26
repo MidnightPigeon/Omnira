@@ -34,7 +34,9 @@ public final class AggregationRingMenu extends AbstractContainerMenu {
     }
     public int progress(){return data.get(0);}
     public int manaCost(){return data.get(1);}
-    @Override public boolean stillValid(Player player){return stillValid(access,player,AggregationContent.BLOCK.get());}
+    @Override public boolean stillValid(Player player){
+        return stillValid(access,player,AggregationContent.BLOCK.get());
+    }
     @Override public ItemStack quickMoveStack(Player player,int index){
         if(index<0||index>=slots.size())return ItemStack.EMPTY;
         var slot=slots.get(index);var stack=slot.getItem();if(stack.isEmpty()||!slot.mayPickup(player))return ItemStack.EMPTY;

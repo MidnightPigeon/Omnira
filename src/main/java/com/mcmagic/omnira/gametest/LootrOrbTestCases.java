@@ -16,6 +16,8 @@ import net.neoforged.neoforge.gametest.*;
 
 
 final class LootrOrbTestCases {
+    private static final net.minecraft.server.level.TicketType<BlockPos> STRUCTURE_TICKET =
+            net.minecraft.server.level.TicketType.create("omnira_lootr_structure_test", BlockPos::compareTo, 480);
     public static void preparedCrystalPersists(GameTestHelper h) {
         var key=ResourceKey.create(Registries.LOOT_TABLE,ResourceLocation.parse("omnira:chests/apprentice_hut"));
         var table=h.getLevel().getServer().reloadableRegistries().getLootTable(key);
@@ -164,7 +166,10 @@ final class LootrOrbTestCases {
         var loaded=net.minecraft.world.level.ChunkPos.rangeClosed(
                 new net.minecraft.world.level.ChunkPos(center.x-2,center.z-2),
                 new net.minecraft.world.level.ChunkPos(center.x+2,center.z+2)).toList();
-        for(var chunk:loaded){level.setChunkForced(chunk.x,chunk.z,true);level.getChunk(chunk.x,chunk.z);}
+        for(var chunk:loaded){
+            level.getChunkSource().addRegionTicket(STRUCTURE_TICKET,chunk,2,origin);
+            level.getChunk(chunk.x,chunk.z);
+        }
         // Let template/NBT loading discover this container through Lootr's own hooks.
         h.succeedWhen(()->{
             var provider=noobanidus.mods.lootr.common.api.LootrAPI.resolveBlockEntity(level.getBlockEntity(pos));
@@ -175,7 +180,7 @@ final class LootrOrbTestCases {
             var owner=player(h,"structory-owner");
             var loot=noobanidus.mods.lootr.common.api.LootrAPI.getInventory(provider,owner);
             h.assertTrue(loot!=null && !loot.isEmpty(),"Converted external chest generated no personal loot");
-            for(var chunk:loaded)level.setChunkForced(chunk.x,chunk.z,false);
+            for(var chunk:loaded)level.getChunkSource().removeRegionTicket(STRUCTURE_TICKET,chunk,2,origin);
         });
     }
 

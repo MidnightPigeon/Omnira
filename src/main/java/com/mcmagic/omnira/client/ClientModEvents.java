@@ -148,7 +148,7 @@ public final class ClientModEvents {
         event.register((stack,tint)->{
             if(tint<1 || tint>com.mcmagic.omnira.item.ResonanceTerminalItem.capacity(stack))return 0xFFFFFFFF;
             int kind=com.mcmagic.omnira.item.ResonanceTerminalItem.data(stack).getCompound("Link"+(tint-1)).getInt("Kind");
-            return kind==4?0xDDFFE58A:kind==3?0xDD85C5FF:kind==2?0xDDA3EBB6:0xDDF3A1B2;
+            return com.mcmagic.omnira.client.screen.ResonanceScreen.nodeColor(kind);
         },com.mcmagic.omnira.registry.ModItems.RESONANCE_TERMINAL.get(),com.mcmagic.omnira.registry.ModItems.ENHANCED_RESONANCE_TERMINAL.get());
         event.register((stack,tint)->{
             double phase=.5+.5*Math.sin(net.minecraft.Util.getMillis()/850.0);

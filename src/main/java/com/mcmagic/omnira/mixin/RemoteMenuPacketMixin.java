@@ -9,6 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(net.minecraft.server.network.ServerGamePacketListenerImpl.class)
 abstract class RemoteMenuPacketMixin {
-    @WrapOperation(method={"handleContainerClick","handleContainerButtonClick"},at=@At(value="INVOKE",target="Lnet/minecraft/world/inventory/AbstractContainerMenu;stillValid(Lnet/minecraft/world/entity/player/Player;)Z"))
+    @WrapOperation(method={"handleContainerClick","handleContainerButtonClick","handleSetBeaconPacket"},at=@At(value="INVOKE",target="Lnet/minecraft/world/inventory/AbstractContainerMenu;stillValid(Lnet/minecraft/world/entity/player/Player;)Z"))
     private boolean omnira$valid(AbstractContainerMenu menu,Player player,Operation<Boolean> original){var valid=RemoteContainerAccess.validity(player,menu);return valid==null?original.call(menu,player):valid;}
 }

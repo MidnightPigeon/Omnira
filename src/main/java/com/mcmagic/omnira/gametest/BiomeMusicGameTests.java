@@ -62,7 +62,7 @@ public final class BiomeMusicGameTests {
     }
     @GameTest(template="spell_arena") public static void timeMusicIsBoundOnlyToUpperBiomes(GameTestHelper h){
         var biomes=h.getLevel().registryAccess().registryOrThrow(Registries.BIOME);
-        var selected=List.of("temporal_continent","stilled_wastes","fleeting_woods","reversion_mire","epochal_cliffs","recurrence_garden","eventide_ruins");
+        var selected=List.of("stilled_wastes","fleeting_woods","reversion_mire","epochal_cliffs","recurrence_garden","eventide_ruins");
         var spatial=List.of("folded_caverns","dislocated_geodes","inverted_abyss","void_starsea","phase_crystal_grove","topological_labyrinth");
         for(var biome:biomes){
             var id=biomes.getKey(biome);if(!id.getNamespace().equals("omnira"))continue;

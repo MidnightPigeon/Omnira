@@ -16,7 +16,7 @@ import net.minecraft.world.level.biome.Biome;
 public final class EcologySelection {
     public enum Group { EARTH, WATER, FIRE, AIR, LIGHT, DARK, TIME, SPACE, OMNI }
 
-    private static final Set<String> TIME = Set.of("temporal_continent", "stilled_wastes",
+    private static final Set<String> TIME = Set.of("stilled_wastes",
             "fleeting_woods", "epochal_cliffs", "recurrence_garden", "eventide_ruins");
     private static final ResourceLocation EXCLUDED_BIOME=ResourceLocation.parse("omnira:spacetime_corridor");
     private static final Set<String> SPACE = Set.of("folded_caverns",

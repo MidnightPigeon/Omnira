@@ -79,8 +79,8 @@ public final class SpacetimePortGameTests {
         var table=new ArcaneAssemblyTableBlockEntity(h.absolutePos(new BlockPos(2,3,2)),ModBlocks.ARCANE_ASSEMBLY_TABLE.get().defaultBlockState());table.setLevel(h.getLevel());
         table.setItem(0,new ItemStack(ModItems.TIME_WARP_POINT.get()));table.setItem(1,new ItemStack(ModItems.SPACE_WARP_POINT.get()));
         table.setItem(2,new ItemStack(ModItems.TIME_WARP_POINT.get()));table.setItem(3,new ItemStack(ModItems.SPACE_WARP_POINT.get()));table.setItem(6,new ItemStack(ModItems.RESONANCE_CORE.get()));
-        table.setMechanicalPowered(true);
-        for(int i=0;i<20;i++)h.runAfterDelay(1+i*10,()->{if(!table.finished())h.assertTrue(table.automaticStrike(),"Assembly strike failed");});
+        // Use the normal powered tick so both automatic strikes and their cooldown advance.
+        for(int tick=1;tick<=200;tick++)h.runAfterDelay(tick,()->table.tickPower(true,16));
         h.runAfterDelay(202,()->{h.assertTrue(table.finished()&&table.getItem(6).is(ModItems.SPACETIME_PORT.get())&&table.getItem(6).getCount()==2,"Assembly lost second port");h.succeed();});
     }
     @GameTest(template="spell_arena",timeoutTicks=80) public static void shaftsChangeAxisAndRejectNonShaftFaces(GameTestHelper h){

@@ -58,7 +58,13 @@ public final class CorridorGenerator extends ChunkGenerator {
     @Override public void applyCarvers(WorldGenRegion region,long seed,RandomState random,BiomeManager biomes,StructureManager structures,ChunkAccess chunk,GenerationStep.Carving step){}
     @Override public void buildSurface(WorldGenRegion region,StructureManager structures,RandomState random,ChunkAccess chunk){}
     @Override public void applyBiomeDecoration(WorldGenLevel level,ChunkAccess chunk,StructureManager structures){super.applyBiomeDecoration(level,chunk,structures);}
-    @Override public void spawnOriginalMobs(WorldGenRegion region){}
+    @Override public void spawnOriginalMobs(WorldGenRegion region){
+        var chunk=region.getCenter();
+        var biome=region.getBiome(chunk.getWorldPosition().atY(region.getMaxBuildHeight()-1));
+        var random=new WorldgenRandom(new LegacyRandomSource(0L));
+        random.setDecorationSeed(region.getSeed(),chunk.getMinBlockX(),chunk.getMinBlockZ());
+        NaturalSpawner.spawnMobsForChunkGeneration(region,biome,chunk,random);
+    }
     @Override public int getGenDepth(){return 256;}
     @Override public int getMinY(){return 0;}
     @Override public int getSeaLevel(){return 0;}

@@ -65,31 +65,57 @@ public final class PreparedSpellLootGameTests {
         var named = new ItemStack(Items.PAPER);
         named.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.literal("Keep"));
         var loot = new ArrayList<>(List.of(new ItemStack(Items.PAPER,6),named,new ItemStack(Items.DIAMOND)));
-        modifier.replace(loot,key,random);
+        modifier.replace(loot,key,random,Set.copyOf(loot));
         h.assertTrue(loot.size()==3 && loot.get(0).is(ModItems.LOW_TIER_MAGIC_CRYSTAL)
                 && loot.get(1)==named && loot.get(2).is(Items.DIAMOND), "Special reward changed or extra reward inserted");
         for (String table : List.of("omnira:chests/shadow_library_sealed", "minecraft:chests/trial_chambers/intersection",
                 "minecraft:chests/jungle_temple_dispenser", "minecraft:chests/trial_chambers/reward_common",
                 "minecraft:gameplay/fishing", "foreign:chests/test")) {
             var excluded = new ArrayList<>(List.of(new ItemStack(Items.PAPER),new ItemStack(Items.DIAMOND)));
-            modifier.replace(excluded,ResourceLocation.parse(table),random);
+            modifier.replace(excluded,ResourceLocation.parse(table),random,Set.copyOf(excluded));
             h.assertTrue(excluded.get(0).is(Items.PAPER) && excluded.get(1).is(Items.DIAMOND), "Unrelated loot modified: "+table);
         }
         var noFiller = new ArrayList<>(List.of(new ItemStack(Items.DIAMOND)));
-        modifier.replace(noFiller,key,random);
+        modifier.replace(noFiller,key,random,Set.copyOf(noFiller));
         h.assertTrue(noFiller.size()==1 && noFiller.getFirst().is(Items.DIAMOND), "No-filler fallback destroyed treasure");
+        h.succeed();
+    }
+
+    @GameTest(template="spell_arena") public static void sameItemFromDifferentPools(GameTestHelper h) {
+        var paper = net.minecraft.world.level.storage.loot.entries.LootItem.lootTableItem(Items.PAPER);
+        var protectedPaper = net.minecraft.world.level.storage.loot.entries.LootItem.lootTableItem(Items.PAPER)
+                .apply(net.minecraft.world.level.storage.loot.functions.SetItemCountFunction.setCount(
+                        net.minecraft.world.level.storage.loot.providers.number.ConstantValue.exactly(12)));
+        var fullPaper = net.minecraft.world.level.storage.loot.entries.LootItem.lootTableItem(Items.PAPER)
+                .apply(net.minecraft.world.level.storage.loot.functions.SetItemCountFunction.setCount(
+                        net.minecraft.world.level.storage.loot.providers.number.ConstantValue.exactly(64)));
+        var table = LootTable.lootTable().withPool(LootPool.lootPool().add(protectedPaper))
+                .withPool(LootPool.lootPool().add(paper).add(paper))
+                .withPool(LootPool.lootPool().add(fullPaper).add(net.minecraft.world.level.storage.loot.entries.LootItem.lootTableItem(Items.DIAMOND))).build();
+        table.setLootTableId(ResourceLocation.parse("omnira:chests/apprentice_hut"));
+        var params = new LootParams.Builder(h.getLevel()).withParameter(LootContextParams.ORIGIN,h.absoluteVec(new net.minecraft.world.phys.Vec3(2,2,2)))
+                .create(LootContextParamSets.CHEST);
+        int hits=0;
+        for(int seed=1;seed<=2000;seed++){
+            var loot=table.getRandomItems(params,seed*17239L);
+            h.assertTrue(loot.size()==3 && loot.get(0).is(Items.PAPER) && loot.get(0).getCount()==12
+                    && loot.get(1).is(Items.PAPER), "Replaced a guaranteed stack sharing a filler ID");
+            if(loot.get(2).is(ModItems.LOW_TIER_MAGIC_CRYSTAL))hits++;
+        }
+        h.assertTrue(hits>0,"Full-stack filler was never replaced");
         h.succeed();
     }
 
     @GameTest(template="spell_arena", timeoutTicks=200) public static void registeredRootTablesRollOnce(GameTestHelper h) {
         var params = new LootParams.Builder(h.getLevel()).withParameter(LootContextParams.ORIGIN,h.absoluteVec(new net.minecraft.world.phys.Vec3(2,2,2)))
                 .create(LootContextParamSets.CHEST);
-        for (String id : List.of("omnira:chests/apprentice_hut", "omnira:chests/topological_labyrinth", "minecraft:chests/stronghold_library")) {
+        for (String id : List.of("omnira:chests/apprentice_hut", "omnira:chests/crystal_workshop", "minecraft:chests/stronghold_library", "omnira:chests/calibration_supplies", "omnira:chests/topological_labyrinth")) {
             var table = h.getLevel().getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE,ResourceLocation.parse(id)));
             h.assertTrue(ResourceLocation.parse(id).equals(table.getLootTableId()), "Config replacement lost table identity: "+id);
             int hits=0;
             for (int i=1;i<=2000;i++) {
                 var loot=table.getRandomItems(params,i*17239L);
+                if (id.equals("omnira:chests/crystal_workshop")) h.assertTrue(loot.stream().anyMatch(s->s.is(ModItems.SPIRITUAL_CRYSTAL)&&s.getCount()>=8),"Lost guaranteed workshop crystals");
                 long count=loot.stream().filter(s -> s.is(ModItems.LOW_TIER_MAGIC_CRYSTAL)).count();
                 h.assertTrue(count<=1, "Nested table rolled twice: "+id);
                 if(count==1)hits++;

@@ -20,7 +20,7 @@ public final class RemoteContainerView {
         var tag=payload.snapshot().getCompound("Entity");var pos=new BlockPos(tag.getInt("x"),tag.getInt("y"),tag.getInt("z"));
         var next=NbtUtils.readBlockState(level.registryAccess().lookupOrThrow(Registries.BLOCK),payload.snapshot().getCompound("State"));
         if(menuId!=payload.menuId()||entity==null||!entity.getBlockPos().equals(pos)||state==null||next.getBlock()!=state.getBlock()){
-            entity=BlockEntity.loadStatic(pos,next,tag,level.registryAccess());if(entity!=null)entity.setLevel(level);
+            entity=payload.loadEntity(level,pos,next);
         }else {entity.setBlockState(next);entity.handleUpdateTag(tag,level.registryAccess());}
         menuId=payload.menuId();state=next;
     }

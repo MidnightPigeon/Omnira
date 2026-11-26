@@ -32,8 +32,17 @@ public final class LootConfigGameTests {
         var disabled=new OmniraLootConfig.FluidRules(false,false,Set.of(),waterTag);
         h.assertTrue(disabled.allows(Fluids.LAVA)&&disabled.allows(Fluids.WATER)&&!disabled.allows(Fluids.FLOWING_WATER)&&!disabled.allows(Fluids.EMPTY),"Disabled lists changed source-only restriction");
         var defaults=OmniraLootConfig.defaults();var rules=OmniraLootConfig.rules(defaults);
-        h.assertTrue(rules.whitelistEnabled()&&rules.blacklistEnabled()&&!rules.allows(dilute)
+        h.assertTrue(!rules.whitelistEnabled()&&rules.blacklistEnabled()&&rules.allows(dilute)
                 &&!rules.allows(com.mcmagic.omnira.alchemy.AlchemyMaterials.REFINED.source.get()),"New defaults mishandled spacetime fluids");
+        var legacy=defaults.deepCopy();
+        var old=legacy.getAsJsonObject("fluidTreasure");
+        old.remove("blacklistDefaultRevision");old.addProperty("whitelistEnabled",true);
+        var custom=legacy.deepCopy();
+        custom.getAsJsonObject("fluidTreasure").getAsJsonArray("blacklist").add("minecraft:lava");
+        h.assertTrue(OmniraLootConfig.migrateDefaultFluidFilter(legacy)&&!OmniraLootConfig.rules(legacy).whitelistEnabled(),"Stock filter did not migrate");
+        old.addProperty("whitelistEnabled",true);
+        h.assertTrue(!OmniraLootConfig.migrateDefaultFluidFilter(legacy)&&OmniraLootConfig.rules(legacy).whitelistEnabled(),"Later whitelist choice overwritten");
+        h.assertTrue(OmniraLootConfig.migrateDefaultFluidFilter(custom)&&OmniraLootConfig.rules(custom).whitelistEnabled()&&!OmniraLootConfig.rules(custom).allows(Fluids.LAVA),"Custom filter changed");
         var f=defaults.getAsJsonObject("fluidTreasure");f.remove("alchemyRevision");f.remove("whitelistEnabled");f.remove("blacklistEnabled");f.addProperty("mode","BLACKLIST");
         h.assertTrue(OmniraLootConfig.migrateFluidSwitches(defaults)&&!OmniraLootConfig.rules(defaults).whitelistEnabled()&&OmniraLootConfig.rules(defaults).blacklistEnabled(),"Old blacklist mode migration changed semantics");
         f.add("whitelist",new JsonArray());
@@ -95,7 +104,6 @@ public final class LootConfigGameTests {
         var path=OmniraLootConfig.path();var original=Files.readString(path);
         var level=h.getLevel();var key=ResourceLocation.parse("omnira:chests/kirisame_attic");
         var root=JsonParser.parseString(original).getAsJsonObject();
-        h.assertTrue(OmniraLootConfig.rules(root).whitelistEnabled(),"Default whitelist switch");
         var candidates=LiquidCrystalBallBlockEntity.treasureFluids();
         var candidateIds=candidates.stream().map(f->net.minecraft.core.registries.BuiltInRegistries.FLUID.getKey(f).toString()).toList();
         var registered=Set.copyOf(OmniraLootConfig.sourceFluidIds());
@@ -106,6 +114,7 @@ public final class LootConfigGameTests {
         h.assertTrue(candidateIds.stream().filter("aeronautics:levitite_blend"::equals).count()==(expected.contains("aeronautics:levitite_blend")?1:0),"Levitite Blend candidate count differs from installed whitelist");
         com.mcmagic.omnira.Omnira.LOGGER.info("Verified loot fluid IDs: {}",OmniraLootConfig.sourceFluidIds());
         try{
+            root.getAsJsonObject("fluidTreasure").addProperty("whitelistEnabled",true);
             root.getAsJsonObject("fluidTreasure").add("whitelist",new JsonArray());
             root.getAsJsonObject("treasureTables").add(key.toString(),JsonParser.parseString("{\"type\":\"minecraft:chest\",\"pools\":[{\"rolls\":1,\"entries\":[{\"type\":\"minecraft:item\",\"name\":\"minecraft:diamond\"}]}]}"));
             Files.writeString(path,root.toString());

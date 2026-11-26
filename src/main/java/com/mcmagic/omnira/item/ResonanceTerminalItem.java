@@ -49,7 +49,11 @@ public final class ResonanceTerminalItem extends Item {
         if(id.equals(core.terminal)) {
             core.terminal=null;core.setChanged();core.refresh();message(player,"unbound");return InteractionResult.CONSUME;
         }
-        if(core.terminal!=null || core.kind()==0){message(player,"unavailable");return InteractionResult.CONSUME;}
+        int kind=core.kind();
+        if(core.terminal!=null || kind==0){message(player,"unavailable");return InteractionResult.CONSUME;}
+        if(kind!=4 && com.mcmagic.omnira.storage.RemoteContainerAccess.provider(context.getLevel(),core.menuPosition())==null){
+            message(player,"no_menu");return InteractionResult.CONSUME;
+        }
         var containerKey=com.mcmagic.omnira.storage.StorageContainerIdentity.terminalKey(core);
         for(int i=0;i<capacity(stack);i++){
             var link=tag.getCompound("Link"+i);String linked=link.getString("Container");
@@ -64,7 +68,7 @@ public final class ResonanceTerminalItem extends Item {
         }
         for(int i=0;i<capacity(stack);i++)if(!tag.contains("Link"+i)) {
             var link=new CompoundTag();link.putUUID("Identity",core.identity);link.putString("Dimension",context.getLevel().dimension().location().toString());
-            link.putLong("Pos",core.getBlockPos().asLong());link.putInt("Kind",core.kind());
+            link.putLong("Pos",core.getBlockPos().asLong());link.putInt("Kind",kind);
             if(containerKey!=null)link.putString("Container",containerKey);
             tag.put("Link"+i,link);save(stack,tag);core.terminal=id;core.setChanged();core.refresh();
             message(player,"bound");return InteractionResult.CONSUME;

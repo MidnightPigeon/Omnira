@@ -39,6 +39,24 @@ public final class EnhancedResonanceGameTests {
                 new BlockHitResult(core.getBlockPos().getCenter(),Direction.UP,core.getBlockPos(),false)));
         p.setShiftKeyDown(false);
     }
+    @GameTest(template="spell_arena") public static void basinRejectsBothTerminals(GameTestHelper h){
+        if(!net.neoforged.fml.ModList.get().isLoaded("create")){h.succeed();return;}
+        for(boolean enhanced:new boolean[]{false,true}){
+            var p=player(h,enhanced);
+            var node=core(h,p,enhanced?6:3,false);
+            h.getLevel().setBlockAndUpdate(node.getBlockPos().below(),com.simibubi.create.AllBlocks.BASIN.get().defaultBlockState());
+            h.assertTrue(node.kind()==ResonanceCoreBlockEntity.MIXED,"Basin lost mixed logistics classification");
+            bind(p,node);
+            h.assertTrue(node.terminal==null&&!ResonanceTerminalItem.data(p.getMainHandItem()).contains("Link0"),"UI-less basin bound");
+        }
+        h.succeed();
+    }
+    @GameTest(template="spell_arena") public static void everyNodeModeRendersParticles(GameTestHelper h){
+        var block=ModBlocks.RESONANCE_CORE.get();
+        for(int mode:ResonanceCoreBlock.MODE.getPossibleValues())
+            block.animateTick(block.defaultBlockState().setValue(ResonanceCoreBlock.MODE,mode),h.getLevel(),h.absolutePos(BlockPos.ZERO),h.getLevel().random);
+        h.succeed();
+    }
     @GameTest(template="spell_arena") public static void destroyedNodesFreeOpenAndStoredLinks(GameTestHelper h){
         var p=player(h,false);var first=core(h,p,3,false);var second=core(h,p,6,false);bind(p,first);bind(p,second);
         var stack=p.getMainHandItem();var storedCopy=stack.copy();var menu=new ResonanceMenu(1,p.getInventory(),0);
@@ -72,6 +90,7 @@ public final class EnhancedResonanceGameTests {
             h.assertTrue((node.terminal!=null)==(i<6),"Enhanced binding limit is not six");if(i==5)sixth=node;
         }
         var menu=new ResonanceMenu(1,p.getInventory(),0);
+        h.assertTrue(menu.slots.isEmpty(),"Enhanced terminal selector exposed inventory slots");
         h.assertTrue(menu.capacity()==6&&menu.clickMenuButton(p,4)&&menu.selected()==4,"Fifth link conflicts with paging");
         h.assertTrue(menu.clickMenuButton(p,5)&&menu.kind()==4&&menu.selected()==5,"Sixth shop link cannot be selected");
         var access=new MarisaRemoteAccess(sixth,p,p.getMainHandItem(),0);

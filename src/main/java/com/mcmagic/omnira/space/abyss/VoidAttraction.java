@@ -31,7 +31,7 @@ public final class VoidAttraction {
         return force;
     }
     @SubscribeEvent public static void tick(EntityTickEvent.Post event){
-        var entity=event.getEntity();if(!entity.isAlive()||entity.isSpectator()||entity.isPassenger())return;
+        var entity=event.getEntity();if(com.mcmagic.omnira.space.sea.SpatialImmunity.riftNative(entity)||!entity.isAlive()||entity.isSpectator()||entity.isPassenger())return;
         if(AbyssGravity.direction(entity)==0)entity.fallDistance=0;
         // Players predict locally; the server uses the same force for other entities.
         if(entity instanceof net.minecraft.world.entity.player.Player){if(!entity.level().isClientSide||!entity.isControlledByLocalInstance())return;}

@@ -15,7 +15,7 @@ public final class ModEntityTypes {
     public static final DeferredHolder<EntityType<?>,EntityType<com.mcmagic.omnira.entity.spacetime.AgecoilSnail>> AGECOIL_SNAIL=ENTITY_TYPES.register("agecoil_snail",()->EntityType.Builder.of(com.mcmagic.omnira.entity.spacetime.AgecoilSnail::new,MobCategory.CREATURE).sized(.8F,.7F).clientTrackingRange(10).updateInterval(2).build("omnira:agecoil_snail"));
     public static final DeferredHolder<EntityType<?>,EntityType<com.mcmagic.omnira.entity.spacetime.RiftstepDeer>> RIFTSTEP_DEER=ENTITY_TYPES.register("riftstep_deer",()->EntityType.Builder.of(com.mcmagic.omnira.entity.spacetime.RiftstepDeer::new,MobCategory.CREATURE).sized(.85F,1.7F).clientTrackingRange(10).updateInterval(2).build("omnira:riftstep_deer"));
     public static final DeferredHolder<EntityType<?>,EntityType<com.mcmagic.omnira.entity.spacetime.RiftMantis>> RIFT_MANTIS=ENTITY_TYPES.register("rift_mantis",()->EntityType.Builder.of(com.mcmagic.omnira.entity.spacetime.RiftMantis::new,MobCategory.MONSTER).sized(1F,1.95F).clientTrackingRange(10).updateInterval(2).build("omnira:rift_mantis"));
-    public static final DeferredHolder<EntityType<?>,EntityType<com.mcmagic.omnira.entity.spacetime.RiftMoth>> RIFT_MOTH=ENTITY_TYPES.register("rift_moth",()->EntityType.Builder.of(com.mcmagic.omnira.entity.spacetime.RiftMoth::new,MobCategory.AMBIENT).sized(.5F,.45F).clientTrackingRange(10).updateInterval(2).build("omnira:rift_moth"));
+    public static final DeferredHolder<EntityType<?>,EntityType<com.mcmagic.omnira.entity.spacetime.RiftMoth>> RIFT_MOTH=ENTITY_TYPES.register("rift_moth",()->EntityType.Builder.of(com.mcmagic.omnira.entity.spacetime.RiftMoth::new,MobCategory.CREATURE).sized(.5F,.45F).clientTrackingRange(10).updateInterval(2).build("omnira:rift_moth"));
     public static final DeferredHolder<EntityType<?>,EntityType<com.mcmagic.omnira.weaver.WeaverBolt>> WEAVER_BOLT=
             ENTITY_TYPES.register("weaver_bolt",()->EntityType.Builder.<com.mcmagic.omnira.weaver.WeaverBolt>of(com.mcmagic.omnira.weaver.WeaverBolt::new,MobCategory.MISC)
                     .sized(.3F,.3F).clientTrackingRange(8).updateInterval(1).noSummon().build("omnira:weaver_bolt"));
@@ -84,6 +84,7 @@ public final class ModEntityTypes {
                     .sized(.65F,.55F).clientTrackingRange(8).updateInterval(2).build("omnira:time_thief_mosquito"));
 
     public static void register(IEventBus eventBus) {
+        eventBus.addListener(com.mcmagic.omnira.entity.spacetime.SpacetimeFaunaSpawning::registerPlacements);
         eventBus.addListener((net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent event)->event.put(AGECOIL_SNAIL.get(),com.mcmagic.omnira.entity.spacetime.AgecoilSnail.attributes().build()));
         eventBus.addListener((net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent event)->event.put(RIFTSTEP_DEER.get(),com.mcmagic.omnira.entity.spacetime.RiftstepDeer.attributes().build()));
         eventBus.addListener((net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent event)->event.put(RIFT_MANTIS.get(),com.mcmagic.omnira.entity.spacetime.RiftMantis.attributes().build()));

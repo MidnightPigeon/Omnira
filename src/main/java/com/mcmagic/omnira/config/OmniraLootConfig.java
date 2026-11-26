@@ -32,6 +32,8 @@ public final class OmniraLootConfig {
                     fluid.builtInRegistryHolder().is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.FLUID,ResourceLocation.parse(s.substring(1)))));
         }
     }
+    private static final List<String> LEGACY_FLUID_WHITELIST = List.of("aeronautics:levitite_blend","create:chocolate","create:honey","create:potion","create:tea",
+                    "minecraft:lava","minecraft:milk","minecraft:water","omnira:decayed_timeflow","omnira:void_starflow");
     private record Snapshot(FluidRules fluids,Map<ResourceLocation,JsonElement> tables){}
     private static volatile Snapshot current;
     private static String loadedStamp="";
@@ -93,6 +95,17 @@ public final class OmniraLootConfig {
         if(fluid.has("fixedWhitelistRevision")&&fluid.get("fixedWhitelistRevision").getAsInt()>=1)return false;
         while(fluid.getAsJsonArray("whitelist").remove(new JsonPrimitive("omnira:dilute_spacetime"))){}
         fluid.addProperty("fixedWhitelistRevision",1);return true;
+    }
+    public static boolean migrateDefaultFluidFilter(JsonObject root){
+        var fluid = root.getAsJsonObject("fluidTreasure");
+        if (fluid.has("blacklistDefaultRevision")) return false;
+        if (fluid.get("whitelistEnabled").getAsBoolean() && fluid.get("blacklistEnabled").getAsBoolean()
+                && fluid.getAsJsonArray("whitelist").equals(GSON.toJsonTree(LEGACY_FLUID_WHITELIST))
+                && fluid.getAsJsonArray("blacklist").equals(GSON.toJsonTree(List.of("omnira:refined_spacetime")))) {
+            fluid.addProperty("whitelistEnabled", false);
+        }
+        fluid.addProperty("blacklistDefaultRevision", 1);
+        return true;
     }
     public static boolean migrateFluidSwitches(JsonObject root){
         var fluid=root.getAsJsonObject("fluidTreasure");boolean changed=false;
@@ -173,10 +186,9 @@ public final class OmniraLootConfig {
             var reader=new InputStreamReader(stream,StandardCharsets.UTF_8)){
             var root=new JsonObject();root.addProperty("formatVersion",1);
             root.addProperty("instructions","Edit this file, then restart or /reload. Treasure tables use vanilla loot-table JSON. Already opened treasure is unchanged. Empty eligible fluid lists leave treasure unopened.");
-            var fluid=new JsonObject();fluid.addProperty("whitelistEnabled",true);fluid.addProperty("blacklistEnabled",true);
+            var fluid=new JsonObject();fluid.addProperty("blacklistDefaultRevision",1);fluid.addProperty("whitelistEnabled",false);fluid.addProperty("blacklistEnabled",true);
             fluid.addProperty("instructions","Enable each list independently. Entries accept fluid IDs or #namespace:fluid_tag. Enabled blacklist overrides whitelist. Disabling both allows all source fluids.");
-            fluid.add("whitelist",GSON.toJsonTree(List.of("aeronautics:levitite_blend","create:chocolate","create:honey","create:potion","create:tea",
-                    "minecraft:lava","minecraft:milk","minecraft:water","omnira:decayed_timeflow","omnira:void_starflow")));
+            fluid.add("whitelist",GSON.toJsonTree(LEGACY_FLUID_WHITELIST));
             fluid.add("blacklist",new JsonArray());
             root.add("fluidTreasure",fluid);migrateAlchemyFluids(root);migrateFixedFluidWhitelist(root);
             root.add("treasureTables",JsonParser.parseReader(reader));return root;
@@ -228,6 +240,7 @@ public final class OmniraLootConfig {
             added=migrateFluidSwitches(root)||added;
             added=migrateAlchemyFluids(root)||added;
             added=migrateFixedFluidWhitelist(root)||added;
+            added=migrateDefaultFluidFilter(root)||added;
             added=migrateDefaultTimeflowTreasure(tables)||added;
             added=migrateDefaultToolTreasures(tables)||added;
             added=migrateDefaultMemoryTreasures(tables)||added;

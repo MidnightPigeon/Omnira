@@ -119,16 +119,28 @@ public final class SpacetimeFaunaGameTests {
         h.assertTrue(!SpatialSteps.teleport(deer,destination.add(17,0,0),16),"Over-range teleport allowed");h.succeed();
     }
     @GameTest(template="spell_arena") public static void mothFlockAndHabitatData(GameTestHelper h){
-        var m=h.spawn(ModEntityTypes.RIFT_MOTH.get(),4,4,4);var id=java.util.UUID.randomUUID();m.setFlock(id);var tag=new CompoundTag();m.addAdditionalSaveData(tag);
-        var other=h.spawn(ModEntityTypes.RIFT_MOTH.get(),5,4,4);other.readAdditionalSaveData(tag);h.assertTrue(id.equals(other.flock()),"Flock lost on reload");
+        var m=h.spawn(ModEntityTypes.RIFT_MOTH.get(),4,4,4);var difficulty=h.getLevel().getCurrentDifficultyAt(m.blockPosition());
+        var group=m.finalizeSpawn(h.getLevel(),difficulty,net.minecraft.world.entity.MobSpawnType.NATURAL,null);
+        var id=m.flock();var tag=new CompoundTag();m.addAdditionalSaveData(tag);
+        var other=h.spawn(ModEntityTypes.RIFT_MOTH.get(),5,4,4);other.finalizeSpawn(h.getLevel(),difficulty,net.minecraft.world.entity.MobSpawnType.NATURAL,group);
+        h.assertTrue(id!=null&&id.equals(other.flock()),"Natural spawn pack lost flock identity");
+        other.readAdditionalSaveData(tag);h.assertTrue(id.equals(other.flock()),"Flock lost on reload");
         var attacker=victim(h,2,4);
         double initialDistance=other.distanceTo(attacker);
         m.hurt(m.damageSources().mobAttack(attacker),1);
         for(int i=0;i<28;i++)h.getLevel().tickNonPassenger(other);
         h.assertTrue(other.distanceTo(attacker)>initialDistance+1,"Unhurt flock member did not flee");
         var registry=h.getLevel().registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.BIOME);
-        var time=registry.getHolderOrThrow(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.BIOME,net.minecraft.resources.ResourceLocation.parse("omnira:temporal_continent")));
+        var time=registry.getHolderOrThrow(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.BIOME,net.minecraft.resources.ResourceLocation.parse("omnira:stilled_wastes")));
         var space=registry.getHolderOrThrow(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.BIOME,net.minecraft.resources.ResourceLocation.parse("omnira:folded_caverns")));
+        h.assertTrue(com.mcmagic.omnira.time.TemporalCreatureTags.timeImmune(m)&&com.mcmagic.omnira.space.sea.SpatialImmunity.starflow(m)&&com.mcmagic.omnira.space.sea.SpatialImmunity.fissure(m),"Moth lacks environmental immunity");
+        for(var biome:registry.holders().toList()){
+            var entries=biome.value().getMobSettings().getMobs(net.minecraft.world.entity.MobCategory.CREATURE).unwrap();
+            for(var type:java.util.List.of(ModEntityTypes.RIFT_MOTH.get(),ModEntityTypes.AGECOIL_SNAIL.get(),ModEntityTypes.RIFTSTEP_DEER.get())){
+                boolean listed=entries.stream().anyMatch(entry->entry.type==type);
+                h.assertTrue(listed==SpacetimeFaunaSpawning.habitat(biome,type),"Incorrect natural spawn list in "+biome.key()+" for "+type);
+            }
+        }
         h.assertTrue(SpacetimeFaunaSpawning.habitat(time,ModEntityTypes.AGECOIL_SNAIL.get())&&!SpacetimeFaunaSpawning.habitat(space,ModEntityTypes.AGECOIL_SNAIL.get()),"Snail habitat incorrect");
         h.assertTrue(SpacetimeFaunaSpawning.habitat(space,ModEntityTypes.RIFTSTEP_DEER.get())&&SpacetimeFaunaSpawning.habitat(time,ModEntityTypes.RIFT_MOTH.get())&&SpacetimeFaunaSpawning.habitat(space,ModEntityTypes.RIFT_MOTH.get()),"Space or moth habitat incorrect");h.succeed();
     }

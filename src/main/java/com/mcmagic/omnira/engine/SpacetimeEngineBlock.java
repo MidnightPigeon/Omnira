@@ -65,6 +65,7 @@ public class SpacetimeEngineBlock extends BaseEntityBlock implements com.mcmagic
         }
         return super.playerWillDestroy(l,p,s,player);
     }
+    @Override public BlockPos menuController(BlockPos part,BlockState state){return origin(part,state).above();}
     @Override public BlockPos bottleOrigin(BlockPos p,BlockState s){return origin(p,s);}
     @Override public java.util.Set<BlockPos> bottleParts(Level l,BlockPos p,BlockState s){
         var be=controller(l,p);if(be==null||!be.complete())return java.util.Set.of();

@@ -16,7 +16,7 @@ public final class InfusedIntakeGameTests {
         var drop=new net.minecraft.world.entity.item.ItemEntity(level,center.x,center.y,center.z,new ItemStack(Items.DIAMOND,3));level.addFreshEntity(drop);
         var clock=new InfusedIntake();for(int i=0;i<199;i++)clock.tick(level,center,upgrades,storage);
         h.assertTrue(drop.isAlive(),"Collected before ten seconds");clock.tick(level,center,upgrades,storage);
-        h.assertTrue(drop.isRemoved()&&storage.getStackInSlot(0).getCount()==3,"Pickup failed");
+        h.assertTrue(drop.isRemoved()&&java.util.stream.IntStream.range(0,storage.getSlots()).mapToObj(storage::getStackInSlot).filter(stack->stack.is(Items.DIAMOND)).mapToInt(ItemStack::getCount).sum()==3,"Pickup: removed="+drop.isRemoved()+" visible="+(level.getEntity(drop.getUUID())==drop)+" stored="+storage.getStackInSlot(0)+" ticking="+level.shouldTickBlocksAt(origin.asLong()));
         var crop=origin.east();level.setBlock(crop.below(),Blocks.FARMLAND.defaultBlockState(),2);level.setBlock(crop,Blocks.WHEAT.defaultBlockState().setValue(CropBlock.AGE,7),2);
         var rock=origin.west();level.setBlock(rock,Blocks.STONE.defaultBlockState(),2);
         OrbUpgrades.setFilter(plate,0,new ItemStack(Items.WHEAT),level.registryAccess());

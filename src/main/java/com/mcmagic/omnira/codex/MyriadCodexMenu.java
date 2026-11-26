@@ -40,7 +40,7 @@ public final class MyriadCodexMenu extends AbstractContainerMenu {
     public int mode(){return data.get(0);}public int shape(){return data.get(1);}public int axis(){return data.get(2);}
     public boolean hollow(){return data.get(3)!=0;}public int power(){return data.get(4);}public boolean placed(){return data.get(5)!=0;}public boolean busy(){return data.get(6)!=0;}
     public String error(){return ERRORS[Math.clamp(data.get(7),0,ERRORS.length-1)];}
-    @Override public boolean stillValid(Player p){return codex.live()&&p.level()==codex.getLevel()&&!p.isSpectator()&&p.canInteractWithBlock(codex.getBlockPos(),4);}
+    @Override public boolean stillValid(Player p){return codex.live()&&!p.isSpectator()&&com.mcmagic.omnira.storage.RemoteContainerAccess.canReachMenuHost(p,codex.host==null?codex:codex.host);}
     @Override public boolean clickMenuButton(Player p,int id){
         if(!stillValid(p)||codex.busy())return false;error=0;
         if(id>=0&&id<=2){

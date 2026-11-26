@@ -39,9 +39,9 @@ public final class ReversionMireGameTests {
         h.assertTrue(MireContent.SILT.get().defaultBlockState().is(TemporalSoils.SILTS),"Rotted soil tag missing");
         h.assertTrue(MireContent.SOURCE.get().defaultFluidState().is(net.minecraft.tags.FluidTags.WATER),"Fish/fishing water behavior missing");
         var level=h.getLevel();var regs=level.registryAccess().registryOrThrow(Registries.BIOME);
-        var source=new StrataBiomeSource(regs.getHolderOrThrow(ResourceKey.create(Registries.BIOME,ResourceLocation.parse("omnira:stilled_wastes"))),regs.getHolderOrThrow(ResourceKey.create(Registries.BIOME,ResourceLocation.parse("omnira:temporal_continent"))),regs.getHolderOrThrow(ResourceKey.create(Registries.BIOME,ResourceLocation.parse("omnira:spacetime_corridor"))),java.util.Optional.of(regs.getHolderOrThrow(FleetingTime.BIOME)),java.util.Optional.of(regs.getHolderOrThrow(MireCycle.BIOME)));
+        var source=h.getLevel().getServer().getLevel(ResourceKey.create(Registries.DIMENSION,ResourceLocation.parse("omnira:spacetime_corridor"))).getChunkSource().getGenerator().getBiomeSource();
         h.assertTrue(source.possibleBiomes().stream().anyMatch(b->b.is(MireCycle.BIOME)),"Biome source omitted mire");
-        var mb=regs.getHolderOrThrow(MireCycle.BIOME).value();for(var category:MobCategory.values())h.assertTrue(mb.getMobSettings().getMobs(category).isEmpty(),"Unexpected vanilla spawn entries");
+        var mb=regs.getHolderOrThrow(MireCycle.BIOME).value();for(var category:MobCategory.values())if(category!=MobCategory.CREATURE)h.assertTrue(mb.getMobSettings().getMobs(category).isEmpty(),"Unexpected vanilla spawn entries");
         h.succeed();
     }
     @GameTest(template="spell_arena")

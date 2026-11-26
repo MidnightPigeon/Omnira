@@ -12,6 +12,11 @@ import org.spongepowered.asm.mixin.Mixin;
 abstract class RemoteMenuClientMixin {
     @WrapMethod(method="createMenuScreen")
     private static void omnira$construct(Component title,MenuType<?> type,int id,RegistryFriendlyByteBuf data,Operation<Void> original){
-        RemoteContainerView.begin(id);try{original.call(title,type,id,data);}finally{RemoteContainerView.end();}
+        RemoteContainerView.begin(id);
+        try {
+            original.call(title,type,id,data);
+        } finally {
+            RemoteContainerView.end();
+        }
     }
 }

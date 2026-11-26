@@ -25,7 +25,7 @@ public final class PulseOrbMenu extends AbstractContainerMenu {
         for(int y=0;y<3;y++)for(int x=0;x<9;x++)addSlot(new Slot(inventory,x+y*9+9,8+x*18,84+y*18));
         for(int x=0;x<9;x++)addSlot(new Slot(inventory,x,8+x*18,142));
     }
-    @Override public boolean stillValid(Player player){return !orb.isRemoved()&&player.level()==orb.getLevel()&&player.canInteractWithBlock(orb.getBlockPos(),4);}
+    @Override public boolean stillValid(Player player){return !orb.isRemoved()&&com.mcmagic.omnira.storage.RemoteContainerAccess.canReachMenuHost(player,orb.host);}
     @Override public boolean clickMenuButton(Player player,int id){if(!stillValid(player)||id<0||id>1)return false;orb.frequency(id,getCarried());return true;}
     @Override public void clicked(int index,int button,ClickType type,Player player){
         if(com.mcmagic.omnira.menu.UpgradeMenuFeedback.rejectClick(this,index,button,type,player,0,1))return;

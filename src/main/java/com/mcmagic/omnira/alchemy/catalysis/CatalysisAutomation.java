@@ -2,10 +2,10 @@ package com.mcmagic.omnira.alchemy.catalysis;
 
 import com.mcmagic.omnira.block.entity.OrbUpgrades;
 import com.mcmagic.omnira.storage.LogisticsRates;
+import com.mcmagic.omnira.storage.FluidDelivery;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import net.neoforged.neoforge.items.*;
 
 /** Item intake scans the base, output the middle. Fluid intake has exactly one physical port. */
@@ -41,13 +41,23 @@ public final class CatalysisAutomation {
             if(intake&&(mask&2)!=0){
                 var at=be.getBlockPos().relative(front.getOpposite());if(!level.hasChunkAt(at))continue;
                 var other=level.getCapability(Capabilities.FluidHandler.BLOCK,at,front);if(other==null)continue;
-                for(int i=0;i<other.getTanks();i++){
+                int limit=LogisticsRates.FLUID/4*LogisticsRates.multiplier(be.upgrades);
+                var registries=level.registryAccess();
+                var pending=FluidDelivery.read(tag,registries);
+                java.util.function.Consumer<net.neoforged.neoforge.fluids.FluidStack> retain=f->{
+                    FluidDelivery.write(tag,registries,f);
+                    plate.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA,net.minecraft.world.item.component.CustomData.of(tag));
+                    be.setChanged();
+                };
+                int accepted=0;
+                if(!pending.isEmpty()){
+                    if(be.filter(upgrade,ItemStack.EMPTY,pending))accepted=FluidDelivery.retry(be.tank,pending,limit,retain);
+                }else for(int i=0;i<other.getTanks();i++){
                     var sample=other.getFluidInTank(i);if(sample.isEmpty()||!be.filter(upgrade,ItemStack.EMPTY,sample))continue;
-                    var offered=other.drain(sample.copyWithAmount(LogisticsRates.FLUID/4*LogisticsRates.multiplier(be.upgrades)),FluidAction.SIMULATE);int n=be.tank.fill(offered,FluidAction.SIMULATE);if(n<=0)continue;
-                    var taken=other.drain(offered.copyWithAmount(n),FluidAction.EXECUTE);int accepted=be.tank.fill(taken,FluidAction.EXECUTE);
-                    com.mcmagic.omnira.progression.BranchProgress.automated(be,accepted);
-                    if(accepted<taken.getAmount())other.fill(taken.copyWithAmount(taken.getAmount()-accepted),FluidAction.EXECUTE);break;
+                    accepted=FluidDelivery.move(other,be.tank,sample.copyWithAmount(limit),retain);
+                    if(accepted>0||FluidDelivery.hasPending(tag))break;
                 }
+                com.mcmagic.omnira.progression.BranchProgress.automated(be,accepted);
             }
         }
     }

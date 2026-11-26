@@ -13,6 +13,18 @@ public record RemoteContainerSnapshot(int menuId,CompoundTag snapshot) implement
     public static final Type<RemoteContainerSnapshot> TYPE=new Type<>(ResourceLocation.parse("omnira:remote_container_snapshot"));
     public static final StreamCodec<RegistryFriendlyByteBuf,RemoteContainerSnapshot> CODEC=StreamCodec.of(
             (b,p)->{b.writeVarInt(p.menuId);b.writeNbt(p.snapshot);},b->new RemoteContainerSnapshot(b.readVarInt(),b.readNbt()));
+    public net.minecraft.world.level.block.entity.BlockEntity loadEntity(net.minecraft.world.level.Level level,
+            net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
+        var entity = net.minecraft.world.level.block.entity.BlockEntity.loadStatic(pos, state,
+                snapshot.getCompound("Entity"), level.registryAccess());
+        if (entity != null) {
+            entity.setLevel(level);
+            // Placed backpacks resolve their pending item and tier-specific wrapper on load.
+            if (com.mcmagic.omnira.compat.SophisticatedBackpackMenus.isPlacedBackpack(entity)) entity.onLoad();
+        }
+        return entity;
+    }
+
     @Override public Type<RemoteContainerSnapshot> type(){return TYPE;}
     @EventBusSubscriber(modid="omnira") public static final class Registration {
         @SubscribeEvent public static void register(RegisterPayloadHandlersEvent event){event.registrar("1").playToClient(TYPE,CODEC,

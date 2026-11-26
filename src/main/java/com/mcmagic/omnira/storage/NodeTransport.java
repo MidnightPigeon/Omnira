@@ -2,7 +2,6 @@ package com.mcmagic.omnira.storage;
 
 import com.mcmagic.omnira.block.entity.*;
 import net.neoforged.neoforge.items.*;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public final class NodeTransport {
     private static int speed(com.mcmagic.omnira.block.entity.ResonanceCoreBlockEntity node){
@@ -66,33 +65,35 @@ public final class NodeTransport {
         if(StorageContainerIdentity.sameStorage(source,target)){unpair(source);return;}
         var from=items(source);var to=items(target);
         if(from!=null&&to!=null&&from!=to){
-            int remaining=LogisticsRates.ITEMS/4*speed(source);boolean moved=false;
+            int remaining=LogisticsRates.ITEMS/4*speed(source);
             for(int i=0;i<from.getSlots()&&remaining>0;i++){
                 var sample=from.extractItem(i,remaining,true);
                 if(sample.isEmpty())continue;
                 int accepted=sample.getCount()-ItemHandlerHelper.insertItemStacked(to,sample,true).getCount();if(accepted<=0)continue;
                 var extracted=from.extractItem(i,accepted,false);var rest=ItemHandlerHelper.insertItemStacked(to,extracted,false);
-                int count=extracted.getCount()-rest.getCount();remaining-=count;moved|=count>0;
+                int count=extracted.getCount()-rest.getCount();remaining-=count;
                 com.mcmagic.omnira.progression.BranchProgress.automated(source,extracted.getCount()-rest.getCount());
                 com.mcmagic.omnira.progression.BranchProgress.automated(target,extracted.getCount()-rest.getCount());
                 if(!rest.isEmpty())rest=from.insertItem(i,rest,false);
                 if(!rest.isEmpty())net.minecraft.world.level.block.Block.popResource(source.getLevel(),source.getBlockPos(),rest);
             }
-            if(moved)return;
+            // Fluids have a separate quota and are attempted after the item pass.
         }
         var fluids=fluids(source);var receiving=fluids(target);
-        if(fluids==null||receiving==null||fluids==receiving)return;
-        for(int i=0;i<fluids.getTanks();i++){
-            var sample=fluids.getFluidInTank(i).copyWithAmount(LogisticsRates.FLUID/4*speed(source));if(sample.isEmpty())continue;
-            var available=fluids.drain(sample,IFluidHandler.FluidAction.SIMULATE);
-            int amount=receiving.fill(available,IFluidHandler.FluidAction.SIMULATE);if(amount<=0)continue;
-            var drained=fluids.drain(available.copyWithAmount(amount),IFluidHandler.FluidAction.EXECUTE);
-            int accepted=receiving.fill(drained,IFluidHandler.FluidAction.EXECUTE);
-            com.mcmagic.omnira.progression.BranchProgress.automated(source,accepted);
-            com.mcmagic.omnira.progression.BranchProgress.automated(target,accepted);
-            if(accepted<drained.getAmount())fluids.fill(drained.copyWithAmount(drained.getAmount()-accepted),IFluidHandler.FluidAction.EXECUTE);
-            return;
+        if(receiving==null||fluids==receiving)return;
+        int limit=LogisticsRates.FLUID/4*speed(source);
+        int accepted=0;
+        if(!source.pendingDelivery.isEmpty()){
+            accepted=FluidDelivery.retry(receiving,source.pendingDelivery,limit,source::retainDelivery);
+        }else if(fluids!=null){
+            for(int i=0;i<fluids.getTanks();i++){
+                var sample=fluids.getFluidInTank(i);if(sample.isEmpty())continue;
+                accepted=FluidDelivery.move(fluids,receiving,sample.copyWithAmount(limit),source::retainDelivery);
+                if(accepted>0||!source.pendingDelivery.isEmpty())break;
+            }
         }
+        com.mcmagic.omnira.progression.BranchProgress.automated(source,accepted);
+        com.mcmagic.omnira.progression.BranchProgress.automated(target,accepted);
     }
     private NodeTransport(){}
 }

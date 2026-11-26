@@ -26,6 +26,10 @@ public class PulseOrbBlock extends BaseEntityBlock {
     @Override protected VoxelShape getShape(BlockState s,BlockGetter level,BlockPos pos,CollisionContext c){return SHAPES.get(s.getValue(MOUNT));}
     @Override public BlockEntity newBlockEntity(BlockPos pos,BlockState s){return PulseContent.ENTITY.get().create(pos,s);}
     @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level,BlockState s,BlockEntityType<T> type){return level.isClientSide?null:(l,p,state,be)->{if(be instanceof com.mcmagic.omnira.pulse.PulseOrbHost host){if(net.neoforged.fml.ModList.get().isLoaded("create"))com.mcmagic.omnira.compat.create.PulseOrbKinetics.tick(be);else host.orb().tick();}};}
+    @Override protected net.minecraft.world.MenuProvider getMenuProvider(BlockState state,Level level,BlockPos pos){
+        var machine=PulseOrbEntity.from(level.getBlockEntity(pos));
+        return machine;
+    }
     @Override protected InteractionResult useWithoutItem(BlockState s,Level level,BlockPos pos,Player player,BlockHitResult hit){
         var orb=PulseOrbEntity.from(level.getBlockEntity(pos));if(orb!=null){if(!level.isClientSide)player.openMenu(orb,pos);return InteractionResult.sidedSuccess(level.isClientSide);}return InteractionResult.PASS;
     }

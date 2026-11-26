@@ -7,7 +7,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(net.minecraft.server.level.ServerPlayer.class)
+// Both tick implementations validate the same menu on the server.
+@Mixin({Player.class, net.minecraft.server.level.ServerPlayer.class})
 abstract class RemoteMenuValidityMixin {
     @WrapOperation(method="tick",at=@At(value="INVOKE",target="Lnet/minecraft/world/inventory/AbstractContainerMenu;stillValid(Lnet/minecraft/world/entity/player/Player;)Z"))
     private boolean omnira$valid(AbstractContainerMenu menu,Player player,Operation<Boolean> original){var valid=RemoteContainerAccess.validity(player,menu);return valid==null?original.call(menu,player):valid;}

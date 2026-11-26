@@ -64,7 +64,7 @@ public final class WaymarkDirectory extends SavedData {
         for(var value:tag.getList("Waymarks",Tag.TAG_COMPOUND)) {
             var n=(CompoundTag)value;var dim=ResourceLocation.tryParse(n.getString("Dimension"));
             if(dim!=null && n.hasUUID("Id")) {
-                var entry=new Entry(n.getUUID("Id"),dim,BlockPos.of(n.getLong("Position")),n.getString("Name"),n.getString("Biome").isBlank()?null:ResourceLocation.tryParse(n.getString("Biome")),n.getInt("LostNumber"));
+                var entry=new Entry(n.getUUID("Id"),dim,BlockPos.of(n.getLong("Position")),n.getString("Name"),n.getString("Biome").isBlank()?null:com.mcmagic.omnira.spacetime.LegacyTimeBiome.migrate(ResourceLocation.tryParse(n.getString("Biome"))),n.getInt("LostNumber"));
                 result.entries.put(entry.id(),entry);
             }
         }

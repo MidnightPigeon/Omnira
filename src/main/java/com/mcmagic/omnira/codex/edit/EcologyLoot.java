@@ -33,8 +33,6 @@ public final class EcologyLoot {
             Map.entry("phase_crystal_grove", "calibration_supplies"));
     // Compatibility biomes have no exclusive structure: reuse their region's authored treasures.
     private static final Map<String,List<String>> REGIONAL_TABLES = Map.of(
-            "temporal_continent", List.of("golden_throne_tower", "kirisame_workshop", "rusty_lake_mill_cellar",
-                    "drilling_platform", "looking_glass_garden_rabbit", "doomsday_rite"),
             "dream_islands", List.of("radiant_courtyard"));
     private EcologyLoot() {}
     static Map<String,String> defaults() { return TABLES; }
