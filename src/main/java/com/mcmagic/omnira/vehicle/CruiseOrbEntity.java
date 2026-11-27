@@ -64,7 +64,7 @@ public final class CruiseOrbEntity extends Entity {
     }
     public double speed(){
         int baseSpeed = core().getItem() instanceof SpellCoreItem installed ? 1 + installed.workBonus() : 1;
-        return baseSpeed * Math.min(2, storage.speedMultiplier());
+        return baseSpeed * storage.speedMultiplier();
     }
     public float turnSpeed(){return 3;}
     public static Vec3 pressedAxes(int keys){return new Vec3(((keys&8)!=0?1:0)-((keys&4)!=0?1:0),

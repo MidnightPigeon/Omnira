@@ -39,7 +39,8 @@ public final class OrbUpgradeScreen extends ResponsiveContainerScreen<OrbUpgrade
     @Override protected void renderBg(GuiGraphics g,float partial,int mouseX,int mouseY) {
         MachinePanelArt.frame(CrystalUi.pixels(g,leftPos,topPos),4,2,168,115,MachinePanelArt.DARK);
         for(int i=0;i<(menu.speed?2:menu.recipeControl?9:3);i++) {
-            int x=leftPos+(menu.speed?62+i*36:62+i%3*18),y=topPos+30+(menu.recipeControl?i/3*18:0);
+            var slot=menu.getSlot(i);
+            int x=leftPos+slot.x,y=topPos+slot.y;
             g.fill(x-1,y-1,x+17,y+17,0xFFB1CED8);
             g.fill(x,y,x+16,y+16,0xFF688091);
             g.fill(x,y+16,x+17,y+17,MachinePanelArt.LIGHT);
@@ -50,7 +51,7 @@ public final class OrbUpgradeScreen extends ResponsiveContainerScreen<OrbUpgrade
         String label=font.plainSubstrByWidth(title.getString(),156);
         g.drawString(font,label,(176-font.width(label))/2,10,0xE6F6F8,false);
         g.drawString(font,playerInventoryTitle,8,121,0xD6E8E9,false);
-        if(menu.speed){int value=2;for(int i=0;i<2;i++)value+=com.mcmagic.omnira.item.SpeedUpgrade.bonus(menu.slots.get(i).getItem());
+        if(menu.speed){int value=com.mcmagic.omnira.item.SpeedUpgrade.multiplier(menu.getSlot(0).getItem(),menu.getSlot(1).getItem());
             g.drawCenteredString(font,Component.translatable("gui.omnira.orb.speed_multiplier",value),88,65,0xE6F6F8);}
     }
     @Override protected void renderContent(GuiGraphics g,int mouseX,int mouseY,float partial) {

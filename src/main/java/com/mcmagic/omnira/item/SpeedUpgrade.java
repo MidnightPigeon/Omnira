@@ -20,7 +20,11 @@ public final class SpeedUpgrade {
         plate.set(DataComponents.CONTAINER,ItemContainerContents.fromItems(cores));
     }
     public static int multiplier(ItemStack plate){
-        int value=2;for(var core:cores(plate))value+=bonus(core);return value;
+        var slots=cores(plate);
+        return multiplier(slots.get(0),slots.get(1));
+    }
+    public static int multiplier(ItemStack left,ItemStack right){
+        return 2+bonus(left)+bonus(right);
     }
     private SpeedUpgrade(){}
 }

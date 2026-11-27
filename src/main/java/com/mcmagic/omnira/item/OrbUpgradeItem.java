@@ -26,8 +26,8 @@ public final class OrbUpgradeItem extends Item {
         if(!level.isClientSide) {
             int source=hand==net.minecraft.world.InteractionHand.OFF_HAND?40:player.getInventory().selected;
             player.openMenu(new net.minecraft.world.SimpleMenuProvider((id,inventory,p)->
-                    new com.mcmagic.omnira.menu.OrbUpgradeMenu(id,inventory,source,(kind==Kind.INTAKE||kind==Kind.INFUSED_INTAKE)),stack.getHoverName()),
-                    data->{data.writeInt(source);data.writeBoolean((kind==Kind.INTAKE||kind==Kind.INFUSED_INTAKE));});
+                    new com.mcmagic.omnira.menu.OrbUpgradeMenu(id,inventory,source,kind),stack.getHoverName()),
+                    data->{data.writeInt(source);data.writeEnum(kind);});
         }
         return net.minecraft.world.InteractionResultHolder.sidedSuccess(stack,level.isClientSide);
     }

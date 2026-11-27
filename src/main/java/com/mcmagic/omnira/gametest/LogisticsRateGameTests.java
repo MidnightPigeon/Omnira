@@ -21,7 +21,7 @@ public final class LogisticsRateGameTests {
         var plate=new ItemStack(ModItems.SPEED_UPGRADE.get());SpeedUpgrade.cores(plate,java.util.List.of(new ItemStack(first),new ItemStack(second)));return plate;
     }
     @GameTest(template="spell_arena") public static void allCorePairsPersistAndAdd(GameTestHelper h){
-        var cores=java.util.List.of(ModItems.TEST_SPELL_CORE.get(),ModItems.DREAM_SPELL_CORE.get(),ModItems.LIGHT_DARK_SPELL_CORE.get(),ModItems.SPACETIME_SPELL_CORE.get());
+        var cores=java.util.List.of(ModItems.TEST_SPELL_CORE.get(),ModItems.DREAM_SPELL_CORE.get(),ModItems.LIGHT_DARK_SPELL_CORE.get(),ModItems.SPACETIME_SPELL_CORE.get(),ModItems.UNBOUND_MANA_CORE.get());
         h.assertTrue(SpeedUpgrade.multiplier(new ItemStack(ModItems.SPEED_UPGRADE.get()))==2,"Empty plate lost base multiplier");
         for(var a:cores)for(var b:cores){
             var plate=speed(a,b);int expected=2+SpeedUpgrade.bonus(new ItemStack(a))+SpeedUpgrade.bonus(new ItemStack(b));
@@ -32,6 +32,13 @@ public final class LogisticsRateGameTests {
     @GameTest(template="spell_arena") public static void heldCoreSlotsAreRealAndSourceIsLocked(GameTestHelper h){
         var p=h.makeMockPlayer(GameType.SURVIVAL);var plate=new ItemStack(ModItems.SPEED_UPGRADE.get());p.getInventory().setItem(0,plate);
         var menu=new OrbUpgradeMenu(1,p.getInventory(),0,false);
+        menu.setCarried(new ItemStack(ModItems.UNBOUND_MANA_CORE.get()));
+        menu.clicked(1,0,ClickType.PICKUP,p);
+        menu.broadcastChanges();
+        menu=new OrbUpgradeMenu(2,p.getInventory(),0,false);
+        h.assertTrue(!menu.getSlot(0).hasItem() && menu.getSlot(1).getItem().is(ModItems.UNBOUND_MANA_CORE.get()),"Right-only core lost or moved after reopening");
+        menu.clicked(1,0,ClickType.PICKUP,p);
+        h.assertTrue(menu.getCarried().is(ModItems.UNBOUND_MANA_CORE.get()),"Right core not retrievable");
         menu.setCarried(new ItemStack(ModItems.SPACETIME_SPELL_CORE.get()));menu.clicked(0,0,ClickType.PICKUP,p);
         h.assertTrue(menu.getCarried().isEmpty()&&SpeedUpgrade.multiplier(plate)==5,"Core was not consumed into a real slot");
         p.getInventory().setItem(9,new ItemStack(ModItems.DREAM_SPELL_CORE.get()));menu.quickMoveStack(p,2);

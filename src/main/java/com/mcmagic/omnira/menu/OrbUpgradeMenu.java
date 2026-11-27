@@ -25,20 +25,29 @@ public final class OrbUpgradeMenu extends AbstractContainerMenu {
     private boolean loading;
     private final int filterCount;
     public OrbUpgradeMenu(int id,Inventory inventory,RegistryFriendlyByteBuf data) {
-        this(id,inventory,data.readInt(),data.readBoolean());
+        this(id,inventory,data.readInt(),data.readEnum(OrbUpgradeItem.Kind.class));
     }
     public OrbUpgradeMenu(int id,Inventory inventory,int source,boolean intake) {
+        this(id,inventory,source,OrbUpgrades.kind(inventory.getItem(source)));
+    }
+    public OrbUpgradeMenu(int id,Inventory inventory,int source,OrbUpgradeItem.Kind kind) {
         super(ModMenuTypes.ORB_UPGRADE.get(),id);
-        this.owner=inventory.player;this.source=source;this.intake=intake;
+        this.owner=inventory.player;this.source=source;this.intake=kind==OrbUpgradeItem.Kind.INTAKE || kind==OrbUpgradeItem.Kind.INFUSED_INTAKE;
         bound=inventory.getItem(source);
-        recipeControl=OrbUpgrades.kind(bound)==OrbUpgradeItem.Kind.RECIPE_CONTROL;
-        areaIntake=OrbUpgrades.kind(bound)==OrbUpgradeItem.Kind.INFUSED_INTAKE;
-        speed=OrbUpgrades.kind(bound)==OrbUpgradeItem.Kind.SPEED;
+        recipeControl=kind==OrbUpgradeItem.Kind.RECIPE_CONTROL;
+        areaIntake=kind==OrbUpgradeItem.Kind.INFUSED_INTAKE;
+        speed=kind==OrbUpgradeItem.Kind.SPEED;
         filterCount=speed?2:recipeControl?9:3;filters=new SimpleContainer(filterCount){
-            @Override public void setChanged(){super.setChanged();if(speed&&!loading&&!owner.level().isClientSide&&stillValid(owner)){
+            @Override public void setChanged(){super.setChanged();if(speed&&!loading&&!owner.level().isClientSide&&OrbUpgradeMenu.this.stillValid(owner)){
                 com.mcmagic.omnira.item.SpeedUpgrade.cores(bound,java.util.List.of(getItem(0).copy(),getItem(1).copy()));owner.getInventory().setChanged();
             }}
         };
+        if(speed){
+            loading=true;
+            var cores=com.mcmagic.omnira.item.SpeedUpgrade.cores(bound);
+            for(int i=0;i<cores.size();i++)filters.setItem(i,cores.get(i));
+            loading=false;
+        }
         for(int i=0;i<filterCount;i++)addSlot(new Slot(filters,i,speed?62+i*36:62+i%3*18,30+(recipeControl?i/3*18:0)) {
             @Override public boolean mayPickup(Player player){return speed;}
             @Override public boolean mayPlace(ItemStack stack){return speed&&com.mcmagic.omnira.item.SpeedUpgrade.bonus(stack)>0;}
@@ -51,8 +60,8 @@ public final class OrbUpgradeMenu extends AbstractContainerMenu {
     }
     private void inventorySlot(Inventory inventory,int index,int x,int y) {
         addSlot(new Slot(inventory,index,x,y) {
-            @Override public boolean mayPickup(Player player){return index!=source;}
-            @Override public boolean mayPlace(ItemStack stack){return index!=source;}
+            @Override public boolean mayPickup(Player player){return getContainerSlot()!=source;}
+            @Override public boolean mayPlace(ItemStack stack){return getContainerSlot()!=source;}
         });
     }
     public boolean whitelist(){return whitelist.get()!=0;}
@@ -67,10 +76,8 @@ public final class OrbUpgradeMenu extends AbstractContainerMenu {
             var tag=OrbUpgrades.settings(bound);
             whitelist.set(tag.getBoolean("Whitelist")?1:0);
             directions.set(tag.contains("Directions")?tag.getInt("Directions"):1);
-            loading=true;
-            try{var cores=speed?com.mcmagic.omnira.item.SpeedUpgrade.cores(bound):null;
-                for(int i=0;i<filterCount;i++)filters.setItem(i,speed?cores.get(i).copy():ItemStack.parseOptional(owner.registryAccess(),tag.getCompound("Filter"+i)));
-            }finally{loading=false;}
+            if(!speed)for(int i=0;i<filterCount;i++)
+                filters.setItem(i,ItemStack.parseOptional(owner.registryAccess(),tag.getCompound("Filter"+i)));
         }
         super.broadcastChanges();
     }

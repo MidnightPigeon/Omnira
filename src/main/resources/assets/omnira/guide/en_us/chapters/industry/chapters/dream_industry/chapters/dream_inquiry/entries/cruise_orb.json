@@ -4,7 +4,7 @@
   "title": "Cruising Crystal Orb",
   "text": [
     "Craft at the Advanced Assembly Table. Mount while stationary. The blue panel button starts normal travel; red starts overload. Either button stops an active craft. Left/right steers in normal mode and strafes in overload. Space ascends and Shift descends; stop, release Shift and press again to dismount.",
-    "Press E for item and fluid storage with shared upgrades. Spell cores increase speed and remove overload's 20 mana per second cost. The vortex costs 300 mana.",
+    "Press E for item and fluid storage with shared upgrades. Spell cores increase speed and remove overload's 20 mana per second cost. Install a Speed Upgrade to adjust the flight speed multiplier. The vortex costs 300 mana.",
     "The spell core slot sits above the vortex button, with a trash slot below. Trash retains the latest stack for retrieval; inserting another permanently deletes the previous contents. Filled fluid and creature buckets become empty buckets after 10 seconds without releasing their contents. Quick transfer never automatically targets trash.",
     "The occupied cabin supplies air, shields its rider from lava, fire, suffocation and incoming attacks, and improves underwater and lava visibility. Attacks on the rider or shell count as collisions. Repeated impacts shatter it; stabilization protects the occupied craft against attacks and collisions. Attack an empty craft to collect it; only stabilization preserves its contents in the dropped item.",
     "Cast outward from the cabin. Self—Burst instantly shatters an unstabilized orb; an external blast striking its shell counts as one collision."
@@ -24,27 +24,19 @@
     ],
     "labels": [
         {"text": "Core", "x": 2, "y": 2, "width": 65, "height": 10},
-        {"text": "Base", "x": 69, "y": 2, "width": 24, "height": 10},
-        {"text": "Boost", "x": 94, "y": 2, "width": 30, "height": 10},
+        {"text": "Base", "x": 94, "y": 2, "width": 24, "height": 10},
         {"text": "Empty", "x": 17, "y": 18, "width": 60, "height": 10},
-        {"text": "1", "x": 78, "y": 18, "width": 12, "height": 10},
-        {"text": "2", "x": 105, "y": 18, "width": 12, "height": 10},
+        {"text": "1", "x": 101, "y": 18, "width": 12, "height": 10},
         {"text": "Primordial", "x": 17, "y": 35, "width": 60, "height": 10},
-        {"text": "2", "x": 78, "y": 35, "width": 12, "height": 10},
-        {"text": "4", "x": 105, "y": 35, "width": 12, "height": 10},
+        {"text": "2", "x": 101, "y": 35, "width": 12, "height": 10},
         {"text": "Dream", "x": 17, "y": 52, "width": 60, "height": 10},
-        {"text": "3", "x": 78, "y": 52, "width": 12, "height": 10},
-        {"text": "6", "x": 105, "y": 52, "width": 12, "height": 10},
+        {"text": "3", "x": 101, "y": 52, "width": 12, "height": 10},
         {"text": "Light/Dark", "x": 17, "y": 69, "width": 60, "height": 10},
-        {"text": "3", "x": 78, "y": 69, "width": 12, "height": 10},
-        {"text": "6", "x": 105, "y": 69, "width": 12, "height": 10},
+        {"text": "3", "x": 101, "y": 69, "width": 12, "height": 10},
         {"text": "Spacetime", "x": 17, "y": 86, "width": 60, "height": 10},
-        {"text": "4", "x": 78, "y": 86, "width": 12, "height": 10},
-        {"text": "8", "x": 105, "y": 86, "width": 12, "height": 10},
+        {"text": "4", "x": 101, "y": 86, "width": 12, "height": 10},
         {"text": "Unbound", "x": 17, "y": 103, "width": 60, "height": 10},
-        {"text": "4", "x": 78, "y": 103, "width": 12, "height": 10},
-        {"text": "8", "x": 105, "y": 103, "width": 12, "height": 10},
-        {"text": "Boost = Speed Upgrade", "x": 0, "y": 121, "width": 124, "height": 10}
+        {"text": "4", "x": 101, "y": 103, "width": 12, "height": 10}
     ]
   }],
   "recipes": true

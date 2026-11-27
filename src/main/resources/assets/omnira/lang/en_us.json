@@ -915,7 +915,7 @@
   "item.omnira.crystal_stocking_shoes": "Crystal Stocking Shoes",
   "item.omnira.infused_spiritual_crystal": "Infused Spiritual Crystal",
   "item.omnira.speed_upgrade": "Speed Upgrade",
-  "tooltip.omnira.orb.speed": "Base x2; core bonuses: primordial +1, dream/light-dark +2, spacetime/unbound +3",
+  "tooltip.omnira.orb.speed": "Add both slots: empty 1×, Primordial 2×, Dream or Light/Dark 3×, Spacetime or Unbound 4×",
   "tooltip.omnira.upgrade.hold_shift": "Hold Shift to view compatibility",
   "tooltip.omnira.upgrade.compatible": "Compatible devices:",
   "gui.omnira.orb.speed_multiplier": "Current multiplier: x%s",

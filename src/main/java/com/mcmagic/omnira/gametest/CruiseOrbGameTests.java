@@ -37,7 +37,12 @@ public final class CruiseOrbGameTests {
             orb.setCore(new ItemStack(core));
             h.assertTrue(orb.speed()==4,"Advanced core should fly at four blocks per second");
             orb.storage.upgrades.insertItem(0,new ItemStack(ModItems.SPEED_UPGRADE.get()),false);
-            h.assertTrue(orb.speed()==8,"Speed upgrade should double advanced core flight speed");
+            h.assertTrue(orb.speed()==8,"Empty plate must double base speed");
+            orb.storage.upgrades.extractItem(0,1,false);
+            var configured=new ItemStack(ModItems.SPEED_UPGRADE.get());
+            com.mcmagic.omnira.item.SpeedUpgrade.cores(configured,java.util.List.of(new ItemStack(core),new ItemStack(core)));
+            orb.storage.upgrades.insertItem(0,configured,false);
+            h.assertTrue(orb.speed()==32,"Configured plate must multiply the four-block base speed by eight");
             orb.storage.upgrades.extractItem(0,1,false);
         }
         orb.discard();h.succeed();

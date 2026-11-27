@@ -915,7 +915,7 @@
   "item.omnira.crystal_stocking_shoes": "灵晶袜鞋",
   "item.omnira.infused_spiritual_crystal": "注灵水晶",
   "item.omnira.speed_upgrade": "速度升级",
-  "tooltip.omnira.orb.speed": "基础倍率×2；核心增幅：原始+1，梦境/光暗+2，时空/无羁+3",
+  "tooltip.omnira.orb.speed": "两槽倍率相加：空槽1×，原始2×，梦境／光暗3×，时空／无羁4×",
   "tooltip.omnira.upgrade.hold_shift": "按住 Shift 查看兼容性",
   "tooltip.omnira.upgrade.compatible": "兼容设备：",
   "gui.omnira.orb.speed_multiplier": "当前倍率：×%s",
